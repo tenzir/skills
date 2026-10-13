@@ -103,7 +103,7 @@ Add the processors and queue settings that your deployment requires. Use an `otl
 
 ## Choose an attribute representation
 
-By default, the receiver keeps attributes as ordered lists of key-value records. Tagged values preserve duplicate keys and OTLP value kinds without creating a new Arrow schema whenever a producer adds an attribute.
+By default, the receiver keeps attributes as ordered lists of key-value records. Tagged values preserve duplicate keys and OTLP value kinds, and the event schema stays stable when a producer adds an attribute.
 
 Set `schema="record"` when you control the attribute vocabulary and prefer direct field access:
 

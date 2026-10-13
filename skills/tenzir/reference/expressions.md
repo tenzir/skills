@@ -343,20 +343,20 @@ from {
 
 ### Secret
 
-[Secrets](../explanations/secrets.md) protect sensitive values like authentication tokens and passwords. The `secret` type contains only a secret’s name, not its actual value, which is resolved asynchronously when needed.
+[Secrets](../explanations/secrets.md) protect sensitive values like authentication tokens and passwords. A value of type `secret` holds the actual secret value, which Tenzir resolves once before the first event arrives.
 
 Create secrets using the [`secret`](https://tenzir.com/docs/reference/functions/secret.md) function or pass string literals directly to operators that accept secrets:
 
 ```tql
 // Using managed secret
-auth_header = f"Bearer {secret("api-token")}"
+let $auth_header = f"Bearer {secret("api-token")}"
 
 
 // Using format string (produces a secret)
-connection = f"https://{secret("user")}:{secret("pass")}@api.example.com"
+let $connection = f"https://{secret("user")}:{secret("pass")}@api.example.com"
 ```
 
-Secrets support concatenation with `+` and can be used in format strings. When a format string contains a secret, the result is also a secret. Converting a secret to a string yields a masked value (`"***"`) to prevent accidental exposure.
+Secrets support concatenation with `+` and can be used in format strings. When a format string contains a secret, the result is also a secret. Converting a secret to a string yields a masked value (`"***"`) to prevent accidental exposure. Secrets never appear in events, so assigning a secret to a field stores the string `"***"` and emits a warning.
 
 ### List
 
@@ -365,7 +365,10 @@ TQL lists may contain elements of different types. Lists use brackets to sequenc
 ```tql
 let $ports = [80, 443, 8080]
 let $mixed = [1, 2+3, foo()]  // Can contain expressions
+let $heterogeneous = [0, "hello", {y: 42}]  // Elements can have different types
 ```
+
+Each element keeps its own type, so a list can mix strings, numbers, and records. Tenzir stores such a list without converting any of its elements.
 
 Lists support indexing with signed or unsigned integer indices and membership testing with `in`. Negative signed indices count from the end of the list (`-1` refers to the last element):
 
@@ -816,7 +819,7 @@ set greater_equal = a >= b
 
 **Comparison rules by type:**
 
-* **All types**: Can compare equality with any other type; unrelated types are never equal
+* **All types except `secret`**: Can compare equality with any other type; unrelated types are never equal
 * **Numeric types**: Can compare across different numeric types; ordered by magnitude
 * **Strings**: Compare lexicographically (dictionary order)
 * **IP addresses**: Ordered by their IPv6 bit pattern

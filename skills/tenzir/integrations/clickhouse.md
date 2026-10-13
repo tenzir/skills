@@ -81,17 +81,19 @@ The following patterns differ in who defines the schema and where additional fie
 
 ### Create a table per OCSF class
 
-Let Tenzir create tables when each OCSF class should have its own schema. The [`ocsf_cast`](https://tenzir.com/docs/reference/operators/ocsf_cast.md) operator casts events to their OCSF class and fills missing fields with typed nulls before [`to_clickhouse`](https://tenzir.com/docs/reference/operators/to_clickhouse.md) creates the table.
+Let Tenzir create tables when each OCSF class should have its own schema. The [`ocsf_cast`](https://tenzir.com/docs/reference/operators/ocsf_cast.md) operator casts events to their OCSF class before [`to_clickhouse`](https://tenzir.com/docs/reference/operators/to_clickhouse.md) creates the table.
 
 ```tql
 from_file "ocsf_network_activity.json"
-ocsf_cast null_fill=true
+ocsf_cast
 to_clickhouse table=f"ocsf.{class_name.replace(" ","_")}",
               primary=time, json=unmapped,
               tls=false
 ```
 
-When creating a table, the [`to_clickhouse`](https://tenzir.com/docs/reference/operators/to_clickhouse.md) operator uses the first event to determine the schema. Fields not mapped to JSON must have known types and must not be empty records. [`ocsf_cast`](https://tenzir.com/docs/reference/operators/ocsf_cast.md) helps because it gives expected OCSF fields explicit types before the table is created.
+When creating a table, the [`to_clickhouse`](https://tenzir.com/docs/reference/operators/to_clickhouse.md) operator uses the first event to determine the schema. Fields not mapped to JSON must have known types and must not be empty records. [`ocsf_cast`](https://tenzir.com/docs/reference/operators/ocsf_cast.md) helps because it casts the fields of an event to their OCSF types before the table is created.
+
+Leave out `null_fill=true` here. The nulls that it adds carry no type, so Tenzir cannot infer columns for them and table creation fails. If you want `null_fill=true`, [append to a table you manage](clickhouse.md#append-to-a-table-you-manage) instead.
 
 The `json=unmapped` option creates the OCSF `unmapped` field as a ClickHouse `JSON` column, preserving its nested structure so you can query into its fields directly.
 
@@ -281,7 +283,7 @@ Ordinary JSON columns consume their matching input subtrees. For both those colu
 
 For strings mapped to ordinary JSON columns, the first non-whitespace character must be `{`. Those strings pass through unchanged, including nulls in the string. Other strings, such as `"[]"` or `"hello"`, become `{}` with a warning. Malformed object text can fail insertion at ClickHouse; it is not redirected to the catch-all. ClickHouse determines the stored native JSON representation, so these writes do not guarantee an exact structured round trip.
 
-The [`from_clickhouse`](https://tenzir.com/docs/reference/operators/from_clickhouse.md) operator returns native JSON as text. Parsing that text can warn and convert incompatible mixed-list elements to strings. Once input has been converted to strings, the writer cannot recover the original element types.
+The [`from_clickhouse`](https://tenzir.com/docs/reference/operators/from_clickhouse.md) operator returns native JSON as text. Parsing that text preserves the types of elements in mixed lists.
 
 Typed columns follow these rules:
 

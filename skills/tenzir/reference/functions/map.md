@@ -29,9 +29,7 @@ A list of values.
 
 A lambda function that is applied to each list element.
 
-If the lambda evaluates to different but compatible types for the elements of the list a unification is performed. For example, records are compatible with other records, and the resulting record will have the keys of both.
-
-If the lambda evaluates to incompatible types for different elements of the list, the largest possible group of compatible values will be chosen and all other values will be `null`.
+The lambda may return a different type for each element. The result keeps every value with its own type, so a list can mix strings, numbers, records, and lists.
 
 ## Examples
 
@@ -79,7 +77,7 @@ answers = answers.map(x => {hostname: x.rrname, ip: x.rdata})
 
 In the below example, the first entry does not match the given grok pattern, causing `parse_grok` to emit a `null`.
 
-`map` will promote `null` values to typed null values, allowing you to still get all valid parts of the list mapped.
+The `map` function preserves the `null` at that position and maps the other elements normally. The result has the same length as the input.
 
 ```tql
 let $pattern = "%{WORD:w} %{NUMBER:n}"
@@ -121,11 +119,9 @@ ys = [
 }
 ```
 
-### Incompatible types between elements
+### Mixed types in the result
 
-In the below example the list `l` contains three strings. Two of those are JSON objects and one is a JSON list. While all three can be parsed as JSON by `parse_json`, the resulting `record` and `list` are incompatible types.
-
-`map` will resolve this by picking the “largest compatible group”, in this case preferring the two `record`s over one `list`.
+The list `l` contains three JSON strings: two objects and one array. Applying [`parse_json`](https://tenzir.com/docs/reference/functions/parse_json.md) to each element returns two records and one list, preserving their fields and types:
 
 ```tql
 from {
@@ -141,9 +137,9 @@ l = l.map(str => str.parse_json())
 ```tql
 {
   l: [
-    {x: 0, y: null},
-    {x: null, y: 0},
-    null,
+    {x: 0},
+    {y: 0},
+    [3],
   ]
 }
 ```

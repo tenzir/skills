@@ -7,9 +7,9 @@ section: "Docs"
 
 # Secrets
 
-> Operators and functions accept secrets as parameters for sensitive values, such as authentication tokens, passwords, keys, or even URLs.
+> Operators and functions accept secrets as arguments for sensitive values, such as authentication tokens, passwords, keys, or even URLs.
 
-Operators and functions accept secrets as parameters for sensitive values, such as authentication tokens, passwords, keys, or even URLs.
+Operators and functions accept secrets as arguments for sensitive values, such as authentication tokens, passwords, keys, or even URLs.
 
 Security Design
 
@@ -19,7 +19,7 @@ Read more in the [Security Design](secrets.md#security-design) section.
 
 ## Usage in TQL
 
-You can use secret values only with operators and functions that accept secrets. Operators generally do not document that they accept a secret, but they will accept secrets where appropriate. Functions list the type `secret` in their signature for every parameter that accepts one.
+You can use secret values only with operators and functions that accept secrets. They generally do not document that they accept a secret, but they will accept secrets where appropriate.
 
 You have two ways to pass an argument to an operator that expects a secret. The following examples use the [`to_splunk`](https://tenzir.com/docs/reference/operators/to_splunk.md) operator, which expects a HEC-token for authentication:
 
@@ -39,11 +39,10 @@ You have two ways to pass an argument to an operator that expects a secret. The 
 
   The operator fetches the secret named `splunk-hec-token` to authenticate with the Splunk endpoint.
 
-Function parameters with the type `secret` in their signature accept secrets, for example the key of [`hmac`](https://tenzir.com/docs/reference/functions/hmac.md) or of the encryption functions such as [`encrypt_aes_gcm_siv`](https://tenzir.com/docs/reference/functions/encrypt_aes_gcm_siv.md). These parameters accept only secrets. Other function parameters don’t accept secrets, for example the `seed` of the `hash_*` functions. In addition, the encoding and decoding functions transform secrets, as the [Encoding & Decoding](secrets.md#encoding--decoding) section describes. Bind a secret with `let` to use it in several places:
+Functions take secrets the same way. For example, the [`hmac`](https://tenzir.com/docs/reference/functions/hmac.md) function signs a value with a key that never appears in the pipeline:
 
 ```tql
-let $key = secret("pii-key").decode_hex()
-email = email.encrypt_aes_gcm_siv(key=$key)
+digest = hmac(message, secret("hmac-key"))
 ```
 
 ## The `secret` type
@@ -52,7 +51,28 @@ Tenzir’s [type system](../reference/types.md) includes secrets as a special ty
 
 ### Internals
 
-A value of type `secret` contains only the secret’s name, not the secret value itself. When a pipeline operator or function uses a secret, Tenzir resolves the name asynchronously. For ad-hoc secrets created from a string literal, the name and value of the secret are identical, so no lookup occurs.
+A value of type `secret` holds the actual secret value. Tenzir restricts which operations can use it to prevent disclosure:
+
+* Resolution: Tenzir resolves every `secret` call once, when it prepares the expression that contains it and before the first event arrives. The name must therefore be a constant, such as `secret("api-key")`, and cannot come from a field of an event. For ad-hoc secrets created from a string literal, the value is the literal itself, so no lookup occurs.
+* Memory: Tenzir keeps the secret value in memory that it wipes once it no longer needs the value.
+* Operations: Format strings, concatenation, and encoding functions that receive a secret return another secret, as the next section describes. No operation converts a secret into a plain value of another type.
+* Comparisons: Comparison operators reject secrets. Sorting, hashing, and deduplication treat all secrets as equal, so their results reveal nothing about the values.
+* Events: Secrets live only within expressions and never in events. When you assign a secret to a field, Tenzir stores the string `"***"` instead and emits a warning.
+
+Assigning a secret to a field stores a censored value:
+
+```tql
+from {}
+key = secret("api-key")
+```
+
+```tql
+{
+  key: "***",
+}
+```
+
+Tenzir warns that secrets cannot be stored in events and suggests passing the secret directly to the function or operator that uses it.
 
 ### Supported Operations
 
@@ -63,8 +83,8 @@ You can use secrets in [format strings](../reference/expressions.md#format-strin
 Use format strings when you combine secrets with other values:
 
 ```tql
-auth = f"Bearer {secret("my-secret")}"
-url = f"{$base_url}{secret("user-name")}:{secret("password")}"
+let $auth = f"Bearer {secret("my-secret")}"
+let $url = f"{$base_url}{secret("user-name")}:{secret("password")}"
 ```
 
 Format strings turn secrets nested in a structured value (`record`, `list`) into the string `"***"`.
@@ -97,7 +117,7 @@ You cannot turn a secret into a string. Any such attempt produces the string `"*
 
 #### Python
 
-Since secrets can be values in a pipeline, you can pass them through the [`python`](https://tenzir.com/docs/reference/operators/python.md) operator. You must not modify a secret in the `python` operator.
+Since secrets cannot be stored in events, they never reach the [`python`](https://tenzir.com/docs/reference/operators/python.md) operator. A field that held a secret contains the string `"***"` by the time the event arrives there.
 
 ## Ad-hoc Secrets
 
@@ -119,9 +139,9 @@ Managed secrets are identified by their name and can come from the following sou
 
 Access a managed secret’s value with the [`secret`](https://tenzir.com/docs/reference/functions/secret.md) function.
 
-The Tenzir Node looks up the secret’s actual value only when an operator or a function requires it. It first checks the config, with environment variables taking precedence over configuration file entries. If the secret is not found there, the node requests it from the Tenzir Platform.
+The Tenzir Node looks up a secret’s actual value when it prepares the expression that uses it. It first checks the config, with environment variables taking precedence over configuration file entries. If the secret is not found there, the node requests it from the Tenzir Platform.
 
-If the value is transferred over any network connection, it is additionally encrypted using [ECIES](https://en.wikipedia.org/wiki/Integrated_Encryption_Scheme) with a one-time, per-secret key. The value remains encrypted throughout the transfer until the final usage site.
+If the value is transferred over any network connection, it is additionally encrypted using [ECIES](https://en.wikipedia.org/wiki/Integrated_Encryption_Scheme) with a one-time, per-secret key. The value remains encrypted throughout the transfer until it reaches the Tenzir Node.
 
 A `tenzir` client process can use managed secrets only if it can connect to a Tenzir Node.
 

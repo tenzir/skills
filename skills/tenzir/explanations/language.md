@@ -62,7 +62,7 @@ A finite source ends when it exhausts its input; a live source can wait for futu
 
 A pipeline can carry **heterogeneous data**: firewall logs, DNS queries, and authentication events with different fields and types. Each event still has a schema. TQL does not require all events in a pipeline to share one schema.
 
-Operators resolve fields against the schemas they receive. This pipeline filters two event shapes without requiring both to contain the same fields:
+Operators resolve fields per event. This pipeline filters two kinds of events without requiring both to contain the same fields:
 
 ```tql
 from {kind: "network", src_ip: 192.0.2.10, severity: "high"},

@@ -28,7 +28,7 @@ The input to check for `null` values.
 ### Check if list has null values
 
 ```tql
-from {x: [{a: 1}, {}]}
+from {x: [{a: 1}, {a: null}]}
 contains_null = x.contains_null()
 ```
 

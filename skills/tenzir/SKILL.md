@@ -538,6 +538,10 @@ Understand TQL's dataflow model, streaming and batch semantics, and support for 
 
 Understand how Tenzir compiles TQL into an execution plan and runs operators with fused handoffs, channels, subpipelines, and parallel jobs.
 
+#### [Data model](explanations/data-model.md)
+
+Understand how Tenzir stores events in columnar batches, keeps events of different shapes and types side by side, and selects rows with bitmaps instead of slicing batches apart.
+
 ### Concepts
 
 #### [Configuration](explanations/configuration.md)
@@ -546,7 +550,7 @@ This page explains how to configure the Tenzir CLI and Node.
 
 #### [Secrets](explanations/secrets.md)
 
-Operators and functions accept secrets as parameters for sensitive values, such as authentication tokens, passwords, keys, or even URLs.
+Operators and functions accept secrets as arguments for sensitive values, such as authentication tokens, passwords, keys, or even URLs.
 
 #### [Normalization](explanations/normalization.md)
 

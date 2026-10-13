@@ -68,7 +68,7 @@ Each partition rotates independently. The operator checks `max_size` after it re
 
 ## Account for buffering operators
 
-Size-based rotation depends on the writer subpipeline producing bytes while it receives events. A streaming pipeline such as `write_parquet` emits data as record batches arrive, which lets the destination observe the growing file.
+Size-based rotation depends on the writer subpipeline producing bytes while it receives events. A streaming pipeline such as `write_parquet` emits data as batches arrive, which lets the destination observe the growing file.
 
 A blocking operator such as `sort` must consume its complete input before it emits any events:
 

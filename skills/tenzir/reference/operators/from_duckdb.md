@@ -115,7 +115,7 @@ A `time` covers the years 1678 to 2261 with nanosecond precision. Timestamps and
 
 ## Optimizations
 
-When the operator reads a table, it lets DuckDB do the work of the [`where`](https://tenzir.com/docs/reference/operators/where.md), [`select`](https://tenzir.com/docs/reference/operators/select.md), and [`head`](https://tenzir.com/docs/reference/operators/head.md) operators that follow it, so that DuckDB returns only the rows and columns that the pipeline needs. The page on [DuckDB optimizations](../optimizations/duckdb.md) describes which filters DuckDB evaluates, and the [optimizations overview](../optimizations.md) explains how Tenzir optimizes pipelines in general.
+When the operator reads a table, it lets DuckDB do the work of the [`where`](https://tenzir.com/docs/reference/operators/where.md), [`select`](https://tenzir.com/docs/reference/operators/select.md), [`head`](https://tenzir.com/docs/reference/operators/head.md), and [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) operators that follow it, so that DuckDB returns only the rows, columns, and summaries that the pipeline needs. The page on [DuckDB optimizations](../optimizations/duckdb.md) describes which filters DuckDB evaluates, and the [optimizations overview](../optimizations.md) explains how Tenzir optimizes pipelines in general.
 
 ## Remote databases
 
@@ -207,6 +207,16 @@ The `where` and `head` reach the query, so DuckDB returns at most 10 matching ro
 from_duckdb "events.duckdb", table="alerts"
 where severity >= 3
 head 10
+```
+
+### Summarize rows in DuckDB
+
+The `where` and the `summarize` reach the query, so DuckDB returns one row per source address:
+
+```tql
+from_duckdb "events.duckdb", table="alerts"
+where severity >= 3
+summarize src_ip, alerts=count(), first=min(ts)
 ```
 
 ### Stream new rows from a table

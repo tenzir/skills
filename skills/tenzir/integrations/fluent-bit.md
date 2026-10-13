@@ -18,7 +18,7 @@ Fluent Bit Inputs & Outputs
 
 Fluent Bit [parsers](https://docs.fluentbit.io/manual/pipeline/parsers) map to Tenzir operators that accept bytes as input and produce events as output. Fluent Bit [filters](https://docs.fluentbit.io/manual/pipeline/filters) correspond to Tenzir operators that perform event-to-event transformations. Tenzir does not expose Fluent Bit parsers and filters, only inputs and output.
 
-Internally, Fluent Bit uses [MsgPack](https://msgpack.org/) to encode events whereas Tenzir uses [Arrow](https://arrow.apache.org) record batches. The `fluentbit` source operator transposes MsgPack to Arrow, and the `fluentbit` sink performs the reverse operation.
+Internally, Fluent Bit uses [MsgPack](https://msgpack.org/) to encode events whereas Tenzir uses columnar batches, as our explanation of the [data model](../explanations/data-model.md) describes. The `fluentbit` source operator transposes MsgPack into these batches, and the `fluentbit` sink performs the reverse operation.
 
 ## Usage
 

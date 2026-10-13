@@ -772,13 +772,14 @@ from {
 
 ### Access secrets
 
-Use [`secret`](https://tenzir.com/docs/reference/functions/secret.md) to retrieve [secrets](../../explanations/secrets.md):
+Use [`secret`](https://tenzir.com/docs/reference/functions/secret.md) to retrieve [secrets](../../explanations/secrets.md) and pass them to the operator or function that needs them:
 
 ```tql
-from {
-  auth_token: secret("AUTH_TOKEN"),
-}
+from_http "https://api.example.com/events",
+  headers={Authorization: f"Bearer {secret("AUTH_TOKEN")}"}
 ```
+
+Secrets never appear in events. If you assign a secret to a field, Tenzir stores the string `"***"` instead and emits a warning.
 
 ## Type inspection
 
@@ -814,10 +815,10 @@ obj_type = obj.type_of()
   arr: [1, 2, 3],
   obj: {key: "value"},
   str_type: {name: null, kind: "string", attributes: [], state: null},
-  num_type: {name: null, kind: "int64", attributes: [], state: null},
-  float_type: {name: null, kind: "double", attributes: [], state: null},
+  num_type: {name: null, kind: "int", attributes: [], state: null},
+  float_type: {name: null, kind: "float", attributes: [], state: null},
   bool_type: {name: null, kind: "bool", attributes: [], state: null},
-  arr_type: {name: null, kind: "list", attributes: [], state: {type: {name: null, kind: "int64", attributes: [], state: null}}},
+  arr_type: {name: null, kind: "list", attributes: [], state: {type: {name: null, kind: "int", attributes: [], state: null}}},
   obj_type: {name: null, kind: "record", attributes: [], state: {fields: [{name: "key", type: {name: null, kind: "string", attributes: [], state: null}}]}}
 }
 ```
@@ -839,9 +840,9 @@ same_type = value1.type_id() == value3.type_id()
   value1: "text",
   value2: 123,
   value3: "456",
-  type1: "2476398993549b5",
-  type2: "5b0d4f0b0b167404",
-  type3: "2476398993549b5",
+  type1: "70005bc71c6facc1",
+  type2: "b8b6a92d4662d78e",
+  type3: "70005bc71c6facc1",
   same_type: true,
 }
 ```

@@ -13,7 +13,7 @@ This page explains TQL’s type system, which provides strong typing with automa
 
 * **Strong typing prevents errors**: Can’t accidentally compare IPs as strings
 * **Automatic inference**: Types detected from data, no declarations needed
-* **Null semantics**: Every type is nullable (real data has gaps)
+* **Null semantics**: Any field can be `null` or not exist
 * **Domain operations**: Types come with relevant methods
 
 Type safety in action
@@ -29,9 +29,11 @@ where severity?.to_upper() == "HIGH" // Safe navigation with type conversion
 
 The diagram below illustrates the type system at a glance:
 
-Type System
+The TQL types grouped under a common Type: null; the arithmetic types bool, int, uint, and float; the temporal types time and duration; the network types ip and subnet; the string types string, blob, and secret; and the containers list, whose elements each have their own type, and record, whose named fields each have their own type.
 
-Tenzir’s type system is a superset of JSON: Every valid JSON object is a valid Tenzir value, but there also additional types available, such as `ip` and `subnet`.
+Tenzir’s type system is a superset of JSON: Every valid JSON object is a valid Tenzir value, but there are also additional types available, such as `ip` and `subnet`.
+
+The types on this page are **logical types**: they define which values a field can hold and which operations apply to them. How Tenzir lays out the values in memory depends on their **physical representation**. An `int` column may store 8-bit values from a Parquet file or one constant for every row. Both behave as 64-bit signed integers in TQL. Our explanation of the [data model](../explanations/data-model.md#logical-types-physical-representations) lists the representations of every logical type.
 
 ### Basic Types
 
@@ -54,13 +56,13 @@ Basic types are stateless types with a static structure. The following basic typ
 
 #### Secrets
 
-The `secret` type is a special type created by the [`secret`](https://tenzir.com/docs/reference/functions/secret.md) function. Secrets can only be used as arguments for operators that accept them and only support a limited set of operations, such as concatenation.
+The `secret` type is a special type created by the [`secret`](https://tenzir.com/docs/reference/functions/secret.md) function. A secret holds the actual secret value, but you can only pass it to operators and functions that accept secrets, and it supports only a limited set of operations, such as concatenation. Assigning a secret to a field stores the string `"***"` instead, because secrets never appear in events.
 
 See the [explanation page for secrets](../explanations/secrets.md) for more details.
 
 ### Complex Types
 
-Complex types are stateful types that carry additional runtime information.
+Complex types contain other values.
 
 #### List
 
@@ -70,19 +72,21 @@ Lists have zero or more elements.
 
 #### Record
 
-The `record` type consists of an ordered sequence *fields*, each of which have a name and type. Records must have at least one field.
+The `record` type is an ordered sequence of zero or more *fields*, each of which has a name and a value of any type. The empty record `{}` is valid.
 
 The field name is an arbitrary UTF-8 string.
 
-The field type is any Tenzir type.
+Every record keeps its own field order. Two events with the same fields in a different order stay as they are.
 
-## Optionality
+## Types belong to values
 
-All types are optional in that there exists an additional `null` data point in every value domain. Consequently, Tenzir does not have a special type to indicate optionality.
+Each value has its own type. The same field can hold an `ip` in one event and a `string` in the next; Tenzir preserves both types. Our explanation of the [data model](../explanations/data-model.md#unions-for-mixed-types) shows how Tenzir stores such fields efficiently.
 
-## Attributes
+## Nulls
 
-Every type has zero or more **attributes** that are free-form key-value pairs to enrich types with custom semantics.
+The `null` value has a type of its own. Any field can hold `null` instead of a value of its usual type, so Tenzir needs no special type to indicate optionality.
+
+In `{x: null}`, the type of `x` is `null`, with no indication of whether it would otherwise hold an `int` or a `string`.
 
 ## Why TQL has more types
 
@@ -108,7 +112,6 @@ from {
   network: 192.168.1.0/24,                 // subnet
   timestamp: 2024-01-15T10:30:00,          // time point
   duration: 250ms,                         // duration
-  api_key: secret("sk_live_..."),          // secret (never logged)
   packet_data: b"\x00\x01\x02"             // blob (binary data)
 }
 ```
@@ -207,11 +210,11 @@ Credentials and sensitive data need protection from accidental exposure:
 ```tql
 // Secrets are never logged or displayed
 let $api_key = secret("API_TOKEN")
-auth_header = f"Bearer {$api_key}"
+let $auth_header = f"Bearer {$api_key}"
 
 
 // Use secrets without exposing them
-http "api.example.com", headers={Auth: $api_key}  // Use secret safely
+http "api.example.com", headers={Auth: $auth_header}  // Use secret safely
 to_file "debug.json"  // Secret value is not written to file
 ```
 
@@ -230,6 +233,6 @@ The secret type ensures sensitive data is never accidentally exposed in logs, ou
 
 ## Comparison to Arrow
 
-All Tenzir types have a lossless mapping to [Arrow](http://arrow.apache.org) types, however, not all Arrow types have a Tenzir equivalent. As a result, it is currently not yet possible to import arbitrary Arrow data. In the future, we plan to extend our support for Arrow-native types and also offer conversion options for seamless data handover.
+Tenzir converts events to and from [Apache Arrow](https://arrow.apache.org) where they cross a boundary, for example when reading or writing Parquet and Feather files or when a node stores events. The `ip` and `subnet` types map to Arrow [extension types](https://arrow.apache.org/docs/format/Columnar.html#extension-types).
 
-Tenzir has a few domain-specific types that map to Arrow [extension types](https://arrow.apache.org/docs/format/Columnar.html#extension-types). These are currently `enum`, `ip`, and `subnet`. Tenzir and Arrow attach type metadata to different entities: Tenzir attaches metadata to a type instance, whereas Arrow attaches metadata to a schema or record field.
+When reading Arrow data, Tenzir keeps the width of integer and floating-point columns, decodes dictionary-encoded columns, turns enumerations into strings, and turns maps from strings to strings into records. Values still behave like their TQL type, so an 8-bit integer column reads as `int`. Our explanation of the [data model](../explanations/data-model.md#logical-types-physical-representations) covers these physical representations.

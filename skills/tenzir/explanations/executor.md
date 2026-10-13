@@ -46,7 +46,7 @@ A parser changes bytes into events, a printer changes events into bytes, and eve
 
 The optimizer pushes filters, limits, and field projections toward the source as far as possible without changing the pipeline’s results. This reduces how much data Tenzir reads, transfers, and processes. A storage source may even turn these operations into a remote query. When a source cannot apply an optimization, the original operator still performs the work in Tenzir.
 
-The optimizer also tracks whether downstream operators depend on event order. When order does not matter, eligible operators may rearrange events with different schemas into fewer, larger batches. This improves throughput while preserving the pipeline’s semantics. Our [pipeline optimization explanation](pipeline.md#optimization) shows a complete pushdown example.
+The optimizer also tracks whether downstream operators depend on event order. When order does not matter, eligible operators may take faster code paths that reorder events, for example a parser that splits its input across several jobs. This improves throughput while preserving the pipeline’s semantics. Our [pipeline optimization explanation](pipeline.md#optimization) shows a complete pushdown example.
 
 ### Planning
 

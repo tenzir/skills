@@ -75,7 +75,7 @@ A request for a disabled signal receives HTTP `404 Not Found` over OTLP/HTTP. Th
 
 Controls the output schema for OTLP attributes.
 
-* `"list"` preserves attributes as a list of key-value records. This is the default. It preserves order and provides stable Arrow schemas.
+* `"list"` preserves attributes as a list of key-value records. This is the default. It preserves order and keeps the event schema stable when producers add attribute keys.
 * `"record"` creates one record field for each attribute key. This mode is more convenient for direct field access, but different key and value combinations can produce different schemas.
 
 List mode emits attributes in this form:

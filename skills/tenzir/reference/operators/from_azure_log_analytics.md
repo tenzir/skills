@@ -53,7 +53,7 @@ Nulls remain null, and all-null fixed-type columns retain their declared type. I
 
 KQL timespans use `[-][days.]hh:mm:ss[.fraction]`; values must fit Tenzir’s nanosecond-resolution duration range. Decimal values retain their exact textual representation, whether Azure encodes them as JSON numbers or strings.
 
-Dynamic values can be native JSON or JSON serialized into a string. An outer dynamic string containing valid JSON is decoded, so `"42"`, `"true"`, and `"null"` become a number, a boolean, and null. Nested strings don’t undergo additional inference. Heterogeneous lists follow Tenzir’s list representation, which may stringify incompatible element types. Duplicate object keys and out-of-range dynamic integers are rejected.
+Dynamic values can be native JSON or JSON serialized into a string. An outer dynamic string containing valid JSON is decoded, so `"42"`, `"true"`, and `"null"` become a number, a boolean, and null. Nested strings don’t undergo additional inference. Heterogeneous lists keep each element with its own type, so a list can mix strings, numbers, and records. Duplicate object keys and out-of-range dynamic integers are rejected.
 
 ### `query: string`
 

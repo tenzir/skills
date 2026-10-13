@@ -75,10 +75,10 @@ top key
 ```
 
 ```tql
-{name: "foo", count: 2}
-{name: "bar", count: 2}
-{name: "baz", count: 2}
-{name: "qux", count: 1}
+{key: "foo", count: 2}
+{key: "bar", count: 2}
+{key: "baz", count: 2}
+{key: "qux", count: 1}
 ```
 
 ## See Also

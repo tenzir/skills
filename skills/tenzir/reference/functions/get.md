@@ -42,7 +42,7 @@ A fallback value to return if the given `index` or `field` do not exist in the s
 from (
   {xs: [1, 2, 3]},
   {xs: []},
-}
+)
 select first = xs.get(0, -1)
 ```
 
@@ -57,7 +57,7 @@ select first = xs.get(0, -1)
 from (
   {x: 1, y: 2},
   {x: 3},
-}
+)
 select x = this.get("x", -1), y = this.get("y", -1)
 ```
 

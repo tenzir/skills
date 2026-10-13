@@ -109,21 +109,23 @@ Duplicate Keys
 
 ```tql
 {key: 7}
-{key: [0.0, 1.0]}
+{key: [0.0, 1]}
 {key: 42}
 ```
 
-If the values are of different type, conversions to a common type will be attempted, such as to a common number type. Ultimately values will be stringified if they do not share a common type:
+The values keep their individual types, so the list can mix values of different types:
 
-Type Conflict
+Mixed Types
 
 ```json
 {"key": 0.0, "key": "1.1.1.1", "key": "example.com"}
 ```
 
 ```tql
-{key: ["0", "1.1.1.1", "example.com"]}
+{key: [0.0, 1.1.1.1, "example.com"]}
 ```
+
+When you provide a `schema` or `selector`, the last value of a repeated key wins instead.
 
 ## Examples
 

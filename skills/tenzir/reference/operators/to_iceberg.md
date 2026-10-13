@@ -157,23 +157,22 @@ Defaults to `15min`.
 
 With `mode="create_append"` (the default) or `mode="create"`, the operator derives the table schema from the first arriving events. Records map to Iceberg structs and stay nested; nothing flattens. Types map as follows:
 
-| Tenzir type   | Iceberg type  | Notes                                                                               |
-| ------------- | ------------- | ----------------------------------------------------------------------------------- |
-| `bool`        | `boolean`     |                                                                                     |
-| `int64`       | `long`        |                                                                                     |
-| `uint64`      | `long`        | Iceberg has no unsigned integers. Values above 2^63 - 1 become null with a warning. |
-| `double`      | `double`      |                                                                                     |
-| `duration`    | `long`        | The duration as a count of nanoseconds.                                             |
-| `time`        | `timestamptz` | Microsecond precision. Nanoseconds truncate on write.                               |
-| `string`      | `string`      |                                                                                     |
-| `ip`          | `string`      |                                                                                     |
-| `subnet`      | `string`      |                                                                                     |
-| `enumeration` | `string`      |                                                                                     |
-| `blob`        | `binary`      |                                                                                     |
-| `list`        | `list`        | The element type maps recursively.                                                  |
-| `record`      | `struct`      | Fields map recursively.                                                             |
+| Tenzir type | Iceberg type  | Notes                                                                               |
+| ----------- | ------------- | ----------------------------------------------------------------------------------- |
+| `bool`      | `boolean`     |                                                                                     |
+| `int64`     | `long`        |                                                                                     |
+| `uint64`    | `long`        | Iceberg has no unsigned integers. Values above 2^63 - 1 become null with a warning. |
+| `double`    | `double`      |                                                                                     |
+| `duration`  | `long`        | The duration as a count of nanoseconds.                                             |
+| `time`      | `timestamptz` | Microsecond precision. Nanoseconds truncate on write.                               |
+| `string`    | `string`      |                                                                                     |
+| `ip`        | `string`      |                                                                                     |
+| `subnet`    | `string`      |                                                                                     |
+| `blob`      | `binary`      |                                                                                     |
+| `list`      | `list`        | The element type maps recursively.                                                  |
+| `record`    | `struct`      | Fields map recursively.                                                             |
 
-Fields with no Iceberg representation are dropped from the table schema with a warning: fields whose values are all null (they carry no type to derive), legacy `map` fields, and `secret` values, which the operator refuses to persist. A record whose fields are all dropped is dropped as a whole. Individual values that cannot convert, such as a `uint64` above the `long` range, become null without affecting neighboring rows.
+Fields with no Iceberg representation are dropped from the table schema with a warning: fields whose values are all null (they carry no type to derive) and legacy `map` fields. A record whose fields are all dropped is dropped as a whole. Individual values that cannot convert, such as a `uint64` above the `long` range, become null without affecting neighboring rows.
 
 When the schema has a top-level `time` field of timestamp type, following the OCSF event convention, created tables register `time` as their sort order, and column metrics default to settings that keep manifests small while retaining time-range pruning.
 

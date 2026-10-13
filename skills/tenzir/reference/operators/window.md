@@ -68,7 +68,7 @@ Fixed windows delay closure but still forward events to their subpipelines in ar
 
 ### Count offsets
 
-A count window assigns the first event offset `0`, the next event offset `1`, and so on. Fixed count windows use half-open offset ranges. For example, `size=100` creates `[0, 100)`, `[100, 200)`, and later ranges. The operator closes a window when it reaches the exclusive finish offset, independent of how events are divided into table slices.
+A count window assigns the first event offset `0`, the next event offset `1`, and so on. Fixed count windows use half-open offset ranges. For example, `size=100` creates `[0, 100)`, `[100, 200)`, and later ranges. The operator closes a window when it reaches the exclusive finish offset, independent of how events are divided into batches.
 
 Count windows follow arrival order. They don’t accept `on`, `tolerance`, or `idle_timeout`.
 

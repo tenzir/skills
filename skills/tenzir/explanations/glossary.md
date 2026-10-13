@@ -57,7 +57,7 @@ Edge storage keeps events in [partitions](glossary.md#partition) of Parquet or F
 
 One record of typed data, and the unit that [pipelines](glossary.md#pipeline) move.
 
-Think of an event as a JSON object with a stricter [type system](../reference/types.md): besides strings, numbers, and records, a field can be a timestamp, a duration, an IP address, or a subnet. The shape of an event is its [schema](glossary.md#schema), and one pipeline can carry events of many schemas at once.
+Think of an event as a JSON object with a stricter [type system](../reference/types.md): besides strings, numbers, and records, a field can be a timestamp, a duration, an IP address, or a subnet. The fields of an event and their types form its [schema](glossary.md#schema), and one pipeline can carry events of many schemas at once.
 
 ## Format
 
@@ -204,7 +204,7 @@ Printers appear as the `write_*` operators, and as `print_*` [functions](glossar
 
 Moving a requirement of a later [operator](glossary.md#operator) toward the [source](glossary.md#source) of a [pipeline](glossary.md#pipeline), so that upstream operators can act on it early.
 
-Before a pipeline runs, Tenzir carries the predicates of `where`, the row limit of `head`, the fields that `select` keeps, and the ordering that downstream operators need upstream. A source such as `from_clickhouse` acts on what it understands, for example by adding a `WHERE` clause to the SQL query it sends, and a [parser](glossary.md#parser) that learns the order does not matter batches events more efficiently. Results stay the same whether or not an operator acts on a pushed-down requirement.
+Before a pipeline runs, Tenzir carries the predicates of `where`, the row limit of `head`, the fields that `select` keeps, and the ordering that downstream operators need upstream. A source such as `from_clickhouse` acts on what it understands, for example by adding a `WHERE` clause to the SQL query it sends, and a [parser](glossary.md#parser) that learns the order does not matter can split its work across several jobs. Results stay the same whether or not an operator acts on a pushed-down requirement.
 
 * Learn more about [pipeline optimization](pipeline.md#optimization)
 
@@ -212,7 +212,7 @@ Before a pipeline runs, Tenzir carries the predicates of `where`, the row limit 
 
 The named record type of an [event](glossary.md#event): its field names and their types.
 
-Events with the same fields share a schema, and `@name` sets or reads its name. A pipeline can carry several schemas at once, and operators apply to the ones where they make sense.
+Events with the same fields and types share a schema. Every event carries its own schema name, which `@name` sets or reads. A pipeline, and even a single batch of events, can carry several schemas at once, and operators apply to the ones where they make sense.
 
 * [Show available schemas in the edge storage](../guides/store/show-available-schemas.md)
 

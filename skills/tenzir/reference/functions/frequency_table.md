@@ -23,7 +23,7 @@ The `values` list sorts entries by descending count. Equal counts use the engine
 
 Values must not contain NaN or positive or negative infinity, including in nested lists and records. The function warns and returns null when it encounters a non-finite value.
 
-All non-null inputs must have the same TQL type. If the input type changes across schema-evolving batches, the function produces a warning and returns null rather than coercing exact keys. The model records the accepted type in `value_type`.
+All non-null inputs must have the same TQL type. If inputs of different types occur, the function produces a warning and returns null rather than coercing exact keys. The model records the accepted type in `value_type`.
 
 ### Definition
 

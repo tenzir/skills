@@ -54,7 +54,9 @@ Every subprocess maintains independent interpreter and module state. External si
 
 ## Secrets
 
-By default, the `python` operator does not accept secrets. If you want to allow usage of secrets in the `code` argument, you can enable the configuration option `tenzir.allow-secrets-in-escape-hatches`.
+Secrets never appear in events: a field that was assigned a secret holds the string `"***"` instead, so your Python code cannot read a secret from an event.
+
+The `code` argument is the exception. It accepts a secret, and Tenzir resolves the secret and passes the resulting text to the Python subprocess as the program. If you build the code from a secret, for example with a format string, the program contains the secret value and can read it.
 
 ## Examples
 

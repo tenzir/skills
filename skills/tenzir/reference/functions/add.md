@@ -25,7 +25,7 @@ The list to add to.
 
 ### `x: any`
 
-An element to add to the list. If this is of a type incompatible with the list, it will be considered as `null`.
+An element to add to the list. The element can have any type, and the list can hold elements of different types. Two elements count as duplicates only when they have the same type and value, so `1` and `"1"` are distinct.
 
 ## Examples
 

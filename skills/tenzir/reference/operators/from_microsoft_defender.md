@@ -38,7 +38,7 @@ Column names and capitalization are preserved. The response schema controls conv
 | `String`, `Guid`         | `string`                                                     |
 | `Dynamic`                | Records, lists, or scalar values according to the JSON value |
 
-KQL spellings such as `datetime`, `long`, `real`, and `dynamic` are also accepted. Null values remain null. Integers must fit signed 64-bit range and aren’t converted through floating point. Ordinary string columns stay strings even when they look like timestamps, IP addresses, numbers, or durations. Dynamic values can be native JSON or JSON serialized into a string. A dynamic string that contains valid JSON is decoded, so `"42"`, `"true"`, and `"null"` become a number, a boolean, and null. Nested strings don’t undergo timestamp or IP inference. Heterogeneous lists follow Tenzir’s list representation, which may stringify incompatible element types.
+KQL spellings such as `datetime`, `long`, `real`, and `dynamic` are also accepted. Null values remain null. Integers must fit signed 64-bit range and aren’t converted through floating point. Ordinary string columns stay strings even when they look like timestamps, IP addresses, numbers, or durations. Dynamic values can be native JSON or JSON serialized into a string. A dynamic string that contains valid JSON is decoded, so `"42"`, `"true"`, and `"null"` become a number, a boolean, and null. Nested strings don’t undergo timestamp or IP inference. Heterogeneous lists keep each element with its own type, so a list can mix strings, numbers, and records.
 
 ### `query: string`
 

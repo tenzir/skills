@@ -39,19 +39,17 @@ Operator Composition Examples
 
 ## Multi-Schema Dataflows
 
-As mentioned above, pipelines can transport both *bytes* and *events*. Let’s go deeper into the details of Tenzir represents events. Every event that flows through a pipeline is part of a *data frame* with a schema. Internally, these data frames are represented as Apache Arrow record batches, encoding potentially of tens of thousands of events in a single block of data. This innate batching is the reason why the pipelines can achieve high throughput.
+Pipelines transport both bytes and events. Events travel in batches that store many events column by column, allowing operators to process many values in one loop.
 
-Unique about Tenzir’s pipeline executor is that a single pipeline can process events with *multiple schemas*. When you typically work with data frames, your workload runs on input with a fixed schema, e.g., when you query a database table. In Tenzir, schemas can change dynamically during the execution of a pipeline, much like document-oriented engines that work on JSON or have one-event-at-a-time processing semantics. Tenzir is unique in that it gives the user the feeling of operating on a single event at a time while hiding the structured data frame batching behind the scenes. Thus, Tenzir combines the performance of structured query engines with the flexibility of document-oriented engines, making it perfect fit for processing *semi-structured data* at scale:
+A single pipeline, and even a single batch, can hold events with multiple schemas. Database tables and data frames typically require a fixed schema; in Tenzir, schemas can change from one event to the next. You write transformations for individual events, as in a document-oriented engine, while Tenzir executes them over columnar batches:
 
 <!--?xml version="1.0" standalone="no"?-->Structured vs document-oriented engines
 
-The schema variance begins early in the data flow, where parsers emit events with changing schemas as they encounter changing fields. If an operator detects a schema changes, it creates a new batch of events. In terms of performance, the worst case for Tenzir is a ordered stream of schema-switching events, with every event having a new schema than the previous one. But even for those scenarios operators can efficiently build homogeneous batches when the inter-event order does not matter. Similar to predicate pushdown, Tenzir operators support *ordering pushdown* to signal to upstream operators that the event order only matters intra-schema but not inter-schema. In this case the operator transparently “demultiplex” a heterogeneous event stream into N homogeneous streams. The [`sort`](https://tenzir.com/docs/reference/operators/sort.md) operator is an example of such an operator; it pushes its ordering requirements upstream, allowing parsers to efficiently create multiple streams events in parallel. The [Optimization](pipeline.md#optimization) section describes this and the other rewrites the optimizer performs.
+The schema variance begins early in the data flow, where parsers emit events with changing fields, and the same field may hold an IP address in one event and a hostname in the next. Tenzir keeps such events together in one batch. Every event keeps its own fields in their original order, and a field with values of different types stores them side by side. Neither a new field nor a changed type forces a new batch, so even a stream in which every event has a different schema than its predecessor flows in large batches and in its original order. Our explanation of the [data model](data-model.md) describes how batches achieve this.
 
-Multi-schema Example
+Some operators only work with exactly one schema at a time, such as the CSV printer [`write_csv`](https://tenzir.com/docs/reference/operators/write_csv.md), which first writes a header and then all subsequent rows have to adhere to the emitted schema. Such operators cannot handle events with changing schemas.
 
-Some operators only work with exactly one instance per schema internally, such as [`write_csv`](https://tenzir.com/docs/reference/operators/write_csv.md), which first writes a header and then all subsequent rows have to adhere to the emitted schema. Such operators cannot handle events with changing schemas.
-
-It’s important to mention that most of the time you don’t have to worry about schemas. They are there for you when you want to work with them, but it’s often enough to just specified the fields that you want to work with, e.g., `where id.orig_h in 10.0.0.0/8`, or `select src_ip, dest_ip, proto`. Schemas are inferred automatically in parsers, but you can also seed a parser with a schema that you define explicitly.
+Most transformations only need field names, for example `where id.orig_h in 10.0.0.0/8` or `select src_ip, dest_ip, proto`. Schemas are inferred automatically in parsers, but you can also seed a parser with a schema that you define explicitly.
 
 ## Optimization
 
@@ -88,7 +86,7 @@ LIMIT 100
 
 Every rewrite preserves results. The `where`, `select`, and `head` stay in the pipeline, so a source that acts on a hint only partially, or not at all, still produces the same output. When only part of a predicate translates, for example because it calls a function the backend does not have, the source pushes what it can and evaluates the rest itself.
 
-Which hints a source acts on depends on its backend. [Optimizations](../reference/optimizations.md) lists the operators that act on hints and states, for each database, which predicates go into the query and which stay in Tenzir. Parsers use the ordering requirement as described in [Multi-Schema Dataflows](pipeline.md#multi-schema-dataflows).
+Which hints a source acts on depends on its backend. [Optimizations](../reference/optimizations.md) lists the operators that act on hints and states, for each database, which predicates go into the query and which stay in Tenzir. When downstream does not depend on event order, operators may take faster code paths that reorder events, for example a parser that splits its input across several jobs.
 
 Federated Search
 

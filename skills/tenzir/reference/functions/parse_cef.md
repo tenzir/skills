@@ -109,21 +109,23 @@ Duplicate Keys
 
 ```tql
 {key: 7}
-{key: [0.0, 1.0]}
+{key: [0.0, 1]}
 {key: 42}
 ```
 
-If the values are of different type, conversions to a common type will be attempted, such as to a common number type. Ultimately values will be stringified if they do not share a common type:
+The values keep their individual types, so the list can mix values of different types:
 
-Type Conflict
+Mixed Types
 
 ```json
 {"key": 0.0, "key": "1.1.1.1", "key": "example.com"}
 ```
 
 ```tql
-{key: ["0", "1.1.1.1", "example.com"]}
+{key: [0.0, 1.1.1.1, "example.com"]}
 ```
+
+When you provide a `schema` or `selector`, the last value of a repeated key wins instead.
 
 ## Examples
 
@@ -134,16 +136,19 @@ y = x.parse_cef()
 
 ```tql
 {
-  cef_version: 0,
-  device_vendor: "Cynet",
-  device_product: "Cynet 360",
-  device_version: "4.5.4.22139",
-  signature_id: "0",
-  name: "Memory Pattern - Cobalt Strike Beacon ReflectiveLoader",
-  severity: "8",
-  extension: {
-    key: "value"
-  }
+  x: "CEF:0|Cynet|Cynet 360|4.5.4.22139|0|Memory Pattern - Cobalt Strike Beacon ReflectiveLoader|8|key=value",
+  y: {
+    cef_version: 0,
+    device_vendor: "Cynet",
+    device_product: "Cynet 360",
+    device_version: "4.5.4.22139",
+    signature_id: "0",
+    name: "Memory Pattern - Cobalt Strike Beacon ReflectiveLoader",
+    severity: "8",
+    extension: {
+      key: "value",
+    },
+  },
 }
 ```
 

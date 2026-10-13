@@ -47,7 +47,7 @@ port_type = port.type_of().kind
 ```
 
 ```tql
-{count: "3", port: 443, count_type: "string", port_type: "int64"}
+{count: "3", port: 443, count_type: "string", port_type: "int"}
 ```
 
 A numeric-looking string is a common surprise. A comparison against it silently matches nothing, because comparing a string to a number yields `null`:

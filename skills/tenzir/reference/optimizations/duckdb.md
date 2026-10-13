@@ -7,9 +7,9 @@ section: "Docs"
 
 # DuckDB
 
-> When fromduckdb reads a table, it lets DuckDB filter the rows, pick the columns, and stop after enough rows, so that DuckDB reads and returns only what the pipeline needs instead of the whole table. This page describes when that happens, which filters DuckDB evaluates, and why the others stay in Tenzir. The optimizations overview explains how Tenzir optimizes pipelines in general and compares the databases.
+> When fromduckdb reads a table, it lets DuckDB filter the rows, pick the columns, stop after enough rows, and compute summaries, so that DuckDB reads and returns only what the pipeline needs instead of the whole table. This page describes when that happens, which filters DuckDB evaluates, and why the others stay in Tenzir. The optimizations overview explains how Tenzir optimizes pipelines in general and compares the databases.
 
-When [`from_duckdb`](https://tenzir.com/docs/reference/operators/from_duckdb.md) reads a table, it lets DuckDB filter the rows, pick the columns, and stop after enough rows, so that DuckDB reads and returns only what the pipeline needs instead of the whole table. This page describes when that happens, which filters DuckDB evaluates, and why the others stay in Tenzir. The [optimizations overview](../optimizations.md) explains how Tenzir optimizes pipelines in general and compares the databases.
+When [`from_duckdb`](https://tenzir.com/docs/reference/operators/from_duckdb.md) reads a table, it lets DuckDB filter the rows, pick the columns, stop after enough rows, and compute summaries, so that DuckDB reads and returns only what the pipeline needs instead of the whole table. This page describes when that happens, which filters DuckDB evaluates, and why the others stay in Tenzir. The [optimizations overview](../optimizations.md) explains how Tenzir optimizes pipelines in general and compares the databases.
 
 ## When it applies
 
@@ -17,7 +17,7 @@ The operator reads in one of these modes, and only table mode optimizes:
 
 * **Table mode** reads a table that you name with `table`, as in `from_duckdb "events.duckdb", table="alerts"`. The operator writes the query itself and adds the work of the operators that follow it. The rest of this page describes this mode.
 * **SQL mode** sends the query that you write with `sql` exactly as written, and Tenzir applies the rest of the pipeline to its result. To have DuckDB filter, write the filter into your query.
-* **Live mode**, with `live=true`, polls a table for new rows. Every poll carries the filters and the columns of table mode, but not the limit, since the limit counts rows across polls.
+* **Live mode**, with `live=true`, polls a table for new rows. Every poll carries the filters and the columns of table mode, but neither the limit, since the limit counts rows across polls, nor a summary, since the input of a live read never ends.
 
 ## How the query changes
 
@@ -45,11 +45,45 @@ WHERE "severity" >= 3 AND starts_with("rule", 'ET ')
 LIMIT 100
 ```
 
-The [`where`](https://tenzir.com/docs/reference/operators/where.md), [`select`](https://tenzir.com/docs/reference/operators/select.md), and [`head`](https://tenzir.com/docs/reference/operators/head.md) operators still run in Tenzir on the rows that DuckDB returns, so the result is the same whether DuckDB evaluated a filter or not.
+The [`where`](https://tenzir.com/docs/reference/operators/where.md), [`select`](https://tenzir.com/docs/reference/operators/select.md), and [`head`](https://tenzir.com/docs/reference/operators/head.md) operators still run in Tenzir on the rows that DuckDB returns, so the result is the same whether DuckDB evaluated a filter or not. The exception is a pipeline in which DuckDB computes a summary, as [Aggregations](duckdb.md#aggregations) describes.
 
-## Aggregation input columns
+## Aggregations
 
-With final summary output, [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) also narrows the input columns. A dependency on `meta.level` retains the whole top-level `meta` column. The [aggregation projection rules](../optimizations.md#aggregation-input-projections) apply to [`top`](https://tenzir.com/docs/reference/operators/top.md) and [`rare`](https://tenzir.com/docs/reference/operators/rare.md) as well. Aggregation still runs in Tenzir, not in a SQL `GROUP BY`; a [`head`](https://tenzir.com/docs/reference/operators/head.md) after it does not add an input `LIMIT`. Explicit `sql` queries remain unchanged.
+When a [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) directly follows the operator, after the filters that went into the query, DuckDB computes the summary with `GROUP BY` and returns one row per group instead of every matching row. This also applies to [`top`](https://tenzir.com/docs/reference/operators/top.md) and [`rare`](https://tenzir.com/docs/reference/operators/rare.md), which count with `summarize`. For example, the pipeline
+
+```tql
+from_duckdb "events.duckdb", table="alerts"
+where severity >= 3
+summarize src_ip, events=count(), last.seen=max(ts)
+where events >= 10
+```
+
+sends a query equivalent to
+
+```sql
+SELECT "src_ip", count_star() AS "events", {'seen': max("ts")} AS "last"
+FROM "alerts"
+WHERE "severity" >= 3
+GROUP BY "src_ip"
+```
+
+DuckDB then takes over the [`where`](https://tenzir.com/docs/reference/operators/where.md) before the summary together with the summary itself, and returns only the group keys and the aggregates. In the example, the `severity` column never reaches Tenzir. The [`where`](https://tenzir.com/docs/reference/operators/where.md) after the summary runs in Tenzir. DuckDB computes these parts of a summary:
+
+* Group keys on boolean, integer, `VARCHAR`, and temporal columns, and on fields of `STRUCT` columns of these types. A collated `VARCHAR` groups with the binary collation, which tells text apart by its bytes like TQL.
+* `count()`, and `count(x)` on such columns and on floating-point columns.
+* `min(x)` and `max(x)` on integer and temporal columns.
+* Nested output fields, such as `last.seen`, which become `STRUCT` values.
+
+Values that Tenzir cannot represent, such as `infinity` or a `DATE` past the year 2262, group, count, and compare as `null`, as they do in Tenzir. Like Tenzir, DuckDB returns one row for an empty table when the summary has no group keys, and no rows when it has some. The rows arrive in the order in which DuckDB returns the groups. Since a table has no defined row order, this is as valid as the first-seen order in which [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) emits groups, but it can differ from the order of a read without a summary, which in practice follows the order in which the rows were inserted. Use [`sort`](https://tenzir.com/docs/reference/operators/sort.md) when you need a particular order.
+
+Everything else runs in Tenzir with the same result. The operator then reads the rows as usual and summarizes them itself:
+
+* A summary with another function, such as `sum`, an option such as `emit`, or a group key or argument that is not a field. The operator then still selects only the columns that the summary reads.
+* A summary after a [`head`](https://tenzir.com/docs/reference/operators/head.md), or after a predicate that stays in Tenzir.
+* Group keys and extremes of floating-point columns, since `GROUP BY` considers `NaN` equal to itself and `-0.0` equal to `0.0`, and Tenzir’s result for `NaN` depends on the order of the rows.
+* Columns that arrive as strings, such as `DECIMAL` and `UUID` columns.
+
+When DuckDB computes a summary, Tenzir does not see the individual rows, so it does not warn about values that it reads as `null`, such as a field of a `NULL` struct or an `infinity` timestamp.
 
 ## Filters that DuckDB evaluates
 

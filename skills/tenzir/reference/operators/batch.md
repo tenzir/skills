@@ -23,7 +23,7 @@ Advanced feature
 
 The `batch` operator is a lower-level building block that lets users explicitly control batching, which otherwise is controlled automatically by Tenzir’s underlying pipeline execution engine. Use with caution!
 
-Note that the operator maintains separate buffers for each distinct schema. Each buffer has independent timeout tracking and fills until reaching the `limit`, at which point it flushes immediately.
+The operator collects events of any schema into a single buffer, preserving their order. It flushes the buffer immediately when it reaches the `limit`.
 
 ### `limit: int (optional)`
 

@@ -28,7 +28,7 @@ from {x: type_id(1 + 3.2)}
 ```
 
 ```tql
-{x: "41615fdb30a38aaf"}
+{x: "e268529445e27ad0"}
 ```
 
 ## See Also

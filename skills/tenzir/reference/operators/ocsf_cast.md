@@ -87,8 +87,10 @@ ocsf_cast null_fill=true encode_variants=true
 subscribe "ocsf"
 where class_name == "Network Activity" and metadata.version == "1.5.0"
 ocsf_cast null_fill=true
-to_clickhouse table="network_activity"
+to_clickhouse table="network_activity", mode="append"
 ```
+
+Create the `network_activity` table in ClickHouse first. The nulls that `null_fill=true` adds carry no type, so [`to_clickhouse`](https://tenzir.com/docs/reference/operators/to_clickhouse.md) cannot infer columns for them when it creates a table.
 
 ## See Also
 

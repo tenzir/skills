@@ -34,7 +34,7 @@ this = type_of(this)
 
 ```tql
 {
-  name: "tenzir.from",
+  name: null,
   kind: "record",
   attributes: [],
   state: {
@@ -43,7 +43,7 @@ this = type_of(this)
         name: "x",
         type: {
           name: null,
-          kind: "int64",
+          kind: "int",
           attributes: [],
           state: null,
         },

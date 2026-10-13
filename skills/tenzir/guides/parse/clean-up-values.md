@@ -93,13 +93,21 @@ enabled = enabled == "yes"
 Convert special numeric values:
 
 ```tql
-from {port: -1, count: 0xFFFFFFFF, size: -999}
+from {port: -1, count: 4294967295, size: -999}
 // -1 often means "any port" or "not applicable"
-port = null if port == -1
-// 0xFFFFFFFF often means "unknown" in network data
-count = null if count == 4294967295
+port = null if port == -1 else port
+// 4294967295 (0xFFFFFFFF) often means "unknown" in network data
+count = null if count == 4294967295 else count
 // -999 is sometimes used as a missing value indicator
-size = null if size == -999
+size = null if size == -999 else size
+```
+
+```tql
+{
+  port: null,
+  count: null,
+  size: null,
+}
 ```
 
 ## Fix types

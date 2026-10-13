@@ -226,7 +226,7 @@ Hopping event-time windows use a window size that is larger than the step betwee
 
 ### Fixed count windows
 
-Fixed count windows close after a bounded number of arriving events rather than at a time boundary. They are useful for batching and sample-based analytics where table-slice boundaries must not affect the result.
+Fixed count windows close after a bounded number of arriving events rather than at a time boundary. They are useful for batching and sample-based analytics where batch boundaries must not affect the result.
 
 | System       | Support | Notes                                                                                                     |
 | ------------ | ------- | --------------------------------------------------------------------------------------------------------- |

@@ -25,17 +25,17 @@ For a union, the function selects the first branch in schema order that accepts 
 
 The function accepts these Tenzir types for the corresponding Avro schemas:
 
-| Tenzir type                                 | Compatible Avro types                                          |
-| ------------------------------------------- | -------------------------------------------------------------- |
-| `null`                                      | `null`                                                         |
-| `bool`                                      | `boolean`                                                      |
-| `int`, `uint`                               | `int`, `long`, `float`, `double`                               |
-| `float`                                     | `float`, `double`                                              |
-| `duration`, `time`                          | `int`, `long`, `float`, `double`, using nanoseconds            |
-| `string`, `pattern`, `ip`, `subnet`, `enum` | `string`, or `enum` with a matching symbol                     |
-| `blob`                                      | `bytes`, or `fixed` with the declared size                     |
-| `list`                                      | `array` with compatible items                                  |
-| `record`                                    | `record` with matching fields, or `map` with compatible values |
+| Tenzir type              | Compatible Avro types                                          |
+| ------------------------ | -------------------------------------------------------------- |
+| `null`                   | `null`                                                         |
+| `bool`                   | `boolean`                                                      |
+| `int`, `uint`            | `int`, `long`, `float`, `double`                               |
+| `float`                  | `float`, `double`                                              |
+| `duration`, `time`       | `int`, `long`, `float`, `double`, using nanoseconds            |
+| `string`, `ip`, `subnet` | `string`, or `enum` with a matching symbol                     |
+| `blob`                   | `bytes`, or `fixed` with the declared size                     |
+| `list`                   | `array` with compatible items                                  |
+| `record`                 | `record` with matching fields, or `map` with compatible values |
 
 Strings and map keys must be valid UTF-8. Avro `int` requires a signed 32-bit value, and Avro `long` requires a signed 64-bit value. Avro `float` and `double` accept the full unsigned 64-bit range. Floating-point conversions can lose precision; finite values outside the Avro `float` range are rejected. Secrets encode as the masked string `"***"`, never as their contents.
 

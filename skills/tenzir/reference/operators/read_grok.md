@@ -67,11 +67,7 @@ With `include_unnamed=true`, replacement fields without a `SEMANTIC` are include
 
 ### `merge = bool (optional)`
 
-Merges all incoming events into a single schema\* that converges over time. This option is usually the fastest *for reading* highly heterogeneous data, but can lead to huge schemas filled with nulls and imprecise results. Use with caution.
-
-\*: In selector mode, only events with the same selector are merged.
-
-In merging mode, a repeated key will always overwrite the previous value.
+This option has no effect and only exists for backward compatibility. Tenzir keeps events with different schemas in the same batch, so heterogeneous input needs no merging.
 
 ### `raw = bool (optional)`
 
@@ -158,21 +154,23 @@ Duplicate Keys
 
 ```tql
 {key: 7}
-{key: [0.0, 1.0]}
+{key: [0.0, 1]}
 {key: 42}
 ```
 
-If the values are of different type, conversions to a common type will be attempted, such as to a common number type. Ultimately values will be stringified if they do not share a common type:
+The values keep their individual types, so the list can mix values of different types:
 
-Type Conflict
+Mixed Types
 
 ```json
 {"key": 0.0, "key": "1.1.1.1", "key": "example.com"}
 ```
 
 ```tql
-{key: ["0", "1.1.1.1", "example.com"]}
+{key: [0.0, 1.1.1.1, "example.com"]}
 ```
+
+When you provide a `schema` or `selector`, the last value of a repeated key wins instead.
 
 ## Examples
 

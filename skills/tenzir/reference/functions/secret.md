@@ -17,7 +17,7 @@ secret(name:string) -> secret
 
 ## Description
 
-An operator accepting a secret will first try and lookup the value in the environment or configuration of the Tenzir Node. A `tenzir` client process can use secrets only if it has a Tenzir Node to connect to.
+Tenzir resolves the secret once, before the first event arrives. It first looks up the value in the environment or configuration of the Tenzir Node. A `tenzir` client process can use secrets only if it has a Tenzir Node to connect to.
 
 If the secret is not found in the node, a request is made to the Tenzir Platform. Should the platform also not be able to find the secret, an error is raised.
 
@@ -46,15 +46,18 @@ accept_tcp "127.0.0.1:4000" {
 to_splunk "https://localhost:8088", hec_token=secret("splunk-hec-token")
 ```
 
-### Secrets are not rendered in output
+### Secrets cannot be stored in events
 
 ```tql
-from {x: secret("geheim")}
+from {}
+x = secret("geheim")
 ```
 
 ```tql
-{x: "***" }
+{x: "***"}
 ```
+
+Tenzir stores the string `"***"` instead of the secret and emits a warning. Pass the secret directly to the operator or function that uses it.
 
 ## See Also
 

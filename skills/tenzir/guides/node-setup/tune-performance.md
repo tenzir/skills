@@ -7,9 +7,9 @@ section: "Docs"
 
 # Tune performance
 
-> This guide covers configuration options that affect node performance. You’ll learn how to tune buffering, batch sizes, memory usage, and parallelism.
+> This guide covers configuration options that affect node performance. You’ll learn how batching affects performance and how to tune buffering, memory usage, and parallelism.
 
-This guide covers configuration options that affect node performance. You’ll learn how to tune buffering, batch sizes, memory usage, and parallelism.
+This guide covers configuration options that affect node performance. You’ll learn how batching affects performance and how to tune buffering, memory usage, and parallelism.
 
 ## Demand
 
@@ -27,25 +27,15 @@ tenzir:
 
 ## Batching
 
-Tenzir processes events in batches. Because the structured data has the shape of a table, we call these batches *table slices*. The following options control their shape and behavior.
+Tenzir processes events in batches. Our explanation of the [data model](../../explanations/data-model.md) describes how a batch stores events column by column, including events with different schemas.
 
-### Size
+Batch size affects both throughput and latency. Smaller batches reduce the work in each processing step, but increase per-batch overhead. Larger batches amortize that overhead and can improve throughput, at the cost of more memory and longer processing steps.
 
-Most components in Tenzir operate on table slices, so their size affects both throughput and latency. Smaller batches reduce the work in each processing step, but increase per-batch overhead. Larger batches amortize that overhead and can improve throughput, at the cost of more memory and longer processing steps.
+Parsers and most sources produce batches of up to 8,192 events. When no new input arrives for a second, they emit a smaller batch so that events do not wait for a batch to fill up. Because a single batch holds events of any schema, a stream whose schema changes from event to event still flows in full batches.
 
-The option `tenzir.import.batch-size` sets an upper bound for the number of events per table slice. It defaults to 8,192.
+The batch size does not bound all buffering in a pipeline. Memory usage also depends on the number of channels, their capacity, and any state that operators retain.
 
-The option limits batch sizes; it does not bound all buffering in a pipeline. Memory usage also depends on the number of channels, their capacity, and any state that operators retain.
-
-Caution
-
-Setting `tenzir.import.batch-size` to `0` causes the table slice size to be unbounded and leaves it to `tenzir.import.batch-timeout` to produce table slices. This can lead to very large table slices for sources with high data rates, and is not recommended.
-
-### Import Timeout
-
-The `tenzir.import.batch-timeout` option sets a timeout for forwarding buffered table slices to the remote Tenzir node. If the timeout fires before a table slice reaches `tenzir.import.batch-size`, then the table slice will contain fewer events and ship immediately.
-
-The `tenzir.import.read-timeout` option determines how long a call to read data from the input will block. After the read timeout elapses, Tenzir tries again at a later. The default value is 10 seconds.
+The option `tenzir.import.batch-size` sets the number of events per batch that a [partition rebuild](tune-performance.md#rebuild-partitions) writes. It defaults to 8,192.
 
 ## Parallelism
 
@@ -204,9 +194,9 @@ The amount of memory that the storage engine can consume is not explicitly confi
 
 ### Control the partition size
 
-Tenzir groups table slices with the same schema in a partition. There exist mutable *active partitions* that Tenzir writes to during ingestion, and immutable *passive partitions* that Tenzir reads from during query execution.
+Tenzir groups events with the same schema in a partition. There exist mutable *active partitions* that Tenzir writes to during ingestion, and immutable *passive partitions* that Tenzir reads from during query execution.
 
-When constructing a partition, the parameter `tenzir.max-partition-size` (default: 4Mi / 2^22) sets an upper bound on the number of records in a partition, across all table slices. The parameter `tenzir.active-partition-timeout` (default: 10 seconds) provides a time-based upper bound: once reached, Tenzir considers the partition as complete, regardless of the number of records.
+When constructing a partition, the parameter `tenzir.max-partition-size` (default: 4Mi / 2^22) sets an upper bound on the number of records in a partition, across all batches. The parameter `tenzir.active-partition-timeout` (default: 10 seconds) provides a time-based upper bound: once reached, Tenzir considers the partition as complete, regardless of the number of records.
 
 The two parameters are decoupled to allow for independent control of throughput and freshness. Tenzir also merges undersized partitions asynchronously in the background, which counter-acts the fragmentation effect from choosing a low partition timeout.
 
