@@ -57,6 +57,27 @@ The [`ocsf_cast`](https://tenzir.com/docs/reference/operators/ocsf_cast.md) oper
 
 After validation, optionally run [`ocsf_trim`](https://tenzir.com/docs/reference/operators/ocsf_trim.md) to minimize events for storage or transport. Its options let you keep or drop fields that OCSF marks as optional or recommended.
 
+### Finalize events in a field
+
+Each operator has a function counterpart with the same name and options: [`ocsf_derive`](https://tenzir.com/docs/reference/functions/ocsf_derive.md), [`ocsf_cast`](https://tenzir.com/docs/reference/functions/ocsf_cast.md), and [`ocsf_trim`](https://tenzir.com/docs/reference/functions/ocsf_trim.md). The functions take the OCSF event as an argument, so they finalize an event that a mapper wrote into a field without hoisting it to the top level first. The envelope around it, such as `raw_data`, stays where it is:
+
+```tql
+vendor::ocsf::map input, ocsf
+ocsf = ocsf_cast(ocsf_derive(ocsf))
+```
+
+The functions also handle failures differently. Where the operators drop an event whose OCSF version or class they cannot resolve, the functions return `null` with a warning and keep the rest of the event. Assign the result to a new field to route such events into a quarantine instead of losing them:
+
+```tql
+validated = ocsf_cast(ocsf)
+if validated == null {
+  publish "ocsf-quarantine"
+} else {
+  ocsf = move validated
+  publish "ocsf"
+}
+```
+
 ## Look up identifiers and names
 
 Six functions translate between OCSF identifiers and their names, so a mapping never hard-codes a number it can compute:

@@ -511,13 +511,11 @@ ocsf_derive
 ocsf_cast
 ```
 
-A caller that writes the result into an envelope flattens it first, because those helpers are stream-oriented:
+A caller that writes the result into an envelope uses the function forms of the same helpers, [`ocsf_derive`](https://tenzir.com/docs/reference/functions/ocsf_derive.md) and [`ocsf_cast`](https://tenzir.com/docs/reference/functions/ocsf_cast.md), which work on a field and leave the rest of the envelope in place:
 
 ```tql
 amazon::vpc_flow::ocsf::normalize message, into=ocsf
-this = move ocsf
-ocsf_derive
-ocsf_cast
+ocsf = ocsf_cast(ocsf_derive(ocsf))
 ```
 
 ## Fit it into the data lifecycle

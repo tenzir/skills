@@ -154,10 +154,13 @@
 
 ## OCSF
 
+- [ocsf_cast](functions/ocsf_cast.md): Casts an OCSF event record to its OCSF type.
 - [ocsf_category_name](functions/ocsf_category_name.md): Returns the `category_name` for a given `category_uid`.
 - [ocsf_category_uid](functions/ocsf_category_uid.md): Returns the `category_uid` for a given `category_name`.
 - [ocsf_class_name](functions/ocsf_class_name.md): Returns the `class_name` for a given `class_uid`.
 - [ocsf_class_uid](functions/ocsf_class_uid.md): Returns the `class_uid` for a given `class_name`.
+- [ocsf_derive](functions/ocsf_derive.md): Assigns enum strings of an OCSF event record from their integer counterparts and vice versa.
+- [ocsf_trim](functions/ocsf_trim.md): Drops fields from an OCSF event record to reduce its size.
 - [ocsf_type_name](functions/ocsf_type_name.md): Returns the `type_name` for a given `type_uid`.
 - [ocsf_type_uid](functions/ocsf_type_uid.md): Returns the `type_uid` for a given `type_name`.
 

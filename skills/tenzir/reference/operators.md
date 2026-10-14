@@ -1239,6 +1239,14 @@ Sends events to Google Cloud Logging.
 to_google_cloud_logging …
 ```
 
+### [to\_google\_cloud\_monitoring](operators/to_google_cloud_monitoring.md)
+
+Sends metric events to Google Cloud Monitoring.
+
+```tql
+to_google_cloud_monitoring project="my-project"
+```
+
 ### [to\_google\_cloud\_pubsub](operators/to_google_cloud_pubsub.md)
 
 Publishes events to a Google Cloud Pub/Sub topic.

@@ -135,7 +135,7 @@ All other types include `CHAR`, `VARCHAR`, `TEXT`, `BINARY`, `VARBINARY`, `DATE`
 
 ## Optimizations
 
-When the operator reads a table, it lets MySQL do the work of the [`where`](https://tenzir.com/docs/reference/operators/where.md), [`select`](https://tenzir.com/docs/reference/operators/select.md), and [`head`](https://tenzir.com/docs/reference/operators/head.md) operators that follow it, so that MySQL returns only the rows and columns that the pipeline needs. The page on [MySQL optimizations](../optimizations/mysql.md) describes which filters MySQL evaluates, and the [optimizations overview](../optimizations.md) explains how Tenzir optimizes pipelines in general.
+When the operator reads a table, it lets MySQL do the work of the [`where`](https://tenzir.com/docs/reference/operators/where.md), [`select`](https://tenzir.com/docs/reference/operators/select.md), and [`head`](https://tenzir.com/docs/reference/operators/head.md) operators that follow it, so that MySQL returns only the rows and columns that the pipeline needs. For one-shot table reads without `live=true`, MySQL can also compute a directly following [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md). With `live=true`, the summary stays in Tenzir because the input never ends. The page on [MySQL optimizations](../optimizations/mysql.md) describes which filters MySQL evaluates, and the [optimizations overview](../optimizations.md) explains how Tenzir optimizes pipelines in general.
 
 ## Examples
 

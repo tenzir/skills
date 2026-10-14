@@ -66,6 +66,8 @@ The rewrite through [`set`](https://tenzir.com/docs/reference/operators/set.md) 
 
 On the way, the optimizer simplifies every predicate. It evaluates the parts that do not depend on the event and removes the branches of `and` and `or` that cannot change the result. After `class_uid = 3002`, the predicate `class_uid == 3002 and src_ip == 1.2.3.4` becomes `src_ip == 1.2.3.4`, and `class_uid == 4001` becomes `false`. The optimizer does not evaluate a part that would emit a warning at runtime, such as `1 / 0`. Removing a branch can still drop its warnings: `x == 1 / 0 or true` becomes `true` and no longer warns.
 
+A filter also moves in front of `if` and `match`. Every event takes exactly one branch, so the optimizer rewrites the predicate through each branch and combines the results with the conditions that send an event to that branch. For example, `if x == 1 { y = a } else { y = b } | where y == 42` turns into `where a == 42 if x == 1 else b == 42` in front of the `if`. Branches that can’t keep an event drop out of the predicate. Behind a `match` on the event ID whose arms assign different OCSF classes, `where class_uid == 3002` becomes a predicate on the event IDs of the arms that assign `3002`. A branch that ends in a sink still receives all of its events. The filter stays inside the branches if the optimizer can’t repeat the routing in a predicate, for example when the condition calls `random()`, or when a `match` pattern is a list or a record.
+
 Take this pipeline:
 
 ```tql

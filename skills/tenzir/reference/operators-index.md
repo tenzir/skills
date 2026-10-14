@@ -196,6 +196,7 @@
 - [to_fluent_bit](operators/to_fluent_bit.md): Sends events via Fluent Bit.
 - [to_ftp](operators/to_ftp.md): Prints events to bytes and uploads them via FTP or FTPS.
 - [to_google_cloud_logging](operators/to_google_cloud_logging.md): Sends events to Google Cloud Logging.
+- [to_google_cloud_monitoring](operators/to_google_cloud_monitoring.md): Sends metric events to Google Cloud Monitoring.
 - [to_google_cloud_pubsub](operators/to_google_cloud_pubsub.md): Publishes events to a Google Cloud Pub/Sub topic.
 - [to_google_cloud_storage](operators/to_google_cloud_storage.md): Writes events to one or multiple objects in Google Cloud Storage.
 - [to_google_secops](operators/to_google_secops.md): Sends raw logs, UDM events, or entities to a Google SecOps Chronicle instance.

@@ -61,18 +61,19 @@ where events >= 10
 sends a query equivalent to
 
 ```sql
-SELECT "src_ip", count_star() AS "events", {'seen': max("ts")} AS "last"
+SELECT "src_ip", count_star(), max("ts")
 FROM "alerts"
 WHERE "severity" >= 3
 GROUP BY "src_ip"
 ```
 
-DuckDB then takes over the [`where`](https://tenzir.com/docs/reference/operators/where.md) before the summary together with the summary itself, and returns only the group keys and the aggregates. In the example, the `severity` column never reaches Tenzir. The [`where`](https://tenzir.com/docs/reference/operators/where.md) after the summary runs in Tenzir. DuckDB computes these parts of a summary:
+Tenzir then arranges the result columns into the fields of the summary, such as `last.seen`.
+
+DuckDB takes over the [`where`](https://tenzir.com/docs/reference/operators/where.md) before the summary together with the summary itself, and returns only the group keys and the aggregates. In the example, the `severity` column never reaches Tenzir. The [`where`](https://tenzir.com/docs/reference/operators/where.md) after the summary runs in Tenzir. DuckDB computes these parts of a summary:
 
 * Group keys on boolean, integer, `VARCHAR`, and temporal columns, and on fields of `STRUCT` columns of these types. A collated `VARCHAR` groups with the binary collation, which tells text apart by its bytes like TQL.
 * `count()`, and `count(x)` on such columns and on floating-point columns.
 * `min(x)` and `max(x)` on integer and temporal columns.
-* Nested output fields, such as `last.seen`, which become `STRUCT` values.
 
 Values that Tenzir cannot represent, such as `infinity` or a `DATE` past the year 2262, group, count, and compare as `null`, as they do in Tenzir. Like Tenzir, DuckDB returns one row for an empty table when the summary has no group keys, and no rows when it has some. The rows arrive in the order in which DuckDB returns the groups. Since a table has no defined row order, this is as valid as the first-seen order in which [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) emits groups, but it can differ from the order of a read without a summary, which in practice follows the order in which the rows were inserted. Use [`sort`](https://tenzir.com/docs/reference/operators/sort.md) when you need a particular order.
 

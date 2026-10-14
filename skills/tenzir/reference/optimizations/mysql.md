@@ -7,9 +7,9 @@ section: "Docs"
 
 # MySQL
 
-> When frommysql reads a table, it lets MySQL filter the rows, pick the columns, and stop after enough rows, so that MySQL sends only what the pipeline needs instead of the whole table. This page describes when that happens, which filters MySQL evaluates, and why the others stay in Tenzir. The optimizations overview explains how Tenzir optimizes pipelines in general and compares the databases.
+> When frommysql reads a table, it lets MySQL filter the rows, pick the columns, stop after enough rows, and compute summaries, so that MySQL sends only what the pipeline needs instead of the whole table. This page describes when that happens, which filters MySQL evaluates, and why the others stay in Tenzir. The optimizations overview explains how Tenzir optimizes pipelines in general and compares the databases.
 
-When [`from_mysql`](https://tenzir.com/docs/reference/operators/from_mysql.md) reads a table, it lets MySQL filter the rows, pick the columns, and stop after enough rows, so that MySQL sends only what the pipeline needs instead of the whole table. This page describes when that happens, which filters MySQL evaluates, and why the others stay in Tenzir. The [optimizations overview](../optimizations.md) explains how Tenzir optimizes pipelines in general and compares the databases.
+When [`from_mysql`](https://tenzir.com/docs/reference/operators/from_mysql.md) reads a table, it lets MySQL filter the rows, pick the columns, stop after enough rows, and compute summaries, so that MySQL sends only what the pipeline needs instead of the whole table. This page describes when that happens, which filters MySQL evaluates, and why the others stay in Tenzir. The [optimizations overview](../optimizations.md) explains how Tenzir optimizes pipelines in general and compares the databases.
 
 ## When it applies
 
@@ -17,7 +17,7 @@ The operator reads in one of these modes, and only table mode optimizes:
 
 * **Table mode** reads a table that you name with `table`, as in `from_mysql table="alerts"`. The operator writes the query itself and adds the work of the operators that follow it. The rest of this page describes this mode.
 * **SQL mode** sends the query that you write with `sql` exactly as written, and Tenzir applies the rest of the pipeline to its result. To have MySQL filter, write the filter into your query.
-* **Live mode**, with `live=true`, polls a table for new rows. Every poll carries the filters and the columns of table mode, but not the limit, since the limit counts rows across polls.
+* **Live mode**, with `live=true`, polls a table for new rows. Every poll carries the filters and the columns of table mode, but neither the limit, since the limit counts rows across polls, nor a summary, since the input of a live read never ends.
 
 ## How the query changes
 
@@ -46,11 +46,42 @@ WHERE `severity` >= 3
 LIMIT 100
 ```
 
-The [text comparisons](mysql.md#text-comparisons) section explains the `CAST`. The [`where`](https://tenzir.com/docs/reference/operators/where.md), [`select`](https://tenzir.com/docs/reference/operators/select.md), and [`head`](https://tenzir.com/docs/reference/operators/head.md) operators still run in Tenzir on the rows that MySQL returns, so the result is the same whether MySQL evaluated a filter or not.
+The [text comparisons](mysql.md#text-comparisons) section explains the `CAST`. The [`where`](https://tenzir.com/docs/reference/operators/where.md), [`select`](https://tenzir.com/docs/reference/operators/select.md), and [`head`](https://tenzir.com/docs/reference/operators/head.md) operators still run in Tenzir on the rows that MySQL returns, so the result is the same whether MySQL evaluated a filter or not. The exception is a pipeline in which MySQL computes a summary, as [Aggregations](mysql.md#aggregations) describes.
 
-## Aggregation input columns
+## Aggregations
 
-With final summary output, [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) also narrows the input columns, subject to the [selected-column rules](mysql.md#selected-columns). The [aggregation projection rules](../optimizations.md#aggregation-input-projections) apply to [`top`](https://tenzir.com/docs/reference/operators/top.md) and [`rare`](https://tenzir.com/docs/reference/operators/rare.md) as well. Aggregation still runs in Tenzir, not in a SQL `GROUP BY`; a [`head`](https://tenzir.com/docs/reference/operators/head.md) after it does not add an input `LIMIT`. Explicit `sql` queries remain unchanged.
+When a [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) directly follows the operator, after the filters that went into the query, MySQL computes the summary with `GROUP BY` and returns one row per group instead of every matching row. This also applies to [`top`](https://tenzir.com/docs/reference/operators/top.md) and [`rare`](https://tenzir.com/docs/reference/operators/rare.md), which count with `summarize`. For example, the pipeline
+
+```tql
+from_mysql table="alerts", host="db.example.com", database="soc"
+where severity >= 3
+summarize rule, alerts=count(), last.id=max(id)
+where alerts >= 10
+```
+
+sends a query equivalent to
+
+```sql
+SELECT ANY_VALUE(`rule`), CAST(COUNT(*) AS SIGNED), MAX(`id`)
+FROM `alerts`
+WHERE `severity` >= 3
+GROUP BY CAST(`rule` AS BINARY)
+```
+
+Tenzir then arranges the result columns into the fields of the summary, such as `last.id`. MySQL takes over the [`where`](https://tenzir.com/docs/reference/operators/where.md) before the summary together with the summary itself, and returns only the group keys and the aggregates. In the example, the `severity` column never reaches Tenzir. The [`where`](https://tenzir.com/docs/reference/operators/where.md) after the summary runs in Tenzir. MySQL computes these parts of a summary:
+
+* Group keys on integer columns, and on text columns that compare by their bytes as the [text comparisons](mysql.md#text-comparisons) section describes. A text key groups by its bytes, like Tenzir, so `a`, `A`, and `a `form three groups, which a collation such as `utf8mb4_0900_ai_ci` would merge into one.
+* `count()`, and `count(x)` on such columns and on `DOUBLE` columns, cast to `SIGNED`, which Tenzir reads as `int` like the result of `count`.
+* `min(x)` and `max(x)` on integer columns.
+
+Like Tenzir, MySQL returns one row for an empty table when the summary has no group keys, with `0` for `count()` and `null` for `min` and `max`, and no rows when it has some. The rows arrive in the order in which MySQL returns the groups. Since a table has no defined row order, this is as valid as the first-seen order in which [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) emits groups. Use [`sort`](https://tenzir.com/docs/reference/operators/sort.md) when you need a particular order.
+
+Everything else runs in Tenzir with the same result. The operator then reads the rows as usual and summarizes them itself, still selecting only the columns that the summary reads:
+
+* A summary with another function, such as `sum`, an option such as `emit`, or a group key or argument that is not a field.
+* A summary after a [`head`](https://tenzir.com/docs/reference/operators/head.md), or after a predicate that stays in Tenzir.
+* Group keys on `DOUBLE` columns, since `GROUP BY` considers `-0.0` equal to `0.0`, and extremes of anything but integers, since MySQL compares text under its collation and Tenzir rejects text.
+* Columns that Tenzir reads differently from MySQL, such as `DECIMAL`, `DATETIME`, `ENUM`, and text in a character set other than UTF-8.
 
 ## Filters that MySQL evaluates
 

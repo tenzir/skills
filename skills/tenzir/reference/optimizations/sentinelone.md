@@ -64,15 +64,56 @@ A finite path alone does not prove that a field is a scalar. SentinelOne stores 
 
 Both retrieval paths preserve the `raw` setting. It disables string inference, not dotted-name reconstruction or timestamp-metadata conversion.
 
+## Aggregations
+
+When a [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) directly follows the operator and no [`where`](https://tenzir.com/docs/reference/operators/where.md) restricts the events, SentinelOne computes the summary in a PowerQuery `group` stage and returns one row per group instead of every event of the time window. This also applies to [`top`](https://tenzir.com/docs/reference/operators/top.md) and [`rare`](https://tenzir.com/docs/reference/operators/rare.md), which count with `summarize`. For example, the pipeline
+
+```tql
+from_sentinelone_data_lake "https://<tenant>.sentinelone.net",
+  token=secret("sentinelone-console-token"),
+  start=2024-01-01, end=2024-01-02
+summarize event.type, n=count()
+```
+
+sends the PowerQuery
+
+```text
+| group __tenzir_aggregate_1 = count(), __tenzir_aggregate_2 = count() by __tenzir_aggregate_0 = event.type | limit 100000
+```
+
+Tenzir then arranges the result columns into the fields of the summary. The last count is the number of events per group, which Tenzir needs to check the result. SentinelOne computes these parts of a summary:
+
+* Group keys on fields, except `timestamp`.
+* `count()`.
+
+Every other summary runs in Tenzir, which reads the events as described in [aggregation input columns](sentinelone.md#aggregation-input-columns):
+
+* A summary with another function, including `count(x)`, `min`, and `max`. A field that is missing in SentinelOne can be a record in Tenzir, whose fields exist, and the numeric result types of PowerQuery are unverified.
+* A summary after a [`where`](https://tenzir.com/docs/reference/operators/where.md), because [filters are prefilters](sentinelone.md#filters-are-prefilters) that may let extra events through. This includes a [`where`](https://tenzir.com/docs/reference/operators/where.md) on `timestamp`: use `start` and `end` to choose the window instead.
+* A summary of an explicit `query`, whose result stays opaque.
+
+PowerQuery groups events without the group key as `null`. For a single group key, Tenzir then reads just these events, with the initial filter `!(event.type = *)` for the example above, and accepts the result only if they add up to the `null` group and Tenzir reads their key as `null` too. Tenzir sees a record instead where an event has fields below the key, such as `endpoint.name` for the key `endpoint`, which PowerQuery has no field for.
+
+Since PowerQuery does not group exactly like Tenzir, Tenzir checks every result before it emits it. It reads the events and summarizes them itself, with the same result, if:
+
+* The groups do not contain every event of the window, according to the `matchCount` of the response. A result that hits the row limit or SentinelOne’s memory limit for groups misses events.
+* The events without the group key have a value in Tenzir, do not add up to the `null` group, or exceed 10,000 events. With several group keys, any `null` key falls back as well.
+* A group key is a floating-point number or not a single value, since `NaN` and `-0.0` need not group as in Tenzir.
+* Type inference makes two group keys equal, such as the text `"true"` and the boolean `true`, which PowerQuery groups apart. With `raw=true`, they stay apart in Tenzir as well.
+* SentinelOne rejects the query or reports omitted events.
+
+PowerQuery groups text by its characters, so `Critical` and `CRITICAL` form two groups, as in Tenzir. Without group keys, the summary has one row, also for an empty window. The groups arrive in the order in which SentinelOne returns them. Use [`sort`](https://tenzir.com/docs/reference/operators/sort.md) when you need a particular order. Operators after the summary, such as [`sort`](https://tenzir.com/docs/reference/operators/sort.md) and [`head`](https://tenzir.com/docs/reference/operators/head.md), run in Tenzir.
+
 ## Aggregation input columns
 
-With final summary output, [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) can request a finite set of input fields without an explicit [`select`](https://tenzir.com/docs/reference/operators/select.md):
+When Tenzir computes the summary, [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) requests a finite set of input fields without an explicit [`select`](https://tenzir.com/docs/reference/operators/select.md):
 
 ```tql
 from_sentinelone_data_lake "https://<tenant>.sentinelone.net",
   token=secret("sentinelone-console-token"),
   account_ids=["<account-id>"],
   start=2024-01-01, end=2024-01-02
+where dataSource.name == "SentinelOne"
 summarize event.type, n=count()
 head 10
 ```
@@ -80,10 +121,10 @@ head 10
 The initial PQ request is:
 
 ```text
-| columns timestamp, event.type
+| filter ((dataSource.name) == ("SentinelOne")) | columns timestamp, dataSource.name, event.type
 ```
 
-The count and grouping still run in Tenzir. The query contains neither a PowerQuery aggregation nor a `limit` stage: [`head`](https://tenzir.com/docs/reference/operators/head.md) limits summary rows, not contributing events. A keyless `summarize n=count()` requests only the mandatory `timestamp` column, rather than sending a remote count.
+The count and grouping run in Tenzir. The query contains no `limit` stage: [`head`](https://tenzir.com/docs/reference/operators/head.md) limits summary rows, not contributing events.
 
 The [result-cap fallback and LOG continuation](sentinelone.md#limits-and-the-result-cap) still retrieve the complete input, even when you request only a few summary rows. Whole-event or dynamic aggregate arguments require complete events instead. Our [shared aggregation projection rules](../optimizations.md#aggregation-input-projections) describe the other dependencies and barriers; [`top`](https://tenzir.com/docs/reference/operators/top.md) and [`rare`](https://tenzir.com/docs/reference/operators/rare.md) inherit these rules. Explicit native `query` requests remain unchanged.
 
@@ -152,7 +193,7 @@ For generated reads, explicit API omission counters or time-limit indicators als
 
 Generated query text is limited to 10,000 bytes. For PQ, required columns take precedence over prefilters. Oversized predicates stay local, while later, smaller predicates can still contribute. An oversized required column list selects LOG instead of dropping fields.
 
-If SentinelOne rejects a generated query, the operator fails. It does not recover from a parser error by launching an unrestricted scan.
+If SentinelOne rejects a generated query, the operator fails. It does not recover from a parser error by launching an unrestricted scan. Only a rejected aggregate query falls back to reading the events of its window, which Tenzir then summarizes.
 
 ## Verify an optimization
 
@@ -162,4 +203,4 @@ Print the optimized pipeline to inspect the hints received by the source:
 tenzir --dump-opt-ir 'from_sentinelone_data_lake "https://<tenant>.sentinelone.net", token=secret("s1") | where event.type == "DNS Resolved" | head 10'
 ```
 
-The source shows predicates as `filter`, the limit as `limit`, and field requirements as `projection`. Startup planning chooses LOG or PQ, and Tenzir rechecks the complete filter chain.
+The source shows predicates as `filter`, the limit as `limit`, field requirements as `projection`, and a summary that SentinelOne computes as `aggregation`. Startup planning chooses LOG or PQ, and Tenzir rechecks the complete filter chain.

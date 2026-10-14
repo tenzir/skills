@@ -30,6 +30,10 @@ OCSF defines logical types like `timestamp_t` and `subnet_t` that map to physica
 
 Fields that are part of recursive object relationships exhibit one level of recursion. For example, you can work with `process.parent_process`, but the nested object `process.parent_process.parent_process` does not exist.
 
+Transform a field with the function
+
+When the OCSF event lives in a field, such as `ocsf` next to `raw_data`, or in a list of events, consider the [`ocsf_cast`](https://tenzir.com/docs/reference/functions/ocsf_cast.md) function instead, as in `ocsf = ocsf_cast(ocsf)`. It leaves the rest of the event untouched and returns `null` for an event it cannot resolve rather than dropping the whole event.
+
 ### `encode_variants = bool`
 
 Setting this option to `true` emits free-form objects such as `unmapped` as JSON strings instead of records. Use it when downstream systems expect a JSON representation rather than a nested structure.
@@ -94,6 +98,7 @@ Create the `network_activity` table in ClickHouse first. The nulls that `null_fi
 
 ## See Also
 
+* [`ocsf_cast`](https://tenzir.com/docs/reference/functions/ocsf_cast.md)
 * [`ocsf_derive`](https://tenzir.com/docs/reference/operators/ocsf_derive.md)
 * [`ocsf_trim`](https://tenzir.com/docs/reference/operators/ocsf_trim.md)
 * [Map to OCSF](../../guides/normalize/map-to-ocsf.md)

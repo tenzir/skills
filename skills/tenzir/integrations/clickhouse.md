@@ -150,7 +150,7 @@ Create the ClickHouse table first when you need explicit types, table engines, T
 
 Use a catch-all when events have a shared set of fields you want to query as typed columns, plus other fields that vary by source or OCSF class. You still create the table in ClickHouse. The difference is one writable, top-level `JSON` column marked with `COMMENT 'tenzir:catch_all'`, which receives fields that do not map to another column. The catch-all column’s name must not contain dots.
 
-Choose typed columns for fields you filter, sort, or aggregate. Keep the rest in the catch-all until you need a dedicated column. This example uses a few common OCSF fields; adapt its columns, ordering key, and retention settings to your queries.
+Choose typed columns for fields you filter, sort, or aggregate. Keep the rest in the catch-all until you need a dedicated column. This example uses a few common OCSF fields; adapt its columns, ordering key, and retention settings to your queries. Our tutorial on [building an OCSF lake with ClickHouse](../tutorials/build-an-ocsf-lake-with-clickhouse.md) explains these choices, measures their effect, and ends with a complete example table.
 
 1. Create the table in ClickHouse:
 
@@ -211,7 +211,17 @@ After Tenzir refreshes the table description, new `src_endpoint.port` values go 
 ALTER TABLE security.events DROP COLUMN `src_endpoint.port`;
 ```
 
-These changes affect new inserts. Adding a column does not backfill historical values from the catch-all. Dropping a column removes its stored typed values; Tenzir does not copy them back into historical JSON.
+These changes affect new inserts. Adding a column does not backfill historical values from the catch-all. To make existing rows return them, declare the catch-all path as the column’s default:
+
+```sql
+ALTER TABLE security.events
+  ADD COLUMN `src_endpoint.port` Nullable(UInt16)
+  DEFAULT event.src_endpoint.port.:Int64;
+```
+
+ClickHouse then computes the value from the catch-all whenever it reads an older row, and `ALTER TABLE ... MATERIALIZE COLUMN` stores it. Use a `Nullable` column or wrap the path in `ifNull`, because reading a non-nullable column fails for rows without the path. When a column and the catch-all both hold a value, [`from_clickhouse`](https://tenzir.com/docs/reference/operators/from_clickhouse.md) returns the column’s. Our tutorial on [building an OCSF lake with ClickHouse](../tutorials/build-an-ocsf-lake-with-clickhouse.md#evolve-the-table) walks through a complete promotion.
+
+Dropping a column removes its stored typed values; Tenzir does not copy them back into historical JSON.
 
 Each worker refreshes marked table descriptions every 30 seconds, checking for expired metadata before preparing a batch. Workers can briefly use different schema versions. For the refresh and retry limits, read the [schema-change behavior](clickhouse.md#schema-refresh-and-retries).
 
@@ -226,6 +236,15 @@ select time, src_endpoint, dst_endpoint, severity_id
 publish "clickhouse-network-activity"
 ```
 
+In table mode, a table with a catch-all column returns the events that [`to_clickhouse`](https://tenzir.com/docs/reference/operators/to_clickhouse.md) wrote. The fields of the catch-all move back to the top level, dotted columns such as `src_endpoint.ip` become nested fields, and other `JSON` columns become records again:
+
+```tql
+from_clickhouse table="security.events", tls=false
+where metadata.product.name == "Demo"
+```
+
+In such a table, only filters on columns without dots in their name go into the query. The [`from_clickhouse`](https://tenzir.com/docs/reference/operators/from_clickhouse.md) reference describes the [reconstruction](../reference/operators/from_clickhouse.md#catch-all-tables) in detail.
+
 Use SQL mode when ClickHouse should aggregate, sort, join, or otherwise shape the result in ways that `table` mode does not express. This query uses the catch-all table created earlier and selects its typed columns:
 
 ```tql
@@ -238,14 +257,14 @@ publish "clickhouse-findings"
 
 Writes to a table with a catch-all enable ClickHouse’s `json_type_escape_dots_in_keys` setting, available from ClickHouse 25.8. Literal JSON keys such as `"a.b"` remain distinct from nested paths such as `a.b`, even when both occur in the same object. This also applies to ordinary JSON columns in the same table. Dotted physical column names still select nested input paths; a literal dotted input key stays in the catch-all.
 
-Enable the same setting when reading JSON to restore literal dotted keys:
+The `table` form of [`from_clickhouse`](https://tenzir.com/docs/reference/operators/from_clickhouse.md) enables the same setting when it reads a table with a catch-all. In `sql` mode, enable it in your query to restore literal dotted keys:
 
 ```tql
 from_clickhouse sql="SELECT * FROM security.events SETTINGS json_type_escape_dots_in_keys=1",
                 tls=false
 ```
 
-Without this read setting, ClickHouse returns the escaped spelling `"a%2Eb"` for a stored literal `"a.b"` key. The `table` form of `from_clickhouse` does not enable the setting automatically; use `sql` as shown here. ClickHouse reads an original literal `%2E` sequence in a JSON key as a dot. Writes to tables without a catch-all keep their existing settings.
+Without this read setting, ClickHouse returns the escaped spelling `"a%2Eb"` for a stored literal `"a.b"` key. ClickHouse reads an original literal `%2E` sequence in a JSON key as a dot. Writes to tables without a catch-all keep their existing settings.
 
 ### Inspect tables and schemas
 
@@ -283,7 +302,7 @@ Ordinary JSON columns consume their matching input subtrees. For both those colu
 
 For strings mapped to ordinary JSON columns, the first non-whitespace character must be `{`. Those strings pass through unchanged, including nulls in the string. Other strings, such as `"[]"` or `"hello"`, become `{}` with a warning. Malformed object text can fail insertion at ClickHouse; it is not redirected to the catch-all. ClickHouse determines the stored native JSON representation, so these writes do not guarantee an exact structured round trip.
 
-The [`from_clickhouse`](https://tenzir.com/docs/reference/operators/from_clickhouse.md) operator returns native JSON as text. Parsing that text preserves the types of elements in mixed lists.
+In `sql` mode, the [`from_clickhouse`](https://tenzir.com/docs/reference/operators/from_clickhouse.md) operator returns native JSON as text. Parsing that text preserves the types of elements in mixed lists. In `table` mode, it parses the JSON of a catch-all table for you, inferring types like `parse_json` does.
 
 Typed columns follow these rules:
 
@@ -306,5 +325,6 @@ Removing an active catch-all marker is an error. Tables without a catch-all keep
 ## See also
 
 * [Read from data stores](../guides/collect/read-from-data-stores.md)
+* [Build an OCSF lake with ClickHouse](../tutorials/build-an-ocsf-lake-with-clickhouse.md)
 * [Send to destinations](../guides/route/send-to-destinations.md)
 * [Secrets](../explanations/secrets.md)

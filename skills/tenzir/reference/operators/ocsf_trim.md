@@ -19,6 +19,10 @@ ocsf_trim [drop_optional=bool, drop_recommended=bool]
 
 The `ocsf_trim` operator uses intelligent analysis to determine which fields to remove from OCSF events, optimizing data size while preserving essential information.
 
+Transform a field with the function
+
+When the OCSF event lives in a field, such as `ocsf` next to `raw_data`, or in a list of events, consider the [`ocsf_trim`](https://tenzir.com/docs/reference/functions/ocsf_trim.md) function instead, as in `ocsf = ocsf_trim(ocsf)`. It leaves the rest of the event untouched and returns `null` for an event it cannot resolve rather than dropping the whole event.
+
 ### `drop_optional = bool`
 
 If specified, explicitly controls whether to remove fields marked as optional in the OCSF schema. Otherwise, this decision is left to the operator itself.
@@ -128,6 +132,7 @@ ocsf_trim drop_optional=true, drop_recommended=true
 
 ## See Also
 
+* [`ocsf_trim`](https://tenzir.com/docs/reference/functions/ocsf_trim.md)
 * [`ocsf_cast`](https://tenzir.com/docs/reference/operators/ocsf_cast.md)
 * [`ocsf_derive`](https://tenzir.com/docs/reference/operators/ocsf_derive.md)
 * [Onboard a data source](../../tutorials/onboard-a-data-source.md)

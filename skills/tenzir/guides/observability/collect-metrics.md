@@ -62,3 +62,15 @@ to_prometheus "https://prometheus.example/api/v1/write"
 ```
 
 The [Prometheus](../../integrations/prometheus.md) integration page covers endpoint setup, authentication headers, and additional examples.
+
+## Send metrics to Google Cloud Monitoring
+
+The same shape works with [`to_google_cloud_monitoring`](https://tenzir.com/docs/reference/operators/to_google_cloud_monitoring.md), which writes the metrics as user-defined metrics to Google Cloud Monitoring:
+
+```tql
+metrics live=true, shape="prometheus"
+to_google_cloud_monitoring project="my-project",
+  metric_prefix="custom.googleapis.com/tenzir/"
+```
+
+On Compute Engine, the operator identifies each node by its instance. Elsewhere, set `resource_type` and `resource_labels` to give every node its own monitored resource. The [Google Cloud Monitoring](../../integrations/google/cloud-monitoring.md) integration page covers permissions, credentials, and additional examples.

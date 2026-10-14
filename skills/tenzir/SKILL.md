@@ -508,6 +508,10 @@ A context is state, not code.
 
 In this tutorial, you will learn how to use pipelines to plot data as charts.
 
+#### [Build an OCSF lake with ClickHouse](tutorials/build-an-ocsf-lake-with-clickhouse.md)
+
+Store OCSF events in ClickHouse, from a table that accepts anything to a tuned lake with typed columns, skip indexes, codecs, and per-class retention.
+
 ## [Explanations](explanations.md)
 
 Explanations are big-picture explanations of higher-level Tenzir concepts.
@@ -1024,11 +1028,15 @@ Transfer files between a client and a server using a reliable, connection-based 
 
 #### [Google integration](integrations/google.md)
 
-Connect Google Cloud, Google SecOps, and Google Workspace: stream through Pub/Sub, store in Cloud Storage, read Cloud Logging, and ship UDM events to SecOps.
+Connect Google Cloud, Google SecOps, and Google Workspace: stream through Pub/Sub, store in Cloud Storage, read Cloud Logging, write Cloud Monitoring metrics, and ship UDM events to SecOps.
 
 #### [Google Cloud Logging integration](integrations/google/cloud-logging.md)
 
 Send events to Google's log management solution
+
+#### [Google Cloud Monitoring integration](integrations/google/cloud-monitoring.md)
+
+Send node metrics, gauges, counters, and histograms to Google Cloud Monitoring as user-defined metrics.
 
 #### [Google Cloud Pub/Sub integration](integrations/google/cloud-pubsub.md)
 

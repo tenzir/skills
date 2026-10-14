@@ -14,7 +14,7 @@ Queries SentinelOne Singularity Data Lake with TQL.
 ```tql
 from_sentinelone_data_lake url:string, token=string,
                            [query=string, start=time, end=time,
-                            account_ids=list<string>, timeout=duration, raw=bool]
+                            account_ids=list<string>, tenant=bool, timeout=duration, raw=bool]
 ```
 
 ## Description
@@ -80,6 +80,12 @@ The account IDs to query. The list must not be empty.
 
 When omitted, the operator requests tenant scope. On some multi-account tenants, that scope selects a default account that may not contain your data. If a query unexpectedly returns no rows, specify the account IDs containing the data. The operator sends `tenant: false` together with `accountIds` when you set this argument.
 
+### `tenant = bool (optional)`
+
+Whether to query every account that the token can access when you omit `account_ids`.
+
+Defaults to `true`, which suits console and service-user API tokens. Set it to `false` for a SentinelOne Data Lake (SDL) API key, which scopes its queries to its own account and finds no events with tenant scope. You cannot set `tenant=true` together with `account_ids`.
+
 ### `timeout = duration (optional)`
 
 The total time budget for launching and polling queries, including all pages, retrieval fallbacks, and retry delays. Must be greater than zero. Defaults to `3min`.
@@ -95,6 +101,8 @@ Defaults to `false`. Dotted attribute names still become nested records, and `ti
 ## Optimizations
 
 When you omit `query`, the operator uses [`where`](https://tenzir.com/docs/reference/operators/where.md), [`select`](https://tenzir.com/docs/reference/operators/select.md), and [`head`](https://tenzir.com/docs/reference/operators/head.md) to narrow the search window, send safe prefilters, and choose between complete-event LOG retrieval and projected PQ. Every original predicate still runs locally, and `head` counts events after that filtering. A full PQ response or ambiguous projected values can trigger a LOG fallback before any PQ events are emitted. With an explicit `query`, both the query and its time window stay unchanged.
+
+Without a [`where`](https://tenzir.com/docs/reference/operators/where.md), SentinelOne also computes a directly following [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) that groups by fields and counts events with `count()`, which includes [`top`](https://tenzir.com/docs/reference/operators/top.md) and [`rare`](https://tenzir.com/docs/reference/operators/rare.md). Tenzir checks the result, reads the events without the group key to confirm their group, and summarizes the events itself whenever SentinelOne might group differently.
 
 Our [SentinelOne optimization reference](../optimizations/sentinelone.md) describes which filters translate, how TQL maps to PowerQuery, which fields the operator requests, and how the result cap interacts with pushed filters.
 

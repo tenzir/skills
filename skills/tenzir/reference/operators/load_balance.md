@@ -19,6 +19,8 @@ load_balance over:list { … }
 
 The `load_balance` operator spawns a nested pipeline for each element in the given list. Incoming events are distributed to exactly one of the nested pipelines. This operator may reorder the event stream.
 
+In a parallel pipeline, `load_balance` runs in at most as many parallel instances as there are targets. Each target has one nested pipeline, assigned to one instance. If the requested parallelism exceeds the number of targets, the operator uses fewer instances.
+
 ### `over: list`
 
 This must be a `$`-variable, previously declared with `let`. For example, to load balance over a list of ports, use `let $cfg = [8080, 8081, 8082]` followed by `load_balance $cfg { … }`.

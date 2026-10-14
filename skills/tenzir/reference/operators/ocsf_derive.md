@@ -19,15 +19,13 @@ ocsf_derive
 
 The `ocsf_derive` operator performs bidirectional enum derivation for OCSF events by automatically assigning enum string values based on their integer counterparts and vice versa.
 
-The operator preserves the original field order from the input record. Enum/sibling pairs are always ordered alphabetically within the pair to match the ordering used by `ocsf_cast`. For example, `activity_id` comes before `activity_name`, and `class_name` comes before `class_uid`.
-
-When deriving new fields:
-
-* If both the enum field and its sibling field exist in the input, they are emitted in alphabetical order at the position of the first field.
-* If only one field exists, the derived counterpart is inserted adjacent to it in alphabetical order.
-* Non-OCSF fields remain at their original positions.
+The operator preserves the original field order from the input record and appends derived fields to the end of the record that contains them.
 
 In the future, this operator will also automatically assign computable values such as `type_uid` based on what is available in the event.
+
+Transform a field with the function
+
+When the OCSF event lives in a field, such as `ocsf` next to `raw_data`, or in a list of events, consider the [`ocsf_derive`](https://tenzir.com/docs/reference/functions/ocsf_derive.md) function instead, as in `ocsf = ocsf_derive(ocsf)`. It leaves the rest of the event untouched and returns `null` for an event it cannot resolve rather than dropping the whole event.
 
 ## Examples
 
@@ -49,14 +47,12 @@ ocsf_derive
   metadata: {
     version: "1.5.0",
   },
-  class_name: "File System Activity",
   class_uid: 1001,
   activity_id: 1,
   activity_name: "Create",
+  class_name: "File System Activity",
 }
 ```
-
-The derived `class_name` appears before `class_uid` (alphabetically), and the derived `activity_name` appears after `activity_id` (alphabetically). Each pair is positioned where the original field appeared in the input.
 
 ### String to Integer
 
@@ -76,14 +72,12 @@ ocsf_derive
   metadata: {
     version: "1.5.0",
   },
-  class_name: "File System Activity",
   class_uid: 1001,
-  activity_id: 2,
   activity_name: "Read",
+  activity_id: 2,
+  class_name: "File System Activity",
 }
 ```
-
-The derived `activity_id` appears before `activity_name` (alphabetically), and the derived `class_name` appears before `class_uid` (alphabetically).
 
 ### Bidirectional enum validation
 
@@ -104,10 +98,10 @@ ocsf_derive
   metadata: {
     version: "1.5.0",
   },
-  class_name: "File System Activity",
   class_uid: 1001,
   activity_id: 1,
   activity_name: "Delete",
+  class_name: "File System Activity",
 }
 ```
 
@@ -124,6 +118,7 @@ warning: found inconsistency between `activity_id` and `activity_name`
 
 ## See Also
 
+* [`ocsf_derive`](https://tenzir.com/docs/reference/functions/ocsf_derive.md)
 * [`ocsf_cast`](https://tenzir.com/docs/reference/operators/ocsf_cast.md)
 * [`ocsf_trim`](https://tenzir.com/docs/reference/operators/ocsf_trim.md)
 * [Map to OCSF](../../guides/normalize/map-to-ocsf.md)

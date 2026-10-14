@@ -150,7 +150,7 @@ All grouping keys and aggregate inputs remain required, even if a later selectio
 
 The [`top`](https://tenzir.com/docs/reference/operators/top.md) and [`rare`](https://tenzir.com/docs/reference/operators/rare.md) operators use `summarize` internally and benefit from the same input-field optimization. Our [aggregation input projection reference](../optimizations.md#aggregation-input-projections) explains the generated query and the shared rules across sources.
 
-Some database sources, such as [`from_duckdb`](https://tenzir.com/docs/reference/operators/from_duckdb.md), compute a final summary that directly follows them in the database, which then returns one row per group. The [optimizations reference](../optimizations.md#aggregations-in-the-source) lists the conditions.
+The database sources [`from_clickhouse`](https://tenzir.com/docs/reference/operators/from_clickhouse.md), [`from_duckdb`](https://tenzir.com/docs/reference/operators/from_duckdb.md), [`from_microsoft_sql`](https://tenzir.com/docs/reference/operators/from_microsoft_sql.md), and [`from_mysql`](https://tenzir.com/docs/reference/operators/from_mysql.md) compute a final summary that directly follows them in the database, which then returns one row per group. [`from_sentinelone_data_lake`](https://tenzir.com/docs/reference/operators/from_sentinelone_data_lake.md) lets SentinelOne compute such a summary as well. The [optimizations reference](../optimizations.md#aggregations-in-the-source) lists the conditions.
 
 ## Examples
 

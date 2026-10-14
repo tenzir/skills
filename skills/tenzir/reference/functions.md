@@ -979,6 +979,14 @@ decapsulate(this)
 
 ## OCSF
 
+### [ocsf\_cast](functions/ocsf_cast.md)
+
+Casts an OCSF event record to its OCSF type.
+
+```tql
+ocsf_cast(ocsf)
+```
+
 ### [ocsf\_category\_name](functions/ocsf_category_name.md)
 
 Returns the `category_name` for a given `category_uid`.
@@ -1009,6 +1017,22 @@ Returns the `class_uid` for a given `class_name`.
 
 ```tql
 ocsf_class_uid("DNS Activity")
+```
+
+### [ocsf\_derive](functions/ocsf_derive.md)
+
+Assigns enum strings of an OCSF event record from their integer counterparts and vice versa.
+
+```tql
+ocsf_derive(ocsf)
+```
+
+### [ocsf\_trim](functions/ocsf_trim.md)
+
+Drops fields from an OCSF event record to reduce its size.
+
+```tql
+ocsf_trim(ocsf)
 ```
 
 ### [ocsf\_type\_name](functions/ocsf_type_name.md)
