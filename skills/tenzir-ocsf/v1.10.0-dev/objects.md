@@ -213,6 +213,7 @@
 - [AI Agent](objects/ai_agent.md)
 - [AI Capability](objects/ai_capability.md)
 - [AI Model](objects/ai_model.md)
+- [AI Status](objects/ai_status.md)
 - [Attestation](objects/attestation.md)
 - [Clipboard](objects/clipboard.md)
 - [Clipboard Item](objects/clipboard_item.md)

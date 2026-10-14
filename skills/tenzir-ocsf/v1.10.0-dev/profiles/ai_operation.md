@@ -91,3 +91,11 @@ The delegation under whose authority this AI operation was performed. Links the 
 - **Group**: context
 
 Communication context for AI system interactions including protocols, roles, clients, and session information for MCP and other AI communication systems.
+
+### `ai_status`
+
+- **Type**: [`ai_status`](../objects/ai_status.md)
+- **Requirement**: optional
+- **Group**: context
+
+Per-operation outcome scalars for this operation, such as the stop reason and the permission check result, grouped in the `ai_status` object so they do not proliferate as discrete attributes at the event root. Additional outcome attributes may be added to the object in later versions.
