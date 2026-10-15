@@ -70,10 +70,6 @@ Guides are practical step-by-step explanation to help you achieve a specific goa
 
 Drowning in logs, alerts, and rigid tools?
 
-#### [Tenzir v6 Migration](guides/tenzir-v6-migration.md)
-
-Learn how to migrate legacy TQL pipelines to Tenzir v6, adopt the new execution patterns, and use temporary compatibility controls while you update.
-
 #### [Overview](guides/installation.md)
 
 This guide shows you how to install the Tenzir CLI to run pipelines locally or deploy a persistent node.

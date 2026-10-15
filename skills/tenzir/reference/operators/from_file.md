@@ -123,7 +123,6 @@ from_file "/logs/*.json", max_age=1h
 ## See Also
 
 * [`from_file`](https://tenzir.com/docs/reference/operators/from_file.md)
-* [Tenzir v6 Migration](../../guides/tenzir-v6-migration.md)
 * [Enrich with asset inventory](../../guides/enrich/enrich-with-asset-inventory.md)
 * [Use lookup tables](../../guides/enrich/use-lookup-tables.md)
 * [Import into a node](../../guides/store/import-into-a-node.md)

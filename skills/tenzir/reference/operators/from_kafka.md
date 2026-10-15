@@ -196,7 +196,6 @@ from_kafka "^tenant-.*\\.alerts$", offset="beginning"
 ## See Also
 
 * [`to_kafka`](https://tenzir.com/docs/reference/operators/to_kafka.md)
-* [Tenzir v6 Migration](../../guides/tenzir-v6-migration.md)
 * [Kafka](../../integrations/kafka.md)
 
 Parallelizable: a parallel pipeline may run this operator on several cores at once.

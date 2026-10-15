@@ -119,5 +119,4 @@ to_file "/tmp/logs/events_{uuid}.json", timeout=1min {
 
 * [`from_file`](https://tenzir.com/docs/reference/operators/from_file.md)
 * [`to_file`](https://tenzir.com/docs/reference/operators/to_file.md)
-* [Tenzir v6 Migration](../../guides/tenzir-v6-migration.md)
 * [File](../../integrations/file.md)

@@ -41,8 +41,8 @@ An environment variable has the form `KEY=VALUE`, and we describe the format of 
 
 There exists a one-to-one mapping from configuration file keys to environment variable names. Here are two examples:
 
-* `tenzir.import.batch-size` - configuration file key
-* `TENZIR_IMPORT__BATCH_SIZE` - environment variable
+* `tenzir.demand.max-batches` - configuration file key
+* `TENZIR_DEMAND__MAX_BATCHES` - environment variable
 
 A hierarchical key of the form `tenzir.x.y.z` maps to the environment variable `TENZIR_X__Y__Z`. More generally, the `KEY` in `TENZIR_{KEY}=VALUE` adheres to the following rules:
 
