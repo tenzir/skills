@@ -31,7 +31,7 @@ The IP address to decrypt.
 
 The key of the permutation, as a secret with exactly 32 bytes.
 
-Read the seed with [`secret`](https://tenzir.com/docs/reference/functions/secret.md), so that it stays out of the pipeline definition. A plain value or a secret of another size is an error when the pipeline starts. If your secret store holds the seed in hex or Base64 form, decode it with [`decode_hex`](https://tenzir.com/docs/reference/functions/decode_hex.md) or [`decode_base64`](https://tenzir.com/docs/reference/functions/decode_base64.md), for example `seed=secret("cryptopan-key").decode_hex()`.
+Read the seed with [`secret`](https://tenzir.com/docs/reference/functions/secret.md), so that it stays out of the pipeline definition. A seed of another size is an error when the pipeline starts. A constant string or blob with 32 bytes also works as an [ad-hoc secret](../../explanations/secrets.md#ad-hoc-secrets), but then the seed appears in the pipeline definition. If your secret store holds the seed in hex or Base64 form, decode it with [`decode_hex`](https://tenzir.com/docs/reference/functions/decode_hex.md) or [`decode_base64`](https://tenzir.com/docs/reference/functions/decode_base64.md), for example `seed=secret("cryptopan-key").decode_hex()`.
 
 Without a seed, the function uses a key of zeros. Anyone can reverse addresses that use that key, so always pass a seed to protect addresses.
 

@@ -53,7 +53,7 @@ Tenzir’s [type system](../reference/types.md) includes secrets as a special ty
 
 A value of type `secret` holds the actual secret value. Tenzir restricts which operations can use it to prevent disclosure:
 
-* Resolution: Tenzir resolves every `secret` call once, when it prepares the expression that contains it and before the first event arrives. The name must therefore be a constant, such as `secret("api-key")`, and cannot come from a field of an event. For ad-hoc secrets created from a string literal, the value is the literal itself, so no lookup occurs.
+* Resolution: Tenzir resolves every `secret` call once, when it prepares the expression that contains it and before the first event arrives. The name must therefore be a constant, such as `secret("api-key")`, and cannot come from a field of an event. For ad-hoc secrets created from a constant string or blob, the value is the constant itself, so no lookup occurs.
 * Memory: Tenzir keeps the secret value in memory that it wipes once it no longer needs the value.
 * Operations: Format strings, concatenation, and encoding functions that receive a secret return another secret, as the next section describes. No operation converts a secret into a plain value of another type.
 * Comparisons: Comparison operators reject secrets. Sorting, hashing, and deduplication treat all secrets as equal, so their results reveal nothing about the values.
@@ -121,11 +121,11 @@ Since secrets cannot be stored in events, they never reach the [`python`](https:
 
 ## Ad-hoc Secrets
 
-**Ad-hoc secrets** are secrets implicitly created from a `string` within [TQL](language.md). This happens when you provide a `string` to an operator that expects a `secret`.
+**Ad-hoc secrets** are secrets implicitly created from a `string` within [TQL](language.md). This happens when you provide a `string` to an operator or function that expects a `secret`. Functions also accept a constant `blob`, which suits binary keys, such as `key=decode_hex("000102030405060708090a0b0c0d0e0f")`.
 
 Plain string values are useful when developing pipelines and you don’t want to add the secret to the configuration or a secret store. This approach also works well for arguments that you don’t consider sensitive, avoiding the need to create a managed secret.
 
-However, secrets created from plain `string`s do not enjoy the same security as managed secrets. Their value appears directly in the TQL pipeline definition, as well as in the compiled and executed representation. As such, the Tenzir Node may persist the value.
+However, secrets created from plain values do not enjoy the same security as managed secrets. Their value appears directly in the TQL pipeline definition, as well as in the compiled and executed representation. As such, the Tenzir Node may persist the value.
 
 ## Managed Secrets
 

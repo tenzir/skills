@@ -99,9 +99,25 @@ The [`top`](https://tenzir.com/docs/reference/operators/top.md) and [`rare`](htt
 
 ## Aggregations in the source
 
-A source that reads from a database can compute a final summary itself, so that the database returns one row per group instead of every matching row. This happens only if the source reads a table once, in [table mode](optimizations.md#database-sources) and without `live=true`, if [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) directly follows the source, after every filter before it went into the query, and if the summary groups by fields and aggregates fields with functions that the database computes exactly like Tenzir. A query that you write with `sql` is sent as written, and a live read never ends, so the summary of either runs in Tenzir. The `summarize` and the filters before it then disappear from the pipeline, the database returns only the group and aggregate fields, and the operators after the summary run on it as usual.
+A source that reads from a database can compute a final summary itself, so that the database returns one row per group instead of every matching row. This happens only if the source reads a table once, in [table mode](optimizations.md#database-sources) and without `live=true`, if [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) follows the source, after every filter before it went into the query, and if the summary groups by fields and aggregates fields with functions that the database computes exactly like Tenzir. A query that you write with `sql` is sent as written, and a live read never ends, so the summary of either runs in Tenzir. The `summarize` and the filters before it then disappear from the pipeline, the database returns only the group and aggregate fields, and the operators after the summary run on it as usual.
 
-If the source finds out only when it runs that it cannot compute the summary, for example because a column has a type that the database aggregates differently, it reads the rows and runs the original `summarize` on them. The result is the same either way, except that Tenzir does not warn about values of rows that it never sees.
+The summary can follow the source directly or behind operators that keep every event and only keep, drop, or copy fields:
+
+* [`select`](https://tenzir.com/docs/reference/operators/select.md) and [`drop`](https://tenzir.com/docs/reference/operators/drop.md) that keep the fields that the summary reads.
+* Renames and copies with [`select`](https://tenzir.com/docs/reference/operators/select.md), [`set`](https://tenzir.com/docs/reference/operators/set.md), or a plain assignment, such as `select ip=src_ip` or `ip = src_ip`. The source then groups and aggregates the original fields, and the result keeps the new names.
+
+For example, the source computes the summary of
+
+```tql
+from_mysql table="alerts", host="db.example.com", database="soc"
+select ip=src_ip, ts, severity
+where severity >= 3
+summarize ip, alerts=count(), last=max(ts)
+```
+
+by grouping on the `src_ip` column. Every right-hand side of a [`select`](https://tenzir.com/docs/reference/operators/select.md) or [`set`](https://tenzir.com/docs/reference/operators/set.md) reads the original event, so `select a=b, b=a` swaps the fields, and the summary reads them swapped. Assignments to fields that the summary does not read do not matter, unless they call a function, which could fail the pipeline. A computed value for a field that the summary reads, such as `ip = src_ip.string()`, an assignment of anything but a record literal to `this`, and every other operator, including [`head`](https://tenzir.com/docs/reference/operators/head.md) and a [`where`](https://tenzir.com/docs/reference/operators/where.md) that stays in Tenzir, keep the summary in Tenzir.
+
+If the source finds out only when it runs that it cannot compute the summary, for example because a column has a type that the database aggregates differently, it reads the rows and runs the operators between the source and the summary and the original `summarize` on them. The result is the same either way, except that Tenzir does not warn about values of rows that it never sees.
 
 [`from_clickhouse`](https://tenzir.com/docs/reference/operators/from_clickhouse.md), [`from_duckdb`](https://tenzir.com/docs/reference/operators/from_duckdb.md), [`from_microsoft_sql`](https://tenzir.com/docs/reference/operators/from_microsoft_sql.md), and [`from_mysql`](https://tenzir.com/docs/reference/operators/from_mysql.md) compute summaries with group keys, `count`, `min`, and `max`. The pages on [ClickHouse](optimizations/clickhouse.md#aggregations), [DuckDB](optimizations/duckdb.md#aggregations), [MySQL](optimizations/mysql.md#aggregations), and [SQL Server](optimizations/microsoft-sql.md#aggregations) list the details.
 

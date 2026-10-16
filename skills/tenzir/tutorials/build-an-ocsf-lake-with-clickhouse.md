@@ -678,15 +678,17 @@ Run the query per class and month again. The old months of Network Activity and 
 
 ### Why whole parts
 
-Removing single rows is expensive in ClickHouse: it has to rewrite every part that contains them. The setting `ttl_only_drop_parts` avoids that. ClickHouse then deletes a part only once all its rows have expired, which costs no more than deleting files.
+Removing single rows is expensive in ClickHouse: it has to rewrite every part that contains them. With the single expiry expression above, the setting `ttl_only_drop_parts` keeps the TTL from rewriting partially expired parts. ClickHouse instead deletes a part once all its rows have expired, which costs no more than deleting files.
 
-The partition key makes this work. Because `class_uid` is part of it, every part belongs to exactly one class, and its rows expire together. In a table partitioned only by month, a part would mix classes, and the short retention of Network Activity could never drop a part that also holds Authentication events.
+The setting does not prevent other rewrites, though. In our tests with ClickHouse 26.8, ordinary background merges still removed expired rows from parts that also held live rows. Without such a merge, expired rows stay until their whole part expires.
 
-The price is precision. Look at the September partition of Network Activity above: its oldest rows are older than 30 days, but the partition stays until its newest row expires at the end of October. With monthly partitions, data lives up to a month longer than its retention period. If that is too long for your compliance requirements, partition by retention period and week instead, with `PARTITION BY (multiIf(class_uid = 4001, 30, class_uid = 4003, 90, 365), toMonday(time))`. Partitions then expire within a week of their retention period, and the sort key on `class_uid` still serves queries for one class.
+The partition key makes this work. Because `class_uid` is part of it, every part belongs to exactly one class, and all its rows share one retention period. In a table partitioned only by month, a part would mix classes, and unexpired Authentication events would keep expired Network Activity events from being dropped with their part.
 
-Avoid `DELETE WHERE` rules with `ttl_only_drop_parts`
+The price is precision. Look at the September partition of Network Activity above: its oldest rows are older than 30 days, but a part that also holds late-September rows cannot be dropped until its newest row expires at the end of October. With monthly partitions, rows can wait up to a month past their retention period for a whole-part drop. To narrow that window, partition by retention period and week instead, with `PARTITION BY (multiIf(class_uid = 4001, 30, class_uid = 4003, 90, 365), toMonday(time))`. The sort key on `class_uid` still serves queries for one class. Either way, ClickHouse deletes expired data in the background without a fixed deadline, so do not rely on TTL alone to meet a hard compliance deadline.
 
-ClickHouse also supports conditional rules, such as `TTL toDateTime(time) + INTERVAL 30 DAY DELETE WHERE class_uid = 4001`. In our tests with ClickHouse 26.9, background merges never applied such rules while `ttl_only_drop_parts` was enabled, so the data stayed. A single TTL expression that computes the retention per row, as above, drops whole parts as intended.
+Use one expression for per-class retention
+
+In our tests with ClickHouse 26.8, combining a conditional rule such as `TTL toDateTime(time) + INTERVAL 30 DAY DELETE WHERE class_uid = 4001` with an unconditional 365-day rule left expired Network Activity parts in place while `ttl_only_drop_parts` was enabled. A single TTL expression that computes the retention per row, as above, drops whole parts as intended.
 
 ClickHouse applies TTL rules during background merges, so expired data can remain visible for a while. `MODIFY TTL` is an exception: it applies the new rule to the existing data right away, which on a large table means a long mutation. Avoid `DELETE` statements for routine cleanup, because they rewrite every affected part.
 
@@ -703,18 +705,22 @@ When `raw_data` expires, ClickHouse resets it to its default, the empty string, 
 
 ### Move old data to cheaper storage
 
-A TTL can also move data instead of deleting it. With a storage policy that defines a volume named `cold`, for example on object storage, this rule moves parts there after 30 days:
+A TTL can also move data instead of deleting it. With a storage policy that defines a volume named `cold`, for example on object storage, this rule moves parts there once all their rows are at least 14 days old:
 
 ```sql
 ALTER TABLE ocsf.events
   MODIFY TTL
-    toDateTime(time) + INTERVAL 30 DAY TO VOLUME 'cold',
+    toDateTime(time) + INTERVAL 14 DAY TO VOLUME 'cold',
     toDateTime(time) + toIntervalDay(multiIf(
       class_uid = 4001, 30,
       class_uid = 4003, 90,
       365
     ));
 ```
+
+Moves follow the same logic as drops: a part becomes eligible to move only once its newest row passes the threshold, and background scheduling can add further delay. With monthly partitions, older rows can wait up to a month longer on the faster volume, and partitioning by week narrows that as well. The threshold does not keep younger rows on the faster volume either: ClickHouse can place them on the colder volume earlier, for example when a merge writes its result there.
+
+Keep move thresholds and retention periods apart. When a move and an expiry fall on the same day, as a 30-day move would with the 30-day retention of Network Activity, ClickHouse sometimes copies a part to the cold volume only to delete it right after.
 
 The storage policy lives in the ClickHouse server configuration, and you assign it to the table with the `storage_policy` setting. The ClickHouse documentation on [TTL](https://clickhouse.com/docs/concepts/features/operations/delete/ttl) covers moves and the other TTL actions.
 
@@ -844,7 +850,7 @@ Let ClickHouse [merge parts](https://clickhouse.com/docs/concepts/core-concepts/
 
 ## Complete table
 
-This definition combines all steps of the tutorial. Adapt it to your data rather than copying it: choose the columns, sort key, indexes, and retention for your own queries, and remember that the sort key and partition key cannot change later.
+This definition combines the single-table steps of the tutorial, except for storage tiering, which requires a storage policy in the server configuration. Adapt it to your data rather than copying it: choose the columns, sort key, indexes, and retention for your own queries, and remember that the sort key and partition key cannot change later.
 
 ```sql
 CREATE TABLE ocsf.events (

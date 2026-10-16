@@ -51,7 +51,7 @@ The [`where`](https://tenzir.com/docs/reference/operators/where.md), [`select`](
 
 ## Aggregations
 
-When a [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) directly follows the operator, after the filters that went into the query, ClickHouse computes the summary with `GROUP BY` and returns one row per group instead of every matching row. This also applies to [`top`](https://tenzir.com/docs/reference/operators/top.md) and [`rare`](https://tenzir.com/docs/reference/operators/rare.md), which count with `summarize`. For example, the pipeline
+When a [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) follows the operator, after the filters that went into the query, ClickHouse computes the summary with `GROUP BY` and returns one row per group instead of every matching row. This also applies to [`top`](https://tenzir.com/docs/reference/operators/top.md) and [`rare`](https://tenzir.com/docs/reference/operators/rare.md), which count with `summarize`. For example, the pipeline
 
 ```tql
 from_clickhouse table="logs.events"
@@ -71,6 +71,8 @@ GROUP BY meta.source
 
 Tenzir then arranges the result columns into the fields of the summary, such as `meta.source` and `last.seen`.
 
+The summary may also follow [`select`](https://tenzir.com/docs/reference/operators/select.md), [`drop`](https://tenzir.com/docs/reference/operators/drop.md), [`set`](https://tenzir.com/docs/reference/operators/set.md), and assignments that keep or copy the fields that it reads, as [Aggregations in the source](../optimizations.md#aggregations-in-the-source) describes. ClickHouse then reads the original columns, and the result keeps the new names. For example, `select source=meta.source` followed by `summarize source, n=count()` groups by `meta.source` and returns the field `source`. A computed value for a field that the summary reads, such as `level = severity * 2` before `max(level)`, keeps the summary in Tenzir.
+
 ClickHouse takes over the [`where`](https://tenzir.com/docs/reference/operators/where.md) before the summary together with the summary itself, and returns only the group keys and the aggregates. In the example, the `code` column never reaches Tenzir. The [`where`](https://tenzir.com/docs/reference/operators/where.md) after the summary runs in Tenzir. ClickHouse computes these parts of a summary:
 
 * Group keys on `Bool`, integer, `String`, `FixedString`, `Enum`, `UUID`, `IPv4`, `IPv6`, and temporal columns, including `Nullable` and `LowCardinality` ones and elements of named tuples.
@@ -82,7 +84,7 @@ Values that Tenzir cannot represent, such as a `Date32` past the year 2262, grou
 Everything else runs in Tenzir with the same result. The operator then reads the rows as usual and summarizes them itself, still selecting only the columns that the summary reads:
 
 * A summary with another function, such as `sum`, an option such as `emit`, or a group key or argument that is not a field.
-* A summary after a [`head`](https://tenzir.com/docs/reference/operators/head.md), or after a predicate that stays in Tenzir.
+* A summary after a [`head`](https://tenzir.com/docs/reference/operators/head.md), after a predicate that stays in Tenzir, or behind an operator that computes a field that the summary reads.
 * Group keys and extremes of floating-point columns, since `GROUP BY` considers `NaN` equal to itself and `-0.0` equal to `0.0`, and Tenzir’s result for `NaN` depends on the order of the rows.
 * Columns without an exact counterpart in Tenzir, such as `Decimal` columns, and generated columns.
 * Tables with a catch-all column, where the operator also reads every column, as [Catch-all tables](clickhouse.md#catch-all-tables) describes.

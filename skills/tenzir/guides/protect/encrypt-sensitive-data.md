@@ -43,7 +43,7 @@ openssl rand -hex 32
 openssl rand -hex 64
 ```
 
-Store the key in your secret store, for example under the name `pii-key`. The functions accept keys only as secrets, so keys never appear in pipeline definitions. They expect raw key bytes, so decode the hexadecimal text when you load it:
+Store the key in your secret store, for example under the name `pii-key`. Reading it with [`secret`](https://tenzir.com/docs/reference/functions/secret.md) keeps the key out of pipeline definitions. The functions expect raw key bytes, so decode the hexadecimal text when you load it:
 
 ```tql
 let $key = secret("pii-key").decode_hex()

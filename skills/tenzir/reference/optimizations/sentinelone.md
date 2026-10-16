@@ -66,7 +66,7 @@ Both retrieval paths preserve the `raw` setting. It disables string inference, n
 
 ## Aggregations
 
-When a [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) directly follows the operator and no [`where`](https://tenzir.com/docs/reference/operators/where.md) restricts the events, SentinelOne computes the summary in a PowerQuery `group` stage and returns one row per group instead of every event of the time window. This also applies to [`top`](https://tenzir.com/docs/reference/operators/top.md) and [`rare`](https://tenzir.com/docs/reference/operators/rare.md), which count with `summarize`. For example, the pipeline
+When a [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) follows the operator and no [`where`](https://tenzir.com/docs/reference/operators/where.md) restricts the events, SentinelOne computes the summary in a PowerQuery `group` stage and returns one row per group instead of every event of the time window. This also applies to [`top`](https://tenzir.com/docs/reference/operators/top.md) and [`rare`](https://tenzir.com/docs/reference/operators/rare.md), which count with `summarize`. For example, the pipeline
 
 ```tql
 from_sentinelone_data_lake "https://<tenant>.sentinelone.net",
@@ -86,11 +86,14 @@ Tenzir then arranges the result columns into the fields of the summary. The last
 * Group keys on fields, except `timestamp`.
 * `count()`.
 
+The summary may also follow [`select`](https://tenzir.com/docs/reference/operators/select.md), [`drop`](https://tenzir.com/docs/reference/operators/drop.md), [`set`](https://tenzir.com/docs/reference/operators/set.md), and assignments that keep or copy the fields that it reads, as [Aggregations in the source](../optimizations.md#aggregations-in-the-source) describes. SentinelOne then reads the original fields, and the result keeps the new names. For example, `select kind=event.type` followed by `summarize kind, n=count()` groups by `event.type` and returns the field `kind`. A computed value for a field that the summary reads, such as `kind = event.type.to_lower()` before `summarize kind`, keeps the summary in Tenzir.
+
 Every other summary runs in Tenzir, which reads the events as described in [aggregation input columns](sentinelone.md#aggregation-input-columns):
 
 * A summary with another function, including `count(x)`, `min`, and `max`. A field that is missing in SentinelOne can be a record in Tenzir, whose fields exist, and the numeric result types of PowerQuery are unverified.
 * A summary after a [`where`](https://tenzir.com/docs/reference/operators/where.md), because [filters are prefilters](sentinelone.md#filters-are-prefilters) that may let extra events through. This includes a [`where`](https://tenzir.com/docs/reference/operators/where.md) on `timestamp`: use `start` and `end` to choose the window instead.
 * A summary of an explicit `query`, whose result stays opaque.
+* A summary behind an operator that computes a field that the summary reads or that changes the events, such as [`head`](https://tenzir.com/docs/reference/operators/head.md).
 
 PowerQuery groups events without the group key as `null`. For a single group key, Tenzir then reads just these events, with the initial filter `!(event.type = *)` for the example above, and accepts the result only if they add up to the `null` group and Tenzir reads their key as `null` too. Tenzir sees a record instead where an event has fields below the key, such as `endpoint.name` for the key `endpoint`, which PowerQuery has no field for.
 

@@ -49,7 +49,7 @@ The [`where`](https://tenzir.com/docs/reference/operators/where.md), [`select`](
 
 ## Aggregations
 
-When a [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) directly follows the operator, after the filters that went into the query, DuckDB computes the summary with `GROUP BY` and returns one row per group instead of every matching row. This also applies to [`top`](https://tenzir.com/docs/reference/operators/top.md) and [`rare`](https://tenzir.com/docs/reference/operators/rare.md), which count with `summarize`. For example, the pipeline
+When a [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) follows the operator, after the filters that went into the query, DuckDB computes the summary with `GROUP BY` and returns one row per group instead of every matching row. This also applies to [`top`](https://tenzir.com/docs/reference/operators/top.md) and [`rare`](https://tenzir.com/docs/reference/operators/rare.md), which count with `summarize`. For example, the pipeline
 
 ```tql
 from_duckdb "events.duckdb", table="alerts"
@@ -69,6 +69,8 @@ GROUP BY "src_ip"
 
 Tenzir then arranges the result columns into the fields of the summary, such as `last.seen`.
 
+The summary may also follow [`select`](https://tenzir.com/docs/reference/operators/select.md), [`drop`](https://tenzir.com/docs/reference/operators/drop.md), [`set`](https://tenzir.com/docs/reference/operators/set.md), and assignments that keep or copy the fields that it reads, as [Aggregations in the source](../optimizations.md#aggregations-in-the-source) describes. DuckDB then reads the original columns, and the result keeps the new names. For example, `select ip=src_ip` followed by `summarize ip, n=count()` groups by the `src_ip` column and returns the field `ip`. A computed value for a field that the summary reads, such as `level = severity * 2` before `max(level)`, keeps the summary in Tenzir.
+
 DuckDB takes over the [`where`](https://tenzir.com/docs/reference/operators/where.md) before the summary together with the summary itself, and returns only the group keys and the aggregates. In the example, the `severity` column never reaches Tenzir. The [`where`](https://tenzir.com/docs/reference/operators/where.md) after the summary runs in Tenzir. DuckDB computes these parts of a summary:
 
 * Group keys on boolean, integer, `VARCHAR`, and temporal columns, and on fields of `STRUCT` columns of these types. A collated `VARCHAR` groups with the binary collation, which tells text apart by its bytes like TQL.
@@ -80,7 +82,7 @@ Values that Tenzir cannot represent, such as `infinity` or a `DATE` past the yea
 Everything else runs in Tenzir with the same result. The operator then reads the rows as usual and summarizes them itself:
 
 * A summary with another function, such as `sum`, an option such as `emit`, or a group key or argument that is not a field. The operator then still selects only the columns that the summary reads.
-* A summary after a [`head`](https://tenzir.com/docs/reference/operators/head.md), or after a predicate that stays in Tenzir.
+* A summary after a [`head`](https://tenzir.com/docs/reference/operators/head.md), after a predicate that stays in Tenzir, or behind an operator that computes a field that the summary reads.
 * Group keys and extremes of floating-point columns, since `GROUP BY` considers `NaN` equal to itself and `-0.0` equal to `0.0`, and Tenzir’s result for `NaN` depends on the order of the rows.
 * Columns that arrive as strings, such as `DECIMAL` and `UUID` columns.
 

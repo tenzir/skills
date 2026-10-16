@@ -34,6 +34,16 @@ from_clickhouse uri="clickhouse://default:secret@clickhouse.example.com:9000/sec
                 tls=false
 ```
 
+Read a Hydrolix table with [`from_hydrolix`](https://tenzir.com/docs/reference/operators/from_hydrolix.md). Pass the URL of the cluster and a token:
+
+```tql
+let $since = now() - 1h
+from_hydrolix "https://acme.hydrolix.live",
+  token=secret("HYDROLIX_TOKEN"),
+  table="security.events"
+where time > $since
+```
+
 Read a MySQL table:
 
 ```tql
@@ -175,4 +185,5 @@ This lets you treat database rows like any other event stream in Tenzir.
 * [`from_clickhouse`](https://tenzir.com/docs/reference/operators/from_clickhouse.md)
 * [`from_mysql`](https://tenzir.com/docs/reference/operators/from_mysql.md)
 * [ClickHouse](../../integrations/clickhouse.md)
+* [Hydrolix](../../integrations/hydrolix.md)
 * [MySQL](../../integrations/mysql.md)

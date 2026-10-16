@@ -115,7 +115,7 @@ The key agreement makes HPKE roughly 100 times slower than the AES functions, in
 
 ## Keys
 
-The functions accept keys only as secrets, so keys never appear in pipeline definitions. The only exception is the public key of HPKE, which doesn’t need to stay confidential. A plain value in place of a key is an error when the pipeline starts.
+Read keys as secrets, so that they never appear in pipeline definitions. The functions also accept a constant string or blob as an [ad-hoc secret](secrets.md#ad-hoc-secrets), but then the key appears in the pipeline definition, so reserve this for testing. The public key of HPKE doesn’t need to stay confidential, so it may be a plain value without this drawback.
 
 The AES and FF1 functions take keys as raw bytes, so a 32-byte key for AES-256 must be exactly 32 bytes long. Secret stores usually hold keys in a text encoding, which you decode in the pipeline:
 

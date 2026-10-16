@@ -122,6 +122,7 @@
 - [from_google_cloud_pubsub](operators/from_google_cloud_pubsub.md): Subscribes to a Google Cloud Pub/Sub subscription and yields events.
 - [from_google_cloud_storage](operators/from_google_cloud_storage.md): Reads one or multiple files from Google Cloud Storage.
 - [from_http](operators/from_http.md): Sends an HTTP/1.1 request and returns the response as events.
+- [from_hydrolix](operators/from_hydrolix.md): Reads events from a [Hydrolix](https://hydrolix.io) table or SQL query.
 - [from_kafka](operators/from_kafka.md): Receives events from an Apache Kafka topic.
 - [from_microsoft_365_activity](operators/from_microsoft_365_activity.md): Reads unified audit records from the Microsoft 365 Management Activity API.
 - [from_microsoft_defender](operators/from_microsoft_defender.md): Runs a Microsoft Defender advanced hunting query and reads its results.
@@ -201,6 +202,7 @@
 - [to_google_cloud_storage](operators/to_google_cloud_storage.md): Writes events to one or multiple objects in Google Cloud Storage.
 - [to_google_secops](operators/to_google_secops.md): Sends raw logs, UDM events, or entities to a Google SecOps Chronicle instance.
 - [to_http](operators/to_http.md): Sends events as a single HTTP request to a webhook or API endpoint.
+- [to_hydrolix](operators/to_hydrolix.md): Sends events to the [Hydrolix](https://hydrolix.io) HTTP streaming ingest API.
 - [to_kafka](operators/to_kafka.md): Sends messages to an Apache Kafka topic.
 - [to_nats](operators/to_nats.md): Publishes messages to a NATS JetStream subject.
 - [to_opensearch](operators/to_opensearch.md): Sends events to a Bulk API compatible with OpenSearch.

@@ -336,7 +336,7 @@ For a string label such as `"1985"`, use [`format_time`](https://tenzir.com/docs
 
 Salts of hash functions
 
-The key of [`hmac`](https://tenzir.com/docs/reference/functions/hmac.md), the seeds of [`encrypt_cryptopan`](https://tenzir.com/docs/reference/functions/encrypt_cryptopan.md) and [`decrypt_cryptopan`](https://tenzir.com/docs/reference/functions/decrypt_cryptopan.md), and the keys of the [encryption functions](encrypt-sensitive-data.md) must be secrets. The `seed` arguments of the `hash_*` functions accept only plain strings. Source salts through your deployment’s secret-injection mechanism, such as environment variables populated from a secret store, and bind them with `let`.
+The key of [`hmac`](https://tenzir.com/docs/reference/functions/hmac.md), the seeds of [`encrypt_cryptopan`](https://tenzir.com/docs/reference/functions/encrypt_cryptopan.md) and [`decrypt_cryptopan`](https://tenzir.com/docs/reference/functions/decrypt_cryptopan.md), and the keys of the [encryption functions](encrypt-sensitive-data.md) accept secrets, which keeps them out of the pipeline definition. The `seed` arguments of the `hash_*` functions accept only plain strings. Source salts through your deployment’s secret-injection mechanism, such as environment variables populated from a secret store, and bind them with `let`.
 
 ## See also
 

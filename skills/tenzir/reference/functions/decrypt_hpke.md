@@ -63,7 +63,7 @@ The function interprets every key with 32 or 56 bytes that is not PEM-encoded as
 
 The function doesn’t support encrypted PEM-encoded private keys. An invalid or unsupported key is an error when the pipeline starts.
 
-Read the key with [`secret`](https://tenzir.com/docs/reference/functions/secret.md), so that it stays out of the pipeline definition. A plain value is an error when the pipeline starts. The function uses the bytes of the secret as they are. If your secret store holds a raw key in hex or Base64 form, decode it with [`decode_hex`](https://tenzir.com/docs/reference/functions/decode_hex.md) or [`decode_base64`](https://tenzir.com/docs/reference/functions/decode_base64.md). Store a PEM-encoded key as it is.
+Read the key with [`secret`](https://tenzir.com/docs/reference/functions/secret.md), so that it stays out of the pipeline definition. A constant string or blob also works as an [ad-hoc secret](../../explanations/secrets.md#ad-hoc-secrets), but then the key appears in the pipeline definition. The function uses the bytes of the secret as they are. If your secret store holds a raw key in hex or Base64 form, decode it with [`decode_hex`](https://tenzir.com/docs/reference/functions/decode_hex.md) or [`decode_base64`](https://tenzir.com/docs/reference/functions/decode_base64.md). Store a PEM-encoded key as it is.
 
 ### `aad = blob|string (optional)`
 

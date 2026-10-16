@@ -133,6 +133,7 @@ These operators run on multiple cores:
 * [`to_google_cloud_logging`](https://tenzir.com/docs/reference/operators/to_google_cloud_logging.md)
 * [`to_google_cloud_pubsub`](https://tenzir.com/docs/reference/operators/to_google_cloud_pubsub.md)
 * [`to_google_secops`](https://tenzir.com/docs/reference/operators/to_google_secops.md)
+* [`to_hydrolix`](https://tenzir.com/docs/reference/operators/to_hydrolix.md)
 * [`to_kafka`](https://tenzir.com/docs/reference/operators/to_kafka.md)
 * [`to_nats`](https://tenzir.com/docs/reference/operators/to_nats.md)
 * [`to_opensearch`](https://tenzir.com/docs/reference/operators/to_opensearch.md)

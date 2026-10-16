@@ -53,7 +53,7 @@ to_amazon_kinesis "security-events"
 
 ### Data stores
 
-Send events to data stores like [ClickHouse](../../integrations/clickhouse.md), [DuckDB](../../integrations/duckdb.md), [Apache Iceberg](../../integrations/iceberg.md), and [Snowflake](../../integrations/snowflake.md).
+Send events to data stores like [ClickHouse](../../integrations/clickhouse.md), [DuckDB](../../integrations/duckdb.md), [Hydrolix](../../integrations/hydrolix.md), [Apache Iceberg](../../integrations/iceberg.md), and [Snowflake](../../integrations/snowflake.md).
 
 Send structured events to ClickHouse with [`to_clickhouse`](https://tenzir.com/docs/reference/operators/to_clickhouse.md):
 
@@ -67,6 +67,15 @@ Write events into a local DuckDB database file with [`to_duckdb`](https://tenzir
 ```tql
 from {time: 2026-01-01T00:00:00Z, severity: "high", message: "scan detected"}
 to_duckdb "alerts.duckdb", table="alerts"
+```
+
+Stream events into a Hydrolix table with [`to_hydrolix`](https://tenzir.com/docs/reference/operators/to_hydrolix.md). Because the example omits `transform`, the table needs a default transform that maps the events to its columns. Otherwise, name the transform with `transform`:
+
+```tql
+from {time: 2026-01-01T00:00:00Z, severity: "high", message: "scan detected"}
+to_hydrolix "https://acme.hydrolix.live",
+  token=secret("HYDROLIX_TOKEN"),
+  table="security.alerts"
 ```
 
 Write to an Apache Iceberg lakehouse table through a REST catalog with [`to_iceberg`](https://tenzir.com/docs/reference/operators/to_iceberg.md):

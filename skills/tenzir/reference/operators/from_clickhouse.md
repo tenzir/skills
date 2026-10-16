@@ -158,12 +158,15 @@ Tenzir maps ClickHouse types to Tenzir types as follows:
 | `Array(T)`                                        | `list<T>`   |                                                                                                                                               |
 | `Array(UInt8)`                                    | `blob`      |                                                                                                                                               |
 | `Nullable(T)`                                     | `T`         | Null values stay null.                                                                                                                        |
+| `Map(K, V)`                                       | `record`    | One field per key; see below.                                                                                                                 |
 
 Date and timestamp values outside Tenzir’s nanosecond timestamp range become null with a warning.
 
 JSON in [tables with a catch-all](../../integrations/clickhouse.md#preserve-dotted-json-keys) is written with `json_type_escape_dots_in_keys=1`. The `table` form enables this setting for such tables to restore literal dotted keys. With `sql`, add `SETTINGS json_type_escape_dots_in_keys=1` to your query. Otherwise, ClickHouse returns escaped keys such as `"a%2Eb"`.
 
-`Map(...)` is not currently supported. Cast unsupported columns in `sql` or omit them from the query result.
+A `Map(K, V)` becomes a record with one field per key, named by the key’s text, such as `200` for a `UInt16` key. The values convert like a column of type `V`. Rows can have different keys, an empty map becomes an empty record, and if a key repeats, the last value wins. Filters on map fields aren’t pushed down to ClickHouse, and since rows may lack a key, use `?` to access map fields, as in `where attributes.status? == "ok"`.
+
+The operator drops columns of other unsupported types, such as geo types, with a warning. Cast them in `sql` or omit them from the query result.
 
 ## Optimizations
 

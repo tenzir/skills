@@ -1054,6 +1054,10 @@ Collect, index, and analyze log data for monitoring and troubleshooting.
 
 Transfer and receive data between clients and servers using a request-response protocol.
 
+#### [Hydrolix integration](integrations/hydrolix.md)
+
+Stream security telemetry into Hydrolix tables and query it back.
+
 #### [IBM QRadar integration](integrations/qradar.md)
 
 Send security events to IBM Security QRadar for SIEM analytics and incident investigation.

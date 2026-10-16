@@ -753,6 +753,14 @@ Sends an HTTP/1.1 request and returns the response as events.
 from_http "https://example.com/api/events.json"
 ```
 
+### [from\_hydrolix](operators/from_hydrolix.md)
+
+Reads events from a Hydrolix table or SQL query.
+
+```tql
+from_hydrolix "https://…", token=…, table="…"
+```
+
 ### [from\_kafka](operators/from_kafka.md)
 
 Receives events from an Apache Kafka topic.
@@ -1277,6 +1285,14 @@ Sends events as a single HTTP request to a webhook or API endpoint.
 
 ```tql
 to_http "https://example.com/webhook" { write_ndjson }
+```
+
+### [to\_hydrolix](operators/to_hydrolix.md)
+
+Sends events to the Hydrolix HTTP streaming ingest API.
+
+```tql
+to_hydrolix "https://…", table="…", token=…
 ```
 
 ### [to\_kafka](operators/to_kafka.md)
