@@ -33,7 +33,7 @@ See [Execute Sigma rules](../../guides/detect/execute-sigma-rules.md) for a prob
 
 A rule file, a directory, or a non-empty list of files and directories. Exactly one of `path` and `rules` must be provided. Directories are searched recursively in deterministic order and include files ending in `.yaml` or `.yml`. An explicitly named file can use another extension. Overlapping path entries are deduplicated, and a file can contain multiple YAML documents.
 
-The operator refreshes filesystem-backed rules. A successfully reloaded rule replaces its previous version. If a changed document no longer parses or validates, the operator reports the error and retains its last valid version. Failures in one source do not disable valid rules from other sources. Removing a file from a successfully inspected directory removes its rules.
+The operator refreshes filesystem-backed rules. A successfully reloaded rule replaces its previous version. If a changed document no longer parses or validates, the operator reports the error once and retains the last valid version of that document. Valid changes to other documents in the same file, including added and removed documents, still take effect. The operator matches a failing document to its last valid version by rule `id`, then `name`. It falls back to the document’s position only if neither version has an `id` or `name` and the file has the same number of documents as before. If a file cannot be read or is not valid YAML, the operator retains all of its previous rules. Failures in one source do not disable valid rules from other sources. Removing a file from a successfully inspected directory removes its rules.
 
 ### `rules = string | list<string>`
 
@@ -95,6 +95,8 @@ A document whose `sigma-version` resolves to a major other than `2` is rejected 
 
 ## Modifiers
 
+Selections support large value lists, including thousands of values for modifiers such as `contains` and `endswith`.
+
 The operator validates every modifier chain before it executes a rule. Unknown, unsupported, incorrectly ordered, or type-incompatible modifiers reject the affected rule with an actionable diagnostic. Nothing is silently ignored.
 
 | Modifiers                                        | Behavior                                                                                                                              |
@@ -122,7 +124,7 @@ The operator supports Sigma v2.1 global filter documents. A filter can target de
 
 Filter compatibility uses subset matching over `logsource.category`, `logsource.product`, and `logsource.service`: every value declared by the filter must equal the corresponding target-rule value. A target rule may be more specific. The `definition` key does not participate in this check.
 
-An unknown or ambiguous target, an incompatible log source, or an invalid new filter produces a warning. The target detection continues without that newly invalid filter unless a last valid version of the filter is available.
+An unknown or ambiguous target, an incompatible log source, or an invalid new filter produces a warning. The target detection continues without that newly invalid filter unless a last valid version of the filter is available. A broken filter document retains its last valid version while other filters in the same file update.
 
 ## OCSF output
 
