@@ -11,7 +11,7 @@ Container for per-operation outcome scalars contributed by the `ai_operation` pr
 - **Type**: `string_t`
 - **Requirement**: optional
 
-The reason the model completion ended, as reported by the event source. Normalized to the caption of the `stop_reason_id` value; when the value is 'Other', this carries the event source's native label (e.g. `end_turn`, `max_tokens`).
+The reason the model completion ended, as reported by the event source. Normalized to the caption of the `stop_reason_id` value (e.g. `Token Limit`); when the value is 'Other', this carries the event source's native label (e.g. `recitation`, `malformed_function_call`).
 
 ### `stop_reason_id`
 
@@ -27,6 +27,7 @@ The reason the model completion ended, as reported by the event source. Normaliz
 - `3`: `Tool Use` - The completion paused to invoke a tool. The turn is not finished; the model expects the tool result and will continue.
 - `4`: `Session Stop` - The completion ended because the session or connection carrying it terminated - for example the caller cancelled, the client disconnected, or the transport closed - rather than because the model reached a stopping point. The session state at termination is therefore known, which distinguishes this from `Unknown` and lets a consumer decide whether the operation needs investigation or can simply be reclaimed.
 - `5`: `Content Filter` - The completion was stopped by a safety, policy, or content moderation mechanism rather than by the model reaching a stopping point or by the caller. This includes a refusal raised by a safety classifier and a guardrail intervening on the request or the response.
+- `6`: `Sub-Agent Stop` - The completion ended because the sub-agent performing it was stopped - the parent agent terminated the child, the child's task was cancelled, or the sub-agent's budget or step limit was exhausted - rather than because the model reached a stopping point. Distinct from `Session Stop`, which is the session or transport carrying the completion terminating. Not for use on an event that itself records a sub-agent stopping; on such an event this attribute records why that sub-agent stopped.
 - `99`: `Other` - The stop reason is not mapped. See the `stop_reason` attribute, which contains a data source specific value.
 
 The normalized reason the model completion ended. Producers map their runtime's native value into this set. Populate on completion events; when the value is 'Other', set `stop_reason` to the event source's native label. Because completion behavior is bound to the configuration that produced it, a shift in this attribute's distribution is more meaningful when weighed against that configuration: `ai_model.version` for direct model invocations, and `ai_agent.version`, `ai_agent.charter`, and `ai_agent.instance_uid` for agent-mediated operations.
