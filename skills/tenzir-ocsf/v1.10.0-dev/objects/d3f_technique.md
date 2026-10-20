@@ -4,6 +4,10 @@ The Defensive Technique object describes the leaf defensive technique ID and/or 
 
 - **Extends**: [Entity (_entity)](_entity.md)
 
+## Constraints
+
+- **At least one of**: `name`, `uid`
+
 ## Attributes
 
 ### `name`

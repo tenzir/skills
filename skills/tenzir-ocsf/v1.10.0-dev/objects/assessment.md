@@ -4,6 +4,10 @@ The Assessment object describes a point-in-time assessment, check, or evaluation
 
 - **Extends**: [Entity (_entity)](_entity.md)
 
+## Constraints
+
+- **At least one of**: `name`, `uid`
+
 ## Attributes
 
 ### `category`

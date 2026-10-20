@@ -4,6 +4,10 @@ The Product object describes characteristics of a software product.
 
 - **Extends**: [Entity (_entity)](_entity.md)
 
+## Constraints
+
+- **At least one of**: `name`, `uid`
+
 ## Attributes
 
 ### `cpe_name`

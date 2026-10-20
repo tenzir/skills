@@ -4,6 +4,10 @@ The Endpoint Connection object contains information detailing a connection attem
 
 - **Extends**: [Object (object)](object.md)
 
+## Constraints
+
+- **At least one of**: `network_endpoint`, `code`
+
 ## Attributes
 
 ### `code`

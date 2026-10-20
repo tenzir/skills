@@ -4,6 +4,10 @@ The Group object represents a collection or association of entities, such as use
 
 - **Extends**: [Entity (_entity)](_entity.md)
 
+## Constraints
+
+- **At least one of**: `name`, `uid`
+
 ## Attributes
 
 ### `desc`

@@ -4,6 +4,10 @@ The Process object describes a running instance of a launched program. Defined b
 
 - **Extends**: [Entity (_entity)](_entity.md)
 
+## Constraints
+
+- **At least one of**: `pid`, `uid`
+
 ## Attributes
 
 ### `cmd_line`

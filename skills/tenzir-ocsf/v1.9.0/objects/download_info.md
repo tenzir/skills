@@ -4,6 +4,10 @@ The Download Info object contains metadata pertaining to a downloaded file.
 
 - **Extends**: [Object (object)](object.md)
 
+## Constraints
+
+- **At least one of**: `src_endpoint`, `src_url`, `type_id`
+
 ## Attributes
 
 ### `referrer`

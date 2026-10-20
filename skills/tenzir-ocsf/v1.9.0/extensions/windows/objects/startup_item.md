@@ -4,6 +4,10 @@ The startup item object describes an application component that has associated s
 
 - **Extends**: [Startup Item (startup_item)](../../../objects/startup_item.md)
 
+## Constraints
+
+- **Exactly one of**: `driver`, `job`, `process`, `win_service`
+
 ## Inherited attributes
 
 **From Startup Item:**

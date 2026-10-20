@@ -6,6 +6,10 @@ A timespan may also be defined by its time interval boundaries, `start_time` and
 
 - **Extends**: [Object (object)](object.md)
 
+## Constraints
+
+- **At least one of**: `duration`, `duration_days`, `duration_hours`, `duration_mins`, `duration_months`, `duration_secs`, `duration_weeks`, `duration_years`, `end_time`, `start_time`
+
 ## Attributes
 
 ### `duration`

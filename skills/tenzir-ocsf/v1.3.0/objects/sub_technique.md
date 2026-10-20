@@ -4,6 +4,10 @@ The MITRE ATT&CK® Sub Technique object describes the sub technique ID and/or na
 
 - **Extends**: [Entity (_entity)](_entity.md)
 
+## Constraints
+
+- **At least one of**: `name`, `uid`
+
 ## Attributes
 
 ### `name`

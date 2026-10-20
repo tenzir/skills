@@ -4,6 +4,10 @@ The Windows resource object describes a resource object managed by Windows, such
 
 - **Extends**: [Resource (_resource)](../../../objects/_resource.md)
 
+## Constraints
+
+- **At least one of**: `name`, `uid`
+
 ## Attributes
 
 ### `name`

@@ -4,6 +4,10 @@ The Resource Details object describes details about a resource (including a user
 
 - **Extends**: [Resource (_resource)](_resource.md)
 
+## Constraints
+
+- **At least one of**: `name`, `uid`
+
 ## Attributes
 
 ### `agent_list`

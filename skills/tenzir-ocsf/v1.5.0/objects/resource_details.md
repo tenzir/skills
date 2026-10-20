@@ -4,6 +4,10 @@ The Resource Details object describes details about resources that were affected
 
 - **Extends**: [Resource (_resource)](_resource.md)
 
+## Constraints
+
+- **At least one of**: `name`, `uid`
+
 ## Attributes
 
 ### `agent_list`

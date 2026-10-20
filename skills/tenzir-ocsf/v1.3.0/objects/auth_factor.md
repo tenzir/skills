@@ -4,6 +4,10 @@ An Authentication Factor object describes a category of methods used for identit
 
 - **Extends**: [Object (object)](object.md)
 
+## Constraints
+
+- **Exactly one of**: `email_addr`, `phone_number`, `security_questions`
+
 ## Attributes
 
 ### `factor_type`

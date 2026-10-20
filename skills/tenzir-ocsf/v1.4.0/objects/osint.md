@@ -4,6 +4,10 @@ The OSINT (Open Source Intelligence) object contains details related to an indic
 
 - **Extends**: [Entity (_entity)](_entity.md)
 
+## Constraints
+
+- **At least one of**: `name`, `uid`
+
 ## Attributes
 
 ### `answers`

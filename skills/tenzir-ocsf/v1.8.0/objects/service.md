@@ -4,6 +4,10 @@ The Service object describes characteristics of a service,  `e.g. AWS EC2.`
 
 - **Extends**: [Entity (_entity)](_entity.md)
 
+## Constraints
+
+- **At least one of**: `name`, `uid`
+
 ## Attributes
 
 ### `labels`

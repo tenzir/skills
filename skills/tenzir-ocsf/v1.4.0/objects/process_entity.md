@@ -4,6 +4,10 @@ The Process Entity object provides critical fields for referencing a process.
 
 - **Extends**: [Entity (_entity)](_entity.md)
 
+## Constraints
+
+- **At least one of**: `cmd_line`, `name`, `path`, `pid`, `uid`
+
 ## Attributes
 
 ### `cmd_line`

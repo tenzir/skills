@@ -4,6 +4,10 @@ The KB Article object contains metadata that describes the patch or update.
 
 - **Extends**: [Object (object)](object.md)
 
+## Constraints
+
+- **At least one of**: `uid`, `src_url`
+
 ## Attributes
 
 ### `avg_timespan`

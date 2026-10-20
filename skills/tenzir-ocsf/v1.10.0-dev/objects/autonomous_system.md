@@ -4,6 +4,10 @@ An autonomous system (AS) is a collection of connected Internet Protocol (IP) ro
 
 - **Extends**: [Object (object)](object.md)
 
+## Constraints
+
+- **At least one of**: `number`, `name`
+
 ## Attributes
 
 ### `name`

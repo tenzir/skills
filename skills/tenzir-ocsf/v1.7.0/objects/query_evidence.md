@@ -2,6 +2,10 @@
 
 The specific resulting evidence information that was queried or discovered. When mapping raw telemetry data users should select the appropriate child object that best matches the evidence type as defined by query_type_id.
 
+## Constraints
+
+- **Exactly one of**: `connection_info`, `file`, `folder`, `group`, `job`, `kernel`, `module`, `network_interfaces`, `peripheral_device`, `process`, `service`, `session`, `startup_item`, `user`
+
 ## Attributes
 
 ### `connection_info`

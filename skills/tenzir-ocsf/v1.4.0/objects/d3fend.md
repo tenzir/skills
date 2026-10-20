@@ -4,6 +4,10 @@ The MITRE D3FEND™ object describes the tactic, technique & sub-technique assoc
 
 - **Extends**: [Object (object)](object.md)
 
+## Constraints
+
+- **At least one of**: `d3f_tactic`, `d3f_technique`
+
 ## Attributes
 
 ### `d3f_tactic`

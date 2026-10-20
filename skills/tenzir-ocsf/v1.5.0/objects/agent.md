@@ -4,6 +4,10 @@ An Agent (also known as a Sensor) is typically installed on an Operating System 
 
 - **Extends**: [Object (object)](object.md)
 
+## Constraints
+
+- **At least one of**: `uid`, `name`
+
 ## Attributes
 
 ### `name`

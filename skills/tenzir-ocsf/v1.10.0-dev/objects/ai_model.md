@@ -4,6 +4,10 @@ The AI Model object describes the characteristics of an AI/ML model. Examples in
 
 - **Extends**: [Entity (_entity)](_entity.md)
 
+## Constraints
+
+- **At least one of**: `name`, `uid`
+
 ## Attributes
 
 ### `ai_provider`

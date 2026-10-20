@@ -4,6 +4,10 @@ Communication context for AI system interactions including protocols, roles, cli
 
 - **Extends**: [Entity (_entity)](_entity.md)
 
+## Constraints
+
+- **At least one of**: `application`, `service`
+
 ## Attributes
 
 ### `ai_role`

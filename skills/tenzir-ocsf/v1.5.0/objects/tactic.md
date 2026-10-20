@@ -4,6 +4,10 @@ The MITRE Tactic object describes the ATT&CK® or ATLAS™ Tactic ID and/or name
 
 - **Extends**: [Entity (_entity)](_entity.md)
 
+## Constraints
+
+- **At least one of**: `name`, `uid`
+
 ## Attributes
 
 ### `name`

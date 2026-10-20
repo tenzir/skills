@@ -4,6 +4,10 @@ The Resource object contains attributes that provide information about a particu
 
 - **Extends**: [Entity (_entity)](_entity.md)
 
+## Constraints
+
+- **At least one of**: `name`, `uid`
+
 ## Attributes
 
 ### `created_time`

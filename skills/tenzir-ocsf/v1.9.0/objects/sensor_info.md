@@ -4,6 +4,10 @@ The Sensor Information object describes a control point sensor that emits data, 
 
 - **Extends**: [Entity (_entity)](_entity.md)
 
+## Constraints
+
+- **At least one of**: `name`, `uid`
+
 ## Attributes
 
 ### `sensor_layer`

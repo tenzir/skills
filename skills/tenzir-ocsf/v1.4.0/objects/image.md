@@ -4,6 +4,10 @@ The Image object provides a description of a specific Virtual Machine (VM) or Co
 
 - **Extends**: [Entity (_entity)](_entity.md)
 
+## Constraints
+
+- **At least one of**: `name`, `uid`
+
 ## Attributes
 
 ### `labels`

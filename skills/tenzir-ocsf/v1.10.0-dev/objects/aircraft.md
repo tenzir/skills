@@ -4,6 +4,10 @@ The Aircraft object represents any aircraft or otherwise airborne asset such as 
 
 - **Extends**: [Entity (_entity)](_entity.md)
 
+## Constraints
+
+- **At least one of**: `name`, `serial_number`, `uid`, `uid_alt`
+
 ## Attributes
 
 ### `location`

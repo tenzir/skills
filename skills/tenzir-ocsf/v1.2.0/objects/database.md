@@ -4,6 +4,10 @@ The database object is used for databases which are typically datastore services
 
 - **Extends**: [Entity (_entity)](_entity.md)
 
+## Constraints
+
+- **At least one of**: `name`, `uid`
+
 ## Attributes
 
 ### `created_time`

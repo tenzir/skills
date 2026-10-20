@@ -4,6 +4,10 @@ The Tactic object describes the tactic IDs and/or name that are associated with 
 
 - **Extends**: [Entity (_entity)](_entity.md)
 
+## Constraints
+
+- **At least one of**: `name`, `uid`
+
 ## Attributes
 
 ### `name`

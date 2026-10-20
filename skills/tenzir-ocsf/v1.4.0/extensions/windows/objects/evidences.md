@@ -4,6 +4,10 @@ Extends the evidences object to add Windows specific fields
 
 - **Extends**: [Evidence Artifacts (evidences)](../../../objects/evidences.md)
 
+## Constraints
+
+- **At least one of**: `actor`, `api`, `connection_info`, `data`, `database`, `databucket`, `device`, `dst_endpoint`, `email`, `file`, `process`, `query`, `src_endpoint`, `url`, `user`, `job`, `script`, `reg_key`, `reg_value`, `win_service`
+
 ## Inherited attributes
 
 **From Evidence Artifacts:**

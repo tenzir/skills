@@ -4,6 +4,10 @@ The Windows Service object describes a Windows service.
 
 - **Extends**: [Service (service)](../../../objects/service.md)
 
+## Constraints
+
+- **At least one of**: `cmd_line`, `service_category_id`, `service_dependencies`, `service_error_control_id`, `service_start_name`, `service_start_type_id`, `service_type_id`
+
 ## Inherited attributes
 
 **From Service:**

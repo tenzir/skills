@@ -6,6 +6,10 @@ Policy attributes provide traceability to the operational state of the security 
 
 - **Extends**: [Entity (_entity)](_entity.md)
 
+## Constraints
+
+- **At least one of**: `name`, `type`, `uid`
+
 ## Attributes
 
 ### `data`

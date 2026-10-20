@@ -4,6 +4,10 @@ The Entity object is an unordered collection of attributes, with a name and uniq
 
 - **Extends**: [Object (object)](object.md)
 
+## Constraints
+
+- **At least one of**: `name`, `uid`
+
 ## Attributes
 
 ### `name`

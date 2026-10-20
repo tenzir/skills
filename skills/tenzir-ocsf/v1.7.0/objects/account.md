@@ -4,6 +4,10 @@ The Account object contains details about the account that initiated or performe
 
 - **Extends**: [Entity (_entity)](_entity.md)
 
+## Constraints
+
+- **At least one of**: `name`, `uid`
+
 ## Attributes
 
 ### `labels`

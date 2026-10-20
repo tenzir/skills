@@ -4,6 +4,10 @@ The Firewall Rule object represents a specific rule within a firewall policy or 
 
 - **Extends**: [Rule (rule)](rule.md)
 
+## Constraints
+
+- **At least one of**: `name`, `uid`
+
 ## Attributes
 
 ### `condition`

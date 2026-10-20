@@ -4,6 +4,10 @@ The MITRE ATT&CK® Tactic object describes the tactic ID and/or name that is ass
 
 - **Extends**: [Entity (_entity)](_entity.md)
 
+## Constraints
+
+- **At least one of**: `name`, `uid`
+
 ## Attributes
 
 ### `name`

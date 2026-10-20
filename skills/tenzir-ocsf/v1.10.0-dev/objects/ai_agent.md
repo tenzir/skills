@@ -4,6 +4,10 @@ An autonomous AI agent that performs tasks under delegated authority. Distinguis
 
 - **Extends**: [Entity (_entity)](_entity.md)
 
+## Constraints
+
+- **At least one of**: `name`, `uid`
+
 ## Attributes
 
 ### `ai_model`

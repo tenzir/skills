@@ -4,6 +4,10 @@ The [MITRE ATT&CK®](https://attack.mitre.org) object describes the tactic, tech
 
 - **Extends**: [Object (object)](object.md)
 
+## Constraints
+
+- **At least one of**: `tactic`, `technique`, `sub_technique`
+
 ## Attributes
 
 ### `tactic`

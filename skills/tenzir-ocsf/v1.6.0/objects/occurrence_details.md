@@ -4,6 +4,10 @@ Details about where in the target entity, specified information was discovered. 
 
 - **Extends**: [Object (object)](object.md)
 
+## Constraints
+
+- **At least one of**: `cell_name`, `column_name`, `column_number`, `end_line`, `json_path`, `page_number`, `record_index_in_array`, `row_number`, `start_line`
+
 ## Attributes
 
 ### `cell_name`

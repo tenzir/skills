@@ -4,6 +4,10 @@ The Actor object contains details about the user, role, application, service, or
 
 - **Extends**: [Object (object)](object.md)
 
+## Constraints
+
+- **At least one of**: `process`, `user`, `invoked_by`, `session`, `app_name`, `app_uid`
+
 ## Attributes
 
 ### `app_name`
