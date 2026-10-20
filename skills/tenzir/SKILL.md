@@ -901,6 +901,7 @@ Functions appear in expressions and take positional and/or named arguments, prod
 
 - [ClickHouse](reference/optimizations/clickhouse.md)
 - [DuckDB](reference/optimizations/duckdb.md)
+- [KQL](reference/optimizations/kql.md)
 - [Microsoft SQL Server](reference/optimizations/microsoft-sql.md)
 - [MySQL](reference/optimizations/mysql.md)
 - [SentinelOne](reference/optimizations/sentinelone.md)

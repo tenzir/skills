@@ -85,17 +85,19 @@ Defaults to `10k`.
 
 The URL of a Confluent-compatible Schema Registry used to decode Avro message values.
 
-The operator accepts version 0 schema IDs and version 1 schema GUIDs in either the payload prefix or the `__value_schema_id` Kafka header. It checks the last such header first and falls back to the payload prefix when the header is absent or null. A malformed, non-null header produces an error. With a non-null header, the message value contains the datum directly, without a schema identifier prefix.
+The operator accepts version 0 schema IDs and version 1 schema GUIDs in either the payload prefix or the `__value_schema_id` Kafka header. It checks the last such header first and falls back to the payload prefix when the header is absent or null. A malformed, non-null header causes the message to be skipped with a warning. With a non-null header, the message value contains the datum directly, without a schema identifier prefix.
 
 The URL may include a base path, but must have a valid host and must not contain a query or fragment.
 
 Schemas are fetched by the identifier in each message, including their named references, and cached for reuse. Messages may use different schema versions. The registry must return Avro schemas. Kafka keys are not decoded.
 
-Avro records become events; other top-level Avro values are wrapped in a `value` field. Kafka tombstones produce no event, but count towards `count`. Empty, non-null payloads are decoded according to their schema. Each value must contain exactly one datum; trailing bytes produce an error. Top-level `bytes` values use the Confluent encoding, with no Avro length prefix.
+Avro records become events; other top-level Avro values are wrapped in a `value` field. Kafka tombstones produce no event, but count towards `count`. Empty, non-null payloads are decoded according to their schema. Each value must contain exactly one datum; messages with trailing bytes are skipped with a warning. Top-level `bytes` values use the Confluent encoding, with no Avro length prefix.
 
 Values use the type mapping of [`read_avro`](https://tenzir.com/docs/reference/operators/read_avro.md). Recursive schemas and arrays whose item schema does not have a fixed Tenzir type are unsupported. Each datum is limited to 16 MiB in encoded form and in the decoder’s estimated in-memory representation. Registry response bodies for one schema and its references are limited to 16 MiB in total. Cyclic references are unsupported; a lookup supports at most 128 named references and 32 schema levels, including the root schema.
 
-Registry requests retry transient failures. An unrecoverable registry error, invalid schema, or malformed datum stops the pipeline without committing the failed batch or later messages. Restarting with the same consumer group can replay messages from that batch when using `offset="stored"`.
+Malformed schema identifiers and Avro payloads produce warnings that identify the topic, partition, and offset. The operator skips these messages and continues with later messages, including valid messages in the same batch. Skipped messages produce no event but count towards `count`, and their offsets are committed along with the batch. This also applies when a payload does not match its registered schema. Once committed, skipped messages are not replayed with `offset="stored"`.
+
+Registry requests retry transient failures. An unrecoverable registry error, authentication failure, or invalid schema stops the pipeline without committing the failed batch or later messages. Restarting with the same consumer group can replay messages from that batch when using `offset="stored"`.
 
 Avro batches are emitted and committed in fetch order, preserving message order within each partition. The consumer continues polling while registry requests are pending and while accepted batches drain. If its assignment changes while an Avro batch is in flight, the operator stops with an error and rejects offsets from the old assignment. Already emitted but uncommitted events may be replayed after restarting.
 

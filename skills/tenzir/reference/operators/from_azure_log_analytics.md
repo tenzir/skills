@@ -18,7 +18,7 @@ from_azure_log_analytics query:string, workspace_id=string|secret,
 
 ## Description
 
-The `from_azure_log_analytics` operator is a finite source that queries the [Azure Monitor Logs Query API](https://learn.microsoft.com/en-us/rest/api/logsquery/query/execute). It sends your Kusto Query Language (KQL) string unchanged to `https://api.loganalytics.azure.com/v1/workspaces/{workspace_id}/query` and emits the returned rows as events. It doesn’t normalize the events to OCSF or ASIM.
+The `from_azure_log_analytics` operator is a finite source that queries the [Azure Monitor Logs Query API](https://learn.microsoft.com/en-us/rest/api/logsquery/query/execute). It sends your Kusto Query Language (KQL) string, with [appended stages](from_azure_log_analytics.md#optimizations) for downstream operators, to `https://api.loganalytics.azure.com/v1/workspaces/{workspace_id}/query` and emits the returned rows as events. It doesn’t normalize the events to OCSF or ASIM.
 
 Use this operator to read data already stored in a Log Analytics workspace, including tables used by Microsoft Sentinel. Unlike [`to_azure_log_analytics`](https://tenzir.com/docs/reference/operators/to_azure_log_analytics.md), it needs a workspace ID rather than a data collection endpoint, data collection rule, or ingestion stream. Ingestion transformations, delays, and retention mean that reading a table doesn’t necessarily reproduce the original uploaded events. For native Microsoft Defender advanced hunting without workspace targeting, use [`from_microsoft_defender`](https://tenzir.com/docs/reference/operators/from_microsoft_defender.md).
 
@@ -57,7 +57,7 @@ Dynamic values can be native JSON or JSON serialized into a string. An outer dyn
 
 ### `query: string`
 
-The required, nonempty KQL query. You can select tables, filter events, join, aggregate, and project computed columns. The operator doesn’t rewrite the query or push downstream filters, projections, or limits into it.
+The required, nonempty KQL query. You can select tables, filter events, join, aggregate, and project computed columns. The operator keeps your query text as is and only appends stages after it, as [Optimizations](from_azure_log_analytics.md#optimizations) describes.
 
 ### `workspace_id = string | secret`
 
@@ -92,6 +92,16 @@ The server-side query timeout. Defaults to `3min`; must be positive and at most 
 ### `tls = bool | record` (optional)
 
 TLS configuration for the query endpoint, following the standard Tenzir TLS options. HTTPS and certificate verification are enabled by default. Use a record to configure a custom trust store, for example with `cacert`.
+
+## Optimizations
+
+The operator appends KQL `where`, `project`, and `take` stages to your query for the [`where`](https://tenzir.com/docs/reference/operators/where.md), [`select`](https://tenzir.com/docs/reference/operators/select.md), and [`head`](https://tenzir.com/docs/reference/operators/head.md) operators that follow it, so that Log Analytics returns fewer rows and columns. The stages apply to the rows that your query returns, and your query text stays as is:
+
+* **Filters** become prefilters that keep every row that could match. Tenzir still evaluates every predicate locally, so the result stays the same. Supported predicates compare top-level fields with numbers, strings, and booleans, or match strings case-sensitively with `starts_with`, `ends_with`, and substring search. Negation, regular expressions, IP addresses, times, nested fields, and other function calls stay local.
+* **Projections** keep the fields that the pipeline reads, including those of local predicates. A field that your query doesn’t return becomes `null`.
+* **Limits** become a `take` stage only if no [`where`](https://tenzir.com/docs/reference/operators/where.md) precedes the [`head`](https://tenzir.com/docs/reference/operators/head.md).
+
+The operator never narrows the `start` and `end` window, and sends queries that use `render`, `fork`, `facet`, or a `set` statement, or that end in `;` or `|`, unchanged. The page on [KQL optimizations](../optimizations/kql.md) describes the rules in detail.
 
 ## Examples
 

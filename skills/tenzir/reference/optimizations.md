@@ -55,8 +55,10 @@ These operators act on hints:
 
 | Operator                                                                                                  | Filters                      | Projections                | Limits                 | Aggregations          |
 | --------------------------------------------------------------------------------------------------------- | ---------------------------- | -------------------------- | ---------------------- | --------------------- |
+| [`from_azure_log_analytics`](https://tenzir.com/docs/reference/operators/from_azure_log_analytics.md)     | As prefilters in the query   | Top-level columns          | Without filters        | No                    |
 | [`from_clickhouse`](https://tenzir.com/docs/reference/operators/from_clickhouse.md)                       | In the query                 | Including tuple fields     | In the query           | In the query          |
 | [`from_duckdb`](https://tenzir.com/docs/reference/operators/from_duckdb.md)                               | In the query                 | Top-level columns          | In the query           | In the query          |
+| [`from_microsoft_defender`](https://tenzir.com/docs/reference/operators/from_microsoft_defender.md)       | As prefilters in the query   | Top-level columns          | Without filters        | No                    |
 | [`from_microsoft_sql`](https://tenzir.com/docs/reference/operators/from_microsoft_sql.md)                 | In the query                 | Top-level columns          | In the query           | In the query          |
 | [`from_mysql`](https://tenzir.com/docs/reference/operators/from_mysql.md)                                 | In the query                 | Top-level columns          | In the query           | In the query          |
 | [`from_sentinelone_data_lake`](https://tenzir.com/docs/reference/operators/from_sentinelone_data_lake.md) | As prefilters in the query   | Including nested fields    | Without filters        | No                    |
@@ -145,6 +147,16 @@ In table mode, these rules hold for every database:
 * **Projections choose the retrieval mode.** A finite field list from [`select`](https://tenzir.com/docs/reference/operators/select.md) or a final [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) can use projected PowerQuery (PQ). Whole-event reads use LOG instead of PQ’s default `timestamp` and `message` columns.
 
 Generated TQL reads handle PQ’s 1,000-row cap transparently: a capped response is discarded before emission and retried through paginated LOG queries, unless an unfiltered pushed `head` intentionally requested no more than the cap. Explicit native `query` requests retain capped-result semantics. Our [SentinelOne optimization reference](optimizations/sentinelone.md#limits-and-the-result-cap) explains the fallback and continuation behavior.
+
+## KQL sources
+
+[`from_microsoft_defender`](https://tenzir.com/docs/reference/operators/from_microsoft_defender.md) and [`from_azure_log_analytics`](https://tenzir.com/docs/reference/operators/from_azure_log_analytics.md) run a KQL query that you write, and append `where`, `project`, and `take` stages to it, so that the stages apply to the rows that your query returns. Your query text stays as is:
+
+* **Filters are prefilters.** The operator knows neither the columns nor the types of your query’s output before it runs, and several KQL types arrive as the same TQL type. A pushed filter therefore keeps every row that could match, and Tenzir evaluates every original predicate as well.
+* **Limits** go into the query only if no [`where`](https://tenzir.com/docs/reference/operators/where.md) precedes the [`head`](https://tenzir.com/docs/reference/operators/head.md), since every predicate also runs in Tenzir.
+* **The time window** never narrows, since a time field in your query’s output need not refer to the time that `start` and `end` select.
+
+Our [KQL optimization reference](optimizations/kql.md) lists the filters that translate and the queries that stay unchanged.
 
 ## Filters by database
 

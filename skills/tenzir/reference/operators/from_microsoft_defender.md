@@ -17,32 +17,34 @@ from_microsoft_defender query:string, azure_auth=record, [start=time, end=time, 
 
 ## Description
 
-The `from_microsoft_defender` operator is a finite source that sends a `POST` request to Microsoft Graph [`/v1.0/security/runHuntingQuery`](https://learn.microsoft.com/en-us/graph/api/security-security-runhuntingquery?view=graph-rest-1.0). It passes your Kusto Query Language (KQL) string unchanged and emits the returned rows, not the Graph response envelope. It doesn’t normalize events to OCSF.
+The `from_microsoft_defender` operator is a finite source that sends a `POST` request to Microsoft Graph [`/v1.0/security/runHuntingQuery`](https://learn.microsoft.com/en-us/graph/api/security-security-runhuntingquery?view=graph-rest-1.0). It passes your Kusto Query Language (KQL) string, with [appended stages](from_microsoft_defender.md#optimizations) for downstream operators, and emits the returned rows, not the Graph response envelope. It doesn’t normalize events to OCSF.
 
 The operator validates the entire response before emitting any rows. Empty results succeed without emitting events. Invalid schemas, incompatible values, service errors, and unexpected envelope fields (including partial-result or continuation metadata) fail the pipeline. Diagnostics omit response bodies and result values. HTTP failures and invalid responses include a request ID when the service provides a safe identifier. Query errors point to `query`, while authorization errors point to `azure_auth` and provide status-specific setup hints.
 
 The operator uses the same Entra client-credentials token provider, TLS settings, and bounded HTTP retry policy as [`from_microsoft_graph`](https://tenzir.com/docs/reference/operators/from_microsoft_graph.md). Transient failures and throttling honor `Retry-After`; exhausted retries fail the pipeline. The operator checks token freshness before each attempt and refreshes it when needed, including after a retry delay. Retries preserve the original query and explicit time range. Permanent client and authorization failures aren’t retried.
 
-There is no pagination, automatic time-window splitting, persistent cursor, or deduplication guarantee. Restarting the pipeline reruns the query. The Graph v1.0 endpoint and result-type references don’t specify numeric result limits or a success-response truncation indicator. Don’t apply limits from the older Defender hunting API or the interactive portal to this endpoint. A successful response is **not a guarantee of extraction completeness**. Bound queries with appropriate time predicates and projections, and check your tenant’s service quotas and data availability.
+There is no pagination, automatic time-window splitting, persistent cursor, or deduplication guarantee. Restarting the pipeline reruns the query. The Microsoft Graph v1.0 [advanced-hunting quotas](https://learn.microsoft.com/en-us/graph/api/resources/security-api-overview?view=graph-rest-1.0#quotas-and-resource-allocation) limit results to 100,000 rows and 50 MB per query. These limits are documented for Microsoft Graph, not inferred from the older Defender hunting API or the interactive portal. The [`huntingQueryResults` response type](https://learn.microsoft.com/en-us/graph/api/resources/security-huntingqueryresults?view=graph-rest-1.0) doesn’t document a truncation indicator. A successful response doesn’t guarantee extraction completeness. Bound queries with appropriate time predicates and projections, and check your tenant’s service quotas and data availability.
 
 ### Result types
 
-Column names and capitalization are preserved. The response schema controls conversion:
+Column names and capitalization are preserved. The response schema controls conversion. Microsoft Graph reports the KQL types with these names:
 
-| Defender type            | Tenzir type                                                  |
-| ------------------------ | ------------------------------------------------------------ |
-| `DateTime`               | `time`                                                       |
-| `Int32`, `Int64`, `Long` | `int64`                                                      |
-| `Double`, `Real`         | `double`                                                     |
-| `Boolean`, `Bool`        | `bool`                                                       |
-| `String`, `Guid`         | `string`                                                     |
-| `Dynamic`                | Records, lists, or scalar values according to the JSON value |
+| Graph type       | KQL type         | Tenzir type                                                  |
+| ---------------- | ---------------- | ------------------------------------------------------------ |
+| `DateTime`       | `datetime`       | `time`                                                       |
+| `Int32`, `Int64` | `int`, `long`    | `int64`                                                      |
+| `Double`         | `real`           | `double`                                                     |
+| `SByte`          | `bool`           | `bool`                                                       |
+| `String`, `Guid` | `string`, `guid` | `string`                                                     |
+| `SqlDecimal`     | `decimal`        | `string` with the exact digits                               |
+| `TimeSpan`       | `timespan`       | `duration`                                                   |
+| `Object`         | `dynamic`        | Records, lists, or scalar values according to the JSON value |
 
-KQL spellings such as `datetime`, `long`, `real`, and `dynamic` are also accepted. Null values remain null. Integers must fit signed 64-bit range and aren’t converted through floating point. Ordinary string columns stay strings even when they look like timestamps, IP addresses, numbers, or durations. Dynamic values can be native JSON or JSON serialized into a string. A dynamic string that contains valid JSON is decoded, so `"42"`, `"true"`, and `"null"` become a number, a boolean, and null. Nested strings don’t undergo timestamp or IP inference. Heterogeneous lists keep each element with its own type, so a list can mix strings, numbers, and records.
+The KQL type names and the older names `Long`, `Real`, `Boolean`, `Bool`, and `Dynamic` are also accepted. Null values remain null. KQL strings have no null value and arrive as empty strings. Integers must fit signed 64-bit range and aren’t converted through floating point. Ordinary string columns stay strings even when they look like timestamps, IP addresses, numbers, or durations. A dynamic string stays a string, even when it looks like a number or holds JSON, and nested strings don’t undergo timestamp or IP inference. Microsoft Graph fails with an internal server error for dynamic lists that mix types, such as `dynamic([1, "x"])`, so convert such values in your query, for example with `tostring()`. Graph also sends objects inside dynamic lists as JSON text, so `dynamic([{"x": 1}])` arrives as a list with the string `{"x":1}`, which you can decode with `parse_json`. Graph treats keys of dynamic objects that contain `@odata.`, such as `x@odata.type`, as its own metadata: it drops them or fails the query. The operator asks Graph to omit OData type annotations, and removes them if Graph sends them anyway.
 
 ### `query: string`
 
-The required, arbitrary KQL query. You can select tables, filter events, join available tables, aggregate, and project computed columns. Tenzir doesn’t rewrite the query or push downstream filters into it.
+The required, arbitrary KQL query. You can select tables, filter events, join available tables, aggregate, and project computed columns. Tenzir keeps your query text as is and only appends stages after it, as [Optimizations](from_microsoft_defender.md#optimizations) describes.
 
 ### `azure_auth = record`
 
@@ -75,6 +77,16 @@ When you omit both arguments, the request omits `Timespan`. The Graph service cu
 ### `tls = bool | record` (optional)
 
 TLS configuration, with the same behavior as [`from_microsoft_graph`](https://tenzir.com/docs/reference/operators/from_microsoft_graph.md#tls--bool--record-optional). HTTPS and certificate verification are enabled by default.
+
+## Optimizations
+
+The operator appends KQL `where`, `project`, and `take` stages to your query for the [`where`](https://tenzir.com/docs/reference/operators/where.md), [`select`](https://tenzir.com/docs/reference/operators/select.md), and [`head`](https://tenzir.com/docs/reference/operators/head.md) operators that follow it, so that Defender returns fewer rows and columns. The stages apply to the rows that your query returns, and your query text stays as is:
+
+* **Filters** become prefilters that keep every row that could match. Tenzir still evaluates every predicate locally, so the result stays the same. Supported predicates compare top-level fields with numbers, strings, and booleans, or match strings case-sensitively with `starts_with`, `ends_with`, and substring search. Negation, regular expressions, IP addresses, times, nested fields, and other function calls stay local. A `take 100000` stage precedes the prefilters to preserve the documented Microsoft Graph result cap, so that they never reveal rows beyond it.
+* **Projections** keep the fields that the pipeline reads, including those of local predicates. A field that your query doesn’t return becomes `null`.
+* **Limits** become a `take` stage only if no [`where`](https://tenzir.com/docs/reference/operators/where.md) precedes the [`head`](https://tenzir.com/docs/reference/operators/head.md).
+
+The operator never narrows the `start` and `end` window, and sends queries that use `render`, `fork`, `facet`, or a `set` statement, or that end in `;` or `|`, unchanged. The page on [KQL optimizations](../optimizations/kql.md) describes the rules in detail.
 
 ## Examples
 
