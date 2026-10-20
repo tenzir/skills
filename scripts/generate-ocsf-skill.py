@@ -385,6 +385,23 @@ def lookup_schema(name: str, *mappings: dict[str, dict]) -> dict | None:
     return None
 
 
+def resolve_constraints(entity_data: dict, *mappings: dict[str, dict]) -> dict | None:
+    """Return the entity's constraints, inheriting from the nearest ancestor
+    along the extends chain that defines any."""
+    seen: set[str] = set()
+    current: dict | None = entity_data
+    while current is not None:
+        constraints = current.get("constraints")
+        if constraints:
+            return constraints
+        extends = current.get("extends")
+        if not extends or extends in seen:
+            break
+        seen.add(extends)
+        current = lookup_schema(extends, *mappings)
+    return None
+
+
 def resolve_attribute(name: str, local_data: object, dictionary: dict) -> dict:
     base = dictionary.get("attributes", {}).get(name, {})
     if not isinstance(base, dict):
@@ -1326,6 +1343,7 @@ def main() -> None:
                         for attr_name, attr_data in (object_data.get("attributes") or {}).items()
                         if not attr_name.startswith("$")
                     ],
+                    constraints=resolve_constraints(object_data, data["objects"]),
                     object_links=object_links,
                 )
                 write_file(output_dir / data["slug"] / "objects" / f"{name_to_slug(name)}.md", page)
@@ -1557,6 +1575,11 @@ def main() -> None:
                             for attr_name, attr_data in (object_data.get("attributes") or {}).items()
                             if not attr_name.startswith("$")
                         ],
+                        constraints=resolve_constraints(
+                            object_data,
+                            extension_objects,
+                            data["objects"],
+                        ),
                         object_links=extension_object_links,
                     )
                     write_file(
