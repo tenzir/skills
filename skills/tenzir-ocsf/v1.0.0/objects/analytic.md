@@ -4,10 +4,6 @@ The Analytic object contains details about the analytic technique used to analyz
 
 - **Extends**: [Entity (_entity)](_entity.md)
 
-## Constraints
-
-- **At least one of**: `name`, `uid`
-
 ## Attributes
 
 ### `category`

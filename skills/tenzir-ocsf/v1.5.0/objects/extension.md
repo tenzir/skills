@@ -4,10 +4,6 @@ The OCSF Schema Extension object provides detailed information about the schema 
 
 - **Extends**: [Entity (_entity)](_entity.md)
 
-## Constraints
-
-- **At least one of**: `name`, `uid`
-
 ## Attributes
 
 ### `name`

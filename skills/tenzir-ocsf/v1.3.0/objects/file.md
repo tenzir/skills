@@ -4,10 +4,6 @@ The File object represents the metadata associated with a file stored in a compu
 
 - **Extends**: [Entity (_entity)](_entity.md)
 
-## Constraints
-
-- **At least one of**: `name`, `uid`
-
 ## Attributes
 
 ### `accessed_time`

@@ -5,6 +5,10 @@ Extends the process object to add macOS specific fields
 - **Extends**: [Process (process)](../../../objects/process.md)
 - **Profiles**: [macOS Users](../profiles/macos_users.md)
 
+## Constraints
+
+- **At least one of**: `pid`, `uid`, `cpid`
+
 ## Inherited attributes
 
 **From Process:**
