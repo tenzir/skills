@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 # /// script
-# requires-python = ">=3.12"
+# requires-python = ">=3.14"
 # dependencies = [
 #   "httpx>=0.28.0",
 #   "markdownify>=1.1.0",
+#   "ocsf-schema-compiler==1.1.1",
 #   "packaging>=24.0",
 # ]
 # ///
@@ -12,6 +13,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import logging
 import re
 import shutil
 import subprocess
@@ -21,6 +23,8 @@ from pathlib import Path
 
 import httpx
 from markdownify import markdownify
+from ocsf_schema_compiler.compiler import SchemaCompiler
+from ocsf_schema_compiler.ocsf_utils import is_hidden_class, is_hidden_object
 from packaging.version import Version
 
 
@@ -233,22 +237,31 @@ def collect_version_specs(client: httpx.Client, requested_version: str | None) -
     return specs
 
 
-def load_directory_json(directory: Path) -> dict[str, dict]:
+def load_directory_json(directory: Path, *, key_by_name: bool = False) -> dict[str, dict]:
+    """Load all JSON files in a directory, keyed by file stem, or by the
+    item's schema name when `key_by_name` is set. Extension patches have no
+    `name` and are keyed by the item they extend."""
     if not directory.exists():
         return {}
-    return {
-        path.stem: read_json(path)
-        for path in sorted(directory.glob("*.json"))
-        if path.is_file()
-    }
+    result: dict[str, dict] = {}
+    for path in sorted(directory.glob("*.json")):
+        if not path.is_file():
+            continue
+        data = read_json(path)
+        key = path.stem
+        if key_by_name:
+            key = data.get("name") or data.get("extends") or path.stem
+        result[key] = data
+    return result
 
 
 def load_classes(schema_dir: Path) -> tuple[dict[str, dict], dict[str, dict]]:
     """Load event classes and intermediate (category-level) base classes.
 
     Returns (classes, intermediate_classes) where intermediate_classes
-    are the abstract category base classes like ``network``, ``system``,
-    ``iam`` etc. that concrete classes extend.
+    are the abstract base classes like ``network``, ``system``, or
+    ``finding`` that concrete classes extend. Like the OCSF schema compiler,
+    a class without a ``uid`` (other than ``base_event``) is abstract.
     """
     classes: dict[str, dict] = {}
     intermediates: dict[str, dict] = {}
@@ -266,7 +279,7 @@ def load_classes(schema_dir: Path) -> tuple[dict[str, dict], dict[str, dict]]:
             data = read_json(entry)
             class_name = data.get("name") or entry.stem
             data["category_key"] = category_key
-            if entry.stem == category_key:
+            if is_hidden_class(class_name, data):
                 intermediates[class_name] = data
                 continue
             classes[class_name] = data
@@ -358,24 +371,52 @@ def load_extensions(schema_dir: Path) -> dict[str, dict]:
         result[extension_dir.name] = {
             "meta": read_json(meta_path),
             "dictionary": read_json(dictionary_path) if dictionary_path.exists() else {},
-            "objects": load_directory_json(extension_dir / "objects"),
-            "profiles": load_directory_json(extension_dir / "profiles"),
-            "events": load_directory_json(extension_dir / "events"),
+            "objects": load_directory_json(extension_dir / "objects", key_by_name=True),
+            "profiles": load_directory_json(extension_dir / "profiles", key_by_name=True),
+            "events": load_directory_json(extension_dir / "events", key_by_name=True),
         }
     return result
 
 
-def merge_dictionaries(base: dict, extra: dict | None = None) -> dict:
-    merged = dict(base)
-    merged["attributes"] = dict(base.get("attributes", {}))
-    merged["types"] = dict(base.get("types", {}))
-    if not extra:
-        return merged
-    if isinstance(extra.get("attributes"), dict):
-        merged["attributes"].update(extra["attributes"])
-    if isinstance(extra.get("types"), dict):
-        merged["types"].update(extra["types"])
-    return merged
+class _SkillSchemaCompiler(SchemaCompiler):
+    """Schema compiler that also keeps the hidden (abstract) classes and
+    objects, such as `system` or `_entity`, which the compiler resolves but
+    drops from its output. The skill documents them as base classes."""
+
+    def __init__(self, *args, **kwargs) -> None:
+        super().__init__(*args, **kwargs)
+        self._hidden_classes: dict = {}
+        self._hidden_objects: dict = {}
+
+    def _resolve_extends(self, items: dict, kind: str) -> None:
+        super()._resolve_extends(items, kind)
+        for name, item in items.items():
+            if kind == "Class" and is_hidden_class(name, item):
+                self._hidden_classes[name] = item
+            elif kind == "Object" and is_hidden_object(name):
+                self._hidden_objects[name] = item
+
+    def compile(self) -> dict:
+        output = super().compile()
+        for hidden, kind, key in (
+            (self._hidden_classes, "class", "classes"),
+            (self._hidden_objects, "object", "objects"),
+        ):
+            self._ensure_item_attributes_have_requirement(hidden, kind, [])
+            self._finish_item_attributes(hidden, kind)
+            output[key].update(hidden)
+        return output
+
+
+def compile_schema(schema_dir: Path, *, ignore_platform_extensions: bool) -> dict:
+    """Compile a raw OCSF schema checkout with the official OCSF schema
+    compiler in browser mode, which records each attribute's `_source`."""
+    logging.getLogger("ocsf_schema_compiler").setLevel(logging.ERROR)
+    return _SkillSchemaCompiler(
+        schema_dir,
+        ignore_platform_extensions=ignore_platform_extensions,
+        browser_mode=True,
+    ).compile()
 
 
 def lookup_schema(name: str, *mappings: dict[str, dict]) -> dict | None:
@@ -412,13 +453,87 @@ def resolve_constraints(entity_data: dict, *mappings: dict[str, dict]) -> dict |
     return None
 
 
-def resolve_attribute(name: str, local_data: object, dictionary: dict) -> dict:
-    base = dictionary.get("attributes", {}).get(name, {})
-    if not isinstance(base, dict):
-        base = {}
-    if not isinstance(local_data, dict):
-        local_data = {}
-    return {**base, **local_data}
+def resolve_item_profiles(
+    raw_item: dict,
+    compiled_item: dict,
+    *parent_mappings: dict[str, dict],
+) -> list[str]:
+    """Profiles that add attributes to an item: those registered on the item
+    and its ancestors, followed by those the compiler merged in via includes."""
+    profiles = resolve_profiles(raw_item, *parent_mappings)
+    for attribute in (compiled_item.get("attributes") or {}).values():
+        for name in attribute.get("profiles") or []:
+            if name not in profiles:
+                profiles.append(name)
+    return profiles
+
+
+def split_compiled_attributes(
+    raw_item: dict,
+    compiled_item: dict,
+    source_name: str,
+    compiled_items: dict[str, dict],
+    *,
+    include_compiled_own: bool = True,
+) -> tuple[list[tuple[str, dict]], list[tuple[str, list[tuple[str, str]]]]]:
+    """Split an item's compiled attributes into its own attributes and the
+    required/recommended attributes it inherits, grouped by ancestor.
+
+    Own attributes keep the order of the raw schema file, followed by those the
+    compiler attributes to the item (e.g. from `$include` or class
+    enrichment). Profile attributes are left to the profile pages."""
+    compiled_attributes = compiled_item.get("attributes") or {}
+    own_names = [
+        name
+        for name in (raw_item.get("attributes") or {})
+        if not name.startswith("$") and name in compiled_attributes
+    ]
+    if include_compiled_own:
+        own_names.extend(
+            name
+            for name, attribute in compiled_attributes.items()
+            if attribute.get("_source") == source_name
+            and not attribute.get("profiles")
+            and name not in own_names
+        )
+    own = [(name, compiled_attributes[name]) for name in own_names]
+
+    by_source: dict[str, list[tuple[str, str]]] = {}
+    for name, attribute in compiled_attributes.items():
+        if name in own_names or attribute.get("profiles"):
+            continue
+        requirement = attribute.get("requirement", "")
+        if requirement in ("required", "recommended"):
+            by_source.setdefault(attribute.get("_source", ""), []).append((name, requirement))
+
+    # Order groups from the nearest ancestor to the root.
+    chain: list[str] = []
+    extends = compiled_item.get("extends")
+    while extends and extends not in chain:
+        chain.append(extends)
+        parent = compiled_items.get(extends)
+        extends = parent.get("extends") if parent else None
+    ordered_sources = [name for name in chain if name in by_source]
+    ordered_sources.extend(name for name in by_source if name not in ordered_sources)
+
+    inherited: list[tuple[str, list[tuple[str, str]]]] = []
+    for source in ordered_sources:
+        attrs = sorted(
+            by_source[source],
+            key=lambda pair: (0 if pair[1] == "required" else 1, pair[0]),
+        )
+        caption = (compiled_items.get(source) or {}).get("caption") or source
+        inherited.append((caption, attrs))
+    return own, inherited
+
+
+def profile_attributes(raw_profile: dict, compiled_profile: dict) -> list[tuple[str, dict]]:
+    compiled_attributes = compiled_profile.get("attributes") or {}
+    return [
+        (name, compiled_attributes[name])
+        for name in (raw_profile.get("attributes") or {})
+        if not name.startswith("$") and name in compiled_attributes
+    ]
 
 
 def format_attribute(
@@ -462,10 +577,15 @@ def format_attribute(
         lines.extend([f"- **Values**: {values}", ""])
     if isinstance(data.get("enum"), dict) and data["enum"]:
         lines.extend(["#### Enum values", ""])
-        for key, value in data["enum"].items():
-            enum_desc = clean_description(
-                value.get("description", ""),
-                relative_link_prefix=relative_link_prefix,
+        enum_items = list(data["enum"].items())
+        if all(re.fullmatch(r"-?\d+", key) for key, _ in enum_items):
+            enum_items.sort(key=lambda item: int(item[0]))
+        for key, value in enum_items:
+            enum_desc = " ".join(
+                clean_description(
+                    value.get("description", ""),
+                    relative_link_prefix=relative_link_prefix,
+                ).split()
             )
             label = value.get("caption") or key
             suffix = f" - {enum_desc}" if enum_desc else ""
@@ -508,44 +628,6 @@ def format_associations(associations: dict) -> str:
         targets_str = ", ".join(f"`{t}`" for t in targets)
         lines.append(f"- `{source}` ↔ {targets_str}")
     return "\n".join(lines)
-
-
-def collect_inherited_attributes(
-    entity_data: dict,
-    dictionary: dict,
-    *parent_mappings: dict[str, dict],
-) -> list[tuple[str, list[tuple[str, str]]]]:
-    """Walk the extends chain and collect required/recommended attributes
-    from each ancestor.  Returns a list of (ancestor_name, [(attr, requirement), ...])."""
-    result: list[tuple[str, list[tuple[str, str]]]] = []
-    own_attrs = set((entity_data.get("attributes") or {}).keys())
-    extends = entity_data.get("extends")
-    seen_parents: set[str] = set()
-    while extends:
-        if extends in seen_parents:
-            break
-        seen_parents.add(extends)
-        parent = lookup_schema(extends, *parent_mappings)
-        if parent is None:
-            break
-        parent_caption = parent.get("caption") or extends
-        parent_attrs = parent.get("attributes") or {}
-        important: list[tuple[str, str]] = []
-        for attr_name, attr_data in parent_attrs.items():
-            if attr_name.startswith("$") or attr_name in own_attrs:
-                continue
-            resolved = resolve_attribute(attr_name, attr_data, dictionary)
-            # Any nearer ancestor shadows the same attribute higher in the chain,
-            # even if the nearer definition downgrades it to optional.
-            own_attrs.add(attr_name)
-            requirement = resolved.get("requirement", "")
-            if requirement in ("required", "recommended"):
-                important.append((attr_name, requirement))
-        if important:
-            important.sort(key=lambda pair: (0 if pair[1] == "required" else 1, pair[0]))
-            result.append((parent_caption, important))
-        extends = parent.get("extends")
-    return result
 
 
 def render_entity_page(
@@ -605,10 +687,12 @@ def build_version_docs(version: str, schema_dir: Path) -> dict:
     categories = read_json(schema_dir / "categories.json").get("attributes", {})
     dictionary = read_json(schema_dir / "dictionary.json")
     classes, intermediates = load_classes(schema_dir)
-    objects = load_directory_json(schema_dir / "objects")
-    profiles = load_directory_json(schema_dir / "profiles")
+    objects = load_directory_json(schema_dir / "objects", key_by_name=True)
+    profiles = load_directory_json(schema_dir / "profiles", key_by_name=True)
     extensions = load_extensions(schema_dir)
     types = dictionary.get("types", {}).get("attributes", {})
+    compiled = compile_schema(schema_dir, ignore_platform_extensions=True)
+    compiled_with_extensions = compile_schema(schema_dir, ignore_platform_extensions=False)
 
     return {
         "version": version,
@@ -621,6 +705,8 @@ def build_version_docs(version: str, schema_dir: Path) -> dict:
         "profiles": profiles,
         "extensions": extensions,
         "types": types,
+        "compiled": compiled,
+        "compiled_with_extensions": compiled_with_extensions,
     }
 
 
@@ -836,6 +922,7 @@ def build_extension_index_page(name: str, extension_data: dict) -> str:
 
 def generate_types_overview(version_data: dict) -> str:
     lines = [f"# Types ({version_data['version']})", ""]
+    compiled_types = version_data["compiled"]["dictionary"]["types"]["attributes"]
     for name, data in sorted(
         version_data["types"].items(),
         key=lambda item: (item[1].get("caption") or item[0]).casefold(),
@@ -843,6 +930,9 @@ def generate_types_overview(version_data: dict) -> str:
         lines.extend([f"## `{name}`", "", f"- **Caption**: {data.get('caption') or name}"])
         if data.get("type_name"):
             lines.append(f"- **Base type**: `{data['type_name']}`")
+        observable = (compiled_types.get(name) or {}).get("observable")
+        if observable is not None:
+            lines.append(f"- **Observable**: `{observable}`")
         if data.get("regex"):
             lines.append(f"- **Regex**: `{data['regex']}`")
         if isinstance(data.get("range"), list):
@@ -1194,6 +1284,10 @@ def main() -> None:
             object_links = build_name_link_map(obj_names, prefix="")
             profile_links = build_name_link_map(profile_names, prefix="../profiles/")
             object_links_from_class_pages = build_name_link_map(obj_names, prefix="../objects/")
+            compiled = data["compiled"]
+            compiled_with_extensions = data["compiled_with_extensions"]
+            # Profiles that apply to each class and object, for "Applies to".
+            profile_consumers: dict[str, list[str]] = {}
             write_file(output_dir / f"{data['slug']}.md", generate_version_overview(data, prev))
             write_file(output_dir / data["slug"] / "classes.md", generate_classes_overview(data))
             write_file(output_dir / data["slug"] / "objects.md", generate_objects_overview(data))
@@ -1210,8 +1304,16 @@ def main() -> None:
                     if category_uid is not None and relative_uid is not None
                     else None
                 )
-                class_profiles = resolve_profiles(
-                    class_data, data["classes"], data["intermediates"],
+                compiled_class = compiled["classes"][name]
+                class_profiles = resolve_item_profiles(
+                    class_data, compiled_class, data["classes"], data["intermediates"],
+                )
+                for profile_name in class_profiles:
+                    profile_consumers.setdefault(profile_name, []).append(
+                        class_data.get("caption") or name
+                    )
+                own_attributes, inherited_attributes = split_compiled_attributes(
+                    class_data, compiled_class, name, compiled["classes"],
                 )
                 constraints = resolve_constraints(
                     class_data, data["classes"], data["intermediates"],
@@ -1258,28 +1360,32 @@ def main() -> None:
                     ],
                     constraints=constraints,
                     associations=associations,
-                    inherited_attributes=collect_inherited_attributes(
-                        class_data, data["dictionary"], data["classes"], data["intermediates"],
-                    ),
-                    attributes=[
-                        (attr_name, resolve_attribute(attr_name, attr_data, data["dictionary"]))
-                        for attr_name, attr_data in (class_data.get("attributes") or {}).items()
-                        if not attr_name.startswith("$")
-                    ],
+                    inherited_attributes=inherited_attributes,
+                    attributes=own_attributes,
                     object_links=object_links_from_class_pages,
                 )
                 write_file(output_dir / data["slug"] / "classes" / f"{name_to_slug(name)}.md", page)
 
             for name, intermediate_data in data["intermediates"].items():
                 category_info = data["categories"].get(intermediate_data.get("category_key"), {})
-                intermediate_profiles = resolve_profiles(
-                    intermediate_data, data["classes"], data["intermediates"],
+                compiled_intermediate = compiled["classes"][name]
+                intermediate_profiles = resolve_item_profiles(
+                    intermediate_data, compiled_intermediate, data["classes"], data["intermediates"],
+                )
+                for profile_name in intermediate_profiles:
+                    profile_consumers.setdefault(profile_name, []).append(
+                        intermediate_data.get("caption") or name
+                    )
+                own_attributes, inherited_attributes = split_compiled_attributes(
+                    intermediate_data, compiled_intermediate, name, compiled["classes"],
                 )
                 page = render_entity_page(
                     title=f"{intermediate_data.get('caption') or name} ({name})",
                     description=(
                         f"Abstract base class for {category_info.get('caption', name)} event classes. "
                         "Concrete classes in this category extend this class and inherit its attributes."
+                        if name == intermediate_data.get("category_key")
+                        else f"Abstract base class. {intermediate_data.get('description') or ''}".strip()
                     ),
                     deprecation=intermediate_data.get("@deprecated"),
                     meta_entries=[
@@ -1316,20 +1422,24 @@ def main() -> None:
                         intermediate_data, data["classes"], data["intermediates"],
                     ),
                     associations=intermediate_data.get("associations"),
-                    inherited_attributes=collect_inherited_attributes(
-                        intermediate_data, data["dictionary"], data["classes"], data["intermediates"],
-                    ),
-                    attributes=[
-                        (attr_name, resolve_attribute(attr_name, attr_data, data["dictionary"]))
-                        for attr_name, attr_data in (intermediate_data.get("attributes") or {}).items()
-                        if not attr_name.startswith("$")
-                    ],
+                    inherited_attributes=inherited_attributes,
+                    attributes=own_attributes,
                     object_links=object_links_from_class_pages,
                 )
                 write_file(output_dir / data["slug"] / "classes" / f"{name_to_slug(name)}.md", page)
 
             for name, object_data in data["objects"].items():
                 extends = object_data.get("extends")
+                compiled_object = compiled["objects"][name]
+                object_profiles = resolve_item_profiles(object_data, compiled_object, data["objects"])
+                for profile_name in object_profiles:
+                    profile_consumers.setdefault(profile_name, []).append(
+                        f"{object_data.get('caption') or name} (object)"
+                    )
+                own_attributes, inherited_attributes = split_compiled_attributes(
+                    object_data, compiled_object, name, compiled["objects"],
+                )
+                observable = compiled_object.get("observable")
                 page = render_entity_page(
                     title=f"{object_data.get('caption') or name} ({name})",
                     description=object_data.get("description"),
@@ -1346,27 +1456,27 @@ def main() -> None:
                             if extends
                             else "",
                         ),
+                        (
+                            "Profiles",
+                            format_named_links(
+                                object_profiles,
+                                data_by_name=data["profiles"],
+                                link_by_name=build_name_link_map(profile_names, prefix="../profiles/"),
+                            )
+                            if object_profiles
+                            else "",
+                        ),
+                        ("Observable", f"`{observable}`" if observable is not None else ""),
                     ],
-                    attributes=[
-                        (attr_name, resolve_attribute(attr_name, attr_data, data["dictionary"]))
-                        for attr_name, attr_data in (object_data.get("attributes") or {}).items()
-                        if not attr_name.startswith("$")
-                    ],
+                    inherited_attributes=inherited_attributes,
+                    attributes=own_attributes,
                     constraints=resolve_constraints(object_data, data["objects"]),
                     object_links=object_links,
                 )
                 write_file(output_dir / data["slug"] / "objects" / f"{name_to_slug(name)}.md", page)
 
-            # Build reverse mapping: profile name → list of classes that register for it.
-            profile_to_classes: dict[str, list[str]] = {}
-            for cname, cdata in {**data["classes"], **data["intermediates"]}.items():
-                for pname in resolve_profiles(cdata, data["classes"], data["intermediates"]):
-                    profile_to_classes.setdefault(pname, []).append(cdata.get("caption") or cname)
-            for pname, consumers in profile_to_classes.items():
-                profile_to_classes[pname] = sorted(set(consumers), key=str.casefold)
-
             for name, profile_data in data["profiles"].items():
-                applies_to = profile_to_classes.get(name, [])
+                applies_to = sorted(set(profile_consumers.get(name, [])), key=str.casefold)
                 applies_section = (
                     "\n".join(f"- {cls}" for cls in applies_to)
                     if applies_to
@@ -1380,11 +1490,7 @@ def main() -> None:
                     description=profile_data.get("description"),
                     deprecation=profile_data.get("@deprecated"),
                     meta_entries=[],
-                    attributes=[
-                        (attr_name, resolve_attribute(attr_name, attr_data, data["dictionary"]))
-                        for attr_name, attr_data in (profile_data.get("attributes") or {}).items()
-                        if not attr_name.startswith("$")
-                    ],
+                    attributes=profile_attributes(profile_data, compiled["profiles"][name]),
                     object_links=object_links_from_class_pages,
                 )
                 if extra_sections:
@@ -1398,10 +1504,9 @@ def main() -> None:
             for name, extension_data in data["extensions"].items():
                 extension_slug = name_to_slug(name)
                 extension_output_dir = output_dir / data["slug"] / "extensions" / extension_slug
-                extension_dictionary = merge_dictionaries(
-                    data["dictionary"],
-                    extension_data.get("dictionary"),
-                )
+                extension_scope = extension_data["meta"].get("name") or name
+                compiled_classes = compiled_with_extensions["classes"]
+                compiled_objects = compiled_with_extensions["objects"]
                 extension_events = extension_data["events"]
                 extension_objects = extension_data["objects"]
                 extension_profiles = extension_data["profiles"]
@@ -1452,6 +1557,16 @@ def main() -> None:
 
                 for event_name, event_data in extension_events.items():
                     extends = event_data.get("extends")
+                    is_patch = extends == event_name
+                    compiled_key = event_name if is_patch else f"{extension_scope}/{event_name}"
+                    compiled_event = compiled_classes[compiled_key]
+                    own_attributes, inherited_attributes = split_compiled_attributes(
+                        event_data,
+                        compiled_event,
+                        compiled_key,
+                        compiled_classes,
+                        include_compiled_own=not is_patch,
+                    )
                     parent = lookup_schema(
                         extends or "",
                         data["classes"],
@@ -1484,7 +1599,12 @@ def main() -> None:
                         description=event_data.get("description"),
                         deprecation=event_data.get("@deprecated"),
                         meta_entries=[
-                            ("Event UID", f"`{event_data['uid']}`" if event_data.get("uid") is not None else ""),
+                            (
+                                "Class UID",
+                                f"`{compiled_event['uid']}`"
+                                if not is_patch and compiled_event.get("uid") is not None
+                                else "",
+                            ),
                             (
                                 "Category",
                                 category_info.get("caption") or parent_category_key or "",
@@ -1516,21 +1636,8 @@ def main() -> None:
                         ],
                         constraints=constraints,
                         associations=associations,
-                        inherited_attributes=collect_inherited_attributes(
-                            event_data,
-                            extension_dictionary,
-                            extension_events,
-                            data["classes"],
-                            data["intermediates"],
-                        ),
-                        attributes=[
-                            (
-                                attr_name,
-                                resolve_attribute(attr_name, attr_data, extension_dictionary),
-                            )
-                            for attr_name, attr_data in (event_data.get("attributes") or {}).items()
-                            if not attr_name.startswith("$")
-                        ],
+                        inherited_attributes=inherited_attributes,
+                        attributes=own_attributes,
                         object_links=extension_object_links,
                     )
                     write_file(
@@ -1540,6 +1647,16 @@ def main() -> None:
 
                 for object_name, object_data in extension_objects.items():
                     extends = object_data.get("extends")
+                    is_patch = extends == object_name
+                    compiled_key = object_name if is_patch else f"{extension_scope}/{object_name}"
+                    compiled_object = compiled_objects[compiled_key]
+                    own_attributes, inherited_attributes = split_compiled_attributes(
+                        object_data,
+                        compiled_object,
+                        compiled_key,
+                        compiled_objects,
+                        include_compiled_own=not is_patch,
+                    )
                     object_profiles = list(object_data.get("profiles") or [])
                     parent = lookup_schema(extends or "", data["objects"], extension_objects)
                     page = render_entity_page(
@@ -1573,20 +1690,8 @@ def main() -> None:
                                 else "",
                             ),
                         ],
-                        inherited_attributes=collect_inherited_attributes(
-                            object_data,
-                            extension_dictionary,
-                            data["objects"],
-                            extension_objects,
-                        ),
-                        attributes=[
-                            (
-                                attr_name,
-                                resolve_attribute(attr_name, attr_data, extension_dictionary),
-                            )
-                            for attr_name, attr_data in (object_data.get("attributes") or {}).items()
-                            if not attr_name.startswith("$")
-                        ],
+                        inherited_attributes=inherited_attributes,
+                        attributes=own_attributes,
                         constraints=resolve_constraints(
                             object_data,
                             extension_objects,
@@ -1632,14 +1737,10 @@ def main() -> None:
                         description=profile_data.get("description"),
                         deprecation=profile_data.get("@deprecated"),
                         meta_entries=[],
-                        attributes=[
-                            (
-                                attr_name,
-                                resolve_attribute(attr_name, attr_data, extension_dictionary),
-                            )
-                            for attr_name, attr_data in (profile_data.get("attributes") or {}).items()
-                            if not attr_name.startswith("$")
-                        ],
+                        attributes=profile_attributes(
+                            profile_data,
+                            compiled_with_extensions["profiles"][f"{extension_scope}/{profile_name}"],
+                        ),
                         object_links=extension_object_links,
                     )
                     if extra_sections:
