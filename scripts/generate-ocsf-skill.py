@@ -110,7 +110,16 @@ def _represent_list(dumper: yaml.Dumper, data: list) -> yaml.Node:
     return dumper.represent_sequence("tag:yaml.org,2002:seq", data, flow_style=flow)
 
 
+class Flow(dict):
+    """A mapping written on one line, so that a grep hit shows all of it."""
+
+
+def _represent_flow(dumper: yaml.Dumper, data: Flow) -> yaml.Node:
+    return dumper.represent_mapping("tag:yaml.org,2002:map", data, flow_style=True)
+
+
 _NoAliasSafeDumper.add_representer(str, _represent_str)
+_NoAliasSafeDumper.add_representer(Flow, _represent_flow)
 _NoAliasSafeDumper.add_representer(list, _represent_list)
 
 
@@ -422,12 +431,14 @@ def render_references(references: object) -> list[dict]:
 
 
 def render_enum(enum: dict) -> dict:
+    """Render enum values keyed by value. Numeric values become integer keys,
+    as TQL compares them, e.g. `activity_id == 1`."""
     items = list(enum.items())
     if all(re.fullmatch(r"-?\d+", key) for key, _ in items):
-        items.sort(key=lambda item: int(item[0]))
-    rendered: dict[str, dict] = {}
+        items = sorted(((int(key), value) for key, value in items), key=lambda item: item[0])
+    rendered: dict[int | str, dict] = {}
     for key, value in items:
-        entry: dict[str, Any] = {"caption": value.get("caption") or key}
+        entry: dict[str, Any] = {"caption": value.get("caption") or str(key)}
         set_if(entry, "description", clean_description(value.get("description", "")))
         set_if(entry, "deprecated", render_deprecation(value.get("@deprecated")))
         set_if(entry, "references", render_references(value.get("references")))
@@ -505,6 +516,11 @@ def item_profiles(item: dict) -> list[str]:
     return profiles
 
 
+# Attributes are listed by requirement, so the top of a file is the list of
+# attributes every event must set.
+REQUIREMENT_ORDER = {"required": 0, "recommended": 1, "optional": 2}
+
+
 def render_item(
     item: dict,
     *,
@@ -558,7 +574,14 @@ def render_item(
     if kind == "object" and patches is None:
         set_if(out, "referenced_by", render_links(item.get("_links"), with_attributes=True))
     compiled_attributes = item.get("attributes") or {}
-    names = attribute_names if attribute_names is not None else sorted(compiled_attributes)
+    names = attribute_names if attribute_names is not None else list(compiled_attributes)
+    names = sorted(
+        (attribute_name for attribute_name in names if attribute_name in compiled_attributes),
+        key=lambda attribute_name: (
+            REQUIREMENT_ORDER.get(compiled_attributes[attribute_name].get("requirement"), len(REQUIREMENT_ORDER)),
+            attribute_name,
+        ),
+    )
     out["attributes"] = {
         attribute_name: render_attribute(
             compiled_attributes[attribute_name],
@@ -567,8 +590,10 @@ def render_item(
             objects=objects,
         )
         for attribute_name in names
-        if attribute_name in compiled_attributes
     }
+    # `type_uid` is `class_uid * 100 + activity_id`; SKILL.md states the rule
+    # instead of listing every combination.
+    out["attributes"].get("type_uid", {}).pop("enum", None)
     return out
 
 
@@ -614,17 +639,22 @@ def render_patch(
     return out
 
 
-SHORT_ATTRIBUTE_FIELDS = ("caption", "requirement", "profile", "profiles")
-SHORT_ATTRIBUTE_NOTE = (
-    "# Attributes with a `definition` path are inherited unchanged. Read that file\n"
-    "# for their type, object, description, enum, and observable.\n"
+# Fields in which an inherited attribute may differ from its definition and
+# still count as unchanged.
+INHERITED_ATTRIBUTE_FIELDS = ("caption", "requirement", "profile", "profiles")
+# Larger enums keep one value per line instead of one long flow line.
+MAX_FLOW_ENUM_VALUES = 12
+INHERITED_ATTRIBUTE_NOTE = (
+    "# Attributes with `from` but no description are inherited unchanged. Their\n"
+    "# descriptions are in the file of the item that `from` names.\n"
 )
 
 
-def shorten_inherited_attributes(documents: dict, slug: str) -> None:
-    """Replace inherited attributes by a reference to the file that defines
-    them in full. An attribute stays complete when anything other than its
-    requirement differs from that definition, e.g. a narrowed enum."""
+def compact_inherited_attributes(documents: dict, slug: str) -> None:
+    """Write inherited attributes on one line without their descriptions,
+    which the defining item's file holds. An attribute stays complete when
+    anything other than its requirement differs from that definition, e.g.
+    a narrowed enum."""
     for path, document in documents.items():
         section = "classes" if "/classes/" in path else "objects" if "/objects/" in path else None
         if section is None or "patches" in document:
@@ -633,17 +663,27 @@ def shorten_inherited_attributes(documents: dict, slug: str) -> None:
             source = attribute.get("from")
             if source is None:
                 continue
-            definition = entity_path(slug, section, source)
-            defined = documents.get(definition, {}).get("attributes", {}).get(name)
+            defined = documents.get(entity_path(slug, section, source), {}).get("attributes", {}).get(name)
             if defined is None or "from" in defined:
                 continue
-            rest = {key: value for key, value in attribute.items() if key not in SHORT_ATTRIBUTE_FIELDS}
+            rest = {key: value for key, value in attribute.items() if key not in INHERITED_ATTRIBUTE_FIELDS}
             rest.pop("from")
-            if rest != {key: value for key, value in defined.items() if key not in SHORT_ATTRIBUTE_FIELDS}:
+            if rest != {key: value for key, value in defined.items() if key not in INHERITED_ATTRIBUTE_FIELDS}:
                 continue
-            short = {key: attribute[key] for key in SHORT_ATTRIBUTE_FIELDS if key in attribute}
-            short["definition"] = definition
-            document["attributes"][name] = short
+            compact = {
+                key: value
+                for key, value in attribute.items()
+                if key not in ("description", "references", "enum", "from")
+            }
+            enum = attribute.get("enum")
+            if enum:
+                captions = {key: value["caption"] for key, value in enum.items()}
+                compact["enum"] = Flow(captions) if len(captions) <= MAX_FLOW_ENUM_VALUES else captions
+            compact["from"] = source
+            if enum and len(enum) > MAX_FLOW_ENUM_VALUES:
+                document["attributes"][name] = compact
+            else:
+                document["attributes"][name] = Flow(compact)
 
 
 def render_types(compiled_types: dict, *, extension_types: dict) -> dict:
@@ -707,6 +747,14 @@ def index_entry(document: dict, *, path: str, extra: dict | None = None) -> dict
     if "deprecated" in document:
         entry["deprecated"] = True
     set_if(entry, "summary", summarize(document.get("description", "")))
+    if "uid" in document and not document.get("abstract"):
+        # Unknown (0) and Other (99) exist in every class.
+        enum = document["attributes"].get("activity_id", {}).get("enum", {})
+        set_if(
+            entry,
+            "activities",
+            Flow({key: value["caption"] for key, value in enum.items() if key not in (0, 99)}),
+        )
     entry["path"] = path
     return entry
 
@@ -849,7 +897,7 @@ def build_version(version: str, schema_dir: Path, *, ref: str, is_stable: bool) 
         )
     )
     object_index.sort(key=lambda entry: ("/" in entry["name"], entry["name"]))
-    shorten_inherited_attributes(documents, slug)
+    compact_inherited_attributes(documents, slug)
 
     documents[f"{slug}/categories.yaml"] = rendered_categories
     documents[f"{slug}/classes.yaml"] = {"classes": class_index}
@@ -919,11 +967,6 @@ def check_references(version_data: dict) -> None:
 
     def check_attributes(path: str, attributes: dict) -> None:
         for attribute_name, attribute in attributes.items():
-            if "definition" in attribute:
-                defined = documents.get(attribute["definition"], {}).get("attributes", {})
-                if "type" not in defined.get(attribute_name, {}):
-                    errors.append(f"{path}: `{attribute_name}` has no definition in {attribute['definition']}")
-                continue
             if "object" in attribute:
                 expect(path, "object", attribute["object"], objects)
             for profile in attribute.get("profiles", [attribute.get("profile")]):
@@ -1032,7 +1075,19 @@ def render_skill(version_lines: list[str], latest_slug: str) -> str:
         [
             "---",
             "name: tenzir-ocsf",
-            "description: Answer questions about OCSF (Open Cybersecurity Schema Framework). Use when the user asks about OCSF classes, objects, attributes, profiles, extensions, or event normalization.",
+            "description: >-",
+            "  Answer questions and produce mappings for the Open Cybersecurity Schema",
+            "  Framework (OCSF): event classes, categories, activities, objects,",
+            "  attributes, requirement levels, enum values, `class_uid`, `type_uid`,",
+            "  profiles, extensions, observables, and schema versions. Use when",
+            "  normalizing logs or security telemetry into OCSF, writing TQL mappings to",
+            "  OCSF, choosing an OCSF event class, or working with OCSF data such as",
+            "  Amazon Security Lake.",
+            "metadata:",
+            "  uses:",
+            "    skills:",
+            "      - name: tenzir",
+            "        when: writing TQL that maps events to OCSF",
             "---",
             "",
             "# OCSF",
@@ -1085,26 +1140,44 @@ def render_skill(version_lines: list[str], latest_slug: str) -> str:
             "| `patched_by: [linux]` | `{version}/extensions/linux/{classes or objects}/{same name}.yaml` |",
             "| `referenced_by`, `used_by`, `applies_to` | class names resolve like `extends` in a class, object names like `object` |",
             "",
+            "## Mapping rules",
+            "",
+            "Write OCSF mappings as TQL with the `tenzir` skill. Use this skill for the",
+            "schema decisions:",
+            "",
+            f"- Choose the version, then the class and its `activity_id` from `activities` in",
+            f"  `{latest_slug}/classes.yaml`, then the profiles the source supports.",
+            "- Set `class_uid`, `category_uid`, `activity_id`, `type_uid`, `severity_id`,",
+            "  `time`, `metadata.version`, and `metadata.product`. `type_uid` is",
+            "  `class_uid * 100 + activity_id`.",
+            "- List applied profiles in `metadata.profiles`, then fill the attributes those",
+            "  profiles add.",
+            "- Fill required attributes first, then recommended ones. Inside an object, its",
+            "  own requirement levels apply once you set the object. Satisfy `constraints`.",
+            "- Set `_id` attributes and leave their string siblings to `ocsf_derive`. For",
+            "  `99` (Other), set the sibling to the source value.",
+            "- Keep source fields without an OCSF target in `unmapped`.",
+            "- Finish with `ocsf_derive`, then `ocsf_cast`. The mapping is complete when",
+            "  `ocsf_cast` emits no warnings.",
+            "",
             "## Reading class and object files",
             "",
             "`attributes` lists every attribute of the class or object, including",
-            "inherited attributes and attributes added by profiles. An attribute that is",
-            "not listed is not part of that class or object.",
+            "inherited attributes and attributes added by profiles, ordered by",
+            "requirement: required, recommended, then optional. An attribute that is not",
+            "listed is not part of that class or object.",
             "",
-            "Inherited attributes that are unchanged from their parent list only `caption`,",
-            "`requirement`, `profile`, and a `definition` path. Read that path for the",
-            "attribute's type, object, description, enum, and observable. The requirement",
-            "in the class or object file is the one that applies there:",
+            "Inherited attributes that are unchanged from their parent omit their",
+            "description and take one line, unless they have a long enum. They carry",
+            "everything a mapping needs. The description is in the file of the item that",
+            "`from` names:",
             "",
             "```yaml",
-            "severity_id:",
-            "  caption: Severity ID",
-            "  requirement: required",
-            f"  definition: {latest_slug}/classes/base_event.yaml",
+            "severity_id: {caption: Severity ID, type: integer_t, requirement: required, group: classification, sibling: severity, enum: {0: Unknown, 1: Informational, 2: Low, 3: Medium, 4: High, 5: Critical, 6: Fatal, 99: Other}, from: base_event}",
             "```",
             "",
             "Attributes that change anything besides the requirement, such as `activity_id`",
-            "with class-specific enum values, are listed in full.",
+            "with class-specific enum values, are listed in full with descriptions.",
             "",
             "Top-level fields:",
             "",
@@ -1133,14 +1206,14 @@ def render_skill(version_lines: list[str], latest_slug: str) -> str:
             "  the object. `array: true` marks a list of values.",
             "- `profile`: the attribute belongs to that profile and is present only when the",
             "  profile is applied. Attributes without `profile` always belong to the item.",
-            "- `from`: the ancestor that defines a fully listed attribute. Attributes",
-            "  without `from` or `definition` are defined by the item itself.",
+            "- `from`: the ancestor that defines the attribute. Attributes without `from`",
+            "  are defined by the item itself.",
             "- `group` (classes): `classification`, `context`, `occurrence`, or `primary`.",
             "- `sibling`: the string attribute that carries the caption of this enum",
             "  attribute, e.g. `activity_name` for `activity_id`.",
             "- `observable`: the observable `type_id` for this attribute, from the",
             "  attribute itself, its data type, or its object.",
-            "- `enum`: the allowed values. Keys are the values, `caption` is the label the",
+            "- `enum`: the allowed values. Keys are the integer values, `caption` is the label the",
             "  sibling attribute takes.",
             "",
             "## Searching",
@@ -1151,13 +1224,14 @@ def render_skill(version_lines: list[str], latest_slug: str) -> str:
             f"- Find a class by keyword: `grep -n -i \"keyword\" {latest_slug}/classes.yaml`",
             f"- Look up an attribute everywhere: `grep -n -A 12 \"^src_endpoint:\" {latest_slug}/attributes.yaml`",
             f"- Jump to an attribute in a class: `grep -n -A 20 \"^  actor:\" {latest_slug}/classes/process_activity.yaml`",
-            f"- Follow a `definition`: `grep -n -A 30 \"^  severity_id:\" {latest_slug}/classes/base_event.yaml`",
+            f"- Read the description of an inherited attribute: `grep -n -A 30 \"^  severity_id:\" {latest_slug}/classes/base_event.yaml`",
             f"- Find classes that hold an object: read `referenced_by` in `{latest_slug}/objects/{{name}}.yaml`",
             "",
             "## Question routing",
             "",
             "| Question pattern | Start here |",
             "| --- | --- |",
+            "| How do I map source X to OCSF? | Mapping rules above → `classes.yaml` → the class file; the `tenzir` skill for TQL |",
             "| Which class fits event X? | Category table below → `classes.yaml` → candidate class files |",
             "| What attributes does class or object Y have? | `classes.yaml` or `objects.yaml` → the item's file |",
             "| Which values can enum attribute Z take? | The `enum` of Z in the class or object file |",
@@ -1214,8 +1288,8 @@ def render_skill(version_lines: list[str], latest_slug: str) -> str:
             "- Arrays use plural names: `answers`, `enrichments`, `attacks`.",
             "- When `_id` is `Other` (`99`), the sibling string **must** be populated with",
             "  the source value. For other values, the sibling takes the enum caption.",
-            "- `type_uid` is `class_uid * 100 + activity_id`. Class files list the",
-            "  resulting values in the `type_uid` enum.",
+            "- `type_uid` is `class_uid * 100 + activity_id`, e.g. `100701` for Process",
+            "  Activity: Launch.",
             "",
             "Key suffixes:",
             "",
@@ -1342,8 +1416,11 @@ def main() -> None:
         for data in version_docs:
             for path, document in data["documents"].items():
                 text = dump_yaml(document)
-                if any("definition" in attribute for attribute in document.get("attributes", {}).values()):
-                    text = SHORT_ATTRIBUTE_NOTE + text
+                if any(
+                    "from" in attribute and "description" not in attribute
+                    for attribute in document.get("attributes", {}).values()
+                ):
+                    text = INHERITED_ATTRIBUTE_NOTE + text
                 write_file(output_dir / path, text)
 
         print(f"Generated OCSF skill in {output_dir}")
