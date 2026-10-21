@@ -3,10 +3,23 @@
 The Network Endpoint object describes characteristics of a network endpoint. These can be a source or destination of a network connection.
 
 - **Extends**: [Endpoint (endpoint)](endpoint.md)
+- **Profiles**: [Container](../profiles/container.md)
+- **Observable**: `20`
 
 ## Constraints
 
 - **At least one of**: `ip`, `uid`, `name`, `hostname`, `svc_name`, `instance_uid`, `interface_uid`, `interface_name`, `domain`
+
+## Inherited attributes
+
+**From Endpoint:**
+- `hostname` (recommended)
+- `instance_uid` (recommended)
+- `interface_name` (recommended)
+- `interface_uid` (recommended)
+- `ip` (recommended)
+- `name` (recommended)
+- `owner` (recommended)
 
 ## Attributes
 
@@ -91,17 +104,34 @@ The service name in service-to-service connections. For example, AWS VPC logs th
 ### `type`
 
 - **Type**: `string_t`
+- **Requirement**: optional
 
 The network endpoint type. For example: `unknown`, `server`, `desktop`, `laptop`, `tablet`, `mobile`, `virtual`, `browser`, or `other`.
 
 ### `type_id`
 
 - **Type**: `integer_t`
+- **Requirement**: recommended
 - **Sibling**: `type`
 
 #### Enum values
 
 - `0`: `Unknown` - The type is unknown.
+- `1`: `Server`
+- `2`: `Desktop`
+- `3`: `Laptop`
+- `4`: `Tablet`
+- `5`: `Mobile`
+- `6`: `Virtual`
+- `7`: `IOT`
+- `8`: `Browser`
+- `9`: `Firewall`
+- `10`: `Switch`
+- `11`: `Hub`
+- `12`: `Router`
+- `13`: `IDS`
+- `14`: `IPS`
+- `15`: `Load Balancer`
 - `99`: `Other` - The type is not mapped. See the `type` attribute, which contains a data source specific value.
 
 The network endpoint type ID.
@@ -109,6 +139,7 @@ The network endpoint type ID.
 ### `uid`
 
 - **Type**: `string_t`
+- **Requirement**: recommended
 - **Observable**: 48
 
-The unique identifier. See specific usage.
+The unique identifier of the endpoint.

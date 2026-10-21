@@ -39,10 +39,10 @@ The linked ticket type determines whether the ticket is internal or in an extern
 
 #### Enum values
 
-- `0`: `Unknown`
+- `0`: `Unknown` - The type is unknown.
 - `1`: `Internal`
 - `2`: `External`
-- `99`: `Other`
+- `99`: `Other` - The type is not mapped. See the `type` attribute, which contains a data source specific value.
 
 The normalized identifier for the ticket type.
 

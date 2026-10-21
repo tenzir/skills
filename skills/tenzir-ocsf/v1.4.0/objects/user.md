@@ -3,6 +3,7 @@
 The User object describes the characteristics of a user/person or a security principal.
 
 - **Extends**: [Entity (_entity)](_entity.md)
+- **Observable**: `21`
 
 ## Constraints
 
@@ -141,11 +142,11 @@ The type of the user. For example, System, AWS IAM User, etc.
 
 #### Enum values
 
-- `0`: `Unknown`
+- `0`: `Unknown` - The type is unknown.
 - `1`: `User` - Regular user account.
 - `2`: `Admin` - Admin/root user account.
 - `3`: `System` - System account. For example, Windows computer accounts with a trailing dollar sign ($).
-- `99`: `Other`
+- `99`: `Other` - The type is not mapped. See the `type` attribute, which contains a data source specific value.
 
 The account type identifier.
 

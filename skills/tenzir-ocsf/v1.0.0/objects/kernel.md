@@ -49,7 +49,9 @@ The type of the kernel resource.
 
 #### Enum values
 
+- `0`: `Unknown` - The type is unknown.
 - `1`: `Shared Mutex`
 - `2`: `System Call`
+- `99`: `Other` - The type is not mapped. See the `type` attribute, which may contain a data source specific value.
 
 The type of the kernel resource.

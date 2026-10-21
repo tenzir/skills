@@ -7,6 +7,7 @@ This profile defines date/time attributes as defined in RFC-3339. For example 19
 
 - Account Change
 - Admin Group Query
+- Advisory (object)
 - Airborne Broadcast Activity
 - API Activity
 - Application Activity
@@ -14,17 +15,24 @@ This profile defines date/time attributes as defined in RFC-3339. For example 19
 - Application Lifecycle
 - Application Security Posture Finding
 - Authentication
+- Authentication Token (object)
 - Authorize Session
 - Base Event
 - Cloud Resources Inventory Info
 - Compliance Finding
+- CVE (object)
 - Data Security Finding
+- Database (object)
+- Databucket (object)
 - Datastore Activity
 - Detection Finding
+- Device (object)
 - Device Config State
 - Device Config State Change
 - Device Inventory Info
 - DHCP Activity
+- Digital Certificate (object)
+- Digital Signature (object)
 - Discovery
 - Discovery Result
 - DNS Activity
@@ -32,25 +40,37 @@ This profile defines date/time attributes as defined in RFC-3339. For example 19
 - Email Activity
 - Email File Activity
 - Email URL Activity
+- Enrichment (object)
 - Entity Management
+- EPSS (object)
 - Event Log Activity
+- File (object)
 - File Hosting Activity
 - File Query
 - File Remediation Activity
 - File System Activity
 - Finding
+- Finding (object)
+- Finding Information (object)
 - Folder Query
 - FTP Activity
 - Group Management
 - HTTP Activity
+- HTTP Cookie (object)
 - Identity & Access Management
 - Incident Finding
+- Job (object)
 - Job Query
+- KB Article (object)
 - Kernel Activity
 - Kernel Extension Activity
 - Kernel Object Query
+- LDAP Person (object)
 - Live Evidence Info
+- Logger (object)
+- Malware Scan Info (object)
 - Memory Activity
+- Metadata (object)
 - Module Activity
 - Module Query
 - Network
@@ -61,29 +81,48 @@ This profile defines date/time attributes as defined in RFC-3339. For example 19
 - Networks Query
 - NTP Activity
 - Operating System Patch State
+- OSINT (object)
 - OSINT Inventory Info
 - Peripheral Device Query
+- Process (object)
 - Process Activity
+- Process Entity (object)
 - Process Query
 - Process Remediation Activity
+- Query Information (object)
 - RDP Activity
+- Related Event/Finding (object)
 - Remediation Activity
+- Resource Details (object)
 - Scan Activity
 - Scheduled Job Activity
+- SCIM (object)
 - Script Activity
 - Security Finding
 - Service Query
+- Session (object)
 - SMB Activity
+- Software Bill of Materials (object)
 - Software Inventory Info
+- Span (object)
 - SSH Activity
+- SSO (object)
 - Startup Item Query
 - System Activity
+- Table (object)
+- Time Span (object)
+- Trace (object)
+- Transformation Info (object)
 - Tunnel Activity
+- Unmanned System Operating Area (object)
 - Unmanned Systems
 - User Access Management
 - User Inventory Info
 - User Query
 - User Session Query
+- Vulnerability Details (object)
 - Vulnerability Finding
+- Web Resource (object)
 - Web Resource Access Activity
 - Web Resources Activity
+- WHOIS (object)

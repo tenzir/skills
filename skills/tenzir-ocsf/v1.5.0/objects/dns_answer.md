@@ -4,6 +4,11 @@ The DNS Answer object represents a specific response provided by the Domain Name
 
 - **Extends**: [DNS (_dns)](_dns.md)
 
+## Inherited attributes
+
+**From DNS:**
+- `packet_uid` (recommended)
+
 ## Attributes
 
 ### `class`
@@ -21,12 +26,14 @@ The class of DNS data contained in this resource record. See [RFC1035](https://w
 
 #### Enum values
 
+- `0`: `Unknown` - The flag is unknown.
 - `1`: `Authoritative Answer`
 - `2`: `Truncated Response`
 - `3`: `Recursion Desired`
 - `4`: `Recursion Available`
 - `5`: `Authentic Data`
 - `6`: `Checking Disabled`
+- `99`: `Other` - The flag is not mapped. See the `flags` attribute, which contains a data source specific value.
 
 The list of DNS answer header flag IDs.
 

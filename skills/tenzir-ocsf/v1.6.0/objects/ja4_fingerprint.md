@@ -49,7 +49,7 @@ The JA4+ fingerprint type as defined by [FoxIO](https://blog.foxio.io/ja4+-netwo
 
 #### Enum values
 
-- `0`: `Unknown`
+- `0`: `Unknown` - The type is unknown.
 - `1`: `JA4` - TLS Client Fingerprint.
 - `2`: `JA4Server` - TLS Server Response/Session Fingerprint.
 - `3`: `JA4HTTP` - HTTP Client Fingerprint.
@@ -59,7 +59,7 @@ The JA4+ fingerprint type as defined by [FoxIO](https://blog.foxio.io/ja4+-netwo
 - `7`: `JA4TCP` - Passive TCP Client Fingerprint.
 - `8`: `JA4TCPServer` - Passive TCP Server Fingerprint.
 - `9`: `JA4TCPScan` - Active TCP Server Fingerprint.
-- `99`: `Other`
+- `99`: `Other` - The type is not mapped. See the `type` attribute, which contains a data source specific value.
 
 The identifier of the JA4+ fingerprint type.
 

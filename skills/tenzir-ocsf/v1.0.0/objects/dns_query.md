@@ -4,6 +4,13 @@ The DNS query object represents a specific request made to the Domain Name Syste
 
 - **Extends**: [DNS (_dns)](_dns.md)
 
+## Inherited attributes
+
+**From DNS:**
+- `class` (required)
+- `type` (required)
+- `packet_uid` (recommended)
+
 ## Attributes
 
 ### `hostname`

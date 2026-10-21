@@ -2,6 +2,18 @@
 
 The attributes that describe information specific to data classification.
 
+## Applies to
+
+- Database (object)
+- Databucket (object)
+- Email (object)
+- File (object)
+- Metadata (object)
+- Product (object)
+- Resource (object)
+- Resource Details (object)
+- Web Resource (object)
+
 ## Attributes
 
 ### `data_classification`

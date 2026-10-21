@@ -3,6 +3,8 @@
 The File object represents the metadata associated with a file stored in a computer system. It encompasses information about the file itself, including its attributes, properties, and organizational details.
 
 - **Extends**: [Entity (_entity)](_entity.md)
+- **Profiles**: [Data Classification](../profiles/data_classification.md), [Cloud](../profiles/cloud.md), [Date/Time](../profiles/datetime.md)
+- **Observable**: `24`
 
 ## Attributes
 
@@ -268,7 +270,7 @@ The file type.
 
 #### Enum values
 
-- `0`: `Unknown`
+- `0`: `Unknown` - The type is unknown.
 - `1`: `Regular File`
 - `2`: `Folder`
 - `3`: `Character Device`
@@ -276,7 +278,7 @@ The file type.
 - `5`: `Local Socket`
 - `6`: `Named Pipe`
 - `7`: `Symbolic Link`
-- `99`: `Other`
+- `99`: `Other` - The type is not mapped. See the `type` attribute, which contains a data source specific value.
 
 The file type ID.
 

@@ -15,8 +15,8 @@ The base event is a generic and concrete event. It also defines a set of attribu
 
 #### Enum values
 
-- `0`: `Unknown`
-- `99`: `Other`
+- `0`: `Unknown` - The event activity is unknown.
+- `99`: `Other` - The event activity is not mapped. See the `activity_name` attribute, which contains a data source specific value.
 
 The normalized identifier of the activity that triggered the event. Each event class defines its own set of activity values. Use `0` (Unknown) when the activity cannot be determined. Use `99` (Other) when the activity does not match any defined value, in which case `activity_name` must be populated with the source-specific label.
 
@@ -55,7 +55,7 @@ The category unique identifier of the event. Each event class belongs to exactly
 - **Requirement**: optional
 - **Group**: classification
 
-The event class name, as defined by the `class_uid` value. The value must match the caption defined for the corresponding `class_uid` (e.g., `"Detection Finding"` for `class_uid: 2004`).
+The event class name, as defined by class_uid value: `Base Event`.
 
 ### `class_uid`
 
@@ -66,7 +66,7 @@ The event class name, as defined by the `class_uid` value. The value must match 
 
 #### Enum values
 
-- `0`: `Base Event`
+- `0`: `Base Event` - The base event is a generic and concrete event. It also defines a set of attributes available in most event classes. As a generic event that does not belong to any event category, it could be used to log events that are not otherwise defined by the schema.
 
 The unique identifier of a class. A class describes the attributes available in an event. Producers and mappers must set this to the `uid` defined in the event class definition. For example, `Detection Finding` is `2004`.
 
@@ -221,8 +221,10 @@ A human-readable description providing additional context about the event outcom
 
 #### Enum values
 
+- `0`: `Unknown` - The status is unknown.
 - `1`: `Success` - The activity completed successfully.
 - `2`: `Failure` - The activity failed.
+- `99`: `Other` - The status is not mapped. See the `status` attribute, which contains a data source specific value.
 
 The normalized status of the event outcome. Use this family of attributes to convey the outcome of the activity described by the event. Producers should map their source outcome to `1` (Success) or `2` (Failure). Use `0` (Unknown) when the outcome cannot be determined, and `99` (Other) with a populated `status` string when the source value does not map cleanly.
 
@@ -256,6 +258,11 @@ The event/finding type name, combining the class and activity (e.g., `"Detection
 - **Requirement**: required
 - **Group**: classification
 - **Sibling**: `type_name`
+
+#### Enum values
+
+- `0`: `Base Event: Unknown`
+- `99`: `Base Event: Other`
 
 The event/finding type ID. It identifies the event's semantics and structure. Producers and mappers must compute this as `class_uid * 100 + activity_id`. It uniquely identifies the combination of event class and activity across the entire schema. For example, `Detection Finding: Create` is `200401`.
 

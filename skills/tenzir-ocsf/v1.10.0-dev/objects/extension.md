@@ -13,12 +13,14 @@ The OCSF Schema Extension object provides detailed information about the schema 
 ### `name`
 
 - **Type**: `string_t`
+- **Requirement**: recommended
 
 The schema extension name. For example: `dev`.
 
 ### `uid`
 
 - **Type**: `string_t`
+- **Requirement**: recommended
 
 The schema extension unique identifier. For example: `999`.
 

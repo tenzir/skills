@@ -20,6 +20,7 @@ The string detailing the attributes of the resource object.
 ### `name`
 
 - **Type**: `string_t`
+- **Requirement**: recommended
 
 The name of the resource object.
 
@@ -96,6 +97,7 @@ The normalized type identifier of the Windows resource object accessed.
 
 ### `uid`
 
-- **Type**: `string_t`
+- **Type**: `resource_uid_t`
+- **Requirement**: recommended
 
 The Windows provided handle identifier for the resource object

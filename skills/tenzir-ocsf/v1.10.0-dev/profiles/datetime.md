@@ -7,26 +7,36 @@ When applied, this profile adds a sibling attribute of data type `datetime_t` (R
 
 - Account Change
 - Admin Group Query
+- Advisory (object)
 - Airborne Broadcast Activity
 - API Activity
+- Application (object)
 - Application Activity
 - Application Error
 - Application Lifecycle
 - Application Security Posture Finding
 - Authentication
+- Authentication Token (object)
 - Authorize Session
 - Base Event
 - Clipboard Activity
 - Cloud Resources Inventory Info
 - Compliance Finding
+- CVE (object)
 - Data Security Finding
+- Database (object)
+- Databucket (object)
 - Datastore Activity
+- Delegation (object)
 - Detection Finding
+- Device (object)
 - Device Config State
 - Device Config State Change
 - Device Inventory Info
 - Device Power State Activity
 - DHCP Activity
+- Digital Certificate (object)
+- Digital Signature (object)
 - Discovery
 - Discovery Result
 - DNS Activity
@@ -35,26 +45,40 @@ When applied, this profile adds a sibling attribute of data type `datetime_t` (R
 - Email Activity
 - Email File Activity
 - Email URL Activity
+- Enrichment (object)
 - Entity Management
+- EPSS (object)
 - Event Log Activity
+- File (object)
 - File Hosting Activity
 - File Query
 - File Remediation Activity
 - File System Activity
 - Finding
+- Finding (object)
+- Finding Information (object)
 - Folder Query
 - FTP Activity
 - Group Management
 - HTTP Activity
+- HTTP Cookie (object)
 - IAM Analysis Finding
 - Identity & Access Management
+- Identity Activity Metrics (object)
 - Incident Finding
+- Job (object)
 - Job Query
+- Job Trigger (object)
+- KB Article (object)
 - Kernel Activity
 - Kernel Extension Activity
 - Kernel Object Query
+- LDAP Person (object)
 - Live Evidence Info
+- Logger (object)
+- Malware Scan Info (object)
 - Memory Activity
+- Metadata (object)
 - Module Activity
 - Module Query
 - Network
@@ -62,35 +86,60 @@ When applied, this profile adds a sibling attribute of data type `datetime_t` (R
 - Network Connection Query
 - Network File Activity
 - Network Remediation Activity
+- Network Traffic (object)
 - Networks Query
+- Note (object)
 - NTP Activity
 - Operating System Patch State
+- OSINT (object)
 - OSINT Inventory Info
 - Peripheral Activity
 - Peripheral Device Query
+- Privilege Info (object)
+- Process (object)
 - Process Activity
+- Process Entity (object)
 - Process Query
 - Process Remediation Activity
+- Programmatic Credential (object)
+- Query Information (object)
 - RDP Activity
+- Related Event/Finding (object)
 - Remediation Activity
+- Resource Details (object)
 - Role Management
 - Scan Activity
 - Scheduled Job Activity
+- SCIM (object)
 - Script Activity
 - Security Finding
+- Service Privilege Analysis (object)
 - Service Query
+- Session (object)
 - SMB Activity
+- Software Bill of Materials (object)
 - Software Inventory Info
+- Span (object)
 - SSH Activity
+- SSO (object)
 - Startup Item Query
 - System Activity
+- Table (object)
+- Time Span (object)
+- Token (object)
+- Trace (object)
+- Transformation Info (object)
 - Tunnel Activity
+- Unmanned System Operating Area (object)
 - Unmanned Systems
 - User Access Management
 - User Inventory Info
 - User Management
 - User Query
 - User Session Query
+- Vulnerability Details (object)
 - Vulnerability Finding
+- Web Resource (object)
 - Web Resource Access Activity
 - Web Resources Activity
+- WHOIS (object)

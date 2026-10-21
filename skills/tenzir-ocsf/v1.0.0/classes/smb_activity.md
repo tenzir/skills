@@ -9,27 +9,39 @@ Server Message Block (SMB) Protocol Activity events report client/server connect
 
 ## Inherited attributes
 
+**From Network Activity:**
+- `dst_endpoint` (required)
+- `src_endpoint` (required)
+- `connection_info` (recommended)
+
 **From Base Event:**
+- `category_uid` (required)
 - `metadata` (required)
 - `severity_id` (required)
+- `time` (required)
 - `message` (recommended)
 - `status_id` (recommended)
+- `timezone_offset` (recommended)
 
 ## Attributes
 
 ### `activity_id`
 
 - **Type**: `integer_t`
+- **Requirement**: required
+- **Group**: classification
 - **Sibling**: `activity_name`
 
 #### Enum values
 
+- `0`: `Unknown` - The event activity is unknown.
 - `1`: `File Supersede` - The event pertains to file superseded activity (overwritten if it exists and created if not).
 - `2`: `File Open` - The event pertains to file open activity (the file is opened if it exists and fails to open if it doesn't).
 - `3`: `File Create` - The event pertains to file creation activity (a file is created if it does not exist and fails if it does).
 - `4`: `File Open If` - The event pertains to file open activity (the file is opened if it exists and is created if it doesn't).
 - `5`: `File Overwrite` - The event pertains to file overwrite activity (the file is opened in a truncated form if it exists and fails if it doesn't).
 - `6`: `File Overwrite If` - The event pertains to file overwrite activity (the file is opened in a truncated form if it exists and created otherwise)
+- `99`: `Other` - The event activity is not mapped.
 
 The normalized identifier of the activity that triggered the event.
 
@@ -114,11 +126,11 @@ The SMB share type, normalized to the caption of the share_type_id value. In the
 
 #### Enum values
 
-- `99`: `Other` - The share type is not mapped.
 - `0`: `Unknown` - The share type is not known.
 - `1`: `File`
 - `2`: `Pipe`
 - `3`: `Print`
+- `99`: `Other` - The share type is not mapped.
 
 The normalized identifier of the SMB share type.
 
@@ -129,3 +141,36 @@ The normalized identifier of the SMB share type.
 - **Group**: primary
 
 The tree id is a unique SMB identifier which represents an open connection to a share.
+
+### `class_uid`
+
+- **Type**: `integer_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `class_name`
+
+#### Enum values
+
+- `4006`: `SMB Activity` - Server Message Block (SMB) Protocol Activity events report client/server connections sharing resources within the network.
+
+The unique identifier of a class. A Class describes the attributes available in an event.
+
+### `type_uid`
+
+- **Type**: `integer_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `type_name`
+
+#### Enum values
+
+- `400600`: `SMB Activity: Unknown`
+- `400601`: `SMB Activity: File Supersede` - The event pertains to file superseded activity (overwritten if it exists and created if not).
+- `400602`: `SMB Activity: File Open` - The event pertains to file open activity (the file is opened if it exists and fails to open if it doesn't).
+- `400603`: `SMB Activity: File Create` - The event pertains to file creation activity (a file is created if it does not exist and fails if it does).
+- `400604`: `SMB Activity: File Open If` - The event pertains to file open activity (the file is opened if it exists and is created if it doesn't).
+- `400605`: `SMB Activity: File Overwrite` - The event pertains to file overwrite activity (the file is opened in a truncated form if it exists and fails if it doesn't).
+- `400606`: `SMB Activity: File Overwrite If` - The event pertains to file overwrite activity (the file is opened in a truncated form if it exists and created otherwise)
+- `400699`: `SMB Activity: Other`
+
+The event type ID. It identifies the event's semantics and structure. The value is calculated by the logging system as: `class_uid * 100 + activity_id`.

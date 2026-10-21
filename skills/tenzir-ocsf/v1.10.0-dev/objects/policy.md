@@ -43,6 +43,7 @@ A determination if the content of a policy was applied to a target or request, o
 ### `name`
 
 - **Type**: `string_t`
+- **Requirement**: recommended
 
 The policy name. For example: `AdministratorAccess Policy`.
 
@@ -56,6 +57,7 @@ The policy type. For example: `Identity Policy, Resource Policy, Service Control
 ### `uid`
 
 - **Type**: `string_t`
+- **Requirement**: recommended
 
 A unique identifier of the policy instance.
 

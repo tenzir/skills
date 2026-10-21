@@ -5,6 +5,7 @@ The Time Span object represents different time period durations. If a timespan i
 A timespan may also be defined by its time interval boundaries, `start_time` and `end_time`.
 
 - **Extends**: [Object (object)](object.md)
+- **Profiles**: [Date/Time](../profiles/datetime.md)
 
 ## Constraints
 
@@ -97,7 +98,7 @@ The type of time span duration the object represents.
 
 #### Enum values
 
-- `0`: `Unknown`
+- `0`: `Unknown` - The type is unknown.
 - `1`: `Milliseconds`
 - `2`: `Seconds`
 - `3`: `Minutes`
@@ -107,6 +108,6 @@ The type of time span duration the object represents.
 - `7`: `Months`
 - `8`: `Years`
 - `9`: `Time Interval` - The `start_time` and `end_time` should be set.
-- `99`: `Other`
+- `99`: `Other` - The type is not mapped. See the `type` attribute, which contains a data source specific value.
 
 The normalized identifier for the time span duration type.

@@ -20,11 +20,9 @@ Drone Flights Activity events report the activity of Unmanned Aerial Systems (UA
 
 **From Base Event:**
 - `category_uid` (required)
-- `class_uid` (required)
 - `metadata` (required)
 - `severity_id` (required)
 - `time` (required)
-- `type_uid` (required)
 - `message` (recommended)
 - `observables` (recommended)
 - `status_code` (recommended)
@@ -75,6 +73,10 @@ The authentication type as defined by the caption of `auth_protocol_id`. In the 
 - `6`: `Specific Authentication Method`
 - `7`: `Reserved`
 - `8`: `Private User`
+- `9`: `EAP`
+- `10`: `RADIUS`
+- `11`: `Basic Authentication`
+- `12`: `LDAP`
 - `99`: `Other` - The authentication type is not mapped. See the `auth_protocol` attribute, which contains a data source specific value.
 
 The normalized identifier of the authentication type used to authorize a flight plan or mission.
@@ -109,7 +111,7 @@ The networking protocol associated with the Remote ID device or beacon. E.g. `BL
 - **Requirement**: optional
 - **Group**: context
 
-The network source endpoint.
+The source network endpoint of the Unmanned Aerial System (UAS), Counter Unmanned Aerial System (CUAS) platform, or other unmanned systems monitoring and/or sensing infrastructure.
 
 ### `status`
 
@@ -128,12 +130,14 @@ The normalized Operational status for the Unmanned Aerial System (UAS) normalize
 
 #### Enum values
 
+- `0`: `Unknown` - The status is unknown.
 - `1`: `Undeclared` - The operational status is not reported.
 - `2`: `Ground` - The Unmanned Aerial System (UAS) is grounded.
 - `3`: `Airborne` - The Unmanned Aerial System (UAS) is airborne.
 - `4`: `Emergency` - The Unmanned Aerial System (UAS) is reporting an emergency status.
 - `5`: `Remote ID System Failure` - The Unmanned Aerial System (UAS) is reporting the Remote ID beacon or device is malfunctioning or has failed.
 - `6`: `Reserved` - An ASTM Reserved status is reported.
+- `99`: `Other` - The event status is not mapped. See the `status` attribute, which contains a data source specific value.
 
 The normalized Operational status identifier for the Unmanned Aerial System (UAS).
 
@@ -168,3 +172,32 @@ The UAS Operating Area object describes details about a precise area of operatio
 - **Group**: primary
 
 The human or machine operator of an Unmanned System.
+
+### `class_uid`
+
+- **Type**: `integer_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `class_name`
+
+#### Enum values
+
+- `8001`: `Drone Flights Activity` - Drone Flights Activity events report the activity of Unmanned Aerial Systems (UAS), their Operators, and mission-planning and authorization metadata as reported by the UAS platforms themselves, by Counter-UAS (CUAS) systems, or other remote monitoring or sensing infrastructure. Based on the Remote ID defined in Standard Specification for Remote ID and Tracking (ASTM Designation: F3411-22a) [ASTM F3411-22a](https://cdn.standards.iteh.ai/samples/112830/71297057ac42432880a203654f213709/ASTM-F3411-22a.pdf)
+
+The unique identifier of a class. A class describes the attributes available in an event.
+
+### `type_uid`
+
+- **Type**: `long_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `type_name`
+
+#### Enum values
+
+- `800100`: `Drone Flights Activity: Unknown`
+- `800101`: `Drone Flights Activity: Capture` - Remote ID information from an Unmanned System is being captured (collected).
+- `800102`: `Drone Flights Activity: Record` - Unmanned System activity is being recorded.
+- `800199`: `Drone Flights Activity: Other` - The event activity is not mapped. See the `activity_name` attribute, which contains a data source specific value.
+
+The event/finding type ID. It identifies the event's semantics and structure. The value is calculated by the logging system as: `class_uid * 100 + activity_id`.

@@ -48,6 +48,7 @@ The detailed geographical location usually associated with an IP address.
 ### `name`
 
 - **Type**: `string_t`
+- **Requirement**: recommended
 
 The name of the managed entity. It should match the name of the specific entity object's name if populated, or the name of the managed entity if the `type_id` is 'Other'.
 
@@ -80,6 +81,7 @@ The managed entity type. For example: `Policy`, `User`, `Organization`, `Device`
 
 #### Enum values
 
+- `0`: `Unknown` - The type is unknown.
 - `1`: `Device` - A managed Device entity. This item corresponds to population of the `device` attribute.
 - `2`: `User` - A managed User entity. This item corresponds to population of the `user` attribute.
 - `3`: `Group` - A managed Group entity. This item corresponds to population of the `group` attribute.
@@ -87,12 +89,14 @@ The managed entity type. For example: `Policy`, `User`, `Organization`, `Device`
 - `5`: `Policy` - A managed Policy entity. This item corresponds to population of the `policy` attribute.
 - `6`: `Email` - A managed Email entity. This item corresponds to population of the `email` attribute.
 - `7`: `Network Zone` - A managed Network Zone entity. Populate the `name` attribute with the zone name and/or the `uid` attribute with the zone ID. Additional zone information can be added to the `data` attribute.
+- `99`: `Other` - The type is not mapped. See the `type` attribute, which contains a data source specific value.
 
 The type of the Managed Entity. It is recommended to also populate the `type` attribute with the associated label, or the source specific name if `Other`.
 
 ### `uid`
 
 - **Type**: `string_t`
+- **Requirement**: recommended
 
 The identifier of the managed entity. It should match the `uid` of the specific entity's object UID if populated, or the source specific ID if the `type_id` is 'Other'.
 

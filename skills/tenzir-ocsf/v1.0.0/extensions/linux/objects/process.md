@@ -15,6 +15,8 @@ Extends the process object to add Linux specific fields
 - `cmd_line` (recommended)
 - `created_time` (recommended)
 - `file` (recommended)
+- `name` (recommended)
 - `parent_process` (recommended)
 - `pid` (recommended)
+- `uid` (recommended)
 - `user` (recommended)

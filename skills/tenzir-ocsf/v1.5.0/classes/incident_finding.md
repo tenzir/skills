@@ -16,11 +16,9 @@ Note: `Incident Finding` implicitly includes the `incident` profile and it shoul
 
 **From Base Event:**
 - `category_uid` (required)
-- `class_uid` (required)
 - `metadata` (required)
 - `severity_id` (required)
 - `time` (required)
-- `type_uid` (required)
 - `message` (recommended)
 - `observables` (recommended)
 - `status_code` (recommended)
@@ -33,13 +31,16 @@ Note: `Incident Finding` implicitly includes the `incident` profile and it shoul
 
 - **Type**: `integer_t`
 - **Requirement**: required
+- **Group**: classification
 - **Sibling**: `activity_name`
 
 #### Enum values
 
+- `0`: `Unknown` - The event activity is unknown.
 - `1`: `Create` - Reports the creation of an Incident.
 - `2`: `Update` - Reports updates to an Incident.
 - `3`: `Close` - Reports closure of an Incident .
+- `99`: `Other` - The event activity is not mapped. See the `activity_name` attribute, which contains a data source specific value.
 
 The normalized identifier of the Incident activity.
 
@@ -47,6 +48,7 @@ The normalized identifier of the Incident activity.
 
 - **Type**: `string_t`
 - **Requirement**: optional
+- **Group**: classification
 
 The Incident activity name, as defined by the `activity_id`.
 
@@ -127,6 +129,7 @@ The short description of the Incident.
 
 - **Type**: `timestamp_t`
 - **Requirement**: optional
+- **Group**: occurrence
 
 The time of the most recent event included in the incident.
 
@@ -218,6 +221,7 @@ A Url link used to access the original incident.
 
 - **Type**: `timestamp_t`
 - **Requirement**: optional
+- **Group**: occurrence
 
 The time of the least recent event included in the incident.
 
@@ -238,11 +242,13 @@ The normalized status of the Incident normalized to the caption of the status_id
 
 #### Enum values
 
+- `0`: `Unknown` - The status is unknown.
 - `1`: `New` - The service desk has received the incident but has not assigned it to an agent.
 - `2`: `In Progress` - The incident has been assigned to an agent but has not been resolved. The agent is actively working with the user to diagnose and resolve the incident.
 - `3`: `On Hold` - The incident requires some information or response from the user or from a third party.
 - `4`: `Resolved` - The service desk has confirmed that the incident is resolved.
 - `5`: `Closed` - The incident is resolved and no further action is necessary.
+- `99`: `Other` - The event status is not mapped. See the `status` attribute, which contains a data source specific value.
 
 The normalized status identifier of the Incident.
 
@@ -303,3 +309,33 @@ The verdict assigned to an Incident finding.
 - `99`: `Other` - The type is not mapped. See the `type` attribute, which contains a data source specific value.
 
 The normalized verdict of an Incident.
+
+### `class_uid`
+
+- **Type**: `integer_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `class_name`
+
+#### Enum values
+
+- `2005`: `Incident Finding` - An Incident Finding reports the creation, update, or closure of security incidents as a result of detections and/or analytics. Note: `Incident Finding` implicitly includes the `incident` profile and it should be added to the `metadata.profiles[]` array.
+
+The unique identifier of a class. A class describes the attributes available in an event.
+
+### `type_uid`
+
+- **Type**: `long_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `type_name`
+
+#### Enum values
+
+- `200500`: `Incident Finding: Unknown`
+- `200501`: `Incident Finding: Create` - Reports the creation of an Incident.
+- `200502`: `Incident Finding: Update` - Reports updates to an Incident.
+- `200503`: `Incident Finding: Close` - Reports closure of an Incident .
+- `200599`: `Incident Finding: Other`
+
+The event/finding type ID. It identifies the event's semantics and structure. The value is calculated by the logging system as: `class_uid * 100 + activity_id`.

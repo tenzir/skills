@@ -17,9 +17,9 @@ System Activity events.
 
 Findings events report findings, detections, and possible resolutions of malware, anomalies, or other actions performed by security products.
 
+- [Finding (finding)](classes/finding.md) [base class]
 - [Compliance Finding](classes/compliance_finding.md)
 - [Detection Finding](classes/detection_finding.md)
-- [Finding](classes/finding.md)
 - [Incident Finding](classes/incident_finding.md)
 - [Security Finding](classes/security_finding.md)
 - [Vulnerability Finding](classes/vulnerability_finding.md)
@@ -60,10 +60,10 @@ Network Activity events.
 Discovery events report the existence and state of devices, files, configurations, processes, registry keys, and other objects.
 
 - [Discovery (discovery)](classes/discovery.md) [base class]
+- [Discovery Result (discovery_result)](classes/discovery_result.md) [base class]
 - [Device Config State](classes/config_state.md)
 - [Device Config State Change](classes/device_config_state_change.md)
 - [Device Inventory Info](classes/inventory_info.md)
-- [Discovery Result](classes/discovery_result.md)
 - [Operating System Patch State](classes/patch_state.md)
 - [User Inventory Info](classes/user_inventory.md)
 

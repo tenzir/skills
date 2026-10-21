@@ -22,11 +22,9 @@ The Network Time Protocol (NTP) Activity events report instances of remote clien
 
 **From Base Event:**
 - `category_uid` (required)
-- `class_uid` (required)
 - `metadata` (required)
 - `severity_id` (required)
 - `time` (required)
-- `type_uid` (required)
 - `message` (recommended)
 - `observables` (recommended)
 - `status` (recommended)
@@ -40,6 +38,8 @@ The Network Time Protocol (NTP) Activity events report instances of remote clien
 ### `activity_id`
 
 - **Type**: `integer_t`
+- **Requirement**: required
+- **Group**: classification
 - **Sibling**: `activity_name`
 
 #### Enum values
@@ -113,3 +113,37 @@ The normalized identifier of the stratum level of an NTP server's time source, a
 - **Group**: context
 
 The version number of the NTP protocol.
+
+### `class_uid`
+
+- **Type**: `integer_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `class_name`
+
+#### Enum values
+
+- `4013`: `NTP Activity` - The Network Time Protocol (NTP) Activity events report instances of remote clients synchronizing their clocks with an NTP server, as observed on the network.
+
+The unique identifier of a class. A class describes the attributes available in an event. Producers and mappers must set this to the `uid` defined in the event class definition. For example, `Detection Finding` is `2004`.
+
+### `type_uid`
+
+- **Type**: `long_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `type_name`
+
+#### Enum values
+
+- `401300`: `NTP Activity: Unknown`
+- `401301`: `NTP Activity: Symmetric Active Exchange` - Bidirectional time exchange between devices.
+- `401302`: `NTP Activity: Symmetric Passive Response` - Device responds as a server to peers in symmetric active mode.
+- `401303`: `NTP Activity: Client Synchronization` - NTP client, syncs with servers.
+- `401304`: `NTP Activity: Server Response` - Dedicated NTP time server, responds to clients.
+- `401305`: `NTP Activity: Broadcast` - Broadcast time info to network devices.
+- `401306`: `NTP Activity: Control` - Monitoring and control messaging.
+- `401307`: `NTP Activity: Private Use Case` - Reserved - Not defined in standard NTP specifications.
+- `401399`: `NTP Activity: Other` - The event activity is not mapped.
+
+The event/finding type ID. It identifies the event's semantics and structure. Producers and mappers must compute this as `class_uid * 100 + activity_id`. It uniquely identifies the combination of event class and activity across the entire schema. For example, `Detection Finding: Create` is `200401`.

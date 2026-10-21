@@ -20,6 +20,7 @@ The D3FEND countermeasures that are associated with the attack technique. For ex
 ### `name`
 
 - **Type**: `string_t`
+- **Requirement**: recommended
 
 The Mitigation name that is associated with the attack technique. For example: `Password Policies`, or `Code Signing`.
 
@@ -33,5 +34,6 @@ The versioned permalink of the Mitigation. For example: `https://attack.mitre.or
 ### `uid`
 
 - **Type**: `string_t`
+- **Requirement**: recommended
 
 The Mitigation ID that is associated with the attack technique. For example: `M1027`, or `AML.M0013`.

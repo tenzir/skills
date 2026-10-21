@@ -3,6 +3,7 @@
 The table object represents a table within a structured relational database or datastore, which contains columns and rows of data that are able to be create, updated, deleted and queried.
 
 - **Extends**: [Entity (_entity)](_entity.md)
+- **Profiles**: [Date/Time](../profiles/datetime.md)
 
 ## Constraints
 
@@ -48,11 +49,13 @@ The group names to which the table belongs.
 ### `name`
 
 - **Type**: `string_t`
+- **Requirement**: recommended
 
 The table name, ordinarily as assigned by a database administrator.
 
 ### `uid`
 
 - **Type**: `string_t`
+- **Requirement**: recommended
 
 The unique identifier of the table.

@@ -20,11 +20,9 @@ Event Log Activity events report actions pertaining to the system's event loggin
 
 **From Base Event:**
 - `category_uid` (required)
-- `class_uid` (required)
 - `metadata` (required)
 - `severity_id` (required)
 - `time` (required)
-- `type_uid` (required)
 - `message` (recommended)
 - `observables` (recommended)
 - `status` (recommended)
@@ -36,10 +34,13 @@ Event Log Activity events report actions pertaining to the system's event loggin
 ### `activity_id`
 
 - **Type**: `integer_t`
+- **Requirement**: required
+- **Group**: classification
 - **Sibling**: `activity_name`
 
 #### Enum values
 
+- `0`: `Unknown` - The event activity is unknown.
 - `1`: `Clear` - Clear the event log database, file, or cache.
 - `2`: `Delete` - Delete the event log database, file, or cache.
 - `3`: `Export` - Export the event log database, file, or cache.
@@ -50,6 +51,7 @@ Event Log Activity events report actions pertaining to the system's event loggin
 - `8`: `Restart` - Restart the event logging service.
 - `9`: `Enable` - Enable the event logging service.
 - `10`: `Disable` - Disable the event logging service.
+- `99`: `Other` - The event activity is not mapped. See the `activity_name` attribute, which contains a data source specific value.
 
 The normalized identifier of the activity that triggered the event.
 
@@ -167,3 +169,40 @@ Example: `0`, `8`, or `21` for [Windows ClearEventLog](https://learn.microsoft.c
 
 The status detail contains additional information about the event outcome.
 Example: `Success`, `Privilege Missing`, or `Invalid Parameter` for [Windows ClearEventLog](https://learn.microsoft.com/en-us/previous-versions/windows/desktop/eventlogprov/cleareventlog-method-in-class-win32-nteventlogfile).
+
+### `class_uid`
+
+- **Type**: `integer_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `class_name`
+
+#### Enum values
+
+- `1008`: `Event Log Activity` - Event Log Activity events report actions pertaining to the system's event logging service(s), such as disabling logging or clearing the log data.
+
+The unique identifier of a class. A class describes the attributes available in an event.
+
+### `type_uid`
+
+- **Type**: `long_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `type_name`
+
+#### Enum values
+
+- `100800`: `Event Log Activity: Unknown`
+- `100801`: `Event Log Activity: Clear` - Clear the event log database, file, or cache.
+- `100802`: `Event Log Activity: Delete` - Delete the event log database, file, or cache.
+- `100803`: `Event Log Activity: Export` - Export the event log database, file, or cache.
+- `100804`: `Event Log Activity: Archive` - Archive the event log database, file, or cache.
+- `100805`: `Event Log Activity: Rotate` - Rotate the event log database, file, or cache.
+- `100806`: `Event Log Activity: Start` - Start the event logging service.
+- `100807`: `Event Log Activity: Stop` - Stop the event logging service.
+- `100808`: `Event Log Activity: Restart` - Restart the event logging service.
+- `100809`: `Event Log Activity: Enable` - Enable the event logging service.
+- `100810`: `Event Log Activity: Disable` - Disable the event logging service.
+- `100899`: `Event Log Activity: Other`
+
+The event/finding type ID. It identifies the event's semantics and structure. The value is calculated by the logging system as: `class_uid * 100 + activity_id`.

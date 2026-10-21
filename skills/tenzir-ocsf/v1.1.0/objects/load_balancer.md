@@ -69,11 +69,13 @@ The load balancer message.
 ### `name`
 
 - **Type**: `string_t`
+- **Requirement**: recommended
 
 The name of the load balancer.
 
 ### `uid`
 
 - **Type**: `string_t`
+- **Requirement**: recommended
 
 The unique identifier for the load balancer.

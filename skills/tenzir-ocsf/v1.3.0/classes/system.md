@@ -14,14 +14,20 @@ Abstract base class for System Activity event classes. Concrete classes in this 
 ## Inherited attributes
 
 **From Base Event:**
+- `activity_id` (required)
+- `category_uid` (required)
+- `class_uid` (required)
 - `metadata` (required)
 - `severity_id` (required)
+- `time` (required)
+- `type_uid` (required)
 - `message` (recommended)
 - `observables` (recommended)
 - `status` (recommended)
 - `status_code` (recommended)
 - `status_detail` (recommended)
 - `status_id` (recommended)
+- `timezone_offset` (recommended)
 
 ## Attributes
 

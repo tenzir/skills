@@ -16,12 +16,14 @@ The total number of bytes (in and out).
 ### `bytes_in`
 
 - **Type**: `long_t`
+- **Requirement**: optional
 
 The number of bytes sent from the destination to the source.
 
 ### `bytes_out`
 
 - **Type**: `long_t`
+- **Requirement**: optional
 
 The number of bytes sent from the source to the destination.
 
@@ -35,11 +37,13 @@ The total number of packets (in and out).
 ### `packets_in`
 
 - **Type**: `long_t`
+- **Requirement**: optional
 
 The number of packets sent from the destination to the source.
 
 ### `packets_out`
 
 - **Type**: `long_t`
+- **Requirement**: optional
 
 The number of packets sent from the source to the destination.

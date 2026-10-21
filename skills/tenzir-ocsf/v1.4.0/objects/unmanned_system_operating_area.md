@@ -3,10 +3,19 @@
 The Unmanned System Operating Area object describes details about a precise area of operations for a UAS flight or mission.
 
 - **Extends**: [Geo Location (location)](location.md)
+- **Profiles**: [Date/Time](../profiles/datetime.md)
+- **Observable**: `26`
 
 ## Constraints
 
 - **At least one of**: `city`, `country`, `postal_code`, `region`
+
+## Inherited attributes
+
+**From Geo Location:**
+- `city` (recommended)
+- `continent` (recommended)
+- `country` (recommended)
 
 ## Attributes
 
@@ -78,6 +87,6 @@ The type of operating area. For example, `Takeoff Location`, `Fixed Location`, `
 - `1`: `Takeoff Location`
 - `2`: `Fixed Location`
 - `3`: `Dynamic Location`
-- `99`: `Other`
+- `99`: `Other` - The type is not mapped. See the `type` attribute, which contains a data source specific value.
 
 The operating area type identifier.

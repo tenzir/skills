@@ -20,7 +20,7 @@ The startup item object describes an application component that has associated s
 
 ### `win_service`
 
-- **Type**: [`win_service`](../objects/win_service.md)
+- **Type**: `win/win_service`
 - **Requirement**: optional
 
 The startup item Windows service resource.

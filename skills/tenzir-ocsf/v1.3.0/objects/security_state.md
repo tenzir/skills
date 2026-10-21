@@ -21,7 +21,6 @@ The security state, normalized to the caption of the state_id value. In the case
 
 #### Enum values
 
-- `99`: `Other` - The security state is not mapped. See the `state` attribute, which contains data source specific values.
 - `0`: `Unknown` - The security state is unknown.
 - `1`: `Missing or outdated content` - The content is missing or outdated.
 - `2`: `Policy mismatch` - Not in compliance with the expected security policy.
@@ -46,5 +45,6 @@ The security state, normalized to the caption of the state_id value. In the case
 - `21`: `Rooted` - The device has been modified to allow root access.
 - `22`: `Android partition modified` - The Android partition has been modified.
 - `23`: `Compliance failure` - The entity is not compliant with the associated security policy.
+- `99`: `Other` - The security state is not mapped. See the `state` attribute, which contains data source specific values.
 
 The security state of the managed entity.

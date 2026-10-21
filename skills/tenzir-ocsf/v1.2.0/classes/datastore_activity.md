@@ -14,24 +14,30 @@ Datastore events describe general activities (Read, Update, Query, Delete, etc.)
 ## Inherited attributes
 
 **From Base Event:**
+- `category_uid` (required)
 - `metadata` (required)
 - `severity_id` (required)
+- `time` (required)
 - `message` (recommended)
 - `observables` (recommended)
 - `status` (recommended)
 - `status_code` (recommended)
 - `status_detail` (recommended)
 - `status_id` (recommended)
+- `timezone_offset` (recommended)
 
 ## Attributes
 
 ### `activity_id`
 
 - **Type**: `integer_t`
+- **Requirement**: required
+- **Group**: classification
 - **Sibling**: `activity_name`
 
 #### Enum values
 
+- `0`: `Unknown` - The event activity is unknown.
 - `1`: `Read` - The 'Read' activity involves accessing specific data record details.
 - `2`: `Update` - The 'Update' activity pertains to modifying specific data record details.
 - `3`: `Connect` - The 'Connect' activity involves establishing a connection to the datastore.
@@ -42,6 +48,7 @@ Datastore events describe general activities (Read, Update, Query, Delete, etc.)
 - `8`: `List` - The 'List' activity provides an overview of existing data records.
 - `9`: `Encrypt` - The 'Encrypt' activity involves securing data by encrypting a specific data record.
 - `10`: `Decrypt` - The 'Decrypt' activity involves converting encrypted data back to its original format.
+- `99`: `Other` - The event activity is not mapped. See the `activity_name` attribute, which contains a data source specific value.
 
 The normalized identifier of the activity that triggered the event.
 
@@ -84,11 +91,11 @@ The datastore resource type (e.g. database, datastore, or table).
 
 #### Enum values
 
-- `99`: `Other` - The datastore resource type is not mapped.
 - `0`: `Unknown` - The datastore resource type is unknown.
 - `1`: `Database`
 - `2`: `Databucket`
 - `3`: `Table`
+- `99`: `Other` - The datastore resource type is not mapped.
 
 The normalized datastore resource type identifier.
 
@@ -131,3 +138,40 @@ The actor object describes details about the user/role/process that was the sour
 - **Group**: primary
 
 Details about the source of the activity.
+
+### `class_uid`
+
+- **Type**: `integer_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `class_name`
+
+#### Enum values
+
+- `6005`: `Datastore Activity` - Datastore events describe general activities (Read, Update, Query, Delete, etc.) which affect datastores or data within those datastores, e.g. (AWS RDS, AWS S3).
+
+The unique identifier of a class. A class describes the attributes available in an event.
+
+### `type_uid`
+
+- **Type**: `long_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `type_name`
+
+#### Enum values
+
+- `600500`: `Datastore Activity: Unknown`
+- `600501`: `Datastore Activity: Read` - The 'Read' activity involves accessing specific data record details.
+- `600502`: `Datastore Activity: Update` - The 'Update' activity pertains to modifying specific data record details.
+- `600503`: `Datastore Activity: Connect` - The 'Connect' activity involves establishing a connection to the datastore.
+- `600504`: `Datastore Activity: Query` - The 'Query' activity involves retrieving a filtered subset of data based on specific criteria.
+- `600505`: `Datastore Activity: Write` - The 'Write' activity involves writing specific data record details.
+- `600506`: `Datastore Activity: Create` - The 'Create' activity involves generating new data record details.
+- `600507`: `Datastore Activity: Delete` - The 'Delete' activity involves removing specific data record details.
+- `600508`: `Datastore Activity: List` - The 'List' activity provides an overview of existing data records.
+- `600509`: `Datastore Activity: Encrypt` - The 'Encrypt' activity involves securing data by encrypting a specific data record.
+- `600510`: `Datastore Activity: Decrypt` - The 'Decrypt' activity involves converting encrypted data back to its original format.
+- `600599`: `Datastore Activity: Other`
+
+The event/finding type ID. It identifies the event's semantics and structure. The value is calculated by the logging system as: `class_uid * 100 + activity_id`.

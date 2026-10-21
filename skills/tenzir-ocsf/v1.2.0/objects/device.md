@@ -3,10 +3,20 @@
 The Device object represents an addressable computer system or host, which is typically connected to a computer network and participates in the transmission or processing of data within the computer network. Defined by D3FEND [d3f:Host](https://d3fend.mitre.org/dao/artifact/d3f:Host/).
 
 - **Extends**: [Endpoint (endpoint)](endpoint.md)
+- **Profiles**: [Container](../profiles/container.md), [Date/Time](../profiles/datetime.md)
+- **Observable**: `20`
 
 ## Constraints
 
 - **At least one of**: `ip`, `uid`, `name`, `hostname`, `instance_uid`, `interface_uid`, `interface_name`
+
+## Inherited attributes
+
+**From Endpoint:**
+- `instance_uid` (recommended)
+- `interface_name` (recommended)
+- `interface_uid` (recommended)
+- `owner` (recommended)
 
 ## Attributes
 
@@ -34,6 +44,7 @@ The description of the device, ordinarily as reported by the operating system.
 ### `domain`
 
 - **Type**: `string_t`
+- **Requirement**: optional
 
 The network domain where the device resides. For example: `work.example.com`.
 
@@ -54,6 +65,7 @@ The group names to which the device belongs. For example: `["Windows Laptops", "
 ### `hostname`
 
 - **Type**: `hostname_t`
+- **Requirement**: recommended
 
 The device hostname.
 
@@ -81,6 +93,7 @@ The International Mobile Station Equipment Identifier that is associated with th
 ### `ip`
 
 - **Type**: `ip_t`
+- **Requirement**: recommended
 
 The device IP address, in either IPv4 or IPv6 format.
 
@@ -122,6 +135,7 @@ The most recent discovery time of the device.
 ### `location`
 
 - **Type**: [`location`](location.md)
+- **Requirement**: optional
 
 The geographical location of the device.
 
@@ -135,6 +149,7 @@ The time when the device was last known to have been modified.
 ### `name`
 
 - **Type**: `string_t`
+- **Requirement**: recommended
 
 The alternate device name, ordinarily as assigned by an administrator.
 
@@ -203,6 +218,7 @@ The subnet mask.
 ### `type`
 
 - **Type**: `string_t`
+- **Requirement**: optional
 
 The device type. For example: `unknown`, `server`, `desktop`, `laptop`, `tablet`, `mobile`, `virtual`, `browser`, or `other`.
 
@@ -214,19 +230,32 @@ The device type. For example: `unknown`, `server`, `desktop`, `laptop`, `tablet`
 
 #### Enum values
 
-- `99`: `Other` - The type is not mapped. See the `type` attribute, which contains a data source specific value.
 - `0`: `Unknown` - The type is unknown.
+- `1`: `Server` - A [server](https://d3fend.mitre.org/dao/artifact/d3f:Server/).
+- `2`: `Desktop` - A [desktop computer](https://d3fend.mitre.org/dao/artifact/d3f:DesktopComputer/).
+- `3`: `Laptop` - A [laptop computer](https://d3fend.mitre.org/dao/artifact/d3f:LaptopComputer/).
+- `4`: `Tablet` - A [tablet computer](https://d3fend.mitre.org/dao/artifact/d3f:TabletComputer/).
+- `5`: `Mobile` - A [mobile phone](https://d3fend.mitre.org/dao/artifact/d3f:MobilePhone/).
+- `6`: `Virtual` - A [virtual machine](https://d3fend.mitre.org/dao/artifact/d3f:VirtualizationSoftware/).
+- `7`: `IOT` - A [IOT (Internet of Things) device](https://www.techtarget.com/iotagenda/definition/IoT-device).
+- `8`: `Browser` - A [web browser](https://d3fend.mitre.org/dao/artifact/d3f:Browser/).
+- `9`: `Firewall` - A [networking firewall](https://d3fend.mitre.org/dao/artifact/d3f:Firewall/).
+- `10`: `Switch` - A [networking switch](https://d3fend.mitre.org/dao/artifact/d3f:Switch/).
+- `11`: `Hub` - A [networking hub](https://en.wikipedia.org/wiki/Ethernet_hub).
+- `99`: `Other` - The type is not mapped. See the `type` attribute, which contains a data source specific value.
 
 The device type ID.
 
 ### `uid`
 
 - **Type**: `string_t`
+- **Requirement**: recommended
 
 The unique identifier of the device. For example the Windows TargetSID or AWS EC2 ARN.
 
 ### `uid_alt`
 
 - **Type**: `string_t`
+- **Requirement**: optional
 
 An alternate unique identifier of the device if any. For example the ActiveDirectory DN.

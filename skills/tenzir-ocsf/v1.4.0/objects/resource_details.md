@@ -3,10 +3,16 @@
 The Resource Details object describes details about resources that were affected by the activity/event.
 
 - **Extends**: [Resource (_resource)](_resource.md)
+- **Profiles**: [Cloud](../profiles/cloud.md), [Data Classification](../profiles/data_classification.md)
 
 ## Constraints
 
 - **At least one of**: `name`, `uid`
+
+## Inherited attributes
+
+**From Resource:**
+- `uid` (recommended)
 
 ## Attributes
 
@@ -58,7 +64,7 @@ The IP address of the resource, in either IPv4 or IPv6 format.
 - **Requirement**: recommended
 - **Observable**: 38
 
-The name of the entity. See specific usage.
+The name of the resource.
 
 ### `namespace`
 

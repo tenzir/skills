@@ -13,5 +13,6 @@ The Trace Profile extends the OCSF framework to capture and standardize observab
 
 - **Type**: [`trace`](../objects/trace.md)
 - **Requirement**: recommended
+- **Group**: primary
 
 The trace object contains information about distributed traces which are critical to observability and describe how requests move through a system, capturing each step's timing and status.

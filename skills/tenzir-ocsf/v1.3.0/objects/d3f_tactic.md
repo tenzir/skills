@@ -8,6 +8,11 @@ The MITRE D3FEND™ Tactic object describes the tactic ID and/or name that is as
 
 - **At least one of**: `name`, `uid`
 
+## Inherited attributes
+
+**From Entity:**
+- `uid` (recommended)
+
 ## Attributes
 
 ### `name`

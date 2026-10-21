@@ -29,12 +29,14 @@ The policy group.
 ### `name`
 
 - **Type**: `string_t`
+- **Requirement**: recommended
 
 The policy name. For example: `IAM Policy`.
 
 ### `uid`
 
 - **Type**: `string_t`
+- **Requirement**: recommended
 
 A unique identifier of the policy instance.
 

@@ -36,7 +36,6 @@ Identity & Access Management (IAM) events relate to the supervision of the syste
 
 Network Activity events.
 
-- [Network Activity (network_activity)](classes/network_activity.md) [base class]
 - [DHCP Activity](classes/dhcp_activity.md)
 - [DNS Activity](classes/dns_activity.md)
 - [Email Activity](classes/email_activity.md)
@@ -44,6 +43,7 @@ Network Activity events.
 - [Email URL Activity](classes/email_url_activity.md)
 - [FTP Activity](classes/ftp_activity.md)
 - [HTTP Activity](classes/http_activity.md)
+- [Network Activity](classes/network_activity.md)
 - [Network File Activity](classes/network_file_activity.md)
 - [RDP Activity](classes/rdp_activity.md)
 - [SMB Activity](classes/smb_activity.md)

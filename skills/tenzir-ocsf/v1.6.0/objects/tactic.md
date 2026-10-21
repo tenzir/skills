@@ -13,6 +13,7 @@ The MITRE Tactic object describes the ATT&CK® or ATLAS™ Tactic ID and/or name
 ### `name`
 
 - **Type**: `string_t`
+- **Requirement**: recommended
 
 The Tactic name that is associated with the attack technique. For example: `Reconnaissance` or `ML Model Access`.
 
@@ -26,5 +27,6 @@ The versioned permalink of the Tactic. For example: `https://attack.mitre.org/ve
 ### `uid`
 
 - **Type**: `string_t`
+- **Requirement**: recommended
 
 The Tactic ID that is associated with the attack technique. For example: `TA0043`, or `AML.TA0000`.

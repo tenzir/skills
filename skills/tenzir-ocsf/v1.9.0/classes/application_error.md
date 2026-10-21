@@ -11,11 +11,9 @@ Application Error events describe issues with an applications. The error message
 
 **From Base Event:**
 - `category_uid` (required)
-- `class_uid` (required)
 - `metadata` (required)
 - `severity_id` (required)
 - `time` (required)
-- `type_uid` (required)
 - `observables` (recommended)
 - `status` (recommended)
 - `status_code` (recommended)
@@ -28,17 +26,52 @@ Application Error events describe issues with an applications. The error message
 ### `activity_id`
 
 - **Type**: `integer_t`
+- **Requirement**: required
+- **Group**: classification
 - **Sibling**: `activity_name`
 
 #### Enum values
 
+- `0`: `Unknown` - The event activity is unknown.
 - `1`: `General Error` - The application has experienced an error.
 - `2`: `Translation Error` - The application has experienced an error translating (mapping) a raw event to OCSF. Including the original raw event in the raw_data field is highly recommended.
+- `99`: `Other` - The event activity is not mapped. See the `activity_name` attribute, which contains a data source specific value.
 
 The normalized identifier of the activity that triggered the event. Each event class defines its own set of activity values. Use `0` (Unknown) when the activity cannot be determined. Use `99` (Other) when the activity does not match any defined value, in which case `activity_name` must be populated with the source-specific label.
 
 ### `message`
 
 - **Type**: `string_t`
+- **Requirement**: recommended
+- **Group**: primary
 
 The error message as reported by the application.
+
+### `class_uid`
+
+- **Type**: `integer_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `class_name`
+
+#### Enum values
+
+- `6008`: `Application Error` - Application Error events describe issues with an applications. The error message should be put in the event's `message` attribute. The `metadata.product` attribute can be used to capture the originating application information. The `host` profile can used to include the generating device information. This class is helpful for applications that generate or handle OCSF events and can also be used for errors in upstream products and services.
+
+The unique identifier of a class. A class describes the attributes available in an event. Producers and mappers must set this to the `uid` defined in the event class definition. For example, `Detection Finding` is `2004`.
+
+### `type_uid`
+
+- **Type**: `long_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `type_name`
+
+#### Enum values
+
+- `600800`: `Application Error: Unknown`
+- `600801`: `Application Error: General Error` - The application has experienced an error.
+- `600802`: `Application Error: Translation Error` - The application has experienced an error translating (mapping) a raw event to OCSF. Including the original raw event in the raw_data field is highly recommended.
+- `600899`: `Application Error: Other`
+
+The event/finding type ID. It identifies the event's semantics and structure. Producers and mappers must compute this as `class_uid * 100 + activity_id`. It uniquely identifies the combination of event class and activity across the entire schema. For example, `Detection Finding: Create` is `200401`.

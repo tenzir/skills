@@ -2,6 +2,10 @@
 
 The container context for a process.
 
+## Applies to
+
+- Process (object)
+
 ## Attributes
 
 ### `container`

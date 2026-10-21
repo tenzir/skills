@@ -3,6 +3,7 @@
 The Authentication Token object extends the base `token` object and represents standardized authentication tokens, tickets, or assertions that conform to established authentication protocols such as Kerberos, OIDC, and SAML. This object inherits all attributes from `token` and adds protocol-specific attributes (e.g., `kerberos_flags`, `encryption_details`) for authentication events. Use this object in authentication events to represent protocol-specific tokens: Kerberos Ticket Granting Tickets (TGT) and Service Tickets (ST), OIDC Identity Tokens and Refresh Tokens, and SAML Assertions. These tokens are issued by authentication servers and identity providers and carry protocol-specific metadata, lifecycle information, and security attributes defined by their respective specifications. When to use this object: Use `authentication_token` when representing protocol-specific authentication tokens (type_id values 1-5: Kerberos TGT/ST, OIDC ID/Refresh tokens, SAML assertions) in authentication events. When NOT to use this object: Do NOT use `authentication_token` for API tokens or client tokens (type_id values 6-7) used in API activity events - use the base `token` object instead. Do NOT use `authentication_token` for generic API keys - use the base `token` object instead.
 
 - **Extends**: [Token (token)](token.md)
+- **Profiles**: [Date/Time](../profiles/datetime.md)
 
 ## Attributes
 
@@ -62,6 +63,8 @@ The type of the authentication token.
 - `3`: `Identity Token` - Identity (ID) Token for OIDC.
 - `4`: `Refresh Token` - Refresh Token for OIDC.
 - `5`: `SAML Assertion` - Authentication Assertion for SAML.
-- `99`: `Other`
+- `6`: `Client Token` - Client Token issued by an Identity Provider (IdP) for application authentication. Use this value for IdP-issued tokens used for service-to-service authentication. Examples: Microsoft Entra ID Application Registration client secrets, Okta API tokens, Auth0 Machine-to-Machine tokens. Key characteristic: These tokens are issued by Identity Providers, not by individual services.
+- `7`: `API Token` - A generic API token or API key used for authenticating API requests. Use this value for service-specific API authentication tokens that are NOT issued by Identity Providers. Examples: REST API keys, GraphQL API keys, Stripe API keys, Twilio API keys, AWS API keys. Key characteristic: These tokens are issued by individual services/platforms, not by Identity Providers.
+- `99`: `Other` - The type is not mapped. See the `type` attribute, which contains a data source specific value.
 
 The normalized authentication token type identifier. This attribute restricts the base `token.type_id` enum to only protocol-specific authentication token types (values 0, 1-5, 99). API tokens and client tokens (values 6-7) are not valid for `authentication_token` - use the base `token` object for those types.

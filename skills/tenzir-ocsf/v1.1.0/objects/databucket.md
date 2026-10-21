@@ -3,6 +3,7 @@
 The databucket object is a basic container that holds data, typically organized through the use of data partitions.
 
 - **Extends**: [Entity (_entity)](_entity.md)
+- **Profiles**: [Date/Time](../profiles/datetime.md)
 
 ## Constraints
 
@@ -67,22 +68,24 @@ The databucket type.
 
 #### Enum values
 
-- `0`: `Unknown`
+- `0`: `Unknown` - The type is unknown.
 - `1`: `S3`
 - `2`: `Azure Blob`
 - `3`: `GCP Bucket`
-- `99`: `Other`
+- `99`: `Other` - The type is not mapped. See the `type` attribute, which contains a data source specific value.
 
 The normalized identifier of the databucket type.
 
 ### `name`
 
 - **Type**: `string_t`
+- **Requirement**: recommended
 
 The databucket name.
 
 ### `uid`
 
 - **Type**: `string_t`
+- **Requirement**: recommended
 
 The unique identifier of the databucket.

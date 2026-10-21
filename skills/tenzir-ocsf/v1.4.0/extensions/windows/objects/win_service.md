@@ -11,6 +11,7 @@ The Windows Service object describes a Windows service.
 ## Inherited attributes
 
 **From Service:**
+- `uid` (recommended)
 - `version` (recommended)
 
 ## Attributes

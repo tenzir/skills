@@ -69,7 +69,7 @@ The type of the UAS. For example, Helicopter, Gyroplane, Rocket, etc.
 - `12`: `Rocket`
 - `13`: `Tethered Powered Aircraft`
 - `14`: `Ground Obstacle`
-- `99`: `Other`
+- `99`: `Other` - The type is not mapped. See the `type` attribute, which contains a data source specific value.
 
 The UAS type identifier.
 

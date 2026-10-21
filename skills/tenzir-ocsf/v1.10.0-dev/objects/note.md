@@ -3,6 +3,7 @@
 Represents a note or a comment in the system. Notes can be used to provide additional context, explanations, or observations related to an event, object, or any other entity in the system. They can be created and modified by users to capture important information that may not be directly represented in the structured data.
 
 - **Extends**: [Object (object)](object.md)
+- **Profiles**: [Date/Time](../profiles/datetime.md)
 
 ## Attributes
 

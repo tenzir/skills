@@ -22,11 +22,9 @@ DNS Zone Transfer Activity events report the bulk replication of a DNS zone betw
 
 **From Base Event:**
 - `category_uid` (required)
-- `class_uid` (required)
 - `metadata` (required)
 - `severity_id` (required)
 - `time` (required)
-- `type_uid` (required)
 - `message` (recommended)
 - `observables` (recommended)
 - `status` (recommended)
@@ -40,14 +38,18 @@ DNS Zone Transfer Activity events report the bulk replication of a DNS zone betw
 ### `activity_id`
 
 - **Type**: `integer_t`
+- **Requirement**: required
+- **Group**: classification
 - **Sibling**: `activity_name`
 
 #### Enum values
 
+- `0`: `Unknown` - The event activity is unknown.
 - `1`: `Transfer Request` - A request from a secondary name server to transfer a zone. Whether a full (AXFR) or incremental (IXFR) transfer was requested is conveyed by `transfer_type_id`.
 - `2`: `Transfer Response` - A zone transfer response message from the primary name server. A single transfer may be delivered as a stream of multiple response messages. Whether the delivered data is a full (AXFR) or incremental (IXFR) transfer is conveyed by `transfer_type_id`; note that a server may answer an IXFR request with a full transfer when it cannot produce a delta.
 - `3`: `Notify` - A NOTIFY exchange, comprising the primary name server's notification that the zone has changed and the secondary's acknowledgement, reported as a single record rather than as separate messages. NOTIFY has no transfer type; the outcome of the acknowledgement is conveyed by `status_id`.
 - `4`: `Transfer` - A zone transfer reported as a single summary record rather than as separate request and response messages. Used by sources, such as name server logs, that emit one event per transfer with the zone, record count, byte count, duration, and peer. Whether the transfer was full (AXFR) or incremental (IXFR) is conveyed by `transfer_type_id`; whether it succeeded is conveyed by `status_id`.
+- `99`: `Other` - The event activity is not mapped. See the `activity_name` attribute, which contains a data source specific value.
 
 The normalized identifier of the activity that triggered the event. Each event class defines its own set of activity values. Use `0` (Unknown) when the activity cannot be determined. Use `99` (Other) when the activity does not match any defined value, in which case `activity_name` must be populated with the source-specific label.
 
@@ -181,3 +183,34 @@ The normalized identifier of the DNS server response code. See RFC 6895.
 - **Group**: primary
 
 The 16-bit DNS transaction identifier assigned by the client and echoed unchanged in the server response. This value is the same for both the request and response messages.
+
+### `class_uid`
+
+- **Type**: `integer_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `class_name`
+
+#### Enum values
+
+- `4015`: `DNS Zone Transfer Activity` - DNS Zone Transfer Activity events report the bulk replication of a DNS zone between name servers, as seen on the network. This includes full transfers (AXFR), incremental transfers (IXFR), and change notifications (NOTIFY). Unlike `DNS Activity`, which reports per-name queries and answers, this class captures whole-zone semantics: SOA serials, the records that make up the zone, and the multi-message streams that carry them.
+
+The unique identifier of a class. A class describes the attributes available in an event. Producers and mappers must set this to the `uid` defined in the event class definition. For example, `Detection Finding` is `2004`.
+
+### `type_uid`
+
+- **Type**: `long_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `type_name`
+
+#### Enum values
+
+- `401500`: `DNS Zone Transfer Activity: Unknown`
+- `401501`: `DNS Zone Transfer Activity: Transfer Request` - A request from a secondary name server to transfer a zone. Whether a full (AXFR) or incremental (IXFR) transfer was requested is conveyed by `transfer_type_id`.
+- `401502`: `DNS Zone Transfer Activity: Transfer Response` - A zone transfer response message from the primary name server. A single transfer may be delivered as a stream of multiple response messages. Whether the delivered data is a full (AXFR) or incremental (IXFR) transfer is conveyed by `transfer_type_id`; note that a server may answer an IXFR request with a full transfer when it cannot produce a delta.
+- `401503`: `DNS Zone Transfer Activity: Notify` - A NOTIFY exchange, comprising the primary name server's notification that the zone has changed and the secondary's acknowledgement, reported as a single record rather than as separate messages. NOTIFY has no transfer type; the outcome of the acknowledgement is conveyed by `status_id`.
+- `401504`: `DNS Zone Transfer Activity: Transfer` - A zone transfer reported as a single summary record rather than as separate request and response messages. Used by sources, such as name server logs, that emit one event per transfer with the zone, record count, byte count, duration, and peer. Whether the transfer was full (AXFR) or incremental (IXFR) is conveyed by `transfer_type_id`; whether it succeeded is conveyed by `status_id`.
+- `401599`: `DNS Zone Transfer Activity: Other`
+
+The event/finding type ID. It identifies the event's semantics and structure. Producers and mappers must compute this as `class_uid * 100 + activity_id`. It uniquely identifies the combination of event class and activity across the entire schema. For example, `Detection Finding: Create` is `200401`.

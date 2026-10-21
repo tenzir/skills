@@ -107,10 +107,10 @@ The Internet Protocol version.
 
 #### Enum values
 
-- `0`: `Unknown`
+- `0`: `Unknown` - The protocol version is unknown.
 - `4`: `Internet Protocol version 4 (IPv4)`
 - `6`: `Internet Protocol version 6 (IPv6)`
-- `99`: `Other`
+- `99`: `Other` - The protocol version is not mapped. See the `protocol_ver` attribute, which contains a data source specific value.
 
 The Internet Protocol version identifier.
 

@@ -28,8 +28,10 @@ The current status of the policy restriction, normalized to the caption of the `
 
 #### Enum values
 
+- `0`: `Unknown` - The status is unknown.
 - `1`: `Applicable` - This restriction is currently applicable and being enforced.
 - `2`: `Inapplicable` - This restriction is not applicable.
 - `3`: `Evaluation Error` - This restriction could not be properly evaluated due to an error.
+- `99`: `Other` - The status is not mapped. See the `status` attribute, which contains a data source specific value.
 
 The normalized status identifier indicating the applicability of this policy restriction.

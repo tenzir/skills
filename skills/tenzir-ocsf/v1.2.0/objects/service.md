@@ -20,12 +20,14 @@ The list of labels associated with the service.
 ### `name`
 
 - **Type**: `string_t`
+- **Requirement**: recommended
 
 The name of the service.
 
 ### `uid`
 
 - **Type**: `string_t`
+- **Requirement**: recommended
 
 The unique identifier of the service.
 

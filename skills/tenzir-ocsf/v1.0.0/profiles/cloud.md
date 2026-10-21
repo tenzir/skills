@@ -34,6 +34,7 @@ The attributes that describe information specific to Cloud services/applications
 - Network File Activity
 - Process Activity
 - RDP Activity
+- Resource Details (object)
 - Scheduled Job Activity
 - Security Finding
 - SMB Activity

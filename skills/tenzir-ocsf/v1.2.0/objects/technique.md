@@ -13,6 +13,7 @@ The Technique object describes the technique ID and/or name associated to an att
 ### `name`
 
 - **Type**: `string_t`
+- **Requirement**: recommended
 
 The name of the attack technique, as defined by [ATT&CK MatrixTM](https://attack.mitre.org/wiki/ATT&CK_Matrix). For example: `Active Scanning`.
 
@@ -26,5 +27,6 @@ The versioned permalink of the attack technique, as defined by [ATT&CK MatrixTM]
 ### `uid`
 
 - **Type**: `string_t`
+- **Requirement**: recommended
 
 The unique identifier of the attack technique, as defined by [ATT&CK MatrixTM](https://attack.mitre.org/wiki/ATT&CK_Matrix). For example: `T1595`.

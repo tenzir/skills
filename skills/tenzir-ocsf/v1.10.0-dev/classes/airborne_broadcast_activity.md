@@ -19,11 +19,9 @@ Airborne Broadcast Activity events report the activity of any aircraft or unmann
 
 **From Base Event:**
 - `category_uid` (required)
-- `class_uid` (required)
 - `metadata` (required)
 - `severity_id` (required)
 - `time` (required)
-- `type_uid` (required)
 - `message` (recommended)
 - `observables` (recommended)
 - `status` (recommended)
@@ -121,3 +119,32 @@ The UAS Operating Area object describes details about a precise area of operatio
 - **Group**: primary
 
 The human or machine operator of an Unmanned System.
+
+### `class_uid`
+
+- **Type**: `integer_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `class_name`
+
+#### Enum values
+
+- `8002`: `Airborne Broadcast Activity` - Airborne Broadcast Activity events report the activity of any aircraft or unmanned system as reported and tracked by Automatic Dependent Surveillance - Broadcast (ADS-B) receivers. Based on the ADS-B standards described in Code of Federal Regulations (CFR) Title 14 Chapter I Subchapter F Part 91 and in other general Federal Aviation Administration (FAA) supplemental orders and guidance.
+
+The unique identifier of a class. A class describes the attributes available in an event. Producers and mappers must set this to the `uid` defined in the event class definition. For example, `Detection Finding` is `2004`.
+
+### `type_uid`
+
+- **Type**: `long_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `type_name`
+
+#### Enum values
+
+- `800200`: `Airborne Broadcast Activity: Unknown`
+- `800201`: `Airborne Broadcast Activity: Capture` - ADS-B information is being captured (collected).
+- `800202`: `Airborne Broadcast Activity: Record` - ADS-B information is being recorded, for example by a standalone transceiver.
+- `800299`: `Airborne Broadcast Activity: Other` - The event activity is not mapped. See the `activity_name` attribute, which contains a data source specific value.
+
+The event/finding type ID. It identifies the event's semantics and structure. Producers and mappers must compute this as `class_uid * 100 + activity_id`. It uniquely identifies the combination of event class and activity across the entire schema. For example, `Detection Finding: Create` is `200401`.

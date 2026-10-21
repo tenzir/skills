@@ -19,11 +19,9 @@ DNS Activity events report DNS queries and answers as seen on the network.
 
 **From Base Event:**
 - `category_uid` (required)
-- `class_uid` (required)
 - `metadata` (required)
 - `severity_id` (required)
 - `time` (required)
-- `type_uid` (required)
 - `message` (recommended)
 - `observables` (recommended)
 - `status` (recommended)
@@ -37,13 +35,17 @@ DNS Activity events report DNS queries and answers as seen on the network.
 ### `activity_id`
 
 - **Type**: `integer_t`
+- **Requirement**: required
+- **Group**: classification
 - **Sibling**: `activity_name`
 
 #### Enum values
 
+- `0`: `Unknown` - The event activity is unknown.
 - `1`: `Query` - The DNS query request.
 - `2`: `Response` - The DNS query response.
 - `6`: `Traffic` - Bidirectional DNS request and response traffic.
+- `99`: `Other` - The event activity is not mapped. See the `activity_name` attribute, which contains a data source specific value.
 
 The normalized identifier of the activity that triggered the event.
 
@@ -67,8 +69,9 @@ The network connection information.
 
 - **Type**: [`network_endpoint`](../objects/network_endpoint.md)
 - **Requirement**: recommended
+- **Group**: primary
 
-The network destination endpoint.
+The responder (server) in a network connection.
 
 ### `query`
 
@@ -143,4 +146,34 @@ The Domain Name System (DNS) response time.
 - **Requirement**: optional
 - **Group**: context
 
-The network traffic refers to the amount of data moving across a network at a given point of time. Intended to be used alongside Network Connection.
+The network traffic for this observation period. Use when reporting: (1) delta values (bytes/packets transferred since the last observation), (2) instantaneous measurements at a specific point in time, or (3) standalone single-event metrics. This attribute represents a point-in-time measurement or incremental change, not a running total. For accumulated totals across multiple observations or the lifetime of a flow, use `cumulative_traffic` instead.
+
+### `class_uid`
+
+- **Type**: `integer_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `class_name`
+
+#### Enum values
+
+- `4003`: `DNS Activity` - DNS Activity events report DNS queries and answers as seen on the network.
+
+The unique identifier of a class. A class describes the attributes available in an event.
+
+### `type_uid`
+
+- **Type**: `long_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `type_name`
+
+#### Enum values
+
+- `400300`: `DNS Activity: Unknown`
+- `400301`: `DNS Activity: Query` - The DNS query request.
+- `400302`: `DNS Activity: Response` - The DNS query response.
+- `400306`: `DNS Activity: Traffic` - Bidirectional DNS request and response traffic.
+- `400399`: `DNS Activity: Other`
+
+The event/finding type ID. It identifies the event's semantics and structure. The value is calculated by the logging system as: `class_uid * 100 + activity_id`.

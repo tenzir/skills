@@ -19,22 +19,31 @@ Kernel Activity events report when an process creates, reads, or deletes a kerne
 - `device` (required)
 
 **From Base Event:**
+- `category_uid` (required)
 - `metadata` (required)
 - `severity_id` (required)
+- `time` (required)
 - `message` (recommended)
 - `status_id` (recommended)
+- `timezone_offset` (recommended)
 
 ## Attributes
 
 ### `activity_id`
 
 - **Type**: `integer_t`
+- **Requirement**: required
+- **Group**: classification
 - **Sibling**: `activity_name`
 
 #### Enum values
 
-- `99`: `Other` - The event activity is not mapped.
 - `0`: `Unknown` - The event activity is unknown.
+- `1`: `Create`
+- `2`: `Read`
+- `3`: `Delete`
+- `4`: `Invoke`
+- `99`: `Other` - The event activity is not mapped.
 
 The normalized identifier of the activity that triggered the event.
 
@@ -45,3 +54,34 @@ The normalized identifier of the activity that triggered the event.
 - **Group**: primary
 
 The target kernel resource.
+
+### `class_uid`
+
+- **Type**: `integer_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `class_name`
+
+#### Enum values
+
+- `1003`: `Kernel Activity` - Kernel Activity events report when an process creates, reads, or deletes a kernel resource.
+
+The unique identifier of a class. A Class describes the attributes available in an event.
+
+### `type_uid`
+
+- **Type**: `integer_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `type_name`
+
+#### Enum values
+
+- `100300`: `Kernel Activity: Unknown`
+- `100301`: `Kernel Activity: Create`
+- `100302`: `Kernel Activity: Read`
+- `100303`: `Kernel Activity: Delete`
+- `100304`: `Kernel Activity: Invoke`
+- `100399`: `Kernel Activity: Other`
+
+The event type ID. It identifies the event's semantics and structure. The value is calculated by the logging system as: `class_uid * 100 + activity_id`.

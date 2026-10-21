@@ -27,6 +27,7 @@ The description of the analytic that generated the finding.
 ### `name`
 
 - **Type**: `string_t`
+- **Requirement**: recommended
 
 The name of the analytic that generated the finding.
 
@@ -54,18 +55,19 @@ The analytic type.
 
 #### Enum values
 
-- `0`: `Unknown`
+- `0`: `Unknown` - The type is unknown.
 - `1`: `Rule`
 - `2`: `Behavioral`
 - `3`: `Statistical`
 - `4`: `Learning (ML/DL)`
-- `99`: `Other`
+- `99`: `Other` - The type is not mapped. See the `type` attribute, which contains a data source specific value.
 
 The analytic type ID.
 
 ### `uid`
 
 - **Type**: `string_t`
+- **Requirement**: recommended
 
 The unique identifier of the analytic that generated the finding.
 

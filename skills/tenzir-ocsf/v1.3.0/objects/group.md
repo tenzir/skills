@@ -27,6 +27,7 @@ The domain where the group is defined. For example: the LDAP or Active Directory
 ### `name`
 
 - **Type**: `string_t`
+- **Requirement**: recommended
 
 The group name.
 
@@ -47,5 +48,6 @@ The type of the group or account.
 ### `uid`
 
 - **Type**: `string_t`
+- **Requirement**: recommended
 
 The unique identifier of the group. For example, for Windows events this is the security identifier (SID) of the group.

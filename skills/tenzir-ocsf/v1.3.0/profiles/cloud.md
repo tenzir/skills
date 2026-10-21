@@ -60,6 +60,7 @@ The attributes that describe information specific to Cloud services/applications
 - Process Remediation Activity
 - RDP Activity
 - Remediation Activity
+- Resource Details (object)
 - Scan Activity
 - Scheduled Job Activity
 - Security Finding

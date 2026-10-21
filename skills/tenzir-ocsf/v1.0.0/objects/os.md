@@ -77,6 +77,8 @@ The type of the operating system.
 
 #### Enum values
 
+- `0`: `Unknown` - The type is unknown.
+- `99`: `Other` - The type is not mapped. See the `type` attribute, which may contain a data source specific value.
 - `100`: `Windows`
 - `101`: `Windows Mobile`
 - `200`: `Linux`

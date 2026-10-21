@@ -3,6 +3,7 @@
 The Metadata object describes the metadata associated with the event. Defined by D3FEND [d3f:Metadata](https://d3fend.mitre.org/dao/artifact/d3f:Metadata/).
 
 - **Extends**: [Object (object)](object.md)
+- **Profiles**: [Date/Time](../profiles/datetime.md)
 
 ## Attributes
 
@@ -92,6 +93,7 @@ The time when the event was last modified or enriched.
 ### `loggers`
 
 - **Type**: [`logger`](logger.md)
+- **Requirement**: optional
 
 An array of Logger objects that describe the devices and logging products between the event source and its eventual destination. Note, this attribute can be used when there is a complex end-to-end path of event flow.
 

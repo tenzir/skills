@@ -24,6 +24,7 @@
 - [Network Proxy Endpoint](objects/network_proxy.md)
 - [Network Traffic](objects/network_traffic.md)
 - [RPC Interface](objects/rpc_interface.md)
+- [TLS Extension](objects/tls_extension.md)
 - [Transport Layer Security (TLS)](objects/tls.md)
 - [Uniform Resource Locator](objects/url.md)
 
@@ -124,4 +125,3 @@
 ## Other
 
 - [Kill Chain](objects/kill_chain.md)
-- [TLS Extension](objects/tls_tls_extension.md)

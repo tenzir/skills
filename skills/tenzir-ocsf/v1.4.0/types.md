@@ -28,6 +28,7 @@ The Internet Date/Time format as defined in [RFC-3339](https://www.rfc-editor.or
 
 - **Caption**: Email Address
 - **Base type**: `String`
+- **Observable**: `5`
 - **Regex**: `^[a-zA-Z0-9!#$%&'*+-/=?^_`{|}~.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$`
 
 Email address. For example:
@@ -37,6 +38,7 @@ Email address. For example:
 
 - **Caption**: File Name
 - **Base type**: `String`
+- **Observable**: `7`
 
 File name. For example:
 `text-file.txt`.
@@ -52,6 +54,7 @@ Real floating-point value. For example:
 
 - **Caption**: Hash
 - **Base type**: `String`
+- **Observable**: `8`
 - **Regex**: `^[a-fA-F0-9]+$`
 
 Hash. A unique value that corresponds to the content of the file, image, ja3_hash or hassh found in the schema. For example:
@@ -61,6 +64,7 @@ Hash. A unique value that corresponds to the content of the file, image, ja3_has
 
 - **Caption**: Hostname
 - **Base type**: `String`
+- **Observable**: `1`
 
 Unique name assigned to a device connected to a computer network. It may be a fully qualified domain name (FQDN). For example:
 `r2-d2.example.com.`,
@@ -76,6 +80,7 @@ Signed integer value.
 
 - **Caption**: IP Address
 - **Base type**: `String`
+- **Observable**: `2`
 - **Regex**: `((^\s*((([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]).){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]))\s*$)|(^\s*((([0-9A-Fa-f]{1,4}:){7}([0-9A-Fa-f]{1,4}|:))|(([0-9A-Fa-f]{1,4}:){6}(:[0-9A-Fa-f]{1,4}|((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){5}(((:[0-9A-Fa-f]{1,4}){1,2})|:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){4}(((:[0-9A-Fa-f]{1,4}){1,3})|((:[0-9A-Fa-f]{1,4})?:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){3}(((:[0-9A-Fa-f]{1,4}){1,4})|((:[0-9A-Fa-f]{1,4}){0,2}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){2}(((:[0-9A-Fa-f]{1,4}){1,5})|((:[0-9A-Fa-f]{1,4}){0,3}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){1}(((:[0-9A-Fa-f]{1,4}){1,6})|((:[0-9A-Fa-f]{1,4}){0,4}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(:(((:[0-9A-Fa-f]{1,4}){1,7})|((:[0-9A-Fa-f]{1,4}){0,5}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:)))(%.+)?\s*$))`
 
 Internet Protocol address (IP address), in either IPv4 or IPv6 format. For example:
@@ -98,6 +103,7 @@ Embedded JSON value. A value can be a string, or a number, or true or false or n
 
 - **Caption**: MAC Address
 - **Base type**: `String`
+- **Observable**: `3`
 - **Regex**: `^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$`
 
 Media Access Control (MAC) address. For example:
@@ -107,6 +113,7 @@ Media Access Control (MAC) address. For example:
 
 - **Caption**: Port
 - **Base type**: `Integer`
+- **Observable**: `11`
 - **Range**: `0` to `65535`
 
 The TCP/UDP port number. For example:
@@ -117,6 +124,7 @@ The TCP/UDP port number. For example:
 
 - **Caption**: Process Name
 - **Base type**: `String`
+- **Observable**: `9`
 
 Process name. For example:
 `Notepad`.
@@ -125,6 +133,7 @@ Process name. For example:
 
 - **Caption**: Resource UID
 - **Base type**: `String`
+- **Observable**: `10`
 
 Resource unique identifier. For example, S3 Bucket name or EC2 Instance ID.
 
@@ -138,6 +147,7 @@ UTF-8 encoded byte sequence.
 
 - **Caption**: Subnet
 - **Base type**: `String`
+- **Observable**: `12`
 
 The subnet represented in a CIDR notation, using the format network_address/prefix_length. The network_address can be in either IPv4 or IPv6 format. The prefix length indicates the number of bits used for the network portion, and the remaining bits are available for host addresses within that subnet. For example:
 `192.168.1.0/24`,
@@ -155,6 +165,7 @@ The timestamp format is the number of milliseconds since the Epoch 01/01/1970 00
 
 - **Caption**: URL String
 - **Base type**: `String`
+- **Observable**: `6`
 
 Uniform Resource Locator (URL) string. For example:
 `http://www.example.com/download/trouble.exe`.
@@ -163,6 +174,7 @@ Uniform Resource Locator (URL) string. For example:
 
 - **Caption**: User Name
 - **Base type**: `String`
+- **Observable**: `4`
 
 User name. For example:
 `john_doe`.

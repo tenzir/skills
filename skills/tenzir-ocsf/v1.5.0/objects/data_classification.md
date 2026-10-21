@@ -119,7 +119,7 @@ The contextual description of the `status, status_id` value.
 
 #### Enum values
 
-- `0`: `Unknown`
+- `0`: `Unknown` - The status is unknown.
 - `1`: `Complete` - The classification job completed for the evaluated resource.
 - `2`: `Partial` - The classification job partially completed for the evaluated resource.
 - `3`: `Fail` - The classification job failed for the evaluated resource.

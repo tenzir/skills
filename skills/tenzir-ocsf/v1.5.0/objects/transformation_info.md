@@ -3,6 +3,7 @@
 The transformation_info object represents the mapping or transformation used.
 
 - **Extends**: [Entity (_entity)](_entity.md)
+- **Profiles**: [Date/Time](../profiles/datetime.md)
 
 ## Constraints
 

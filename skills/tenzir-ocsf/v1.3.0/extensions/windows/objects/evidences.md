@@ -32,21 +32,21 @@ Extends the evidences object to add Windows specific fields
 
 ### `reg_key`
 
-- **Type**: `reg_key`
+- **Type**: `win/reg_key`
 - **Requirement**: recommended
 
 Describes details about the registry key that triggered the detection.
 
 ### `reg_value`
 
-- **Type**: `reg_value`
+- **Type**: `win/reg_value`
 - **Requirement**: recommended
 
 Describes details about the registry value that triggered the detection.
 
 ### `win_service`
 
-- **Type**: [`win_service`](../objects/win_service.md)
+- **Type**: `win/win_service`
 - **Requirement**: recommended
 
 Describes details about the Windows service that triggered the detection.

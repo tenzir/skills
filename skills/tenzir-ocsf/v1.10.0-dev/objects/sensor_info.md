@@ -8,6 +8,12 @@ The Sensor Information object describes a control point sensor that emits data, 
 
 - **At least one of**: `name`, `uid`
 
+## Inherited attributes
+
+**From Entity:**
+- `name` (recommended)
+- `uid` (recommended)
+
 ## Attributes
 
 ### `sensor_layer`

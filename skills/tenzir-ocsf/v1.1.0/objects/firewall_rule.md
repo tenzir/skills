@@ -8,6 +8,12 @@ The Firewall Rule object represents a specific rule within a firewall policy or 
 
 - **At least one of**: `name`, `uid`
 
+## Inherited attributes
+
+**From Rule:**
+- `name` (recommended)
+- `uid` (recommended)
+
 ## Attributes
 
 ### `condition`

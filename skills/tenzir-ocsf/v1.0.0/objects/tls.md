@@ -43,7 +43,7 @@ The client cipher suites that were exchanged during the TLS handshake negotiatio
 
 ### `extension_list`
 
-- **Type**: `tls_extension`
+- **Type**: [`tls_extension`](tls_extension.md)
 - **Requirement**: optional
 
 The list of TLS extensions.

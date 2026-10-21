@@ -24,35 +24,43 @@ Authentication events report authentication session activities such as user atte
 - `src_endpoint` (recommended)
 
 **From Base Event:**
+- `category_uid` (required)
 - `metadata` (required)
 - `severity_id` (required)
+- `time` (required)
 - `message` (recommended)
 - `observables` (recommended)
 - `status` (recommended)
 - `status_code` (recommended)
 - `status_id` (recommended)
+- `timezone_offset` (recommended)
 
 ## Attributes
 
 ### `activity_id`
 
 - **Type**: `integer_t`
+- **Requirement**: required
+- **Group**: classification
 - **Sibling**: `activity_name`
 
 #### Enum values
 
+- `0`: `Unknown` - The event activity is unknown.
 - `1`: `Logon` - A new logon session was requested.
 - `2`: `Logoff` - A logon session was terminated and no longer exists.
 - `3`: `Authentication Ticket` - A Kerberos authentication ticket (TGT) was requested.
 - `4`: `Service Ticket Request` - A Kerberos service ticket was requested.
 - `5`: `Service Ticket Renew` - A Kerberos service ticket was renewed.
 - `6`: `Preauth` - A preauthentication stage was engaged.
+- `99`: `Other` - The event activity is not mapped. See the `activity_name` attribute, which contains a data source specific value.
 
 The normalized identifier of the activity that triggered the event.
 
 ### `actor`
 
 - **Type**: [`actor`](../objects/actor.md)
+- **Requirement**: optional
 - **Group**: context
 
 The actor that requested the authentication.
@@ -82,10 +90,8 @@ The authentication protocol as defined by the caption of 'auth_protocol_id'. In 
 
 #### Enum values
 
-- `99`: `Other` - The authentication protocol is not mapped. See the `auth_protocol` attribute, which contains a data source specific value.
 - `0`: `Unknown` - The authentication protocol is unknown.
 - `1`: `NTLM`
-- `10`: `RADIUS`
 - `2`: `Kerberos`
 - `3`: `Digest`
 - `4`: `OpenID`
@@ -94,6 +100,8 @@ The authentication protocol as defined by the caption of 'auth_protocol_id'. In 
 - `7`: `PAP`
 - `8`: `CHAP`
 - `9`: `EAP`
+- `10`: `RADIUS`
+- `99`: `Other` - The authentication protocol is not mapped. See the `auth_protocol` attribute, which contains a data source specific value.
 
 The normalized identifier of the authentication protocol used to create the user session.
 
@@ -150,6 +158,7 @@ The attempted authentication is over a remote connection.
 ### `logon_process`
 
 - **Type**: [`process`](../objects/process.md)
+- **Requirement**: optional
 - **Group**: context
 
 The trusted process that validated the authentication credentials.
@@ -171,13 +180,8 @@ The logon type, normalized to the caption of the logon_type_id value. In the cas
 
 #### Enum values
 
-- `99`: `Other` - The logon type is not mapped. See the `logon_type` attribute, which contains a data source specific value.
 - `0`: `Unknown` - The logon type is unknown.
 - `1`: `System` - Used only by the System account, for example at system startup.
-- `10`: `Remote Interactive` - A remote logon using Terminal Services or remote desktop application.
-- `11`: `Cached Interactive` - A user logged on to this device with network credentials that were stored locally on the device and the domain controller was not contacted to verify the credentials.
-- `12`: `Cached Remote Interactive` - Same as Remote Interactive. This is used for internal auditing.
-- `13`: `Cached Unlock` - Workstation logon.
 - `2`: `Interactive` - A local logon to device console.
 - `3`: `Network` - A user or device logged onto this device from the network.
 - `4`: `Batch` - A batch server logon, where processes may be executing on behalf of a user without their direct intervention.
@@ -185,6 +189,11 @@ The logon type, normalized to the caption of the logon_type_id value. In the cas
 - `7`: `Unlock` - A user unlocked the device.
 - `8`: `Network Cleartext` - A user logged on to this device from the network. The user's password in the authentication package was not hashed.
 - `9`: `New Credentials` - A caller cloned its current token and specified new credentials for outbound connections. The new logon session has the same local identity, but uses different credentials for other network connections.
+- `10`: `Remote Interactive` - A remote logon using Terminal Services or remote desktop application.
+- `11`: `Cached Interactive` - A user logged on to this device with network credentials that were stored locally on the device and the domain controller was not contacted to verify the credentials.
+- `12`: `Cached Remote Interactive` - Same as Remote Interactive. This is used for internal auditing.
+- `13`: `Cached Unlock` - Workstation logon.
+- `99`: `Other` - The logon type is not mapped. See the `logon_type` attribute, which contains a data source specific value.
 
 The normalized logon type identifier.
 
@@ -207,6 +216,8 @@ The authenticated user or service session.
 ### `status_detail`
 
 - **Type**: `string_t`
+- **Requirement**: recommended
+- **Group**: primary
 
 The details about the authentication request. For example, possible details for Windows logon or logoff events are:
 
@@ -230,3 +241,36 @@ The details about the authentication request. For example, possible details for 
 - **Group**: primary
 
 The subject (user/role or account) to authenticate.
+
+### `class_uid`
+
+- **Type**: `integer_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `class_name`
+
+#### Enum values
+
+- `3002`: `Authentication` - Authentication events report authentication session activities such as user attempts a logon or logoff, successfully or otherwise.
+
+The unique identifier of a class. A class describes the attributes available in an event.
+
+### `type_uid`
+
+- **Type**: `long_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `type_name`
+
+#### Enum values
+
+- `300200`: `Authentication: Unknown`
+- `300201`: `Authentication: Logon` - A new logon session was requested.
+- `300202`: `Authentication: Logoff` - A logon session was terminated and no longer exists.
+- `300203`: `Authentication: Authentication Ticket` - A Kerberos authentication ticket (TGT) was requested.
+- `300204`: `Authentication: Service Ticket Request` - A Kerberos service ticket was requested.
+- `300205`: `Authentication: Service Ticket Renew` - A Kerberos service ticket was renewed.
+- `300206`: `Authentication: Preauth` - A preauthentication stage was engaged.
+- `300299`: `Authentication: Other`
+
+The event/finding type ID. It identifies the event's semantics and structure. The value is calculated by the logging system as: `class_uid * 100 + activity_id`.

@@ -3,10 +3,21 @@
 The Process object describes a running instance of a launched program.
 
 - **Extends**: [Process Entity (process_entity)](process_entity.md)
+- **Profiles**: [Container](../profiles/container.md), [Date/Time](../profiles/datetime.md)
+- **Observable**: `25`
 
 ## Constraints
 
 - **At least one of**: `pid`, `uid`
+
+## Inherited attributes
+
+**From Process Entity:**
+- `cmd_line` (recommended)
+- `created_time` (recommended)
+- `name` (recommended)
+- `pid` (recommended)
+- `uid` (recommended)
 
 ## Attributes
 

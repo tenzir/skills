@@ -2,6 +2,14 @@
 
 The container context for a process.
 
+## Applies to
+
+- Device (object)
+- Endpoint (object)
+- Network Endpoint (object)
+- Network Proxy Endpoint (object)
+- Process (object)
+
 ## Attributes
 
 ### `container`

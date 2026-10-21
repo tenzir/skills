@@ -13,6 +13,7 @@ The Organization object describes characteristics of an organization or company 
 ### `name`
 
 - **Type**: `string_t`
+- **Requirement**: recommended
 
 The name of the organization, Oracle Cloud Tenancy, Google Cloud Organization, or AWS Organization. For example,  `Widget, Inc.`  or the  `AWS Organization name` .
 
@@ -33,5 +34,6 @@ The unique identifier of an organizational unit, Google Cloud Folder, or AWS Org
 ### `uid`
 
 - **Type**: `string_t`
+- **Requirement**: recommended
 
 The unique identifier of the organization, Oracle Cloud Tenancy, Google Cloud Organization, or AWS Organization. For example, an  `AWS Org ID`  or  `Oracle Cloud Domain ID` .

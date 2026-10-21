@@ -3,6 +3,7 @@
 The Geo Location object describes a geographical location, usually associated with an IP address.
 
 - **Extends**: [Object (object)](object.md)
+- **Observable**: `26`
 
 ## Constraints
 

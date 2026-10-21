@@ -15,16 +15,16 @@ Note: If the Finding is an incident, i.e. requires incident workflow, also apply
 ## Inherited attributes
 
 **From Finding:**
+- `activity_id` (required)
 - `finding_info` (required)
+- `time` (required)
 - `confidence_id` (recommended)
 - `status_id` (recommended)
 
 **From Base Event:**
 - `category_uid` (required)
-- `class_uid` (required)
 - `metadata` (required)
 - `severity_id` (required)
-- `type_uid` (required)
 - `message` (recommended)
 - `observables` (recommended)
 - `status_code` (recommended)
@@ -72,3 +72,33 @@ Describes details about the resource/resources that are affected by the vulnerab
 - **Group**: primary
 
 This object describes vulnerabilities reported in a security finding.
+
+### `class_uid`
+
+- **Type**: `integer_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `class_name`
+
+#### Enum values
+
+- `2007`: `Application Security Posture Finding` - The Application Security Posture Finding event is a notification about any bug, defect, deficiency, exploit, vulnerability, weakness or any other issue with software and related systems. Application Security Posture Findings typically involve reporting on the greater context including compliance, impacted resources, remediation guidance, specific code defects, and/or vulnerability metadata. Application Security Posture Findings can be reported by Threat & Vulnerability Management (TVM) tools, Application Security Posture Management (ASPM) tools, or other similar tools. Note: if the event producer is a security control, the `security_control` profile should be applied and its `attacks` information, if present, should be duplicated into the `finding_info` object. Note: If the Finding is an incident, i.e. requires incident workflow, also apply the `incident` profile or aggregate this finding into an `Incident Finding`.
+
+The unique identifier of a class. A class describes the attributes available in an event. Producers and mappers must set this to the `uid` defined in the event class definition. For example, `Detection Finding` is `2004`.
+
+### `type_uid`
+
+- **Type**: `long_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `type_name`
+
+#### Enum values
+
+- `200700`: `Application Security Posture Finding: Unknown`
+- `200701`: `Application Security Posture Finding: Create` - A finding was created.
+- `200702`: `Application Security Posture Finding: Update` - A finding was updated.
+- `200703`: `Application Security Posture Finding: Close` - A finding was closed.
+- `200799`: `Application Security Posture Finding: Other`
+
+The event/finding type ID. It identifies the event's semantics and structure. Producers and mappers must compute this as `class_uid * 100 + activity_id`. It uniquely identifies the combination of event class and activity across the entire schema. For example, `Detection Finding: Create` is `200401`.

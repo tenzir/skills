@@ -37,7 +37,7 @@ Abstract base class for System Activity event classes. Concrete classes in this 
 - **Requirement**: required
 - **Group**: primary
 
-The actor object describes details about the user/role/process that was the source of the activity. Note that this is not the threat actor of a campaign but may be part of a campaign.
+The user, process, or service that initiated the activity on the host. For system-level events this is typically a process; for IAM events it is typically a user or role.
 
 ### `device`
 
@@ -45,4 +45,4 @@ The actor object describes details about the user/role/process that was the sour
 - **Requirement**: required
 - **Group**: primary
 
-An addressable device, computer system or host.
+The host or device where the activity was observed. Populate with details such as hostname, IP address, OS, and hardware identifiers when available from the source.

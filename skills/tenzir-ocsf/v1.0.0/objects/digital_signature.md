@@ -3,6 +3,7 @@
 The Digital Signature object contains information about the cryptographic mechanism used to verify the authenticity, integrity, and origin of the file or application.
 
 - **Extends**: [Object (object)](object.md)
+- **Profiles**: [Date/Time](../profiles/datetime.md)
 
 ## Attributes
 
@@ -21,12 +22,12 @@ The digital signature algorithm used to create the signature, normalized to the 
 
 #### Enum values
 
-- `99`: `Other`
 - `0`: `Unknown`
 - `1`: `DSA` - Digital Signature Algorithm (DSA).
 - `2`: `RSA` - Rivest-Shamir-Adleman (RSA) Algorithm.
 - `3`: `ECDSA` - Elliptic Curve Digital Signature Algorithm.
 - `4`: `Authenticode` - Microsoft Authenticode Digital Signature Algorithm.
+- `99`: `Other`
 
 The identifier of the normalized digital signature algorithm.
 

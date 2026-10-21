@@ -14,20 +14,26 @@ Datastore events describe general activities (Read, Update, Query, Delete, etc.)
 ## Inherited attributes
 
 **From Base Event:**
+- `category_uid` (required)
 - `metadata` (required)
 - `severity_id` (required)
+- `time` (required)
 - `message` (recommended)
 - `status_id` (recommended)
+- `timezone_offset` (recommended)
 
 ## Attributes
 
 ### `activity_id`
 
 - **Type**: `integer_t`
+- **Requirement**: required
+- **Group**: classification
 - **Sibling**: `activity_name`
 
 #### Enum values
 
+- `0`: `Unknown` - The event activity is unknown.
 - `1`: `Read` - The datastore activity in the event pertains to a 'Read' operation.
 - `2`: `Update` - The datastore activity in the event pertains to a 'Update' operation.
 - `3`: `Connect` - The datastore activity in the event pertains to a 'Connect' operation.
@@ -35,6 +41,7 @@ Datastore events describe general activities (Read, Update, Query, Delete, etc.)
 - `5`: `Write` - The datastore activity in the event pertains to a 'Write' operation.
 - `6`: `Create` - The datastore activity in the event pertains to a 'Create' operation.
 - `7`: `Delete` - The datastore activity in the event pertains to a 'Delete' operation.
+- `99`: `Other` - The event activity is not mapped. See the `activity_name` attribute, which contains a data source specific value.
 
 The normalized identifier of the activity that triggered the event.
 
@@ -77,11 +84,11 @@ The datastore resource type (e.g. database, datastore, or table).
 
 #### Enum values
 
-- `99`: `Other` - The datastore resource type is not mapped.
 - `0`: `Unknown` - The datastore resource type is unknown.
 - `1`: `Database`
 - `2`: `Databucket`
 - `3`: `Table`
+- `99`: `Other` - The datastore resource type is not mapped.
 
 The normalized datastore resource type identifier.
 
@@ -124,3 +131,37 @@ The actor object describes details about the user/role/process that was the sour
 - **Group**: primary
 
 Details about the source of the activity.
+
+### `class_uid`
+
+- **Type**: `integer_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `class_name`
+
+#### Enum values
+
+- `6005`: `Datastore Activity` - Datastore events describe general activities (Read, Update, Query, Delete, etc.) which affect datastores or data within those datastores, e.g. (AWS RDS, AWS S3).
+
+The unique identifier of a class. A Class describes the attributes available in an event.
+
+### `type_uid`
+
+- **Type**: `long_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `type_name`
+
+#### Enum values
+
+- `600500`: `Datastore Activity: Unknown`
+- `600501`: `Datastore Activity: Read` - The datastore activity in the event pertains to a 'Read' operation.
+- `600502`: `Datastore Activity: Update` - The datastore activity in the event pertains to a 'Update' operation.
+- `600503`: `Datastore Activity: Connect` - The datastore activity in the event pertains to a 'Connect' operation.
+- `600504`: `Datastore Activity: Query` - The datastore activity in the event pertains to a 'Query' operation.
+- `600505`: `Datastore Activity: Write` - The datastore activity in the event pertains to a 'Write' operation.
+- `600506`: `Datastore Activity: Create` - The datastore activity in the event pertains to a 'Create' operation.
+- `600507`: `Datastore Activity: Delete` - The datastore activity in the event pertains to a 'Delete' operation.
+- `600599`: `Datastore Activity: Other`
+
+The event/finding type ID. It identifies the event's semantics and structure. The value is calculated by the logging system as: `class_uid * 100 + activity_id`.

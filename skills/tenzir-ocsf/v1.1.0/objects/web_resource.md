@@ -27,18 +27,21 @@ Description of the web resource.
 ### `name`
 
 - **Type**: `string_t`
+- **Requirement**: optional
 
 The name of the web resource.
 
 ### `type`
 
 - **Type**: `string_t`
+- **Requirement**: optional
 
 The web resource type as defined by the event source.
 
 ### `uid`
 
 - **Type**: `string_t`
+- **Requirement**: optional
 
 The unique identifier of the web resource.
 

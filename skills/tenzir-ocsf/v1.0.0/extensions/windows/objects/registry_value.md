@@ -63,8 +63,8 @@ A string representation of the value type as specified in [Registry Value Types]
 
 #### Enum values
 
+- `0`: `Unknown` - The type is unknown.
 - `1`: `REG_BINARY`
-- `10`: `REG_SZ`
 - `2`: `REG_DWORD`
 - `3`: `REG_DWORD_BIG_ENDIAN`
 - `4`: `REG_EXPAND_SZ`
@@ -73,5 +73,7 @@ A string representation of the value type as specified in [Registry Value Types]
 - `7`: `REG_NONE`
 - `8`: `REG_QWORD`
 - `9`: `REG_QWORD_LITTLE_ENDIAN`
+- `10`: `REG_SZ`
+- `99`: `Other` - The type is not mapped. See the `type` attribute, which may contain a data source specific value.
 
 The value type ID.

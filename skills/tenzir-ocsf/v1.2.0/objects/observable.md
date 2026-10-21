@@ -36,6 +36,33 @@ The observable value type name.
 #### Enum values
 
 - `0`: `Unknown` - Unknown observable data type.
+- `1`: `Hostname` - Observable by Dictionary Type. Unique name assigned to a device connected to a computer network. A domain name in general is an Internet address that can be resolved through the Domain Name System (DNS). For example: `r2-d2.example.com`.
+- `2`: `IP Address` - Observable by Dictionary Type. Internet Protocol address (IP address), in either IPv4 or IPv6 format. For example, `192.168.200.24` or `2001:0db8:85a3:0000:0000:8a2e:0370:7334`.
+- `3`: `MAC Address` - Observable by Dictionary Type. Media Access Control (MAC) address. For example: `18:36:F3:98:4F:9A`.
+- `4`: `User Name` - Observable by Dictionary Type. User name. For example: `john_doe`.
+- `5`: `Email Address` - Observable by Dictionary Type. Email address. For example: `john_doe@example.com`.
+- `6`: `URL String` - Observable by Dictionary Type. Uniform Resource Locator (URL) string. For example: `http://www.example.com/download/trouble.exe`.
+- `7`: `File Name` - Observable by Dictionary Type. File name. For example: `text-file.txt`.
+- `8`: `Hash` - Observable by Dictionary Type. Hash. A unique value that corresponds to the content of the file, image, ja3_hash or hassh found in the schema. For example MD5: `3172ac7e2b55cbb81f04a6e65855a628`.
+- `9`: `Process Name` - Observable by Dictionary Type. Process name. For example: `Notepad`.
+- `10`: `Resource UID` - Observable by Dictionary Type. Resource unique identifier. For example, S3 Bucket name or EC2 Instance ID.
+- `11`: `Port` - Observable by Dictionary Type. The TCP/UDP port number. For example: `80` or `22`.
+- `12`: `Subnet` - Observable by Dictionary Type. The subnet represented in a CIDR notation, using the format network_address/prefix_length. The network_address can be in either IPv4 or IPv6 format. The prefix length indicates the number of bits used for the network portion, and the remaining bits are available for host addresses within that subnet. For example: - 192.168.1.0/24 - 2001:0db8:85a3:0000::/64
+- `13`: `Command Line` - Observable by Dictionary Attribute. The full command line used to launch an application, service, process, or job. For example: `ssh user@10.0.0.10`. If the command line is unavailable or missing, the empty string `''` is to be used.
+- `14`: `Country` - Observable by Dictionary Attribute. The ISO 3166-1 Alpha-2 country code. For the complete list of country codes see [ISO 3166-1 alpha-2 codes](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en). Note: The two letter country code should be capitalized. For example: `US` or `CA`.
+- `15`: `Process ID` - Observable by Dictionary Attribute. The process identifier, as reported by the operating system. Process ID (PID) is a number used by the operating system to uniquely identify an active process.
+- `16`: `HTTP User-Agent` - Observable by Dictionary Attribute. The request header that identifies the operating system and web browser.
+- `17`: `CWE Object: uid` - Observable by Object-Specific Attribute. Object-specific attribute "uid" for the CWE Object.
+- `18`: `CVE Object: uid` - Observable by Object-Specific Attribute. Object-specific attribute "uid" for the CVE Object.
+- `20`: `Endpoint` - Observable by Object. The Endpoint object describes a physical or virtual device that connects to and exchanges information with a computer network. Some examples of endpoints are mobile devices, desktop computers, virtual machines, embedded devices, and servers. Internet-of-Things devices—like cameras, lighting, refrigerators, security systems, smart speakers, and thermostats—are also endpoints.
+- `21`: `User` - Observable by Object. The User object describes the characteristics of a user/person or a security principal. Defined by D3FEND [d3f:UserAccount](https://d3fend.mitre.org/dao/artifact/d3f:UserAccount/).
+- `22`: `Email` - Observable by Object. The Email object describes the email metadata such as sender, recipients, and direction. Defined by D3FEND [d3f:Email](https://d3fend.mitre.org/dao/artifact/d3f:Email/).
+- `23`: `Uniform Resource Locator` - Observable by Object. The Uniform Resource Locator(URL) object describes the characteristics of a URL. Defined in [RFC 1738](https://datatracker.ietf.org/doc/html/rfc1738) and by D3FEND [d3f:URL](https://d3fend.mitre.org/dao/artifact/d3f:URL/).
+- `24`: `File` - Observable by Object. The File object represents the metadata associated with a file stored in a computer system. It encompasses information about the file itself, including its attributes, properties, and organizational details. Defined by D3FEND [d3f:File](https://next.d3fend.mitre.org/dao/artifact/d3f:File/).
+- `25`: `Process` - Observable by Object. The Process object describes a running instance of a launched program. Defined by D3FEND [d3f:Process](https://d3fend.mitre.org/dao/artifact/d3f:Process/).
+- `26`: `Geo Location` - Observable by Object. The Geo Location object describes a geographical location, usually associated with an IP address. Defined by D3FEND [d3f:PhysicalLocation](https://d3fend.mitre.org/dao/artifact/d3f:PhysicalLocation/).
+- `27`: `Container` - Observable by Object. The Container object describes an instance of a specific container. A container is a prepackaged, portable system image that runs isolated on an existing system using a container runtime like containerd.
+- `30`: `Fingerprint` - Observable by Object. The Fingerprint object provides detailed information about a digital fingerprint, which is a compact representation of data used to identify a longer piece of information, such as a public key or file content. It contains the algorithm and value of the fingerprint, enabling efficient and reliable identification of the associated data.
 - `99`: `Other` - The observable data type is not mapped. See the `type` attribute, which may contain data source specific value.
 
 The observable value type identifier.

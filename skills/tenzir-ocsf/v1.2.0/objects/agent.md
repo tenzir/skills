@@ -18,6 +18,7 @@ An Agent (also known as a Sensor) is typically installed on an Operating System 
 
 #### Enum values
 
+- `0`: `Unknown` - The type is unknown.
 - `1`: `Endpoint Detection and Response` - Any EDR sensor or agent. Or any tool that provides similar threat detection, anti-malware, anti-ransomware, or similar capabilities. E.g., Crowdstrike Falcon, Microsoft Defender for Endpoint, Wazuh.
 - `2`: `Data Loss Prevention` - Any DLP sensor or agent. Or any tool that provides similar data classification, data loss detection, and/or data loss prevention capabilities. E.g., Forcepoint DLP, Microsoft Purview, Symantec DLP.
 - `3`: `Backup & Recovery` - Any agent or sensor that provides backups, archival, or recovery capabilities. E.g., Azure Backup, AWS Backint Agent.
@@ -27,6 +28,7 @@ An Agent (also known as a Sensor) is typically installed on an Operating System 
 - `7`: `Mobile Device Management` - Any agent or sensor responsible for providing Mobile Device Management (MDM) or Mobile Enterprise Management (MEM) capabilities. E.g., JumpCloud Agent, Esper Agent, Jamf Pro binary.
 - `8`: `Configuration Management` - Any agent or sensor that provides configuration management of a device, such as scanning for software, license management, or applying configurations. E.g., AWS Systems Manager Agent, Flexera, ServiceNow MID Server.
 - `9`: `Remote Access` - Any agent or sensor that provides remote access capabilities to a device. E.g., BeyondTrust, Amazon Systems Manager Agent, Verkada Agent.
+- `99`: `Other` - The type is not mapped. See the `type` attribute, which contains a data source specific value.
 
 The normalized representation of an agent or sensor. E.g., EDR, vulnerability management, APM, backup & recovery, etc.
 

@@ -22,11 +22,9 @@ HTTP Activity events report HTTP connection and traffic information.
 
 **From Base Event:**
 - `category_uid` (required)
-- `class_uid` (required)
 - `metadata` (required)
 - `severity_id` (required)
 - `time` (required)
-- `type_uid` (required)
 - `message` (recommended)
 - `observables` (recommended)
 - `status` (recommended)
@@ -40,10 +38,13 @@ HTTP Activity events report HTTP connection and traffic information.
 ### `activity_id`
 
 - **Type**: `integer_t`
+- **Requirement**: required
+- **Group**: classification
 - **Sibling**: `activity_name`
 
 #### Enum values
 
+- `0`: `Unknown` - The event activity is unknown.
 - `1`: `Connect` - The CONNECT method establishes a tunnel to the server identified by the target resource.
 - `2`: `Delete` - The DELETE method deletes the specified resource.
 - `3`: `Get` - The GET method requests a representation of the specified resource. Requests using GET should only retrieve data.
@@ -52,6 +53,7 @@ HTTP Activity events report HTTP connection and traffic information.
 - `6`: `Post` - The POST method submits an entity to the specified resource, often causing a change in state or side effects on the server.
 - `7`: `Put` - The PUT method replaces all current representations of the target resource with the request payload.
 - `8`: `Trace` - The TRACE method performs a message loop-back test along the path to the target resource.
+- `99`: `Other` - The event activity is not mapped. See the `activity_name` attribute, which contains a data source specific value.
 
 The normalized identifier of the activity that triggered the event.
 
@@ -96,3 +98,38 @@ The HTTP Response from a web server to a requester.
 > **Deprecated since v1.1.0.** Use the `http_response.code` attribute instead.
 
 The Hypertext Transfer Protocol (HTTP) [status code](https://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml) returned to the client.
+
+### `class_uid`
+
+- **Type**: `integer_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `class_name`
+
+#### Enum values
+
+- `4002`: `HTTP Activity` - HTTP Activity events report HTTP connection and traffic information.
+
+The unique identifier of a class. A class describes the attributes available in an event.
+
+### `type_uid`
+
+- **Type**: `long_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `type_name`
+
+#### Enum values
+
+- `400200`: `HTTP Activity: Unknown`
+- `400201`: `HTTP Activity: Connect` - The CONNECT method establishes a tunnel to the server identified by the target resource.
+- `400202`: `HTTP Activity: Delete` - The DELETE method deletes the specified resource.
+- `400203`: `HTTP Activity: Get` - The GET method requests a representation of the specified resource. Requests using GET should only retrieve data.
+- `400204`: `HTTP Activity: Head` - The HEAD method asks for a response identical to a GET request, but without the response body.
+- `400205`: `HTTP Activity: Options` - The OPTIONS method describes the communication options for the target resource.
+- `400206`: `HTTP Activity: Post` - The POST method submits an entity to the specified resource, often causing a change in state or side effects on the server.
+- `400207`: `HTTP Activity: Put` - The PUT method replaces all current representations of the target resource with the request payload.
+- `400208`: `HTTP Activity: Trace` - The TRACE method performs a message loop-back test along the path to the target resource.
+- `400299`: `HTTP Activity: Other`
+
+The event/finding type ID. It identifies the event's semantics and structure. The value is calculated by the logging system as: `class_uid * 100 + activity_id`.

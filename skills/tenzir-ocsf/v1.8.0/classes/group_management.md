@@ -15,11 +15,9 @@ Group Management events report management updates to a group, including updates 
 
 **From Base Event:**
 - `category_uid` (required)
-- `class_uid` (required)
 - `metadata` (required)
 - `severity_id` (required)
 - `time` (required)
-- `type_uid` (required)
 - `message` (recommended)
 - `observables` (recommended)
 - `status` (recommended)
@@ -33,10 +31,13 @@ Group Management events report management updates to a group, including updates 
 ### `activity_id`
 
 - **Type**: `integer_t`
+- **Requirement**: required
+- **Group**: classification
 - **Sibling**: `activity_name`
 
 #### Enum values
 
+- `0`: `Unknown` - The event activity is unknown.
 - `1`: `Assign Privileges` - Assign privileges to a group.
 - `2`: `Revoke Privileges` - Revoke privileges from a group.
 - `3`: `Add User` - Add user to a group.
@@ -45,6 +46,7 @@ Group Management events report management updates to a group, including updates 
 - `6`: `Create` - A group was created.
 - `7`: `Add Subgroup` - Add subgroup to a group.
 - `8`: `Remove Subgroup` - Remove subgroup from a group.
+- `99`: `Other` - The event activity is not mapped. See the `activity_name` attribute, which contains a data source specific value.
 
 The normalized identifier of the activity that triggered the event.
 
@@ -87,3 +89,38 @@ A subgroup that was added to or removed from the group.
 - **Group**: primary
 
 A user that was added to or removed from the group.
+
+### `class_uid`
+
+- **Type**: `integer_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `class_name`
+
+#### Enum values
+
+- `3006`: `Group Management` - Group Management events report management updates to a group, including updates to membership and permissions.
+
+The unique identifier of a class. A class describes the attributes available in an event.
+
+### `type_uid`
+
+- **Type**: `long_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `type_name`
+
+#### Enum values
+
+- `300600`: `Group Management: Unknown`
+- `300601`: `Group Management: Assign Privileges` - Assign privileges to a group.
+- `300602`: `Group Management: Revoke Privileges` - Revoke privileges from a group.
+- `300603`: `Group Management: Add User` - Add user to a group.
+- `300604`: `Group Management: Remove User` - Remove user from a group.
+- `300605`: `Group Management: Delete` - A group was deleted.
+- `300606`: `Group Management: Create` - A group was created.
+- `300607`: `Group Management: Add Subgroup` - Add subgroup to a group.
+- `300608`: `Group Management: Remove Subgroup` - Remove subgroup from a group.
+- `300699`: `Group Management: Other`
+
+The event/finding type ID. It identifies the event's semantics and structure. The value is calculated by the logging system as: `class_uid * 100 + activity_id`.

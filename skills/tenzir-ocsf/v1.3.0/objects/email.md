@@ -3,6 +3,8 @@
 The Email object describes the email metadata such as sender, recipients, and direction. Defined by D3FEND [d3f:Email](https://d3fend.mitre.org/dao/artifact/d3f:Email/).
 
 - **Extends**: [Object (object)](object.md)
+- **Profiles**: [Data Classification](../profiles/data_classification.md)
+- **Observable**: `22`
 
 ## Attributes
 

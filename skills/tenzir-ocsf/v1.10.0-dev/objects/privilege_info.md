@@ -3,6 +3,7 @@
 The Privilege Info object describes information about a specific privilege, action, or permission. It captures the privilege name, type, usage status, and when it was last used.
 
 - **Extends**: [Object (object)](object.md)
+- **Profiles**: [Date/Time](../profiles/datetime.md)
 
 ## Attributes
 

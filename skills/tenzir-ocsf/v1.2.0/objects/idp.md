@@ -13,11 +13,13 @@ The Identity Provider object contains detailed information about a provider resp
 ### `name`
 
 - **Type**: `string_t`
+- **Requirement**: recommended
 
 The name of the identity provider.
 
 ### `uid`
 
 - **Type**: `string_t`
+- **Requirement**: recommended
 
 The unique identifier of the identity provider.

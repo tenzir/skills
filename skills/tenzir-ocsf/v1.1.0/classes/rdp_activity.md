@@ -15,26 +15,33 @@ Remote Desktop Protocol (RDP) Activity events report remote client connections t
 - `connection_info` (recommended)
 
 **From Base Event:**
+- `category_uid` (required)
 - `metadata` (required)
 - `severity_id` (required)
+- `time` (required)
 - `message` (recommended)
 - `status_id` (recommended)
+- `timezone_offset` (recommended)
 
 ## Attributes
 
 ### `activity_id`
 
 - **Type**: `integer_t`
+- **Requirement**: required
+- **Group**: classification
 - **Sibling**: `activity_name`
 
 #### Enum values
 
+- `0`: `Unknown` - The event activity is unknown.
 - `1`: `Initial Request` - The initial RDP request.
 - `2`: `Initial Response` - The initial RDP response.
 - `3`: `Connect Request` - An RDP connection request.
 - `4`: `Connect Response` - An RDP connection response.
 - `5`: `TLS Handshake` - The TLS handshake.
 - `6`: `Traffic` - Network traffic report.
+- `99`: `Other` - The event activity is not mapped. See the `activity_name` attribute, which contains a data source specific value.
 
 The normalized identifier of the activity that triggered the event.
 
@@ -57,6 +64,7 @@ The list of observed certificates in an RDP TLS connection.
 
 - **Type**: [`device`](../objects/device.md)
 - **Requirement**: optional
+- **Group**: primary
 
 The device instigating the RDP connection.
 
@@ -98,3 +106,36 @@ The client request in an RDP network connection.
 - **Group**: primary
 
 The server response in an RDP network connection.
+
+### `class_uid`
+
+- **Type**: `integer_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `class_name`
+
+#### Enum values
+
+- `4005`: `RDP Activity` - Remote Desktop Protocol (RDP) Activity events report remote client connections to a server as seen on the network.
+
+The unique identifier of a class. A Class describes the attributes available in an event.
+
+### `type_uid`
+
+- **Type**: `long_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `type_name`
+
+#### Enum values
+
+- `400500`: `RDP Activity: Unknown`
+- `400501`: `RDP Activity: Initial Request` - The initial RDP request.
+- `400502`: `RDP Activity: Initial Response` - The initial RDP response.
+- `400503`: `RDP Activity: Connect Request` - An RDP connection request.
+- `400504`: `RDP Activity: Connect Response` - An RDP connection response.
+- `400505`: `RDP Activity: TLS Handshake` - The TLS handshake.
+- `400506`: `RDP Activity: Traffic` - Network traffic report.
+- `400599`: `RDP Activity: Other`
+
+The event/finding type ID. It identifies the event's semantics and structure. The value is calculated by the logging system as: `class_uid * 100 + activity_id`.

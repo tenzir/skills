@@ -20,6 +20,7 @@ The list of labels associated with the service.
 ### `name`
 
 - **Type**: `string_t`
+- **Requirement**: recommended
 
 The name of the service.
 
@@ -33,6 +34,7 @@ The list of tags; `{key:value}` pairs associated to the service.
 ### `uid`
 
 - **Type**: `string_t`
+- **Requirement**: recommended
 
 The unique identifier of the service.
 

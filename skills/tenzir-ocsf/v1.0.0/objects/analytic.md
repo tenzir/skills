@@ -49,12 +49,12 @@ The analytic type.
 
 #### Enum values
 
-- `0`: `Unknown`
+- `0`: `Unknown` - The type is unknown.
 - `1`: `Rule`
 - `2`: `Behavioral`
 - `3`: `Statistical`
 - `4`: `Learning (ML/DL)`
-- `99`: `Other`
+- `99`: `Other` - The type is not mapped. See the `type` attribute, which may contain a data source specific value.
 
 The analytic type ID.
 

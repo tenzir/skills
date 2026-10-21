@@ -3,6 +3,7 @@
 A durable authorization context that a principal issues to a delegate (e.g., an application, automated process, service account, or AI agent), representing delegated authority to act on the principal's behalf. Persists independently of any single trace, session, or workflow instance, so the same delegation can be referenced across many events. The principal and delegate themselves are identified by the other objects on the event carrying this delegation, such as `actor.user` or `actor.iam_role` for the principal and `ai_operation.ai_agent` for an AI delegate. The `delegation` object itself only carries the durable identifiers used to correlate across those events. Delegations reference a parent via `parent_uid`, forming a directed acyclic graph (DAG) of re-delegations that supports lineage queries across the chain of authority. This authority graph is distinct from any agent instantiation or orchestration hierarchy, which may or may not coincide with it.
 
 - **Extends**: [Object (object)](object.md)
+- **Profiles**: [Date/Time](../profiles/datetime.md)
 
 ## Attributes
 

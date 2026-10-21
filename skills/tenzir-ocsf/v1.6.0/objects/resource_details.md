@@ -3,10 +3,16 @@
 The Resource Details object describes details about resources that were affected by the activity/event.
 
 - **Extends**: [Resource (_resource)](_resource.md)
+- **Profiles**: [Cloud](../profiles/cloud.md), [Data Classification](../profiles/data_classification.md), [Date/Time](../profiles/datetime.md)
 
 ## Constraints
 
 - **At least one of**: `name`, `uid`
+
+## Inherited attributes
+
+**From Resource:**
+- `uid` (recommended)
 
 ## Attributes
 
@@ -65,7 +71,7 @@ Indicates whether the device or resource has a backup enabled, such as an automa
 - **Requirement**: recommended
 - **Observable**: 38
 
-The name of the entity. See specific usage.
+The name of the resource.
 
 ### `namespace`
 
@@ -110,10 +116,12 @@ The role of the resource in the context of the event or finding, normalized to t
 
 #### Enum values
 
+- `0`: `Unknown` - The role is unknown.
 - `1`: `Target` - The resource is the primary target or subject of the event/finding.
 - `2`: `Actor` - The resource is acting as the initiator or performer in the context of the event/finding.
 - `3`: `Affected` - The resource was impacted or affected by the event/finding.
 - `4`: `Related` - The resource is related to or associated with the event/finding.
+- `99`: `Other` - The role is not mapped. See the role attribute, which contains a data source specific value.
 
 The normalized identifier of the resource's role in the context of the event or finding.
 

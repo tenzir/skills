@@ -30,6 +30,7 @@ The TLS extension type. For example: `Server Name`.
 
 - `0`: `server_name` - The Server Name Indication extension.
 - `1`: `maximum_fragment_length` - The Maximum Fragment Length Negotiation extension.
+- `5`: `status_request` - The Certificate Status Request extension.
 - `10`: `supported_groups` - The Supported Groups extension.
 - `13`: `signature_algorithms` - The Signature Algorithms extension.
 - `14`: `use_srtp` - The Use SRTP data protection extension.
@@ -47,8 +48,8 @@ The TLS extension type. For example: `Server Name`.
 - `47`: `certificate_authorities` - The Certificate Authorities extension.
 - `48`: `oid_filters` - The OID Filters extension.
 - `49`: `post_handshake_auth` - The Post-Handshake Client Authentication extension.
-- `5`: `status_request` - The Certificate Status Request extension.
 - `50`: `signature_algorithms_cert` - The Signature Algorithms extension.
 - `51`: `key_share` - The Key Share extension.
+- `99`: `Other` - The type is not mapped. See the `type` attribute, which contains a data source specific value.
 
 The TLS extension type identifier. See [The Transport Layer Security (TLS) extension page](https://datatracker.ietf.org/doc/html/rfc8446#page-35).

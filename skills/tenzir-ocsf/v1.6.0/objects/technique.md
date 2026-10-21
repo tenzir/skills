@@ -13,6 +13,7 @@ The MITRE Technique object describes the ATT&CK® or ATLAS™ Technique ID and/o
 ### `name`
 
 - **Type**: `string_t`
+- **Requirement**: recommended
 
 The name of the attack technique. For example: `Active Scanning` or `AI Model Inference API Access`.
 
@@ -26,5 +27,6 @@ The versioned permalink of the attack technique. For example: `https://attack.mi
 ### `uid`
 
 - **Type**: `string_t`
+- **Requirement**: recommended
 
 The unique identifier of the attack technique. For example: `T1595` or `AML.T0040`.

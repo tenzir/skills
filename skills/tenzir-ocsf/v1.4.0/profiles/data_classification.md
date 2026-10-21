@@ -2,6 +2,18 @@
 
 The Data Classification profile adds attributes to spepcific resource objects, allowing users to describe information about classifiers & data classification results.
 
+## Applies to
+
+- Database (object)
+- Databucket (object)
+- Email (object)
+- File (object)
+- Metadata (object)
+- Product (object)
+- Resource (object)
+- Resource Details (object)
+- Web Resource (object)
+
 ## Attributes
 
 ### `data_classification`

@@ -8,6 +8,12 @@ The Data Security object describes the characteristics, techniques and content o
 
 - **At least one of**: `data_lifecycle_state_id`, `detection_pattern`, `detection_system_id`, `policy`
 
+## Inherited attributes
+
+**From Data Classification:**
+- `category_id` (recommended)
+- `confidentiality_id` (recommended)
+
 ## Attributes
 
 ### `data_lifecycle_state`

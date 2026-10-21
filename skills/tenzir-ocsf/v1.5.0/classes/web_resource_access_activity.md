@@ -13,11 +13,9 @@ Web Resource Access Activity events describe successful/failed attempts to acces
 
 **From Base Event:**
 - `category_uid` (required)
-- `class_uid` (required)
 - `metadata` (required)
 - `severity_id` (required)
 - `time` (required)
-- `type_uid` (required)
 - `message` (recommended)
 - `observables` (recommended)
 - `status` (recommended)
@@ -31,14 +29,18 @@ Web Resource Access Activity events describe successful/failed attempts to acces
 ### `activity_id`
 
 - **Type**: `integer_t`
+- **Requirement**: required
+- **Group**: classification
 - **Sibling**: `activity_name`
 
 #### Enum values
 
+- `0`: `Unknown` - The event activity is unknown.
 - `1`: `Access Grant` - The incoming request has permission to the web resource.
 - `2`: `Access Deny` - The incoming request does not have permission to the web resource.
 - `3`: `Access Revoke` - The incoming request's access has been revoked due to security policy enforcements.
 - `4`: `Access Error` - An error occurred during processing the request.
+- `99`: `Other` - The event activity is not mapped. See the `activity_name` attribute, which contains a data source specific value.
 
 The normalized identifier of the activity that triggered the event.
 
@@ -91,3 +93,34 @@ The Transport Layer Security (TLS) attributes, if available.
 - **Group**: primary
 
 Details about the resource that is the target of the activity.
+
+### `class_uid`
+
+- **Type**: `integer_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `class_name`
+
+#### Enum values
+
+- `6004`: `Web Resource Access Activity` - Web Resource Access Activity events describe successful/failed attempts to access a web resource over HTTP.
+
+The unique identifier of a class. A class describes the attributes available in an event.
+
+### `type_uid`
+
+- **Type**: `long_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `type_name`
+
+#### Enum values
+
+- `600400`: `Web Resource Access Activity: Unknown`
+- `600401`: `Web Resource Access Activity: Access Grant` - The incoming request has permission to the web resource.
+- `600402`: `Web Resource Access Activity: Access Deny` - The incoming request does not have permission to the web resource.
+- `600403`: `Web Resource Access Activity: Access Revoke` - The incoming request's access has been revoked due to security policy enforcements.
+- `600404`: `Web Resource Access Activity: Access Error` - An error occurred during processing the request.
+- `600499`: `Web Resource Access Activity: Other`
+
+The event/finding type ID. It identifies the event's semantics and structure. The value is calculated by the logging system as: `class_uid * 100 + activity_id`.

@@ -9,23 +9,38 @@ DNS Activity events report DNS queries and answers as seen on the network.
 
 ## Inherited attributes
 
+**From Network Activity:**
+- `dst_endpoint` (required)
+- `src_endpoint` (required)
+
 **From Base Event:**
+- `category_uid` (required)
 - `metadata` (required)
 - `severity_id` (required)
+- `time` (required)
 - `message` (recommended)
 - `status_id` (recommended)
+- `timezone_offset` (recommended)
 
 ## Attributes
 
 ### `activity_id`
 
 - **Type**: `integer_t`
+- **Requirement**: required
+- **Group**: classification
 - **Sibling**: `activity_name`
 
 #### Enum values
 
-- `99`: `Other` - The event activity is not mapped.
 - `0`: `Unknown` - The event activity is unknown.
+- `1`: `Query` - The DNS query request.
+- `2`: `Response` - The DNS query response.
+- `3`: `Reset` - The network connection was abnormally terminated or closed by a middle device like firewalls.
+- `4`: `Fail` - The network connection failed. For example a connection timeout or no route to host.
+- `5`: `Refuse` - The network connection was refused. For example an attempt to connect to a server port which is not open.
+- `6`: `Traffic` - Network traffic report.
+- `99`: `Other` - The event activity is not mapped.
 
 The normalized identifier of the activity that triggered the event.
 
@@ -127,3 +142,36 @@ The Domain Name System (DNS) response time.
 - **Group**: context
 
 The network traffic refers to the amount of data moving across a network at a given point of time. Intended to be used alongside Network Connection.
+
+### `class_uid`
+
+- **Type**: `integer_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `class_name`
+
+#### Enum values
+
+- `4003`: `DNS Activity` - DNS Activity events report DNS queries and answers as seen on the network.
+
+The unique identifier of a class. A Class describes the attributes available in an event.
+
+### `type_uid`
+
+- **Type**: `integer_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `type_name`
+
+#### Enum values
+
+- `400300`: `DNS Activity: Unknown`
+- `400301`: `DNS Activity: Query` - The DNS query request.
+- `400302`: `DNS Activity: Response` - The DNS query response.
+- `400303`: `DNS Activity: Reset` - The network connection was abnormally terminated or closed by a middle device like firewalls.
+- `400304`: `DNS Activity: Fail` - The network connection failed. For example a connection timeout or no route to host.
+- `400305`: `DNS Activity: Refuse` - The network connection was refused. For example an attempt to connect to a server port which is not open.
+- `400306`: `DNS Activity: Traffic` - Network traffic report.
+- `400399`: `DNS Activity: Other`
+
+The event type ID. It identifies the event's semantics and structure. The value is calculated by the logging system as: `class_uid * 100 + activity_id`.

@@ -3,6 +3,7 @@
 The Product object describes characteristics of a software product.
 
 - **Extends**: [Entity (_entity)](_entity.md)
+- **Profiles**: [Data Classification](../profiles/data_classification.md)
 
 ## Constraints
 
@@ -34,6 +35,7 @@ The two letter lower case language codes, as defined by ISO 639-1. For example: 
 ### `name`
 
 - **Type**: `string_t`
+- **Requirement**: recommended
 
 The name of the product.
 
@@ -47,6 +49,7 @@ The installation path of the product.
 ### `uid`
 
 - **Type**: `string_t`
+- **Requirement**: recommended
 
 The unique identifier of the product.
 

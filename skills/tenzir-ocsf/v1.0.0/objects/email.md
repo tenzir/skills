@@ -3,6 +3,7 @@
 The Email object describes the email metadata such as sender, recipients, and direction. Defined by D3FEND [d3f:Email](https://d3fend.mitre.org/dao/artifact/d3f:Email/).
 
 - **Extends**: [Object (object)](object.md)
+- **Observable**: `22`
 
 ## Attributes
 
@@ -72,6 +73,7 @@ The value of the SMTP envelope RCPT TO command.
 ### `subject`
 
 - **Type**: `string_t`
+- **Requirement**: optional
 
 The email header Subject value, as defined by RFC 5322.
 

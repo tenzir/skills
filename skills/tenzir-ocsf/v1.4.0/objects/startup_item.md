@@ -44,9 +44,11 @@ The startup item process resource.
 
 #### Enum values
 
+- `0`: `Unknown` - The run mode is unknown.
 - `1`: `Interactive` - The startup item interacts with the desktop.
 - `2`: `Own Process` - The startup item runs in its own process.
 - `3`: `Shared Process` - The startup item runs in a shared process.
+- `99`: `Other` - The run mode is not mapped. See the `run_modes` attribute, which contains data source specific values.
 
 The list of normalized identifiers that describe the startup items' properties when it is running.  Use this field to capture extended information about the process, which may depend on the type of startup item.  E.g., A Windows service that interacts with the desktop.
 
@@ -72,6 +74,7 @@ The run state of the startup item.
 
 #### Enum values
 
+- `0`: `Unknown` - The run state is unknown.
 - `1`: `Stopped` - The service is not running.
 - `2`: `Start Pending` - The service is starting.
 - `3`: `Stop Pending` - The service is stopping.
@@ -80,6 +83,7 @@ The run state of the startup item.
 - `6`: `Pause Pending` - The service is pending pause.
 - `7`: `Paused` - The service is paused.
 - `8`: `Restart Pending` - The service is pending restart.
+- `99`: `Other` - The run state is not mapped. See the `run_state` attribute, which contains a data source specific value.
 
 The run state ID of the startup item.
 

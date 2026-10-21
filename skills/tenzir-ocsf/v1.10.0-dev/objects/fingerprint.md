@@ -3,6 +3,7 @@
 The Fingerprint object provides detailed information about a fingerprint, which is a compact representation of data used to identify a longer piece of information, such as a public key, file content, or application implementation. It contains the algorithm or scheme and value of the fingerprint, enabling efficient and reliable identification of the associated data.
 
 - **Extends**: [Object (object)](object.md)
+- **Observable**: `30`
 
 ## Attributes
 
@@ -21,7 +22,7 @@ The algorithm or scheme used to create the fingerprint, normalized to the captio
 
 #### Enum values
 
-- `0`: `Unknown`
+- `0`: `Unknown` - The algorithm is unknown.
 - `1`: `MD5` - MD5 message-digest algorithm producing a 128-bit (16-byte) hash value.
 - `2`: `SHA-1` - Secure Hash Algorithm 1 producing a 160-bit (20-byte) hash value.
 - `3`: `SHA-256` - Secure Hash Algorithm 2 producing a 256-bit (32-byte) hash value.
@@ -42,7 +43,7 @@ The algorithm or scheme used to create the fingerprint, normalized to the captio
 - `18`: `Imphash` - Import hash (imphash) based on the import table of a Portable Executable (PE) file producing a 128-bit (16-byte) hash value.
 - `19`: `NPF` - Network Protocol Fingerprint (NPF) used to identify network protocols and applications.
 - `20`: `HASSH` - HASSH is a network fingerprinting standard which can be used to identify specific SSH client and server implementations.
-- `99`: `Other`
+- `99`: `Other` - The algorithm is not mapped. See the `algorithm` attribute, which contains a data source specific value.
 
 The identifier of the normalized algorithm or scheme, which was used to create the fingerprint.
 

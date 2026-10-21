@@ -3,10 +3,22 @@
 The Network Endpoint object describes characteristics of a network endpoint. These can be a source or destination of a network connection.
 
 - **Extends**: [Endpoint (endpoint)](endpoint.md)
+- **Observable**: `20`
 
 ## Constraints
 
 - **At least one of**: `ip`, `uid`, `name`, `hostname`, `svc_name`, `instance_uid`, `interface_uid`, `interface_name`
+
+## Inherited attributes
+
+**From Endpoint:**
+- `hostname` (recommended)
+- `instance_uid` (recommended)
+- `interface_name` (recommended)
+- `interface_uid` (recommended)
+- `ip` (recommended)
+- `name` (recommended)
+- `uid` (recommended)
 
 ## Attributes
 

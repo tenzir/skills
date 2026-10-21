@@ -3,6 +3,7 @@
 The Resource Details object describes details about resources that were affected by the activity/event.
 
 - **Extends**: [Resource (_resource)](_resource.md)
+- **Profiles**: [Cloud](../profiles/cloud.md), [Data Classification](../profiles/data_classification.md)
 
 ## Constraints
 

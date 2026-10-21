@@ -39,6 +39,7 @@ A list of contextual descriptions of the `status, status_id` values.
 
 #### Enum values
 
+- `0`: `Unknown` - The status is unknown.
 - `1`: `New` - The ticket is new and yet to be reviewed.
 - `2`: `In Progress` - The ticket is actively being worked on.
 - `3`: `Notified` - Relevant parties have been notified about the ticket.
@@ -47,6 +48,7 @@ A list of contextual descriptions of the `status, status_id` values.
 - `6`: `Closed` - The ticket has been completed and closed.
 - `7`: `Canceled` - The ticket has been canceled and will not be processed.
 - `8`: `Reopened` - The ticket was previously closed, but has been reopened.
+- `99`: `Other` - The status is not mapped. See the `status` attribute, which contains a data source specific value.
 
 The normalized identifier for the ticket status.
 
@@ -72,10 +74,10 @@ The linked ticket type determines whether the ticket is internal or in an extern
 
 #### Enum values
 
-- `0`: `Unknown`
+- `0`: `Unknown` - The type is unknown.
 - `1`: `Internal`
 - `2`: `External`
-- `99`: `Other`
+- `99`: `Other` - The type is not mapped. See the `type` attribute, which contains a data source specific value.
 
 The normalized identifier for the ticket type.
 

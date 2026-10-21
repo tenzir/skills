@@ -3,6 +3,7 @@
 The Resource object contains attributes that provide information about a particular resource. It serves as a base object, offering attributes that help identify and classify the resource effectively.
 
 - **Extends**: [Entity (_entity)](_entity.md)
+- **Profiles**: [Data Classification](../profiles/data_classification.md)
 
 ## Constraints
 

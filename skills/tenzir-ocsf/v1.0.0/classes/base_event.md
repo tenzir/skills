@@ -9,6 +9,7 @@ The base event is a generic and concrete event. It also defines a set of attribu
 ### `enrichments`
 
 - **Type**: [`enrichment`](../objects/enrichment.md)
+- **Requirement**: optional
 - **Group**: context
 
 The additional information from an external data source, which is associated with the event. For example add location information for the IP address in the DNS answers:`[{"name": "answers.ip", "value": "92.24.47.250", "type": "location", "data": {"city": "Socotra", "continent": "Asia", "coordinates": [-25.4153, 17.0743], "country": "YE", "desc": "Yemen"}}]`
@@ -40,6 +41,7 @@ The observables associated with the event.
 ### `raw_data`
 
 - **Type**: `string_t`
+- **Requirement**: optional
 - **Group**: context
 
 The event data as received from the event source.
@@ -61,7 +63,6 @@ The event severity, normalized to the caption of the severity_id value. In the c
 
 #### Enum values
 
-- `99`: `Other` - The event severity is not mapped. See the `severity` attribute, which contains a data source specific value.
 - `0`: `Unknown` - The event severity is not known.
 - `1`: `Informational` - Informational message. No action required.
 - `2`: `Low` - The user decides if action is needed.
@@ -69,6 +70,7 @@ The event severity, normalized to the caption of the severity_id value. In the c
 - `4`: `High` - Action is required immediately.
 - `5`: `Critical` - Action is required immediately and the scope is broad.
 - `6`: `Fatal` - An error occurred but it is too late to take remedial action.
+- `99`: `Other` - The event severity is not mapped. See the `severity` attribute, which contains a data source specific value.
 
 The normalized identifier of the event severity.
 
@@ -85,6 +87,7 @@ The event status, normalized to the caption of the status_id value. In the case 
 ### `status_code`
 
 - **Type**: `string_t`
+- **Requirement**: optional
 - **Group**: primary
 
 The event status code, as reported by the event source.
@@ -94,6 +97,7 @@ For example, in a Windows Failed Authentication event, this would be the value o
 ### `status_detail`
 
 - **Type**: `string_t`
+- **Requirement**: optional
 - **Group**: primary
 
 The status details contains additional information about the event outcome.
@@ -107,16 +111,151 @@ The status details contains additional information about the event outcome.
 
 #### Enum values
 
-- `99`: `Other` - The event status is not mapped. See the `status` attribute, which contains a data source specific value.
 - `0`: `Unknown`
 - `1`: `Success`
 - `2`: `Failure`
+- `99`: `Other` - The event status is not mapped. See the `status` attribute, which contains a data source specific value.
 
 The normalized identifier of the event status.
 
 ### `unmapped`
 
 - **Type**: [`object`](../objects/object.md)
+- **Requirement**: optional
 - **Group**: context
 
 The attributes that are not mapped to the event schema. The names and values of those attributes are specific to the event source.
+
+### `activity_name`
+
+- **Type**: `string_t`
+- **Requirement**: optional
+- **Group**: classification
+
+The event activity name, as defined by the activity_id.
+
+### `activity_id`
+
+- **Type**: `integer_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `activity_name`
+
+#### Enum values
+
+- `0`: `Unknown` - The event activity is unknown.
+- `99`: `Other` - The event activity is not mapped.
+
+The normalized identifier of the activity that triggered the event.
+
+### `category_name`
+
+- **Type**: `string_t`
+- **Requirement**: optional
+- **Group**: classification
+
+The event category name, as defined by category_uid value.
+
+### `category_uid`
+
+- **Type**: `integer_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `category_name`
+
+#### Enum values
+
+- `0`: `Uncategorized`
+
+The category unique identifier of the event.
+
+### `class_name`
+
+- **Type**: `string_t`
+- **Requirement**: optional
+- **Group**: classification
+
+The event class name, as defined by class_uid value: `Base Event`.
+
+### `class_uid`
+
+- **Type**: `integer_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `class_name`
+
+#### Enum values
+
+- `0`: `Base Event` - The base event is a generic and concrete event. It also defines a set of attributes available in most event classes. As a generic event that does not belong to any event category, it could be used to log events that are not otherwise defined by the schema.
+
+The unique identifier of a class. A Class describes the attributes available in an event.
+
+### `type_name`
+
+- **Type**: `string_t`
+- **Requirement**: optional
+- **Group**: classification
+
+The event type name, as defined by the type_uid.
+
+### `type_uid`
+
+- **Type**: `integer_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `type_name`
+
+#### Enum values
+
+- `0`: `Base Event: Unknown`
+- `99`: `Base Event: Other`
+
+The event type ID. It identifies the event's semantics and structure. The value is calculated by the logging system as: `class_uid * 100 + activity_id`.
+
+### `time`
+
+- **Type**: `timestamp_t`
+- **Requirement**: required
+- **Group**: occurrence
+
+The normalized event occurrence time.
+
+### `count`
+
+- **Type**: `integer_t`
+- **Requirement**: optional
+- **Group**: occurrence
+
+The number of times that events in the same logical group occurred during the event Start Time to End Time period.
+
+### `duration`
+
+- **Type**: `integer_t`
+- **Requirement**: optional
+- **Group**: occurrence
+
+The event duration or aggregate time, the amount of time the event covers from `start_time` to `end_time` in milliseconds.
+
+### `end_time`
+
+- **Type**: `timestamp_t`
+- **Requirement**: optional
+- **Group**: occurrence
+
+The end time of a time period, or the time of the most recent event included in the aggregate event.
+
+### `start_time`
+
+- **Type**: `timestamp_t`
+- **Requirement**: optional
+- **Group**: occurrence
+
+The start time of a time period, or the time of the least recent event included in the aggregate event.
+
+### `timezone_offset`
+
+- **Type**: `integer_t`
+- **Requirement**: recommended
+- **Group**: occurrence
+
+The number of minutes that the reported event `time` is ahead or behind UTC, in the range -1,080 to +1,080.

@@ -3,6 +3,7 @@
 The Uniform Resource Locator (URL) object describes the characteristics of a URL.
 
 - **Extends**: [Object (object)](object.md)
+- **Observable**: `23`
 
 ## Constraints
 

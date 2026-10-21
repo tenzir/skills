@@ -3,6 +3,7 @@
 The query info object holds information related to data access within a datastore. To access, manipulate, delete, or retrieve data from a datastore, a query must be written using a specific syntax.
 
 - **Extends**: [Entity (_entity)](_entity.md)
+- **Profiles**: [Date/Time](../profiles/datetime.md)
 
 ## Constraints
 
@@ -41,11 +42,13 @@ The size of the data returned from the query.
 ### `name`
 
 - **Type**: `string_t`
+- **Requirement**: recommended
 
 The query name for a saved or scheduled query.
 
 ### `uid`
 
 - **Type**: `string_t`
+- **Requirement**: recommended
 
 The unique identifier of the query.

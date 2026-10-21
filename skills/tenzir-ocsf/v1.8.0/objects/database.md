@@ -3,6 +3,7 @@
 The database object is used for databases which are typically datastore services that contain an organized collection of structured and unstructured data or a types of data.
 
 - **Extends**: [Entity (_entity)](_entity.md)
+- **Profiles**: [Data Classification](../profiles/data_classification.md), [Date/Time](../profiles/datetime.md)
 
 ## Constraints
 
@@ -48,6 +49,7 @@ The most recent time when any changes, updates, or modifications were made withi
 ### `name`
 
 - **Type**: `string_t`
+- **Requirement**: recommended
 
 The database name, ordinarily as assigned by a database administrator.
 
@@ -73,7 +75,7 @@ The database type.
 
 #### Enum values
 
-- `0`: `Unknown`
+- `0`: `Unknown` - The type is unknown.
 - `1`: `Relational`
 - `2`: `Network`
 - `3`: `Object Oriented`
@@ -82,12 +84,13 @@ The database type.
 - `6`: `NoSQL`
 - `7`: `Vector`
 - `8`: `Knowledge Graph`
-- `99`: `Other`
+- `99`: `Other` - The type is not mapped. See the `type` attribute, which contains a data source specific value.
 
 The normalized identifier of the database type.
 
 ### `uid`
 
 - **Type**: `string_t`
+- **Requirement**: recommended
 
 The unique identifier of the database.

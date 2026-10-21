@@ -13,13 +13,14 @@ Cloud Resources Inventory Info events report cloud asset inventory data. This da
 
 ## Inherited attributes
 
+**From Discovery:**
+- `activity_id` (required)
+
 **From Base Event:**
 - `category_uid` (required)
-- `class_uid` (required)
 - `metadata` (required)
 - `severity_id` (required)
 - `time` (required)
-- `type_uid` (required)
 - `message` (recommended)
 - `observables` (recommended)
 - `status` (recommended)
@@ -93,3 +94,32 @@ The cloud resource(s) that are being discovered by an inventory process. Use thi
 - **Group**: primary
 
 A cloud-based database table discovered by an inventory process.
+
+### `class_uid`
+
+- **Type**: `integer_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `class_name`
+
+#### Enum values
+
+- `5023`: `Cloud Resources Inventory Info` - Cloud Resources Inventory Info events report cloud asset inventory data. This data can be either logged or proactively collected. For example, use this event class when creating an inventory of cloud resource information from a Configuration Management Database (CMDB), Cyber Asset Attack Surface Management (CAASM), direct public cloud service provider APIs, Software-as-a-Service (SaaS) APIs, or otherwise.
+
+The unique identifier of a class. A class describes the attributes available in an event. Producers and mappers must set this to the `uid` defined in the event class definition. For example, `Detection Finding` is `2004`.
+
+### `type_uid`
+
+- **Type**: `long_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `type_name`
+
+#### Enum values
+
+- `502300`: `Cloud Resources Inventory Info: Unknown`
+- `502301`: `Cloud Resources Inventory Info: Log` - The discovered information is via a log.
+- `502302`: `Cloud Resources Inventory Info: Collect` - The discovered information is via a collection process.
+- `502399`: `Cloud Resources Inventory Info: Other`
+
+The event/finding type ID. It identifies the event's semantics and structure. Producers and mappers must compute this as `class_uid * 100 + activity_id`. It uniquely identifies the combination of event class and activity across the entire schema. For example, `Detection Finding: Create` is `200401`.

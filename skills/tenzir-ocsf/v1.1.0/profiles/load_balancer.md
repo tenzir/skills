@@ -22,5 +22,6 @@ The attributes that describe information specific to load balancers.
 
 - **Type**: [`load_balancer`](../objects/load_balancer.md)
 - **Requirement**: recommended
+- **Group**: primary
 
 The Load Balancer object contains information related to the device that is distributing incoming traffic to specified destinations.

@@ -20,6 +20,7 @@ The list of labels associated to the account.
 ### `name`
 
 - **Type**: `string_t`
+- **Requirement**: recommended
 - **Observable**: 34
 
 The name of the account (e.g.  `GCP Project name` ,  `Linux Account name`  or  `AWS Account name`).
@@ -48,6 +49,14 @@ The account type, normalized to the caption of 'account_type_id'. In the case of
 
 - `0`: `Unknown` - The account type is unknown.
 - `1`: `LDAP Account`
+- `2`: `Windows Account`
+- `3`: `AWS IAM User`
+- `4`: `AWS IAM Role`
+- `5`: `GCP Account`
+- `6`: `Azure AD Account`
+- `7`: `Mac OS Account`
+- `8`: `Apple Account`
+- `9`: `Linux Account`
 - `10`: `AWS Account`
 - `11`: `GCP Project`
 - `12`: `OCI Compartment`
@@ -57,14 +66,6 @@ The account type, normalized to the caption of 'account_type_id'. In the case of
 - `16`: `Servicenow Instance`
 - `17`: `M365 Tenant`
 - `18`: `Email Account`
-- `2`: `Windows Account`
-- `3`: `AWS IAM User`
-- `4`: `AWS IAM Role`
-- `5`: `GCP Account`
-- `6`: `Azure AD Account`
-- `7`: `Mac OS Account`
-- `8`: `Apple Account`
-- `9`: `Linux Account`
 - `99`: `Other` - The account type is not mapped.
 
 The normalized account type identifier.
@@ -72,6 +73,7 @@ The normalized account type identifier.
 ### `uid`
 
 - **Type**: `string_t`
+- **Requirement**: recommended
 - **Observable**: 35
 
 The unique identifier of the account (e.g.  `AWS Account ID` ,  `OCID` ,  `GCP Project ID` ,  `Azure Subscription ID` ,  `Google Workspace Customer ID` , or  `M365 Tenant UID`).

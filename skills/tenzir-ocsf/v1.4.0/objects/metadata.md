@@ -3,6 +3,7 @@
 The Metadata object describes the metadata associated with the event.
 
 - **Extends**: [Object (object)](object.md)
+- **Profiles**: [Data Classification](../profiles/data_classification.md), [Date/Time](../profiles/datetime.md)
 
 ## Attributes
 

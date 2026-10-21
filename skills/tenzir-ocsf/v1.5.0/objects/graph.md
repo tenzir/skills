@@ -34,6 +34,7 @@ Indicates if the graph is directed (`true`) or undirected (`false`).
 ### `name`
 
 - **Type**: `string_t`
+- **Requirement**: recommended
 
 The graph name - a human readable identifier for the graph.
 
@@ -59,6 +60,7 @@ The graph query language, normalized to the caption of the `query_language_id` v
 
 #### Enum values
 
+- `0`: `Unknown` - The Query Language is unknown.
 - `1`: `Cypher` - A declarative graph query language developed by Neo4j that allows for expressive and efficient querying of graph databases.
 - `2`: `GraphQL` - A query language for APIs that enables declarative data fetching and provides a complete description of the data in the API.
 - `3`: `Gremlin` - A graph traversal language and virtual machine developed by Apache TinkerPop that enables graph computing across different graph databases.
@@ -66,6 +68,7 @@ The graph query language, normalized to the caption of the `query_language_id` v
 - `5`: `G-CORE` - A graph query language that combines features from existing languages while adding support for paths as first-class citizens.
 - `6`: `PGQL` - Property Graph Query Language developed by Oracle that provides SQL-like syntax for querying property graphs.
 - `7`: `SPARQL` - A semantic query language for databases that enables querying and manipulating data stored in RDF format.
+- `99`: `Other` - The Query Language is not mapped. See the `query_language` attribute, which contains a data source specific value.
 
 The normalized identifier of a graph query language that can be used to interact with the graph.
 
@@ -79,5 +82,6 @@ The graph type. Typically useful to represent the specifc type of graph that is 
 ### `uid`
 
 - **Type**: `string_t`
+- **Requirement**: recommended
 
 Unique identifier of the graph - a unique ID to reference this specific graph.

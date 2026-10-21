@@ -3,6 +3,7 @@
 The OSINT (Open Source Intelligence) object contains details related to an indicator such as the indicator itself, related indicators, geolocation, registrar information, subdomains, analyst commentary, and other contextual information. This information can be used to further enrich a detection or finding by providing decisioning support to other analysts and engineers.
 
 - **Extends**: [Object (object)](object.md)
+- **Profiles**: [Date/Time](../profiles/datetime.md)
 
 ## Attributes
 
@@ -338,11 +339,6 @@ The OSINT indicator type.
 
 - `0`: `Unknown` - The indicator type is ambiguous or there is not a related indicator for the OSINT object.
 - `1`: `IP Address` - An IPv4 or IPv6 address.
-- `10`: `Vulnerability` - A CVE ID, CWE ID, or other identifier for a weakness, exploit, bug, or misconfiguration.
-- `11`: `File` - A file or metadata about a file.
-- `12`: `Registry Key` - A Windows Registry Key.
-- `13`: `Registry Value` - A Windows Registry Value.
-- `14`: `Command Line` - A partial or full Command Line used to invoke scripts or other remote commands.
 - `2`: `Domain` - A full-qualified domain name (FQDN), subdomain, or partial domain.
 - `3`: `Hostname` - A hostname or computer name.
 - `4`: `Hash` - Any type of hash e.g., MD5, SHA1, SHA2, BLAKE, BLAKE2, SSDEEP, VHASH, etc. generated from a file, malware sample, request header, or otherwise used to identify a pertinent artifact.
@@ -351,6 +347,11 @@ The OSINT indicator type.
 - `7`: `Digital Certificate` - The serial number, fingerprint, or full content of an X.509 digital certificate.
 - `8`: `Email` - The contents of an email or any related information to an email object.
 - `9`: `Email Address` - An email address.
+- `10`: `Vulnerability` - A CVE ID, CWE ID, or other identifier for a weakness, exploit, bug, or misconfiguration.
+- `11`: `File` - A file or metadata about a file.
+- `12`: `Registry Key` - A Windows Registry Key.
+- `13`: `Registry Value` - A Windows Registry Value.
+- `14`: `Command Line` - A partial or full Command Line used to invoke scripts or other remote commands.
 - `99`: `Other` - The indicator type is not directly listed.
 
 The OSINT indicator type ID.

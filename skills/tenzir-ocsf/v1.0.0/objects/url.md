@@ -3,6 +3,7 @@
 The Uniform Resource Locator(URL) object describes the characteristics of a URL. Defined in [RFC 1738](https://datatracker.ietf.org/doc/html/rfc1738) and by D3FEND [d3f:URL](https://d3fend.mitre.org/dao/artifact/d3f:URL/).
 
 - **Extends**: [Object (object)](object.md)
+- **Observable**: `23`
 
 ## Constraints
 
@@ -13,6 +14,7 @@ The Uniform Resource Locator(URL) object describes the characteristics of a URL.
 ### `categories`
 
 - **Type**: `string_t`
+- **Requirement**: optional
 
 The Website categorization names, as defined by `category_ids` enum values.
 
@@ -24,24 +26,15 @@ The Website categorization names, as defined by `category_ids` enum values.
 
 #### Enum values
 
-- `99`: `Other` - The Domain/URL category is not mapped. See the `categories` attribute, which may contain a data source specific value.
 - `0`: `Unknown` - The Domain/URL category is unknown.
 - `1`: `Adult/Mature Content`
-- `101`: `Spam`
-- `102`: `Potentially Unwanted Software`
-- `103`: `Dynamic DNS Host`
-- `106`: `E-Card/Invitations`
-- `107`: `Informational`
-- `108`: `Computer/Information Security`
-- `109`: `Internet Connected Devices`
+- `3`: `Pornography`
+- `4`: `Sex Education`
+- `5`: `Intimate Apparel/Swimsuit`
+- `6`: `Nudity`
+- `7`: `Extreme`
+- `9`: `Scam/Questionable/Illegal`
 - `11`: `Gambling`
-- `110`: `Internet Telephony`
-- `111`: `Online Meetings`
-- `112`: `Media Sharing`
-- `113`: `Radio/Audio Streams`
-- `114`: `TV/Video Streams`
-- `118`: `Piracy/Copyright Concerns`
-- `121`: `Marijuana`
 - `14`: `Violence/Hate/Racism`
 - `15`: `Weapons`
 - `16`: `Abortion`
@@ -56,7 +49,6 @@ The Website categorization names, as defined by `category_ids` enum values.
 - `26`: `Child Pornography`
 - `27`: `Education`
 - `29`: `Charitable Organizations`
-- `3`: `Pornography`
 - `30`: `Art/Culture`
 - `31`: `Financial Services`
 - `32`: `Brokerage/Trading`
@@ -66,7 +58,6 @@ The Website categorization names, as defined by `category_ids` enum values.
 - `36`: `Political/Social Advocacy`
 - `37`: `Health`
 - `38`: `Technology/Internet`
-- `4`: `Sex Education`
 - `40`: `Search Engines/Portals`
 - `43`: `Malicious Sources/Malnets`
 - `44`: `Malicious Outbound Data/Botnets`
@@ -74,7 +65,6 @@ The Website categorization names, as defined by `category_ids` enum values.
 - `46`: `News/Media`
 - `47`: `Personals/Dating`
 - `49`: `Reference`
-- `5`: `Intimate Apparel/Swimsuit`
 - `50`: `Mixed Content/Potentially Adult`
 - `51`: `Chat (IM)/SMS`
 - `52`: `Email`
@@ -85,7 +75,6 @@ The Website categorization names, as defined by `category_ids` enum values.
 - `57`: `Remote Access Tools`
 - `58`: `Shopping`
 - `59`: `Auctions`
-- `6`: `Nudity`
 - `60`: `Real Estate`
 - `61`: `Society/Daily Living`
 - `63`: `Personal Sites`
@@ -94,7 +83,6 @@ The Website categorization names, as defined by `category_ids` enum values.
 - `66`: `Travel`
 - `67`: `Vehicles`
 - `68`: `Humor/Jokes`
-- `7`: `Extreme`
 - `71`: `Software Downloads`
 - `83`: `Peer-to-Peer (P2P)`
 - `84`: `Audio/Video Clips`
@@ -103,7 +91,6 @@ The Website categorization names, as defined by `category_ids` enum values.
 - `87`: `For Kids`
 - `88`: `Web Ads/Analytics`
 - `89`: `Web Hosting`
-- `9`: `Scam/Questionable/Illegal`
 - `90`: `Uncategorized`
 - `92`: `Suspicious`
 - `93`: `Sexual Expression`
@@ -111,6 +98,21 @@ The Website categorization names, as defined by `category_ids` enum values.
 - `96`: `Non-Viewable/Infrastructure`
 - `97`: `Content Servers`
 - `98`: `Placeholders`
+- `99`: `Other` - The Domain/URL category is not mapped. See the `categories` attribute, which may contain a data source specific value.
+- `101`: `Spam`
+- `102`: `Potentially Unwanted Software`
+- `103`: `Dynamic DNS Host`
+- `106`: `E-Card/Invitations`
+- `107`: `Informational`
+- `108`: `Computer/Information Security`
+- `109`: `Internet Connected Devices`
+- `110`: `Internet Telephony`
+- `111`: `Online Meetings`
+- `112`: `Media Sharing`
+- `113`: `Radio/Audio Streams`
+- `114`: `TV/Video Streams`
+- `118`: `Piracy/Copyright Concerns`
+- `121`: `Marijuana`
 
 The Website categorization identifies.
 
@@ -145,6 +147,7 @@ The query portion of the URL. For example: the query portion of the URL `http://
 ### `resource_type`
 
 - **Type**: `string_t`
+- **Requirement**: optional
 
 The context in which a resource was retrieved in a web request.
 

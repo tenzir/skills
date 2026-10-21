@@ -13,12 +13,14 @@ The Feature object provides information about the software product feature that 
 ### `name`
 
 - **Type**: `string_t`
+- **Requirement**: recommended
 
 The name of the feature.
 
 ### `uid`
 
 - **Type**: `string_t`
+- **Requirement**: recommended
 
 The unique identifier of the feature.
 

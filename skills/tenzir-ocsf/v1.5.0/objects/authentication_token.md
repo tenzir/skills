@@ -3,6 +3,7 @@
 The Authentication Token object contains the attributes pertaining to an authentication token, ticket, or assertion e.g. Kerberos, OIDC, SAML.
 
 - **Extends**: [Object (object)](object.md)
+- **Profiles**: [Date/Time](../profiles/datetime.md)
 
 ## Attributes
 
@@ -62,6 +63,6 @@ The type of the authentication token.
 - `3`: `Identity Token` - Identity (ID) Token for OIDC.
 - `4`: `Refresh Token` - Refresh Token for OIDC.
 - `5`: `SAML Assertion` - Authentication Assertion for SAML.
-- `99`: `Other`
+- `99`: `Other` - The type is not mapped. See the `type` attribute, which contains a data source specific value.
 
 The normalized authentication token type identifier.

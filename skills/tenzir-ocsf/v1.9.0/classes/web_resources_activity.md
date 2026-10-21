@@ -11,11 +11,9 @@ Web Resources Activity events describe actions executed on a set of Web Resource
 
 **From Base Event:**
 - `category_uid` (required)
-- `class_uid` (required)
 - `metadata` (required)
 - `severity_id` (required)
 - `time` (required)
-- `type_uid` (required)
 - `message` (recommended)
 - `observables` (recommended)
 - `status` (recommended)
@@ -29,10 +27,13 @@ Web Resources Activity events describe actions executed on a set of Web Resource
 ### `activity_id`
 
 - **Type**: `integer_t`
+- **Requirement**: required
+- **Group**: classification
 - **Sibling**: `activity_name`
 
 #### Enum values
 
+- `0`: `Unknown` - The event activity is unknown.
 - `1`: `Create` - One or more web resources were created.
 - `2`: `Read` - One or more web resources were read / viewed.
 - `3`: `Update` - One or more web resources were updated.
@@ -41,6 +42,7 @@ Web Resources Activity events describe actions executed on a set of Web Resource
 - `6`: `Import` - One or more web resources were imported into an Application.
 - `7`: `Export` - One or more web resources were exported from an Application.
 - `8`: `Share` - One or more web resources were shared.
+- `99`: `Other` - The event activity is not mapped. See the `activity_name` attribute, which contains a data source specific value.
 
 The normalized identifier of the activity that triggered the event. Each event class defines its own set of activity values. Use `0` (Unknown) when the activity cannot be determined. Use `99` (Other) when the activity does not match any defined value, in which case `activity_name` must be populated with the source-specific label.
 
@@ -109,3 +111,38 @@ Describes details about web resources that were affected by an activity/event.
 > **Deprecated since v1.9.0.** Use the `updated_web_resources` attribute instead.
 
 The results of the activity on web resources. It should contain the new values of the changed attributes of the web resources.
+
+### `class_uid`
+
+- **Type**: `integer_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `class_name`
+
+#### Enum values
+
+- `6001`: `Web Resources Activity` - Web Resources Activity events describe actions executed on a set of Web Resources.
+
+The unique identifier of a class. A class describes the attributes available in an event. Producers and mappers must set this to the `uid` defined in the event class definition. For example, `Detection Finding` is `2004`.
+
+### `type_uid`
+
+- **Type**: `long_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `type_name`
+
+#### Enum values
+
+- `600100`: `Web Resources Activity: Unknown`
+- `600101`: `Web Resources Activity: Create` - One or more web resources were created.
+- `600102`: `Web Resources Activity: Read` - One or more web resources were read / viewed.
+- `600103`: `Web Resources Activity: Update` - One or more web resources were updated.
+- `600104`: `Web Resources Activity: Delete` - One or more web resources were deleted.
+- `600105`: `Web Resources Activity: Search` - A search was performed on one or more web resources.
+- `600106`: `Web Resources Activity: Import` - One or more web resources were imported into an Application.
+- `600107`: `Web Resources Activity: Export` - One or more web resources were exported from an Application.
+- `600108`: `Web Resources Activity: Share` - One or more web resources were shared.
+- `600199`: `Web Resources Activity: Other`
+
+The event/finding type ID. It identifies the event's semantics and structure. Producers and mappers must compute this as `class_uid * 100 + activity_id`. It uniquely identifies the combination of event class and activity across the entire schema. For example, `Detection Finding: Create` is `200401`.

@@ -10,20 +10,26 @@ Network File Activity events report activities on a cloud file storage service s
 ## Inherited attributes
 
 **From Base Event:**
+- `category_uid` (required)
 - `metadata` (required)
 - `severity_id` (required)
+- `time` (required)
 - `message` (recommended)
 - `status_id` (recommended)
+- `timezone_offset` (recommended)
 
 ## Attributes
 
 ### `activity_id`
 
 - **Type**: `integer_t`
+- **Requirement**: required
+- **Group**: classification
 - **Sibling**: `activity_name`
 
 #### Enum values
 
+- `0`: `Unknown` - The event activity is unknown.
 - `1`: `Upload`
 - `2`: `Download`
 - `3`: `Update`
@@ -38,6 +44,7 @@ Network File Activity events report activities on a cloud file storage service s
 - `12`: `Share`
 - `13`: `Unshare`
 - `14`: `Open`
+- `99`: `Other` - The event activity is not mapped.
 
 The normalized identifier of the activity that triggered the event.
 
@@ -72,3 +79,44 @@ The file that is the target of the activity.
 - **Group**: primary
 
 The endpoint that performed the activity on the target file.
+
+### `class_uid`
+
+- **Type**: `integer_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `class_name`
+
+#### Enum values
+
+- `4010`: `Network File Activity` - Network File Activity events report activities on a cloud file storage service such as Box, MS OneDrive, or Google Drive.
+
+The unique identifier of a class. A Class describes the attributes available in an event.
+
+### `type_uid`
+
+- **Type**: `integer_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `type_name`
+
+#### Enum values
+
+- `401000`: `Network File Activity: Unknown`
+- `401001`: `Network File Activity: Upload`
+- `401002`: `Network File Activity: Download`
+- `401003`: `Network File Activity: Update`
+- `401004`: `Network File Activity: Delete`
+- `401005`: `Network File Activity: Rename`
+- `401006`: `Network File Activity: Copy`
+- `401007`: `Network File Activity: Move`
+- `401008`: `Network File Activity: Restore`
+- `401009`: `Network File Activity: Preview`
+- `401010`: `Network File Activity: Lock`
+- `401011`: `Network File Activity: Unlock`
+- `401012`: `Network File Activity: Share`
+- `401013`: `Network File Activity: Unshare`
+- `401014`: `Network File Activity: Open`
+- `401099`: `Network File Activity: Other`
+
+The event type ID. It identifies the event's semantics and structure. The value is calculated by the logging system as: `class_uid * 100 + activity_id`.

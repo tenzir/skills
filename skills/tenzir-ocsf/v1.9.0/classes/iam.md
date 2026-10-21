@@ -32,7 +32,7 @@ Abstract base class for Identity & Access Management event classes. Concrete cla
 - **Requirement**: recommended
 - **Group**: context
 
-The actor object describes details about the user/role/process that was the source of the activity. Note that this is not the threat actor of a campaign but may be part of a campaign.
+The user, process, or service that initiated the activity on the host. For system-level events this is typically a process; for IAM events it is typically a user or role.
 
 ### `http_request`
 

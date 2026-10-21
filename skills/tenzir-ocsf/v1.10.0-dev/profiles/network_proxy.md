@@ -26,6 +26,7 @@ The attributes that identify network proxy attributes.
 
 - **Type**: [`network_connection_info`](../objects/network_connection_info.md)
 - **Requirement**: recommended
+- **Group**: context
 
 The connection information from the proxy server to the remote server.
 
@@ -33,6 +34,7 @@ The connection information from the proxy server to the remote server.
 
 - **Type**: [`network_proxy`](../objects/network_proxy.md)
 - **Requirement**: optional
+- **Group**: context
 
 The proxy (server) in a network connection.
 
@@ -40,6 +42,7 @@ The proxy (server) in a network connection.
 
 - **Type**: [`http_request`](../objects/http_request.md)
 - **Requirement**: optional
+- **Group**: context
 
 The HTTP Request from the proxy server to the remote server.
 
@@ -47,6 +50,7 @@ The HTTP Request from the proxy server to the remote server.
 
 - **Type**: [`http_response`](../objects/http_response.md)
 - **Requirement**: optional
+- **Group**: context
 
 The HTTP Response from the remote server to the proxy server.
 
@@ -54,6 +58,7 @@ The HTTP Response from the remote server to the proxy server.
 
 - **Type**: [`tls`](../objects/tls.md)
 - **Requirement**: recommended
+- **Group**: context
 
 The TLS protocol negotiated between the proxy server and the remote server.
 
@@ -61,5 +66,6 @@ The TLS protocol negotiated between the proxy server and the remote server.
 
 - **Type**: [`network_traffic`](../objects/network_traffic.md)
 - **Requirement**: recommended
+- **Group**: context
 
 The network traffic refers to the amount of data moving across a network, from proxy to remote server at a given point of time.

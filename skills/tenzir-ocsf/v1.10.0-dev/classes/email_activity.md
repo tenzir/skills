@@ -11,11 +11,9 @@ Email Activity events report SMTP protocol and email activities including those 
 
 **From Base Event:**
 - `category_uid` (required)
-- `class_uid` (required)
 - `metadata` (required)
 - `severity_id` (required)
 - `time` (required)
-- `type_uid` (required)
 - `message` (recommended)
 - `observables` (recommended)
 - `status` (recommended)
@@ -30,15 +28,18 @@ Email Activity events report SMTP protocol and email activities including those 
 
 - **Type**: `integer_t`
 - **Requirement**: required
+- **Group**: classification
 - **Sibling**: `activity_name`
 
 #### Enum values
 
+- `0`: `Unknown` - The event activity is unknown.
 - `1`: `Send`
 - `2`: `Receive`
 - `3`: `Scan` - Email being scanned (example: security scanning)
 - `4`: `Trace` - Follow an email message as it travels through an organization. The `message_trace_uid` should be populated when selected.
 - `5`: `MTA Relay` - Email processed by an MTA, typically combining send, receive, and scan operations into a single activity.
+- `99`: `Other` - The event activity is not mapped. See the `activity_name` attribute, which contains a data source specific value.
 
 The normalized identifier of the activity that triggered the event. Each event class defines its own set of activity values. Use `0` (Unknown) when the activity cannot be determined. Use `99` (Other) when the activity does not match any defined value, in which case `activity_name` must be populated with the source-specific label.
 
@@ -87,7 +88,8 @@ The direction of the email, as defined by the `direction_id` value.
 - `1`: `Inbound` - Email Inbound, from the Internet or outside network destined for an entity inside network.
 - `2`: `Outbound` - Email Outbound, from inside the network destined for an entity outside network.
 - `3`: `Internal` - Email Internal, from inside the network destined for an entity inside network.
-- `99`: `Other`
+- `4`: `Local` - Local network connection (`localhost`). The connection is intra-device, originating from and destined for services running on the same device.
+- `99`: `Other` - The direction is not mapped. See the `direction` attribute, which contains a data source specific value.
 
 The direction of the email relative to the scanning host or organization.
 
@@ -166,3 +168,35 @@ The initiator (client) sending the email.
 - **Group**: primary
 
 The recipient address from the transmission envelope. This may differ from the 'To' header and represents where the message was actually delivered.
+
+### `class_uid`
+
+- **Type**: `integer_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `class_name`
+
+#### Enum values
+
+- `4009`: `Email Activity` - Email Activity events report SMTP protocol and email activities including those with embedded URLs and files. See the `Email` object for details.
+
+The unique identifier of a class. A class describes the attributes available in an event. Producers and mappers must set this to the `uid` defined in the event class definition. For example, `Detection Finding` is `2004`.
+
+### `type_uid`
+
+- **Type**: `long_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `type_name`
+
+#### Enum values
+
+- `400900`: `Email Activity: Unknown`
+- `400901`: `Email Activity: Send`
+- `400902`: `Email Activity: Receive`
+- `400903`: `Email Activity: Scan` - Email being scanned (example: security scanning)
+- `400904`: `Email Activity: Trace` - Follow an email message as it travels through an organization. The `message_trace_uid` should be populated when selected.
+- `400905`: `Email Activity: MTA Relay` - Email processed by an MTA, typically combining send, receive, and scan operations into a single activity.
+- `400999`: `Email Activity: Other`
+
+The event/finding type ID. It identifies the event's semantics and structure. Producers and mappers must compute this as `class_uid * 100 + activity_id`. It uniquely identifies the combination of event class and activity across the entire schema. For example, `Detection Finding: Create` is `200401`.

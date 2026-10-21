@@ -11,13 +11,14 @@ Device Config State events report device configuration data, device assessments,
 
 ## Inherited attributes
 
+**From Discovery:**
+- `activity_id` (required)
+
 **From Base Event:**
 - `category_uid` (required)
-- `class_uid` (required)
 - `metadata` (required)
 - `severity_id` (required)
 - `time` (required)
-- `type_uid` (required)
 - `message` (recommended)
 - `observables` (recommended)
 - `status` (recommended)
@@ -61,3 +62,32 @@ The CIS Benchmark Result object captures results generated from benchmark evalua
 - **Group**: primary
 
 The device that is being discovered by an inventory process.
+
+### `class_uid`
+
+- **Type**: `integer_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `class_name`
+
+#### Enum values
+
+- `5002`: `Device Config State` - Device Config State events report device configuration data, device assessments, and/or CIS Benchmark results.
+
+The unique identifier of a class. A class describes the attributes available in an event.
+
+### `type_uid`
+
+- **Type**: `long_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `type_name`
+
+#### Enum values
+
+- `500200`: `Device Config State: Unknown`
+- `500201`: `Device Config State: Log` - The discovered information is via a log.
+- `500202`: `Device Config State: Collect` - The discovered information is via a collection process.
+- `500299`: `Device Config State: Other`
+
+The event/finding type ID. It identifies the event's semantics and structure. The value is calculated by the logging system as: `class_uid * 100 + activity_id`.

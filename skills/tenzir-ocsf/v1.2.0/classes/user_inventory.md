@@ -9,15 +9,21 @@ User Inventory Info events report user inventory data that is either logged or p
 
 ## Inherited attributes
 
+**From Discovery:**
+- `activity_id` (required)
+
 **From Base Event:**
+- `category_uid` (required)
 - `metadata` (required)
 - `severity_id` (required)
+- `time` (required)
 - `message` (recommended)
 - `observables` (recommended)
 - `status` (recommended)
 - `status_code` (recommended)
 - `status_detail` (recommended)
 - `status_id` (recommended)
+- `timezone_offset` (recommended)
 
 ## Attributes
 
@@ -36,3 +42,32 @@ The actor describes the process that was the source of the inventory activity. I
 - **Group**: primary
 
 The user that is being discovered by an inventory process.
+
+### `class_uid`
+
+- **Type**: `integer_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `class_name`
+
+#### Enum values
+
+- `5003`: `User Inventory Info` - User Inventory Info events report user inventory data that is either logged or proactively collected. For example, when collecting user information from Active Directory entries.
+
+The unique identifier of a class. A class describes the attributes available in an event.
+
+### `type_uid`
+
+- **Type**: `long_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `type_name`
+
+#### Enum values
+
+- `500300`: `User Inventory Info: Unknown`
+- `500301`: `User Inventory Info: Log` - The discovered information is via a log.
+- `500302`: `User Inventory Info: Collect` - The discovered information is via a collection process.
+- `500399`: `User Inventory Info: Other`
+
+The event/finding type ID. It identifies the event's semantics and structure. The value is calculated by the logging system as: `class_uid * 100 + activity_id`.

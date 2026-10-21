@@ -19,11 +19,9 @@ DNS Activity events report DNS queries and answers as seen on the network.
 
 **From Base Event:**
 - `category_uid` (required)
-- `class_uid` (required)
 - `metadata` (required)
 - `severity_id` (required)
 - `time` (required)
-- `type_uid` (required)
 - `message` (recommended)
 - `observables` (recommended)
 - `status` (recommended)
@@ -37,13 +35,17 @@ DNS Activity events report DNS queries and answers as seen on the network.
 ### `activity_id`
 
 - **Type**: `integer_t`
+- **Requirement**: required
+- **Group**: classification
 - **Sibling**: `activity_name`
 
 #### Enum values
 
+- `0`: `Unknown` - The event activity is unknown.
 - `1`: `Query` - The DNS query request.
 - `2`: `Response` - The DNS query response.
 - `6`: `Traffic` - Bidirectional DNS request and response traffic.
+- `99`: `Other` - The event activity is not mapped. See the `activity_name` attribute, which contains a data source specific value.
 
 The normalized identifier of the activity that triggered the event. Each event class defines its own set of activity values. Use `0` (Unknown) when the activity cannot be determined. Use `99` (Other) when the activity does not match any defined value, in which case `activity_name` must be populated with the source-specific label.
 
@@ -75,8 +77,9 @@ The network connection information.
 
 - **Type**: [`network_endpoint`](../objects/network_endpoint.md)
 - **Requirement**: recommended
+- **Group**: primary
 
-The network destination endpoint.
+The responder (server) in a network connection.
 
 ### `flag_ids`
 
@@ -87,12 +90,14 @@ The network destination endpoint.
 
 #### Enum values
 
+- `0`: `Unknown` - The flag is unknown.
 - `1`: `Authoritative Answer` - The responding server is authoritative for the domain. Set by the server in responses only.
 - `2`: `Truncated Response` - The response was truncated because it exceeded the maximum UDP message size.
 - `3`: `Recursion Desired` - The client requests that the server perform recursive resolution. Set by the client and echoed in the response.
 - `4`: `Recursion Available` - The server supports recursive resolution. Set by the server in responses.
 - `5`: `Authentic Data` - All data in the response has been cryptographically verified (DNSSEC). Set by the server.
 - `6`: `Checking Disabled` - The client requests that the server disable DNSSEC validation. Set by the client and echoed in the response.
+- `99`: `Other` - The flag is not mapped. See the `flags` attribute, which contains a data source specific value.
 
 The list of DNS message header flag IDs. For Query events, populated from the query header (RD, CD). For Response and Traffic events, populated from the response header, which is the complete and authoritative source as it echoes all client-set flags and adds server-set flags.
 
@@ -220,7 +225,7 @@ The Domain Name System (DNS) response time.
 - **Requirement**: optional
 - **Group**: context
 
-The network traffic refers to the amount of data moving across a network at a given point of time. Intended to be used alongside Network Connection.
+The network traffic for this observation period. Use when reporting: (1) delta values (bytes/packets transferred since the last observation), (2) instantaneous measurements at a specific point in time, or (3) standalone single-event metrics. This attribute represents a point-in-time measurement or incremental change, not a running total. For accumulated totals across multiple observations or the lifetime of a flow, use `cumulative_traffic` instead.
 
 ### `transaction_id`
 
@@ -229,3 +234,33 @@ The network traffic refers to the amount of data moving across a network at a gi
 - **Group**: primary
 
 The 16-bit DNS transaction identifier assigned by the client and echoed unchanged in the server response. This value is the same for both the query and response messages.
+
+### `class_uid`
+
+- **Type**: `integer_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `class_name`
+
+#### Enum values
+
+- `4003`: `DNS Activity` - DNS Activity events report DNS queries and answers as seen on the network.
+
+The unique identifier of a class. A class describes the attributes available in an event. Producers and mappers must set this to the `uid` defined in the event class definition. For example, `Detection Finding` is `2004`.
+
+### `type_uid`
+
+- **Type**: `long_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `type_name`
+
+#### Enum values
+
+- `400300`: `DNS Activity: Unknown`
+- `400301`: `DNS Activity: Query` - The DNS query request.
+- `400302`: `DNS Activity: Response` - The DNS query response.
+- `400306`: `DNS Activity: Traffic` - Bidirectional DNS request and response traffic.
+- `400399`: `DNS Activity: Other`
+
+The event/finding type ID. It identifies the event's semantics and structure. Producers and mappers must compute this as `class_uid * 100 + activity_id`. It uniquely identifies the combination of event class and activity across the entire schema. For example, `Detection Finding: Create` is `200401`.

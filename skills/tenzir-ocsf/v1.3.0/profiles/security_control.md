@@ -39,6 +39,7 @@ The attributes including disposition that represent the outcome of a security co
 
 - **Type**: `string_t`
 - **Requirement**: optional
+- **Group**: primary
 
 The normalized caption of `action_id`.
 
@@ -46,6 +47,7 @@ The normalized caption of `action_id`.
 
 - **Type**: `integer_t`
 - **Requirement**: required
+- **Group**: primary
 - **Sibling**: `action`
 
 #### Enum values
@@ -53,6 +55,7 @@ The normalized caption of `action_id`.
 - `0`: `Unknown` - The action was unknown. The `disposition_id` attribute may still be set to a non-unknown value, for example 'Count', 'Uncorrected', 'Isolated', 'Quarantined' or 'Exonerated'.
 - `1`: `Allowed` - The activity was allowed. The `disposition_id` attribute should be set to a value that conforms to this action, for example 'Allowed', 'Approved', 'Delayed', 'No Action', 'Count' etc.
 - `2`: `Denied` - The attempted activity was denied. The `disposition_id` attribute should be set to a value that conforms to this action, for example 'Blocked', 'Rejected', 'Quarantined', 'Isolated', 'Dropped', 'Access Revoked, etc.
+- `99`: `Other` - The action was not mapped. See the `action` attribute, which contains a data source specific value.
 
 The action taken by a control or other policy-based system leading to an outcome or disposition. Dispositions conform to an action of `1` 'Allowed' or `2` 'Denied' in most cases. Note that `99` 'Other' is not an option. No action would equate to `1` 'Allowed'. An unknown action may still correspond to a known disposition. Refer to `disposition_id` for the outcome of the action.
 
@@ -60,6 +63,7 @@ The action taken by a control or other policy-based system leading to an outcome
 
 - **Type**: [`attack`](../objects/attack.md)
 - **Requirement**: optional
+- **Group**: primary
 
 An array of [MITRE ATT&CK®](https://attack.mitre.org) objects describing the tactics, techniques & sub-techniques identified by a security control or finding.
 
@@ -67,6 +71,7 @@ An array of [MITRE ATT&CK®](https://attack.mitre.org) objects describing the ta
 
 - **Type**: [`authorization`](../objects/authorization.md)
 - **Requirement**: optional
+- **Group**: primary
 
 Provides details about an authorization, such as authorization outcome, and any associated policies related to the activity/event.
 
@@ -74,6 +79,7 @@ Provides details about an authorization, such as authorization outcome, and any 
 
 - **Type**: `string_t`
 - **Requirement**: optional
+- **Group**: primary
 
 The disposition name, normalized to the caption of the disposition_id value. In the case of 'Other', it is defined by the event source.
 
@@ -81,6 +87,7 @@ The disposition name, normalized to the caption of the disposition_id value. In 
 
 - **Type**: `integer_t`
 - **Requirement**: recommended
+- **Group**: primary
 - **Sibling**: `disposition`
 
 #### Enum values
@@ -121,6 +128,7 @@ Describes the outcome or action taken by a security control, such as access cont
 
 - **Type**: [`firewall_rule`](../objects/firewall_rule.md)
 - **Requirement**: optional
+- **Group**: primary
 
 The firewall rule that triggered the event.
 
@@ -128,5 +136,6 @@ The firewall rule that triggered the event.
 
 - **Type**: [`malware`](../objects/malware.md)
 - **Requirement**: optional
+- **Group**: primary
 
 A list of Malware objects, describing details about the identified malware.

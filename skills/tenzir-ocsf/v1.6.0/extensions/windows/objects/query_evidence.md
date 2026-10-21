@@ -31,7 +31,7 @@ The resulting evidence information that was queried.
 
 ### `reg_key`
 
-- **Type**: `reg_key`
+- **Type**: `win/reg_key`
 - **Requirement**: recommended
 - **Group**: primary
 
@@ -39,7 +39,7 @@ The registry key object describes a Windows registry key.
 
 ### `reg_value`
 
-- **Type**: `reg_value`
+- **Type**: `win/reg_value`
 - **Requirement**: recommended
 - **Group**: primary
 

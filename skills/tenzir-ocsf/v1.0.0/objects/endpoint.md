@@ -3,6 +3,7 @@
 The Endpoint object describes a physical or virtual device that connects to and exchanges information with a computer network. Some examples of endpoints are mobile devices, desktop computers, virtual machines, embedded devices, and servers. Internet-of-Things devices—like cameras, lighting, refrigerators, security systems, smart speakers, and thermostats—are also endpoints.
 
 - **Extends**: [Entity (_entity)](_entity.md)
+- **Observable**: `20`
 
 ## Constraints
 
@@ -69,6 +70,7 @@ The Media Access Control (MAC) address of the endpoint.
 ### `name`
 
 - **Type**: `string_t`
+- **Requirement**: recommended
 
 The short name of the endpoint.
 
@@ -82,6 +84,7 @@ The unique identifier of a virtual subnet.
 ### `uid`
 
 - **Type**: `string_t`
+- **Requirement**: recommended
 
 The unique identifier of the endpoint.
 

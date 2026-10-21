@@ -35,10 +35,8 @@ The reputation score, normalized to the caption of the score_id value. In the ca
 
 #### Enum values
 
-- `99`: `Other` - The reputation score is not mapped. See the `rep_score` attribute, which contains a data source specific value.
 - `0`: `Unknown` - The reputation score is unknown.
 - `1`: `Very Safe` - Long history of good behavior.
-- `10`: `Malicious` - Proven evidence of maliciousness.
 - `2`: `Safe` - Consistently good behavior.
 - `3`: `Probably Safe` - Reasonable history of good behavior.
 - `4`: `Leans Safe` - Starting to establish a history of normal behavior.
@@ -47,5 +45,7 @@ The reputation score, normalized to the caption of the score_id value. In the ca
 - `7`: `Suspicious/Risky` - A site with a history of suspicious or risky behavior. (spam, scam, potentially unwanted software, potentially malicious).
 - `8`: `Possibly Malicious` - Strong possibility of maliciousness.
 - `9`: `Probably Malicious` - Indicators of maliciousness.
+- `10`: `Malicious` - Proven evidence of maliciousness.
+- `99`: `Other` - The reputation score is not mapped. See the `rep_score` attribute, which contains a data source specific value.
 
 The normalized reputation score identifier.

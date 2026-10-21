@@ -20,11 +20,9 @@ Network Activity events report network connection and traffic activity.
 
 **From Base Event:**
 - `category_uid` (required)
-- `class_uid` (required)
 - `metadata` (required)
 - `severity_id` (required)
 - `time` (required)
-- `type_uid` (required)
 - `message` (recommended)
 - `observables` (recommended)
 - `status` (recommended)
@@ -38,10 +36,13 @@ Network Activity events report network connection and traffic activity.
 ### `activity_id`
 
 - **Type**: `integer_t`
+- **Requirement**: required
+- **Group**: classification
 - **Sibling**: `activity_name`
 
 #### Enum values
 
+- `0`: `Unknown` - The event activity is unknown.
 - `1`: `Open` - A new network connection was opened.
 - `2`: `Close` - The network connection was closed.
 - `3`: `Reset` - The network connection was abnormally terminated or closed by a middle device like firewalls.
@@ -49,12 +50,15 @@ Network Activity events report network connection and traffic activity.
 - `5`: `Refuse` - The network connection was refused. For example an attempt to connect to a server port which is not open.
 - `6`: `Traffic` - Network traffic report.
 - `7`: `Listen` - A network endpoint began listening for new network connections.
+- `99`: `Other` - The event activity is not mapped. See the `activity_name` attribute, which contains a data source specific value.
 
 The normalized identifier of the activity that triggered the event. Each event class defines its own set of activity values. Use `0` (Unknown) when the activity cannot be determined. Use `99` (Other) when the activity does not match any defined value, in which case `activity_name` must be populated with the source-specific label.
 
 ### `dst_endpoint`
 
 - **Type**: [`network_endpoint`](../objects/network_endpoint.md)
+- **Requirement**: recommended
+- **Group**: primary
 
 The destination endpoint of the network activity — typically the responder. In bi-flow or asymmetric flow scenarios, this endpoint may represent the true initiator of the original communication. Use `initiator_id` to determine which endpoint actually initiated the communication.
 
@@ -95,6 +99,8 @@ The normalized identifier of the endpoint that initiated the network communicati
 ### `src_endpoint`
 
 - **Type**: [`network_endpoint`](../objects/network_endpoint.md)
+- **Requirement**: recommended
+- **Group**: primary
 
 The source endpoint of the network activity — typically the initiator. In bi-flow or asymmetric flow scenarios, this endpoint may represent the response side of communication originally initiated by the destination. Use `initiator_id` to determine which endpoint actually initiated the communication.
 
@@ -105,3 +111,37 @@ The source endpoint of the network activity — typically the initiator. In bi-f
 - **Group**: primary
 
 The URL details relevant to the network traffic.
+
+### `class_uid`
+
+- **Type**: `integer_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `class_name`
+
+#### Enum values
+
+- `4001`: `Network Activity` - Network Activity events report network connection and traffic activity.
+
+The unique identifier of a class. A class describes the attributes available in an event. Producers and mappers must set this to the `uid` defined in the event class definition. For example, `Detection Finding` is `2004`.
+
+### `type_uid`
+
+- **Type**: `long_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `type_name`
+
+#### Enum values
+
+- `400100`: `Network Activity: Unknown`
+- `400101`: `Network Activity: Open` - A new network connection was opened.
+- `400102`: `Network Activity: Close` - The network connection was closed.
+- `400103`: `Network Activity: Reset` - The network connection was abnormally terminated or closed by a middle device like firewalls.
+- `400104`: `Network Activity: Fail` - The network connection failed. For example a connection timeout or no route to host.
+- `400105`: `Network Activity: Refuse` - The network connection was refused. For example an attempt to connect to a server port which is not open.
+- `400106`: `Network Activity: Traffic` - Network traffic report.
+- `400107`: `Network Activity: Listen` - A network endpoint began listening for new network connections.
+- `400199`: `Network Activity: Other`
+
+The event/finding type ID. It identifies the event's semantics and structure. Producers and mappers must compute this as `class_uid * 100 + activity_id`. It uniquely identifies the combination of event class and activity across the entire schema. For example, `Detection Finding: Create` is `200401`.

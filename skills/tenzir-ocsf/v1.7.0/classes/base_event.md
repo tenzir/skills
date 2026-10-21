@@ -15,8 +15,8 @@ The base event is a generic and concrete event. It also defines a set of attribu
 
 #### Enum values
 
-- `0`: `Unknown`
-- `99`: `Other`
+- `0`: `Unknown` - The event activity is unknown.
+- `99`: `Other` - The event activity is not mapped. See the `activity_name` attribute, which contains a data source specific value.
 
 The normalized identifier of the activity that triggered the event.
 
@@ -55,7 +55,7 @@ The category unique identifier of the event.
 - **Requirement**: optional
 - **Group**: classification
 
-The event class name, as defined by class_uid value.
+The event class name, as defined by class_uid value: `Base Event`.
 
 ### `class_uid`
 
@@ -66,7 +66,7 @@ The event class name, as defined by class_uid value.
 
 #### Enum values
 
-- `0`: `Base Event`
+- `0`: `Base Event` - The base event is a generic and concrete event. It also defines a set of attributes available in most event classes. As a generic event that does not belong to any event category, it could be used to log events that are not otherwise defined by the schema.
 
 The unique identifier of a class. A class describes the attributes available in an event.
 
@@ -260,6 +260,11 @@ The event/finding type name, as defined by the type_uid.
 - **Requirement**: required
 - **Group**: classification
 - **Sibling**: `type_name`
+
+#### Enum values
+
+- `0`: `Base Event: Unknown`
+- `99`: `Base Event: Other`
 
 The event/finding type ID. It identifies the event's semantics and structure. The value is calculated by the logging system as: `class_uid * 100 + activity_id`.
 

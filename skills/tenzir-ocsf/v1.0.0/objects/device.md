@@ -3,10 +3,19 @@
 The Device object represents an addressable computer system or host, which is typically connected to a computer network and participates in the transmission or processing of data within the computer network. Defined by D3FEND [d3f:Host](https://d3fend.mitre.org/dao/artifact/d3f:Host/).
 
 - **Extends**: [Endpoint (endpoint)](endpoint.md)
+- **Profiles**: [Date/Time](../profiles/datetime.md)
+- **Observable**: `20`
 
 ## Constraints
 
 - **At least one of**: `ip`, `uid`, `name`, `hostname`, `instance_uid`, `interface_uid`, `interface_name`
+
+## Inherited attributes
+
+**From Endpoint:**
+- `instance_uid` (recommended)
+- `interface_name` (recommended)
+- `interface_uid` (recommended)
 
 ## Attributes
 
@@ -34,6 +43,7 @@ The description of the device, ordinarily as reported by the operating system.
 ### `domain`
 
 - **Type**: `string_t`
+- **Requirement**: optional
 
 The network domain where the device resides. For example: `work.example.com`.
 
@@ -54,6 +64,7 @@ The group names to which the device belongs. For example: `["Windows Laptops", "
 ### `hostname`
 
 - **Type**: `hostname_t`
+- **Requirement**: recommended
 
 The device hostname.
 
@@ -88,6 +99,7 @@ The International Mobile Station Equipment Identifier that is associated with th
 ### `ip`
 
 - **Type**: `ip_t`
+- **Requirement**: recommended
 
 The device IP address, in either IPv4 or IPv6 format.
 
@@ -129,12 +141,14 @@ The most recent discovery time of the device.
 ### `location`
 
 - **Type**: [`location`](location.md)
+- **Requirement**: optional
 
 The geographical location of the device.
 
 ### `mac`
 
 - **Type**: `mac_t`
+- **Requirement**: optional
 
 The device Media Access Control (MAC) address.
 
@@ -148,6 +162,7 @@ The time when the device was last known to have been modified.
 ### `name`
 
 - **Type**: `string_t`
+- **Requirement**: recommended
 
 The alternate device name, ordinarily as assigned by an administrator.
 
@@ -235,6 +250,7 @@ The device type. For example: `unknown`, `server`, `desktop`, `laptop`, `tablet`
 
 #### Enum values
 
+- `0`: `Unknown` - The type is unknown.
 - `1`: `Server`
 - `2`: `Desktop`
 - `3`: `Laptop`
@@ -243,17 +259,20 @@ The device type. For example: `unknown`, `server`, `desktop`, `laptop`, `tablet`
 - `6`: `Virtual`
 - `7`: `IOT`
 - `8`: `Browser`
+- `99`: `Other` - The type is not mapped. See the `type` attribute, which may contain a data source specific value.
 
 The device type ID.
 
 ### `uid`
 
 - **Type**: `string_t`
+- **Requirement**: recommended
 
 The unique identifier of the device. For example the Windows TargetSID or AWS EC2 ARN.
 
 ### `uid_alt`
 
 - **Type**: `string_t`
+- **Requirement**: optional
 
 An alternate unique identifier of the device if any. For example the ActiveDirectory DN.

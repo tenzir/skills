@@ -16,6 +16,7 @@ The list of labels associated to the image.
 ### `name`
 
 - **Type**: `string_t`
+- **Requirement**: recommended
 
 The image name. For example: `elixir`.
 

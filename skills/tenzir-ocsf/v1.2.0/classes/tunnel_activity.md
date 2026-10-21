@@ -22,14 +22,17 @@ Tunnel Activity events report secure tunnel establishment (such as VPN), teardow
 - `proxy` (recommended)
 
 **From Base Event:**
+- `category_uid` (required)
 - `metadata` (required)
 - `severity_id` (required)
+- `time` (required)
 - `message` (recommended)
 - `observables` (recommended)
 - `status` (recommended)
 - `status_code` (recommended)
 - `status_detail` (recommended)
 - `status_id` (recommended)
+- `timezone_offset` (recommended)
 
 ## Attributes
 
@@ -37,6 +40,7 @@ Tunnel Activity events report secure tunnel establishment (such as VPN), teardow
 
 - **Type**: `integer_t`
 - **Requirement**: required
+- **Group**: classification
 - **Sibling**: `activity_name`
 
 #### Enum values
@@ -144,3 +148,33 @@ The normalized tunnel type ID.
 - **Group**: primary
 
 The user associated with the tunnel activity.
+
+### `class_uid`
+
+- **Type**: `integer_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `class_name`
+
+#### Enum values
+
+- `4014`: `Tunnel Activity` - Tunnel Activity events report secure tunnel establishment (such as VPN), teardowns, renewals, and other network tunnel specific actions.
+
+The unique identifier of a class. A class describes the attributes available in an event.
+
+### `type_uid`
+
+- **Type**: `long_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `type_name`
+
+#### Enum values
+
+- `401400`: `Tunnel Activity: Unknown`
+- `401401`: `Tunnel Activity: Open` - Open a tunnel.
+- `401402`: `Tunnel Activity: Close` - Close a tunnel.
+- `401403`: `Tunnel Activity: Renew` - Renew a tunnel.
+- `401499`: `Tunnel Activity: Other` - The event activity is not mapped. See the `activity_name` attribute, which contains a data source specific value.
+
+The event/finding type ID. It identifies the event's semantics and structure. The value is calculated by the logging system as: `class_uid * 100 + activity_id`.

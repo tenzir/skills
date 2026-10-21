@@ -3,6 +3,7 @@
 The additional LDAP attributes that describe a person.
 
 - **Extends**: [Object (object)](object.md)
+- **Profiles**: [Date/Time](../profiles/datetime.md)
 
 ## Attributes
 

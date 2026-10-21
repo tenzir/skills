@@ -1,6 +1,6 @@
 # Finding (finding)
 
-The Finding event is a generic event that defines a set of attributes available in the Findings category.
+Abstract base class. The Finding event is a generic event that defines a set of attributes available in the Findings category.
 
 - **Category**: Findings
 - **Extends**: [Base Event (base_event)](base_event.md)
@@ -25,19 +25,25 @@ The Finding event is a generic event that defines a set of attributes available 
 ### `activity_id`
 
 - **Type**: `integer_t`
+- **Requirement**: required
+- **Group**: classification
 - **Sibling**: `activity_name`
 
 #### Enum values
 
+- `0`: `Unknown` - The event activity is unknown.
 - `1`: `Create` - A finding was created.
 - `2`: `Update` - A finding was updated.
 - `3`: `Close` - A finding was closed.
+- `99`: `Other` - The event activity is not mapped. See the `activity_name` attribute, which contains a data source specific value.
 
 The normalized identifier of the finding activity. Use `1` (Create) when a finding is first generated, `2` (Update) when an existing finding is modified (e.g., severity change, new evidence), and `3` (Close) when a finding is resolved or dismissed.
 
 ### `activity_name`
 
 - **Type**: `string_t`
+- **Requirement**: optional
+- **Group**: classification
 
 The finding activity name, as defined by the `activity_id`. When `activity_id` is `99` (Other), this must contain the source-specific activity label.
 
@@ -82,7 +88,7 @@ The normalized confidence refers to the accuracy of the analytics that produced 
 - **Requirement**: optional
 - **Group**: context
 
-The confidence score as reported by the event source.
+The confidence score as reported by the event source. If `confidence_id` is 99 'Other', it should be the same as `confidence` if both are populated.
 
 ### `device`
 
@@ -98,6 +104,7 @@ If a single device is the source of the finding, use the `Host` profile and popu
 
 - **Type**: `timestamp_t`
 - **Requirement**: optional
+- **Group**: occurrence
 
 The time of the most recent event or finding that contributed to this finding.
 
@@ -129,6 +136,7 @@ Describes details about resources that were the target of the activity that trig
 
 - **Type**: `timestamp_t`
 - **Requirement**: optional
+- **Group**: occurrence
 
 The time of the earliest event or finding that contributed to this finding.
 
@@ -149,18 +157,22 @@ The finding lifecycle status label, normalized to the caption of the `status_id`
 
 #### Enum values
 
+- `0`: `Unknown` - The status is unknown.
 - `1`: `New` - The Finding is new and yet to be reviewed.
 - `2`: `In Progress` - The Finding is under review.
 - `3`: `Suppressed` - The Finding was reviewed, determined to be benign or a false positive and is now suppressed.
 - `4`: `Resolved` - The Finding was reviewed, remediated and is now considered resolved.
 - `5`: `Archived` - The Finding was archived.
 - `6`: `Deleted` - The Finding was deleted. For example, it might have been created in error.
+- `99`: `Other` - The status is not mapped. See the `status` attribute, which contains a data source specific value.
 
 The normalized finding lifecycle status identifier. Unlike the status of an activity event, which indicates the success or failure of the activity, finding status tracks the review and triage workflow: whether the finding is new, being investigated, suppressed, or resolved. Producers should set this to reflect the current state of the finding in their system (e.g., `1` for newly created findings, `4` when remediated).
 
 ### `time`
 
 - **Type**: `timestamp_t`
+- **Requirement**: required
+- **Group**: occurrence
 
 The finding creation time - when the finding was first generated, not when the underlying activity occurred. For the time range of contributing events, use `start_time` and `end_time`.
 

@@ -15,11 +15,9 @@ Role Management events report lifecycle management of a role, as well as privile
 
 **From Base Event:**
 - `category_uid` (required)
-- `class_uid` (required)
 - `metadata` (required)
 - `severity_id` (required)
 - `time` (required)
-- `type_uid` (required)
 - `message` (recommended)
 - `observables` (recommended)
 - `status` (recommended)
@@ -33,10 +31,13 @@ Role Management events report lifecycle management of a role, as well as privile
 ### `activity_id`
 
 - **Type**: `integer_t`
+- **Requirement**: required
+- **Group**: classification
 - **Sibling**: `activity_name`
 
 #### Enum values
 
+- `0`: `Unknown` - The event activity is unknown.
 - `1`: `Create` - Create a role. Use `iam_role` as the role to be created.
 - `2`: `Update` - Update a role. The updated role details should be populated in the `updated_role` attribute.
 - `3`: `Delete` - Delete a role. Use `iam_role` as the role to be deleted.
@@ -48,12 +49,15 @@ Role Management events report lifecycle management of a role, as well as privile
 - `9`: `Detach Policies` - Detach one or more policies from a role. Use `policies` to be detached from `iam_role`.
 - `10`: `Add Programmatic Credentials` - Add credentials to a role. Use `programmatic_credentials` to be added to `iam_role`.
 - `11`: `Remove Programmatic Credentials` - Remove credentials from a role. Use `programmatic_credentials` to be removed from `iam_role`.
+- `99`: `Other` - The event activity is not mapped. See the `activity_name` attribute, which contains a data source specific value.
 
 The normalized identifier of the activity that triggered the event. Each event class defines its own set of activity values. Use `0` (Unknown) when the activity cannot be determined. Use `99` (Other) when the activity does not match any defined value, in which case `activity_name` must be populated with the source-specific label.
 
 ### `ai_agent`
 
 - **Type**: [`ai_agent`](../objects/ai_agent.md)
+- **Requirement**: optional
+- **Group**: context
 
 The AI agent that `iam_role` is provisioned for or bound to, e.g., an agent's execution role or the permission set governing an agentic service. Populate when the role being managed belongs to an AI agent rather than a human user or service.
 
@@ -103,3 +107,41 @@ Resources assigned or removed from `iam_role`.
 - **Group**: primary
 
 The intended state of the `iam_role` after the update. On `Success`, represents the actual post-update state.
+
+### `class_uid`
+
+- **Type**: `integer_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `class_name`
+
+#### Enum values
+
+- `3008`: `Role Management` - Role Management events report lifecycle management of a role, as well as privileges, policies, credentials, and resources associated with the role. There are two ways updates to the state of a role may be expressed: Using the `Update` activity, for example when updating multiple items at one time, the `updated_role` reflects the changes made to `iam_role`. Using discrete activities, such as `Assign Privileges` the state change is expressed by the `privileges` attribute. Optionally, on success, the `updated_role` reflects the new state of the role. Roles assigned or removed from users and groups are expressed by the `User Management` and `Group Management` classes. Role Management events also cover roles bound to AI agents, e.g., an agent's role being created, updated, or having privileges, resources, policies, or credentials granted, revoked, attached, detached, added, or removed. The `ai_agent` attribute identifies the agent associated with `iam_role`.
+
+The unique identifier of a class. A class describes the attributes available in an event. Producers and mappers must set this to the `uid` defined in the event class definition. For example, `Detection Finding` is `2004`.
+
+### `type_uid`
+
+- **Type**: `long_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `type_name`
+
+#### Enum values
+
+- `300800`: `Role Management: Unknown`
+- `300801`: `Role Management: Create` - Create a role. Use `iam_role` as the role to be created.
+- `300802`: `Role Management: Update` - Update a role. The updated role details should be populated in the `updated_role` attribute.
+- `300803`: `Role Management: Delete` - Delete a role. Use `iam_role` as the role to be deleted.
+- `300804`: `Role Management: Assign Privileges` - Assign privileges to a role. Use `privileges` to be assigned to `iam_role`.
+- `300805`: `Role Management: Remove Privileges` - Remove privileges from a role. Use `privileges` to be removed from `iam_role`.
+- `300806`: `Role Management: Assign Resources` - Assign resources to a role. Use `resources` to be assigned to `iam_role`.
+- `300807`: `Role Management: Remove Resources` - Remove resources from a role. Use `resources` to be removed from `iam_role`.
+- `300808`: `Role Management: Attach Policies` - Attach one or more policies to a role. Use `policies` to be attached to `iam_role`.
+- `300809`: `Role Management: Detach Policies` - Detach one or more policies from a role. Use `policies` to be detached from `iam_role`.
+- `300810`: `Role Management: Add Programmatic Credentials` - Add credentials to a role. Use `programmatic_credentials` to be added to `iam_role`.
+- `300811`: `Role Management: Remove Programmatic Credentials` - Remove credentials from a role. Use `programmatic_credentials` to be removed from `iam_role`.
+- `300899`: `Role Management: Other`
+
+The event/finding type ID. It identifies the event's semantics and structure. Producers and mappers must compute this as `class_uid * 100 + activity_id`. It uniquely identifies the combination of event class and activity across the entire schema. For example, `Detection Finding: Create` is `200401`.

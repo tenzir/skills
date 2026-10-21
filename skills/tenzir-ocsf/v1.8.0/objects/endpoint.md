@@ -3,6 +3,8 @@
 The Endpoint object describes a physical or virtual device that connects to and exchanges information with a computer network. Some examples of endpoints are mobile devices, desktop computers, virtual machines, embedded devices, and servers. Internet-of-Things devices—like cameras, lighting, refrigerators, security systems, smart speakers, and thermostats—are also endpoints.
 
 - **Extends**: [Entity (_entity)](_entity.md)
+- **Profiles**: [Container](../profiles/container.md)
+- **Observable**: `20`
 
 ## Constraints
 
@@ -90,6 +92,7 @@ The vendor or manufacturer of the endpoint's network interface controller (NIC),
 ### `name`
 
 - **Type**: `string_t`
+- **Requirement**: recommended
 
 The short name of the endpoint.
 
@@ -136,6 +139,7 @@ The endpoint type. For example: `unknown`, `server`, `desktop`, `laptop`, `table
 
 #### Enum values
 
+- `0`: `Unknown` - The type is unknown.
 - `1`: `Server` - A [server](https://d3fend.mitre.org/dao/artifact/d3f:Server/).
 - `2`: `Desktop` - A [desktop computer](https://d3fend.mitre.org/dao/artifact/d3f:DesktopComputer/).
 - `3`: `Laptop` - A [laptop computer](https://d3fend.mitre.org/dao/artifact/d3f:LaptopComputer/).
@@ -151,12 +155,14 @@ The endpoint type. For example: `unknown`, `server`, `desktop`, `laptop`, `table
 - `13`: `IDS` - An [intrusion detection system](https://d3fend.mitre.org/dao/artifact/d3f:IntrusionDetectionSystem/).
 - `14`: `IPS` - An [intrusion prevention system](https://d3fend.mitre.org/dao/artifact/d3f:IntrusionPreventionSystem/).
 - `15`: `Load Balancer` - A [Load Balancer device.](https://en.wikipedia.org/wiki/Load_balancing_(computing))
+- `99`: `Other` - The type is not mapped. See the `type` attribute, which contains a data source specific value.
 
 The endpoint type ID.
 
 ### `uid`
 
 - **Type**: `string_t`
+- **Requirement**: recommended
 
 The unique identifier of the endpoint.
 

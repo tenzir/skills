@@ -3,6 +3,7 @@
 The Process Entity object provides critical fields for referencing a process.
 
 - **Extends**: [Entity (_entity)](_entity.md)
+- **Profiles**: [Date/Time](../profiles/datetime.md)
 
 ## Constraints
 
@@ -35,6 +36,7 @@ The time when the process was created/started.
 ### `name`
 
 - **Type**: `process_name_t`
+- **Requirement**: recommended
 
 The friendly name of the process, for example: `Notepad++`.
 
@@ -56,6 +58,7 @@ The process identifier, as reported by the operating system. Process ID (PID) is
 ### `uid`
 
 - **Type**: `string_t`
+- **Requirement**: recommended
 - **Observable**: 39
 
 A unique identifier for this process assigned by the producer (tool).  Facilitates correlation of a process event with other events for that process.

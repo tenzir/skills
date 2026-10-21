@@ -21,11 +21,9 @@ Remote Desktop Protocol (RDP) Activity events report post-authentication remote 
 
 **From Base Event:**
 - `category_uid` (required)
-- `class_uid` (required)
 - `metadata` (required)
 - `severity_id` (required)
 - `time` (required)
-- `type_uid` (required)
 - `message` (recommended)
 - `observables` (recommended)
 - `status` (recommended)
@@ -39,10 +37,13 @@ Remote Desktop Protocol (RDP) Activity events report post-authentication remote 
 ### `activity_id`
 
 - **Type**: `integer_t`
+- **Requirement**: required
+- **Group**: classification
 - **Sibling**: `activity_name`
 
 #### Enum values
 
+- `0`: `Unknown` - The event activity is unknown.
 - `1`: `Initial Request` - The initial RDP request.
 - `2`: `Initial Response` - The initial RDP response.
 - `3`: `Connect Request` - An RDP connection request.
@@ -51,6 +52,7 @@ Remote Desktop Protocol (RDP) Activity events report post-authentication remote 
 - `6`: `Traffic` - Network traffic report.
 - `7`: `Disconnect` - An RDP connection disconnect.
 - `8`: `Reconnect` - An RDP connection reconnect.
+- `99`: `Other` - The event activity is not mapped. See the `activity_name` attribute, which contains a data source specific value.
 
 The normalized identifier of the activity that triggered the event. Each event class defines its own set of activity values. Use `0` (Unknown) when the activity cannot be determined. Use `99` (Other) when the activity does not match any defined value, in which case `activity_name` must be populated with the source-specific label.
 
@@ -82,6 +84,7 @@ The remote desktop connection details, either connection-based or connectionless
 
 - **Type**: [`device`](../objects/device.md)
 - **Requirement**: optional
+- **Group**: primary
 
 The device instigating the RDP connection.
 
@@ -148,3 +151,38 @@ The server response in an RDP network connection.
 - **Group**: primary
 
 The target user associated with the RDP activity.
+
+### `class_uid`
+
+- **Type**: `integer_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `class_name`
+
+#### Enum values
+
+- `4005`: `RDP Activity` - Remote Desktop Protocol (RDP) Activity events report post-authentication remote client connections between clients and servers over the network.
+
+The unique identifier of a class. A class describes the attributes available in an event. Producers and mappers must set this to the `uid` defined in the event class definition. For example, `Detection Finding` is `2004`.
+
+### `type_uid`
+
+- **Type**: `long_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `type_name`
+
+#### Enum values
+
+- `400500`: `RDP Activity: Unknown`
+- `400501`: `RDP Activity: Initial Request` - The initial RDP request.
+- `400502`: `RDP Activity: Initial Response` - The initial RDP response.
+- `400503`: `RDP Activity: Connect Request` - An RDP connection request.
+- `400504`: `RDP Activity: Connect Response` - An RDP connection response.
+- `400505`: `RDP Activity: TLS Handshake` - The TLS handshake.
+- `400506`: `RDP Activity: Traffic` - Network traffic report.
+- `400507`: `RDP Activity: Disconnect` - An RDP connection disconnect.
+- `400508`: `RDP Activity: Reconnect` - An RDP connection reconnect.
+- `400599`: `RDP Activity: Other`
+
+The event/finding type ID. It identifies the event's semantics and structure. Producers and mappers must compute this as `class_uid * 100 + activity_id`. It uniquely identifies the combination of event class and activity across the entire schema. For example, `Detection Finding: Create` is `200401`.

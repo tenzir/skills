@@ -13,11 +13,9 @@ Security Finding events describe findings, detections, anomalies, alerts and/or 
 
 **From Base Event:**
 - `category_uid` (required)
-- `class_uid` (required)
 - `metadata` (required)
 - `severity_id` (required)
 - `time` (required)
-- `type_uid` (required)
 - `message` (recommended)
 - `observables` (recommended)
 - `status` (recommended)
@@ -31,13 +29,17 @@ Security Finding events describe findings, detections, anomalies, alerts and/or 
 ### `activity_id`
 
 - **Type**: `integer_t`
+- **Requirement**: required
+- **Group**: classification
 - **Sibling**: `activity_name`
 
 #### Enum values
 
+- `0`: `Unknown` - The event activity is unknown.
 - `1`: `Create` - A security finding was created.
 - `2`: `Update` - A security finding was updated.
 - `3`: `Close` - A security finding was closed.
+- `99`: `Other` - The event activity is not mapped. See the `activity_name` attribute, which contains a data source specific value.
 
 The normalized identifier of the activity that triggered the event. Each event class defines its own set of activity values. Use `0` (Unknown) when the activity cannot be determined. Use `99` (Other) when the activity does not match any defined value, in which case `activity_name` must be populated with the source-specific label.
 
@@ -98,7 +100,7 @@ The confidence, normalized to the caption of the confidence_id value. In the cas
 - `3`: `High`
 - `99`: `Other` - The confidence is not mapped to the defined enum values. See the `confidence` attribute, which contains a data source specific value.
 
-The normalized confidence refers to the accuracy of the analytics that produced the alert or finding. See specific usage.
+The normalized confidence refers to the accuracy of the security control or alert. An analytic with a low confidence means that the alerts may be noisy or may not be malicious in nature.
 
 ### `confidence_score`
 
@@ -106,7 +108,7 @@ The normalized confidence refers to the accuracy of the analytics that produced 
 - **Requirement**: recommended
 - **Group**: primary
 
-The confidence score. See specific usage.
+The confidence score as reported by the source or assigned by the analyst expressed on a source-specific numeric scale. This score provides finer-grained confidence information than the categorical `confidence_id` value. If `confidence_id` is 99 'Other', it should reflect the the same assessment as `confidence` if both are populated.
 
 ### `data_sources`
 
@@ -259,10 +261,12 @@ The normalized state of a security finding.
 
 #### Enum values
 
+- `0`: `Unknown` - The state is unknown.
 - `1`: `New` - The finding is new and yet to be reviewed.
 - `2`: `In Progress` - The finding is under review.
 - `3`: `Suppressed` - The finding was reviewed, considered as a false positive and is now suppressed.
 - `4`: `Resolved` - The finding was reviewed and remediated and is now considered resolved.
+- `99`: `Other` - The state is not mapped. See the `state` attribute, which contains a data source specific value.
 
 The normalized state identifier of a security finding.
 
@@ -273,3 +277,33 @@ The normalized state identifier of a security finding.
 - **Group**: context
 
 This object describes vulnerabilities reported in a security finding.
+
+### `class_uid`
+
+- **Type**: `integer_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `class_name`
+
+#### Enum values
+
+- `2001`: `Security Finding` - Security Finding events describe findings, detections, anomalies, alerts and/or actions performed by security products
+
+The unique identifier of a class. A class describes the attributes available in an event. Producers and mappers must set this to the `uid` defined in the event class definition. For example, `Detection Finding` is `2004`.
+
+### `type_uid`
+
+- **Type**: `long_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `type_name`
+
+#### Enum values
+
+- `200100`: `Security Finding: Unknown`
+- `200101`: `Security Finding: Create` - A security finding was created.
+- `200102`: `Security Finding: Update` - A security finding was updated.
+- `200103`: `Security Finding: Close` - A security finding was closed.
+- `200199`: `Security Finding: Other`
+
+The event/finding type ID. It identifies the event's semantics and structure. Producers and mappers must compute this as `class_uid * 100 + activity_id`. It uniquely identifies the combination of event class and activity across the entire schema. For example, `Detection Finding: Create` is `200401`.

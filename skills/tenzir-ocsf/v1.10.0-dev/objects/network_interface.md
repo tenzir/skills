@@ -34,6 +34,7 @@ The MAC address of the network interface.
 ### `name`
 
 - **Type**: `string_t`
+- **Requirement**: recommended
 
 The name of the network interface.
 
@@ -73,12 +74,12 @@ The type of network interface.
 
 #### Enum values
 
-- `0`: `Unknown`
+- `0`: `Unknown` - The type is unknown.
 - `1`: `Wired`
 - `2`: `Wireless`
 - `3`: `Mobile`
 - `4`: `Tunnel`
-- `99`: `Other`
+- `99`: `Other` - The type is not mapped. See the `type` attribute, which contains a data source specific value.
 
 The network interface type identifier.
 

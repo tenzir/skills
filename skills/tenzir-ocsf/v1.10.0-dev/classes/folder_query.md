@@ -12,17 +12,16 @@ Folder Query events report information about folders that are present on the sys
 ## Inherited attributes
 
 **From Discovery Result:**
+- `activity_id` (required)
 - `query_result_id` (required)
 - `query_info` (recommended)
 - `query_result` (recommended)
 
 **From Base Event:**
 - `category_uid` (required)
-- `class_uid` (required)
 - `metadata` (required)
 - `severity_id` (required)
 - `time` (required)
-- `type_uid` (required)
 - `message` (recommended)
 - `observables` (recommended)
 - `status` (recommended)
@@ -40,3 +39,31 @@ Folder Query events report information about folders that are present on the sys
 - **Group**: primary
 
 The folder that is the target of the query.
+
+### `class_uid`
+
+- **Type**: `integer_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `class_name`
+
+#### Enum values
+
+- `5008`: `Folder Query` - Folder Query events report information about folders that are present on the system.
+
+The unique identifier of a class. A class describes the attributes available in an event. Producers and mappers must set this to the `uid` defined in the event class definition. For example, `Detection Finding` is `2004`.
+
+### `type_uid`
+
+- **Type**: `long_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `type_name`
+
+#### Enum values
+
+- `500800`: `Folder Query: Unknown`
+- `500801`: `Folder Query: Query` - The discovered results are via a query request.
+- `500899`: `Folder Query: Other`
+
+The event/finding type ID. It identifies the event's semantics and structure. Producers and mappers must compute this as `class_uid * 100 + activity_id`. It uniquely identifies the combination of event class and activity across the entire schema. For example, `Detection Finding: Create` is `200401`.

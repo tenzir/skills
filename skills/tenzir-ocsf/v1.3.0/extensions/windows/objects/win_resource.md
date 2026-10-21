@@ -13,6 +13,7 @@ The Windows resource object describes a resource object managed by Windows, such
 ### `name`
 
 - **Type**: `string_t`
+- **Requirement**: recommended
 
 The name of the resource object.
 
@@ -45,7 +46,6 @@ The type of the Windows resource object.
 
 #### Enum values
 
-- `99`: `Other` - The resource object type is not mapped. See the `type` attribute, which may contain a data source specific value.
 - `0`: `Unknown` - The resource object type is unknown.
 - `1`: `Directory`
 - `2`: `Event`
@@ -84,11 +84,13 @@ The type of the Windows resource object.
 - `35`: `SAM_USER`
 - `36`: `SAM_DOMAIN`
 - `37`: `SAM_SERVER`
+- `99`: `Other` - The resource object type is not mapped. See the `type` attribute, which may contain a data source specific value.
 
 The normalized type identifier of the Windows resource object accessed.
 
 ### `uid`
 
 - **Type**: `string_t`
+- **Requirement**: recommended
 
 The Windows provided handle identifier for the resource object

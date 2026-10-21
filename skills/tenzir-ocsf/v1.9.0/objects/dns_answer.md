@@ -4,6 +4,15 @@ The DNS Answer object represents a specific response provided by the Domain Name
 
 - **Extends**: [DNS Resource Record (dns_resource_record)](dns_resource_record.md)
 
+## Inherited attributes
+
+**From DNS Resource Record:**
+- `rdata` (required)
+- `class` (recommended)
+- `hostname` (recommended)
+- `ttl` (recommended)
+- `type` (recommended)
+
 ## Attributes
 
 ### `flag_ids`
@@ -14,12 +23,14 @@ The DNS Answer object represents a specific response provided by the Domain Name
 
 #### Enum values
 
+- `0`: `Unknown` - The flag is unknown.
 - `1`: `Authoritative Answer`
 - `2`: `Truncated Response`
 - `3`: `Recursion Desired`
 - `4`: `Recursion Available`
 - `5`: `Authentic Data`
 - `6`: `Checking Disabled`
+- `99`: `Other` - The flag is not mapped. See the `flags` attribute, which contains a data source specific value.
 
 > **Deprecated since v1.9.0.** Use `dns_activity.flag_ids` instead.
 

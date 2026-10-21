@@ -12,17 +12,16 @@ Network Connection Query events report information about active network connecti
 ## Inherited attributes
 
 **From Discovery Result:**
+- `activity_id` (required)
 - `query_result_id` (required)
 - `query_info` (recommended)
 - `query_result` (recommended)
 
 **From Base Event:**
 - `category_uid` (required)
-- `class_uid` (required)
 - `metadata` (required)
 - `severity_id` (required)
 - `time` (required)
-- `type_uid` (required)
 - `message` (recommended)
 - `observables` (recommended)
 - `status` (recommended)
@@ -78,5 +77,34 @@ The state of the socket, normalized to the caption of the state_id value. In the
 - `9`: `LAST_ACK` - The socket connection has been closed by the remote peer, the local application has closed its half of the connection, and the system is waiting for the remote peer to acknowledge the close.
 - `10`: `LISTEN` - The socket is listening for incoming connections.
 - `11`: `CLOSING` - The socket connection has been closed by the local application and the remote peer simultaneously, and the remote peer has not yet acknowledged the close attempt of the local application.
+- `99`: `Other` - The state is not mapped. See the `state` attribute, which contains a data source specific value.
 
 The state of the socket.
+
+### `class_uid`
+
+- **Type**: `integer_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `class_name`
+
+#### Enum values
+
+- `5012`: `Network Connection Query` - Network Connection Query events report information about active network connections.
+
+The unique identifier of a class. A class describes the attributes available in an event.
+
+### `type_uid`
+
+- **Type**: `long_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `type_name`
+
+#### Enum values
+
+- `501200`: `Network Connection Query: Unknown`
+- `501201`: `Network Connection Query: Query` - The discovered results are via a query request.
+- `501299`: `Network Connection Query: Other`
+
+The event/finding type ID. It identifies the event's semantics and structure. The value is calculated by the logging system as: `class_uid * 100 + activity_id`.

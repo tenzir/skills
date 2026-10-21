@@ -20,11 +20,9 @@ Memory Activity events report when a process has memory allocated, read/modified
 
 **From Base Event:**
 - `category_uid` (required)
-- `class_uid` (required)
 - `metadata` (required)
 - `severity_id` (required)
 - `time` (required)
-- `type_uid` (required)
 - `message` (recommended)
 - `observables` (recommended)
 - `status` (recommended)
@@ -38,10 +36,13 @@ Memory Activity events report when a process has memory allocated, read/modified
 ### `activity_id`
 
 - **Type**: `integer_t`
+- **Requirement**: required
+- **Group**: classification
 - **Sibling**: `activity_name`
 
 #### Enum values
 
+- `0`: `Unknown` - The event activity is unknown.
 - `1`: `Allocate Page`
 - `2`: `Modify Page`
 - `3`: `Delete Page`
@@ -51,6 +52,7 @@ Memory Activity events report when a process has memory allocated, read/modified
 - `7`: `Read` - Read (Example: `ReadProcessMemory`)
 - `8`: `Write` - Write (Example: `WriteProcessMemory`)
 - `9`: `Map View` - Map View (Example: `MapViewOfFile2`)
+- `99`: `Other` - The event activity is not mapped. See the `activity_name` attribute, which contains a data source specific value.
 
 The normalized identifier of the activity that triggered the event. Each event class defines its own set of activity values. Use `0` (Unknown) when the activity cannot be determined. Use `99` (Other) when the activity does not match any defined value, in which case `activity_name` must be populated with the source-specific label.
 
@@ -93,3 +95,39 @@ The permissions mask that was requested to access memory.
 - **Group**: primary
 
 The memory size that was access or requested.
+
+### `class_uid`
+
+- **Type**: `integer_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `class_name`
+
+#### Enum values
+
+- `1004`: `Memory Activity` - Memory Activity events report when a process has memory allocated, read/modified, or other manipulation activities - such as a buffer overflow or turning off data execution protection (DEP).
+
+The unique identifier of a class. A class describes the attributes available in an event. Producers and mappers must set this to the `uid` defined in the event class definition. For example, `Detection Finding` is `2004`.
+
+### `type_uid`
+
+- **Type**: `long_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `type_name`
+
+#### Enum values
+
+- `100400`: `Memory Activity: Unknown`
+- `100401`: `Memory Activity: Allocate Page`
+- `100402`: `Memory Activity: Modify Page`
+- `100403`: `Memory Activity: Delete Page`
+- `100404`: `Memory Activity: Buffer Overflow`
+- `100405`: `Memory Activity: Disable DEP` - Data Execution Permission
+- `100406`: `Memory Activity: Enable DEP` - Data Execution Permission
+- `100407`: `Memory Activity: Read` - Read (Example: `ReadProcessMemory`)
+- `100408`: `Memory Activity: Write` - Write (Example: `WriteProcessMemory`)
+- `100409`: `Memory Activity: Map View` - Map View (Example: `MapViewOfFile2`)
+- `100499`: `Memory Activity: Other`
+
+The event/finding type ID. It identifies the event's semantics and structure. Producers and mappers must compute this as `class_uid * 100 + activity_id`. It uniquely identifies the combination of event class and activity across the entire schema. For example, `Detection Finding: Create` is `200401`.

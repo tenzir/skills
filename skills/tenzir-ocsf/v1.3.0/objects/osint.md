@@ -8,6 +8,12 @@ The OSINT (Open Source Intelligence) object contains details related to an indic
 
 - **At least one of**: `name`, `uid`
 
+## Inherited attributes
+
+**From Entity:**
+- `name` (recommended)
+- `uid` (recommended)
+
 ## Attributes
 
 ### `type_id`

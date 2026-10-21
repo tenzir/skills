@@ -19,8 +19,8 @@ The Windows extension defines Windows specific attributes, objects and classes.
 ## Objects
 
 - [Query Evidence](objects/query_evidence.md)
-- [Registry Key](objects/registry_key.md)
-- [Registry Value](objects/registry_value.md)
+- [Registry Key](objects/reg_key.md)
+- [Registry Value](objects/reg_value.md)
 - [Startup Item](objects/startup_item.md)
 - [Windows Evidence Artifacts](objects/evidences.md)
 - [Windows Resource](objects/win_resource.md)

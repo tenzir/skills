@@ -13,6 +13,7 @@ The Account object contains details about the account that initiated or performe
 ### `name`
 
 - **Type**: `string_t`
+- **Requirement**: recommended
 
 The name of the account (e.g. GCP Account Name).
 
@@ -31,7 +32,6 @@ The account type, normalized to the caption of 'account_type_id'. In the case of
 
 #### Enum values
 
-- `99`: `Other` - The account type is not mapped.
 - `0`: `Unknown` - The account type is unknown.
 - `1`: `LDAP Account`
 - `2`: `Windows Account`
@@ -43,12 +43,14 @@ The account type, normalized to the caption of 'account_type_id'. In the case of
 - `8`: `Apple Account`
 - `9`: `Linux Account`
 - `10`: `AWS Account`
+- `99`: `Other` - The account type is not mapped.
 
 The normalized account type identifier.
 
 ### `uid`
 
 - **Type**: `string_t`
+- **Requirement**: recommended
 
 The unique identifier of the account (e.g. AWS Account ID).
 

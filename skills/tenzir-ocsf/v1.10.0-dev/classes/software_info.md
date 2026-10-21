@@ -9,13 +9,14 @@ Software Inventory Info events report device software inventory data that is eit
 
 ## Inherited attributes
 
+**From Discovery:**
+- `activity_id` (required)
+
 **From Base Event:**
 - `category_uid` (required)
-- `class_uid` (required)
 - `metadata` (required)
 - `severity_id` (required)
 - `time` (required)
-- `type_uid` (required)
 - `message` (recommended)
 - `observables` (recommended)
 - `status` (recommended)
@@ -32,7 +33,7 @@ Software Inventory Info events report device software inventory data that is eit
 - **Requirement**: optional
 - **Group**: context
 
-The actor object describes details about the user/role/process that was the source of the activity. Note that this is not the threat actor of a campaign but may be part of a campaign.
+The user, process, or service that initiated the activity on the host. For system-level events this is typically a process; for IAM events it is typically a user or role.
 
 ### `device`
 
@@ -67,3 +68,32 @@ Additional product attributes that have been discovered or enriched from a catal
 - **Group**: primary
 
 The Software Bill of Materials (SBOM) of the device software that is being discovered by an inventory process.
+
+### `class_uid`
+
+- **Type**: `integer_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `class_name`
+
+#### Enum values
+
+- `5020`: `Software Inventory Info` - Software Inventory Info events report device software inventory data that is either logged or proactively collected. For example, when collecting device information from a CMDB or running a network sweep of connected devices.
+
+The unique identifier of a class. A class describes the attributes available in an event. Producers and mappers must set this to the `uid` defined in the event class definition. For example, `Detection Finding` is `2004`.
+
+### `type_uid`
+
+- **Type**: `long_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `type_name`
+
+#### Enum values
+
+- `502000`: `Software Inventory Info: Unknown`
+- `502001`: `Software Inventory Info: Log` - The discovered information is via a log.
+- `502002`: `Software Inventory Info: Collect` - The discovered information is via a collection process.
+- `502099`: `Software Inventory Info: Other`
+
+The event/finding type ID. It identifies the event's semantics and structure. Producers and mappers must compute this as `class_uid * 100 + activity_id`. It uniquely identifies the combination of event class and activity across the entire schema. For example, `Detection Finding: Create` is `200401`.

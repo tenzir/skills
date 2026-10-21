@@ -50,5 +50,6 @@ The TLS extension type. For example: `Server Name`.
 - `49`: `post_handshake_auth` - The Post-Handshake Client Authentication extension.
 - `50`: `signature_algorithms_cert` - The Signature Algorithms extension.
 - `51`: `key_share` - The Key Share extension.
+- `99`: `Other` - The type is not mapped. See the `type` attribute, which contains a data source specific value.
 
 The TLS extension type identifier.

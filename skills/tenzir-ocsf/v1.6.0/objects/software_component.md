@@ -84,9 +84,11 @@ The type of software component, normalized to the caption of the `type_id` value
 
 #### Enum values
 
+- `0`: `Unknown` - The type is unknown.
 - `1`: `Framework` - A software framework.
 - `2`: `Library` - A software library.
 - `3`: `Operating System` - An operating system. Useful for SBOMs of container images.
+- `99`: `Other` - The type is not mapped. See the `type` attribute, which contains a data source specific value.
 
 The type of software component.
 

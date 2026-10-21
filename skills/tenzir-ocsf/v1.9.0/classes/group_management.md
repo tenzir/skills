@@ -15,11 +15,9 @@ Group Management events report lifecycle management of a group, as well as privi
 
 **From Base Event:**
 - `category_uid` (required)
-- `class_uid` (required)
 - `metadata` (required)
 - `severity_id` (required)
 - `time` (required)
-- `type_uid` (required)
 - `message` (recommended)
 - `observables` (recommended)
 - `status` (recommended)
@@ -33,10 +31,13 @@ Group Management events report lifecycle management of a group, as well as privi
 ### `activity_id`
 
 - **Type**: `integer_t`
+- **Requirement**: required
+- **Group**: classification
 - **Sibling**: `activity_name`
 
 #### Enum values
 
+- `0`: `Unknown` - The event activity is unknown.
 - `1`: `Assign Privileges` - Assign privileges to the group. Use `privileges` as privileges to be assigned.
 - `2`: `Revoke Privileges` - Revoke privileges from the group. Use `privileges` as privileges to be revoked.
 - `3`: `Add User` - Add a user or users to the group. Use `users` for the users to be added.
@@ -50,6 +51,7 @@ Group Management events report lifecycle management of a group, as well as privi
 - `11`: `Detach Policies` - Detach one or more IAM Policies from the group. Use `policies` as policies to be detached.
 - `12`: `Assign Roles` - Assign one or more roles to the group. Use `iam_roles` for the specific roles to be assigned.
 - `13`: `Remove Roles` - Remove one or more roles from the group. Use `iam_roles` for the specific roles to be removed.
+- `99`: `Other` - The event activity is not mapped. See the `activity_name` attribute, which contains a data source specific value.
 
 The normalized identifier of the activity that triggered the event. The target of each activity is the `group` attribute.
 
@@ -136,3 +138,43 @@ A user that was added to or removed from `group`.
 - **Group**: primary
 
 Users that were added to or removed from `group`.
+
+### `class_uid`
+
+- **Type**: `integer_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `class_name`
+
+#### Enum values
+
+- `3006`: `Group Management` - Group Management events report lifecycle management of a group, as well as privileges, roles, and resources associated with the group. There are two ways updates to the state of a group may be expressed: Using the `Update` activity, for example when updating multiple items at one time, the `updated_group` reflects the changes made to `group`. Using discrete activities, such as `Assign Privileges` the state change is expressed by the `privileges` attribute. Optionally, on success, the `updated_group` reflects the new state of the group.
+
+The unique identifier of a class. A class describes the attributes available in an event. Producers and mappers must set this to the `uid` defined in the event class definition. For example, `Detection Finding` is `2004`.
+
+### `type_uid`
+
+- **Type**: `long_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `type_name`
+
+#### Enum values
+
+- `300600`: `Group Management: Unknown`
+- `300601`: `Group Management: Assign Privileges` - Assign privileges to the group. Use `privileges` as privileges to be assigned.
+- `300602`: `Group Management: Revoke Privileges` - Revoke privileges from the group. Use `privileges` as privileges to be revoked.
+- `300603`: `Group Management: Add User` - Add a user or users to the group. Use `users` for the users to be added.
+- `300604`: `Group Management: Remove User` - Remove a user or users from the group. Use `users` for the users to be removed.
+- `300605`: `Group Management: Delete` - Delete the group.
+- `300606`: `Group Management: Create` - Create a group. Populate the `group` object with details of the group to be created.
+- `300607`: `Group Management: Add Subgroup` - Add a subgroup to the group. Use `sub_group` as the subgroup to be added.
+- `300608`: `Group Management: Remove Subgroup` - Remove a subgroup from the group. Use `sub_group` as the subgroup to be removed.
+- `300609`: `Group Management: Update` - Update the group. The updated group details should be populated in the `updated_group` attribute.
+- `300610`: `Group Management: Attach Policies` - Attach one or more IAM Policies to the group. Use `policies` as policies to be attached.
+- `300611`: `Group Management: Detach Policies` - Detach one or more IAM Policies from the group. Use `policies` as policies to be detached.
+- `300612`: `Group Management: Assign Roles` - Assign one or more roles to the group. Use `iam_roles` for the specific roles to be assigned.
+- `300613`: `Group Management: Remove Roles` - Remove one or more roles from the group. Use `iam_roles` for the specific roles to be removed.
+- `300699`: `Group Management: Other`
+
+The event/finding type ID. It identifies the event's semantics and structure. Producers and mappers must compute this as `class_uid * 100 + activity_id`. It uniquely identifies the combination of event class and activity across the entire schema. For example, `Detection Finding: Create` is `200401`.

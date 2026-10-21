@@ -3,6 +3,7 @@
 The Authentication Token object represents standardized authentication tokens, tickets, or assertions that conform to established authentication protocols such as Kerberos, OIDC, and SAML. These tokens are issued by authentication servers and identity providers and carry protocol-specific metadata, lifecycle information, and security attributes defined by their respective specifications.
 
 - **Extends**: [Object (object)](object.md)
+- **Profiles**: [Date/Time](../profiles/datetime.md)
 
 ## Attributes
 
@@ -62,6 +63,6 @@ The type of the authentication token.
 - `3`: `Identity Token` - Identity (ID) Token for OIDC.
 - `4`: `Refresh Token` - Refresh Token for OIDC.
 - `5`: `SAML Assertion` - Authentication Assertion for SAML.
-- `99`: `Other`
+- `99`: `Other` - The type is not mapped. See the `type` attribute, which contains a data source specific value.
 
 The normalized authentication token type identifier.

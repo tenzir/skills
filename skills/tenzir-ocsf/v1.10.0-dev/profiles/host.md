@@ -100,6 +100,7 @@ Adds host and actor context to event classes. Apply this profile when the event 
 
 - **Type**: [`actor`](../objects/actor.md)
 - **Requirement**: optional
+- **Group**: primary
 
 The user, process, or service that initiated the activity on the host. For system-level events this is typically a process; for IAM events it is typically a user or role.
 
@@ -107,5 +108,6 @@ The user, process, or service that initiated the activity on the host. For syste
 
 - **Type**: [`device`](../objects/device.md)
 - **Requirement**: recommended
+- **Group**: primary
 
 The host or device where the activity was observed. Populate with details such as hostname, IP address, OS, and hardware identifiers when available from the source.

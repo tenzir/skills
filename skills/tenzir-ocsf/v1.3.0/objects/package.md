@@ -84,8 +84,10 @@ The type of software package, normalized to the caption of the type_id value. In
 
 #### Enum values
 
+- `0`: `Unknown` - The type is unknown.
 - `1`: `Application` - An application software package.
 - `2`: `Operating System` - An operating system software package.
+- `99`: `Other` - The type is not mapped. See the `type` attribute, which contains a data source specific value.
 
 The type of software package.
 

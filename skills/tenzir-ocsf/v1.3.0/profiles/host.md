@@ -74,6 +74,7 @@ The attributes that identify host/device attributes.
 
 - **Type**: [`device`](../objects/device.md)
 - **Requirement**: recommended
+- **Group**: primary
 
 An addressable device, computer system or host.
 
@@ -81,5 +82,6 @@ An addressable device, computer system or host.
 
 - **Type**: [`actor`](../objects/actor.md)
 - **Requirement**: optional
+- **Group**: primary
 
 The actor object describes details about the user/role/process that was the source of the activity.

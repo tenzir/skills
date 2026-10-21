@@ -9,10 +9,16 @@ Abstract base class for Network Activity event classes. Concrete classes in this
 ## Inherited attributes
 
 **From Base Event:**
+- `activity_id` (required)
+- `category_uid` (required)
+- `class_uid` (required)
 - `metadata` (required)
 - `severity_id` (required)
+- `time` (required)
+- `type_uid` (required)
 - `message` (recommended)
 - `status_id` (recommended)
+- `timezone_offset` (recommended)
 
 ## Attributes
 
@@ -61,6 +67,7 @@ The initiator (client) of the network connection.
 ### `tls`
 
 - **Type**: [`tls`](../objects/tls.md)
+- **Requirement**: optional
 - **Group**: primary
 
 The Transport Layer Security (TLS) attributes.

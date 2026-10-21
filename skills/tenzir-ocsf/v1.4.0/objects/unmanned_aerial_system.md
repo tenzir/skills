@@ -56,11 +56,6 @@ The type of the UAS. For example, Helicopter, Gyroplane, Rocket, etc.
 
 - `0`: `Unknown/Undeclared` - The UAS type is empty or not declared.
 - `1`: `Airplane`
-- `10`: `Airship` - E.g., a blimp.
-- `11`: `Free Fall/Parachute` - Parachutes, or objects without any power or propulsion mechanism.
-- `12`: `Rocket`
-- `13`: `Tethered Powered Aircraft`
-- `14`: `Ground Obstacle`
 - `2`: `Helicopter` - Can also be a Multi-rotor Unmanned Aircraft (e.g., Quad-copter).
 - `3`: `Gyroplane`
 - `4`: `Hybrid Lift` - Fixed wing aircraft that can take off vertically.
@@ -69,7 +64,12 @@ The type of the UAS. For example, Helicopter, Gyroplane, Rocket, etc.
 - `7`: `Kite`
 - `8`: `Free Balloon`
 - `9`: `Captive Balloon`
-- `99`: `Other`
+- `10`: `Airship` - E.g., a blimp.
+- `11`: `Free Fall/Parachute` - Parachutes, or objects without any power or propulsion mechanism.
+- `12`: `Rocket`
+- `13`: `Tethered Powered Aircraft`
+- `14`: `Ground Obstacle`
+- `99`: `Other` - The type is not mapped. See the `type` attribute, which contains a data source specific value.
 
 The UAS type identifier.
 

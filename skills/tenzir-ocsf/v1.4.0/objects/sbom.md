@@ -3,6 +3,7 @@
 The Software Bill of Materials object describes characteristics of a generated SBOM.
 
 - **Extends**: [Object (object)](object.md)
+- **Profiles**: [Date/Time](../profiles/datetime.md)
 
 ## Attributes
 

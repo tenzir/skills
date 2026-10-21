@@ -3,6 +3,7 @@
 The Resource object contains attributes that provide information about a particular resource. It serves as a base object, offering attributes that help identify and classify the resource effectively.
 
 - **Extends**: [Entity (_entity)](_entity.md)
+- **Profiles**: [Data Classification](../profiles/data_classification.md)
 
 ## Constraints
 
@@ -27,6 +28,7 @@ The list of labels associated to the resource.
 ### `name`
 
 - **Type**: `string_t`
+- **Requirement**: recommended
 
 The name of the resource.
 
@@ -47,5 +49,6 @@ The resource type as defined by the event source.
 ### `uid`
 
 - **Type**: `string_t`
+- **Requirement**: recommended
 
 The unique identifier of the resource.

@@ -9,6 +9,7 @@ The Network Connection Information object describes characteristics of a network
 ### `boundary`
 
 - **Type**: `string_t`
+- **Requirement**: optional
 
 The boundary of the connection, normalized to the caption of 'boundary_id'. In the case of 'Other', it is defined by the event source.
 
@@ -17,15 +18,13 @@ For cloud connections, this translates to the traffic-boundary(same VPC, through
 ### `boundary_id`
 
 - **Type**: `integer_t`
+- **Requirement**: optional
 - **Sibling**: `boundary`
 
 #### Enum values
 
-- `99`: `Other`
 - `0`: `Unknown` - The connection boundary is unknown.
 - `1`: `Localhost` - Local network traffic on the same endpoint.
-- `10`: `Gateway VPC` - Through a gateway VPC endpoint (Nitro-based instances only)
-- `11`: `Internet Gateway` - Through an Internet gateway (Nitro-based instances only)
 - `2`: `Internal` - Internal network traffic between two endpoints inside network.
 - `3`: `External` - External network traffic between two endpoints on the Internet or outside the network.
 - `4`: `Same VPC` - Through another resource in the same VPC
@@ -34,6 +33,9 @@ For cloud connections, this translates to the traffic-boundary(same VPC, through
 - `7`: `Intra-region VPC` - Through an intra-region VPC peering connection
 - `8`: `Inter-region VPC` - Through an inter-region VPC peering connection
 - `9`: `Local Gateway` - Through a local gateway
+- `10`: `Gateway VPC` - Through a gateway VPC endpoint (Nitro-based instances only)
+- `11`: `Internet Gateway` - Through an Internet gateway (Nitro-based instances only)
+- `99`: `Other`
 
 The normalized identifier of the boundary of the connection.
 
@@ -65,6 +67,7 @@ The normalized identifier of the direction of the initiated connection, traffic,
 ### `protocol_name`
 
 - **Type**: `string_t`
+- **Requirement**: optional
 
 The TCP/IP protocol name in lowercase, as defined by the Internet Assigned Numbers Authority (IANA). See [Protocol Numbers](https://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml). For example: `tcp` or `udp`.
 
@@ -78,12 +81,14 @@ The TCP/IP protocol number, as defined by the Internet Assigned Numbers Authorit
 ### `protocol_ver`
 
 - **Type**: `string_t`
+- **Requirement**: optional
 
 The Internet Protocol version.
 
 ### `protocol_ver_id`
 
 - **Type**: `integer_t`
+- **Requirement**: optional
 - **Sibling**: `protocol_ver`
 
 #### Enum values
@@ -98,11 +103,13 @@ The Internet Protocol version identifier.
 ### `tcp_flags`
 
 - **Type**: `integer_t`
+- **Requirement**: optional
 
 The network connection TCP header flags (i.e., control bits).
 
 ### `uid`
 
 - **Type**: `string_t`
+- **Requirement**: optional
 
 The unique identifier of the connection.

@@ -48,6 +48,7 @@ The detailed geographical location usually associated with an IP address.
 ### `name`
 
 - **Type**: `string_t`
+- **Requirement**: recommended
 
 The name of the managed entity.
 
@@ -80,18 +81,21 @@ The managed entity type. For example: `policy`, `user`, `organizational unit`, `
 
 #### Enum values
 
+- `0`: `Unknown` - The type is unknown.
 - `1`: `Device` - A managed Device entity. This item corresponds to population of the `device` attribute.
 - `2`: `User` - A managed User entity. This item corresponds to population of the `user` attribute.
 - `3`: `Group` - A managed Group entity. This item corresponds to population of the `group` attribute.
 - `4`: `Organization` - A managed Organization entity. This item corresponds to population of the `org` attribute.
 - `5`: `Policy` - A managed Policy entity. This item corresponds to population of the `policy` attribute.
 - `6`: `Email` - A managed Email entity. This item corresponds to population of the `email` attribute.
+- `99`: `Other` - The type is not mapped. See the `type` attribute, which contains a data source specific value.
 
 The type of the Managed Entity. It is recommended to also populate the `type` attribute with the associated label, or the source specific name if `Other`.
 
 ### `uid`
 
 - **Type**: `string_t`
+- **Requirement**: recommended
 
 The identifier of the managed entity.
 

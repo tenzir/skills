@@ -9,11 +9,17 @@ Security Finding events describe findings, detections, anomalies, alerts and/or 
 
 ## Inherited attributes
 
+**From Findings:**
+- `activity_id` (required)
+
 **From Base Event:**
+- `category_uid` (required)
 - `metadata` (required)
 - `severity_id` (required)
+- `time` (required)
 - `message` (recommended)
 - `status_id` (recommended)
+- `timezone_offset` (recommended)
 
 ## Attributes
 
@@ -230,10 +236,12 @@ The normalized state of a security finding.
 
 #### Enum values
 
+- `0`: `Unknown`
 - `1`: `New` - The finding is new and yet to be reviewed.
 - `2`: `In Progress` - The finding is under review.
 - `3`: `Suppressed` - The finding was reviewed, considered as a false positive and is now suppressed.
 - `4`: `Resolved` - The finding was reviewed and remediated and is now considered resolved.
+- `99`: `Other` - The state is not mapped. See the `state` attribute, which contains a data source specific value.
 
 The normalized state identifier of a security finding.
 
@@ -244,3 +252,32 @@ The normalized state identifier of a security finding.
 - **Group**: context
 
 This object describes vulnerabilities reported in a security finding.
+
+### `class_uid`
+
+- **Type**: `integer_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `class_name`
+
+#### Enum values
+
+- `2001`: `Security Finding` - Security Finding events describe findings, detections, anomalies, alerts and/or actions performed by security products
+
+The unique identifier of a class. A Class describes the attributes available in an event.
+
+### `type_uid`
+
+- **Type**: `integer_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `type_name`
+
+#### Enum values
+
+- `200100`: `Security Finding: Unknown`
+- `200101`: `Security Finding: Create` - A security finding is created.
+- `200102`: `Security Finding: Update` - A security finding is updated.
+- `200199`: `Security Finding: Other`
+
+The event type ID. It identifies the event's semantics and structure. The value is calculated by the logging system as: `class_uid * 100 + activity_id`.

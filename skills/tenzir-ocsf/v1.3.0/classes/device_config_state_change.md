@@ -9,15 +9,21 @@ Device Config State Change events report state changes that impact the security 
 
 ## Inherited attributes
 
+**From Discovery:**
+- `activity_id` (required)
+
 **From Base Event:**
+- `category_uid` (required)
 - `metadata` (required)
 - `severity_id` (required)
+- `time` (required)
 - `message` (recommended)
 - `observables` (recommended)
 - `status` (recommended)
 - `status_code` (recommended)
 - `status_detail` (recommended)
 - `status_id` (recommended)
+- `timezone_offset` (recommended)
 
 ## Attributes
 
@@ -124,3 +130,32 @@ The Config Change Stat, normalized to the caption of the state_id value. In the 
 - `99`: `Other` - The Config Change is not mapped. See the `state` attribute, which contains data source specific values.
 
 The Config Change State of the managed entity.
+
+### `class_uid`
+
+- **Type**: `integer_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `class_name`
+
+#### Enum values
+
+- `5019`: `Device Config State Change` - Device Config State Change events report state changes that impact the security of the device.
+
+The unique identifier of a class. A class describes the attributes available in an event.
+
+### `type_uid`
+
+- **Type**: `long_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `type_name`
+
+#### Enum values
+
+- `501900`: `Device Config State Change: Unknown`
+- `501901`: `Device Config State Change: Log` - The discovered information is via a log.
+- `501902`: `Device Config State Change: Collect` - The discovered information is via a collection process.
+- `501999`: `Device Config State Change: Other`
+
+The event/finding type ID. It identifies the event's semantics and structure. The value is calculated by the logging system as: `class_uid * 100 + activity_id`.

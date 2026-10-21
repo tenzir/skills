@@ -42,11 +42,13 @@ The load type, normalized to the caption of the load_type_id value. In the case 
 
 #### Enum values
 
+- `0`: `Unknown` - The load type is unknown.
 - `1`: `Standard` - A normal module loaded by the normal windows loading mechanism i.e. LoadLibrary.
 - `2`: `Non Standard` - A module loaded in a way avoidant of normal windows procedures. i.e. Bootstrapped Loading/Manual Dll Loading.
 - `3`: `ShellCode` - A raw module in process memory that is READWRITE_EXECUTE and had a thread started in its range.
 - `4`: `Mapped` - A memory mapped file, typically created with CreatefileMapping/MapViewOfFile.
 - `5`: `NonStandard Backed` - A module loaded in a non standard way. However, GetModuleFileName succeeds on this allocation.
+- `99`: `Other` - The load type is not mapped. See the `load_type` attribute, which contains a data source specific value.
 
 The normalized identifier for how the module was loaded in memory.
 

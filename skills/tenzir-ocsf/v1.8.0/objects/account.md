@@ -41,6 +41,7 @@ The list of labels associated to the account.
 ### `name`
 
 - **Type**: `string_t`
+- **Requirement**: recommended
 - **Observable**: 34
 
 The name of the account (e.g.  `GCP Project name` ,  `Linux Account name`  or  `AWS Account name`).
@@ -96,6 +97,7 @@ The normalized account type identifier.
 ### `uid`
 
 - **Type**: `string_t`
+- **Requirement**: recommended
 - **Observable**: 35
 
 The unique identifier of the account (e.g.  `AWS Account ID` ,  `OCID` ,  `GCP Project ID` ,  `Azure Subscription ID` ,  `Google Workspace Customer ID` , or  `M365 Tenant UID`).

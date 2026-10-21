@@ -9,7 +9,13 @@ Abstract base class for Application Activity event classes. Concrete classes in 
 ## Inherited attributes
 
 **From Base Event:**
+- `activity_id` (required)
+- `category_uid` (required)
+- `class_uid` (required)
 - `metadata` (required)
 - `severity_id` (required)
+- `time` (required)
+- `type_uid` (required)
 - `message` (recommended)
 - `status_id` (recommended)
+- `timezone_offset` (recommended)

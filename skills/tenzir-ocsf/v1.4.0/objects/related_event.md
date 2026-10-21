@@ -3,6 +3,7 @@
 The Related Event object describes an event or another finding related to a finding. It may or may not be an OCSF event.
 
 - **Extends**: [Object (object)](object.md)
+- **Profiles**: [Date/Time](../profiles/datetime.md)
 
 ## Attributes
 

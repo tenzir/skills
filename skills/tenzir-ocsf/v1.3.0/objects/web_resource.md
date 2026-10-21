@@ -3,6 +3,7 @@
 The Web Resource object describes characteristics of a web resource that was affected by the activity/event.
 
 - **Extends**: [Resource (_resource)](_resource.md)
+- **Profiles**: [Data Classification](../profiles/data_classification.md)
 
 ## Constraints
 
@@ -27,18 +28,21 @@ Description of the web resource.
 ### `name`
 
 - **Type**: `string_t`
+- **Requirement**: recommended
 
 The name of the web resource.
 
 ### `type`
 
 - **Type**: `string_t`
+- **Requirement**: optional
 
 The web resource type as defined by the event source.
 
 ### `uid`
 
 - **Type**: `string_t`
+- **Requirement**: recommended
 
 The unique identifier of the web resource.
 

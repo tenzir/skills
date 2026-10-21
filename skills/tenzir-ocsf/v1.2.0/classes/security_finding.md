@@ -12,27 +12,34 @@ Security Finding events describe findings, detections, anomalies, alerts and/or 
 ## Inherited attributes
 
 **From Base Event:**
+- `category_uid` (required)
 - `metadata` (required)
 - `severity_id` (required)
+- `time` (required)
 - `message` (recommended)
 - `observables` (recommended)
 - `status` (recommended)
 - `status_code` (recommended)
 - `status_detail` (recommended)
 - `status_id` (recommended)
+- `timezone_offset` (recommended)
 
 ## Attributes
 
 ### `activity_id`
 
 - **Type**: `integer_t`
+- **Requirement**: required
+- **Group**: classification
 - **Sibling**: `activity_name`
 
 #### Enum values
 
+- `0`: `Unknown` - The event activity is unknown.
 - `1`: `Create` - A security finding was created.
 - `2`: `Update` - A security finding was updated.
 - `3`: `Close` - A security finding was closed.
+- `99`: `Other` - The event activity is not mapped. See the `activity_name` attribute, which contains a data source specific value.
 
 The normalized identifier of the activity that triggered the event.
 
@@ -251,10 +258,12 @@ The normalized state of a security finding.
 
 #### Enum values
 
+- `0`: `Unknown` - The state is unknown.
 - `1`: `New` - The finding is new and yet to be reviewed.
 - `2`: `In Progress` - The finding is under review.
 - `3`: `Suppressed` - The finding was reviewed, considered as a false positive and is now suppressed.
 - `4`: `Resolved` - The finding was reviewed and remediated and is now considered resolved.
+- `99`: `Other` - The state is not mapped. See the `state` attribute, which contains a data source specific value.
 
 The normalized state identifier of a security finding.
 
@@ -265,3 +274,33 @@ The normalized state identifier of a security finding.
 - **Group**: context
 
 This object describes vulnerabilities reported in a security finding.
+
+### `class_uid`
+
+- **Type**: `integer_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `class_name`
+
+#### Enum values
+
+- `2001`: `Security Finding` - Security Finding events describe findings, detections, anomalies, alerts and/or actions performed by security products
+
+The unique identifier of a class. A class describes the attributes available in an event.
+
+### `type_uid`
+
+- **Type**: `long_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `type_name`
+
+#### Enum values
+
+- `200100`: `Security Finding: Unknown`
+- `200101`: `Security Finding: Create` - A security finding was created.
+- `200102`: `Security Finding: Update` - A security finding was updated.
+- `200103`: `Security Finding: Close` - A security finding was closed.
+- `200199`: `Security Finding: Other`
+
+The event/finding type ID. It identifies the event's semantics and structure. The value is calculated by the logging system as: `class_uid * 100 + activity_id`.

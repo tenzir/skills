@@ -13,6 +13,7 @@ The Defensive Tactic object describes the tactic ID and/or name that is associat
 ### `name`
 
 - **Type**: `string_t`
+- **Requirement**: recommended
 
 The tactic name that is associated with the defensive technique. For example: `Isolate`.
 
@@ -26,5 +27,6 @@ The versioned permalink of the defensive tactic. For example: `https://d3fend.mi
 ### `uid`
 
 - **Type**: `string_t`
+- **Requirement**: recommended
 
 The unique identifier of the defensive tactic.

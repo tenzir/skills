@@ -22,11 +22,9 @@ Server Message Block (SMB) Protocol Activity events report client/server connect
 
 **From Base Event:**
 - `category_uid` (required)
-- `class_uid` (required)
 - `metadata` (required)
 - `severity_id` (required)
 - `time` (required)
-- `type_uid` (required)
 - `message` (recommended)
 - `observables` (recommended)
 - `status` (recommended)
@@ -40,16 +38,20 @@ Server Message Block (SMB) Protocol Activity events report client/server connect
 ### `activity_id`
 
 - **Type**: `integer_t`
+- **Requirement**: required
+- **Group**: classification
 - **Sibling**: `activity_name`
 
 #### Enum values
 
+- `0`: `Unknown` - The event activity is unknown.
 - `1`: `File Supersede` - The event pertains to file superseded activity (overwritten if it exists and created if not).
 - `2`: `File Open` - The event pertains to file open activity (the file is opened if it exists and fails to open if it doesn't).
 - `3`: `File Create` - The event pertains to file creation activity (a file is created if it does not exist and fails if it does).
 - `4`: `File Open If` - The event pertains to file open activity (the file is opened if it exists and is created if it doesn't).
 - `5`: `File Overwrite` - The event pertains to file overwrite activity (the file is opened in a truncated form if it exists and fails if it doesn't).
 - `6`: `File Overwrite If` - The event pertains to file overwrite activity (the file is opened in a truncated form if it exists and created otherwise)
+- `99`: `Other` - The event activity is not mapped. See the `activity_name` attribute, which contains a data source specific value.
 
 The normalized identifier of the activity that triggered the event. Each event class defines its own set of activity values. Use `0` (Unknown) when the activity cannot be determined. Use `99` (Other) when the activity does not match any defined value, in which case `activity_name` must be populated with the source-specific label.
 
@@ -149,3 +151,36 @@ The normalized identifier of the SMB share type.
 - **Group**: primary
 
 The tree id is a unique SMB identifier which represents an open connection to a share.
+
+### `class_uid`
+
+- **Type**: `integer_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `class_name`
+
+#### Enum values
+
+- `4006`: `SMB Activity` - Server Message Block (SMB) Protocol Activity events report client/server connections sharing resources within the network.
+
+The unique identifier of a class. A class describes the attributes available in an event. Producers and mappers must set this to the `uid` defined in the event class definition. For example, `Detection Finding` is `2004`.
+
+### `type_uid`
+
+- **Type**: `long_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `type_name`
+
+#### Enum values
+
+- `400600`: `SMB Activity: Unknown`
+- `400601`: `SMB Activity: File Supersede` - The event pertains to file superseded activity (overwritten if it exists and created if not).
+- `400602`: `SMB Activity: File Open` - The event pertains to file open activity (the file is opened if it exists and fails to open if it doesn't).
+- `400603`: `SMB Activity: File Create` - The event pertains to file creation activity (a file is created if it does not exist and fails if it does).
+- `400604`: `SMB Activity: File Open If` - The event pertains to file open activity (the file is opened if it exists and is created if it doesn't).
+- `400605`: `SMB Activity: File Overwrite` - The event pertains to file overwrite activity (the file is opened in a truncated form if it exists and fails if it doesn't).
+- `400606`: `SMB Activity: File Overwrite If` - The event pertains to file overwrite activity (the file is opened in a truncated form if it exists and created otherwise)
+- `400699`: `SMB Activity: Other`
+
+The event/finding type ID. It identifies the event's semantics and structure. Producers and mappers must compute this as `class_uid * 100 + activity_id`. It uniquely identifies the combination of event class and activity across the entire schema. For example, `Detection Finding: Create` is `200401`.

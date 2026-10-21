@@ -11,14 +11,16 @@ Extends the process object to add macOS specific fields
 
 ## Inherited attributes
 
-**From Process:**
-- `file` (recommended)
-- `parent_process` (recommended)
-- `user` (recommended)
-
 **From Process Entity:**
 - `cmd_line` (recommended)
 - `cpid` (recommended)
 - `created_time` (recommended)
+- `name` (recommended)
 - `path` (recommended)
 - `pid` (recommended)
+- `uid` (recommended)
+
+**From Process:**
+- `file` (recommended)
+- `parent_process` (recommended)
+- `user` (recommended)

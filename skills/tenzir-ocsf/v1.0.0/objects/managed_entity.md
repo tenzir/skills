@@ -20,6 +20,7 @@ The managed entity content as a JSON object.
 ### `name`
 
 - **Type**: `string_t`
+- **Requirement**: recommended
 
 The name of the managed entity.
 
@@ -33,6 +34,7 @@ The managed entity type. For example: `policy`, `user`, `organizational unit`, `
 ### `uid`
 
 - **Type**: `string_t`
+- **Requirement**: recommended
 
 The identifier of the managed entity.
 

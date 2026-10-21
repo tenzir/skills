@@ -23,6 +23,7 @@ Additional HTTP headers of an HTTP request or response.
 ### `http_method`
 
 - **Type**: `string_t`
+- **Requirement**: optional
 
 #### Enum values
 

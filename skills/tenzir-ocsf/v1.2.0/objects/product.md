@@ -3,6 +3,7 @@
 The Product object describes characteristics of a software product.
 
 - **Extends**: [Entity (_entity)](_entity.md)
+- **Profiles**: [Data Classification](../profiles/data_classification.md)
 
 ## Constraints
 
@@ -13,6 +14,7 @@ The Product object describes characteristics of a software product.
 ### `feature`
 
 - **Type**: [`feature`](feature.md)
+- **Requirement**: optional
 
 The feature that reported the event.
 
@@ -33,24 +35,28 @@ The two letter lower case language codes, as defined by [ISO 639-1](https://en.w
 ### `name`
 
 - **Type**: `string_t`
+- **Requirement**: recommended
 
 The name of the product.
 
 ### `path`
 
 - **Type**: `string_t`
+- **Requirement**: optional
 
 The installation path of the product.
 
 ### `uid`
 
 - **Type**: `string_t`
+- **Requirement**: recommended
 
 The unique identifier of the product.
 
 ### `url_string`
 
 - **Type**: `url_t`
+- **Requirement**: optional
 
 The URL pointing towards the product.
 

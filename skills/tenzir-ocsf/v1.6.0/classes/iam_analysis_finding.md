@@ -16,17 +16,16 @@ Note: If the Finding is an incident, i.e. requires incident workflow, also apply
 ## Inherited attributes
 
 **From Finding:**
+- `activity_id` (required)
 - `finding_info` (required)
 - `confidence_id` (recommended)
 - `status_id` (recommended)
 
 **From Base Event:**
 - `category_uid` (required)
-- `class_uid` (required)
 - `metadata` (required)
 - `severity_id` (required)
 - `time` (required)
-- `type_uid` (required)
 - `message` (recommended)
 - `observables` (recommended)
 - `status_code` (recommended)
@@ -90,3 +89,33 @@ Details about resources involved in the IAM analysis. For identity-centric analy
 - **Group**: primary
 
 Details about the identity (user, role, service account, or other principal) that is the subject of the IAM analysis. This provides context about the identity being evaluated for security risks and access patterns.
+
+### `class_uid`
+
+- **Type**: `integer_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `class_name`
+
+#### Enum values
+
+- `2008`: `IAM Analysis Finding` - This finding represents an IAM analysis result, which evaluates IAM policies, access patterns, and IAM configurations for potential security risks. The analysis can focus on either an identity (user, role, service account) or a resource to assess permissions, access patterns, and security posture within the IAM domain. Note: Use `permission_analysis_results` for identity-centric analysis (evaluating what an identity can do) and `access_analysis_result` for resource-centric analysis (evaluating who can access a resource). These complement each other for comprehensive IAM security assessment. Note: If the Finding is an incident, i.e. requires incident workflow, also apply the `incident` profile or aggregate this finding into an `Incident Finding`.
+
+The unique identifier of a class. A class describes the attributes available in an event.
+
+### `type_uid`
+
+- **Type**: `long_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `type_name`
+
+#### Enum values
+
+- `200800`: `IAM Analysis Finding: Unknown`
+- `200801`: `IAM Analysis Finding: Create` - A finding was created.
+- `200802`: `IAM Analysis Finding: Update` - A finding was updated.
+- `200803`: `IAM Analysis Finding: Close` - A finding was closed.
+- `200899`: `IAM Analysis Finding: Other`
+
+The event/finding type ID. It identifies the event's semantics and structure. The value is calculated by the logging system as: `class_uid * 100 + activity_id`.

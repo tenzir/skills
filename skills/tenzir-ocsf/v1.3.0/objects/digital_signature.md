@@ -3,6 +3,7 @@
 The Digital Signature object contains information about the cryptographic mechanism used to verify the authenticity, integrity, and origin of the file or application.
 
 - **Extends**: [Object (object)](object.md)
+- **Profiles**: [Date/Time](../profiles/datetime.md)
 
 ## Attributes
 
@@ -21,12 +22,12 @@ The digital signature algorithm used to create the signature, normalized to the 
 
 #### Enum values
 
-- `99`: `Other`
-- `0`: `Unknown`
+- `0`: `Unknown` - The algorithm is unknown.
 - `1`: `DSA` - Digital Signature Algorithm (DSA).
 - `2`: `RSA` - Rivest-Shamir-Adleman (RSA) Algorithm.
 - `3`: `ECDSA` - Elliptic Curve Digital Signature Algorithm.
 - `4`: `Authenticode` - Microsoft Authenticode Digital Signature Algorithm.
+- `99`: `Other` - The algorithm is not mapped. See the `algorithm` attribute, which contains a data source specific value.
 
 The identifier of the normalized digital signature algorithm.
 
@@ -73,10 +74,12 @@ The digital signature state defines the signature state, normalized to the capti
 
 #### Enum values
 
+- `0`: `Unknown` - The state is unknown.
 - `1`: `Valid` - The digital signature is valid.
 - `2`: `Expired` - The digital signature is not valid due to expiration of certificate.
 - `3`: `Revoked` - The digital signature is invalid due to certificate revocation.
 - `4`: `Suspended` - The digital signature is invalid due to certificate suspension.
 - `5`: `Pending` - The digital signature state is pending.
+- `99`: `Other` - The state is not mapped. See the `state` attribute, which contains a data source specific value.
 
 The normalized identifier of the signature state.

@@ -93,6 +93,7 @@ The attributes that identify host/device attributes.
 
 - **Type**: [`actor`](../objects/actor.md)
 - **Requirement**: optional
+- **Group**: primary
 
 The actor object describes details about the user/role/process that was the source of the activity. Note that this is not the threat actor of a campaign but may be part of a campaign.
 
@@ -100,5 +101,6 @@ The actor object describes details about the user/role/process that was the sour
 
 - **Type**: [`device`](../objects/device.md)
 - **Requirement**: recommended
+- **Group**: primary
 
 An addressable device, computer system or host.

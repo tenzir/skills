@@ -13,6 +13,7 @@ The MITRE Sub-technique object describes the ATT&CK® or ATLAS™ Sub-technique 
 ### `name`
 
 - **Type**: `string_t`
+- **Requirement**: recommended
 
 The name of the attack sub-technique. For example: `Scanning IP Blocks` or `User Execution: Unsafe ML Artifacts`.
 
@@ -26,5 +27,6 @@ The versioned permalink of the attack sub-technique. For example: `https://attac
 ### `uid`
 
 - **Type**: `string_t`
+- **Requirement**: recommended
 
 The unique identifier of the attack sub-technique. For example: `T1595.001` or `AML.T0011.000`.

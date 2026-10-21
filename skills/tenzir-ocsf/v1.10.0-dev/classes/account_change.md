@@ -17,11 +17,9 @@ Account Change events report when specific user account management tasks are per
 
 **From Base Event:**
 - `category_uid` (required)
-- `class_uid` (required)
 - `metadata` (required)
 - `severity_id` (required)
 - `time` (required)
-- `type_uid` (required)
 - `message` (recommended)
 - `observables` (recommended)
 - `status` (recommended)
@@ -35,10 +33,13 @@ Account Change events report when specific user account management tasks are per
 ### `activity_id`
 
 - **Type**: `integer_t`
+- **Requirement**: required
+- **Group**: classification
 - **Sibling**: `activity_name`
 
 #### Enum values
 
+- `0`: `Unknown` - The event activity is unknown.
 - `1`: `Create` - A user/role was created.
 - `2`: `Enable` - A user/role was enabled.
 - `3`: `Password Change` - An attempt was made to change a user account's password.
@@ -51,6 +52,7 @@ Account Change events report when specific user account management tasks are per
 - `10`: `MFA Factor Enable` - One or more authentication factors were enabled for a user account.
 - `11`: `MFA Factor Disable` - One or more authentication factors were disabled for a user account.
 - `12`: `Unlock` - A user account was unlocked.
+- `99`: `Other` - The event activity is not mapped. See the `activity_name` attribute, which contains a data source specific value.
 
 The normalized identifier of the activity that triggered the event. Each event class defines its own set of activity values. Use `0` (Unknown) when the activity cannot be determined. Use `99` (Other) when the activity does not match any defined value, in which case `activity_name` must be populated with the source-specific label.
 
@@ -97,3 +99,42 @@ The user that was a target of an activity.
 > **Deprecated since v1.9.0.** Use the `updated_user` attribute instead.
 
 The result of the user account change. It should contain the new values of the changed attributes.
+
+### `class_uid`
+
+- **Type**: `integer_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `class_name`
+
+#### Enum values
+
+- `3001`: `Account Change` - Account Change events report when specific user account management tasks are performed, such as a user/role being created or role assigned, changed, deleted, renamed, disabled, enabled, locked out or unlocked.
+
+The unique identifier of a class. A class describes the attributes available in an event. Producers and mappers must set this to the `uid` defined in the event class definition. For example, `Detection Finding` is `2004`.
+
+### `type_uid`
+
+- **Type**: `long_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `type_name`
+
+#### Enum values
+
+- `300100`: `Account Change: Unknown`
+- `300101`: `Account Change: Create` - A user/role was created.
+- `300102`: `Account Change: Enable` - A user/role was enabled.
+- `300103`: `Account Change: Password Change` - An attempt was made to change a user account's password.
+- `300104`: `Account Change: Password Reset` - An attempt was made to reset a user account's password.
+- `300105`: `Account Change: Disable` - A user/role was disabled.
+- `300106`: `Account Change: Delete` - A user/role was deleted.
+- `300107`: `Account Change: Attach Policy` - An IAM Policy was attached to a user/role.
+- `300108`: `Account Change: Detach Policy` - An IAM Policy was detached from a user/role.
+- `300109`: `Account Change: Lock` - A user account was locked out.
+- `300110`: `Account Change: MFA Factor Enable` - One or more authentication factors were enabled for a user account.
+- `300111`: `Account Change: MFA Factor Disable` - One or more authentication factors were disabled for a user account.
+- `300112`: `Account Change: Unlock` - A user account was unlocked.
+- `300199`: `Account Change: Other`
+
+The event/finding type ID. It identifies the event's semantics and structure. Producers and mappers must compute this as `class_uid * 100 + activity_id`. It uniquely identifies the combination of event class and activity across the entire schema. For example, `Detection Finding: Create` is `200401`.

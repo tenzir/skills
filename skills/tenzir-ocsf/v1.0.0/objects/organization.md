@@ -13,6 +13,7 @@ The Organization object describes characteristics of an organization or company 
 ### `name`
 
 - **Type**: `string_t`
+- **Requirement**: recommended
 
 The name of the organization. For example, Widget, Inc.
 
@@ -33,5 +34,6 @@ The alternate identifier for an entity's unique identifier. For example, its Act
 ### `uid`
 
 - **Type**: `string_t`
+- **Requirement**: recommended
 
 The unique identifier of the organization. For example, its Active Directory or AWS Org ID.

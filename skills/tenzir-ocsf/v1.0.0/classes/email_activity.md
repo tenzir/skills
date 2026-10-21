@@ -10,10 +10,13 @@ Email events report activities of emails.
 ## Inherited attributes
 
 **From Base Event:**
+- `category_uid` (required)
 - `metadata` (required)
 - `severity_id` (required)
+- `time` (required)
 - `message` (recommended)
 - `status_id` (recommended)
+- `timezone_offset` (recommended)
 
 ## Attributes
 
@@ -26,9 +29,11 @@ Email events report activities of emails.
 
 #### Enum values
 
+- `0`: `Unknown` - The event activity is unknown.
 - `1`: `Send`
 - `2`: `Receive`
 - `3`: `Scan` - Email being scanned (example: security scanning)
+- `99`: `Other` - The event activity is not mapped.
 
 The normalized identifier of the activity that triggered the event.
 
@@ -114,3 +119,33 @@ The initiator (client) sending the email.
 - **Group**: primary
 
 The value of the SMTP HELO or EHLO command sent by the initiator (client).
+
+### `class_uid`
+
+- **Type**: `integer_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `class_name`
+
+#### Enum values
+
+- `4009`: `Email Activity` - Email events report activities of emails.
+
+The unique identifier of a class. A Class describes the attributes available in an event.
+
+### `type_uid`
+
+- **Type**: `integer_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `type_name`
+
+#### Enum values
+
+- `400900`: `Email Activity: Unknown`
+- `400901`: `Email Activity: Send`
+- `400902`: `Email Activity: Receive`
+- `400903`: `Email Activity: Scan` - Email being scanned (example: security scanning)
+- `400999`: `Email Activity: Other`
+
+The event type ID. It identifies the event's semantics and structure. The value is calculated by the logging system as: `class_uid * 100 + activity_id`.

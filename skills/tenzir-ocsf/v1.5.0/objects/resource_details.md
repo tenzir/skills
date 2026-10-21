@@ -3,10 +3,16 @@
 The Resource Details object describes details about resources that were affected by the activity/event.
 
 - **Extends**: [Resource (_resource)](_resource.md)
+- **Profiles**: [Cloud](../profiles/cloud.md), [Data Classification](../profiles/data_classification.md), [Date/Time](../profiles/datetime.md)
 
 ## Constraints
 
 - **At least one of**: `name`, `uid`
+
+## Inherited attributes
+
+**From Resource:**
+- `uid` (recommended)
 
 ## Attributes
 
@@ -65,7 +71,7 @@ Indicates whether the device or resource has a backup enabled, such as an automa
 - **Requirement**: recommended
 - **Observable**: 38
 
-The name of the entity. See specific usage.
+The name of the resource.
 
 ### `namespace`
 

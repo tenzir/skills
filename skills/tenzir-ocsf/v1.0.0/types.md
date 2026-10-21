@@ -26,6 +26,7 @@ The Internet Date/Time format as defined in [RFC-3339](https://www.rfc-editor.or
 
 - **Caption**: Email Address
 - **Base type**: `String`
+- **Observable**: `5`
 - **Regex**: `^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$`
 
 Email address. For example: `john_doe@example.com`.
@@ -34,6 +35,7 @@ Email address. For example: `john_doe@example.com`.
 
 - **Caption**: File Hash
 - **Base type**: `String`
+- **Observable**: `8`
 
 File hash. A unique value that corresponds to the content of the file.
 
@@ -41,6 +43,7 @@ File hash. A unique value that corresponds to the content of the file.
 
 - **Caption**: File Name
 - **Base type**: `String`
+- **Observable**: `7`
 
 File name. For example: `text-file.txt`.
 
@@ -54,6 +57,7 @@ Real floating-point value. For example: `3.14`.
 
 - **Caption**: Hostname
 - **Base type**: `String`
+- **Observable**: `1`
 - **Regex**: `^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\-]*[a-zA-Z0-9])\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\-]*[A-Za-z0-9])$`
 
 Unique name assigned to a device connected to a computer network. A domain name in general is an Internet address that can be resolved through the Domain Name System (DNS). For example: `r2-d2.example.com`.
@@ -68,6 +72,7 @@ Signed integer value.
 
 - **Caption**: IP Address
 - **Base type**: `String`
+- **Observable**: `2`
 - **Regex**: `/^(?>(?>([a-f0-9]{1,4})(?>:(?1)){7}|(?!(?:.*[a-f0-9](?>:|$)){8,})((?1)(?>:(?1)){0,6})?::(?2)?)|(?>(?>(?1)(?>:(?1)){5}:|(?!(?:.*[a-f0-9]:){6,})(?3)?::(?>((?1)(?>:(?1)){0,4}):)?)?(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])(?>\.(?4)){3}))$/iD`
 
 Internet Protocol address (IP address), in either IPv4 or IPv6 format.
@@ -88,6 +93,7 @@ Embedded JSON value. A value can be a string, or a number, or true or false or n
 
 - **Caption**: MAC Address
 - **Base type**: `String`
+- **Observable**: `3`
 - **Regex**: `^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$`
 
 Media Access Control (MAC) address. For example: `18:36:F3:98:4F:9A`.
@@ -104,6 +110,7 @@ The TCP/UDP port number. For example: `80` or `22`.
 
 - **Caption**: Process Name
 - **Base type**: `String`
+- **Observable**: `9`
 
 Process name. For example: `Notepad`.
 
@@ -111,6 +118,7 @@ Process name. For example: `Notepad`.
 
 - **Caption**: Resource UID
 - **Base type**: `String`
+- **Observable**: `10`
 
 Resource unique identifier. For example, S3 Bucket name or EC2 Instance ID.
 
@@ -138,6 +146,7 @@ The timestamp format is the number of milliseconds since the Epoch 01/01/1970 00
 
 - **Caption**: URL String
 - **Base type**: `String`
+- **Observable**: `6`
 
 Uniform Resource Locator (URL) string. For example: `http://www.example.com/download/trouble.exe`.
 
@@ -145,6 +154,7 @@ Uniform Resource Locator (URL) string. For example: `http://www.example.com/down
 
 - **Caption**: User Name
 - **Base type**: `String`
+- **Observable**: `4`
 
 User name. For example: `john_doe`.
 

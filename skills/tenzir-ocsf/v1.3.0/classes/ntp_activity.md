@@ -17,20 +17,25 @@ The Network Time Protocol (NTP) Activity events report instances of remote clien
 - `traffic` (recommended)
 
 **From Base Event:**
+- `category_uid` (required)
 - `metadata` (required)
 - `severity_id` (required)
+- `time` (required)
 - `message` (recommended)
 - `observables` (recommended)
 - `status` (recommended)
 - `status_code` (recommended)
 - `status_detail` (recommended)
 - `status_id` (recommended)
+- `timezone_offset` (recommended)
 
 ## Attributes
 
 ### `activity_id`
 
 - **Type**: `integer_t`
+- **Requirement**: required
+- **Group**: classification
 - **Sibling**: `activity_name`
 
 #### Enum values
@@ -104,3 +109,37 @@ The normalized identifier of the stratum level, as defined in [RFC-5905](https:/
 - **Group**: context
 
 The version number of the NTP protocol.
+
+### `class_uid`
+
+- **Type**: `integer_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `class_name`
+
+#### Enum values
+
+- `4013`: `NTP Activity` - The Network Time Protocol (NTP) Activity events report instances of remote clients synchronizing their clocks with an NTP server, as observed on the network.
+
+The unique identifier of a class. A class describes the attributes available in an event.
+
+### `type_uid`
+
+- **Type**: `long_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `type_name`
+
+#### Enum values
+
+- `401300`: `NTP Activity: Unknown`
+- `401301`: `NTP Activity: Symmetric Active Exchange` - Bidirectional time exchange between devices.
+- `401302`: `NTP Activity: Symmetric Passive Response` - Device responds as a server to peers in symmetric active mode.
+- `401303`: `NTP Activity: Client Synchronization` - NTP client, syncs with servers.
+- `401304`: `NTP Activity: Server Response` - Dedicated NTP time server, responds to clients.
+- `401305`: `NTP Activity: Broadcast` - Broadcast time info to network devices.
+- `401306`: `NTP Activity: Control` - Monitoring and control messaging.
+- `401307`: `NTP Activity: Private Use Case` - Reserved - Not defined in standard NTP specifications.
+- `401399`: `NTP Activity: Other` - The event activity is not mapped.
+
+The event/finding type ID. It identifies the event's semantics and structure. The value is calculated by the logging system as: `class_uid * 100 + activity_id`.

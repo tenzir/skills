@@ -4,6 +4,14 @@ The Affected Package object describes details about a software package identifie
 
 - **Extends**: [Software Package (package)](package.md)
 
+## Inherited attributes
+
+**From Software Package:**
+- `name` (required)
+- `version` (required)
+- `architecture` (recommended)
+- `type_id` (recommended)
+
 ## Attributes
 
 ### `fixed_in_version`

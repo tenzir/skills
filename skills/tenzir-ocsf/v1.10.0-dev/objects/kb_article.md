@@ -3,6 +3,7 @@
 The KB Article object contains metadata that describes the patch or update.
 
 - **Extends**: [Object (object)](object.md)
+- **Profiles**: [Date/Time](../profiles/datetime.md)
 
 ## Constraints
 

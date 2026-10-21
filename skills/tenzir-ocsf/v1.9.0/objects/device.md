@@ -3,10 +3,20 @@
 The Device object represents an addressable computer system or host, which is typically connected to a computer network and participates in the transmission or processing of data within the computer network.
 
 - **Extends**: [Endpoint (endpoint)](endpoint.md)
+- **Profiles**: [Container](../profiles/container.md), [Date/Time](../profiles/datetime.md)
+- **Observable**: `20`
 
 ## Constraints
 
 - **At least one of**: `ip`, `uid`, `name`, `hostname`, `instance_uid`, `interface_uid`, `interface_name`
+
+## Inherited attributes
+
+**From Endpoint:**
+- `instance_uid` (recommended)
+- `interface_name` (recommended)
+- `interface_uid` (recommended)
+- `owner` (recommended)
 
 ## Attributes
 
@@ -315,6 +325,21 @@ The device type. For example: `unknown`, `server`, `desktop`, `laptop`, `tablet`
 #### Enum values
 
 - `0`: `Unknown` - The type is unknown.
+- `1`: `Server`
+- `2`: `Desktop`
+- `3`: `Laptop`
+- `4`: `Tablet`
+- `5`: `Mobile`
+- `6`: `Virtual`
+- `7`: `IOT`
+- `8`: `Browser`
+- `9`: `Firewall`
+- `10`: `Switch`
+- `11`: `Hub`
+- `12`: `Router`
+- `13`: `IDS`
+- `14`: `IPS`
+- `15`: `Load Balancer`
 - `99`: `Other` - The type is not mapped. See the `type` attribute, which contains a data source specific value.
 
 The device type ID.

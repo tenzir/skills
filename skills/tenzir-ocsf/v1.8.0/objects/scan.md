@@ -13,6 +13,7 @@ The Scan object describes characteristics of a proactive scan.
 ### `name`
 
 - **Type**: `string_t`
+- **Requirement**: recommended
 
 The administrator-supplied or application-generated name of the scan. For example: "Home office weekly user database scan", "Scan folders for viruses", "Full system virus scan"
 
@@ -31,7 +32,7 @@ The type of scan.
 
 #### Enum values
 
-- `0`: `Unknown`
+- `0`: `Unknown` - The type is unknown.
 - `1`: `Manual` - The scan was manually initiated by the user or administrator.
 - `2`: `Scheduled` - The scan was started based on scheduler.
 - `3`: `Updated Content` - The scan was triggered by a content update.
@@ -46,5 +47,6 @@ The type id of the scan.
 ### `uid`
 
 - **Type**: `string_t`
+- **Requirement**: recommended
 
 The application-defined unique identifier assigned to an instance of a scan.

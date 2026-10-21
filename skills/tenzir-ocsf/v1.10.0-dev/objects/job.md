@@ -3,6 +3,7 @@
 The Job object provides information about a scheduled job or task, including its name, command line, and state. It encompasses attributes that describe the properties and status of the scheduled job.
 
 - **Extends**: [Object (object)](object.md)
+- **Profiles**: [Date/Time](../profiles/datetime.md)
 
 ## Constraints
 
@@ -154,13 +155,13 @@ The run state of the job.
 
 #### Enum values
 
-- `0`: `Unknown`
+- `0`: `Unknown` - The run state is unknown.
 - `1`: `Ready`
 - `2`: `Queued`
 - `3`: `Running`
 - `4`: `Stopped`
 - `5`: `Disabled`
-- `99`: `Other`
+- `99`: `Other` - The run state is not mapped. See the `run_state` attribute, which contains a data source specific value.
 
 The run state ID of the job.
 

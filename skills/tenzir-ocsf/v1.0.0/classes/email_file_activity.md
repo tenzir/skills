@@ -10,10 +10,13 @@ Email File Activity events report files within emails.
 ## Inherited attributes
 
 **From Base Event:**
+- `category_uid` (required)
 - `metadata` (required)
 - `severity_id` (required)
+- `time` (required)
 - `message` (recommended)
 - `status_id` (recommended)
+- `timezone_offset` (recommended)
 
 ## Attributes
 
@@ -26,9 +29,11 @@ Email File Activity events report files within emails.
 
 #### Enum values
 
+- `0`: `Unknown` - The event activity is unknown.
 - `1`: `Send`
 - `2`: `Receive`
 - `3`: `Scan` - Email file being scanned (example: security scanning).
+- `99`: `Other` - The event activity is not mapped.
 
 The normalized identifier of the activity that triggered the event.
 
@@ -47,3 +52,33 @@ The unique identifier of the email, used to correlate related email alert and ac
 - **Group**: primary
 
 The email file attachment.
+
+### `class_uid`
+
+- **Type**: `integer_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `class_name`
+
+#### Enum values
+
+- `4011`: `Email File Activity` - Email File Activity events report files within emails.
+
+The unique identifier of a class. A Class describes the attributes available in an event.
+
+### `type_uid`
+
+- **Type**: `integer_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `type_name`
+
+#### Enum values
+
+- `401100`: `Email File Activity: Unknown`
+- `401101`: `Email File Activity: Send`
+- `401102`: `Email File Activity: Receive`
+- `401103`: `Email File Activity: Scan` - Email file being scanned (example: security scanning).
+- `401199`: `Email File Activity: Other`
+
+The event type ID. It identifies the event's semantics and structure. The value is calculated by the logging system as: `class_uid * 100 + activity_id`.

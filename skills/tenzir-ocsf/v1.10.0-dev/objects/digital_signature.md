@@ -3,6 +3,7 @@
 The Digital Signature object contains information about the cryptographic mechanism used to verify the authenticity, integrity, and origin of the file or application.
 
 - **Extends**: [Object (object)](object.md)
+- **Profiles**: [Date/Time](../profiles/datetime.md)
 
 ## Attributes
 
@@ -21,14 +22,14 @@ The digital signature algorithm used to create the signature, normalized to the 
 
 #### Enum values
 
-- `0`: `Unknown`
+- `0`: `Unknown` - The algorithm is unknown.
 - `1`: `DSA` - Digital Signature Algorithm (DSA).
 - `2`: `RSA` - Rivest-Shamir-Adleman (RSA) Algorithm.
 - `3`: `ECDSA` - Elliptic Curve Digital Signature Algorithm.
 - `4`: `Authenticode` - Authenticode Digital Signature Algorithm.
 - `5`: `Code Signing` - Code Signing Algorithm.
 - `6`: `App Package` - Application Package Signing Algorithm.
-- `99`: `Other`
+- `99`: `Other` - The algorithm is not mapped. See the `algorithm` attribute, which contains a data source specific value.
 
 The identifier of the normalized digital signature algorithm.
 
@@ -103,6 +104,7 @@ The digital signature state defines the signature state, normalized to the capti
 
 #### Enum values
 
+- `0`: `Unknown` - The state is unknown.
 - `1`: `Valid` - The digital signature is valid.
 - `2`: `Expired` - The digital signature is invalid because its timestamp does not fall within the certificate's validity period.
 - `3`: `Revoked` - The digital signature is invalid due to certificate revocation.
@@ -113,6 +115,7 @@ The digital signature state defines the signature state, normalized to the capti
 - `8`: `WrongUsage` - The digital signature is invalid because the certificate is not intended for code signing purposes.
 - `9`: `Bad` - The digital signature is cryptographically invalid, e.g. a mismatched digest. This indicates possible tampering.
 - `10`: `Broken` - The digital signature is malformed and could not be processed.
+- `99`: `Other` - The state is not mapped. See the `state` attribute, which contains a data source specific value.
 
 The normalized identifier of the signature state.
 

@@ -17,6 +17,7 @@ The attributes that describe information specific to Cloud services/applications
 - Cloud Resources Inventory Info
 - Compliance Finding
 - Data Security Finding
+- Databucket (object)
 - Datastore Activity
 - Detection Finding
 - Device Config State
@@ -32,6 +33,7 @@ The attributes that describe information specific to Cloud services/applications
 - Email URL Activity
 - Entity Management
 - Event Log Activity
+- File (object)
 - File Hosting Activity
 - File Query
 - File Remediation Activity
@@ -65,6 +67,7 @@ The attributes that describe information specific to Cloud services/applications
 - Process Remediation Activity
 - RDP Activity
 - Remediation Activity
+- Resource Details (object)
 - Scan Activity
 - Scheduled Job Activity
 - Script Activity

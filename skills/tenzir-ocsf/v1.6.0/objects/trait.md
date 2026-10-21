@@ -20,6 +20,7 @@ The high-level grouping or classification this trait belongs to.
 ### `name`
 
 - **Type**: `string_t`
+- **Requirement**: recommended
 
 The name of the trait.
 
@@ -33,6 +34,7 @@ The type of the trait. For example, this can be used to indicate if the trait ac
 ### `uid`
 
 - **Type**: `string_t`
+- **Requirement**: recommended
 
 The unique identifier of the trait.
 

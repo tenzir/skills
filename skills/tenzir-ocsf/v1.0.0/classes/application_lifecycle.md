@@ -10,10 +10,13 @@ Application Lifecycle events report installation, removal, start, stop of an app
 ## Inherited attributes
 
 **From Base Event:**
+- `category_uid` (required)
 - `metadata` (required)
 - `severity_id` (required)
+- `time` (required)
 - `message` (recommended)
 - `status_id` (recommended)
+- `timezone_offset` (recommended)
 
 ## Attributes
 
@@ -21,14 +24,17 @@ Application Lifecycle events report installation, removal, start, stop of an app
 
 - **Type**: `integer_t`
 - **Requirement**: required
+- **Group**: classification
 - **Sibling**: `activity_name`
 
 #### Enum values
 
+- `0`: `Unknown` - The event activity is unknown.
 - `1`: `Install`
 - `2`: `Remove`
 - `3`: `Start`
 - `4`: `Stop`
+- `99`: `Other` - The event activity is not mapped.
 
 The normalized identifier of the activity that triggered the event.
 
@@ -39,3 +45,34 @@ The normalized identifier of the activity that triggered the event.
 - **Group**: primary
 
 The application that was affected by the lifecycle event.  This also applies to self-updating application systems.
+
+### `class_uid`
+
+- **Type**: `integer_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `class_name`
+
+#### Enum values
+
+- `6002`: `Application Lifecycle` - Application Lifecycle events report installation, removal, start, stop of an application or service.
+
+The unique identifier of a class. A Class describes the attributes available in an event.
+
+### `type_uid`
+
+- **Type**: `integer_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `type_name`
+
+#### Enum values
+
+- `600200`: `Application Lifecycle: Unknown`
+- `600201`: `Application Lifecycle: Install`
+- `600202`: `Application Lifecycle: Remove`
+- `600203`: `Application Lifecycle: Start`
+- `600204`: `Application Lifecycle: Stop`
+- `600299`: `Application Lifecycle: Other`
+
+The event type ID. It identifies the event's semantics and structure. The value is calculated by the logging system as: `class_uid * 100 + activity_id`.

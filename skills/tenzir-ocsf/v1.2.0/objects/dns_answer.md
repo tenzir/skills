@@ -4,17 +4,24 @@ The DNS Answer object represents a specific response provided by the Domain Name
 
 - **Extends**: [DNS (_dns)](_dns.md)
 
+## Inherited attributes
+
+**From DNS:**
+- `packet_uid` (recommended)
+
 ## Attributes
 
 ### `class`
 
 - **Type**: `string_t`
+- **Requirement**: recommended
 
 The class of DNS data contained in this resource record. See [RFC1035](https://www.rfc-editor.org/rfc/rfc1035.txt). For example: `IN`.
 
 ### `flag_ids`
 
 - **Type**: `integer_t`
+- **Requirement**: optional
 - **Sibling**: `flags`
 
 #### Enum values
@@ -33,6 +40,7 @@ The list of DNS answer header flag IDs.
 ### `flags`
 
 - **Type**: `string_t`
+- **Requirement**: optional
 
 The list of DNS answer header flags.
 
@@ -53,5 +61,6 @@ The time interval that the resource record may be cached. Zero value means that 
 ### `type`
 
 - **Type**: `string_t`
+- **Requirement**: recommended
 
 The type of data contained in this resource record. See [RFC1035](https://www.rfc-editor.org/rfc/rfc1035.txt). For example: `CNAME`.

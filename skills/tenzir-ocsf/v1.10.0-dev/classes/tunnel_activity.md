@@ -23,11 +23,9 @@ Tunnel Activity events report secure tunnel establishment (such as VPN), teardow
 
 **From Base Event:**
 - `category_uid` (required)
-- `class_uid` (required)
 - `metadata` (required)
 - `severity_id` (required)
 - `time` (required)
-- `type_uid` (required)
 - `message` (recommended)
 - `observables` (recommended)
 - `status` (recommended)
@@ -42,6 +40,7 @@ Tunnel Activity events report secure tunnel establishment (such as VPN), teardow
 
 - **Type**: `integer_t`
 - **Requirement**: required
+- **Group**: classification
 - **Sibling**: `activity_name`
 
 #### Enum values
@@ -135,10 +134,10 @@ The type of tunnel configuration, normalized to the caption of the `tunnel_type_
 
 #### Enum values
 
-- `0`: `Unknown`
-- `1`: `Split Tunnel`
-- `2`: `Full Tunnel`
-- `99`: `Other`
+- `0`: `Unknown` - The type of tunnel configuration is unknown.
+- `1`: `Split Tunnel` - The tunnel configuration routes only specific traffic through the tunnel.
+- `2`: `Full Tunnel` - The tunnel configuration routes all traffic through the tunnel.
+- `99`: `Other` - The type of tunnel configuration is not defined by the event source.
 
 The normalized identifier for the type of tunnel configuration, indicating the scope of traffic routed through the connection. Example: `1 (Split Tunnel)` or `2 (Full Tunnel)`.
 
@@ -149,3 +148,33 @@ The normalized identifier for the type of tunnel configuration, indicating the s
 - **Group**: primary
 
 The user associated with the tunnel activity.
+
+### `class_uid`
+
+- **Type**: `integer_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `class_name`
+
+#### Enum values
+
+- `4014`: `Tunnel Activity` - Tunnel Activity events report secure tunnel establishment (such as VPN), teardowns, renewals, and other network tunnel specific actions.
+
+The unique identifier of a class. A class describes the attributes available in an event. Producers and mappers must set this to the `uid` defined in the event class definition. For example, `Detection Finding` is `2004`.
+
+### `type_uid`
+
+- **Type**: `long_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `type_name`
+
+#### Enum values
+
+- `401400`: `Tunnel Activity: Unknown`
+- `401401`: `Tunnel Activity: Open` - Open a tunnel.
+- `401402`: `Tunnel Activity: Close` - Close a tunnel.
+- `401403`: `Tunnel Activity: Renew` - Renew a tunnel.
+- `401499`: `Tunnel Activity: Other` - The event activity is not mapped. See the `activity_name` attribute, which contains a data source specific value.
+
+The event/finding type ID. It identifies the event's semantics and structure. Producers and mappers must compute this as `class_uid * 100 + activity_id`. It uniquely identifies the combination of event class and activity across the entire schema. For example, `Detection Finding: Create` is `200401`.

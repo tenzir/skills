@@ -21,15 +21,15 @@ The attachment bus or interface standard, normalized to the caption of the bus_t
 
 #### Enum values
 
-- `0`: `Unknown`
-- `1`: `Onboard`
-- `2`: `PCIe x16`
-- `3`: `PCIe x8`
-- `4`: `MXM Type A`
-- `5`: `MXM Type B`
-- `6`: `M.2`
-- `7`: `CXL`
-- `99`: `Other`
+- `0`: `Unknown` - The bus type is unknown or not reported.
+- `1`: `Onboard` - The device is attached directly on the motherboard or SoC (often referred to as 'integrated' or 'onboard').
+- `2`: `PCIe x16` - Peripheral Component Interconnect Express slot with 16 lanes, typically used for high‑bandwidth add‑in devices.
+- `3`: `PCIe x8` - Peripheral Component Interconnect Express slot with 8 lanes; common for high‑performance NICs, storage controllers, and accelerators.
+- `4`: `MXM Type A` - Mobile PCI Express Module (MXM) Type A form factor (compact laptop/embedded GPU module).
+- `5`: `MXM Type B` - Mobile PCI Express Module (MXM) Type B form factor (larger laptop/embedded GPU module).
+- `6`: `M.2` - M.2 (NGFF) internal module form factor/connector exposing PCIe (and/or SATA/USB) for SSDs and add‑in modules.
+- `7`: `CXL` - Compute Express Link (CXL), an open cache‑coherent interconnect for processors, memory expansion, and accelerators built on the PCIe physical layer.
+- `99`: `Other` - A bus or interface standard not covered by the defined values; the exact value is reported by the event source.
 
 The normalized identifier of the attachment bus or interface standard.
 
@@ -69,10 +69,10 @@ The video memory attachment mode, indicating how the VRAM hardware is integrated
 
 #### Enum values
 
-- `0`: `Unknown`
-- `1`: `Shared`
-- `2`: `Dedicated`
-- `99`: `Other`
+- `0`: `Unknown` - The VRAM mode is unknown or not reported.
+- `1`: `Shared` - Video memory is allocated from system memory.
+- `2`: `Dedicated` - Video memory is physically separate from system memory.
+- `99`: `Other` - A VRAM mode not covered by the defined values; the exact value is reported by the event source.
 
 The normalized identifier of the video memory attachment mode.
 

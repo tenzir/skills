@@ -3,12 +3,14 @@
 The Metadata object describes the metadata associated with the event. Defined by D3FEND [d3f:Metadata](https://d3fend.mitre.org/dao/artifact/d3f:Metadata/).
 
 - **Extends**: [Object (object)](object.md)
+- **Profiles**: [Date/Time](../profiles/datetime.md)
 
 ## Attributes
 
 ### `correlation_uid`
 
 - **Type**: `string_t`
+- **Requirement**: optional
 
 The unique identifier used to correlate events.
 
@@ -22,12 +24,14 @@ The Event ID or Code that the product uses to describe the event.
 ### `extension`
 
 - **Type**: [`extension`](extension.md)
+- **Requirement**: optional
 
 The schema extension used to create the event.
 
 ### `labels`
 
 - **Type**: `string_t`
+- **Requirement**: optional
 
 The list of category labels attached to the event or specific attributes. Labels are user defined tags or aliases added at normalization time.
 
@@ -57,6 +61,7 @@ The event log schema version that specifies the format of the original event. Fo
 ### `logged_time`
 
 - **Type**: `timestamp_t`
+- **Requirement**: optional
 
 The time when the logging system collected and logged the event.
 
@@ -65,6 +70,7 @@ This attribute is distinct from the event time in that event time typically cont
 ### `modified_time`
 
 - **Type**: `timestamp_t`
+- **Requirement**: optional
 
 The time when the event was last modified or enriched.
 
@@ -78,6 +84,7 @@ The original event time as reported by the event source. For example, the time i
 ### `processed_time`
 
 - **Type**: `timestamp_t`
+- **Requirement**: optional
 
 The event processed time, such as an ETL operation.
 
@@ -91,12 +98,14 @@ The product that reported the event.
 ### `profiles`
 
 - **Type**: `string_t`
+- **Requirement**: optional
 
 The list of profiles used to create the event.
 
 ### `sequence`
 
 - **Type**: `integer_t`
+- **Requirement**: optional
 
 Sequence number of the event. The sequence number is a value available in some events, to make the exact ordering of events unambiguous, regardless of the event time precision.
 

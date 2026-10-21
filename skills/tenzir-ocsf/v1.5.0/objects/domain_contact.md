@@ -49,11 +49,13 @@ The Domain Contact type, normalized to the caption of the `type_id` value. In th
 
 #### Enum values
 
+- `0`: `Unknown` - The type is unknown.
 - `1`: `Registrant` - The contact information provided is for the domain registrant.
 - `2`: `Administrative` - The contact information provided is for the domain administrator.
 - `3`: `Technical` - The contact information provided is for the domain technical lead.
 - `4`: `Billing` - The contact information provided is for the domain billing lead.
 - `5`: `Abuse` - The contact information provided is for the domain abuse contact.
+- `99`: `Other` - The type is not mapped. See the `type` attribute, which contains a data source specific value.
 
 The normalized domain contact type ID.
 

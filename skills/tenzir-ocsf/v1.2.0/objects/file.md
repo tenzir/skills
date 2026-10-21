@@ -3,6 +3,8 @@
 The File object represents the metadata associated with a file stored in a computer system. It encompasses information about the file itself, including its attributes, properties, and organizational details. Defined by D3FEND [d3f:File](https://next.d3fend.mitre.org/dao/artifact/d3f:File/).
 
 - **Extends**: [Entity (_entity)](_entity.md)
+- **Profiles**: [Data Classification](../profiles/data_classification.md), [Date/Time](../profiles/datetime.md)
+- **Observable**: `24`
 
 ## Attributes
 
@@ -49,7 +51,6 @@ The file content confidentiality, normalized to the confidentiality_id value. In
 
 #### Enum values
 
-- `99`: `Other` - The confidentiality is not mapped. See the `confidentiality` attribute, which contains a data source specific value.
 - `0`: `Unknown` - The confidentiality is unknown.
 - `1`: `Not Confidential`
 - `2`: `Confidential`
@@ -57,6 +58,7 @@ The file content confidentiality, normalized to the confidentiality_id value. In
 - `4`: `Top Secret`
 - `5`: `Private`
 - `6`: `Restricted`
+- `99`: `Other` - The confidentiality is not mapped. See the `confidentiality` attribute, which contains a data source specific value.
 
 The normalized identifier of the file content confidentiality indicator.
 
@@ -187,7 +189,7 @@ The file type.
 
 #### Enum values
 
-- `0`: `Unknown`
+- `0`: `Unknown` - The type is unknown.
 - `1`: `Regular File`
 - `2`: `Folder`
 - `3`: `Character Device`
@@ -195,7 +197,7 @@ The file type.
 - `5`: `Local Socket`
 - `6`: `Named Pipe`
 - `7`: `Symbolic Link`
-- `99`: `Other`
+- `99`: `Other` - The type is not mapped. See the `type` attribute, which contains a data source specific value.
 
 The file type ID.
 

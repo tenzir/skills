@@ -24,11 +24,9 @@ Authorize Session events report privileges or groups assigned to a new user sess
 
 **From Base Event:**
 - `category_uid` (required)
-- `class_uid` (required)
 - `metadata` (required)
 - `severity_id` (required)
 - `time` (required)
-- `type_uid` (required)
 - `message` (recommended)
 - `observables` (recommended)
 - `status` (recommended)
@@ -42,12 +40,16 @@ Authorize Session events report privileges or groups assigned to a new user sess
 ### `activity_id`
 
 - **Type**: `integer_t`
+- **Requirement**: required
+- **Group**: classification
 - **Sibling**: `activity_name`
 
 #### Enum values
 
+- `0`: `Unknown` - The event activity is unknown.
 - `1`: `Assign Privileges` - Assign special privileges to a new logon.
 - `2`: `Assign Groups` - Assign special groups to a new logon.
+- `99`: `Other` - The event activity is not mapped. See the `activity_name` attribute, which contains a data source specific value.
 
 The normalized identifier of the activity that triggered the event.
 
@@ -90,3 +92,32 @@ The user session with the assigned privileges.
 - **Group**: primary
 
 The user to which new privileges were assigned.
+
+### `class_uid`
+
+- **Type**: `integer_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `class_name`
+
+#### Enum values
+
+- `3003`: `Authorize Session` - Authorize Session events report privileges or groups assigned to a new user session, usually at login time.
+
+The unique identifier of a class. A class describes the attributes available in an event.
+
+### `type_uid`
+
+- **Type**: `long_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `type_name`
+
+#### Enum values
+
+- `300300`: `Authorize Session: Unknown`
+- `300301`: `Authorize Session: Assign Privileges` - Assign special privileges to a new logon.
+- `300302`: `Authorize Session: Assign Groups` - Assign special groups to a new logon.
+- `300399`: `Authorize Session: Other`
+
+The event/finding type ID. It identifies the event's semantics and structure. The value is calculated by the logging system as: `class_uid * 100 + activity_id`.

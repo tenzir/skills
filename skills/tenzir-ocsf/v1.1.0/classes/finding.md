@@ -1,6 +1,6 @@
 # Finding (finding)
 
-The Finding event is a generic event that defines a set of attributes available in the Findings category.
+Abstract base class. The Finding event is a generic event that defines a set of attributes available in the Findings category.
 
 - **Category**: Findings
 - **Extends**: [Base Event (base_event)](base_event.md)
@@ -9,28 +9,39 @@ The Finding event is a generic event that defines a set of attributes available 
 ## Inherited attributes
 
 **From Base Event:**
+- `category_uid` (required)
+- `class_uid` (required)
 - `metadata` (required)
 - `severity_id` (required)
+- `time` (required)
+- `type_uid` (required)
 - `message` (recommended)
+- `timezone_offset` (recommended)
 
 ## Attributes
 
 ### `activity_name`
 
 - **Type**: `string_t`
+- **Requirement**: optional
+- **Group**: classification
 
 The finding activity name, as defined by the `activity_id`.
 
 ### `activity_id`
 
 - **Type**: `integer_t`
+- **Requirement**: required
+- **Group**: classification
 - **Sibling**: `activity_name`
 
 #### Enum values
 
+- `0`: `Unknown` - The event activity is unknown.
 - `1`: `Create` - A finding was created.
 - `2`: `Update` - A finding was updated.
 - `3`: `Close` - A finding was closed.
+- `99`: `Other` - The event activity is not mapped. See the `activity_name` attribute, which contains a data source specific value.
 
 The normalized identifier of the finding activity.
 
@@ -88,6 +99,7 @@ e.g. Specific details about an AWS EC2 instance, that is affected by the Finding
 
 - **Type**: `timestamp_t`
 - **Requirement**: optional
+- **Group**: occurrence
 
 The time of the most recent event included in the finding.
 
@@ -103,6 +115,7 @@ Describes the supporting information about a generated finding.
 
 - **Type**: `timestamp_t`
 - **Requirement**: optional
+- **Group**: occurrence
 
 The time of the least recent event included in the finding.
 
@@ -123,9 +136,11 @@ The normalized status of the Finding set by the consumer normalized to the capti
 
 #### Enum values
 
+- `0`: `Unknown` - The status is unknown.
 - `1`: `New` - The Finding is new and yet to be reviewed.
 - `2`: `In Progress` - The Finding is under review.
 - `3`: `Suppressed` - The Finding was reviewed, determined to be benign or a false positive and is now suppressed.
 - `4`: `Resolved` - The Finding was reviewed, remediated and is now considered resolved.
+- `99`: `Other` - The event status is not mapped. See the `status` attribute, which contains a data source specific value.
 
 The normalized status identifier of the Finding, set by the consumer.

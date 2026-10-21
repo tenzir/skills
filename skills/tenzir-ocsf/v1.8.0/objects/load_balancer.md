@@ -69,6 +69,7 @@ General purpose metrics associated with the load balancer.
 ### `name`
 
 - **Type**: `string_t`
+- **Requirement**: recommended
 
 The name of the load balancer.
 
@@ -82,5 +83,6 @@ The status detail contains additional status information about the load balancer
 ### `uid`
 
 - **Type**: `string_t`
+- **Requirement**: recommended
 
 The unique identifier for the load balancer.

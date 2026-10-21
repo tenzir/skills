@@ -10,22 +10,29 @@ User Access Management events report management updates to a user's privileges.
 ## Inherited attributes
 
 **From Base Event:**
+- `category_uid` (required)
 - `metadata` (required)
 - `severity_id` (required)
+- `time` (required)
 - `message` (recommended)
 - `status_id` (recommended)
+- `timezone_offset` (recommended)
 
 ## Attributes
 
 ### `activity_id`
 
 - **Type**: `integer_t`
+- **Requirement**: required
+- **Group**: classification
 - **Sibling**: `activity_name`
 
 #### Enum values
 
+- `0`: `Unknown` - The event activity is unknown.
 - `1`: `Assign Privileges` - Assign privileges to a user.
 - `2`: `Revoke Privileges` - Revoke privileges from a user.
+- `99`: `Other` - The event activity is not mapped.
 
 The normalized identifier of the activity that triggered the event.
 
@@ -52,3 +59,32 @@ Resource that the privileges give access to.
 - **Group**: primary
 
 User to which privileges were assigned.
+
+### `class_uid`
+
+- **Type**: `integer_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `class_name`
+
+#### Enum values
+
+- `3005`: `User Access Management` - User Access Management events report management updates to a user's privileges.
+
+The unique identifier of a class. A Class describes the attributes available in an event.
+
+### `type_uid`
+
+- **Type**: `integer_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `type_name`
+
+#### Enum values
+
+- `300500`: `User Access Management: Unknown`
+- `300501`: `User Access Management: Assign Privileges` - Assign privileges to a user.
+- `300502`: `User Access Management: Revoke Privileges` - Revoke privileges from a user.
+- `300599`: `User Access Management: Other`
+
+The event type ID. It identifies the event's semantics and structure. The value is calculated by the logging system as: `class_uid * 100 + activity_id`.

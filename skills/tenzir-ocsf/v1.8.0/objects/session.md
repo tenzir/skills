@@ -3,6 +3,7 @@
 The Session object describes details about an authenticated session. e.g. Session Creation Time, Session Issuer.
 
 - **Extends**: [Object (object)](object.md)
+- **Profiles**: [Date/Time](../profiles/datetime.md)
 
 ## Attributes
 

@@ -27,6 +27,7 @@ The description of the rule that generated the event.
 ### `name`
 
 - **Type**: `string_t`
+- **Requirement**: recommended
 
 The name of the rule that generated the event.
 
@@ -40,6 +41,7 @@ The rule type.
 ### `uid`
 
 - **Type**: `string_t`
+- **Requirement**: recommended
 
 The unique identifier of the rule that generated the event.
 

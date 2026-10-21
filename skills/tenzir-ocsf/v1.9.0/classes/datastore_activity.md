@@ -15,11 +15,9 @@ Datastore events describe general activities (Read, Update, Query, Delete, etc.)
 
 **From Base Event:**
 - `category_uid` (required)
-- `class_uid` (required)
 - `metadata` (required)
 - `severity_id` (required)
 - `time` (required)
-- `type_uid` (required)
 - `message` (recommended)
 - `observables` (recommended)
 - `status` (recommended)
@@ -33,10 +31,13 @@ Datastore events describe general activities (Read, Update, Query, Delete, etc.)
 ### `activity_id`
 
 - **Type**: `integer_t`
+- **Requirement**: required
+- **Group**: classification
 - **Sibling**: `activity_name`
 
 #### Enum values
 
+- `0`: `Unknown` - The event activity is unknown.
 - `1`: `Read` - The 'Read' activity involves accessing specific data record details.
 - `2`: `Update` - The 'Update' activity pertains to modifying specific data record details.
 - `3`: `Connect` - The 'Connect' activity involves establishing a connection to the datastore.
@@ -47,6 +48,7 @@ Datastore events describe general activities (Read, Update, Query, Delete, etc.)
 - `8`: `List` - The 'List' activity provides an overview of existing data records.
 - `9`: `Encrypt` - The 'Encrypt' activity involves securing data by encrypting a specific data record.
 - `10`: `Decrypt` - The 'Decrypt' activity involves converting encrypted data back to its original format.
+- `99`: `Other` - The event activity is not mapped. See the `activity_name` attribute, which contains a data source specific value.
 
 The normalized identifier of the activity that triggered the event. Each event class defines its own set of activity values. Use `0` (Unknown) when the activity cannot be determined. Use `99` (Other) when the activity does not match any defined value, in which case `activity_name` must be populated with the source-specific label.
 
@@ -56,7 +58,7 @@ The normalized identifier of the activity that triggered the event. Each event c
 - **Requirement**: required
 - **Group**: primary
 
-The actor object describes details about the user/role/process that was the source of the activity. Note that this is not the threat actor of a campaign but may be part of a campaign.
+The user, process, or service that initiated the activity on the host. For system-level events this is typically a process; for IAM events it is typically a user or role.
 
 ### `database`
 
@@ -144,3 +146,40 @@ The datastore resource type (e.g. database, datastore, or table).
 - `99`: `Other` - The datastore resource type is not mapped.
 
 The normalized datastore resource type identifier.
+
+### `class_uid`
+
+- **Type**: `integer_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `class_name`
+
+#### Enum values
+
+- `6005`: `Datastore Activity` - Datastore events describe general activities (Read, Update, Query, Delete, etc.) which affect datastores or data within those datastores, e.g. (AWS RDS, AWS S3).
+
+The unique identifier of a class. A class describes the attributes available in an event. Producers and mappers must set this to the `uid` defined in the event class definition. For example, `Detection Finding` is `2004`.
+
+### `type_uid`
+
+- **Type**: `long_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `type_name`
+
+#### Enum values
+
+- `600500`: `Datastore Activity: Unknown`
+- `600501`: `Datastore Activity: Read` - The 'Read' activity involves accessing specific data record details.
+- `600502`: `Datastore Activity: Update` - The 'Update' activity pertains to modifying specific data record details.
+- `600503`: `Datastore Activity: Connect` - The 'Connect' activity involves establishing a connection to the datastore.
+- `600504`: `Datastore Activity: Query` - The 'Query' activity involves retrieving a filtered subset of data based on specific criteria.
+- `600505`: `Datastore Activity: Write` - The 'Write' activity involves writing specific data record details.
+- `600506`: `Datastore Activity: Create` - The 'Create' activity involves generating new data record details.
+- `600507`: `Datastore Activity: Delete` - The 'Delete' activity involves removing specific data record details.
+- `600508`: `Datastore Activity: List` - The 'List' activity provides an overview of existing data records.
+- `600509`: `Datastore Activity: Encrypt` - The 'Encrypt' activity involves securing data by encrypting a specific data record.
+- `600510`: `Datastore Activity: Decrypt` - The 'Decrypt' activity involves converting encrypted data back to its original format.
+- `600599`: `Datastore Activity: Other`
+
+The event/finding type ID. It identifies the event's semantics and structure. Producers and mappers must compute this as `class_uid * 100 + activity_id`. It uniquely identifies the combination of event class and activity across the entire schema. For example, `Detection Finding: Create` is `200401`.

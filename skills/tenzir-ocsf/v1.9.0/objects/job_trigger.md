@@ -2,6 +2,8 @@
 
 The condition or event that, when met, will initiate the job to perform specified actions.
 
+- **Profiles**: [Date/Time](../profiles/datetime.md)
+
 ## Attributes
 
 ### `event_codes`

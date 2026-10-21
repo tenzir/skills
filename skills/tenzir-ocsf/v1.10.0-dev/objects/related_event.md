@@ -5,6 +5,7 @@ The Related Event object describes an event or another finding related to a find
 Note: If the related event is a finding, `finding_info` should be populated with its `finding_info.uid` attribute equal to `uid`. That finding may also have related events.
 
 - **Extends**: [Object (object)](object.md)
+- **Profiles**: [Date/Time](../profiles/datetime.md)
 
 ## Attributes
 
@@ -221,9 +222,11 @@ Populate if the related event/finding is `NOT` in OCSF and `type_id` is 99 (Othe
 
 #### Enum values
 
+- `0`: `Unknown` - The type is unknown.
 - `1`: `Activity` - The related event is a normal OCSF activity.
 - `2`: `Alert` - The related event is an OCSF alert using the `security_control` profile with `is_alert = true`.
 - `3`: `Finding` - The related event is an OCSF finding or intermediate finding. Intermediate findings are ordinary findings analyzed into higher level findings.
+- `99`: `Other` - The type is not mapped. See the `type` attribute, which contains a data source specific value.
 
 The normalized identifier of the related event type.
 

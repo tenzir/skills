@@ -3,6 +3,7 @@
 The Session object describes details about an authenticated session. e.g. Session Creation Time, Session Issuer. Defined by D3FEND [d3f:Session](https://d3fend.mitre.org/dao/artifact/d3f:Session/).
 
 - **Extends**: [Object (object)](object.md)
+- **Profiles**: [Date/Time](../profiles/datetime.md)
 
 ## Attributes
 

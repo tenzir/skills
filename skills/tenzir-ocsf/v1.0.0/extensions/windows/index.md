@@ -7,9 +7,9 @@ The Windows extension defines Windows specific attributes.
 
 ## Events
 
-- [Registry Key Activity](events/registry_key.md)
-- [Registry Value Activity](events/registry_value.md)
-- [Windows Resource Activity](events/resource.md)
+- [Registry Key Activity](events/registry_key_activity.md)
+- [Registry Value Activity](events/registry_value_activity.md)
+- [Windows Resource Activity](events/resource_activity.md)
 
 ## Objects
 

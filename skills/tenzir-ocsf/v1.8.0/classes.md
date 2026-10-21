@@ -19,12 +19,12 @@ Application Activity events report detailed information about the behavior of ap
 Discovery events report the existence and state of devices, files, configurations, processes, registry keys, and other objects.
 
 - [Discovery (discovery)](classes/discovery.md) [base class]
+- [Discovery Result (discovery_result)](classes/discovery_result.md) [base class]
 - [Admin Group Query](classes/admin_group_query.md)
 - [Cloud Resources Inventory Info](classes/cloud_resources_inventory_info.md)
 - [Device Config State](classes/config_state.md)
 - [Device Config State Change](classes/device_config_state_change.md)
 - [Device Inventory Info](classes/inventory_info.md)
-- [Discovery Result](classes/discovery_result.md)
 - [File Query](classes/file_query.md)
 - [Folder Query](classes/folder_query.md)
 - [Job Query](classes/job_query.md)
@@ -48,11 +48,11 @@ Discovery events report the existence and state of devices, files, configuration
 
 Findings events report findings, detections, and possible resolutions of malware, anomalies, or other actions performed by security products.
 
+- [Finding (finding)](classes/finding.md) [base class]
 - [Application Security Posture Finding](classes/application_security_posture_finding.md)
 - [Compliance Finding](classes/compliance_finding.md)
 - [Data Security Finding](classes/data_security_finding.md)
 - [Detection Finding](classes/detection_finding.md)
-- [Finding](classes/finding.md)
 - [IAM Analysis Finding](classes/iam_analysis_finding.md)
 - [Incident Finding](classes/incident_finding.md)
 - [Security Finding](classes/security_finding.md)

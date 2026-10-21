@@ -91,6 +91,7 @@ The attributes including disposition that represent the outcome of a security co
 
 - **Type**: `string_t`
 - **Requirement**: optional
+- **Group**: primary
 
 The normalized caption of `action_id`.
 
@@ -98,6 +99,7 @@ The normalized caption of `action_id`.
 
 - **Type**: `integer_t`
 - **Requirement**: recommended
+- **Group**: primary
 - **Sibling**: `action`
 
 #### Enum values
@@ -115,6 +117,7 @@ The action taken by a control or other policy-based system leading to an outcome
 
 - **Type**: [`attack`](../objects/attack.md)
 - **Requirement**: optional
+- **Group**: primary
 
 An array of [MITRE ATT&CK®](https://attack.mitre.org) objects describing identified tactics, techniques & sub-techniques.
 
@@ -122,6 +125,7 @@ An array of [MITRE ATT&CK®](https://attack.mitre.org) objects describing identi
 
 - **Type**: [`authorization`](../objects/authorization.md)
 - **Requirement**: optional
+- **Group**: primary
 
 Provides details about an authorization, such as authorization outcome, and any associated policies related to the activity/event.
 
@@ -162,6 +166,7 @@ The confidence score as reported by the event source.
 
 - **Type**: `string_t`
 - **Requirement**: optional
+- **Group**: primary
 
 The disposition name, normalized to the caption of the disposition_id value. In the case of 'Other', it is defined by the event source.
 
@@ -169,6 +174,7 @@ The disposition name, normalized to the caption of the disposition_id value. In 
 
 - **Type**: `integer_t`
 - **Requirement**: recommended
+- **Group**: primary
 - **Sibling**: `disposition`
 
 #### Enum values
@@ -209,6 +215,7 @@ Describes the outcome or action taken by a security control, such as access cont
 
 - **Type**: [`firewall_rule`](../objects/firewall_rule.md)
 - **Requirement**: optional
+- **Group**: primary
 
 The firewall rule that pertains to the control that triggered the event, if applicable.
 
@@ -216,6 +223,7 @@ The firewall rule that pertains to the control that triggered the event, if appl
 
 - **Type**: `boolean_t`
 - **Requirement**: recommended
+- **Group**: primary
 
 Indicates that the event is considered to be an alertable signal. Should be set to `true` if `disposition_id = Alert` among other dispositions, and/or `risk_level_id` or `severity_id` of the event is elevated. Not all control events will be alertable, for example if `disposition_id = Exonerated` or `disposition_id = Allowed`.
 
@@ -223,6 +231,7 @@ Indicates that the event is considered to be an alertable signal. Should be set 
 
 - **Type**: [`malware`](../objects/malware.md)
 - **Requirement**: optional
+- **Group**: primary
 
 A list of Malware objects, describing details about the identified malware.
 
@@ -230,6 +239,7 @@ A list of Malware objects, describing details about the identified malware.
 
 - **Type**: [`policy`](../objects/policy.md)
 - **Requirement**: optional
+- **Group**: primary
 
 The policy that pertains to the control that triggered the event, if applicable. For example the name of an anti-malware policy or an access control policy.
 

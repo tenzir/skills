@@ -21,12 +21,14 @@ The encryption algorithm used, normalized to the caption of 'algorithm_id
 
 #### Enum values
 
+- `0`: `Unknown` - The algorithm is unknown.
 - `1`: `DES` - Data Encryption Standard Algorithm
 - `2`: `TripleDES` - Triple Data Encryption Standard Algorithm
 - `3`: `AES` - Advanced Encryption Standard Algorithm.
 - `4`: `RSA` - Rivest-Shamir-Adleman Algorithm
 - `5`: `ECC` - Elliptic Curve Cryptography Algorithm
 - `6`: `SM2` - ShangMi Cryptographic Algorithm
+- `99`: `Other` - The algorithm is not mapped. See the `algorithm` attribute, which contains a data source specific value.
 
 The encryption algorithm used.
 

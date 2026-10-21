@@ -3,6 +3,7 @@
 The User object describes the characteristics of a user/person or a security principal. Defined by D3FEND [d3f:UserAccount](https://d3fend.mitre.org/dao/artifact/d3f:UserAccount/).
 
 - **Extends**: [Entity (_entity)](_entity.md)
+- **Observable**: `21`
 
 ## Constraints
 
@@ -55,6 +56,7 @@ The administrative groups to which the user belongs.
 ### `name`
 
 - **Type**: `username_t`
+- **Requirement**: recommended
 
 The username. For example, `janedoe1`.
 
@@ -80,17 +82,18 @@ The type of the user. For example, System, AWS IAM User, etc.
 
 #### Enum values
 
-- `0`: `Unknown`
+- `0`: `Unknown` - The type is unknown.
 - `1`: `User` - Regular user account.
 - `2`: `Admin` - Admin/root user account.
 - `3`: `System` - System account. For example, Windows computer accounts with a trailing dollar sign ($).
-- `99`: `Other`
+- `99`: `Other` - The type is not mapped. See the `type` attribute, which may contain a data source specific value.
 
 The account type identifier.
 
 ### `uid`
 
 - **Type**: `string_t`
+- **Requirement**: recommended
 
 The unique user identifier. For example, the Windows user SID, ActiveDirectory DN or AWS user ARN.
 

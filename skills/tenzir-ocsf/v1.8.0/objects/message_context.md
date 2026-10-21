@@ -53,6 +53,7 @@ Number of tokens in the model's response/completion for this message.
 ### `name`
 
 - **Type**: `string_t`
+- **Requirement**: recommended
 
 The name or identifier of the message context. In AI systems, this could be the conversation ID, session name, thread identifier, or interaction name (e.g., 'user-session-123', 'conversation-abc', 'chat-thread-456').
 
@@ -80,5 +81,6 @@ Total number of tokens used for this message (prompt + completion).
 ### `uid`
 
 - **Type**: `string_t`
+- **Requirement**: recommended
 
 The unique identifier of the message context. This could be a session ID, conversation ID, or other unique identifier that allows correlation of messages within the same context.

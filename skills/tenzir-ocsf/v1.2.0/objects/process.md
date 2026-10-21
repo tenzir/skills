@@ -3,6 +3,8 @@
 The Process object describes a running instance of a launched program. Defined by D3FEND [d3f:Process](https://d3fend.mitre.org/dao/artifact/d3f:Process/).
 
 - **Extends**: [Entity (_entity)](_entity.md)
+- **Profiles**: [Container](../profiles/container.md), [Date/Time](../profiles/datetime.md)
+- **Observable**: `25`
 
 ## Constraints
 
@@ -75,6 +77,7 @@ The list of loaded module names.
 ### `name`
 
 - **Type**: `process_name_t`
+- **Requirement**: recommended
 
 The friendly name of the process, for example: `Notepad++`.
 
@@ -124,6 +127,7 @@ The Identifier of the thread associated with the event, as returned by the opera
 ### `uid`
 
 - **Type**: `string_t`
+- **Requirement**: recommended
 
 A unique identifier for this process assigned by the producer (tool).  Facilitates correlation of a process event with other events for that process.
 

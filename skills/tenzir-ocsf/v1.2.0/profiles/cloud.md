@@ -55,6 +55,7 @@ The attributes that describe information specific to Cloud services/applications
 - Process Activity
 - Process Query
 - RDP Activity
+- Resource Details (object)
 - Scan Activity
 - Scheduled Job Activity
 - Security Finding

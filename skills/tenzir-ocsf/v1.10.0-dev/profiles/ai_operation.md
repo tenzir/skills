@@ -35,6 +35,7 @@ AI-specific attributes for model operations, retrieval systems, and agent activi
 - Network File Activity
 - NTP Activity
 - Peripheral Activity
+- Process (object)
 - Process Activity
 - RDP Activity
 - Role Management

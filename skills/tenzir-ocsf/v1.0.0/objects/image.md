@@ -16,6 +16,7 @@ The image labels.
 ### `name`
 
 - **Type**: `string_t`
+- **Requirement**: recommended
 
 The image name. For example: `elixir`.
 

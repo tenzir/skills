@@ -13,6 +13,7 @@ The MITRE DEFEND™ Technique object describes the leaf defensive technique ID a
 ### `name`
 
 - **Type**: `string_t`
+- **Requirement**: recommended
 
 The name of the defensive technique, as defined by [D3FENDTM Matrix](https://d3fend.mitre.org). For example: `IO Port Restriction`.
 
@@ -26,5 +27,6 @@ The versioned permalink of the defensive technique, as defined by [D3FENDTM Matr
 ### `uid`
 
 - **Type**: `string_t`
+- **Requirement**: recommended
 
 The unique identifier of the defensive technique, as defined by [D3FENDTM Matrix](https://mitre.mitre.org). For example: `D3-IOPR`.

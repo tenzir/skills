@@ -3,6 +3,7 @@
 The Advisory object represents publicly disclosed cybersecurity vulnerabilities defined in a Security advisory. e.g.  `Microsoft KB Article`, `Apple Security Advisory`, or a `GitHub Security Advisory (GHSA)`
 
 - **Extends**: [Object (object)](object.md)
+- **Profiles**: [Date/Time](../profiles/datetime.md)
 
 ## Attributes
 

@@ -15,10 +15,13 @@ SSH Activity events report remote client connections to a server using the Secur
 - `connection_info` (recommended)
 
 **From Base Event:**
+- `category_uid` (required)
 - `metadata` (required)
 - `severity_id` (required)
+- `time` (required)
 - `message` (recommended)
 - `status_id` (recommended)
+- `timezone_offset` (recommended)
 
 ## Attributes
 
@@ -39,14 +42,14 @@ The SSH authentication type, normalized to the caption of 'auth_type_id'. In the
 
 #### Enum values
 
-- `99`: `Other`
-- `0`: `Unknown`
+- `0`: `Unknown` - The authentication type is unknown.
 - `1`: `Certificate Based` - Authentication using digital certificates.
 - `2`: `GSSAPI` - GSSAPI for centralized authentication.
 - `3`: `Host Based` - Authentication based on the client host's identity.
 - `4`: `Keyboard Interactive` - Multi-step, interactive authentication.
 - `5`: `Password` - Password Authentication.
 - `6`: `Public Key` - Paired public key authentication.
+- `99`: `Other` - The authentication type is not mapped. See the `auth_type` attribute, which contains a data source specific value.
 
 The normalized identifier of the SSH authentication type.
 
@@ -73,3 +76,56 @@ The Secure Shell Protocol version.
 - **Group**: primary
 
 The Server HASSH fingerprinting object.
+
+### `activity_id`
+
+- **Type**: `integer_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `activity_name`
+
+#### Enum values
+
+- `0`: `Unknown` - The event activity is unknown.
+- `1`: `Open` - A new network connection was opened.
+- `2`: `Close` - The network connection was closed.
+- `3`: `Reset` - The network connection was abnormally terminated or closed by a middle device like firewalls.
+- `4`: `Fail` - The network connection failed. For example a connection timeout or no route to host.
+- `5`: `Refuse` - The network connection was refused. For example an attempt to connect to a server port which is not open.
+- `6`: `Traffic` - Network traffic report.
+- `99`: `Other` - The event activity is not mapped. See the `activity_name` attribute, which contains a data source specific value.
+
+The normalized identifier of the activity that triggered the event.
+
+### `class_uid`
+
+- **Type**: `integer_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `class_name`
+
+#### Enum values
+
+- `4007`: `SSH Activity` - SSH Activity events report remote client connections to a server using the Secure Shell (SSH) Protocol.
+
+The unique identifier of a class. A Class describes the attributes available in an event.
+
+### `type_uid`
+
+- **Type**: `long_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `type_name`
+
+#### Enum values
+
+- `400700`: `SSH Activity: Unknown`
+- `400701`: `SSH Activity: Open` - A new network connection was opened.
+- `400702`: `SSH Activity: Close` - The network connection was closed.
+- `400703`: `SSH Activity: Reset` - The network connection was abnormally terminated or closed by a middle device like firewalls.
+- `400704`: `SSH Activity: Fail` - The network connection failed. For example a connection timeout or no route to host.
+- `400705`: `SSH Activity: Refuse` - The network connection was refused. For example an attempt to connect to a server port which is not open.
+- `400706`: `SSH Activity: Traffic` - Network traffic report.
+- `400799`: `SSH Activity: Other`
+
+The event/finding type ID. It identifies the event's semantics and structure. The value is calculated by the logging system as: `class_uid * 100 + activity_id`.

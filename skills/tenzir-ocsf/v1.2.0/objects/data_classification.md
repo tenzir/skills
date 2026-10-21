@@ -51,7 +51,6 @@ The file content confidentiality, normalized to the confidentiality_id value. In
 
 #### Enum values
 
-- `99`: `Other` - The confidentiality is not mapped. See the `confidentiality` attribute, which contains a data source specific value.
 - `0`: `Unknown` - The confidentiality is unknown.
 - `1`: `Not Confidential`
 - `2`: `Confidential`
@@ -59,6 +58,7 @@ The file content confidentiality, normalized to the confidentiality_id value. In
 - `4`: `Top Secret`
 - `5`: `Private`
 - `6`: `Restricted`
+- `99`: `Other` - The confidentiality is not mapped. See the `confidentiality` attribute, which contains a data source specific value.
 
 The normalized identifier of the file content confidentiality indicator.
 

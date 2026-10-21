@@ -13,12 +13,18 @@ This profile defines date/time attributes as defined in RFC-3339. For example 19
 - Authorize Session
 - Base Event
 - Compliance Finding
+- CVE (object)
+- Database (object)
+- Databucket (object)
 - Datastore Activity
 - Detection Finding
+- Device (object)
 - Device Config State
 - Device Config State Change
 - Device Inventory Info
 - DHCP Activity
+- Digital Certificate (object)
+- Digital Signature (object)
 - Discovery
 - Discovery Result
 - DNS Activity
@@ -26,33 +32,48 @@ This profile defines date/time attributes as defined in RFC-3339. For example 19
 - Email File Activity
 - Email URL Activity
 - Entity Management
+- EPSS (object)
+- File (object)
 - File Hosting Activity
 - File System Activity
 - Finding
+- Finding (object)
+- Finding Information (object)
 - FTP Activity
 - Group Management
 - HTTP Activity
+- HTTP Cookie (object)
 - Identity & Access Management
 - Incident Finding
+- Job (object)
+- KB Article (object)
 - Kernel Activity
 - Kernel Extension Activity
+- LDAP Person (object)
+- Logger (object)
 - Memory Activity
+- Metadata (object)
 - Module Activity
 - Network
 - Network Activity
 - Network File Activity
 - NTP Activity
 - Operating System Patch State
+- Process (object)
 - Process Activity
+- Query Information (object)
 - RDP Activity
 - Scan Activity
 - Scheduled Job Activity
 - Security Finding
+- Session (object)
 - SMB Activity
 - SSH Activity
 - System Activity
+- Table (object)
 - User Access Management
 - User Inventory Info
+- Vulnerability Details (object)
 - Vulnerability Finding
 - Web Resource Access Activity
 - Web Resources Activity

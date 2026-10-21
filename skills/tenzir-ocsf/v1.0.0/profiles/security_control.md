@@ -29,6 +29,7 @@ The attributes that identify security controls such as malware or policy violati
 
 - **Type**: [`attack`](../objects/attack.md)
 - **Requirement**: recommended
+- **Group**: primary
 
 An array of attacks associated with an event.
 
@@ -36,6 +37,7 @@ An array of attacks associated with an event.
 
 - **Type**: `string_t`
 - **Requirement**: optional
+- **Group**: primary
 
 The event disposition name, normalized to the caption of the disposition_id value. In the case of 'Other', it is defined by the event source.
 
@@ -43,11 +45,11 @@ The event disposition name, normalized to the caption of the disposition_id valu
 
 - **Type**: `integer_t`
 - **Requirement**: required
+- **Group**: primary
 - **Sibling**: `disposition`
 
 #### Enum values
 
-- `99`: `Other`
 - `0`: `Unknown`
 - `1`: `Allowed`
 - `2`: `Blocked`
@@ -67,6 +69,7 @@ The event disposition name, normalized to the caption of the disposition_id valu
 - `16`: `No Action`
 - `17`: `Logged`
 - `18`: `Tagged` - Marked with extended attributes.
+- `99`: `Other`
 
 When security issues, such as malware or policy violations, are detected and possibly corrected, then `disposition_id` describes the action taken by the security product.
 
@@ -74,5 +77,6 @@ When security issues, such as malware or policy violations, are detected and pos
 
 - **Type**: [`malware`](../objects/malware.md)
 - **Requirement**: optional
+- **Group**: primary
 
 The list of malware identified by a finding.

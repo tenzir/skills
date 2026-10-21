@@ -4,7 +4,7 @@ Prefetch Query events report information about Windows prefetch files.
 
 > **Deprecated since v1.5.0.** Use the `evidence_info` class instead. Populate `query_evidence.file` and set `query_type_id` to `Prefetch`.
 
-- **Event UID**: `19`
+- **Class UID**: `205019`
 - **Category**: Discovery
 - **Extends**: [Discovery Result (discovery_result)](../../../classes/discovery_result.md)
 - **Profiles**: [Cloud](../../../profiles/cloud.md), [Date/Time](../../../profiles/datetime.md), [Host](../../../profiles/host.md), [OSINT](../../../profiles/osint.md), [Record Integrity](../../../profiles/record_integrity.md), [Security Control](../../../profiles/security_control.md)
@@ -12,17 +12,16 @@ Prefetch Query events report information about Windows prefetch files.
 ## Inherited attributes
 
 **From Discovery Result:**
+- `activity_id` (required)
 - `query_result_id` (required)
 - `query_info` (recommended)
 - `query_result` (recommended)
 
 **From Base Event:**
 - `category_uid` (required)
-- `class_uid` (required)
 - `metadata` (required)
 - `severity_id` (required)
 - `time` (required)
-- `type_uid` (required)
 - `message` (recommended)
 - `observables` (recommended)
 - `status` (recommended)
@@ -56,3 +55,31 @@ The name of the prefetch file that is the target of the query.
 - **Group**: primary
 
 The prefetch file run count.
+
+### `class_uid`
+
+- **Type**: `integer_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `class_name`
+
+#### Enum values
+
+- `205019`: `Prefetch Query` - Prefetch Query events report information about Windows prefetch files.
+
+The unique identifier of a class. A class describes the attributes available in an event. Producers and mappers must set this to the `uid` defined in the event class definition. For example, `Detection Finding` is `2004`.
+
+### `type_uid`
+
+- **Type**: `long_t`
+- **Requirement**: required
+- **Group**: classification
+- **Sibling**: `type_name`
+
+#### Enum values
+
+- `20501900`: `Prefetch Query: Unknown`
+- `20501901`: `Prefetch Query: Query` - The discovered results are via a query request.
+- `20501999`: `Prefetch Query: Other`
+
+The event/finding type ID. It identifies the event's semantics and structure. Producers and mappers must compute this as `class_uid * 100 + activity_id`. It uniquely identifies the combination of event class and activity across the entire schema. For example, `Detection Finding: Create` is `200401`.

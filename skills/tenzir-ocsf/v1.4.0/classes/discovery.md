@@ -28,11 +28,15 @@ Abstract base class for Discovery event classes. Concrete classes in this catego
 ### `activity_id`
 
 - **Type**: `integer_t`
+- **Requirement**: required
+- **Group**: classification
 - **Sibling**: `activity_name`
 
 #### Enum values
 
+- `0`: `Unknown` - The event activity is unknown.
 - `1`: `Log` - The discovered information is via a log.
 - `2`: `Collect` - The discovered information is via a collection process.
+- `99`: `Other` - The event activity is not mapped. See the `activity_name` attribute, which contains a data source specific value.
 
 The normalized identifier of the activity that triggered the event.

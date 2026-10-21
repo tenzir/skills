@@ -27,6 +27,7 @@ Human-readable model name. For example: `gpt-4o`, `claude-3-sonnet`, or `text-em
 ### `uid`
 
 - **Type**: `string_t`
+- **Requirement**: recommended
 
 The unique identifier of the AI model.
 
