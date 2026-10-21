@@ -3,6 +3,8 @@ title: Structured YAML schema data in the OCSF skill
 type: change
 authors:
   - zedoraps
+prs:
+  - 43
 created: 2026-10-21T08:23:40.782693Z
 ---
 

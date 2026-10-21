@@ -3,6 +3,8 @@ title: OCSF schema parity with the official compiler
 type: bugfix
 authors:
   - zedoraps
+prs:
+  - 43
 created: 2026-10-21T05:24:59.679339Z
 ---
 
