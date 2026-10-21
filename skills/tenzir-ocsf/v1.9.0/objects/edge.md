@@ -4,6 +4,10 @@ Represents a connection or relationship between two nodes in a graph.
 
 - **Extends**: [Entity (_entity)](_entity.md)
 
+## Constraints
+
+- **At least one of**: `name`, `uid`
+
 ## Attributes
 
 ### `data`

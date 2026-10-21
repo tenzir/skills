@@ -5,6 +5,10 @@ Extends the process object to add Linux specific fields
 - **Extends**: [Process (process)](../../../objects/process.md)
 - **Profiles**: [Linux](../profiles/linux_users.md)
 
+## Constraints
+
+- **At least one of**: `pid`, `uid`
+
 ## Inherited attributes
 
 **From Process:**

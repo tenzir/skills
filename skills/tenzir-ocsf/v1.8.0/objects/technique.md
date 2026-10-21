@@ -4,6 +4,10 @@ The MITRE Technique object describes the ATT&CK® or ATLAS™ Technique ID and/o
 
 - **Extends**: [Entity (_entity)](_entity.md)
 
+## Constraints
+
+- **At least one of**: `name`, `uid`
+
 ## Attributes
 
 ### `name`

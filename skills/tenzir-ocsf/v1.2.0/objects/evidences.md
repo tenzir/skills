@@ -4,6 +4,10 @@ A collection of evidence artifacts associated to the activity/activities that tr
 
 - **Extends**: [Object (object)](object.md)
 
+## Constraints
+
+- **At least one of**: `actor`, `api`, `connection_info`, `data`, `database`, `databucket`, `dst_endpoint`, `file`, `process`, `query`, `src_endpoint`
+
 ## Attributes
 
 ### `actor`

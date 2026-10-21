@@ -4,6 +4,10 @@ The Module object describes the attributes of a module.
 
 - **Extends**: [Object (object)](object.md)
 
+## Constraints
+
+- **At least one of**: `load_type_id`, `function_name`
+
 ## Attributes
 
 ### `base_address`

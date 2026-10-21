@@ -4,6 +4,10 @@ The Logger object represents the device and product where events are stored with
 
 - **Extends**: [Entity (_entity)](_entity.md)
 
+## Constraints
+
+- **At least one of**: `name`, `uid`
+
 ## Attributes
 
 ### `device`

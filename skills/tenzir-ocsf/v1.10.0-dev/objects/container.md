@@ -4,6 +4,10 @@ The Container object describes an instance of a specific container. A container 
 
 - **Extends**: [Object (object)](object.md)
 
+## Constraints
+
+- **At least one of**: `uid`, `name`
+
 ## Attributes
 
 ### `hash`

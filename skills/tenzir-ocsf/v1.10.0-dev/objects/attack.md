@@ -4,6 +4,10 @@ The Attack object describes the tactic, technique, sub-technique & mitigation as
 
 - **Extends**: [Object (object)](object.md)
 
+## Constraints
+
+- **At least one of**: `tactic`, `technique`, `sub_technique`
+
 ## Attributes
 
 ### `mitigation`

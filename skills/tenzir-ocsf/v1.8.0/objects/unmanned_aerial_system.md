@@ -4,6 +4,10 @@ The Unmanned Aerial System object describes the characteristics, Position Locati
 
 - **Extends**: [Aircraft (aircraft)](aircraft.md)
 
+## Constraints
+
+- **At least one of**: `name`, `serial_number`, `uid`, `uid_alt`
+
 ## Attributes
 
 ### `hw_info`

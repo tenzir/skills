@@ -4,6 +4,10 @@ The Unmanned System Operating Area object describes details about a precise area
 
 - **Extends**: [Geo Location (location)](location.md)
 
+## Constraints
+
+- **At least one of**: `city`, `country`, `postal_code`, `region`
+
 ## Attributes
 
 ### `altitude_ceiling`

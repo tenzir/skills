@@ -4,6 +4,10 @@ The Email object describes the email metadata such as sender, recipients, and di
 
 - **Extends**: [Object (object)](object.md)
 
+## Constraints
+
+- **At least one of**: `from`, `to`
+
 ## Attributes
 
 ### `bcc`

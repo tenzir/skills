@@ -4,6 +4,10 @@ The Rule object describes characteristics of a rule associated with a policy or 
 
 - **Extends**: [Entity (_entity)](_entity.md)
 
+## Constraints
+
+- **At least one of**: `name`, `uid`
+
 ## Attributes
 
 ### `category`

@@ -4,6 +4,10 @@ The Technique object describes the technique ID and/or name associated to an att
 
 - **Extends**: [Entity (_entity)](_entity.md)
 
+## Constraints
+
+- **At least one of**: `name`, `uid`
+
 ## Attributes
 
 ### `name`

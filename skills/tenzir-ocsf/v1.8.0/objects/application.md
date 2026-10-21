@@ -4,6 +4,10 @@ An Application describes the details for an inventoried application as reported 
 
 - **Extends**: [Object (object)](object.md)
 
+## Constraints
+
+- **At least one of**: `uid`, `name`
+
 ## Attributes
 
 ### `criticality`

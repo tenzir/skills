@@ -4,6 +4,10 @@ The Network Endpoint object describes characteristics of a network endpoint. The
 
 - **Extends**: [Endpoint (endpoint)](endpoint.md)
 
+## Constraints
+
+- **At least one of**: `ip`, `uid`, `name`, `hostname`, `svc_name`, `instance_uid`, `interface_uid`, `interface_name`
+
 ## Attributes
 
 ### `intermediate_ips`

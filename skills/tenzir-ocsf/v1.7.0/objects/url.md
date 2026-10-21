@@ -4,6 +4,10 @@ The Uniform Resource Locator (URL) object describes the characteristics of a URL
 
 - **Extends**: [Object (object)](object.md)
 
+## Constraints
+
+- **At least one of**: `url_string`, `path`
+
 ## Attributes
 
 ### `categories`

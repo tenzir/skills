@@ -4,6 +4,10 @@ The Managed Entity object describes the type and version of an entity, such as a
 
 - **Extends**: [Entity (_entity)](_entity.md)
 
+## Constraints
+
+- **At least one of**: `name`, `uid`, `device`, `group`, `org`, `policy`, `user`
+
 ## Attributes
 
 ### `data`

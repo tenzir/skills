@@ -4,6 +4,10 @@ The Device object represents an addressable computer system or host, which is ty
 
 - **Extends**: [Endpoint (endpoint)](endpoint.md)
 
+## Constraints
+
+- **At least one of**: `ip`, `uid`, `name`, `hostname`, `instance_uid`, `interface_uid`, `interface_name`
+
 ## Attributes
 
 ### `autoscale_uid`

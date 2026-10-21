@@ -4,6 +4,10 @@ The Geo Location object describes a geographical location, usually associated wi
 
 - **Extends**: [Object (object)](object.md)
 
+## Constraints
+
+- **At least one of**: `coordinates`, `city`, `country`, `postal_code`, `region`
+
 ## Attributes
 
 ### `city`

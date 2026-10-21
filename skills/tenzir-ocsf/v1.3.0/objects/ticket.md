@@ -4,6 +4,10 @@ The Ticket object represents ticket in the customer's systems like Salesforce, j
 
 - **Extends**: [Object (object)](object.md)
 
+## Constraints
+
+- **At least one of**: `src_url`, `uid`
+
 ## Attributes
 
 ### `src_url`

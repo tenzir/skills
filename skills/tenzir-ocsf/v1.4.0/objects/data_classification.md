@@ -4,6 +4,10 @@ The Data Classification object includes information about data classification le
 
 - **Extends**: [Object (object)](object.md)
 
+## Constraints
+
+- **At least one of**: `category_id`, `confidentiality_id`
+
 ## Attributes
 
 ### `category`

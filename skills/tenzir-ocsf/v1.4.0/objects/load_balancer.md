@@ -4,6 +4,10 @@ The load balancer object describes the load balancer entity and contains additio
 
 - **Extends**: [Entity (_entity)](_entity.md)
 
+## Constraints
+
+- **At least one of**: `name`, `uid`
+
 ## Attributes
 
 ### `classification`

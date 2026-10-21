@@ -4,6 +4,10 @@ The Identity Provider object contains detailed information about a provider resp
 
 - **Extends**: [Entity (_entity)](_entity.md)
 
+## Constraints
+
+- **At least one of**: `name`, `uid`
+
 ## Attributes
 
 ### `auth_factors`

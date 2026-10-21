@@ -4,6 +4,10 @@ The MITRE DEFEND™ Technique object describes the leaf defensive technique ID a
 
 - **Extends**: [Entity (_entity)](_entity.md)
 
+## Constraints
+
+- **At least one of**: `name`, `uid`
+
 ## Attributes
 
 ### `name`

@@ -4,6 +4,10 @@ A generic object allowing to define a `{key:value}` pair.
 
 - **Extends**: [Object (object)](object.md)
 
+## Constraints
+
+- **At least one of**: `value`, `values`
+
 ## Attributes
 
 ### `name`

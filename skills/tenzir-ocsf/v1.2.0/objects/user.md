@@ -4,6 +4,10 @@ The User object describes the characteristics of a user/person or a security pri
 
 - **Extends**: [Entity (_entity)](_entity.md)
 
+## Constraints
+
+- **At least one of**: `account`, `name`, `uid`
+
 ## Attributes
 
 ### `account`

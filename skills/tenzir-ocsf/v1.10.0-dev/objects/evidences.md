@@ -4,6 +4,10 @@ A collection of evidence artifacts associated to the activity/activities that tr
 
 - **Extends**: [Entity (_entity)](_entity.md)
 
+## Constraints
+
+- **At least one of**: `actor`, `api`, `connection_info`, `data`, `database`, `databucket`, `device`, `dst_endpoint`, `email`, `file`, `process`, `query`, `resources`, `src_endpoint`, `url`, `user`, `job`, `script`
+
 ## Attributes
 
 ### `actor`

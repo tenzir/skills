@@ -4,6 +4,10 @@ The Function Invocation object provides details regarding the invocation of a fu
 
 - **Extends**: [Object (object)](object.md)
 
+## Constraints
+
+- **At least one of**: `parameters`, `return_value`, `error`
+
 ## Attributes
 
 ### `error`

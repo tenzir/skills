@@ -4,6 +4,10 @@ The Time Span object represents different time period durations. If a timespan i
 
 - **Extends**: [Object (object)](object.md)
 
+## Constraints
+
+- **At least one of**: `duration`, `duration_days`, `duration_hours`, `duration_mins`, `duration_months`, `duration_secs`, `duration_weeks`, `duration_years`
+
 ## Attributes
 
 ### `duration`

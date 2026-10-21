@@ -4,6 +4,10 @@ The Actor object contains details about the user, role, or process that initiate
 
 - **Extends**: [Object (object)](object.md)
 
+## Constraints
+
+- **At least one of**: `process`, `user`, `invoked_by`, `session`
+
 ## Attributes
 
 ### `authorizations`

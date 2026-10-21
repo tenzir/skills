@@ -385,6 +385,33 @@ def lookup_schema(name: str, *mappings: dict[str, dict]) -> dict | None:
     return None
 
 
+def resolve_constraints(entity_data: dict, *mappings: dict[str, dict]) -> dict | None:
+    """Return the entity's effective constraints, mirroring the OCSF schema
+    compiler: an entity inherits the constraints of the nearest ancestor along
+    the extends chain that has a `constraints` key, and an explicitly empty
+    `constraints` clears inherited ones. Mappings are searched in order, but an
+    extension patch that extends its own name resolves to the base entity."""
+    visited: list[dict] = []
+    current: dict | None = entity_data
+    while current is not None and not any(current is v for v in visited):
+        if "constraints" in current:
+            return current["constraints"] or None
+        visited.append(current)
+        extends = current.get("extends")
+        if not extends:
+            break
+        current = next(
+            (
+                mapping[extends]
+                for mapping in mappings
+                if extends in mapping
+                and not any(mapping[extends] is v for v in visited)
+            ),
+            None,
+        )
+    return None
+
+
 def resolve_attribute(name: str, local_data: object, dictionary: dict) -> dict:
     base = dictionary.get("attributes", {}).get(name, {})
     if not isinstance(base, dict):
@@ -1186,12 +1213,9 @@ def main() -> None:
                 class_profiles = resolve_profiles(
                     class_data, data["classes"], data["intermediates"],
                 )
-                # Collect constraints: prefer class-level, fall back to parent.
-                constraints = class_data.get("constraints")
-                if not constraints:
-                    parent = data["intermediates"].get(class_data.get("extends", ""))
-                    if parent:
-                        constraints = parent.get("constraints")
+                constraints = resolve_constraints(
+                    class_data, data["classes"], data["intermediates"],
+                )
                 associations = class_data.get("associations")
                 if not associations:
                     parent = data["intermediates"].get(class_data.get("extends", ""))
@@ -1288,7 +1312,9 @@ def main() -> None:
                             else "",
                         ),
                     ],
-                    constraints=intermediate_data.get("constraints"),
+                    constraints=resolve_constraints(
+                        intermediate_data, data["classes"], data["intermediates"],
+                    ),
                     associations=intermediate_data.get("associations"),
                     inherited_attributes=collect_inherited_attributes(
                         intermediate_data, data["dictionary"], data["classes"], data["intermediates"],
@@ -1326,6 +1352,7 @@ def main() -> None:
                         for attr_name, attr_data in (object_data.get("attributes") or {}).items()
                         if not attr_name.startswith("$")
                     ],
+                    constraints=resolve_constraints(object_data, data["objects"]),
                     object_links=object_links,
                 )
                 write_file(output_dir / data["slug"] / "objects" / f"{name_to_slug(name)}.md", page)
@@ -1443,9 +1470,12 @@ def main() -> None:
                         data["classes"],
                         data["intermediates"],
                     )
-                    constraints = event_data.get("constraints")
-                    if not constraints and parent is not None:
-                        constraints = parent.get("constraints")
+                    constraints = resolve_constraints(
+                        event_data,
+                        extension_events,
+                        data["classes"],
+                        data["intermediates"],
+                    )
                     associations = event_data.get("associations")
                     if not associations and parent is not None:
                         associations = parent.get("associations")
@@ -1557,6 +1587,11 @@ def main() -> None:
                             for attr_name, attr_data in (object_data.get("attributes") or {}).items()
                             if not attr_name.startswith("$")
                         ],
+                        constraints=resolve_constraints(
+                            object_data,
+                            extension_objects,
+                            data["objects"],
+                        ),
                         object_links=extension_object_links,
                     )
                     write_file(

@@ -4,6 +4,10 @@ The query info object holds information related to data access within a datastor
 
 - **Extends**: [Entity (_entity)](_entity.md)
 
+## Constraints
+
+- **At least one of**: `name`, `uid`
+
 ## Attributes
 
 ### `query_time`

@@ -4,6 +4,10 @@ The TSIG (Transaction Signature) object represents a TSIG resource record as def
 
 - **Extends**: [Object (object)](object.md)
 
+## Constraints
+
+- **At least one of**: `algorithm`, `key_name`, `error_id`
+
 ## Attributes
 
 ### `algorithm`

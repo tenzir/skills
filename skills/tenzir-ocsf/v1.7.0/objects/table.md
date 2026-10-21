@@ -4,6 +4,10 @@ The table object represents a table within a structured relational database or d
 
 - **Extends**: [Entity (_entity)](_entity.md)
 
+## Constraints
+
+- **At least one of**: `name`, `uid`
+
 ## Attributes
 
 ### `created_time`

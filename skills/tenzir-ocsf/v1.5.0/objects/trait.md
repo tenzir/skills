@@ -4,6 +4,10 @@ Describes a characteristic or feature of an entity that was observed. For exampl
 
 - **Extends**: [Entity (_entity)](_entity.md)
 
+## Constraints
+
+- **At least one of**: `name`, `uid`
+
 ## Attributes
 
 ### `category`

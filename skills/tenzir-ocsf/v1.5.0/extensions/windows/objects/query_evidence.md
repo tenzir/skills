@@ -4,6 +4,10 @@ The resulting evidence information that was queried.
 
 - **Extends**: [Query Evidence (query_evidence)](../../../objects/query_evidence.md)
 
+## Constraints
+
+- **Exactly one of**: `connection_info`, `file`, `folder`, `group`, `job`, `kernel`, `module`, `network_interfaces`, `peripheral_device`, `process`, `reg_key`, `reg_value`, `service`, `session`, `startup_item`, `user`
+
 ## Inherited attributes
 
 **From Query Evidence:**

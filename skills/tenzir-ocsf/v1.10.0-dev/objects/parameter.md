@@ -4,6 +4,10 @@ The Parameter object provides details regarding a parameter of a a function.
 
 - **Extends**: [Object (object)](object.md)
 
+## Constraints
+
+- **At least one of**: `name`, `pre_value`, `post_value`
+
 ## Attributes
 
 ### `name`

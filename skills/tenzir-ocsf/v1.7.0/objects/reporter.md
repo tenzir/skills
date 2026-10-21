@@ -4,6 +4,10 @@ The entity from which an event or finding was reported.
 
 - **Extends**: [Entity (_entity)](_entity.md)
 
+## Constraints
+
+- **At least one of**: `hostname`, `ip`, `name`, `uid`
+
 ## Attributes
 
 ### `hostname`

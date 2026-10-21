@@ -4,6 +4,10 @@ The Organization object describes characteristics of an organization or company 
 
 - **Extends**: [Entity (_entity)](_entity.md)
 
+## Constraints
+
+- **At least one of**: `name`, `uid`
+
 ## Attributes
 
 ### `name`

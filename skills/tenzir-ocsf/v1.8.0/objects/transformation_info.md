@@ -4,6 +4,10 @@ The transformation_info object represents the mapping or transformation used.
 
 - **Extends**: [Entity (_entity)](_entity.md)
 
+## Constraints
+
+- **At least one of**: `name`, `uid`
+
 ## Attributes
 
 ### `lang`

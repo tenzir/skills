@@ -4,6 +4,10 @@ The MITRE ATT&CK® & ATLAS™ object describes the tactic, technique, sub-techni
 
 - **Extends**: [Object (object)](object.md)
 
+## Constraints
+
+- **At least one of**: `tactic`, `technique`, `sub_technique`
+
 ## Attributes
 
 ### `mitigation`

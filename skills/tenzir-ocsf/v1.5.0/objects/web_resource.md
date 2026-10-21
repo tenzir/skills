@@ -4,6 +4,10 @@ The Web Resource object describes characteristics of a web resource that was aff
 
 - **Extends**: [Resource (_resource)](_resource.md)
 
+## Constraints
+
+- **At least one of**: `name`, `uid`
+
 ## Attributes
 
 ### `data`

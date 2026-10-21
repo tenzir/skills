@@ -4,6 +4,10 @@ A cryptographic attestation that an event has not been altered since it was prod
 
 - **Extends**: [Object (object)](object.md)
 
+## Constraints
+
+- **At least one of**: `fingerprint`, `signatures`
+
 ## Attributes
 
 ### `authority_uid`

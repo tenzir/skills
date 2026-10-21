@@ -4,6 +4,10 @@ The MITRE Sub-technique object describes the ATT&CK® or ATLAS™ Sub-technique 
 
 - **Extends**: [Entity (_entity)](_entity.md)
 
+## Constraints
+
+- **At least one of**: `name`, `uid`
+
 ## Attributes
 
 ### `name`

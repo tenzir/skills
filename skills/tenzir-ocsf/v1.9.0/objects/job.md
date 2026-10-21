@@ -4,6 +4,10 @@ The Job object provides information about a scheduled job or task, including its
 
 - **Extends**: [Object (object)](object.md)
 
+## Constraints
+
+- **At least one of**: `name`, `type_id`
+
 ## Attributes
 
 ### `cmd_line`

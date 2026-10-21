@@ -4,6 +4,10 @@ The Data Security object describes the characteristics, techniques and content o
 
 - **Extends**: [Data Classification (data_classification)](data_classification.md)
 
+## Constraints
+
+- **At least one of**: `data_lifecycle_state_id`, `detection_pattern`, `detection_system_id`, `policy`
+
 ## Attributes
 
 ### `data_lifecycle_state`

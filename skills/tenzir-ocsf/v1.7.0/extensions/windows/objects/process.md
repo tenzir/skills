@@ -4,6 +4,10 @@ Extends the process object to add Windows specific fields.
 
 - **Extends**: [Process (process)](../../../objects/process.md)
 
+## Constraints
+
+- **At least one of**: `pid`, `uid`, `cpid`
+
 ## Inherited attributes
 
 **From Process:**

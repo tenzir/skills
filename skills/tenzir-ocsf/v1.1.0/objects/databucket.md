@@ -4,6 +4,10 @@ The databucket object is a basic container that holds data, typically organized 
 
 - **Extends**: [Entity (_entity)](_entity.md)
 
+## Constraints
+
+- **At least one of**: `name`, `uid`
+
 ## Attributes
 
 ### `created_time`

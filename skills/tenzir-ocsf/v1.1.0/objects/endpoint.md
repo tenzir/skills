@@ -4,6 +4,10 @@ The Endpoint object describes a physical or virtual device that connects to and 
 
 - **Extends**: [Entity (_entity)](_entity.md)
 
+## Constraints
+
+- **At least one of**: `ip`, `uid`, `name`, `hostname`, `instance_uid`, `interface_uid`, `interface_name`
+
 ## Attributes
 
 ### `domain`

@@ -4,6 +4,10 @@ The AI Capability object describes a callable capability invoked by or on behalf
 
 - **Extends**: [Entity (_entity)](_entity.md)
 
+## Constraints
+
+- **At least one of**: `name`, `uid`
+
 ## Attributes
 
 ### `baseline_fingerprint`

@@ -2,6 +2,10 @@
 
 The startup item object describes an application component that has associated startup criteria and configurations.
 
+## Constraints
+
+- **Exactly one of**: `driver`, `job`, `process`
+
 ## Attributes
 
 ### `driver`

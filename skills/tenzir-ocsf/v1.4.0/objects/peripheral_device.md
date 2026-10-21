@@ -4,6 +4,10 @@ The peripheral device object describes the identity, vendor and model of a perip
 
 - **Extends**: [Entity (_entity)](_entity.md)
 
+## Constraints
+
+- **At least one of**: `name`, `uid`
+
 ## Attributes
 
 ### `class`

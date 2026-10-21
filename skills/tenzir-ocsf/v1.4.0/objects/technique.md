@@ -4,6 +4,10 @@ The MITRE ATT&CK® Technique object describes the technique ID and/or name assoc
 
 - **Extends**: [Entity (_entity)](_entity.md)
 
+## Constraints
+
+- **At least one of**: `name`, `uid`
+
 ## Attributes
 
 ### `name`

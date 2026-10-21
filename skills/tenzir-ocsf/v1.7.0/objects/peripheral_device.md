@@ -4,6 +4,10 @@ The peripheral device object describes the properties of external, connectable, 
 
 - **Extends**: [Entity (_entity)](_entity.md)
 
+## Constraints
+
+- **At least one of**: `name`, `uid`
+
 ## Attributes
 
 ### `class`

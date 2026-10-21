@@ -4,6 +4,10 @@ The Network Interface object describes the type and associated attributes of a p
 
 - **Extends**: [Entity (_entity)](_entity.md)
 
+## Constraints
+
+- **At least one of**: `ip`, `mac`, `name`, `hostname`, `uid`
+
 ## Attributes
 
 ### `hostname`

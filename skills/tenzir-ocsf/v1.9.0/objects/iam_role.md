@@ -4,6 +4,10 @@ The IAM Role object describes permission characteristics (or privileges) associa
 
 - **Extends**: [Entity (_entity)](_entity.md)
 
+## Constraints
+
+- **At least one of**: `name`, `uid`
+
 ## Attributes
 
 ### `account`

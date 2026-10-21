@@ -4,6 +4,10 @@ The Technique object describes the technique related to an attack, as defined by
 
 - **Extends**: [Entity (_entity)](_entity.md)
 
+## Constraints
+
+- **At least one of**: `name`, `uid`
+
 ## Attributes
 
 ### `name`
