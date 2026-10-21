@@ -1,0 +1,14 @@
+name: startup_item
+caption: Startup Item
+extension: win
+patches: startup_item
+description: The startup item object describes an application component that has associated startup criteria and configurations.
+constraints:
+  just_one: [driver, job, process, win_service]
+attributes:
+  win_service:
+    caption: Windows Service
+    type: object_t
+    object: win/win_service
+    requirement: recommended
+    description: The startup item Windows service resource.

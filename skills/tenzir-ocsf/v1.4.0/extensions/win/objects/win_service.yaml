@@ -1,0 +1,185 @@
+name: win/win_service
+caption: Windows Service
+extension: win
+extends: service
+description: The Windows Service object describes a Windows service.
+constraints:
+  at_least_one: [cmd_line, service_category_id, service_dependencies, service_error_control_id, service_start_name, service_start_type_id, service_type_id]
+referenced_by:
+  classes:
+    win/windows_service_activity: [win_service]
+  objects:
+    evidences: [win_service]
+    startup_item: [win_service]
+attributes:
+  cmd_line:
+    caption: Command Line
+    type: string_t
+    requirement: recommended
+    observable: 13
+    description: The full command line used to launch the service.
+  labels:
+    caption: Labels
+    type: string_t
+    array: true
+    requirement: optional
+    from: service
+    description: The list of labels associated with the service.
+  load_order_group:
+    caption: Load Order Group
+    type: string_t
+    requirement: recommended
+    description: The name of the load ordering group of which this service is a member.
+  name:
+    caption: Name
+    type: string_t
+    requirement: required
+    description: The unique name of the service.
+  service_category:
+    caption: Service Category
+    type: string_t
+    requirement: optional
+    description: The service category, normalized to the caption of the service_category_id value. In the case of 'Other', it is defined by the event source.
+  service_category_id:
+    caption: Service Category ID
+    type: integer_t
+    requirement: recommended
+    sibling: service_category
+    description: The normalized identifier of the service category.
+    enum:
+      '0':
+        caption: Unknown
+        description: The service category is unknown.
+      '1':
+        caption: Kernel Mode
+        description: A kernel mode driver.
+      '2':
+        caption: User Mode
+        description: A user mode service.
+      '99':
+        caption: Other
+        description: The service category is not mapped. See the `service_category` attribute, which contains an event source specific value.
+  service_dependencies:
+    caption: Service Dependencies
+    type: string_t
+    array: true
+    requirement: recommended
+    description: The names of other services upon which this service has a dependency.
+  service_error_control:
+    caption: Service Error Control
+    type: string_t
+    requirement: optional
+    description: The service error control, normalized to the caption of the `service_error_control_id` value. In the case of 'Other', it is defined by the event source.
+  service_error_control_id:
+    caption: Service Error Control ID
+    type: integer_t
+    requirement: recommended
+    sibling: service_error_control
+    description: The normalized identifier of the service error control.
+    enum:
+      '0':
+        caption: Unknown
+        description: The service error control is unknown.
+      '1':
+        caption: Ignore
+        description: The startup program ignores the error and continues the startup operation.
+      '2':
+        caption: Normal
+        description: The startup program logs the error in the event log but continues the startup operation.
+      '3':
+        caption: Severe
+        description: The startup program logs the error in the event log. If the last-known-good configuration is being started, the startup operation continues. Otherwise, the system is restarted with the last-known-good configuration.
+      '4':
+        caption: Critical
+        description: The startup program logs the error in the event log, if possible. If the last-known-good configuration is being started, the startup operation fails. Otherwise, the system is restarted with the last-known good configuration.
+      '99':
+        caption: Other
+        description: The service error control is not mapped. See the `service_error_control` attribute, which contains an event source specific value.
+  service_start_name:
+    caption: Service Start Name
+    type: string_t
+    requirement: recommended
+    description: For a user mode service, this attribute represents the name of the account under which the service is run. For a kernel mode driver, this attribute represents the object name used to load the driver.
+  service_start_type:
+    caption: Service Start Type
+    type: string_t
+    requirement: optional
+    description: The service start type, normalized to the caption of the `service_start_type_id` value. In the case of 'Other', it is defined by the event source.
+  service_start_type_id:
+    caption: Service Start Type ID
+    type: integer_t
+    requirement: recommended
+    sibling: service_start_type
+    description: The normalized identifier of the service start type.
+    enum:
+      '0':
+        caption: Unknown
+        description: The service start type is unknown.
+      '1':
+        caption: Boot
+        description: A kernel mode driver loaded at boot.
+      '2':
+        caption: System
+        description: A kernel mode driver loaded during system startup.
+      '3':
+        caption: Auto
+        description: A user mode service started automatically during system startup.
+      '4':
+        caption: Demand
+        description: A user mode service started on demand when a process calls `StartService`.
+      '5':
+        caption: Disabled
+        description: A driver or service that cannot be started.
+      '99':
+        caption: Other
+        description: The service start type is not mapped. See the `service_start_type` attribute, which contains an event source specific value.
+  service_type:
+    caption: Service Type
+    type: string_t
+    requirement: optional
+    description: The service type, normalized to the caption of the service_type_id value. In the case of 'Other', it is defined by the event source.
+  service_type_id:
+    caption: Service Type ID
+    type: integer_t
+    requirement: recommended
+    sibling: service_type
+    description: The normalized identifier of the service type.
+    enum:
+      '0':
+        caption: Unknown
+        description: The service type is unknown.
+      '1':
+        caption: Kernel Driver
+        description: A kernel mode driver.
+      '2':
+        caption: File System Driver
+        description: A kernel mode file system minifilter.
+      '3':
+        caption: Own Process
+        description: A user mode service that runs in its own process.
+      '4':
+        caption: Share Process
+        description: A user mode service that shares a process with other services.
+      '99':
+        caption: Other
+        description: The service type is not mapped. See the `service_type` attribute, which contains an event source specific value.
+  tags:
+    caption: Tags
+    type: object_t
+    object: key_value_object
+    array: true
+    requirement: optional
+    from: service
+    description: The list of tags; `{key:value}` pairs associated to the service.
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: recommended
+    from: service
+    description: The unique identifier of the service.
+  version:
+    caption: Version
+    type: string_t
+    requirement: recommended
+    from: service
+    description: The version of the service.

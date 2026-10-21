@@ -1,0 +1,30 @@
+system:
+  uid: 1
+  caption: System Activity
+  description: System Activity events.
+  classes: [file_activity, kernel_activity, kernel_extension, memory_activity, module_activity, process_activity, scheduled_job_activity, win/registry_key_activity, win/registry_value_activity, win/resource_activity]
+findings:
+  uid: 2
+  caption: Findings
+  description: Findings events report findings, detections, and possible resolutions of malware, anomalies, or other actions performed by security products.
+  classes: [security_finding]
+iam:
+  uid: 3
+  caption: Identity & Access Management
+  description: Identity & Access Management (IAM) events relate to the supervision of the system's authentication and access control model. Examples of such events are the success or failure of authentication, granting of authority, password change, entity change, privileged use etc.
+  classes: [account_change, authentication, authorize_session, entity_management, group_management, user_access]
+network:
+  uid: 4
+  caption: Network Activity
+  description: Network Activity events.
+  classes: [dhcp_activity, dns_activity, email_activity, email_file_activity, email_url_activity, ftp_activity, http_activity, network_activity, network_file_activity, rdp_activity, smb_activity, ssh_activity]
+discovery:
+  uid: 5
+  caption: Discovery
+  description: Discovery events report the existence and state of devices, files, configurations, processes, registry keys, and other objects.
+  classes: [config_state, inventory_info]
+application:
+  uid: 6
+  caption: Application Activity
+  description: Application Activity events report detailed information about the behavior of applications and services.
+  classes: [api_activity, application_lifecycle, web_resource_access_activity, web_resources_activity]

@@ -1,0 +1,83 @@
+name: group
+caption: Group
+extends: _entity
+description: The Group object represents a collection or association of entities, such as users, policies, or devices. It serves as a logical grouping mechanism to organize and manage entities with similar characteristics or permissions within a system or organization, including but not limited to purposes of access control.
+constraints:
+  at_least_one: [name, uid]
+references:
+- description: D3FEND™ Ontology d3f:AccessControlGroup.
+  url: https://d3fend.mitre.org/dao/artifact/d3f:AccessControlGroup/
+referenced_by:
+  classes:
+    admin_group_query: [group]
+    application_security_posture_finding: [assignee_group]
+    authorize_session: [group, groups]
+    compliance_finding: [assignee_group]
+    data_security_finding: [assignee_group]
+    detection_finding: [assignee_group]
+    group_management: [group, subgroup, updated_group]
+    iam_analysis_finding: [assignee_group]
+    incident_finding: [assignee_group]
+    vulnerability_finding: [assignee_group]
+  objects:
+    api: [group]
+    application: [group]
+    database: [groups]
+    databucket: [group, groups]
+    device: [groups, pool]
+    endpoint: [pool]
+    managed_entity: [group]
+    network_endpoint: [pool]
+    network_proxy: [pool]
+    policy: [group]
+    query_evidence: [group]
+    resource_details: [group]
+    table: [groups]
+    user: [groups]
+attributes:
+  desc:
+    caption: Description
+    type: string_t
+    requirement: optional
+    description: The group description.
+  domain:
+    caption: Domain
+    type: string_t
+    requirement: optional
+    description: 'The domain where the group is defined. For example: the LDAP or Active Directory domain.'
+  name:
+    caption: Name
+    type: string_t
+    requirement: recommended
+    observable: 32
+    description: The group name.
+  privileges:
+    caption: Privileges
+    type: string_t
+    array: true
+    requirement: optional
+    description: The group privileges.
+  type:
+    caption: Group Type
+    type: string_t
+    requirement: optional
+    description: The type of the group.
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: recommended
+    observable: 33
+    description: The unique identifier of the group. For example, for Windows events this is the security identifier (SID) of the group. Another example, pool id or desktop id that the device belongs to.
+  uid_alt:
+    caption: Alternate ID
+    type: string_t
+    requirement: optional
+    description: The alternate unique identifier.
+  uid_numeric:
+    caption: Numeric Unique ID
+    type: long_t
+    requirement: optional
+    from: _entity
+    description: |-
+      The `uid` attribute in numeric form where applicable.
+      Note: Producers may populate `uid_numeric` only in addition to `uid` and not as an alternative to it.

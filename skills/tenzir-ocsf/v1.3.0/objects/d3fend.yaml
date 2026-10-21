@@ -1,0 +1,30 @@
+name: d3fend
+caption: MITRE D3FEND™
+extends: object
+description: The [MITRE D3FEND™](https://d3fend.mitre.org) object describes the tactic, technique & sub-technique associated with a countermeasure as defined in [DEFEND MatrixTM](https://d3fend.mitre.org/).
+constraints:
+  at_least_one: [d3f_tactic, d3f_technique]
+referenced_by:
+  classes:
+    file_remediation_activity: [countermeasures]
+    network_remediation_activity: [countermeasures]
+    process_remediation_activity: [countermeasures]
+    remediation_activity: [countermeasures]
+attributes:
+  d3f_tactic:
+    caption: MITRE DEFEND™ Tactic
+    type: object_t
+    object: d3f_tactic
+    requirement: recommended
+    description: The Tactic object describes the tactic ID and/or name that is associated with a countermeasure, as defined by [D3FEND MatrixTM](https://d3fend.mitre.org).
+  d3f_technique:
+    caption: MITRE DEFEND™ Technique
+    type: object_t
+    object: d3f_technique
+    requirement: recommended
+    description: The Defend Technique object describes the technique ID and/or name associated with a countermeasure, as defined by [D3FEND MatrixTM](https://d3fend.mitre.org).
+  version:
+    caption: Version
+    type: string_t
+    requirement: recommended
+    description: The [D3FEND MatrixTM](https://d3fend.mitre.org) version.

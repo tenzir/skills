@@ -1,0 +1,21 @@
+name: request
+caption: Request Elements
+extends: object
+description: The Request Elements object describes characteristics of an API request.
+referenced_by:
+  classes:
+    rdp_activity: [request]
+  objects:
+    api: [request]
+attributes:
+  flags:
+    caption: Flags
+    type: string_t
+    array: true
+    requirement: optional
+    description: The list of communication flags, normalized to the captions of the flag_ids values. In the case of 'Other', they are defined by the event source.
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: required
+    description: The unique request identifier.

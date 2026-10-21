@@ -1,0 +1,31 @@
+version: 1.3.0
+status: stable
+source:
+  repository: https://github.com/ocsf/ocsf-schema.git
+  ref: v1.3.0
+  commit: c8bde8c4cc7e93bb4a36e873623bbe099da22fb5
+  compiler: ocsf-schema-compiler 1.1.1
+extensions:
+  linux:
+    uid: 1
+    caption: Linux
+    version: 1.3.0
+    description: The Linux extension defines Linux specific attributes, objects and classes.
+    profiles: [linux/linux_users]
+    patches:
+      objects: [process]
+  win:
+    uid: 2
+    caption: Windows
+    version: 1.3.0
+    description: The Windows extension defines Windows specific attributes, objects and classes.
+    classes: [win/prefetch_query, win/registry_key_activity, win/registry_key_query, win/registry_value_activity, win/registry_value_query, win/resource_activity, win/win_service_activity]
+    objects: [win/reg_key, win/reg_value, win/win_resource, win/win_service]
+    patches:
+      objects: [evidences]
+previous: 1.2.0
+changes:
+  added:
+    classes: [event_log, file_remediation_activity, network_remediation_activity, process_remediation_activity, remediation_activity, software_info]
+    objects: [d3f_tactic, d3f_technique, d3fend, domain_contact, ja4_fingerprint, osint, ticket, timespan, whois]
+    profiles: [osint]

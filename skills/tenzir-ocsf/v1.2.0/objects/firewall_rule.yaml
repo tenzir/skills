@@ -1,0 +1,101 @@
+name: firewall_rule
+caption: Firewall Rule
+extends: rule
+description: The Firewall Rule object represents a specific rule within a firewall policy or event. It contains information about a rule's configuration, properties, and associated actions that define how network traffic is handled by the firewall.
+constraints:
+  at_least_one: [name, uid]
+referenced_by:
+  classes:
+    data_security_finding: [firewall_rule]
+    datastore_activity: [firewall_rule]
+    detection_finding: [firewall_rule]
+    dhcp_activity: [firewall_rule]
+    dns_activity: [firewall_rule]
+    email_activity: [firewall_rule]
+    email_file_activity: [firewall_rule]
+    email_url_activity: [firewall_rule]
+    file_activity: [firewall_rule]
+    ftp_activity: [firewall_rule]
+    http_activity: [firewall_rule]
+    kernel_activity: [firewall_rule]
+    kernel_extension: [firewall_rule]
+    memory_activity: [firewall_rule]
+    module_activity: [firewall_rule]
+    network_activity: [firewall_rule]
+    network_file_activity: [firewall_rule]
+    ntp_activity: [firewall_rule]
+    process_activity: [firewall_rule]
+    rdp_activity: [firewall_rule]
+    scheduled_job_activity: [firewall_rule]
+    smb_activity: [firewall_rule]
+    ssh_activity: [firewall_rule]
+    tunnel_activity: [firewall_rule]
+    web_resources_activity: [firewall_rule]
+attributes:
+  category:
+    caption: Category
+    type: string_t
+    requirement: optional
+    from: rule
+    description: The rule category.
+  condition:
+    caption: Condition
+    type: string_t
+    requirement: optional
+    description: 'The rule trigger condition for the rule. For example: SQL_INJECTION.'
+  desc:
+    caption: Description
+    type: string_t
+    requirement: optional
+    from: rule
+    description: The description of the rule that generated the event.
+  duration:
+    caption: Duration
+    type: integer_t
+    requirement: optional
+    description: The rule response time duration, usually used for challenge completion time.
+  match_details:
+    caption: Match Details
+    type: string_t
+    array: true
+    requirement: optional
+    description: 'The data in a request that rule matched. For example: ''["10","and","1"]''.'
+  match_location:
+    caption: Match Location
+    type: string_t
+    requirement: optional
+    description: 'The location of the matched data in the source which resulted in the triggered firewall rule. For example: HEADER.'
+  name:
+    caption: Name
+    type: string_t
+    requirement: recommended
+    from: rule
+    description: The name of the rule that generated the event.
+  rate_limit:
+    caption: Rate Limit
+    type: integer_t
+    requirement: optional
+    description: The rate limit for a rate-based rule.
+  sensitivity:
+    caption: Sensitivity
+    type: string_t
+    requirement: optional
+    description: 'The sensitivity of the firewall rule in the matched event. For example: HIGH.'
+  type:
+    caption: Type
+    type: string_t
+    requirement: optional
+    from: rule
+    description: The rule type.
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: recommended
+    from: rule
+    description: The unique identifier of the rule that generated the event.
+  version:
+    caption: Version
+    type: string_t
+    requirement: optional
+    from: rule
+    description: 'The rule version. For example: `1.1`.'

@@ -1,0 +1,154 @@
+name: evidences
+caption: Evidence Artifacts
+extends: object
+description: A collection of evidence artifacts associated to the activity/activities that triggered a security detection.
+profiles: [cloud, container, data_classification]
+constraints:
+  at_least_one: [actor, api, connection_info, data, database, databucket, device, dst_endpoint, email, file, process, query, src_endpoint, url, user, job, script]
+patched_by: [win]
+referenced_by:
+  classes:
+    compliance_finding: [evidences]
+    detection_finding: [evidences]
+attributes:
+  actor:
+    caption: Actor
+    type: object_t
+    object: actor
+    requirement: recommended
+    description: Describes details about the user/role/process that was the source of the activity that triggered the detection.
+  api:
+    caption: API Details
+    type: object_t
+    object: api
+    requirement: recommended
+    description: Describes details about the API call associated to the activity that triggered the detection.
+  connection_info:
+    caption: Connection Info
+    type: object_t
+    object: network_connection_info
+    requirement: recommended
+    description: Describes details about the network connection associated to the activity that triggered the detection.
+  container:
+    caption: Container
+    type: object_t
+    object: container
+    requirement: recommended
+    observable: 27
+    description: Describes details about the container associated to the activity that triggered the detection.
+  data:
+    caption: Data
+    type: json_t
+    requirement: optional
+    description: Additional evidence data that is not accounted for in the specific evidence attributes. `Use only when absolutely necessary.`
+  database:
+    caption: Database
+    type: object_t
+    object: database
+    requirement: recommended
+    description: Describes details about the database associated to the activity that triggered the detection.
+  databucket:
+    caption: Databucket
+    type: object_t
+    object: databucket
+    requirement: recommended
+    description: Describes details about the databucket associated to the activity that triggered the detection.
+  device:
+    caption: Device
+    type: object_t
+    object: device
+    requirement: recommended
+    observable: 20
+    description: An addressable device, computer system or host associated to the activity that triggered the detection.
+  dst_endpoint:
+    caption: Destination Endpoint
+    type: object_t
+    object: network_endpoint
+    requirement: recommended
+    observable: 20
+    description: Describes details about the destination of the network activity that triggered the detection.
+  email:
+    caption: Email
+    type: object_t
+    object: email
+    requirement: recommended
+    observable: 22
+    description: The email object associated to the activity that triggered the detection.
+  file:
+    caption: File
+    type: object_t
+    object: file
+    requirement: recommended
+    observable: 24
+    description: Describes details about the file associated to the activity that triggered the detection.
+  http_request:
+    caption: HTTP Request
+    type: object_t
+    object: http_request
+    requirement: recommended
+    description: Describes details about the http request associated to the activity that triggered the detection.
+  http_response:
+    caption: HTTP Response
+    type: object_t
+    object: http_response
+    requirement: recommended
+    description: Describes details about the http response associated to the activity that triggered the detection.
+  ja4_fingerprint_list:
+    caption: JA4+ Fingerprints
+    type: object_t
+    object: ja4_fingerprint
+    array: true
+    requirement: recommended
+    description: Describes details about the JA4+ fingerprints that triggered the detection.
+  job:
+    caption: Job
+    type: object_t
+    object: job
+    requirement: recommended
+    description: Describes details about the scheduled job that was associated with the activity that triggered the detection.
+  process:
+    caption: Process
+    type: object_t
+    object: process
+    requirement: recommended
+    observable: 25
+    description: Describes details about the process associated to the activity that triggered the detection.
+  query:
+    caption: DNS Query
+    type: object_t
+    object: dns_query
+    requirement: recommended
+    description: Describes details about the DNS query associated to the activity that triggered the detection.
+  script:
+    caption: Script
+    type: object_t
+    object: script
+    requirement: recommended
+    description: Describes details about the script that was associated with the activity that triggered the detection.
+  src_endpoint:
+    caption: Source Endpoint
+    type: object_t
+    object: network_endpoint
+    requirement: recommended
+    observable: 20
+    description: Describes details about the source of the network activity that triggered the detection.
+  tls:
+    caption: TLS
+    type: object_t
+    object: tls
+    requirement: recommended
+    description: Describes details about the Transport Layer Security (TLS) activity that triggered the detection.
+  url:
+    caption: URL
+    type: object_t
+    object: url
+    requirement: recommended
+    observable: 23
+    description: The URL object that pertains to the event or object associated to the activity that triggered the detection.
+  user:
+    caption: User
+    type: object_t
+    object: user
+    requirement: recommended
+    observable: 21
+    description: Describes details about the user that was the target or somehow else associated with the activity that triggered the detection.

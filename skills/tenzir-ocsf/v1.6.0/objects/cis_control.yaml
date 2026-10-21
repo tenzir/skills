@@ -1,0 +1,24 @@
+name: cis_control
+caption: CIS Control
+extends: object
+description: The CIS Control (aka Critical Security Control) object describes a prioritized set of actions to protect your organization and data from cyber-attack vectors. The [CIS Controls](https://www.cisecurity.org/controls) are defined by the Center for Internet Security.
+referenced_by:
+  objects:
+    cis_benchmark: [cis_controls]
+    remediation: [cis_controls]
+attributes:
+  desc:
+    caption: Description
+    type: string_t
+    requirement: optional
+    description: 'The CIS Control description. For example: Uninstall or disable unnecessary services on enterprise assets and software, such as an unused file sharing service, web application module, or service function.'
+  name:
+    caption: Name
+    type: string_t
+    requirement: required
+    description: 'The CIS Control name. For example: 4.8 Uninstall or Disable Unnecessary Services on Enterprise Assets and Software.'
+  version:
+    caption: Version
+    type: string_t
+    requirement: recommended
+    description: 'The CIS Control version. For example: v8.'

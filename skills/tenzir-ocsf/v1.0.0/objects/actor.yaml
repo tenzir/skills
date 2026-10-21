@@ -1,0 +1,79 @@
+name: actor
+caption: Actor
+extends: object
+description: The Actor object contains details about the user, role, or process that initiated or performed a specific activity.
+profiles: [container]
+constraints:
+  at_least_one: [process, user, invoked_by, session]
+referenced_by:
+  classes:
+    account_change: [actor]
+    api_activity: [actor]
+    application_lifecycle: [actor]
+    authentication: [actor]
+    authorize_session: [actor]
+    config_state: [actor]
+    dhcp_activity: [actor]
+    dns_activity: [actor]
+    email_activity: [actor]
+    email_file_activity: [actor]
+    email_url_activity: [actor]
+    entity_management: [actor]
+    file_activity: [actor]
+    ftp_activity: [actor]
+    group_management: [actor]
+    http_activity: [actor]
+    inventory_info: [actor]
+    kernel_activity: [actor]
+    kernel_extension: [actor]
+    memory_activity: [actor]
+    module_activity: [actor]
+    network_activity: [actor]
+    network_file_activity: [actor]
+    process_activity: [actor]
+    rdp_activity: [actor]
+    scheduled_job_activity: [actor]
+    smb_activity: [actor]
+    ssh_activity: [actor]
+    user_access: [actor]
+    web_resource_access_activity: [actor]
+    web_resources_activity: [actor]
+attributes:
+  authorizations:
+    caption: Authorization Information
+    type: object_t
+    object: authorization
+    array: true
+    requirement: optional
+    description: This object provides details such as authorization outcome, associated policies related to activity/event.
+  idp:
+    caption: Identity Provider
+    type: object_t
+    object: idp
+    requirement: optional
+    description: This object describes details about the Identity Provider used.
+  invoked_by:
+    caption: Invoked by
+    type: string_t
+    requirement: optional
+    description: The name of the service that invoked the activity as described in the event.
+  process:
+    caption: Process
+    type: object_t
+    object: process
+    requirement: recommended
+    observable: 25
+    description: The process that initiated the activity.
+  session:
+    caption: Session
+    type: object_t
+    object: session
+    requirement: optional
+    description: The user session from which the activity was initiated.
+  user:
+    caption: User
+    type: object_t
+    object: user
+    requirement: recommended
+    observable: 21
+    description: The user that initiated the activity or the user context from which the activity was initiated.

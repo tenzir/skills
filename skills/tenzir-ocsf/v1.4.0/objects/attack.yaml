@@ -1,0 +1,118 @@
+name: attack
+caption: MITRE ATT&CK®
+extends: object
+description: The [MITRE ATT&CK®](https://attack.mitre.org) object describes the tactic, technique & sub-technique associated to an attack as defined in [ATT&CK® Matrix](https://attack.mitre.org/wiki/ATT&CK_Matrix).
+constraints:
+  at_least_one: [tactic, technique, sub_technique]
+referenced_by:
+  classes:
+    account_change: [attacks]
+    admin_group_query: [attacks]
+    airborne_broadcast_activity: [attacks]
+    api_activity: [attacks]
+    application_error: [attacks]
+    application_lifecycle: [attacks]
+    authentication: [attacks]
+    authorize_session: [attacks]
+    base_event: [attacks]
+    cloud_resources_inventory_info: [attacks]
+    compliance_finding: [attacks]
+    config_state: [attacks]
+    data_security_finding: [attacks]
+    datastore_activity: [attacks]
+    detection_finding: [attacks]
+    device_config_state_change: [attacks]
+    dhcp_activity: [attacks]
+    dns_activity: [attacks]
+    drone_flights_activity: [attacks]
+    email_activity: [attacks]
+    email_file_activity: [attacks]
+    email_url_activity: [attacks]
+    entity_management: [attacks]
+    event_log_actvity: [attacks]
+    file_activity: [attacks]
+    file_hosting: [attacks]
+    file_query: [attacks]
+    file_remediation_activity: [attacks]
+    folder_query: [attacks]
+    ftp_activity: [attacks]
+    group_management: [attacks]
+    http_activity: [attacks]
+    incident_finding: [attacks]
+    inventory_info: [attacks]
+    job_query: [attacks]
+    kernel_activity: [attacks]
+    kernel_extension_activity: [attacks]
+    kernel_object_query: [attacks]
+    memory_activity: [attacks]
+    module_activity: [attacks]
+    module_query: [attacks]
+    network_activity: [attacks]
+    network_connection_query: [attacks]
+    network_file_activity: [attacks]
+    network_remediation_activity: [attacks]
+    networks_query: [attacks]
+    ntp_activity: [attacks]
+    osint_inventory_info: [attacks]
+    patch_state: [attacks]
+    peripheral_device_query: [attacks]
+    process_activity: [attacks]
+    process_query: [attacks]
+    process_remediation_activity: [attacks]
+    rdp_activity: [attacks]
+    remediation_activity: [attacks]
+    scan_activity: [attacks]
+    scheduled_job_activity: [attacks]
+    script_activity: [attacks]
+    security_finding: [attacks]
+    service_query: [attacks]
+    session_query: [attacks]
+    smb_activity: [attacks]
+    software_info: [attacks]
+    ssh_activity: [attacks]
+    startup_item_query: [attacks]
+    tunnel_activity: [attacks]
+    user_access: [attacks]
+    user_inventory: [attacks]
+    user_query: [attacks]
+    vulnerability_finding: [attacks]
+    web_resource_access_activity: [attacks]
+    web_resources_activity: [attacks]
+  objects:
+    finding_info: [attacks]
+    osint: [attacks]
+    related_event: [attacks]
+attributes:
+  sub_technique:
+    caption: Sub Technique
+    type: object_t
+    object: sub_technique
+    requirement: optional
+    description: The Sub Technique object describes the sub technique ID and/or name associated to an attack, as defined by [ATT&CK® Matrix](https://attack.mitre.org/wiki/ATT&CK_Matrix).
+  tactic:
+    caption: Tactic
+    type: object_t
+    object: tactic
+    requirement: optional
+    description: The Tactic object describes the tactic ID and/or name that is associated to an attack, as defined by [ATT&CK® Matrix](https://attack.mitre.org/wiki/ATT&CK_Matrix).
+  tactics:
+    caption: Tactics
+    type: object_t
+    object: tactic
+    array: true
+    requirement: optional
+    deprecated:
+      since: 1.1.0
+      message: Use the `tactic` attribute instead.
+    description: The Tactic object describes the tactic ID and/or tactic name that are associated with the attack technique, as defined by [ATT&CK® Matrix](https://attack.mitre.org/wiki/ATT&CK_Matrix).
+  technique:
+    caption: Technique
+    type: object_t
+    object: technique
+    requirement: optional
+    description: The Technique object describes the technique ID and/or name associated to an attack, as defined by [ATT&CK® Matrix](https://attack.mitre.org/wiki/ATT&CK_Matrix).
+  version:
+    caption: Version
+    type: string_t
+    requirement: recommended
+    description: The [ATT&CK® Matrix](https://attack.mitre.org/wiki/ATT&CK_Matrix) version.

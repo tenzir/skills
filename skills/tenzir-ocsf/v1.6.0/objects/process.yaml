@@ -1,0 +1,234 @@
+name: process
+caption: Process
+extends: process_entity
+observable: 25
+description: The Process object describes a running instance of a launched program.
+profiles: [container, data_classification, datetime]
+constraints:
+  at_least_one: [pid, uid, cpid]
+references:
+- description: D3FEND™ Ontology d3f:Process
+  url: https://d3fend.mitre.org/dao/artifact/d3f:Process/
+patched_by: [linux]
+referenced_by:
+  classes:
+    authentication: [logon_process]
+    memory_activity: [process]
+    module_query: [process]
+    network_connection_query: [process]
+    process_activity: [process]
+    process_query: [process]
+    process_remediation_activity: [process]
+    security_finding: [process]
+  objects:
+    actor: [process]
+    evidences: [process]
+    process: [parent_process]
+    query_evidence: [process]
+    startup_item: [process]
+attributes:
+  ancestry:
+    caption: Ancestry
+    type: object_t
+    object: process_entity
+    array: true
+    requirement: optional
+    description: An array of Process Entities describing the extended parentage of this process object. Direct parent information should be expressed through the `parent_process` attribute. The first array element is the direct parent of this process object. Subsequent list elements go up the process parentage hierarchy. That is, the array is sorted from newest to oldest process. It is recommended to only populate this field for the top-level process object.
+    references:
+    - description: Guidance on Representing Process Parentage
+      url: https://github.com/ocsf/ocsf-docs/blob/main/articles/representing-process-parentage.md
+  cmd_line:
+    caption: Command Line
+    type: string_t
+    requirement: recommended
+    from: process_entity
+    observable: 13
+    description: 'The full command line used to launch an application, service, process, or job. For example: `ssh user@10.0.0.10`. If the command line is unavailable or missing, the empty string `''''` is to be used.'
+  container:
+    caption: Container
+    type: object_t
+    object: container
+    requirement: recommended
+    group: context
+    profile: container
+    observable: 27
+    description: The information describing an instance of a container. A container is a prepackaged, portable system image that runs isolated on an existing system using a container runtime like containerd.
+  cpid:
+    caption: Common Process Identifier
+    type: uuid_t
+    requirement: recommended
+    from: process_entity
+    description: A unique process identifier that can be assigned deterministically by multiple system data producers.
+    references:
+    - description: OCSF Common Process Identifier (CPID) Specification
+      url: https://github.com/ocsf/common-process-id
+  created_time:
+    caption: Created Time
+    type: timestamp_t
+    requirement: recommended
+    from: process_entity
+    description: The time when the process was created/started.
+  created_time_dt:
+    caption: Created Time
+    type: datetime_t
+    requirement: optional
+    profile: datetime
+    from: process_entity
+    description: The time when the process was created/started.
+  environment_variables:
+    caption: Environment Variables
+    type: object_t
+    object: environment_variable
+    array: true
+    requirement: optional
+    description: Environment variables associated with the process.
+  file:
+    caption: File
+    type: object_t
+    object: file
+    requirement: recommended
+    observable: 24
+    description: The process file object.
+  integrity:
+    caption: Integrity
+    type: string_t
+    requirement: optional
+    description: The process integrity level, normalized to the caption of the integrity_id value. In the case of 'Other', it is defined by the event source (Windows only).
+  integrity_id:
+    caption: Integrity Level
+    type: integer_t
+    requirement: optional
+    sibling: integrity
+    description: The normalized identifier of the process integrity level (Windows only).
+    enum:
+      '0':
+        caption: Unknown
+        description: The integrity level is unknown.
+      '1':
+        caption: Untrusted
+      '2':
+        caption: Low
+      '3':
+        caption: Medium
+      '4':
+        caption: High
+      '5':
+        caption: System
+      '6':
+        caption: Protected
+      '99':
+        caption: Other
+        description: The integrity level is not mapped. See the `integrity` attribute, which contains a data source specific value.
+  lineage:
+    caption: Lineage
+    type: file_path_t
+    array: true
+    requirement: optional
+    observable: 45
+    deprecated:
+      since: 1.4.0
+      message: Use the `ancestry` attribute.
+    description: 'The lineage of the process, represented by a list of paths for each ancestor process. For example: `[''/usr/sbin/sshd'', ''/usr/bin/bash'', ''/usr/bin/whoami'']`.'
+  loaded_modules:
+    caption: Loaded Modules
+    type: string_t
+    array: true
+    requirement: optional
+    description: The list of loaded module names.
+  name:
+    caption: Name
+    type: process_name_t
+    requirement: recommended
+    from: process_entity
+    observable: 9
+    description: 'The friendly name of the process, for example: `Notepad++`.'
+  namespace_pid:
+    caption: Namespace PID
+    type: integer_t
+    requirement: recommended
+    group: context
+    profile: container
+    description: If running under a process namespace (such as in a container), the process identifier within that process namespace.
+  parent_process:
+    caption: Parent Process
+    type: object_t
+    object: process
+    requirement: recommended
+    observable: 25
+    description: The parent process of this process object. It is recommended to only populate this field for the top-level process object, to prevent deep nesting. Additional ancestry information can be supplied in the `ancestry` attribute.
+    references:
+    - description: Guidance on Representing Process Parentage
+      url: https://github.com/ocsf/ocsf-docs/blob/main/articles/representing-process-parentage.md
+  path:
+    caption: Path
+    type: string_t
+    requirement: optional
+    from: process_entity
+    description: The process file path.
+  pid:
+    caption: Process ID
+    type: integer_t
+    requirement: recommended
+    from: process_entity
+    observable: 15
+    description: The process identifier, as reported by the operating system. Process ID (PID) is a number used by the operating system to uniquely identify an active process.
+  ptid:
+    caption: Process Thread ID
+    type: long_t
+    requirement: optional
+    description: The identifier of the process thread associated with the event, as returned by the operating system.
+  sandbox:
+    caption: Sandbox
+    type: string_t
+    requirement: optional
+    description: The name of the containment jail (i.e., sandbox). For example, hardened_ps, high_security_ps, oracle_ps, netsvcs_ps, or default_ps.
+  session:
+    caption: Session
+    type: object_t
+    object: session
+    requirement: optional
+    description: The user session under which this process is running.
+  terminated_time:
+    caption: Terminated Time
+    type: timestamp_t
+    requirement: optional
+    description: The time when the process was terminated.
+  terminated_time_dt:
+    caption: Terminated Time
+    type: datetime_t
+    requirement: optional
+    profile: datetime
+    description: The time when the process was terminated.
+  tid:
+    caption: Thread ID
+    type: integer_t
+    requirement: optional
+    deprecated:
+      since: 1.6.0
+      message: '`tid` is deprecated in favor of `ptid`. `ptid` has type `long_t` which can accommodate the thread identifiers returned by all platforms (e.g. 64-bit on MacOS).'
+    description: The identifier of the thread associated with the event, as returned by the operating system.
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: recommended
+    from: process_entity
+    observable: 39
+    description: A unique identifier for this process assigned by the producer (tool).  Facilitates correlation of a process event with other events for that process.
+  user:
+    caption: User
+    type: object_t
+    object: user
+    requirement: recommended
+    observable: 21
+    description: The user under which this process is running.
+  working_directory:
+    caption: Working Directory
+    type: string_t
+    requirement: optional
+    description: The working directory of a process.
+  xattributes:
+    caption: Extended Attributes
+    type: object_t
+    object: object
+    requirement: optional
+    description: An unordered collection of zero or more name/value pairs that represent a process extended attribute.

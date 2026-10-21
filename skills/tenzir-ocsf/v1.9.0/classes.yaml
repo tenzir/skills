@@ -1,0 +1,696 @@
+classes:
+- name: base_event
+  caption: Base Event
+  uid: 0
+  summary: The base event is a generic and concrete event.
+  path: v1.9.0/classes/base_event.yaml
+- name: system
+  caption: System Activity
+  category: system
+  abstract: true
+  extends: base_event
+  summary: The System Activity event is a generic event that defines a set of attributes available in the system activity events.
+  path: v1.9.0/classes/system.yaml
+- name: clipboard_activity
+  caption: Clipboard Activity
+  uid: 1012
+  category: system
+  extends: system
+  summary: Clipboard Activity events report when a process performs an action on a clipboard.
+  path: v1.9.0/classes/clipboard_activity.yaml
+- name: device_power_state_activity
+  caption: Device Power State Activity
+  uid: 1011
+  category: system
+  extends: system
+  summary: Device Power State Activity events report activities related to power state changes of a system.
+  path: v1.9.0/classes/device_power_state_activity.yaml
+- name: event_log_actvity
+  caption: Event Log Activity
+  uid: 1008
+  category: system
+  extends: system
+  summary: Event Log Activity events report actions pertaining to the system's event logging service(s), such as disabling logging or clearing the log data.
+  path: v1.9.0/classes/event_log_actvity.yaml
+- name: file_activity
+  caption: File System Activity
+  uid: 1001
+  category: system
+  extends: system
+  summary: File System Activity events report when a process performs an action on a file or folder.
+  path: v1.9.0/classes/file_activity.yaml
+- name: kernel_activity
+  caption: Kernel Activity
+  uid: 1003
+  category: system
+  extends: system
+  summary: Kernel Activity events report when an process creates, reads, or deletes a kernel resource.
+  path: v1.9.0/classes/kernel_activity.yaml
+- name: kernel_extension_activity
+  caption: Kernel Extension Activity
+  uid: 1002
+  category: system
+  extends: system
+  summary: Kernel Extension events report when a driver/extension is loaded or unloaded into the kernel
+  path: v1.9.0/classes/kernel_extension_activity.yaml
+- name: memory_activity
+  caption: Memory Activity
+  uid: 1004
+  category: system
+  extends: system
+  summary: Memory Activity events report when a process has memory allocated, read/modified, or other manipulation activities - such as a buffer overflow or turning off data execution protection (DEP).
+  path: v1.9.0/classes/memory_activity.yaml
+- name: module_activity
+  caption: Module Activity
+  uid: 1005
+  category: system
+  extends: system
+  summary: Module Activity events report when an endpoint process acts on a `module`.
+  path: v1.9.0/classes/module_activity.yaml
+- name: peripheral_activity
+  caption: Peripheral Activity
+  uid: 1010
+  category: system
+  extends: system
+  summary: Peripheral Activity events log a system's interactions with external, connectable, and detachable hardware.
+  path: v1.9.0/classes/peripheral_activity.yaml
+- name: process_activity
+  caption: Process Activity
+  uid: 1007
+  category: system
+  extends: system
+  summary: Process Activity events report when a process launches, injects, opens or terminates another process, successful or otherwise.
+  path: v1.9.0/classes/process_activity.yaml
+- name: scheduled_job_activity
+  caption: Scheduled Job Activity
+  uid: 1006
+  category: system
+  extends: system
+  summary: Scheduled Job Activity events report activities related to scheduled jobs or tasks.
+  path: v1.9.0/classes/scheduled_job_activity.yaml
+- name: script_activity
+  caption: Script Activity
+  uid: 1009
+  category: system
+  extends: system
+  summary: Script Activity events report when a process executes a script.
+  path: v1.9.0/classes/script_activity.yaml
+- name: win/registry_key_activity
+  caption: Registry Key Activity
+  uid: 201001
+  category: system
+  extension: win
+  extends: system
+  summary: Registry Key Activity events report when a process performs an action on a Windows registry key.
+  path: v1.9.0/extensions/win/classes/registry_key_activity.yaml
+- name: win/registry_value_activity
+  caption: Registry Value Activity
+  uid: 201002
+  category: system
+  extension: win
+  extends: system
+  summary: Registry Value Activity events reports when a process performs an action on a Windows registry value.
+  path: v1.9.0/extensions/win/classes/registry_value_activity.yaml
+- name: win/windows_resource_activity
+  caption: Windows Resource Activity
+  uid: 201003
+  category: system
+  extension: win
+  extends: system
+  summary: Windows Resource Activity events report when a process accesses a Windows managed resource object, successful or otherwise.
+  path: v1.9.0/extensions/win/classes/windows_resource_activity.yaml
+- name: win/windows_service_activity
+  caption: Windows Service Activity
+  uid: 201004
+  category: system
+  extension: win
+  extends: system
+  summary: Windows Service Activity events report when a process interacts with the Service Control Manager.
+  path: v1.9.0/extensions/win/classes/windows_service_activity.yaml
+- name: finding
+  caption: Finding
+  category: findings
+  abstract: true
+  extends: base_event
+  summary: The Finding event is a generic event that defines a set of attributes available in the Findings category.
+  path: v1.9.0/classes/finding.yaml
+- name: application_security_posture_finding
+  caption: Application Security Posture Finding
+  uid: 2007
+  category: findings
+  extends: finding
+  summary: The Application Security Posture Finding event is a notification about any bug, defect, deficiency, exploit, vulnerability, weakness or any other issue with software and related systems.
+  path: v1.9.0/classes/application_security_posture_finding.yaml
+- name: compliance_finding
+  caption: Compliance Finding
+  uid: 2003
+  category: findings
+  extends: finding
+  summary: Compliance Finding events describe results of evaluations performed against resources, to check compliance with various Industry Frameworks or Security Standards such as `NIST SP 800-53, CIS AWS Foundations Benchmark v1.4.0, ISO/IEC 27001` etc.
+  path: v1.9.0/classes/compliance_finding.yaml
+- name: data_security_finding
+  caption: Data Security Finding
+  uid: 2006
+  category: findings
+  extends: finding
+  summary: A Data Security Finding describes detections or alerts generated by various data security products such as Data Loss Prevention (DLP), Data Classification, Secrets Management, Digital Rights Management (DRM), Data Security Posture Management (DSPM), and similar tools.
+  path: v1.9.0/classes/data_security_finding.yaml
+- name: detection_finding
+  caption: Detection Finding
+  uid: 2004
+  category: findings
+  extends: finding
+  summary: A Detection Finding describes detections or alerts generated by security products using correlation engines, detection engines or other methodologies.
+  path: v1.9.0/classes/detection_finding.yaml
+- name: iam_analysis_finding
+  caption: IAM Analysis Finding
+  uid: 2008
+  category: findings
+  extends: finding
+  summary: This finding represents an IAM analysis result, which evaluates IAM policies, access patterns, and IAM configurations for potential security risks.
+  path: v1.9.0/classes/iam_analysis_finding.yaml
+- name: incident_finding
+  caption: Incident Finding
+  uid: 2005
+  category: findings
+  extends: base_event
+  summary: An Incident Finding reports the creation, update, or closure of security incidents as a result of detections and/or analytics.
+  path: v1.9.0/classes/incident_finding.yaml
+- name: security_finding
+  caption: Security Finding
+  uid: 2001
+  category: findings
+  extends: base_event
+  deprecated: true
+  summary: Security Finding events describe findings, detections, anomalies, alerts and/or actions performed by security products
+  path: v1.9.0/classes/security_finding.yaml
+- name: vulnerability_finding
+  caption: Vulnerability Finding
+  uid: 2002
+  category: findings
+  extends: finding
+  summary: The Vulnerability Finding event is a notification about weakness in an information system, system security procedures, internal controls, or implementation that could be exploited or triggered by a threat source.
+  path: v1.9.0/classes/vulnerability_finding.yaml
+- name: iam
+  caption: Identity & Access Management
+  category: iam
+  abstract: true
+  extends: base_event
+  summary: The Identity & Access Management event is a generic event that defines a set of attributes available in the access control events.
+  path: v1.9.0/classes/iam.yaml
+- name: account_change
+  caption: Account Change
+  uid: 3001
+  category: iam
+  extends: iam
+  deprecated: true
+  summary: Account Change events report when specific user account management tasks are performed, such as a user/role being created or role assigned, changed, deleted, renamed, disabled, enabled, locked out or unlocked.
+  path: v1.9.0/classes/account_change.yaml
+- name: authentication
+  caption: Authentication
+  uid: 3002
+  category: iam
+  extends: iam
+  summary: Authentication events report authentication session activities, including user attempts to log on or log off, regardless of success, as well as other key stages within the authentication process.
+  path: v1.9.0/classes/authentication.yaml
+- name: authorize_session
+  caption: Authorize Session
+  uid: 3003
+  category: iam
+  extends: iam
+  summary: Authorize Session events report privileges, groups or roles assigned to a new user session, usually at login time.
+  path: v1.9.0/classes/authorize_session.yaml
+- name: entity_management
+  caption: Entity Management
+  uid: 3004
+  category: iam
+  extends: iam
+  summary: Entity Management events report activity by a managed client, a micro service, or a user at a management console.
+  path: v1.9.0/classes/entity_management.yaml
+- name: group_management
+  caption: Group Management
+  uid: 3006
+  category: iam
+  extends: iam
+  summary: Group Management events report lifecycle management of a group, as well as privileges, roles, and resources associated with the group.
+  path: v1.9.0/classes/group_management.yaml
+- name: role_management
+  caption: Role Management
+  uid: 3008
+  category: iam
+  extends: iam
+  summary: Role Management events report lifecycle management of a role, as well as privileges, policies, credentials, and resources associated with the role.
+  path: v1.9.0/classes/role_management.yaml
+- name: user_access
+  caption: User Access Management
+  uid: 3005
+  category: iam
+  extends: iam
+  deprecated: true
+  summary: User Access Management events report management updates to a user's privileges.
+  path: v1.9.0/classes/user_access.yaml
+- name: user_management
+  caption: User Management
+  uid: 3007
+  category: iam
+  extends: iam
+  summary: User Management events report lifecycle management of a user and account management tasks that are performed, such as a password change or reset, a user being created, updated, deleted, disabled, enabled, locked out or unlocked.
+  path: v1.9.0/classes/user_management.yaml
+- name: network
+  caption: Network
+  category: network
+  abstract: true
+  extends: base_event
+  summary: Network event is a generic event that defines a set of attributes available in the Network category.
+  path: v1.9.0/classes/network.yaml
+- name: dhcp_activity
+  caption: DHCP Activity
+  uid: 4004
+  category: network
+  extends: network
+  summary: DHCP Activity events report MAC to IP assignment via DHCP from a client or server.
+  path: v1.9.0/classes/dhcp_activity.yaml
+- name: dns_activity
+  caption: DNS Activity
+  uid: 4003
+  category: network
+  extends: network
+  summary: DNS Activity events report DNS queries and answers as seen on the network.
+  path: v1.9.0/classes/dns_activity.yaml
+- name: email_activity
+  caption: Email Activity
+  uid: 4009
+  category: network
+  extends: base_event
+  summary: Email Activity events report SMTP protocol and email activities including those with embedded URLs and files.
+  path: v1.9.0/classes/email_activity.yaml
+- name: email_file_activity
+  caption: Email File Activity
+  uid: 4011
+  category: network
+  extends: base_event
+  deprecated: true
+  summary: Email File Activity events report files within emails.
+  path: v1.9.0/classes/email_file_activity.yaml
+- name: email_url_activity
+  caption: Email URL Activity
+  uid: 4012
+  category: network
+  extends: base_event
+  deprecated: true
+  summary: Email URL Activity events report URLs within an email.
+  path: v1.9.0/classes/email_url_activity.yaml
+- name: ftp_activity
+  caption: FTP Activity
+  uid: 4008
+  category: network
+  extends: network
+  summary: File Transfer Protocol (FTP) Activity events report file transfers between a server and a client as seen on the network.
+  path: v1.9.0/classes/ftp_activity.yaml
+- name: http_activity
+  caption: HTTP Activity
+  uid: 4002
+  category: network
+  extends: network
+  summary: HTTP Activity events report HTTP connection and traffic information.
+  path: v1.9.0/classes/http_activity.yaml
+- name: network_activity
+  caption: Network Activity
+  uid: 4001
+  category: network
+  extends: network
+  summary: Network Activity events report network connection and traffic activity.
+  path: v1.9.0/classes/network_activity.yaml
+- name: network_file_activity
+  caption: Network File Activity
+  uid: 4010
+  category: network
+  extends: network
+  deprecated: true
+  summary: Network File Activity events report file activities traversing the network, including file storage services such as Box, MS OneDrive, or Google Drive.
+  path: v1.9.0/classes/network_file_activity.yaml
+- name: ntp_activity
+  caption: NTP Activity
+  uid: 4013
+  category: network
+  extends: network
+  summary: The Network Time Protocol (NTP) Activity events report instances of remote clients synchronizing their clocks with an NTP server, as observed on the network.
+  path: v1.9.0/classes/ntp_activity.yaml
+- name: rdp_activity
+  caption: RDP Activity
+  uid: 4005
+  category: network
+  extends: network
+  summary: Remote Desktop Protocol (RDP) Activity events report post-authentication remote client connections between clients and servers over the network.
+  path: v1.9.0/classes/rdp_activity.yaml
+- name: smb_activity
+  caption: SMB Activity
+  uid: 4006
+  category: network
+  extends: network
+  summary: Server Message Block (SMB) Protocol Activity events report client/server connections sharing resources within the network.
+  path: v1.9.0/classes/smb_activity.yaml
+- name: ssh_activity
+  caption: SSH Activity
+  uid: 4007
+  category: network
+  extends: network
+  summary: SSH Activity events report remote client connections to a server using the Secure Shell (SSH) Protocol.
+  path: v1.9.0/classes/ssh_activity.yaml
+- name: tunnel_activity
+  caption: Tunnel Activity
+  uid: 4014
+  category: network
+  extends: network
+  summary: Tunnel Activity events report secure tunnel establishment (such as VPN), teardowns, renewals, and other network tunnel specific actions.
+  path: v1.9.0/classes/tunnel_activity.yaml
+- name: discovery
+  caption: Discovery
+  category: discovery
+  abstract: true
+  extends: base_event
+  summary: The Discovery event is a generic event that defines a set of attributes available in Discovery category events.
+  path: v1.9.0/classes/discovery.yaml
+- name: discovery_result
+  caption: Discovery Result
+  category: discovery
+  abstract: true
+  extends: base_event
+  summary: Discovery Result events report the results of a discovery request.
+  path: v1.9.0/classes/discovery_result.yaml
+- name: admin_group_query
+  caption: Admin Group Query
+  uid: 5009
+  category: discovery
+  extends: discovery_result
+  deprecated: true
+  summary: Admin Group Query events report information about administrative groups.
+  path: v1.9.0/classes/admin_group_query.yaml
+- name: cloud_resources_inventory_info
+  caption: Cloud Resources Inventory Info
+  uid: 5023
+  category: discovery
+  extends: discovery
+  summary: Cloud Resources Inventory Info events report cloud asset inventory data.
+  path: v1.9.0/classes/cloud_resources_inventory_info.yaml
+- name: config_state
+  caption: Device Config State
+  uid: 5002
+  category: discovery
+  extends: discovery
+  deprecated: true
+  summary: Device Config State events report device configuration data, device assessments, and/or CIS Benchmark results.
+  path: v1.9.0/classes/config_state.yaml
+- name: device_config_state_change
+  caption: Device Config State Change
+  uid: 5019
+  category: discovery
+  extends: discovery
+  summary: Device Config State Change events report state changes that impact the security of the device.
+  path: v1.9.0/classes/device_config_state_change.yaml
+- name: evidence_info
+  caption: Live Evidence Info
+  uid: 5040
+  category: discovery
+  extends: discovery_result
+  summary: Data collected directly from devices that represents forensic information pulled, queried, or discovered from devices that may indicate malicious activity.
+  path: v1.9.0/classes/evidence_info.yaml
+- name: file_query
+  caption: File Query
+  uid: 5007
+  category: discovery
+  extends: discovery_result
+  deprecated: true
+  summary: File Query events report information about files that are present on the system.
+  path: v1.9.0/classes/file_query.yaml
+- name: folder_query
+  caption: Folder Query
+  uid: 5008
+  category: discovery
+  extends: discovery_result
+  deprecated: true
+  summary: Folder Query events report information about folders that are present on the system.
+  path: v1.9.0/classes/folder_query.yaml
+- name: inventory_info
+  caption: Device Inventory Info
+  uid: 5001
+  category: discovery
+  extends: discovery
+  summary: Device Inventory Info events report device inventory data that is either logged or proactively collected.
+  path: v1.9.0/classes/inventory_info.yaml
+- name: job_query
+  caption: Job Query
+  uid: 5010
+  category: discovery
+  extends: discovery_result
+  deprecated: true
+  summary: Job Query events report information about scheduled jobs.
+  path: v1.9.0/classes/job_query.yaml
+- name: kernel_object_query
+  caption: Kernel Object Query
+  uid: 5006
+  category: discovery
+  extends: discovery_result
+  deprecated: true
+  summary: Kernel Object Query events report information about discovered kernel resources.
+  path: v1.9.0/classes/kernel_object_query.yaml
+- name: module_query
+  caption: Module Query
+  uid: 5011
+  category: discovery
+  extends: discovery_result
+  deprecated: true
+  summary: Module Query events report information about loaded modules.
+  path: v1.9.0/classes/module_query.yaml
+- name: network_connection_query
+  caption: Network Connection Query
+  uid: 5012
+  category: discovery
+  extends: discovery_result
+  deprecated: true
+  summary: Network Connection Query events report information about active network connections.
+  path: v1.9.0/classes/network_connection_query.yaml
+- name: networks_query
+  caption: Networks Query
+  uid: 5013
+  category: discovery
+  extends: discovery_result
+  deprecated: true
+  summary: Networks Query events report information about network adapters.
+  path: v1.9.0/classes/networks_query.yaml
+- name: osint_inventory_info
+  caption: OSINT Inventory Info
+  uid: 5021
+  category: discovery
+  extends: discovery
+  summary: OSINT Inventory Info events report open source intelligence or threat intelligence inventory data that is either logged or proactively collected.
+  path: v1.9.0/classes/osint_inventory_info.yaml
+- name: patch_state
+  caption: Operating System Patch State
+  uid: 5004
+  category: discovery
+  extends: discovery
+  summary: Operating System Patch State reports the installation of an OS patch to a device and any associated knowledgebase articles.
+  path: v1.9.0/classes/patch_state.yaml
+- name: peripheral_device_query
+  caption: Peripheral Device Query
+  uid: 5014
+  category: discovery
+  extends: discovery_result
+  deprecated: true
+  summary: Peripheral Device Query events report information about peripheral devices.
+  path: v1.9.0/classes/peripheral_device_query.yaml
+- name: process_query
+  caption: Process Query
+  uid: 5015
+  category: discovery
+  extends: discovery_result
+  deprecated: true
+  summary: Process Query events report information about running processes.
+  path: v1.9.0/classes/process_query.yaml
+- name: service_query
+  caption: Service Query
+  uid: 5016
+  category: discovery
+  extends: discovery_result
+  deprecated: true
+  summary: Service Query events report information about running services.
+  path: v1.9.0/classes/service_query.yaml
+- name: session_query
+  caption: User Session Query
+  uid: 5017
+  category: discovery
+  extends: discovery_result
+  deprecated: true
+  summary: User Session Query events report information about existing user sessions.
+  path: v1.9.0/classes/session_query.yaml
+- name: software_info
+  caption: Software Inventory Info
+  uid: 5020
+  category: discovery
+  extends: discovery
+  summary: Software Inventory Info events report device software inventory data that is either logged or proactively collected.
+  path: v1.9.0/classes/software_info.yaml
+- name: startup_item_query
+  caption: Startup Item Query
+  uid: 5022
+  category: discovery
+  extends: discovery_result
+  deprecated: true
+  summary: Startup Item Query events report information about discovered items, e.g., application components that are generally configured to run automatically.
+  path: v1.9.0/classes/startup_item_query.yaml
+- name: user_inventory
+  caption: User Inventory Info
+  uid: 5003
+  category: discovery
+  extends: discovery
+  summary: User Inventory Info events report user inventory data that is either logged or proactively collected.
+  path: v1.9.0/classes/user_inventory.yaml
+- name: user_query
+  caption: User Query
+  uid: 5018
+  category: discovery
+  extends: discovery_result
+  deprecated: true
+  summary: User Query events report user data that have been discovered, queried, polled or searched.
+  path: v1.9.0/classes/user_query.yaml
+- name: win/prefetch_query
+  caption: Prefetch Query
+  uid: 205019
+  category: discovery
+  extension: win
+  extends: discovery_result
+  deprecated: true
+  summary: Prefetch Query events report information about Windows prefetch files.
+  path: v1.9.0/extensions/win/classes/prefetch_query.yaml
+- name: win/registry_key_query
+  caption: Registry Key Query
+  uid: 205004
+  category: discovery
+  extension: win
+  extends: discovery_result
+  deprecated: true
+  summary: Registry Key Query events report information about discovered Windows registry keys.
+  path: v1.9.0/extensions/win/classes/registry_key_query.yaml
+- name: win/registry_value_query
+  caption: Registry Value Query
+  uid: 205005
+  category: discovery
+  extension: win
+  extends: discovery_result
+  deprecated: true
+  summary: Registry Value Query events report information about discovered Windows registry values.
+  path: v1.9.0/extensions/win/classes/registry_value_query.yaml
+- name: application
+  caption: Application Activity
+  category: application
+  abstract: true
+  extends: base_event
+  summary: The base event is a generic and concrete event.
+  path: v1.9.0/classes/application.yaml
+- name: api_activity
+  caption: API Activity
+  uid: 6003
+  category: application
+  extends: application
+  summary: API events describe general CRUD (Create, Read, Update, Delete) API activities, e.g.
+  path: v1.9.0/classes/api_activity.yaml
+- name: application_error
+  caption: Application Error
+  uid: 6008
+  category: application
+  extends: application
+  summary: Application Error events describe issues with an applications.
+  path: v1.9.0/classes/application_error.yaml
+- name: application_lifecycle
+  caption: Application Lifecycle
+  uid: 6002
+  category: application
+  extends: application
+  summary: Application Lifecycle events report installation, removal, start, stop of an application or service.
+  path: v1.9.0/classes/application_lifecycle.yaml
+- name: datastore_activity
+  caption: Datastore Activity
+  uid: 6005
+  category: application
+  extends: application
+  summary: Datastore events describe general activities (Read, Update, Query, Delete, etc.) which affect datastores or data within those datastores, e.g.
+  path: v1.9.0/classes/datastore_activity.yaml
+- name: file_hosting
+  caption: File Hosting Activity
+  uid: 6006
+  category: application
+  extends: application
+  summary: File Hosting Activity events report the actions taken by file management applications, including file sharing servers like Sharepoint and services such as Box, MS OneDrive, Google Drive, or network file share services.
+  path: v1.9.0/classes/file_hosting.yaml
+- name: scan_activity
+  caption: Scan Activity
+  uid: 6007
+  category: application
+  extends: application
+  summary: Scan events report the start, completion, and results of a scan job.
+  path: v1.9.0/classes/scan_activity.yaml
+- name: web_resource_access_activity
+  caption: Web Resource Access Activity
+  uid: 6004
+  category: application
+  extends: application
+  deprecated: true
+  summary: Web Resource Access Activity events describe successful/failed attempts to access a web resource over HTTP.
+  path: v1.9.0/classes/web_resource_access_activity.yaml
+- name: web_resources_activity
+  caption: Web Resources Activity
+  uid: 6001
+  category: application
+  extends: application
+  summary: Web Resources Activity events describe actions executed on a set of Web Resources.
+  path: v1.9.0/classes/web_resources_activity.yaml
+- name: file_remediation_activity
+  caption: File Remediation Activity
+  uid: 7002
+  category: remediation
+  extends: remediation_activity
+  summary: File Remediation Activity events report on attempts at remediating files.
+  path: v1.9.0/classes/file_remediation_activity.yaml
+- name: network_remediation_activity
+  caption: Network Remediation Activity
+  uid: 7004
+  category: remediation
+  extends: remediation_activity
+  summary: Network Remediation Activity events report on attempts at remediating computer networks.
+  path: v1.9.0/classes/network_remediation_activity.yaml
+- name: process_remediation_activity
+  caption: Process Remediation Activity
+  uid: 7003
+  category: remediation
+  extends: remediation_activity
+  summary: Process Remediation Activity events report on attempts at remediating processes.
+  path: v1.9.0/classes/process_remediation_activity.yaml
+- name: remediation_activity
+  caption: Remediation Activity
+  uid: 7001
+  category: remediation
+  extends: base_event
+  summary: Remediation Activity events report on attempts at remediating a compromised device or computer network.
+  path: v1.9.0/classes/remediation_activity.yaml
+- name: unmanned_systems
+  caption: Unmanned Systems
+  category: unmanned_systems
+  abstract: true
+  extends: base_event
+  summary: The Unmanned Systems event is a generic event that defines a set of attributes available in the Unmanned Systems category.
+  path: v1.9.0/classes/unmanned_systems.yaml
+- name: airborne_broadcast_activity
+  caption: Airborne Broadcast Activity
+  uid: 8002
+  category: unmanned_systems
+  extends: unmanned_systems
+  summary: Airborne Broadcast Activity events report the activity of any aircraft or unmanned system as reported and tracked by Automatic Dependent Surveillance - Broadcast (ADS-B) receivers.
+  path: v1.9.0/classes/airborne_broadcast_activity.yaml
+- name: drone_flights_activity
+  caption: Drone Flights Activity
+  uid: 8001
+  category: unmanned_systems
+  extends: unmanned_systems
+  summary: Drone Flights Activity events report the activity of Unmanned Aerial Systems (UAS), their Operators, and mission-planning and authorization metadata as reported by the UAS platforms themselves, by Counter-UAS (CUAS) systems, or other remote monitoring or sensing infrastructure.
+  path: v1.9.0/classes/drone_flights_activity.yaml

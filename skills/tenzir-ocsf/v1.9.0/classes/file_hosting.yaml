@@ -1,0 +1,920 @@
+name: file_hosting
+caption: File Hosting Activity
+uid: 6006
+category: application
+category_uid: 6
+extends: application
+supersedes:
+- name: network_file_activity
+  since: 1.1.0
+description: File Hosting Activity events report the actions taken by file management applications, including file sharing servers like Sharepoint and services such as Box, MS OneDrive, Google Drive, or network file share services.
+profiles: [ai_operation, cloud, container, data_classification, datetime, host, osint, record_integrity, security_control]
+attributes:
+  access_list:
+    caption: Access List
+    type: string_t
+    array: true
+    requirement: optional
+    group: context
+    description: The list of requested access rights.
+  access_mask:
+    caption: Access Mask
+    type: integer_t
+    requirement: optional
+    group: context
+    description: The sum of hexadecimal values of requested access rights.
+  access_result:
+    caption: Access Check Result
+    type: json_t
+    requirement: optional
+    group: context
+    description: The list of access check results.
+  action:
+    caption: Action
+    type: string_t
+    requirement: optional
+    group: primary
+    profile: security_control
+    from: base_event
+    description: The normalized caption of `action_id`.
+  action_id:
+    caption: Action ID
+    type: integer_t
+    requirement: recommended
+    group: primary
+    profile: security_control
+    from: base_event
+    sibling: action
+    description: The action taken by a control or other policy-based system leading to an outcome or disposition. An unknown action may still correspond to a known disposition. Refer to `disposition_id` for the outcome of the action.
+    enum:
+      '0':
+        caption: Unknown
+        description: The action was unknown. The `disposition_id` attribute may still be set to a non-unknown value, for example 'Custom Action', 'Challenge'.
+      '1':
+        caption: Allowed
+        description: The activity was allowed. The `disposition_id` attribute should be set to a value that conforms to this action, for example 'Allowed', 'Approved', 'Delayed', 'No Action', 'Count' etc.
+      '2':
+        caption: Denied
+        description: The attempted activity was denied. The `disposition_id` attribute should be set to a value that conforms to this action, for example 'Blocked', 'Rejected', 'Quarantined', 'Isolated', 'Dropped', 'Access Revoked, etc.
+      '3':
+        caption: Observed
+        description: The activity was observed, but neither explicitly allowed nor denied. This is common with IDS and EDR controls that report additional information on observed behavior such as TTPs. The `disposition_id` attribute should be set to a value that conforms to this action, for example 'Logged', 'Alert', 'Detected', 'Count', etc.
+      '4':
+        caption: Modified
+        description: The activity was modified, adjusted, or corrected. The `disposition_id` attribute should be set appropriately, for example 'Restored', 'Corrected', 'Delayed', 'Captcha', 'Tagged'.
+      '99':
+        caption: Other
+        description: The action is not mapped. See the `action` attribute which contains a data source specific value.
+  activity_id:
+    caption: Activity ID
+    type: integer_t
+    requirement: required
+    group: classification
+    sibling: activity_name
+    description: The normalized identifier of the activity that triggered the event. Each event class defines its own set of activity values. Use `0` (Unknown) when the activity cannot be determined. Use `99` (Other) when the activity does not match any defined value, in which case `activity_name` must be populated with the source-specific label.
+    enum:
+      '0':
+        caption: Unknown
+        description: The event activity is unknown.
+      '1':
+        caption: Upload
+        description: Upload a file.
+      '2':
+        caption: Download
+        description: Download a file.
+      '3':
+        caption: Update
+        description: Update a file.
+      '4':
+        caption: Delete
+        description: Delete a file.
+      '5':
+        caption: Rename
+        description: Rename a file.
+      '6':
+        caption: Copy
+        description: Copy a file.
+      '7':
+        caption: Move
+        description: Move a file.
+      '8':
+        caption: Restore
+        description: Restore a file.
+      '9':
+        caption: Preview
+        description: Preview a file.
+      '10':
+        caption: Lock
+        description: Lock a file.
+      '11':
+        caption: Unlock
+        description: Unlock a file.
+      '12':
+        caption: Share
+        description: Share a file.
+      '13':
+        caption: Unshare
+        description: Unshare a file.
+      '14':
+        caption: Open
+        description: Open a file.
+      '15':
+        caption: Sync
+        description: Mark a file or folder to sync with a computer.
+      '16':
+        caption: Unsync
+        description: Mark a file or folder to not sync with a computer.
+      '17':
+        caption: Access Check
+        description: Access check for a file. The `security_control` profile can be used to add the access check results.
+      '99':
+        caption: Other
+        description: The event activity is not mapped. See the `activity_name` attribute, which contains a data source specific value.
+  activity_name:
+    caption: Activity
+    type: string_t
+    requirement: optional
+    group: classification
+    from: base_event
+    description: The event activity name, as defined by the `activity_id`. When `activity_id` is `99` (Other), this attribute must contain the source-specific activity label. For all other `activity_id` values, this must match the caption defined for that `activity_id` enum value.
+  actor:
+    caption: Actor
+    type: object_t
+    object: actor
+    requirement: required
+    group: primary
+    description: The actor that performed the activity on the target file.
+  ai_agent:
+    caption: AI Agent
+    type: object_t
+    object: ai_agent
+    requirement: optional
+    group: context
+    profile: ai_operation
+    from: application
+    description: The autonomous AI agent that performed this operation. Carries model identity via `ai_agent.ai_model`. Populate when the action was performed by an agent rather than a direct model call.
+  ai_model:
+    caption: AI Model
+    type: object_t
+    object: ai_model
+    requirement: recommended
+    group: context
+    profile: ai_operation
+    from: application
+    description: The AI model involved in this operation. Use for direct model invocations where no autonomous agent is involved. For agent-mediated operations, model identity is carried within `ai_agent.ai_model` instead.
+  api:
+    caption: API Details
+    type: object_t
+    object: api
+    requirement: optional
+    group: context
+    profile: cloud
+    from: base_event
+    description: Describes details about a typical API (Application Programming Interface) call.
+  attacks:
+    caption: MITRE ATT&CK® and ATLAS™ Details
+    type: object_t
+    object: attack
+    array: true
+    requirement: optional
+    group: primary
+    profile: security_control
+    from: base_event
+    description: An array of MITRE ATT&CK® objects describing identified tactics, techniques & sub-techniques. The objects are compatible with MITRE ATLAS™ tactics, techniques & sub-techniques.
+    references:
+    - description: MITRE ATT&CK®
+      url: https://attack.mitre.org
+    - description: MITRE ATLAS
+      url: https://atlas.mitre.org/matrices/ATLAS
+  attestation_list:
+    caption: Attestation List
+    type: object_t
+    object: attestation
+    array: true
+    requirement: optional
+    group: context
+    profile: record_integrity
+    from: base_event
+    description: One or more cryptographic `attestation` objects over an event, each providing integrity, authenticity, and non-repudiation. Independent attesters over the same event — for example a producer at write time and a downstream processor at ingest — each contribute a separate attestation, distinct from co-signers on a single attestation, which share its `signatures` array. Carried on the `record_integrity` profile; the object itself is domain-agnostic.
+  authorizations:
+    caption: Authorization Information
+    type: object_t
+    object: authorization
+    array: true
+    requirement: optional
+    group: primary
+    profile: security_control
+    from: base_event
+    description: Provides details about an authorization, such as authorization outcome, and any associated policies related to the activity/event.
+  category_name:
+    caption: Category
+    type: string_t
+    requirement: optional
+    group: classification
+    from: base_event
+    description: 'The event category name, as defined by category_uid value: `Application Activity`.'
+  category_uid:
+    caption: Category ID
+    type: integer_t
+    requirement: required
+    group: classification
+    from: base_event
+    sibling: category_name
+    description: The category unique identifier of the event. Each event class belongs to exactly one category. Producers and mappers must set this to the category defined by the event class being used.
+    enum:
+      '6':
+        caption: Application Activity
+        description: Application Activity events report detailed information about the behavior of applications and services.
+  class_name:
+    caption: Class
+    type: string_t
+    requirement: optional
+    group: classification
+    from: base_event
+    description: 'The event class name, as defined by class_uid value: `File Hosting Activity`.'
+  class_uid:
+    caption: Class ID
+    type: integer_t
+    requirement: required
+    group: classification
+    sibling: class_name
+    description: The unique identifier of a class. A class describes the attributes available in an event. Producers and mappers must set this to the `uid` defined in the event class definition. For example, `Detection Finding` is `2004`.
+    enum:
+      '6006':
+        caption: File Hosting Activity
+        description: File Hosting Activity events report the actions taken by file management applications, including file sharing servers like Sharepoint and services such as Box, MS OneDrive, Google Drive, or network file share services.
+  cloud:
+    caption: Cloud
+    type: object_t
+    object: cloud
+    requirement: required
+    group: primary
+    profile: cloud
+    from: base_event
+    description: Describes details about the Cloud environment where the event or finding was created.
+  confidence:
+    caption: Confidence
+    type: string_t
+    requirement: optional
+    group: context
+    profile: security_control
+    from: base_event
+    description: The confidence, normalized to the caption of the confidence_id value. In the case of 'Other', it is defined by the event source.
+  confidence_id:
+    caption: Confidence ID
+    type: integer_t
+    requirement: recommended
+    group: context
+    profile: security_control
+    from: base_event
+    sibling: confidence
+    description: The normalized confidence refers to the accuracy of the security control or alert. An analytic with a low confidence means that the alerts may be noisy or may not be malicious in nature.
+    enum:
+      '0':
+        caption: Unknown
+        description: The normalized confidence is unknown.
+      '1':
+        caption: Low
+      '2':
+        caption: Medium
+      '3':
+        caption: High
+      '99':
+        caption: Other
+        description: The confidence is not mapped to the defined enum values. See the `confidence` attribute, which contains a data source specific value.
+  confidence_score:
+    caption: Confidence Score
+    type: integer_t
+    requirement: optional
+    group: context
+    profile: security_control
+    from: base_event
+    description: The confidence score as reported by the event source. If `confidence_id` is 99 'Other', it should be the same as `confidence` if both are populated.
+  connection_info:
+    caption: Connection Info
+    type: object_t
+    object: network_connection_info
+    requirement: optional
+    group: context
+    description: The network connection information.
+  count:
+    caption: Count
+    type: integer_t
+    requirement: optional
+    group: occurrence
+    from: base_event
+    description: The number of events aggregated into this single record. Only populate for aggregate events. When set, `start_time` and `end_time` should also be provided to define the aggregation window.
+  delegation:
+    caption: Delegation
+    type: object_t
+    object: delegation
+    requirement: optional
+    group: context
+    profile: ai_operation
+    from: application
+    description: The delegation under whose authority this AI operation was performed. Links the event to a durable authorization context independent of traces and sessions, enabling correlation of all events executed under the same delegated authority.
+  device:
+    caption: Device
+    type: object_t
+    object: device
+    requirement: recommended
+    group: primary
+    profile: host
+    from: base_event
+    observable: 20
+    description: The host or device where the activity was observed. Populate with details such as hostname, IP address, OS, and hardware identifiers when available from the source.
+  disposition:
+    caption: Disposition
+    type: string_t
+    requirement: optional
+    group: primary
+    profile: security_control
+    from: base_event
+    description: The disposition name, normalized to the caption of the disposition_id value. In the case of 'Other', it is defined by the event source.
+  disposition_id:
+    caption: Disposition ID
+    type: integer_t
+    requirement: recommended
+    group: primary
+    profile: security_control
+    from: base_event
+    sibling: disposition
+    description: Describes the outcome or action taken by a security control, such as access control checks, malware detections or various types of policy violations.
+    enum:
+      '0':
+        caption: Unknown
+        description: The disposition is unknown.
+      '1':
+        caption: Allowed
+        description: Granted access or allowed the action to the protected resource.
+      '2':
+        caption: Blocked
+        description: Denied access or blocked the action to the protected resource.
+      '3':
+        caption: Quarantined
+        description: A suspicious file or other content was moved to a benign location.
+      '4':
+        caption: Isolated
+        description: A session was isolated on the network or within a browser.
+      '5':
+        caption: Deleted
+        description: A file or other content was deleted.
+      '6':
+        caption: Dropped
+        description: The request was detected as a threat and resulted in the connection being dropped.
+      '7':
+        caption: Custom Action
+        description: A custom action was executed such as running of a command script. Use the `message` attribute of the base class for details.
+      '8':
+        caption: Approved
+        description: A request or submission was approved. For example, when a form was properly filled out and submitted. This is distinct from `1` 'Allowed'.
+      '9':
+        caption: Restored
+        description: A quarantined file or other content was restored to its original location.
+      '10':
+        caption: Exonerated
+        description: A suspicious or risky entity was deemed to no longer be suspicious (re-scored).
+      '11':
+        caption: Corrected
+        description: A corrupt file or configuration was corrected.
+      '12':
+        caption: Partially Corrected
+        description: A corrupt file or configuration was partially corrected.
+      '13':
+        caption: Uncorrected
+        description: A corrupt file or configuration was not corrected.
+      '14':
+        caption: Delayed
+        description: An operation was delayed, for example if a restart was required to finish the operation.
+      '15':
+        caption: Detected
+        description: Suspicious activity or a policy violation was detected without further action.
+      '16':
+        caption: No Action
+        description: The outcome of an operation had no action taken.
+      '17':
+        caption: Logged
+        description: The operation or action was logged without further action.
+      '18':
+        caption: Tagged
+        description: A file or other entity was marked with extended attributes.
+      '19':
+        caption: Alert
+        description: The request or activity was detected as a threat and resulted in a notification but request was not blocked.
+      '20':
+        caption: Count
+        description: Counted the request or activity but did not determine whether to allow it or block it.
+      '21':
+        caption: Reset
+        description: The request was detected as a threat and resulted in the connection being reset.
+      '22':
+        caption: Captcha
+        description: Required the end user to solve a CAPTCHA puzzle to prove that a human being is sending the request.
+      '23':
+        caption: Challenge
+        description: Ran a silent challenge that required the client session to verify that it's a browser, and not a bot.
+      '24':
+        caption: Access Revoked
+        description: 'The requestor''s access has been revoked due to security policy enforcements. Note: use the `Host` profile if the `User` or `Actor` requestor is not present in the event class.'
+      '25':
+        caption: Rejected
+        description: A request or submission was rejected. For example, when a form was improperly filled out and submitted. This is distinct from `2` 'Blocked'.
+      '26':
+        caption: Unauthorized
+        description: An attempt to access a resource was denied due to an authorization check that failed. This is a more specific disposition than `2` 'Blocked' and can be complemented with the `authorizations` attribute for more detail.
+      '27':
+        caption: Error
+        description: An error occurred during the processing of the activity or request. Use the `message` attribute of the base class for details.
+      '99':
+        caption: Other
+        description: The disposition is not mapped. See the `disposition` attribute, which contains a data source specific value.
+  dst_endpoint:
+    caption: Destination Endpoint
+    type: object_t
+    object: network_endpoint
+    requirement: recommended
+    observable: 20
+    description: The endpoint that received the activity on the target file.
+  duration:
+    caption: Duration Milliseconds
+    type: long_t
+    requirement: optional
+    group: occurrence
+    from: base_event
+    description: The elapsed time of the aggregation window in milliseconds, from `start_time` to `end_time`. Only populate for aggregate events (`count` > 1). The value should equal `end_time - start_time`.
+  end_time:
+    caption: End Time
+    type: timestamp_t
+    requirement: optional
+    group: occurrence
+    from: base_event
+    description: The time of the most recent event in an aggregate (`count` > 1). Do not populate for discrete, point-in-time events - use `time` alone. Subclasses such as findings may redefine this for their own time-range semantics.
+  end_time_dt:
+    caption: End Time
+    type: datetime_t
+    requirement: optional
+    group: occurrence
+    profile: datetime
+    from: base_event
+    description: The time of the most recent event in an aggregate (`count` > 1). Do not populate for discrete, point-in-time events - use `time` alone. Subclasses such as findings may redefine this for their own time-range semantics.
+  enrichments:
+    caption: Enrichments
+    type: object_t
+    object: enrichment
+    array: true
+    requirement: optional
+    group: context
+    from: base_event
+    description: 'The additional information from an external data source, which is associated with the event or a finding. For example add location information for the IP address in the DNS answers:`[{"name": "answers.ip", "value": "92.24.47.250", "type": "location", "data": {"city": "Socotra", "continent": "Asia", "coordinates": [-25.4153, 17.0743], "country": "YE", "desc": "Yemen"}}]`'
+  expiration_time:
+    caption: Expiration Time
+    type: timestamp_t
+    requirement: optional
+    group: context
+    description: The share expiration time.
+  expiration_time_dt:
+    caption: Expiration Time
+    type: datetime_t
+    requirement: optional
+    group: context
+    profile: datetime
+    description: The share expiration time.
+  file:
+    caption: File
+    type: object_t
+    object: file
+    requirement: required
+    group: primary
+    observable: 24
+    description: The file that is the target of the activity.
+  file_result:
+    caption: File Result
+    type: object_t
+    object: file
+    requirement: optional
+    group: context
+    observable: 24
+    description: The resulting file object when the activity was allowed and successful.
+  firewall_rule:
+    caption: Firewall Rule
+    type: object_t
+    object: firewall_rule
+    requirement: optional
+    group: primary
+    profile: security_control
+    from: base_event
+    description: The firewall rule that pertains to the control that triggered the event, if applicable.
+  http_request:
+    caption: HTTP Request
+    type: object_t
+    object: http_request
+    requirement: recommended
+    group: context
+    description: Details about the underlying HTTP request.
+  http_response:
+    caption: HTTP Response
+    type: object_t
+    object: http_response
+    requirement: optional
+    group: context
+    description: Details about the HTTP response, if available.
+  is_alert:
+    caption: Alert
+    type: boolean_t
+    requirement: recommended
+    group: primary
+    profile: security_control
+    from: base_event
+    description: Indicates that the event is considered to be an alertable signal. Should be set to `true` if `disposition_id = Alert` among other dispositions, and/or `risk_level_id` or `severity_id` of the event is elevated. Not all control events will be alertable, for example if `disposition_id = Exonerated` or `disposition_id = Allowed`.
+  malware:
+    caption: Malware
+    type: object_t
+    object: malware
+    array: true
+    requirement: optional
+    group: primary
+    profile: security_control
+    from: base_event
+    description: A list of Malware objects, describing details about the identified malware.
+  malware_scan_info:
+    caption: Malware Scan Info
+    type: object_t
+    object: malware_scan_info
+    requirement: optional
+    group: primary
+    profile: security_control
+    from: base_event
+    description: Describes details about the scan job that identified malware on the target system.
+  message:
+    caption: Message
+    type: string_t
+    requirement: recommended
+    group: primary
+    from: base_event
+    description: 'A human-readable description of the event, as defined by the source. This should be a concise, meaningful summary suitable for display in a UI or alert notification - not a raw log line. For example: `"User john_doe logged in from 10.0.0.1."` rather than a raw syslog string.'
+  message_context:
+    caption: Message Context
+    type: object_t
+    object: message_context
+    requirement: optional
+    group: context
+    profile: ai_operation
+    from: application
+    description: Communication context for AI system interactions including protocols, roles, clients, and session information for MCP and other AI communication systems.
+  metadata:
+    caption: Metadata
+    type: object_t
+    object: metadata
+    requirement: required
+    group: context
+    from: base_event
+    description: The metadata object describes the event producer, schema version, and processing information. Producers and mappers must populate `metadata.product` to identify the data source, and `metadata.version` to indicate the OCSF schema version used. Consumers rely on this to interpret the event correctly.
+  observables:
+    caption: Observables
+    type: object_t
+    object: observable
+    array: true
+    requirement: recommended
+    group: primary
+    from: base_event
+    description: The observables array surfaces key indicators and entities from the event or finding in a single, consistent location for downstream correlation and detection. Each entry references an attribute path within the event (e.g., `src_endpoint.ip`) along with its type and value, enabling consumers to extract IOCs without parsing the full event structure.
+    references:
+    - description: OCSF Observables FAQ
+      url: https://github.com/ocsf/ocsf-docs/blob/main/articles/defining-and-using-observables.md
+  osint:
+    caption: OSINT
+    type: object_t
+    object: osint
+    array: true
+    requirement: required
+    group: primary
+    profile: osint
+    from: base_event
+    description: The OSINT (Open Source Intelligence) object contains details related to an indicator such as the indicator itself, related indicators, geolocation, registrar information, subdomains, analyst commentary, and other contextual information. This information can be used to further enrich a detection or finding by providing decisioning support to other analysts and engineers.
+  policy:
+    caption: Policy
+    type: object_t
+    object: policy
+    requirement: optional
+    group: primary
+    profile: security_control
+    from: base_event
+    description: The policy that pertains to the control that triggered the event, if applicable. For example the name of an anti-malware policy or an access control policy.
+  raw_data:
+    caption: Raw Data
+    type: string_t
+    requirement: optional
+    group: context
+    from: base_event
+    description: The original event/finding data as received from the source, before normalization into OCSF. Populate this with the verbatim log line, JSON payload, or other native format for forensic and debugging purposes. This field is not intended for structured querying - use the normalized OCSF attributes instead.
+  raw_data_hash:
+    caption: Raw Data Hash
+    type: object_t
+    object: fingerprint
+    requirement: optional
+    group: context
+    from: base_event
+    observable: 30
+    description: A fingerprint (hash) of the `raw_data` content. Use this to verify the integrity of the original event data or to deduplicate events.
+  raw_data_size:
+    caption: Raw Data Size
+    type: long_t
+    requirement: optional
+    group: context
+    from: base_event
+    description: The size of the original event data (as captured in `raw_data`) in bytes, before OCSF normalization. Useful for metering and capacity planning.
+  risk_details:
+    caption: Risk Details
+    type: string_t
+    requirement: optional
+    group: context
+    profile: security_control
+    from: base_event
+    description: Describes the risk associated with the finding.
+  risk_level:
+    caption: Risk Level
+    type: string_t
+    requirement: optional
+    group: context
+    profile: security_control
+    from: base_event
+    description: The risk level, normalized to the caption of the risk_level_id value.
+  risk_level_id:
+    caption: Risk Level ID
+    type: integer_t
+    requirement: optional
+    group: context
+    profile: security_control
+    from: base_event
+    sibling: risk_level
+    description: The normalized risk level id.
+    enum:
+      '0':
+        caption: Info
+      '1':
+        caption: Low
+      '2':
+        caption: Medium
+      '3':
+        caption: High
+      '4':
+        caption: Critical
+      '99':
+        caption: Other
+        description: The risk level is not mapped. See the `risk_level` attribute, which contains a data source specific value.
+  risk_score:
+    caption: Risk Score
+    type: integer_t
+    requirement: optional
+    group: context
+    profile: security_control
+    from: base_event
+    description: The risk score as reported by the event source.
+  severity:
+    caption: Severity
+    type: string_t
+    requirement: optional
+    group: classification
+    from: base_event
+    description: 'The event/finding severity label, normalized to the caption of the `severity_id` value. When `severity_id` is `99` (Other), this attribute must contain the source-specific severity label. For all other values, this should match the caption defined for that `severity_id` enum value (e.g., `"High"` for `severity_id: 4`).'
+  severity_id:
+    caption: Severity ID
+    type: integer_t
+    requirement: required
+    group: classification
+    from: base_event
+    sibling: severity
+    description: |-
+      The normalized identifier of the event/finding severity.
+
+      The normalized severity is a measurement the effort and expense required to manage and resolve an event or incident. Smaller numerical values represent lower impact events, and larger numerical values represent higher impact events.
+    enum:
+      '0':
+        caption: Unknown
+        description: The event/finding severity is unknown.
+      '1':
+        caption: Informational
+        description: Informational message. No action required.
+      '2':
+        caption: Low
+        description: The user decides if action is needed.
+      '3':
+        caption: Medium
+        description: Action is required but the situation is not serious at this time.
+      '4':
+        caption: High
+        description: Action is required immediately.
+      '5':
+        caption: Critical
+        description: Action is required immediately and the scope is broad.
+      '6':
+        caption: Fatal
+        description: An error occurred but it is too late to take remedial action.
+      '99':
+        caption: Other
+        description: The event/finding severity is not mapped. See the `severity` attribute, which contains a data source specific value.
+  share:
+    caption: Share
+    type: string_t
+    requirement: optional
+    group: context
+    description: The share name.
+  share_type:
+    caption: Share Type
+    type: string_t
+    requirement: optional
+    group: context
+    description: The share type, normalized to the caption of the share_type_id value. In the case of 'Other', it is defined by the event source.
+  share_type_id:
+    caption: Share Type ID
+    type: integer_t
+    requirement: optional
+    group: context
+    sibling: share_type
+    description: The normalized identifier of the share type.
+    enum:
+      '0':
+        caption: Unknown
+        description: The share type is unknown.
+      '1':
+        caption: File
+      '2':
+        caption: Pipe
+      '3':
+        caption: Print
+      '99':
+        caption: Other
+        description: The share type is not mapped. See the `share_type` attribute, which contains a data source specific value.
+  src_endpoint:
+    caption: Source Endpoint
+    type: object_t
+    object: network_endpoint
+    requirement: required
+    group: primary
+    observable: 20
+    description: The endpoint that performed the activity on the target file.
+  start_time:
+    caption: Start Time
+    type: timestamp_t
+    requirement: optional
+    group: occurrence
+    from: base_event
+    description: The time of the earliest event in an aggregate (`count` > 1). Do not populate for discrete, point-in-time events - use `time` alone. Subclasses such as findings may redefine this for their own time-range semantics.
+  start_time_dt:
+    caption: Start Time
+    type: datetime_t
+    requirement: optional
+    group: occurrence
+    profile: datetime
+    from: base_event
+    description: The time of the earliest event in an aggregate (`count` > 1). Do not populate for discrete, point-in-time events - use `time` alone. Subclasses such as findings may redefine this for their own time-range semantics.
+  status:
+    caption: Status
+    type: string_t
+    requirement: recommended
+    group: primary
+    from: base_event
+    description: 'The event status label, normalized to the caption of the `status_id` value. When `status_id` is `99` (Other), this attribute must contain the source-specific status label. For all other values, this must match the caption defined for that `status_id` enum value (e.g., `"Success"` for `status_id: 1`).'
+  status_code:
+    caption: Status Code
+    type: string_t
+    requirement: recommended
+    group: primary
+    from: base_event
+    description: The source-specific status or error code as reported by the event source. For example, a Windows logon failure code (`0x18`), an HTTP response code (`403`), or an AWS API error code. This preserves the original code for detailed troubleshooting beyond what `status_id` conveys.
+  status_detail:
+    caption: Status Detail
+    type: string_t
+    requirement: recommended
+    group: primary
+    from: base_event
+    description: 'A human-readable description providing additional context about the event outcome. Use this to convey details that go beyond the normalized `status_id` and source-specific `status_code`, such as a failure reason or error message. For example: `"Account locked after 5 failed attempts."`.'
+  status_id:
+    caption: Status ID
+    type: integer_t
+    requirement: recommended
+    group: primary
+    from: base_event
+    sibling: status
+    description: The normalized status of the event outcome. Use this family of attributes to convey the outcome of the activity described by the event. Producers should map their source outcome to `1` (Success) or `2` (Failure). Use `0` (Unknown) when the outcome cannot be determined, and `99` (Other) with a populated `status` string when the source value does not map cleanly.
+    enum:
+      '0':
+        caption: Unknown
+        description: The status is unknown.
+      '1':
+        caption: Success
+        description: The activity completed successfully.
+      '2':
+        caption: Failure
+        description: The activity failed.
+      '99':
+        caption: Other
+        description: The status is not mapped. See the `status` attribute, which contains a data source specific value.
+  time:
+    caption: Event Time
+    type: timestamp_t
+    requirement: required
+    group: occurrence
+    from: base_event
+    description: 'The primary timestamp of the event - when the activity actually occurred at the source. This does not capture when the event record was created or serialized by the source system; for event lifecycle timestamps such as ingestion and processing, use `metadata.logged_time` and `metadata.processed_time` respectively, or the equivalent attributes in the `metadata.loggers` array when recording pipeline stages. For aggregate events (`count` > 1), set this to `start_time` (the earliest OCSF `time` in the aggregate) to preserve causal ordering and consistent timeline alignment. Note: finding classes redefine `time` as the finding creation time rather than the activity occurrence time. This must be a UTC epoch value in milliseconds (e.g., `1776881335332`). Mappers should use the most precise and authoritative timestamp available from the source.'
+  time_dt:
+    caption: Event Time
+    type: datetime_t
+    requirement: optional
+    group: occurrence
+    profile: datetime
+    from: base_event
+    description: 'The primary timestamp of the event - when the activity actually occurred at the source. This does not capture when the event record was created or serialized by the source system; for event lifecycle timestamps such as ingestion and processing, use `metadata.logged_time` and `metadata.processed_time` respectively, or the equivalent attributes in the `metadata.loggers` array when recording pipeline stages. For aggregate events (`count` > 1), set this to `start_time` (the earliest OCSF `time` in the aggregate) to preserve causal ordering and consistent timeline alignment. Note: finding classes redefine `time` as the finding creation time rather than the activity occurrence time. This must be a UTC epoch value in milliseconds (e.g., `1776881335332`). Mappers should use the most precise and authoritative timestamp available from the source.'
+  timezone_offset:
+    caption: Timezone Offset
+    type: integer_t
+    requirement: recommended
+    group: occurrence
+    from: base_event
+    description: The number of minutes that the reported event `time` is ahead or behind UTC, in the range -1,080 to +1,080. This allows consumers to reconstruct the local time at the event source. For example, US Eastern Standard Time is `-300`. Populate this when the source provides local time zone information.
+  type_name:
+    caption: Type Name
+    type: string_t
+    requirement: optional
+    group: classification
+    from: base_event
+    description: 'The event/finding type name, combining the class and activity (e.g., `"Detection Finding: Create"`). The value must match the `class_name` and `activity_name` joined by `": "`.'
+  type_uid:
+    caption: Type ID
+    type: long_t
+    requirement: required
+    group: classification
+    sibling: type_name
+    description: 'The event/finding type ID. It identifies the event''s semantics and structure. Producers and mappers must compute this as `class_uid * 100 + activity_id`. It uniquely identifies the combination of event class and activity across the entire schema. For example, `Detection Finding: Create` is `200401`.'
+    enum:
+      '600600':
+        caption: 'File Hosting Activity: Unknown'
+      '600601':
+        caption: 'File Hosting Activity: Upload'
+        description: Upload a file.
+      '600602':
+        caption: 'File Hosting Activity: Download'
+        description: Download a file.
+      '600603':
+        caption: 'File Hosting Activity: Update'
+        description: Update a file.
+      '600604':
+        caption: 'File Hosting Activity: Delete'
+        description: Delete a file.
+      '600605':
+        caption: 'File Hosting Activity: Rename'
+        description: Rename a file.
+      '600606':
+        caption: 'File Hosting Activity: Copy'
+        description: Copy a file.
+      '600607':
+        caption: 'File Hosting Activity: Move'
+        description: Move a file.
+      '600608':
+        caption: 'File Hosting Activity: Restore'
+        description: Restore a file.
+      '600609':
+        caption: 'File Hosting Activity: Preview'
+        description: Preview a file.
+      '600610':
+        caption: 'File Hosting Activity: Lock'
+        description: Lock a file.
+      '600611':
+        caption: 'File Hosting Activity: Unlock'
+        description: Unlock a file.
+      '600612':
+        caption: 'File Hosting Activity: Share'
+        description: Share a file.
+      '600613':
+        caption: 'File Hosting Activity: Unshare'
+        description: Unshare a file.
+      '600614':
+        caption: 'File Hosting Activity: Open'
+        description: Open a file.
+      '600615':
+        caption: 'File Hosting Activity: Sync'
+        description: Mark a file or folder to sync with a computer.
+      '600616':
+        caption: 'File Hosting Activity: Unsync'
+        description: Mark a file or folder to not sync with a computer.
+      '600617':
+        caption: 'File Hosting Activity: Access Check'
+        description: Access check for a file. The `security_control` profile can be used to add the access check results.
+      '600699':
+        caption: 'File Hosting Activity: Other'
+  unmapped:
+    caption: Unmapped Data
+    type: object_t
+    object: object
+    requirement: optional
+    group: context
+    from: base_event
+    description: |-
+      A container for source-specific attributes that do not map to any defined OCSF attribute. Use this to preserve valuable source data that would otherwise be lost during normalization. The keys and values are specific to the event source.
+
+      Note: Consumers should not rely on a stable structure within this field. The preferred approach to unmapped attributes is to create a custom extension with the desired structure.
+    references:
+    - description: 'Schema FAQ: When should I use the unmapped attribute?'
+      url: https://github.com/ocsf/ocsf-docs/blob/main/faqs/schema-faq.md#when-should-i-use-the-unmapped-attribute
+    - description: OCSF Extensions
+      url: https://github.com/ocsf/ocsf-schema/blob/main/CONTRIBUTING.md#ocsf-extensions

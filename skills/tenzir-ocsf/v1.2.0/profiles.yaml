@@ -1,0 +1,335 @@
+cloud:
+  caption: Cloud
+  description: The attributes that describe information specific to Cloud services/applications.
+  applies_to:
+    classes: [account_change, admin_group_query, api_activity, application_lifecycle, authentication, authorize_session, base_event, compliance_finding, config_state, data_security_finding, datastore_activity, detection_finding, device_config_state_change, dhcp_activity, dns_activity, email_activity, email_file_activity, email_url_activity, entity_management, file_activity, file_hosting, file_query, folder_query, ftp_activity, group_management, http_activity, incident_finding, inventory_info, job_query, kernel_activity, kernel_extension, kernel_object_query, memory_activity, module_activity, module_query, network_activity, network_connection_query, network_file_activity, networks_query, ntp_activity, patch_state, peripheral_device_query, process_activity, process_query, rdp_activity, scan_activity, scheduled_job_activity, security_finding, service_query, session_query, smb_activity, ssh_activity, tunnel_activity, user_access, user_inventory, user_query, vulnerability_finding, web_resource_access_activity, web_resources_activity]
+    objects: [resource_details]
+  attributes:
+    api:
+      caption: API Details
+      type: object_t
+      object: api
+      requirement: optional
+      group: context
+      description: Describes details about a typical API (Application Programming Interface) call.
+    cloud:
+      caption: Cloud
+      type: object_t
+      object: cloud
+      requirement: required
+      group: primary
+      description: Describes details about the Cloud environment where the event was originally created or logged.
+container:
+  caption: Container
+  description: The container context for a process.
+  applies_to:
+    objects: [device, endpoint, network_endpoint, network_proxy, process]
+  attributes:
+    container:
+      caption: Container
+      type: object_t
+      object: container
+      requirement: recommended
+      group: context
+      observable: 27
+      description: The information describing an instance of a container. A container is a prepackaged, portable system image that runs isolated on an existing system using a container runtime like containerd.
+    namespace_pid:
+      caption: Namespace PID
+      type: integer_t
+      requirement: recommended
+      group: context
+      description: If running under a process namespace (such as in a container), the process identifier within that process namespace.
+data_classification:
+  caption: Data Classification
+  description: The attributes that describe information specific to data classification.
+  applies_to:
+    objects: [database, databucket, email, file, metadata, product, resource_details, web_resource]
+  attributes:
+    data_classification:
+      caption: Data Classification
+      type: object_t
+      object: data_classification
+      requirement: recommended
+      group: context
+      description: The Data Classification object includes information about data classification levels and data category types.
+datetime:
+  caption: Date/Time
+  description: This profile defines date/time attributes as defined in RFC-3339. For example 1985-04-12T23:20:50.52Z.
+  applies_to:
+    classes: [account_change, admin_group_query, api_activity, application_lifecycle, authentication, authorize_session, base_event, compliance_finding, config_state, data_security_finding, datastore_activity, detection_finding, device_config_state_change, dhcp_activity, dns_activity, email_activity, email_file_activity, email_url_activity, entity_management, file_activity, file_hosting, file_query, folder_query, ftp_activity, group_management, http_activity, incident_finding, inventory_info, job_query, kernel_activity, kernel_extension, kernel_object_query, memory_activity, module_activity, module_query, network_activity, network_connection_query, network_file_activity, networks_query, ntp_activity, patch_state, peripheral_device_query, process_activity, process_query, rdp_activity, scan_activity, scheduled_job_activity, security_finding, service_query, session_query, smb_activity, ssh_activity, tunnel_activity, user_access, user_inventory, user_query, vulnerability_finding, web_resource_access_activity, web_resources_activity]
+  attributes: {}
+host:
+  caption: Host
+  description: The attributes that identify host/device attributes.
+  applies_to:
+    classes: [account_change, admin_group_query, application_lifecycle, authentication, authorize_session, compliance_finding, config_state, data_security_finding, detection_finding, device_config_state_change, dhcp_activity, dns_activity, email_activity, email_file_activity, email_url_activity, entity_management, file_activity, file_query, folder_query, ftp_activity, group_management, http_activity, inventory_info, job_query, kernel_activity, kernel_extension, kernel_object_query, memory_activity, module_activity, module_query, network_activity, network_connection_query, network_file_activity, networks_query, ntp_activity, patch_state, peripheral_device_query, process_activity, process_query, rdp_activity, scan_activity, scheduled_job_activity, service_query, session_query, smb_activity, ssh_activity, tunnel_activity, user_access, user_query, vulnerability_finding, web_resource_access_activity, web_resources_activity]
+  attributes:
+    actor:
+      caption: Actor
+      type: object_t
+      object: actor
+      requirement: optional
+      group: primary
+      description: The actor object describes details about the user/role/process that was the source of the activity.
+    device:
+      caption: Device
+      type: object_t
+      object: device
+      requirement: recommended
+      group: primary
+      observable: 20
+      description: An addressable device, computer system or host.
+load_balancer:
+  caption: Load Balancer
+  description: The attributes that describe information specific to load balancers.
+  applies_to:
+    classes: [dhcp_activity, dns_activity, ftp_activity, http_activity, network_activity, network_file_activity, ntp_activity, rdp_activity, smb_activity, ssh_activity, tunnel_activity]
+  attributes:
+    load_balancer:
+      caption: Load Balancer
+      type: object_t
+      object: load_balancer
+      requirement: recommended
+      group: primary
+      description: The Load Balancer object contains information related to the device that is distributing incoming traffic to specified destinations.
+network_proxy:
+  caption: Network Proxy
+  description: The attributes that identify network proxy attributes.
+  applies_to:
+    classes: [dhcp_activity, dns_activity, ftp_activity, http_activity, network_activity, network_file_activity, ntp_activity, rdp_activity, smb_activity, ssh_activity, tunnel_activity, web_resource_access_activity, web_resources_activity]
+  attributes:
+    proxy_connection_info:
+      caption: Proxy Connection Info
+      type: object_t
+      object: network_connection_info
+      requirement: recommended
+      group: context
+      description: The connection information from the proxy server to the remote server.
+    proxy_endpoint:
+      caption: Proxy Endpoint
+      type: object_t
+      object: network_proxy
+      requirement: optional
+      group: context
+      observable: 20
+      description: The proxy (server) in a network connection.
+    proxy_http_request:
+      caption: Proxy HTTP Request
+      type: object_t
+      object: http_request
+      requirement: optional
+      group: context
+      description: The HTTP Request from the proxy server to the remote server.
+    proxy_http_response:
+      caption: Proxy HTTP Response
+      type: object_t
+      object: http_response
+      requirement: optional
+      group: context
+      description: The HTTP Response from the remote server to the proxy server.
+    proxy_tls:
+      caption: Proxy TLS
+      type: object_t
+      object: tls
+      requirement: recommended
+      group: context
+      description: The TLS protocol negotiated between the proxy server and the remote server.
+    proxy_traffic:
+      caption: Proxy Traffic
+      type: object_t
+      object: network_traffic
+      requirement: recommended
+      group: context
+      description: The network traffic refers to the amount of data moving across a network, from proxy to remote server at a given point of time.
+security_control:
+  caption: Security Control
+  description: The attributes including disposition that represent the outcome of a security control including but not limited to access control, malware or policy violation, network proxy, firewall, or data control.  The profile is intended to augment activities or findings with an outcome where a security control has intervened.
+  applies_to:
+    classes: [data_security_finding, datastore_activity, detection_finding, dhcp_activity, dns_activity, email_activity, email_file_activity, email_url_activity, file_activity, ftp_activity, http_activity, kernel_activity, kernel_extension, memory_activity, module_activity, network_activity, network_file_activity, ntp_activity, process_activity, rdp_activity, scheduled_job_activity, smb_activity, ssh_activity, tunnel_activity, web_resources_activity]
+  attributes:
+    action:
+      caption: Action
+      type: string_t
+      requirement: optional
+      group: primary
+      description: The normalized caption of `action_id`.
+    action_id:
+      caption: Action ID
+      type: integer_t
+      requirement: required
+      group: primary
+      sibling: action
+      description: The action taken by a control or other policy-based system leading to an outcome or disposition. Dispositions conform to an action of `1` 'Allowed' or `2` 'Denied' in most cases. Note that `99` 'Other' is not an option. No action would equate to `1` 'Allowed'. An unknown action may still correspond to a known disposition. Refer to `disposition_id` for the outcome of the action.
+      enum:
+        '0':
+          caption: Unknown
+          description: The action was unknown. The `disposition_id` attribute may still be set to a non-unknown value, for example 'Count', 'Uncorrected', 'Isolated', 'Quarantined' or 'Exonerated'.
+        '1':
+          caption: Allowed
+          description: The activity was allowed. The `disposition_id` attribute should be set to a value that conforms to this action, for example 'Allowed', 'Approved', 'Delayed', 'No Action', 'Count' etc.
+        '2':
+          caption: Denied
+          description: The attempted activity was denied. The `disposition_id` attribute should be set to a value that conforms to this action, for example 'Blocked', 'Rejected', 'Quarantined', 'Isolated', 'Dropped', 'Access Revoked, etc.
+        '99':
+          caption: Other
+          description: The action was not mapped. See the `action` attribute, which contains a data source specific value.
+    attacks:
+      caption: MITRE ATT&CK® Details
+      type: object_t
+      object: attack
+      array: true
+      requirement: optional
+      group: primary
+      description: An array of [MITRE ATT&CK®](https://attack.mitre.org) objects describing the tactics, techniques & sub-techniques identified by a security control or finding.
+    authorizations:
+      caption: Authorization Information
+      type: object_t
+      object: authorization
+      array: true
+      requirement: optional
+      group: primary
+      description: Provides details about an authorization, such as authorization outcome, and any associated policies related to the activity/event.
+    disposition:
+      caption: Disposition
+      type: string_t
+      requirement: optional
+      group: primary
+      description: The disposition name, normalized to the caption of the disposition_id value. In the case of 'Other', it is defined by the event source.
+    disposition_id:
+      caption: Disposition ID
+      type: integer_t
+      requirement: recommended
+      group: primary
+      sibling: disposition
+      description: Describes the outcome or action taken by a security control, such as access control checks, malware detections or various types of policy violations.
+      enum:
+        '0':
+          caption: Unknown
+          description: The disposition was not known.
+        '1':
+          caption: Allowed
+          description: Granted access or allowed the action to the protected resource.
+        '2':
+          caption: Blocked
+          description: Denied access or blocked the action to the protected resource.
+        '3':
+          caption: Quarantined
+          description: A suspicious file or other content was moved to a benign location.
+        '4':
+          caption: Isolated
+          description: A session was isolated on the network or within a browser.
+        '5':
+          caption: Deleted
+          description: A file or other content was deleted.
+        '6':
+          caption: Dropped
+          description: The request was detected as a threat and resulted in the connection being dropped.
+        '7':
+          caption: Custom Action
+          description: A custom action was executed such as running of a command script. Use the `message` attribute of the base class for details.
+        '8':
+          caption: Approved
+          description: A request or submission was approved. For example, when a form was properly filled out and submitted. This is distinct from `1` 'Allowed'.
+        '9':
+          caption: Restored
+          description: A quarantined file or other content was restored to its original location.
+        '10':
+          caption: Exonerated
+          description: A suspicious or risky entity was deemed to no longer be suspicious (re-scored).
+        '11':
+          caption: Corrected
+          description: A corrupt file or configuration was corrected.
+        '12':
+          caption: Partially Corrected
+          description: A corrupt file or configuration was partially corrected.
+        '13':
+          caption: Uncorrected
+          description: A corrupt file or configuration was not corrected.
+        '14':
+          caption: Delayed
+          description: An operation was delayed, for example if a restart was required to finish the operation.
+        '15':
+          caption: Detected
+          description: Suspicious activity or a policy violation was detected without further action.
+        '16':
+          caption: No Action
+          description: The outcome of an operation had no action taken.
+        '17':
+          caption: Logged
+          description: The operation or action was logged without further action.
+        '18':
+          caption: Tagged
+          description: A file or other entity was marked with extended attributes.
+        '19':
+          caption: Alert
+          description: The request or activity was detected as a threat and resulted in a notification but request was not blocked.
+        '20':
+          caption: Count
+          description: Counted the request or activity but did not determine whether to allow it or block it.
+        '21':
+          caption: Reset
+          description: The request was detected as a threat and resulted in the connection being reset.
+        '22':
+          caption: Captcha
+          description: Required the end user to solve a CAPTCHA puzzle to prove that a human being is sending the request.
+        '23':
+          caption: Challenge
+          description: Ran a silent challenge that required the client session to verify that it's a browser, and not a bot.
+        '24':
+          caption: Access Revoked
+          description: 'The requestor''s access has been revoked due to security policy enforcements. Note: use the `Host` profile if the `User` or `Actor` requestor is not present in the event class.'
+        '25':
+          caption: Rejected
+          description: A request or submission was rejected. For example, when a form was improperly filled out and submitted. This is distinct from `2` 'Blocked'.
+        '26':
+          caption: Unauthorized
+          description: An attempt to access a resource was denied due to an authorization check that failed. This is a more specific disposition than `2` 'Blocked' and can be complemented with the `authorizations` attribute for more detail.
+        '27':
+          caption: Error
+          description: An error occurred during the processing of the activity or request. Use the `message` attribute of the base class for details.
+        '99':
+          caption: Other
+          description: The disposition is not listed. The `disposition` attribute should be populated with a source specific caption.
+    firewall_rule:
+      caption: Firewall Rule
+      type: object_t
+      object: firewall_rule
+      requirement: optional
+      group: primary
+      description: The firewall rule that triggered the event.
+    malware:
+      caption: Malware
+      type: object_t
+      object: malware
+      array: true
+      requirement: optional
+      group: primary
+      description: A list of Malware objects, describing details about the identified malware.
+linux/linux_users:
+  caption: Linux
+  extension: linux
+  description: The attributes that Linux uses to identify user information.
+  applies_to:
+    objects: [process]
+  attributes:
+    auid:
+      caption: Audit User ID
+      type: integer_t
+      requirement: optional
+      description: The audit user assigned at login by the audit subsystem.
+    egid:
+      caption: Effective Group ID
+      type: integer_t
+      requirement: optional
+      description: The effective group under which this process is running.
+    euid:
+      caption: Effective User ID
+      type: integer_t
+      requirement: optional
+      description: The effective user under which this process is running.
+    group:
+      caption: Group
+      type: object_t
+      object: group
+      requirement: recommended
+      description: The group under which this process is running.

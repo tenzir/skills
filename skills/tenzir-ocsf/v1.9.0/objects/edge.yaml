@@ -1,0 +1,56 @@
+name: edge
+caption: Edge
+extends: _entity
+description: Represents a connection or relationship between two nodes in a graph.
+constraints:
+  at_least_one: [name, uid]
+references:
+- description: JSON graph specification.
+  url: https://github.com/jsongraph/json-graph-specification/
+referenced_by:
+  objects:
+    graph: [edges]
+attributes:
+  data:
+    caption: Data
+    type: json_t
+    requirement: optional
+    description: Additional data about the edge such as weight, distance, or custom properties.
+  is_directed:
+    caption: Directed
+    type: boolean_t
+    requirement: optional
+    description: Indicates whether the edge is (`true`) or undirected (`false`).
+  name:
+    caption: Name
+    type: string_t
+    requirement: recommended
+    description: The human-readable name or label for the edge.
+  relation:
+    caption: Relation
+    type: string_t
+    requirement: recommended
+    description: The type of relationship between nodes (e.g. is-attached-to , depends-on, etc).
+  source:
+    caption: Source
+    type: string_t
+    requirement: required
+    description: The unique identifier of the node where the edge originates.
+  target:
+    caption: Target
+    type: string_t
+    requirement: required
+    description: The unique identifier of the node where the edge terminates.
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: recommended
+    description: Unique identifier of the edge.
+  uid_numeric:
+    caption: Numeric Unique ID
+    type: long_t
+    requirement: optional
+    from: _entity
+    description: |-
+      The `uid` attribute in numeric form where applicable.
+      Note: Producers may populate `uid_numeric` only in addition to `uid` and not as an alternative to it.

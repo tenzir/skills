@@ -1,0 +1,60 @@
+name: transformation_info
+caption: Transformation Info
+extends: _entity
+description: The transformation_info object represents the mapping or transformation used.
+profiles: [data_classification, datetime]
+constraints:
+  at_least_one: [name, uid]
+referenced_by:
+  objects:
+    metadata: [transformation_info_list]
+attributes:
+  lang:
+    caption: Language
+    type: string_t
+    requirement: optional
+    description: The transformation language used to transform the data.
+    references:
+    - description: ISO 639-1
+      url: https://en.wikipedia.org/wiki/ISO_639-1
+  name:
+    caption: Name
+    type: string_t
+    requirement: recommended
+    description: The name of the transformation or mapping.
+  product:
+    caption: Product
+    type: object_t
+    object: product
+    requirement: optional
+    description: The product or instance used to make the transformation
+  time:
+    caption: Event Time
+    type: timestamp_t
+    requirement: recommended
+    description: Time of the transformation.
+  time_dt:
+    caption: Event Time
+    type: datetime_t
+    requirement: optional
+    profile: datetime
+    description: Time of the transformation.
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: optional
+    description: The unique identifier of the mapping or transformation.
+  uid_numeric:
+    caption: Numeric Unique ID
+    type: long_t
+    requirement: optional
+    from: _entity
+    description: |-
+      The `uid` attribute in numeric form where applicable.
+      Note: Producers may populate `uid_numeric` only in addition to `uid` and not as an alternative to it.
+  url_string:
+    caption: URL String
+    type: url_t
+    requirement: recommended
+    observable: 6
+    description: The Uniform Resource Locator String where the mapping or transformation exists.

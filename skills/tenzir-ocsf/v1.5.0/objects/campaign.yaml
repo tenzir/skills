@@ -1,0 +1,13 @@
+name: campaign
+caption: Campaign
+extends: object
+description: Campaign represent organized efforts by threat actors to achieve malicious objectives over a period, often characterized by shared tactics, techniques, and procedures (TTPs).
+referenced_by:
+  objects:
+    osint: [campaign]
+attributes:
+  name:
+    caption: Name
+    type: string_t
+    requirement: required
+    description: The name of a specific campaign associated with a cyber threat.

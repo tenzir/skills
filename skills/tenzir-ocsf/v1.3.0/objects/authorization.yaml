@@ -1,0 +1,46 @@
+name: authorization
+caption: Authorization Result
+extends: object
+description: The Authorization Result object provides details about the authorization outcome and associated policies related to activity.
+referenced_by:
+  classes:
+    data_security_finding: [authorizations]
+    datastore_activity: [authorizations]
+    detection_finding: [authorizations]
+    dhcp_activity: [authorizations]
+    dns_activity: [authorizations]
+    email_activity: [authorizations]
+    email_file_activity: [authorizations]
+    email_url_activity: [authorizations]
+    event_log: [authorizations]
+    file_activity: [authorizations]
+    ftp_activity: [authorizations]
+    http_activity: [authorizations]
+    kernel_activity: [authorizations]
+    kernel_extension: [authorizations]
+    memory_activity: [authorizations]
+    module_activity: [authorizations]
+    network_activity: [authorizations]
+    network_file_activity: [authorizations]
+    ntp_activity: [authorizations]
+    process_activity: [authorizations]
+    rdp_activity: [authorizations]
+    scheduled_job_activity: [authorizations]
+    smb_activity: [authorizations]
+    ssh_activity: [authorizations]
+    tunnel_activity: [authorizations]
+    web_resources_activity: [authorizations]
+  objects:
+    actor: [authorizations]
+attributes:
+  decision:
+    caption: Authorization Decision/Outcome
+    type: string_t
+    requirement: recommended
+    description: Authorization Result/outcome, e.g. allowed, denied.
+  policy:
+    caption: Policy
+    type: object_t
+    object: policy
+    requirement: optional
+    description: Details about the Identity/Access management policies that are applicable.

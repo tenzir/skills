@@ -1,0 +1,117 @@
+name: device_hw_info
+caption: Device Hardware Info
+extends: object
+description: The Device Hardware Information object contains details and specifications of the physical components that make up a device. This information provides an overview of the hardware capabilities, configuration, and characteristics of the device.
+referenced_by:
+  objects:
+    device: [hw_info]
+    endpoint: [hw_info]
+    network_endpoint: [hw_info]
+    network_proxy: [hw_info]
+    unmanned_aerial_system: [hw_info]
+attributes:
+  bios_date:
+    caption: BIOS Date
+    type: string_t
+    requirement: optional
+    description: 'The BIOS date. For example: `03/31/16`.'
+  bios_manufacturer:
+    caption: BIOS Manufacturer
+    type: string_t
+    requirement: optional
+    description: 'The BIOS manufacturer. For example: `LENOVO`.'
+  bios_ver:
+    caption: BIOS Version
+    type: string_t
+    requirement: optional
+    description: 'The BIOS version. For example: `LENOVO G5ETA2WW (2.62)`.'
+  chassis:
+    caption: Chassis
+    type: string_t
+    requirement: optional
+    description: The chassis type describes the system enclosure or physical form factor. Such as the following examples for Windows [Windows Chassis Types](https://docs.microsoft.com/en-us/windows/win32/cimwin32prov/win32-systemenclosure)
+  cpu_architecture:
+    caption: CPU Architecture
+    type: string_t
+    requirement: optional
+    description: The CPU architecture, normalized to the caption of the `cpu_architecture_id` value. In the case of `Other`, it is defined by the source.
+  cpu_architecture_id:
+    caption: CPU Architecture ID
+    type: integer_t
+    requirement: optional
+    sibling: cpu_architecture
+    description: The normalized identifier of the CPU architecture.
+    enum:
+      '0':
+        caption: Unknown
+        description: The CPU architecture is unknown.
+      '1':
+        caption: x86
+        description: CPU uses the x86 ISA. For bitness, refer to `cpu_bits`.
+      '2':
+        caption: ARM
+        description: CPU uses the ARM ISA. For bitness, refer to `cpu_bits`.
+      '3':
+        caption: RISC-V
+        description: CPU uses the RISC-V ISA. For bitness, refer to `cpu_bits`.
+      '99':
+        caption: Other
+        description: The CPU architecture is not mapped. See the `cpu_architecture` attribute, which contains a data source specific value.
+  cpu_bits:
+    caption: CPU Bits
+    type: integer_t
+    requirement: optional
+    description: 'The cpu architecture, the number of bits used for addressing in memory. For example: `32` or `64`.'
+  cpu_cores:
+    caption: CPU Cores
+    type: integer_t
+    requirement: optional
+    description: 'The number of processor cores in all installed processors. For Example: `42`.'
+  cpu_count:
+    caption: CPU Count
+    type: integer_t
+    requirement: optional
+    description: 'The number of physical processors on a system. For example: `1`.'
+  cpu_speed:
+    caption: Processor Speed
+    type: integer_t
+    requirement: optional
+    description: 'The speed of the processor in Mhz. For Example: `4200`.'
+  cpu_type:
+    caption: Processor Type
+    type: string_t
+    requirement: optional
+    description: 'The processor type. For example: `x86 Family 6 Model 37 Stepping 5`.'
+  desktop_display:
+    caption: Desktop Display
+    type: object_t
+    object: display
+    requirement: optional
+    description: The desktop display affiliated with the event
+  keyboard_info:
+    caption: Keyboard Information
+    type: object_t
+    object: keyboard_info
+    requirement: optional
+    description: The keyboard detailed information.
+  ram_size:
+    caption: RAM Size
+    type: integer_t
+    requirement: optional
+    description: 'The total amount of installed RAM, in Megabytes. For example: `2048`.'
+  serial_number:
+    caption: Serial Number
+    type: string_t
+    requirement: optional
+    observable: 37
+    description: The device manufacturer serial number.
+  uuid:
+    caption: UUID
+    type: uuid_t
+    requirement: optional
+    description: 'The device manufacturer assigned universally unique hardware identifier. For example: The BIOS System UUID or the Apple IOPlatformUUID.'
+  vendor_name:
+    caption: Vendor Name
+    type: string_t
+    requirement: optional
+    description: The device manufacturer.

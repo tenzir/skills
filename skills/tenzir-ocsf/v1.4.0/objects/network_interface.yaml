@@ -1,0 +1,78 @@
+name: network_interface
+caption: Network Interface
+extends: _entity
+description: The Network Interface object describes the type and associated attributes of a network interface.
+constraints:
+  at_least_one: [ip, mac, name, hostname]
+referenced_by:
+  classes:
+    dhcp_activity: [relay]
+    networks_query: [network_interfaces]
+    tunnel_activity: [tunnel_interface]
+  objects:
+    device: [network_interfaces]
+attributes:
+  hostname:
+    caption: Hostname
+    type: hostname_t
+    requirement: recommended
+    observable: 1
+    description: The hostname associated with the network interface.
+  ip:
+    caption: IP Address
+    type: ip_t
+    requirement: recommended
+    observable: 2
+    description: The IP address associated with the network interface.
+  mac:
+    caption: MAC Address
+    type: mac_t
+    requirement: recommended
+    observable: 3
+    description: The MAC address of the network interface.
+  name:
+    caption: Name
+    type: string_t
+    requirement: recommended
+    description: The name of the network interface.
+  namespace:
+    caption: Namespace
+    type: string_t
+    requirement: optional
+    description: The namespace is useful in merger or acquisition situations. For example, when similar entities exist that you need to keep separate.
+  subnet_prefix:
+    caption: Subnet Prefix Length
+    type: integer_t
+    requirement: optional
+    description: The subnet prefix length determines the number of bits used to represent the network part of the IP address. The remaining bits are reserved for identifying individual hosts within that subnet.
+  type:
+    caption: Type
+    type: string_t
+    requirement: optional
+    description: The type of network interface.
+  type_id:
+    caption: Type ID
+    type: integer_t
+    requirement: required
+    sibling: type
+    description: The network interface type identifier.
+    enum:
+      '0':
+        caption: Unknown
+        description: The type is unknown.
+      '1':
+        caption: Wired
+      '2':
+        caption: Wireless
+      '3':
+        caption: Mobile
+      '4':
+        caption: Tunnel
+      '99':
+        caption: Other
+        description: The type is not mapped. See the `type` attribute, which contains a data source specific value.
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: optional
+    description: The unique identifier for the network interface.

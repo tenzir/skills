@@ -1,0 +1,61 @@
+name: table
+caption: Table
+extends: _entity
+description: The table object represents a table within a structured relational database or datastore, which contains columns and rows of data that are able to be create, updated, deleted and queried.
+profiles: [datetime]
+constraints:
+  at_least_one: [name, uid]
+referenced_by:
+  classes:
+    data_security_finding: [table]
+    datastore_activity: [table]
+attributes:
+  created_time:
+    caption: Created Time
+    type: timestamp_t
+    requirement: optional
+    description: The time when the table was known to have been created.
+  created_time_dt:
+    caption: Created Time
+    type: datetime_t
+    requirement: optional
+    profile: datetime
+    description: The time when the table was known to have been created.
+  desc:
+    caption: Description
+    type: string_t
+    requirement: optional
+    description: The description of the table.
+  groups:
+    caption: Groups
+    type: object_t
+    object: group
+    array: true
+    requirement: optional
+    description: The group names to which the table belongs.
+  modified_time:
+    caption: Modified Time
+    type: timestamp_t
+    requirement: optional
+    description: The most recent time when any changes, updates, or modifications were made within the table.
+  modified_time_dt:
+    caption: Modified Time
+    type: datetime_t
+    requirement: optional
+    profile: datetime
+    description: The most recent time when any changes, updates, or modifications were made within the table.
+  name:
+    caption: Name
+    type: string_t
+    requirement: recommended
+    description: The table name, ordinarily as assigned by a database administrator.
+  size:
+    caption: Size
+    type: long_t
+    requirement: optional
+    description: The size of the data table in bytes.
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: recommended
+    description: The unique identifier of the table.

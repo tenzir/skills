@@ -1,0 +1,70 @@
+name: container
+caption: Container
+extends: object
+observable: 27
+description: The Container object describes an instance of a specific container. A container is a prepackaged, portable system image that runs isolated on an existing system using a container runtime like containerd.
+constraints:
+  at_least_one: [uid, name]
+referenced_by:
+  objects:
+    device: [container]
+    endpoint: [container]
+    network_endpoint: [container]
+    network_proxy: [container]
+    process: [container]
+    request: [containers]
+    response: [containers]
+attributes:
+  hash:
+    caption: Hash
+    type: object_t
+    object: fingerprint
+    requirement: recommended
+    observable: 30
+    description: 'Commit hash of image created for docker or the SHA256 hash of the container. For example: `13550340a8681c84c861aac2e5b440161c2b33a3e4f302ac680ca5b686de48de`.'
+  image:
+    caption: Image
+    type: object_t
+    object: image
+    requirement: recommended
+    description: The container image used as a template to run the container.
+  name:
+    caption: Name
+    type: string_t
+    requirement: recommended
+    description: The container name.
+  network_driver:
+    caption: Network Driver
+    type: string_t
+    requirement: optional
+    description: The network driver used by the container. For example, bridge, overlay, host, none, etc.
+  orchestrator:
+    caption: Orchestrator
+    type: string_t
+    requirement: optional
+    description: The orchestrator managing the container, such as ECS, EKS, K8s, or OpenShift.
+  pod_uuid:
+    caption: Pod UUID
+    type: uuid_t
+    requirement: optional
+    description: The unique identifier of the pod (or equivalent) that the container is executing on.
+  runtime:
+    caption: Runtime
+    type: string_t
+    requirement: optional
+    description: The backend running the container, such as containerd or cri-o.
+  size:
+    caption: Size
+    type: long_t
+    requirement: recommended
+    description: The size of the container image.
+  tag:
+    caption: Image Tag
+    type: string_t
+    requirement: optional
+    description: The tag used by the container. It can indicate version, format, OS.
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: recommended
+    description: 'The full container unique identifier for this instantiation of the container. For example: `ac2ea168264a08f9aaca0dfc82ff3551418dfd22d02b713142a6843caa2f61bf`.'

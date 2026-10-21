@@ -1,0 +1,37 @@
+name: ai_model
+caption: AI Model
+extends: _entity
+description: The AI Model object describes the characteristics of an AI/ML model. Examples include language models like GPT-4, embedding models like text-embedding-ada-002, and computer vision models like CLIP.
+constraints:
+  at_least_one: [name, uid]
+references:
+- description: AI Model Registry and Documentation Standards
+  url: https://huggingface.co/docs/hub/models
+- description: OpenAI Model Documentation
+  url: https://platform.openai.com/docs/models
+referenced_by:
+  classes:
+    api_activity: [ai_model]
+    datastore_activity: [ai_model]
+    process_activity: [ai_model]
+attributes:
+  ai_provider:
+    caption: AI Provider
+    type: string_t
+    requirement: required
+    description: 'AI service provider or organization name. For example: `OpenAI`, `Anthropic`, `Google`, or `Internal`.'
+  name:
+    caption: Name
+    type: string_t
+    requirement: required
+    description: 'Human-readable model name. For example: `gpt-4o`, `claude-3-sonnet`, or `text-embedding-ada-002`.'
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: recommended
+    description: The unique identifier of the AI model.
+  version:
+    caption: Version
+    type: string_t
+    requirement: recommended
+    description: 'Model version identifier. For example: `2024-05-13`, `v2.1.0`, or `beta`.'

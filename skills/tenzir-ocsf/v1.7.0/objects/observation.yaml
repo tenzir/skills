@@ -1,0 +1,25 @@
+name: observation
+caption: Observation
+extends: object
+description: A record of an observed value or event that captures the timing and frequency of its occurrence. Used to track when values/events were first detected, last detected, and their total occurrence count.
+referenced_by:
+  objects:
+    anomaly: [observations]
+    baseline: [observations]
+attributes:
+  count:
+    caption: Count
+    type: integer_t
+    requirement: recommended
+    description: Integer representing the total number of times this specific value/event was observed across all occurrences. Helps establish prevalence and patterns.
+  timespan:
+    caption: Time Span
+    type: object_t
+    object: timespan
+    requirement: recommended
+    description: The time window when the value or event was first observed. It is used to analyze activity patterns, detect trends, or correlate events within a specific timeframe.
+  value:
+    caption: Value
+    type: string_t
+    requirement: required
+    description: The specific value, event, indicator or data point that was observed and recorded. This is the core piece of information being tracked.

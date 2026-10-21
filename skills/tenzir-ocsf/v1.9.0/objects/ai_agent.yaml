@@ -1,0 +1,124 @@
+name: ai_agent
+caption: AI Agent
+extends: _entity
+description: An autonomous AI agent that performs tasks under delegated authority. Distinguished from the OCSF agent object (which describes security sensors such as EDR and DLP tools) and from human principals. An AI agent has a stable logical identity across runs and a restart-sensitive instance identity. The agent owns its model; the ai_model attribute captures which model was backing the agent at the time of action.
+profiles: [container, data_classification]
+constraints:
+  at_least_one: [name, uid]
+referenced_by:
+  classes:
+    account_change: [ai_agent]
+    api_activity: [ai_agent]
+    application_error: [ai_agent]
+    application_lifecycle: [ai_agent]
+    authentication: [ai_agent]
+    authorize_session: [ai_agent]
+    clipboard_activity: [ai_agent]
+    datastore_activity: [ai_agent]
+    device_power_state_activity: [ai_agent]
+    dhcp_activity: [ai_agent]
+    dns_activity: [ai_agent]
+    email_activity: [ai_agent]
+    entity_management: [ai_agent]
+    event_log_actvity: [ai_agent]
+    file_activity: [ai_agent]
+    file_hosting: [ai_agent]
+    ftp_activity: [ai_agent]
+    group_management: [ai_agent]
+    http_activity: [ai_agent]
+    kernel_activity: [ai_agent]
+    kernel_extension_activity: [ai_agent]
+    memory_activity: [ai_agent]
+    module_activity: [ai_agent]
+    network_activity: [ai_agent]
+    network_file_activity: [ai_agent]
+    ntp_activity: [ai_agent]
+    peripheral_activity: [ai_agent]
+    process_activity: [ai_agent]
+    rdp_activity: [ai_agent]
+    role_management: [ai_agent]
+    scan_activity: [ai_agent]
+    scheduled_job_activity: [ai_agent]
+    script_activity: [ai_agent]
+    smb_activity: [ai_agent]
+    ssh_activity: [ai_agent]
+    tunnel_activity: [ai_agent]
+    user_access: [ai_agent]
+    user_management: [ai_agent]
+    web_resource_access_activity: [ai_agent]
+    web_resources_activity: [ai_agent]
+  objects:
+    evidences: [ai_agent]
+    process: [ai_agent, hosted_ai_agent_list]
+attributes:
+  ai_model:
+    caption: AI Model
+    type: object_t
+    object: ai_model
+    requirement: recommended
+    description: The AI model backing this agent at the time of the recorded event. An agent's model may change across instances or versions; this captures the model in use for the specific logged activity or delegation.
+  charter:
+    caption: Agent Charter
+    type: object_t
+    object: file
+    requirement: optional
+    observable: 24
+    description: A document that defines an AI agent's durable role, responsibilities, constraints, and operating boundaries. When available, populate `hashes` on the file for content integrity and `signatures` for provenance. Integrity of the event that reports this agent is provided separately by the `record_integrity` profile.
+  instance_uid:
+    caption: AI Agent Instance ID
+    type: string_t
+    requirement: recommended
+    description: 'Identifier for a specific running instance or session of the agent, distinct from the stable logical `uid`. An instance is a single materialization of the agent: a conversation, session, or run. It may persist across restarts (a session that is suspended and later resumed keeps the same `instance_uid`) and may span multiple cooperating runtime components, so several events can share one `instance_uid`. Enables attribution of actions to a particular instance of the agent rather than to the agent generally.'
+  name:
+    caption: Name
+    type: string_t
+    requirement: recommended
+    description: 'Human-readable name for the agent. For example: `Q4 Analysis Agent` or `Model Tester Agent`.'
+  type:
+    caption: Agent Type
+    type: string_t
+    requirement: optional
+    description: The agent framework, normalized to the caption of the `type_id` value.
+  type_id:
+    caption: Agent Type ID
+    type: integer_t
+    requirement: recommended
+    sibling: type
+    description: The normalized identifier for the agent framework. Different agent frameworks have different identity, tool-call, and delegation semantics, so recording the framework enables cross-framework normalization. Communication protocols (e.g., MCP, A2A) are a property of individual operations rather than the agent itself, and are surfaced on the relevant operation rather than here.
+    enum:
+      '0':
+        caption: Unknown
+        description: The agent framework is unknown.
+      '1':
+        caption: Native
+        description: A first-party or proprietary agent built without a third-party agent framework. For example, a custom orchestrator or an LLM provider's own agent SDK.
+      '2':
+        caption: LangChain
+        description: An agent built with the LangChain framework.
+      '3':
+        caption: AutoGen
+        description: An agent built with the AutoGen framework for multi-agent conversation and orchestration.
+      '4':
+        caption: CrewAI
+        description: An agent built with the CrewAI framework for role-based multi-agent collaboration.
+      '99':
+        caption: Other
+        description: The agent framework is not listed. Use the `type` attribute to describe it.
+  uid:
+    caption: AI Agent ID
+    type: string_t
+    requirement: recommended
+    description: 'The stable logical identifier for the agent, assigned by the agent''s authoritative source (e.g., its control plane, registry, or issuing identity provider). Persists across restarts and instances. Producers populate this from whatever identity they observe: for a runtime that owns the agent, this is its issued ID; for a gateway or proxy, it is typically derived from the agent''s credential. Multiple producers logging the same agent should converge on the same `uid` when they share an authoritative source.'
+  uid_numeric:
+    caption: Numeric Unique ID
+    type: long_t
+    requirement: optional
+    from: _entity
+    description: |-
+      The `uid` attribute in numeric form where applicable.
+      Note: Producers may populate `uid_numeric` only in addition to `uid` and not as an alternative to it.
+  version:
+    caption: AI Agent Version
+    type: string_t
+    requirement: recommended
+    description: 'The version of the agent: the agent''s own code or configuration revision (e.g., `1.4.2`), distinct from the version of the model backing it (carried on `ai_model.version`). Enables correlation of behavioral changes with charter or configuration revisions across agent versions.'

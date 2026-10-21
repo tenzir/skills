@@ -1,0 +1,21 @@
+name: cis_csc
+caption: CIS CSC
+extends: object
+deprecated:
+  since: 1.5.0
+  message: Use the cis_control object instead.
+description: The CIS Critical Security Control (CSC) contains information as defined by the Center for Internet Security Critical Security Control [(CIS CSC)](https://www.cisecurity.org/controls). Prioritized set of actions to protect your organization and data from cyber-attack vectors.
+referenced_by:
+  classes:
+    security_finding: [cis_csc]
+attributes:
+  control:
+    caption: Security Control
+    type: string_t
+    requirement: required
+    description: A Control is prescriptive, prioritized, and simplified set of best practices that one can use to strengthen their cybersecurity posture. e.g. AWS SecurityHub Controls, CIS Controls.
+  version:
+    caption: Version
+    type: string_t
+    requirement: recommended
+    description: The CIS critical security control version.

@@ -1,0 +1,60 @@
+name: cpu_info
+caption: CPU Information
+extends: object
+description: The CPU information object contains attributes describing a physical CPU package installed in the device.
+referenced_by:
+  objects:
+    device_hw_info: [cpu_info_list]
+attributes:
+  cores:
+    caption: Cores
+    type: integer_t
+    requirement: optional
+    description: The number of processing cores or compute units for the component.
+  cpu_architecture:
+    caption: CPU Architecture
+    type: string_t
+    requirement: optional
+    description: The CPU architecture, normalized to the caption of the `cpu_architecture_id` value. In the case of `Other`, it is defined by the source.
+  cpu_architecture_id:
+    caption: CPU Architecture ID
+    type: integer_t
+    requirement: optional
+    sibling: cpu_architecture
+    description: The normalized identifier of the CPU architecture.
+    enum:
+      '0':
+        caption: Unknown
+        description: The CPU architecture is unknown.
+      '1':
+        caption: x86
+        description: CPU uses the x86 ISA. For bitness, refer to `cpu_bits`.
+      '2':
+        caption: ARM
+        description: CPU uses the ARM ISA. For bitness, refer to `cpu_bits`.
+      '3':
+        caption: RISC-V
+        description: CPU uses the RISC-V ISA. For bitness, refer to `cpu_bits`.
+      '99':
+        caption: Other
+        description: The CPU architecture is not mapped. See the `cpu_architecture` attribute, which contains a data source specific value.
+  cpu_bits:
+    caption: CPU Bits
+    type: integer_t
+    requirement: optional
+    description: The number of bits used by the CPU for memory addressing.
+  model:
+    caption: Model
+    type: string_t
+    requirement: recommended
+    description: 'The model name of the CPU. For example: `Intel Xeon Gold 6348`, `AMD EPYC 7763`, or `Apple M3 Max`.'
+  speed_mhz:
+    caption: Compute Unit Speed (MHz)
+    type: integer_t
+    requirement: optional
+    description: The nominal clock speed of the unit, expressed in megahertz.
+  vendor_name:
+    caption: Vendor Name
+    type: string_t
+    requirement: recommended
+    description: 'The name of the vendor of the CPU. For example: `Intel`, `AMD`, or `Apple`.'

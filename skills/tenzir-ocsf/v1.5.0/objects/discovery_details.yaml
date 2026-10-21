@@ -1,0 +1,40 @@
+name: discovery_details
+caption: Discovery Details
+extends: object
+description: The Discovery Details object describes results of a discovery task/job.
+referenced_by:
+  objects:
+    data_classification: [discovery_details]
+    data_security: [discovery_details]
+attributes:
+  count:
+    caption: Count
+    type: integer_t
+    requirement: recommended
+    description: The number of discovered entities of the specified type.
+  occurrence_details:
+    caption: Occurrence Details
+    type: object_t
+    object: occurrence_details
+    requirement: optional
+    deprecated:
+      since: 1.4.0
+      message: Use `occurrences` instead.
+    description: Details about where in the target entity, specified information was discovered. Only the attributes, relevant to the target entity type should be populuated.
+  occurrences:
+    caption: Occurrences
+    type: object_t
+    object: occurrence_details
+    array: true
+    requirement: optional
+    description: Details about where in the target entity, specified information was discovered. Only the attributes, relevant to the target entity type should be populuated.
+  type:
+    caption: Type
+    type: string_t
+    requirement: recommended
+    description: The specific type of information that was discovered. e.g. `name, phone_number, etc.`
+  value:
+    caption: Value
+    type: string_t
+    requirement: optional
+    description: Optionally, the specific value of discovered information.

@@ -1,0 +1,26 @@
+name: sub_technique
+caption: MITRE ATT&CK® Sub Technique
+extends: _entity
+description: The MITRE ATT&CK® Sub Technique object describes the sub technique ID and/or name associated to an attack, as defined by [ATT&CK® Matrix](https://attack.mitre.org/wiki/ATT&CK_Matrix).
+constraints:
+  at_least_one: [name, uid]
+referenced_by:
+  objects:
+    attack: [sub_technique]
+attributes:
+  name:
+    caption: Name
+    type: string_t
+    requirement: optional
+    description: 'The name of the attack sub technique, as defined by [ATT&CK® Matrix](https://attack.mitre.org/wiki/ATT&CK_Matrix). For example: `Scanning IP Blocks`.'
+  src_url:
+    caption: Source URL
+    type: url_t
+    requirement: optional
+    observable: 6
+    description: 'The versioned permalink of the attack sub technique, as defined by [ATT&CK® Matrix](https://attack.mitre.org/wiki/ATT&CK_Matrix). For example: `https://attack.mitre.org/versions/v14/techniques/T1595/001/`.'
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: recommended
+    description: 'The unique identifier of the attack sub technique, as defined by [ATT&CK® Matrix](https://attack.mitre.org/wiki/ATT&CK_Matrix). For example: `T1595.001`.'

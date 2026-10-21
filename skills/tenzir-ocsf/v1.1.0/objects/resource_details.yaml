@@ -1,0 +1,88 @@
+name: resource_details
+caption: Resource Details
+extends: _resource
+description: The Resource Details object describes details about resources that were affected by the activity/event.
+profiles: [cloud]
+constraints:
+  at_least_one: [name, uid]
+referenced_by:
+  classes:
+    api_activity: [resources]
+    compliance_finding: [resource]
+    detection_finding: [resources]
+    group_management: [resource]
+    security_finding: [resources]
+    user_access: [resource]
+    vulnerability_finding: [resource]
+attributes:
+  cloud_partition:
+    caption: Cloud Partition
+    type: string_t
+    requirement: optional
+    profile: cloud
+    description: 'The canonical cloud partition name to which the region is assigned (e.g. AWS Partitions: aws, aws-cn, aws-us-gov).'
+  criticality:
+    caption: Criticality
+    type: string_t
+    requirement: optional
+    description: The criticality of the resource as defined by the event source.
+  data:
+    caption: Data
+    type: json_t
+    requirement: optional
+    from: _resource
+    description: Additional data describing the resource.
+  group:
+    caption: Group
+    type: object_t
+    object: group
+    requirement: optional
+    description: The name of the related resource group.
+  labels:
+    caption: Labels
+    type: string_t
+    array: true
+    requirement: optional
+    from: _resource
+    description: The list of labels/tags associated to a resource.
+  name:
+    caption: Name
+    type: string_t
+    requirement: optional
+    from: _resource
+    description: The name of the resource.
+  namespace:
+    caption: Namespace
+    type: string_t
+    requirement: optional
+    description: The namespace is useful when similar entities exist that you need to keep separate.
+  owner:
+    caption: Owner
+    type: object_t
+    object: user
+    requirement: recommended
+    observable: 21
+    description: The identity of the service or user account that owns the resource.
+  region:
+    caption: Region
+    type: string_t
+    requirement: optional
+    profile: cloud
+    description: The cloud region of the resource.
+  type:
+    caption: Type
+    type: string_t
+    requirement: optional
+    from: _resource
+    description: The resource type as defined by the event source.
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: optional
+    from: _resource
+    description: The unique identifier of the resource.
+  version:
+    caption: Version
+    type: string_t
+    requirement: optional
+    description: The version of the resource. For example `1.2.3`.

@@ -1,0 +1,20 @@
+name: hassh
+caption: HASSH
+extends: object
+description: The HASSH object contains SSH network fingerprinting values for specific client/server implementations. It provides a standardized way of identifying and categorizing SSH connections based on their unique characteristics and behavior.
+referenced_by:
+  classes:
+    ssh_activity: [client_hassh, server_hassh]
+attributes:
+  algorithm:
+    caption: Algorithm
+    type: string_t
+    requirement: recommended
+    description: 'The concatenation of key exchange, encryption, authentication and compression algorithms (separated by '';''). NOTE: This is not the underlying algorithm for the hash implementation.'
+  fingerprint:
+    caption: Fingerprint
+    type: object_t
+    object: fingerprint
+    requirement: required
+    observable: 30
+    description: The hash of the key exchange, encryption, authentication and compression algorithms.

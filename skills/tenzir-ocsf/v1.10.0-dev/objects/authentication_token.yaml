@@ -1,0 +1,128 @@
+name: authentication_token
+caption: Authentication Token
+extends: token
+description: 'The Authentication Token object extends the base `token` object and represents standardized authentication tokens, tickets, or assertions that conform to established authentication protocols such as Kerberos, OIDC, and SAML. This object inherits all attributes from `token` and adds protocol-specific attributes (e.g., `kerberos_flags`, `encryption_details`) for authentication events. Use this object in authentication events to represent protocol-specific tokens: Kerberos Ticket Granting Tickets (TGT) and Service Tickets (ST), OIDC Identity Tokens and Refresh Tokens, and SAML Assertions. These tokens are issued by authentication servers and identity providers and carry protocol-specific metadata, lifecycle information, and security attributes defined by their respective specifications. When to use this object: Use `authentication_token` when representing protocol-specific authentication tokens (type_id values 1-5: Kerberos TGT/ST, OIDC ID/Refresh tokens, SAML assertions) in authentication events. When NOT to use this object: Do NOT use `authentication_token` for API tokens or client tokens (type_id values 6-7) used in API activity events - use the base `token` object instead. Do NOT use `authentication_token` for generic API keys - use the base `token` object instead.'
+profiles: [datetime]
+referenced_by:
+  classes:
+    authentication: [authentication_token]
+attributes:
+  created_time:
+    caption: Created Time
+    type: timestamp_t
+    requirement: recommended
+    description: The time that the authentication token was created or issued. This corresponds to the token issuance time, such as the `iat` (issued at) claim in OIDC tokens, the issue instant in SAML assertions, or the ticket start time in Kerberos tickets.
+  created_time_dt:
+    caption: Created Time
+    type: datetime_t
+    requirement: optional
+    profile: datetime
+    description: The time that the authentication token was created or issued. This corresponds to the token issuance time, such as the `iat` (issued at) claim in OIDC tokens, the issue instant in SAML assertions, or the ticket start time in Kerberos tickets.
+  encryption_details:
+    caption: Encryption Details
+    type: object_t
+    object: encryption_details
+    requirement: recommended
+    description: The encryption details of the authentication token.
+  expiration_time:
+    caption: Expiration Time
+    type: timestamp_t
+    requirement: optional
+    description: The expiration time of the authentication token.
+  expiration_time_dt:
+    caption: Expiration Time
+    type: datetime_t
+    requirement: optional
+    profile: datetime
+    description: The expiration time of the authentication token.
+  is_renewable:
+    caption: Renewable
+    type: boolean_t
+    requirement: optional
+    description: Indicates whether the authentication token is renewable.
+  kerberos_flags:
+    caption: Kerberos Flags
+    type: string_t
+    requirement: recommended
+    description: A bitmask, either in hexadecimal or decimal form, which encodes various attributes or permissions associated with a Kerberos ticket. These flags delineate specific characteristics of the ticket, such as its renewability or forwardability.
+    references:
+    - description: 'RFC 4120: 5.2.8.  KerberosFlags'
+      url: https://www.rfc-editor.org/rfc/rfc4120#section-5.2.8
+    - description: Microsoft Windows Security 4769 (see 'Ticket Options')
+      url: https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/auditing/event-4769
+  modified_time:
+    caption: Modified Time
+    type: timestamp_t
+    requirement: optional
+    from: token
+    description: The last time the token was updated.
+  modified_time_dt:
+    caption: Modified Time
+    type: datetime_t
+    requirement: optional
+    profile: datetime
+    from: token
+    description: The last time the token was updated.
+  name:
+    caption: Name
+    type: string_t
+    requirement: optional
+    from: token
+    description: The human-friendly name of a token or key, if available, such as the `name` from the Okta API Token API.
+  tenant_uid:
+    caption: Tenant UID
+    type: string_t
+    requirement: optional
+    from: token
+    description: The unique identifier of the tenant or organization that owns the token or key, or the tenant context in which the token is authorized for use. This is particularly relevant in multi-tenant Identity Provider scenarios where tokens are scoped to specific tenants.
+  type:
+    caption: Type
+    type: string_t
+    requirement: recommended
+    description: The type of the authentication token.
+  type_id:
+    caption: Type ID
+    type: integer_t
+    requirement: recommended
+    sibling: type
+    description: The normalized authentication token type identifier. This attribute restricts the base `token.type_id` enum to only protocol-specific authentication token types (values 0, 1-5, 99). API tokens and client tokens (values 6-7) are not valid for `authentication_token` - use the base `token` object for those types.
+    enum:
+      '0':
+        caption: Unknown
+        description: The Authentication token type is unknown.
+      '1':
+        caption: Ticket Granting Ticket
+        description: Ticket Granting Ticket (TGT) for Kerberos.
+      '2':
+        caption: Service Ticket
+        description: Service Ticket (ST) for Kerberos.
+      '3':
+        caption: Identity Token
+        description: Identity (ID) Token for OIDC.
+      '4':
+        caption: Refresh Token
+        description: Refresh Token for OIDC.
+      '5':
+        caption: SAML Assertion
+        description: Authentication Assertion for SAML.
+      '6':
+        caption: Client Token
+        description: 'Client Token issued by an Identity Provider (IdP) for application authentication. Use this value for IdP-issued tokens used for service-to-service authentication. Examples: Microsoft Entra ID Application Registration client secrets, Okta API tokens, Auth0 Machine-to-Machine tokens. Key characteristic: These tokens are issued by Identity Providers, not by individual services.'
+      '7':
+        caption: API Token
+        description: 'A generic API token or API key used for authenticating API requests. Use this value for service-specific API authentication tokens that are NOT issued by Identity Providers. Examples: REST API keys, GraphQL API keys, Stripe API keys, Twilio API keys, AWS API keys. Key characteristic: These tokens are issued by individual services/platforms, not by Identity Providers.'
+      '99':
+        caption: Other
+        description: The type is not mapped. See the `type` attribute, which contains a data source specific value.
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: optional
+    from: token
+    description: The unique ID of a token or key, if available, such as the `Secret ID` of Entra ID Application Registration Client Secrets.
+  zone:
+    caption: Network Zone
+    type: string_t
+    requirement: optional
+    from: token
+    description: The network zone or geographic region that the token or key is authorized to be used from. This may represent network-based access restrictions, geographic limitations, or other zone-based authorization policies. Examples include Okta's network zone restrictions or cloud provider region restrictions.

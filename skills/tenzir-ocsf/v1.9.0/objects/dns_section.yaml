@@ -1,0 +1,26 @@
+name: dns_section
+caption: DNS Section
+extends: object
+description: The DNS Section object represents a DNS message section that carries supplementary resource records alongside an optional TSIG record. It is used for both the client Additional section (`query_additional`) and the server Additional section (`response_additional`) of a DNS message. A DNS message has at most one TSIG record, which authenticates the entire message.
+references:
+- description: RFC 1035 — DNS Implementation and Specification.
+  url: https://www.rfc-editor.org/rfc/rfc1035.txt
+- description: RFC 2845 — Secret Key Transaction Authentication for DNS (TSIG).
+  url: https://www.rfc-editor.org/rfc/rfc2845
+referenced_by:
+  classes:
+    dns_activity: [query_additional, response_additional]
+attributes:
+  records:
+    caption: Resource Records
+    type: object_t
+    object: dns_resource_record
+    array: true
+    requirement: required
+    description: The resource records contained in this DNS section.
+  tsig:
+    caption: TSIG
+    type: object_t
+    object: tsig
+    requirement: optional
+    description: The TSIG (Transaction Signature) record present in this DNS section, used to authenticate the entire DNS message. Per RFC 2845, at most one TSIG record is permitted per DNS message.

@@ -1,0 +1,30 @@
+name: cis_benchmark_result
+caption: CIS Benchmark Result
+extends: object
+description: The CIS Benchmark Result object contains information as defined by the Center for Internet Security ([CIS](https://www.cisecurity.org/cis-benchmarks/)) benchmark result. CIS Benchmarks are a collection of best practices for securely configuring IT systems, software, networks, and cloud infrastructure.
+referenced_by:
+  classes:
+    config_state: [cis_benchmark_result]
+attributes:
+  desc:
+    caption: Description
+    type: string_t
+    requirement: optional
+    description: The CIS benchmark description.
+  name:
+    caption: Name
+    type: string_t
+    requirement: required
+    description: The CIS benchmark name.
+  remediation:
+    caption: Remediation
+    type: object_t
+    object: remediation
+    requirement: optional
+    description: The remediation recommendations on how to fix the identified issue(s).
+  rule:
+    caption: Rule
+    type: object_t
+    object: rule
+    requirement: optional
+    description: The CIS benchmark rule.

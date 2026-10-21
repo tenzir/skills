@@ -1,0 +1,23 @@
+name: endpoint_connection
+caption: Endpoint Connection
+extends: object
+description: The Endpoint Connection object contains information detailing a connection attempt to an endpoint.
+profiles: [container]
+constraints:
+  at_least_one: [network_endpoint, code]
+referenced_by:
+  objects:
+    load_balancer: [endpoint_connections]
+attributes:
+  code:
+    caption: Response Code
+    type: integer_t
+    requirement: recommended
+    description: A numerical response status code providing details about the connection.
+  network_endpoint:
+    caption: Network Endpoint
+    type: object_t
+    object: network_endpoint
+    requirement: recommended
+    observable: 20
+    description: Provides characteristics of the network endpoint.

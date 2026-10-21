@@ -1,0 +1,59 @@
+name: note
+caption: Note
+extends: object
+description: Represents a note or a comment in the system. Notes can be used to provide additional context, explanations, or observations related to an event, object, or any other entity in the system. They can be created and modified by users to capture important information that may not be directly represented in the structured data.
+profiles: [datetime]
+referenced_by:
+  classes:
+    application_security_posture_finding: [notes]
+    compliance_finding: [notes]
+    data_security_finding: [notes]
+    detection_finding: [notes]
+    iam_analysis_finding: [notes]
+    incident_finding: [notes]
+    vulnerability_finding: [notes]
+attributes:
+  comment:
+    caption: Comment
+    type: string_t
+    requirement: required
+    description: A user provided comment.
+  created_time:
+    caption: Created Time
+    type: timestamp_t
+    requirement: recommended
+    description: The time when the note was created.
+  created_time_dt:
+    caption: Created Time
+    type: datetime_t
+    requirement: optional
+    profile: datetime
+    description: The time when the note was created.
+  modified_time:
+    caption: Modified Time
+    type: timestamp_t
+    requirement: recommended
+    description: The time when the note was last modified.
+  modified_time_dt:
+    caption: Modified Time
+    type: datetime_t
+    requirement: optional
+    profile: datetime
+    description: The time when the note was last modified.
+  owner:
+    caption: Owner
+    type: object_t
+    object: user
+    requirement: recommended
+    observable: 21
+    description: The user who created or last modified the note. Typically the same user that created the note can modify the note.
+  title:
+    caption: Title
+    type: string_t
+    requirement: optional
+    description: A short description of the comment, if applicable.
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: optional
+    description: The unique identifier of the note, if applicable.

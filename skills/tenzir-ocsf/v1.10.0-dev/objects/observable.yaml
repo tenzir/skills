@@ -1,0 +1,390 @@
+name: observable
+caption: Observable
+extends: object
+description: The observable object is a pivot element that contains related information found in many places in the event.
+references:
+- description: OCSF Observables Article
+  url: https://github.com/ocsf/ocsf-docs/blob/main/articles/defining-and-using-observables.md
+referenced_by:
+  classes:
+    account_change: [observables]
+    admin_group_query: [observables]
+    airborne_broadcast_activity: [observables]
+    api_activity: [observables]
+    application_error: [observables]
+    application_lifecycle: [observables]
+    application_security_posture_finding: [observables]
+    authentication: [observables]
+    authorize_session: [observables]
+    base_event: [observables]
+    clipboard_activity: [observables]
+    cloud_resources_inventory_info: [observables]
+    compliance_finding: [observables]
+    config_state: [observables]
+    data_security_finding: [observables]
+    datastore_activity: [observables]
+    detection_finding: [observables]
+    device_config_state_change: [observables]
+    device_power_state_activity: [observables]
+    dhcp_activity: [observables]
+    dns_activity: [observables]
+    dns_zone_transfer_activity: [observables]
+    drone_flights_activity: [observables]
+    email_activity: [observables]
+    email_file_activity: [observables]
+    email_url_activity: [observables]
+    entity_management: [observables]
+    event_log_actvity: [observables]
+    evidence_info: [observables]
+    file_activity: [observables]
+    file_hosting: [observables]
+    file_query: [observables]
+    file_remediation_activity: [observables]
+    folder_query: [observables]
+    ftp_activity: [observables]
+    group_management: [observables]
+    http_activity: [observables]
+    iam_analysis_finding: [observables]
+    incident_finding: [observables]
+    inventory_info: [observables]
+    job_query: [observables]
+    kernel_activity: [observables]
+    kernel_extension_activity: [observables]
+    kernel_object_query: [observables]
+    memory_activity: [observables]
+    module_activity: [observables]
+    module_query: [observables]
+    network_activity: [observables]
+    network_connection_query: [observables]
+    network_file_activity: [observables]
+    network_remediation_activity: [observables]
+    networks_query: [observables]
+    ntp_activity: [observables]
+    osint_inventory_info: [observables]
+    patch_state: [observables]
+    peripheral_activity: [observables]
+    peripheral_device_query: [observables]
+    process_activity: [observables]
+    process_query: [observables]
+    process_remediation_activity: [observables]
+    rdp_activity: [observables]
+    remediation_activity: [observables]
+    role_management: [observables]
+    scan_activity: [observables]
+    scheduled_job_activity: [observables]
+    script_activity: [observables]
+    security_finding: [observables]
+    service_query: [observables]
+    session_query: [observables]
+    smb_activity: [observables]
+    software_info: [observables]
+    ssh_activity: [observables]
+    startup_item_query: [observables]
+    tunnel_activity: [observables]
+    user_access: [observables]
+    user_inventory: [observables]
+    user_management: [observables]
+    user_query: [observables]
+    vulnerability_finding: [observables]
+    web_resource_access_activity: [observables]
+    web_resources_activity: [observables]
+  objects:
+    related_event: [observables]
+attributes:
+  event_uid:
+    caption: Event UID
+    type: string_t
+    requirement: optional
+    description: The unique identifier (`metadata.uid`) of the source OCSF event from which this observable was extracted. This field enables linking observables back to their originating event data when observables are stored in a separate location or system.
+  name:
+    caption: Name
+    type: string_t
+    requirement: recommended
+    description: 'The full name of the observable attribute. The `name` is a pointer/reference to an attribute within the OCSF event data. For example: `file.name`. Array attributes may be represented in one of three ways. For example: `resources.uid`, `resources[].uid`, `resources[0].uid`.'
+  reputation:
+    caption: Reputation Scores
+    type: object_t
+    object: reputation
+    requirement: optional
+    description: Contains the original and normalized reputation scores.
+  type:
+    caption: Type
+    type: string_t
+    requirement: optional
+    description: The observable value type name.
+  type_id:
+    caption: Type ID
+    type: integer_t
+    requirement: required
+    sibling: type
+    description: The observable value type identifier.
+    enum:
+      '0':
+        caption: Unknown
+        description: Unknown observable data type.
+      '1':
+        caption: Hostname
+        description: |-
+          Observable by Dictionary Type.
+          Unique name assigned to a device connected to a computer network. It may be a fully qualified domain name (FQDN). For example:
+          `r2-d2.example.com.`,
+          `mx.example.com`
+      '2':
+        caption: IP Address
+        description: |-
+          Observable by Dictionary Type.
+          Internet Protocol address (IP address), in either IPv4 or IPv6 format. For example:
+          `192.168.200.24`,
+           `2001:0db8:85a3:0000:0000:8a2e:0370:7334`.
+      '3':
+        caption: MAC Address
+        description: |-
+          Observable by Dictionary Type.
+          Media Access Control (MAC) address. For example:
+          `18:36:F3:98:4F:9A`.
+      '4':
+        caption: User Name
+        description: |-
+          Observable by Dictionary Type.
+          User name. For example:
+          `john_doe`.
+      '5':
+        caption: Email Address
+        description: |-
+          Observable by Dictionary Type.
+          Email address. For example:
+          `john_doe@example.com`.
+      '6':
+        caption: URL String
+        description: |-
+          Observable by Dictionary Type.
+          Uniform Resource Locator (URL) string. For example:
+          `http://www.example.com/download/trouble.exe`.
+      '7':
+        caption: File Name
+        description: |-
+          Observable by Dictionary Type.
+          File name. For example:
+          `text-file.txt`.
+      '8':
+        caption: Hash
+        description: |-
+          Observable by Dictionary Type.
+          Fingerprint. A value, in any format, that maps an arbitrarily large data item to a much shorter string that uniquely identifies the original data. Examples include cryptographic hashing of a file, code signing, and Network Protocol Fingerprinting (NPF).
+
+          Note about name. The type name `file_hash_t` and the caption "Hash" are used for legacy reasons. This type has been generalized from a file hash to a general fingerprint. The existing type name and caption were retained for backwards compatibility.
+      '9':
+        caption: Process Name
+        description: |-
+          Observable by Dictionary Type.
+          Process name. For example:
+          `Notepad`.
+      '10':
+        caption: Resource UID
+        description: |-
+          Observable by Dictionary Type.
+          Resource unique identifier. For example, S3 Bucket name or EC2 Instance ID.
+      '11':
+        caption: Port
+        description: |-
+          Observable by Dictionary Type.
+          The TCP/UDP port number. For example:
+          `80`,
+          `22`.
+      '12':
+        caption: Subnet
+        description: |-
+          Observable by Dictionary Type.
+          The subnet represented in a CIDR notation, using the format network_address/prefix_length. The network_address can be in either IPv4 or IPv6 format. The prefix length indicates the number of bits used for the network portion, and the remaining bits are available for host addresses within that subnet. For example:
+          `192.168.1.0/24`,
+          `2001:0db8:85a3:0000::/64`
+      '13':
+        caption: Command Line
+        description: |-
+          Observable by Dictionary Attribute.
+          The full command line used to launch an application, service, process, or job. For example: `ssh user@10.0.0.10`. If the command line is unavailable or missing, the empty string `''` is to be used.
+      '14':
+        caption: Country
+        description: |-
+          Observable by Dictionary Attribute.
+          The ISO 3166-1 Alpha-2 country code.
+
+          Note: The two letter country code should be capitalized. For example: `US` or `CA`.
+      '15':
+        caption: Process ID
+        description: |-
+          Observable by Dictionary Attribute.
+          The process identifier, as reported by the operating system. Process ID (PID) is a number used by the operating system to uniquely identify an active process.
+      '16':
+        caption: HTTP User-Agent
+        description: |-
+          Observable by Dictionary Attribute.
+          The request header that identifies the operating system and web browser.
+      '17':
+        caption: 'CWE Object: uid'
+        description: |-
+          Observable by Object-Specific Attribute.
+          Object-specific attribute "uid" for the CWE Object.
+      '18':
+        caption: 'CVE Object: uid'
+        description: |-
+          Observable by Object-Specific Attribute.
+          Object-specific attribute "uid" for the CVE Object.
+      '19':
+        caption: User Credential ID
+        description: |-
+          Observable by Dictionary Attribute.
+          The unique identifier of the user's credential. For example, AWS Access Key ID.
+      '20':
+        caption: Endpoint
+        description: |-
+          Observable by Object.
+          The Endpoint object describes a physical or virtual device that connects to and exchanges information with a computer network. Some examples of endpoints are mobile devices, desktop computers, virtual machines, embedded devices, and servers. Internet-of-Things devices—like cameras, lighting, refrigerators, security systems, smart speakers, and thermostats—are also endpoints.
+      '21':
+        caption: User
+        description: |-
+          Observable by Object.
+          The User object describes the characteristics of a user/person or a security principal.
+      '22':
+        caption: Email
+        description: |-
+          Observable by Object.
+          The Email object describes the email metadata such as sender, recipients, and direction, and can include embedded URLs and files.
+      '23':
+        caption: Uniform Resource Locator
+        description: |-
+          Observable by Object.
+          The Uniform Resource Locator (URL) object describes the characteristics of a URL.
+      '24':
+        caption: File
+        description: |-
+          Observable by Object.
+          The File object represents the metadata associated with a file stored in a computer system. It encompasses information about the file itself, including its attributes, properties, and organizational details.
+      '25':
+        caption: Process
+        description: |-
+          Observable by Object.
+          The Process object describes a running instance of a launched program.
+      '26':
+        caption: Geo Location
+        description: |-
+          Observable by Object.
+          The Geo Location object describes a geographical location, usually associated with an IP address.
+      '27':
+        caption: Container
+        description: |-
+          Observable by Object.
+          The Container object describes an instance of a specific container. A container is a prepackaged, portable system image that runs isolated on an existing system using a container runtime like containerd.
+      '30':
+        caption: Fingerprint
+        description: |-
+          Observable by Object.
+          The Fingerprint object provides detailed information about a fingerprint, which is a compact representation of data used to identify a longer piece of information, such as a public key, file content, or application implementation. It contains the algorithm or scheme and value of the fingerprint, enabling efficient and reliable identification of the associated data.
+      '31':
+        caption: 'User Object: uid'
+        description: |-
+          Observable by Object-Specific Attribute.
+          Object-specific attribute "uid" for the User Object.
+      '32':
+        caption: 'Group Object: name'
+        description: |-
+          Observable by Object-Specific Attribute.
+          Object-specific attribute "name" for the Group Object.
+      '33':
+        caption: 'Group Object: uid'
+        description: |-
+          Observable by Object-Specific Attribute.
+          Object-specific attribute "uid" for the Group Object.
+      '34':
+        caption: 'Account Object: name'
+        description: |-
+          Observable by Object-Specific Attribute.
+          Object-specific attribute "name" for the Account Object.
+      '35':
+        caption: 'Account Object: uid'
+        description: |-
+          Observable by Object-Specific Attribute.
+          Object-specific attribute "uid" for the Account Object.
+      '36':
+        caption: Script Content
+        description: |-
+          Observable by Dictionary Attribute.
+          The script content, normalized to UTF-8 encoding irrespective of its original encoding. When emitting this attribute, it may be appropriate to truncate large scripts. When consuming this attribute, large scripts should be anticipated.
+      '37':
+        caption: Serial Number
+        description: |-
+          Observable by Dictionary Attribute.
+          The serial number that pertains to the object. See specific usage.
+      '38':
+        caption: 'Resource Details Object: name'
+        description: |-
+          Observable by Object-Specific Attribute.
+          Object-specific attribute "name" for the Resource Details Object.
+      '39':
+        caption: 'Process Entity Object: uid'
+        description: |-
+          Observable by Object-Specific Attribute.
+          Object-specific attribute "uid" for the Process Entity Object.
+      '40':
+        caption: 'Email Object: subject'
+        description: |-
+          Observable by Object-Specific Attribute.
+          Object-specific attribute "subject" for the Email Object.
+      '41':
+        caption: 'Email Object: uid'
+        description: |-
+          Observable by Object-Specific Attribute.
+          Object-specific attribute "uid" for the Email Object.
+      '42':
+        caption: Message UID
+        description: |-
+          Observable by Dictionary Attribute.
+          The email header Message-ID value, as defined by RFC 5322.
+      '44':
+        caption: 'Advisory Object: uid'
+        description: |-
+          Observable by Object-Specific Attribute.
+          Object-specific attribute "uid" for the Advisory Object.
+      '45':
+        caption: File Path
+        description: |-
+          Observable by Dictionary Type.
+          The full path to the file. For example:
+          `c:\windows\system32\svchost.exe`.
+      '47':
+        caption: 'Device Object: uid'
+        description: |-
+          Observable by Object-Specific Attribute.
+          Object-specific attribute "uid" for the Device Object.
+      '48':
+        caption: 'Network Endpoint Object: uid'
+        description: |-
+          Observable by Object-Specific Attribute.
+          Object-specific attribute "uid" for the Network Endpoint Object.
+      '49':
+        caption: 'IAM Role Object: name'
+        description: |-
+          Observable by Object-Specific Attribute.
+          Object-specific attribute "name" for the IAM Role Object.
+      '50':
+        caption: 'IAM Role Object: uid'
+        description: |-
+          Observable by Object-Specific Attribute.
+          Object-specific attribute "uid" for the IAM Role Object.
+      '99':
+        caption: Other
+        description: The observable data type is not mapped. See the `type` attribute, which may contain data source specific value.
+  type_uid:
+    caption: Type ID
+    type: long_t
+    requirement: optional
+    sibling: type_name
+    description: 'The OCSF event type UID (`type_uid`) of the source event that this observable was extracted from. This field enables filtering and categorizing observables by their originating event type. For example: `400101` for Network Activity (class_uid 4001) with activity_id 1.'
+  value:
+    caption: Value
+    type: string_t
+    requirement: optional
+    description: |-
+      The value associated with the observable attribute. The meaning of the value depends on the observable type.
+      If the `name` refers to a scalar attribute, then the `value` is the value of the attribute.
+      If the `name` refers to an object attribute, then the `value` is not populated.

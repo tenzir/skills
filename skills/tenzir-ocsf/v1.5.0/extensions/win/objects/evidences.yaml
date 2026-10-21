@@ -1,0 +1,28 @@
+name: evidences
+caption: Windows Evidence Artifacts
+extension: win
+patches: evidences
+description: Extends the evidences object to add Windows specific fields
+constraints:
+  at_least_one: [actor, api, connection_info, data, database, databucket, device, dst_endpoint, email, file, process, query, src_endpoint, url, user, job, script, reg_key, reg_value, win_service]
+attributes:
+  reg_key:
+    caption: Registry Key
+    type: object_t
+    object: win/reg_key
+    requirement: recommended
+    observable: 28
+    description: Describes details about the registry key that triggered the detection.
+  reg_value:
+    caption: Registry Value
+    type: object_t
+    object: win/reg_value
+    requirement: recommended
+    observable: 29
+    description: Describes details about the registry value that triggered the detection.
+  win_service:
+    caption: Windows Service
+    type: object_t
+    object: win/win_service
+    requirement: recommended
+    description: Describes details about the Windows service that triggered the detection.

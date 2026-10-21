@@ -1,0 +1,85 @@
+name: job_trigger
+caption: Job Trigger
+description: The condition or event that, when met, will initiate the job to perform specified actions.
+profiles: [datetime]
+referenced_by:
+  objects:
+    job: [job_triggers]
+attributes:
+  event_codes:
+    caption: Event Codes
+    type: string_t
+    array: true
+    requirement: optional
+    description: Event identifiers that pertain to the job trigger. Should be populated when the `Event (3)` type is specified.
+  last_run_time:
+    caption: Last Run
+    type: timestamp_t
+    requirement: recommended
+    description: The time when the job was last run.
+  last_run_time_dt:
+    caption: Last Run
+    type: datetime_t
+    requirement: optional
+    profile: datetime
+    description: The time when the job was last run.
+  log_sources:
+    caption: Log Sources
+    type: string_t
+    array: true
+    requirement: optional
+    description: A collection of log systems or components that pertain to the job trigger. Should be populated when the `Event (3)` type is specified.
+  next_run_time:
+    caption: Next Run
+    type: timestamp_t
+    requirement: optional
+    description: The time when the job will next be run.
+  next_run_time_dt:
+    caption: Next Run
+    type: datetime_t
+    requirement: optional
+    profile: datetime
+    description: The time when the job will next be run.
+  properties:
+    caption: Properties
+    type: object_t
+    object: key_value_object
+    array: true
+    requirement: recommended
+    description: |-
+      The list of properties associated with the trigger.
+      Can be used to describe time boundaries of the job, amount of repetitions or when the job should be activated or expired.
+  type:
+    caption: Type
+    type: string_t
+    requirement: recommended
+    description: The job trigger type, normalized to the caption of the `type_id` value. In the case of 'Other', it is defined by the event source.
+  type_id:
+    caption: Type ID
+    type: integer_t
+    requirement: required
+    sibling: type
+    description: The job trigger type, i.e. the condition that must be met for the job to perform its action.
+    enum:
+      '0':
+        caption: Unknown
+        description: The trigger is unknown.
+      '1':
+        caption: Boot
+        description: The job is triggered on a system boot.
+      '2':
+        caption: Schedule
+        description: The job is triggered on a specific schedule. Properties should be populated with respective time bounds.
+      '3':
+        caption: Event
+        description: The job is triggered when the specific event occurs. The `properties` attribute should be populated with respective event sources and identifiers.
+      '99':
+        caption: Other
+        description: The job trigger is unmapped. See the `type` attribute, which contains a data source specific value.
+  user:
+    caption: User
+    type: object_t
+    object: user
+    requirement: optional
+    observable: 21
+    description: The user that pertains to the job trigger. Can be populated when the `Event (3)` type that bounds to specific user is used.

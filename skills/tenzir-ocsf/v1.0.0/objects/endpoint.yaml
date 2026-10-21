@@ -1,0 +1,78 @@
+name: endpoint
+caption: Endpoint
+extends: _entity
+observable: 20
+description: The Endpoint object describes a physical or virtual device that connects to and exchanges information with a computer network. Some examples of endpoints are mobile devices, desktop computers, virtual machines, embedded devices, and servers. Internet-of-Things devices—like cameras, lighting, refrigerators, security systems, smart speakers, and thermostats—are also endpoints.
+constraints:
+  at_least_one: [ip, uid, name, hostname, instance_uid, interface_uid, interface_name]
+attributes:
+  domain:
+    caption: Domain
+    type: string_t
+    requirement: optional
+    description: The name of the domain.
+  hostname:
+    caption: Hostname
+    type: hostname_t
+    requirement: recommended
+    observable: 1
+    description: The fully qualified name of the endpoint.
+  instance_uid:
+    caption: Instance ID
+    type: string_t
+    requirement: recommended
+    description: The unique identifier of a VM instance.
+  interface_name:
+    caption: Network Interface Name
+    type: string_t
+    requirement: recommended
+    description: The name of the network interface (e.g. eth2).
+  interface_uid:
+    caption: Network Interface ID
+    type: string_t
+    requirement: recommended
+    description: The unique identifier of the network interface.
+  ip:
+    caption: IP Address
+    type: ip_t
+    requirement: recommended
+    observable: 2
+    description: The IP address of the endpoint, in either IPv4 or IPv6 format.
+  location:
+    caption: Geo Location
+    type: object_t
+    object: location
+    requirement: optional
+    observable: 26
+    description: The geographical location of the endpoint.
+  mac:
+    caption: MAC Address
+    type: mac_t
+    requirement: optional
+    observable: 3
+    description: The Media Access Control (MAC) address of the endpoint.
+  name:
+    caption: Name
+    type: string_t
+    requirement: recommended
+    description: The short name of the endpoint.
+  subnet_uid:
+    caption: Subnet UID
+    type: string_t
+    requirement: optional
+    description: The unique identifier of a virtual subnet.
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: recommended
+    description: The unique identifier of the endpoint.
+  vlan_uid:
+    caption: VLAN
+    type: string_t
+    requirement: optional
+    description: The Virtual LAN identifier.
+  vpc_uid:
+    caption: VPC UID
+    type: string_t
+    requirement: optional
+    description: The unique identifier of the Virtual Private Cloud (VPC).

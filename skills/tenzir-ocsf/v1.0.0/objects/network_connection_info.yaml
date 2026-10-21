@@ -1,0 +1,136 @@
+name: network_connection_info
+caption: Network Connection Information
+extends: object
+description: The Network Connection Information object describes characteristics of a network connection. Defined by D3FEND [d3f:NetworkSession](https://d3fend.mitre.org/dao/artifact/d3f:NetworkSession/).
+referenced_by:
+  classes:
+    dns_activity: [connection_info]
+    ftp_activity: [connection_info]
+    http_activity: [connection_info]
+    network_activity: [connection_info]
+    rdp_activity: [connection_info]
+    smb_activity: [connection_info]
+    ssh_activity: [connection_info]
+attributes:
+  boundary:
+    caption: Boundary
+    type: string_t
+    requirement: optional
+    description: |-
+      The boundary of the connection, normalized to the caption of 'boundary_id'. In the case of 'Other', it is defined by the event source.
+
+      For cloud connections, this translates to the traffic-boundary(same VPC, through IGW, etc.). For traditional networks, this is described as Local, Internal, or External.
+  boundary_id:
+    caption: Boundary ID
+    type: integer_t
+    requirement: optional
+    sibling: boundary
+    description: |-
+      The normalized identifier of the boundary of the connection.
+
+      For cloud connections, this translates to the traffic-boundary (same VPC, through IGW, etc.). For traditional networks, this is described as Local, Internal, or External.
+    enum:
+      '0':
+        caption: Unknown
+        description: The connection boundary is unknown.
+      '1':
+        caption: Localhost
+        description: Local network traffic on the same endpoint.
+      '2':
+        caption: Internal
+        description: Internal network traffic between two endpoints inside network.
+      '3':
+        caption: External
+        description: External network traffic between two endpoints on the Internet or outside the network.
+      '4':
+        caption: Same VPC
+        description: Through another resource in the same VPC
+      '5':
+        caption: Internet/VPC Gateway
+        description: Through an Internet gateway or a gateway VPC endpoint
+      '6':
+        caption: Virtual Private Gateway
+        description: Through a virtual private gateway
+      '7':
+        caption: Intra-region VPC
+        description: Through an intra-region VPC peering connection
+      '8':
+        caption: Inter-region VPC
+        description: Through an inter-region VPC peering connection
+      '9':
+        caption: Local Gateway
+        description: Through a local gateway
+      '10':
+        caption: Gateway VPC
+        description: Through a gateway VPC endpoint (Nitro-based instances only)
+      '11':
+        caption: Internet Gateway
+        description: Through an Internet gateway (Nitro-based instances only)
+      '99':
+        caption: Other
+  direction:
+    caption: Direction
+    type: string_t
+    requirement: optional
+    description: The direction of the initiated connection, traffic, or email, normalized to the caption of the direction_id value. In the case of 'Other', it is defined by the event source.
+  direction_id:
+    caption: Direction ID
+    type: integer_t
+    requirement: required
+    sibling: direction
+    description: The normalized identifier of the direction of the initiated connection, traffic, or email.
+    enum:
+      '0':
+        caption: Unknown
+        description: Connection direction is unknown.
+      '1':
+        caption: Inbound
+        description: Inbound network connection. The connection was originated from the Internet or outside network, destined for services on the inside network.
+      '2':
+        caption: Outbound
+        description: Outbound network connection. The connection was originated from inside the network, destined for services on the Internet or outside network.
+      '3':
+        caption: Lateral
+        description: Lateral network connection. The connection was originated from inside the network, destined for services on the inside network.
+      '99':
+        caption: Other
+  protocol_name:
+    caption: Protocol Name
+    type: string_t
+    requirement: optional
+    description: 'The TCP/IP protocol name in lowercase, as defined by the Internet Assigned Numbers Authority (IANA). See [Protocol Numbers](https://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml). For example: `tcp` or `udp`.'
+  protocol_num:
+    caption: Protocol Number
+    type: integer_t
+    requirement: recommended
+    description: 'The TCP/IP protocol number, as defined by the Internet Assigned Numbers Authority (IANA). Use -1 if the protocol is not defined by IANA. See [Protocol Numbers](https://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml). For example: `6` for TCP and `17` for UDP.'
+  protocol_ver:
+    caption: IP Version
+    type: string_t
+    requirement: optional
+    description: The Internet Protocol version.
+  protocol_ver_id:
+    caption: IP Version ID
+    type: integer_t
+    requirement: optional
+    sibling: protocol_ver
+    description: The Internet Protocol version identifier.
+    enum:
+      '0':
+        caption: Unknown
+      '4':
+        caption: Internet Protocol version 4 (IPv4)
+      '6':
+        caption: Internet Protocol version 6 (IPv6)
+      '99':
+        caption: Other
+  tcp_flags:
+    caption: TCP Flags
+    type: integer_t
+    requirement: optional
+    description: The network connection TCP header flags (i.e., control bits).
+  uid:
+    caption: Connection UID
+    type: string_t
+    requirement: optional
+    description: The unique identifier of the connection.

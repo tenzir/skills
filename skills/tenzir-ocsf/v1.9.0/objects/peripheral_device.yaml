@@ -1,0 +1,98 @@
+name: peripheral_device
+caption: Peripheral Device
+extends: _entity
+description: The peripheral device object describes the properties of external, connectable, and detachable hardware.
+constraints:
+  at_least_one: [name, uid]
+referenced_by:
+  classes:
+    peripheral_activity: [peripheral_device]
+    peripheral_device_query: [peripheral_device]
+  objects:
+    device: [peripheral_devices]
+    query_evidence: [peripheral_device]
+attributes:
+  class:
+    caption: Class
+    type: string_t
+    requirement: optional
+    description: The class of the peripheral device.
+  model:
+    caption: Model
+    type: string_t
+    requirement: recommended
+    description: The peripheral device model.
+  name:
+    caption: Name
+    type: string_t
+    requirement: required
+    description: The name of the peripheral device.
+  serial_number:
+    caption: Serial Number
+    type: string_t
+    requirement: recommended
+    observable: 37
+    description: The peripheral device serial number.
+  type:
+    caption: Peripheral Device Type
+    type: string_t
+    requirement: optional
+    description: The Peripheral Device type, normalized to the caption of the `type_id` value. In the case of 'Other', it is defined by the source.
+  type_id:
+    caption: Peripheral Device Type ID
+    type: integer_t
+    requirement: recommended
+    sibling: type
+    description: The normalized peripheral device type ID.
+    enum:
+      '0':
+        caption: Unknown
+        description: The peripheral device type is unknown.
+      '1':
+        caption: External Storage
+        description: The peripheral device is an external storage device.
+      '2':
+        caption: Keyboard
+        description: The peripheral device is a keyboard.
+      '3':
+        caption: Mouse
+        description: The peripheral device is a mouse.
+      '4':
+        caption: Printer
+        description: The peripheral device is a printer.
+      '5':
+        caption: Monitor
+        description: The peripheral device is a monitor.
+      '6':
+        caption: Microphone
+        description: The peripheral device is a microphone.
+      '7':
+        caption: Webcam
+        description: The peripheral device is a webcam.
+      '99':
+        caption: Other
+        description: The peripheral device type is not mapped. See the `type` attribute which contains an event source specific value.
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: recommended
+    description: The unique identifier of the peripheral device.
+  uid_numeric:
+    caption: Numeric Unique ID
+    type: long_t
+    requirement: optional
+    from: _entity
+    description: |-
+      The `uid` attribute in numeric form where applicable.
+      Note: Producers may populate `uid_numeric` only in addition to `uid` and not as an alternative to it.
+  vendor_id_list:
+    caption: Vendor ID List
+    type: string_t
+    array: true
+    requirement: recommended
+    description: The list of vendor IDs for the peripheral device.
+  vendor_name:
+    caption: Vendor Name
+    type: string_t
+    requirement: recommended
+    description: The primary vendor name for the peripheral device.

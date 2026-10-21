@@ -1,0 +1,39 @@
+name: policy
+caption: Policy
+extends: _entity
+description: |-
+  The Policy object describes the policies that are applicable.
+
+  Policy attributes provide traceability to the operational state of the security product at the time that the event was captured, facilitating forensics, troubleshooting, and policy tuning/adjustments.
+constraints:
+  at_least_one: [name, uid]
+referenced_by:
+  objects:
+    authorization: [policy]
+attributes:
+  desc:
+    caption: Description
+    type: string_t
+    requirement: optional
+    description: The description of the policy.
+  group:
+    caption: Group
+    type: object_t
+    object: group
+    requirement: optional
+    description: The policy group.
+  name:
+    caption: Name
+    type: string_t
+    requirement: recommended
+    description: 'The policy name. For example: `IAM Policy`.'
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: recommended
+    description: A unique identifier of the policy instance.
+  version:
+    caption: Version
+    type: string_t
+    requirement: recommended
+    description: The policy version number.

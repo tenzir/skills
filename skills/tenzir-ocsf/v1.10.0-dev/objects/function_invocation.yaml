@@ -1,0 +1,27 @@
+name: function_invocation
+caption: Function Invocation
+extends: object
+description: The Function Invocation object provides details regarding the invocation of a function.
+constraints:
+  at_least_one: [parameters, return_value, error]
+referenced_by:
+  objects:
+    module: [function_invocation]
+attributes:
+  error:
+    caption: Error Code
+    type: string_t
+    requirement: recommended
+    description: The error indication returned from the function. This may differ from the return value (e.g. when `errno` is used).
+  parameters:
+    caption: Parameters
+    type: object_t
+    object: parameter
+    array: true
+    requirement: recommended
+    description: The parameters passed into a function invocation.
+  return_value:
+    caption: Return Value
+    type: string_t
+    requirement: recommended
+    description: The value returned from a function.

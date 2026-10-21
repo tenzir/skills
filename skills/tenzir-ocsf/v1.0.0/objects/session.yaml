@@ -1,0 +1,60 @@
+name: session
+caption: Session
+extends: object
+description: The Session object describes details about an authenticated session. e.g. Session Creation Time, Session Issuer. Defined by D3FEND [d3f:Session](https://d3fend.mitre.org/dao/artifact/d3f:Session/).
+profiles: [datetime]
+referenced_by:
+  classes:
+    authentication: [session]
+    authorize_session: [session]
+  objects:
+    actor: [session]
+    process: [session]
+attributes:
+  created_time:
+    caption: Created Time
+    type: timestamp_t
+    requirement: recommended
+    description: The time when the session was created.
+  created_time_dt:
+    caption: Created Time
+    type: datetime_t
+    requirement: optional
+    profile: datetime
+    description: The time when the session was created.
+  credential_uid:
+    caption: User Credential ID
+    type: string_t
+    requirement: optional
+    description: The unique identifier of the user's credential. For example, AWS Access Key ID.
+  expiration_time:
+    caption: Expiration Time
+    type: timestamp_t
+    requirement: optional
+    description: The session expiration time.
+  expiration_time_dt:
+    caption: Expiration Time
+    type: datetime_t
+    requirement: optional
+    profile: datetime
+    description: The session expiration time.
+  is_remote:
+    caption: Remote
+    type: boolean_t
+    requirement: recommended
+    description: The indication of whether the session is remote.
+  issuer:
+    caption: Issuer Details
+    type: string_t
+    requirement: recommended
+    description: The identifier of the session issuer.
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: recommended
+    description: The unique identifier of the session.
+  uuid:
+    caption: UUID
+    type: uuid_t
+    requirement: optional
+    description: The universally unique identifier of the session.

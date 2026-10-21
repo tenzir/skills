@@ -1,0 +1,263 @@
+name: file
+caption: File
+extends: _entity
+observable: 24
+description: The File object represents the metadata associated with a file stored in a computer system. It encompasses information about the file itself, including its attributes, properties, and organizational details. Defined by D3FEND [d3f:File](https://next.d3fend.mitre.org/dao/artifact/d3f:File/).
+profiles: [data_classification, datetime]
+referenced_by:
+  classes:
+    data_security_finding: [file]
+    email_file_activity: [file]
+    event_log: [file]
+    file_activity: [file, file_result]
+    file_hosting: [file, file_result]
+    file_query: [file]
+    file_remediation_activity: [file]
+    folder_query: [folder]
+    ftp_activity: [file]
+    http_activity: [file]
+    network_file_activity: [file]
+    rdp_activity: [file]
+    smb_activity: [file]
+    ssh_activity: [file]
+  objects:
+    affected_code: [file]
+    databucket: [file]
+    evidences: [file]
+    job: [file]
+    kernel_driver: [file]
+    module: [file]
+    process: [file]
+attributes:
+  accessed_time:
+    caption: Accessed Time
+    type: timestamp_t
+    requirement: optional
+    description: The time when the file was last accessed.
+  accessed_time_dt:
+    caption: Accessed Time
+    type: datetime_t
+    requirement: optional
+    profile: datetime
+    description: The time when the file was last accessed.
+  accessor:
+    caption: Accessor
+    type: object_t
+    object: user
+    requirement: optional
+    observable: 21
+    description: The name of the user who last accessed the object.
+  attributes:
+    caption: Attributes
+    type: integer_t
+    requirement: optional
+    description: The bitmask value that represents the file attributes.
+  company_name:
+    caption: Company Name
+    type: string_t
+    requirement: optional
+    description: 'The name of the company that published the file. For example: `Microsoft Corporation`.'
+  confidentiality:
+    caption: Confidentiality
+    type: string_t
+    requirement: optional
+    description: The file content confidentiality, normalized to the confidentiality_id value. In the case of 'Other', it is defined by the event source.
+  confidentiality_id:
+    caption: Confidentiality ID
+    type: integer_t
+    requirement: optional
+    sibling: confidentiality
+    description: The normalized identifier of the file content confidentiality indicator.
+    enum:
+      '0':
+        caption: Unknown
+        description: The confidentiality is unknown.
+      '1':
+        caption: Not Confidential
+      '2':
+        caption: Confidential
+      '3':
+        caption: Secret
+      '4':
+        caption: Top Secret
+      '5':
+        caption: Private
+      '6':
+        caption: Restricted
+      '99':
+        caption: Other
+        description: The confidentiality is not mapped. See the `confidentiality` attribute, which contains a data source specific value.
+  created_time:
+    caption: Created Time
+    type: timestamp_t
+    requirement: optional
+    description: The time when the file was created.
+  created_time_dt:
+    caption: Created Time
+    type: datetime_t
+    requirement: optional
+    profile: datetime
+    description: The time when the file was created.
+  creator:
+    caption: Creator
+    type: object_t
+    object: user
+    requirement: optional
+    observable: 21
+    description: The user that created the file.
+  data_classification:
+    caption: Data Classification
+    type: object_t
+    object: data_classification
+    requirement: recommended
+    group: context
+    profile: data_classification
+    description: The Data Classification object includes information about data classification levels and data category types.
+  desc:
+    caption: Description
+    type: string_t
+    requirement: optional
+    description: 'The description of the file, as returned by file system. For example: the description as returned by the Unix file command or the Windows file type.'
+  ext:
+    caption: File Extension
+    type: string_t
+    requirement: recommended
+    description: 'The extension of the file, excluding the leading dot. For example: `exe` from `svchost.exe`, or `gz` from `export.tar.gz`.'
+  hashes:
+    caption: Hashes
+    type: object_t
+    object: fingerprint
+    array: true
+    requirement: recommended
+    observable: 30
+    description: An array of hash attributes.
+  is_system:
+    caption: System
+    type: boolean_t
+    requirement: optional
+    description: The indication of whether the object is part of the operating system.
+  mime_type:
+    caption: MIME type
+    type: string_t
+    requirement: optional
+    description: The Multipurpose Internet Mail Extensions (MIME) type of the file, if applicable.
+  modified_time:
+    caption: Modified Time
+    type: timestamp_t
+    requirement: optional
+    description: The time when the file was last modified.
+  modified_time_dt:
+    caption: Modified Time
+    type: datetime_t
+    requirement: optional
+    profile: datetime
+    description: The time when the file was last modified.
+  modifier:
+    caption: Modifier
+    type: object_t
+    object: user
+    requirement: optional
+    observable: 21
+    description: The user that last modified the file.
+  name:
+    caption: Name
+    type: file_name_t
+    requirement: required
+    observable: 7
+    description: 'The name of the file. For example: `svchost.exe`'
+  owner:
+    caption: Owner
+    type: object_t
+    object: user
+    requirement: optional
+    observable: 21
+    description: The user that owns the file/object.
+  parent_folder:
+    caption: Parent Folder
+    type: string_t
+    requirement: optional
+    description: 'The parent folder in which the file resides. For example: `c:\windows\system32`'
+  path:
+    caption: Path
+    type: string_t
+    requirement: recommended
+    description: 'The full path to the file. For example: `c:\windows\system32\svchost.exe`.'
+  product:
+    caption: Product
+    type: object_t
+    object: product
+    requirement: optional
+    description: The product that created or installed the file.
+  security_descriptor:
+    caption: Security Descriptor
+    type: string_t
+    requirement: optional
+    description: The object security descriptor.
+  signature:
+    caption: Digital Signature
+    type: object_t
+    object: digital_signature
+    requirement: optional
+    description: The digital signature of the file.
+  size:
+    caption: Size
+    type: long_t
+    requirement: optional
+    description: The size of data, in bytes.
+  type:
+    caption: Type
+    type: string_t
+    requirement: optional
+    description: The file type.
+  type_id:
+    caption: Type ID
+    type: integer_t
+    requirement: required
+    sibling: type
+    description: The file type ID.
+    enum:
+      '0':
+        caption: Unknown
+        description: The type is unknown.
+      '1':
+        caption: Regular File
+      '2':
+        caption: Folder
+      '3':
+        caption: Character Device
+      '4':
+        caption: Block Device
+      '5':
+        caption: Local Socket
+      '6':
+        caption: Named Pipe
+      '7':
+        caption: Symbolic Link
+      '99':
+        caption: Other
+        description: The type is not mapped. See the `type` attribute, which contains a data source specific value.
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: optional
+    description: The unique identifier of the file as defined by the storage system, such the file system file ID.
+  version:
+    caption: Version
+    type: string_t
+    requirement: optional
+    description: 'The file version. For example: `8.0.7601.17514`.'
+  xattributes:
+    caption: Extended Attributes
+    type: object_t
+    object: object
+    requirement: optional
+    description: |-
+      An unordered collection of zero or more name/value pairs where each pair represents a file or folder extended attribute.For example: Windows alternate data stream attributes (ADS stream name, ADS size, etc.), user-defined or application-defined attributes, ACL, owner, primary group, etc. Examples from DCS:
+
+      - ads_name
+      - ads_size
+      - dacl
+      - owner
+      - primary_group
+      - link_name - name of the link associated to the file.
+      - hard_link_count - the number of links that are associated to the file.

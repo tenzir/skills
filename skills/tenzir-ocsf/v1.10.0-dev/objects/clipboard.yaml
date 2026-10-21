@@ -1,0 +1,20 @@
+name: clipboard
+caption: Clipboard
+extends: object
+description: The Clipboard object represents an endpoint clipboard and its contents.
+referenced_by:
+  classes:
+    clipboard_activity: [clipboard]
+attributes:
+  contents:
+    caption: Clipboard Contents
+    type: object_t
+    object: clipboard_item
+    array: true
+    requirement: recommended
+    description: The data items written to, or read from, the clipboard.
+  name:
+    caption: Name
+    type: string_t
+    requirement: optional
+    description: 'The name of the clipboard on systems with named clipboards. For example: `General` or `Drag`.'

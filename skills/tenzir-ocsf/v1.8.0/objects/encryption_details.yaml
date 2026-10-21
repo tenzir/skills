@@ -1,0 +1,61 @@
+name: encryption_details
+caption: Encryption Details
+extends: object
+description: Details about the encryption methodology utilized.
+referenced_by:
+  objects:
+    authentication_token: [encryption_details]
+    databucket: [encryption_details]
+    file: [encryption_details]
+attributes:
+  algorithm:
+    caption: Encryption Algorithm
+    type: string_t
+    requirement: optional
+    description: The encryption algorithm used, normalized to the caption of 'algorithm_id
+  algorithm_id:
+    caption: Encryption Algorithm ID
+    type: integer_t
+    requirement: recommended
+    sibling: algorithm
+    description: The encryption algorithm used.
+    enum:
+      '0':
+        caption: Unknown
+        description: The algorithm is unknown.
+      '1':
+        caption: DES
+        description: Data Encryption Standard Algorithm
+      '2':
+        caption: TripleDES
+        description: Triple Data Encryption Standard Algorithm
+      '3':
+        caption: AES
+        description: Advanced Encryption Standard Algorithm.
+      '4':
+        caption: RSA
+        description: Rivest-Shamir-Adleman Algorithm
+      '5':
+        caption: ECC
+        description: Elliptic Curve Cryptography Algorithm
+      '6':
+        caption: SM2
+        description: ShangMi Cryptographic Algorithm
+      '99':
+        caption: Other
+        description: The algorithm is not mapped. See the `algorithm` attribute, which contains a data source specific value.
+  key_length:
+    caption: Encryption Key Length
+    type: integer_t
+    requirement: optional
+    description: The length of the encryption key used.
+  key_uid:
+    caption: Key UID
+    type: string_t
+    requirement: optional
+    description: The unique identifier of the key used for encryption. For example, AWS KMS Key ARN.
+  type:
+    caption: Encryption Type
+    type: string_t
+    requirement: recommended
+    description: The type of the encryption used.

@@ -1,0 +1,32 @@
+name: process
+caption: Linux Process
+extension: linux
+patches: process
+description: Extends the process object to add Linux specific fields
+profiles: [linux/linux_users]
+attributes:
+  auid:
+    caption: Audit User ID
+    type: integer_t
+    requirement: optional
+    profile: linux/linux_users
+    description: The audit user assigned at login by the audit subsystem.
+  egid:
+    caption: Effective Group ID
+    type: integer_t
+    requirement: optional
+    profiles: [linux/linux_users, macos/macos_users]
+    description: The effective group under which this process is running.
+  euid:
+    caption: Effective User ID
+    type: integer_t
+    requirement: optional
+    profiles: [linux/linux_users, macos/macos_users]
+    description: The effective user under which this process is running.
+  group:
+    caption: Group
+    type: object_t
+    object: group
+    requirement: recommended
+    profile: linux/linux_users
+    description: The group under which this process is running.

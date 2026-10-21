@@ -1,0 +1,31 @@
+name: cis_benchmark
+caption: CIS Benchmark
+extends: object
+deprecated:
+  since: 1.5.0
+  message: Use the `compliance.checks` attribute instead.
+  superseded_by: [compliance.checks]
+description: The CIS Benchmark object describes best practices for securely configuring IT systems, software, networks, and cloud infrastructure as defined by the Center for Internet Security. See also Getting to Know the CIS Benchmarks.
+references:
+- description: CIS Benchmarks
+  url: https://www.cisecurity.org/cis-benchmarks/
+- description: Getting to Know the CIS Benchmarks
+  url: https://www.cisecurity.org/insights/blog/getting-to-know-the-cis-benchmarks
+attributes:
+  cis_controls:
+    caption: CIS Controls
+    type: object_t
+    object: cis_control
+    array: true
+    requirement: recommended
+    description: The CIS Critical Security Controls is a prioritized set of actions to protect your organization and data from cyber-attack vectors.
+  desc:
+    caption: Description
+    type: string_t
+    requirement: optional
+    description: 'The CIS Benchmark description. For example: The cramfs filesystem type is a compressed read-only Linux filesystem embedded in small footprint systems. A cramfs image can be used without having to first decompress the image.'
+  name:
+    caption: Name
+    type: string_t
+    requirement: required
+    description: 'The CIS Benchmark name. For example: Ensure mounting of cramfs filesystems is disabled.'

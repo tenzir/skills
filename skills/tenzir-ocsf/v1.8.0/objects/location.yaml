@@ -1,0 +1,133 @@
+name: location
+caption: Geo Location
+extends: object
+observable: 26
+description: The Geo Location object describes a geographical location, usually associated with an IP address.
+constraints:
+  at_least_one: [city, country, postal_code, region]
+referenced_by:
+  objects:
+    aircraft: [location]
+    device: [location]
+    domain_contact: [location]
+    endpoint: [location]
+    ldap_person: [location]
+    managed_entity: [location]
+    network_endpoint: [location]
+    network_proxy: [location]
+    osint: [location]
+    unmanned_aerial_system: [location]
+    unmanned_system_operating_area: [locations]
+attributes:
+  aerial_height:
+    caption: Aerial Height
+    type: string_t
+    requirement: optional
+    description: 'Expressed as either height above takeoff location or height above ground level (AGL) for a UAS current location. This value is provided in meters and must have a minimum resolution of 1 m. Special Values: `Invalid`, `No Value`, or `Unknown: -1000 m`.'
+  city:
+    caption: City
+    type: string_t
+    requirement: recommended
+    description: The name of the city.
+  continent:
+    caption: Continent
+    type: string_t
+    requirement: recommended
+    description: The name of the continent.
+  coordinates:
+    caption: Coordinates
+    type: float_t
+    array: true
+    requirement: optional
+    deprecated:
+      since: 1.2.0
+      message: Use specific `lat, long` attributes instead.
+    description: 'A two-element array, containing a longitude/latitude pair. The format conforms with [GeoJSON](https://geojson.org). For example: `[-73.983, 40.719]`.'
+  country:
+    caption: Country
+    type: string_t
+    requirement: recommended
+    observable: 14
+    description: |-
+      The ISO 3166-1 Alpha-2 country code.
+
+      Note: The two letter country code should be capitalized. For example: `US` or `CA`.
+    references:
+    - description: ISO 3166-1 alpha-2 codes
+      url: https://www.iso.org/obp/ui/#iso:pub:PUB500001:en
+  desc:
+    caption: Description
+    type: string_t
+    requirement: optional
+    description: The description of the geographical location.
+  geodetic_altitude:
+    caption: Geodetic Altitude
+    type: string_t
+    requirement: optional
+    description: 'The aircraft distance above or below the ellipsoid as measured along a line that passes through the aircraft and is normal to the surface of the WGS-84 ellipsoid. This value is provided in meters and must have a minimum resolution of 1 m. Special Values: `Invalid`, `No Value`, or `Unknown: -1000 m`.'
+  geodetic_vertical_accuracy:
+    caption: Geodetic Vertical Accuracy
+    type: string_t
+    requirement: optional
+    description: Provides quality/containment on geodetic altitude. This is based on ADS-B Geodetic Vertical Accuracy (GVA). Measured in meters.
+  geohash:
+    caption: Geohash
+    type: string_t
+    requirement: optional
+    description: |-
+      Geohash of the geo-coordinates (latitude and longitude).
+
+      [Geohashing](https://en.wikipedia.org/wiki/Geohash) is a geocoding system used to encode geographic coordinates in decimal degrees, to a single string.
+  horizontal_accuracy:
+    caption: Horizontal Accuracy
+    type: string_t
+    requirement: optional
+    description: Provides quality/containment on horizontal position. This is based on ADS-B NACp. Measured in meters.
+  is_on_premises:
+    caption: On-Premises
+    type: boolean_t
+    requirement: optional
+    description: Indicates whether the location is on-premises.
+  isp:
+    caption: ISP Name
+    type: string_t
+    requirement: optional
+    deprecated:
+      since: 1.5.0
+      message: Utilize `isp` attribute available in `network_endpoint, whois` objects according to your use-case.
+    description: The name of the Internet Service Provider (ISP).
+  lat:
+    caption: Latitude
+    type: float_t
+    requirement: optional
+    description: 'The geographical Latitude coordinate represented in Decimal Degrees (DD). For example: `42.361145`.'
+  long:
+    caption: Longitude
+    type: float_t
+    requirement: optional
+    description: 'The geographical Longitude coordinate represented in Decimal Degrees (DD). For example: `-71.057083`.'
+  postal_code:
+    caption: Postal Code
+    type: string_t
+    requirement: optional
+    description: The postal code of the location.
+  pressure_altitude:
+    caption: Pressure Altitude
+    type: string_t
+    requirement: optional
+    description: 'The uncorrected barometric pressure altitude (based on reference standard 29.92 inHg, 1013.25 mb) provides a reference for algorithms that utilize ''altitude deltas'' between aircraft. This value is provided in meters and must have a minimum resolution of 1 m.. Special Values: `Invalid`, `No Value`, or `Unknown: -1000 m`.'
+  provider:
+    caption: Provider
+    type: string_t
+    requirement: optional
+    description: The provider of the geographical location data.
+  region:
+    caption: Region
+    type: string_t
+    requirement: optional
+    description: The alphanumeric code that identifies the principal subdivision (e.g. province or state) of the country. For example, 'CH-VD' for the Canton of Vaud, Switzerland
+    references:
+    - description: ISO Region Codes
+      url: https://www.iso.org/iso-3166-country-codes.html
+    - description: U.S. Region Codes
+      url: https://www.iso.org/obp/ui/#iso:code:3166:US

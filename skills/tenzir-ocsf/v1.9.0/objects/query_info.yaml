@@ -1,0 +1,70 @@
+name: query_info
+caption: Query Information
+extends: _entity
+description: The query info object holds information related to data access within a datastore. To access, manipulate, delete, or retrieve data from a datastore, a query must be written using a specific syntax.
+profiles: [datetime]
+constraints:
+  at_least_one: [name, uid]
+referenced_by:
+  classes:
+    admin_group_query: [query_info]
+    datastore_activity: [query_info]
+    evidence_info: [query_info]
+    file_query: [query_info]
+    folder_query: [query_info]
+    job_query: [query_info]
+    kernel_object_query: [query_info]
+    module_query: [query_info]
+    network_connection_query: [query_info]
+    networks_query: [query_info]
+    peripheral_device_query: [query_info]
+    process_query: [query_info]
+    service_query: [query_info]
+    session_query: [query_info]
+    startup_item_query: [query_info]
+    user_query: [query_info]
+attributes:
+  bytes:
+    caption: Total Bytes
+    type: long_t
+    requirement: optional
+    description: The size of the data returned from the query.
+  data:
+    caption: Data
+    type: json_t
+    requirement: optional
+    description: The data returned from the query execution.
+  name:
+    caption: Name
+    type: string_t
+    requirement: recommended
+    description: The query name for a saved or scheduled query.
+  query_string:
+    caption: Query String
+    type: string_t
+    requirement: required
+    description: 'A string representing the query code being run. For example: `SELECT * FROM my_table`'
+  query_time:
+    caption: Query Time
+    type: timestamp_t
+    requirement: optional
+    description: The time when the query was run.
+  query_time_dt:
+    caption: Query Time
+    type: datetime_t
+    requirement: optional
+    profile: datetime
+    description: The time when the query was run.
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: recommended
+    description: The unique identifier of the query.
+  uid_numeric:
+    caption: Numeric Unique ID
+    type: long_t
+    requirement: optional
+    from: _entity
+    description: |-
+      The `uid` attribute in numeric form where applicable.
+      Note: Producers may populate `uid_numeric` only in addition to `uid` and not as an alternative to it.

@@ -1,0 +1,28 @@
+name: rpc_interface
+caption: RPC Interface
+extends: object
+description: The RPC Interface represents the remote procedure call interface used in the DCE/RPC session.
+referenced_by:
+  objects:
+    dce_rpc: [rpc_interface]
+attributes:
+  ack_reason:
+    caption: Acknowledgement Reason
+    type: integer_t
+    requirement: recommended
+    description: An integer that provides a reason code or additional information about the acknowledgment result.
+  ack_result:
+    caption: Acknowledgement Result
+    type: integer_t
+    requirement: recommended
+    description: An integer that denotes the acknowledgment result of the DCE/RPC call.
+  uuid:
+    caption: UUID
+    type: uuid_t
+    requirement: required
+    description: The unique identifier of the particular remote procedure or service.
+  version:
+    caption: Version
+    type: string_t
+    requirement: required
+    description: The version of the DCE/RPC protocol being used in the session.

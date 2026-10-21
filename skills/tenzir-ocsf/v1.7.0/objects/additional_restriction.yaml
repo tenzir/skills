@@ -1,0 +1,41 @@
+name: additional_restriction
+caption: Additional Restriction
+extends: object
+description: The Additional Restriction object describes supplementary access controls and guardrails that constrain or limit granted permissions beyond the primary policy. These restrictions are typically applied through hierarchical policy frameworks, organizational controls, or conditional access mechanisms. Examples include AWS Service Control Policies (SCPs), Resource Control Policies (RCPs), Azure Management Group policies, GCP Organization policies, conditional access policies, IP restrictions, time-based constraints, and MFA requirements.
+referenced_by:
+  objects:
+    access_analysis_result: [additional_restrictions]
+attributes:
+  policy:
+    caption: Policy
+    type: object_t
+    object: policy
+    requirement: required
+    description: Detailed information about the policy document that defines this restriction, including policy metadata, type, scope, and the specific rules or conditions that implement the access control.
+  status:
+    caption: Status
+    type: string_t
+    requirement: optional
+    description: The current status of the policy restriction, normalized to the caption of the `status_id` enum value.
+  status_id:
+    caption: Status ID
+    type: integer_t
+    requirement: recommended
+    sibling: status
+    description: The normalized status identifier indicating the applicability of this policy restriction.
+    enum:
+      '0':
+        caption: Unknown
+        description: The status is unknown.
+      '1':
+        caption: Applicable
+        description: This restriction is currently applicable and being enforced.
+      '2':
+        caption: Inapplicable
+        description: This restriction is not applicable.
+      '3':
+        caption: Evaluation Error
+        description: This restriction could not be properly evaluated due to an error.
+      '99':
+        caption: Other
+        description: The status is not mapped. See the `status` attribute, which contains a data source specific value.

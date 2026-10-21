@@ -1,0 +1,147 @@
+name: message_context
+caption: Message Context
+extends: _entity
+description: Communication context for AI system interactions including protocols, roles, clients, and session information for MCP and other AI communication systems.
+profiles: [data_classification]
+constraints:
+  at_least_one: [application, service]
+references:
+- description: OWASP AI Security and Privacy Guide - Agent Security
+  url: https://owasp.org/www-project-ai-security-and-privacy-guide/
+- description: Model Context Protocol (MCP) Specification
+  url: https://modelcontextprotocol.io/
+referenced_by:
+  classes:
+    account_change: [message_context]
+    api_activity: [message_context]
+    application_error: [message_context]
+    application_lifecycle: [message_context]
+    authentication: [message_context]
+    authorize_session: [message_context]
+    clipboard_activity: [message_context]
+    datastore_activity: [message_context]
+    device_power_state_activity: [message_context]
+    dhcp_activity: [message_context]
+    dns_activity: [message_context]
+    dns_zone_transfer_activity: [message_context]
+    email_activity: [message_context]
+    entity_management: [message_context]
+    event_log_actvity: [message_context]
+    file_activity: [message_context]
+    file_hosting: [message_context]
+    ftp_activity: [message_context]
+    group_management: [message_context]
+    http_activity: [message_context]
+    kernel_activity: [message_context]
+    kernel_extension_activity: [message_context]
+    memory_activity: [message_context]
+    module_activity: [message_context]
+    network_activity: [message_context]
+    network_file_activity: [message_context]
+    ntp_activity: [message_context]
+    peripheral_activity: [message_context]
+    process_activity: [message_context]
+    rdp_activity: [message_context]
+    role_management: [message_context]
+    scan_activity: [message_context]
+    scheduled_job_activity: [message_context]
+    script_activity: [message_context]
+    smb_activity: [message_context]
+    ssh_activity: [message_context]
+    tunnel_activity: [message_context]
+    user_access: [message_context]
+    user_management: [message_context]
+    web_resource_access_activity: [message_context]
+    web_resources_activity: [message_context]
+attributes:
+  ai_role:
+    caption: AI Role
+    type: string_t
+    requirement: optional
+    description: The normalized caption of the `ai_role_id`.
+  ai_role_id:
+    caption: AI Role ID
+    type: integer_t
+    requirement: recommended
+    sibling: ai_role
+    description: Specifies the functional role of the AI within the context of this message, such as retrieving information, assisting reasoning, executing a tool, or generating content.
+    enum:
+      '0':
+        caption: Unknown
+        description: Unknown role type.
+      '1':
+        caption: User
+        description: The human user initiating a request.
+      '2':
+        caption: Assistant
+        description: The AI model generating a response.
+      '3':
+        caption: Tool
+        description: A callable tool or API invoked by the assistant.
+      '4':
+        caption: Agent
+        description: A software agent that performs tasks with autonomy or delegated intent.
+      '5':
+        caption: Orchestrator
+        description: The component coordinating multiple agents or tools.
+      '6':
+        caption: Retriever
+        description: A component that retrieves information or context from a knowledge source (e.g., vector DB, search system, or API).
+      '99':
+        caption: Other
+        description: Other role type not covered above.
+  application:
+    caption: Application
+    type: object_t
+    object: application
+    requirement: recommended
+    description: The initiating client application. In AI systems, this represents the client-side application or framework that initiates requests (e.g., LangChain application, web browser, mobile app, SDK implementation).
+  completion_tokens:
+    caption: Completion Tokens
+    type: integer_t
+    requirement: optional
+    description: Number of tokens in the model's response/completion for this message.
+  name:
+    caption: Name
+    type: string_t
+    requirement: recommended
+    description: The name or identifier of the message context. In AI systems, this could be the conversation ID, session name, thread identifier, or interaction name (e.g., 'user-session-123', 'conversation-abc', 'chat-thread-456').
+  prompt_text:
+    caption: Prompt Text
+    type: string_t
+    requirement: optional
+    description: The text of the input prompt provided to the model for this message. This is the verbatim instruction, query, or context supplied to the AI system that drove the operation.
+  prompt_tokens:
+    caption: Prompt Tokens
+    type: integer_t
+    requirement: optional
+    description: Number of tokens in the input prompt for this message.
+  response_text:
+    caption: Response Text
+    type: string_t
+    requirement: optional
+    description: The text of the model's response generated for this message. For agent-mediated operations, this is the content returned by the assistant, tool, or agent.
+  service:
+    caption: Service
+    type: object_t
+    object: service
+    requirement: recommended
+    description: The server or service handling the request. In AI systems, this represents the AI service, API endpoint, or agent that processes and responds to requests (e.g., OpenAI API service, Claude API service, internal AI model service).
+  total_tokens:
+    caption: Total Tokens
+    type: integer_t
+    requirement: optional
+    description: Total number of tokens used for this message (prompt + completion).
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: recommended
+    description: The unique identifier of the message context. This could be a session ID, conversation ID, or other unique identifier that allows correlation of messages within the same context.
+  uid_numeric:
+    caption: Numeric Unique ID
+    type: long_t
+    requirement: optional
+    from: _entity
+    description: |-
+      The `uid` attribute in numeric form where applicable.
+      Note: Producers may populate `uid_numeric` only in addition to `uid` and not as an alternative to it.

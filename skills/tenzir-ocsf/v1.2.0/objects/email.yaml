@@ -1,0 +1,95 @@
+name: email
+caption: Email
+extends: object
+observable: 22
+description: The Email object describes the email metadata such as sender, recipients, and direction. Defined by D3FEND [d3f:Email](https://d3fend.mitre.org/dao/artifact/d3f:Email/).
+profiles: [data_classification]
+referenced_by:
+  classes:
+    email_activity: [email]
+attributes:
+  cc:
+    caption: Cc
+    type: email_t
+    array: true
+    requirement: optional
+    observable: 5
+    description: The email header Cc values, as defined by RFC 5322.
+  data_classification:
+    caption: Data Classification
+    type: object_t
+    object: data_classification
+    requirement: recommended
+    group: context
+    profile: data_classification
+    description: The Data Classification object includes information about data classification levels and data category types.
+  delivered_to:
+    caption: Delivered To
+    type: email_t
+    requirement: optional
+    observable: 5
+    description: The Delivered-To email header field.
+  from:
+    caption: From
+    type: email_t
+    requirement: required
+    observable: 5
+    description: The email header From values, as defined by RFC 5322.
+  message_uid:
+    caption: Message UID
+    type: string_t
+    requirement: recommended
+    description: The email header Message-Id value, as defined by RFC 5322.
+  raw_header:
+    caption: Raw Header
+    type: string_t
+    requirement: optional
+    description: The email authentication header.
+  reply_to:
+    caption: Reply To
+    type: email_t
+    requirement: recommended
+    observable: 5
+    description: The email header Reply-To values, as defined by RFC 5322.
+  size:
+    caption: Size
+    type: long_t
+    requirement: recommended
+    description: The size in bytes of the email, including attachments.
+  smtp_from:
+    caption: SMTP From
+    type: email_t
+    requirement: recommended
+    observable: 5
+    description: The value of the SMTP MAIL FROM command.
+  smtp_to:
+    caption: SMTP To
+    type: email_t
+    array: true
+    requirement: recommended
+    observable: 5
+    description: The value of the SMTP envelope RCPT TO command.
+  subject:
+    caption: Subject
+    type: string_t
+    requirement: optional
+    description: The email header Subject value, as defined by RFC 5322.
+  to:
+    caption: To
+    type: email_t
+    array: true
+    requirement: required
+    observable: 5
+    description: The email header To values, as defined by RFC 5322.
+  uid:
+    caption: Email UID
+    type: string_t
+    requirement: recommended
+    description: The email unique identifier.
+  x_originating_ip:
+    caption: X-Originating-IP
+    type: ip_t
+    array: true
+    requirement: optional
+    observable: 2
+    description: The X-Originating-IP header identifying the emails originating IP address(es).

@@ -1,0 +1,24 @@
+name: classifier_details
+caption: Classifier Details
+extends: object
+description: The Classifier Details object describes details about the classifier used for data classification.
+referenced_by:
+  objects:
+    data_classification: [classifier_details]
+    data_security: [classifier_details]
+attributes:
+  name:
+    caption: Name
+    type: string_t
+    requirement: recommended
+    description: The name of the classifier.
+  type:
+    caption: Type
+    type: string_t
+    requirement: required
+    description: The type of the classifier.
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: recommended
+    description: The unique identifier of the classifier.

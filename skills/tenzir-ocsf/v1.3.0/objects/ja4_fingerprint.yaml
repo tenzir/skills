@@ -1,0 +1,88 @@
+name: ja4_fingerprint
+caption: JA4+ Fingerprint
+extends: object
+description: The JA4+ fingerprint object provides detailed fingerprint information about various aspects of network traffic which is both machine and human readable.
+referenced_by:
+  classes:
+    dhcp_activity: [ja4_fingerprint_list]
+    dns_activity: [ja4_fingerprint_list]
+    ftp_activity: [ja4_fingerprint_list]
+    http_activity: [ja4_fingerprint_list]
+    network_activity: [ja4_fingerprint_list]
+    network_file_activity: [ja4_fingerprint_list]
+    ntp_activity: [ja4_fingerprint_list]
+    rdp_activity: [ja4_fingerprint_list]
+    smb_activity: [ja4_fingerprint_list]
+    ssh_activity: [ja4_fingerprint_list]
+    tunnel_activity: [ja4_fingerprint_list]
+attributes:
+  section_a:
+    caption: JA4 Section A
+    type: string_t
+    requirement: optional
+    description: The 'a' section of the JA4 fingerprint.
+  section_b:
+    caption: JA4 Section B
+    type: string_t
+    requirement: optional
+    description: The 'b' section of the JA4 fingerprint.
+  section_c:
+    caption: JA4 Section C
+    type: string_t
+    requirement: optional
+    description: The 'c' section of the JA4 fingerprint.
+  section_d:
+    caption: JA4 Section D
+    type: string_t
+    requirement: optional
+    description: The 'd' section of the JA4 fingerprint.
+  type:
+    caption: Type
+    type: string_t
+    requirement: optional
+    description: The JA4+ fingerprint type as defined by [FoxIO](https://blog.foxio.io/ja4+-network-fingerprinting target=), normalized to the caption of 'type_id'. In the case of 'Other', it is defined by the event source.
+  type_id:
+    caption: Type ID
+    type: integer_t
+    requirement: required
+    sibling: type
+    description: The identifier of the JA4+ fingerprint type.
+    enum:
+      '0':
+        caption: Unknown
+        description: The type is unknown.
+      '1':
+        caption: JA4
+        description: TLS Client Fingerprint.
+      '2':
+        caption: JA4Server
+        description: TLS Server Response/Session Fingerprint.
+      '3':
+        caption: JA4HTTP
+        description: HTTP Client Fingerprint.
+      '4':
+        caption: JA4Latency
+        description: Latency Measurement/Light Distance Fingerprint.
+      '5':
+        caption: JA4X509
+        description: X509 TLS Certificate Fingerprint.
+      '6':
+        caption: JA4SSH
+        description: SSH Traffic Fingerprint.
+      '7':
+        caption: JA4TCP
+        description: Passive TCP Client Fingerprint.
+      '8':
+        caption: JA4TCPServer
+        description: Passive TCP Server Fingerprint.
+      '9':
+        caption: JA4TCPScan
+        description: Active TCP Server Fingerprint.
+      '99':
+        caption: Other
+        description: The type is not mapped. See the `type` attribute, which contains a data source specific value.
+  value:
+    caption: Value
+    type: string_t
+    requirement: required
+    description: The JA4+ fingerprint value.

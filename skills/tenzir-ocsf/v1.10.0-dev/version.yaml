@@ -1,0 +1,38 @@
+version: 1.10.0-dev
+status: development
+source:
+  repository: https://github.com/ocsf/ocsf-schema.git
+  ref: main
+  commit: a7e16ed3f3d8f081b52c4fbdb535f864fbdd1de2
+  compiler: ocsf-schema-compiler 1.1.1
+extensions:
+  linux:
+    uid: 1
+    caption: Linux
+    version: 1.10.0-dev
+    description: The Linux extension defines Linux specific attributes, profiles, objects, and classes.
+    profiles: [linux/linux_users]
+    patches:
+      objects: [process]
+  macos:
+    uid: 3
+    caption: macOS
+    version: 1.10.0-dev
+    description: The macOS extension defines macOS specific attributes, profiles, objects, and classes.
+    profiles: [macos/macos_users]
+    patches:
+      objects: [process]
+  win:
+    uid: 2
+    caption: Windows
+    version: 1.10.0-dev
+    description: The Windows extension defines Windows specific attributes, objects, and classes.
+    classes: [win/prefetch_query, win/registry_key_activity, win/registry_key_query, win/registry_value_activity, win/registry_value_query, win/windows_resource_activity, win/windows_service_activity]
+    objects: [win/reg_key, win/reg_value, win/win_resource, win/win_service]
+    patches:
+      objects: [evidences, process, query_evidence, startup_item]
+previous: 1.9.0
+changes:
+  added:
+    classes: [dns_zone_transfer_activity]
+    objects: [ai_capability, ai_status, dns_soa]

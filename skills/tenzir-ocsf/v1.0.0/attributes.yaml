@@ -1,0 +1,3131 @@
+access_list:
+  caption: Access List
+  type: string_t
+  array: true
+  description: The list of requested access rights.
+access_mask:
+  caption: Access Mask
+  type: integer_t
+  description: The access mask in a platform-native format.
+  used_by:
+    classes: [file_activity]
+access_result:
+  caption: Access Check Result
+  type: json_t
+  description: The list of access check results.
+accessed_time:
+  caption: Accessed Time
+  type: timestamp_t
+  description: The time when the file was last accessed.
+  used_by:
+    objects: [file]
+accessed_time_dt:
+  caption: Accessed Time
+  type: datetime_t
+  description: The time when the file was last accessed.
+  used_by:
+    objects: [file]
+accessor:
+  caption: Accessor
+  type: object_t
+  object: user
+  observable: 21
+  description: The name of the user who last accessed the object.
+  used_by:
+    objects: [file]
+account:
+  caption: Account
+  type: object_t
+  object: account
+  description: The account object describes details about the account that was the source or target of the activity.
+  used_by:
+    objects: [cloud, user]
+ack_reason:
+  caption: Acknowledgement Reason
+  type: integer_t
+  description: An integer that provides a reason code or additional information about the acknowledgment result.
+  used_by:
+    objects: [rpc_interface]
+ack_result:
+  caption: Acknowledgement Result
+  type: integer_t
+  description: An integer that denotes the acknowledgment result of the DCE/RPC call.
+  used_by:
+    objects: [rpc_interface]
+activity_id:
+  caption: Activity ID
+  type: integer_t
+  sibling: activity_name
+  description: The normalized identifier of the activity that triggered the event.
+  used_by:
+    classes: [account_change, api_activity, application_lifecycle, authentication, authorize_session, base_event, config_state, dhcp_activity, dns_activity, email_activity, email_file_activity, email_url_activity, entity_management, file_activity, ftp_activity, group_management, http_activity, inventory_info, kernel_activity, kernel_extension, memory_activity, module_activity, network_activity, network_file_activity, process_activity, rdp_activity, scheduled_job_activity, security_finding, smb_activity, ssh_activity, user_access, web_resource_access_activity, web_resources_activity]
+activity_name:
+  caption: Activity
+  type: string_t
+  description: The event activity name, as defined by the activity_id.
+  used_by:
+    classes: [account_change, api_activity, application_lifecycle, authentication, authorize_session, base_event, config_state, dhcp_activity, dns_activity, email_activity, email_file_activity, email_url_activity, entity_management, file_activity, ftp_activity, group_management, http_activity, inventory_info, kernel_activity, kernel_extension, memory_activity, module_activity, network_activity, network_file_activity, process_activity, rdp_activity, scheduled_job_activity, security_finding, smb_activity, ssh_activity, user_access, web_resource_access_activity, web_resources_activity]
+actor:
+  caption: Actor
+  type: object_t
+  object: actor
+  description: The actor object describes details about the user/role/process that was the source of the activity.
+  used_by:
+    classes: [account_change, api_activity, application_lifecycle, authentication, authorize_session, config_state, dhcp_activity, dns_activity, email_activity, email_file_activity, email_url_activity, entity_management, file_activity, ftp_activity, group_management, http_activity, inventory_info, kernel_activity, kernel_extension, memory_activity, module_activity, network_activity, network_file_activity, process_activity, rdp_activity, scheduled_job_activity, smb_activity, ssh_activity, user_access, web_resource_access_activity, web_resources_activity]
+actual_permissions:
+  caption: Actual Permissions
+  type: integer_t
+  description: The permissions that were granted to the in a platform-native format.
+  used_by:
+    classes: [memory_activity, process_activity]
+alert:
+  caption: Client TLS Alert
+  type: integer_t
+  description: The integer value of TLS alert if present. The alerts are defined in the TLS specification in [RFC-2246](https://datatracker.ietf.org/doc/html/rfc2246).
+  used_by:
+    objects: [tls]
+algorithm:
+  caption: Algorithm
+  type: string_t
+  description: The applicable algorithm, normalized to the caption of 'algorithm_id'. See specific usage.
+  used_by:
+    objects: [digital_signature, fingerprint, hassh]
+algorithm_id:
+  caption: Algorithm ID
+  type: integer_t
+  sibling: algorithm
+  description: The identifier of the normalized algorithm. See specific usage.
+  used_by:
+    objects: [digital_signature, fingerprint]
+analytic:
+  caption: Analytic
+  type: object_t
+  object: analytic
+  description: The analytic technique used to create the finding or detection
+  used_by:
+    classes: [security_finding]
+answers:
+  caption: DNS Answer
+  type: object_t
+  object: dns_answer
+  array: true
+  description: The Domain Name System (DNS) answers.
+  used_by:
+    classes: [dns_activity]
+api:
+  caption: API Details
+  type: object_t
+  object: api
+  description: Describes details about a typical API (Application Programming Interface) call.
+  used_by:
+    classes: [account_change, api_activity, application_lifecycle, authentication, authorize_session, base_event, config_state, dhcp_activity, dns_activity, email_activity, email_file_activity, email_url_activity, entity_management, file_activity, ftp_activity, group_management, http_activity, inventory_info, kernel_activity, kernel_extension, memory_activity, module_activity, network_activity, network_file_activity, process_activity, rdp_activity, scheduled_job_activity, security_finding, smb_activity, ssh_activity, user_access, web_resource_access_activity, web_resources_activity]
+app:
+  caption: Application
+  type: object_t
+  object: product
+  description: The application that reported the event.
+  used_by:
+    classes: [application_lifecycle]
+app_name:
+  caption: Application Name
+  type: string_t
+  description: The name of the application that is associated with the event or object.
+  used_by:
+    classes: [dns_activity, ftp_activity, http_activity, network_activity, rdp_activity, smb_activity, ssh_activity]
+architecture:
+  caption: Architecture
+  type: string_t
+  description: Architecture is a shorthand name describing the type of computer hardware the packaged software is meant to run on.
+  used_by:
+    objects: [package]
+args:
+  caption: HTTP Arguments
+  type: string_t
+  description: The arguments sent along with the HTTP request.
+  used_by:
+    objects: [http_request]
+attacks:
+  caption: Attacks
+  type: object_t
+  object: attack
+  array: true
+  description: An array of attacks associated with an event.
+  used_by:
+    classes: [dns_activity, email_activity, email_file_activity, email_url_activity, file_activity, ftp_activity, http_activity, kernel_activity, kernel_extension, memory_activity, module_activity, network_activity, process_activity, rdp_activity, scheduled_job_activity, security_finding, smb_activity, ssh_activity]
+attempt:
+  caption: Attempt
+  type: integer_t
+  description: The delivery attempt.
+  used_by:
+    classes: [email_activity]
+attributes:
+  caption: Attributes
+  type: integer_t
+  description: The bitmask value that represents the file attributes.
+  used_by:
+    objects: [file]
+auth_protocol:
+  caption: Auth Protocol
+  type: string_t
+  description: The authentication protocol as defined by the caption of 'auth_protocol_id'. In the case of 'Other', it is defined by the event source.
+  used_by:
+    classes: [authentication]
+auth_protocol_id:
+  caption: Auth Protocol ID
+  type: integer_t
+  sibling: auth_protocol
+  description: The normalized identifier of the authentication protocol used to create the user session.
+  used_by:
+    classes: [authentication]
+auth_type:
+  caption: Authentication Type
+  type: string_t
+  description: The agreed upon authentication type, normalized to the caption of 'auth_type_id'. In the case of 'Other', it is defined by the event source.
+auth_type_id:
+  caption: Authentication Type ID
+  type: integer_t
+  sibling: auth_type
+  description: The normalized identifier of the agreed upon authentication type. See specific usage.
+authorizations:
+  caption: Authorization Information
+  type: object_t
+  object: authorization
+  array: true
+  description: This object provides details such as authorization outcome, associated policies related to activity/event.
+  used_by:
+    objects: [actor]
+autoscale_uid:
+  caption: Autoscale UID
+  type: string_t
+  description: The unique identifier of the cloud autoscale configuration.
+  used_by:
+    objects: [device]
+banner:
+  caption: SMTP Banner
+  type: string_t
+  description: The initial SMTP connection response that a messaging server receives after it connects to a email server.
+  used_by:
+    classes: [email_activity]
+base_address:
+  caption: Base Address
+  type: string_t
+  description: The memory address where the module was loaded.
+  used_by:
+    classes: [memory_activity]
+    objects: [module]
+base_score:
+  caption: Base Score
+  type: float_t
+  description: The base score as reported by the event source. See specific usage.
+  used_by:
+    objects: [cvss, reputation]
+bios_date:
+  caption: BIOS Date
+  type: string_t
+  description: 'The BIOS date. For example: `03/31/16`.'
+  used_by:
+    objects: [device_hw_info]
+bios_manufacturer:
+  caption: BIOS Manufacturer
+  type: string_t
+  description: 'The BIOS manufacturer. For example: `LENOVO`.'
+  used_by:
+    objects: [device_hw_info]
+bios_ver:
+  caption: BIOS Version
+  type: string_t
+  description: 'The BIOS version. For example: `LENOVO G5ETA2WW (2.62)`.'
+  used_by:
+    objects: [device_hw_info]
+boundary:
+  caption: Boundary
+  type: string_t
+  description: |-
+    The boundary of the connection, normalized to the caption of 'boundary_id'. In the case of 'Other', it is defined by the event source.
+
+    For cloud connections, this translates to the traffic-boundary(same VPC, through IGW, etc.). For traditional networks, this is described as Local, Internal, or External.
+  used_by:
+    objects: [network_connection_info]
+boundary_id:
+  caption: Boundary ID
+  type: integer_t
+  sibling: boundary
+  description: |-
+    The normalized identifier of the boundary of the connection.
+
+    For cloud connections, this translates to the traffic-boundary (same VPC, through IGW, etc.). For traditional networks, this is described as Local, Internal, or External.
+  used_by:
+    objects: [network_connection_info]
+build:
+  caption: OS Build
+  type: string_t
+  description: The operating system build number.
+  used_by:
+    objects: [os]
+bytes:
+  caption: Total Bytes
+  type: long_t
+  description: The total number of bytes (in and out).
+  used_by:
+    objects: [network_traffic]
+bytes_in:
+  caption: Bytes In
+  type: long_t
+  description: The number of bytes sent from the destination to the source.
+  used_by:
+    objects: [network_traffic]
+bytes_out:
+  caption: Bytes Out
+  type: long_t
+  description: The number of bytes sent from the source to the destination.
+  used_by:
+    objects: [network_traffic]
+capabilities:
+  caption: Capabilities
+  type: string_t
+  array: true
+  description: A list of RDP capabilities.
+  used_by:
+    classes: [rdp_activity]
+caption:
+  caption: Caption
+  type: string_t
+  description: 'A short description or caption of the device. For example: `Scanner 1` or `Database Manager`.'
+categories:
+  caption: Website Categorization
+  type: string_t
+  array: true
+  description: The Website categorization names, as defined by `category_ids` enum values.
+  used_by:
+    objects: [url]
+category:
+  caption: Category
+  type: string_t
+  description: The object category. See specific usage.
+  used_by:
+    objects: [analytic, rule]
+category_ids:
+  caption: Website Categorization IDs
+  type: integer_t
+  array: true
+  sibling: categories
+  description: The Website categorization identifies.
+  used_by:
+    objects: [url]
+category_name:
+  caption: Category
+  type: string_t
+  description: The event category name, as defined by category_uid value.
+  used_by:
+    classes: [account_change, api_activity, application_lifecycle, authentication, authorize_session, base_event, config_state, dhcp_activity, dns_activity, email_activity, email_file_activity, email_url_activity, entity_management, file_activity, ftp_activity, group_management, http_activity, inventory_info, kernel_activity, kernel_extension, memory_activity, module_activity, network_activity, network_file_activity, process_activity, rdp_activity, scheduled_job_activity, security_finding, smb_activity, ssh_activity, user_access, web_resource_access_activity, web_resources_activity]
+category_uid:
+  caption: Category ID
+  type: integer_t
+  sibling: category_name
+  description: The category unique identifier of the event.
+  used_by:
+    classes: [account_change, api_activity, application_lifecycle, authentication, authorize_session, base_event, config_state, dhcp_activity, dns_activity, email_activity, email_file_activity, email_url_activity, entity_management, file_activity, ftp_activity, group_management, http_activity, inventory_info, kernel_activity, kernel_extension, memory_activity, module_activity, network_activity, network_file_activity, process_activity, rdp_activity, scheduled_job_activity, security_finding, smb_activity, ssh_activity, user_access, web_resource_access_activity, web_resources_activity]
+cc:
+  caption: Cc
+  type: email_t
+  array: true
+  observable: 5
+  description: The email header Cc values, as defined by RFC 5322.
+  used_by:
+    objects: [email]
+certificate:
+  caption: Certificate
+  type: object_t
+  object: certificate
+  description: The certificate object containing information about the digital certificate.
+  used_by:
+    classes: [authentication]
+    objects: [digital_signature, tls]
+certificate_chain:
+  caption: Certificate Chain
+  type: string_t
+  array: true
+  description: The Chain of Certificate Serial Numbers field provides a chain of Certificate Issuer Serial Numbers leading to the Root Certificate Issuer.
+  used_by:
+    classes: [rdp_activity]
+    objects: [tls]
+chassis:
+  caption: Chassis
+  type: string_t
+  description: The chassis type describes the system enclosure or physical form factor. Such as the following examples for Windows [Windows Chassis Types](https://docs.microsoft.com/en-us/windows/win32/cimwin32prov/win32-systemenclosure)
+  used_by:
+    objects: [device_hw_info]
+cipher:
+  caption: Cipher Suite
+  type: string_t
+  description: The negotiated cipher suite.
+  used_by:
+    objects: [tls]
+cis_benchmark_result:
+  caption: CIS Benchmark Result
+  type: object_t
+  object: cis_benchmark_result
+  description: The CIS benchmark result.
+  used_by:
+    classes: [config_state]
+cis_csc:
+  caption: CIS CSC
+  type: object_t
+  object: cis_control
+  array: true
+  description: The CIS Critical Security Controls is a list of top 20 actions and practices an organization’s security team can take on such that cyber attacks or malware, are minimized and prevented.
+  used_by:
+    classes: [security_finding]
+city:
+  caption: City
+  type: string_t
+  description: The name of the city.
+  used_by:
+    objects: [location]
+class:
+  caption: Class
+  type: string_t
+  description: The class name of the object. See specific usage.
+  used_by:
+    objects: [dns_answer, dns_query]
+class_name:
+  caption: Class
+  type: string_t
+  description: The event class name, as defined by class_uid value.
+  used_by:
+    classes: [account_change, api_activity, application_lifecycle, authentication, authorize_session, base_event, config_state, dhcp_activity, dns_activity, email_activity, email_file_activity, email_url_activity, entity_management, file_activity, ftp_activity, group_management, http_activity, inventory_info, kernel_activity, kernel_extension, memory_activity, module_activity, network_activity, network_file_activity, process_activity, rdp_activity, scheduled_job_activity, security_finding, smb_activity, ssh_activity, user_access, web_resource_access_activity, web_resources_activity]
+class_uid:
+  caption: Class ID
+  type: integer_t
+  sibling: class_name
+  description: The unique identifier of a class. A Class describes the attributes available in an event.
+  used_by:
+    classes: [account_change, api_activity, application_lifecycle, authentication, authorize_session, base_event, config_state, dhcp_activity, dns_activity, email_activity, email_file_activity, email_url_activity, entity_management, file_activity, ftp_activity, group_management, http_activity, inventory_info, kernel_activity, kernel_extension, memory_activity, module_activity, network_activity, network_file_activity, process_activity, rdp_activity, scheduled_job_activity, security_finding, smb_activity, ssh_activity, user_access, web_resource_access_activity, web_resources_activity]
+classification_ids:
+  caption: Classification IDs
+  type: integer_t
+  array: true
+  sibling: classifications
+  description: 'The list of normalized identifiers of the malware classifications. Reference: [STIX Malware Types](https://docs.oasis-open.org/cti/stix/v2.1/os/stix-v2.1-os.html#_oxlc4df65spl)'
+  used_by:
+    objects: [malware]
+classifications:
+  caption: Classifications
+  type: string_t
+  array: true
+  description: The list of malware classifications, normalized to the captions of the classification_id values. In the case of 'Other', they are defined by the event source.
+  used_by:
+    objects: [malware]
+client_ciphers:
+  caption: Client Cipher Suites
+  type: string_t
+  array: true
+  description: The client cipher suites that were exchanged during the TLS handshake negotiation.
+  used_by:
+    objects: [tls]
+client_dialects:
+  caption: Client Dialects
+  type: string_t
+  array: true
+  description: The list of SMB dialects that the client speaks.
+  used_by:
+    classes: [smb_activity]
+client_hassh:
+  caption: Client HASSH
+  type: object_t
+  object: hassh
+  description: The Client HASSH fingerprinting object.
+  used_by:
+    classes: [ssh_activity]
+cloud:
+  caption: Cloud
+  type: object_t
+  object: cloud
+  description: Describes details about the Cloud environment where the event was originally created or logged.
+  used_by:
+    classes: [account_change, api_activity, application_lifecycle, authentication, authorize_session, base_event, config_state, dhcp_activity, dns_activity, email_activity, email_file_activity, email_url_activity, entity_management, file_activity, ftp_activity, group_management, http_activity, inventory_info, kernel_activity, kernel_extension, memory_activity, module_activity, network_activity, network_file_activity, process_activity, rdp_activity, scheduled_job_activity, security_finding, smb_activity, ssh_activity, user_access, web_resource_access_activity, web_resources_activity]
+cloud_partition:
+  caption: Cloud Partition
+  type: string_t
+  description: 'The canonical cloud partition name to which the region is assigned (e.g. AWS Partitions: aws, aws-cn, aws-us-gov).'
+  used_by:
+    objects: [resource_details]
+cmd_line:
+  caption: Command Line
+  type: string_t
+  description: 'The full command line used to launch an application, service, process, or job. For example: `ssh user@10.0.0.10`. If the command line is unavailable or missing, the empty string `''''` is to be used'
+  used_by:
+    objects: [job, process]
+code:
+  caption: Response Code
+  type: integer_t
+  description: The numeric response sent to a request.
+  used_by:
+    objects: [http_response, response]
+codes:
+  caption: Response Codes
+  type: integer_t
+  array: true
+  description: The list of numeric responses sent to a request.
+  used_by:
+    classes: [ftp_activity]
+color_depth:
+  caption: Color Depth
+  type: integer_t
+  description: The numeric color depth.
+  used_by:
+    objects: [display]
+command:
+  caption: Command
+  type: string_t
+  description: The command name.
+  used_by:
+    classes: [ftp_activity, smb_activity]
+    objects: [dce_rpc]
+command_response:
+  caption: Command Response
+  type: string_t
+  description: The response to the command.
+  used_by:
+    objects: [dce_rpc]
+command_responses:
+  caption: Command Responses
+  type: string_t
+  array: true
+  description: The responses to the command.
+  used_by:
+    classes: [ftp_activity]
+comment:
+  caption: Comment
+  type: string_t
+  description: The user-provided comment.
+  used_by:
+    classes: [entity_management]
+company_name:
+  caption: Company Name
+  type: string_t
+  description: 'The name of the company that published the file. For example: `Microsoft Corporation`.'
+  used_by:
+    objects: [file]
+compliance:
+  caption: Compliance
+  type: object_t
+  object: compliance
+  description: The compliance object provides context to compliance findings (e.g., a check against a specific regulatory or best practice framework such as CIS or NIST) and contains compliance related details.
+  used_by:
+    classes: [security_finding]
+component:
+  caption: Component
+  type: string_t
+  description: |-
+    The name or relative pathname of a sub-component of the data object, if applicable.
+
+    For example: `attachment.doc`, `attachment.zip/bad.doc`, or `part.mime/part.cab/part.uue/part.doc`.
+  used_by:
+    classes: [file_activity]
+confidence:
+  caption: Confidence
+  type: string_t
+  description: The confidence, normalized to the caption of the confidence_id value. In the case of 'Other', it is defined by the event source.
+  used_by:
+    classes: [security_finding]
+confidence_id:
+  caption: Confidence Id
+  type: integer_t
+  description: The normalized confidence refers to the accuracy of the rule that created the finding. A rule with a low confidence means that the finding scope is wide and may create finding reports that may not be malicious in nature.
+  used_by:
+    classes: [security_finding]
+confidence_score:
+  caption: Confidence Score
+  type: integer_t
+  description: The confidence score as reported by the event source.
+  used_by:
+    classes: [security_finding]
+confidentiality:
+  caption: Confidentiality
+  type: string_t
+  description: The file content confidentiality, normalized to the confidentiality_id value. In the case of 'Other', it is defined by the event source.
+  used_by:
+    objects: [file]
+confidentiality_id:
+  caption: Confidentiality ID
+  type: integer_t
+  sibling: confidentiality
+  description: The normalized identifier of the file content confidentiality indicator.
+  used_by:
+    objects: [file]
+connection_info:
+  caption: Connection Info
+  type: object_t
+  object: network_connection_info
+  description: The network connection information.
+  used_by:
+    classes: [dns_activity, ftp_activity, http_activity, network_activity, rdp_activity, smb_activity, ssh_activity]
+connection_uid:
+  caption: Connection Identifier
+  type: string_t
+  description: The network connection identifier.
+  used_by:
+    classes: [file_activity]
+container:
+  caption: Container
+  type: object_t
+  object: container
+  observable: 27
+  description: The information describing an instance of a container. A container is a prepackaged, portable system image that runs isolated on an existing system using a container runtime like containerd.
+  used_by:
+    objects: [process]
+content_type:
+  caption: HTTP Content Type
+  type: string_t
+  description: The request header that identifies the original [media type](https://www.iana.org/assignments/media-types/media-types.xhtml)  of the resource (prior to any content encoding applied for sending).
+  used_by:
+    objects: [http_response]
+continent:
+  caption: Continent
+  type: string_t
+  description: The name of the continent.
+  used_by:
+    objects: [location]
+control:
+  caption: Control
+  type: string_t
+  description: The CIS critical security control.
+  used_by:
+    objects: [cis_control]
+coordinates:
+  caption: Coordinates
+  type: float_t
+  array: true
+  description: 'A two-element array, containing a longitude/latitude pair. The format conforms with [GeoJSON](https://geojson.org). For example: `[-73.983, 40.719]`.'
+  used_by:
+    objects: [location]
+correlation_uid:
+  caption: Correlation UID
+  type: string_t
+  description: The unique identifier used to correlate events.
+  used_by:
+    objects: [metadata]
+count:
+  caption: Count
+  type: integer_t
+  description: The number of times that events in the same logical group occurred during the event Start Time to End Time period.
+  used_by:
+    classes: [account_change, api_activity, application_lifecycle, authentication, authorize_session, base_event, config_state, dhcp_activity, dns_activity, email_activity, email_file_activity, email_url_activity, entity_management, file_activity, ftp_activity, group_management, http_activity, inventory_info, kernel_activity, kernel_extension, memory_activity, module_activity, network_activity, network_file_activity, process_activity, rdp_activity, scheduled_job_activity, security_finding, smb_activity, ssh_activity, user_access, web_resource_access_activity, web_resources_activity]
+country:
+  caption: Country
+  type: string_t
+  description: |-
+    The ISO 3166-1 Alpha-2 country code. For the complete list of country codes see [ISO 3166-1 alpha-2 codes](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en).
+
+    Note: The two letter country code should be capitalized. For example: `US` or `CA`.
+  used_by:
+    objects: [location, os]
+cpu_bits:
+  caption: CPU Bits
+  type: integer_t
+  description: 'The cpu architecture, the number of bits used for addressing in memory. For example: `32` or `64`.'
+  used_by:
+    objects: [device_hw_info, os]
+cpu_cores:
+  caption: CPU Cores
+  type: integer_t
+  description: 'The number of processor cores in all installed processors. For Example: `42`.'
+  used_by:
+    objects: [device_hw_info]
+cpu_count:
+  caption: CPU Count
+  type: integer_t
+  description: 'The number of physical processors on a system. For example: `1`.'
+  used_by:
+    objects: [device_hw_info]
+cpu_speed:
+  caption: Processor Speed
+  type: integer_t
+  description: 'The speed of the processor in Mhz. For Example: `4200`.'
+  used_by:
+    objects: [device_hw_info]
+cpu_type:
+  caption: Processor Type
+  type: string_t
+  description: 'The processor type. For example: `x86 Family 6 Model 37 Stepping 5`.'
+  used_by:
+    objects: [device_hw_info]
+create_mask:
+  caption: Create Mask
+  type: string_t
+  description: The original Windows mask that is required to create the object.
+  used_by:
+    classes: [file_activity]
+created_time:
+  caption: Created Time
+  type: timestamp_t
+  description: The time when the object was created. See specific usage.
+  used_by:
+    objects: [certificate, cve, device, digital_signature, file, finding, job, process, session]
+created_time_dt:
+  caption: Created Time
+  type: datetime_t
+  description: The time when the object was created. See specific usage.
+  used_by:
+    objects: [certificate, cve, device, digital_signature, file, finding, job, process, session]
+creator:
+  caption: Creator
+  type: object_t
+  object: user
+  observable: 21
+  description: The user that created the object associated with event. See specific usage.
+  used_by:
+    objects: [file]
+credential_uid:
+  caption: User Credential ID
+  type: string_t
+  description: The unique identifier of the user's credential. For example, AWS Access Key ID.
+  used_by:
+    objects: [session, user]
+criticality:
+  caption: Criticality
+  type: string_t
+  description: Criticality of a resource/object in question
+  used_by:
+    objects: [resource_details]
+customer_uid:
+  caption: Customer UID
+  type: string_t
+  description: The unique customer identifier.
+cve:
+  caption: CVE
+  type: object_t
+  object: cve
+  description: The Common Vulnerabilities and Exposures ([CVE](https://cve.mitre.org/)).
+  used_by:
+    objects: [vulnerability]
+cves:
+  caption: CVE List
+  type: object_t
+  object: cve
+  array: true
+  description: List of Common Vulnerabilities and Exposures ([CVE](https://cve.mitre.org/)).
+  used_by:
+    objects: [malware]
+cvss:
+  caption: CVSS Score
+  type: object_t
+  object: cvss
+  description: The CVSS object details Common Vulnerability Scoring System ([CVSS](https://www.first.org/cvss/)) scores from the advisory that are related to the vulnerability.
+  used_by:
+    objects: [cve]
+cwe_uid:
+  caption: CWE UID
+  type: string_t
+  description: 'The [Common Weakness Enumeration (CWE)](https://cwe.mitre.org/) unique identifier. For example: `CWE-787`.'
+  used_by:
+    objects: [cve]
+cwe_url:
+  caption: CWE URL
+  type: url_t
+  observable: 6
+  description: 'Common Weakness Enumeration (CWE) definition URL. For example: `https://cwe.mitre.org/data/definitions/787.html`.'
+  used_by:
+    objects: [cve]
+data:
+  caption: Data
+  type: json_t
+  description: The additional data that is associated with the event or object. See specific usage.
+  used_by:
+    objects: [enrichment, managed_entity, resource_details, tls_extension, web_resource]
+data_sources:
+  caption: Data Sources
+  type: string_t
+  array: true
+  description: The data sources for the finding.
+  used_by:
+    classes: [security_finding]
+dce_rpc:
+  caption: Distributed Computing Environment/Remote Procedure Call (DCE/RPC)
+  type: object_t
+  object: dce_rpc
+  description: The DCE/RPC object describes the remote procedure call system for distributed computing environments.
+  used_by:
+    classes: [smb_activity]
+decision:
+  caption: Authorization Decision/Outcome
+  type: string_t
+  description: Decision/outcome of the authorization mechanism (e.g. Approved, Denied)
+  used_by:
+    objects: [authorization]
+delivered_to:
+  caption: Delivered To
+  type: email_t
+  observable: 5
+  description: The Delivered-To email header field.
+  used_by:
+    objects: [email]
+depth:
+  caption: CVSS Depth
+  type: string_t
+  description: The CVSS depth represents a depth of the equation used to calculate CVSS score.
+  used_by:
+    objects: [cvss]
+desc:
+  caption: Description
+  type: string_t
+  description: The description that pertains to the object or event. See specific usage.
+  used_by:
+    objects: [analytic, cis_benchmark_result, device, file, finding, group, job, location, policy, remediation, rule, vulnerability, web_resource]
+desktop_display:
+  caption: Desktop Display
+  type: object_t
+  object: display
+  description: The desktop display affiliated with the event
+  used_by:
+    objects: [device_hw_info]
+details:
+  caption: Details
+  type: string_t
+  description: Details of an entity. See specific usage
+detection_uid:
+  caption: Detection UID
+  type: string_t
+  description: 'The associated unique detection event identifier. For example: detection response events include the Detection ID of the original event.'
+developer_uid:
+  caption: Developer UID
+  type: string_t
+  description: The developer ID on the certificate that signed the file.
+  used_by:
+    objects: [digital_signature]
+device:
+  caption: Device
+  type: object_t
+  object: device
+  observable: 20
+  description: An addressable device, computer system or host.
+  used_by:
+    classes: [account_change, application_lifecycle, authentication, authorize_session, config_state, dhcp_activity, dns_activity, email_activity, email_file_activity, email_url_activity, entity_management, file_activity, ftp_activity, group_management, http_activity, inventory_info, kernel_activity, kernel_extension, memory_activity, module_activity, network_activity, process_activity, rdp_activity, scheduled_job_activity, smb_activity, ssh_activity, user_access, web_resource_access_activity, web_resources_activity]
+devices:
+  caption: Devices
+  type: object_t
+  object: device
+  array: true
+  observable: 20
+  description: The object describes details related to the list of devices.
+dialect:
+  caption: Dialect
+  type: string_t
+  description: The negotiated protocol dialect.
+  used_by:
+    classes: [smb_activity]
+digest:
+  caption: Message Digest
+  type: object_t
+  object: fingerprint
+  observable: 30
+  description: The message digest attribute contains the fixed length message hash representation and the corresponding hashing algorithm information.
+  used_by:
+    objects: [digital_signature]
+direction:
+  caption: Direction
+  type: string_t
+  description: The direction of the initiated connection, traffic, or email, normalized to the caption of the direction_id value. In the case of 'Other', it is defined by the event source.
+  used_by:
+    classes: [email_activity]
+    objects: [network_connection_info]
+direction_id:
+  caption: Direction ID
+  type: integer_t
+  sibling: direction
+  description: The normalized identifier of the direction of the initiated connection, traffic, or email.
+  used_by:
+    classes: [email_activity]
+    objects: [network_connection_info]
+disposition:
+  caption: Disposition
+  type: string_t
+  description: The event disposition name, normalized to the caption of the disposition_id value. In the case of 'Other', it is defined by the event source.
+  used_by:
+    classes: [dns_activity, email_activity, email_file_activity, email_url_activity, file_activity, ftp_activity, http_activity, kernel_activity, kernel_extension, memory_activity, module_activity, network_activity, process_activity, rdp_activity, scheduled_job_activity, smb_activity, ssh_activity]
+disposition_id:
+  caption: Disposition ID
+  type: integer_t
+  sibling: disposition
+  description: When security issues, such as malware or policy violations, are detected and possibly corrected, then `disposition_id` describes the action taken by the security product.
+  used_by:
+    classes: [dns_activity, email_activity, email_file_activity, email_url_activity, file_activity, ftp_activity, http_activity, kernel_activity, kernel_extension, memory_activity, module_activity, network_activity, process_activity, rdp_activity, scheduled_job_activity, smb_activity, ssh_activity]
+dkim:
+  caption: DKIM Status
+  type: string_t
+  description: The DomainKeys Identified Mail (DKIM) status of the email.
+  used_by:
+    objects: [email_auth]
+dkim_domain:
+  caption: DKIM Domain
+  type: string_t
+  description: The DomainKeys Identified Mail (DKIM) signing domain of the email.
+  used_by:
+    objects: [email_auth]
+dkim_signature:
+  caption: DKIM Signature
+  type: string_t
+  description: The DomainKeys Identified Mail (DKIM) signature used by the sending/receiving system.
+  used_by:
+    objects: [email_auth]
+dmarc:
+  caption: DMARC Status
+  type: string_t
+  description: The Domain-based Message Authentication, Reporting and Conformance (DMARC) status of the email.
+  used_by:
+    objects: [email_auth]
+dmarc_override:
+  caption: DMARC Override
+  type: string_t
+  description: The Domain-based Message Authentication, Reporting and Conformance (DMARC) override action.
+  used_by:
+    objects: [email_auth]
+dmarc_policy:
+  caption: DMARC Policy
+  type: string_t
+  description: The Domain-based Message Authentication, Reporting and Conformance (DMARC) policy status.
+  used_by:
+    objects: [email_auth]
+domain:
+  caption: Domain
+  type: string_t
+  description: The name of the domain.
+  used_by:
+    objects: [device, endpoint, http_cookie, network_endpoint, network_proxy, user]
+driver:
+  caption: Kernel Driver
+  type: object_t
+  object: kernel_driver
+  description: The driver that was loaded/unloaded into the kernel
+  used_by:
+    classes: [kernel_extension]
+dst_endpoint:
+  caption: Destination Endpoint
+  type: object_t
+  object: network_endpoint
+  observable: 20
+  description: The network destination endpoint.
+  used_by:
+    classes: [api_activity, authentication, authorize_session, dhcp_activity, dns_activity, email_activity, ftp_activity, http_activity, network_activity, rdp_activity, smb_activity, ssh_activity, web_resources_activity]
+duration:
+  caption: Duration
+  type: integer_t
+  description: The event duration or aggregate time, the amount of time the event covers from `start_time` to `end_time` in milliseconds.
+  used_by:
+    classes: [account_change, api_activity, application_lifecycle, authentication, authorize_session, base_event, config_state, dhcp_activity, dns_activity, email_activity, email_file_activity, email_url_activity, entity_management, file_activity, ftp_activity, group_management, http_activity, inventory_info, kernel_activity, kernel_extension, memory_activity, module_activity, network_activity, network_file_activity, process_activity, rdp_activity, scheduled_job_activity, security_finding, smb_activity, ssh_activity, user_access, web_resource_access_activity, web_resources_activity]
+edition:
+  caption: OS Edition
+  type: string_t
+  description: 'The operating system edition. For example: `Professional`.'
+  used_by:
+    objects: [os]
+email:
+  caption: Email
+  type: object_t
+  object: email
+  observable: 22
+  description: The email object.
+  used_by:
+    classes: [email_activity]
+email_addr:
+  caption: Email Address
+  type: email_t
+  observable: 5
+  description: The user's email address.
+  used_by:
+    objects: [user]
+email_auth:
+  caption: Email Authentication
+  type: object_t
+  object: email_auth
+  description: The SPF, DKIM and DMARC attributes of an email.
+  used_by:
+    classes: [email_activity]
+email_uid:
+  caption: Email UID
+  type: string_t
+  description: The unique identifier of the email, used to correlate related email alert and activity events.
+  used_by:
+    classes: [email_file_activity, email_url_activity]
+end_time:
+  caption: End Time
+  type: timestamp_t
+  description: The end time of a time period. See specific usage.
+  used_by:
+    classes: [account_change, api_activity, application_lifecycle, authentication, authorize_session, base_event, config_state, dhcp_activity, dns_activity, email_activity, email_file_activity, email_url_activity, entity_management, file_activity, ftp_activity, group_management, http_activity, inventory_info, kernel_activity, kernel_extension, memory_activity, module_activity, network_activity, network_file_activity, process_activity, rdp_activity, scheduled_job_activity, security_finding, smb_activity, ssh_activity, user_access, web_resource_access_activity, web_resources_activity]
+end_time_dt:
+  caption: End Time
+  type: datetime_t
+  description: The end time of a time period. See specific usage.
+  used_by:
+    classes: [account_change, api_activity, application_lifecycle, authentication, authorize_session, base_event, config_state, dhcp_activity, dns_activity, email_activity, email_file_activity, email_url_activity, entity_management, file_activity, ftp_activity, group_management, http_activity, inventory_info, kernel_activity, kernel_extension, memory_activity, module_activity, network_activity, network_file_activity, process_activity, rdp_activity, scheduled_job_activity, security_finding, smb_activity, ssh_activity, user_access, web_resource_access_activity, web_resources_activity]
+enrichments:
+  caption: Enrichments
+  type: object_t
+  object: enrichment
+  array: true
+  description: 'The additional information from an external data source, which is associated with the event. For example add location information for the IP address in the DNS answers:`[{"name": "answers.ip", "value": "92.24.47.250", "type": "location", "data": {"city": "Socotra", "continent": "Asia", "coordinates": [-25.4153, 17.0743], "country": "YE", "desc": "Yemen"}}]`'
+  used_by:
+    classes: [account_change, api_activity, application_lifecycle, authentication, authorize_session, base_event, config_state, dhcp_activity, dns_activity, email_activity, email_file_activity, email_url_activity, entity_management, file_activity, ftp_activity, group_management, http_activity, inventory_info, kernel_activity, kernel_extension, memory_activity, module_activity, network_activity, network_file_activity, process_activity, rdp_activity, scheduled_job_activity, security_finding, smb_activity, ssh_activity, user_access, web_resource_access_activity, web_resources_activity]
+entity:
+  caption: Entity
+  type: object_t
+  object: managed_entity
+  description: The managed entity that is being acted upon.
+  used_by:
+    classes: [entity_management]
+entity_result:
+  caption: Entity Result
+  type: object_t
+  object: managed_entity
+  description: The updated managed entity.
+  used_by:
+    classes: [entity_management]
+epoch:
+  caption: Epoch
+  type: integer_t
+  description: The software package epoch. Epoch is a way to define weighted dependencies based on version numbers.
+  used_by:
+    objects: [package]
+error:
+  caption: Error Code
+  type: string_t
+  description: Error Code
+  used_by:
+    objects: [response]
+error_message:
+  caption: Error Message
+  type: string_t
+  description: Error Message
+  used_by:
+    objects: [response]
+event_code:
+  caption: Event Code
+  type: string_t
+  description: The Event ID or Code that the product uses to describe the event.
+  used_by:
+    objects: [metadata]
+evidence:
+  caption: Evidence
+  type: json_t
+  description: The data the finding exposes to the analyst.
+  used_by:
+    classes: [security_finding]
+exit_code:
+  caption: Exit Code
+  type: integer_t
+  description: The exit code reported by a process when it terminates. The convention is that zero indicates success and any non-zero exit code indicates that some error occurred.
+  used_by:
+    classes: [process_activity]
+expiration_time:
+  caption: Expiration Time
+  type: timestamp_t
+  description: The expiration time. See specific usage.
+  used_by:
+    classes: [network_file_activity]
+    objects: [certificate, http_cookie, session]
+expiration_time_dt:
+  caption: Expiration Time
+  type: datetime_t
+  description: The expiration time. See specific usage.
+  used_by:
+    classes: [network_file_activity]
+    objects: [certificate, http_cookie, session]
+extension:
+  caption: Schema Extension
+  type: object_t
+  object: extension
+  description: The schema extension used to create the event.
+  used_by:
+    objects: [metadata]
+extension_list:
+  caption: Extension List
+  type: object_t
+  object: tls_extension
+  array: true
+  description: The list of TLS extensions.
+  used_by:
+    objects: [tls]
+feature:
+  caption: Feature
+  type: object_t
+  object: feature
+  description: The feature that reported the event.
+  used_by:
+    objects: [product]
+file:
+  caption: File
+  type: object_t
+  object: file
+  observable: 24
+  description: The file that pertains to the event or object. See specific usage.
+  used_by:
+    classes: [email_file_activity, file_activity, network_file_activity, smb_activity]
+    objects: [job, kernel_driver, module, process]
+file_diff:
+  caption: File Diff
+  type: string_t
+  description: File content differences used for change detection. For example, a common use case is to identify itemized changes within INI or configuration/property setting values.
+  used_by:
+    classes: [file_activity]
+file_result:
+  caption: File Result
+  type: object_t
+  object: file
+  observable: 24
+  description: The result of the file change. It should contain the new values of the changed attributes.
+  used_by:
+    classes: [file_activity]
+finding:
+  caption: Finding
+  type: object_t
+  object: finding
+  description: Finding object provides details related to a finding generated by security tool
+  used_by:
+    classes: [security_finding]
+fingerprint:
+  caption: Fingerprint
+  type: object_t
+  object: fingerprint
+  observable: 30
+  description: The digital fingerprint associated with an object.
+  used_by:
+    objects: [hassh]
+fingerprints:
+  caption: Fingerprints
+  type: object_t
+  object: fingerprint
+  array: true
+  observable: 30
+  description: An array of digital fingerprint objects.
+  used_by:
+    objects: [certificate]
+first_seen_time:
+  caption: First Seen
+  type: timestamp_t
+  description: The initial detection time of the activity or object. See specific usage
+  used_by:
+    objects: [device, finding]
+first_seen_time_dt:
+  caption: First Seen
+  type: datetime_t
+  description: The initial detection time of the activity or object. See specific usage
+  used_by:
+    objects: [device, finding]
+fix_available:
+  caption: Fix Availability
+  type: boolean_t
+  description: Indicates if a fix is available for the reported vulnerability.
+  used_by:
+    objects: [vulnerability]
+flag_ids:
+  caption: Communication Flag IDs
+  type: integer_t
+  array: true
+  sibling: flags
+  description: The list of normalized identifiers of the communication flag IDs.
+  used_by:
+    objects: [dns_answer]
+flags:
+  caption: Flags
+  type: string_t
+  array: true
+  description: The list of communication flags, normalized to the captions of the flag_ids values. In the case of 'Other', they are defined by the event source.
+  used_by:
+    objects: [dce_rpc, dns_answer, request, response]
+folder:
+  caption: Folder
+  type: object_t
+  object: file
+  observable: 24
+  description: The folder that pertains to the event.
+from:
+  caption: From
+  type: email_t
+  observable: 5
+  description: The email header From values, as defined by RFC 5322.
+  used_by:
+    objects: [email]
+full_name:
+  caption: Full Name
+  type: string_t
+  description: The full name of the person, as per the LDAP Common Name attribute (cn).
+  used_by:
+    objects: [user]
+function_keys:
+  caption: Function Keys
+  type: integer_t
+  description: The number of function keys on client keyboard.
+  used_by:
+    objects: [keyboard_info]
+function_name:
+  caption: Function Name
+  type: string_t
+  description: The entry-point function of the module. The system calls the entry-point function whenever a process or thread loads or unloads the module.
+  used_by:
+    objects: [module]
+group:
+  caption: Group
+  type: object_t
+  object: group
+  description: The group object associated with an entity such as user, policy, or rule.
+  used_by:
+    classes: [authorize_session, group_management]
+    objects: [policy, resource_details]
+group_name:
+  caption: Group Name
+  type: string_t
+  description: The name of the group that the resource belongs to.
+groups:
+  caption: Groups
+  type: object_t
+  object: group
+  array: true
+  description: The groups to which an entity belongs. See specific usage.
+  used_by:
+    objects: [device, user]
+handshake_dur:
+  caption: Handshake Duration
+  type: integer_t
+  description: The amount of total time for the TLS handshake to complete after the TCP connection is established, including client-side delays, in milliseconds.
+  used_by:
+    objects: [tls]
+hash:
+  caption: Hash
+  type: object_t
+  object: fingerprint
+  observable: 30
+  description: The hash attribute is the value of a digital fingerprint including information about its algorithm.
+  used_by:
+    objects: [container]
+hashes:
+  caption: Hashes
+  type: object_t
+  object: fingerprint
+  array: true
+  observable: 30
+  description: An array of hash attributes.
+  used_by:
+    objects: [file]
+hostname:
+  caption: Hostname
+  type: hostname_t
+  observable: 1
+  description: The hostname of an endpoint or a device.
+  used_by:
+    objects: [device, dns_query, endpoint, network_endpoint, network_interface, network_proxy, url]
+http_cookies:
+  caption: HTTP Cookies
+  type: object_t
+  object: http_cookie
+  array: true
+  description: The cookies object describes details about HTTP cookies
+http_headers:
+  caption: HTTP Headers
+  type: object_t
+  object: http_header
+  array: true
+  description: Additional HTTP headers of an HTTP request or response.
+  used_by:
+    objects: [http_request]
+http_method:
+  caption: HTTP Method
+  type: string_t
+  description: |-
+    The HTTP request method indicates the desired action to be performed for a given resource. Expected values:
+
+    - TRACE
+    - CONNECT
+    - OPTIONS
+    - HEAD
+    - DELETE
+    - POST
+    - PUT
+    - GET
+  used_by:
+    objects: [http_request]
+http_only:
+  caption: HTTP Only
+  type: boolean_t
+  description: A cookie attribute to make it inaccessible via JavaScript
+  used_by:
+    objects: [http_cookie]
+http_request:
+  caption: HTTP Request
+  type: object_t
+  object: http_request
+  description: The HTTP Request Object documents attributes of a request made to a web server.
+  used_by:
+    classes: [account_change, api_activity, authentication, http_activity, web_resource_access_activity]
+http_response:
+  caption: HTTP Response
+  type: object_t
+  object: http_response
+  description: The HTTP Response from a web server to a requester.
+  used_by:
+    classes: [http_activity, web_resource_access_activity]
+http_status:
+  caption: HTTP Status
+  type: integer_t
+  description: The Hypertext Transfer Protocol (HTTP) [status code](https://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml) returned to the client.
+  used_by:
+    classes: [http_activity]
+hw_info:
+  caption: Hardware Info
+  type: object_t
+  object: device_hw_info
+  description: The device hardware information.
+  used_by:
+    objects: [device]
+hypervisor:
+  caption: Hypervisor
+  type: string_t
+  description: The name of the hypervisor running on the device. For example, `Xen`, `VMware`, `Hyper-V`, `VirtualBox`, etc.
+  used_by:
+    objects: [device]
+identifier_cookie:
+  caption: Identifier Cookie
+  type: string_t
+  description: The client identifier cookie during client/server exchange.
+  used_by:
+    classes: [rdp_activity]
+idp:
+  caption: Identity Provider
+  type: object_t
+  object: idp
+  description: This object describes details about the Identity Provider used.
+  used_by:
+    objects: [actor]
+image:
+  caption: Image
+  type: object_t
+  object: image
+  description: The image used as a template to run a container or virtual machine.
+  used_by:
+    objects: [container, device]
+ime:
+  caption: IME
+  type: string_t
+  description: The Input Method Editor (IME) file name.
+  used_by:
+    objects: [keyboard_info]
+imei:
+  caption: IMEI
+  type: string_t
+  description: The International Mobile Station Equipment Identifier that is associated with the device.
+  used_by:
+    objects: [device]
+impact:
+  caption: Impact
+  type: string_t
+  description: The impact , normalized to the caption of the impact_id value. In the case of 'Other', it is defined by the event source.
+  used_by:
+    classes: [security_finding]
+impact_id:
+  caption: Impact ID
+  type: integer_t
+  sibling: impact
+  description: The normalized impact of the finding.
+  used_by:
+    classes: [security_finding]
+impact_score:
+  caption: Impact
+  type: integer_t
+  description: The impact of the finding, valid range 0-100.
+  used_by:
+    classes: [security_finding]
+injection_type:
+  caption: Injection Type
+  type: string_t
+  description: The process injection method, normalized to the caption of the injection_type_id value. In the case of 'Other', it is defined by the event source.
+  used_by:
+    classes: [process_activity]
+injection_type_id:
+  caption: Injection Type ID
+  type: integer_t
+  sibling: injection_type
+  description: The normalized identifier of the process injection method.
+  used_by:
+    classes: [process_activity]
+instance_uid:
+  caption: Instance ID
+  type: string_t
+  description: The unique identifier of a VM instance.
+  used_by:
+    objects: [device, endpoint, network_endpoint, network_proxy]
+integrity:
+  caption: Integrity
+  type: string_t
+  description: The process integrity level, normalized to the caption of the direction_id value. In the case of 'Other', it is defined by the event source (Windows only).
+  used_by:
+    objects: [process]
+integrity_id:
+  caption: Integrity Level
+  type: integer_t
+  sibling: integrity
+  description: The normalized identifier of the process integrity level (Windows only).
+  used_by:
+    objects: [process]
+interface_name:
+  caption: Network Interface Name
+  type: string_t
+  description: The name of the network interface (e.g. eth2).
+  used_by:
+    objects: [device, endpoint, network_endpoint, network_proxy]
+interface_uid:
+  caption: Network Interface ID
+  type: string_t
+  description: The unique identifier of the network interface.
+  used_by:
+    objects: [device, endpoint, network_endpoint, network_proxy]
+intermediate_ips:
+  caption: Intermediate IP Addresses
+  type: ip_t
+  array: true
+  observable: 2
+  description: The intermediate IP Addresses. For example, the IP addresses in the HTTP X-Forwarded-For header.
+  used_by:
+    objects: [network_endpoint, network_proxy]
+invoked_by:
+  caption: Invoked by
+  type: string_t
+  description: The name of the service that invoked the activity as described in the event.
+  used_by:
+    objects: [actor]
+ip:
+  caption: IP Address
+  type: ip_t
+  observable: 2
+  description: The IP address, in either IPv4 or IPv6 format.
+  used_by:
+    objects: [device, endpoint, network_endpoint, network_interface, network_proxy]
+is_cleartext:
+  caption: Cleartext Credentials
+  type: boolean_t
+  description: |-
+    Indicates whether the credentials were passed in clear text.
+
+    Note: True if the credentials were passed in a clear text protocol such as FTP or TELNET, or if Windows detected that a user's logon password was passed to the authentication package in clear text.
+  used_by:
+    classes: [authentication]
+is_compliant:
+  caption: Compliant Device
+  type: boolean_t
+  description: The event occurred on a compliant device.
+  used_by:
+    objects: [device]
+is_default:
+  caption: Default Value
+  type: boolean_t
+  description: The indication of whether the value is from a default value name. For example, the value name could be missing.
+is_managed:
+  caption: Managed Device
+  type: boolean_t
+  description: The event occurred on a managed device.
+  used_by:
+    objects: [device]
+is_mfa:
+  caption: Multi Factor Authentication
+  type: boolean_t
+  description: Indicates whether Multi Factor Authentication was used during authentication.
+  used_by:
+    classes: [authentication]
+is_new_logon:
+  caption: New Logon
+  type: boolean_t
+  description: Indicates logon is from a device not seen before or a first time account logon.
+  used_by:
+    classes: [authentication]
+is_on_premises:
+  caption: On Premises
+  type: boolean_t
+  description: The indication of whether the location is on premises.
+  used_by:
+    objects: [location]
+is_personal:
+  caption: Personal Device
+  type: boolean_t
+  description: The event occurred on a personal device.
+  used_by:
+    objects: [device]
+is_remote:
+  caption: Remote
+  type: boolean_t
+  description: The indication of whether the session is remote.
+  used_by:
+    classes: [authentication]
+    objects: [session]
+is_renewal:
+  caption: Renewal
+  type: boolean_t
+  description: The indication of whether this is a lease/session renewal event.
+  used_by:
+    classes: [dhcp_activity]
+is_system:
+  caption: System
+  type: boolean_t
+  description: The indication of whether the object is part of the operating system.
+  used_by:
+    objects: [file, kernel]
+is_trusted:
+  caption: Trusted Device
+  type: boolean_t
+  description: The event occurred on a trusted device.
+  used_by:
+    objects: [device]
+isp:
+  caption: ISP
+  type: string_t
+  description: The name of the Internet Service Provider (ISP).
+  used_by:
+    objects: [location]
+issuer:
+  caption: Issuer Details
+  type: string_t
+  description: The identifier of the issuer. See specific usage.
+  used_by:
+    objects: [certificate, session]
+ja3_hash:
+  caption: JA3 Hash
+  type: object_t
+  object: fingerprint
+  observable: 30
+  description: The MD5 hash of a JA3 string.
+  used_by:
+    objects: [tls]
+ja3s_hash:
+  caption: JA3S Hash
+  type: object_t
+  object: fingerprint
+  observable: 30
+  description: The MD5 hash of a JA3S string.
+  used_by:
+    objects: [tls]
+job:
+  caption: Job
+  type: object_t
+  object: job
+  description: The job object that pertains to the event.
+  used_by:
+    classes: [scheduled_job_activity]
+kb_articles:
+  caption: Knowledgebase Articles
+  type: string_t
+  array: true
+  description: The KB article/s related to the entity
+  used_by:
+    objects: [remediation, vulnerability]
+kernel:
+  caption: Kernel
+  type: object_t
+  object: kernel
+  description: The kernel resource object that pertains to the event.
+  used_by:
+    classes: [kernel_activity]
+key_length:
+  caption: Key Length
+  type: integer_t
+  description: The length of the encryption key.
+  used_by:
+    objects: [tls]
+keyboard_info:
+  caption: Keyboard Information
+  type: object_t
+  object: keyboard_info
+  description: The keyboard detailed information.
+  used_by:
+    objects: [device_hw_info]
+keyboard_layout:
+  caption: Keyboard Layout
+  type: string_t
+  description: The keyboard locale identifier name (e.g., en-US).
+  used_by:
+    objects: [keyboard_info]
+keyboard_subtype:
+  caption: Keyboard Subtype
+  type: integer_t
+  description: The keyboard numeric code.
+  used_by:
+    objects: [keyboard_info]
+keyboard_type:
+  caption: Keyboard Type
+  type: string_t
+  description: The keyboard type (e.g., xt, ico).
+  used_by:
+    objects: [keyboard_info]
+kill_chain:
+  caption: Kill Chain
+  type: object_t
+  object: kill_chain
+  array: true
+  description: The [Cyber Kill Chain®](https://www.lockheedmartin.com/en-us/capabilities/cyber/cyber-kill-chain.html).
+  used_by:
+    classes: [security_finding]
+labels:
+  caption: Labels
+  type: string_t
+  array: true
+  description: The list of labels attached to an event, object, or attribute.
+  used_by:
+    objects: [image, metadata, resource_details, service, web_resource]
+lang:
+  caption: Language
+  type: string_t
+  description: 'The two letter lower case language codes, as defined by [ISO 639-1](https://en.wikipedia.org/wiki/ISO_639-1). For example: `en` (English), `de` (German), or `fr` (French).'
+  used_by:
+    objects: [os, product]
+last_run_time:
+  caption: Last Run
+  type: timestamp_t
+  description: The last run time of application or service. See specific usage.
+  used_by:
+    objects: [job]
+last_run_time_dt:
+  caption: Last Run
+  type: datetime_t
+  description: The last run time of application or service. See specific usage.
+  used_by:
+    objects: [job]
+last_seen_time:
+  caption: Last Seen
+  type: timestamp_t
+  description: The most recent detection time of the activity or object. See specific usage.
+  used_by:
+    objects: [device, finding]
+last_seen_time_dt:
+  caption: Last Seen
+  type: datetime_t
+  description: The most recent detection time of the activity or object. See specific usage.
+  used_by:
+    objects: [device, finding]
+latency:
+  caption: Latency
+  type: integer_t
+  description: 'TODO: The HTTP response latency. In seconds, milliseconds, etc.?'
+  used_by:
+    objects: [http_response]
+lease_dur:
+  caption: Lease Duration
+  type: integer_t
+  description: This represents the length of the DHCP lease in seconds. This is present in DHCP Ack events. (activity_id = 1)
+  used_by:
+    classes: [dhcp_activity]
+length:
+  caption: Response Length
+  type: integer_t
+  description: The HTTP response length, in number of bytes.
+  used_by:
+    objects: [http_response]
+license:
+  caption: Software License
+  type: string_t
+  description: The name or identifier of the license applied on package or software. See [SPDX License List](https://spdx.org/licenses/).
+  used_by:
+    objects: [package]
+lineage:
+  caption: Lineage
+  type: string_t
+  array: true
+  description: 'The lineage of the process, represented by a list of paths for each ancestor process. For example: `[''/usr/sbin/sshd'', ''/usr/bin/bash'', ''/usr/bin/whoami'']`'
+  used_by:
+    objects: [process]
+linux/auid:
+  caption: Audit User ID
+  type: integer_t
+  extension: linux
+  description: The audit user assigned at login by the audit subsystem.
+  used_by:
+    objects: [process]
+linux/egid:
+  caption: Effective Group ID
+  type: integer_t
+  extension: linux
+  description: The effective group under which this process is running.
+  used_by:
+    objects: [process]
+linux/euid:
+  caption: Effective User ID
+  type: integer_t
+  extension: linux
+  description: The effective user under which this process is running.
+  used_by:
+    objects: [process]
+load_type:
+  caption: Load Type
+  type: string_t
+  description: The load type, normalized to the caption of the load_type_id value. In the case of 'Other', it is defined by the event source. It describes how the module was loaded in memory.
+  used_by:
+    objects: [module]
+load_type_id:
+  caption: Load Type ID
+  type: integer_t
+  sibling: load_type
+  description: The normalized identifier of the load type. It identifies how the module was loaded in memory.
+  used_by:
+    objects: [module]
+loaded_modules:
+  caption: Loaded Modules
+  type: string_t
+  array: true
+  description: The list of loaded module names.
+  used_by:
+    objects: [process]
+location:
+  caption: Geo Location
+  type: object_t
+  object: location
+  observable: 26
+  description: The detailed geographical location usually associated with an IP address.
+  used_by:
+    objects: [device, endpoint, network_endpoint, network_proxy]
+log_name:
+  caption: Log Name
+  type: string_t
+  description: 'The event log name. For example, syslog file name or Windows logging subsystem: Security.'
+  used_by:
+    objects: [metadata]
+log_provider:
+  caption: Log Provider
+  type: string_t
+  description: The logging provider or logging service that logged the event. For example, Microsoft-Windows-Security-Auditing.
+  used_by:
+    objects: [metadata]
+log_version:
+  caption: Log Version
+  type: string_t
+  description: The event log schema version that specifies the format of the original event. For example syslog version or Cisco Log Schema Version.
+  used_by:
+    objects: [metadata]
+logged_time:
+  caption: Logged Time
+  type: timestamp_t
+  description: |-
+    The time when the logging system collected and logged the event.
+
+    This attribute is distinct from the event time in that event time typically contain the time extracted from the original event. Most of the time, these two times will be different.
+  used_by:
+    objects: [metadata]
+logged_time_dt:
+  caption: Logged Time
+  type: datetime_t
+  description: |-
+    The time when the logging system collected and logged the event.
+
+    This attribute is distinct from the event time in that event time typically contain the time extracted from the original event. Most of the time, these two times will be different.
+  used_by:
+    objects: [metadata]
+logon_process:
+  caption: Logon Process
+  type: object_t
+  object: process
+  observable: 25
+  description: The trusted process that validated the authentication credentials.
+  used_by:
+    classes: [authentication]
+logon_type:
+  caption: Logon Type
+  type: string_t
+  description: The logon type, normalized to the caption of the logon_type_id value. In the case of 'Other', it is defined by the event source.
+  used_by:
+    classes: [authentication]
+logon_type_id:
+  caption: Logon Type ID
+  type: integer_t
+  sibling: logon_type
+  description: The normalized logon type identifier.
+  used_by:
+    classes: [authentication]
+mac:
+  caption: MAC Address
+  type: mac_t
+  observable: 3
+  description: The Media Access Control (MAC) address that is associated with the network interface.
+  used_by:
+    objects: [device, endpoint, network_endpoint, network_interface, network_proxy]
+malware:
+  caption: Malware
+  type: object_t
+  object: malware
+  array: true
+  description: The list of malware identified by a finding.
+  used_by:
+    classes: [dns_activity, email_activity, email_file_activity, email_url_activity, file_activity, ftp_activity, http_activity, kernel_activity, kernel_extension, memory_activity, module_activity, network_activity, process_activity, rdp_activity, scheduled_job_activity, security_finding, smb_activity, ssh_activity]
+message:
+  caption: Message
+  type: string_t
+  description: The description of the event, as defined by the event source.
+  used_by:
+    classes: [account_change, api_activity, application_lifecycle, authentication, authorize_session, base_event, config_state, dhcp_activity, dns_activity, email_activity, email_file_activity, email_url_activity, entity_management, file_activity, ftp_activity, group_management, http_activity, inventory_info, kernel_activity, kernel_extension, memory_activity, module_activity, network_activity, network_file_activity, process_activity, rdp_activity, scheduled_job_activity, security_finding, smb_activity, ssh_activity, user_access, web_resource_access_activity, web_resources_activity]
+    objects: [http_response, response]
+message_uid:
+  caption: Message UID
+  type: string_t
+  description: The email header Message-Id value, as defined by RFC 5322.
+  used_by:
+    objects: [email]
+metadata:
+  caption: Metadata
+  type: object_t
+  object: metadata
+  description: The metadata associated with the event.
+  used_by:
+    classes: [account_change, api_activity, application_lifecycle, authentication, authorize_session, base_event, config_state, dhcp_activity, dns_activity, email_activity, email_file_activity, email_url_activity, entity_management, file_activity, ftp_activity, group_management, http_activity, inventory_info, kernel_activity, kernel_extension, memory_activity, module_activity, network_activity, network_file_activity, process_activity, rdp_activity, scheduled_job_activity, security_finding, smb_activity, ssh_activity, user_access, web_resource_access_activity, web_resources_activity]
+metrics:
+  caption: Metrics
+  type: object_t
+  object: metric
+  array: true
+  description: The general purpose metrics associated with the event. See specific usage.
+  used_by:
+    objects: [cvss]
+mime_type:
+  caption: MIME type
+  type: string_t
+  description: The Multipurpose Internet Mail Extensions (MIME) type of the file, if applicable.
+  used_by:
+    objects: [file]
+modified_time:
+  caption: Modified Time
+  type: timestamp_t
+  description: The time when the object was last modified. See specific usage.
+  used_by:
+    objects: [cve, device, file, finding, metadata]
+modified_time_dt:
+  caption: Modified Time
+  type: datetime_t
+  description: The time when the object was last modified. See specific usage.
+  used_by:
+    objects: [cve, device, file, finding, metadata]
+modifier:
+  caption: Modifier
+  type: object_t
+  object: user
+  observable: 21
+  description: The user that last modified the object associated with the event. See specific usage.
+  used_by:
+    objects: [file]
+module:
+  caption: Module
+  type: object_t
+  object: module
+  description: The module that pertains to the event.
+  used_by:
+    classes: [module_activity, process_activity]
+name:
+  caption: Name
+  type: string_t
+  description: The name of the entity. See specific usage.
+  used_by:
+    classes: [ftp_activity]
+    objects: [account, analytic, cis_benchmark_result, container, device, endpoint, enrichment, extension, feature, file, group, http_cookie, http_header, idp, image, job, kernel, malware, managed_entity, metric, network_endpoint, network_interface, network_proxy, observable, organization, os, package, policy, process, product, resource_details, rule, san, service, tactic, technique, user, web_resource]
+namespace:
+  caption: Namespace
+  type: string_t
+  description: The namespace is useful in merger or acquisition situations. For example, when similar entities exists that you need to keep separate.
+  used_by:
+    objects: [network_interface]
+namespace_pid:
+  caption: Namespace PID
+  type: integer_t
+  description: If running under a process namespace (such as in a container), the process identifier within that process namespace.
+  used_by:
+    objects: [process]
+network_driver:
+  caption: Network Driver
+  type: string_t
+  description: The network driver used by the container. For example, bridge, overlay, host, none, etc.
+  used_by:
+    objects: [container]
+network_interfaces:
+  caption: Network Interfaces
+  type: object_t
+  object: network_interface
+  array: true
+  description: |-
+    The network interfaces that are associated with the device, one for each unique MAC address/IP address/hostname/name combination.
+
+    Note: The first element of the array is the network information that pertains to the event.
+  used_by:
+    objects: [device]
+next_run_time:
+  caption: Next Run
+  type: timestamp_t
+  description: The next run time. See specific usage.
+  used_by:
+    objects: [job]
+next_run_time_dt:
+  caption: Next Run
+  type: datetime_t
+  description: The next run time. See specific usage.
+  used_by:
+    objects: [job]
+nist:
+  caption: NIST List
+  type: string_t
+  array: true
+  description: The NIST Cybersecurity Framework recommendations for managing the cybersecurity risk.
+  used_by:
+    classes: [security_finding]
+observables:
+  caption: Observables
+  type: object_t
+  object: observable
+  array: true
+  description: The observables associated with the event.
+  used_by:
+    classes: [account_change, api_activity, application_lifecycle, authentication, authorize_session, base_event, config_state, dhcp_activity, dns_activity, email_activity, email_file_activity, email_url_activity, entity_management, file_activity, ftp_activity, group_management, http_activity, inventory_info, kernel_activity, kernel_extension, memory_activity, module_activity, network_activity, network_file_activity, process_activity, rdp_activity, scheduled_job_activity, security_finding, smb_activity, ssh_activity, user_access, web_resource_access_activity, web_resources_activity]
+opcode:
+  caption: DNS Opcode
+  type: string_t
+  description: The DNS opcode specifies the type of the query message.
+  used_by:
+    objects: [dns_query]
+opcode_id:
+  caption: DNS Opcode ID
+  type: integer_t
+  description: The DNS opcode ID specifies the normalized query message type.
+  used_by:
+    objects: [dns_query]
+open_mask:
+  caption: Open Mask
+  type: integer_t
+  description: The Windows options needed to open a registry key.
+open_type:
+  caption: Open Type
+  type: string_t
+  description: The file open type.
+  used_by:
+    classes: [smb_activity]
+operation:
+  caption: Operation
+  type: string_t
+  description: Verb/Operation associated with the request
+  used_by:
+    objects: [api]
+opnum:
+  caption: Opnum
+  type: integer_t
+  description: An operation number used to identify a specific remote procedure call (RPC) method or a method in an interface.
+  used_by:
+    objects: [dce_rpc]
+orchestrator:
+  caption: Orchestrator
+  type: string_t
+  description: The orchestrator managing the container, such as ECS, EKS, K8s, or OpenShift.
+  used_by:
+    objects: [container]
+org:
+  caption: Organization
+  type: object_t
+  object: organization
+  description: Organization and org unit relevant to the event or object.
+  used_by:
+    objects: [cloud, device, user]
+original_time:
+  caption: Original Time
+  type: string_t
+  description: The original event time as reported by the event source. For example, the time in the original format from system event log such as Syslog on Unix/Linux and the System event file on Windows. Omit if event is generated instead of collected via logs.
+  used_by:
+    objects: [metadata]
+os:
+  caption: OS
+  type: object_t
+  object: os
+  description: The device operating system.
+  used_by:
+    objects: [device]
+ou_name:
+  caption: Org Unit Name
+  type: string_t
+  description: The name of the organizational unit, within an organization.  For example, Finance, IT, R&D
+  used_by:
+    objects: [organization]
+ou_uid:
+  caption: Org Unit ID
+  type: string_t
+  description: The alternate identifier for an entity's unique identifier. For example, its Active Directory OU DN or AWS OU ID.
+  used_by:
+    objects: [organization]
+overall_score:
+  caption: Overall Score
+  type: float_t
+  description: The overall score as reported by the event source. See specific usage.
+  used_by:
+    objects: [cvss]
+owner:
+  caption: Owner
+  type: object_t
+  object: user
+  observable: 21
+  description: The user that owns the file/object.
+  used_by:
+    objects: [file, resource_details]
+packages:
+  caption: Software Packages
+  type: object_t
+  object: package
+  array: true
+  description: List of vulnerable packages as identified by the security product
+  used_by:
+    objects: [vulnerability]
+packet_uid:
+  caption: Packet UID
+  type: integer_t
+  description: The packet identifier assigned by the protocol.
+  used_by:
+    objects: [dns_answer, dns_query]
+packets:
+  caption: Total Packets
+  type: long_t
+  description: The total number of packets (in and out).
+  used_by:
+    objects: [network_traffic]
+packets_in:
+  caption: Packets In
+  type: long_t
+  description: The number of packets sent from the destination to the source.
+  used_by:
+    objects: [network_traffic]
+packets_out:
+  caption: Packets Out
+  type: long_t
+  description: The number of packets sent from the source to the destination.
+  used_by:
+    objects: [network_traffic]
+parent_folder:
+  caption: Parent Folder
+  type: string_t
+  description: 'The parent folder in which the file resides. For example: `c:\windows\system32`'
+  used_by:
+    objects: [file]
+parent_process:
+  caption: Parent Process
+  type: object_t
+  object: process
+  observable: 25
+  description: The parent process of this process object. It is recommended to only populate this field for the first process object, to prevent deep nesting.
+  used_by:
+    objects: [process]
+path:
+  caption: Path
+  type: string_t
+  description: The path that pertains to the event or object. See specific usage.
+  used_by:
+    objects: [file, http_cookie, image, kernel, malware, product, url]
+permission:
+  caption: Permission
+  type: string_t
+  description: The IAM permission related to an event
+phase:
+  caption: Kill Chain Phase
+  type: string_t
+  description: The cyber kill chain phase.
+  used_by:
+    objects: [kill_chain]
+phase_id:
+  caption: Kill Chain Phase ID
+  type: integer_t
+  sibling: phase
+  description: The cyber kill chain phase identifier.
+  used_by:
+    objects: [kill_chain]
+physical_height:
+  caption: Physical Height
+  type: integer_t
+  description: The numeric physical height of display.
+  used_by:
+    objects: [display]
+physical_orientation:
+  caption: Physical Orientation
+  type: integer_t
+  description: The numeric physical orientation of display.
+  used_by:
+    objects: [display]
+physical_width:
+  caption: Physical Width
+  type: integer_t
+  description: The numeric physical width of display.
+  used_by:
+    objects: [display]
+pid:
+  caption: Process ID
+  type: integer_t
+  description: The process identifier, as reported by the operating system. Process ID (PID) is a number used by the operating system to uniquely identify an active process.
+  used_by:
+    objects: [process]
+pod_uuid:
+  caption: Pod UUID
+  type: uuid_t
+  description: The unique identifier of the pod (or equivalent) that the container is executing on.
+  used_by:
+    objects: [container]
+policy:
+  caption: Policy
+  type: object_t
+  object: policy
+  description: Describes details of a policy. See specific usage.
+  used_by:
+    objects: [authorization]
+port:
+  caption: Port
+  type: port_t
+  description: The TCP/UDP port number associated with a connection. See specific usage.
+  used_by:
+    classes: [ftp_activity]
+    objects: [network_endpoint, network_proxy, url]
+postal_code:
+  caption: Postal Code
+  type: string_t
+  description: The postal code of the location.
+  used_by:
+    objects: [location]
+priority:
+  caption: Priority
+  type: integer_t
+  description: The priority, normalized to the caption of the priority_id value. In the case of 'Other', it is defined by the event source. See specific usage.
+priority_id:
+  caption: Priority ID
+  type: integer_t
+  sibling: priority
+  description: The normalized priority. See specific usage.
+privileges:
+  caption: Privileges
+  type: string_t
+  array: true
+  description: The user or group privileges.
+  used_by:
+    classes: [authorize_session, group_management, user_access]
+    objects: [group]
+process:
+  caption: Process
+  type: object_t
+  object: process
+  observable: 25
+  description: The process object.
+  used_by:
+    classes: [memory_activity, process_activity, security_finding]
+    objects: [actor]
+processed_time:
+  caption: Processed Time
+  type: timestamp_t
+  description: The event processed time, such as an ETL operation.
+  used_by:
+    objects: [metadata]
+processed_time_dt:
+  caption: Processed Time
+  type: datetime_t
+  description: The event processed time, such as an ETL operation.
+  used_by:
+    objects: [metadata]
+product:
+  caption: Product
+  type: object_t
+  object: product
+  description: The product that reported the event.
+  used_by:
+    objects: [cve, file, metadata]
+product_uid:
+  caption: Product Identifier
+  type: string_t
+  description: Unique Identifier of a product.
+  used_by:
+    objects: [finding, related_event]
+profiles:
+  caption: Profiles
+  type: string_t
+  array: true
+  description: The list of profiles used to create the event.
+  used_by:
+    objects: [metadata]
+project_uid:
+  caption: Project ID
+  type: string_t
+  description: The unique identifier of a Cloud project.
+  used_by:
+    objects: [cloud]
+protocol_name:
+  caption: Protocol Name
+  type: string_t
+  description: 'The TCP/IP protocol name in lowercase, as defined by the Internet Assigned Numbers Authority (IANA). See [Protocol Numbers](https://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml). For example: `tcp` or `udp`.'
+  used_by:
+    objects: [network_connection_info]
+protocol_num:
+  caption: Protocol Number
+  type: integer_t
+  description: 'The TCP/IP protocol number, as defined by the Internet Assigned Numbers Authority (IANA). Use -1 if the protocol is not defined by IANA. See [Protocol Numbers](https://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml). For example: `6` for TCP and `17` for UDP.'
+  used_by:
+    objects: [network_connection_info]
+protocol_ver:
+  caption: Protocol Version
+  type: string_t
+  description: The Protocol version, normalized to the caption of the protocol_ver_id value. In the case of 'Other', it is defined by the event source.
+  used_by:
+    classes: [rdp_activity, ssh_activity]
+    objects: [network_connection_info]
+protocol_ver_id:
+  caption: Protocol Version ID
+  type: integer_t
+  sibling: protocol_ver
+  description: The normalized identifier of the Protocol version.
+  used_by:
+    objects: [network_connection_info]
+provider:
+  caption: Provider
+  type: string_t
+  description: The origin of information associated with the event. See specific usage.
+  used_by:
+    objects: [cloud, enrichment, location, malware, reputation]
+proxy:
+  caption: Proxy
+  type: object_t
+  object: network_proxy
+  observable: 20
+  description: If a proxy connection is present, the connection from the client to the proxy server.
+  used_by:
+    classes: [dns_activity, ftp_activity, http_activity, network_activity, rdp_activity, smb_activity, ssh_activity, web_resource_access_activity]
+query:
+  caption: DNS Query
+  type: object_t
+  object: dns_query
+  description: The Domain Name System (DNS) query.
+  used_by:
+    classes: [dns_activity]
+query_string:
+  caption: HTTP Query String
+  type: string_t
+  description: 'The query portion of the URL. For example: the query portion of the URL `http://www.example.com/search?q=bad&sort=date` is `q=bad&sort=date`.'
+  used_by:
+    objects: [url]
+query_time:
+  caption: Query Time
+  type: timestamp_t
+  description: The Domain Name System (DNS) query time.
+  used_by:
+    classes: [dns_activity]
+query_time_dt:
+  caption: Query Time
+  type: datetime_t
+  description: The Domain Name System (DNS) query time.
+  used_by:
+    classes: [dns_activity]
+ram_size:
+  caption: RAM Size
+  type: integer_t
+  description: 'The total amount of installed RAM, in Megabytes. For example: `2048`.'
+  used_by:
+    objects: [device_hw_info]
+raw_data:
+  caption: Raw Data
+  type: string_t
+  description: The event data as received from the event source.
+  used_by:
+    classes: [account_change, api_activity, application_lifecycle, authentication, authorize_session, base_event, config_state, dhcp_activity, dns_activity, email_activity, email_file_activity, email_url_activity, entity_management, file_activity, ftp_activity, group_management, http_activity, inventory_info, kernel_activity, kernel_extension, memory_activity, module_activity, network_activity, network_file_activity, process_activity, rdp_activity, scheduled_job_activity, security_finding, smb_activity, ssh_activity, user_access, web_resource_access_activity, web_resources_activity]
+raw_header:
+  caption: Raw Header
+  type: string_t
+  description: The email authentication header.
+  used_by:
+    objects: [email]
+rcode:
+  caption: Response Code
+  type: string_t
+  description: The server response code, normalized to the caption of the rcode_id value. In the case of 'Other', it is defined by the event source.
+  used_by:
+    classes: [dns_activity]
+rcode_id:
+  caption: Response Code ID
+  type: integer_t
+  sibling: rcode
+  description: The normalized identifier of the server response code. See specific usage.
+  used_by:
+    classes: [dns_activity]
+rdata:
+  caption: DNS RData
+  type: string_t
+  description: The data describing the DNS resource. The meaning of this data depends on the type and class of the resource record.
+  used_by:
+    objects: [dns_answer]
+references:
+  caption: References
+  type: string_t
+  array: true
+  description: Supporting reference URLs
+  used_by:
+    objects: [vulnerability]
+referrer:
+  caption: HTTP Referrer
+  type: string_t
+  description: The request header that identifies the address of the previous web page, which is linked to the current web page or resource being requested.
+  used_by:
+    objects: [http_request]
+region:
+  caption: Region
+  type: string_t
+  description: The name or the code of a region. See specific usage.
+  used_by:
+    objects: [cloud, device, location, resource_details]
+registrar:
+  caption: Domain Registrar
+  type: string_t
+  description: The domain registrar.
+related_analytics:
+  caption: Related Analytics
+  type: object_t
+  object: analytic
+  array: true
+  description: Describes analytics related to the analytic of a finding or detection as identified by the security product.
+  used_by:
+    objects: [analytic]
+related_events:
+  caption: Related Events
+  type: object_t
+  object: related_event
+  array: true
+  description: Describes events related to a finding or detection as identified by the security product.
+  used_by:
+    objects: [finding]
+related_vulnerabilities:
+  caption: Related Vulnerabilities
+  type: string_t
+  array: true
+  description: List of vulnerabilities that are related to this vulnerability.
+  used_by:
+    objects: [vulnerability]
+relay:
+  caption: Relay
+  type: object_t
+  object: network_interface
+  description: The network relay that is associated with the event.
+  used_by:
+    classes: [dhcp_activity]
+release:
+  caption: Software Release Details
+  type: string_t
+  description: Release is the number of times a version of the software has been packaged.
+  used_by:
+    objects: [package]
+remediation:
+  caption: Remediation
+  type: object_t
+  object: remediation
+  description: The remediation recommendations on how to fix the identified issue(s).
+  used_by:
+    objects: [cis_benchmark_result, finding]
+remote_display:
+  caption: Remote Display
+  type: object_t
+  object: display
+  description: The remote display affiliated with the event
+  used_by:
+    classes: [rdp_activity]
+reply_to:
+  caption: Reply To
+  type: email_t
+  observable: 5
+  description: The email header Reply-To values, as defined by RFC 5322.
+  used_by:
+    objects: [email]
+reputation:
+  caption: Reputation Scores
+  type: object_t
+  object: reputation
+  description: Contains the original and normalized reputation scores.
+  used_by:
+    objects: [observable]
+request:
+  caption: API Request Details
+  type: object_t
+  object: request
+  description: General Purpose API Request Object. See specific usage
+  used_by:
+    classes: [rdp_activity]
+    objects: [api]
+requested_permissions:
+  caption: Requested Permissions
+  type: integer_t
+  description: The permissions mask that were requested by the process.
+  used_by:
+    classes: [memory_activity, process_activity]
+requirements:
+  caption: Requirements
+  type: string_t
+  array: true
+  description: A list of applicable compliance requirements for which this finding is related to.
+  used_by:
+    objects: [compliance]
+resource:
+  caption: Resource
+  type: object_t
+  object: resource_details
+  description: The target resource.
+  used_by:
+    classes: [group_management, user_access]
+resource_type:
+  caption: Resource Type
+  type: string_t
+  description: The resource type as defined by the event source.
+  used_by:
+    objects: [url]
+resources:
+  caption: Resources Array
+  type: object_t
+  object: resource_details
+  array: true
+  description: Describes details about resources that were affected by the activity/event.
+  used_by:
+    classes: [api_activity, security_finding]
+resources_result:
+  caption: Resource Results Array
+  type: object_t
+  object: resource_details
+  array: true
+  description: Updated resources after an activity/event.
+response:
+  caption: API Response Details
+  type: object_t
+  object: response
+  description: General Purpose API Response Object. See specific usage.
+  used_by:
+    classes: [rdp_activity, smb_activity]
+    objects: [api]
+response_time:
+  caption: Response Time
+  type: timestamp_t
+  description: The Domain Name System (DNS) response time.
+  used_by:
+    classes: [dns_activity]
+response_time_dt:
+  caption: Response Time
+  type: datetime_t
+  description: The Domain Name System (DNS) response time.
+  used_by:
+    classes: [dns_activity]
+risk_level:
+  caption: Risk Level
+  type: string_t
+  description: The risk level, normalized to the caption of the risk_level_id value. In the case of 'Other', it is defined by the event source.
+  used_by:
+    classes: [security_finding]
+    objects: [device]
+risk_level_id:
+  caption: Risk Level ID
+  type: integer_t
+  sibling: risk_level
+  description: The normalized risk level id.
+  used_by:
+    classes: [security_finding]
+    objects: [device]
+risk_score:
+  caption: Risk Score
+  type: integer_t
+  description: The risk score as reported by the event source.
+  used_by:
+    classes: [security_finding]
+    objects: [device]
+rpc_interface:
+  caption: Remote Procedure Call Interface
+  type: object_t
+  object: rpc_interface
+  description: The RPC Interface object describes the details pertaining to the remote procedure call interface.
+  used_by:
+    objects: [dce_rpc]
+rule:
+  caption: Rule
+  type: object_t
+  object: rule
+  description: The rules that reported the events.
+  used_by:
+    objects: [cis_benchmark_result]
+run_state:
+  caption: Run State
+  type: string_t
+  description: The state of the job or service, normalized to the caption of the run_state_id value. In the case of 'Other', it is defined by the event source. See specific usage.
+  used_by:
+    objects: [job]
+run_state_id:
+  caption: Run State ID
+  type: integer_t
+  sibling: run_state
+  description: The normalized identifier of the state of the job or service. See specific usage.
+  used_by:
+    objects: [job]
+runtime:
+  caption: Runtime
+  type: string_t
+  description: The backend running the container, such as containerd or cri-o.
+  used_by:
+    objects: [container]
+samesite:
+  caption: SameSite
+  type: string_t
+  description: 'The cookie attribute that lets servers specify whether/when cookies are sent with cross-site requests. Values are: Strict, Lax or None'
+  used_by:
+    objects: [http_cookie]
+sandbox:
+  caption: Sandbox
+  type: string_t
+  description: The name of the containment jail (i.e., sandbox). For example, hardened_ps, high_security_ps, oracle_ps, netsvcs_ps, or default_ps.
+  used_by:
+    objects: [process]
+sans:
+  caption: Subject Alternative Names
+  type: object_t
+  object: san
+  array: true
+  description: The list of subject alternative names that are secured by a specific certificate.
+  used_by:
+    objects: [tls]
+scale_factor:
+  caption: Scale Factor
+  type: integer_t
+  description: The numeric scale factor of display.
+  used_by:
+    objects: [display]
+scheme:
+  caption: Scheme
+  type: string_t
+  description: 'The scheme portion of the URL. For example: `http`, `https`, `ftp`, or `sftp`.'
+  used_by:
+    objects: [url]
+score:
+  caption: Reputation Score
+  type: string_t
+  description: The reputation score, normalized to the caption of the score_id value. In the case of 'Other', it is defined by the event source.
+  used_by:
+    objects: [reputation]
+score_id:
+  caption: Reputation Score ID
+  type: integer_t
+  sibling: score
+  description: The normalized reputation score identifier.
+  used_by:
+    objects: [reputation]
+secure:
+  caption: Secure
+  type: boolean_t
+  description: The cookie attribute to only send cookies to the server with an encrypted request over the HTTPS protocol.
+  used_by:
+    objects: [http_cookie]
+security_descriptor:
+  caption: Security Descriptor
+  type: string_t
+  description: The object security descriptor.
+  used_by:
+    objects: [file]
+sequence:
+  caption: Sequence Number
+  type: integer_t
+  description: Sequence number of the event. The sequence number is a value available in some events, to make the exact ordering of events unambiguous, regardless of the event time precision.
+  used_by:
+    objects: [metadata]
+serial_number:
+  caption: Serial Number
+  type: string_t
+  description: The serial number that pertains to the object. See specific usage.
+  used_by:
+    objects: [certificate, device_hw_info]
+server_ciphers:
+  caption: Server Cipher Suites
+  type: string_t
+  array: true
+  description: The server cipher suites that were exchanged during the TLS handshake negotiation.
+  used_by:
+    objects: [tls]
+server_hassh:
+  caption: Server HASSH
+  type: object_t
+  object: hassh
+  description: The Server HASSH fingerprinting object.
+  used_by:
+    classes: [ssh_activity]
+service:
+  caption: Service
+  type: object_t
+  object: service
+  description: The service that pertains to the event.
+  used_by:
+    classes: [authentication]
+    objects: [api]
+session:
+  caption: Session
+  type: object_t
+  object: session
+  description: The authenticated user or service session.
+  used_by:
+    classes: [authentication, authorize_session]
+    objects: [actor, process]
+severity:
+  caption: Severity
+  type: string_t
+  description: The event severity, normalized to the caption of the severity_id value. In the case of 'Other', it is defined by the event source.
+  used_by:
+    classes: [account_change, api_activity, application_lifecycle, authentication, authorize_session, base_event, config_state, dhcp_activity, dns_activity, email_activity, email_file_activity, email_url_activity, entity_management, file_activity, ftp_activity, group_management, http_activity, inventory_info, kernel_activity, kernel_extension, memory_activity, module_activity, network_activity, network_file_activity, process_activity, rdp_activity, scheduled_job_activity, security_finding, smb_activity, ssh_activity, user_access, web_resource_access_activity, web_resources_activity]
+    objects: [cvss, vulnerability]
+severity_id:
+  caption: Severity ID
+  type: integer_t
+  sibling: severity
+  description: |-
+    The normalized identifier of the event severity.
+
+    The normalized severity is a measurement the effort and expense required to manage and resolve an event or incident. Smaller numerical values represent lower impact events, and larger numerical values represent higher impact events.
+  used_by:
+    classes: [account_change, api_activity, application_lifecycle, authentication, authorize_session, base_event, config_state, dhcp_activity, dns_activity, email_activity, email_file_activity, email_url_activity, entity_management, file_activity, ftp_activity, group_management, http_activity, inventory_info, kernel_activity, kernel_extension, memory_activity, module_activity, network_activity, network_file_activity, process_activity, rdp_activity, scheduled_job_activity, security_finding, smb_activity, ssh_activity, user_access, web_resource_access_activity, web_resources_activity]
+share:
+  caption: Share
+  type: string_t
+  description: The SMB share name.
+  used_by:
+    classes: [smb_activity]
+share_type:
+  caption: Share Type
+  type: string_t
+  description: The SMB share type, normalized to the caption of the share_type_id value. In the case of 'Other', it is defined by the event source.
+  used_by:
+    classes: [smb_activity]
+share_type_id:
+  caption: Share Type Id
+  type: integer_t
+  sibling: share_type
+  description: The normalized identifier of the SMB share type.
+  used_by:
+    classes: [smb_activity]
+signature:
+  caption: Digital Signature
+  type: object_t
+  object: digital_signature
+  description: The digital signature of the file.
+  used_by:
+    objects: [file]
+size:
+  caption: Size
+  type: long_t
+  description: The size of data, in bytes.
+  used_by:
+    classes: [memory_activity]
+    objects: [container, email, file]
+smtp_from:
+  caption: SMTP From
+  type: email_t
+  observable: 5
+  description: The value of the SMTP MAIL FROM command.
+  used_by:
+    objects: [email]
+smtp_hello:
+  caption: SMTP Hello
+  type: string_t
+  description: The value of the SMTP HELO or EHLO command.
+  used_by:
+    classes: [email_activity]
+smtp_to:
+  caption: SMTP To
+  type: email_t
+  array: true
+  observable: 5
+  description: The value of the SMTP envelope RCPT TO command.
+  used_by:
+    objects: [email]
+sni:
+  caption: Server Name Indication
+  type: string_t
+  description: The Server Name Indication (SNI) extension sent by the client.
+  used_by:
+    objects: [tls]
+sp_name:
+  caption: OS Service Pack
+  type: string_t
+  description: The name of the latest Service Pack.
+  used_by:
+    objects: [os]
+sp_ver:
+  caption: OS Service Pack Version
+  type: integer_t
+  description: The version number of the latest Service Pack.
+  used_by:
+    objects: [os]
+spf:
+  caption: SPF Status
+  type: string_t
+  description: The Sender Policy Framework (SPF) status of the email.
+  used_by:
+    objects: [email_auth]
+src_endpoint:
+  caption: Source Endpoint
+  type: object_t
+  object: network_endpoint
+  observable: 20
+  description: The network source endpoint.
+  used_by:
+    classes: [account_change, api_activity, authentication, dhcp_activity, dns_activity, email_activity, ftp_activity, http_activity, network_activity, network_file_activity, rdp_activity, smb_activity, ssh_activity, web_resource_access_activity, web_resources_activity]
+src_url:
+  caption: Source URL
+  type: url_t
+  observable: 6
+  description: The URL pointing towards the source of an entity. See specific usage.
+  used_by:
+    objects: [finding]
+start_address:
+  caption: Start Address
+  type: string_t
+  description: The start address of the execution.
+  used_by:
+    objects: [module]
+start_time:
+  caption: Start Time
+  type: timestamp_t
+  description: The start time of a time period. See specific usage.
+  used_by:
+    classes: [account_change, api_activity, application_lifecycle, authentication, authorize_session, base_event, config_state, dhcp_activity, dns_activity, email_activity, email_file_activity, email_url_activity, entity_management, file_activity, ftp_activity, group_management, http_activity, inventory_info, kernel_activity, kernel_extension, memory_activity, module_activity, network_activity, network_file_activity, process_activity, rdp_activity, scheduled_job_activity, security_finding, smb_activity, ssh_activity, user_access, web_resource_access_activity, web_resources_activity]
+start_time_dt:
+  caption: Start Time
+  type: datetime_t
+  description: The start time of a time period. See specific usage.
+  used_by:
+    classes: [account_change, api_activity, application_lifecycle, authentication, authorize_session, base_event, config_state, dhcp_activity, dns_activity, email_activity, email_file_activity, email_url_activity, entity_management, file_activity, ftp_activity, group_management, http_activity, inventory_info, kernel_activity, kernel_extension, memory_activity, module_activity, network_activity, network_file_activity, process_activity, rdp_activity, scheduled_job_activity, security_finding, smb_activity, ssh_activity, user_access, web_resource_access_activity, web_resources_activity]
+state:
+  caption: State
+  type: string_t
+  description: The state of the event or object, normalized to the caption of the state_id value. In the case of 'Other', it is defined by the event source. See specific usage.
+  used_by:
+    classes: [security_finding]
+state_id:
+  caption: State ID
+  type: integer_t
+  sibling: state
+  description: The normalized state ID of the event or object. See specific usage.
+  used_by:
+    classes: [security_finding]
+status:
+  caption: Status
+  type: string_t
+  description: The event status, normalized to the caption of the status_id value. In the case of 'Other', it is defined by the event source.
+  used_by:
+    classes: [account_change, api_activity, application_lifecycle, authentication, authorize_session, base_event, config_state, dhcp_activity, dns_activity, email_activity, email_file_activity, email_url_activity, entity_management, file_activity, ftp_activity, group_management, http_activity, inventory_info, kernel_activity, kernel_extension, memory_activity, module_activity, network_activity, network_file_activity, process_activity, rdp_activity, scheduled_job_activity, security_finding, smb_activity, ssh_activity, user_access, web_resource_access_activity, web_resources_activity]
+    objects: [compliance, http_response]
+status_code:
+  caption: Status Code
+  type: string_t
+  description: |-
+    The event status code, as reported by the event source.
+
+    For example, in a Windows Failed Authentication event, this would be the value of 'Failure Code', e.g. 0x18.
+  used_by:
+    classes: [account_change, api_activity, application_lifecycle, authentication, authorize_session, base_event, config_state, dhcp_activity, dns_activity, email_activity, email_file_activity, email_url_activity, entity_management, file_activity, ftp_activity, group_management, http_activity, inventory_info, kernel_activity, kernel_extension, memory_activity, module_activity, network_activity, network_file_activity, process_activity, rdp_activity, scheduled_job_activity, security_finding, smb_activity, ssh_activity, user_access, web_resource_access_activity, web_resources_activity]
+status_detail:
+  caption: Status Details
+  type: string_t
+  description: The status details contains additional information about the event outcome.
+  used_by:
+    classes: [account_change, api_activity, application_lifecycle, authentication, authorize_session, base_event, config_state, dhcp_activity, dns_activity, email_activity, email_file_activity, email_url_activity, entity_management, file_activity, ftp_activity, group_management, http_activity, inventory_info, kernel_activity, kernel_extension, memory_activity, module_activity, network_activity, network_file_activity, process_activity, rdp_activity, scheduled_job_activity, security_finding, smb_activity, ssh_activity, user_access, web_resource_access_activity, web_resources_activity]
+    objects: [compliance]
+status_id:
+  caption: Status ID
+  type: integer_t
+  sibling: status
+  description: The normalized identifier of the event status.
+  used_by:
+    classes: [account_change, api_activity, application_lifecycle, authentication, authorize_session, base_event, config_state, dhcp_activity, dns_activity, email_activity, email_file_activity, email_url_activity, entity_management, file_activity, ftp_activity, group_management, http_activity, inventory_info, kernel_activity, kernel_extension, memory_activity, module_activity, network_activity, network_file_activity, process_activity, rdp_activity, scheduled_job_activity, security_finding, smb_activity, ssh_activity, user_access, web_resource_access_activity, web_resources_activity]
+subdomain:
+  caption: Subdomain
+  type: string_t
+  description: 'The subdomain portion of the URL. For example: `sub` in `https://sub.example.com` or `sub2.sub1` in `https://sub2.sub1.example.com`.'
+  used_by:
+    objects: [url]
+subject:
+  caption: Subject Details
+  type: string_t
+  description: The identifier of the subject. See specific usage.
+  used_by:
+    objects: [certificate, email]
+subnet:
+  caption: Subnet
+  type: subnet_t
+  description: The subnet mask.
+  used_by:
+    objects: [device]
+subnet_prefix:
+  caption: Subnet Prefix Length
+  type: integer_t
+  description: The subnet prefix length determines the number of bits used to represent the network part of the IP address. The remaining bits are reserved for identifying individual hosts within that subnet.
+  used_by:
+    objects: [network_interface]
+subnet_uid:
+  caption: Subnet UID
+  type: string_t
+  description: The unique identifier of a virtual subnet.
+  used_by:
+    objects: [device, endpoint, network_endpoint, network_proxy]
+supporting_data:
+  caption: Supporting Data
+  type: json_t
+  description: Additional data supporting a finding as provided by security tool
+  used_by:
+    objects: [finding]
+svc_name:
+  caption: Service Name
+  type: string_t
+  description: The service name in service-to-service connections. For example, AWS VPC logs the pkt-src-aws-service and pkt-dst-aws-service fields identify the connection is coming from or going to an AWS service.
+  used_by:
+    objects: [network_endpoint, network_proxy]
+system_call:
+  caption: System Call
+  type: string_t
+  description: The system call that was invoked.
+  used_by:
+    objects: [kernel]
+tactics:
+  caption: Tactics
+  type: object_t
+  object: tactic
+  array: true
+  description: The a list of tactic ID's/names that are associated with the attack technique, as defined by [ATT&CK MatrixTM](https://attack.mitre.org/wiki/ATT&CK_Matrix).
+  used_by:
+    objects: [attack]
+tag:
+  caption: Image Tag
+  type: string_t
+  description: 'The image tag. For example: `1.11-alpine`.'
+  used_by:
+    objects: [container, image]
+tcp_flags:
+  caption: TCP Flags
+  type: integer_t
+  description: The network connection TCP header flags (i.e., control bits).
+  used_by:
+    objects: [network_connection_info]
+technique:
+  caption: Technique
+  type: object_t
+  object: technique
+  description: The attack technique.
+  used_by:
+    objects: [attack]
+terminated_time:
+  caption: Terminated Time
+  type: timestamp_t
+  description: The time when the entity was terminated. See specific usage.
+  used_by:
+    objects: [process]
+terminated_time_dt:
+  caption: Terminated Time
+  type: datetime_t
+  description: The time when the entity was terminated. See specific usage.
+  used_by:
+    objects: [process]
+tid:
+  caption: Thread ID
+  type: integer_t
+  description: The Identifier of the thread associated with the event, as returned by the operating system.
+  used_by:
+    objects: [process]
+time:
+  caption: Event Time
+  type: timestamp_t
+  description: The normalized event occurrence time.
+  used_by:
+    classes: [account_change, api_activity, application_lifecycle, authentication, authorize_session, base_event, config_state, dhcp_activity, dns_activity, email_activity, email_file_activity, email_url_activity, entity_management, file_activity, ftp_activity, group_management, http_activity, inventory_info, kernel_activity, kernel_extension, memory_activity, module_activity, network_activity, network_file_activity, process_activity, rdp_activity, scheduled_job_activity, security_finding, smb_activity, ssh_activity, user_access, web_resource_access_activity, web_resources_activity]
+time_dt:
+  caption: Event Time
+  type: datetime_t
+  description: The normalized event occurrence time.
+  used_by:
+    classes: [account_change, api_activity, application_lifecycle, authentication, authorize_session, base_event, config_state, dhcp_activity, dns_activity, email_activity, email_file_activity, email_url_activity, entity_management, file_activity, ftp_activity, group_management, http_activity, inventory_info, kernel_activity, kernel_extension, memory_activity, module_activity, network_activity, network_file_activity, process_activity, rdp_activity, scheduled_job_activity, security_finding, smb_activity, ssh_activity, user_access, web_resource_access_activity, web_resources_activity]
+timezone_offset:
+  caption: Timezone Offset
+  type: integer_t
+  description: The number of minutes that the reported event `time` is ahead or behind UTC, in the range -1,080 to +1,080.
+  used_by:
+    classes: [account_change, api_activity, application_lifecycle, authentication, authorize_session, base_event, config_state, dhcp_activity, dns_activity, email_activity, email_file_activity, email_url_activity, entity_management, file_activity, ftp_activity, group_management, http_activity, inventory_info, kernel_activity, kernel_extension, memory_activity, module_activity, network_activity, network_file_activity, process_activity, rdp_activity, scheduled_job_activity, security_finding, smb_activity, ssh_activity, user_access, web_resource_access_activity, web_resources_activity]
+title:
+  caption: Title
+  type: string_t
+  description: The title of an entity. See specific usage.
+  used_by:
+    objects: [finding, vulnerability]
+tls:
+  caption: TLS
+  type: object_t
+  object: tls
+  description: The Transport Layer Security (TLS) attributes.
+  used_by:
+    classes: [dns_activity, ftp_activity, http_activity, network_activity, rdp_activity, smb_activity, ssh_activity, web_resource_access_activity]
+to:
+  caption: To
+  type: email_t
+  array: true
+  observable: 5
+  description: The email header To values, as defined by RFC 5322.
+  used_by:
+    objects: [email]
+traffic:
+  caption: Traffic
+  type: object_t
+  object: network_traffic
+  description: The network traffic refers to the amount of data moving across a network at a given point of time. Intended to be used alongside Network Connection.
+  used_by:
+    classes: [dns_activity, ftp_activity, http_activity, network_activity, rdp_activity, smb_activity, ssh_activity]
+transaction_uid:
+  caption: Transaction UID
+  type: string_t
+  description: The unique identifier of the transaction.
+  used_by:
+    classes: [dhcp_activity]
+tree_uid:
+  caption: Tree UID
+  type: string_t
+  description: The tree id is a unique SMB identifier which represents an open connection to a share.
+  used_by:
+    classes: [smb_activity]
+ttl:
+  caption: TTL
+  type: integer_t
+  description: The time interval that the resource record may be cached. Zero value means that the resource record can only be used for the transaction in progress, and should not be cached.
+  used_by:
+    objects: [dns_answer]
+type:
+  caption: Type
+  type: string_t
+  description: The type of an object or value, normalized to the caption of the type_id value. In the case of 'Other', it is defined by the event source. See specific usage.
+  used_by:
+    classes: [ftp_activity]
+    objects: [account, analytic, cve, device, dns_answer, dns_query, enrichment, file, group, kernel, managed_entity, module, network_interface, observable, os, related_event, resource_details, rule, san, tls_extension, user, web_resource]
+type_id:
+  caption: Type ID
+  type: integer_t
+  sibling: type
+  description: The normalized type identifier of an object. See specific usage.
+  used_by:
+    objects: [account, analytic, device, file, kernel, network_interface, observable, os, tls_extension, user]
+type_name:
+  caption: Type Name
+  type: string_t
+  description: The event type name, as defined by the type_uid.
+  used_by:
+    classes: [account_change, api_activity, application_lifecycle, authentication, authorize_session, base_event, config_state, dhcp_activity, dns_activity, email_activity, email_file_activity, email_url_activity, entity_management, file_activity, ftp_activity, group_management, http_activity, inventory_info, kernel_activity, kernel_extension, memory_activity, module_activity, network_activity, network_file_activity, process_activity, rdp_activity, scheduled_job_activity, security_finding, smb_activity, ssh_activity, user_access, web_resource_access_activity, web_resources_activity]
+type_uid:
+  caption: Type ID
+  type: integer_t
+  sibling: type_name
+  description: 'The event type ID. It identifies the event''s semantics and structure. The value is calculated by the logging system as: `class_uid * 100 + activity_id`.'
+  used_by:
+    classes: [account_change, api_activity, application_lifecycle, authentication, authorize_session, base_event, config_state, dhcp_activity, dns_activity, email_activity, email_file_activity, email_url_activity, entity_management, file_activity, ftp_activity, group_management, http_activity, inventory_info, kernel_activity, kernel_extension, memory_activity, module_activity, network_activity, network_file_activity, process_activity, rdp_activity, scheduled_job_activity, security_finding, smb_activity, ssh_activity, user_access, web_resource_access_activity, web_resources_activity]
+    objects: [related_event]
+types:
+  caption: Types
+  type: string_t
+  array: true
+  description: The type/s of an entity. See specific usage.
+  used_by:
+    objects: [finding]
+uid:
+  caption: Unique ID
+  type: string_t
+  description: The unique identifier. See specific usage.
+  used_by:
+    objects: [account, analytic, container, cve, device, email, endpoint, extension, feature, file, finding, group, http_request, idp, image, malware, managed_entity, metadata, network_connection_info, network_endpoint, network_interface, network_proxy, organization, policy, process, product, related_event, request, resource_details, rule, service, session, tactic, technique, user, web_resource]
+uid_alt:
+  caption: Alternate ID
+  type: string_t
+  description: The alternate unique identifier. See specific usage.
+  used_by:
+    objects: [device, user]
+unmapped:
+  caption: Unmapped Data
+  type: object_t
+  object: object
+  description: The attributes that are not mapped to the event schema. The names and values of those attributes are specific to the event source.
+  used_by:
+    classes: [account_change, api_activity, application_lifecycle, authentication, authorize_session, base_event, config_state, dhcp_activity, dns_activity, email_activity, email_file_activity, email_url_activity, entity_management, file_activity, ftp_activity, group_management, http_activity, inventory_info, kernel_activity, kernel_extension, memory_activity, module_activity, network_activity, network_file_activity, process_activity, rdp_activity, scheduled_job_activity, security_finding, smb_activity, ssh_activity, user_access, web_resource_access_activity, web_resources_activity]
+url:
+  caption: URL
+  type: object_t
+  object: url
+  observable: 23
+  description: The URL object that pertains to the event or object. See specific usage.
+  used_by:
+    classes: [email_url_activity]
+    objects: [http_request]
+url_string:
+  caption: URL String
+  type: url_t
+  observable: 6
+  description: 'The URL string. See RFC 1738. For example: `http://www.example.com/download/trouble.exe`.'
+  used_by:
+    objects: [product, url, web_resource]
+user:
+  caption: User
+  type: object_t
+  object: user
+  observable: 21
+  description: The user that pertains to the event or object.
+  used_by:
+    classes: [account_change, authentication, authorize_session, group_management, user_access]
+    objects: [actor, job, process]
+user_agent:
+  caption: HTTP User-Agent
+  type: string_t
+  description: The request header that identifies the operating system and web browser.
+  used_by:
+    objects: [http_request]
+user_result:
+  caption: User Result
+  type: object_t
+  object: user
+  observable: 21
+  description: The result of the user account change. It should contain the new values of the changed attributes.
+  used_by:
+    classes: [account_change]
+uuid:
+  caption: UUID
+  type: uuid_t
+  description: The universally unique identifier. See specific usage.
+  used_by:
+    objects: [rpc_interface, session]
+value:
+  caption: Value
+  type: string_t
+  description: The value that pertains to the object. See specific usage.
+  used_by:
+    objects: [enrichment, fingerprint, http_cookie, http_header, metric, observable]
+vector_string:
+  caption: Vector String
+  type: string_t
+  description: 'The CVSS vector string is a text representation of a set of CVSS metrics. It is commonly used to record or transfer CVSS metric information in a concise form. For example: `3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:N/A:H`.'
+  used_by:
+    objects: [cvss]
+vendor_name:
+  caption: Vendor Name
+  type: string_t
+  description: The name of the vendor. See specific usage.
+  used_by:
+    objects: [product, vulnerability]
+version:
+  caption: Version
+  type: string_t
+  description: The version that pertains to the event or object. See specific usage.
+  used_by:
+    objects: [analytic, api, attack, certificate, cis_control, cvss, extension, feature, file, http_request, managed_entity, metadata, os, package, policy, product, resource_details, rpc_interface, rule, service, tls]
+vlan_uid:
+  caption: VLAN
+  type: string_t
+  description: The Virtual LAN identifier.
+  used_by:
+    objects: [device, endpoint, network_endpoint, network_proxy]
+vpc_uid:
+  caption: VPC UID
+  type: string_t
+  description: The unique identifier of the Virtual Private Cloud (VPC).
+  used_by:
+    objects: [device, endpoint, network_endpoint, network_proxy]
+vulnerabilities:
+  caption: Vulnerabilities
+  type: object_t
+  object: vulnerability
+  array: true
+  description: This object describes vulnerabilities reported in a security finding.
+  used_by:
+    classes: [security_finding]
+vulnerability:
+  caption: Vulnerability
+  type: object_t
+  object: vulnerability
+  description: The vulnerability object describes details related to the observed vulnerability
+web_resources:
+  caption: Web Resources
+  type: object_t
+  object: web_resource
+  array: true
+  description: Describes details about web resources that were affected by an activity/event.
+  used_by:
+    classes: [web_resource_access_activity, web_resources_activity]
+web_resources_result:
+  caption: Web Resources Result
+  type: object_t
+  object: web_resource
+  array: true
+  description: The results of the activity on web resources. It should contain the new values of the changed attributes of the web resources.
+  used_by:
+    classes: [web_resources_activity]
+win/prev_reg_key:
+  caption: Previous Registry Key
+  type: object_t
+  object: win/registry_key
+  extension: win
+  observable: 28
+  description: The registry key before the mutation
+  used_by:
+    classes: [win/registry_key_activity]
+win/prev_reg_value:
+  caption: Previous Registry Value
+  type: object_t
+  object: win/registry_value
+  extension: win
+  observable: 29
+  description: The registry value before the mutation
+  used_by:
+    classes: [win/registry_value_activity]
+win/reg_key:
+  caption: Registry Key
+  type: object_t
+  object: win/registry_key
+  extension: win
+  observable: 28
+  description: The registry key.
+  used_by:
+    classes: [win/registry_key_activity]
+win/reg_value:
+  caption: Registry Value
+  type: object_t
+  object: win/registry_value
+  extension: win
+  observable: 29
+  description: The registry value.
+  used_by:
+    classes: [win/registry_value_activity]
+win/win_resource:
+  caption: Windows Resource
+  type: object_t
+  object: win/win_resource
+  extension: win
+  description: The Windows resource object that was accessed, such as a mutant or timer.
+  used_by:
+    classes: [win/resource_activity]
+x_forwarded_for:
+  caption: X-Forwarded-For
+  type: ip_t
+  array: true
+  observable: 2
+  description: The X-Forwarded-For header identifying the originating IP address(es) of a client connecting to a web server through an HTTP proxy or a load balancer.
+  used_by:
+    objects: [http_request]
+x_originating_ip:
+  caption: X-Originating-IP
+  type: ip_t
+  array: true
+  observable: 2
+  description: The X-Originating-IP header identifying the emails originating IP address(es).
+  used_by:
+    objects: [email]
+xattributes:
+  caption: Extended Attributes
+  type: object_t
+  object: object
+  description: |-
+    An unordered collection of zero or more name/value pairs where each pair represents a file or folder extended attribute.For example: Windows alternate data stream attributes (ADS stream name, ADS size, etc.), user-defined or application-defined attributes, ACL, owner, primary group, etc. Examples from DCS:
+
+    - ads_name
+    - ads_size
+    - dacl
+    - owner
+    - primary_group
+    - link_name - name of the link associated to the file.
+    - hard_link_count - the number of links that are associated to the file.
+  used_by:
+    objects: [file, process]
+zone:
+  caption: Network Zone
+  type: string_t
+  description: The network zone or LAN segment.
+  used_by:
+    objects: [cloud]

@@ -1,0 +1,101 @@
+name: database
+caption: Database
+extends: _entity
+description: The database object is used for databases which are typically datastore services that contain an organized collection of structured and unstructured data or a types of data.
+profiles: [data_classification, datetime]
+constraints:
+  at_least_one: [name, uid]
+referenced_by:
+  classes:
+    data_security_finding: [database]
+    datastore_activity: [database]
+  objects:
+    evidences: [database]
+attributes:
+  created_time:
+    caption: Created Time
+    type: timestamp_t
+    requirement: optional
+    description: The time when the database was known to have been created.
+  created_time_dt:
+    caption: Created Time
+    type: datetime_t
+    requirement: optional
+    profile: datetime
+    description: The time when the database was known to have been created.
+  data_classification:
+    caption: Data Classification
+    type: object_t
+    object: data_classification
+    requirement: recommended
+    group: context
+    profile: data_classification
+    description: The Data Classification object includes information about data classification levels and data category types.
+  desc:
+    caption: Description
+    type: string_t
+    requirement: optional
+    description: The description of the database.
+  groups:
+    caption: Groups
+    type: object_t
+    object: group
+    array: true
+    requirement: optional
+    description: The group names to which the database belongs.
+  modified_time:
+    caption: Modified Time
+    type: timestamp_t
+    requirement: optional
+    description: The most recent time when any changes, updates, or modifications were made within the database.
+  modified_time_dt:
+    caption: Modified Time
+    type: datetime_t
+    requirement: optional
+    profile: datetime
+    description: The most recent time when any changes, updates, or modifications were made within the database.
+  name:
+    caption: Name
+    type: string_t
+    requirement: recommended
+    description: The database name, ordinarily as assigned by a database administrator.
+  size:
+    caption: Size
+    type: long_t
+    requirement: optional
+    description: The size of the database in bytes.
+  type:
+    caption: Type
+    type: string_t
+    requirement: recommended
+    description: The database type.
+  type_id:
+    caption: Type ID
+    type: integer_t
+    requirement: required
+    sibling: type
+    description: The normalized identifier of the database type.
+    enum:
+      '0':
+        caption: Unknown
+        description: The type is unknown.
+      '1':
+        caption: Relational
+      '2':
+        caption: Network
+      '3':
+        caption: Object Oriented
+      '4':
+        caption: Centralized
+      '5':
+        caption: Operational
+      '6':
+        caption: NoSQL
+      '99':
+        caption: Other
+        description: The type is not mapped. See the `type` attribute, which contains a data source specific value.
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: recommended
+    description: The unique identifier of the database.

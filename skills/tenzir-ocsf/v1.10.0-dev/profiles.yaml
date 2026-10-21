@@ -1,0 +1,765 @@
+ai_operation:
+  caption: AI Operation
+  description: AI-specific attributes for model operations, retrieval systems, and agent activities. e.g. model_name, total_token_counts etc.
+  applies_to:
+    classes: [account_change, api_activity, application_error, application_lifecycle, authentication, authorize_session, clipboard_activity, datastore_activity, device_power_state_activity, dhcp_activity, dns_activity, dns_zone_transfer_activity, email_activity, entity_management, event_log_actvity, file_activity, file_hosting, ftp_activity, group_management, http_activity, kernel_activity, kernel_extension_activity, memory_activity, module_activity, network_activity, network_file_activity, ntp_activity, peripheral_activity, process_activity, rdp_activity, role_management, scan_activity, scheduled_job_activity, script_activity, smb_activity, ssh_activity, tunnel_activity, user_access, user_management, web_resource_access_activity, web_resources_activity]
+  attributes:
+    ai_agent:
+      caption: AI Agent
+      type: object_t
+      object: ai_agent
+      requirement: optional
+      group: context
+      description: The autonomous AI agent that performed this operation. Carries model identity via `ai_agent.ai_model`. Populate when the action was performed by an agent rather than a direct model call.
+    ai_capability:
+      caption: AI Capability
+      type: object_t
+      object: ai_capability
+      requirement: optional
+      group: context
+      description: 'The AI capability invoked in this operation: a tool, resource, or prompt, in the sense of the MCP primitives. Records the capability''s identity, kind, provenance, declared contracts, and declared safety hints. Transport details remain on the event''s transport attributes (e.g., `api`, `http_request`), and affected objects remain in `resources`. Producers deriving `activity_id` from the capability''s declared hints (e.g., mapping a declared read-only tool to `Read`) should note the hints are self-declared and unverified; when the observed operation contradicts the declaration, classify by observed behavior.'
+    ai_model:
+      caption: AI Model
+      type: object_t
+      object: ai_model
+      requirement: recommended
+      group: context
+      description: The AI model involved in this operation. Use for direct model invocations where no autonomous agent is involved. For agent-mediated operations, model identity is carried within `ai_agent.ai_model` instead.
+    ai_status:
+      caption: AI Status
+      type: object_t
+      object: ai_status
+      requirement: optional
+      group: context
+      description: Per-operation outcome scalars for this operation, such as the stop reason and the permission check result, grouped in the `ai_status` object so they do not proliferate as discrete attributes at the event root. Additional outcome attributes may be added to the object in later versions.
+    delegation:
+      caption: Delegation
+      type: object_t
+      object: delegation
+      requirement: optional
+      group: context
+      description: The delegation under whose authority this AI operation was performed. Links the event to a durable authorization context independent of traces and sessions, enabling correlation of all events executed under the same delegated authority.
+    message_context:
+      caption: Message Context
+      type: object_t
+      object: message_context
+      requirement: optional
+      group: context
+      description: Communication context for AI system interactions including protocols, roles, clients, and session information for MCP and other AI communication systems.
+cloud:
+  caption: Cloud
+  description: The attributes that describe information specific to Cloud services/applications.
+  applies_to:
+    classes: [account_change, admin_group_query, airborne_broadcast_activity, api_activity, application_error, application_lifecycle, application_security_posture_finding, authentication, authorize_session, base_event, clipboard_activity, cloud_resources_inventory_info, compliance_finding, config_state, data_security_finding, datastore_activity, detection_finding, device_config_state_change, device_power_state_activity, dhcp_activity, dns_activity, dns_zone_transfer_activity, drone_flights_activity, email_activity, email_file_activity, email_url_activity, entity_management, event_log_actvity, evidence_info, file_activity, file_hosting, file_query, file_remediation_activity, folder_query, ftp_activity, group_management, http_activity, iam_analysis_finding, incident_finding, inventory_info, job_query, kernel_activity, kernel_extension_activity, kernel_object_query, memory_activity, module_activity, module_query, network_activity, network_connection_query, network_file_activity, network_remediation_activity, networks_query, ntp_activity, osint_inventory_info, patch_state, peripheral_activity, peripheral_device_query, process_activity, process_query, process_remediation_activity, rdp_activity, remediation_activity, role_management, scan_activity, scheduled_job_activity, script_activity, security_finding, service_query, session_query, smb_activity, software_info, ssh_activity, startup_item_query, tunnel_activity, user_access, user_inventory, user_management, user_query, vulnerability_finding, web_resource_access_activity, web_resources_activity]
+    objects: [databucket, resource_details]
+  attributes:
+    api:
+      caption: API Details
+      type: object_t
+      object: api
+      requirement: optional
+      group: context
+      description: Describes details about a typical API (Application Programming Interface) call.
+    cloud:
+      caption: Cloud
+      type: object_t
+      object: cloud
+      requirement: required
+      group: primary
+      description: Describes details about the Cloud environment where the event or finding was created.
+container:
+  caption: Container
+  description: The container context for a process.
+  applies_to:
+    objects: [device, endpoint, network_endpoint, network_proxy, process]
+  attributes:
+    container:
+      caption: Container
+      type: object_t
+      object: container
+      requirement: recommended
+      group: context
+      observable: 27
+      description: The information describing an instance of a container. A container is a prepackaged, portable system image that runs isolated on an existing system using a container runtime like containerd.
+    namespace_pid:
+      caption: Namespace PID
+      type: integer_t
+      requirement: recommended
+      group: context
+      description: If running under a process namespace (such as in a container), the process identifier within that process namespace.
+data_classification:
+  caption: Data Classification
+  description: The Data Classification profile adds attributes to specific resource objects, allowing users to describe information about classifiers & data classification results.
+  applies_to:
+    objects: [database, databucket, email, file, metadata, product, resource_details, web_resource]
+  attributes:
+    data_classification:
+      caption: Data Classification
+      type: object_t
+      object: data_classification
+      requirement: recommended
+      group: context
+      deprecated:
+        since: 1.4.0
+        message: Use the attribute `data_classifications` instead
+        superseded_by: [data_classifications]
+      description: The Data Classification object includes information about data classification levels and data category types.
+    data_classifications:
+      caption: Data Classification
+      type: object_t
+      object: data_classification
+      array: true
+      requirement: recommended
+      group: context
+      description: A list of Data Classification objects, that include information about data classification levels and data category types, identified by a classifier.
+datetime:
+  caption: Date/Time
+  description: When applied, this profile adds a sibling attribute of data type `datetime_t` (RFC-3339 string) wherever a `timestamp_t` attribute appears in the event class. This provides human-readable date/time representations alongside the epoch-millisecond timestamps. For example, `time` (`timestamp_t`) would gain a `time_dt` (`datetime_t`) sibling such as `"1985-04-12T23:20:50.52Z"`.
+  applies_to:
+    classes: [account_change, admin_group_query, airborne_broadcast_activity, api_activity, application_error, application_lifecycle, application_security_posture_finding, authentication, authorize_session, base_event, clipboard_activity, cloud_resources_inventory_info, compliance_finding, config_state, data_security_finding, datastore_activity, detection_finding, device_config_state_change, device_power_state_activity, dhcp_activity, dns_activity, dns_zone_transfer_activity, drone_flights_activity, email_activity, email_file_activity, email_url_activity, entity_management, event_log_actvity, evidence_info, file_activity, file_hosting, file_query, file_remediation_activity, folder_query, ftp_activity, group_management, http_activity, iam_analysis_finding, incident_finding, inventory_info, job_query, kernel_activity, kernel_extension_activity, kernel_object_query, memory_activity, module_activity, module_query, network_activity, network_connection_query, network_file_activity, network_remediation_activity, networks_query, ntp_activity, osint_inventory_info, patch_state, peripheral_activity, peripheral_device_query, process_activity, process_query, process_remediation_activity, rdp_activity, remediation_activity, role_management, scan_activity, scheduled_job_activity, script_activity, security_finding, service_query, session_query, smb_activity, software_info, ssh_activity, startup_item_query, tunnel_activity, user_access, user_inventory, user_management, user_query, vulnerability_finding, web_resource_access_activity, web_resources_activity]
+  attributes: {}
+host:
+  caption: Host
+  description: Adds host and actor context to event classes. Apply this profile when the event originates from or is observed on a specific host or device, and when the initiating user, process, or service is known. All event classes include this profile by default through the base event.
+  applies_to:
+    classes: [account_change, admin_group_query, airborne_broadcast_activity, api_activity, application_error, application_lifecycle, application_security_posture_finding, authentication, authorize_session, base_event, clipboard_activity, cloud_resources_inventory_info, compliance_finding, config_state, data_security_finding, datastore_activity, detection_finding, device_config_state_change, device_power_state_activity, dhcp_activity, dns_activity, dns_zone_transfer_activity, drone_flights_activity, email_activity, email_file_activity, email_url_activity, entity_management, event_log_actvity, evidence_info, file_activity, file_hosting, file_query, file_remediation_activity, folder_query, ftp_activity, group_management, http_activity, iam_analysis_finding, incident_finding, inventory_info, job_query, kernel_activity, kernel_extension_activity, kernel_object_query, memory_activity, module_activity, module_query, network_activity, network_connection_query, network_file_activity, network_remediation_activity, networks_query, ntp_activity, osint_inventory_info, patch_state, peripheral_activity, peripheral_device_query, process_activity, process_query, process_remediation_activity, rdp_activity, remediation_activity, role_management, scan_activity, scheduled_job_activity, script_activity, security_finding, service_query, session_query, smb_activity, software_info, ssh_activity, startup_item_query, tunnel_activity, user_access, user_inventory, user_management, user_query, vulnerability_finding, web_resource_access_activity, web_resources_activity]
+  attributes:
+    actor:
+      caption: Actor
+      type: object_t
+      object: actor
+      requirement: optional
+      group: primary
+      description: The user, process, or service that initiated the activity on the host. For system-level events this is typically a process; for IAM events it is typically a user or role.
+    device:
+      caption: Device
+      type: object_t
+      object: device
+      requirement: recommended
+      group: primary
+      observable: 20
+      description: The host or device where the activity was observed. Populate with details such as hostname, IP address, OS, and hardware identifiers when available from the source.
+incident:
+  caption: Incident
+  description: The attributes that add incident handling semantics to a Finding.
+  applies_to:
+    classes: [application_security_posture_finding, compliance_finding, data_security_finding, detection_finding, iam_analysis_finding, incident_finding, vulnerability_finding]
+  attributes:
+    assignee:
+      caption: Assignee
+      type: object_t
+      object: user
+      requirement: optional
+      group: context
+      observable: 21
+      description: The details of the user assigned to an Incident.
+    assignee_group:
+      caption: Assignee Group
+      type: object_t
+      object: group
+      requirement: optional
+      group: context
+      description: The details of the group assigned to an Incident.
+    confidence:
+      caption: Confidence
+      type: string_t
+      requirement: optional
+      group: context
+      description: The confidence, normalized to the caption of the confidence_id value. In the case of 'Other', it is defined by the event source.
+    confidence_id:
+      caption: Confidence ID
+      type: integer_t
+      requirement: recommended
+      group: context
+      sibling: confidence
+      description: The normalized confidence refers to the accuracy of the analytics that produced the alert or finding. See specific usage.
+      enum:
+        '0':
+          caption: Unknown
+          description: The normalized confidence is unknown.
+        '1':
+          caption: Low
+        '2':
+          caption: Medium
+        '3':
+          caption: High
+        '99':
+          caption: Other
+          description: The confidence is not mapped to the defined enum values. See the `confidence` attribute, which contains a data source specific value.
+    impact:
+      caption: Impact
+      type: string_t
+      requirement: recommended
+      group: primary
+      description: The impact , normalized to the caption of the impact_id value. In the case of 'Other', it is defined by the event source.
+    impact_id:
+      caption: Impact ID
+      type: integer_t
+      requirement: recommended
+      group: primary
+      sibling: impact
+      description: The normalized impact of the incident or finding. Per NIST, this is the magnitude of harm that can be expected to result from the consequences of unauthorized disclosure, modification, destruction, or loss of information or information system availability.
+      enum:
+        '0':
+          caption: Unknown
+          description: The normalized impact is unknown.
+        '1':
+          caption: Low
+          description: The magnitude of harm is low.
+        '2':
+          caption: Medium
+          description: The magnitude of harm is moderate.
+        '3':
+          caption: High
+          description: The magnitude of harm is high.
+        '4':
+          caption: Critical
+          description: The magnitude of harm is high and the scope is widespread.
+        '99':
+          caption: Other
+          description: The impact is not mapped. See the `impact` attribute, which contains a data source specific value.
+      references:
+      - description: NIST SP 800-172 from FIPS 199
+        url: https://doi.org/10.6028/NIST.FIPS.199
+      - description: NIST Computer Security Resource Center
+        url: https://doi.org/10.6028/NIST.FIPS.199
+    impact_score:
+      caption: Impact Score
+      type: integer_t
+      requirement: recommended
+      group: primary
+      description: The impact as an integer value of the finding, valid range 0-100.
+    is_declared_incident:
+      caption: Declared Incident
+      type: boolean_t
+      requirement: optional
+      group: context
+      description: Indicates that the Finding (or Incident Finding) is declared to be an incident, subject to the meaning of incident to an organization.
+    is_suspected_breach:
+      caption: Suspected Breach
+      type: boolean_t
+      requirement: optional
+      group: context
+      description: A determination based on analytics as to whether a potential breach was found.
+    priority:
+      caption: Priority
+      type: string_t
+      requirement: optional
+      group: context
+      description: The priority, normalized to the caption of the priority_id value. In the case of 'Other', it is defined by the event source.
+    priority_id:
+      caption: Priority ID
+      type: integer_t
+      requirement: recommended
+      group: context
+      sibling: priority
+      description: The normalized priority. Priority identifies the relative importance of the incident or finding. It is a measurement of urgency.
+      enum:
+        '0':
+          caption: Unknown
+          description: No priority is assigned.
+        '1':
+          caption: Low
+          description: Application or personal procedure is unusable, where a workaround is available or a repair is possible.
+        '2':
+          caption: Medium
+          description: Non-critical function or procedure is unusable or hard to use causing operational disruptions with no direct impact on a service's availability. A workaround is available.
+        '3':
+          caption: High
+          description: Critical functionality or network access is interrupted, degraded or unusable, having a severe impact on services availability. No acceptable alternative is possible.
+        '4':
+          caption: Critical
+          description: Interruption making a critical functionality inaccessible or a complete network interruption causing a severe impact on services availability. There is no possible alternative.
+        '99':
+          caption: Other
+          description: The priority is not normalized.
+    src_url:
+      caption: Source URL
+      type: url_t
+      requirement: recommended
+      group: primary
+      observable: 6
+      description: A Url link used to access the original incident.
+    ticket:
+      caption: Ticket
+      type: object_t
+      object: ticket
+      requirement: optional
+      group: context
+      deprecated:
+        since: 1.5.0
+        message: Use `tickets` instead.
+        superseded_by: [tickets]
+      description: The linked ticket in the ticketing system.
+    tickets:
+      caption: Tickets
+      type: object_t
+      object: ticket
+      array: true
+      requirement: optional
+      group: context
+      description: The associated ticket(s) in the ticketing system. Each ticket contains details like ticket ID, status, etc.
+    verdict:
+      caption: Verdict
+      type: string_t
+      requirement: recommended
+      group: primary
+      description: The verdict assigned to an Incident finding.
+    verdict_id:
+      caption: Verdict ID
+      type: integer_t
+      requirement: recommended
+      group: primary
+      sibling: verdict
+      description: The normalized verdict of an Incident.
+      enum:
+        '0':
+          caption: Unknown
+          description: The type is unknown.
+        '1':
+          caption: False Positive
+          description: The incident is a false positive.
+        '2':
+          caption: True Positive
+          description: The incident is a true positive.
+        '3':
+          caption: Disregard
+          description: The incident can be disregarded as it is unimportant, an error or accident.
+        '4':
+          caption: Suspicious
+          description: The incident is suspicious.
+        '5':
+          caption: Benign
+          description: The incident is benign.
+        '6':
+          caption: Test
+          description: The incident is a test.
+        '7':
+          caption: Insufficient Data
+          description: The incident has insufficient data to make a verdict.
+        '8':
+          caption: Security Risk
+          description: The incident is a security risk.
+        '9':
+          caption: Managed Externally
+          description: The incident remediation or required actions are managed externally.
+        '10':
+          caption: Duplicate
+          description: The incident is a duplicate.
+        '99':
+          caption: Other
+          description: The type is not mapped. See the `type` attribute, which contains a data source specific value.
+load_balancer:
+  caption: Load Balancer
+  description: The attributes that describe information specific to load balancers.
+  applies_to:
+    classes: [dhcp_activity, dns_activity, dns_zone_transfer_activity, ftp_activity, http_activity, network_activity, network_file_activity, ntp_activity, rdp_activity, smb_activity, ssh_activity, tunnel_activity]
+  attributes:
+    load_balancer:
+      caption: Load Balancer
+      type: object_t
+      object: load_balancer
+      requirement: recommended
+      group: primary
+      description: The Load Balancer object contains information related to the device that is distributing incoming traffic to specified destinations.
+network_proxy:
+  caption: Network Proxy
+  description: The attributes that identify network proxy attributes.
+  applies_to:
+    classes: [dhcp_activity, dns_activity, dns_zone_transfer_activity, ftp_activity, http_activity, network_activity, network_file_activity, ntp_activity, rdp_activity, smb_activity, ssh_activity, tunnel_activity, web_resource_access_activity, web_resources_activity]
+  attributes:
+    proxy_connection_info:
+      caption: Proxy Connection Info
+      type: object_t
+      object: network_connection_info
+      requirement: recommended
+      group: context
+      description: The connection information from the proxy server to the remote server.
+    proxy_endpoint:
+      caption: Proxy Endpoint
+      type: object_t
+      object: network_proxy
+      requirement: optional
+      group: context
+      observable: 20
+      description: The proxy (server) in a network connection.
+    proxy_http_request:
+      caption: Proxy HTTP Request
+      type: object_t
+      object: http_request
+      requirement: optional
+      group: context
+      description: The HTTP Request from the proxy server to the remote server.
+    proxy_http_response:
+      caption: Proxy HTTP Response
+      type: object_t
+      object: http_response
+      requirement: optional
+      group: context
+      description: The HTTP Response from the remote server to the proxy server.
+    proxy_tls:
+      caption: Proxy TLS
+      type: object_t
+      object: tls
+      requirement: recommended
+      group: context
+      description: The TLS protocol negotiated between the proxy server and the remote server.
+    proxy_traffic:
+      caption: Proxy Traffic
+      type: object_t
+      object: network_traffic
+      requirement: recommended
+      group: context
+      description: The network traffic refers to the amount of data moving across a network, from proxy to remote server at a given point of time.
+osint:
+  caption: OSINT
+  description: The OSINT (Open Source Intelligence) profile contains one or more indicators and associated analysis and details, such as registrar (WHOIS) information and commentary about a hostname, or information about a digital certificate and its usage within a campaign. This information can be used to further enrich a detection or finding by providing decisioning support to other analysts and engineers within the profile itself.
+  applies_to:
+    classes: [account_change, admin_group_query, airborne_broadcast_activity, api_activity, application_error, application_lifecycle, application_security_posture_finding, authentication, authorize_session, base_event, clipboard_activity, cloud_resources_inventory_info, compliance_finding, config_state, data_security_finding, datastore_activity, detection_finding, device_config_state_change, device_power_state_activity, dhcp_activity, dns_activity, dns_zone_transfer_activity, drone_flights_activity, email_activity, email_file_activity, email_url_activity, entity_management, event_log_actvity, evidence_info, file_activity, file_hosting, file_query, file_remediation_activity, folder_query, ftp_activity, group_management, http_activity, iam_analysis_finding, incident_finding, inventory_info, job_query, kernel_activity, kernel_extension_activity, kernel_object_query, memory_activity, module_activity, module_query, network_activity, network_connection_query, network_file_activity, network_remediation_activity, networks_query, ntp_activity, osint_inventory_info, patch_state, peripheral_activity, peripheral_device_query, process_activity, process_query, process_remediation_activity, rdp_activity, remediation_activity, role_management, scan_activity, scheduled_job_activity, script_activity, security_finding, service_query, session_query, smb_activity, software_info, ssh_activity, startup_item_query, tunnel_activity, user_access, user_inventory, user_management, user_query, vulnerability_finding, web_resource_access_activity, web_resources_activity]
+  attributes:
+    osint:
+      caption: OSINT
+      type: object_t
+      object: osint
+      array: true
+      requirement: required
+      group: primary
+      description: The OSINT (Open Source Intelligence) object contains details related to an indicator such as the indicator itself, related indicators, geolocation, registrar information, subdomains, analyst commentary, and other contextual information. This information can be used to further enrich a detection or finding by providing decisioning support to other analysts and engineers.
+record_integrity:
+  caption: Record Integrity
+  description: The Record Integrity profile adds one or more cryptographic attestations over the event itself, providing integrity, authenticity, and non-repudiation independent of any domain-specific content. It is domain-agnostic and may be applied to any event class. Each attestation is computed over a canonical serialization of the event; independent attesters over the same event each contribute a separate entry in `attestation_list`, while multiple signers of a single attestation, such as a producer plus a co-signature, notary, or witness, are carried in that attestation's `signatures` array, and a sequence of events may form a tamper-evident hash chain.
+  applies_to:
+    classes: [account_change, admin_group_query, airborne_broadcast_activity, api_activity, application_error, application_lifecycle, application_security_posture_finding, authentication, authorize_session, base_event, clipboard_activity, cloud_resources_inventory_info, compliance_finding, config_state, data_security_finding, datastore_activity, detection_finding, device_config_state_change, device_power_state_activity, dhcp_activity, dns_activity, dns_zone_transfer_activity, drone_flights_activity, email_activity, email_file_activity, email_url_activity, entity_management, event_log_actvity, evidence_info, file_activity, file_hosting, file_query, file_remediation_activity, folder_query, ftp_activity, group_management, http_activity, iam_analysis_finding, incident_finding, inventory_info, job_query, kernel_activity, kernel_extension_activity, kernel_object_query, memory_activity, module_activity, module_query, network_activity, network_connection_query, network_file_activity, network_remediation_activity, networks_query, ntp_activity, osint_inventory_info, patch_state, peripheral_activity, peripheral_device_query, process_activity, process_query, process_remediation_activity, rdp_activity, remediation_activity, role_management, scan_activity, scheduled_job_activity, script_activity, security_finding, service_query, session_query, smb_activity, software_info, ssh_activity, startup_item_query, tunnel_activity, user_access, user_inventory, user_management, user_query, vulnerability_finding, web_resource_access_activity, web_resources_activity]
+  attributes:
+    attestation_list:
+      caption: Attestation List
+      type: object_t
+      object: attestation
+      array: true
+      requirement: optional
+      group: context
+      description: One or more cryptographic `attestation` objects over an event, each providing integrity, authenticity, and non-repudiation. Independent attesters over the same event — for example a producer at write time and a downstream processor at ingest — each contribute a separate attestation, distinct from co-signers on a single attestation, which share its `signatures` array. Carried on the `record_integrity` profile; the object itself is domain-agnostic.
+security_control:
+  caption: Security Control
+  description: The attributes including disposition that represent the outcome of a security control including but not limited to access control, malware or policy violation, network proxy, intrusion detection, firewall, or data control. The profile is intended to augment activities or findings with an outcome when a security control has observed or intervened. If the control detected a security violation, and the `disposition_id` or `action_id` is an alertable outcome or action, the `is_alert` flag may be set to `true`.
+  applies_to:
+    classes: [account_change, admin_group_query, airborne_broadcast_activity, api_activity, application_error, application_lifecycle, application_security_posture_finding, authentication, authorize_session, base_event, clipboard_activity, cloud_resources_inventory_info, compliance_finding, config_state, data_security_finding, datastore_activity, detection_finding, device_config_state_change, device_power_state_activity, dhcp_activity, dns_activity, dns_zone_transfer_activity, drone_flights_activity, email_activity, email_file_activity, email_url_activity, entity_management, event_log_actvity, evidence_info, file_activity, file_hosting, file_query, file_remediation_activity, folder_query, ftp_activity, group_management, http_activity, iam_analysis_finding, incident_finding, inventory_info, job_query, kernel_activity, kernel_extension_activity, kernel_object_query, memory_activity, module_activity, module_query, network_activity, network_connection_query, network_file_activity, network_remediation_activity, networks_query, ntp_activity, osint_inventory_info, patch_state, peripheral_activity, peripheral_device_query, process_activity, process_query, process_remediation_activity, rdp_activity, remediation_activity, role_management, scan_activity, scheduled_job_activity, script_activity, security_finding, service_query, session_query, smb_activity, software_info, ssh_activity, startup_item_query, tunnel_activity, user_access, user_inventory, user_management, user_query, vulnerability_finding, web_resource_access_activity, web_resources_activity]
+  attributes:
+    action:
+      caption: Action
+      type: string_t
+      requirement: optional
+      group: primary
+      description: The normalized caption of `action_id`.
+    action_id:
+      caption: Action ID
+      type: integer_t
+      requirement: recommended
+      group: primary
+      sibling: action
+      description: The action taken by a control or other policy-based system leading to an outcome or disposition. An unknown action may still correspond to a known disposition. Refer to `disposition_id` for the outcome of the action.
+      enum:
+        '0':
+          caption: Unknown
+          description: The action was unknown. The `disposition_id` attribute may still be set to a non-unknown value, for example 'Custom Action', 'Challenge'.
+        '1':
+          caption: Allowed
+          description: The activity was allowed. The `disposition_id` attribute should be set to a value that conforms to this action, for example 'Allowed', 'Approved', 'Delayed', 'No Action', 'Count' etc.
+        '2':
+          caption: Denied
+          description: The attempted activity was denied. The `disposition_id` attribute should be set to a value that conforms to this action, for example 'Blocked', 'Rejected', 'Quarantined', 'Isolated', 'Dropped', 'Access Revoked, etc.
+        '3':
+          caption: Observed
+          description: The activity was observed, but neither explicitly allowed nor denied. This is common with IDS and EDR controls that report additional information on observed behavior such as TTPs. The `disposition_id` attribute should be set to a value that conforms to this action, for example 'Logged', 'Alert', 'Detected', 'Count', etc.
+        '4':
+          caption: Modified
+          description: The activity was modified, adjusted, or corrected. The `disposition_id` attribute should be set appropriately, for example 'Restored', 'Corrected', 'Delayed', 'Captcha', 'Tagged'.
+        '99':
+          caption: Other
+          description: The action is not mapped. See the `action` attribute which contains a data source specific value.
+    attacks:
+      caption: MITRE ATT&CK® and ATLAS™ Details
+      type: object_t
+      object: attack
+      array: true
+      requirement: optional
+      group: primary
+      description: An array of MITRE ATT&CK® objects describing identified tactics, techniques & sub-techniques. The objects are compatible with MITRE ATLAS™ tactics, techniques & sub-techniques.
+      references:
+      - description: MITRE ATT&CK®
+        url: https://attack.mitre.org
+      - description: MITRE ATLAS
+        url: https://atlas.mitre.org/matrices/ATLAS
+    authorizations:
+      caption: Authorization Information
+      type: object_t
+      object: authorization
+      array: true
+      requirement: optional
+      group: primary
+      description: Provides details about an authorization, such as authorization outcome, and any associated policies related to the activity/event.
+    confidence:
+      caption: Confidence
+      type: string_t
+      requirement: optional
+      group: context
+      description: The confidence, normalized to the caption of the confidence_id value. In the case of 'Other', it is defined by the event source.
+    confidence_id:
+      caption: Confidence ID
+      type: integer_t
+      requirement: recommended
+      group: context
+      sibling: confidence
+      description: The normalized confidence refers to the accuracy of the security control or alert. An analytic with a low confidence means that the alerts may be noisy or may not be malicious in nature.
+      enum:
+        '0':
+          caption: Unknown
+          description: The normalized confidence is unknown.
+        '1':
+          caption: Low
+        '2':
+          caption: Medium
+        '3':
+          caption: High
+        '99':
+          caption: Other
+          description: The confidence is not mapped to the defined enum values. See the `confidence` attribute, which contains a data source specific value.
+    confidence_score:
+      caption: Confidence Score
+      type: integer_t
+      requirement: optional
+      group: context
+      description: The confidence score as reported by the source or assigned by the analyst expressed on a source-specific numeric scale. This score provides finer-grained confidence information than the categorical `confidence_id` value. If `confidence_id` is 99 'Other', it should reflect the the same assessment as `confidence` if both are populated.
+    disposition:
+      caption: Disposition
+      type: string_t
+      requirement: optional
+      group: primary
+      description: The disposition name, normalized to the caption of the disposition_id value. In the case of 'Other', it is defined by the event source.
+    disposition_id:
+      caption: Disposition ID
+      type: integer_t
+      requirement: recommended
+      group: primary
+      sibling: disposition
+      description: Describes the outcome or action taken by a security control, such as access control checks, malware detections or various types of policy violations.
+      enum:
+        '0':
+          caption: Unknown
+          description: The disposition is unknown.
+        '1':
+          caption: Allowed
+          description: Granted access or allowed the action to the protected resource.
+        '2':
+          caption: Blocked
+          description: Denied access or blocked the action to the protected resource.
+        '3':
+          caption: Quarantined
+          description: A suspicious file or other content was moved to a benign location.
+        '4':
+          caption: Isolated
+          description: A session was isolated on the network or within a browser.
+        '5':
+          caption: Deleted
+          description: A file or other content was deleted.
+        '6':
+          caption: Dropped
+          description: The request was detected as a threat and resulted in the connection being dropped.
+        '7':
+          caption: Custom Action
+          description: A custom action was executed such as running of a command script. Use the `message` attribute of the base class for details.
+        '8':
+          caption: Approved
+          description: A request or submission was approved. For example, when a form was properly filled out and submitted. This is distinct from `1` 'Allowed'.
+        '9':
+          caption: Restored
+          description: A quarantined file or other content was restored to its original location.
+        '10':
+          caption: Exonerated
+          description: A suspicious or risky entity was deemed to no longer be suspicious (re-scored).
+        '11':
+          caption: Corrected
+          description: A corrupt file or configuration was corrected.
+        '12':
+          caption: Partially Corrected
+          description: A corrupt file or configuration was partially corrected.
+        '13':
+          caption: Uncorrected
+          description: A corrupt file or configuration was not corrected.
+        '14':
+          caption: Delayed
+          description: An operation was delayed, for example if a restart was required to finish the operation.
+        '15':
+          caption: Detected
+          description: Suspicious activity or a policy violation was detected without further action.
+        '16':
+          caption: No Action
+          description: The outcome of an operation had no action taken.
+        '17':
+          caption: Logged
+          description: The operation or action was logged without further action.
+        '18':
+          caption: Tagged
+          description: A file or other entity was marked with extended attributes.
+        '19':
+          caption: Alert
+          description: The request or activity was detected as a threat and resulted in a notification but request was not blocked.
+        '20':
+          caption: Count
+          description: Counted the request or activity but did not determine whether to allow it or block it.
+        '21':
+          caption: Reset
+          description: The request was detected as a threat and resulted in the connection being reset.
+        '22':
+          caption: Captcha
+          description: Required the end user to solve a CAPTCHA puzzle to prove that a human being is sending the request.
+        '23':
+          caption: Challenge
+          description: Ran a silent challenge that required the client session to verify that it's a browser, and not a bot.
+        '24':
+          caption: Access Revoked
+          description: 'The requestor''s access has been revoked due to security policy enforcements. Note: use the `Host` profile if the `User` or `Actor` requestor is not present in the event class.'
+        '25':
+          caption: Rejected
+          description: A request or submission was rejected. For example, when a form was improperly filled out and submitted. This is distinct from `2` 'Blocked'.
+        '26':
+          caption: Unauthorized
+          description: An attempt to access a resource was denied due to an authorization check that failed. This is a more specific disposition than `2` 'Blocked' and can be complemented with the `authorizations` attribute for more detail.
+        '27':
+          caption: Error
+          description: An error occurred during the processing of the activity or request. Use the `message` attribute of the base class for details.
+        '99':
+          caption: Other
+          description: The disposition is not mapped. See the `disposition` attribute, which contains a data source specific value.
+    firewall_rule:
+      caption: Firewall Rule
+      type: object_t
+      object: firewall_rule
+      requirement: optional
+      group: primary
+      description: The firewall rule that pertains to the control that triggered the event, if applicable.
+    is_alert:
+      caption: Alert
+      type: boolean_t
+      requirement: recommended
+      group: primary
+      description: Indicates that the event is considered to be an alertable signal. Should be set to `true` if `disposition_id = Alert` among other dispositions, and/or `risk_level_id` or `severity_id` of the event is elevated. Not all control events will be alertable, for example if `disposition_id = Exonerated` or `disposition_id = Allowed`.
+    malware:
+      caption: Malware
+      type: object_t
+      object: malware
+      array: true
+      requirement: optional
+      group: primary
+      description: A list of Malware objects, describing details about the identified malware.
+    malware_scan_info:
+      caption: Malware Scan Info
+      type: object_t
+      object: malware_scan_info
+      requirement: optional
+      group: primary
+      description: Describes details about the scan job that identified malware on the target system.
+    policy:
+      caption: Policy
+      type: object_t
+      object: policy
+      requirement: optional
+      group: primary
+      description: The policy that pertains to the control that triggered the event, if applicable. For example the name of an anti-malware policy or an access control policy.
+    risk_details:
+      caption: Risk Details
+      type: string_t
+      requirement: optional
+      group: context
+      description: Describes the risk associated with the finding.
+    risk_level:
+      caption: Risk Level
+      type: string_t
+      requirement: optional
+      group: context
+      description: The risk level, normalized to the caption of the risk_level_id value.
+    risk_level_id:
+      caption: Risk Level ID
+      type: integer_t
+      requirement: optional
+      group: context
+      sibling: risk_level
+      description: The normalized risk level id.
+      enum:
+        '0':
+          caption: Info
+        '1':
+          caption: Low
+        '2':
+          caption: Medium
+        '3':
+          caption: High
+        '4':
+          caption: Critical
+        '99':
+          caption: Other
+          description: The risk level is not mapped. See the `risk_level` attribute, which contains a data source specific value.
+    risk_score:
+      caption: Risk Score
+      type: integer_t
+      requirement: optional
+      group: context
+      description: The risk score as reported by the event source.
+trace:
+  caption: Trace
+  description: The Trace Profile extends the OCSF framework to capture and standardize observability events, specifically targeting trace-level data. This profile enables integration and normalization of distributed tracing information, allowing OCSF events to retain essential trace context such as trace IDs, span relationships, and service dependencies.
+  applies_to:
+    classes: [api_activity, http_activity]
+  attributes:
+    trace:
+      caption: Trace
+      type: object_t
+      object: trace
+      requirement: recommended
+      group: primary
+      description: The trace object contains information about distributed traces which are critical to observability and describe how requests move through a system, capturing each step's timing and status.
+linux/linux_users:
+  caption: Linux Users
+  extension: linux
+  description: The attributes that Linux uses to identify user information.
+  applies_to:
+    objects: [process]
+  attributes:
+    auid:
+      caption: Audit User ID
+      type: integer_t
+      requirement: optional
+      description: The audit user assigned at login by the audit subsystem.
+    egid:
+      caption: Effective Group ID
+      type: integer_t
+      requirement: optional
+      description: The effective group under which this process is running.
+    euid:
+      caption: Effective User ID
+      type: integer_t
+      requirement: optional
+      description: The effective user under which this process is running.
+    group:
+      caption: Group
+      type: object_t
+      object: group
+      requirement: recommended
+      description: The group under which this process is running.
+macos/macos_users:
+  caption: macOS Users
+  extension: macos
+  description: The attributes that macOS uses to identify user information.
+  applies_to:
+    objects: [process]
+  attributes:
+    egid:
+      caption: Effective Group ID
+      type: integer_t
+      requirement: optional
+      description: The effective group under which this process is running.
+    euid:
+      caption: Effective User ID
+      type: integer_t
+      requirement: optional
+      description: The effective user under which this process is running.

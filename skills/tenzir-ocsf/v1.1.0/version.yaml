@@ -1,0 +1,31 @@
+version: 1.1.0
+status: stable
+source:
+  repository: https://github.com/ocsf/ocsf-schema.git
+  ref: v1.1.0
+  commit: 8ea34523a316c4bad7e360e870a23a8e5cb29bd5
+  compiler: ocsf-schema-compiler 1.1.1
+extensions:
+  linux:
+    uid: 1
+    caption: Linux
+    version: 1.1.0
+    description: The Linux extension defines Linux specific attributes, objects and classes.
+    profiles: [linux/linux_users]
+    patches:
+      objects: [process]
+  win:
+    uid: 2
+    caption: Windows
+    version: 1.1.0
+    description: The Windows extension defines Windows specific attributes, objects and classes.
+    classes: [win/prefetch_info, win/registry_key_activity, win/registry_key_info, win/registry_value_activity, win/registry_value_info, win/resource_activity]
+    objects: [win/reg_key, win/reg_value, win/win_resource]
+previous: 1.0.0
+changes:
+  added:
+    classes: [compliance_finding, datastore_activity, detection_finding, device_config_state_change, file_hosting, incident_finding, ntp_activity, patch_state, scan_activity, user_inventory, vulnerability_finding]
+    objects: [affected_code, affected_package, cis_benchmark, cis_csc, cwe, database, databucket, endpoint_connection, epss, evidences, finding_info, firewall_rule, kb_article, kill_chain_phase, ldap_person, load_balancer, logger, peripheral_device, query_info, scan, security_state, sub_technique, table]
+    profiles: [load_balancer, network_proxy]
+  removed:
+    objects: [kill_chain]

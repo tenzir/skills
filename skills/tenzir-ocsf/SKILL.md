@@ -5,67 +5,131 @@ description: Answer questions about OCSF (Open Cybersecurity Schema Framework). 
 
 # OCSF
 
-Look up OCSF reference documentation and answer from those sources. Only state
-facts from files you read. Never invent schema details. If the documentation
-does not cover the question, say so.
+Answer OCSF questions from the YAML schema files in this skill. They are
+generated with the official OCSF schema compiler and are the authoritative
+reference for names, types, requirements, enum values, constraints, profiles,
+and observables. Use the Markdown docs under `docs/` for concepts and mapping
+guidance. State only facts from files you read. If something is not in the
+files, say that this skill does not document it.
 
 ## Versions
 
 Use the latest stable version unless the user requests a specific one. Stick to
 one version per answer.
 
-- [1.0.0](v1.0.0.md)
-- [1.1.0](v1.1.0.md)
-- [1.2.0](v1.2.0.md)
-- [1.3.0](v1.3.0.md)
-- [1.4.0](v1.4.0.md)
-- [1.5.0](v1.5.0.md)
-- [1.6.0](v1.6.0.md)
-- [1.7.0](v1.7.0.md)
-- [1.8.0](v1.8.0.md)
-- **[1.9.0](v1.9.0.md)** ← latest stable
-- [1.10.0-dev](v1.10.0-dev.md) ← unreleased development snapshot
+- [1.0.0](v1.0.0/version.yaml)
+- [1.1.0](v1.1.0/version.yaml)
+- [1.2.0](v1.2.0/version.yaml)
+- [1.3.0](v1.3.0/version.yaml)
+- [1.4.0](v1.4.0/version.yaml)
+- [1.5.0](v1.5.0/version.yaml)
+- [1.6.0](v1.6.0/version.yaml)
+- [1.7.0](v1.7.0/version.yaml)
+- [1.8.0](v1.8.0/version.yaml)
+- **[1.9.0](v1.9.0/version.yaml)** ← latest stable
+- [1.10.0-dev](v1.10.0-dev/version.yaml) ← unreleased development snapshot
 
-Each version page links to its classes, objects, profiles, extensions, and
-types.
+## Data files
 
-## File layout
+Each version directory contains the same files:
 
-```
-introduction.md          # OCSF overview and conceptual sections
-introduction/{section}.md
-faqs.md                  # Schema design rationale
-faqs/{slug}.md
-articles.md              # Deep-dive guides on specific topics
-articles/{slug}.md
-{version}.md             # Version summary (what's new, counts)
-{version}/classes.md     # Class index grouped by category
-{version}/classes/{name}.md
-{version}/objects.md
-{version}/objects/{name}.md
-{version}/profiles.md
-{version}/profiles/{name}.md
-{version}/extensions.md
-{version}/extensions/{name}/index.md
-{version}/extensions/{name}/events/{event}.md
-{version}/extensions/{name}/objects/{object}.md
-{version}/extensions/{name}/profiles/{profile}.md
-{version}/types.md
-```
+| File | Contents |
+| --- | --- |
+| `{version}/version.yaml` | Status, source commit, extensions with their classes, objects, profiles, and patches, and changes since the previous version |
+| `{version}/categories.yaml` | Categories with UID, description, and classes |
+| `{version}/classes.yaml` | Index of all classes: name, caption, UID, category, summary, path |
+| `{version}/classes/{name}.yaml` | One class, fully resolved |
+| `{version}/objects.yaml` | Index of all objects: name, caption, group, summary, path |
+| `{version}/objects/{name}.yaml` | One object, fully resolved |
+| `{version}/profiles.yaml` | All profiles with their attributes and the classes and objects they apply to |
+| `{version}/attributes.yaml` | Attribute dictionary: type, description, and the classes and objects that use each attribute |
+| `{version}/types.yaml` | Data types: base type, length, range, regex, and observable type ID |
+| `{version}/extensions/{extension}/classes/{name}.yaml` | Extension classes and patches of core classes |
+| `{version}/extensions/{extension}/objects/{name}.yaml` | Extension objects and patches of core objects |
+
+## Resolving names
+
+Files refer to each other by name within the same version:
+
+| Field | Resolves to |
+| --- | --- |
+| `object: actor` | `{version}/objects/actor.yaml` |
+| `object: win/reg_key` | `{version}/extensions/win/objects/reg_key.yaml` |
+| `extends: system` in a class | `{version}/classes/system.yaml` |
+| `extends: endpoint` in an object | `{version}/objects/endpoint.yaml` |
+| `profile: cloud`, `profiles: [...]` | the key in `{version}/profiles.yaml` |
+| `type: ip_t` | the key in `{version}/types.yaml` |
+| `category: system` | the key in `{version}/categories.yaml` |
+| `patched_by: [linux]` | `{version}/extensions/linux/{classes or objects}/{same name}.yaml` |
+| `referenced_by`, `used_by`, `applies_to` | class names resolve like `extends` in a class, object names like `object` |
+
+## Reading class and object files
+
+Each file is complete: `attributes` lists every attribute of the class or
+object, including inherited attributes and attributes added by profiles. An
+attribute that is not listed is not part of that class or object.
+
+Top-level fields:
+
+- `uid`: the `class_uid` of a class. `category_uid` is its category.
+- `abstract: true`: a base class or object that events never use directly.
+  Concrete classes extend abstract classes and inherit their attributes.
+- `extends`: the parent the item inherits from.
+- `profiles`: profiles that can apply to the item.
+- `constraints`: `at_least_one` means at least one of the listed attributes
+  must be set; `just_one` means exactly one must be set.
+- `associations`: attributes that describe the same entity, e.g. `actor.user`
+  and `device`.
+- `observable` (objects): the observable `type_id` of the whole object.
+- `referenced_by` (objects): the classes and objects that use this object, with
+  the attribute names that hold it.
+- `patched_by`: platform extensions that add attributes to this item.
+- `extension`: the extension that defines the item. `patches` names the core
+  item an extension patch modifies; the patch lists only the attributes it adds
+  or changes.
+- `deprecated`: `since`, `message`, and `superseded_by` for deprecated items.
+
+Attribute fields:
+
+- `requirement`: `required`, `recommended`, or `optional`.
+- `type`: an OCSF data type from `types.yaml`. For `object_t`, `object` names
+  the object. `array: true` marks a list of values.
+- `profile`: the attribute belongs to that profile and is present only when the
+  profile is applied. Attributes without `profile` always belong to the item.
+- `from`: the ancestor or profile owner that defines the attribute. Attributes
+  without `from` are defined by the item itself.
+- `group` (classes): `classification`, `context`, `occurrence`, or `primary`.
+- `sibling`: the string attribute that carries the caption of this enum
+  attribute, e.g. `activity_name` for `activity_id`.
+- `observable`: the observable `type_id` for this attribute, from the
+  attribute itself, its data type, or its object.
+- `enum`: the allowed values. Keys are the values, `caption` is the label the
+  sibling attribute takes.
+
+## Searching
+
+Read the index first, then the file it points to. These searches answer
+common questions without opening many files:
+
+- Find a class by keyword: `grep -n -i "keyword" v1.9.0/classes.yaml`
+- Look up an attribute everywhere: `grep -n -A 12 "^src_endpoint:" v1.9.0/attributes.yaml`
+- Jump to an attribute in a class: `grep -n -A 20 "^  actor:" v1.9.0/classes/process_activity.yaml`
+- Find classes that hold an object: read `referenced_by` in `v1.9.0/objects/{name}.yaml`
 
 ## Question routing
 
-Pick the shortest reading path for the question type.
-
 | Question pattern | Start here |
 | --- | --- |
-| Which class fits event X? | Category table below → version classes index → candidate class pages |
-| What attributes does class/object Y have? | Version classes or objects index → the specific page |
-| How do profiles work? / Which profile for X? | [Introduction: Profiles](introduction/profiles.md) → version profiles index |
-| How do I extend the schema? | [Introduction: Extensions](introduction/extensions.md) or [Patching the Core Schema](articles/patching-core-using-extensions.md) |
-| How do I populate observables / model alerts? | [FAQs](faqs.md) and [Articles](articles.md) |
-| What changed between versions? | Compare the two version pages |
-| Conceptual / design question | [Introduction](introduction.md) → [FAQs](faqs.md) |
+| Which class fits event X? | Category table below → `classes.yaml` → candidate class files |
+| What attributes does class or object Y have? | `classes.yaml` or `objects.yaml` → the item's file |
+| Which values can enum attribute Z take? | The `enum` of Z in the class or object file |
+| Where is attribute or object X used? | `attributes.yaml` (`used_by`) or the object's `referenced_by` |
+| How do profiles work? / Which profile for X? | [Introduction: Profiles](docs/introduction/profiles.md) → `profiles.yaml` |
+| What do platform extensions add? | `version.yaml` (`extensions`) → the extension files |
+| How do I extend the schema? | [Introduction: Extensions](docs/introduction/extensions.md) or [Patching the Core Schema](docs/articles/patching-core-using-extensions.md) |
+| How do I populate observables / model alerts? | [FAQs](docs/faqs.md) and [Articles](docs/articles.md) |
+| What changed between versions? | `changes` in `version.yaml`, then compare the item files |
+| Conceptual / design question | [Introduction](docs/introduction.md) → [FAQs](docs/faqs.md) |
 
 When the question asks you to pick a class, read multiple candidates and explain
 trade-offs.
@@ -93,8 +157,7 @@ multiple profiles.
 
 ### Event categories
 
-Use the category range to narrow scope before diving into individual class
-pages.
+Use the category range to narrow scope before reading individual class files.
 
 | Range | Category | Focus |
 | ----- | -------- | ----- |
@@ -112,7 +175,9 @@ pages.
 - `snake_case` everywhere: `process_activity`, `network_endpoint`.
 - Arrays use plural names: `answers`, `enrichments`, `attacks`.
 - When `_id` is `Other` (`99`), the sibling string **must** be populated with
-  the source value.
+  the source value. For other values, the sibling takes the enum caption.
+- `type_uid` is `class_uid * 100 + activity_id`. Class files list the
+  resulting values in the `type_uid` enum.
 
 Key suffixes:
 
@@ -132,10 +197,10 @@ Key suffixes:
 ## Answering principles
 
 - Read before answering. Every claim must trace back to a file you read.
-- Use the question routing table and category table to narrow scope before
-  reading class or object pages.
-- Consult [FAQs](faqs.md) for schema design rationale and ambiguous mappings.
-- Consult [Articles](articles.md) for deep-dive topics like observables, alerts,
-  process parentage, and extensions.
-- Read [Introduction](introduction.md) sections for conceptual questions about
-  the framework itself.
+- Use the indexes, the question routing table, and the category table to narrow
+  scope before reading class or object files.
+- Consult [FAQs](docs/faqs.md) for schema design rationale and ambiguous mappings.
+- Consult [Articles](docs/articles.md) for deep-dive topics like observables,
+  alerts, process parentage, and extensions.
+- Read [Introduction](docs/introduction.md) sections for conceptual questions
+  about the framework itself.

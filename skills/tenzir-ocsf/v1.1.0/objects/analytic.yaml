@@ -1,0 +1,74 @@
+name: analytic
+caption: Analytic
+extends: _entity
+description: The Analytic object contains details about the analytic technique used to analyze and derive insights from the data or information that led to the creation of a finding or conclusion.
+constraints:
+  at_least_one: [name, uid]
+referenced_by:
+  classes:
+    security_finding: [analytic]
+  objects:
+    analytic: [related_analytics]
+    finding_info: [analytic, related_analytics]
+attributes:
+  category:
+    caption: Category
+    type: string_t
+    requirement: optional
+    description: The analytic category.
+  desc:
+    caption: Description
+    type: string_t
+    requirement: optional
+    description: The description of the analytic that generated the finding.
+  name:
+    caption: Name
+    type: string_t
+    requirement: recommended
+    description: The name of the analytic that generated the finding.
+  related_analytics:
+    caption: Related Analytics
+    type: object_t
+    object: analytic
+    array: true
+    requirement: optional
+    deprecated:
+      since: 1.0.0
+      message: Related Analytics has been decoupled from this object, instead use `finding_info.related_analytics`.
+    description: Other analytics related to this analytic.
+  type:
+    caption: Type
+    type: string_t
+    requirement: optional
+    description: The analytic type.
+  type_id:
+    caption: Type ID
+    type: integer_t
+    requirement: required
+    sibling: type
+    description: The analytic type ID.
+    enum:
+      '0':
+        caption: Unknown
+        description: The type is unknown.
+      '1':
+        caption: Rule
+      '2':
+        caption: Behavioral
+      '3':
+        caption: Statistical
+      '4':
+        caption: Learning (ML/DL)
+      '99':
+        caption: Other
+        description: The type is not mapped. See the `type` attribute, which contains a data source specific value.
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: recommended
+    description: The unique identifier of the analytic that generated the finding.
+  version:
+    caption: Version
+    type: string_t
+    requirement: optional
+    description: 'The analytic version. For example: `1.1`.'

@@ -1,0 +1,30 @@
+name: anomaly
+caption: Anomaly
+extends: object
+description: Describes an anomaly or deviation detected in a system. Anomalies are unexpected activity patterns that could indicate potential issues needing attention.
+referenced_by:
+  objects:
+    anomaly_analysis: [anomalies]
+attributes:
+  observation_parameter:
+    caption: Observation Parameter
+    type: string_t
+    requirement: required
+    description: 'The specific parameter, metric or property where the anomaly was observed. Examples include: CPU usage percentage, API response time in milliseconds, HTTP error rate, memory utilization, network latency, transaction volume, etc. This helps identify the exact aspect of the system exhibiting anomalous behavior.'
+  observation_type:
+    caption: Observation Type
+    type: string_t
+    requirement: recommended
+    description: 'The type of analysis methodology used to detect the anomaly. This indicates how the anomaly was identified through different analytical approaches. Common types include: Frequency Analysis, Time Pattern Analysis, Volume Analysis, Sequence Analysis, Distribution Analysis, etc.'
+  observations:
+    caption: Observations
+    type: object_t
+    object: observation
+    array: true
+    requirement: required
+    description: Details about the observed anomaly or observations that were flagged as anomalous compared to expected baseline behavior.
+  observed_pattern:
+    caption: Observed Pattern
+    type: string_t
+    requirement: recommended
+    description: The specific pattern identified within the observation type. For Frequency Analysis, this could be 'FREQUENT', 'INFREQUENT', 'RARE', or 'UNSEEN'. For Time Pattern Analysis, this could be 'BUSINESS_HOURS', 'OFF_HOURS', or 'UNUSUAL_TIME'. For Volume Analysis, this could be 'NORMAL_VOLUME', 'HIGH_VOLUME', or 'SURGE'. The pattern values are specific to each observation type and indicate how the observed behavior relates to the baseline.

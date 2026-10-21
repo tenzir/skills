@@ -1,0 +1,375 @@
+name: network_endpoint
+caption: Network Endpoint
+extends: endpoint
+observable: 20
+description: The Network Endpoint object describes characteristics of a network endpoint. These can be a source or destination of a network connection.
+profiles: [container]
+constraints:
+  at_least_one: [ip, uid, name, hostname, svc_name, instance_uid, interface_uid, interface_name, domain]
+references:
+- description: D3FEND™ Ontology d3f:ComputerNetworkNode.
+  url: https://d3fend.mitre.org/dao/artifact/d3f:ComputerNetworkNode/
+referenced_by:
+  classes:
+    account_change: [src_endpoint]
+    airborne_broadcast_activity: [dst_endpoint, src_endpoint]
+    api_activity: [dst_endpoint, src_endpoint]
+    authentication: [dst_endpoint, src_endpoint]
+    authorize_session: [dst_endpoint, src_endpoint]
+    data_security_finding: [dst_endpoint, src_endpoint]
+    datastore_activity: [dst_endpoint, src_endpoint]
+    dhcp_activity: [dst_endpoint, network_observation_point, src_endpoint]
+    dns_activity: [dst_endpoint, network_observation_point, src_endpoint]
+    dns_zone_transfer_activity: [dst_endpoint, network_observation_point, src_endpoint]
+    drone_flights_activity: [dst_endpoint, src_endpoint]
+    email_activity: [dst_endpoint, src_endpoint]
+    entity_management: [src_endpoint]
+    event_log_actvity: [dst_endpoint, src_endpoint]
+    file_hosting: [dst_endpoint, src_endpoint]
+    ftp_activity: [dst_endpoint, network_observation_point, src_endpoint]
+    group_management: [src_endpoint]
+    http_activity: [dst_endpoint, network_observation_point, src_endpoint]
+    network_activity: [dst_endpoint, network_observation_point, src_endpoint]
+    network_file_activity: [dst_endpoint, network_observation_point, src_endpoint]
+    ntp_activity: [dst_endpoint, network_observation_point, src_endpoint]
+    rdp_activity: [dst_endpoint, network_observation_point, src_endpoint]
+    role_management: [src_endpoint]
+    smb_activity: [dst_endpoint, network_observation_point, src_endpoint]
+    ssh_activity: [dst_endpoint, network_observation_point, src_endpoint]
+    tunnel_activity: [dst_endpoint, network_observation_point, src_endpoint]
+    user_access: [src_endpoint]
+    user_management: [src_endpoint]
+    web_resource_access_activity: [src_endpoint]
+    web_resources_activity: [dst_endpoint, src_endpoint]
+  objects:
+    download_info: [src_endpoint]
+    endpoint_connection: [network_endpoint]
+    evidences: [dst_endpoint, src_endpoint]
+    load_balancer: [dst_endpoint]
+attributes:
+  agent_list:
+    caption: Agent List
+    type: object_t
+    object: agent
+    array: true
+    requirement: optional
+    from: endpoint
+    description: A list of `agent` objects associated with a device, endpoint, or resource.
+  autonomous_system:
+    caption: Autonomous System
+    type: object_t
+    object: autonomous_system
+    requirement: optional
+    description: The Autonomous System details associated with an IP address.
+  container:
+    caption: Container
+    type: object_t
+    object: container
+    requirement: recommended
+    group: context
+    profile: container
+    from: endpoint
+    observable: 27
+    description: The information describing an instance of a container. A container is a prepackaged, portable system image that runs isolated on an existing system using a container runtime like containerd.
+  domain:
+    caption: Domain
+    type: string_t
+    requirement: recommended
+    description: The name of the domain that the endpoint belongs to or that corresponds to the endpoint.
+  fingerprints:
+    caption: Fingerprints
+    type: object_t
+    object: fingerprint
+    array: true
+    requirement: optional
+    observable: 30
+    description: Fingerprints that identify the specific application implementation on this endpoint, such as Cisco NPF or HASSH.
+  hostname:
+    caption: Hostname
+    type: hostname_t
+    requirement: recommended
+    from: endpoint
+    observable: 1
+    description: The fully qualified name of the endpoint.
+  hw_info:
+    caption: Hardware Info
+    type: object_t
+    object: device_hw_info
+    requirement: optional
+    from: endpoint
+    description: The endpoint hardware information.
+  instance_uid:
+    caption: Instance ID
+    type: string_t
+    requirement: recommended
+    from: endpoint
+    description: The unique identifier of a VM instance.
+  interface_name:
+    caption: Network Interface Name
+    type: string_t
+    requirement: recommended
+    from: endpoint
+    description: The name of the network interface (e.g. eth2).
+  interface_uid:
+    caption: Network Interface ID
+    type: string_t
+    requirement: recommended
+    from: endpoint
+    description: The unique identifier of the network interface.
+  intermediate_ips:
+    caption: Intermediate IP Addresses
+    type: ip_t
+    array: true
+    requirement: optional
+    observable: 2
+    description: The intermediate IP Addresses. For example, the IP addresses in the HTTP X-Forwarded-For header.
+  ip:
+    caption: IP Address
+    type: ip_t
+    requirement: recommended
+    from: endpoint
+    observable: 2
+    description: The IP address of the endpoint, in either IPv4 or IPv6 format.
+  isp:
+    caption: ISP Name
+    type: string_t
+    requirement: optional
+    description: The name of the Internet Service Provider (ISP).
+  isp_org:
+    caption: ISP Org
+    type: string_t
+    requirement: optional
+    description: The organization name of the Internet Service Provider (ISP). This represents the parent organization or company that owns/operates the ISP. For example, Comcast Corporation would be the ISP org for Xfinity internet service. This attribute helps identify the ultimate provider when ISPs operate under different brand names.
+  location:
+    caption: Geo Location
+    type: object_t
+    object: location
+    requirement: optional
+    from: endpoint
+    observable: 26
+    description: The geographical location of the endpoint.
+  mac:
+    caption: MAC Address
+    type: mac_t
+    requirement: optional
+    from: endpoint
+    observable: 3
+    description: The Media Access Control (MAC) address of the endpoint.
+  mac_vendor:
+    caption: MAC Vendor
+    type: string_t
+    requirement: optional
+    from: endpoint
+    description: The vendor or manufacturer of the endpoint's network interface controller (NIC), as identified from the MAC address.
+    references:
+    - description: IEEE Registration Authority
+      url: https://standards.ieee.org/products-programs/regauth/
+  name:
+    caption: Name
+    type: string_t
+    requirement: recommended
+    from: endpoint
+    description: The short name of the endpoint.
+  namespace_pid:
+    caption: Namespace PID
+    type: integer_t
+    requirement: recommended
+    group: context
+    profile: container
+    from: endpoint
+    description: If running under a process namespace (such as in a container), the process identifier within that process namespace.
+  network_scope:
+    caption: Network Scope
+    type: string_t
+    requirement: optional
+    description: Indicates whether the endpoint resides inside the customer’s network, outside on the Internet, or if its location relative to the customer’s network cannot be determined. The value is normalized to the caption of the `network_scope_id`.
+  network_scope_id:
+    caption: Network Scope ID
+    type: integer_t
+    requirement: optional
+    sibling: network_scope
+    description: The normalized identifier of the endpoint’s network scope. The normalized network scope identifier indicates whether the endpoint resides inside the customer’s network, outside on the Internet, or if its location relative to the customer’s network cannot be determined.
+    enum:
+      '0':
+        caption: Unknown
+        description: Unknown whether this endpoint resides within the customer’s network.
+      '1':
+        caption: Internal
+        description: The endpoint resides inside the customer’s network.
+      '2':
+        caption: External
+        description: The endpoint is on the Internet or otherwise external to the customer’s network.
+      '99':
+        caption: Other
+        description: The network scope is not mapped. See the `network_scope` attribute, which contains a data source specific value.
+  os:
+    caption: OS
+    type: object_t
+    object: os
+    requirement: optional
+    from: endpoint
+    description: The endpoint operating system.
+  owner:
+    caption: Owner
+    type: object_t
+    object: user
+    requirement: recommended
+    from: endpoint
+    observable: 21
+    description: The identity of the service or user account that owns the endpoint or was last logged into it.
+  pool:
+    caption: Pool
+    type: object_t
+    object: group
+    requirement: optional
+    from: endpoint
+    description: The pool of desktops or virtual machines to which the endpoint belongs.
+  port:
+    caption: Port
+    type: port_t
+    requirement: recommended
+    observable: 11
+    description: The port used for communication within the network connection.
+  proxy_endpoint:
+    caption: Proxy Endpoint
+    type: object_t
+    object: network_proxy
+    requirement: optional
+    observable: 20
+    description: The network proxy information pertaining to a specific endpoint. This can be used to describe information pertaining to network address translation (NAT).
+  subnet_uid:
+    caption: Subnet UID
+    type: string_t
+    requirement: optional
+    from: endpoint
+    description: The unique identifier of a virtual subnet.
+  svc_name:
+    caption: Service Name
+    type: string_t
+    requirement: recommended
+    description: The service name in service-to-service connections. For example, AWS VPC logs the pkt-src-aws-service and pkt-dst-aws-service fields identify the connection is coming from or going to an AWS service.
+  type:
+    caption: Type
+    type: string_t
+    requirement: optional
+    description: 'The network endpoint type. For example: `unknown`, `server`, `desktop`, `laptop`, `tablet`, `mobile`, `virtual`, `browser`, or `other`.'
+  type_id:
+    caption: Type ID
+    type: integer_t
+    requirement: recommended
+    sibling: type
+    description: The network endpoint type ID.
+    enum:
+      '0':
+        caption: Unknown
+        description: The type is unknown.
+      '1':
+        caption: Server
+        references:
+        - description: Server
+          url: https://d3fend.mitre.org/dao/artifact/d3f:Server/
+      '2':
+        caption: Desktop
+        references:
+        - description: Desktop Computer
+          url: https://d3fend.mitre.org/dao/artifact/d3f:DesktopComputer/
+      '3':
+        caption: Laptop
+        references:
+        - description: Laptop Computer
+          url: https://d3fend.mitre.org/dao/artifact/d3f:LaptopComputer
+      '4':
+        caption: Tablet
+        references:
+        - description: Tablet Computer
+          url: https://d3fend.mitre.org/dao/artifact/d3f:TabletComputer/
+      '5':
+        caption: Mobile
+        references:
+        - description: Mobile Phone
+          url: https://d3fend.mitre.org/dao/artifact/d3f:MobilePhone/
+      '6':
+        caption: Virtual
+        references:
+        - description: Virtual Machine
+          url: https://d3fend.mitre.org/dao/artifact/d3f:VirtualizationSoftware/
+      '7':
+        caption: IOT
+        references:
+        - description: IOT (Internet of Things) Device
+          url: https://www.techtarget.com/iotagenda/definition/IoT-device
+      '8':
+        caption: Browser
+        references:
+        - description: Web Browser
+          url: https://d3fend.mitre.org/dao/artifact/d3f:Browser/
+      '9':
+        caption: Firewall
+        references:
+        - description: Network Firewall
+          url: https://d3fend.mitre.org/dao/artifact/d3f:Firewall/
+      '10':
+        caption: Switch
+        references:
+        - description: Networking Switch
+          url: https://d3fend.mitre.org/dao/artifact/d3f:Switch/
+      '11':
+        caption: Hub
+        references:
+        - description: Networking Hub
+          url: https://en.wikipedia.org/wiki/Ethernet_hub
+      '12':
+        caption: Router
+        references:
+        - description: Networking Router
+          url: https://d3fend.mitre.org/dao/artifact/d3f:Router/
+      '13':
+        caption: IDS
+        references:
+        - description: Intrustion Detection System
+          url: https://d3fend.mitre.org/dao/artifact/d3f:IntrusionDetectionSystem/
+      '14':
+        caption: IPS
+        references:
+        - description: Intrusion Prevention System
+          url: https://d3fend.mitre.org/dao/artifact/d3f:IntrusionPreventionSystem/
+      '15':
+        caption: Load Balancer
+        references:
+        - description: Load Balancer Device
+          url: https://en.wikipedia.org/wiki/Load_balancing_(computing)
+      '99':
+        caption: Other
+        description: The type is not mapped. See the `type` attribute, which contains a data source specific value.
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: recommended
+    observable: 48
+    description: The unique identifier of the endpoint.
+  uid_numeric:
+    caption: Numeric Unique ID
+    type: long_t
+    requirement: optional
+    from: _entity
+    description: |-
+      The `uid` attribute in numeric form where applicable.
+      Note: Producers may populate `uid_numeric` only in addition to `uid` and not as an alternative to it.
+  vlan_uid:
+    caption: VLAN
+    type: string_t
+    requirement: optional
+    from: endpoint
+    description: The Virtual LAN identifier.
+  vpc_uid:
+    caption: VPC UID
+    type: string_t
+    requirement: optional
+    from: endpoint
+    description: The unique identifier of the Virtual Private Cloud (VPC).
+  zone:
+    caption: Network Zone
+    type: string_t
+    requirement: optional
+    from: endpoint
+    description: The network zone or LAN segment.

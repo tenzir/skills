@@ -1,0 +1,430 @@
+name: datastore_activity
+caption: Datastore Activity
+uid: 6005
+category: application
+category_uid: 6
+extends: application
+description: Datastore events describe general activities (Read, Update, Query, Delete, etc.) which affect datastores or data within those datastores, e.g. (AWS RDS, AWS S3).
+profiles: [cloud, container, datetime]
+constraints:
+  at_least_one: [database, databucket, table]
+attributes:
+  activity_id:
+    caption: Activity ID
+    type: integer_t
+    requirement: required
+    group: classification
+    sibling: activity_name
+    description: The normalized identifier of the activity that triggered the event.
+    enum:
+      '0':
+        caption: Unknown
+        description: The event activity is unknown.
+      '1':
+        caption: Read
+        description: The datastore activity in the event pertains to a 'Read' operation.
+      '2':
+        caption: Update
+        description: The datastore activity in the event pertains to a 'Update' operation.
+      '3':
+        caption: Connect
+        description: The datastore activity in the event pertains to a 'Connect' operation.
+      '4':
+        caption: Query
+        description: The datastore activity in the event pertains to a 'Query' operation.
+      '5':
+        caption: Write
+        description: The datastore activity in the event pertains to a 'Write' operation.
+      '6':
+        caption: Create
+        description: The datastore activity in the event pertains to a 'Create' operation.
+      '7':
+        caption: Delete
+        description: The datastore activity in the event pertains to a 'Delete' operation.
+      '99':
+        caption: Other
+        description: The event activity is not mapped. See the `activity_name` attribute, which contains a data source specific value.
+  activity_name:
+    caption: Activity
+    type: string_t
+    requirement: optional
+    group: classification
+    from: base_event
+    description: The event activity name, as defined by the activity_id.
+  actor:
+    caption: Actor
+    type: object_t
+    object: actor
+    requirement: required
+    group: primary
+    description: The actor object describes details about the user/role/process that was the source of the activity.
+  api:
+    caption: API Details
+    type: object_t
+    object: api
+    requirement: optional
+    group: context
+    profile: cloud
+    from: base_event
+    description: Describes details about a typical API (Application Programming Interface) call.
+  category_name:
+    caption: Category
+    type: string_t
+    requirement: optional
+    group: classification
+    from: base_event
+    description: 'The event category name, as defined by category_uid value: `Application Activity`.'
+  category_uid:
+    caption: Category ID
+    type: integer_t
+    requirement: required
+    group: classification
+    from: base_event
+    sibling: category_name
+    description: The category unique identifier of the event.
+    enum:
+      '6':
+        caption: Application Activity
+        description: Application Activity events report detailed information about the behavior of applications and services.
+  class_name:
+    caption: Class
+    type: string_t
+    requirement: optional
+    group: classification
+    from: base_event
+    description: 'The event class name, as defined by class_uid value: `Datastore Activity`.'
+  class_uid:
+    caption: Class ID
+    type: integer_t
+    requirement: required
+    group: classification
+    sibling: class_name
+    description: The unique identifier of a class. A Class describes the attributes available in an event.
+    enum:
+      '6005':
+        caption: Datastore Activity
+        description: Datastore events describe general activities (Read, Update, Query, Delete, etc.) which affect datastores or data within those datastores, e.g. (AWS RDS, AWS S3).
+  cloud:
+    caption: Cloud
+    type: object_t
+    object: cloud
+    requirement: required
+    group: primary
+    profile: cloud
+    from: base_event
+    description: Describes details about the Cloud environment where the event was originally created or logged.
+  count:
+    caption: Count
+    type: integer_t
+    requirement: optional
+    group: occurrence
+    from: base_event
+    description: The number of times that events in the same logical group occurred during the event Start Time to End Time period.
+  database:
+    caption: Database
+    type: object_t
+    object: database
+    requirement: recommended
+    group: primary
+    description: The database object is used for databases which are typically datastore services that contain an organized collection of structured and unstructured data or a types of data.
+  databucket:
+    caption: Databucket
+    type: object_t
+    object: databucket
+    requirement: recommended
+    group: primary
+    description: The data bucket object is a basic container that holds data, typically organized through the use of data partitions.
+  dst_endpoint:
+    caption: Destination Endpoint
+    type: object_t
+    object: network_endpoint
+    requirement: optional
+    group: primary
+    observable: 20
+    description: Details about the endpoint hosting the datastore application or service.
+  duration:
+    caption: Duration
+    type: integer_t
+    requirement: optional
+    group: occurrence
+    from: base_event
+    description: The event duration or aggregate time, the amount of time the event covers from `start_time` to `end_time` in milliseconds.
+  end_time:
+    caption: End Time
+    type: timestamp_t
+    requirement: optional
+    group: occurrence
+    from: base_event
+    description: The end time of a time period, or the time of the most recent event included in the aggregate event.
+  end_time_dt:
+    caption: End Time
+    type: datetime_t
+    requirement: optional
+    group: occurrence
+    profile: datetime
+    from: base_event
+    description: The end time of a time period, or the time of the most recent event included in the aggregate event.
+  enrichments:
+    caption: Enrichments
+    type: object_t
+    object: enrichment
+    array: true
+    requirement: optional
+    group: context
+    from: base_event
+    description: 'The additional information from an external data source, which is associated with the event or a finding. For example add location information for the IP address in the DNS answers:`[{"name": "answers.ip", "value": "92.24.47.250", "type": "location", "data": {"city": "Socotra", "continent": "Asia", "coordinates": [-25.4153, 17.0743], "country": "YE", "desc": "Yemen"}}]`'
+  http_request:
+    caption: HTTP Request
+    type: object_t
+    object: http_request
+    requirement: optional
+    group: primary
+    description: Details about the underlying http request.
+  message:
+    caption: Message
+    type: string_t
+    requirement: recommended
+    group: primary
+    from: base_event
+    description: The description of the event/finding, as defined by the source.
+  metadata:
+    caption: Metadata
+    type: object_t
+    object: metadata
+    requirement: required
+    group: context
+    from: base_event
+    description: The metadata associated with the event or a finding.
+  observables:
+    caption: Observables
+    type: object_t
+    object: observable
+    array: true
+    requirement: optional
+    group: primary
+    from: base_event
+    description: The observables associated with the event or a finding.
+  query_info:
+    caption: Query Info
+    type: object_t
+    object: query_info
+    requirement: optional
+    group: primary
+    description: The query info object holds information related to data access within a datastore. To access, manipulate, delete, or retrieve data from a datastore, a database query must be written using a specific syntax.
+  raw_data:
+    caption: Raw Data
+    type: string_t
+    requirement: optional
+    group: context
+    from: base_event
+    description: The raw event/finding data as received from the source.
+  severity:
+    caption: Severity
+    type: string_t
+    requirement: optional
+    group: classification
+    from: base_event
+    description: The event/finding severity, normalized to the caption of the severity_id value. In the case of 'Other', it is defined by the source.
+  severity_id:
+    caption: Severity ID
+    type: integer_t
+    requirement: required
+    group: classification
+    from: base_event
+    sibling: severity
+    description: |-
+      The normalized identifier of the event/finding severity.
+
+      The normalized severity is a measurement the effort and expense required to manage and resolve an event or incident. Smaller numerical values represent lower impact events, and larger numerical values represent higher impact events.
+    enum:
+      '0':
+        caption: Unknown
+        description: The event/finding severity is unknown.
+      '1':
+        caption: Informational
+        description: Informational message. No action required.
+      '2':
+        caption: Low
+        description: The user decides if action is needed.
+      '3':
+        caption: Medium
+        description: Action is required but the situation is not serious at this time.
+      '4':
+        caption: High
+        description: Action is required immediately.
+      '5':
+        caption: Critical
+        description: Action is required immediately and the scope is broad.
+      '6':
+        caption: Fatal
+        description: An error occurred but it is too late to take remedial action.
+      '99':
+        caption: Other
+        description: The event/finding severity is not mapped. See the `severity` attribute, which contains a data source specific value.
+  src_endpoint:
+    caption: Source Endpoint
+    type: object_t
+    object: network_endpoint
+    requirement: required
+    group: primary
+    observable: 20
+    description: Details about the source of the activity.
+  start_time:
+    caption: Start Time
+    type: timestamp_t
+    requirement: optional
+    group: occurrence
+    from: base_event
+    description: The start time of a time period, or the time of the least recent event included in the aggregate event.
+  start_time_dt:
+    caption: Start Time
+    type: datetime_t
+    requirement: optional
+    group: occurrence
+    profile: datetime
+    from: base_event
+    description: The start time of a time period, or the time of the least recent event included in the aggregate event.
+  status:
+    caption: Status
+    type: string_t
+    requirement: optional
+    group: primary
+    from: base_event
+    description: The event status, normalized to the caption of the status_id value. In the case of 'Other', it is defined by the event source.
+  status_code:
+    caption: Status Code
+    type: string_t
+    requirement: optional
+    group: primary
+    from: base_event
+    description: |-
+      The event status code, as reported by the event source.
+
+      For example, in a Windows Failed Authentication event, this would be the value of 'Failure Code', e.g. 0x18.
+  status_detail:
+    caption: Status Details
+    type: string_t
+    requirement: optional
+    group: primary
+    from: base_event
+    description: The status details contains additional information about the event/finding outcome.
+  status_id:
+    caption: Status ID
+    type: integer_t
+    requirement: recommended
+    group: primary
+    from: base_event
+    sibling: status
+    description: The normalized identifier of the event status.
+    enum:
+      '0':
+        caption: Unknown
+        description: The status is unknown.
+      '1':
+        caption: Success
+      '2':
+        caption: Failure
+      '99':
+        caption: Other
+        description: The event status is not mapped. See the `status` attribute, which contains a data source specific value.
+  table:
+    caption: Table
+    type: object_t
+    object: table
+    requirement: optional
+    group: primary
+    description: The table object represents a table within a structured relational database or datastore, which contains columns and rows of data that are able to be create, updated, deleted and queried.
+  time:
+    caption: Event Time
+    type: timestamp_t
+    requirement: required
+    group: occurrence
+    from: base_event
+    description: The normalized event occurrence time or the finding creation time.
+  time_dt:
+    caption: Event Time
+    type: datetime_t
+    requirement: optional
+    group: occurrence
+    profile: datetime
+    from: base_event
+    description: The normalized event occurrence time or the finding creation time.
+  timezone_offset:
+    caption: Timezone Offset
+    type: integer_t
+    requirement: recommended
+    group: occurrence
+    from: base_event
+    description: The number of minutes that the reported event `time` is ahead or behind UTC, in the range -1,080 to +1,080.
+  type:
+    caption: Datastore Type
+    type: string_t
+    requirement: optional
+    description: The datastore resource type (e.g. database, datastore, or table).
+  type_id:
+    caption: Datastore Type ID
+    type: integer_t
+    requirement: recommended
+    sibling: type
+    description: The normalized datastore resource type identifier.
+    enum:
+      '0':
+        caption: Unknown
+        description: The datastore resource type is unknown.
+      '1':
+        caption: Database
+      '2':
+        caption: Databucket
+      '3':
+        caption: Table
+      '99':
+        caption: Other
+        description: The datastore resource type is not mapped.
+  type_name:
+    caption: Type Name
+    type: string_t
+    requirement: optional
+    group: classification
+    from: base_event
+    description: The event/finding type name, as defined by the type_uid.
+  type_uid:
+    caption: Type ID
+    type: long_t
+    requirement: required
+    group: classification
+    sibling: type_name
+    description: 'The event/finding type ID. It identifies the event''s semantics and structure. The value is calculated by the logging system as: `class_uid * 100 + activity_id`.'
+    enum:
+      '600500':
+        caption: 'Datastore Activity: Unknown'
+      '600501':
+        caption: 'Datastore Activity: Read'
+        description: The datastore activity in the event pertains to a 'Read' operation.
+      '600502':
+        caption: 'Datastore Activity: Update'
+        description: The datastore activity in the event pertains to a 'Update' operation.
+      '600503':
+        caption: 'Datastore Activity: Connect'
+        description: The datastore activity in the event pertains to a 'Connect' operation.
+      '600504':
+        caption: 'Datastore Activity: Query'
+        description: The datastore activity in the event pertains to a 'Query' operation.
+      '600505':
+        caption: 'Datastore Activity: Write'
+        description: The datastore activity in the event pertains to a 'Write' operation.
+      '600506':
+        caption: 'Datastore Activity: Create'
+        description: The datastore activity in the event pertains to a 'Create' operation.
+      '600507':
+        caption: 'Datastore Activity: Delete'
+        description: The datastore activity in the event pertains to a 'Delete' operation.
+      '600599':
+        caption: 'Datastore Activity: Other'
+  unmapped:
+    caption: Unmapped Data
+    type: object_t
+    object: object
+    requirement: optional
+    group: context
+    from: base_event
+    description: The attributes that are not mapped to the event schema. The names and values of those attributes are specific to the event source.

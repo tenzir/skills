@@ -1,0 +1,35 @@
+name: display
+caption: Display
+extends: object
+description: The Display object contains information about the physical or virtual display connected to a computer system.
+referenced_by:
+  classes:
+    rdp_activity: [remote_display]
+  objects:
+    device_hw_info: [desktop_display]
+attributes:
+  color_depth:
+    caption: Color Depth
+    type: integer_t
+    requirement: optional
+    description: The numeric color depth.
+  physical_height:
+    caption: Physical Height
+    type: integer_t
+    requirement: optional
+    description: The numeric physical height of display.
+  physical_orientation:
+    caption: Physical Orientation
+    type: integer_t
+    requirement: optional
+    description: The numeric physical orientation of display.
+  physical_width:
+    caption: Physical Width
+    type: integer_t
+    requirement: optional
+    description: The numeric physical width of display.
+  scale_factor:
+    caption: Scale Factor
+    type: integer_t
+    requirement: optional
+    description: The numeric scale factor of display.

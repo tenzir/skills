@@ -1,0 +1,29 @@
+name: related_event
+caption: Related Event
+extends: object
+description: The Related Event object describes an event related to a finding or detection as identified by the security product.
+referenced_by:
+  objects:
+    finding: [related_events]
+attributes:
+  product_uid:
+    caption: Product Identifier
+    type: string_t
+    requirement: optional
+    description: The unique identifier of the product that reported the related event.
+  type:
+    caption: Type
+    type: string_t
+    requirement: optional
+    description: 'The type of the related event. For example: Process Activity: Launch.'
+  type_uid:
+    caption: Type ID
+    type: integer_t
+    requirement: recommended
+    sibling: type_name
+    description: 'The unique identifier of the related event type. For example: 100701.'
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: required
+    description: The unique identifier of the related event.

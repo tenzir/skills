@@ -1,0 +1,1134 @@
+name: dns_zone_transfer_activity
+caption: DNS Zone Transfer Activity
+uid: 4015
+category: network
+category_uid: 4
+extends: network
+description: 'DNS Zone Transfer Activity events report the bulk replication of a DNS zone between name servers, as seen on the network. This includes full transfers (AXFR), incremental transfers (IXFR), and change notifications (NOTIFY). Unlike `DNS Activity`, which reports per-name queries and answers, this class captures whole-zone semantics: SOA serials, the records that make up the zone, and the multi-message streams that carry them.'
+profiles: [ai_operation, cloud, container, data_classification, datetime, host, load_balancer, network_proxy, osint, record_integrity, security_control]
+constraints:
+  at_least_one: [dst_endpoint, src_endpoint]
+references:
+- description: RFC 5936 — DNS Zone Transfer Protocol (AXFR).
+  url: https://www.rfc-editor.org/rfc/rfc5936
+- description: RFC 1995 — Incremental Zone Transfer in DNS (IXFR).
+  url: https://www.rfc-editor.org/rfc/rfc1995
+- description: RFC 1996 — A Mechanism for Prompt Notification of Zone Changes (NOTIFY).
+  url: https://www.rfc-editor.org/rfc/rfc1996
+- description: RFC 1035 — Domain Names, Implementation and Specification.
+  url: https://www.rfc-editor.org/rfc/rfc1035
+- description: RFC 2845 — Secret Key Transaction Authentication for DNS (TSIG).
+  url: https://www.rfc-editor.org/rfc/rfc2845
+- description: RFC 6895 — Domain Name System (DNS) IANA Considerations (response codes).
+  url: https://www.rfc-editor.org/rfc/rfc6895
+attributes:
+  action:
+    caption: Action
+    type: string_t
+    requirement: optional
+    group: primary
+    profile: security_control
+    from: base_event
+    description: The normalized caption of `action_id`.
+  action_id:
+    caption: Action ID
+    type: integer_t
+    requirement: recommended
+    group: primary
+    profile: security_control
+    from: base_event
+    sibling: action
+    description: The action taken by a control or other policy-based system leading to an outcome or disposition. An unknown action may still correspond to a known disposition. Refer to `disposition_id` for the outcome of the action.
+    enum:
+      '0':
+        caption: Unknown
+        description: The action was unknown. The `disposition_id` attribute may still be set to a non-unknown value, for example 'Custom Action', 'Challenge'.
+      '1':
+        caption: Allowed
+        description: The activity was allowed. The `disposition_id` attribute should be set to a value that conforms to this action, for example 'Allowed', 'Approved', 'Delayed', 'No Action', 'Count' etc.
+      '2':
+        caption: Denied
+        description: The attempted activity was denied. The `disposition_id` attribute should be set to a value that conforms to this action, for example 'Blocked', 'Rejected', 'Quarantined', 'Isolated', 'Dropped', 'Access Revoked, etc.
+      '3':
+        caption: Observed
+        description: The activity was observed, but neither explicitly allowed nor denied. This is common with IDS and EDR controls that report additional information on observed behavior such as TTPs. The `disposition_id` attribute should be set to a value that conforms to this action, for example 'Logged', 'Alert', 'Detected', 'Count', etc.
+      '4':
+        caption: Modified
+        description: The activity was modified, adjusted, or corrected. The `disposition_id` attribute should be set appropriately, for example 'Restored', 'Corrected', 'Delayed', 'Captcha', 'Tagged'.
+      '99':
+        caption: Other
+        description: The action is not mapped. See the `action` attribute which contains a data source specific value.
+  activity_id:
+    caption: Activity ID
+    type: integer_t
+    requirement: required
+    group: classification
+    sibling: activity_name
+    description: The normalized identifier of the activity that triggered the event. Each event class defines its own set of activity values. Use `0` (Unknown) when the activity cannot be determined. Use `99` (Other) when the activity does not match any defined value, in which case `activity_name` must be populated with the source-specific label.
+    enum:
+      '0':
+        caption: Unknown
+        description: The event activity is unknown.
+      '1':
+        caption: Transfer Request
+        description: A request from a secondary name server to transfer a zone. Whether a full (AXFR) or incremental (IXFR) transfer was requested is conveyed by `transfer_type_id`.
+      '2':
+        caption: Transfer Response
+        description: A zone transfer response message from the primary name server. A single transfer may be delivered as a stream of multiple response messages. Whether the delivered data is a full (AXFR) or incremental (IXFR) transfer is conveyed by `transfer_type_id`; note that a server may answer an IXFR request with a full transfer when it cannot produce a delta.
+      '3':
+        caption: Notify
+        description: A NOTIFY exchange, comprising the primary name server's notification that the zone has changed and the secondary's acknowledgement, reported as a single record rather than as separate messages. NOTIFY has no transfer type; the outcome of the acknowledgement is conveyed by `status_id`.
+      '4':
+        caption: Transfer
+        description: A zone transfer reported as a single summary record rather than as separate request and response messages. Used by sources, such as name server logs, that emit one event per transfer with the zone, record count, byte count, duration, and peer. Whether the transfer was full (AXFR) or incremental (IXFR) is conveyed by `transfer_type_id`; whether it succeeded is conveyed by `status_id`.
+      '99':
+        caption: Other
+        description: The event activity is not mapped. See the `activity_name` attribute, which contains a data source specific value.
+  activity_name:
+    caption: Activity
+    type: string_t
+    requirement: optional
+    group: classification
+    from: base_event
+    description: The event activity name, as defined by the `activity_id`. When `activity_id` is `99` (Other), this attribute must contain the source-specific activity label. For all other `activity_id` values, this must match the caption defined for that `activity_id` enum value.
+  actor:
+    caption: Actor
+    type: object_t
+    object: actor
+    requirement: optional
+    group: primary
+    profile: host
+    from: base_event
+    description: The user, process, or service that initiated the activity on the host. For system-level events this is typically a process; for IAM events it is typically a user or role.
+  ai_agent:
+    caption: AI Agent
+    type: object_t
+    object: ai_agent
+    requirement: optional
+    group: context
+    profile: ai_operation
+    from: network
+    description: The autonomous AI agent that performed this operation. Carries model identity via `ai_agent.ai_model`. Populate when the action was performed by an agent rather than a direct model call.
+  ai_capability:
+    caption: AI Capability
+    type: object_t
+    object: ai_capability
+    requirement: optional
+    group: context
+    profile: ai_operation
+    from: network
+    description: 'The AI capability invoked in this operation: a tool, resource, or prompt, in the sense of the MCP primitives. Records the capability''s identity, kind, provenance, declared contracts, and declared safety hints. Transport details remain on the event''s transport attributes (e.g., `api`, `http_request`), and affected objects remain in `resources`. Producers deriving `activity_id` from the capability''s declared hints (e.g., mapping a declared read-only tool to `Read`) should note the hints are self-declared and unverified; when the observed operation contradicts the declaration, classify by observed behavior.'
+  ai_model:
+    caption: AI Model
+    type: object_t
+    object: ai_model
+    requirement: recommended
+    group: context
+    profile: ai_operation
+    from: network
+    description: The AI model involved in this operation. Use for direct model invocations where no autonomous agent is involved. For agent-mediated operations, model identity is carried within `ai_agent.ai_model` instead.
+  ai_status:
+    caption: AI Status
+    type: object_t
+    object: ai_status
+    requirement: optional
+    group: context
+    profile: ai_operation
+    from: network
+    description: Per-operation outcome scalars for this operation, such as the stop reason and the permission check result, grouped in the `ai_status` object so they do not proliferate as discrete attributes at the event root. Additional outcome attributes may be added to the object in later versions.
+  api:
+    caption: API Details
+    type: object_t
+    object: api
+    requirement: optional
+    group: context
+    profile: cloud
+    from: base_event
+    description: Describes details about a typical API (Application Programming Interface) call.
+  app_name:
+    caption: Application Name
+    type: string_t
+    requirement: optional
+    group: context
+    from: network
+    description: The network application name identified by tools such as NBAR or App ID (e.g., youtube, facebook, webex). This represents a specific network application that uses standard protocols (such as https or quic) to deliver its service.
+  app_protocol_name:
+    caption: Application Protocol Name
+    type: string_t
+    requirement: optional
+    group: context
+    from: network
+    description: |-
+      The application-layer (Layer 7) protocol name identified by deep packet inspection or packet parsing (e.g., `https`, `quic`, `ssh`, `dns`), expressed as an IANA-registered service name from the IANA Service Name and Transport Protocol Port Number Registry.
+
+      Note: Port numbers alone are not always a reliable indicator of the actual application protocol in use.
+    references:
+    - description: IANA Service Name and Transport Protocol Port Number Registry
+      url: https://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xhtml
+  attacks:
+    caption: MITRE ATT&CK® and ATLAS™ Details
+    type: object_t
+    object: attack
+    array: true
+    requirement: optional
+    group: primary
+    profile: security_control
+    from: base_event
+    description: An array of MITRE ATT&CK® objects describing identified tactics, techniques & sub-techniques. The objects are compatible with MITRE ATLAS™ tactics, techniques & sub-techniques.
+    references:
+    - description: MITRE ATT&CK®
+      url: https://attack.mitre.org
+    - description: MITRE ATLAS
+      url: https://atlas.mitre.org/matrices/ATLAS
+  attestation_list:
+    caption: Attestation List
+    type: object_t
+    object: attestation
+    array: true
+    requirement: optional
+    group: context
+    profile: record_integrity
+    from: base_event
+    description: One or more cryptographic `attestation` objects over an event, each providing integrity, authenticity, and non-repudiation. Independent attesters over the same event — for example a producer at write time and a downstream processor at ingest — each contribute a separate attestation, distinct from co-signers on a single attestation, which share its `signatures` array. Carried on the `record_integrity` profile; the object itself is domain-agnostic.
+  authority:
+    caption: DNS Authority Section
+    type: object_t
+    object: dns_resource_record
+    array: true
+    requirement: optional
+    group: context
+    description: The DNS Authority section resource records. Contains NS records pointing to authoritative name servers, or a SOA record for negative responses (NXDOMAIN).
+  authorizations:
+    caption: Authorization Information
+    type: object_t
+    object: authorization
+    array: true
+    requirement: optional
+    group: primary
+    profile: security_control
+    from: base_event
+    description: Provides details about an authorization, such as authorization outcome, and any associated policies related to the activity/event.
+  category_name:
+    caption: Category
+    type: string_t
+    requirement: optional
+    group: classification
+    from: base_event
+    description: 'The event category name, as defined by category_uid value: `Network Activity`.'
+  category_uid:
+    caption: Category ID
+    type: integer_t
+    requirement: required
+    group: classification
+    from: base_event
+    sibling: category_name
+    description: The category unique identifier of the event. Each event class belongs to exactly one category. Producers and mappers must set this to the category defined by the event class being used.
+    enum:
+      '4':
+        caption: Network Activity
+        description: Network Activity events.
+  class_name:
+    caption: Class
+    type: string_t
+    requirement: optional
+    group: classification
+    from: base_event
+    description: 'The event class name, as defined by class_uid value: `DNS Zone Transfer Activity`.'
+  class_uid:
+    caption: Class ID
+    type: integer_t
+    requirement: required
+    group: classification
+    sibling: class_name
+    description: The unique identifier of a class. A class describes the attributes available in an event. Producers and mappers must set this to the `uid` defined in the event class definition. For example, `Detection Finding` is `2004`.
+    enum:
+      '4015':
+        caption: DNS Zone Transfer Activity
+        description: 'DNS Zone Transfer Activity events report the bulk replication of a DNS zone between name servers, as seen on the network. This includes full transfers (AXFR), incremental transfers (IXFR), and change notifications (NOTIFY). Unlike `DNS Activity`, which reports per-name queries and answers, this class captures whole-zone semantics: SOA serials, the records that make up the zone, and the multi-message streams that carry them.'
+  cloud:
+    caption: Cloud
+    type: object_t
+    object: cloud
+    requirement: required
+    group: primary
+    profile: cloud
+    from: base_event
+    description: Describes details about the Cloud environment where the event or finding was created.
+  confidence:
+    caption: Confidence
+    type: string_t
+    requirement: optional
+    group: context
+    profile: security_control
+    from: base_event
+    description: The confidence, normalized to the caption of the confidence_id value. In the case of 'Other', it is defined by the event source.
+  confidence_id:
+    caption: Confidence ID
+    type: integer_t
+    requirement: recommended
+    group: context
+    profile: security_control
+    from: base_event
+    sibling: confidence
+    description: The normalized confidence refers to the accuracy of the security control or alert. An analytic with a low confidence means that the alerts may be noisy or may not be malicious in nature.
+    enum:
+      '0':
+        caption: Unknown
+        description: The normalized confidence is unknown.
+      '1':
+        caption: Low
+      '2':
+        caption: Medium
+      '3':
+        caption: High
+      '99':
+        caption: Other
+        description: The confidence is not mapped to the defined enum values. See the `confidence` attribute, which contains a data source specific value.
+  confidence_score:
+    caption: Confidence Score
+    type: integer_t
+    requirement: optional
+    group: context
+    profile: security_control
+    from: base_event
+    description: The confidence score as reported by the source or assigned by the analyst expressed on a source-specific numeric scale. This score provides finer-grained confidence information than the categorical `confidence_id` value. If `confidence_id` is 99 'Other', it should reflect the the same assessment as `confidence` if both are populated.
+  connection_info:
+    caption: Connection Info
+    type: object_t
+    object: network_connection_info
+    requirement: recommended
+    group: primary
+    from: network
+    description: The network connection information.
+  count:
+    caption: Count
+    type: integer_t
+    requirement: optional
+    group: occurrence
+    from: base_event
+    description: The number of events aggregated into this single record. Only populate for aggregate events. When set, `start_time` and `end_time` should also be provided to define the aggregation window.
+  cumulative_traffic:
+    caption: Cumulative Traffic
+    type: object_t
+    object: network_traffic
+    requirement: optional
+    group: context
+    from: network
+    description: 'The cumulative (running total) network traffic aggregated from the start of a flow or session. Use when reporting: (1) total accumulated bytes/packets since flow initiation, (2) combined aggregation models where both incremental deltas and running totals are reported together (populate both `traffic` for the delta and this attribute for the cumulative total), or (3) final summary metrics when a long-lived connection closes. This represents the sum of all activity from flow start to the current observation, not a delta or point-in-time value.'
+  delegation:
+    caption: Delegation
+    type: object_t
+    object: delegation
+    requirement: optional
+    group: context
+    profile: ai_operation
+    from: network
+    description: The delegation under whose authority this AI operation was performed. Links the event to a durable authorization context independent of traces and sessions, enabling correlation of all events executed under the same delegated authority.
+  device:
+    caption: Device
+    type: object_t
+    object: device
+    requirement: recommended
+    group: primary
+    profile: host
+    from: base_event
+    observable: 20
+    description: The host or device where the activity was observed. Populate with details such as hostname, IP address, OS, and hardware identifiers when available from the source.
+  disposition:
+    caption: Disposition
+    type: string_t
+    requirement: optional
+    group: primary
+    profile: security_control
+    from: base_event
+    description: The disposition name, normalized to the caption of the disposition_id value. In the case of 'Other', it is defined by the event source.
+  disposition_id:
+    caption: Disposition ID
+    type: integer_t
+    requirement: recommended
+    group: primary
+    profile: security_control
+    from: base_event
+    sibling: disposition
+    description: Describes the outcome or action taken by a security control, such as access control checks, malware detections or various types of policy violations.
+    enum:
+      '0':
+        caption: Unknown
+        description: The disposition is unknown.
+      '1':
+        caption: Allowed
+        description: Granted access or allowed the action to the protected resource.
+      '2':
+        caption: Blocked
+        description: Denied access or blocked the action to the protected resource.
+      '3':
+        caption: Quarantined
+        description: A suspicious file or other content was moved to a benign location.
+      '4':
+        caption: Isolated
+        description: A session was isolated on the network or within a browser.
+      '5':
+        caption: Deleted
+        description: A file or other content was deleted.
+      '6':
+        caption: Dropped
+        description: The request was detected as a threat and resulted in the connection being dropped.
+      '7':
+        caption: Custom Action
+        description: A custom action was executed such as running of a command script. Use the `message` attribute of the base class for details.
+      '8':
+        caption: Approved
+        description: A request or submission was approved. For example, when a form was properly filled out and submitted. This is distinct from `1` 'Allowed'.
+      '9':
+        caption: Restored
+        description: A quarantined file or other content was restored to its original location.
+      '10':
+        caption: Exonerated
+        description: A suspicious or risky entity was deemed to no longer be suspicious (re-scored).
+      '11':
+        caption: Corrected
+        description: A corrupt file or configuration was corrected.
+      '12':
+        caption: Partially Corrected
+        description: A corrupt file or configuration was partially corrected.
+      '13':
+        caption: Uncorrected
+        description: A corrupt file or configuration was not corrected.
+      '14':
+        caption: Delayed
+        description: An operation was delayed, for example if a restart was required to finish the operation.
+      '15':
+        caption: Detected
+        description: Suspicious activity or a policy violation was detected without further action.
+      '16':
+        caption: No Action
+        description: The outcome of an operation had no action taken.
+      '17':
+        caption: Logged
+        description: The operation or action was logged without further action.
+      '18':
+        caption: Tagged
+        description: A file or other entity was marked with extended attributes.
+      '19':
+        caption: Alert
+        description: The request or activity was detected as a threat and resulted in a notification but request was not blocked.
+      '20':
+        caption: Count
+        description: Counted the request or activity but did not determine whether to allow it or block it.
+      '21':
+        caption: Reset
+        description: The request was detected as a threat and resulted in the connection being reset.
+      '22':
+        caption: Captcha
+        description: Required the end user to solve a CAPTCHA puzzle to prove that a human being is sending the request.
+      '23':
+        caption: Challenge
+        description: Ran a silent challenge that required the client session to verify that it's a browser, and not a bot.
+      '24':
+        caption: Access Revoked
+        description: 'The requestor''s access has been revoked due to security policy enforcements. Note: use the `Host` profile if the `User` or `Actor` requestor is not present in the event class.'
+      '25':
+        caption: Rejected
+        description: A request or submission was rejected. For example, when a form was improperly filled out and submitted. This is distinct from `2` 'Blocked'.
+      '26':
+        caption: Unauthorized
+        description: An attempt to access a resource was denied due to an authorization check that failed. This is a more specific disposition than `2` 'Blocked' and can be complemented with the `authorizations` attribute for more detail.
+      '27':
+        caption: Error
+        description: An error occurred during the processing of the activity or request. Use the `message` attribute of the base class for details.
+      '99':
+        caption: Other
+        description: The disposition is not mapped. See the `disposition` attribute, which contains a data source specific value.
+  dns_additional:
+    caption: DNS Additional Section
+    type: object_t
+    object: dns_section
+    requirement: optional
+    group: context
+    description: The Additional section of this DNS message, carrying any supplementary resource records (such as an EDNS OPT pseudo-record) and an optional TSIG record. Because `activity_id` distinguishes the request from the response, each event represents a single DNS message with a single Additional section. The TSIG record authenticating the message is available via `dns_additional.tsig`; a `BADKEY` or `BADSIG` error commonly indicates an unauthorized transfer attempt.
+    references:
+    - description: RFC 2845 — Secret Key Transaction Authentication for DNS (TSIG).
+      url: https://www.rfc-editor.org/rfc/rfc2845
+  dns_zone:
+    caption: DNS Zone
+    type: hostname_t
+    requirement: recommended
+    group: primary
+    observable: 1
+    description: 'The DNS zone being transferred, i.e., the zone apex. This is the QNAME present in every message of the transfer or NOTIFY. The message role is conveyed by `activity_id` and the transfer type (AXFR or IXFR) by `transfer_type_id`. For example: `example.com`.'
+  dst_endpoint:
+    caption: Destination Endpoint
+    type: object_t
+    object: network_endpoint
+    requirement: recommended
+    group: primary
+    from: network
+    observable: 20
+    description: The responder (server) in a network connection.
+  duration:
+    caption: Duration Milliseconds
+    type: long_t
+    requirement: optional
+    group: occurrence
+    from: base_event
+    description: The elapsed time of the aggregation window in milliseconds, from `start_time` to `end_time`. Only populate for aggregate events (`count` > 1). The value should equal `end_time - start_time`.
+  end_time:
+    caption: End Time
+    type: timestamp_t
+    requirement: optional
+    group: occurrence
+    from: base_event
+    description: The time of the most recent event in an aggregate (`count` > 1). Do not populate for discrete, point-in-time events - use `time` alone. Subclasses such as findings may redefine this for their own time-range semantics.
+  end_time_dt:
+    caption: End Time
+    type: datetime_t
+    requirement: optional
+    group: occurrence
+    profile: datetime
+    from: base_event
+    description: The time of the most recent event in an aggregate (`count` > 1). Do not populate for discrete, point-in-time events - use `time` alone. Subclasses such as findings may redefine this for their own time-range semantics.
+  enrichments:
+    caption: Enrichments
+    type: object_t
+    object: enrichment
+    array: true
+    requirement: optional
+    group: context
+    from: base_event
+    description: 'The additional information from an external data source, which is associated with the event or a finding. For example add location information for the IP address in the DNS answers:`[{"name": "answers.ip", "value": "92.24.47.250", "type": "location", "data": {"city": "Socotra", "continent": "Asia", "coordinates": [-25.4153, 17.0743], "country": "YE", "desc": "Yemen"}}]`'
+  firewall_rule:
+    caption: Firewall Rule
+    type: object_t
+    object: firewall_rule
+    requirement: optional
+    group: primary
+    profile: security_control
+    from: base_event
+    description: The firewall rule that pertains to the control that triggered the event, if applicable.
+  is_alert:
+    caption: Alert
+    type: boolean_t
+    requirement: recommended
+    group: primary
+    profile: security_control
+    from: base_event
+    description: Indicates that the event is considered to be an alertable signal. Should be set to `true` if `disposition_id = Alert` among other dispositions, and/or `risk_level_id` or `severity_id` of the event is elevated. Not all control events will be alertable, for example if `disposition_id = Exonerated` or `disposition_id = Allowed`.
+  ja4_fingerprint_list:
+    caption: JA4+ Fingerprints
+    type: object_t
+    object: ja4_fingerprint
+    array: true
+    requirement: optional
+    group: context
+    from: network
+    description: A list of the JA4+ network fingerprints.
+  load_balancer:
+    caption: Load Balancer
+    type: object_t
+    object: load_balancer
+    requirement: recommended
+    group: primary
+    profile: load_balancer
+    from: network
+    description: The Load Balancer object contains information related to the device that is distributing incoming traffic to specified destinations.
+  malware:
+    caption: Malware
+    type: object_t
+    object: malware
+    array: true
+    requirement: optional
+    group: primary
+    profile: security_control
+    from: base_event
+    description: A list of Malware objects, describing details about the identified malware.
+  malware_scan_info:
+    caption: Malware Scan Info
+    type: object_t
+    object: malware_scan_info
+    requirement: optional
+    group: primary
+    profile: security_control
+    from: base_event
+    description: Describes details about the scan job that identified malware on the target system.
+  message:
+    caption: Message
+    type: string_t
+    requirement: recommended
+    group: primary
+    from: base_event
+    description: 'A human-readable description of the event, as defined by the source. This should be a concise, meaningful summary suitable for display in a UI or alert notification - not a raw log line. For example: `"User john_doe logged in from 10.0.0.1."` rather than a raw syslog string.'
+  message_context:
+    caption: Message Context
+    type: object_t
+    object: message_context
+    requirement: optional
+    group: context
+    profile: ai_operation
+    from: network
+    description: Communication context for AI system interactions including protocols, roles, clients, and session information for MCP and other AI communication systems.
+  metadata:
+    caption: Metadata
+    type: object_t
+    object: metadata
+    requirement: required
+    group: context
+    from: base_event
+    description: The metadata object describes the event producer, schema version, and processing information. Producers and mappers must populate `metadata.product` to identify the data source, and `metadata.version` to indicate the OCSF schema version used. Consumers rely on this to interpret the event correctly.
+  network_observation_point:
+    caption: Network Observation Point
+    type: object_t
+    object: network_endpoint
+    requirement: optional
+    group: context
+    from: network
+    observable: 20
+    description: The network endpoint that observes or inspects network traffic as a third-party system, used when the observer is neither the source nor the destination of the communication (when `observation_point_id` = 3). Examples include network taps, span ports, inline security devices, or packet capture systems that monitor traffic between other endpoints.
+  num_records:
+    caption: Number of Records
+    type: integer_t
+    requirement: optional
+    group: context
+    description: The number of resource records transferred. Useful when the event source reports a count without shipping every record.
+  observables:
+    caption: Observables
+    type: object_t
+    object: observable
+    array: true
+    requirement: recommended
+    group: primary
+    from: base_event
+    description: The observables array surfaces key indicators and entities from the event or finding in a single, consistent location for downstream correlation and detection. Each entry references an attribute path within the event (e.g., `src_endpoint.ip`) along with its type and value, enabling consumers to extract IOCs without parsing the full event structure.
+    references:
+    - description: OCSF Observables FAQ
+      url: https://github.com/ocsf/ocsf-docs/blob/main/articles/defining-and-using-observables.md
+  observation_point:
+    caption: Observation Point
+    type: string_t
+    requirement: optional
+    group: context
+    from: network
+    description: Indicates whether the source network endpoint, destination network endpoint, or neither served as the observation point for the activity. The value is normalized to the caption of the `observation_point_id`.
+  observation_point_id:
+    caption: Observation Point ID
+    type: integer_t
+    requirement: optional
+    group: context
+    from: network
+    sibling: observation_point
+    description: The normalized identifier of the observation point. The observation point identifier indicates whether the source network endpoint, destination network endpoint, or neither served as the observation point for the activity.
+    enum:
+      '0':
+        caption: Unknown
+        description: The observation point is unknown.
+      '1':
+        caption: Source
+        description: The source network endpoint is the observation point.
+      '2':
+        caption: Destination
+        description: The destination network endpoint is the observation point.
+      '3':
+        caption: Neither
+        description: Neither the source nor destination network endpoint is the observation point. Refer to the `network_observation_point` attribute for details.
+      '4':
+        caption: Both
+        description: Both the source and destination network endpoint are the observation point. This typically occurs in localhost or internal communications where the source and destination are the same endpoint, often resulting in a `connection_info.direction` of `Local`.
+      '99':
+        caption: Other
+        description: The observation point is not mapped. See the `observation_point` attribute for a data source specific value.
+  osint:
+    caption: OSINT
+    type: object_t
+    object: osint
+    array: true
+    requirement: required
+    group: primary
+    profile: osint
+    from: base_event
+    description: The OSINT (Open Source Intelligence) object contains details related to an indicator such as the indicator itself, related indicators, geolocation, registrar information, subdomains, analyst commentary, and other contextual information. This information can be used to further enrich a detection or finding by providing decisioning support to other analysts and engineers.
+  packet_list:
+    caption: Packets
+    type: object_t
+    object: packet
+    array: true
+    requirement: optional
+    group: context
+    from: network
+    description: The list of packet objects describing captured network packets.
+  policy:
+    caption: Policy
+    type: object_t
+    object: policy
+    requirement: optional
+    group: primary
+    profile: security_control
+    from: base_event
+    description: The policy that pertains to the control that triggered the event, if applicable. For example the name of an anti-malware policy or an access control policy.
+  proxy:
+    caption: Proxy
+    type: object_t
+    object: network_proxy
+    requirement: recommended
+    group: primary
+    from: network
+    observable: 20
+    deprecated:
+      since: 1.1.0
+      message: Use the `proxy_endpoint` attribute instead.
+      superseded_by: [proxy_endpoint]
+    description: The proxy (server) in a network connection.
+  proxy_connection_info:
+    caption: Proxy Connection Info
+    type: object_t
+    object: network_connection_info
+    requirement: recommended
+    group: context
+    profile: network_proxy
+    from: network
+    description: The connection information from the proxy server to the remote server.
+  proxy_endpoint:
+    caption: Proxy Endpoint
+    type: object_t
+    object: network_proxy
+    requirement: optional
+    group: context
+    profile: network_proxy
+    from: network
+    observable: 20
+    description: The proxy (server) in a network connection.
+  proxy_http_request:
+    caption: Proxy HTTP Request
+    type: object_t
+    object: http_request
+    requirement: optional
+    group: context
+    profile: network_proxy
+    from: network
+    description: The HTTP Request from the proxy server to the remote server.
+  proxy_http_response:
+    caption: Proxy HTTP Response
+    type: object_t
+    object: http_response
+    requirement: optional
+    group: context
+    profile: network_proxy
+    from: network
+    description: The HTTP Response from the remote server to the proxy server.
+  proxy_tls:
+    caption: Proxy TLS
+    type: object_t
+    object: tls
+    requirement: recommended
+    group: context
+    profile: network_proxy
+    from: network
+    description: The TLS protocol negotiated between the proxy server and the remote server.
+  proxy_traffic:
+    caption: Proxy Traffic
+    type: object_t
+    object: network_traffic
+    requirement: recommended
+    group: context
+    profile: network_proxy
+    from: network
+    description: The network traffic refers to the amount of data moving across a network, from proxy to remote server at a given point of time.
+  raw_data:
+    caption: Raw Data
+    type: string_t
+    requirement: optional
+    group: context
+    from: base_event
+    description: The original event/finding data as received from the source, before normalization into OCSF. Populate this with the verbatim log line, JSON payload, or other native format for forensic and debugging purposes. This field is not intended for structured querying - use the normalized OCSF attributes instead.
+  raw_data_hash:
+    caption: Raw Data Hash
+    type: object_t
+    object: fingerprint
+    requirement: optional
+    group: context
+    from: base_event
+    observable: 30
+    description: A fingerprint (hash) of the `raw_data` content. Use this to verify the integrity of the original event data or to deduplicate events.
+  raw_data_size:
+    caption: Raw Data Size
+    type: long_t
+    requirement: optional
+    group: context
+    from: base_event
+    description: The size of the original event data (as captured in `raw_data`) in bytes, before OCSF normalization. Useful for metering and capacity planning.
+  rcode:
+    caption: Response Code
+    type: string_t
+    requirement: recommended
+    group: primary
+    description: The DNS server response code, normalized to the caption of the `rcode_id` value. In the case of 'Other', it is defined by the event source. A `Refused` code typically indicates a blocked or unauthorized transfer.
+  rcode_id:
+    caption: Response Code ID
+    type: integer_t
+    requirement: recommended
+    group: primary
+    sibling: rcode
+    description: The normalized identifier of the DNS server response code. See RFC 6895.
+    enum:
+      '0':
+        caption: NoError
+        description: No Error.
+      '1':
+        caption: FormError
+        description: Format Error.
+      '2':
+        caption: ServError
+        description: Server Failure.
+      '3':
+        caption: NXDomain
+        description: Non-Existent Domain.
+      '4':
+        caption: NotImp
+        description: Not Implemented.
+      '5':
+        caption: Refused
+        description: Query Refused. For a zone transfer, this typically indicates the transfer was blocked because the requesting client is not authorized.
+      '6':
+        caption: YXDomain
+        description: Name Exists when it should not.
+      '7':
+        caption: YXRRSet
+        description: RR Set Exists when it should not.
+      '8':
+        caption: NXRRSet
+        description: RR Set that should exist does not.
+      '9':
+        caption: NotAuth
+        description: Not Authorized or Server Not Authoritative for zone.
+      '10':
+        caption: NotZone
+        description: Name not contained in zone.
+      '11':
+        caption: DSOTYPENI
+        description: DSO-TYPE Not Implemented.
+      '16':
+        caption: BADVERS
+        description: Bad EDNS OPT Version. Indicates that the client requested an EDNS version that the server does not support.
+      '17':
+        caption: BADKEY
+        description: Key not recognized.
+      '18':
+        caption: BADTIME
+        description: Signature out of time window.
+      '19':
+        caption: BADMODE
+        description: Bad TKEY Mode.
+      '20':
+        caption: BADNAME
+        description: Duplicate key name.
+      '21':
+        caption: BADALG
+        description: Algorithm not supported.
+      '22':
+        caption: BADTRUNC
+        description: Bad Truncation.
+      '23':
+        caption: BADCOOKIE
+        description: Bad/missing Server Cookie.
+      '24':
+        caption: Unassigned
+        description: 'The codes deemed to be unassigned by the RFC (unassigned codes: 12-15, 24-3840, 4096-65534).'
+      '25':
+        caption: Reserved
+        description: 'The codes deemed to be reserved by the RFC (codes: 3841-4095, 65535).'
+      '99':
+        caption: Other
+        description: The dns response code is not defined by the RFC.
+  records:
+    caption: DNS Resource Records
+    type: object_t
+    object: dns_resource_record
+    array: true
+    requirement: recommended
+    group: primary
+    description: The resource records transferred for the zone. For an AXFR this is the complete set of zone records; for an IXFR this is the changed records that make up the delta.
+  risk_details:
+    caption: Risk Details
+    type: string_t
+    requirement: optional
+    group: context
+    profile: security_control
+    from: base_event
+    description: Describes the risk associated with the finding.
+  risk_level:
+    caption: Risk Level
+    type: string_t
+    requirement: optional
+    group: context
+    profile: security_control
+    from: base_event
+    description: The risk level, normalized to the caption of the risk_level_id value.
+  risk_level_id:
+    caption: Risk Level ID
+    type: integer_t
+    requirement: optional
+    group: context
+    profile: security_control
+    from: base_event
+    sibling: risk_level
+    description: The normalized risk level id.
+    enum:
+      '0':
+        caption: Info
+      '1':
+        caption: Low
+      '2':
+        caption: Medium
+      '3':
+        caption: High
+      '4':
+        caption: Critical
+      '99':
+        caption: Other
+        description: The risk level is not mapped. See the `risk_level` attribute, which contains a data source specific value.
+  risk_score:
+    caption: Risk Score
+    type: integer_t
+    requirement: optional
+    group: context
+    profile: security_control
+    from: base_event
+    description: The risk score as reported by the event source.
+  severity:
+    caption: Severity
+    type: string_t
+    requirement: optional
+    group: classification
+    from: base_event
+    description: 'The event/finding severity label, normalized to the caption of the `severity_id` value. When `severity_id` is `99` (Other), this attribute must contain the source-specific severity label. For all other values, this should match the caption defined for that `severity_id` enum value (e.g., `"High"` for `severity_id: 4`).'
+  severity_id:
+    caption: Severity ID
+    type: integer_t
+    requirement: required
+    group: classification
+    from: base_event
+    sibling: severity
+    description: |-
+      The normalized identifier of the event/finding severity.
+
+      The normalized severity is a measurement the effort and expense required to manage and resolve an event or incident. Smaller numerical values represent lower impact events, and larger numerical values represent higher impact events.
+    enum:
+      '0':
+        caption: Unknown
+        description: The event/finding severity is unknown.
+      '1':
+        caption: Informational
+        description: Informational message. No action required.
+      '2':
+        caption: Low
+        description: The user decides if action is needed.
+      '3':
+        caption: Medium
+        description: Action is required but the situation is not serious at this time.
+      '4':
+        caption: High
+        description: Action is required immediately.
+      '5':
+        caption: Critical
+        description: Action is required immediately and the scope is broad.
+      '6':
+        caption: Fatal
+        description: An error occurred but it is too late to take remedial action.
+      '99':
+        caption: Other
+        description: The event/finding severity is not mapped. See the `severity` attribute, which contains a data source specific value.
+  soa:
+    caption: SOA Record
+    type: object_t
+    object: dns_soa
+    requirement: optional
+    group: context
+    description: The current Start of Authority (SOA) record for the zone. For an IXFR request, this is the SOA the secondary already holds, i.e., the "from" serial that bounds the requested delta.
+  src_endpoint:
+    caption: Source Endpoint
+    type: object_t
+    object: network_endpoint
+    requirement: recommended
+    group: primary
+    from: network
+    observable: 20
+    description: The initiator (client) of the network connection.
+  start_time:
+    caption: Start Time
+    type: timestamp_t
+    requirement: optional
+    group: occurrence
+    from: base_event
+    description: The time of the earliest event in an aggregate (`count` > 1). Do not populate for discrete, point-in-time events - use `time` alone. Subclasses such as findings may redefine this for their own time-range semantics.
+  start_time_dt:
+    caption: Start Time
+    type: datetime_t
+    requirement: optional
+    group: occurrence
+    profile: datetime
+    from: base_event
+    description: The time of the earliest event in an aggregate (`count` > 1). Do not populate for discrete, point-in-time events - use `time` alone. Subclasses such as findings may redefine this for their own time-range semantics.
+  status:
+    caption: Status
+    type: string_t
+    requirement: recommended
+    group: primary
+    from: base_event
+    description: 'The event status label, normalized to the caption of the `status_id` value. When `status_id` is `99` (Other), this attribute must contain the source-specific status label. For all other values, this must match the caption defined for that `status_id` enum value (e.g., `"Success"` for `status_id: 1`).'
+  status_code:
+    caption: Status Code
+    type: string_t
+    requirement: recommended
+    group: primary
+    from: base_event
+    description: The source-specific status or error code as reported by the event source. For example, a Windows logon failure code (`0x18`), an HTTP response code (`403`), or an AWS API error code. This preserves the original code for detailed troubleshooting beyond what `status_id` conveys.
+  status_detail:
+    caption: Status Detail
+    type: string_t
+    requirement: recommended
+    group: primary
+    from: base_event
+    description: 'A human-readable description providing additional context about the event outcome. Use this to convey details that go beyond the normalized `status_id` and source-specific `status_code`, such as a failure reason or error message. For example: `"Account locked after 5 failed attempts."`.'
+  status_id:
+    caption: Status ID
+    type: integer_t
+    requirement: recommended
+    group: primary
+    from: base_event
+    sibling: status
+    description: The normalized status of the event outcome. Use this family of attributes to convey the outcome of the activity described by the event. Producers should map their source outcome to `1` (Success) or `2` (Failure). Use `0` (Unknown) when the outcome cannot be determined, and `99` (Other) with a populated `status` string when the source value does not map cleanly.
+    enum:
+      '0':
+        caption: Unknown
+        description: The status is unknown.
+      '1':
+        caption: Success
+        description: The activity completed successfully.
+      '2':
+        caption: Failure
+        description: The activity failed.
+      '99':
+        caption: Other
+        description: The status is not mapped. See the `status` attribute, which contains a data source specific value.
+  time:
+    caption: Event Time
+    type: timestamp_t
+    requirement: required
+    group: occurrence
+    from: base_event
+    description: 'The primary timestamp of the event - when the activity actually occurred at the source. This does not capture when the event record was created or serialized by the source system; for event lifecycle timestamps such as ingestion and processing, use `metadata.logged_time` and `metadata.processed_time` respectively, or the equivalent attributes in the `metadata.loggers` array when recording pipeline stages. For aggregate events (`count` > 1), set this to `start_time` (the earliest OCSF `time` in the aggregate) to preserve causal ordering and consistent timeline alignment. Note: finding classes redefine `time` as the finding creation time rather than the activity occurrence time. This must be a UTC epoch value in milliseconds (e.g., `1776881335332`). Mappers should use the most precise and authoritative timestamp available from the source.'
+  time_dt:
+    caption: Event Time
+    type: datetime_t
+    requirement: optional
+    group: occurrence
+    profile: datetime
+    from: base_event
+    description: 'The primary timestamp of the event - when the activity actually occurred at the source. This does not capture when the event record was created or serialized by the source system; for event lifecycle timestamps such as ingestion and processing, use `metadata.logged_time` and `metadata.processed_time` respectively, or the equivalent attributes in the `metadata.loggers` array when recording pipeline stages. For aggregate events (`count` > 1), set this to `start_time` (the earliest OCSF `time` in the aggregate) to preserve causal ordering and consistent timeline alignment. Note: finding classes redefine `time` as the finding creation time rather than the activity occurrence time. This must be a UTC epoch value in milliseconds (e.g., `1776881335332`). Mappers should use the most precise and authoritative timestamp available from the source.'
+  timezone_offset:
+    caption: Timezone Offset
+    type: integer_t
+    requirement: recommended
+    group: occurrence
+    from: base_event
+    description: The number of minutes that the reported event `time` is ahead or behind UTC, in the range -1,080 to +1,080. This allows consumers to reconstruct the local time at the event source. For example, US Eastern Standard Time is `-300`. Populate this when the source provides local time zone information.
+  tls:
+    caption: TLS
+    type: object_t
+    object: tls
+    requirement: optional
+    group: context
+    from: network
+    description: The Transport Layer Security (TLS) attributes.
+  traffic:
+    caption: Traffic
+    type: object_t
+    object: network_traffic
+    requirement: recommended
+    group: primary
+    from: network
+    description: 'The network traffic for this observation period. Use when reporting: (1) delta values (bytes/packets transferred since the last observation), (2) instantaneous measurements at a specific point in time, or (3) standalone single-event metrics. This attribute represents a point-in-time measurement or incremental change, not a running total. For accumulated totals across multiple observations or the lifetime of a flow, use `cumulative_traffic` instead.'
+  transaction_id:
+    caption: DNS Transaction ID
+    type: integer_t
+    requirement: recommended
+    group: primary
+    description: The 16-bit DNS transaction identifier assigned by the client and echoed unchanged in the server response. This value is the same for both the request and response messages.
+  transfer_type:
+    caption: Transfer Type
+    type: string_t
+    requirement: recommended
+    group: primary
+    description: The zone transfer type, normalized to the caption of the `transfer_type_id` value. In the case of 'Other', it is defined by the event source.
+  transfer_type_id:
+    caption: Transfer Type ID
+    type: integer_t
+    requirement: recommended
+    group: primary
+    sibling: transfer_type
+    description: The normalized identifier of the zone transfer type. On a `Transfer Request` this is the type requested; on a `Transfer Response` or `Transfer` activity this is the type actually delivered.
+    enum:
+      '0':
+        caption: Unknown
+        description: The transfer type is unknown. For example, the event source reports a transfer without indicating whether it was full or incremental, or the message has no transfer type (such as a NOTIFY).
+      '1':
+        caption: Full Transfer (AXFR)
+        description: A full zone transfer, in which the primary name server sends the complete contents of the zone.
+      '2':
+        caption: Incremental Transfer (IXFR)
+        description: An incremental zone transfer, in which the primary name server sends only the changes since the secondary's known SOA serial.
+      '99':
+        caption: Other
+        description: The transfer type is not mapped. See the `transfer_type` attribute, which contains a data source specific value.
+  type_name:
+    caption: Type Name
+    type: string_t
+    requirement: optional
+    group: classification
+    from: base_event
+    description: 'The event/finding type name, combining the class and activity (e.g., `"Detection Finding: Create"`). The value must match the `class_name` and `activity_name` joined by `": "`.'
+  type_uid:
+    caption: Type ID
+    type: long_t
+    requirement: required
+    group: classification
+    sibling: type_name
+    description: 'The event/finding type ID. It identifies the event''s semantics and structure. Producers and mappers must compute this as `class_uid * 100 + activity_id`. It uniquely identifies the combination of event class and activity across the entire schema. For example, `Detection Finding: Create` is `200401`.'
+    enum:
+      '401500':
+        caption: 'DNS Zone Transfer Activity: Unknown'
+      '401501':
+        caption: 'DNS Zone Transfer Activity: Transfer Request'
+        description: A request from a secondary name server to transfer a zone. Whether a full (AXFR) or incremental (IXFR) transfer was requested is conveyed by `transfer_type_id`.
+      '401502':
+        caption: 'DNS Zone Transfer Activity: Transfer Response'
+        description: A zone transfer response message from the primary name server. A single transfer may be delivered as a stream of multiple response messages. Whether the delivered data is a full (AXFR) or incremental (IXFR) transfer is conveyed by `transfer_type_id`; note that a server may answer an IXFR request with a full transfer when it cannot produce a delta.
+      '401503':
+        caption: 'DNS Zone Transfer Activity: Notify'
+        description: A NOTIFY exchange, comprising the primary name server's notification that the zone has changed and the secondary's acknowledgement, reported as a single record rather than as separate messages. NOTIFY has no transfer type; the outcome of the acknowledgement is conveyed by `status_id`.
+      '401504':
+        caption: 'DNS Zone Transfer Activity: Transfer'
+        description: A zone transfer reported as a single summary record rather than as separate request and response messages. Used by sources, such as name server logs, that emit one event per transfer with the zone, record count, byte count, duration, and peer. Whether the transfer was full (AXFR) or incremental (IXFR) is conveyed by `transfer_type_id`; whether it succeeded is conveyed by `status_id`.
+      '401599':
+        caption: 'DNS Zone Transfer Activity: Other'
+  unmapped:
+    caption: Unmapped Data
+    type: object_t
+    object: object
+    requirement: optional
+    group: context
+    from: base_event
+    description: |-
+      A container for source-specific attributes that do not map to any defined OCSF attribute. Use this to preserve valuable source data that would otherwise be lost during normalization. The keys and values are specific to the event source.
+
+      Note: Consumers should not rely on a stable structure within this field. The preferred approach to unmapped attributes is to create a custom extension with the desired structure.
+    references:
+    - description: 'Schema FAQ: When should I use the unmapped attribute?'
+      url: https://github.com/ocsf/ocsf-docs/blob/main/faqs/schema-faq.md#when-should-i-use-the-unmapped-attribute
+    - description: OCSF Extensions
+      url: https://github.com/ocsf/ocsf-schema/blob/main/CONTRIBUTING.md#ocsf-extensions
+  updated_soa:
+    caption: Updated SOA Record
+    type: object_t
+    object: dns_soa
+    requirement: optional
+    group: context
+    description: The new Start of Authority (SOA) record for the zone after the transfer, i.e., the "to" serial. Present when the transfer advances the zone to a newer serial.

@@ -1,0 +1,62 @@
+name: service_privilege_analysis
+caption: Service Privilege Analysis
+extends: object
+description: The Service Privilege Analysis object describes privilege analysis results for a single cloud service or resource namespace. It provides metrics on privilege usage, counts by type, and mappings to potential attack techniques.
+profiles: [datetime]
+referenced_by:
+  objects:
+    permission_analysis_result: [service_privilege_analysis_list]
+attributes:
+  all_privileges_unused:
+    caption: All Privileges Unused
+    type: boolean_t
+    requirement: optional
+    description: Indicates whether all privileges within this service are unused.
+  analyzed_privileges_count:
+    caption: Analyzed Privileges Count
+    type: integer_t
+    requirement: optional
+    description: The total count of privileges analyzed within this service.
+  execute_count:
+    caption: Execute Privilege Count
+    type: integer_t
+    requirement: optional
+    description: The count of execute-type privileges within this service.
+  last_used_time:
+    caption: Last Used Time
+    type: timestamp_t
+    requirement: optional
+    description: The most recent time any privilege in this service was used.
+  last_used_time_dt:
+    caption: Last Used Time
+    type: datetime_t
+    requirement: optional
+    profile: datetime
+    description: The most recent time any privilege in this service was used.
+  name:
+    caption: Name
+    type: string_t
+    requirement: required
+    description: 'The service or namespace identifier. Examples: `s3`, `ec2` (AWS); `Microsoft.Storage` (Azure); `storage` (GCP).'
+  privilege_attack_info_list:
+    caption: Privilege Attack Info List
+    type: object_t
+    object: privilege_attack_info
+    array: true
+    requirement: optional
+    description: The list of privilege-to-attack mappings for this service.
+  read_count:
+    caption: Read Privilege Count
+    type: integer_t
+    requirement: optional
+    description: The count of read-type privileges within this service.
+  unused_privileges_count:
+    caption: Unused Privileges Count
+    type: integer_t
+    requirement: optional
+    description: The count of unused privileges within this service.
+  write_count:
+    caption: Write Privilege Count
+    type: integer_t
+    requirement: optional
+    description: The count of write-type privileges within this service.

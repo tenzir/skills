@@ -1,0 +1,675 @@
+objects:
+- name: _dns
+  caption: DNS
+  abstract: true
+  extends: object
+  group: Network
+  summary: The Domain Name System (DNS) object represents the shared information associated with the DNS query and answer objects.
+  path: v1.1.0/objects/_dns.yaml
+- name: _entity
+  caption: Entity
+  abstract: true
+  extends: object
+  group: Base
+  summary: The Entity object is an unordered collection of attributes, with a name and unique identifier.
+  path: v1.1.0/objects/_entity.yaml
+- name: _resource
+  caption: Resource
+  abstract: true
+  extends: _entity
+  group: Base
+  summary: The Resource object contains attributes that provide information about a particular resource.
+  path: v1.1.0/objects/_resource.yaml
+- name: account
+  caption: Account
+  extends: _entity
+  group: Identity & Access
+  summary: The Account object contains details about the account that initiated or performed a specific activity within a system or application.
+  path: v1.1.0/objects/account.yaml
+- name: actor
+  caption: Actor
+  extends: object
+  group: Identity & Access
+  summary: The Actor object contains details about the user, role, or process that initiated or performed a specific activity.
+  path: v1.1.0/objects/actor.yaml
+- name: affected_code
+  caption: Affected Code
+  extends: object
+  group: File & Data
+  summary: The Affected Code object describes details about a code block identified as vulnerable.
+  path: v1.1.0/objects/affected_code.yaml
+- name: affected_package
+  caption: Affected Software Package
+  extends: package
+  group: File & Data
+  summary: The Affected Package object describes details about a software package identified as affected by a vulnerability/vulnerabilities.
+  path: v1.1.0/objects/affected_package.yaml
+- name: analytic
+  caption: Analytic
+  extends: _entity
+  group: Findings & Compliance
+  summary: The Analytic object contains details about the analytic technique used to analyze and derive insights from the data or information that led to the creation of a finding or conclusion.
+  path: v1.1.0/objects/analytic.yaml
+- name: api
+  caption: API
+  extends: object
+  group: Metadata & Context
+  summary: The API, or Application Programming Interface, object represents information pertaining to an API request and response.
+  path: v1.1.0/objects/api.yaml
+- name: attack
+  caption: MITRE ATT&CK®
+  extends: object
+  group: Threat Intelligence
+  summary: The [MITRE ATT&CK®](https://attack.mitre.org) object describes the tactic, technique & sub-technique associated to an attack as defined in [ATT&CK MatrixTM](https://attack.mitre.org/wiki/ATT&CK_Matrix).
+  path: v1.1.0/objects/attack.yaml
+- name: authorization
+  caption: Authorization Result
+  extends: object
+  group: Identity & Access
+  summary: The Authorization Result object provides details about the authorization outcome and associated policies related to activity.
+  path: v1.1.0/objects/authorization.yaml
+- name: certificate
+  caption: Digital Certificate
+  extends: object
+  group: Location & Geography
+  summary: The Digital Certificate, also known as a Public Key Certificate, object contains information about the ownership and usage of a public key.
+  path: v1.1.0/objects/certificate.yaml
+- name: cis_benchmark
+  caption: CIS Benchmark
+  extends: object
+  group: Findings & Compliance
+  summary: The CIS Benchmark object describes best practices for securely configuring IT systems, software, networks, and cloud infrastructure as defined by the [Center for Internet Security](https://www.cisecurity.org/cis-benchmarks/).
+  path: v1.1.0/objects/cis_benchmark.yaml
+- name: cis_benchmark_result
+  caption: CIS Benchmark Result
+  extends: object
+  group: Findings & Compliance
+  summary: The CIS Benchmark Result object contains information as defined by the Center for Internet Security ([CIS](https://www.cisecurity.org/cis-benchmarks/)) benchmark result.
+  path: v1.1.0/objects/cis_benchmark_result.yaml
+- name: cis_control
+  caption: CIS Control
+  extends: object
+  group: Findings & Compliance
+  summary: The CIS Control (aka Critical Security Control) object describes a prioritized set of actions to protect your organization and data from cyber-attack vectors.
+  path: v1.1.0/objects/cis_control.yaml
+- name: cis_csc
+  caption: CIS CSC
+  extends: object
+  group: Findings & Compliance
+  summary: The CIS Critical Security Control (CSC) contains information as defined by the Center for Internet Security Critical Security Control [(CIS CSC)](https://www.cisecurity.org/controls).
+  path: v1.1.0/objects/cis_csc.yaml
+- name: cloud
+  caption: Cloud
+  extends: object
+  group: Cloud & Resources
+  summary: The Cloud object contains information about a cloud account such as AWS Account ID, regions, etc.
+  path: v1.1.0/objects/cloud.yaml
+- name: compliance
+  caption: Compliance
+  extends: object
+  group: Findings & Compliance
+  summary: The Compliance object contains information about Industry and Regulatory Framework standards, controls and requirements.
+  path: v1.1.0/objects/compliance.yaml
+- name: container
+  caption: Container
+  extends: object
+  observable: 27
+  group: Device & Host
+  summary: The Container object describes an instance of a specific container.
+  path: v1.1.0/objects/container.yaml
+- name: cve
+  caption: CVE
+  extends: object
+  group: Threat Intelligence
+  summary: The Common Vulnerabilities and Exposures (CVE) object represents publicly disclosed cybersecurity vulnerabilities defined in CVE Program catalog ([CVE](https://cve.mitre.org/)).
+  path: v1.1.0/objects/cve.yaml
+- name: cvss
+  caption: CVSS Score
+  extends: object
+  group: Threat Intelligence
+  summary: The Common Vulnerability Scoring System ([CVSS](https://www.first.org/cvss/)) object provides a way to capture the principal characteristics of a vulnerability and produce a numerical score reflecting its severity.
+  path: v1.1.0/objects/cvss.yaml
+- name: cwe
+  caption: CWE
+  extends: object
+  group: Threat Intelligence
+  summary: The CWE object represents a weakness in a software system that can be exploited by a threat actor to perform an attack.
+  path: v1.1.0/objects/cwe.yaml
+- name: database
+  caption: Database
+  extends: _entity
+  group: File & Data
+  summary: The database object is used for databases which are typically datastore services that contain an organized collection of structured and unstructured data or a types of data.
+  path: v1.1.0/objects/database.yaml
+- name: databucket
+  caption: Databucket
+  extends: _entity
+  group: File & Data
+  summary: The databucket object is a basic container that holds data, typically organized through the use of data partitions.
+  path: v1.1.0/objects/databucket.yaml
+- name: dce_rpc
+  caption: DCE/RPC
+  extends: object
+  group: Network
+  summary: The DCE/RPC, or Distributed Computing Environment/Remote Procedure Call, object describes the remote procedure call system for distributed computing environments.
+  path: v1.1.0/objects/dce_rpc.yaml
+- name: device
+  caption: Device
+  extends: endpoint
+  observable: 20
+  group: Device & Host
+  summary: The Device object represents an addressable computer system or host, which is typically connected to a computer network and participates in the transmission or processing of data within the computer network.
+  path: v1.1.0/objects/device.yaml
+- name: device_hw_info
+  caption: Device Hardware Info
+  extends: object
+  group: Device & Host
+  summary: The Device Hardware Information object contains details and specifications of the physical components that make up a device.
+  path: v1.1.0/objects/device_hw_info.yaml
+- name: digital_signature
+  caption: Digital Signature
+  extends: object
+  group: File & Data
+  summary: The Digital Signature object contains information about the cryptographic mechanism used to verify the authenticity, integrity, and origin of the file or application.
+  path: v1.1.0/objects/digital_signature.yaml
+- name: display
+  caption: Display
+  extends: object
+  group: Device & Host
+  summary: The Display object contains information about the physical or virtual display connected to a computer system.
+  path: v1.1.0/objects/display.yaml
+- name: dns_answer
+  caption: DNS Answer
+  extends: _dns
+  group: Network
+  summary: The DNS Answer object represents a specific response provided by the Domain Name System (DNS) when querying for information about a domain or performing a DNS operation.
+  path: v1.1.0/objects/dns_answer.yaml
+- name: dns_query
+  caption: DNS Query
+  extends: _dns
+  group: Network
+  summary: The DNS query object represents a specific request made to the Domain Name System (DNS) to retrieve information about a domain or perform a DNS operation.
+  path: v1.1.0/objects/dns_query.yaml
+- name: email
+  caption: Email
+  extends: object
+  observable: 22
+  group: Email
+  summary: The Email object describes the email metadata such as sender, recipients, and direction.
+  path: v1.1.0/objects/email.yaml
+- name: email_auth
+  caption: Email Authentication
+  extends: object
+  group: Email
+  summary: The Email Authentication object describes the Sender Policy Framework (SPF), DomainKeys Identified Mail (DKIM) and Domain-based Message Authentication, Reporting and Conformance (DMARC) attributes of an email.
+  path: v1.1.0/objects/email_auth.yaml
+- name: endpoint
+  caption: Endpoint
+  extends: _entity
+  observable: 20
+  group: Network
+  summary: The Endpoint object describes a physical or virtual device that connects to and exchanges information with a computer network.
+  path: v1.1.0/objects/endpoint.yaml
+- name: endpoint_connection
+  caption: Endpoint Connection
+  extends: object
+  group: Network
+  summary: The Endpoint Connection object contains information detailing a connection attempt to an endpoint.
+  path: v1.1.0/objects/endpoint_connection.yaml
+- name: enrichment
+  caption: Enrichment
+  extends: object
+  group: Metadata & Context
+  summary: The Enrichment object provides inline enrichment data for specific attributes of interest within an event.
+  path: v1.1.0/objects/enrichment.yaml
+- name: epss
+  caption: EPSS
+  extends: object
+  group: Threat Intelligence
+  summary: The Exploit Prediction Scoring System (EPSS) object describes the estimated probability a vulnerability will be exploited.
+  path: v1.1.0/objects/epss.yaml
+- name: evidences
+  caption: Evidence Artifacts
+  extends: object
+  group: Findings & Compliance
+  summary: A collection of evidence artifacts associated to the activity/activities that triggered a security detection.
+  path: v1.1.0/objects/evidences.yaml
+- name: extension
+  caption: Schema Extension
+  extends: _entity
+  group: Metadata & Context
+  summary: The OCSF Schema Extension object provides detailed information about the schema extension used to construct the event.
+  path: v1.1.0/objects/extension.yaml
+- name: feature
+  caption: Feature
+  extends: _entity
+  group: Metadata & Context
+  summary: The Feature object provides information about the software product feature that generated a specific event.
+  path: v1.1.0/objects/feature.yaml
+- name: file
+  caption: File
+  extends: _entity
+  observable: 24
+  group: File & Data
+  summary: The File object represents the metadata associated with a file stored in a computer system.
+  path: v1.1.0/objects/file.yaml
+- name: finding
+  caption: Finding
+  extends: object
+  group: Findings & Compliance
+  deprecated: true
+  summary: The Finding object describes metadata related to a security finding generated by a security tool or system.
+  path: v1.1.0/objects/finding.yaml
+- name: finding_info
+  caption: Finding Information
+  extends: object
+  group: Findings & Compliance
+  summary: The Finding Information object describes metadata related to a security finding generated by a security tool or system.
+  path: v1.1.0/objects/finding_info.yaml
+- name: fingerprint
+  caption: Fingerprint
+  extends: object
+  observable: 30
+  group: File & Data
+  summary: The Fingerprint object provides detailed information about a digital fingerprint, which is a compact representation of data used to identify a longer piece of information, such as a public key or file content.
+  path: v1.1.0/objects/fingerprint.yaml
+- name: firewall_rule
+  caption: Firewall Rule
+  extends: rule
+  group: Findings & Compliance
+  summary: The Firewall Rule object represents a specific rule within a firewall policy or event.
+  path: v1.1.0/objects/firewall_rule.yaml
+- name: group
+  caption: Group
+  extends: _entity
+  group: Identity & Access
+  summary: The Group object represents a collection or association of entities, such as users, policies, or devices.
+  path: v1.1.0/objects/group.yaml
+- name: hassh
+  caption: HASSH
+  extends: object
+  group: Network
+  summary: The HASSH object contains SSH network fingerprinting values for specific client/server implementations.
+  path: v1.1.0/objects/hassh.yaml
+- name: http_cookie
+  caption: HTTP Cookie
+  extends: object
+  group: Network
+  summary: The HTTP Cookie object, also known as a web cookie or browser cookie, contains details and values pertaining to a small piece of data that a server sends to a user's web browser.
+  path: v1.1.0/objects/http_cookie.yaml
+- name: http_header
+  caption: HTTP Header
+  extends: object
+  group: Network
+  summary: TThe HTTP Header object represents the headers sent in an HTTP request or response.
+  path: v1.1.0/objects/http_header.yaml
+- name: http_request
+  caption: HTTP Request
+  extends: object
+  group: Network
+  summary: The HTTP Request object represents the attributes of a request made to a web server.
+  path: v1.1.0/objects/http_request.yaml
+- name: http_response
+  caption: HTTP Response
+  extends: object
+  group: Network
+  summary: The HTTP Response object contains detailed information about the response sent from a web server to the requester.
+  path: v1.1.0/objects/http_response.yaml
+- name: idp
+  caption: Identity Provider
+  extends: _entity
+  group: Identity & Access
+  summary: The Identity Provider object contains detailed information about a provider responsible for creating, maintaining, and managing identity information while offering authentication services to applications.
+  path: v1.1.0/objects/idp.yaml
+- name: image
+  caption: Image
+  extends: _entity
+  group: Device & Host
+  summary: The Image object provides a description of a specific Virtual Machine (VM) or Container image.
+  path: v1.1.0/objects/image.yaml
+- name: job
+  caption: Job
+  extends: object
+  group: Discovery
+  summary: The Job object provides information about a scheduled job or task, including its name, command line, and state.
+  path: v1.1.0/objects/job.yaml
+- name: kb_article
+  caption: KB Article
+  extends: object
+  group: Discovery
+  summary: The KB Article object contains metadata that describes the patch or update.
+  path: v1.1.0/objects/kb_article.yaml
+- name: kernel
+  caption: Kernel Resource
+  extends: object
+  group: Device & Host
+  summary: The Kernel Resource object provides information about a specific kernel resource, including its name and type.
+  path: v1.1.0/objects/kernel.yaml
+- name: kernel_driver
+  caption: Kernel Extension
+  extends: object
+  group: Device & Host
+  summary: The Kernel Extension object describes a kernel driver that has been loaded or unloaded into the operating system (OS) kernel.
+  path: v1.1.0/objects/kernel_driver.yaml
+- name: keyboard_info
+  caption: Keyboard Information
+  extends: object
+  group: Device & Host
+  summary: The Keyboard Information object contains details and attributes related to a computer or device keyboard.
+  path: v1.1.0/objects/keyboard_info.yaml
+- name: kill_chain_phase
+  caption: Kill Chain Phase
+  extends: object
+  group: Threat Intelligence
+  summary: The Kill Chain Phase object represents a single phase of a cyber attack, including the initial reconnaissance and planning stages up to the final objective of the attacker.
+  path: v1.1.0/objects/kill_chain_phase.yaml
+- name: ldap_person
+  caption: LDAP Person
+  extends: object
+  group: Identity & Access
+  summary: The additional LDAP attributes that describe a person.
+  path: v1.1.0/objects/ldap_person.yaml
+- name: load_balancer
+  caption: Load Balancer
+  extends: _entity
+  group: Network
+  summary: The load balancer object describes the load balancer entity and contains additional information regarding the distribution of traffic across a network.
+  path: v1.1.0/objects/load_balancer.yaml
+- name: location
+  caption: Geo Location
+  extends: object
+  observable: 26
+  group: Location & Geography
+  summary: The Geo Location object describes a geographical location, usually associated with an IP address.
+  path: v1.1.0/objects/location.yaml
+- name: logger
+  caption: Logger
+  extends: _entity
+  group: Metadata & Context
+  summary: The Logger object represents the device and product where events are stored with times for receipt and transmission.
+  path: v1.1.0/objects/logger.yaml
+- name: malware
+  caption: Malware
+  extends: _entity
+  group: Threat Intelligence
+  summary: The Malware object describes the classification of known malicious software, which is intentionally designed to cause damage to a computer, server, client, or computer network.
+  path: v1.1.0/objects/malware.yaml
+- name: managed_entity
+  caption: Managed Entity
+  extends: _entity
+  group: Cloud & Resources
+  summary: The Managed Entity object describes the type and version of an entity, such as a policy or configuration.
+  path: v1.1.0/objects/managed_entity.yaml
+- name: metadata
+  caption: Metadata
+  extends: object
+  group: Metadata & Context
+  summary: The Metadata object describes the metadata associated with the event.
+  path: v1.1.0/objects/metadata.yaml
+- name: metric
+  caption: Metric
+  extends: object
+  group: Metadata & Context
+  summary: The Metric object defines a simple name/value pair entity for a metric.
+  path: v1.1.0/objects/metric.yaml
+- name: module
+  caption: Module
+  extends: object
+  group: Process & Module
+  summary: The Module object describes the load attributes of a module.
+  path: v1.1.0/objects/module.yaml
+- name: network_connection_info
+  caption: Network Connection Information
+  extends: object
+  group: Network
+  summary: The Network Connection Information object describes characteristics of a network connection.
+  path: v1.1.0/objects/network_connection_info.yaml
+- name: network_endpoint
+  caption: Network Endpoint
+  extends: endpoint
+  observable: 20
+  group: Network
+  summary: The Network Endpoint object describes characteristics of a network endpoint.
+  path: v1.1.0/objects/network_endpoint.yaml
+- name: network_interface
+  caption: Network Interface
+  extends: _entity
+  group: Network
+  summary: The Network Interface object describes the type and associated attributes of a network interface.
+  path: v1.1.0/objects/network_interface.yaml
+- name: network_proxy
+  caption: Network Proxy Endpoint
+  extends: network_endpoint
+  observable: 20
+  group: Network
+  summary: The network proxy endpoint object describes a proxy server, which acts as an intermediary between a client requesting a resource and the server providing that resource.
+  path: v1.1.0/objects/network_proxy.yaml
+- name: network_traffic
+  caption: Network Traffic
+  extends: object
+  group: Network
+  summary: The Network Traffic object describes characteristics of network traffic.
+  path: v1.1.0/objects/network_traffic.yaml
+- name: object
+  caption: Object
+  group: Base
+  summary: An unordered collection of attributes.
+  path: v1.1.0/objects/object.yaml
+- name: observable
+  caption: Observable
+  extends: object
+  group: Metadata & Context
+  summary: The observable object is a pivot element that contains related information found in many places in the event.
+  path: v1.1.0/objects/observable.yaml
+- name: organization
+  caption: Organization
+  extends: _entity
+  group: Metadata & Context
+  summary: The Organization object describes characteristics of an organization or company and its division if any.
+  path: v1.1.0/objects/organization.yaml
+- name: os
+  caption: Operating System (OS)
+  extends: object
+  group: Device & Host
+  summary: The Operating System (OS) object describes characteristics of an OS, such as Linux or Windows.
+  path: v1.1.0/objects/os.yaml
+- name: package
+  caption: Software Package
+  extends: object
+  group: File & Data
+  summary: The Software Package object describes details about a software package.
+  path: v1.1.0/objects/package.yaml
+- name: peripheral_device
+  caption: Peripheral Device
+  extends: _entity
+  group: Device & Host
+  summary: The peripheral device object describes the identity, vendor and model of a peripheral device.
+  path: v1.1.0/objects/peripheral_device.yaml
+- name: policy
+  caption: Policy
+  extends: _entity
+  group: Findings & Compliance
+  summary: The Policy object describes the policies that are applicable.
+  path: v1.1.0/objects/policy.yaml
+- name: process
+  caption: Process
+  extends: _entity
+  observable: 25
+  group: Process & Module
+  summary: The Process object describes a running instance of a launched program.
+  path: v1.1.0/objects/process.yaml
+- name: product
+  caption: Product
+  extends: _entity
+  group: Metadata & Context
+  summary: The Product object describes characteristics of a software product.
+  path: v1.1.0/objects/product.yaml
+- name: query_info
+  caption: Query Information
+  extends: _entity
+  group: Metadata & Context
+  summary: The query info object holds information related to data access within a datastore.
+  path: v1.1.0/objects/query_info.yaml
+- name: related_event
+  caption: Related Event
+  extends: object
+  group: Metadata & Context
+  summary: The Related Event object describes an event related to a finding or detection as identified by the security product.
+  path: v1.1.0/objects/related_event.yaml
+- name: remediation
+  caption: Remediation
+  extends: object
+  group: Findings & Compliance
+  summary: The Remediation object describes the recommended remediation steps to address identified issue(s).
+  path: v1.1.0/objects/remediation.yaml
+- name: reputation
+  caption: Reputation
+  extends: object
+  group: Threat Intelligence
+  summary: The Reputation object describes the reputation/risk score of an entity (e.g. device, user, domain).
+  path: v1.1.0/objects/reputation.yaml
+- name: request
+  caption: Request Elements
+  extends: object
+  group: Metadata & Context
+  summary: The Request Elements object describes characteristics of an API request.
+  path: v1.1.0/objects/request.yaml
+- name: resource_details
+  caption: Resource Details
+  extends: _resource
+  group: Cloud & Resources
+  summary: The Resource Details object describes details about resources that were affected by the activity/event.
+  path: v1.1.0/objects/resource_details.yaml
+- name: response
+  caption: Response Elements
+  extends: object
+  group: Metadata & Context
+  summary: The Response Elements object describes characteristics of an API response.
+  path: v1.1.0/objects/response.yaml
+- name: rpc_interface
+  caption: RPC Interface
+  extends: object
+  group: Network
+  summary: The RPC Interface represents the remote procedure call interface used in the DCE/RPC session.
+  path: v1.1.0/objects/rpc_interface.yaml
+- name: rule
+  caption: Rule
+  extends: _entity
+  group: Findings & Compliance
+  summary: The Rule object describes characteristics of a rule associated with a policy or an event.
+  path: v1.1.0/objects/rule.yaml
+- name: san
+  caption: Subject Alternative Name
+  extends: object
+  group: Location & Geography
+  summary: The Subject Alternative name (SAN) object describes a SAN secured by a digital certificate
+  path: v1.1.0/objects/san.yaml
+- name: scan
+  caption: Scan
+  extends: _entity
+  group: Other
+  summary: The Scan object describes characteristics of a proactive scan.
+  path: v1.1.0/objects/scan.yaml
+- name: security_state
+  caption: Security State
+  extends: object
+  group: Findings & Compliance
+  summary: The Security State object describes the security related state of a managed entity.
+  path: v1.1.0/objects/security_state.yaml
+- name: service
+  caption: Service
+  extends: _entity
+  group: Process & Module
+  summary: The Service object describes characteristics of a service, `e.g.
+  path: v1.1.0/objects/service.yaml
+- name: session
+  caption: Session
+  extends: object
+  group: Identity & Access
+  summary: The Session object describes details about an authenticated session. e.g.
+  path: v1.1.0/objects/session.yaml
+- name: sub_technique
+  caption: Sub Technique
+  extends: _entity
+  group: Threat Intelligence
+  summary: The Sub Technique object describes the sub technique ID and/or name associated to an attack, as defined by [ATT&CK MatrixTM](https://attack.mitre.org/wiki/ATT&CK_Matrix).
+  path: v1.1.0/objects/sub_technique.yaml
+- name: table
+  caption: Table
+  extends: _entity
+  group: File & Data
+  summary: The table object represents a table within a structured relational database or datastore, which contains columns and rows of data that are able to be create, updated, deleted and queried.
+  path: v1.1.0/objects/table.yaml
+- name: tactic
+  caption: Tactic
+  extends: _entity
+  group: Threat Intelligence
+  summary: The Tactic object describes the tactic ID and/or name that is associated to an attack, as defined by [ATT&CK MatrixTM](https://attack.mitre.org/wiki/ATT&CK_Matrix).
+  path: v1.1.0/objects/tactic.yaml
+- name: technique
+  caption: Technique
+  extends: _entity
+  group: Threat Intelligence
+  summary: The Technique object describes the technique ID and/or name associated to an attack, as defined by [ATT&CK MatrixTM](https://attack.mitre.org/wiki/ATT&CK_Matrix).
+  path: v1.1.0/objects/technique.yaml
+- name: tls
+  caption: Transport Layer Security (TLS)
+  extends: object
+  group: Network
+  summary: The Transport Layer Security (TLS) object describes the negotiated TLS protocol used for secure communications over an establish network connection.
+  path: v1.1.0/objects/tls.yaml
+- name: tls_extension
+  caption: TLS Extension
+  extends: object
+  group: Network
+  summary: The TLS Extension object describes additional attributes that extend the base Transport Layer Security (TLS) object.
+  path: v1.1.0/objects/tls_extension.yaml
+- name: url
+  caption: Uniform Resource Locator
+  extends: object
+  observable: 23
+  group: Network
+  summary: The Uniform Resource Locator(URL) object describes the characteristics of a URL.
+  path: v1.1.0/objects/url.yaml
+- name: user
+  caption: User
+  extends: _entity
+  observable: 21
+  group: Identity & Access
+  summary: The User object describes the characteristics of a user/person or a security principal.
+  path: v1.1.0/objects/user.yaml
+- name: vulnerability
+  caption: Vulnerability Details
+  extends: object
+  group: Threat Intelligence
+  summary: The vulnerability is an unintended characteristic of a computing component or system configuration that multiplies the risk of an adverse event or a loss occurring either due to accidental exposure, deliberate attack, or conflict with new system components.
+  path: v1.1.0/objects/vulnerability.yaml
+- name: web_resource
+  caption: Web Resource
+  extends: _resource
+  group: File & Data
+  summary: The Web Resource object describes characteristics of a web resource that was affected by the activity/event.
+  path: v1.1.0/objects/web_resource.yaml
+- name: win/reg_key
+  caption: Registry Key
+  extension: win
+  extends: object
+  observable: 28
+  group: Other
+  summary: The registry key object describes a Windows registry key.
+  path: v1.1.0/extensions/win/objects/reg_key.yaml
+- name: win/reg_value
+  caption: Registry Value
+  extension: win
+  extends: object
+  observable: 29
+  group: Other
+  summary: The registry value object describes a Windows registry value.
+  path: v1.1.0/extensions/win/objects/reg_value.yaml
+- name: win/win_resource
+  caption: Windows Resource
+  extension: win
+  extends: _resource
+  group: Other
+  summary: The Windows resource object describes a resource object managed by Windows, such as mutant or timer.
+  path: v1.1.0/extensions/win/objects/win_resource.yaml

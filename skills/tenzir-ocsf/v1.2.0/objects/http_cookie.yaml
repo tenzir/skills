@@ -1,0 +1,71 @@
+name: http_cookie
+caption: HTTP Cookie
+extends: object
+description: The HTTP Cookie object, also known as a web cookie or browser cookie, contains details and values pertaining to a small piece of data that a server sends to a user's web browser. This data is then stored by the browser and sent back to the server with subsequent requests, allowing the server to remember and track certain information about the user's browsing session or preferences.
+profiles: [datetime]
+referenced_by:
+  classes:
+    http_activity: [http_cookies]
+attributes:
+  domain:
+    caption: Domain
+    type: string_t
+    requirement: optional
+    description: The name of the domain.
+  expiration_time:
+    caption: Expiration Time
+    type: timestamp_t
+    requirement: optional
+    description: The expiration time of the HTTP cookie.
+  expiration_time_dt:
+    caption: Expiration Time
+    type: datetime_t
+    requirement: optional
+    profile: datetime
+    description: The expiration time of the HTTP cookie.
+  http_only:
+    caption: HTTP Only
+    type: boolean_t
+    requirement: optional
+    deprecated:
+      since: 1.1.0
+      message: Use the  `is_http_only`  attribute instead.
+    description: A cookie attribute to make it inaccessible via JavaScript
+  is_http_only:
+    caption: HTTP Only
+    type: boolean_t
+    requirement: optional
+    description: This attribute prevents the cookie from being accessed via JavaScript.
+  is_secure:
+    caption: Secure
+    type: boolean_t
+    requirement: optional
+    description: The cookie attribute indicates that cookies are sent to the server only when the request is encrypted using the HTTPS protocol.
+  name:
+    caption: Name
+    type: string_t
+    requirement: required
+    description: The HTTP cookie name.
+  path:
+    caption: Path
+    type: string_t
+    requirement: optional
+    description: The path of the HTTP cookie.
+  samesite:
+    caption: SameSite
+    type: string_t
+    requirement: optional
+    description: 'The cookie attribute that lets servers specify whether/when cookies are sent with cross-site requests. Values are: Strict, Lax or None'
+  secure:
+    caption: Secure
+    type: boolean_t
+    requirement: optional
+    deprecated:
+      since: 1.1.0
+      message: Use the  `is_secure`  attribute instead.
+    description: The cookie attribute to only send cookies to the server with an encrypted request over the HTTPS protocol.
+  value:
+    caption: Value
+    type: string_t
+    requirement: required
+    description: The HTTP cookie value.

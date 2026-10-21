@@ -1,0 +1,15 @@
+name: process
+caption: Process
+extension: win
+patches: process
+description: Extends the process object to add Windows specific fields.
+constraints:
+  at_least_one: [pid, uid, cpid]
+attributes:
+  hosted_services:
+    caption: Hosted Services
+    type: object_t
+    object: win/win_service
+    array: true
+    requirement: optional
+    description: The Windows services that this process is hosting.

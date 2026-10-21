@@ -1,0 +1,102 @@
+name: graph
+caption: Graph
+extends: _entity
+description: A graph data structure representation with nodes and edges.
+constraints:
+  at_least_one: [name, uid]
+references:
+- description: JSON graph specification.
+  url: https://github.com/jsongraph/json-graph-specification/
+referenced_by:
+  objects:
+    application: [resource_relationship]
+    databucket: [resource_relationship]
+    finding_info: [attack_graph]
+    resource_details: [resource_relationship]
+attributes:
+  desc:
+    caption: Description
+    type: string_t
+    requirement: optional
+    description: The graph description - provides additional details about the graph's purpose and contents.
+  edges:
+    caption: Edges
+    type: object_t
+    object: edge
+    array: true
+    requirement: optional
+    description: The edges/connections between nodes in the graph - contains the collection of `edge` objects defining relationships between nodes.
+  is_directed:
+    caption: Directed
+    type: boolean_t
+    requirement: optional
+    description: Indicates if the graph is directed (`true`) or undirected (`false`).
+  name:
+    caption: Name
+    type: string_t
+    requirement: recommended
+    description: The graph name - a human readable identifier for the graph.
+  nodes:
+    caption: Nodes
+    type: object_t
+    object: node
+    array: true
+    requirement: required
+    description: The nodes/vertices of the graph - contains the collection of `node` objects that make up the graph.
+  query_language:
+    caption: Query Language
+    type: string_t
+    requirement: optional
+    description: The graph query language, normalized to the caption of the `query_language_id` value.
+  query_language_id:
+    caption: Query Language ID
+    type: integer_t
+    requirement: recommended
+    sibling: query_language
+    description: The normalized identifier of a graph query language that can be used to interact with the graph.
+    enum:
+      '0':
+        caption: Unknown
+        description: The Query Language is unknown.
+      '1':
+        caption: Cypher
+        description: A declarative graph query language developed by Neo4j that allows for expressive and efficient querying of graph databases.
+      '2':
+        caption: GraphQL
+        description: A query language for APIs that enables declarative data fetching and provides a complete description of the data in the API.
+      '3':
+        caption: Gremlin
+        description: A graph traversal language and virtual machine developed by Apache TinkerPop that enables graph computing across different graph databases.
+      '4':
+        caption: GQL
+        description: An ISO standard graph query language designed to provide a unified way to query graph databases.
+      '5':
+        caption: G-CORE
+        description: A graph query language that combines features from existing languages while adding support for paths as first-class citizens.
+      '6':
+        caption: PGQL
+        description: Property Graph Query Language developed by Oracle that provides SQL-like syntax for querying property graphs.
+      '7':
+        caption: SPARQL
+        description: A semantic query language for databases that enables querying and manipulating data stored in RDF format.
+      '99':
+        caption: Other
+        description: The Query Language is not mapped. See the `query_language` attribute, which contains a data source specific value.
+  type:
+    caption: Type
+    type: string_t
+    requirement: optional
+    description: The graph type. Typically useful to represent the specific type of graph that is used.
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: recommended
+    description: Unique identifier of the graph - a unique ID to reference this specific graph.
+  uid_numeric:
+    caption: Numeric Unique ID
+    type: long_t
+    requirement: optional
+    from: _entity
+    description: |-
+      The `uid` attribute in numeric form where applicable.
+      Note: Producers may populate `uid_numeric` only in addition to `uid` and not as an alternative to it.

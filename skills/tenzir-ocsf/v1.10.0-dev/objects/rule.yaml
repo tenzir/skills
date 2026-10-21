@@ -1,0 +1,50 @@
+name: rule
+caption: Rule
+extends: _entity
+description: The Rule object describes characteristics of a rule associated with a policy or an event.
+constraints:
+  at_least_one: [name, uid]
+referenced_by:
+  objects:
+    affected_code: [rule]
+    cis_benchmark_result: [rule]
+    discovery_details: [rule]
+attributes:
+  category:
+    caption: Category
+    type: string_t
+    requirement: optional
+    description: The rule category.
+  desc:
+    caption: Description
+    type: string_t
+    requirement: optional
+    description: The description of the rule that generated the event.
+  name:
+    caption: Name
+    type: string_t
+    requirement: recommended
+    description: The name of the rule that generated the event.
+  type:
+    caption: Type
+    type: string_t
+    requirement: optional
+    description: The rule type.
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: recommended
+    description: The unique identifier of the rule that generated the event.
+  uid_numeric:
+    caption: Numeric Unique ID
+    type: long_t
+    requirement: optional
+    from: _entity
+    description: |-
+      The `uid` attribute in numeric form where applicable.
+      Note: Producers may populate `uid_numeric` only in addition to `uid` and not as an alternative to it.
+  version:
+    caption: Version
+    type: string_t
+    requirement: optional
+    description: 'The rule version. For example: `1.1`.'

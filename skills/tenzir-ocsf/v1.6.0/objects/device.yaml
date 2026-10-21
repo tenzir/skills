@@ -1,0 +1,537 @@
+name: device
+caption: Device
+extends: endpoint
+observable: 20
+description: The Device object represents an addressable computer system or host, which is typically connected to a computer network and participates in the transmission or processing of data within the computer network.
+profiles: [container, datetime]
+constraints:
+  at_least_one: [ip, uid, name, hostname, instance_uid, interface_uid, interface_name]
+references:
+- description: D3FEND™ Ontology d3f:Host.
+  url: https://d3fend.mitre.org/dao/artifact/d3f:Host/
+referenced_by:
+  classes:
+    account_change: [device]
+    admin_group_query: [device]
+    airborne_broadcast_activity: [device]
+    api_activity: [device]
+    application_error: [device]
+    application_lifecycle: [device]
+    application_security_posture_finding: [device]
+    authentication: [device]
+    authorize_session: [device]
+    base_event: [device]
+    cloud_resources_inventory_info: [device]
+    compliance_finding: [device]
+    config_state: [device]
+    data_security_finding: [device]
+    datastore_activity: [device]
+    detection_finding: [device]
+    device_config_state_change: [device]
+    dhcp_activity: [device]
+    dns_activity: [device]
+    drone_flights_activity: [device]
+    email_activity: [device]
+    email_file_activity: [device]
+    email_url_activity: [device]
+    entity_management: [device]
+    event_log_actvity: [device]
+    evidence_info: [device]
+    file_activity: [device]
+    file_hosting: [device]
+    file_query: [device]
+    file_remediation_activity: [device]
+    folder_query: [device]
+    ftp_activity: [device]
+    group_management: [device]
+    http_activity: [device]
+    iam_analysis_finding: [device]
+    incident_finding: [device]
+    inventory_info: [device]
+    job_query: [device]
+    kernel_activity: [device]
+    kernel_extension_activity: [device]
+    kernel_object_query: [device]
+    memory_activity: [device]
+    module_activity: [device]
+    module_query: [device]
+    network_activity: [device]
+    network_connection_query: [device]
+    network_file_activity: [device]
+    network_remediation_activity: [device]
+    networks_query: [device]
+    ntp_activity: [device]
+    osint_inventory_info: [device]
+    patch_state: [device]
+    peripheral_device_query: [device]
+    process_activity: [device]
+    process_query: [device]
+    process_remediation_activity: [device]
+    rdp_activity: [device]
+    remediation_activity: [device]
+    scan_activity: [device]
+    scheduled_job_activity: [device]
+    script_activity: [device]
+    security_finding: [device]
+    service_query: [device]
+    session_query: [device]
+    smb_activity: [device]
+    software_info: [device]
+    ssh_activity: [device]
+    startup_item_query: [device]
+    tunnel_activity: [device]
+    user_access: [device]
+    user_inventory: [device]
+    user_query: [device]
+    vulnerability_finding: [device]
+    web_resource_access_activity: [device]
+    web_resources_activity: [device]
+  objects:
+    auth_factor: [device]
+    evidences: [device]
+    logger: [device]
+    managed_entity: [device]
+attributes:
+  agent_list:
+    caption: Agent List
+    type: object_t
+    object: agent
+    array: true
+    requirement: optional
+    from: endpoint
+    description: A list of `agent` objects associated with a device, endpoint, or resource.
+  autoscale_uid:
+    caption: Autoscale UID
+    type: string_t
+    requirement: optional
+    description: The unique identifier of the cloud autoscale configuration.
+  boot_time:
+    caption: Boot Time
+    type: timestamp_t
+    requirement: optional
+    description: The time the system was booted.
+  boot_time_dt:
+    caption: Boot Time
+    type: datetime_t
+    requirement: optional
+    profile: datetime
+    description: The time the system was booted.
+  boot_uid:
+    caption: Boot UID
+    type: string_t
+    requirement: optional
+    description: A unique identifier of the device that changes after every reboot. For example, the value of `/proc/sys/kernel/random/boot_id` from Linux's procfs.
+    references:
+    - description: Linux kernel's documentation
+      url: https://docs.kernel.org/admin-guide/sysctl/kernel.html#random
+  container:
+    caption: Container
+    type: object_t
+    object: container
+    requirement: recommended
+    group: context
+    profile: container
+    from: endpoint
+    observable: 27
+    description: The information describing an instance of a container. A container is a prepackaged, portable system image that runs isolated on an existing system using a container runtime like containerd.
+  created_time:
+    caption: Created Time
+    type: timestamp_t
+    requirement: optional
+    description: The time when the device was known to have been created.
+  created_time_dt:
+    caption: Created Time
+    type: datetime_t
+    requirement: optional
+    profile: datetime
+    description: The time when the device was known to have been created.
+  desc:
+    caption: Description
+    type: string_t
+    requirement: optional
+    description: The description of the device, ordinarily as reported by the operating system.
+  domain:
+    caption: Domain
+    type: string_t
+    requirement: optional
+    description: 'The network domain where the device resides. For example: `work.example.com`.'
+  eid:
+    caption: EID
+    type: string_t
+    requirement: optional
+    description: An Embedded Identity Document, is a unique serial number that identifies an eSIM-enabled device.
+  first_seen_time:
+    caption: First Seen
+    type: timestamp_t
+    requirement: optional
+    description: The initial discovery time of the device.
+  first_seen_time_dt:
+    caption: First Seen
+    type: datetime_t
+    requirement: optional
+    profile: datetime
+    description: The initial discovery time of the device.
+  groups:
+    caption: Groups
+    type: object_t
+    object: group
+    array: true
+    requirement: optional
+    description: 'The group names to which the device belongs. For example: `["Windows Laptops", "Engineering"]`.'
+  hostname:
+    caption: Hostname
+    type: hostname_t
+    requirement: recommended
+    observable: 1
+    description: The device hostname.
+  hw_info:
+    caption: Hardware Info
+    type: object_t
+    object: device_hw_info
+    requirement: optional
+    from: endpoint
+    description: The endpoint hardware information.
+  hypervisor:
+    caption: Hypervisor
+    type: string_t
+    requirement: optional
+    description: The name of the hypervisor running on the device. For example, `Xen`, `VMware`, `Hyper-V`, `VirtualBox`, etc.
+  iccid:
+    caption: ICCID
+    type: string_t
+    requirement: optional
+    description: The Integrated Circuit Card Identification of a mobile device. Typically it is a unique 18 to 22 digit number that identifies a SIM card.
+  image:
+    caption: Image
+    type: object_t
+    object: image
+    requirement: optional
+    description: The image used as a template to run the virtual machine.
+  imei:
+    caption: IMEI
+    type: string_t
+    requirement: optional
+    deprecated:
+      since: 1.4.0
+      message: Use the `imei_list` attribute instead.
+    description: The International Mobile Equipment Identity that is associated with the device.
+  imei_list:
+    caption: IMEI List
+    type: string_t
+    array: true
+    requirement: optional
+    description: The International Mobile Equipment Identity values that are associated with the device.
+  instance_uid:
+    caption: Instance ID
+    type: string_t
+    requirement: recommended
+    from: endpoint
+    description: The unique identifier of a VM instance.
+  interface_name:
+    caption: Network Interface Name
+    type: string_t
+    requirement: recommended
+    from: endpoint
+    description: The name of the network interface (e.g. eth2).
+  interface_uid:
+    caption: Network Interface ID
+    type: string_t
+    requirement: recommended
+    from: endpoint
+    description: The unique identifier of the network interface.
+  ip:
+    caption: IP Address
+    type: ip_t
+    requirement: optional
+    observable: 2
+    description: The device IP address, in either IPv4 or IPv6 format.
+  is_backed_up:
+    caption: Back Ups Configured
+    type: boolean_t
+    requirement: optional
+    description: Indicates whether the device or resource has a backup enabled, such as an automated snapshot or a cloud backup. For example, this is indicated by the `cloudBackupEnabled` value within JAMF Pro mobile devices or the registration of an AWS ARN with the AWS Backup service.
+  is_compliant:
+    caption: Compliant Device
+    type: boolean_t
+    requirement: optional
+    description: The event occurred on a compliant device.
+  is_managed:
+    caption: Managed Device
+    type: boolean_t
+    requirement: optional
+    description: The event occurred on a managed device.
+  is_mobile_account_active:
+    caption: Mobile Account Active
+    type: boolean_t
+    requirement: optional
+    description: Indicates whether the device has an active mobile account. For example, this is indicated by the `itunesStoreAccountActive` value within JAMF Pro mobile devices.
+  is_personal:
+    caption: Personal Device
+    type: boolean_t
+    requirement: optional
+    description: The event occurred on a personal device.
+  is_shared:
+    caption: Shared Device
+    type: boolean_t
+    requirement: optional
+    description: The event occurred on a shared device.
+  is_supervised:
+    caption: Supervised Device
+    type: boolean_t
+    requirement: optional
+    description: The event occurred on a supervised device. Devices that are supervised are typically mobile devices managed by a Mobile Device Management solution and are restricted from specific behaviors such as Apple AirDrop.
+  is_trusted:
+    caption: Trusted Device
+    type: boolean_t
+    requirement: optional
+    description: The event occurred on a trusted device.
+  last_seen_time:
+    caption: Last Seen
+    type: timestamp_t
+    requirement: optional
+    description: The most recent discovery time of the device.
+  last_seen_time_dt:
+    caption: Last Seen
+    type: datetime_t
+    requirement: optional
+    profile: datetime
+    description: The most recent discovery time of the device.
+  location:
+    caption: Geo Location
+    type: object_t
+    object: location
+    requirement: optional
+    observable: 26
+    description: The geographical location of the device.
+  mac:
+    caption: MAC Address
+    type: mac_t
+    requirement: optional
+    from: endpoint
+    observable: 3
+    description: The Media Access Control (MAC) address of the endpoint.
+  meid:
+    caption: MEID
+    type: string_t
+    requirement: optional
+    description: The Mobile Equipment Identifier. It's a unique number that identifies a Code Division Multiple Access (CDMA) mobile device.
+  model:
+    caption: Model
+    type: string_t
+    requirement: optional
+    description: The model of the device. For example `ThinkPad X1 Carbon`.
+  modified_time:
+    caption: Modified Time
+    type: timestamp_t
+    requirement: optional
+    description: The time when the device was last known to have been modified.
+  modified_time_dt:
+    caption: Modified Time
+    type: datetime_t
+    requirement: optional
+    profile: datetime
+    description: The time when the device was last known to have been modified.
+  name:
+    caption: Name
+    type: string_t
+    requirement: optional
+    description: |-
+      The alternate device name, ordinarily as assigned by an administrator.
+
+      Note: The Name could be any other string that helps to identify the device, such as a phone number; for example `310-555-1234`.
+  namespace_pid:
+    caption: Namespace PID
+    type: integer_t
+    requirement: recommended
+    group: context
+    profile: container
+    from: endpoint
+    description: If running under a process namespace (such as in a container), the process identifier within that process namespace.
+  network_interfaces:
+    caption: Network Interfaces
+    type: object_t
+    object: network_interface
+    array: true
+    requirement: optional
+    description: |-
+      The physical or virtual network interfaces that are associated with the device, one for each unique MAC address/IP address/hostname/name combination.
+
+      Note: The first element of the array is the network information that pertains to the event.
+  org:
+    caption: Organization
+    type: object_t
+    object: organization
+    requirement: optional
+    description: Organization and org unit related to the device.
+  os:
+    caption: OS
+    type: object_t
+    object: os
+    requirement: optional
+    from: endpoint
+    description: The endpoint operating system.
+  os_machine_uuid:
+    caption: OS Machine UUID
+    type: uuid_t
+    requirement: optional
+    description: 'The operating system assigned Machine ID. In Windows, this is the value stored at the registry path: `HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Cryptography\MachineGuid`. In Linux, this is stored in the file: `/etc/machine-id`.'
+  owner:
+    caption: Owner
+    type: object_t
+    object: user
+    requirement: recommended
+    from: endpoint
+    observable: 21
+    description: The identity of the service or user account that owns the endpoint or was last logged into it.
+  region:
+    caption: Region
+    type: string_t
+    requirement: recommended
+    description: The region where the virtual machine is located. For example, an AWS Region.
+  risk_level:
+    caption: Risk Level
+    type: string_t
+    requirement: optional
+    description: The risk level, normalized to the caption of the risk_level_id value.
+  risk_level_id:
+    caption: Risk Level ID
+    type: integer_t
+    requirement: optional
+    sibling: risk_level
+    description: The normalized risk level id.
+    enum:
+      '0':
+        caption: Info
+      '1':
+        caption: Low
+      '2':
+        caption: Medium
+      '3':
+        caption: High
+      '4':
+        caption: Critical
+      '99':
+        caption: Other
+        description: The risk level is not mapped. See the `risk_level` attribute, which contains a data source specific value.
+  risk_score:
+    caption: Risk Score
+    type: integer_t
+    requirement: optional
+    description: The risk score as reported by the event source.
+  subnet:
+    caption: Subnet
+    type: subnet_t
+    requirement: optional
+    observable: 12
+    description: The subnet mask.
+  subnet_uid:
+    caption: Subnet UID
+    type: string_t
+    requirement: optional
+    from: endpoint
+    description: The unique identifier of a virtual subnet.
+  type:
+    caption: Type
+    type: string_t
+    requirement: recommended
+    description: 'The device type. For example: `unknown`, `server`, `desktop`, `laptop`, `tablet`, `mobile`, `virtual`, `browser`, or `other`.'
+  type_id:
+    caption: Type ID
+    type: integer_t
+    requirement: required
+    sibling: type
+    description: The device type ID.
+    enum:
+      '0':
+        caption: Unknown
+        description: The type is unknown.
+      '1':
+        caption: Server
+        description: A [server](https://d3fend.mitre.org/dao/artifact/d3f:Server/).
+      '2':
+        caption: Desktop
+        description: A [desktop computer](https://d3fend.mitre.org/dao/artifact/d3f:DesktopComputer/).
+      '3':
+        caption: Laptop
+        description: A [laptop computer](https://d3fend.mitre.org/dao/artifact/d3f:LaptopComputer/).
+      '4':
+        caption: Tablet
+        description: A [tablet computer](https://d3fend.mitre.org/dao/artifact/d3f:TabletComputer/).
+      '5':
+        caption: Mobile
+        description: A [mobile phone](https://d3fend.mitre.org/dao/artifact/d3f:MobilePhone/).
+      '6':
+        caption: Virtual
+        description: A [virtual machine](https://d3fend.mitre.org/dao/artifact/d3f:VirtualizationSoftware/).
+      '7':
+        caption: IOT
+        description: An [IOT (Internet of Things) device](https://www.techtarget.com/iotagenda/definition/IoT-device).
+      '8':
+        caption: Browser
+        description: A [web browser](https://d3fend.mitre.org/dao/artifact/d3f:Browser/).
+      '9':
+        caption: Firewall
+        description: A [networking firewall](https://d3fend.mitre.org/dao/artifact/d3f:Firewall/).
+      '10':
+        caption: Switch
+        description: A [networking switch](https://d3fend.mitre.org/dao/artifact/d3f:Switch/).
+      '11':
+        caption: Hub
+        description: A [networking hub](https://en.wikipedia.org/wiki/Ethernet_hub).
+      '12':
+        caption: Router
+        description: A [networking router](https://d3fend.mitre.org/dao/artifact/d3f:Router/).
+      '13':
+        caption: IDS
+        description: An [intrusion detection system](https://d3fend.mitre.org/dao/artifact/d3f:IntrusionDetectionSystem/).
+      '14':
+        caption: IPS
+        description: An [intrusion prevention system](https://d3fend.mitre.org/dao/artifact/d3f:IntrusionPreventionSystem/).
+      '15':
+        caption: Load Balancer
+        description: A [Load Balancer device.](https://en.wikipedia.org/wiki/Load_balancing_(computing))
+      '99':
+        caption: Other
+        description: The type is not mapped. See the `type` attribute, which contains a data source specific value.
+  udid:
+    caption: Unique Device Identifier
+    type: string_t
+    requirement: optional
+    description: 'The Apple assigned Unique Device Identifier (UDID). For iOS, iPadOS, tvOS, watchOS and visionOS devices, this is the UDID. For macOS devices, it is the Provisioning UDID. For example: `00008020-008D4548007B4F26`'
+    references:
+    - description: Apple Wiki
+      url: https://theapplewiki.com/wiki/UDID
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: recommended
+    observable: 47
+    description: The unique identifier of the device. For example the Windows TargetSID or AWS EC2 ARN.
+  uid_alt:
+    caption: Alternate ID
+    type: string_t
+    requirement: optional
+    description: An alternate unique identifier of the device if any. For example the ActiveDirectory DN.
+  vendor_name:
+    caption: Vendor Name
+    type: string_t
+    requirement: recommended
+    description: The vendor for the device. For example `Dell` or `Lenovo`.
+  vlan_uid:
+    caption: VLAN
+    type: string_t
+    requirement: optional
+    from: endpoint
+    description: The Virtual LAN identifier.
+  vpc_uid:
+    caption: VPC UID
+    type: string_t
+    requirement: optional
+    from: endpoint
+    description: The unique identifier of the Virtual Private Cloud (VPC).
+  zone:
+    caption: Network Zone
+    type: string_t
+    requirement: optional
+    from: endpoint
+    description: The network zone or LAN segment.

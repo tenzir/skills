@@ -1,0 +1,18 @@
+name: cis_control
+caption: CIS Control
+extends: object
+description: The CIS Control contains information as defined by the Center for Internet Security Critical Security Control [(CIS CSC)](https://www.cisecurity.org/controls). Prioritized set of actions to protect your organization and data from cyber-attack vectors.
+referenced_by:
+  classes:
+    security_finding: [cis_csc]
+attributes:
+  control:
+    caption: Control
+    type: string_t
+    requirement: required
+    description: The CIS critical security control.
+  version:
+    caption: Version
+    type: string_t
+    requirement: recommended
+    description: The CIS critical security control version.

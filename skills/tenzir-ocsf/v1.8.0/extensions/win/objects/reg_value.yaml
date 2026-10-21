@@ -1,0 +1,128 @@
+name: win/reg_value
+caption: Registry Value
+extension: win
+extends: object
+observable: 29
+description: The registry value object describes a Windows registry value.
+profiles: [datetime]
+references:
+- description: D3FEND™ Ontology d3f:WindowsRegistryValue.
+  url: https://d3fend.mitre.org/dao/artifact/d3f:WindowsRegistryValue/
+referenced_by:
+  classes:
+    win/registry_value_activity: [prev_reg_value, reg_value]
+    win/registry_value_query: [reg_value]
+  objects:
+    evidences: [reg_value]
+    query_evidence: [reg_value]
+attributes:
+  data:
+    caption: Data
+    type: json_t
+    requirement: optional
+    description: The data of the registry value. Where the value type is known, implementers should instead use a type-specific attribute, i.e. `reg_binary_data`, `reg_integer_data`, `reg_string_data`, or `reg_string_list_data`.
+  is_default:
+    caption: Default Value
+    type: boolean_t
+    requirement: optional
+    description: The indication of whether the value is from a default value name. For example, the value name could be missing.
+  is_system:
+    caption: System
+    type: boolean_t
+    requirement: optional
+    description: The indication of whether the object is part of the operating system.
+  modified_time:
+    caption: Modified Time
+    type: timestamp_t
+    requirement: optional
+    description: The time when the registry value was last modified.
+  modified_time_dt:
+    caption: Modified Time
+    type: datetime_t
+    requirement: optional
+    profile: datetime
+    description: The time when the registry value was last modified.
+  name:
+    caption: Name
+    type: string_t
+    requirement: required
+    observable: 43
+    description: The name of the registry value.
+  path:
+    caption: Path
+    type: reg_key_path_t
+    requirement: required
+    observable: 46
+    description: The full path to the registry key, where the value is located.
+  reg_binary_data:
+    caption: Registry Binary Data
+    type: bytestring_t
+    requirement: optional
+    description: The data of the registry value when `type_id` is `REG_BINARY` or `REG_NONE`.
+  reg_integer_data:
+    caption: Registry Integer Data
+    type: long_t
+    requirement: optional
+    description: The data of the registry value when `type_id` is `REG_DWORD`, `REG_DWORD_BIG_ENDIAN`, or `REG_QWORD`.
+  reg_string_data:
+    caption: Registry String Data
+    type: string_t
+    requirement: optional
+    description: The data of the registry value when `type_id` is `REG_SZ`, `REG_EXPAND_SZ`, or `REG_LINK`.
+  reg_string_list_data:
+    caption: Registry String List Data
+    type: string_t
+    array: true
+    requirement: optional
+    description: The data of the registry value when `type_id` is `REG_MULTI_SZ`.
+  type:
+    caption: Type
+    type: string_t
+    requirement: optional
+    description: A string representation of the value type as specified in [Registry Value Types](https://learn.microsoft.com/en-us/windows/win32/sysinfo/registry-value-types).
+  type_id:
+    caption: Type ID
+    type: integer_t
+    requirement: recommended
+    sibling: type
+    description: The value type ID.
+    enum:
+      '0':
+        caption: Unknown
+        description: The type is unknown.
+      '1':
+        caption: REG_BINARY
+        description: Arbitrary binary data.
+      '2':
+        caption: REG_DWORD
+        description: A 32-bit integer.
+      '3':
+        caption: REG_DWORD_BIG_ENDIAN
+        description: A 32-bit integer in big-endian byte order.
+      '4':
+        caption: REG_EXPAND_SZ
+        description: A string containing unexpanded environment variables, e.g. `%USERPROFILE%\Downloads`.
+      '5':
+        caption: REG_LINK
+        description: A string containing the target path of a symbolic link created by calling `RegCreateKeyEx` with `REG_OPTION_CREATE_LINK`.
+      '6':
+        caption: REG_MULTI_SZ
+        description: A sequence of zero or more strings.
+      '7':
+        caption: REG_NONE
+        description: A value with no declared type.
+      '8':
+        caption: REG_QWORD
+        description: A 64-bit integer.
+      '9':
+        caption: REG_QWORD_LITTLE_ENDIAN
+        description: Not defined in Windows documentation and previously added to OCSF in error.
+        deprecated:
+          since: 1.6.0
+          message: Use `REG_QWORD` instead.
+      '10':
+        caption: REG_SZ
+        description: A string.
+      '99':
+        caption: Other
+        description: The type is not mapped. See the `type` attribute, which contains a data source specific value.

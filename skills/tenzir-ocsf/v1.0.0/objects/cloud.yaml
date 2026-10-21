@@ -1,0 +1,72 @@
+name: cloud
+caption: Cloud
+extends: object
+description: The Cloud object contains information about a cloud account such as AWS Account ID, regions, etc.
+referenced_by:
+  classes:
+    account_change: [cloud]
+    api_activity: [cloud]
+    application_lifecycle: [cloud]
+    authentication: [cloud]
+    authorize_session: [cloud]
+    base_event: [cloud]
+    config_state: [cloud]
+    dhcp_activity: [cloud]
+    dns_activity: [cloud]
+    email_activity: [cloud]
+    email_file_activity: [cloud]
+    email_url_activity: [cloud]
+    entity_management: [cloud]
+    file_activity: [cloud]
+    ftp_activity: [cloud]
+    group_management: [cloud]
+    http_activity: [cloud]
+    inventory_info: [cloud]
+    kernel_activity: [cloud]
+    kernel_extension: [cloud]
+    memory_activity: [cloud]
+    module_activity: [cloud]
+    network_activity: [cloud]
+    network_file_activity: [cloud]
+    process_activity: [cloud]
+    rdp_activity: [cloud]
+    scheduled_job_activity: [cloud]
+    security_finding: [cloud]
+    smb_activity: [cloud]
+    ssh_activity: [cloud]
+    user_access: [cloud]
+    web_resource_access_activity: [cloud]
+    web_resources_activity: [cloud]
+attributes:
+  account:
+    caption: Account
+    type: object_t
+    object: account
+    requirement: optional
+    description: The account object describes details about the account that was the source or target of the activity.
+  org:
+    caption: Organization
+    type: object_t
+    object: organization
+    requirement: optional
+    description: Organization and org unit relevant to the event or object.
+  project_uid:
+    caption: Project ID
+    type: string_t
+    requirement: optional
+    description: The unique identifier of a Cloud project.
+  provider:
+    caption: Provider
+    type: string_t
+    requirement: required
+    description: The unique name of the Cloud services provider, such as AWS, MS Azure, GCP, etc.
+  region:
+    caption: Region
+    type: string_t
+    requirement: recommended
+    description: The name of the cloud region, as defined by the cloud provider.
+  zone:
+    caption: Network Zone
+    type: string_t
+    requirement: optional
+    description: The availability zone in the cloud region, as defined by the cloud provider.

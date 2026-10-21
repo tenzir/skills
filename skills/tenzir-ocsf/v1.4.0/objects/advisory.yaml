@@ -1,0 +1,137 @@
+name: advisory
+caption: Advisory
+extends: object
+description: The Advisory object represents publicly disclosed cybersecurity vulnerabilities defined in a Secruity advisory. e.g.  `Microsoft KB Article, Apple Security Advisory`
+profiles: [data_classification, datetime]
+referenced_by:
+  objects:
+    vulnerability: [advisory]
+attributes:
+  avg_timespan:
+    caption: Average Timespan
+    type: object_t
+    object: timespan
+    requirement: optional
+    description: The average time to patch.
+  bulletin:
+    caption: Patch Bulletin
+    type: string_t
+    requirement: optional
+    description: The Advisory bulletin identifier.
+  classification:
+    caption: Classification
+    type: string_t
+    requirement: optional
+    description: The vendors classification of the Advisory.
+  created_time:
+    caption: Created Time
+    type: timestamp_t
+    requirement: recommended
+    description: The time when the Advisory record was created.
+  created_time_dt:
+    caption: Created Time
+    type: datetime_t
+    requirement: optional
+    profile: datetime
+    description: The time when the Advisory record was created.
+  desc:
+    caption: Description
+    type: string_t
+    requirement: optional
+    description: A brief description of the Advisory Record.
+  install_state:
+    caption: Install State
+    type: string_t
+    requirement: recommended
+    description: The install state of the Advisory.
+  install_state_id:
+    caption: Install State ID
+    type: integer_t
+    requirement: recommended
+    sibling: install_state
+    description: The normalized install state ID of the Advisory.
+    enum:
+      '0':
+        caption: Unknown
+        description: The normalized install state is unknown.
+      '1':
+        caption: Installed
+        description: The item is installed.
+      '2':
+        caption: Not Installed
+        description: The item is not installed.
+      '3':
+        caption: Installed Pending Reboot
+        description: The item is installed pending reboot operation.
+      '99':
+        caption: Other
+        description: The install state is not mapped. See the `install_state` attribute, which contains a data source specific value.
+  is_superseded:
+    caption: The patch is superseded.
+    type: boolean_t
+    requirement: optional
+    description: The Advisory has been replaced by another.
+  modified_time:
+    caption: Modified Time
+    type: timestamp_t
+    requirement: optional
+    description: The time when the Advisory record was last updated.
+  modified_time_dt:
+    caption: Modified Time
+    type: datetime_t
+    requirement: optional
+    profile: datetime
+    description: The time when the Advisory record was last updated.
+  os:
+    caption: OS
+    type: object_t
+    object: os
+    requirement: recommended
+    description: The operating system the Advisory applies to.
+  product:
+    caption: Product
+    type: object_t
+    object: product
+    requirement: optional
+    description: The product where the vulnerability was discovered.
+  references:
+    caption: References
+    type: string_t
+    array: true
+    requirement: recommended
+    description: A list of reference URLs with additional information about the vulnerabilities disclosed in the Advisory.
+  related_cves:
+    caption: Related CVEs
+    type: object_t
+    object: cve
+    array: true
+    requirement: optional
+    description: A list of Common Vulnerabilities and Exposures [(CVE)](https://cve.mitre.org/) identifiers related to the vulnerabilities disclosed in the Advisory.
+  related_cwes:
+    caption: Related CWEs
+    type: object_t
+    object: cwe
+    array: true
+    requirement: optional
+    description: A list of Common Weakness Enumeration [(CWE)](https://cwe.mitre.org/) identifiers related to the vulnerabilities disclosed in the Advisory.
+  size:
+    caption: Size
+    type: long_t
+    requirement: optional
+    description: The size in bytes for the Advisory. Usually populated for a KB Article patch.
+  src_url:
+    caption: Source URL
+    type: url_t
+    requirement: optional
+    observable: 6
+    description: The Advisory link from the source vendor.
+  title:
+    caption: Title
+    type: string_t
+    requirement: recommended
+    description: A title or a brief phrase summarizing the Advisory.
+  uid:
+    caption: Advisory ID
+    type: string_t
+    requirement: required
+    description: The unique number assigned to the disclosed vulnerability.

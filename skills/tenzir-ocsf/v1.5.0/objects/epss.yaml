@@ -1,0 +1,35 @@
+name: epss
+caption: EPSS
+extends: object
+description: The Exploit Prediction Scoring System (EPSS) object describes the estimated probability a vulnerability will be exploited. EPSS is a community-driven effort to combine descriptive information about vulnerabilities (CVEs) with evidence of actual exploitation in-the-wild. ([EPSS](https://www.first.org/epss/)).
+profiles: [datetime]
+referenced_by:
+  objects:
+    cve: [epss]
+attributes:
+  created_time:
+    caption: Created Time
+    type: timestamp_t
+    requirement: recommended
+    description: The timestamp indicating when the EPSS score was calculated.
+  created_time_dt:
+    caption: Created Time
+    type: datetime_t
+    requirement: optional
+    profile: datetime
+    description: The timestamp indicating when the EPSS score was calculated.
+  percentile:
+    caption: EPSS Percentile
+    type: float_t
+    requirement: optional
+    description: The EPSS score's percentile representing relative importance and ranking of the score in the larger EPSS dataset.
+  score:
+    caption: EPPS Score
+    type: string_t
+    requirement: required
+    description: The EPSS score representing the probability [0-1] of exploitation in the wild in the next 30 days (following score publication).
+  version:
+    caption: Version
+    type: string_t
+    requirement: recommended
+    description: The version of the EPSS model used to calculate the score.

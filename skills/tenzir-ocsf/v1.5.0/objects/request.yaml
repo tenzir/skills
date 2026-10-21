@@ -1,0 +1,34 @@
+name: request
+caption: Request Elements
+extends: object
+description: The Request Elements object describes characteristics of an API request.
+referenced_by:
+  classes:
+    rdp_activity: [request]
+  objects:
+    api: [request]
+attributes:
+  containers:
+    caption: Containers
+    type: object_t
+    object: container
+    array: true
+    requirement: optional
+    observable: 27
+    description: When working with containerized applications, the set of containers which write to the standard the output of a particular logging driver. For example, this may be the set of containers involved in handling api requests and responses for a containerized application.
+  data:
+    caption: Data
+    type: json_t
+    requirement: optional
+    description: The additional data that is associated with the api request.
+  flags:
+    caption: Flags
+    type: string_t
+    array: true
+    requirement: optional
+    description: The communication flags that are associated with the api request.
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: required
+    description: The unique request identifier.

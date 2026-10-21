@@ -1,0 +1,20 @@
+name: idp
+caption: Identity Provider
+extends: _entity
+description: The Identity Provider object contains detailed information about a provider responsible for creating, maintaining, and managing identity information while offering authentication services to applications. An Identity Provider (IdP) serves as a trusted authority that verifies the identity of users and issues authentication tokens or assertions to enable secure access to applications or services.
+constraints:
+  at_least_one: [name, uid]
+referenced_by:
+  objects:
+    actor: [idp]
+attributes:
+  name:
+    caption: Name
+    type: string_t
+    requirement: recommended
+    description: The name of the identity provider.
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: recommended
+    description: The unique identifier of the identity provider.

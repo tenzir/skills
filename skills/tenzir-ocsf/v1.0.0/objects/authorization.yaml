@@ -1,0 +1,19 @@
+name: authorization
+caption: Authorization Result
+extends: object
+description: The Authorization Result object provides details about the authorization outcome and associated policies related to activity.
+referenced_by:
+  objects:
+    actor: [authorizations]
+attributes:
+  decision:
+    caption: Authorization Decision/Outcome
+    type: string_t
+    requirement: optional
+    description: Authorization Result/outcome, e.g. allowed, denied.
+  policy:
+    caption: Policy
+    type: object_t
+    object: policy
+    requirement: optional
+    description: Details about the Identity/Access management policies that are applicable.
