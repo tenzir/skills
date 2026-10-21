@@ -132,6 +132,8 @@ Some differences from the original events remain:
 * Blobs in the catch-all come back as Base64 strings.
 * A non-nullable column receives its default value for an event without the field, such as `0`, `""`, or `{}`, and the event comes back with that value.
 
+If a column is added after the operator reads the table schema but before a query with pushed filters starts, the query can fail to avoid filtering against an outdated field layout. Retry the query to use the updated schema.
+
 The `sql` mode and tables without a catch-all column return the columns as they are.
 
 ## Types
@@ -172,7 +174,7 @@ The operator drops columns of other unsupported types, such as geo types, with a
 
 When the operator reads a table, it lets ClickHouse do the work of the [`where`](https://tenzir.com/docs/reference/operators/where.md), [`select`](https://tenzir.com/docs/reference/operators/select.md), [`head`](https://tenzir.com/docs/reference/operators/head.md), and [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) operators that follow it, so that ClickHouse returns only the rows, columns, and summaries that the pipeline needs. The page on [ClickHouse optimizations](../optimizations/clickhouse.md) describes which filters ClickHouse evaluates, and the [optimizations overview](../optimizations.md) explains how Tenzir optimizes pipelines in general.
 
-In a [catch-all table](from_clickhouse.md#catch-all-tables), only filters on columns without dots in their name go into the query, and the query reads every column.
+In a [catch-all table](from_clickhouse.md#catch-all-tables), supported filters on scalar columns go into the query, including columns with dotted names such as `src_endpoint.port`. Many filters on fields in the catch-all go into the query as prefilters that narrow the rows, and the filter still runs in Tenzir. The query reads every column. The [ClickHouse optimizations](../optimizations/clickhouse.md#catch-all-tables) page lists which filters qualify.
 
 ## Examples
 

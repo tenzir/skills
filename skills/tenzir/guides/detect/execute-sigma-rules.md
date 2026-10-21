@@ -35,7 +35,7 @@ publish "detections.sigma"
 
 Directories are searched recursively in lexical order and include `.yaml` and `.yml` files. An explicitly named rule file can use another extension. Overlapping entries are deduplicated. A file can contain several `---`-separated YAML documents, which lets you keep detection rules and their global filters together.
 
-Filesystem rules refresh without restarting the pipeline. A broken change does not replace a valid active rule: Tenzir keeps that document’s last valid version, reports the new error once, and still updates unrelated rules. Removing a source file from a successfully inspected directory removes its rules.
+Filesystem rules refresh without restarting the pipeline. A broken change does not replace a valid active rule: Tenzir keeps that document’s last valid version, reports the new error once, and still updates unrelated rules. To clear all rules and filters from a file, empty it or replace its contents with only whitespace and comments. The next refresh removes them without treating the empty file as an error. Removing a source file from a successfully inspected directory also removes its rules.
 
 ### Embed one or more rules
 

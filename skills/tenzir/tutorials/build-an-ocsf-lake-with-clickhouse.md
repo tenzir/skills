@@ -168,6 +168,8 @@ ORDER BY time;
 
 The comment `tenzir:catch_all` marks the `event` column as the **catch-all column**. When [`to_clickhouse`](https://tenzir.com/docs/reference/operators/to_clickhouse.md) writes an event, it looks up each field in the table: a field with a column of the same name goes into that column, and every other field goes into the catch-all. Without a catch-all, Tenzir drops fields that have no column, with a warning.
 
+The name `event` works for OCSF, which has no top-level attribute called `event`. Data with such a field, such as Elastic Common Schema events, needs another name. Otherwise a typed column like `event.category` shadows part of the catch-all, and filters on it stay out of ClickHouse. Our integration guide explains how to [name the catch-all column](../integrations/clickhouse.md#name-the-catch-all-column).
+
 The `DateTime64(9, 'UTC')` type keeps the full nanosecond precision of Tenzir timestamps. The `MergeTree` engine stores the rows sorted by the `ORDER BY` key, here `time`, which the next steps make use of.
 
 Load the sample events into the table:
@@ -293,14 +295,25 @@ A column whose name is a field path, such as `src_endpoint.ip`, receives that fi
 
 Whether a field deserves a typed column depends on how queries use it:
 
-|                                | Typed column                          | Catch-all path                                  |
-| ------------------------------ | ------------------------------------- | ----------------------------------------------- |
-| Filter on the field            | Can use the sort key and skip indexes | Scans every row unless an index covers the path |
-| Sort or partition by the field | Possible                              | Not supported for the catch-all                 |
-| Value type                     | Declared once, checked on insert      | Inferred per value, can differ between rows     |
-| Cost when mostly empty         | Small, but not zero                   | None                                            |
+|                                | Typed column                                                                                                    | Catch-all path                                                                                               |
+| ------------------------------ | --------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| Filtering                      | Can use the sort key and skip indexes                                                                           | Reads the path in every row                                                                                  |
+| Pushdown of pipeline filters   | [Most filters](../reference/optimizations/clickhouse.md#filters-that-clickhouse-evaluates) | Only comparisons with strings and numbers, `starts_with`, `ends_with`, substrings, `in` lists, and `!= null` |
+| Sort or partition by the field | Possible                                                                                                        | Not supported for the catch-all                                                                              |
+| Value type                     | Declared once, checked on insert                                                                                | Inferred per value, can differ between rows                                                                  |
+| Cost when mostly empty         | Small, but not zero                                                                                             | None                                                                                                         |
 
-The last row is why you should not give every OCSF attribute a column. OCSF defines thousands of attributes, and in ClickHouse every column costs memory on every insert and work on every merge, no matter how sparse it is. As our post on [OCSF storage strategies](https://tenzir.com/blog/ocsf-storage-strategies-for-your-security-lakehouse.md#wide-and-sparse-is-expensive-in-clickhouse) explains, a wide and sparse table that works well in Iceberg becomes expensive in ClickHouse once it reaches thousands of columns. Promote the few dozen fields you filter and aggregate on, such as time, class, hosts, IP addresses, users, severity, and event codes, and leave the rest in the catch-all. The table above covers the class-independent core of OCSF plus the fields of our four classes. Adding a column later is cheap, as the step on [evolving the table](build-an-ocsf-lake-with-clickhouse.md#evolve-the-table) shows.
+Pushdown
+
+In a pipeline, Tenzir pushes a filter down by translating it into the SQL query it sends, so ClickHouse skips the rows that do not match instead of sending them to Tenzir. Our reference on [optimizations](../reference/optimizations.md) explains how this works.
+
+To decide where a field goes, ask three questions:
+
+1. Is the field part of the sort key or partition key?
+2. Do queries often filter, group, or aggregate on it?
+3. Do you sometimes filter it in a way the catch-all [cannot push down](../reference/optimizations/clickhouse.md#catch-all-tables), such as a subnet match or `status != "Success"`?
+
+If you answer any question with yes, give the field a typed column. Otherwise, leave it in the catch-all. You can [add a column later](build-an-ocsf-lake-with-clickhouse.md#evolve-the-table) at any time.
 
 ### Choose column types
 
@@ -506,9 +519,9 @@ head 2
 
 The [`ocsf_derive`](https://tenzir.com/docs/reference/operators/ocsf_derive.md) operator restored the captions `status` and `severity` from their IDs, and the IP address comes back as an IP, not as the IPv4-mapped IPv6 address that ClickHouse stores.
 
-Rebuilding events has a cost: any field can be split between a column and the catch-all, so ClickHouse returns every column of the matching rows. Only filters on columns without dots in their name, such as the first `where` on `class_uid`, `status_id`, and `time`, run in ClickHouse. The filter on `user.name`, the [`select`](https://tenzir.com/docs/reference/operators/select.md), and everything after it run in Tenzir. Narrow the rows with filters on such columns first. The reference on [ClickHouse optimizations](../reference/optimizations/clickhouse.md#catch-all-tables) lists what reaches ClickHouse, and the [`from_clickhouse`](https://tenzir.com/docs/reference/operators/from_clickhouse.md) reference lists how a [rebuilt event](../reference/operators/from_clickhouse.md#catch-all-tables) can differ from the original one.
+Rebuilding events has a cost: any field can be split between a column and the catch-all, so ClickHouse returns every column of the matching rows. Filters on typed columns, such as `class_uid`, `status_id`, `time`, and the dotted column `user.name`, run in ClickHouse. Supported filters on fields in the catch-all narrow the rows in ClickHouse and run again in Tenzir. The [`select`](https://tenzir.com/docs/reference/operators/select.md) and everything after it run in Tenzir. Filter on typed columns where you can, because ClickHouse can use the sort key and skip indexes for them. The reference on [ClickHouse optimizations](../reference/optimizations/clickhouse.md#catch-all-tables) lists what reaches ClickHouse, and the [`from_clickhouse`](https://tenzir.com/docs/reference/operators/from_clickhouse.md) reference lists how a [rebuilt event](../reference/operators/from_clickhouse.md#catch-all-tables) can differ from the original one.
 
-When ClickHouse should do the work, such as filtering on dotted columns, aggregating, or sorting, use SQL mode. It returns the result as it is, without rebuilding events:
+When ClickHouse should do more of the work, such as aggregating or sorting, use SQL mode. It returns the result as it is, without rebuilding events:
 
 ```tql
 from_clickhouse tls=false, sql="
@@ -629,7 +642,7 @@ The index skips nothing, because every granule of 8192 rows contains events from
 ALTER TABLE ocsf.events DROP INDEX idx_hostname;
 ```
 
-Indexes on dotted columns, such as `dst_endpoint.ip`, help SQL queries only. When you read the table with [`from_clickhouse`](https://tenzir.com/docs/reference/operators/from_clickhouse.md) in table mode, filters on dotted columns run in Tenzir, so ClickHouse never consults the index.
+Indexes on typed dotted columns, such as `dst_endpoint.ip`, can also help when you read the table with [`from_clickhouse`](https://tenzir.com/docs/reference/operators/from_clickhouse.md) in table mode. Supported filters on these columns reach ClickHouse, so it can use their skip indexes. As with SQL queries, an index helps only when it can skip enough granules.
 
 A path inside the catch-all can carry an index on its typed subcolumn, such as `INDEX idx_query event.query.hostname.:String TYPE bloom_filter(0.01)`, but only queries that spell out the same typed subcolumn use it. When you query a field often enough to index it, promote it to a typed column instead.
 

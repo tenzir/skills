@@ -197,6 +197,12 @@ The table determines where each field goes:
 
 The catch-all column’s name does not select an input field. If the input itself contains a field named `event`, that field remains part of the catch-all JSON. Use `uint` values for unsigned integer columns and IP values for IP columns, as in the example. Fields without a matching column enter the catch-all without a warning; incompatible values for typed columns cause the event to be dropped with a warning. The [data handling rules](clickhouse.md#json-values-and-type-restrictions) cover the remaining conversions and restrictions.
 
+#### Name the catch-all column
+
+Give the catch-all a name that no top-level field of your data uses. In ClickHouse, a column named after the catch-all, a dot, and a path shadows that path. With a column `event.category` next to the catch-all `event`, a query that names `event.category` reads the column, not the `category` field in the JSON. [`from_clickhouse`](https://tenzir.com/docs/reference/operators/from_clickhouse.md) therefore does not push down filters on shadowed fields, such as `category == "x"` or `category.name == "x"`. These filters run only in Tenzir, so the results stay correct, but the query reads more rows. Tenzir warns and names the shadowing column. The optimizations reference lists this rule with the other [catch-all filters](../reference/optimizations/clickhouse.md#catch-all-tables).
+
+The name `event` suits OCSF, which has no top-level attribute of that name. Data with a top-level `event` field, such as the Elastic Common Schema (ECS) or Splunk events, collides with it once you promote one of its fields to a typed column. For such data, choose a name like `extra` or `catch_all`.
+
 #### Change which paths get typed columns
 
 Add a column when you need to query a field that currently lives in the catch-all:
@@ -243,7 +249,7 @@ from_clickhouse table="security.events", tls=false
 where metadata.product.name == "Demo"
 ```
 
-In such a table, only filters on columns without dots in their name go into the query. The [`from_clickhouse`](https://tenzir.com/docs/reference/operators/from_clickhouse.md) reference describes the [reconstruction](../reference/operators/from_clickhouse.md#catch-all-tables) in detail.
+In such a table, supported filters on scalar columns go into the query, including dotted columns such as `src_endpoint.ip`. Many filters on fields in the catch-all, such as `metadata.product.name == "Demo"`, let ClickHouse narrow the rows, and Tenzir applies them again to the rebuilt events. Our reference on [ClickHouse optimizations](../reference/optimizations/clickhouse.md#catch-all-tables) lists which filters qualify. The [`from_clickhouse`](https://tenzir.com/docs/reference/operators/from_clickhouse.md) reference describes the [reconstruction](../reference/operators/from_clickhouse.md#catch-all-tables) in detail.
 
 Use SQL mode when ClickHouse should aggregate, sort, join, or otherwise shape the result in ways that `table` mode does not express. This query uses the catch-all table created earlier and selects its typed columns:
 

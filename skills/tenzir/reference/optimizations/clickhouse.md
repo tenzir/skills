@@ -93,7 +93,42 @@ When ClickHouse computes a summary, Tenzir does not see the individual rows, so 
 
 ## Catch-all tables
 
-A table with a [catch-all column](../../integrations/clickhouse.md#catch-all-columns) returns reconstructed events: the fields of the catch-all move to the top level, and dotted columns become nested fields. A filter goes into the query only if it refers to a column whose name has no dots and whose type is not `JSON`, because only those columns keep their name and value in the event. All other filters run in Tenzir. A [`select`](https://tenzir.com/docs/reference/operators/select.md) does not narrow the columns, because a field can be split between a column and the catch-all, so the query reads every column. For the same reason, a [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) always runs in Tenzir on the reconstructed events. A [`head`](https://tenzir.com/docs/reference/operators/head.md) still becomes a `LIMIT` if every filter went into the query.
+A table with a [catch-all column](../../integrations/clickhouse.md#catch-all-columns) returns reconstructed events: the fields of the catch-all move to the top level, and dotted columns become nested fields. A filter on a field of such an event reaches ClickHouse through the column that holds the field:
+
+* A supported filter on a typed column goes into the query like a filter on any other table. This applies to columns without dots in their name and to scalar columns with a dotted name, such as `src_endpoint.port`.
+* A filter on a field stored in the catch-all, such as `metadata.product.name`, can go into the query as a **prefilter**. ClickHouse reads only that path of the catch-all, not the whole JSON value. It compares the stored text of the value, so it may let extra rows through, such as the string `"7"` for `n > 4`. The filter stays in the pipeline and runs on the reconstructed events, so the result does not change.
+
+For example, if `src_endpoint.port` is a `UInt16` column and the catch-all column `event` holds `metadata`, the pipeline
+
+```tql
+from_clickhouse table="security.events"
+where src_endpoint.port == 443 and metadata.product.name == "Demo"
+```
+
+sends a query with this filter:
+
+```sql
+WHERE `src_endpoint.port` = 443
+  AND toString(`event`.`metadata`.`product`.`name`) = 'Demo'
+```
+
+These predicates on fields of the catch-all become prefilters:
+
+* Comparisons (`==`, `<`, `<=`, `>`, `>=`) with string and number literals, and equality with booleans.
+* The functions `starts_with` and `ends_with`.
+* Substring search with `"needle" in field`, unless the needle contains a quote, a backslash, or a control character.
+* Membership tests with `in` and a list of such literals, which may mix types.
+* Existence tests with `field != null`.
+
+Other predicates on these fields run only in Tenzir, including negated predicates, `!=` with a non-null literal, `== null`, arithmetic, regular expressions, and comparisons with `ip` or `time` values. A field whose value may come from more than one column also stays in Tenzir. This includes a record that a dotted column merges into, such as `src_endpoint` next to a `src_endpoint.port` column, and a field that overlaps a generated `ALIAS`, `MATERIALIZED`, or `EPHEMERAL` column. When an explicit column overrides a catch-all value at the same path, the filter uses the explicit column.
+
+A column can also shadow paths of the catch-all. ClickHouse resolves a path such as `event.category` to a column of that name if one exists, instead of to the `category` path of the catch-all `event`. Tenzir therefore keeps filters on the shadowed field and the fields below it in the pipeline, for example `category == "x"` and `category.name == "x"`. It warns and names the shadowing column. The result stays correct, but ClickHouse sends more rows. Our integration guide explains how to [name the catch-all column](../../integrations/clickhouse.md#name-the-catch-all-column) to avoid this.
+
+Fields in other `JSON` columns of a catch-all table support the same prefilters if the column uses plain `JSON` or only the `max_dynamic_paths` and `max_dynamic_types` settings. If its declaration contains any typed path or `SKIP` clause, filters on all fields of that column stay in Tenzir. The marked catch-all column itself must still use bare `JSON`: declarations with settings, typed paths, or `SKIP` clauses are rejected, not read with local filtering. Tables without a catch-all keep their existing behavior.
+
+A [`select`](https://tenzir.com/docs/reference/operators/select.md) does not narrow the columns, because a field can be split between a column and the catch-all, so the query reads every column. For the same reason, a [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) always runs in Tenzir on the reconstructed events. A [`head`](https://tenzir.com/docs/reference/operators/head.md) becomes a `LIMIT` only if every filter went into the query as an exact filter, not as a prefilter. To see the filter that ClickHouse received, look up the query in ClickHouse’s `system.query_log` table.
+
+Adding a column while a catch-all query with pushed filters starts can cause the query to fail. Retry it to use the updated schema, as the [operator reference](../operators/from_clickhouse.md#catch-all-tables) describes.
 
 ## Filters that ClickHouse evaluates
 

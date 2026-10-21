@@ -352,7 +352,7 @@ from_http "https://api.example.com/data", max_retry_count=3, retry_delay=2s {
 }
 ```
 
-This retries transient transport failures and HTTP `429` and `5xx` responses up to 3 times. The delay starts at 2 seconds and backs off exponentially. Tenzir emits a diagnostic before each retry with the reason and wait time.
+This retries transient transport failures and HTTP `429` and `5xx` responses up to 3 times. The delay starts at 2 seconds and backs off exponentially. Intermediate retries do not emit pipeline warnings, so retries also work inside [`strict`](https://tenzir.com/docs/reference/operators/strict.md). When retries are exhausted, the request fails unless `error_field` captures the HTTP error response.
 
 ## See Also
 
