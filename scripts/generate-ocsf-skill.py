@@ -17,6 +17,7 @@ import json
 import logging
 import re
 import shutil
+import string
 import subprocess
 import tempfile
 from dataclasses import dataclass
@@ -1070,248 +1071,134 @@ def fetch_pages(client: httpx.Client, section: str) -> list[dict[str, str]]:
     return pages
 
 
-def render_skill(version_lines: list[str], latest_slug: str) -> str:
-    return "\n".join(
-        [
-            "---",
-            "name: tenzir-ocsf",
-            "description: Answer questions about OCSF (Open Cybersecurity Schema Framework). Use when the user asks about OCSF classes, objects, attributes, profiles, extensions, or event normalization.",
-            "metadata:",
-            "  uses:",
-            "    skills:",
-            "      - name: tenzir",
-            "        when: writing TQL that maps events to OCSF",
-            "---",
-            "",
-            "# OCSF",
-            "",
-            "Answer OCSF questions from the YAML schema files in this skill. They are",
-            "generated with the official OCSF schema compiler and are the authoritative",
-            "reference for names, types, requirements, enum values, constraints, profiles,",
-            "and observables. Use the Markdown docs under `docs/` for concepts and mapping",
-            "guidance. State only facts from files you read. If something is not in the",
-            "files, say that this skill does not document it.",
-            "",
-            "## Versions",
-            "",
-            "Use the latest stable version unless the user requests a specific one. Stick to",
-            "one version per answer.",
-            "",
-            *version_lines,
-            "",
-            "## Data files",
-            "",
-            "Each version directory contains the same files:",
-            "",
-            "| File | Contents |",
-            "| --- | --- |",
-            "| `{version}/version.yaml` | Status, source commit, extensions with their classes, objects, profiles, and patches, and changes since the previous version |",
-            "| `{version}/categories.yaml` | Categories with UID, description, and classes |",
-            "| `{version}/classes.yaml` | Index of all classes: name, caption, UID, category, summary, path |",
-            "| `{version}/classes/{name}.yaml` | One class, fully resolved |",
-            "| `{version}/objects.yaml` | Index of all objects: name, caption, group, summary, path |",
-            "| `{version}/objects/{name}.yaml` | One object, fully resolved |",
-            "| `{version}/profiles.yaml` | All profiles with their attributes and the classes and objects they apply to |",
-            "| `{version}/attributes.yaml` | Attribute dictionary: type, description, and the classes and objects that use each attribute |",
-            "| `{version}/types.yaml` | Data types: base type, length, range, regex, and observable type ID |",
-            "| `{version}/extensions/{extension}/classes/{name}.yaml` | Extension classes and patches of core classes |",
-            "| `{version}/extensions/{extension}/objects/{name}.yaml` | Extension objects and patches of core objects |",
-            "",
-            "## Resolving names",
-            "",
-            "Files refer to each other by name within the same version:",
-            "",
-            "| Field | Resolves to |",
-            "| --- | --- |",
-            "| `object: actor` | `{version}/objects/actor.yaml` |",
-            "| `object: win/reg_key` | `{version}/extensions/win/objects/reg_key.yaml` |",
-            "| `extends: system` in a class | `{version}/classes/system.yaml` |",
-            "| `extends: endpoint` in an object | `{version}/objects/endpoint.yaml` |",
-            "| `profile: cloud`, `profiles: [...]` | the key in `{version}/profiles.yaml` |",
-            "| `type: ip_t` | the key in `{version}/types.yaml` |",
-            "| `category: system` | the key in `{version}/categories.yaml` |",
-            "| `patched_by: [linux]` | `{version}/extensions/linux/{classes or objects}/{same name}.yaml` |",
-            "| `referenced_by`, `used_by`, `applies_to` | class names resolve like `extends` in a class, object names like `object` |",
-            "",
-            "## Mapping rules",
-            "",
-            "Write OCSF mappings as TQL with the `tenzir` skill. Use this skill for the",
-            "schema decisions:",
-            "",
-            f"- Choose the version, then the class and its `activity_id` from `activities` in",
-            f"  `{latest_slug}/classes.yaml`, then the profiles the source supports.",
-            "- Set `class_uid`, `category_uid`, `activity_id`, `type_uid`, `severity_id`,",
-            "  `time`, `metadata.version`, and `metadata.product`. `type_uid` is",
-            "  `class_uid * 100 + activity_id`.",
-            "- List applied profiles in `metadata.profiles`, then fill the attributes those",
-            "  profiles add.",
-            "- Fill required attributes first, then recommended ones. Inside an object, its",
-            "  own requirement levels apply once you set the object. Satisfy `constraints`.",
-            "- Set `_id` attributes and leave their string siblings to `ocsf_derive`. For",
-            "  `99` (Other), set the sibling to the source value.",
-            "- Keep source fields without an OCSF target in `unmapped`.",
-            "- Finish with `ocsf_derive`, then `ocsf_cast`. The mapping is complete when",
-            "  `ocsf_cast` emits no warnings.",
-            "",
-            "## Reading class and object files",
-            "",
-            "`attributes` lists every attribute of the class or object, including",
-            "inherited attributes and attributes added by profiles, ordered by",
-            "requirement: required, recommended, then optional. An attribute that is not",
-            "listed is not part of that class or object.",
-            "",
-            "Inherited attributes that are unchanged from their parent omit their",
-            "description and take one line, unless they have a long enum. They carry",
-            "everything a mapping needs. The description is in the file of the item that",
-            "`from` names:",
-            "",
-            "```yaml",
-            "severity_id: {caption: Severity ID, type: integer_t, requirement: required, group: classification, sibling: severity, enum: {0: Unknown, 1: Informational, 2: Low, 3: Medium, 4: High, 5: Critical, 6: Fatal, 99: Other}, from: base_event}",
-            "```",
-            "",
-            "Attributes that change anything besides the requirement, such as `activity_id`",
-            "with class-specific enum values, are listed in full with descriptions.",
-            "",
-            "Top-level fields:",
-            "",
-            "- `uid`: the `class_uid` of a class. `category_uid` is its category.",
-            "- `abstract: true`: a base class or object that events never use directly.",
-            "  Concrete classes extend abstract classes and inherit their attributes.",
-            "- `extends`: the parent the item inherits from.",
-            "- `profiles`: profiles that can apply to the item.",
-            "- `constraints`: `at_least_one` means at least one of the listed attributes",
-            "  must be set; `just_one` means exactly one must be set.",
-            "- `associations`: attributes that describe the same entity, e.g. `actor.user`",
-            "  and `device`.",
-            "- `observable` (objects): the observable `type_id` of the whole object.",
-            "- `referenced_by` (objects): the classes and objects that use this object, with",
-            "  the attribute names that hold it.",
-            "- `patched_by`: platform extensions that add attributes to this item.",
-            "- `extension`: the extension that defines the item. `patches` names the core",
-            "  item an extension patch modifies; the patch lists only the attributes it adds",
-            "  or changes.",
-            "- `deprecated`: `since`, `message`, and `superseded_by` for deprecated items.",
-            "",
-            "Attribute fields:",
-            "",
-            "- `requirement`: `required`, `recommended`, or `optional`.",
-            "- `type`: an OCSF data type from `types.yaml`. For `object_t`, `object` names",
-            "  the object. `array: true` marks a list of values.",
-            "- `profile`: the attribute belongs to that profile and is present only when the",
-            "  profile is applied. Attributes without `profile` always belong to the item.",
-            "- `from`: the ancestor that defines the attribute. Attributes without `from`",
-            "  are defined by the item itself.",
-            "- `group` (classes): `classification`, `context`, `occurrence`, or `primary`.",
-            "- `sibling`: the string attribute that carries the caption of this enum",
-            "  attribute, e.g. `activity_name` for `activity_id`.",
-            "- `observable`: the observable `type_id` for this attribute, from the",
-            "  attribute itself, its data type, or its object.",
-            "- `enum`: the allowed values. Keys are the integer values, `caption` is the label the",
-            "  sibling attribute takes.",
-            "",
-            "## Searching",
-            "",
-            "Read the index first, then the file it points to. These searches answer",
-            "common questions without opening many files:",
-            "",
-            f"- Find a class by keyword: `grep -n -i \"keyword\" {latest_slug}/classes.yaml`",
-            f"- Look up an attribute everywhere: `grep -n -A 12 \"^src_endpoint:\" {latest_slug}/attributes.yaml`",
-            f"- Jump to an attribute in a class: `grep -n -A 20 \"^  actor:\" {latest_slug}/classes/process_activity.yaml`",
-            f"- Read the description of an inherited attribute: `grep -n -A 30 \"^  severity_id:\" {latest_slug}/classes/base_event.yaml`",
-            f"- Find classes that hold an object: read `referenced_by` in `{latest_slug}/objects/{{name}}.yaml`",
-            "",
-            "## Question routing",
-            "",
-            "| Question pattern | Start here |",
-            "| --- | --- |",
-            "| How do I map source X to OCSF? | Mapping rules above → `classes.yaml` → the class file; the `tenzir` skill for TQL |",
-            "| Which class fits event X? | Category table below → `classes.yaml` → candidate class files |",
-            "| What attributes does class or object Y have? | `classes.yaml` or `objects.yaml` → the item's file |",
-            "| Which values can enum attribute Z take? | The `enum` of Z in the class or object file |",
-            "| Where is attribute or object X used? | `attributes.yaml` (`used_by`) or the object's `referenced_by` |",
-            "| How do profiles work? / Which profile for X? | [Introduction: Profiles](docs/introduction/profiles.md) → `profiles.yaml` |",
-            "| What do platform extensions add? | `version.yaml` (`extensions`) → the extension files |",
-            "| How do I extend the schema? | [Introduction: Extensions](docs/introduction/extensions.md) or [Patching the Core Schema](docs/articles/patching-core-using-extensions.md) |",
-            "| How do I populate observables / model alerts? | [FAQs](docs/faqs.md) and [Articles](docs/articles.md) |",
-            "| What changed between versions? | `changes` in `version.yaml`, then compare the item files |",
-            "| Conceptual / design question | [Introduction](docs/introduction.md) → [FAQs](docs/faqs.md) |",
-            "",
-            "When the question asks you to pick a class, read multiple candidates and explain",
-            "trade-offs.",
-            "",
-            "## Domain knowledge",
-            "",
-            "### Core concepts",
-            "",
-            "**Attributes** are named fields with a data type. Every OCSF field has a",
-            "requirement level: required, recommended, or optional.",
-            "",
-            "**Objects** group related attributes into reusable structures. Objects can nest",
-            "other objects.",
-            "",
-            "**Event classes** define schemas for specific security events. Each class belongs",
-            "to a category and inherits from Base Event.",
-            "",
-            "**Base Event** provides universal attributes and serves as a catch-all when no",
-            "more specific class fits.",
-            "",
-            "**Profiles** are mix-ins that add cross-cutting attributes. A class can apply",
-            "multiple profiles.",
-            "",
-            "**Extensions** add vendor-specific attributes without modifying the core schema.",
-            "",
-            "### Event categories",
-            "",
-            "Use the category range to narrow scope before reading individual class files.",
-            "",
-            "| Range | Category | Focus |",
-            "| ----- | -------- | ----- |",
-            "| 1xxx | System Activity | OS-level: process, file, module, memory, kernel, registry |",
-            "| 2xxx | Findings | Detections, vulnerabilities, incidents, compliance |",
-            "| 3xxx | IAM | Authentication, authorization, account and group changes |",
-            "| 4xxx | Network Activity | General traffic and protocol-specific activity |",
-            "| 5xxx | Discovery | Device, user, service, and resource enumeration |",
-            "| 6xxx | Application Activity | Web resources, API calls, file hosting, datastore operations |",
-            "| 7xxx | Remediation | File, process, network, and entity remediation actions |",
-            "| 8xxx | Unmanned | Drones, vehicles, and robots |",
-            "",
-            "### Naming conventions",
-            "",
-            "- `snake_case` everywhere: `process_activity`, `network_endpoint`.",
-            "- Arrays use plural names: `answers`, `enrichments`, `attacks`.",
-            "- When `_id` is `Other` (`99`), the sibling string **must** be populated with",
-            "  the source value. For other values, the sibling takes the enum caption.",
-            "- `type_uid` is `class_uid * 100 + activity_id`, e.g. `100701` for Process",
-            "  Activity: Launch.",
-            "",
-            "Key suffixes:",
-            "",
-            "| Suffix | Meaning |",
-            "| ------ | ------- |",
-            "| `_id` | Enum integer identifier with a sibling string (same name minus `_id`). `0` = Unknown, `99` = Other. |",
-            "| `_uid` | Schema-unique or external unique identifier (integer for classification attrs, string otherwise). Sibling uses `_name`. |",
-            "| `_uuid` | Globally unique 128-bit identifier (string). No sibling. |",
-            "| `_name` | Friendly name / caption sibling for `_uid` or `_id` attributes. |",
-            "| `_time` | Timestamp (`timestamp_t`, milliseconds since epoch). |",
-            "| `_dt` | Datetime (`datetime_t`, RFC 3339 string). Added by the Date/Time profile alongside `_time` attributes. |",
-            "| `_info` / `_detail` | Object carrying supplementary information. |",
-            "| `_process` | Reference to a Process object. |",
-            "| `_ver` | Version string. |",
-            "| `_list` | Array of values. |",
-            "",
-            "## Answering principles",
-            "",
-            "- Read before answering. Every claim must trace back to a file you read.",
-            "- Use the indexes, the question routing table, and the category table to narrow",
-            "  scope before reading class or object files.",
-            "- Consult [FAQs](docs/faqs.md) for schema design rationale and ambiguous mappings.",
-            "- Consult [Articles](docs/articles.md) for deep-dive topics like observables,",
-            "  alerts, process parentage, and extensions.",
-            "- Read [Introduction](docs/introduction.md) sections for conceptual questions",
-            "  about the framework itself.",
-            "",
-        ]
-    )
+SKILL_TEMPLATE = string.Template(
+    """---
+name: tenzir-ocsf
+description: Answer questions about OCSF (Open Cybersecurity Schema Framework). Use when the user asks about OCSF classes, objects, attributes, profiles, extensions, or event normalization.
+metadata:
+  uses:
+    skills:
+      - name: tenzir
+        when: writing TQL that maps events to OCSF
+---
+
+# OCSF
+
+Answer OCSF questions and make OCSF mapping decisions from the files in this
+skill. The YAML schema files are authoritative for names, types, requirements,
+enum values, and constraints. The Markdown docs under `docs/` explain concepts
+and mapping practice. State only facts from files you read, and say when the
+files do not cover a question.
+
+## Versions
+
+Use ${latest}${latest_note} unless the user asks for another one. Stay
+within one version per answer.
+
+Available: ${available}.
+
+Paths below use `${latest}/`; swap in the version you need.
+
+## Data files
+
+All paths are relative to this skill's directory. Run searches from there.
+
+| File | Contents |
+| --- | --- |
+| `${latest}/version.yaml` | Status, source commit, extensions, and changes since the previous version |
+| `${latest}/categories.yaml` | Categories with UID and classes |
+| `${latest}/classes.yaml` | Class index: UID, category, summary, `activities`, path |
+| `${latest}/classes/{name}.yaml` | One class, fully resolved |
+| `${latest}/objects.yaml` | Object index: group, summary, path |
+| `${latest}/objects/{name}.yaml` | One object, fully resolved |
+| `${latest}/profiles.yaml` | Profiles with their attributes and `applies_to` |
+| `${latest}/attributes.yaml` | Attribute dictionary with `used_by` |
+| `${latest}/types.yaml` | Data types with base type, constraints, and observable type ID |
+| `${latest}/extensions/{ext}/{classes,objects}/{name}.yaml` | Extension classes and objects, and patches of core items |
+
+Names resolve within the same version: `object: actor` →
+`objects/actor.yaml`; `object: win/reg_key` →
+`extensions/win/objects/reg_key.yaml`; `extends` → the parent class or object
+file; `type`, `profile`, and `category` → the key in `types.yaml`,
+`profiles.yaml`, or `categories.yaml`; `patched_by: [linux]` →
+`extensions/linux/{classes,objects}/{same name}.yaml`.
+
+Searches that avoid opening many files:
+
+- Find a class: `grep -n -i "keyword" ${latest}/classes.yaml`
+- Find an attribute and where it is used: `grep -n -A 12 "^src_endpoint:" ${latest}/attributes.yaml`
+- Jump to an attribute in a class: `grep -n -A 20 "^  actor:" ${latest}/classes/process_activity.yaml`
+- Find what holds an object: `referenced_by` in `${latest}/objects/{name}.yaml`
+
+## Reading class and object files
+
+`attributes` lists every attribute, including inherited and profile
+attributes, ordered required, recommended, then optional. Attributes that
+`patched_by` extensions add live only in the extension patch files.
+
+Attributes with `from` but no description are inherited unchanged and fit on
+one line; the description is in the file that `from` names:
+
+```yaml
+severity_id: {caption: Severity ID, type: integer_t, requirement: required, group: classification, sibling: severity, enum: {0: Unknown, 1: Informational, 2: Low, 3: Medium, 4: High, 5: Critical, 6: Fatal, 99: Other}, from: base_event}
+```
+
+Fields that need explanation:
+
+- `uid`, `category_uid`: the class's `class_uid` and `category_uid` values.
+- `abstract: true`: a parent that events never use directly.
+- `profile` / `profiles` on an attribute: present only when that profile is
+  applied.
+- `sibling`: the string attribute that takes the enum caption, e.g.
+  `activity_name` for `activity_id`.
+- `enum`: integer keys mapped to captions, or to `caption` and `description`.
+- `observable`: the observable `type_id` of the attribute or object.
+- `constraints`: `at_least_one` (one or more listed attributes set) or
+  `just_one` (exactly one set).
+- `associations`: attributes that describe the same entity.
+- `referenced_by` (objects): classes and objects that hold this object, with
+  the attribute names.
+- `extension`, `patches`: the defining extension and, for a patch, the core
+  item it extends. A patch lists only what it adds or changes.
+- `deprecated`, `supersedes`: deprecation details and the items this one
+  replaces.
+
+## Mapping events
+
+Write the TQL with the `tenzir` skill. Use this skill for the schema
+decisions:
+
+1. Pick the class by its category and the `activities` in `classes.yaml`;
+   read the candidate class files and compare them. `activities` omits `0`
+   (Unknown) and `99` (Other), which every class allows.
+2. Set `class_uid`, `category_uid`, `activity_id`, `type_uid`
+   (`class_uid * 100 + activity_id`), `severity_id`, `time`,
+   `metadata.version`, and `metadata.product`.
+3. Apply the profiles the source supports: list them in `metadata.profiles`
+   and fill the attributes they add.
+4. Fill required attributes, then recommended ones. A nested object's own
+   requirement levels apply once you set it. Satisfy `constraints`.
+5. Set `_id` attributes and let `ocsf_derive` fill their string siblings. For
+   `99` (Other), set the sibling to the source value.
+6. Keep source fields without an OCSF target in `unmapped`.
+7. Run `ocsf_derive`, then `ocsf_cast`. The mapping is complete when
+   `ocsf_cast` emits no warnings.
+
+## Docs
+
+| Topic | Start here |
+| --- | --- |
+| Framework concepts and design | [Introduction](docs/introduction.md), [FAQs](docs/faqs.md) |
+| Profiles | [Profiles](docs/introduction/profiles.md), then `profiles.yaml` |
+| Extending the schema | [Extensions](docs/introduction/extensions.md), [Patching the Core Schema](docs/articles/patching-core-using-extensions.md) |
+| Observables, alerts, process parentage | [Articles](docs/articles.md) |
+| Changes between versions | `changes` in `version.yaml`, then diff the item files |
+"""
+)
+
+
+def render_skill(*, latest: str, latest_note: str, available: str) -> str:
+    return SKILL_TEMPLATE.substitute(latest=latest, latest_note=latest_note, available=available)
 
 
 def parse_args() -> argparse.Namespace:
@@ -1355,17 +1242,19 @@ def main() -> None:
         shutil.rmtree(output_dir, ignore_errors=True)
         output_dir.mkdir(parents=True, exist_ok=True)
 
-        version_lines: list[str] = []
-        for data in version_docs:
-            link = f"[{data['version']}]({data['slug']}/version.yaml)"
-            if data is latest_stable:
-                version_lines.append(f"- **{link}** ← latest stable")
-            elif data is latest_dev:
-                version_lines.append(f"- {link} ← unreleased development snapshot")
-            else:
-                version_lines.append(f"- {link}")
-
-        write_file(output_dir / "SKILL.md", render_skill(version_lines, latest_reference["slug"]))
+        slugs = [data["slug"] for data in version_docs if data["is_stable"]]
+        available = f"{slugs[0]} through {slugs[-1]}" if len(slugs) > 1 else ", ".join(slugs)
+        if latest_dev is not None:
+            dev = f"{latest_dev['slug']} (unreleased)"
+            available = f"{available} and {dev}" if available else dev
+        write_file(
+            output_dir / "SKILL.md",
+            render_skill(
+                latest=latest_reference["slug"],
+                latest_note=", the latest stable version," if latest_stable is not None else "",
+                available=available,
+            ),
+        )
 
         docs_dir = output_dir / "docs"
         intro_sections = split_introduction(overview)
