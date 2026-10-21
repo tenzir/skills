@@ -1,3 +1,5 @@
+# Attributes with a `definition` path are inherited unchanged. Read that file
+# for their type, object, description, enum, and observable.
 name: authentication_token
 caption: Authentication Token
 extends: token
@@ -52,29 +54,21 @@ attributes:
       url: https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/auditing/event-4769
   modified_time:
     caption: Modified Time
-    type: timestamp_t
     requirement: optional
-    from: token
-    description: The last time the token was updated.
+    definition: v1.9.0/objects/token.yaml
   modified_time_dt:
     caption: Modified Time
-    type: datetime_t
     requirement: optional
     profile: datetime
-    from: token
-    description: The last time the token was updated.
+    definition: v1.9.0/objects/token.yaml
   name:
     caption: Name
-    type: string_t
     requirement: optional
-    from: token
-    description: The human-friendly name of a token or key, if available, such as the `name` from the Okta API Token API.
+    definition: v1.9.0/objects/token.yaml
   tenant_uid:
     caption: Tenant UID
-    type: string_t
     requirement: optional
-    from: token
-    description: The unique identifier of the tenant or organization that owns the token or key, or the tenant context in which the token is authorized for use. This is particularly relevant in multi-tenant Identity Provider scenarios where tokens are scoped to specific tenants.
+    definition: v1.9.0/objects/token.yaml
   type:
     caption: Type
     type: string_t
@@ -116,13 +110,9 @@ attributes:
         description: The type is not mapped. See the `type` attribute, which contains a data source specific value.
   uid:
     caption: Unique ID
-    type: string_t
     requirement: optional
-    from: token
-    description: The unique ID of a token or key, if available, such as the `Secret ID` of Entra ID Application Registration Client Secrets.
+    definition: v1.9.0/objects/token.yaml
   zone:
     caption: Network Zone
-    type: string_t
     requirement: optional
-    from: token
-    description: The network zone or geographic region that the token or key is authorized to be used from. This may represent network-based access restrictions, geographic limitations, or other zone-based authorization policies. Examples include Okta's network zone restrictions or cloud provider region restrictions.
+    definition: v1.9.0/objects/token.yaml

@@ -1,3 +1,5 @@
+# Attributes with a `definition` path are inherited unchanged. Read that file
+# for their type, object, description, enum, and observable.
 name: resource_details
 caption: Resource Details
 extends: _resource
@@ -28,10 +30,8 @@ attributes:
     description: The criticality of the resource as defined by the event source.
   data:
     caption: Data
-    type: json_t
     requirement: optional
-    from: _resource
-    description: Additional data describing the resource.
+    definition: v1.1.0/objects/_resource.yaml
   group:
     caption: Group
     type: object_t
@@ -40,17 +40,12 @@ attributes:
     description: The name of the related resource group.
   labels:
     caption: Labels
-    type: string_t
-    array: true
     requirement: optional
-    from: _resource
-    description: The list of labels/tags associated to a resource.
+    definition: v1.1.0/objects/_resource.yaml
   name:
     caption: Name
-    type: string_t
     requirement: optional
-    from: _resource
-    description: The name of the resource.
+    definition: v1.1.0/objects/_resource.yaml
   namespace:
     caption: Namespace
     type: string_t
@@ -71,16 +66,12 @@ attributes:
     description: The cloud region of the resource.
   type:
     caption: Type
-    type: string_t
     requirement: optional
-    from: _resource
-    description: The resource type as defined by the event source.
+    definition: v1.1.0/objects/_resource.yaml
   uid:
     caption: Unique ID
-    type: string_t
     requirement: optional
-    from: _resource
-    description: The unique identifier of the resource.
+    definition: v1.1.0/objects/_resource.yaml
   version:
     caption: Version
     type: string_t

@@ -1,3 +1,5 @@
+# Attributes with a `definition` path are inherited unchanged. Read that file
+# for their type, object, description, enum, and observable.
 name: evidences
 caption: Evidence Artifacts
 extends: _entity
@@ -163,12 +165,8 @@ attributes:
     description: The unique identifier of the evidence associated with the security detection. For example, the `activity_id` from CrowdStrike Falcon Alerts or `behavior_id` from CrowdStrike Falcon Incident Behaviors.
   uid_numeric:
     caption: Numeric Unique ID
-    type: long_t
     requirement: optional
-    from: _entity
-    description: |-
-      The `uid` attribute in numeric form where applicable.
-      Note: Producers may populate `uid_numeric` only in addition to `uid` and not as an alternative to it.
+    definition: v1.9.0/objects/_entity.yaml
   url:
     caption: URL
     type: object_t

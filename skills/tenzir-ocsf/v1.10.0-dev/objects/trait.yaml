@@ -1,3 +1,5 @@
+# Attributes with a `definition` path are inherited unchanged. Read that file
+# for their type, object, description, enum, and observable.
 name: trait
 caption: Trait
 extends: _entity
@@ -31,12 +33,8 @@ attributes:
     description: The unique identifier of the trait.
   uid_numeric:
     caption: Numeric Unique ID
-    type: long_t
     requirement: optional
-    from: _entity
-    description: |-
-      The `uid` attribute in numeric form where applicable.
-      Note: Producers may populate `uid_numeric` only in addition to `uid` and not as an alternative to it.
+    definition: v1.10.0-dev/objects/_entity.yaml
   values:
     caption: Values
     type: string_t

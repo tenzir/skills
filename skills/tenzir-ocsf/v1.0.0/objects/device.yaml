@@ -1,3 +1,5 @@
+# Attributes with a `definition` path are inherited unchanged. Read that file
+# for their type, object, description, enum, and observable.
 name: device
 caption: Device
 extends: endpoint
@@ -112,22 +114,16 @@ attributes:
     description: The International Mobile Station Equipment Identifier that is associated with the device.
   instance_uid:
     caption: Instance ID
-    type: string_t
     requirement: recommended
-    from: endpoint
-    description: The unique identifier of a VM instance.
+    definition: v1.0.0/objects/endpoint.yaml
   interface_name:
     caption: Network Interface Name
-    type: string_t
     requirement: recommended
-    from: endpoint
-    description: The name of the network interface (e.g. eth2).
+    definition: v1.0.0/objects/endpoint.yaml
   interface_uid:
     caption: Network Interface ID
-    type: string_t
     requirement: recommended
-    from: endpoint
-    description: The unique identifier of the network interface.
+    definition: v1.0.0/objects/endpoint.yaml
   ip:
     caption: IP Address
     type: ip_t
@@ -258,10 +254,8 @@ attributes:
     description: The subnet mask.
   subnet_uid:
     caption: Subnet UID
-    type: string_t
     requirement: optional
-    from: endpoint
-    description: The unique identifier of a virtual subnet.
+    definition: v1.0.0/objects/endpoint.yaml
   type:
     caption: Type
     type: string_t
@@ -308,13 +302,9 @@ attributes:
     description: An alternate unique identifier of the device if any. For example the ActiveDirectory DN.
   vlan_uid:
     caption: VLAN
-    type: string_t
     requirement: optional
-    from: endpoint
-    description: The Virtual LAN identifier.
+    definition: v1.0.0/objects/endpoint.yaml
   vpc_uid:
     caption: VPC UID
-    type: string_t
     requirement: optional
-    from: endpoint
-    description: The unique identifier of the Virtual Private Cloud (VPC).
+    definition: v1.0.0/objects/endpoint.yaml

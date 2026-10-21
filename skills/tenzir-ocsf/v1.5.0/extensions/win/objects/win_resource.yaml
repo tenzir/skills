@@ -1,3 +1,5 @@
+# Attributes with a `definition` path are inherited unchanged. Read that file
+# for their type, object, description, enum, and observable.
 name: win/win_resource
 caption: Windows Resource
 extension: win
@@ -12,10 +14,8 @@ referenced_by:
 attributes:
   created_time:
     caption: Created Time
-    type: timestamp_t
     requirement: optional
-    from: _resource
-    description: The time when the resource was created.
+    definition: v1.5.0/objects/_resource.yaml
   created_time_dt:
     caption: Created Time
     type: datetime_t
@@ -25,32 +25,18 @@ attributes:
     description: The time when the resource was created.
   data:
     caption: Data
-    type: json_t
     requirement: optional
-    from: _resource
-    description: Additional data describing the resource.
+    definition: v1.5.0/objects/_resource.yaml
   data_classification:
     caption: Data Classification
-    type: object_t
-    object: data_classification
     requirement: recommended
-    group: context
     profile: data_classification
-    from: _resource
-    deprecated:
-      since: 1.4.0
-      message: Use the attribute `data_classifications` instead
-    description: The Data Classification object includes information about data classification levels and data category types.
+    definition: v1.5.0/objects/_resource.yaml
   data_classifications:
     caption: Data Classification
-    type: object_t
-    object: data_classification
-    array: true
     requirement: recommended
-    group: context
     profile: data_classification
-    from: _resource
-    description: A list of Data Classification objects, that include information about data classification levels and data category types, indentified by a classifier.
+    definition: v1.5.0/objects/_resource.yaml
   details:
     caption: Details
     type: string_t
@@ -58,17 +44,12 @@ attributes:
     description: The string detailing the attributes of the resource object.
   labels:
     caption: Labels
-    type: string_t
-    array: true
     requirement: optional
-    from: _resource
-    description: The list of labels associated to the resource.
+    definition: v1.5.0/objects/_resource.yaml
   modified_time:
     caption: Modified Time
-    type: timestamp_t
     requirement: optional
-    from: _resource
-    description: The time when the resource was last modified.
+    definition: v1.5.0/objects/_resource.yaml
   modified_time_dt:
     caption: Modified Time
     type: datetime_t
@@ -88,12 +69,8 @@ attributes:
     description: The Windows service acting as the object server for the resource object, such as Security or Security Account Manager.
   tags:
     caption: Tags
-    type: object_t
-    object: key_value_object
-    array: true
     requirement: optional
-    from: _resource
-    description: The list of tags; `{key:value}` pairs associated to the resource.
+    definition: v1.5.0/objects/_resource.yaml
   type:
     caption: Type
     type: string_t
@@ -194,8 +171,5 @@ attributes:
     description: The Windows provided handle identifier for the resource object
   uid_alt:
     caption: Alternate ID
-    type: resource_uid_t
     requirement: optional
-    from: _resource
-    observable: 10
-    description: The alternative unique identifier of the resource.
+    definition: v1.5.0/objects/_resource.yaml

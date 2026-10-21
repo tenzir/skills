@@ -1,3 +1,5 @@
+# Attributes with a `definition` path are inherited unchanged. Read that file
+# for their type, object, description, enum, and observable.
 name: osint
 caption: OSINT
 extends: _entity
@@ -150,10 +152,8 @@ attributes:
     description: Any pertinent geolocation information related to an indicator or OSINT analysis.
   name:
     caption: Name
-    type: string_t
     requirement: recommended
-    from: _entity
-    description: The name of the entity.
+    definition: v1.3.0/objects/_entity.yaml
   signatures:
     caption: Related Digital Signatures
     type: object_t
@@ -244,10 +244,8 @@ attributes:
         description: The indicator type is not directly listed.
   uid:
     caption: Unique ID
-    type: string_t
     requirement: recommended
-    from: _entity
-    description: The unique identifier of the entity.
+    definition: v1.3.0/objects/_entity.yaml
   value:
     caption: Indicator
     type: string_t

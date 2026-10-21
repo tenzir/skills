@@ -1,3 +1,5 @@
+# Attributes with a `definition` path are inherited unchanged. Read that file
+# for their type, object, description, enum, and observable.
 name: unmanned_aerial_system
 caption: Unmanned Aerial System
 extends: aircraft
@@ -24,10 +26,8 @@ attributes:
     description: The detailed geographical location usually associated with an IP address.
   model:
     caption: Model
-    type: string_t
     requirement: optional
-    from: aircraft
-    description: The model name of the aircraft or unmanned system.
+    definition: v1.7.0/objects/aircraft.yaml
   name:
     caption: Name
     type: string_t
@@ -41,22 +41,16 @@ attributes:
     description: The serial number of the unmanned system. This is expressed in `CTA-2063-A` format.
   speed:
     caption: Speed
-    type: string_t
     requirement: optional
-    from: aircraft
-    description: 'Ground speed of flight. This value is provided in meters per second with a minimum resolution of 0.25 m/s. Special Values: `Invalid`, `No Value`, or `Unknown: 255 m/s`.'
+    definition: v1.7.0/objects/aircraft.yaml
   speed_accuracy:
     caption: Speed Accuracy
-    type: string_t
     requirement: optional
-    from: aircraft
-    description: Provides quality/containment on horizontal ground speed. Measured in meters/second.
+    definition: v1.7.0/objects/aircraft.yaml
   track_direction:
     caption: Track Direction
-    type: string_t
     requirement: optional
-    from: aircraft
-    description: Direction of flight expressed as a “True North-based” ground track angle. This value is provided in clockwise degrees with a minimum resolution of 1 degree. If aircraft is not moving horizontally, use the “Unknown” value
+    definition: v1.7.0/objects/aircraft.yaml
   type:
     caption: Type
     type: string_t
@@ -124,7 +118,5 @@ attributes:
     description: The Unmanned Aircraft System Traffic Management (UTM) provided universal unique ID (UUID) traceable to a non-obfuscated ID where this UTM UUID acts as a 'session id' to protect exposure of operationally sensitive information.
   vertical_speed:
     caption: Vertical Speed
-    type: string_t
     requirement: optional
-    from: aircraft
-    description: 'Vertical speed upward relative to the WGS-84 datum, measured in meters per second. Special Values: `Invalid`, `No Value`, or `Unknown: 63 m/s`.'
+    definition: v1.7.0/objects/aircraft.yaml

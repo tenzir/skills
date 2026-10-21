@@ -1,3 +1,5 @@
+# Attributes with a `definition` path are inherited unchanged. Read that file
+# for their type, object, description, enum, and observable.
 name: device
 caption: Device
 extends: endpoint
@@ -66,12 +68,8 @@ referenced_by:
 attributes:
   agent_list:
     caption: Agent List
-    type: object_t
-    object: agent
-    array: true
     requirement: optional
-    from: endpoint
-    description: A list of `agent` objects associated with a device, endpoint, or resource.
+    definition: v1.2.0/objects/endpoint.yaml
   autoscale_uid:
     caption: Autoscale UID
     type: string_t
@@ -79,14 +77,9 @@ attributes:
     description: The unique identifier of the cloud autoscale configuration.
   container:
     caption: Container
-    type: object_t
-    object: container
     requirement: recommended
-    group: context
     profile: container
-    from: endpoint
-    observable: 27
-    description: The information describing an instance of a container. A container is a prepackaged, portable system image that runs isolated on an existing system using a container runtime like containerd.
+    definition: v1.2.0/objects/endpoint.yaml
   created_time:
     caption: Created Time
     type: timestamp_t
@@ -134,11 +127,8 @@ attributes:
     description: The device hostname.
   hw_info:
     caption: Hardware Info
-    type: object_t
-    object: device_hw_info
     requirement: optional
-    from: endpoint
-    description: The endpoint hardware information.
+    definition: v1.2.0/objects/endpoint.yaml
   hypervisor:
     caption: Hypervisor
     type: string_t
@@ -157,22 +147,16 @@ attributes:
     description: The International Mobile Station Equipment Identifier that is associated with the device.
   instance_uid:
     caption: Instance ID
-    type: string_t
     requirement: recommended
-    from: endpoint
-    description: The unique identifier of a VM instance.
+    definition: v1.2.0/objects/endpoint.yaml
   interface_name:
     caption: Network Interface Name
-    type: string_t
     requirement: recommended
-    from: endpoint
-    description: The name of the network interface (e.g. eth2).
+    definition: v1.2.0/objects/endpoint.yaml
   interface_uid:
     caption: Network Interface ID
-    type: string_t
     requirement: recommended
-    from: endpoint
-    description: The unique identifier of the network interface.
+    definition: v1.2.0/objects/endpoint.yaml
   ip:
     caption: IP Address
     type: ip_t
@@ -219,11 +203,8 @@ attributes:
     description: The geographical location of the device.
   mac:
     caption: MAC Address
-    type: mac_t
     requirement: optional
-    from: endpoint
-    observable: 3
-    description: The Media Access Control (MAC) address of the endpoint.
+    definition: v1.2.0/objects/endpoint.yaml
   modified_time:
     caption: Modified Time
     type: timestamp_t
@@ -245,12 +226,9 @@ attributes:
       Note: The Name could be any other string that helps to identify the device, such as a phone number; for example `310-555-1234`.
   namespace_pid:
     caption: Namespace PID
-    type: integer_t
     requirement: recommended
-    group: context
     profile: container
-    from: endpoint
-    description: If running under a process namespace (such as in a container), the process identifier within that process namespace.
+    definition: v1.2.0/objects/endpoint.yaml
   network_interfaces:
     caption: Network Interfaces
     type: object_t
@@ -269,19 +247,12 @@ attributes:
     description: Organization and org unit related to the device.
   os:
     caption: OS
-    type: object_t
-    object: os
     requirement: optional
-    from: endpoint
-    description: The endpoint operating system.
+    definition: v1.2.0/objects/endpoint.yaml
   owner:
     caption: Owner
-    type: object_t
-    object: user
     requirement: recommended
-    from: endpoint
-    observable: 21
-    description: The identity of the service or user account that owns the endpoint or was last logged into it.
+    definition: v1.2.0/objects/endpoint.yaml
   region:
     caption: Region
     type: string_t
@@ -322,10 +293,8 @@ attributes:
     description: The subnet mask.
   subnet_uid:
     caption: Subnet UID
-    type: string_t
     requirement: optional
-    from: endpoint
-    description: The unique identifier of a virtual subnet.
+    definition: v1.2.0/objects/endpoint.yaml
   type:
     caption: Type
     type: string_t
@@ -389,19 +358,13 @@ attributes:
     description: An alternate unique identifier of the device if any. For example the ActiveDirectory DN.
   vlan_uid:
     caption: VLAN
-    type: string_t
     requirement: optional
-    from: endpoint
-    description: The Virtual LAN identifier.
+    definition: v1.2.0/objects/endpoint.yaml
   vpc_uid:
     caption: VPC UID
-    type: string_t
     requirement: optional
-    from: endpoint
-    description: The unique identifier of the Virtual Private Cloud (VPC).
+    definition: v1.2.0/objects/endpoint.yaml
   zone:
     caption: Network Zone
-    type: string_t
     requirement: optional
-    from: endpoint
-    description: The network zone or LAN segment.
+    definition: v1.2.0/objects/endpoint.yaml

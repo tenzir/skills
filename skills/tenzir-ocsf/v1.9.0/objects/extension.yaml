@@ -1,3 +1,5 @@
+# Attributes with a `definition` path are inherited unchanged. Read that file
+# for their type, object, description, enum, and observable.
 name: extension
 caption: Schema Extension
 extends: _entity
@@ -23,12 +25,8 @@ attributes:
     description: 'The schema extension unique identifier. For example: `999`.'
   uid_numeric:
     caption: Numeric Unique ID
-    type: long_t
     requirement: optional
-    from: _entity
-    description: |-
-      The `uid` attribute in numeric form where applicable.
-      Note: Producers may populate `uid_numeric` only in addition to `uid` and not as an alternative to it.
+    definition: v1.9.0/objects/_entity.yaml
   version:
     caption: Version
     type: string_t

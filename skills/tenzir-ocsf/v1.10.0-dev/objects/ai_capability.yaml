@@ -1,3 +1,5 @@
+# Attributes with a `definition` path are inherited unchanged. Read that file
+# for their type, object, description, enum, and observable.
 name: ai_capability
 caption: AI Capability
 extends: _entity
@@ -251,12 +253,8 @@ attributes:
     description: 'The stable identifier of the capability itself, when one exists: a registry or catalog identifier, or a producer-derived stable key (e.g., serving server identity plus capability name). Identifies the capability across invocations; per-invocation correlation is carried by `transaction_uid` instead.'
   uid_numeric:
     caption: Numeric Unique ID
-    type: long_t
     requirement: optional
-    from: _entity
-    description: |-
-      The `uid` attribute in numeric form where applicable.
-      Note: Producers may populate `uid_numeric` only in addition to `uid` and not as an alternative to it.
+    definition: v1.10.0-dev/objects/_entity.yaml
   uri:
     caption: URI
     type: url_t

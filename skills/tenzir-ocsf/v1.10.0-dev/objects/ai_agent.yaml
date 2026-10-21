@@ -1,3 +1,5 @@
+# Attributes with a `definition` path are inherited unchanged. Read that file
+# for their type, object, description, enum, and observable.
 name: ai_agent
 caption: AI Agent
 extends: _entity
@@ -112,12 +114,8 @@ attributes:
     description: 'The stable logical identifier for the agent, assigned by the agent''s authoritative source (e.g., its control plane, registry, or issuing identity provider). Persists across restarts and instances. Producers populate this from whatever identity they observe: for a runtime that owns the agent, this is its issued ID; for a gateway or proxy, it is typically derived from the agent''s credential. Multiple producers logging the same agent should converge on the same `uid` when they share an authoritative source.'
   uid_numeric:
     caption: Numeric Unique ID
-    type: long_t
     requirement: optional
-    from: _entity
-    description: |-
-      The `uid` attribute in numeric form where applicable.
-      Note: Producers may populate `uid_numeric` only in addition to `uid` and not as an alternative to it.
+    definition: v1.10.0-dev/objects/_entity.yaml
   version:
     caption: AI Agent Version
     type: string_t

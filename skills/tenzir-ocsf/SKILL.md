@@ -65,9 +65,24 @@ Files refer to each other by name within the same version:
 
 ## Reading class and object files
 
-Each file is complete: `attributes` lists every attribute of the class or
-object, including inherited attributes and attributes added by profiles. An
-attribute that is not listed is not part of that class or object.
+`attributes` lists every attribute of the class or object, including
+inherited attributes and attributes added by profiles. An attribute that is
+not listed is not part of that class or object.
+
+Inherited attributes that are unchanged from their parent list only `caption`,
+`requirement`, `profile`, and a `definition` path. Read that path for the
+attribute's type, object, description, enum, and observable. The requirement
+in the class or object file is the one that applies there:
+
+```yaml
+severity_id:
+  caption: Severity ID
+  requirement: required
+  definition: v1.9.0/classes/base_event.yaml
+```
+
+Attributes that change anything besides the requirement, such as `activity_id`
+with class-specific enum values, are listed in full.
 
 Top-level fields:
 
@@ -96,8 +111,8 @@ Attribute fields:
   the object. `array: true` marks a list of values.
 - `profile`: the attribute belongs to that profile and is present only when the
   profile is applied. Attributes without `profile` always belong to the item.
-- `from`: the ancestor or profile owner that defines the attribute. Attributes
-  without `from` are defined by the item itself.
+- `from`: the ancestor that defines a fully listed attribute. Attributes
+  without `from` or `definition` are defined by the item itself.
 - `group` (classes): `classification`, `context`, `occurrence`, or `primary`.
 - `sibling`: the string attribute that carries the caption of this enum
   attribute, e.g. `activity_name` for `activity_id`.
@@ -114,6 +129,7 @@ common questions without opening many files:
 - Find a class by keyword: `grep -n -i "keyword" v1.9.0/classes.yaml`
 - Look up an attribute everywhere: `grep -n -A 12 "^src_endpoint:" v1.9.0/attributes.yaml`
 - Jump to an attribute in a class: `grep -n -A 20 "^  actor:" v1.9.0/classes/process_activity.yaml`
+- Follow a `definition`: `grep -n -A 30 "^  severity_id:" v1.9.0/classes/base_event.yaml`
 - Find classes that hold an object: read `referenced_by` in `v1.9.0/objects/{name}.yaml`
 
 ## Question routing

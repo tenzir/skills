@@ -1,3 +1,5 @@
+# Attributes with a `definition` path are inherited unchanged. Read that file
+# for their type, object, description, enum, and observable.
 name: idp
 caption: Identity Provider
 extends: _entity
@@ -107,12 +109,8 @@ attributes:
     description: The unique identifier of the Identity Provider.
   uid_numeric:
     caption: Numeric Unique ID
-    type: long_t
     requirement: optional
-    from: _entity
-    description: |-
-      The `uid` attribute in numeric form where applicable.
-      Note: Producers may populate `uid_numeric` only in addition to `uid` and not as an alternative to it.
+    definition: v1.10.0-dev/objects/_entity.yaml
   url_string:
     caption: Configuration URL
     type: url_t

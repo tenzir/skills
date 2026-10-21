@@ -1,3 +1,5 @@
+# Attributes with a `definition` path are inherited unchanged. Read that file
+# for their type, object, description, enum, and observable.
 name: managed_entity
 caption: Managed Entity
 extends: _entity
@@ -104,12 +106,8 @@ attributes:
     description: The identifier of the managed entity. It should match the `uid` of the specific entity's object UID if populated, or the source specific ID if the `type_id` is 'Other'.
   uid_numeric:
     caption: Numeric Unique ID
-    type: long_t
     requirement: optional
-    from: _entity
-    description: |-
-      The `uid` attribute in numeric form where applicable.
-      Note: Producers may populate `uid_numeric` only in addition to `uid` and not as an alternative to it.
+    definition: v1.9.0/objects/_entity.yaml
   user:
     caption: User
     type: object_t

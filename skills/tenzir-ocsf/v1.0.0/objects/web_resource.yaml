@@ -1,3 +1,5 @@
+# Attributes with a `definition` path are inherited unchanged. Read that file
+# for their type, object, description, enum, and observable.
 name: web_resource
 caption: Web Resource
 extends: _resource
@@ -21,11 +23,8 @@ attributes:
     description: Description of the web resource.
   labels:
     caption: Labels
-    type: string_t
-    array: true
     requirement: optional
-    from: _resource
-    description: The list of labels/tags associated to a resource.
+    definition: v1.0.0/objects/_resource.yaml
   name:
     caption: Name
     type: string_t

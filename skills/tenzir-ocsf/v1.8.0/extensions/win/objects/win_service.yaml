@@ -1,3 +1,5 @@
+# Attributes with a `definition` path are inherited unchanged. Read that file
+# for their type, object, description, enum, and observable.
 name: win/win_service
 caption: Windows Service
 extension: win
@@ -31,11 +33,8 @@ attributes:
     description: The process that is hosting this service.
   labels:
     caption: Labels
-    type: string_t
-    array: true
     requirement: optional
-    from: service
-    description: The list of labels associated with the service.
+    definition: v1.8.0/objects/service.yaml
   load_order_group:
     caption: Load Order Group
     type: string_t
@@ -192,21 +191,13 @@ attributes:
         description: The service type is not mapped. See the `service_type` attribute, which contains an event source specific value.
   tags:
     caption: Tags
-    type: object_t
-    object: key_value_object
-    array: true
     requirement: optional
-    from: service
-    description: The list of tags; `{key:value}` pairs associated to the service.
+    definition: v1.8.0/objects/service.yaml
   uid:
     caption: Unique ID
-    type: string_t
     requirement: recommended
-    from: service
-    description: The unique identifier of the service.
+    definition: v1.8.0/objects/service.yaml
   version:
     caption: Version
-    type: string_t
     requirement: recommended
-    from: service
-    description: The version of the service.
+    definition: v1.8.0/objects/service.yaml

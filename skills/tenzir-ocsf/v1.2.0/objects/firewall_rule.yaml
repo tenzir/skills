@@ -1,3 +1,5 @@
+# Attributes with a `definition` path are inherited unchanged. Read that file
+# for their type, object, description, enum, and observable.
 name: firewall_rule
 caption: Firewall Rule
 extends: rule
@@ -34,10 +36,8 @@ referenced_by:
 attributes:
   category:
     caption: Category
-    type: string_t
     requirement: optional
-    from: rule
-    description: The rule category.
+    definition: v1.2.0/objects/rule.yaml
   condition:
     caption: Condition
     type: string_t
@@ -45,10 +45,8 @@ attributes:
     description: 'The rule trigger condition for the rule. For example: SQL_INJECTION.'
   desc:
     caption: Description
-    type: string_t
     requirement: optional
-    from: rule
-    description: The description of the rule that generated the event.
+    definition: v1.2.0/objects/rule.yaml
   duration:
     caption: Duration
     type: integer_t
@@ -67,10 +65,8 @@ attributes:
     description: 'The location of the matched data in the source which resulted in the triggered firewall rule. For example: HEADER.'
   name:
     caption: Name
-    type: string_t
     requirement: recommended
-    from: rule
-    description: The name of the rule that generated the event.
+    definition: v1.2.0/objects/rule.yaml
   rate_limit:
     caption: Rate Limit
     type: integer_t
@@ -83,19 +79,13 @@ attributes:
     description: 'The sensitivity of the firewall rule in the matched event. For example: HIGH.'
   type:
     caption: Type
-    type: string_t
     requirement: optional
-    from: rule
-    description: The rule type.
+    definition: v1.2.0/objects/rule.yaml
   uid:
     caption: Unique ID
-    type: string_t
     requirement: recommended
-    from: rule
-    description: The unique identifier of the rule that generated the event.
+    definition: v1.2.0/objects/rule.yaml
   version:
     caption: Version
-    type: string_t
     requirement: optional
-    from: rule
-    description: 'The rule version. For example: `1.1`.'
+    definition: v1.2.0/objects/rule.yaml

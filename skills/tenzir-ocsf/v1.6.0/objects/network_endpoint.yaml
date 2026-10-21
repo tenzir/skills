@@ -1,3 +1,5 @@
+# Attributes with a `definition` path are inherited unchanged. Read that file
+# for their type, object, description, enum, and observable.
 name: network_endpoint
 caption: Network Endpoint
 extends: endpoint
@@ -45,12 +47,8 @@ referenced_by:
 attributes:
   agent_list:
     caption: Agent List
-    type: object_t
-    object: agent
-    array: true
     requirement: optional
-    from: endpoint
-    description: A list of `agent` objects associated with a device, endpoint, or resource.
+    definition: v1.6.0/objects/endpoint.yaml
   autonomous_system:
     caption: Autonomous System
     type: object_t
@@ -59,52 +57,33 @@ attributes:
     description: The Autonomous System details associated with an IP address.
   container:
     caption: Container
-    type: object_t
-    object: container
     requirement: recommended
-    group: context
     profile: container
-    from: endpoint
-    observable: 27
-    description: The information describing an instance of a container. A container is a prepackaged, portable system image that runs isolated on an existing system using a container runtime like containerd.
+    definition: v1.6.0/objects/endpoint.yaml
   domain:
     caption: Domain
-    type: string_t
     requirement: optional
-    from: endpoint
-    description: The name of the domain that the endpoint belongs to or that corresponds to the endpoint.
+    definition: v1.6.0/objects/endpoint.yaml
   hostname:
     caption: Hostname
-    type: hostname_t
     requirement: recommended
-    from: endpoint
-    observable: 1
-    description: The fully qualified name of the endpoint.
+    definition: v1.6.0/objects/endpoint.yaml
   hw_info:
     caption: Hardware Info
-    type: object_t
-    object: device_hw_info
     requirement: optional
-    from: endpoint
-    description: The endpoint hardware information.
+    definition: v1.6.0/objects/endpoint.yaml
   instance_uid:
     caption: Instance ID
-    type: string_t
     requirement: recommended
-    from: endpoint
-    description: The unique identifier of a VM instance.
+    definition: v1.6.0/objects/endpoint.yaml
   interface_name:
     caption: Network Interface Name
-    type: string_t
     requirement: recommended
-    from: endpoint
-    description: The name of the network interface (e.g. eth2).
+    definition: v1.6.0/objects/endpoint.yaml
   interface_uid:
     caption: Network Interface ID
-    type: string_t
     requirement: recommended
-    from: endpoint
-    description: The unique identifier of the network interface.
+    definition: v1.6.0/objects/endpoint.yaml
   intermediate_ips:
     caption: Intermediate IP Addresses
     type: ip_t
@@ -114,11 +93,8 @@ attributes:
     description: The intermediate IP Addresses. For example, the IP addresses in the HTTP X-Forwarded-For header.
   ip:
     caption: IP Address
-    type: ip_t
     requirement: recommended
-    from: endpoint
-    observable: 2
-    description: The IP address of the endpoint, in either IPv4 or IPv6 format.
+    definition: v1.6.0/objects/endpoint.yaml
   isp:
     caption: ISP Name
     type: string_t
@@ -131,48 +107,29 @@ attributes:
     description: The organization name of the Internet Service Provider (ISP). This represents the parent organization or company that owns/operates the ISP. For example, Comcast Corporation would be the ISP org for Xfinity internet service. This attribute helps identify the ultimate provider when ISPs operate under different brand names.
   location:
     caption: Geo Location
-    type: object_t
-    object: location
     requirement: optional
-    from: endpoint
-    observable: 26
-    description: The geographical location of the endpoint.
+    definition: v1.6.0/objects/endpoint.yaml
   mac:
     caption: MAC Address
-    type: mac_t
     requirement: optional
-    from: endpoint
-    observable: 3
-    description: The Media Access Control (MAC) address of the endpoint.
+    definition: v1.6.0/objects/endpoint.yaml
   name:
     caption: Name
-    type: string_t
     requirement: recommended
-    from: endpoint
-    description: The short name of the endpoint.
+    definition: v1.6.0/objects/endpoint.yaml
   namespace_pid:
     caption: Namespace PID
-    type: integer_t
     requirement: recommended
-    group: context
     profile: container
-    from: endpoint
-    description: If running under a process namespace (such as in a container), the process identifier within that process namespace.
+    definition: v1.6.0/objects/endpoint.yaml
   os:
     caption: OS
-    type: object_t
-    object: os
     requirement: optional
-    from: endpoint
-    description: The endpoint operating system.
+    definition: v1.6.0/objects/endpoint.yaml
   owner:
     caption: Owner
-    type: object_t
-    object: user
     requirement: recommended
-    from: endpoint
-    observable: 21
-    description: The identity of the service or user account that owns the endpoint or was last logged into it.
+    definition: v1.6.0/objects/endpoint.yaml
   port:
     caption: Port
     type: port_t
@@ -188,10 +145,8 @@ attributes:
     description: The network proxy information pertaining to a specific endpoint. This can be used to describe information pertaining to network address translation (NAT).
   subnet_uid:
     caption: Subnet UID
-    type: string_t
     requirement: optional
-    from: endpoint
-    description: The unique identifier of a virtual subnet.
+    definition: v1.6.0/objects/endpoint.yaml
   svc_name:
     caption: Service Name
     type: string_t
@@ -262,25 +217,17 @@ attributes:
         description: The type is not mapped. See the `type` attribute, which contains a data source specific value.
   uid:
     caption: Unique ID
-    type: string_t
     requirement: recommended
-    from: endpoint
-    description: The unique identifier of the endpoint.
+    definition: v1.6.0/objects/endpoint.yaml
   vlan_uid:
     caption: VLAN
-    type: string_t
     requirement: optional
-    from: endpoint
-    description: The Virtual LAN identifier.
+    definition: v1.6.0/objects/endpoint.yaml
   vpc_uid:
     caption: VPC UID
-    type: string_t
     requirement: optional
-    from: endpoint
-    description: The unique identifier of the Virtual Private Cloud (VPC).
+    definition: v1.6.0/objects/endpoint.yaml
   zone:
     caption: Network Zone
-    type: string_t
     requirement: optional
-    from: endpoint
-    description: The network zone or LAN segment.
+    definition: v1.6.0/objects/endpoint.yaml

@@ -1,3 +1,5 @@
+# Attributes with a `definition` path are inherited unchanged. Read that file
+# for their type, object, description, enum, and observable.
 name: affected_package
 caption: Affected Software Package
 extends: package
@@ -9,16 +11,12 @@ referenced_by:
 attributes:
   architecture:
     caption: Architecture
-    type: string_t
     requirement: recommended
-    from: package
-    description: Architecture is a shorthand name describing the type of computer hardware the packaged software is meant to run on.
+    definition: v1.2.0/objects/package.yaml
   epoch:
     caption: Epoch
-    type: integer_t
     requirement: optional
-    from: package
-    description: The software package epoch. Epoch is a way to define weighted dependencies based on version numbers.
+    definition: v1.2.0/objects/package.yaml
   fixed_in_version:
     caption: Fixed In Version
     type: string_t
@@ -26,16 +24,12 @@ attributes:
     description: The software package version in which a reported vulnerability was patched/fixed.
   license:
     caption: Software License
-    type: string_t
     requirement: optional
-    from: package
-    description: The software license applied to this package.
+    definition: v1.2.0/objects/package.yaml
   name:
     caption: Name
-    type: string_t
     requirement: required
-    from: package
-    description: The software package name.
+    definition: v1.2.0/objects/package.yaml
   package_manager:
     caption: Package Manager
     type: string_t
@@ -48,16 +42,12 @@ attributes:
     description: The installation path of the affected package.
   purl:
     caption: Package URL
-    type: string_t
     requirement: optional
-    from: package
-    description: A purl is a URL string used to identify and locate a software package in a mostly universal and uniform way across programming languages, package managers, packaging conventions, tools, APIs and databases.
+    definition: v1.2.0/objects/package.yaml
   release:
     caption: Software Release Details
-    type: string_t
     requirement: optional
-    from: package
-    description: Release is the number of times a version of the software has been packaged.
+    definition: v1.2.0/objects/package.yaml
   remediation:
     caption: Remediation Guidance
     type: object_t
@@ -66,7 +56,5 @@ attributes:
     description: Describes the recommended remediation steps to address identified issue(s).
   version:
     caption: Version
-    type: string_t
     requirement: required
-    from: package
-    description: The software package version.
+    definition: v1.2.0/objects/package.yaml

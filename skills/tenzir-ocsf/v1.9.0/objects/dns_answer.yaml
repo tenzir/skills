@@ -1,3 +1,5 @@
+# Attributes with a `definition` path are inherited unchanged. Read that file
+# for their type, object, description, enum, and observable.
 name: dns_answer
 caption: DNS Answer
 extends: dns_resource_record
@@ -15,10 +17,8 @@ referenced_by:
 attributes:
   class:
     caption: Resource Record Class
-    type: string_t
     requirement: recommended
-    from: dns_resource_record
-    description: 'The class of DNS data contained in this resource record. See RFC 1035. For example: `IN`.'
+    definition: v1.9.0/objects/dns_resource_record.yaml
   flag_ids:
     caption: DNS Header Flags
     type: integer_t
@@ -61,11 +61,8 @@ attributes:
     description: The list of DNS answer header flags.
   hostname:
     caption: Hostname
-    type: hostname_t
     requirement: recommended
-    from: dns_resource_record
-    observable: 1
-    description: 'The owner name of the resource record. For example: `www.example.com`.'
+    definition: v1.9.0/objects/dns_resource_record.yaml
   packet_uid:
     caption: Packet UID
     type: integer_t
@@ -77,22 +74,13 @@ attributes:
     description: The DNS packet identifier assigned by the program that generated the query. The identifier is copied to the response.
   rdata:
     caption: DNS RData
-    type: string_t
     requirement: required
-    from: dns_resource_record
-    description: The data describing the DNS resource. The meaning of this data depends on the type and class of the resource record.
+    definition: v1.9.0/objects/dns_resource_record.yaml
   ttl:
     caption: TTL
-    type: integer_t
     requirement: recommended
-    from: dns_resource_record
-    description: The time interval that the resource record may be cached. Zero value means that the resource record can only be used for the transaction in progress, and should not be cached.
+    definition: v1.9.0/objects/dns_resource_record.yaml
   type:
     caption: Resource Record Type
-    type: string_t
     requirement: recommended
-    from: dns_resource_record
-    description: 'The type of data contained in this resource record. See RFC 1035. For example: `CNAME`.'
-    references:
-    - description: RFC 1035 — DNS Implementation and Specification.
-      url: https://www.rfc-editor.org/rfc/rfc1035.txt
+    definition: v1.9.0/objects/dns_resource_record.yaml

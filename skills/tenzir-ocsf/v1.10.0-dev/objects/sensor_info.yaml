@@ -1,3 +1,5 @@
+# Attributes with a `definition` path are inherited unchanged. Read that file
+# for their type, object, description, enum, and observable.
 name: sensor_info
 caption: Sensor Information
 extends: _entity
@@ -10,10 +12,8 @@ referenced_by:
 attributes:
   name:
     caption: Name
-    type: string_t
     requirement: recommended
-    from: _entity
-    description: The name of the entity.
+    definition: v1.10.0-dev/objects/_entity.yaml
   sensor_layer:
     caption: Sensor Layer
     type: string_t
@@ -55,15 +55,9 @@ attributes:
         description: The sensor layer type is not mapped. See the `sensor_layer` attribute, which contains a data source specific value.
   uid:
     caption: Unique ID
-    type: string_t
     requirement: recommended
-    from: _entity
-    description: The unique identifier of the entity.
+    definition: v1.10.0-dev/objects/_entity.yaml
   uid_numeric:
     caption: Numeric Unique ID
-    type: long_t
     requirement: optional
-    from: _entity
-    description: |-
-      The `uid` attribute in numeric form where applicable.
-      Note: Producers may populate `uid_numeric` only in addition to `uid` and not as an alternative to it.
+    definition: v1.10.0-dev/objects/_entity.yaml

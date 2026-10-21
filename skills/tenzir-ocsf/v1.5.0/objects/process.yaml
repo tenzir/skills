@@ -1,3 +1,5 @@
+# Attributes with a `definition` path are inherited unchanged. Read that file
+# for their type, object, description, enum, and observable.
 name: process
 caption: Process
 extends: process_entity
@@ -39,11 +41,8 @@ attributes:
       url: https://github.com/ocsf/ocsf-docs/blob/main/Articles/Representing Process Parentage.md
   cmd_line:
     caption: Command Line
-    type: string_t
     requirement: recommended
-    from: process_entity
-    observable: 13
-    description: 'The full command line used to launch an application, service, process, or job. For example: `ssh user@10.0.0.10`. If the command line is unavailable or missing, the empty string `''''` is to be used.'
+    definition: v1.5.0/objects/process_entity.yaml
   container:
     caption: Container
     type: object_t
@@ -55,26 +54,17 @@ attributes:
     description: The information describing an instance of a container. A container is a prepackaged, portable system image that runs isolated on an existing system using a container runtime like containerd.
   cpid:
     caption: Common Process Identifier
-    type: uuid_t
     requirement: recommended
-    from: process_entity
-    description: A unique process identifier that can be assigned deterministically by multiple system data producers.
-    references:
-    - description: OCSF Common Process Identifier (CPID) Specification
-      url: https://github.com/ocsf/common-process-id
+    definition: v1.5.0/objects/process_entity.yaml
   created_time:
     caption: Created Time
-    type: timestamp_t
     requirement: recommended
-    from: process_entity
-    description: The time when the process was created/started.
+    definition: v1.5.0/objects/process_entity.yaml
   created_time_dt:
     caption: Created Time
-    type: datetime_t
     requirement: optional
     profile: datetime
-    from: process_entity
-    description: The time when the process was created/started.
+    definition: v1.5.0/objects/process_entity.yaml
   environment_variables:
     caption: Environment Variables
     type: object_t
@@ -137,11 +127,8 @@ attributes:
     description: The list of loaded module names.
   name:
     caption: Name
-    type: process_name_t
     requirement: recommended
-    from: process_entity
-    observable: 9
-    description: 'The friendly name of the process, for example: `Notepad++`.'
+    definition: v1.5.0/objects/process_entity.yaml
   namespace_pid:
     caption: Namespace PID
     type: integer_t
@@ -161,17 +148,12 @@ attributes:
       url: https://github.com/ocsf/ocsf-docs/blob/main/Articles/Representing Process Parentage.md
   path:
     caption: Path
-    type: string_t
     requirement: optional
-    from: process_entity
-    description: The process file path.
+    definition: v1.5.0/objects/process_entity.yaml
   pid:
     caption: Process ID
-    type: integer_t
     requirement: recommended
-    from: process_entity
-    observable: 15
-    description: The process identifier, as reported by the operating system. Process ID (PID) is a number used by the operating system to uniquely identify an active process.
+    definition: v1.5.0/objects/process_entity.yaml
   sandbox:
     caption: Sandbox
     type: string_t
@@ -201,11 +183,8 @@ attributes:
     description: The Identifier of the thread associated with the event, as returned by the operating system.
   uid:
     caption: Unique ID
-    type: string_t
     requirement: recommended
-    from: process_entity
-    observable: 39
-    description: A unique identifier for this process assigned by the producer (tool).  Facilitates correlation of a process event with other events for that process.
+    definition: v1.5.0/objects/process_entity.yaml
   user:
     caption: User
     type: object_t

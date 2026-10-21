@@ -1,3 +1,5 @@
+# Attributes with a `definition` path are inherited unchanged. Read that file
+# for their type, object, description, enum, and observable.
 name: dns_answer
 caption: DNS Answer
 extends: _dns
@@ -50,10 +52,8 @@ attributes:
     description: The list of DNS answer header flags.
   packet_uid:
     caption: Packet UID
-    type: integer_t
     requirement: recommended
-    from: _dns
-    description: The DNS packet identifier assigned by the program that generated the query. The identifier is copied to the response.
+    definition: v1.8.0/objects/_dns.yaml
   rdata:
     caption: DNS RData
     type: string_t

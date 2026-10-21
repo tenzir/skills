@@ -1,3 +1,5 @@
+# Attributes with a `definition` path are inherited unchanged. Read that file
+# for their type, object, description, enum, and observable.
 name: dns_activity
 caption: DNS Activity
 uid: 4003
@@ -14,40 +16,14 @@ references:
 attributes:
   action:
     caption: Action
-    type: string_t
     requirement: optional
-    group: primary
     profile: security_control
-    from: base_event
-    description: The normalized caption of `action_id`.
+    definition: v1.8.0/classes/base_event.yaml
   action_id:
     caption: Action ID
-    type: integer_t
     requirement: recommended
-    group: primary
     profile: security_control
-    from: base_event
-    sibling: action
-    description: The action taken by a control or other policy-based system leading to an outcome or disposition. An unknown action may still correspond to a known disposition. Refer to `disposition_id` for the outcome of the action.
-    enum:
-      '0':
-        caption: Unknown
-        description: The action was unknown. The `disposition_id` attribute may still be set to a non-unknown value, for example 'Custom Action', 'Challenge'.
-      '1':
-        caption: Allowed
-        description: The activity was allowed. The `disposition_id` attribute should be set to a value that conforms to this action, for example 'Allowed', 'Approved', 'Delayed', 'No Action', 'Count' etc.
-      '2':
-        caption: Denied
-        description: The attempted activity was denied. The `disposition_id` attribute should be set to a value that conforms to this action, for example 'Blocked', 'Rejected', 'Quarantined', 'Isolated', 'Dropped', 'Access Revoked, etc.
-      '3':
-        caption: Observed
-        description: The activity was observed, but neither explicitly allowed nor denied. This is common with IDS and EDR controls that report additional information on observed behavior such as TTPs. The `disposition_id` attribute should be set to a value that conforms to this action, for example 'Logged', 'Alert', 'Detected', 'Count', etc.
-      '4':
-        caption: Modified
-        description: The activity was modified, adjusted, or corrected. The `disposition_id` attribute should be set appropriately, for example 'Restored', 'Corrected', 'Delayed', 'Captcha', 'Tagged'.
-      '99':
-        caption: Other
-        description: The action is not mapped. See the `action` attribute which contains a data source specific value.
+    definition: v1.8.0/classes/base_event.yaml
   activity_id:
     caption: Activity ID
     type: integer_t
@@ -73,20 +49,13 @@ attributes:
         description: The event activity is not mapped. See the `activity_name` attribute, which contains a data source specific value.
   activity_name:
     caption: Activity
-    type: string_t
     requirement: optional
-    group: classification
-    from: base_event
-    description: The event activity name, as defined by the activity_id.
+    definition: v1.8.0/classes/base_event.yaml
   actor:
     caption: Actor
-    type: object_t
-    object: actor
     requirement: optional
-    group: primary
     profile: host
-    from: base_event
-    description: The actor object describes details about the user/role/process that was the source of the activity. Note that this is not the threat actor of a campaign but may be part of a campaign.
+    definition: v1.8.0/classes/base_event.yaml
   answers:
     caption: DNS Answer
     type: object_t
@@ -97,58 +66,27 @@ attributes:
     description: The Domain Name System (DNS) answers.
   api:
     caption: API Details
-    type: object_t
-    object: api
     requirement: optional
-    group: context
     profile: cloud
-    from: base_event
-    description: Describes details about a typical API (Application Programming Interface) call.
+    definition: v1.8.0/classes/base_event.yaml
   app_name:
     caption: Application Name
-    type: string_t
     requirement: optional
-    group: context
-    from: network
-    description: The network application name identified by tools such as NBAR or App ID (e.g., youtube, facebook, webex). This represents a specific network application that uses standard protocols (such as https or quic) to deliver its service.
+    definition: v1.8.0/classes/network.yaml
   app_protocol_name:
     caption: Application Protocol Name
-    type: string_t
     requirement: optional
-    group: context
-    from: network
-    description: |-
-      The application-layer (Layer 7) protocol name identified by deep packet inspection or packet parsing (e.g., `https`, `quic`, `ssh`, `dns`), expressed as an IANA-registered service name from the IANA Service Name and Transport Protocol Port Number Registry.
-
-      Note: Port numbers alone are not always a reliable indicator of the actual application protocol in use.
-    references:
-    - description: IANA Service Name and Transport Protocol Port Number Registry
-      url: https://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xhtml
+    definition: v1.8.0/classes/network.yaml
   attacks:
     caption: MITRE ATT&CK® and ATLAS™ Details
-    type: object_t
-    object: attack
-    array: true
     requirement: optional
-    group: primary
     profile: security_control
-    from: base_event
-    description: An array of MITRE ATT&CK® objects describing identified tactics, techniques & sub-techniques. The objects are compatible with MITRE ATLAS™ tactics, techniques & sub-techniques.
-    references:
-    - description: MITRE ATT&CK®
-      url: https://attack.mitre.org
-    - description: MITRE ATLAS
-      url: https://atlas.mitre.org/matrices/ATLAS
+    definition: v1.8.0/classes/base_event.yaml
   authorizations:
     caption: Authorization Information
-    type: object_t
-    object: authorization
-    array: true
     requirement: optional
-    group: primary
     profile: security_control
-    from: base_event
-    description: Provides details about an authorization, such as authorization outcome, and any associated policies related to the activity/event.
+    definition: v1.8.0/classes/base_event.yaml
   category_name:
     caption: Category
     type: string_t
@@ -188,51 +126,24 @@ attributes:
         description: DNS Activity events report DNS queries and answers as seen on the network.
   cloud:
     caption: Cloud
-    type: object_t
-    object: cloud
     requirement: required
-    group: primary
     profile: cloud
-    from: base_event
-    description: Describes details about the Cloud environment where the event or finding was created.
+    definition: v1.8.0/classes/base_event.yaml
   confidence:
     caption: Confidence
-    type: string_t
     requirement: optional
-    group: context
     profile: security_control
-    from: base_event
-    description: The confidence, normalized to the caption of the confidence_id value. In the case of 'Other', it is defined by the event source.
+    definition: v1.8.0/classes/base_event.yaml
   confidence_id:
     caption: Confidence ID
-    type: integer_t
     requirement: recommended
-    group: context
     profile: security_control
-    from: base_event
-    sibling: confidence
-    description: The normalized confidence refers to the accuracy of the rule that created the finding. A rule with a low confidence means that the finding scope is wide and may create finding reports that may not be malicious in nature.
-    enum:
-      '0':
-        caption: Unknown
-        description: The normalized confidence is unknown.
-      '1':
-        caption: Low
-      '2':
-        caption: Medium
-      '3':
-        caption: High
-      '99':
-        caption: Other
-        description: The confidence is not mapped to the defined enum values. See the `confidence` attribute, which contains a data source specific value.
+    definition: v1.8.0/classes/base_event.yaml
   confidence_score:
     caption: Confidence Score
-    type: integer_t
     requirement: optional
-    group: context
     profile: security_control
-    from: base_event
-    description: The confidence score as reported by the event source.
+    definition: v1.8.0/classes/base_event.yaml
   connection_info:
     caption: Connection Info
     type: object_t
@@ -242,134 +153,27 @@ attributes:
     description: The network connection information.
   count:
     caption: Count
-    type: integer_t
     requirement: optional
-    group: occurrence
-    from: base_event
-    description: The number of times that events in the same logical group occurred during the event Start Time to End Time period.
+    definition: v1.8.0/classes/base_event.yaml
   cumulative_traffic:
     caption: Cumulative Traffic
-    type: object_t
-    object: network_traffic
     requirement: optional
-    group: context
-    from: network
-    description: 'The cumulative (running total) network traffic aggregated from the start of a flow or session. Use when reporting: (1) total accumulated bytes/packets since flow initiation, (2) combined aggregation models where both incremental deltas and running totals are reported together (populate both `traffic` for the delta and this attribute for the cumulative total), or (3) final summary metrics when a long-lived connection closes. This represents the sum of all activity from flow start to the current observation, not a delta or point-in-time value.'
+    definition: v1.8.0/classes/network.yaml
   device:
     caption: Device
-    type: object_t
-    object: device
     requirement: recommended
-    group: primary
     profile: host
-    from: base_event
-    observable: 20
-    description: An addressable device, computer system or host.
+    definition: v1.8.0/classes/base_event.yaml
   disposition:
     caption: Disposition
-    type: string_t
     requirement: optional
-    group: primary
     profile: security_control
-    from: base_event
-    description: The disposition name, normalized to the caption of the disposition_id value. In the case of 'Other', it is defined by the event source.
+    definition: v1.8.0/classes/base_event.yaml
   disposition_id:
     caption: Disposition ID
-    type: integer_t
     requirement: recommended
-    group: primary
     profile: security_control
-    from: base_event
-    sibling: disposition
-    description: Describes the outcome or action taken by a security control, such as access control checks, malware detections or various types of policy violations.
-    enum:
-      '0':
-        caption: Unknown
-        description: The disposition is unknown.
-      '1':
-        caption: Allowed
-        description: Granted access or allowed the action to the protected resource.
-      '2':
-        caption: Blocked
-        description: Denied access or blocked the action to the protected resource.
-      '3':
-        caption: Quarantined
-        description: A suspicious file or other content was moved to a benign location.
-      '4':
-        caption: Isolated
-        description: A session was isolated on the network or within a browser.
-      '5':
-        caption: Deleted
-        description: A file or other content was deleted.
-      '6':
-        caption: Dropped
-        description: The request was detected as a threat and resulted in the connection being dropped.
-      '7':
-        caption: Custom Action
-        description: A custom action was executed such as running of a command script. Use the `message` attribute of the base class for details.
-      '8':
-        caption: Approved
-        description: A request or submission was approved. For example, when a form was properly filled out and submitted. This is distinct from `1` 'Allowed'.
-      '9':
-        caption: Restored
-        description: A quarantined file or other content was restored to its original location.
-      '10':
-        caption: Exonerated
-        description: A suspicious or risky entity was deemed to no longer be suspicious (re-scored).
-      '11':
-        caption: Corrected
-        description: A corrupt file or configuration was corrected.
-      '12':
-        caption: Partially Corrected
-        description: A corrupt file or configuration was partially corrected.
-      '13':
-        caption: Uncorrected
-        description: A corrupt file or configuration was not corrected.
-      '14':
-        caption: Delayed
-        description: An operation was delayed, for example if a restart was required to finish the operation.
-      '15':
-        caption: Detected
-        description: Suspicious activity or a policy violation was detected without further action.
-      '16':
-        caption: No Action
-        description: The outcome of an operation had no action taken.
-      '17':
-        caption: Logged
-        description: The operation or action was logged without further action.
-      '18':
-        caption: Tagged
-        description: A file or other entity was marked with extended attributes.
-      '19':
-        caption: Alert
-        description: The request or activity was detected as a threat and resulted in a notification but request was not blocked.
-      '20':
-        caption: Count
-        description: Counted the request or activity but did not determine whether to allow it or block it.
-      '21':
-        caption: Reset
-        description: The request was detected as a threat and resulted in the connection being reset.
-      '22':
-        caption: Captcha
-        description: Required the end user to solve a CAPTCHA puzzle to prove that a human being is sending the request.
-      '23':
-        caption: Challenge
-        description: Ran a silent challenge that required the client session to verify that it's a browser, and not a bot.
-      '24':
-        caption: Access Revoked
-        description: 'The requestor''s access has been revoked due to security policy enforcements. Note: use the `Host` profile if the `User` or `Actor` requestor is not present in the event class.'
-      '25':
-        caption: Rejected
-        description: A request or submission was rejected. For example, when a form was improperly filled out and submitted. This is distinct from `2` 'Blocked'.
-      '26':
-        caption: Unauthorized
-        description: An attempt to access a resource was denied due to an authorization check that failed. This is a more specific disposition than `2` 'Blocked' and can be complemented with the `authorizations` attribute for more detail.
-      '27':
-        caption: Error
-        description: An error occurred during the processing of the activity or request. Use the `message` attribute of the base class for details.
-      '99':
-        caption: Other
-        description: The disposition is not mapped. See the `disposition` attribute, which contains a data source specific value.
+    definition: v1.8.0/classes/base_event.yaml
   dst_endpoint:
     caption: Destination Endpoint
     type: object_t
@@ -380,252 +184,122 @@ attributes:
     description: The responder (server) in a network connection.
   duration:
     caption: Duration Milliseconds
-    type: long_t
     requirement: optional
-    group: occurrence
-    from: base_event
-    description: The event duration or aggregate time, the amount of time the event covers from `start_time` to `end_time` in milliseconds.
+    definition: v1.8.0/classes/base_event.yaml
   end_time:
     caption: End Time
-    type: timestamp_t
     requirement: optional
-    group: occurrence
-    from: base_event
-    description: The end time of a time period, or the time of the most recent event included in the aggregate event.
+    definition: v1.8.0/classes/base_event.yaml
   end_time_dt:
     caption: End Time
-    type: datetime_t
     requirement: optional
-    group: occurrence
     profile: datetime
-    from: base_event
-    description: The end time of a time period, or the time of the most recent event included in the aggregate event.
+    definition: v1.8.0/classes/base_event.yaml
   enrichments:
     caption: Enrichments
-    type: object_t
-    object: enrichment
-    array: true
     requirement: optional
-    group: context
-    from: base_event
-    description: 'The additional information from an external data source, which is associated with the event or a finding. For example add location information for the IP address in the DNS answers:`[{"name": "answers.ip", "value": "92.24.47.250", "type": "location", "data": {"city": "Socotra", "continent": "Asia", "coordinates": [-25.4153, 17.0743], "country": "YE", "desc": "Yemen"}}]`'
+    definition: v1.8.0/classes/base_event.yaml
   firewall_rule:
     caption: Firewall Rule
-    type: object_t
-    object: firewall_rule
     requirement: optional
-    group: primary
     profile: security_control
-    from: base_event
-    description: The firewall rule that pertains to the control that triggered the event, if applicable.
+    definition: v1.8.0/classes/base_event.yaml
   is_alert:
     caption: Alert
-    type: boolean_t
     requirement: recommended
-    group: primary
     profile: security_control
-    from: base_event
-    description: Indicates that the event is considered to be an alertable signal. Should be set to `true` if `disposition_id = Alert` among other dispositions, and/or `risk_level_id` or `severity_id` of the event is elevated. Not all control events will be alertable, for example if `disposition_id = Exonerated` or `disposition_id = Allowed`.
+    definition: v1.8.0/classes/base_event.yaml
   ja4_fingerprint_list:
     caption: JA4+ Fingerprints
-    type: object_t
-    object: ja4_fingerprint
-    array: true
     requirement: optional
-    group: context
-    from: network
-    description: A list of the JA4+ network fingerprints.
+    definition: v1.8.0/classes/network.yaml
   load_balancer:
     caption: Load Balancer
-    type: object_t
-    object: load_balancer
     requirement: recommended
-    group: primary
     profile: load_balancer
-    from: network
-    description: The Load Balancer object contains information related to the device that is distributing incoming traffic to specified destinations.
+    definition: v1.8.0/classes/network.yaml
   malware:
     caption: Malware
-    type: object_t
-    object: malware
-    array: true
     requirement: optional
-    group: primary
     profile: security_control
-    from: base_event
-    description: A list of Malware objects, describing details about the identified malware.
+    definition: v1.8.0/classes/base_event.yaml
   malware_scan_info:
     caption: Malware Scan Info
-    type: object_t
-    object: malware_scan_info
     requirement: optional
-    group: primary
     profile: security_control
-    from: base_event
-    description: Describes details about the scan job that identified malware on the target system.
+    definition: v1.8.0/classes/base_event.yaml
   message:
     caption: Message
-    type: string_t
     requirement: recommended
-    group: primary
-    from: base_event
-    description: The description of the event/finding, as defined by the source.
+    definition: v1.8.0/classes/base_event.yaml
   metadata:
     caption: Metadata
-    type: object_t
-    object: metadata
     requirement: required
-    group: context
-    from: base_event
-    description: The metadata associated with the event or a finding.
+    definition: v1.8.0/classes/base_event.yaml
   network_observation_point:
     caption: Network Observation Point
-    type: object_t
-    object: network_endpoint
     requirement: optional
-    group: context
-    from: network
-    observable: 20
-    description: The network endpoint that observes or inspects network traffic as a third-party system, used when the observer is neither the source nor the destination of the communication (when `observation_point_id` = 3). Examples include network taps, span ports, inline security devices, or packet capture systems that monitor traffic between other endpoints.
+    definition: v1.8.0/classes/network.yaml
   observables:
     caption: Observables
-    type: object_t
-    object: observable
-    array: true
     requirement: recommended
-    group: primary
-    from: base_event
-    description: The observables associated with the event or a finding.
-    references:
-    - description: OCSF Observables FAQ
-      url: https://github.com/ocsf/ocsf-docs/blob/main/articles/defining-and-using-observables.md
+    definition: v1.8.0/classes/base_event.yaml
   observation_point:
     caption: Observation Point
-    type: string_t
     requirement: optional
-    from: network
-    description: Indicates whether the source network endpoint, destination network endpoint, or neither served as the observation point for the activity. The value is normalized to the caption of the `observation_point_id`.
+    definition: v1.8.0/classes/network.yaml
   observation_point_id:
     caption: Observation Point ID
-    type: integer_t
     requirement: optional
-    from: network
-    sibling: observation_point
-    description: The normalized identifier of the observation point. The observation point identifier indicates whether the source network endpoint, destination network endpoint, or neither served as the observation point for the activity.
-    enum:
-      '0':
-        caption: Unknown
-        description: The observation point is unknown.
-      '1':
-        caption: Source
-        description: The source network endpoint is the observation point.
-      '2':
-        caption: Destination
-        description: The destination network endpoint is the observation point.
-      '3':
-        caption: Neither
-        description: Neither the source nor destination network endpoint is the observation point. Refer to the `network_observation_point` attribute for details.
-      '4':
-        caption: Both
-        description: Both the source and destination network endpoint are the observation point. This typically occurs in localhost or internal communications where the source and destination are the same endpoint, often resulting in a `connection_info.direction` of `Local`.
-      '99':
-        caption: Other
-        description: The observation point is not mapped. See the `observation_point` attribute for a data source specific value.
+    definition: v1.8.0/classes/network.yaml
   osint:
     caption: OSINT
-    type: object_t
-    object: osint
-    array: true
     requirement: required
-    group: primary
     profile: osint
-    from: base_event
-    description: The OSINT (Open Source Intelligence) object contains details related to an indicator such as the indicator itself, related indicators, geolocation, registrar information, subdomains, analyst commentary, and other contextual information. This information can be used to further enrich a detection or finding by providing decisioning support to other analysts and engineers.
+    definition: v1.8.0/classes/base_event.yaml
   packet_list:
     caption: Packets
-    type: object_t
-    object: packet
-    array: true
     requirement: optional
-    group: context
-    from: network
-    description: The list of packet objects describing captured network packets.
+    definition: v1.8.0/classes/network.yaml
   policy:
     caption: Policy
-    type: object_t
-    object: policy
     requirement: optional
-    group: primary
     profile: security_control
-    from: base_event
-    description: The policy that pertains to the control that triggered the event, if applicable. For example the name of an anti-malware policy or an access control policy.
+    definition: v1.8.0/classes/base_event.yaml
   proxy:
     caption: Proxy
-    type: object_t
-    object: network_proxy
     requirement: recommended
-    group: primary
-    from: network
-    observable: 20
-    deprecated:
-      since: 1.1.0
-      message: Use the `proxy_endpoint` attribute instead.
-    description: The proxy (server) in a network connection.
+    definition: v1.8.0/classes/network.yaml
   proxy_connection_info:
     caption: Proxy Connection Info
-    type: object_t
-    object: network_connection_info
     requirement: recommended
-    group: context
     profile: network_proxy
-    from: network
-    description: The connection information from the proxy server to the remote server.
+    definition: v1.8.0/classes/network.yaml
   proxy_endpoint:
     caption: Proxy Endpoint
-    type: object_t
-    object: network_proxy
     requirement: optional
-    group: context
     profile: network_proxy
-    from: network
-    observable: 20
-    description: The proxy (server) in a network connection.
+    definition: v1.8.0/classes/network.yaml
   proxy_http_request:
     caption: Proxy HTTP Request
-    type: object_t
-    object: http_request
     requirement: optional
-    group: context
     profile: network_proxy
-    from: network
-    description: The HTTP Request from the proxy server to the remote server.
+    definition: v1.8.0/classes/network.yaml
   proxy_http_response:
     caption: Proxy HTTP Response
-    type: object_t
-    object: http_response
     requirement: optional
-    group: context
     profile: network_proxy
-    from: network
-    description: The HTTP Response from the remote server to the proxy server.
+    definition: v1.8.0/classes/network.yaml
   proxy_tls:
     caption: Proxy TLS
-    type: object_t
-    object: tls
     requirement: recommended
-    group: context
     profile: network_proxy
-    from: network
-    description: The TLS protocol negotiated between the proxy server and the remote server.
+    definition: v1.8.0/classes/network.yaml
   proxy_traffic:
     caption: Proxy Traffic
-    type: object_t
-    object: network_traffic
     requirement: recommended
-    group: context
     profile: network_proxy
-    from: network
-    description: The network traffic refers to the amount of data moving across a network, from proxy to remote server at a given point of time.
+    definition: v1.8.0/classes/network.yaml
   query:
     caption: DNS Query
     type: object_t
@@ -648,27 +322,16 @@ attributes:
     description: The Domain Name System (DNS) query time.
   raw_data:
     caption: Raw Data
-    type: string_t
     requirement: optional
-    group: context
-    from: base_event
-    description: The raw event/finding data as received from the source.
+    definition: v1.8.0/classes/base_event.yaml
   raw_data_hash:
     caption: Raw Data Hash
-    type: object_t
-    object: fingerprint
     requirement: optional
-    group: context
-    from: base_event
-    observable: 30
-    description: The hash, which describes the content of the raw_data field.
+    definition: v1.8.0/classes/base_event.yaml
   raw_data_size:
     caption: Raw Data Size
-    type: long_t
     requirement: optional
-    group: context
-    from: base_event
-    description: The size of the raw data which was transformed into an OCSF event, in bytes.
+    definition: v1.8.0/classes/base_event.yaml
   rcode:
     caption: Response Code
     type: string_t
@@ -767,191 +430,78 @@ attributes:
     description: The Domain Name System (DNS) response time.
   risk_details:
     caption: Risk Details
-    type: string_t
     requirement: optional
-    group: context
     profile: security_control
-    from: base_event
-    description: Describes the risk associated with the finding.
+    definition: v1.8.0/classes/base_event.yaml
   risk_level:
     caption: Risk Level
-    type: string_t
     requirement: optional
-    group: context
     profile: security_control
-    from: base_event
-    description: The risk level, normalized to the caption of the risk_level_id value.
+    definition: v1.8.0/classes/base_event.yaml
   risk_level_id:
     caption: Risk Level ID
-    type: integer_t
     requirement: optional
-    group: context
     profile: security_control
-    from: base_event
-    sibling: risk_level
-    description: The normalized risk level id.
-    enum:
-      '0':
-        caption: Info
-      '1':
-        caption: Low
-      '2':
-        caption: Medium
-      '3':
-        caption: High
-      '4':
-        caption: Critical
-      '99':
-        caption: Other
-        description: The risk level is not mapped. See the `risk_level` attribute, which contains a data source specific value.
+    definition: v1.8.0/classes/base_event.yaml
   risk_score:
     caption: Risk Score
-    type: integer_t
     requirement: optional
-    group: context
     profile: security_control
-    from: base_event
-    description: The risk score as reported by the event source.
+    definition: v1.8.0/classes/base_event.yaml
   severity:
     caption: Severity
-    type: string_t
     requirement: optional
-    group: classification
-    from: base_event
-    description: The event/finding severity, normalized to the caption of the `severity_id` value. In the case of 'Other', it is defined by the source.
+    definition: v1.8.0/classes/base_event.yaml
   severity_id:
     caption: Severity ID
-    type: integer_t
     requirement: required
-    group: classification
-    from: base_event
-    sibling: severity
-    description: |-
-      The normalized identifier of the event/finding severity.
-
-      The normalized severity is a measurement the effort and expense required to manage and resolve an event or incident. Smaller numerical values represent lower impact events, and larger numerical values represent higher impact events.
-    enum:
-      '0':
-        caption: Unknown
-        description: The event/finding severity is unknown.
-      '1':
-        caption: Informational
-        description: Informational message. No action required.
-      '2':
-        caption: Low
-        description: The user decides if action is needed.
-      '3':
-        caption: Medium
-        description: Action is required but the situation is not serious at this time.
-      '4':
-        caption: High
-        description: Action is required immediately.
-      '5':
-        caption: Critical
-        description: Action is required immediately and the scope is broad.
-      '6':
-        caption: Fatal
-        description: An error occurred but it is too late to take remedial action.
-      '99':
-        caption: Other
-        description: The event/finding severity is not mapped. See the `severity` attribute, which contains a data source specific value.
+    definition: v1.8.0/classes/base_event.yaml
   src_endpoint:
     caption: Source Endpoint
-    type: object_t
-    object: network_endpoint
     requirement: recommended
-    group: primary
-    from: network
-    observable: 20
-    description: The initiator (client) of the network connection.
+    definition: v1.8.0/classes/network.yaml
   start_time:
     caption: Start Time
-    type: timestamp_t
     requirement: optional
-    group: occurrence
-    from: base_event
-    description: The start time of a time period, or the time of the least recent event included in the aggregate event.
+    definition: v1.8.0/classes/base_event.yaml
   start_time_dt:
     caption: Start Time
-    type: datetime_t
     requirement: optional
-    group: occurrence
     profile: datetime
-    from: base_event
-    description: The start time of a time period, or the time of the least recent event included in the aggregate event.
+    definition: v1.8.0/classes/base_event.yaml
   status:
     caption: Status
-    type: string_t
     requirement: recommended
-    group: primary
-    from: base_event
-    description: The event status, normalized to the caption of the status_id value. In the case of 'Other', it is defined by the event source.
+    definition: v1.8.0/classes/base_event.yaml
   status_code:
     caption: Status Code
-    type: string_t
     requirement: recommended
-    group: primary
-    from: base_event
-    description: |-
-      The event status code, as reported by the event source.
-
-      For example, in a Windows Failed Authentication event, this would be the value of 'Failure Code', e.g. 0x18.
+    definition: v1.8.0/classes/base_event.yaml
   status_detail:
     caption: Status Detail
-    type: string_t
     requirement: recommended
-    group: primary
-    from: base_event
-    description: The status detail contains additional information about the event/finding outcome.
+    definition: v1.8.0/classes/base_event.yaml
   status_id:
     caption: Status ID
-    type: integer_t
     requirement: recommended
-    group: primary
-    from: base_event
-    sibling: status
-    description: The normalized identifier of the event status.
-    enum:
-      '0':
-        caption: Unknown
-        description: The status is unknown.
-      '1':
-        caption: Success
-      '2':
-        caption: Failure
-      '99':
-        caption: Other
-        description: The status is not mapped. See the `status` attribute, which contains a data source specific value.
+    definition: v1.8.0/classes/base_event.yaml
   time:
     caption: Event Time
-    type: timestamp_t
     requirement: required
-    group: occurrence
-    from: base_event
-    description: The normalized event occurrence time or the finding creation time.
+    definition: v1.8.0/classes/base_event.yaml
   time_dt:
     caption: Event Time
-    type: datetime_t
     requirement: optional
-    group: occurrence
     profile: datetime
-    from: base_event
-    description: The normalized event occurrence time or the finding creation time.
+    definition: v1.8.0/classes/base_event.yaml
   timezone_offset:
     caption: Timezone Offset
-    type: integer_t
     requirement: recommended
-    group: occurrence
-    from: base_event
-    description: The number of minutes that the reported event `time` is ahead or behind UTC, in the range -1,080 to +1,080.
+    definition: v1.8.0/classes/base_event.yaml
   tls:
     caption: TLS
-    type: object_t
-    object: tls
     requirement: optional
-    group: context
-    from: network
-    description: The Transport Layer Security (TLS) attributes.
+    definition: v1.8.0/classes/network.yaml
   traffic:
     caption: Traffic
     type: object_t
@@ -961,11 +511,8 @@ attributes:
     description: 'The network traffic for this observation period. Use when reporting: (1) delta values (bytes/packets transferred since the last observation), (2) instantaneous measurements at a specific point in time, or (3) standalone single-event metrics. This attribute represents a point-in-time measurement or incremental change, not a running total. For accumulated totals across multiple observations or the lifetime of a flow, use `cumulative_traffic` instead.'
   type_name:
     caption: Type Name
-    type: string_t
     requirement: optional
-    group: classification
-    from: base_event
-    description: The event/finding type name, as defined by the type_uid.
+    definition: v1.8.0/classes/base_event.yaml
   type_uid:
     caption: Type ID
     type: long_t
@@ -989,9 +536,5 @@ attributes:
         caption: 'DNS Activity: Other'
   unmapped:
     caption: Unmapped Data
-    type: object_t
-    object: object
     requirement: optional
-    group: context
-    from: base_event
-    description: The attributes that are not mapped to the event schema. The names and values of those attributes are specific to the event source.
+    definition: v1.8.0/classes/base_event.yaml

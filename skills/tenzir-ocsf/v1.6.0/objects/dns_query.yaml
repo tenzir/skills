@@ -1,3 +1,5 @@
+# Attributes with a `definition` path are inherited unchanged. Read that file
+# for their type, object, description, enum, and observable.
 name: dns_query
 caption: DNS Query
 extends: _dns
@@ -13,10 +15,8 @@ referenced_by:
 attributes:
   class:
     caption: Resource Record Class
-    type: string_t
     requirement: recommended
-    from: _dns
-    description: 'The class of resource records being queried. See [RFC1035](https://www.rfc-editor.org/rfc/rfc1035.txt). For example: `IN`.'
+    definition: v1.6.0/objects/_dns.yaml
   hostname:
     caption: Hostname
     type: hostname_t
@@ -60,13 +60,9 @@ attributes:
         description: The DNS Opcode is not defined by the RFC. See the `opcode` attribute, which contains a data source specific value.
   packet_uid:
     caption: Packet UID
-    type: integer_t
     requirement: recommended
-    from: _dns
-    description: The DNS packet identifier assigned by the program that generated the query. The identifier is copied to the response.
+    definition: v1.6.0/objects/_dns.yaml
   type:
     caption: Resource Record Type
-    type: string_t
     requirement: recommended
-    from: _dns
-    description: 'The type of resource records being queried. See [RFC1035](https://www.rfc-editor.org/rfc/rfc1035.txt). For example: A, AAAA, CNAME, MX, and NS.'
+    definition: v1.6.0/objects/_dns.yaml

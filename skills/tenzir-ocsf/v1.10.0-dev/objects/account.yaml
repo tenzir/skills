@@ -1,3 +1,5 @@
+# Attributes with a `definition` path are inherited unchanged. Read that file
+# for their type, object, description, enum, and observable.
 name: account
 caption: Account
 extends: _entity
@@ -122,9 +124,5 @@ attributes:
     description: The unique identifier of the account (e.g.  `AWS Account ID` ,  `OCID` ,  `GCP Project ID` ,  `Azure Subscription ID` ,  `Google Workspace Customer ID` , or  `M365 Tenant UID`).
   uid_numeric:
     caption: Numeric Unique ID
-    type: long_t
     requirement: optional
-    from: _entity
-    description: |-
-      The `uid` attribute in numeric form where applicable.
-      Note: Producers may populate `uid_numeric` only in addition to `uid` and not as an alternative to it.
+    definition: v1.10.0-dev/objects/_entity.yaml

@@ -1,3 +1,5 @@
+# Attributes with a `definition` path are inherited unchanged. Read that file
+# for their type, object, description, enum, and observable.
 name: reporter
 caption: Reporter
 extends: _entity
@@ -38,9 +40,5 @@ attributes:
     description: The unique identifier of the entity from which the event or finding was reported.
   uid_numeric:
     caption: Numeric Unique ID
-    type: long_t
     requirement: optional
-    from: _entity
-    description: |-
-      The `uid` attribute in numeric form where applicable.
-      Note: Producers may populate `uid_numeric` only in addition to `uid` and not as an alternative to it.
+    definition: v1.9.0/objects/_entity.yaml

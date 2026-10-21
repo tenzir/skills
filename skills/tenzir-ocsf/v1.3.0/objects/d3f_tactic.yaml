@@ -1,3 +1,5 @@
+# Attributes with a `definition` path are inherited unchanged. Read that file
+# for their type, object, description, enum, and observable.
 name: d3f_tactic
 caption: MITRE D3FEND™ Tactic
 extends: _entity
@@ -21,7 +23,5 @@ attributes:
     description: 'The versioned permalink of the defensive tactic, as defined by [D3FENDTM Matrix](https://d3fend.mitre.org). For example: `https://d3fend.mitre.org/tactic/d3f:Isolate/`.'
   uid:
     caption: Unique ID
-    type: string_t
     requirement: recommended
-    from: _entity
-    description: The unique identifier of the entity.
+    definition: v1.3.0/objects/_entity.yaml
