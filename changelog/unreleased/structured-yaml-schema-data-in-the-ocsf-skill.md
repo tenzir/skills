@@ -28,6 +28,16 @@ attributes:
     group: primary
 ```
 
+Inherited attributes that only change their requirement level point to the
+file with their full definition instead of repeating it:
+
+```yaml
+  severity_id:
+    caption: Severity ID
+    requirement: required
+    definition: v1.9.0/classes/base_event.yaml
+```
+
 Objects now list the classes and objects that reference them, and the attribute
 dictionary lists where each attribute is used. Extension classes, objects, and
 patches of core items live under `{version}/extensions/{extension}/`. The OCSF
