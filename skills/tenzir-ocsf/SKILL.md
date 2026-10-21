@@ -1,13 +1,6 @@
 ---
 name: tenzir-ocsf
-description: >-
-  Answer questions and produce mappings for the Open Cybersecurity Schema
-  Framework (OCSF): event classes, categories, activities, objects,
-  attributes, requirement levels, enum values, `class_uid`, `type_uid`,
-  profiles, extensions, observables, and schema versions. Use when
-  normalizing logs or security telemetry into OCSF, writing TQL mappings to
-  OCSF, choosing an OCSF event class, or working with OCSF data such as
-  Amazon Security Lake.
+description: Answer questions about OCSF (Open Cybersecurity Schema Framework). Use when the user asks about OCSF classes, objects, attributes, profiles, extensions, or event normalization.
 metadata:
   uses:
     skills:
