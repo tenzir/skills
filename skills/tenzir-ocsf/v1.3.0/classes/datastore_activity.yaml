@@ -1,5 +1,5 @@
-# Attributes with a `definition` path are inherited unchanged. Read that file
-# for their type, object, description, enum, and observable.
+# Attributes with `from` but no description are inherited unchanged. Their
+# descriptions are in the file of the item that `from` names.
 name: datastore_activity
 caption: Datastore Activity
 uid: 6005
@@ -11,13 +11,6 @@ profiles: [cloud, container, data_classification, datetime, osint, security_cont
 constraints:
   at_least_one: [database, databucket, table]
 attributes:
-  action:
-    caption: Action
-    type: string_t
-    requirement: optional
-    group: primary
-    profile: security_control
-    description: The normalized caption of `action_id`.
   action_id:
     caption: Action ID
     type: integer_t
@@ -27,16 +20,16 @@ attributes:
     sibling: action
     description: The action taken by a control or other policy-based system leading to an outcome or disposition. Dispositions conform to an action of `1` 'Allowed' or `2` 'Denied' in most cases. Note that `99` 'Other' is not an option. No action would equate to `1` 'Allowed'. An unknown action may still correspond to a known disposition. Refer to `disposition_id` for the outcome of the action.
     enum:
-      '0':
+      0:
         caption: Unknown
         description: The action was unknown. The `disposition_id` attribute may still be set to a non-unknown value, for example 'Count', 'Uncorrected', 'Isolated', 'Quarantined' or 'Exonerated'.
-      '1':
+      1:
         caption: Allowed
         description: The activity was allowed. The `disposition_id` attribute should be set to a value that conforms to this action, for example 'Allowed', 'Approved', 'Delayed', 'No Action', 'Count' etc.
-      '2':
+      2:
         caption: Denied
         description: The attempted activity was denied. The `disposition_id` attribute should be set to a value that conforms to this action, for example 'Blocked', 'Rejected', 'Quarantined', 'Isolated', 'Dropped', 'Access Revoked, etc.
-      '99':
+      99:
         caption: Other
         description: The action was not mapped. See the `action` attribute, which contains a data source specific value.
   activity_id:
@@ -47,46 +40,42 @@ attributes:
     sibling: activity_name
     description: The normalized identifier of the activity that triggered the event.
     enum:
-      '0':
+      0:
         caption: Unknown
         description: The event activity is unknown.
-      '1':
+      1:
         caption: Read
         description: The 'Read' activity involves accessing specific data record details.
-      '2':
+      2:
         caption: Update
         description: The 'Update' activity pertains to modifying specific data record details.
-      '3':
+      3:
         caption: Connect
         description: The 'Connect' activity involves establishing a connection to the datastore.
-      '4':
+      4:
         caption: Query
         description: The 'Query' activity involves retrieving a filtered subset of data based on specific criteria.
-      '5':
+      5:
         caption: Write
         description: The 'Write' activity involves writing specific data record details.
-      '6':
+      6:
         caption: Create
         description: The 'Create' activity involves generating new data record details.
-      '7':
+      7:
         caption: Delete
         description: The 'Delete' activity involves removing specific data record details.
-      '8':
+      8:
         caption: List
         description: The 'List' activity provides an overview of existing data records.
-      '9':
+      9:
         caption: Encrypt
         description: The 'Encrypt' activity involves securing data by encrypting a specific data record.
-      '10':
+      10:
         caption: Decrypt
         description: The 'Decrypt' activity involves converting encrypted data back to its original format.
-      '99':
+      99:
         caption: Other
         description: The event activity is not mapped. See the `activity_name` attribute, which contains a data source specific value.
-  activity_name:
-    caption: Activity
-    requirement: optional
-    definition: v1.3.0/classes/base_event.yaml
   actor:
     caption: Actor
     type: object_t
@@ -94,11 +83,223 @@ attributes:
     requirement: required
     group: primary
     description: The actor object describes details about the user/role/process that was the source of the activity.
-  api:
-    caption: API Details
+  category_uid:
+    caption: Category ID
+    type: integer_t
+    requirement: required
+    group: classification
+    from: base_event
+    sibling: category_name
+    description: The category unique identifier of the event.
+    enum:
+      6:
+        caption: Application Activity
+        description: Application Activity events report detailed information about the behavior of applications and services.
+  class_uid:
+    caption: Class ID
+    type: integer_t
+    requirement: required
+    group: classification
+    sibling: class_name
+    description: The unique identifier of a class. A class describes the attributes available in an event.
+    enum:
+      6005:
+        caption: Datastore Activity
+        description: Datastore events describe general activities (Read, Update, Query, Delete, etc.) which affect datastores or data within those datastores, e.g. (AWS RDS, AWS S3).
+  cloud: {caption: Cloud, type: object_t, object: cloud, requirement: required, group: primary, profile: cloud, from: base_event}
+  metadata: {caption: Metadata, type: object_t, object: metadata, requirement: required, group: context, from: base_event}
+  osint: {caption: OSINT, type: object_t, object: osint, array: true, requirement: required, group: primary, profile: osint, from: base_event}
+  severity_id: {caption: Severity ID, type: integer_t, requirement: required, group: classification, sibling: severity, enum: {0: Unknown, 1: Informational, 2: Low, 3: Medium, 4: High, 5: Critical, 6: Fatal, 99: Other}, from: base_event}
+  src_endpoint:
+    caption: Source Endpoint
+    type: object_t
+    object: network_endpoint
+    requirement: required
+    group: primary
+    observable: 20
+    description: Details about the source of the activity.
+  time: {caption: Event Time, type: timestamp_t, requirement: required, group: occurrence, from: base_event}
+  type_uid:
+    caption: Type ID
+    type: long_t
+    requirement: required
+    group: classification
+    sibling: type_name
+    description: 'The event/finding type ID. It identifies the event''s semantics and structure. The value is calculated by the logging system as: `class_uid * 100 + activity_id`.'
+  database:
+    caption: Database
+    type: object_t
+    object: database
+    requirement: recommended
+    group: primary
+    description: The database object is used for databases which are typically datastore services that contain an organized collection of structured and unstructured data or a types of data.
+  databucket:
+    caption: Databucket
+    type: object_t
+    object: databucket
+    requirement: recommended
+    group: primary
+    description: The data bucket object is a basic container that holds data, typically organized through the use of data partitions.
+  disposition_id:
+    caption: Disposition ID
+    type: integer_t
+    requirement: recommended
+    group: primary
+    profile: security_control
+    sibling: disposition
+    description: Describes the outcome or action taken by a security control, such as access control checks, malware detections or various types of policy violations.
+    enum:
+      0:
+        caption: Unknown
+        description: The disposition is unknown.
+      1:
+        caption: Allowed
+        description: Granted access or allowed the action to the protected resource.
+      2:
+        caption: Blocked
+        description: Denied access or blocked the action to the protected resource.
+      3:
+        caption: Quarantined
+        description: A suspicious file or other content was moved to a benign location.
+      4:
+        caption: Isolated
+        description: A session was isolated on the network or within a browser.
+      5:
+        caption: Deleted
+        description: A file or other content was deleted.
+      6:
+        caption: Dropped
+        description: The request was detected as a threat and resulted in the connection being dropped.
+      7:
+        caption: Custom Action
+        description: A custom action was executed such as running of a command script. Use the `message` attribute of the base class for details.
+      8:
+        caption: Approved
+        description: A request or submission was approved. For example, when a form was properly filled out and submitted. This is distinct from `1` 'Allowed'.
+      9:
+        caption: Restored
+        description: A quarantined file or other content was restored to its original location.
+      10:
+        caption: Exonerated
+        description: A suspicious or risky entity was deemed to no longer be suspicious (re-scored).
+      11:
+        caption: Corrected
+        description: A corrupt file or configuration was corrected.
+      12:
+        caption: Partially Corrected
+        description: A corrupt file or configuration was partially corrected.
+      13:
+        caption: Uncorrected
+        description: A corrupt file or configuration was not corrected.
+      14:
+        caption: Delayed
+        description: An operation was delayed, for example if a restart was required to finish the operation.
+      15:
+        caption: Detected
+        description: Suspicious activity or a policy violation was detected without further action.
+      16:
+        caption: No Action
+        description: The outcome of an operation had no action taken.
+      17:
+        caption: Logged
+        description: The operation or action was logged without further action.
+      18:
+        caption: Tagged
+        description: A file or other entity was marked with extended attributes.
+      19:
+        caption: Alert
+        description: The request or activity was detected as a threat and resulted in a notification but request was not blocked.
+      20:
+        caption: Count
+        description: Counted the request or activity but did not determine whether to allow it or block it.
+      21:
+        caption: Reset
+        description: The request was detected as a threat and resulted in the connection being reset.
+      22:
+        caption: Captcha
+        description: Required the end user to solve a CAPTCHA puzzle to prove that a human being is sending the request.
+      23:
+        caption: Challenge
+        description: Ran a silent challenge that required the client session to verify that it's a browser, and not a bot.
+      24:
+        caption: Access Revoked
+        description: 'The requestor''s access has been revoked due to security policy enforcements. Note: use the `Host` profile if the `User` or `Actor` requestor is not present in the event class.'
+      25:
+        caption: Rejected
+        description: A request or submission was rejected. For example, when a form was improperly filled out and submitted. This is distinct from `2` 'Blocked'.
+      26:
+        caption: Unauthorized
+        description: An attempt to access a resource was denied due to an authorization check that failed. This is a more specific disposition than `2` 'Blocked' and can be complemented with the `authorizations` attribute for more detail.
+      27:
+        caption: Error
+        description: An error occurred during the processing of the activity or request. Use the `message` attribute of the base class for details.
+      99:
+        caption: Other
+        description: The disposition is not mapped. See the `disposition` attribute, which contains a data source specific value.
+  dst_endpoint:
+    caption: Destination Endpoint
+    type: object_t
+    object: network_endpoint
+    requirement: recommended
+    group: primary
+    observable: 20
+    description: Details about the endpoint hosting the datastore application or service.
+  http_request:
+    caption: HTTP Request
+    type: object_t
+    object: http_request
+    requirement: recommended
+    group: primary
+    description: Details about the underlying http request.
+  message: {caption: Message, type: string_t, requirement: recommended, group: primary, from: base_event}
+  observables: {caption: Observables, type: object_t, object: observable, array: true, requirement: recommended, group: primary, from: base_event}
+  query_info:
+    caption: Query Info
+    type: object_t
+    object: query_info
+    requirement: recommended
+    group: primary
+    description: The query info object holds information related to data access within a datastore. To access, manipulate, delete, or retrieve data from a datastore, a database query must be written using a specific syntax.
+  status: {caption: Status, type: string_t, requirement: recommended, group: primary, from: base_event}
+  status_code: {caption: Status Code, type: string_t, requirement: recommended, group: primary, from: base_event}
+  status_detail: {caption: Status Detail, type: string_t, requirement: recommended, group: primary, from: base_event}
+  status_id: {caption: Status ID, type: integer_t, requirement: recommended, group: primary, sibling: status, enum: {0: Unknown, 1: Success, 2: Failure, 99: Other}, from: base_event}
+  table:
+    caption: Table
+    type: object_t
+    object: table
+    requirement: recommended
+    group: primary
+    description: The table object represents a table within a structured relational database or datastore, which contains columns and rows of data that are able to be create, updated, deleted and queried.
+  timezone_offset: {caption: Timezone Offset, type: integer_t, requirement: recommended, group: occurrence, from: base_event}
+  type_id:
+    caption: Datastore Type ID
+    type: integer_t
+    requirement: recommended
+    sibling: type
+    description: The normalized datastore resource type identifier.
+    enum:
+      0:
+        caption: Unknown
+        description: The datastore resource type is unknown.
+      1:
+        caption: Database
+      2:
+        caption: Databucket
+      3:
+        caption: Table
+      99:
+        caption: Other
+        description: The datastore resource type is not mapped.
+  action:
+    caption: Action
+    type: string_t
     requirement: optional
-    profile: cloud
-    definition: v1.3.0/classes/base_event.yaml
+    group: primary
+    profile: security_control
+    description: The normalized caption of `action_id`.
+  activity_name: {caption: Activity, type: string_t, requirement: optional, group: classification, from: base_event}
+  api: {caption: API Details, type: object_t, object: api, requirement: optional, group: context, profile: cloud, from: base_event}
   attacks:
     caption: MITRE ATT&CK® Details
     type: object_t
@@ -124,18 +325,6 @@ attributes:
     group: classification
     from: base_event
     description: 'The event category name, as defined by category_uid value: `Application Activity`.'
-  category_uid:
-    caption: Category ID
-    type: integer_t
-    requirement: required
-    group: classification
-    from: base_event
-    sibling: category_name
-    description: The category unique identifier of the event.
-    enum:
-      '6':
-        caption: Application Activity
-        description: Application Activity events report detailed information about the behavior of applications and services.
   class_name:
     caption: Class
     type: string_t
@@ -143,40 +332,7 @@ attributes:
     group: classification
     from: base_event
     description: 'The event class name, as defined by class_uid value: `Datastore Activity`.'
-  class_uid:
-    caption: Class ID
-    type: integer_t
-    requirement: required
-    group: classification
-    sibling: class_name
-    description: The unique identifier of a class. A class describes the attributes available in an event.
-    enum:
-      '6005':
-        caption: Datastore Activity
-        description: Datastore events describe general activities (Read, Update, Query, Delete, etc.) which affect datastores or data within those datastores, e.g. (AWS RDS, AWS S3).
-  cloud:
-    caption: Cloud
-    requirement: required
-    profile: cloud
-    definition: v1.3.0/classes/base_event.yaml
-  count:
-    caption: Count
-    requirement: optional
-    definition: v1.3.0/classes/base_event.yaml
-  database:
-    caption: Database
-    type: object_t
-    object: database
-    requirement: recommended
-    group: primary
-    description: The database object is used for databases which are typically datastore services that contain an organized collection of structured and unstructured data or a types of data.
-  databucket:
-    caption: Databucket
-    type: object_t
-    object: databucket
-    requirement: recommended
-    group: primary
-    description: The data bucket object is a basic container that holds data, typically organized through the use of data partitions.
+  count: {caption: Count, type: integer_t, requirement: optional, group: occurrence, from: base_event}
   disposition:
     caption: Disposition
     type: string_t
@@ -184,127 +340,10 @@ attributes:
     group: primary
     profile: security_control
     description: The disposition name, normalized to the caption of the disposition_id value. In the case of 'Other', it is defined by the event source.
-  disposition_id:
-    caption: Disposition ID
-    type: integer_t
-    requirement: recommended
-    group: primary
-    profile: security_control
-    sibling: disposition
-    description: Describes the outcome or action taken by a security control, such as access control checks, malware detections or various types of policy violations.
-    enum:
-      '0':
-        caption: Unknown
-        description: The disposition is unknown.
-      '1':
-        caption: Allowed
-        description: Granted access or allowed the action to the protected resource.
-      '2':
-        caption: Blocked
-        description: Denied access or blocked the action to the protected resource.
-      '3':
-        caption: Quarantined
-        description: A suspicious file or other content was moved to a benign location.
-      '4':
-        caption: Isolated
-        description: A session was isolated on the network or within a browser.
-      '5':
-        caption: Deleted
-        description: A file or other content was deleted.
-      '6':
-        caption: Dropped
-        description: The request was detected as a threat and resulted in the connection being dropped.
-      '7':
-        caption: Custom Action
-        description: A custom action was executed such as running of a command script. Use the `message` attribute of the base class for details.
-      '8':
-        caption: Approved
-        description: A request or submission was approved. For example, when a form was properly filled out and submitted. This is distinct from `1` 'Allowed'.
-      '9':
-        caption: Restored
-        description: A quarantined file or other content was restored to its original location.
-      '10':
-        caption: Exonerated
-        description: A suspicious or risky entity was deemed to no longer be suspicious (re-scored).
-      '11':
-        caption: Corrected
-        description: A corrupt file or configuration was corrected.
-      '12':
-        caption: Partially Corrected
-        description: A corrupt file or configuration was partially corrected.
-      '13':
-        caption: Uncorrected
-        description: A corrupt file or configuration was not corrected.
-      '14':
-        caption: Delayed
-        description: An operation was delayed, for example if a restart was required to finish the operation.
-      '15':
-        caption: Detected
-        description: Suspicious activity or a policy violation was detected without further action.
-      '16':
-        caption: No Action
-        description: The outcome of an operation had no action taken.
-      '17':
-        caption: Logged
-        description: The operation or action was logged without further action.
-      '18':
-        caption: Tagged
-        description: A file or other entity was marked with extended attributes.
-      '19':
-        caption: Alert
-        description: The request or activity was detected as a threat and resulted in a notification but request was not blocked.
-      '20':
-        caption: Count
-        description: Counted the request or activity but did not determine whether to allow it or block it.
-      '21':
-        caption: Reset
-        description: The request was detected as a threat and resulted in the connection being reset.
-      '22':
-        caption: Captcha
-        description: Required the end user to solve a CAPTCHA puzzle to prove that a human being is sending the request.
-      '23':
-        caption: Challenge
-        description: Ran a silent challenge that required the client session to verify that it's a browser, and not a bot.
-      '24':
-        caption: Access Revoked
-        description: 'The requestor''s access has been revoked due to security policy enforcements. Note: use the `Host` profile if the `User` or `Actor` requestor is not present in the event class.'
-      '25':
-        caption: Rejected
-        description: A request or submission was rejected. For example, when a form was improperly filled out and submitted. This is distinct from `2` 'Blocked'.
-      '26':
-        caption: Unauthorized
-        description: An attempt to access a resource was denied due to an authorization check that failed. This is a more specific disposition than `2` 'Blocked' and can be complemented with the `authorizations` attribute for more detail.
-      '27':
-        caption: Error
-        description: An error occurred during the processing of the activity or request. Use the `message` attribute of the base class for details.
-      '99':
-        caption: Other
-        description: The disposition is not mapped. See the `disposition` attribute, which contains a data source specific value.
-  dst_endpoint:
-    caption: Destination Endpoint
-    type: object_t
-    object: network_endpoint
-    requirement: recommended
-    group: primary
-    observable: 20
-    description: Details about the endpoint hosting the datastore application or service.
-  duration:
-    caption: Duration Milliseconds
-    requirement: optional
-    definition: v1.3.0/classes/base_event.yaml
-  end_time:
-    caption: End Time
-    requirement: optional
-    definition: v1.3.0/classes/base_event.yaml
-  end_time_dt:
-    caption: End Time
-    requirement: optional
-    profile: datetime
-    definition: v1.3.0/classes/base_event.yaml
-  enrichments:
-    caption: Enrichments
-    requirement: optional
-    definition: v1.3.0/classes/base_event.yaml
+  duration: {caption: Duration Milliseconds, type: long_t, requirement: optional, group: occurrence, from: base_event}
+  end_time: {caption: End Time, type: timestamp_t, requirement: optional, group: occurrence, from: base_event}
+  end_time_dt: {caption: End Time, type: datetime_t, requirement: optional, group: occurrence, profile: datetime, from: base_event}
+  enrichments: {caption: Enrichments, type: object_t, object: enrichment, array: true, requirement: optional, group: context, from: base_event}
   firewall_rule:
     caption: Firewall Rule
     type: object_t
@@ -313,13 +352,6 @@ attributes:
     group: primary
     profile: security_control
     description: The firewall rule that triggered the event.
-  http_request:
-    caption: HTTP Request
-    type: object_t
-    object: http_request
-    requirement: recommended
-    group: primary
-    description: Details about the underlying http request.
   malware:
     caption: Malware
     type: object_t
@@ -329,166 +361,15 @@ attributes:
     group: primary
     profile: security_control
     description: A list of Malware objects, describing details about the identified malware.
-  message:
-    caption: Message
-    requirement: recommended
-    definition: v1.3.0/classes/base_event.yaml
-  metadata:
-    caption: Metadata
-    requirement: required
-    definition: v1.3.0/classes/base_event.yaml
-  observables:
-    caption: Observables
-    requirement: recommended
-    definition: v1.3.0/classes/base_event.yaml
-  osint:
-    caption: OSINT
-    requirement: required
-    profile: osint
-    definition: v1.3.0/classes/base_event.yaml
-  query_info:
-    caption: Query Info
-    type: object_t
-    object: query_info
-    requirement: recommended
-    group: primary
-    description: The query info object holds information related to data access within a datastore. To access, manipulate, delete, or retrieve data from a datastore, a database query must be written using a specific syntax.
-  raw_data:
-    caption: Raw Data
-    requirement: optional
-    definition: v1.3.0/classes/base_event.yaml
-  severity:
-    caption: Severity
-    requirement: optional
-    definition: v1.3.0/classes/base_event.yaml
-  severity_id:
-    caption: Severity ID
-    requirement: required
-    definition: v1.3.0/classes/base_event.yaml
-  src_endpoint:
-    caption: Source Endpoint
-    type: object_t
-    object: network_endpoint
-    requirement: required
-    group: primary
-    observable: 20
-    description: Details about the source of the activity.
-  start_time:
-    caption: Start Time
-    requirement: optional
-    definition: v1.3.0/classes/base_event.yaml
-  start_time_dt:
-    caption: Start Time
-    requirement: optional
-    profile: datetime
-    definition: v1.3.0/classes/base_event.yaml
-  status:
-    caption: Status
-    requirement: recommended
-    definition: v1.3.0/classes/base_event.yaml
-  status_code:
-    caption: Status Code
-    requirement: recommended
-    definition: v1.3.0/classes/base_event.yaml
-  status_detail:
-    caption: Status Detail
-    requirement: recommended
-    definition: v1.3.0/classes/base_event.yaml
-  status_id:
-    caption: Status ID
-    requirement: recommended
-    definition: v1.3.0/classes/base_event.yaml
-  table:
-    caption: Table
-    type: object_t
-    object: table
-    requirement: recommended
-    group: primary
-    description: The table object represents a table within a structured relational database or datastore, which contains columns and rows of data that are able to be create, updated, deleted and queried.
-  time:
-    caption: Event Time
-    requirement: required
-    definition: v1.3.0/classes/base_event.yaml
-  time_dt:
-    caption: Event Time
-    requirement: optional
-    profile: datetime
-    definition: v1.3.0/classes/base_event.yaml
-  timezone_offset:
-    caption: Timezone Offset
-    requirement: recommended
-    definition: v1.3.0/classes/base_event.yaml
+  raw_data: {caption: Raw Data, type: string_t, requirement: optional, group: context, from: base_event}
+  severity: {caption: Severity, type: string_t, requirement: optional, group: classification, from: base_event}
+  start_time: {caption: Start Time, type: timestamp_t, requirement: optional, group: occurrence, from: base_event}
+  start_time_dt: {caption: Start Time, type: datetime_t, requirement: optional, group: occurrence, profile: datetime, from: base_event}
+  time_dt: {caption: Event Time, type: datetime_t, requirement: optional, group: occurrence, profile: datetime, from: base_event}
   type:
     caption: Datastore Type
     type: string_t
     requirement: optional
     description: The datastore resource type (e.g. database, datastore, or table).
-  type_id:
-    caption: Datastore Type ID
-    type: integer_t
-    requirement: recommended
-    sibling: type
-    description: The normalized datastore resource type identifier.
-    enum:
-      '0':
-        caption: Unknown
-        description: The datastore resource type is unknown.
-      '1':
-        caption: Database
-      '2':
-        caption: Databucket
-      '3':
-        caption: Table
-      '99':
-        caption: Other
-        description: The datastore resource type is not mapped.
-  type_name:
-    caption: Type Name
-    requirement: optional
-    definition: v1.3.0/classes/base_event.yaml
-  type_uid:
-    caption: Type ID
-    type: long_t
-    requirement: required
-    group: classification
-    sibling: type_name
-    description: 'The event/finding type ID. It identifies the event''s semantics and structure. The value is calculated by the logging system as: `class_uid * 100 + activity_id`.'
-    enum:
-      '600500':
-        caption: 'Datastore Activity: Unknown'
-      '600501':
-        caption: 'Datastore Activity: Read'
-        description: The 'Read' activity involves accessing specific data record details.
-      '600502':
-        caption: 'Datastore Activity: Update'
-        description: The 'Update' activity pertains to modifying specific data record details.
-      '600503':
-        caption: 'Datastore Activity: Connect'
-        description: The 'Connect' activity involves establishing a connection to the datastore.
-      '600504':
-        caption: 'Datastore Activity: Query'
-        description: The 'Query' activity involves retrieving a filtered subset of data based on specific criteria.
-      '600505':
-        caption: 'Datastore Activity: Write'
-        description: The 'Write' activity involves writing specific data record details.
-      '600506':
-        caption: 'Datastore Activity: Create'
-        description: The 'Create' activity involves generating new data record details.
-      '600507':
-        caption: 'Datastore Activity: Delete'
-        description: The 'Delete' activity involves removing specific data record details.
-      '600508':
-        caption: 'Datastore Activity: List'
-        description: The 'List' activity provides an overview of existing data records.
-      '600509':
-        caption: 'Datastore Activity: Encrypt'
-        description: The 'Encrypt' activity involves securing data by encrypting a specific data record.
-      '600510':
-        caption: 'Datastore Activity: Decrypt'
-        description: The 'Decrypt' activity involves converting encrypted data back to its original format.
-      '600599':
-        caption: 'Datastore Activity: Other'
-  unmapped:
-    caption: Unmapped Data
-    requirement: optional
-    definition: v1.3.0/classes/base_event.yaml
+  type_name: {caption: Type Name, type: string_t, requirement: optional, group: classification, from: base_event}
+  unmapped: {caption: Unmapped Data, type: object_t, object: object, requirement: optional, group: context, from: base_event}

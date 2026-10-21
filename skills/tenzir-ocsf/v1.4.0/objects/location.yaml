@@ -19,11 +19,6 @@ referenced_by:
     unmanned_aerial_system: [location]
     unmanned_system_operating_area: [locations]
 attributes:
-  aerial_height:
-    caption: Aerial Height
-    type: string_t
-    requirement: optional
-    description: 'Expressed as either height above takeoff location or height above ground level (AGL) for a UAS current location. This value is provided in meters and must have a minimum resolution of 1 m. Special Values: `Invalid`, `No Value`, or `Unknown: -1000 m`.'
   city:
     caption: City
     type: string_t
@@ -34,15 +29,6 @@ attributes:
     type: string_t
     requirement: recommended
     description: The name of the continent.
-  coordinates:
-    caption: Coordinates
-    type: float_t
-    array: true
-    requirement: optional
-    deprecated:
-      since: 1.2.0
-      message: Use specific `lat, long` attributes instead.
-    description: 'A two-element array, containing a longitude/latitude pair. The format conforms with [GeoJSON](https://geojson.org). For example: `[-73.983, 40.719]`.'
   country:
     caption: Country
     type: string_t
@@ -55,6 +41,20 @@ attributes:
     references:
     - description: ISO 3166-1 alpha-2 codes
       url: https://www.iso.org/obp/ui/#iso:pub:PUB500001:en
+  aerial_height:
+    caption: Aerial Height
+    type: string_t
+    requirement: optional
+    description: 'Expressed as either height above takeoff location or height above ground level (AGL) for a UAS current location. This value is provided in meters and must have a minimum resolution of 1 m. Special Values: `Invalid`, `No Value`, or `Unknown: -1000 m`.'
+  coordinates:
+    caption: Coordinates
+    type: float_t
+    array: true
+    requirement: optional
+    deprecated:
+      since: 1.2.0
+      message: Use specific `lat, long` attributes instead.
+    description: 'A two-element array, containing a longitude/latitude pair. The format conforms with [GeoJSON](https://geojson.org). For example: `[-73.983, 40.719]`.'
   desc:
     caption: Description
     type: string_t

@@ -35,16 +35,23 @@ referenced_by:
   objects:
     evidences: [http_response]
 attributes:
-  body_length:
-    caption: Response Body Length
-    type: integer_t
-    requirement: optional
-    description: The actual length of the HTTP response body, in number of bytes, independent of a potentially existing Content-Length header.
   code:
     caption: Response Code
     type: integer_t
     requirement: required
     description: The Hypertext Transfer Protocol (HTTP) status code returned from the web server to the client. For example, 200.
+  http_headers:
+    caption: HTTP Headers
+    type: object_t
+    object: http_header
+    array: true
+    requirement: recommended
+    description: Additional HTTP headers of an HTTP request or response.
+  body_length:
+    caption: Response Body Length
+    type: integer_t
+    requirement: optional
+    description: The actual length of the HTTP response body, in number of bytes, independent of a potentially existing Content-Length header.
   content_type:
     caption: HTTP Content Type
     type: string_t
@@ -53,13 +60,6 @@ attributes:
     references:
     - description: IANA Media Types
       url: https://www.iana.org/assignments/media-types/media-types.xhtml
-  http_headers:
-    caption: HTTP Headers
-    type: object_t
-    object: http_header
-    array: true
-    requirement: recommended
-    description: Additional HTTP headers of an HTTP request or response.
   latency:
     caption: Latency
     type: integer_t

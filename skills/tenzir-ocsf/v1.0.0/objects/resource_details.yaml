@@ -1,5 +1,5 @@
-# Attributes with a `definition` path are inherited unchanged. Read that file
-# for their type, object, description, enum, and observable.
+# Attributes with `from` but no description are inherited unchanged. Their
+# descriptions are in the file of the item that `from` names.
 name: resource_details
 caption: Resource Details
 extends: _resource
@@ -14,6 +14,13 @@ referenced_by:
     security_finding: [resources]
     user_access: [resource]
 attributes:
+  owner:
+    caption: Owner
+    type: object_t
+    object: user
+    requirement: recommended
+    observable: 21
+    description: The identity of the service or user account that owns the resource.
   cloud_partition:
     caption: Cloud Partition
     type: string_t
@@ -25,45 +32,23 @@ attributes:
     type: string_t
     requirement: optional
     description: The criticality of the resource as defined by the event source.
-  data:
-    caption: Data
-    requirement: optional
-    definition: v1.0.0/objects/_resource.yaml
+  data: {caption: Data, type: json_t, requirement: optional, from: _resource}
   group:
     caption: Group
     type: object_t
     object: group
     requirement: optional
     description: The name of the related resource group.
-  labels:
-    caption: Labels
-    requirement: optional
-    definition: v1.0.0/objects/_resource.yaml
-  name:
-    caption: Name
-    requirement: optional
-    definition: v1.0.0/objects/_resource.yaml
-  owner:
-    caption: Owner
-    type: object_t
-    object: user
-    requirement: recommended
-    observable: 21
-    description: The identity of the service or user account that owns the resource.
+  labels: {caption: Labels, type: string_t, array: true, requirement: optional, from: _resource}
+  name: {caption: Name, type: string_t, requirement: optional, from: _resource}
   region:
     caption: Region
     type: string_t
     requirement: optional
     profile: cloud
     description: The cloud region of the resource.
-  type:
-    caption: Type
-    requirement: optional
-    definition: v1.0.0/objects/_resource.yaml
-  uid:
-    caption: Unique ID
-    requirement: optional
-    definition: v1.0.0/objects/_resource.yaml
+  type: {caption: Type, type: string_t, requirement: optional, from: _resource}
+  uid: {caption: Unique ID, type: string_t, requirement: optional, from: _resource}
   version:
     caption: Version
     type: string_t

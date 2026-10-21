@@ -9,11 +9,6 @@ referenced_by:
   classes:
     entity_management: [entity, entity_result]
 attributes:
-  data:
-    caption: Data
-    type: json_t
-    requirement: optional
-    description: The managed entity content as a JSON object.
   device:
     caption: Device
     type: object_t
@@ -34,13 +29,6 @@ attributes:
     object: group
     requirement: recommended
     description: The group object associated with an entity such as user, policy, or rule.
-  location:
-    caption: Geo Location
-    type: object_t
-    object: location
-    requirement: optional
-    observable: 26
-    description: The detailed geographical location usually associated with an IP address.
   name:
     caption: Name
     type: string_t
@@ -70,28 +58,28 @@ attributes:
     sibling: type
     description: The type of the Managed Entity. It is recommended to also populate the `type` attribute with the associated label, or the source specific name if `Other`.
     enum:
-      '0':
+      0:
         caption: Unknown
         description: The type is unknown.
-      '1':
+      1:
         caption: Device
         description: A managed Device entity. This item corresponds to population of the `device` attribute.
-      '2':
+      2:
         caption: User
         description: A managed User entity. This item corresponds to population of the `user` attribute.
-      '3':
+      3:
         caption: Group
         description: A managed Group entity. This item corresponds to population of the `group` attribute.
-      '4':
+      4:
         caption: Organization
         description: A managed Organization entity. This item corresponds to population of the `org` attribute.
-      '5':
+      5:
         caption: Policy
         description: A managed Policy entity. This item corresponds to population of the `policy` attribute.
-      '6':
+      6:
         caption: Email
         description: A managed Email entity. This item corresponds to population of the `email` attribute.
-      '99':
+      99:
         caption: Other
         description: The type is not mapped. See the `type` attribute, which contains a data source specific value.
   uid:
@@ -111,3 +99,15 @@ attributes:
     type: string_t
     requirement: recommended
     description: 'The version of the managed entity. For example: `1.2.3`.'
+  data:
+    caption: Data
+    type: json_t
+    requirement: optional
+    description: The managed entity content as a JSON object.
+  location:
+    caption: Geo Location
+    type: object_t
+    object: location
+    requirement: optional
+    observable: 26
+    description: The detailed geographical location usually associated with an IP address.

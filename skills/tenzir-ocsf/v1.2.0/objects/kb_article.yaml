@@ -10,6 +10,27 @@ referenced_by:
     remediation: [kb_article_list]
     vulnerability: [kb_article_list]
 attributes:
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: required
+    description: The unique identifier for the kb article.
+  os:
+    caption: OS
+    type: object_t
+    object: os
+    requirement: recommended
+    description: The operating system the kb article applies.
+  severity:
+    caption: Severity
+    type: string_t
+    requirement: recommended
+    description: The severity of the kb article.
+  title:
+    caption: Title
+    type: string_t
+    requirement: recommended
+    description: The title of the kb article.
   bulletin:
     caption: Patch Bulletin
     type: string_t
@@ -36,23 +57,12 @@ attributes:
     type: boolean_t
     requirement: optional
     description: The kb article has been replaced by another.
-  os:
-    caption: OS
-    type: object_t
-    object: os
-    requirement: recommended
-    description: The operating system the kb article applies.
   product:
     caption: Product
     type: object_t
     object: product
     requirement: optional
     description: The product details the kb article applies.
-  severity:
-    caption: Severity
-    type: string_t
-    requirement: recommended
-    description: The severity of the kb article.
   size:
     caption: Size
     type: long_t
@@ -64,13 +74,3 @@ attributes:
     requirement: optional
     observable: 6
     description: The kb article link from the source vendor.
-  title:
-    caption: Title
-    type: string_t
-    requirement: recommended
-    description: The title of the kb article.
-  uid:
-    caption: Unique ID
-    type: string_t
-    requirement: required
-    description: The unique identifier for the kb article.

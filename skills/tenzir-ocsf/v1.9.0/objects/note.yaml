@@ -23,22 +23,10 @@ attributes:
     type: timestamp_t
     requirement: recommended
     description: The time when the note was created.
-  created_time_dt:
-    caption: Created Time
-    type: datetime_t
-    requirement: optional
-    profile: datetime
-    description: The time when the note was created.
   modified_time:
     caption: Modified Time
     type: timestamp_t
     requirement: recommended
-    description: The time when the note was last modified.
-  modified_time_dt:
-    caption: Modified Time
-    type: datetime_t
-    requirement: optional
-    profile: datetime
     description: The time when the note was last modified.
   owner:
     caption: Owner
@@ -47,6 +35,18 @@ attributes:
     requirement: recommended
     observable: 21
     description: The user who created or last modified the note. Typically the same user that created the note can modify the note.
+  created_time_dt:
+    caption: Created Time
+    type: datetime_t
+    requirement: optional
+    profile: datetime
+    description: The time when the note was created.
+  modified_time_dt:
+    caption: Modified Time
+    type: datetime_t
+    requirement: optional
+    profile: datetime
+    description: The time when the note was last modified.
   title:
     caption: Title
     type: string_t

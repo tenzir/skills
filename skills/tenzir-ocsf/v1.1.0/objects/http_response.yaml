@@ -22,11 +22,6 @@ attributes:
     type: integer_t
     requirement: required
     description: The Hypertext Transfer Protocol (HTTP) status code returned from the web server to the client. For example, 200.
-  content_type:
-    caption: HTTP Content Type
-    type: string_t
-    requirement: optional
-    description: The request header that identifies the original [media type](https://www.iana.org/assignments/media-types/media-types.xhtml)  of the resource (prior to any content encoding applied for sending).
   http_headers:
     caption: HTTP Headers
     type: object_t
@@ -34,6 +29,11 @@ attributes:
     array: true
     requirement: recommended
     description: Additional HTTP headers of an HTTP request or response.
+  content_type:
+    caption: HTTP Content Type
+    type: string_t
+    requirement: optional
+    description: The request header that identifies the original [media type](https://www.iana.org/assignments/media-types/media-types.xhtml)  of the resource (prior to any content encoding applied for sending).
   latency:
     caption: Latency
     type: integer_t

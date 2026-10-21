@@ -6,16 +6,16 @@ referenced_by:
   classes:
     config_state: [cis_benchmark_result]
 attributes:
-  desc:
-    caption: Description
-    type: string_t
-    requirement: optional
-    description: The CIS benchmark description.
   name:
     caption: Name
     type: string_t
     requirement: required
     description: The CIS benchmark name.
+  desc:
+    caption: Description
+    type: string_t
+    requirement: optional
+    description: The CIS benchmark description.
   remediation:
     caption: Remediation
     type: object_t

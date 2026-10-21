@@ -30,6 +30,11 @@ attributes:
     type: long_t
     requirement: recommended
     description: The total number of bytes transferred in both directions (sum of bytes_in and bytes_out).
+  packets:
+    caption: Total Packets
+    type: long_t
+    requirement: recommended
+    description: The total number of packets transferred in both directions (sum of packets_in and packets_out).
   bytes_in:
     caption: Bytes In
     type: long_t
@@ -71,11 +76,6 @@ attributes:
     requirement: optional
     profile: datetime
     description: The end time of the observation or reporting period.
-  packets:
-    caption: Total Packets
-    type: long_t
-    requirement: recommended
-    description: The total number of packets transferred in both directions (sum of packets_in and packets_out).
   packets_in:
     caption: Packets In
     type: long_t

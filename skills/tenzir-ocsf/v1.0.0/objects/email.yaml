@@ -7,35 +7,24 @@ referenced_by:
   classes:
     email_activity: [email]
 attributes:
-  cc:
-    caption: Cc
-    type: email_t
-    array: true
-    requirement: optional
-    observable: 5
-    description: The email header Cc values, as defined by RFC 5322.
-  delivered_to:
-    caption: Delivered To
-    type: email_t
-    requirement: optional
-    observable: 5
-    description: The Delivered-To email header field.
   from:
     caption: From
     type: email_t
     requirement: required
     observable: 5
     description: The email header From values, as defined by RFC 5322.
+  to:
+    caption: To
+    type: email_t
+    array: true
+    requirement: required
+    observable: 5
+    description: The email header To values, as defined by RFC 5322.
   message_uid:
     caption: Message UID
     type: string_t
     requirement: recommended
     description: The email header Message-Id value, as defined by RFC 5322.
-  raw_header:
-    caption: Raw Header
-    type: string_t
-    requirement: optional
-    description: The email authentication header.
   reply_to:
     caption: Reply To
     type: email_t
@@ -60,23 +49,34 @@ attributes:
     requirement: recommended
     observable: 5
     description: The value of the SMTP envelope RCPT TO command.
-  subject:
-    caption: Subject
-    type: string_t
-    requirement: optional
-    description: The email header Subject value, as defined by RFC 5322.
-  to:
-    caption: To
-    type: email_t
-    array: true
-    requirement: required
-    observable: 5
-    description: The email header To values, as defined by RFC 5322.
   uid:
     caption: Email UID
     type: string_t
     requirement: recommended
     description: The email unique identifier.
+  cc:
+    caption: Cc
+    type: email_t
+    array: true
+    requirement: optional
+    observable: 5
+    description: The email header Cc values, as defined by RFC 5322.
+  delivered_to:
+    caption: Delivered To
+    type: email_t
+    requirement: optional
+    observable: 5
+    description: The Delivered-To email header field.
+  raw_header:
+    caption: Raw Header
+    type: string_t
+    requirement: optional
+    description: The email authentication header.
+  subject:
+    caption: Subject
+    type: string_t
+    requirement: optional
+    description: The email header Subject value, as defined by RFC 5322.
   x_originating_ip:
     caption: X-Originating-IP
     type: ip_t

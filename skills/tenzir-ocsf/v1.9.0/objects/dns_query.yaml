@@ -11,26 +11,17 @@ referenced_by:
   objects:
     evidences: [query]
 attributes:
-  class:
-    caption: Resource Record Class
-    type: string_t
-    requirement: recommended
-    description: 'The class of resource records being queried. See RFC 1035. For example: `IN`.'
   hostname:
     caption: Hostname
     type: hostname_t
     requirement: required
     observable: 1
     description: 'The hostname or domain being queried. For example: `www.example.com`'
-  opcode:
-    caption: DNS Opcode
+  class:
+    caption: Resource Record Class
     type: string_t
-    requirement: optional
-    deprecated:
-      since: 1.9.0
-      message: Use `dns_activity.opcode` instead.
-      superseded_by: [dns_activity.opcode]
-    description: The DNS opcode specifies the type of the query message.
+    requirement: recommended
+    description: 'The class of resource records being queried. See RFC 1035. For example: `IN`.'
   opcode_id:
     caption: DNS Opcode ID
     type: integer_t
@@ -41,28 +32,28 @@ attributes:
       superseded_by: [dns_activity.opcode_id]
     description: The DNS opcode ID specifies the normalized query message type as defined in RFC 5395.
     enum:
-      '0':
+      0:
         caption: Query
         description: Standard query
-      '1':
+      1:
         caption: Inverse Query
         description: Inverse query, obsolete
-      '2':
+      2:
         caption: Status
         description: Server status request
-      '3':
+      3:
         caption: Reserved
         description: Reserved, not used
-      '4':
+      4:
         caption: Notify
         description: Zone change notification
-      '5':
+      5:
         caption: Update
         description: Dynamic DNS update
-      '6':
+      6:
         caption: DSO Message
         description: DNS Stateful Operations (DSO)
-      '99':
+      99:
         caption: Other
         description: The DNS Opcode is not defined by the RFC. See the `opcode` attribute, which contains a data source specific value.
     references:
@@ -82,3 +73,12 @@ attributes:
     type: string_t
     requirement: recommended
     description: 'The type of resource records being queried. See RFC 1035. For example: A, AAAA, CNAME, MX, and NS.'
+  opcode:
+    caption: DNS Opcode
+    type: string_t
+    requirement: optional
+    deprecated:
+      since: 1.9.0
+      message: Use `dns_activity.opcode` instead.
+      superseded_by: [dns_activity.opcode]
+    description: The DNS opcode specifies the type of the query message.

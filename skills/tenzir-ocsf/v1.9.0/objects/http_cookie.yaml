@@ -10,6 +10,16 @@ referenced_by:
   classes:
     http_activity: [http_cookies]
 attributes:
+  name:
+    caption: Name
+    type: string_t
+    requirement: required
+    description: The HTTP cookie name.
+  value:
+    caption: Value
+    type: string_t
+    requirement: required
+    description: The HTTP cookie value.
   domain:
     caption: Domain
     type: string_t
@@ -45,11 +55,6 @@ attributes:
     type: boolean_t
     requirement: optional
     description: The cookie attribute indicates that cookies are sent to the server only when the request is encrypted using the HTTPS protocol.
-  name:
-    caption: Name
-    type: string_t
-    requirement: required
-    description: The HTTP cookie name.
   path:
     caption: Path
     type: string_t
@@ -69,8 +74,3 @@ attributes:
       message: Use the `is_secure` attribute instead.
       superseded_by: [is_secure]
     description: The cookie attribute to only send cookies to the server with an encrypted request over the HTTPS protocol.
-  value:
-    caption: Value
-    type: string_t
-    requirement: required
-    description: The HTTP cookie value.

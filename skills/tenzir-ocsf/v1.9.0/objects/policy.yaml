@@ -1,5 +1,5 @@
-# Attributes with a `definition` path are inherited unchanged. Read that file
-# for their type, object, description, enum, and observable.
+# Attributes with `from` but no description are inherited unchanged. Their
+# descriptions are in the file of the item that `from` names.
 name: policy
 caption: Policy
 extends: _entity
@@ -102,6 +102,26 @@ referenced_by:
     managed_entity: [policy]
     permission_analysis_result: [policy]
 attributes:
+  is_applied:
+    caption: Applied
+    type: boolean_t
+    requirement: recommended
+    description: A determination if the content of a policy was applied to a target or request, or not.
+  name:
+    caption: Name
+    type: string_t
+    requirement: recommended
+    description: 'The policy name. For example: `AdministratorAccess Policy`.'
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: recommended
+    description: A unique identifier of the policy instance.
+  version:
+    caption: Version
+    type: string_t
+    requirement: recommended
+    description: The policy version number.
   data:
     caption: Data
     type: json_t
@@ -118,32 +138,9 @@ attributes:
     object: group
     requirement: optional
     description: The policy group.
-  is_applied:
-    caption: Applied
-    type: boolean_t
-    requirement: recommended
-    description: A determination if the content of a policy was applied to a target or request, or not.
-  name:
-    caption: Name
-    type: string_t
-    requirement: recommended
-    description: 'The policy name. For example: `AdministratorAccess Policy`.'
   type:
     caption: Type
     type: string_t
     requirement: optional
     description: 'The policy type. For example: `Identity Policy, Resource Policy, Service Control Policy, etc.`.'
-  uid:
-    caption: Unique ID
-    type: string_t
-    requirement: recommended
-    description: A unique identifier of the policy instance.
-  uid_numeric:
-    caption: Numeric Unique ID
-    requirement: optional
-    definition: v1.9.0/objects/_entity.yaml
-  version:
-    caption: Version
-    type: string_t
-    requirement: recommended
-    description: The policy version number.
+  uid_numeric: {caption: Numeric Unique ID, type: long_t, requirement: optional, from: _entity}

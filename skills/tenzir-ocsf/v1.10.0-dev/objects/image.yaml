@@ -1,5 +1,5 @@
-# Attributes with a `definition` path are inherited unchanged. Read that file
-# for their type, object, description, enum, and observable.
+# Attributes with `from` but no description are inherited unchanged. Their
+# descriptions are in the file of the item that `from` names.
 name: image
 caption: Image
 extends: _entity
@@ -12,17 +12,22 @@ referenced_by:
     container: [image]
     device: [image]
 attributes:
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: required
+    description: 'The unique image ID. For example: `77af4d6b9913`.'
+  name:
+    caption: Name
+    type: string_t
+    requirement: recommended
+    description: 'The image name. For example: `elixir`.'
   labels:
     caption: Labels
     type: string_t
     array: true
     requirement: optional
     description: The list of labels associated to the image.
-  name:
-    caption: Name
-    type: string_t
-    requirement: recommended
-    description: 'The image name. For example: `elixir`.'
   path:
     caption: Path
     type: file_path_t
@@ -45,12 +50,4 @@ attributes:
     array: true
     requirement: optional
     description: The list of tags; `{key:value}` pairs associated to the image.
-  uid:
-    caption: Unique ID
-    type: string_t
-    requirement: required
-    description: 'The unique image ID. For example: `77af4d6b9913`.'
-  uid_numeric:
-    caption: Numeric Unique ID
-    requirement: optional
-    definition: v1.10.0-dev/objects/_entity.yaml
+  uid_numeric: {caption: Numeric Unique ID, type: long_t, requirement: optional, from: _entity}

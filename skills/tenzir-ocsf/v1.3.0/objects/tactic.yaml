@@ -8,6 +8,11 @@ referenced_by:
   objects:
     attack: [tactic, tactics]
 attributes:
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: recommended
+    description: 'The tactic ID that is associated with the attack technique, as defined by [ATT&CK® Matrix](https://attack.mitre.org/wiki/ATT&CK_Matrix). For example: `TA0043`.'
   name:
     caption: Name
     type: string_t
@@ -19,8 +24,3 @@ attributes:
     requirement: optional
     observable: 6
     description: 'The versioned permalink of the attack tactic, as defined by [ATT&CK® Matrix](https://attack.mitre.org/wiki/ATT&CK_Matrix). For example: `https://attack.mitre.org/versions/v14/tactics/TA0043/`.'
-  uid:
-    caption: Unique ID
-    type: string_t
-    requirement: recommended
-    description: 'The tactic ID that is associated with the attack technique, as defined by [ATT&CK® Matrix](https://attack.mitre.org/wiki/ATT&CK_Matrix). For example: `TA0043`.'

@@ -7,11 +7,6 @@ profiles: [data_classification]
 constraints:
   at_least_one: [name, uid]
 attributes:
-  data:
-    caption: Data
-    type: json_t
-    requirement: optional
-    description: Additional data describing the resource.
   data_classification:
     caption: Data Classification
     type: object_t
@@ -20,6 +15,11 @@ attributes:
     group: context
     profile: data_classification
     description: The Data Classification object includes information about data classification levels and data category types.
+  data:
+    caption: Data
+    type: json_t
+    requirement: optional
+    description: Additional data describing the resource.
   labels:
     caption: Labels
     type: string_t

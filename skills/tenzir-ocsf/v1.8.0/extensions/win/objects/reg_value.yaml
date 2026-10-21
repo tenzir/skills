@@ -16,6 +16,64 @@ referenced_by:
     evidences: [reg_value]
     query_evidence: [reg_value]
 attributes:
+  name:
+    caption: Name
+    type: string_t
+    requirement: required
+    observable: 43
+    description: The name of the registry value.
+  path:
+    caption: Path
+    type: reg_key_path_t
+    requirement: required
+    observable: 46
+    description: The full path to the registry key, where the value is located.
+  type_id:
+    caption: Type ID
+    type: integer_t
+    requirement: recommended
+    sibling: type
+    description: The value type ID.
+    enum:
+      0:
+        caption: Unknown
+        description: The type is unknown.
+      1:
+        caption: REG_BINARY
+        description: Arbitrary binary data.
+      2:
+        caption: REG_DWORD
+        description: A 32-bit integer.
+      3:
+        caption: REG_DWORD_BIG_ENDIAN
+        description: A 32-bit integer in big-endian byte order.
+      4:
+        caption: REG_EXPAND_SZ
+        description: A string containing unexpanded environment variables, e.g. `%USERPROFILE%\Downloads`.
+      5:
+        caption: REG_LINK
+        description: A string containing the target path of a symbolic link created by calling `RegCreateKeyEx` with `REG_OPTION_CREATE_LINK`.
+      6:
+        caption: REG_MULTI_SZ
+        description: A sequence of zero or more strings.
+      7:
+        caption: REG_NONE
+        description: A value with no declared type.
+      8:
+        caption: REG_QWORD
+        description: A 64-bit integer.
+      9:
+        caption: REG_QWORD_LITTLE_ENDIAN
+        description: Not defined in Windows documentation and previously added to OCSF in error.
+        deprecated:
+          since: 1.6.0
+          message: Use `REG_QWORD` instead.
+      10:
+        caption: REG_SZ
+        description: A string.
+      99:
+        caption: Other
+        description: The type is not mapped. See the `type` attribute, which contains a data source specific value.
   data:
     caption: Data
     type: json_t
@@ -42,18 +100,6 @@ attributes:
     requirement: optional
     profile: datetime
     description: The time when the registry value was last modified.
-  name:
-    caption: Name
-    type: string_t
-    requirement: required
-    observable: 43
-    description: The name of the registry value.
-  path:
-    caption: Path
-    type: reg_key_path_t
-    requirement: required
-    observable: 46
-    description: The full path to the registry key, where the value is located.
   reg_binary_data:
     caption: Registry Binary Data
     type: bytestring_t
@@ -80,49 +126,3 @@ attributes:
     type: string_t
     requirement: optional
     description: A string representation of the value type as specified in [Registry Value Types](https://learn.microsoft.com/en-us/windows/win32/sysinfo/registry-value-types).
-  type_id:
-    caption: Type ID
-    type: integer_t
-    requirement: recommended
-    sibling: type
-    description: The value type ID.
-    enum:
-      '0':
-        caption: Unknown
-        description: The type is unknown.
-      '1':
-        caption: REG_BINARY
-        description: Arbitrary binary data.
-      '2':
-        caption: REG_DWORD
-        description: A 32-bit integer.
-      '3':
-        caption: REG_DWORD_BIG_ENDIAN
-        description: A 32-bit integer in big-endian byte order.
-      '4':
-        caption: REG_EXPAND_SZ
-        description: A string containing unexpanded environment variables, e.g. `%USERPROFILE%\Downloads`.
-      '5':
-        caption: REG_LINK
-        description: A string containing the target path of a symbolic link created by calling `RegCreateKeyEx` with `REG_OPTION_CREATE_LINK`.
-      '6':
-        caption: REG_MULTI_SZ
-        description: A sequence of zero or more strings.
-      '7':
-        caption: REG_NONE
-        description: A value with no declared type.
-      '8':
-        caption: REG_QWORD
-        description: A 64-bit integer.
-      '9':
-        caption: REG_QWORD_LITTLE_ENDIAN
-        description: Not defined in Windows documentation and previously added to OCSF in error.
-        deprecated:
-          since: 1.6.0
-          message: Use `REG_QWORD` instead.
-      '10':
-        caption: REG_SZ
-        description: A string.
-      '99':
-        caption: Other
-        description: The type is not mapped. See the `type` attribute, which contains a data source specific value.

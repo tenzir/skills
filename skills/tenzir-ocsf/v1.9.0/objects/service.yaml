@@ -1,5 +1,5 @@
-# Attributes with a `definition` path are inherited unchanged. Read that file
-# for their type, object, description, enum, and observable.
+# Attributes with `from` but no description are inherited unchanged. Their
+# descriptions are in the file of the item that `from` names.
 name: service
 caption: Service
 extends: _entity
@@ -20,17 +20,27 @@ referenced_by:
     span: [service]
     trace: [service]
 attributes:
+  name:
+    caption: Name
+    type: string_t
+    requirement: recommended
+    description: The name of the service.
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: recommended
+    description: The unique identifier of the service.
+  version:
+    caption: Version
+    type: string_t
+    requirement: recommended
+    description: The version of the service.
   labels:
     caption: Labels
     type: string_t
     array: true
     requirement: optional
     description: The list of labels associated with the service.
-  name:
-    caption: Name
-    type: string_t
-    requirement: recommended
-    description: The name of the service.
   tags:
     caption: Tags
     type: object_t
@@ -38,17 +48,4 @@ attributes:
     array: true
     requirement: optional
     description: The list of tags; `{key:value}` pairs associated to the service.
-  uid:
-    caption: Unique ID
-    type: string_t
-    requirement: recommended
-    description: The unique identifier of the service.
-  uid_numeric:
-    caption: Numeric Unique ID
-    requirement: optional
-    definition: v1.9.0/objects/_entity.yaml
-  version:
-    caption: Version
-    type: string_t
-    requirement: recommended
-    description: The version of the service.
+  uid_numeric: {caption: Numeric Unique ID, type: long_t, requirement: optional, from: _entity}

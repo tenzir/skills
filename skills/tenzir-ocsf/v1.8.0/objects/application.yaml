@@ -15,6 +15,23 @@ referenced_by:
   objects:
     message_context: [application]
 attributes:
+  name:
+    caption: Application Name
+    type: string_t
+    requirement: recommended
+    description: The name of the application.
+  owner:
+    caption: Owner
+    type: object_t
+    object: user
+    requirement: recommended
+    observable: 21
+    description: The identity of the service or user account that owns the application.
+  uid:
+    caption: Application ID
+    type: string_t
+    requirement: recommended
+    description: The unique identifier for the application.
   criticality:
     caption: Business Criticality
     type: string_t
@@ -48,18 +65,6 @@ attributes:
     array: true
     requirement: optional
     description: The list of labels associated to the application.
-  name:
-    caption: Application Name
-    type: string_t
-    requirement: recommended
-    description: The name of the application.
-  owner:
-    caption: Owner
-    type: object_t
-    object: user
-    requirement: recommended
-    observable: 21
-    description: The identity of the service or user account that owns the application.
   region:
     caption: Region
     type: string_t
@@ -84,17 +89,17 @@ attributes:
     sibling: risk_level
     description: The normalized risk level id.
     enum:
-      '0':
+      0:
         caption: Info
-      '1':
+      1:
         caption: Low
-      '2':
+      2:
         caption: Medium
-      '3':
+      3:
         caption: High
-      '4':
+      4:
         caption: Critical
-      '99':
+      99:
         caption: Other
         description: The risk level is not mapped. See the `risk_level` attribute, which contains a data source specific value.
   risk_score:
@@ -120,11 +125,6 @@ attributes:
     type: string_t
     requirement: optional
     description: The type of application as defined by the event source, e.g., `GitHub`, `Azure Logic App`, or `Amazon Elastic BeanStalk`.
-  uid:
-    caption: Application ID
-    type: string_t
-    requirement: recommended
-    description: The unique identifier for the application.
   uid_alt:
     caption: Application Alternative ID
     type: string_t

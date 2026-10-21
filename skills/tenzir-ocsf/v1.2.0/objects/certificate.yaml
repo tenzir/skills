@@ -10,28 +10,6 @@ referenced_by:
     digital_signature: [certificate]
     tls: [certificate]
 attributes:
-  created_time:
-    caption: Created Time
-    type: timestamp_t
-    requirement: recommended
-    description: The time when the certificate was created.
-  created_time_dt:
-    caption: Created Time
-    type: datetime_t
-    requirement: optional
-    profile: datetime
-    description: The time when the certificate was created.
-  expiration_time:
-    caption: Expiration Time
-    type: timestamp_t
-    requirement: recommended
-    description: The expiration time of the certificate.
-  expiration_time_dt:
-    caption: Expiration Time
-    type: datetime_t
-    requirement: optional
-    profile: datetime
-    description: The expiration time of the certificate.
   fingerprints:
     caption: Fingerprints
     type: object_t
@@ -50,18 +28,40 @@ attributes:
     type: string_t
     requirement: required
     description: The serial number of the certificate used to create the digital signature.
+  created_time:
+    caption: Created Time
+    type: timestamp_t
+    requirement: recommended
+    description: The time when the certificate was created.
+  expiration_time:
+    caption: Expiration Time
+    type: timestamp_t
+    requirement: recommended
+    description: The expiration time of the certificate.
   subject:
     caption: Subject Distinguished Name
     type: string_t
     requirement: recommended
     description: The certificate subject distinguished name.
-  uid:
-    caption: Unique ID
-    type: string_t
-    requirement: optional
-    description: The unique identifier of the certificate.
   version:
     caption: Version
     type: string_t
     requirement: recommended
     description: The certificate version.
+  created_time_dt:
+    caption: Created Time
+    type: datetime_t
+    requirement: optional
+    profile: datetime
+    description: The time when the certificate was created.
+  expiration_time_dt:
+    caption: Expiration Time
+    type: datetime_t
+    requirement: optional
+    profile: datetime
+    description: The expiration time of the certificate.
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: optional
+    description: The unique identifier of the certificate.

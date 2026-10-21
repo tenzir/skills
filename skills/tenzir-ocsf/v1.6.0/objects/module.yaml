@@ -11,6 +11,34 @@ referenced_by:
   objects:
     query_evidence: [module]
 attributes:
+  load_type_id:
+    caption: Load Type ID
+    type: integer_t
+    requirement: required
+    sibling: load_type
+    description: The normalized identifier for how the module was loaded in memory.
+    enum:
+      0:
+        caption: Unknown
+        description: The load type is unknown.
+      1:
+        caption: Standard
+        description: A normal module loaded by the normal windows loading mechanism i.e. LoadLibrary.
+      2:
+        caption: Non Standard
+        description: A module loaded in a way avoidant of normal windows procedures. i.e. Bootstrapped Loading/Manual Dll Loading.
+      3:
+        caption: ShellCode
+        description: A raw module in process memory that is READWRITE_EXECUTE and had a thread started in its range.
+      4:
+        caption: Mapped
+        description: A memory mapped file, typically created with CreatefileMapping/MapViewOfFile.
+      5:
+        caption: NonStandard Backed
+        description: A module loaded in a non standard way. However, GetModuleFileName succeeds on this allocation.
+      99:
+        caption: Other
+        description: The load type is not mapped. See the `load_type` attribute, which contains a data source specific value.
   base_address:
     caption: Base Address
     type: string_t
@@ -23,44 +51,6 @@ attributes:
     requirement: recommended
     observable: 24
     description: The module file object.
-  function_name:
-    caption: Function Name
-    type: string_t
-    requirement: optional
-    description: The entry-point function of the module. The system calls the entry-point function whenever a process or thread loads or unloads the module.
-  load_type:
-    caption: Load Type
-    type: string_t
-    requirement: optional
-    description: The load type, normalized to the caption of the load_type_id value. In the case of 'Other', it is defined by the event source.
-  load_type_id:
-    caption: Load Type ID
-    type: integer_t
-    requirement: required
-    sibling: load_type
-    description: The normalized identifier for how the module was loaded in memory.
-    enum:
-      '0':
-        caption: Unknown
-        description: The load type is unknown.
-      '1':
-        caption: Standard
-        description: A normal module loaded by the normal windows loading mechanism i.e. LoadLibrary.
-      '2':
-        caption: Non Standard
-        description: A module loaded in a way avoidant of normal windows procedures. i.e. Bootstrapped Loading/Manual Dll Loading.
-      '3':
-        caption: ShellCode
-        description: A raw module in process memory that is READWRITE_EXECUTE and had a thread started in its range.
-      '4':
-        caption: Mapped
-        description: A memory mapped file, typically created with CreatefileMapping/MapViewOfFile.
-      '5':
-        caption: NonStandard Backed
-        description: A module loaded in a non standard way. However, GetModuleFileName succeeds on this allocation.
-      '99':
-        caption: Other
-        description: The load type is not mapped. See the `load_type` attribute, which contains a data source specific value.
   start_address:
     caption: Start Address
     type: string_t
@@ -71,3 +61,13 @@ attributes:
     type: string_t
     requirement: recommended
     description: The module type.
+  function_name:
+    caption: Function Name
+    type: string_t
+    requirement: optional
+    description: The entry-point function of the module. The system calls the entry-point function whenever a process or thread loads or unloads the module.
+  load_type:
+    caption: Load Type
+    type: string_t
+    requirement: optional
+    description: The load type, normalized to the caption of the load_type_id value. In the case of 'Other', it is defined by the event source.

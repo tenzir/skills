@@ -24,11 +24,11 @@ referenced_by:
     ssh_activity: [packet_list]
     tunnel_activity: [packet_list]
 attributes:
-  encoding:
-    caption: Encoding
+  value:
+    caption: Value
     type: string_t
-    requirement: optional
-    description: The human-readable name of the encoding used to represent the packet data in the `value` field. This should match the caption associated with `encoding_id`. If `encoding_id` is 99 (Other), this field contains the original data source–specific encoding value.
+    requirement: required
+    description: The actual packet data, represented as a string. The format of this string is determined by the specified `encoding_id` (e.g., Base64, Hexadecimal, or URL Encoded).
   encoding_id:
     caption: Encoding ID
     type: integer_t
@@ -36,21 +36,91 @@ attributes:
     sibling: encoding
     description: The normalized identifier of the encoding method used to represent the packet data as a string.
     enum:
-      '0':
+      0:
         caption: Unknown
         description: The encoding format of the packet data is not known.
-      '1':
+      1:
         caption: Base64
         description: The packet data is encoded using Base64.
-      '2':
+      2:
         caption: Hexadecimal
         description: The packet data is encoded as a hexadecimal string representation of the raw bytes.
-      '3':
+      3:
         caption: URL Encoded
         description: The packet data is encoded using percent-encoding (URL encoding).
-      '99':
+      99:
         caption: Other
         description: The encoding method is not mapped. Refer to the `encoding` field for the original source-specific value.
+  format_id:
+    caption: Format ID
+    type: integer_t
+    requirement: recommended
+    sibling: format
+    description: The normalized identifier of the packet capture format.
+    enum:
+      0:
+        caption: Unknown
+        description: The packet format is unknown.
+      1:
+        caption: PCAP
+        description: Standard libpcap/tcpdump packet capture file format.
+      2:
+        caption: PCAPNG
+        description: Next-generation PCAP format that supports multiple interfaces and enhanced metadata.
+      3:
+        caption: Snoop
+        description: Solaris/Unix capture format.
+      4:
+        caption: ERF
+        description: Extensible Record Format used by Endace network monitoring hardware.
+      5:
+        caption: NetMon
+        description: Microsoft Network Monitor capture file format.
+      6:
+        caption: 5Views
+        description: Accellent 5Views packet capture format.
+      99:
+        caption: Other
+        description: The packet format is not mapped. Refer to the `format` field for the original source-specific value.
+  source_id:
+    caption: Source ID
+    type: integer_t
+    requirement: recommended
+    sibling: source
+    description: A normalized numeric identifier that specifies how the packet was obtained or generated.
+    enum:
+      0:
+        caption: Unknown
+        description: The packet source is unknown.
+      1:
+        caption: Wire
+        description: The packet was captured directly from a network interface.
+      2:
+        caption: Stream
+        description: The packet was reconstructed or derived from a stream of packets.
+      3:
+        caption: Decoder
+        description: The packet was generated or extracted by a protocol decoder or analysis engine.
+      4:
+        caption: TAP
+        description: The packet was captured from a physical network Test Access Point (TAP) device used for passive monitoring.
+      5:
+        caption: SPAN
+        description: The packet was captured from a switch Switched Port Analyzer (SPAN) or mirror port.
+      6:
+        caption: Endpoint
+        description: The packet was captured by a host-based agent or endpoint detection and response (EDR) sensor.
+      7:
+        caption: Virtual
+        description: The packet was captured from a virtual network interface, virtual switch, or container network.
+      99:
+        caption: Other
+        description: The packet source is not mapped. Refer to the `source` field for the original source-specific value.
+  encoding:
+    caption: Encoding
+    type: string_t
+    requirement: optional
+    description: The human-readable name of the encoding used to represent the packet data in the `value` field. This should match the caption associated with `encoding_id`. If `encoding_id` is 99 (Other), this field contains the original data source–specific encoding value.
   end_offset:
     caption: End Offset
     type: long_t
@@ -61,37 +131,6 @@ attributes:
     type: string_t
     requirement: optional
     description: The human-readable name of the packet capture file format in which the packet is stored. This should match the caption associated with `format_id`. If `format_id` is 99 (Other), this field contains the original data source–specific format value.
-  format_id:
-    caption: Format ID
-    type: integer_t
-    requirement: recommended
-    sibling: format
-    description: The normalized identifier of the packet capture format.
-    enum:
-      '0':
-        caption: Unknown
-        description: The packet format is unknown.
-      '1':
-        caption: PCAP
-        description: Standard libpcap/tcpdump packet capture file format.
-      '2':
-        caption: PCAPNG
-        description: Next-generation PCAP format that supports multiple interfaces and enhanced metadata.
-      '3':
-        caption: Snoop
-        description: Solaris/Unix capture format.
-      '4':
-        caption: ERF
-        description: Extensible Record Format used by Endace network monitoring hardware.
-      '5':
-        caption: NetMon
-        description: Microsoft Network Monitor capture file format.
-      '6':
-        caption: 5Views
-        description: Accellent 5Views packet capture format.
-      '99':
-        caption: Other
-        description: The packet format is not mapped. Refer to the `format` field for the original source-specific value.
   sequence_number:
     caption: Sequence Number
     type: long_t
@@ -102,47 +141,8 @@ attributes:
     type: string_t
     requirement: optional
     description: The human-readable name describing how or where the packet was obtained. This should match the caption associated with `source_id`. If `source_id` is 99 (Other), this field contains the original data source–specific value.
-  source_id:
-    caption: Source ID
-    type: integer_t
-    requirement: recommended
-    sibling: source
-    description: A normalized numeric identifier that specifies how the packet was obtained or generated.
-    enum:
-      '0':
-        caption: Unknown
-        description: The packet source is unknown.
-      '1':
-        caption: Wire
-        description: The packet was captured directly from a network interface.
-      '2':
-        caption: Stream
-        description: The packet was reconstructed or derived from a stream of packets.
-      '3':
-        caption: Decoder
-        description: The packet was generated or extracted by a protocol decoder or analysis engine.
-      '4':
-        caption: TAP
-        description: The packet was captured from a physical network Test Access Point (TAP) device used for passive monitoring.
-      '5':
-        caption: SPAN
-        description: The packet was captured from a switch Switched Port Analyzer (SPAN) or mirror port.
-      '6':
-        caption: Endpoint
-        description: The packet was captured by a host-based agent or endpoint detection and response (EDR) sensor.
-      '7':
-        caption: Virtual
-        description: The packet was captured from a virtual network interface, virtual switch, or container network.
-      '99':
-        caption: Other
-        description: The packet source is not mapped. Refer to the `source` field for the original source-specific value.
   start_offset:
     caption: Start Offset
     type: long_t
     requirement: optional
     description: The starting byte position of this packet within a capture file or stream.
-  value:
-    caption: Value
-    type: string_t
-    requirement: required
-    description: The actual packet data, represented as a string. The format of this string is determined by the specified `encoding_id` (e.g., Base64, Hexadecimal, or URL Encoded).

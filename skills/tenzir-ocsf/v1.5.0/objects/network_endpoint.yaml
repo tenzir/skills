@@ -1,5 +1,5 @@
-# Attributes with a `definition` path are inherited unchanged. Read that file
-# for their type, object, description, enum, and observable.
+# Attributes with `from` but no description are inherited unchanged. Their
+# descriptions are in the file of the item that `from` names.
 name: network_endpoint
 caption: Network Endpoint
 extends: endpoint
@@ -42,45 +42,94 @@ referenced_by:
     evidences: [dst_endpoint, src_endpoint]
     load_balancer: [dst_endpoint]
 attributes:
-  agent_list:
-    caption: Agent List
-    requirement: optional
-    definition: v1.5.0/objects/endpoint.yaml
+  container: {caption: Container, type: object_t, object: container, requirement: recommended, group: context, profile: container, observable: 27, from: endpoint}
+  hostname: {caption: Hostname, type: hostname_t, requirement: recommended, observable: 1, from: endpoint}
+  instance_uid: {caption: Instance ID, type: string_t, requirement: recommended, from: endpoint}
+  interface_name: {caption: Network Interface Name, type: string_t, requirement: recommended, from: endpoint}
+  interface_uid: {caption: Network Interface ID, type: string_t, requirement: recommended, from: endpoint}
+  ip: {caption: IP Address, type: ip_t, requirement: recommended, observable: 2, from: endpoint}
+  name: {caption: Name, type: string_t, requirement: recommended, from: endpoint}
+  namespace_pid: {caption: Namespace PID, type: integer_t, requirement: recommended, group: context, profile: container, from: endpoint}
+  owner: {caption: Owner, type: object_t, object: user, requirement: recommended, observable: 21, from: endpoint}
+  port:
+    caption: Port
+    type: port_t
+    requirement: recommended
+    observable: 11
+    description: The port used for communication within the network connection.
+  svc_name:
+    caption: Service Name
+    type: string_t
+    requirement: recommended
+    description: The service name in service-to-service connections. For example, AWS VPC logs the pkt-src-aws-service and pkt-dst-aws-service fields identify the connection is coming from or going to an AWS service.
+  type_id:
+    caption: Type ID
+    type: integer_t
+    requirement: recommended
+    sibling: type
+    description: The network endpoint type ID.
+    enum:
+      0:
+        caption: Unknown
+        description: The type is unknown.
+      1:
+        caption: Server
+        description: A [server](https://d3fend.mitre.org/dao/artifact/d3f:Server/).
+      2:
+        caption: Desktop
+        description: A [desktop computer](https://d3fend.mitre.org/dao/artifact/d3f:DesktopComputer/).
+      3:
+        caption: Laptop
+        description: A [laptop computer](https://d3fend.mitre.org/dao/artifact/d3f:LaptopComputer/).
+      4:
+        caption: Tablet
+        description: A [tablet computer](https://d3fend.mitre.org/dao/artifact/d3f:TabletComputer/).
+      5:
+        caption: Mobile
+        description: A [mobile phone](https://d3fend.mitre.org/dao/artifact/d3f:MobilePhone/).
+      6:
+        caption: Virtual
+        description: A [virtual machine](https://d3fend.mitre.org/dao/artifact/d3f:VirtualizationSoftware/).
+      7:
+        caption: IOT
+        description: An [IOT (Internet of Things) device](https://www.techtarget.com/iotagenda/definition/IoT-device).
+      8:
+        caption: Browser
+        description: A [web browser](https://d3fend.mitre.org/dao/artifact/d3f:Browser/).
+      9:
+        caption: Firewall
+        description: A [networking firewall](https://d3fend.mitre.org/dao/artifact/d3f:Firewall/).
+      10:
+        caption: Switch
+        description: A [networking switch](https://d3fend.mitre.org/dao/artifact/d3f:Switch/).
+      11:
+        caption: Hub
+        description: A [networking hub](https://en.wikipedia.org/wiki/Ethernet_hub).
+      12:
+        caption: Router
+        description: A [networking router](https://d3fend.mitre.org/dao/artifact/d3f:Router/).
+      13:
+        caption: IDS
+        description: An [intrusion detection system](https://d3fend.mitre.org/dao/artifact/d3f:IntrusionDetectionSystem/).
+      14:
+        caption: IPS
+        description: An [intrusion prevention system](https://d3fend.mitre.org/dao/artifact/d3f:IntrusionPreventionSystem/).
+      15:
+        caption: Load Balancer
+        description: A [Load Balancer device.](https://en.wikipedia.org/wiki/Load_balancing_(computing))
+      99:
+        caption: Other
+        description: The type is not mapped. See the `type` attribute, which contains a data source specific value.
+  uid: {caption: Unique ID, type: string_t, requirement: recommended, from: endpoint}
+  agent_list: {caption: Agent List, type: object_t, object: agent, array: true, requirement: optional, from: endpoint}
   autonomous_system:
     caption: Autonomous System
     type: object_t
     object: autonomous_system
     requirement: optional
     description: The Autonomous System details associated with an IP address.
-  container:
-    caption: Container
-    requirement: recommended
-    profile: container
-    definition: v1.5.0/objects/endpoint.yaml
-  domain:
-    caption: Domain
-    requirement: optional
-    definition: v1.5.0/objects/endpoint.yaml
-  hostname:
-    caption: Hostname
-    requirement: recommended
-    definition: v1.5.0/objects/endpoint.yaml
-  hw_info:
-    caption: Hardware Info
-    requirement: optional
-    definition: v1.5.0/objects/endpoint.yaml
-  instance_uid:
-    caption: Instance ID
-    requirement: recommended
-    definition: v1.5.0/objects/endpoint.yaml
-  interface_name:
-    caption: Network Interface Name
-    requirement: recommended
-    definition: v1.5.0/objects/endpoint.yaml
-  interface_uid:
-    caption: Network Interface ID
-    requirement: recommended
-    definition: v1.5.0/objects/endpoint.yaml
+  domain: {caption: Domain, type: string_t, requirement: optional, from: endpoint}
+  hw_info: {caption: Hardware Info, type: object_t, object: device_hw_info, requirement: optional, from: endpoint}
   intermediate_ips:
     caption: Intermediate IP Addresses
     type: ip_t
@@ -88,10 +137,6 @@ attributes:
     requirement: optional
     observable: 2
     description: The intermediate IP Addresses. For example, the IP addresses in the HTTP X-Forwarded-For header.
-  ip:
-    caption: IP Address
-    requirement: recommended
-    definition: v1.5.0/objects/endpoint.yaml
   isp:
     caption: ISP Name
     type: string_t
@@ -102,37 +147,9 @@ attributes:
     type: string_t
     requirement: optional
     description: The organization name of the Internet Service Provider (ISP). This represents the parent organization or company that owns/operates the ISP. For example, Comcast Corporation would be the ISP org for Xfinity internet service. This attribute helps identify the ultimate provider when ISPs operate under different brand names.
-  location:
-    caption: Geo Location
-    requirement: optional
-    definition: v1.5.0/objects/endpoint.yaml
-  mac:
-    caption: MAC Address
-    requirement: optional
-    definition: v1.5.0/objects/endpoint.yaml
-  name:
-    caption: Name
-    requirement: recommended
-    definition: v1.5.0/objects/endpoint.yaml
-  namespace_pid:
-    caption: Namespace PID
-    requirement: recommended
-    profile: container
-    definition: v1.5.0/objects/endpoint.yaml
-  os:
-    caption: OS
-    requirement: optional
-    definition: v1.5.0/objects/endpoint.yaml
-  owner:
-    caption: Owner
-    requirement: recommended
-    definition: v1.5.0/objects/endpoint.yaml
-  port:
-    caption: Port
-    type: port_t
-    requirement: recommended
-    observable: 11
-    description: The port used for communication within the network connection.
+  location: {caption: Geo Location, type: object_t, object: location, requirement: optional, observable: 26, from: endpoint}
+  mac: {caption: MAC Address, type: mac_t, requirement: optional, observable: 3, from: endpoint}
+  os: {caption: OS, type: object_t, object: os, requirement: optional, from: endpoint}
   proxy_endpoint:
     caption: Proxy Endpoint
     type: object_t
@@ -140,91 +157,12 @@ attributes:
     requirement: optional
     observable: 20
     description: The network proxy information pertaining to a specific endpoint. This can be used to describe information pertaining to network address translation (NAT).
-  subnet_uid:
-    caption: Subnet UID
-    requirement: optional
-    definition: v1.5.0/objects/endpoint.yaml
-  svc_name:
-    caption: Service Name
-    type: string_t
-    requirement: recommended
-    description: The service name in service-to-service connections. For example, AWS VPC logs the pkt-src-aws-service and pkt-dst-aws-service fields identify the connection is coming from or going to an AWS service.
+  subnet_uid: {caption: Subnet UID, type: string_t, requirement: optional, from: endpoint}
   type:
     caption: Type
     type: string_t
     requirement: optional
     description: 'The network endpoint type. For example: `unknown`, `server`, `desktop`, `laptop`, `tablet`, `mobile`, `virtual`, `browser`, or `other`.'
-  type_id:
-    caption: Type ID
-    type: integer_t
-    requirement: recommended
-    sibling: type
-    description: The network endpoint type ID.
-    enum:
-      '0':
-        caption: Unknown
-        description: The type is unknown.
-      '1':
-        caption: Server
-        description: A [server](https://d3fend.mitre.org/dao/artifact/d3f:Server/).
-      '2':
-        caption: Desktop
-        description: A [desktop computer](https://d3fend.mitre.org/dao/artifact/d3f:DesktopComputer/).
-      '3':
-        caption: Laptop
-        description: A [laptop computer](https://d3fend.mitre.org/dao/artifact/d3f:LaptopComputer/).
-      '4':
-        caption: Tablet
-        description: A [tablet computer](https://d3fend.mitre.org/dao/artifact/d3f:TabletComputer/).
-      '5':
-        caption: Mobile
-        description: A [mobile phone](https://d3fend.mitre.org/dao/artifact/d3f:MobilePhone/).
-      '6':
-        caption: Virtual
-        description: A [virtual machine](https://d3fend.mitre.org/dao/artifact/d3f:VirtualizationSoftware/).
-      '7':
-        caption: IOT
-        description: An [IOT (Internet of Things) device](https://www.techtarget.com/iotagenda/definition/IoT-device).
-      '8':
-        caption: Browser
-        description: A [web browser](https://d3fend.mitre.org/dao/artifact/d3f:Browser/).
-      '9':
-        caption: Firewall
-        description: A [networking firewall](https://d3fend.mitre.org/dao/artifact/d3f:Firewall/).
-      '10':
-        caption: Switch
-        description: A [networking switch](https://d3fend.mitre.org/dao/artifact/d3f:Switch/).
-      '11':
-        caption: Hub
-        description: A [networking hub](https://en.wikipedia.org/wiki/Ethernet_hub).
-      '12':
-        caption: Router
-        description: A [networking router](https://d3fend.mitre.org/dao/artifact/d3f:Router/).
-      '13':
-        caption: IDS
-        description: An [intrusion detection system](https://d3fend.mitre.org/dao/artifact/d3f:IntrusionDetectionSystem/).
-      '14':
-        caption: IPS
-        description: An [intrusion prevention system](https://d3fend.mitre.org/dao/artifact/d3f:IntrusionPreventionSystem/).
-      '15':
-        caption: Load Balancer
-        description: A [Load Balancer device.](https://en.wikipedia.org/wiki/Load_balancing_(computing))
-      '99':
-        caption: Other
-        description: The type is not mapped. See the `type` attribute, which contains a data source specific value.
-  uid:
-    caption: Unique ID
-    requirement: recommended
-    definition: v1.5.0/objects/endpoint.yaml
-  vlan_uid:
-    caption: VLAN
-    requirement: optional
-    definition: v1.5.0/objects/endpoint.yaml
-  vpc_uid:
-    caption: VPC UID
-    requirement: optional
-    definition: v1.5.0/objects/endpoint.yaml
-  zone:
-    caption: Network Zone
-    requirement: optional
-    definition: v1.5.0/objects/endpoint.yaml
+  vlan_uid: {caption: VLAN, type: string_t, requirement: optional, from: endpoint}
+  vpc_uid: {caption: VPC UID, type: string_t, requirement: optional, from: endpoint}
+  zone: {caption: Network Zone, type: string_t, requirement: optional, from: endpoint}

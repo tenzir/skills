@@ -1,5 +1,5 @@
-# Attributes with a `definition` path are inherited unchanged. Read that file
-# for their type, object, description, enum, and observable.
+# Attributes with `from` but no description are inherited unchanged. Their
+# descriptions are in the file of the item that `from` names.
 name: group_management
 caption: Group Management
 uid: 3006
@@ -19,51 +19,30 @@ attributes:
     sibling: activity_name
     description: The normalized identifier of the activity that triggered the event.
     enum:
-      '0':
+      0:
         caption: Unknown
         description: The event activity is unknown.
-      '1':
+      1:
         caption: Assign Privileges
         description: Assign privileges to a group.
-      '2':
+      2:
         caption: Revoke Privileges
         description: Revoke privileges from a group.
-      '3':
+      3:
         caption: Add User
         description: Add user to a group.
-      '4':
+      4:
         caption: Remove User
         description: Remove user from a group.
-      '5':
+      5:
         caption: Delete
         description: A group was deleted.
-      '6':
+      6:
         caption: Create
         description: A group was created.
-      '99':
+      99:
         caption: Other
         description: The event activity is not mapped. See the `activity_name` attribute, which contains a data source specific value.
-  activity_name:
-    caption: Activity
-    requirement: optional
-    definition: v1.2.0/classes/base_event.yaml
-  actor:
-    caption: Actor
-    requirement: optional
-    profile: host
-    definition: v1.2.0/classes/iam.yaml
-  api:
-    caption: API Details
-    requirement: optional
-    profile: cloud
-    definition: v1.2.0/classes/base_event.yaml
-  category_name:
-    caption: Category
-    type: string_t
-    requirement: optional
-    group: classification
-    from: base_event
-    description: 'The event category name, as defined by category_uid value: `Identity & Access Management`.'
   category_uid:
     caption: Category ID
     type: integer_t
@@ -73,16 +52,9 @@ attributes:
     sibling: category_name
     description: The category unique identifier of the event.
     enum:
-      '3':
+      3:
         caption: Identity & Access Management
         description: Identity & Access Management (IAM) events relate to the supervision of the system's authentication and access control model. Examples of such events are the success or failure of authentication, granting of authority, password change, entity change, privileged use etc.
-  class_name:
-    caption: Class
-    type: string_t
-    requirement: optional
-    group: classification
-    from: base_event
-    description: 'The event class name, as defined by class_uid value: `Group Management`.'
   class_uid:
     caption: Class ID
     type: integer_t
@@ -91,40 +63,10 @@ attributes:
     sibling: class_name
     description: The unique identifier of a class. A class describes the attributes available in an event.
     enum:
-      '3006':
+      3006:
         caption: Group Management
         description: Group Management events report management updates to a group, including updates to membership and permissions.
-  cloud:
-    caption: Cloud
-    requirement: required
-    profile: cloud
-    definition: v1.2.0/classes/base_event.yaml
-  count:
-    caption: Count
-    requirement: optional
-    definition: v1.2.0/classes/base_event.yaml
-  device:
-    caption: Device
-    requirement: recommended
-    profile: host
-    definition: v1.2.0/classes/iam.yaml
-  duration:
-    caption: Duration
-    requirement: optional
-    definition: v1.2.0/classes/base_event.yaml
-  end_time:
-    caption: End Time
-    requirement: optional
-    definition: v1.2.0/classes/base_event.yaml
-  end_time_dt:
-    caption: End Time
-    requirement: optional
-    profile: datetime
-    definition: v1.2.0/classes/base_event.yaml
-  enrichments:
-    caption: Enrichments
-    requirement: optional
-    definition: v1.2.0/classes/base_event.yaml
+  cloud: {caption: Cloud, type: object_t, object: cloud, requirement: required, group: primary, profile: cloud, from: base_event}
   group:
     caption: Group
     type: object_t
@@ -132,94 +74,9 @@ attributes:
     requirement: required
     group: primary
     description: Group that was the target of the event.
-  http_request:
-    caption: HTTP Request
-    requirement: optional
-    definition: v1.2.0/classes/iam.yaml
-  message:
-    caption: Message
-    requirement: recommended
-    definition: v1.2.0/classes/base_event.yaml
-  metadata:
-    caption: Metadata
-    requirement: required
-    definition: v1.2.0/classes/base_event.yaml
-  observables:
-    caption: Observables
-    requirement: recommended
-    definition: v1.2.0/classes/base_event.yaml
-  privileges:
-    caption: Privileges
-    type: string_t
-    array: true
-    requirement: recommended
-    group: primary
-    description: A list of privileges assigned to the group.
-  raw_data:
-    caption: Raw Data
-    requirement: optional
-    definition: v1.2.0/classes/base_event.yaml
-  resource:
-    caption: Resource
-    type: object_t
-    object: resource_details
-    requirement: recommended
-    group: primary
-    description: Resource that the privileges give access to.
-  severity:
-    caption: Severity
-    requirement: optional
-    definition: v1.2.0/classes/base_event.yaml
-  severity_id:
-    caption: Severity ID
-    requirement: required
-    definition: v1.2.0/classes/base_event.yaml
-  src_endpoint:
-    caption: Source Endpoint
-    requirement: recommended
-    definition: v1.2.0/classes/iam.yaml
-  start_time:
-    caption: Start Time
-    requirement: optional
-    definition: v1.2.0/classes/base_event.yaml
-  start_time_dt:
-    caption: Start Time
-    requirement: optional
-    profile: datetime
-    definition: v1.2.0/classes/base_event.yaml
-  status:
-    caption: Status
-    requirement: recommended
-    definition: v1.2.0/classes/base_event.yaml
-  status_code:
-    caption: Status Code
-    requirement: recommended
-    definition: v1.2.0/classes/base_event.yaml
-  status_detail:
-    caption: Status Details
-    requirement: recommended
-    definition: v1.2.0/classes/base_event.yaml
-  status_id:
-    caption: Status ID
-    requirement: recommended
-    definition: v1.2.0/classes/base_event.yaml
-  time:
-    caption: Event Time
-    requirement: required
-    definition: v1.2.0/classes/base_event.yaml
-  time_dt:
-    caption: Event Time
-    requirement: optional
-    profile: datetime
-    definition: v1.2.0/classes/base_event.yaml
-  timezone_offset:
-    caption: Timezone Offset
-    requirement: recommended
-    definition: v1.2.0/classes/base_event.yaml
-  type_name:
-    caption: Type Name
-    requirement: optional
-    definition: v1.2.0/classes/base_event.yaml
+  metadata: {caption: Metadata, type: object_t, object: metadata, requirement: required, group: context, from: base_event}
+  severity_id: {caption: Severity ID, type: integer_t, requirement: required, group: classification, sibling: severity, enum: {0: Unknown, 1: Informational, 2: Low, 3: Medium, 4: High, 5: Critical, 6: Fatal, 99: Other}, from: base_event}
+  time: {caption: Event Time, type: timestamp_t, requirement: required, group: occurrence, from: base_event}
   type_uid:
     caption: Type ID
     type: long_t
@@ -227,33 +84,29 @@ attributes:
     group: classification
     sibling: type_name
     description: 'The event/finding type ID. It identifies the event''s semantics and structure. The value is calculated by the logging system as: `class_uid * 100 + activity_id`.'
-    enum:
-      '300600':
-        caption: 'Group Management: Unknown'
-      '300601':
-        caption: 'Group Management: Assign Privileges'
-        description: Assign privileges to a group.
-      '300602':
-        caption: 'Group Management: Revoke Privileges'
-        description: Revoke privileges from a group.
-      '300603':
-        caption: 'Group Management: Add User'
-        description: Add user to a group.
-      '300604':
-        caption: 'Group Management: Remove User'
-        description: Remove user from a group.
-      '300605':
-        caption: 'Group Management: Delete'
-        description: A group was deleted.
-      '300606':
-        caption: 'Group Management: Create'
-        description: A group was created.
-      '300699':
-        caption: 'Group Management: Other'
-  unmapped:
-    caption: Unmapped Data
-    requirement: optional
-    definition: v1.2.0/classes/base_event.yaml
+  device: {caption: Device, type: object_t, object: device, requirement: recommended, group: primary, profile: host, observable: 20, from: iam}
+  message: {caption: Message, type: string_t, requirement: recommended, group: primary, from: base_event}
+  observables: {caption: Observables, type: object_t, object: observable, array: true, requirement: recommended, group: primary, from: base_event}
+  privileges:
+    caption: Privileges
+    type: string_t
+    array: true
+    requirement: recommended
+    group: primary
+    description: A list of privileges assigned to the group.
+  resource:
+    caption: Resource
+    type: object_t
+    object: resource_details
+    requirement: recommended
+    group: primary
+    description: Resource that the privileges give access to.
+  src_endpoint: {caption: Source Endpoint, type: object_t, object: network_endpoint, requirement: recommended, group: primary, observable: 20, from: iam}
+  status: {caption: Status, type: string_t, requirement: recommended, group: primary, from: base_event}
+  status_code: {caption: Status Code, type: string_t, requirement: recommended, group: primary, from: base_event}
+  status_detail: {caption: Status Details, type: string_t, requirement: recommended, group: primary, from: base_event}
+  status_id: {caption: Status ID, type: integer_t, requirement: recommended, group: primary, sibling: status, enum: {0: Unknown, 1: Success, 2: Failure, 99: Other}, from: base_event}
+  timezone_offset: {caption: Timezone Offset, type: integer_t, requirement: recommended, group: occurrence, from: base_event}
   user:
     caption: User
     type: object_t
@@ -262,3 +115,33 @@ attributes:
     group: primary
     observable: 21
     description: A user that was added to or removed from the group.
+  activity_name: {caption: Activity, type: string_t, requirement: optional, group: classification, from: base_event}
+  actor: {caption: Actor, type: object_t, object: actor, requirement: optional, group: primary, profile: host, from: iam}
+  api: {caption: API Details, type: object_t, object: api, requirement: optional, group: context, profile: cloud, from: base_event}
+  category_name:
+    caption: Category
+    type: string_t
+    requirement: optional
+    group: classification
+    from: base_event
+    description: 'The event category name, as defined by category_uid value: `Identity & Access Management`.'
+  class_name:
+    caption: Class
+    type: string_t
+    requirement: optional
+    group: classification
+    from: base_event
+    description: 'The event class name, as defined by class_uid value: `Group Management`.'
+  count: {caption: Count, type: integer_t, requirement: optional, group: occurrence, from: base_event}
+  duration: {caption: Duration, type: integer_t, requirement: optional, group: occurrence, from: base_event}
+  end_time: {caption: End Time, type: timestamp_t, requirement: optional, group: occurrence, from: base_event}
+  end_time_dt: {caption: End Time, type: datetime_t, requirement: optional, group: occurrence, profile: datetime, from: base_event}
+  enrichments: {caption: Enrichments, type: object_t, object: enrichment, array: true, requirement: optional, group: context, from: base_event}
+  http_request: {caption: HTTP Request, type: object_t, object: http_request, requirement: optional, group: context, from: iam}
+  raw_data: {caption: Raw Data, type: string_t, requirement: optional, group: context, from: base_event}
+  severity: {caption: Severity, type: string_t, requirement: optional, group: classification, from: base_event}
+  start_time: {caption: Start Time, type: timestamp_t, requirement: optional, group: occurrence, from: base_event}
+  start_time_dt: {caption: Start Time, type: datetime_t, requirement: optional, group: occurrence, profile: datetime, from: base_event}
+  time_dt: {caption: Event Time, type: datetime_t, requirement: optional, group: occurrence, profile: datetime, from: base_event}
+  type_name: {caption: Type Name, type: string_t, requirement: optional, group: classification, from: base_event}
+  unmapped: {caption: Unmapped Data, type: object_t, object: object, requirement: optional, group: context, from: base_event}

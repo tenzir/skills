@@ -25,14 +25,14 @@ attributes:
     type: string_t
     requirement: recommended
     description: The name of the entity from which the event or finding was reported.
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: recommended
+    description: The unique identifier of the entity from which the event or finding was reported.
   org:
     caption: Organization
     type: object_t
     object: organization
     requirement: optional
     description: The organization properties of the entity that reported the event or finding.
-  uid:
-    caption: Unique ID
-    type: string_t
-    requirement: recommended
-    description: The unique identifier of the entity from which the event or finding was reported.

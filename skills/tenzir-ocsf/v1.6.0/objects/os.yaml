@@ -14,6 +14,44 @@ referenced_by:
     network_endpoint: [os]
     network_proxy: [os]
 attributes:
+  name:
+    caption: Name
+    type: string_t
+    requirement: required
+    description: The operating system name.
+  type_id:
+    caption: Type ID
+    type: integer_t
+    requirement: required
+    sibling: type
+    description: The type identifier of the operating system.
+    enum:
+      0:
+        caption: Unknown
+        description: The type is unknown.
+      99:
+        caption: Other
+        description: The type is not mapped. See the `type` attribute, which contains a data source specific value.
+      100:
+        caption: Windows
+      101:
+        caption: Windows Mobile
+      200:
+        caption: Linux
+      201:
+        caption: Android
+      300:
+        caption: macOS
+      301:
+        caption: iOS
+      302:
+        caption: iPadOS
+      400:
+        caption: Solaris
+      401:
+        caption: AIX
+      402:
+        caption: HP-UX
   build:
     caption: OS Build
     type: string_t
@@ -56,11 +94,6 @@ attributes:
     type: string_t
     requirement: optional
     description: 'The two letter lower case language codes, as defined by [ISO 639-1](https://en.wikipedia.org/wiki/ISO_639-1). For example: `en` (English), `de` (German), or `fr` (French).'
-  name:
-    caption: Name
-    type: string_t
-    requirement: required
-    description: The operating system name.
   sp_name:
     caption: OS Service Pack
     type: string_t
@@ -76,39 +109,6 @@ attributes:
     type: string_t
     requirement: optional
     description: The type of the operating system.
-  type_id:
-    caption: Type ID
-    type: integer_t
-    requirement: required
-    sibling: type
-    description: The type identifier of the operating system.
-    enum:
-      '0':
-        caption: Unknown
-        description: The type is unknown.
-      '99':
-        caption: Other
-        description: The type is not mapped. See the `type` attribute, which contains a data source specific value.
-      '100':
-        caption: Windows
-      '101':
-        caption: Windows Mobile
-      '200':
-        caption: Linux
-      '201':
-        caption: Android
-      '300':
-        caption: macOS
-      '301':
-        caption: iOS
-      '302':
-        caption: iPadOS
-      '400':
-        caption: Solaris
-      '401':
-        caption: AIX
-      '402':
-        caption: HP-UX
   version:
     caption: Version
     type: string_t

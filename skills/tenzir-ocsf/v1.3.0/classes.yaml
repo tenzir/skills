@@ -17,6 +17,7 @@ classes:
   category: system
   extends: system
   summary: Event Log Activity events report actions pertaining to the system's event logging service(s), such as disabling logging or clearing the log data.
+  activities: {1: Clear, 2: Delete, 3: Export, 4: Archive, 5: Rotate, 6: Start, 7: Stop, 8: Restart, 9: Enable, 10: Disable}
   path: v1.3.0/classes/event_log.yaml
 - name: file_activity
   caption: File System Activity
@@ -24,6 +25,7 @@ classes:
   category: system
   extends: system
   summary: File System Activity events report when a process performs an action on a file or folder.
+  activities: {1: Create, 2: Read, 3: Update, 4: Delete, 5: Rename, 6: Set Attributes, 7: Set Security, 8: Get Attributes, 9: Get Security, 10: Encrypt, 11: Decrypt, 12: Mount, 13: Unmount, 14: Open}
   path: v1.3.0/classes/file_activity.yaml
 - name: kernel_activity
   caption: Kernel Activity
@@ -31,6 +33,7 @@ classes:
   category: system
   extends: system
   summary: Kernel Activity events report when an process creates, reads, or deletes a kernel resource.
+  activities: {1: Create, 2: Read, 3: Delete, 4: Invoke}
   path: v1.3.0/classes/kernel_activity.yaml
 - name: kernel_extension
   caption: Kernel Extension Activity
@@ -38,6 +41,7 @@ classes:
   category: system
   extends: system
   summary: Kernel Extension events report when a driver/extension is loaded or unloaded into the kernel
+  activities: {1: Load, 2: Unload}
   path: v1.3.0/classes/kernel_extension.yaml
 - name: memory_activity
   caption: Memory Activity
@@ -45,6 +49,7 @@ classes:
   category: system
   extends: system
   summary: Memory Activity events report when a process has memory allocated, read/modified, or other manipulation activities - such as a buffer overflow or turning off data execution protection (DEP).
+  activities: {1: Allocate Page, 2: Modify Page, 3: Delete Page, 4: Buffer Overflow, 5: Disable DEP, 6: Enable DEP, 7: Read, 8: Write, 9: Map View}
   path: v1.3.0/classes/memory_activity.yaml
 - name: module_activity
   caption: Module Activity
@@ -52,6 +57,7 @@ classes:
   category: system
   extends: system
   summary: Module Activity events report when a process loads or unloads the `module`.
+  activities: {1: Load, 2: Unload}
   path: v1.3.0/classes/module_activity.yaml
 - name: process_activity
   caption: Process Activity
@@ -59,6 +65,7 @@ classes:
   category: system
   extends: system
   summary: Process Activity events report when a process launches, injects, opens or terminates another process, successful or otherwise.
+  activities: {1: Launch, 2: Terminate, 3: Open, 4: Inject, 5: Set User ID}
   path: v1.3.0/classes/process_activity.yaml
 - name: scheduled_job_activity
   caption: Scheduled Job Activity
@@ -66,6 +73,7 @@ classes:
   category: system
   extends: system
   summary: Scheduled Job Activity events report activities related to scheduled jobs or tasks.
+  activities: {1: Create, 2: Update, 3: Delete, 4: Enable, 5: Disable, 6: Start}
   path: v1.3.0/classes/scheduled_job_activity.yaml
 - name: win/registry_key_activity
   caption: Registry Key Activity
@@ -74,6 +82,7 @@ classes:
   extension: win
   extends: system
   summary: Registry Key Activity events report when a process performs an action on a Windows registry key.
+  activities: {1: Create, 2: Read, 3: Modify, 4: Delete, 5: Rename, 6: Set Security, 7: Restore, 8: Import, 9: Export}
   path: v1.3.0/extensions/win/classes/registry_key_activity.yaml
 - name: win/registry_value_activity
   caption: Registry Value Activity
@@ -82,6 +91,7 @@ classes:
   extension: win
   extends: system
   summary: Registry Value Activity events reports when a process performs an action on a Windows registry value.
+  activities: {1: Get, 2: Set, 3: Modify, 4: Delete}
   path: v1.3.0/extensions/win/classes/registry_value_activity.yaml
 - name: win/resource_activity
   caption: Windows Resource Activity
@@ -90,6 +100,7 @@ classes:
   extension: win
   extends: system
   summary: Windows Resource Activity events report when a process accesses a Windows managed resource object, successful or otherwise.
+  activities: {1: Access}
   path: v1.3.0/extensions/win/classes/resource_activity.yaml
 - name: win/win_service_activity
   caption: Windows Service Activity
@@ -98,6 +109,7 @@ classes:
   extension: win
   extends: system
   summary: Windows Service Activity events report when a process interacts with the Service Control Manager.
+  activities: {1: Create, 2: Reconfigure, 3: Start, 4: Stop, 5: Pause, 6: Continue, 7: Delete}
   path: v1.3.0/extensions/win/classes/win_service_activity.yaml
 - name: finding
   caption: Finding
@@ -112,6 +124,7 @@ classes:
   category: findings
   extends: finding
   summary: Compliance Finding events describe results of evaluations performed against resources, to check compliance with various Industry Frameworks or Security Standards such as `NIST SP 800-53, CIS AWS Foundations Benchmark v1.4.0, ISO/IEC 27001` etc.
+  activities: {1: Create, 2: Update, 3: Close}
   path: v1.3.0/classes/compliance_finding.yaml
 - name: data_security_finding
   caption: Data Security Finding
@@ -119,6 +132,7 @@ classes:
   category: findings
   extends: finding
   summary: A Data Security Finding describes detections or alerts generated by various data security products such as Data Loss Prevention (DLP), Data Classification, Secrets Management, Digital Rights Management (DRM), Data Security Posture Management (DSPM), and similar tools.
+  activities: {1: Create, 2: Update, 3: Close, 4: Suppressed}
   path: v1.3.0/classes/data_security_finding.yaml
 - name: detection_finding
   caption: Detection Finding
@@ -126,6 +140,7 @@ classes:
   category: findings
   extends: finding
   summary: A Detection Finding describes detections or alerts generated by security products using correlation engines, detection engines or other methodologies.
+  activities: {1: Create, 2: Update, 3: Close}
   path: v1.3.0/classes/detection_finding.yaml
 - name: incident_finding
   caption: Incident Finding
@@ -133,6 +148,7 @@ classes:
   category: findings
   extends: base_event
   summary: An Incident Finding reports the creation, update, or closure of security incidents as a result of detections and/or analytics.
+  activities: {1: Create, 2: Update, 3: Close}
   path: v1.3.0/classes/incident_finding.yaml
 - name: security_finding
   caption: Security Finding
@@ -141,6 +157,7 @@ classes:
   extends: base_event
   deprecated: true
   summary: Security Finding events describe findings, detections, anomalies, alerts and/or actions performed by security products
+  activities: {1: Create, 2: Update, 3: Close}
   path: v1.3.0/classes/security_finding.yaml
 - name: vulnerability_finding
   caption: Vulnerability Finding
@@ -148,6 +165,7 @@ classes:
   category: findings
   extends: finding
   summary: The Vulnerability Finding event is a notification about weakness in an information system, system security procedures, internal controls, or implementation that could be exploited or triggered by a threat source.
+  activities: {1: Create, 2: Update, 3: Close}
   path: v1.3.0/classes/vulnerability_finding.yaml
 - name: iam
   caption: Identity & Access Management
@@ -162,6 +180,7 @@ classes:
   category: iam
   extends: iam
   summary: Account Change events report when specific user account management tasks are performed, such as a user/role being created, changed, deleted, renamed, disabled, enabled, locked out or unlocked.
+  activities: {1: Create, 2: Enable, 3: Password Change, 4: Password Reset, 5: Disable, 6: Delete, 7: Attach Policy, 8: Detach Policy, 9: Lock, 10: MFA Factor Enable, 11: MFA Factor Disable}
   path: v1.3.0/classes/account_change.yaml
 - name: authentication
   caption: Authentication
@@ -169,6 +188,7 @@ classes:
   category: iam
   extends: iam
   summary: Authentication events report authentication session activities such as user attempts a logon or logoff, successfully or otherwise.
+  activities: {1: Logon, 2: Logoff, 3: Authentication Ticket, 4: Service Ticket Request, 5: Service Ticket Renew, 6: Preauth}
   path: v1.3.0/classes/authentication.yaml
 - name: authorize_session
   caption: Authorize Session
@@ -176,6 +196,7 @@ classes:
   category: iam
   extends: iam
   summary: Authorize Session events report privileges or groups assigned to a new user session, usually at login time.
+  activities: {1: Assign Privileges, 2: Assign Groups}
   path: v1.3.0/classes/authorize_session.yaml
 - name: entity_management
   caption: Entity Management
@@ -183,6 +204,7 @@ classes:
   category: iam
   extends: iam
   summary: Entity Management events report activity by a managed client, a micro service, or a user at a management console.
+  activities: {1: Create, 2: Read, 3: Update, 4: Delete, 5: Move, 6: Enroll, 7: Unenroll, 8: Enable, 9: Disable, 10: Activate, 11: Deactivate, 12: Suspend, 13: Resume}
   path: v1.3.0/classes/entity_management.yaml
 - name: group_management
   caption: Group Management
@@ -190,6 +212,7 @@ classes:
   category: iam
   extends: iam
   summary: Group Management events report management updates to a group, including updates to membership and permissions.
+  activities: {1: Assign Privileges, 2: Revoke Privileges, 3: Add User, 4: Remove User, 5: Delete, 6: Create}
   path: v1.3.0/classes/group_management.yaml
 - name: user_access
   caption: User Access Management
@@ -197,6 +220,7 @@ classes:
   category: iam
   extends: iam
   summary: User Access Management events report management updates to a user's privileges.
+  activities: {1: Assign Privileges, 2: Revoke Privileges}
   path: v1.3.0/classes/user_access.yaml
 - name: network
   caption: Network
@@ -211,6 +235,7 @@ classes:
   category: network
   extends: network
   summary: DHCP Activity events report MAC to IP assignment via DHCP from a client or server.
+  activities: {1: Discover, 2: Offer, 3: Request, 4: Decline, 5: Ack, 6: Nak, 7: Release, 8: Inform, 9: Expire}
   path: v1.3.0/classes/dhcp_activity.yaml
 - name: dns_activity
   caption: DNS Activity
@@ -218,6 +243,7 @@ classes:
   category: network
   extends: network
   summary: DNS Activity events report DNS queries and answers as seen on the network.
+  activities: {1: Query, 2: Response, 6: Traffic}
   path: v1.3.0/classes/dns_activity.yaml
 - name: email_activity
   caption: Email Activity
@@ -225,6 +251,7 @@ classes:
   category: network
   extends: base_event
   summary: Email events report activities of emails.
+  activities: {1: Send, 2: Receive, 3: Scan}
   path: v1.3.0/classes/email_activity.yaml
 - name: email_file_activity
   caption: Email File Activity
@@ -232,6 +259,7 @@ classes:
   category: network
   extends: base_event
   summary: Email File Activity events report files within emails.
+  activities: {1: Send, 2: Receive, 3: Scan}
   path: v1.3.0/classes/email_file_activity.yaml
 - name: email_url_activity
   caption: Email URL Activity
@@ -239,6 +267,7 @@ classes:
   category: network
   extends: base_event
   summary: Email URL Activity events report URLs within an email.
+  activities: {1: Send, 2: Receive, 3: Scan}
   path: v1.3.0/classes/email_url_activity.yaml
 - name: ftp_activity
   caption: FTP Activity
@@ -246,6 +275,7 @@ classes:
   category: network
   extends: network
   summary: File Transfer Protocol (FTP) Activity events report file transfers between a server and a client as seen on the network.
+  activities: {1: Put, 2: Get, 3: Poll, 4: Delete, 5: Rename, 6: List}
   path: v1.3.0/classes/ftp_activity.yaml
 - name: http_activity
   caption: HTTP Activity
@@ -253,6 +283,7 @@ classes:
   category: network
   extends: network
   summary: HTTP Activity events report HTTP connection and traffic information.
+  activities: {1: Connect, 2: Delete, 3: Get, 4: Head, 5: Options, 6: Post, 7: Put, 8: Trace}
   path: v1.3.0/classes/http_activity.yaml
 - name: network_activity
   caption: Network Activity
@@ -260,6 +291,7 @@ classes:
   category: network
   extends: network
   summary: Network Activity events report network connection and traffic activity.
+  activities: {1: Open, 2: Close, 3: Reset, 4: Fail, 5: Refuse, 6: Traffic, 7: Listen}
   path: v1.3.0/classes/network_activity.yaml
 - name: network_file_activity
   caption: Network File Activity
@@ -268,6 +300,7 @@ classes:
   extends: network
   deprecated: true
   summary: Network File Activity events report file activities traversing the network, including file storage services such as Box, MS OneDrive, or Google Drive.
+  activities: {1: Upload, 2: Download, 3: Update, 4: Delete, 5: Rename, 6: Copy, 7: Move, 8: Restore, 9: Preview, 10: Lock, 11: Unlock, 12: Share, 13: Unshare, 14: Open, 15: Sync, 16: Unsync}
   path: v1.3.0/classes/network_file_activity.yaml
 - name: ntp_activity
   caption: NTP Activity
@@ -275,6 +308,7 @@ classes:
   category: network
   extends: network
   summary: The Network Time Protocol (NTP) Activity events report instances of remote clients synchronizing their clocks with an NTP server, as observed on the network.
+  activities: {1: Symmetric Active Exchange, 2: Symmetric Passive Response, 3: Client Synchronization, 4: Server Response, 5: Broadcast, 6: Control, 7: Private Use Case}
   path: v1.3.0/classes/ntp_activity.yaml
 - name: rdp_activity
   caption: RDP Activity
@@ -282,6 +316,7 @@ classes:
   category: network
   extends: network
   summary: Remote Desktop Protocol (RDP) Activity events report remote client connections to a server as seen on the network.
+  activities: {1: Initial Request, 2: Initial Response, 3: Connect Request, 4: Connect Response, 5: TLS Handshake, 6: Traffic}
   path: v1.3.0/classes/rdp_activity.yaml
 - name: smb_activity
   caption: SMB Activity
@@ -289,6 +324,7 @@ classes:
   category: network
   extends: network
   summary: Server Message Block (SMB) Protocol Activity events report client/server connections sharing resources within the network.
+  activities: {1: File Supersede, 2: File Open, 3: File Create, 4: File Open If, 5: File Overwrite, 6: File Overwrite If}
   path: v1.3.0/classes/smb_activity.yaml
 - name: ssh_activity
   caption: SSH Activity
@@ -296,6 +332,7 @@ classes:
   category: network
   extends: network
   summary: SSH Activity events report remote client connections to a server using the Secure Shell (SSH) Protocol.
+  activities: {1: Open, 2: Close, 3: Reset, 4: Fail, 5: Refuse, 6: Traffic, 7: Listen}
   path: v1.3.0/classes/ssh_activity.yaml
 - name: tunnel_activity
   caption: Tunnel Activity
@@ -303,6 +340,7 @@ classes:
   category: network
   extends: network
   summary: Tunnel Activity events report secure tunnel establishment (such as VPN), teardowns, renewals, and other network tunnel specific actions.
+  activities: {1: Open, 2: Close, 3: Renew}
   path: v1.3.0/classes/tunnel_activity.yaml
 - name: discovery
   caption: Discovery
@@ -324,6 +362,7 @@ classes:
   category: discovery
   extends: discovery_result
   summary: Admin Group Query events report information about administrative groups.
+  activities: {1: Query}
   path: v1.3.0/classes/admin_group_query.yaml
 - name: config_state
   caption: Device Config State
@@ -331,6 +370,7 @@ classes:
   category: discovery
   extends: discovery
   summary: Device Config State events report device configuration data and CIS Benchmark results.
+  activities: {1: Log, 2: Collect}
   path: v1.3.0/classes/config_state.yaml
 - name: device_config_state_change
   caption: Device Config State Change
@@ -338,6 +378,7 @@ classes:
   category: discovery
   extends: discovery
   summary: Device Config State Change events report state changes that impact the security of the device.
+  activities: {1: Log, 2: Collect}
   path: v1.3.0/classes/device_config_state_change.yaml
 - name: file_query
   caption: File Query
@@ -345,6 +386,7 @@ classes:
   category: discovery
   extends: discovery_result
   summary: File Query events report information about files that are present on the system.
+  activities: {1: Query}
   path: v1.3.0/classes/file_query.yaml
 - name: folder_query
   caption: Folder Query
@@ -352,6 +394,7 @@ classes:
   category: discovery
   extends: discovery_result
   summary: Folder Query events report information about folders that are present on the system.
+  activities: {1: Query}
   path: v1.3.0/classes/folder_query.yaml
 - name: inventory_info
   caption: Device Inventory Info
@@ -359,6 +402,7 @@ classes:
   category: discovery
   extends: discovery
   summary: Device Inventory Info events report device inventory data that is either logged or proactively collected.
+  activities: {1: Log, 2: Collect}
   path: v1.3.0/classes/inventory_info.yaml
 - name: job_query
   caption: Job Query
@@ -366,6 +410,7 @@ classes:
   category: discovery
   extends: discovery_result
   summary: Job Query events report information about scheduled jobs.
+  activities: {1: Query}
   path: v1.3.0/classes/job_query.yaml
 - name: kernel_object_query
   caption: Kernel Object Query
@@ -373,6 +418,7 @@ classes:
   category: discovery
   extends: discovery_result
   summary: Kernel Object Query events report information about discovered kernel resources.
+  activities: {1: Query}
   path: v1.3.0/classes/kernel_object_query.yaml
 - name: module_query
   caption: Module Query
@@ -380,6 +426,7 @@ classes:
   category: discovery
   extends: discovery_result
   summary: Module Query events report information about loaded modules.
+  activities: {1: Query}
   path: v1.3.0/classes/module_query.yaml
 - name: network_connection_query
   caption: Network Connection Query
@@ -387,6 +434,7 @@ classes:
   category: discovery
   extends: discovery_result
   summary: Network Connection Query events report information about active network connections.
+  activities: {1: Query}
   path: v1.3.0/classes/network_connection_query.yaml
 - name: networks_query
   caption: Networks Query
@@ -394,6 +442,7 @@ classes:
   category: discovery
   extends: discovery_result
   summary: Networks Query events report information about network adapters.
+  activities: {1: Query}
   path: v1.3.0/classes/networks_query.yaml
 - name: patch_state
   caption: Operating System Patch State
@@ -401,6 +450,7 @@ classes:
   category: discovery
   extends: discovery
   summary: Operating System Patch State reports the installation of an OS patch to a device and any associated knowledgebase articles.
+  activities: {1: Log, 2: Collect}
   path: v1.3.0/classes/patch_state.yaml
 - name: peripheral_device_query
   caption: Peripheral Device Query
@@ -408,6 +458,7 @@ classes:
   category: discovery
   extends: discovery_result
   summary: Peripheral Device Query events report information about peripheral devices.
+  activities: {1: Query}
   path: v1.3.0/classes/peripheral_device_query.yaml
 - name: process_query
   caption: Process Query
@@ -415,6 +466,7 @@ classes:
   category: discovery
   extends: discovery_result
   summary: Process Query events report information about running processes.
+  activities: {1: Query}
   path: v1.3.0/classes/process_query.yaml
 - name: service_query
   caption: Service Query
@@ -422,6 +474,7 @@ classes:
   category: discovery
   extends: discovery_result
   summary: Service Query events report information about running services.
+  activities: {1: Query}
   path: v1.3.0/classes/service_query.yaml
 - name: session_query
   caption: User Session Query
@@ -429,6 +482,7 @@ classes:
   category: discovery
   extends: discovery_result
   summary: User Session Query events report information about existing user sessions.
+  activities: {1: Query}
   path: v1.3.0/classes/session_query.yaml
 - name: software_info
   caption: Software Inventory Info
@@ -436,6 +490,7 @@ classes:
   category: discovery
   extends: discovery
   summary: Software Inventory Info events report device software inventory data that is either logged or proactively collected.
+  activities: {1: Log, 2: Collect}
   path: v1.3.0/classes/software_info.yaml
 - name: user_inventory
   caption: User Inventory Info
@@ -443,6 +498,7 @@ classes:
   category: discovery
   extends: discovery
   summary: User Inventory Info events report user inventory data that is either logged or proactively collected.
+  activities: {1: Log, 2: Collect}
   path: v1.3.0/classes/user_inventory.yaml
 - name: user_query
   caption: User Query
@@ -450,6 +506,7 @@ classes:
   category: discovery
   extends: discovery_result
   summary: User Query events report user data that have been discovered, queried, polled or searched.
+  activities: {1: Query}
   path: v1.3.0/classes/user_query.yaml
 - name: win/prefetch_query
   caption: Prefetch Query
@@ -458,6 +515,7 @@ classes:
   extension: win
   extends: discovery_result
   summary: Prefetch Query events report information about Windows prefetch files.
+  activities: {1: Query}
   path: v1.3.0/extensions/win/classes/prefetch_query.yaml
 - name: win/registry_key_query
   caption: Registry Key Query
@@ -466,6 +524,7 @@ classes:
   extension: win
   extends: discovery_result
   summary: Registry Key Query events report information about discovered Windows registry keys.
+  activities: {1: Query}
   path: v1.3.0/extensions/win/classes/registry_key_query.yaml
 - name: win/registry_value_query
   caption: Registry Value Query
@@ -474,6 +533,7 @@ classes:
   extension: win
   extends: discovery_result
   summary: Registry Value Query events report information about discovered Windows registry values.
+  activities: {1: Query}
   path: v1.3.0/extensions/win/classes/registry_value_query.yaml
 - name: application
   caption: Application Activity
@@ -488,6 +548,7 @@ classes:
   category: application
   extends: application
   summary: API events describe general CRUD (Create, Read, Update, Delete) API activities, e.g.
+  activities: {1: Create, 2: Read, 3: Update, 4: Delete}
   path: v1.3.0/classes/api_activity.yaml
 - name: application_lifecycle
   caption: Application Lifecycle
@@ -495,6 +556,7 @@ classes:
   category: application
   extends: application
   summary: Application Lifecycle events report installation, removal, start, stop of an application or service.
+  activities: {1: Install, 2: Remove, 3: Start, 4: Stop, 5: Restart, 6: Enable, 7: Disable, 8: Update}
   path: v1.3.0/classes/application_lifecycle.yaml
 - name: datastore_activity
   caption: Datastore Activity
@@ -502,6 +564,7 @@ classes:
   category: application
   extends: application
   summary: Datastore events describe general activities (Read, Update, Query, Delete, etc.) which affect datastores or data within those datastores, e.g.
+  activities: {1: Read, 2: Update, 3: Connect, 4: Query, 5: Write, 6: Create, 7: Delete, 8: List, 9: Encrypt, 10: Decrypt}
   path: v1.3.0/classes/datastore_activity.yaml
 - name: file_hosting
   caption: File Hosting Activity
@@ -509,6 +572,7 @@ classes:
   category: application
   extends: application
   summary: File Hosting Activity events report the actions taken by file management applications, including file sharing servers like Sharepoint and services such as Box, MS OneDrive, or Google Drive.
+  activities: {1: Upload, 2: Download, 3: Update, 4: Delete, 5: Rename, 6: Copy, 7: Move, 8: Restore, 9: Preview, 10: Lock, 11: Unlock, 12: Share, 13: Unshare, 14: Open, 15: Sync, 16: Unsync}
   path: v1.3.0/classes/file_hosting.yaml
 - name: scan_activity
   caption: Scan Activity
@@ -516,6 +580,7 @@ classes:
   category: application
   extends: base_event
   summary: Scan events report the start, completion, and results of a scan job.
+  activities: {1: Started, 2: Completed, 3: Cancelled, 4: Duration Violation, 5: Pause Violation, 6: Error, 7: Paused, 8: Resumed, 9: Restarted, 10: Delayed}
   path: v1.3.0/classes/scan_activity.yaml
 - name: web_resource_access_activity
   caption: Web Resource Access Activity
@@ -524,6 +589,7 @@ classes:
   extends: application
   deprecated: true
   summary: Web Resource Access Activity events describe successful/failed attempts to access a web resource over HTTP.
+  activities: {1: Access Grant, 2: Access Deny, 3: Access Revoke, 4: Access Error}
   path: v1.3.0/classes/web_resource_access_activity.yaml
 - name: web_resources_activity
   caption: Web Resources Activity
@@ -531,6 +597,7 @@ classes:
   category: application
   extends: base_event
   summary: Web Resources Activity events describe actions executed on a set of Web Resources.
+  activities: {1: Create, 2: Read, 3: Update, 4: Delete, 5: Search, 6: Import, 7: Export, 8: Share}
   path: v1.3.0/classes/web_resources_activity.yaml
 - name: file_remediation_activity
   caption: File Remediation Activity
@@ -538,6 +605,7 @@ classes:
   category: remediation
   extends: remediation_activity
   summary: File Remediation Activity events report on attempts at remediating files.
+  activities: {1: Isolate, 2: Evict, 3: Restore, 4: Harden}
   path: v1.3.0/classes/file_remediation_activity.yaml
 - name: network_remediation_activity
   caption: Network Remediation Activity
@@ -545,6 +613,7 @@ classes:
   category: remediation
   extends: remediation_activity
   summary: Network Remediation Activity events report on attempts at remediating computer networks.
+  activities: {1: Isolate, 2: Evict, 3: Restore, 4: Harden}
   path: v1.3.0/classes/network_remediation_activity.yaml
 - name: process_remediation_activity
   caption: Process Remediation Activity
@@ -552,6 +621,7 @@ classes:
   category: remediation
   extends: remediation_activity
   summary: Process Remediation Activity events report on attempts at remediating processes.
+  activities: {1: Isolate, 2: Evict, 3: Restore, 4: Harden}
   path: v1.3.0/classes/process_remediation_activity.yaml
 - name: remediation_activity
   caption: Remediation Activity
@@ -559,4 +629,5 @@ classes:
   category: remediation
   extends: base_event
   summary: Remediation Activity events report on attempts at remediating a compromised device or computer network.
+  activities: {1: Isolate, 2: Evict, 3: Restore, 4: Harden}
   path: v1.3.0/classes/remediation_activity.yaml

@@ -35,11 +35,6 @@ attributes:
     requirement: recommended
     observable: 27
     description: Describes details about the container associated to the activity that triggered the detection.
-  data:
-    caption: Data
-    type: json_t
-    requirement: optional
-    description: Additional evidence data that is not accounted for in the specific evidence attributes. `Use only when absolutely necessary.`
   database:
     caption: Database
     type: object_t
@@ -120,3 +115,8 @@ attributes:
     requirement: recommended
     observable: 21
     description: Describes details about the user that was the target or somehow else associated with the activity that triggered the detection.
+  data:
+    caption: Data
+    type: json_t
+    requirement: optional
+    description: Additional evidence data that is not accounted for in the specific evidence attributes. `Use only when absolutely necessary.`

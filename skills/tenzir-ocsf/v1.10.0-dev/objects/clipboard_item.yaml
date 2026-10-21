@@ -6,6 +6,11 @@ referenced_by:
   objects:
     clipboard: [contents]
 attributes:
+  mime_type:
+    caption: MIME type
+    type: string_t
+    requirement: required
+    description: 'The Multipurpose Internet Mail Extensions (MIME) type of the item''s data. For example: `text/plain`.'
   binary_data:
     caption: Binary Data
     type: bytestring_t
@@ -16,11 +21,6 @@ attributes:
     type: string_t
     requirement: optional
     description: 'The type of the item''s data, in an operating specific form. For example: `CF_TEXT` or `public.utf8-plain-text`.'
-  mime_type:
-    caption: MIME type
-    type: string_t
-    requirement: required
-    description: 'The Multipurpose Internet Mail Extensions (MIME) type of the item''s data. For example: `text/plain`.'
   string_data:
     caption: String Data
     type: string_t

@@ -8,6 +8,11 @@ referenced_by:
     api_activity: [trace]
     http_activity: [trace]
 attributes:
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: required
+    description: The unique identifier of the trace used in distributed systems and microservices architecture to track and correlate requests across various components of an application.
   duration:
     caption: Duration Milliseconds
     type: long_t
@@ -53,8 +58,3 @@ attributes:
     requirement: optional
     profile: datetime
     description: The start timestamp of the trace, essential for identifying latency and performance bottlenecks. Like the end time, this timestamp is normalized across the trace system to ensure consistency, even when events are recorded across distributed services with unsynchronized clocks. Normalized time enables accurate trace duration calculations and helps observability tools track performance across services, regardless of the individual system time settings.
-  uid:
-    caption: Unique ID
-    type: string_t
-    requirement: required
-    description: The unique identifier of the trace used in distributed systems and microservices architecture to track and correlate requests across various components of an application.

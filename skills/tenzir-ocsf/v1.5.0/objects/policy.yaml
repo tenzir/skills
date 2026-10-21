@@ -91,22 +91,6 @@ referenced_by:
     data_security: [policy]
     managed_entity: [policy]
 attributes:
-  data:
-    caption: Data
-    type: json_t
-    requirement: optional
-    description: Additional data about the policy such as the underlying JSON policy itself or other details.
-  desc:
-    caption: Description
-    type: string_t
-    requirement: optional
-    description: The description of the policy.
-  group:
-    caption: Group
-    type: object_t
-    object: group
-    requirement: optional
-    description: The policy group.
   is_applied:
     caption: Applied
     type: boolean_t
@@ -127,3 +111,19 @@ attributes:
     type: string_t
     requirement: recommended
     description: The policy version number.
+  data:
+    caption: Data
+    type: json_t
+    requirement: optional
+    description: Additional data about the policy such as the underlying JSON policy itself or other details.
+  desc:
+    caption: Description
+    type: string_t
+    requirement: optional
+    description: The description of the policy.
+  group:
+    caption: Group
+    type: object_t
+    object: group
+    requirement: optional
+    description: The policy group.

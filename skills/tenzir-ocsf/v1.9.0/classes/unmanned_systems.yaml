@@ -1,5 +1,5 @@
-# Attributes with a `definition` path are inherited unchanged. Read that file
-# for their type, object, description, enum, and observable.
+# Attributes with `from` but no description are inherited unchanged. Their
+# descriptions are in the file of the item that `from` names.
 name: unmanned_systems
 caption: Unmanned Systems
 category: unmanned_systems
@@ -8,64 +8,8 @@ extends: base_event
 description: The Unmanned Systems event is a generic event that defines a set of attributes available in the Unmanned Systems category.
 profiles: [cloud, datetime, host, osint, record_integrity, security_control]
 attributes:
-  action:
-    caption: Action
-    requirement: optional
-    profile: security_control
-    definition: v1.9.0/classes/base_event.yaml
-  action_id:
-    caption: Action ID
-    requirement: recommended
-    profile: security_control
-    definition: v1.9.0/classes/base_event.yaml
-  activity_id:
-    caption: Activity ID
-    requirement: required
-    definition: v1.9.0/classes/base_event.yaml
-  activity_name:
-    caption: Activity
-    requirement: optional
-    definition: v1.9.0/classes/base_event.yaml
-  actor:
-    caption: Actor
-    requirement: optional
-    profile: host
-    definition: v1.9.0/classes/base_event.yaml
-  api:
-    caption: API Details
-    requirement: optional
-    profile: cloud
-    definition: v1.9.0/classes/base_event.yaml
-  attacks:
-    caption: MITRE ATT&CK® and ATLAS™ Details
-    requirement: optional
-    profile: security_control
-    definition: v1.9.0/classes/base_event.yaml
-  attestation_list:
-    caption: Attestation List
-    requirement: optional
-    profile: record_integrity
-    definition: v1.9.0/classes/base_event.yaml
-  authorizations:
-    caption: Authorization Information
-    requirement: optional
-    profile: security_control
-    definition: v1.9.0/classes/base_event.yaml
-  category_name:
-    caption: Category
-    requirement: optional
-    definition: v1.9.0/classes/base_event.yaml
-  category_uid:
-    caption: Category ID
-    requirement: required
-    definition: v1.9.0/classes/base_event.yaml
-  class_name:
-    caption: Class
-    type: string_t
-    requirement: optional
-    group: classification
-    from: base_event
-    description: 'The event class name, as defined by the `class_uid` value. The value must match the caption defined for the corresponding `class_uid` (e.g., `"Detection Finding"` for `class_uid: 2004`).'
+  activity_id: {caption: Activity ID, type: integer_t, requirement: required, group: classification, sibling: activity_name, enum: {0: Unknown, 99: Other}, from: base_event}
+  category_uid: {caption: Category ID, type: integer_t, requirement: required, group: classification, sibling: category_name, enum: {0: Uncategorized}, from: base_event}
   class_uid:
     caption: Class ID
     type: integer_t
@@ -75,54 +19,9 @@ attributes:
     sibling: class_name
     description: The unique identifier of a class. A class describes the attributes available in an event. Producers and mappers must set this to the `uid` defined in the event class definition. For example, `Detection Finding` is `2004`.
     enum:
-      '0':
+      0:
         caption: Base Event
-  cloud:
-    caption: Cloud
-    requirement: required
-    profile: cloud
-    definition: v1.9.0/classes/base_event.yaml
-  confidence:
-    caption: Confidence
-    requirement: optional
-    profile: security_control
-    definition: v1.9.0/classes/base_event.yaml
-  confidence_id:
-    caption: Confidence ID
-    requirement: recommended
-    profile: security_control
-    definition: v1.9.0/classes/base_event.yaml
-  confidence_score:
-    caption: Confidence Score
-    requirement: optional
-    profile: security_control
-    definition: v1.9.0/classes/base_event.yaml
-  connection_info:
-    caption: Connection Info
-    type: object_t
-    object: network_connection_info
-    requirement: recommended
-    group: context
-    description: The network connection information.
-  count:
-    caption: Count
-    requirement: optional
-    definition: v1.9.0/classes/base_event.yaml
-  device:
-    caption: Device
-    requirement: recommended
-    profile: host
-    definition: v1.9.0/classes/base_event.yaml
-  disposition:
-    caption: Disposition
-    requirement: optional
-    profile: security_control
-    definition: v1.9.0/classes/base_event.yaml
-  disposition_id:
-    caption: Disposition ID
-    requirement: recommended
-    profile: security_control
-    definition: v1.9.0/classes/base_event.yaml
+  cloud: {caption: Cloud, type: object_t, object: cloud, requirement: required, group: primary, profile: cloud, from: base_event}
   dst_endpoint:
     caption: Destination Endpoint
     type: object_t
@@ -131,60 +30,62 @@ attributes:
     group: context
     observable: 20
     description: The destination network endpoint of the Unmanned Aerial System (UAS), Counter Unmanned Aerial System (CUAS) platform, or other unmanned systems monitoring and/or sensing infrastructure.
-  duration:
-    caption: Duration Milliseconds
-    requirement: optional
-    definition: v1.9.0/classes/base_event.yaml
-  end_time:
-    caption: End Time
-    requirement: optional
-    definition: v1.9.0/classes/base_event.yaml
-  enrichments:
-    caption: Enrichments
-    requirement: optional
-    definition: v1.9.0/classes/base_event.yaml
-  firewall_rule:
-    caption: Firewall Rule
-    requirement: optional
-    profile: security_control
-    definition: v1.9.0/classes/base_event.yaml
-  is_alert:
-    caption: Alert
+  metadata: {caption: Metadata, type: object_t, object: metadata, requirement: required, group: context, from: base_event}
+  osint: {caption: OSINT, type: object_t, object: osint, array: true, requirement: required, group: primary, profile: osint, from: base_event}
+  severity_id: {caption: Severity ID, type: integer_t, requirement: required, group: classification, sibling: severity, enum: {0: Unknown, 1: Informational, 2: Low, 3: Medium, 4: High, 5: Critical, 6: Fatal, 99: Other}, from: base_event}
+  time: {caption: Event Time, type: timestamp_t, requirement: required, group: occurrence, from: base_event}
+  type_uid: {caption: Type ID, type: long_t, requirement: required, group: classification, sibling: type_name, from: base_event}
+  action_id: {caption: Action ID, type: integer_t, requirement: recommended, group: primary, profile: security_control, sibling: action, enum: {0: Unknown, 1: Allowed, 2: Denied, 3: Observed, 4: Modified, 99: Other}, from: base_event}
+  confidence_id: {caption: Confidence ID, type: integer_t, requirement: recommended, group: context, profile: security_control, sibling: confidence, enum: {0: Unknown, 1: Low, 2: Medium, 3: High, 99: Other}, from: base_event}
+  connection_info:
+    caption: Connection Info
+    type: object_t
+    object: network_connection_info
     requirement: recommended
-    profile: security_control
-    definition: v1.9.0/classes/base_event.yaml
-  malware:
-    caption: Malware
-    requirement: optional
-    profile: security_control
-    definition: v1.9.0/classes/base_event.yaml
-  malware_scan_info:
-    caption: Malware Scan Info
-    requirement: optional
-    profile: security_control
-    definition: v1.9.0/classes/base_event.yaml
-  message:
-    caption: Message
+    group: context
+    description: The network connection information.
+  device: {caption: Device, type: object_t, object: device, requirement: recommended, group: primary, profile: host, observable: 20, from: base_event}
+  disposition_id:
+    caption: Disposition ID
+    type: integer_t
     requirement: recommended
-    definition: v1.9.0/classes/base_event.yaml
-  metadata:
-    caption: Metadata
-    requirement: required
-    definition: v1.9.0/classes/base_event.yaml
-  observables:
-    caption: Observables
-    requirement: recommended
-    definition: v1.9.0/classes/base_event.yaml
-  osint:
-    caption: OSINT
-    requirement: required
-    profile: osint
-    definition: v1.9.0/classes/base_event.yaml
-  policy:
-    caption: Policy
-    requirement: optional
+    group: primary
     profile: security_control
-    definition: v1.9.0/classes/base_event.yaml
+    sibling: disposition
+    enum:
+      0: Unknown
+      1: Allowed
+      2: Blocked
+      3: Quarantined
+      4: Isolated
+      5: Deleted
+      6: Dropped
+      7: Custom Action
+      8: Approved
+      9: Restored
+      10: Exonerated
+      11: Corrected
+      12: Partially Corrected
+      13: Uncorrected
+      14: Delayed
+      15: Detected
+      16: No Action
+      17: Logged
+      18: Tagged
+      19: Alert
+      20: Count
+      21: Reset
+      22: Captcha
+      23: Challenge
+      24: Access Revoked
+      25: Rejected
+      26: Unauthorized
+      27: Error
+      99: Other
+    from: base_event
+  is_alert: {caption: Alert, type: boolean_t, requirement: recommended, group: primary, profile: security_control, from: base_event}
+  message: {caption: Message, type: string_t, requirement: recommended, group: primary, from: base_event}
+  observables: {caption: Observables, type: object_t, object: observable, array: true, requirement: recommended, group: primary, from: base_event}
   proxy_endpoint:
     caption: Proxy Endpoint
     type: object_t
@@ -193,46 +94,6 @@ attributes:
     group: context
     observable: 20
     description: The proxy (server) in a network connection.
-  raw_data:
-    caption: Raw Data
-    requirement: optional
-    definition: v1.9.0/classes/base_event.yaml
-  raw_data_hash:
-    caption: Raw Data Hash
-    requirement: optional
-    definition: v1.9.0/classes/base_event.yaml
-  raw_data_size:
-    caption: Raw Data Size
-    requirement: optional
-    definition: v1.9.0/classes/base_event.yaml
-  risk_details:
-    caption: Risk Details
-    requirement: optional
-    profile: security_control
-    definition: v1.9.0/classes/base_event.yaml
-  risk_level:
-    caption: Risk Level
-    requirement: optional
-    profile: security_control
-    definition: v1.9.0/classes/base_event.yaml
-  risk_level_id:
-    caption: Risk Level ID
-    requirement: optional
-    profile: security_control
-    definition: v1.9.0/classes/base_event.yaml
-  risk_score:
-    caption: Risk Score
-    requirement: optional
-    profile: security_control
-    definition: v1.9.0/classes/base_event.yaml
-  severity:
-    caption: Severity
-    requirement: optional
-    definition: v1.9.0/classes/base_event.yaml
-  severity_id:
-    caption: Severity ID
-    requirement: required
-    definition: v1.9.0/classes/base_event.yaml
   src_endpoint:
     caption: Source Endpoint
     type: object_t
@@ -241,41 +102,11 @@ attributes:
     group: context
     observable: 20
     description: The source network endpoint of the Unmanned Aerial System (UAS), Counter Unmanned Aerial System (CUAS) platform, or other unmanned systems monitoring and/or sensing infrastructure.
-  start_time:
-    caption: Start Time
-    requirement: optional
-    definition: v1.9.0/classes/base_event.yaml
-  status:
-    caption: Status
-    requirement: recommended
-    definition: v1.9.0/classes/base_event.yaml
-  status_code:
-    caption: Status Code
-    requirement: recommended
-    definition: v1.9.0/classes/base_event.yaml
-  status_detail:
-    caption: Status Detail
-    requirement: recommended
-    definition: v1.9.0/classes/base_event.yaml
-  status_id:
-    caption: Status ID
-    requirement: recommended
-    definition: v1.9.0/classes/base_event.yaml
-  time:
-    caption: Event Time
-    requirement: required
-    definition: v1.9.0/classes/base_event.yaml
-  timezone_offset:
-    caption: Timezone Offset
-    requirement: recommended
-    definition: v1.9.0/classes/base_event.yaml
-  tls:
-    caption: TLS
-    type: object_t
-    object: tls
-    requirement: optional
-    group: context
-    description: The Transport Layer Security (TLS) attributes.
+  status: {caption: Status, type: string_t, requirement: recommended, group: primary, from: base_event}
+  status_code: {caption: Status Code, type: string_t, requirement: recommended, group: primary, from: base_event}
+  status_detail: {caption: Status Detail, type: string_t, requirement: recommended, group: primary, from: base_event}
+  status_id: {caption: Status ID, type: integer_t, requirement: recommended, group: primary, sibling: status, enum: {0: Unknown, 1: Success, 2: Failure, 99: Other}, from: base_event}
+  timezone_offset: {caption: Timezone Offset, type: integer_t, requirement: recommended, group: occurrence, from: base_event}
   traffic:
     caption: Traffic
     type: object_t
@@ -283,19 +114,47 @@ attributes:
     requirement: recommended
     group: context
     description: The network traffic refers to the amount of data moving across a network at a given point of time. Intended to be used alongside Network Connection.
-  type_name:
-    caption: Type Name
+  action: {caption: Action, type: string_t, requirement: optional, group: primary, profile: security_control, from: base_event}
+  activity_name: {caption: Activity, type: string_t, requirement: optional, group: classification, from: base_event}
+  actor: {caption: Actor, type: object_t, object: actor, requirement: optional, group: primary, profile: host, from: base_event}
+  api: {caption: API Details, type: object_t, object: api, requirement: optional, group: context, profile: cloud, from: base_event}
+  attacks: {caption: MITRE ATT&CK® and ATLAS™ Details, type: object_t, object: attack, array: true, requirement: optional, group: primary, profile: security_control, from: base_event}
+  attestation_list: {caption: Attestation List, type: object_t, object: attestation, array: true, requirement: optional, group: context, profile: record_integrity, from: base_event}
+  authorizations: {caption: Authorization Information, type: object_t, object: authorization, array: true, requirement: optional, group: primary, profile: security_control, from: base_event}
+  category_name: {caption: Category, type: string_t, requirement: optional, group: classification, from: base_event}
+  class_name:
+    caption: Class
+    type: string_t
     requirement: optional
-    definition: v1.9.0/classes/base_event.yaml
-  type_uid:
-    caption: Type ID
-    type: long_t
-    requirement: required
     group: classification
     from: base_event
-    sibling: type_name
-    description: 'The event/finding type ID. It identifies the event''s semantics and structure. Producers and mappers must compute this as `class_uid * 100 + activity_id`. It uniquely identifies the combination of event class and activity across the entire schema. For example, `Detection Finding: Create` is `200401`.'
-  unmapped:
-    caption: Unmapped Data
+    description: 'The event class name, as defined by the `class_uid` value. The value must match the caption defined for the corresponding `class_uid` (e.g., `"Detection Finding"` for `class_uid: 2004`).'
+  confidence: {caption: Confidence, type: string_t, requirement: optional, group: context, profile: security_control, from: base_event}
+  confidence_score: {caption: Confidence Score, type: integer_t, requirement: optional, group: context, profile: security_control, from: base_event}
+  count: {caption: Count, type: integer_t, requirement: optional, group: occurrence, from: base_event}
+  disposition: {caption: Disposition, type: string_t, requirement: optional, group: primary, profile: security_control, from: base_event}
+  duration: {caption: Duration Milliseconds, type: long_t, requirement: optional, group: occurrence, from: base_event}
+  end_time: {caption: End Time, type: timestamp_t, requirement: optional, group: occurrence, from: base_event}
+  enrichments: {caption: Enrichments, type: object_t, object: enrichment, array: true, requirement: optional, group: context, from: base_event}
+  firewall_rule: {caption: Firewall Rule, type: object_t, object: firewall_rule, requirement: optional, group: primary, profile: security_control, from: base_event}
+  malware: {caption: Malware, type: object_t, object: malware, array: true, requirement: optional, group: primary, profile: security_control, from: base_event}
+  malware_scan_info: {caption: Malware Scan Info, type: object_t, object: malware_scan_info, requirement: optional, group: primary, profile: security_control, from: base_event}
+  policy: {caption: Policy, type: object_t, object: policy, requirement: optional, group: primary, profile: security_control, from: base_event}
+  raw_data: {caption: Raw Data, type: string_t, requirement: optional, group: context, from: base_event}
+  raw_data_hash: {caption: Raw Data Hash, type: object_t, object: fingerprint, requirement: optional, group: context, observable: 30, from: base_event}
+  raw_data_size: {caption: Raw Data Size, type: long_t, requirement: optional, group: context, from: base_event}
+  risk_details: {caption: Risk Details, type: string_t, requirement: optional, group: context, profile: security_control, from: base_event}
+  risk_level: {caption: Risk Level, type: string_t, requirement: optional, group: context, profile: security_control, from: base_event}
+  risk_level_id: {caption: Risk Level ID, type: integer_t, requirement: optional, group: context, profile: security_control, sibling: risk_level, enum: {0: Info, 1: Low, 2: Medium, 3: High, 4: Critical, 99: Other}, from: base_event}
+  risk_score: {caption: Risk Score, type: integer_t, requirement: optional, group: context, profile: security_control, from: base_event}
+  severity: {caption: Severity, type: string_t, requirement: optional, group: classification, from: base_event}
+  start_time: {caption: Start Time, type: timestamp_t, requirement: optional, group: occurrence, from: base_event}
+  tls:
+    caption: TLS
+    type: object_t
+    object: tls
     requirement: optional
-    definition: v1.9.0/classes/base_event.yaml
+    group: context
+    description: The Transport Layer Security (TLS) attributes.
+  type_name: {caption: Type Name, type: string_t, requirement: optional, group: classification, from: base_event}
+  unmapped: {caption: Unmapped Data, type: object_t, object: object, requirement: optional, group: context, from: base_event}

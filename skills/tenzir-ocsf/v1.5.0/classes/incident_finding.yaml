@@ -1,5 +1,5 @@
-# Attributes with a `definition` path are inherited unchanged. Read that file
-# for their type, object, description, enum, and observable.
+# Attributes with `from` but no description are inherited unchanged. Their
+# descriptions are in the file of the item that `from` names.
 name: incident_finding
 caption: Incident Finding
 uid: 2005
@@ -13,16 +13,6 @@ profiles: [cloud, container, data_classification, datetime, host, incident, osin
 constraints:
   at_least_one: [assignee, assignee_group]
 attributes:
-  action:
-    caption: Action
-    requirement: optional
-    profile: security_control
-    definition: v1.5.0/classes/base_event.yaml
-  action_id:
-    caption: Action ID
-    requirement: recommended
-    profile: security_control
-    definition: v1.5.0/classes/base_event.yaml
   activity_id:
     caption: Activity ID
     type: integer_t
@@ -31,37 +21,308 @@ attributes:
     sibling: activity_name
     description: The normalized identifier of the Incident activity.
     enum:
-      '0':
+      0:
         caption: Unknown
         description: The event activity is unknown.
-      '1':
+      1:
         caption: Create
         description: Reports the creation of an Incident.
-      '2':
+      2:
         caption: Update
         description: Reports updates to an Incident.
-      '3':
+      3:
         caption: Close
         description: Reports closure of an Incident .
-      '99':
+      99:
         caption: Other
         description: The event activity is not mapped. See the `activity_name` attribute, which contains a data source specific value.
+  category_uid:
+    caption: Category ID
+    type: integer_t
+    requirement: required
+    group: classification
+    from: base_event
+    sibling: category_name
+    description: The category unique identifier of the event.
+    enum:
+      2:
+        caption: Findings
+        description: Findings events report findings, detections, and possible resolutions of malware, anomalies, or other actions performed by security products.
+  class_uid:
+    caption: Class ID
+    type: integer_t
+    requirement: required
+    group: classification
+    sibling: class_name
+    description: The unique identifier of a class. A class describes the attributes available in an event.
+    enum:
+      2005:
+        caption: Incident Finding
+        description: |-
+          An Incident Finding reports the creation, update, or closure of security incidents as a result of detections and/or analytics.
+          Note: `Incident Finding` implicitly includes the `incident` profile and it should be added to the `metadata.profiles[]` array.
+  cloud: {caption: Cloud, type: object_t, object: cloud, requirement: required, group: primary, profile: cloud, from: base_event}
+  finding_info_list:
+    caption: Finding Information List
+    type: object_t
+    object: finding_info
+    array: true
+    requirement: required
+    group: primary
+    description: A list of `finding_info` objects associated to an incident.
+  metadata: {caption: Metadata, type: object_t, object: metadata, requirement: required, group: context, from: base_event}
+  osint: {caption: OSINT, type: object_t, object: osint, array: true, requirement: required, group: primary, profile: osint, from: base_event}
+  severity_id: {caption: Severity ID, type: integer_t, requirement: required, group: classification, sibling: severity, enum: {0: Unknown, 1: Informational, 2: Low, 3: Medium, 4: High, 5: Critical, 6: Fatal, 99: Other}, from: base_event}
+  status_id:
+    caption: Status ID
+    type: integer_t
+    requirement: required
+    group: primary
+    sibling: status
+    description: The normalized status identifier of the Incident.
+    enum:
+      0:
+        caption: Unknown
+        description: The status is unknown.
+      1:
+        caption: New
+        description: The service desk has received the incident but has not assigned it to an agent.
+      2:
+        caption: In Progress
+        description: The incident has been assigned to an agent but has not been resolved. The agent is actively working with the user to diagnose and resolve the incident.
+      3:
+        caption: On Hold
+        description: The incident requires some information or response from the user or from a third party.
+      4:
+        caption: Resolved
+        description: The service desk has confirmed that the incident is resolved.
+      5:
+        caption: Closed
+        description: The incident is resolved and no further action is necessary.
+      99:
+        caption: Other
+        description: The event status is not mapped. See the `status` attribute, which contains a data source specific value.
+  time: {caption: Event Time, type: timestamp_t, requirement: required, group: occurrence, from: base_event}
+  type_uid:
+    caption: Type ID
+    type: long_t
+    requirement: required
+    group: classification
+    sibling: type_name
+    description: 'The event/finding type ID. It identifies the event''s semantics and structure. The value is calculated by the logging system as: `class_uid * 100 + activity_id`.'
+  action_id: {caption: Action ID, type: integer_t, requirement: recommended, group: primary, profile: security_control, sibling: action, enum: {0: Unknown, 1: Allowed, 2: Denied, 3: Observed, 4: Modified, 99: Other}, from: base_event}
+  confidence_id:
+    caption: Confidence ID
+    type: integer_t
+    requirement: recommended
+    group: context
+    sibling: confidence
+    description: The normalized confidence refers to the accuracy of the rule that created the finding. A rule with a low confidence means that the finding scope is wide and may create finding reports that may not be malicious in nature.
+    enum:
+      0:
+        caption: Unknown
+        description: The normalized confidence is unknown.
+      1:
+        caption: Low
+      2:
+        caption: Medium
+      3:
+        caption: High
+      99:
+        caption: Other
+        description: The confidence is not mapped to the defined enum values. See the `confidence` attribute, which contains a data source specific value.
+  desc:
+    caption: Description
+    type: string_t
+    requirement: recommended
+    group: primary
+    description: The short description of the Incident.
+  device: {caption: Device, type: object_t, object: device, requirement: recommended, group: primary, profile: host, observable: 20, from: base_event}
+  disposition_id:
+    caption: Disposition ID
+    type: integer_t
+    requirement: recommended
+    group: primary
+    profile: security_control
+    sibling: disposition
+    enum:
+      0: Unknown
+      1: Allowed
+      2: Blocked
+      3: Quarantined
+      4: Isolated
+      5: Deleted
+      6: Dropped
+      7: Custom Action
+      8: Approved
+      9: Restored
+      10: Exonerated
+      11: Corrected
+      12: Partially Corrected
+      13: Uncorrected
+      14: Delayed
+      15: Detected
+      16: No Action
+      17: Logged
+      18: Tagged
+      19: Alert
+      20: Count
+      21: Reset
+      22: Captcha
+      23: Challenge
+      24: Access Revoked
+      25: Rejected
+      26: Unauthorized
+      27: Error
+      99: Other
+    from: base_event
+  impact:
+    caption: Impact
+    type: string_t
+    requirement: recommended
+    group: primary
+    description: The impact , normalized to the caption of the impact_id value. In the case of 'Other', it is defined by the event source.
+  impact_id:
+    caption: Impact ID
+    type: integer_t
+    requirement: recommended
+    group: primary
+    sibling: impact
+    description: The normalized impact of the incident or finding. Per NIST, this is the magnitude of harm that can be expected to result from the consequences of unauthorized disclosure, modification, destruction, or loss of information or information system availability.
+    enum:
+      0:
+        caption: Unknown
+        description: The normalized impact is unknown.
+      1:
+        caption: Low
+        description: The magnitude of harm is low.
+      2:
+        caption: Medium
+        description: The magnitude of harm is moderate.
+      3:
+        caption: High
+        description: The magnitude of harm is high.
+      4:
+        caption: Critical
+        description: The magnitude of harm is high and the scope is widespread.
+      99:
+        caption: Other
+        description: The impact is not mapped. See the `impact` attribute, which contains a data source specific value.
+    references:
+    - description: NIST SP 800-172 from FIPS 199
+      url: https://doi.org/10.6028/NIST.FIPS.199
+    - description: NIST Computer Security Resource Center
+      url: https://doi.org/10.6028/NIST.FIPS.199
+  impact_score:
+    caption: Impact Score
+    type: integer_t
+    requirement: recommended
+    group: primary
+    description: The impact as an integer value of the finding, valid range 0-100.
+  is_alert: {caption: Alert, type: boolean_t, requirement: recommended, group: primary, profile: security_control, from: base_event}
+  message: {caption: Message, type: string_t, requirement: recommended, group: primary, from: base_event}
+  observables: {caption: Observables, type: object_t, object: observable, array: true, requirement: recommended, group: primary, from: base_event}
+  priority_id:
+    caption: Priority ID
+    type: integer_t
+    requirement: recommended
+    group: context
+    sibling: priority
+    description: The normalized priority. Priority identifies the relative importance of the incident or finding. It is a measurement of urgency.
+    enum:
+      0:
+        caption: Unknown
+        description: No priority is assigned.
+      1:
+        caption: Low
+        description: Application or personal procedure is unusable, where a workaround is available or a repair is possible.
+      2:
+        caption: Medium
+        description: Non-critical function or procedure is unusable or hard to use causing operational disruptions with no direct impact on a service's availability. A workaround is available.
+      3:
+        caption: High
+        description: Critical functionality or network access is interrupted, degraded or unusable, having a severe impact on services availability. No acceptable alternative is possible.
+      4:
+        caption: Critical
+        description: Interruption making a critical functionality inaccessible or a complete network interruption causing a severe impact on services availability. There is no possible alternative.
+      99:
+        caption: Other
+        description: The priority is not normalized.
+  src_url:
+    caption: Source URL
+    type: url_t
+    requirement: recommended
+    group: primary
+    observable: 6
+    description: A Url link used to access the original incident.
+  status:
+    caption: Status
+    type: string_t
+    requirement: recommended
+    group: primary
+    description: The normalized status of the Incident normalized to the caption of the status_id value. In the case of 'Other', it is defined by the source.
+  status_code: {caption: Status Code, type: string_t, requirement: recommended, group: primary, from: base_event}
+  status_detail: {caption: Status Detail, type: string_t, requirement: recommended, group: primary, from: base_event}
+  timezone_offset: {caption: Timezone Offset, type: integer_t, requirement: recommended, group: occurrence, from: base_event}
+  verdict:
+    caption: Verdict
+    type: string_t
+    requirement: recommended
+    group: primary
+    description: The verdict assigned to an Incident finding.
+  verdict_id:
+    caption: Verdict ID
+    type: integer_t
+    requirement: recommended
+    group: primary
+    sibling: verdict
+    description: The normalized verdict of an Incident.
+    enum:
+      0:
+        caption: Unknown
+        description: The type is unknown.
+      1:
+        caption: False Positive
+        description: The incident is a false positive.
+      2:
+        caption: True Positive
+        description: The incident is a true positive.
+      3:
+        caption: Disregard
+        description: The incident can be disregarded as it is unimportant, an error or accident.
+      4:
+        caption: Suspicious
+        description: The incident is suspicious.
+      5:
+        caption: Benign
+        description: The incident is benign.
+      6:
+        caption: Test
+        description: The incident is a test.
+      7:
+        caption: Insufficient Data
+        description: The incident has insufficient data to make a verdict.
+      8:
+        caption: Security Risk
+        description: The incident is a security risk.
+      9:
+        caption: Managed Externally
+        description: The incident remediation or required actions are managed externally.
+      10:
+        caption: Duplicate
+        description: The incident is a duplicate.
+      99:
+        caption: Other
+        description: The type is not mapped. See the `type` attribute, which contains a data source specific value.
+  action: {caption: Action, type: string_t, requirement: optional, group: primary, profile: security_control, from: base_event}
   activity_name:
     caption: Activity
     type: string_t
     requirement: optional
     group: classification
     description: The Incident activity name, as defined by the `activity_id`.
-  actor:
-    caption: Actor
-    requirement: optional
-    profile: host
-    definition: v1.5.0/classes/base_event.yaml
-  api:
-    caption: API Details
-    requirement: optional
-    profile: cloud
-    definition: v1.5.0/classes/base_event.yaml
+  actor: {caption: Actor, type: object_t, object: actor, requirement: optional, group: primary, profile: host, from: base_event}
+  api: {caption: API Details, type: object_t, object: api, requirement: optional, group: context, profile: cloud, from: base_event}
   assignee:
     caption: Assignee
     type: object_t
@@ -90,11 +351,7 @@ attributes:
       url: https://attack.mitre.org
     - description: MITRE ATLAS
       url: https://atlas.mitre.org/matrices/ATLAS
-  authorizations:
-    caption: Authorization Information
-    requirement: optional
-    profile: security_control
-    definition: v1.5.0/classes/base_event.yaml
+  authorizations: {caption: Authorization Information, type: object_t, object: authorization, array: true, requirement: optional, group: primary, profile: security_control, from: base_event}
   category_name:
     caption: Category
     type: string_t
@@ -102,18 +359,6 @@ attributes:
     group: classification
     from: base_event
     description: 'The event category name, as defined by category_uid value: `Findings`.'
-  category_uid:
-    caption: Category ID
-    type: integer_t
-    requirement: required
-    group: classification
-    from: base_event
-    sibling: category_name
-    description: The category unique identifier of the event.
-    enum:
-      '2':
-        caption: Findings
-        description: Findings events report findings, detections, and possible resolutions of malware, anomalies, or other actions performed by security products.
   class_name:
     caption: Class
     type: string_t
@@ -121,24 +366,6 @@ attributes:
     group: classification
     from: base_event
     description: 'The event class name, as defined by class_uid value: `Incident Finding`.'
-  class_uid:
-    caption: Class ID
-    type: integer_t
-    requirement: required
-    group: classification
-    sibling: class_name
-    description: The unique identifier of a class. A class describes the attributes available in an event.
-    enum:
-      '2005':
-        caption: Incident Finding
-        description: |-
-          An Incident Finding reports the creation, update, or closure of security incidents as a result of detections and/or analytics.
-          Note: `Incident Finding` implicitly includes the `incident` profile and it should be added to the `metadata.profiles[]` array.
-  cloud:
-    caption: Cloud
-    requirement: required
-    profile: cloud
-    definition: v1.5.0/classes/base_event.yaml
   comment:
     caption: Comment
     type: string_t
@@ -151,61 +378,15 @@ attributes:
     requirement: optional
     group: context
     description: The confidence, normalized to the caption of the confidence_id value. In the case of 'Other', it is defined by the event source.
-  confidence_id:
-    caption: Confidence ID
-    type: integer_t
-    requirement: recommended
-    group: context
-    sibling: confidence
-    description: The normalized confidence refers to the accuracy of the rule that created the finding. A rule with a low confidence means that the finding scope is wide and may create finding reports that may not be malicious in nature.
-    enum:
-      '0':
-        caption: Unknown
-        description: The normalized confidence is unknown.
-      '1':
-        caption: Low
-      '2':
-        caption: Medium
-      '3':
-        caption: High
-      '99':
-        caption: Other
-        description: The confidence is not mapped to the defined enum values. See the `confidence` attribute, which contains a data source specific value.
   confidence_score:
     caption: Confidence Score
     type: integer_t
     requirement: optional
     group: context
     description: The confidence score as reported by the event source.
-  count:
-    caption: Count
-    requirement: optional
-    definition: v1.5.0/classes/base_event.yaml
-  desc:
-    caption: Description
-    type: string_t
-    requirement: recommended
-    group: primary
-    description: The short description of the Incident.
-  device:
-    caption: Device
-    requirement: recommended
-    profile: host
-    definition: v1.5.0/classes/base_event.yaml
-  disposition:
-    caption: Disposition
-    requirement: optional
-    profile: security_control
-    definition: v1.5.0/classes/base_event.yaml
-  disposition_id:
-    caption: Disposition ID
-    requirement: recommended
-    profile: security_control
-    definition: v1.5.0/classes/base_event.yaml
-  duration:
-    caption: Duration Milliseconds
-    requirement: optional
-    definition: v1.5.0/classes/base_event.yaml
+  count: {caption: Count, type: integer_t, requirement: optional, group: occurrence, from: base_event}
+  disposition: {caption: Disposition, type: string_t, requirement: optional, group: primary, profile: security_control, from: base_event}
+  duration: {caption: Duration Milliseconds, type: long_t, requirement: optional, group: occurrence, from: base_event}
   end_time:
     caption: End Time
     type: timestamp_t
@@ -219,184 +400,30 @@ attributes:
     group: occurrence
     profile: datetime
     description: The time of the most recent event included in the incident.
-  enrichments:
-    caption: Enrichments
-    requirement: optional
-    definition: v1.5.0/classes/base_event.yaml
-  finding_info_list:
-    caption: Finding Information List
-    type: object_t
-    object: finding_info
-    array: true
-    requirement: required
-    group: primary
-    description: A list of `finding_info` objects associated to an incident.
-  firewall_rule:
-    caption: Firewall Rule
-    requirement: optional
-    profile: security_control
-    definition: v1.5.0/classes/base_event.yaml
-  impact:
-    caption: Impact
-    type: string_t
-    requirement: recommended
-    group: primary
-    description: The impact , normalized to the caption of the impact_id value. In the case of 'Other', it is defined by the event source.
-  impact_id:
-    caption: Impact ID
-    type: integer_t
-    requirement: recommended
-    group: primary
-    sibling: impact
-    description: The normalized impact of the incident or finding. Per NIST, this is the magnitude of harm that can be expected to result from the consequences of unauthorized disclosure, modification, destruction, or loss of information or information system availability.
-    enum:
-      '0':
-        caption: Unknown
-        description: The normalized impact is unknown.
-      '1':
-        caption: Low
-        description: The magnitude of harm is low.
-      '2':
-        caption: Medium
-        description: The magnitude of harm is moderate.
-      '3':
-        caption: High
-        description: The magnitude of harm is high.
-      '4':
-        caption: Critical
-        description: The magnitude of harm is high and the scope is widespread.
-      '99':
-        caption: Other
-        description: The impact is not mapped. See the `impact` attribute, which contains a data source specific value.
-    references:
-    - description: NIST SP 800-172 from FIPS 199
-      url: https://doi.org/10.6028/NIST.FIPS.199
-    - description: NIST Computer Security Resource Center
-      url: https://doi.org/10.6028/NIST.FIPS.199
-  impact_score:
-    caption: Impact Score
-    type: integer_t
-    requirement: recommended
-    group: primary
-    description: The impact as an integer value of the finding, valid range 0-100.
-  is_alert:
-    caption: Alert
-    requirement: recommended
-    profile: security_control
-    definition: v1.5.0/classes/base_event.yaml
+  enrichments: {caption: Enrichments, type: object_t, object: enrichment, array: true, requirement: optional, group: context, from: base_event}
+  firewall_rule: {caption: Firewall Rule, type: object_t, object: firewall_rule, requirement: optional, group: primary, profile: security_control, from: base_event}
   is_suspected_breach:
     caption: Suspected Breach
     type: boolean_t
     requirement: optional
     group: context
     description: A determination based on analytics as to whether a potential breach was found.
-  malware:
-    caption: Malware
-    requirement: optional
-    profile: security_control
-    definition: v1.5.0/classes/base_event.yaml
-  malware_scan_info:
-    caption: Malware Scan Info
-    requirement: optional
-    profile: security_control
-    definition: v1.5.0/classes/base_event.yaml
-  message:
-    caption: Message
-    requirement: recommended
-    definition: v1.5.0/classes/base_event.yaml
-  metadata:
-    caption: Metadata
-    requirement: required
-    definition: v1.5.0/classes/base_event.yaml
-  observables:
-    caption: Observables
-    requirement: recommended
-    definition: v1.5.0/classes/base_event.yaml
-  osint:
-    caption: OSINT
-    requirement: required
-    profile: osint
-    definition: v1.5.0/classes/base_event.yaml
-  policy:
-    caption: Policy
-    requirement: optional
-    profile: security_control
-    definition: v1.5.0/classes/base_event.yaml
+  malware: {caption: Malware, type: object_t, object: malware, array: true, requirement: optional, group: primary, profile: security_control, from: base_event}
+  malware_scan_info: {caption: Malware Scan Info, type: object_t, object: malware_scan_info, requirement: optional, group: primary, profile: security_control, from: base_event}
+  policy: {caption: Policy, type: object_t, object: policy, requirement: optional, group: primary, profile: security_control, from: base_event}
   priority:
     caption: Priority
     type: string_t
     requirement: optional
     group: context
     description: The priority, normalized to the caption of the priority_id value. In the case of 'Other', it is defined by the event source.
-  priority_id:
-    caption: Priority ID
-    type: integer_t
-    requirement: recommended
-    group: context
-    sibling: priority
-    description: The normalized priority. Priority identifies the relative importance of the incident or finding. It is a measurement of urgency.
-    enum:
-      '0':
-        caption: Unknown
-        description: No priority is assigned.
-      '1':
-        caption: Low
-        description: Application or personal procedure is unusable, where a workaround is available or a repair is possible.
-      '2':
-        caption: Medium
-        description: Non-critical function or procedure is unusable or hard to use causing operational disruptions with no direct impact on a service's availability. A workaround is available.
-      '3':
-        caption: High
-        description: Critical functionality or network access is interrupted, degraded or unusable, having a severe impact on services availability. No acceptable alternative is possible.
-      '4':
-        caption: Critical
-        description: Interruption making a critical functionality inaccessible or a complete network interruption causing a severe impact on services availability. There is no possible alternative.
-      '99':
-        caption: Other
-        description: The priority is not normalized.
-  raw_data:
-    caption: Raw Data
-    requirement: optional
-    definition: v1.5.0/classes/base_event.yaml
-  raw_data_size:
-    caption: Raw Data Size
-    requirement: optional
-    definition: v1.5.0/classes/base_event.yaml
-  risk_details:
-    caption: Risk Details
-    requirement: optional
-    profile: security_control
-    definition: v1.5.0/classes/base_event.yaml
-  risk_level:
-    caption: Risk Level
-    requirement: optional
-    profile: security_control
-    definition: v1.5.0/classes/base_event.yaml
-  risk_level_id:
-    caption: Risk Level ID
-    requirement: optional
-    profile: security_control
-    definition: v1.5.0/classes/base_event.yaml
-  risk_score:
-    caption: Risk Score
-    requirement: optional
-    profile: security_control
-    definition: v1.5.0/classes/base_event.yaml
-  severity:
-    caption: Severity
-    requirement: optional
-    definition: v1.5.0/classes/base_event.yaml
-  severity_id:
-    caption: Severity ID
-    requirement: required
-    definition: v1.5.0/classes/base_event.yaml
-  src_url:
-    caption: Source URL
-    type: url_t
-    requirement: recommended
-    group: primary
-    observable: 6
-    description: A Url link used to access the original incident.
+  raw_data: {caption: Raw Data, type: string_t, requirement: optional, group: context, from: base_event}
+  raw_data_size: {caption: Raw Data Size, type: long_t, requirement: optional, group: context, from: base_event}
+  risk_details: {caption: Risk Details, type: string_t, requirement: optional, group: context, profile: security_control, from: base_event}
+  risk_level: {caption: Risk Level, type: string_t, requirement: optional, group: context, profile: security_control, from: base_event}
+  risk_level_id: {caption: Risk Level ID, type: integer_t, requirement: optional, group: context, profile: security_control, sibling: risk_level, enum: {0: Info, 1: Low, 2: Medium, 3: High, 4: Critical, 99: Other}, from: base_event}
+  risk_score: {caption: Risk Score, type: integer_t, requirement: optional, group: context, profile: security_control, from: base_event}
+  severity: {caption: Severity, type: string_t, requirement: optional, group: classification, from: base_event}
   start_time:
     caption: Start Time
     type: timestamp_t
@@ -410,49 +437,6 @@ attributes:
     group: occurrence
     profile: datetime
     description: The time of the least recent event included in the incident.
-  status:
-    caption: Status
-    type: string_t
-    requirement: recommended
-    group: primary
-    description: The normalized status of the Incident normalized to the caption of the status_id value. In the case of 'Other', it is defined by the source.
-  status_code:
-    caption: Status Code
-    requirement: recommended
-    definition: v1.5.0/classes/base_event.yaml
-  status_detail:
-    caption: Status Detail
-    requirement: recommended
-    definition: v1.5.0/classes/base_event.yaml
-  status_id:
-    caption: Status ID
-    type: integer_t
-    requirement: required
-    group: primary
-    sibling: status
-    description: The normalized status identifier of the Incident.
-    enum:
-      '0':
-        caption: Unknown
-        description: The status is unknown.
-      '1':
-        caption: New
-        description: The service desk has received the incident but has not assigned it to an agent.
-      '2':
-        caption: In Progress
-        description: The incident has been assigned to an agent but has not been resolved. The agent is actively working with the user to diagnose and resolve the incident.
-      '3':
-        caption: On Hold
-        description: The incident requires some information or response from the user or from a third party.
-      '4':
-        caption: Resolved
-        description: The service desk has confirmed that the incident is resolved.
-      '5':
-        caption: Closed
-        description: The incident is resolved and no further action is necessary.
-      '99':
-        caption: Other
-        description: The event status is not mapped. See the `status` attribute, which contains a data source specific value.
   ticket:
     caption: Ticket
     type: object_t
@@ -471,48 +455,9 @@ attributes:
     requirement: optional
     group: context
     description: The associated ticket(s) in the ticketing system. Each ticket contains details like ticket ID, status, etc.
-  time:
-    caption: Event Time
-    requirement: required
-    definition: v1.5.0/classes/base_event.yaml
-  time_dt:
-    caption: Event Time
-    requirement: optional
-    profile: datetime
-    definition: v1.5.0/classes/base_event.yaml
-  timezone_offset:
-    caption: Timezone Offset
-    requirement: recommended
-    definition: v1.5.0/classes/base_event.yaml
-  type_name:
-    caption: Type Name
-    requirement: optional
-    definition: v1.5.0/classes/base_event.yaml
-  type_uid:
-    caption: Type ID
-    type: long_t
-    requirement: required
-    group: classification
-    sibling: type_name
-    description: 'The event/finding type ID. It identifies the event''s semantics and structure. The value is calculated by the logging system as: `class_uid * 100 + activity_id`.'
-    enum:
-      '200500':
-        caption: 'Incident Finding: Unknown'
-      '200501':
-        caption: 'Incident Finding: Create'
-        description: Reports the creation of an Incident.
-      '200502':
-        caption: 'Incident Finding: Update'
-        description: Reports updates to an Incident.
-      '200503':
-        caption: 'Incident Finding: Close'
-        description: Reports closure of an Incident .
-      '200599':
-        caption: 'Incident Finding: Other'
-  unmapped:
-    caption: Unmapped Data
-    requirement: optional
-    definition: v1.5.0/classes/base_event.yaml
+  time_dt: {caption: Event Time, type: datetime_t, requirement: optional, group: occurrence, profile: datetime, from: base_event}
+  type_name: {caption: Type Name, type: string_t, requirement: optional, group: classification, from: base_event}
+  unmapped: {caption: Unmapped Data, type: object_t, object: object, requirement: optional, group: context, from: base_event}
   vendor_attributes:
     caption: Vendor Attributes
     type: object_t
@@ -521,53 +466,3 @@ attributes:
     description: |-
       The Vendor Attributes object can be used to represent values of attributes populated by the Vendor/Finding Provider. It can help distinguish between the vendor-prodvided values and consumer-updated values, of key attributes like `severity_id`.
       The original finding producer should not populate this object. It should be populated by consuming systems that support data mutability.
-  verdict:
-    caption: Verdict
-    type: string_t
-    requirement: recommended
-    group: primary
-    description: The verdict assigned to an Incident finding.
-  verdict_id:
-    caption: Verdict ID
-    type: integer_t
-    requirement: recommended
-    group: primary
-    sibling: verdict
-    description: The normalized verdict of an Incident.
-    enum:
-      '0':
-        caption: Unknown
-        description: The type is unknown.
-      '1':
-        caption: False Positive
-        description: The incident is a false positive.
-      '2':
-        caption: True Positive
-        description: The incident is a true positive.
-      '3':
-        caption: Disregard
-        description: The incident can be disregarded as it is unimportant, an error or accident.
-      '4':
-        caption: Suspicious
-        description: The incident is suspicious.
-      '5':
-        caption: Benign
-        description: The incident is benign.
-      '6':
-        caption: Test
-        description: The incident is a test.
-      '7':
-        caption: Insufficient Data
-        description: The incident has insufficient data to make a verdict.
-      '8':
-        caption: Security Risk
-        description: The incident is a security risk.
-      '9':
-        caption: Managed Externally
-        description: The incident remediation or required actions are managed externally.
-      '10':
-        caption: Duplicate
-        description: The incident is a duplicate.
-      '99':
-        caption: Other
-        description: The type is not mapped. See the `type` attribute, which contains a data source specific value.

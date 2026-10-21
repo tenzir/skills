@@ -39,6 +39,27 @@ attributes:
     type: string_t
     requirement: recommended
     description: The name of the network interface.
+  type_id:
+    caption: Type ID
+    type: integer_t
+    requirement: recommended
+    sibling: type
+    description: The network interface type identifier.
+    enum:
+      0:
+        caption: Unknown
+        description: The type is unknown.
+      1:
+        caption: Wired
+      2:
+        caption: Wireless
+      3:
+        caption: Mobile
+      4:
+        caption: Tunnel
+      99:
+        caption: Other
+        description: The type is not mapped. See the `type` attribute, which contains a data source specific value.
   namespace:
     caption: Namespace
     type: string_t
@@ -61,27 +82,6 @@ attributes:
     type: string_t
     requirement: optional
     description: The type of network interface.
-  type_id:
-    caption: Type ID
-    type: integer_t
-    requirement: recommended
-    sibling: type
-    description: The network interface type identifier.
-    enum:
-      '0':
-        caption: Unknown
-        description: The type is unknown.
-      '1':
-        caption: Wired
-      '2':
-        caption: Wireless
-      '3':
-        caption: Mobile
-      '4':
-        caption: Tunnel
-      '99':
-        caption: Other
-        description: The type is not mapped. See the `type` attribute, which contains a data source specific value.
   uid:
     caption: Unique ID
     type: string_t

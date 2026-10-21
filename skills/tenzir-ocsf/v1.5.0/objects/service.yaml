@@ -14,24 +14,11 @@ referenced_by:
     span: [service]
     trace: [service]
 attributes:
-  labels:
-    caption: Labels
-    type: string_t
-    array: true
-    requirement: optional
-    description: The list of labels associated with the service.
   name:
     caption: Name
     type: string_t
     requirement: recommended
     description: The name of the service.
-  tags:
-    caption: Tags
-    type: object_t
-    object: key_value_object
-    array: true
-    requirement: optional
-    description: The list of tags; `{key:value}` pairs associated to the service.
   uid:
     caption: Unique ID
     type: string_t
@@ -42,3 +29,16 @@ attributes:
     type: string_t
     requirement: recommended
     description: The version of the service.
+  labels:
+    caption: Labels
+    type: string_t
+    array: true
+    requirement: optional
+    description: The list of labels associated with the service.
+  tags:
+    caption: Tags
+    type: object_t
+    object: key_value_object
+    array: true
+    requirement: optional
+    description: The list of tags; `{key:value}` pairs associated to the service.

@@ -19,20 +19,20 @@ attributes:
     references:
     - description: D3FEND™ Matrix
       url: https://d3fend.mitre.org
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: recommended
+    description: 'The unique identifier of the defensive technique. For example: `D3-IOPR`.'
+    references:
+    - description: D3FEND™ Matrix
+      url: https://d3fend.mitre.org
   src_url:
     caption: Source URL
     type: url_t
     requirement: optional
     observable: 6
     description: 'The versioned permalink of the defensive technique. For example: `https://d3fend.mitre.org/technique/d3f:IOPortRestriction/`.'
-    references:
-    - description: D3FEND™ Matrix
-      url: https://d3fend.mitre.org
-  uid:
-    caption: Unique ID
-    type: string_t
-    requirement: recommended
-    description: 'The unique identifier of the defensive technique. For example: `D3-IOPR`.'
     references:
     - description: D3FEND™ Matrix
       url: https://d3fend.mitre.org

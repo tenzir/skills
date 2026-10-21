@@ -1,5 +1,5 @@
-# Attributes with a `definition` path are inherited unchanged. Read that file
-# for their type, object, description, enum, and observable.
+# Attributes with `from` but no description are inherited unchanged. Their
+# descriptions are in the file of the item that `from` names.
 name: transformation_info
 caption: Transformation Info
 extends: _entity
@@ -11,6 +11,22 @@ referenced_by:
   objects:
     metadata: [transformation_info_list]
 attributes:
+  name:
+    caption: Name
+    type: string_t
+    requirement: recommended
+    description: The name of the transformation or mapping.
+  time:
+    caption: Event Time
+    type: timestamp_t
+    requirement: recommended
+    description: Time of the transformation.
+  url_string:
+    caption: URL String
+    type: url_t
+    requirement: recommended
+    observable: 6
+    description: The Uniform Resource Locator String where the mapping or transformation exists.
   lang:
     caption: Language
     type: string_t
@@ -19,22 +35,12 @@ attributes:
     references:
     - description: ISO 639-1
       url: https://en.wikipedia.org/wiki/ISO_639-1
-  name:
-    caption: Name
-    type: string_t
-    requirement: recommended
-    description: The name of the transformation or mapping.
   product:
     caption: Product
     type: object_t
     object: product
     requirement: optional
     description: The product or instance used to make the transformation
-  time:
-    caption: Event Time
-    type: timestamp_t
-    requirement: recommended
-    description: Time of the transformation.
   time_dt:
     caption: Event Time
     type: datetime_t
@@ -46,13 +52,4 @@ attributes:
     type: string_t
     requirement: optional
     description: The unique identifier of the mapping or transformation.
-  uid_numeric:
-    caption: Numeric Unique ID
-    requirement: optional
-    definition: v1.9.0/objects/_entity.yaml
-  url_string:
-    caption: URL String
-    type: url_t
-    requirement: recommended
-    observable: 6
-    description: The Uniform Resource Locator String where the mapping or transformation exists.
+  uid_numeric: {caption: Numeric Unique ID, type: long_t, requirement: optional, from: _entity}

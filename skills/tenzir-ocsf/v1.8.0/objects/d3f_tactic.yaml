@@ -16,14 +16,14 @@ attributes:
     type: string_t
     requirement: recommended
     description: 'The tactic name that is associated with the defensive technique. For example: `Isolate`.'
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: recommended
+    description: The unique identifier of the defensive tactic.
   src_url:
     caption: Source URL
     type: url_t
     requirement: optional
     observable: 6
     description: 'The versioned permalink of the defensive tactic. For example: `https://d3fend.mitre.org/tactic/d3f:Isolate/`.'
-  uid:
-    caption: Unique ID
-    type: string_t
-    requirement: recommended
-    description: The unique identifier of the defensive tactic.

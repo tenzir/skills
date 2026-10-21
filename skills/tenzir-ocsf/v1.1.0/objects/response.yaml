@@ -14,6 +14,21 @@ attributes:
     type: integer_t
     requirement: recommended
     description: The numeric response sent to a request.
+  error:
+    caption: Error Code
+    type: string_t
+    requirement: recommended
+    description: Error Code
+  error_message:
+    caption: Error Message
+    type: string_t
+    requirement: recommended
+    description: Error Message
+  message:
+    caption: Message
+    type: string_t
+    requirement: recommended
+    description: The description of the event/finding, as defined by the source.
   containers:
     caption: Containers
     type: object_t
@@ -27,24 +42,9 @@ attributes:
     type: json_t
     requirement: optional
     description: The additional data that is associated with the api response.
-  error:
-    caption: Error Code
-    type: string_t
-    requirement: recommended
-    description: Error Code
-  error_message:
-    caption: Error Message
-    type: string_t
-    requirement: recommended
-    description: Error Message
   flags:
     caption: Flags
     type: string_t
     array: true
     requirement: optional
     description: The list of communication flags, normalized to the captions of the flag_ids values. In the case of 'Other', they are defined by the event source.
-  message:
-    caption: Message
-    type: string_t
-    requirement: recommended
-    description: The description of the event/finding, as defined by the source.

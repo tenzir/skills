@@ -12,6 +12,48 @@ referenced_by:
   objects:
     evidences: [databucket]
 attributes:
+  type_id:
+    caption: Type ID
+    type: integer_t
+    requirement: required
+    sibling: type
+    description: The normalized identifier of the databucket type.
+    enum:
+      0:
+        caption: Unknown
+        description: The type is unknown.
+      1:
+        caption: S3
+      2:
+        caption: Azure Blob
+      3:
+        caption: GCP Bucket
+      99:
+        caption: Other
+        description: The type is not mapped. See the `type` attribute, which contains a data source specific value.
+  data_classification:
+    caption: Data Classification
+    type: object_t
+    object: data_classification
+    requirement: recommended
+    group: context
+    profile: data_classification
+    description: The Data Classification object includes information about data classification levels and data category types.
+  name:
+    caption: Name
+    type: string_t
+    requirement: recommended
+    description: The databucket name.
+  type:
+    caption: Type
+    type: string_t
+    requirement: recommended
+    description: The databucket type.
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: recommended
+    description: The unique identifier of the databucket.
   created_time:
     caption: Created Time
     type: timestamp_t
@@ -23,14 +65,6 @@ attributes:
     requirement: optional
     profile: datetime
     description: The time when the databucket was known to have been created.
-  data_classification:
-    caption: Data Classification
-    type: object_t
-    object: data_classification
-    requirement: recommended
-    group: context
-    profile: data_classification
-    description: The Data Classification object includes information about data classification levels and data category types.
   desc:
     caption: Description
     type: string_t
@@ -61,42 +95,8 @@ attributes:
     requirement: optional
     profile: datetime
     description: The most recent time when any changes, updates, or modifications were made within the databucket.
-  name:
-    caption: Name
-    type: string_t
-    requirement: recommended
-    description: The databucket name.
   size:
     caption: Size
     type: long_t
     requirement: optional
     description: The size of the databucket in bytes.
-  type:
-    caption: Type
-    type: string_t
-    requirement: recommended
-    description: The databucket type.
-  type_id:
-    caption: Type ID
-    type: integer_t
-    requirement: required
-    sibling: type
-    description: The normalized identifier of the databucket type.
-    enum:
-      '0':
-        caption: Unknown
-        description: The type is unknown.
-      '1':
-        caption: S3
-      '2':
-        caption: Azure Blob
-      '3':
-        caption: GCP Bucket
-      '99':
-        caption: Other
-        description: The type is not mapped. See the `type` attribute, which contains a data source specific value.
-  uid:
-    caption: Unique ID
-    type: string_t
-    requirement: recommended
-    description: The unique identifier of the databucket.

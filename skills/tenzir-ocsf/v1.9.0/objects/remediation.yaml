@@ -20,6 +20,11 @@ referenced_by:
     finding: [remediation]
     vulnerability: [remediation]
 attributes:
+  desc:
+    caption: Description
+    type: string_t
+    requirement: required
+    description: The description of the remediation strategy.
   cis_controls:
     caption: CIS Controls
     type: object_t
@@ -30,11 +35,6 @@ attributes:
     references:
     - description: Center For Internet Security Controls
       url: https://www.cisecurity.org/controls/
-  desc:
-    caption: Description
-    type: string_t
-    requirement: required
-    description: The description of the remediation strategy.
   kb_article_list:
     caption: Knowledgebase Articles
     type: object_t

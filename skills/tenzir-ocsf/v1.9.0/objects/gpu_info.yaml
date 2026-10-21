@@ -6,50 +6,6 @@ referenced_by:
   objects:
     device_hw_info: [gpu_info_list]
 attributes:
-  bus_type:
-    caption: Bus Type
-    type: string_t
-    requirement: optional
-    description: The attachment bus or interface standard, normalized to the caption of the bus_type_id value. In the case of 'Other', it is defined by the event source.
-  bus_type_id:
-    caption: Bus Type ID
-    type: integer_t
-    requirement: optional
-    sibling: bus_type
-    description: The normalized identifier of the attachment bus or interface standard.
-    enum:
-      '0':
-        caption: Unknown
-        description: The bus type is unknown or not reported.
-      '1':
-        caption: Onboard
-        description: The device is attached directly on the motherboard or SoC (often referred to as 'integrated' or 'onboard').
-      '2':
-        caption: PCIe x16
-        description: Peripheral Component Interconnect Express slot with 16 lanes, typically used for high‑bandwidth add‑in devices.
-      '3':
-        caption: PCIe x8
-        description: Peripheral Component Interconnect Express slot with 8 lanes; common for high‑performance NICs, storage controllers, and accelerators.
-      '4':
-        caption: MXM Type A
-        description: Mobile PCI Express Module (MXM) Type A form factor (compact laptop/embedded GPU module).
-      '5':
-        caption: MXM Type B
-        description: Mobile PCI Express Module (MXM) Type B form factor (larger laptop/embedded GPU module).
-      '6':
-        caption: M.2
-        description: M.2 (NGFF) internal module form factor/connector exposing PCIe (and/or SATA/USB) for SSDs and add‑in modules.
-      '7':
-        caption: CXL
-        description: Compute Express Link (CXL), an open cache‑coherent interconnect for processors, memory expansion, and accelerators built on the PCIe physical layer.
-      '99':
-        caption: Other
-        description: A bus or interface standard not covered by the defined values; the exact value is reported by the event source.
-  cores:
-    caption: Cores
-    type: integer_t
-    requirement: optional
-    description: The number of processing cores or compute units for the component.
   model:
     caption: Model
     type: string_t
@@ -72,16 +28,16 @@ attributes:
     sibling: vram_mode
     description: The normalized identifier of the video memory attachment mode.
     enum:
-      '0':
+      0:
         caption: Unknown
         description: The VRAM mode is unknown or not reported.
-      '1':
+      1:
         caption: Shared
         description: Video memory is allocated from system memory.
-      '2':
+      2:
         caption: Dedicated
         description: Video memory is physically separate from system memory.
-      '99':
+      99:
         caption: Other
         description: A VRAM mode not covered by the defined values; the exact value is reported by the event source.
   vram_size:
@@ -89,3 +45,47 @@ attributes:
     type: integer_t
     requirement: recommended
     description: The total amount of installed video RAM.
+  bus_type:
+    caption: Bus Type
+    type: string_t
+    requirement: optional
+    description: The attachment bus or interface standard, normalized to the caption of the bus_type_id value. In the case of 'Other', it is defined by the event source.
+  bus_type_id:
+    caption: Bus Type ID
+    type: integer_t
+    requirement: optional
+    sibling: bus_type
+    description: The normalized identifier of the attachment bus or interface standard.
+    enum:
+      0:
+        caption: Unknown
+        description: The bus type is unknown or not reported.
+      1:
+        caption: Onboard
+        description: The device is attached directly on the motherboard or SoC (often referred to as 'integrated' or 'onboard').
+      2:
+        caption: PCIe x16
+        description: Peripheral Component Interconnect Express slot with 16 lanes, typically used for high‑bandwidth add‑in devices.
+      3:
+        caption: PCIe x8
+        description: Peripheral Component Interconnect Express slot with 8 lanes; common for high‑performance NICs, storage controllers, and accelerators.
+      4:
+        caption: MXM Type A
+        description: Mobile PCI Express Module (MXM) Type A form factor (compact laptop/embedded GPU module).
+      5:
+        caption: MXM Type B
+        description: Mobile PCI Express Module (MXM) Type B form factor (larger laptop/embedded GPU module).
+      6:
+        caption: M.2
+        description: M.2 (NGFF) internal module form factor/connector exposing PCIe (and/or SATA/USB) for SSDs and add‑in modules.
+      7:
+        caption: CXL
+        description: Compute Express Link (CXL), an open cache‑coherent interconnect for processors, memory expansion, and accelerators built on the PCIe physical layer.
+      99:
+        caption: Other
+        description: A bus or interface standard not covered by the defined values; the exact value is reported by the event source.
+  cores:
+    caption: Cores
+    type: integer_t
+    requirement: optional
+    description: The number of processing cores or compute units for the component.

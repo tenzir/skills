@@ -12,17 +12,17 @@ attributes:
     type: integer_t
     requirement: recommended
     description: The number of discovered entities of the specified type.
+  type:
+    caption: Type
+    type: string_t
+    requirement: recommended
+    description: The specific type of information that was discovered. e.g. `name, phone_number, etc.`
   occurrence_details:
     caption: Occurrence Details
     type: object_t
     object: occurrence_details
     requirement: optional
     description: Details about where in the target entity, specified information was discovered. Only the attributes, relevant to the target entity type should be populuated.
-  type:
-    caption: Type
-    type: string_t
-    requirement: recommended
-    description: The specific type of information that was discovered. e.g. `name, phone_number, etc.`
   value:
     caption: Value
     type: string_t

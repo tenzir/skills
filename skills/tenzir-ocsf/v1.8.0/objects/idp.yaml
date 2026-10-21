@@ -11,6 +11,16 @@ referenced_by:
   objects:
     actor: [idp]
 attributes:
+  name:
+    caption: Name
+    type: string_t
+    requirement: recommended
+    description: The name of the Identity Provider.
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: recommended
+    description: The unique identifier of the Identity Provider.
   auth_factors:
     caption: Authentication Factors
     type: object_t
@@ -40,11 +50,6 @@ attributes:
     type: string_t
     requirement: optional
     description: The unique identifier (often a URL) used by the Identity Provider as its issuer.
-  name:
-    caption: Name
-    type: string_t
-    requirement: recommended
-    description: The name of the Identity Provider.
   protocol_name:
     caption: Supported Protocol
     type: string_t
@@ -77,22 +82,22 @@ attributes:
     sibling: state
     description: The normalized state ID of the Identity Provider to reflect its configuration or activation status.
     enum:
-      '0':
+      0:
         caption: Unknown
         description: The configuration state of the Identity Provider is unknown.
-      '1':
+      1:
         caption: Active
         description: The Identity Provider is in an Active state, or otherwise enabled.
-      '2':
+      2:
         caption: Suspended
         description: The Identity Provider is in a Suspended state.
-      '3':
+      3:
         caption: Deprecated
         description: The Identity Provider is in a Deprecated state, or is otherwise disabled.
-      '4':
+      4:
         caption: Deleted
         description: The Identity Provider is in a Deleted state.
-      '99':
+      99:
         caption: Other
         description: The configuration state of the Identity Provider is not mapped. See the `state` attribute, which contains a data source specific value.
   tenant_uid:
@@ -100,11 +105,6 @@ attributes:
     type: string_t
     requirement: optional
     description: The tenant ID associated with the Identity Provider.
-  uid:
-    caption: Unique ID
-    type: string_t
-    requirement: recommended
-    description: The unique identifier of the Identity Provider.
   url_string:
     caption: Configuration URL
     type: url_t

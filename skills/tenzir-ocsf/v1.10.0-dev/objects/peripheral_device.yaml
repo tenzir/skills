@@ -1,5 +1,5 @@
-# Attributes with a `definition` path are inherited unchanged. Read that file
-# for their type, object, description, enum, and observable.
+# Attributes with `from` but no description are inherited unchanged. Their
+# descriptions are in the file of the item that `from` names.
 name: peripheral_device
 caption: Peripheral Device
 extends: _entity
@@ -14,32 +14,22 @@ referenced_by:
     device: [peripheral_devices]
     query_evidence: [peripheral_device]
 attributes:
-  class:
-    caption: Class
-    type: string_t
-    requirement: optional
-    description: The class of the peripheral device.
-  model:
-    caption: Model
-    type: string_t
-    requirement: recommended
-    description: The peripheral device model.
   name:
     caption: Name
     type: string_t
     requirement: required
     description: The name of the peripheral device.
+  model:
+    caption: Model
+    type: string_t
+    requirement: recommended
+    description: The peripheral device model.
   serial_number:
     caption: Serial Number
     type: string_t
     requirement: recommended
     observable: 37
     description: The peripheral device serial number.
-  type:
-    caption: Peripheral Device Type
-    type: string_t
-    requirement: optional
-    description: The Peripheral Device type, normalized to the caption of the `type_id` value. In the case of 'Other', it is defined by the source.
   type_id:
     caption: Peripheral Device Type ID
     type: integer_t
@@ -47,31 +37,31 @@ attributes:
     sibling: type
     description: The normalized peripheral device type ID.
     enum:
-      '0':
+      0:
         caption: Unknown
         description: The peripheral device type is unknown.
-      '1':
+      1:
         caption: External Storage
         description: The peripheral device is an external storage device.
-      '2':
+      2:
         caption: Keyboard
         description: The peripheral device is a keyboard.
-      '3':
+      3:
         caption: Mouse
         description: The peripheral device is a mouse.
-      '4':
+      4:
         caption: Printer
         description: The peripheral device is a printer.
-      '5':
+      5:
         caption: Monitor
         description: The peripheral device is a monitor.
-      '6':
+      6:
         caption: Microphone
         description: The peripheral device is a microphone.
-      '7':
+      7:
         caption: Webcam
         description: The peripheral device is a webcam.
-      '99':
+      99:
         caption: Other
         description: The peripheral device type is not mapped. See the `type` attribute which contains an event source specific value.
   uid:
@@ -79,10 +69,6 @@ attributes:
     type: string_t
     requirement: recommended
     description: The unique identifier of the peripheral device.
-  uid_numeric:
-    caption: Numeric Unique ID
-    requirement: optional
-    definition: v1.10.0-dev/objects/_entity.yaml
   vendor_id_list:
     caption: Vendor ID List
     type: string_t
@@ -94,3 +80,14 @@ attributes:
     type: string_t
     requirement: recommended
     description: The primary vendor name for the peripheral device.
+  class:
+    caption: Class
+    type: string_t
+    requirement: optional
+    description: The class of the peripheral device.
+  type:
+    caption: Peripheral Device Type
+    type: string_t
+    requirement: optional
+    description: The Peripheral Device type, normalized to the caption of the `type_id` value. In the case of 'Other', it is defined by the source.
+  uid_numeric: {caption: Numeric Unique ID, type: long_t, requirement: optional, from: _entity}

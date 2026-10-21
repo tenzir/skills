@@ -1,5 +1,5 @@
-# Attributes with a `definition` path are inherited unchanged. Read that file
-# for their type, object, description, enum, and observable.
+# Attributes with `from` but no description are inherited unchanged. Their
+# descriptions are in the file of the item that `from` names.
 name: dns_zone_transfer_activity
 caption: DNS Zone Transfer Activity
 uid: 4015
@@ -24,16 +24,6 @@ references:
 - description: RFC 6895 — Domain Name System (DNS) IANA Considerations (response codes).
   url: https://www.rfc-editor.org/rfc/rfc6895
 attributes:
-  action:
-    caption: Action
-    requirement: optional
-    profile: security_control
-    definition: v1.10.0-dev/classes/base_event.yaml
-  action_id:
-    caption: Action ID
-    requirement: recommended
-    profile: security_control
-    definition: v1.10.0-dev/classes/base_event.yaml
   activity_id:
     caption: Activity ID
     type: integer_t
@@ -42,96 +32,24 @@ attributes:
     sibling: activity_name
     description: The normalized identifier of the activity that triggered the event. Each event class defines its own set of activity values. Use `0` (Unknown) when the activity cannot be determined. Use `99` (Other) when the activity does not match any defined value, in which case `activity_name` must be populated with the source-specific label.
     enum:
-      '0':
+      0:
         caption: Unknown
         description: The event activity is unknown.
-      '1':
+      1:
         caption: Transfer Request
         description: A request from a secondary name server to transfer a zone. Whether a full (AXFR) or incremental (IXFR) transfer was requested is conveyed by `transfer_type_id`.
-      '2':
+      2:
         caption: Transfer Response
         description: A zone transfer response message from the primary name server. A single transfer may be delivered as a stream of multiple response messages. Whether the delivered data is a full (AXFR) or incremental (IXFR) transfer is conveyed by `transfer_type_id`; note that a server may answer an IXFR request with a full transfer when it cannot produce a delta.
-      '3':
+      3:
         caption: Notify
         description: A NOTIFY exchange, comprising the primary name server's notification that the zone has changed and the secondary's acknowledgement, reported as a single record rather than as separate messages. NOTIFY has no transfer type; the outcome of the acknowledgement is conveyed by `status_id`.
-      '4':
+      4:
         caption: Transfer
         description: A zone transfer reported as a single summary record rather than as separate request and response messages. Used by sources, such as name server logs, that emit one event per transfer with the zone, record count, byte count, duration, and peer. Whether the transfer was full (AXFR) or incremental (IXFR) is conveyed by `transfer_type_id`; whether it succeeded is conveyed by `status_id`.
-      '99':
+      99:
         caption: Other
         description: The event activity is not mapped. See the `activity_name` attribute, which contains a data source specific value.
-  activity_name:
-    caption: Activity
-    requirement: optional
-    definition: v1.10.0-dev/classes/base_event.yaml
-  actor:
-    caption: Actor
-    requirement: optional
-    profile: host
-    definition: v1.10.0-dev/classes/base_event.yaml
-  ai_agent:
-    caption: AI Agent
-    requirement: optional
-    profile: ai_operation
-    definition: v1.10.0-dev/classes/network.yaml
-  ai_capability:
-    caption: AI Capability
-    requirement: optional
-    profile: ai_operation
-    definition: v1.10.0-dev/classes/network.yaml
-  ai_model:
-    caption: AI Model
-    requirement: recommended
-    profile: ai_operation
-    definition: v1.10.0-dev/classes/network.yaml
-  ai_status:
-    caption: AI Status
-    requirement: optional
-    profile: ai_operation
-    definition: v1.10.0-dev/classes/network.yaml
-  api:
-    caption: API Details
-    requirement: optional
-    profile: cloud
-    definition: v1.10.0-dev/classes/base_event.yaml
-  app_name:
-    caption: Application Name
-    requirement: optional
-    definition: v1.10.0-dev/classes/network.yaml
-  app_protocol_name:
-    caption: Application Protocol Name
-    requirement: optional
-    definition: v1.10.0-dev/classes/network.yaml
-  attacks:
-    caption: MITRE ATT&CK® and ATLAS™ Details
-    requirement: optional
-    profile: security_control
-    definition: v1.10.0-dev/classes/base_event.yaml
-  attestation_list:
-    caption: Attestation List
-    requirement: optional
-    profile: record_integrity
-    definition: v1.10.0-dev/classes/base_event.yaml
-  authority:
-    caption: DNS Authority Section
-    type: object_t
-    object: dns_resource_record
-    array: true
-    requirement: optional
-    group: context
-    description: The DNS Authority section resource records. Contains NS records pointing to authoritative name servers, or a SOA record for negative responses (NXDOMAIN).
-  authorizations:
-    caption: Authorization Information
-    requirement: optional
-    profile: security_control
-    definition: v1.10.0-dev/classes/base_event.yaml
-  category_name:
-    caption: Category
-    type: string_t
-    requirement: optional
-    group: classification
-    from: base_event
-    description: 'The event category name, as defined by category_uid value: `Network Activity`.'
   category_uid:
     caption: Category ID
     type: integer_t
@@ -141,16 +59,9 @@ attributes:
     sibling: category_name
     description: The category unique identifier of the event. Each event class belongs to exactly one category. Producers and mappers must set this to the category defined by the event class being used.
     enum:
-      '4':
+      4:
         caption: Network Activity
         description: Network Activity events.
-  class_name:
-    caption: Class
-    type: string_t
-    requirement: optional
-    group: classification
-    from: base_event
-    description: 'The event class name, as defined by class_uid value: `DNS Zone Transfer Activity`.'
   class_uid:
     caption: Class ID
     type: integer_t
@@ -159,71 +70,64 @@ attributes:
     sibling: class_name
     description: The unique identifier of a class. A class describes the attributes available in an event. Producers and mappers must set this to the `uid` defined in the event class definition. For example, `Detection Finding` is `2004`.
     enum:
-      '4015':
+      4015:
         caption: DNS Zone Transfer Activity
         description: 'DNS Zone Transfer Activity events report the bulk replication of a DNS zone between name servers, as seen on the network. This includes full transfers (AXFR), incremental transfers (IXFR), and change notifications (NOTIFY). Unlike `DNS Activity`, which reports per-name queries and answers, this class captures whole-zone semantics: SOA serials, the records that make up the zone, and the multi-message streams that carry them.'
-  cloud:
-    caption: Cloud
+  cloud: {caption: Cloud, type: object_t, object: cloud, requirement: required, group: primary, profile: cloud, from: base_event}
+  metadata: {caption: Metadata, type: object_t, object: metadata, requirement: required, group: context, from: base_event}
+  osint: {caption: OSINT, type: object_t, object: osint, array: true, requirement: required, group: primary, profile: osint, from: base_event}
+  severity_id: {caption: Severity ID, type: integer_t, requirement: required, group: classification, sibling: severity, enum: {0: Unknown, 1: Informational, 2: Low, 3: Medium, 4: High, 5: Critical, 6: Fatal, 99: Other}, from: base_event}
+  time: {caption: Event Time, type: timestamp_t, requirement: required, group: occurrence, from: base_event}
+  type_uid:
+    caption: Type ID
+    type: long_t
     requirement: required
-    profile: cloud
-    definition: v1.10.0-dev/classes/base_event.yaml
-  confidence:
-    caption: Confidence
-    requirement: optional
-    profile: security_control
-    definition: v1.10.0-dev/classes/base_event.yaml
-  confidence_id:
-    caption: Confidence ID
-    requirement: recommended
-    profile: security_control
-    definition: v1.10.0-dev/classes/base_event.yaml
-  confidence_score:
-    caption: Confidence Score
-    requirement: optional
-    profile: security_control
-    definition: v1.10.0-dev/classes/base_event.yaml
-  connection_info:
-    caption: Connection Info
-    requirement: recommended
-    definition: v1.10.0-dev/classes/network.yaml
-  count:
-    caption: Count
-    requirement: optional
-    definition: v1.10.0-dev/classes/base_event.yaml
-  cumulative_traffic:
-    caption: Cumulative Traffic
-    requirement: optional
-    definition: v1.10.0-dev/classes/network.yaml
-  delegation:
-    caption: Delegation
-    requirement: optional
-    profile: ai_operation
-    definition: v1.10.0-dev/classes/network.yaml
-  device:
-    caption: Device
-    requirement: recommended
-    profile: host
-    definition: v1.10.0-dev/classes/base_event.yaml
-  disposition:
-    caption: Disposition
-    requirement: optional
-    profile: security_control
-    definition: v1.10.0-dev/classes/base_event.yaml
+    group: classification
+    sibling: type_name
+    description: 'The event/finding type ID. It identifies the event''s semantics and structure. Producers and mappers must compute this as `class_uid * 100 + activity_id`. It uniquely identifies the combination of event class and activity across the entire schema. For example, `Detection Finding: Create` is `200401`.'
+  action_id: {caption: Action ID, type: integer_t, requirement: recommended, group: primary, profile: security_control, sibling: action, enum: {0: Unknown, 1: Allowed, 2: Denied, 3: Observed, 4: Modified, 99: Other}, from: base_event}
+  ai_model: {caption: AI Model, type: object_t, object: ai_model, requirement: recommended, group: context, profile: ai_operation, from: network}
+  confidence_id: {caption: Confidence ID, type: integer_t, requirement: recommended, group: context, profile: security_control, sibling: confidence, enum: {0: Unknown, 1: Low, 2: Medium, 3: High, 99: Other}, from: base_event}
+  connection_info: {caption: Connection Info, type: object_t, object: network_connection_info, requirement: recommended, group: primary, from: network}
+  device: {caption: Device, type: object_t, object: device, requirement: recommended, group: primary, profile: host, observable: 20, from: base_event}
   disposition_id:
     caption: Disposition ID
+    type: integer_t
     requirement: recommended
+    group: primary
     profile: security_control
-    definition: v1.10.0-dev/classes/base_event.yaml
-  dns_additional:
-    caption: DNS Additional Section
-    type: object_t
-    object: dns_section
-    requirement: optional
-    group: context
-    description: The Additional section of this DNS message, carrying any supplementary resource records (such as an EDNS OPT pseudo-record) and an optional TSIG record. Because `activity_id` distinguishes the request from the response, each event represents a single DNS message with a single Additional section. The TSIG record authenticating the message is available via `dns_additional.tsig`; a `BADKEY` or `BADSIG` error commonly indicates an unauthorized transfer attempt.
-    references:
-    - description: RFC 2845 — Secret Key Transaction Authentication for DNS (TSIG).
-      url: https://www.rfc-editor.org/rfc/rfc2845
+    sibling: disposition
+    enum:
+      0: Unknown
+      1: Allowed
+      2: Blocked
+      3: Quarantined
+      4: Isolated
+      5: Deleted
+      6: Dropped
+      7: Custom Action
+      8: Approved
+      9: Restored
+      10: Exonerated
+      11: Corrected
+      12: Partially Corrected
+      13: Uncorrected
+      14: Delayed
+      15: Detected
+      16: No Action
+      17: Logged
+      18: Tagged
+      19: Alert
+      20: Count
+      21: Reset
+      22: Captcha
+      23: Challenge
+      24: Access Revoked
+      25: Rejected
+      26: Unauthorized
+      27: Error
+      99: Other
+    from: base_event
   dns_zone:
     caption: DNS Zone
     type: hostname_t
@@ -231,151 +135,15 @@ attributes:
     group: primary
     observable: 1
     description: 'The DNS zone being transferred, i.e., the zone apex. This is the QNAME present in every message of the transfer or NOTIFY. The message role is conveyed by `activity_id` and the transfer type (AXFR or IXFR) by `transfer_type_id`. For example: `example.com`.'
-  dst_endpoint:
-    caption: Destination Endpoint
-    requirement: recommended
-    definition: v1.10.0-dev/classes/network.yaml
-  duration:
-    caption: Duration Milliseconds
-    requirement: optional
-    definition: v1.10.0-dev/classes/base_event.yaml
-  end_time:
-    caption: End Time
-    requirement: optional
-    definition: v1.10.0-dev/classes/base_event.yaml
-  end_time_dt:
-    caption: End Time
-    requirement: optional
-    profile: datetime
-    definition: v1.10.0-dev/classes/base_event.yaml
-  enrichments:
-    caption: Enrichments
-    requirement: optional
-    definition: v1.10.0-dev/classes/base_event.yaml
-  firewall_rule:
-    caption: Firewall Rule
-    requirement: optional
-    profile: security_control
-    definition: v1.10.0-dev/classes/base_event.yaml
-  is_alert:
-    caption: Alert
-    requirement: recommended
-    profile: security_control
-    definition: v1.10.0-dev/classes/base_event.yaml
-  ja4_fingerprint_list:
-    caption: JA4+ Fingerprints
-    requirement: optional
-    definition: v1.10.0-dev/classes/network.yaml
-  load_balancer:
-    caption: Load Balancer
-    requirement: recommended
-    profile: load_balancer
-    definition: v1.10.0-dev/classes/network.yaml
-  malware:
-    caption: Malware
-    requirement: optional
-    profile: security_control
-    definition: v1.10.0-dev/classes/base_event.yaml
-  malware_scan_info:
-    caption: Malware Scan Info
-    requirement: optional
-    profile: security_control
-    definition: v1.10.0-dev/classes/base_event.yaml
-  message:
-    caption: Message
-    requirement: recommended
-    definition: v1.10.0-dev/classes/base_event.yaml
-  message_context:
-    caption: Message Context
-    requirement: optional
-    profile: ai_operation
-    definition: v1.10.0-dev/classes/network.yaml
-  metadata:
-    caption: Metadata
-    requirement: required
-    definition: v1.10.0-dev/classes/base_event.yaml
-  network_observation_point:
-    caption: Network Observation Point
-    requirement: optional
-    definition: v1.10.0-dev/classes/network.yaml
-  num_records:
-    caption: Number of Records
-    type: integer_t
-    requirement: optional
-    group: context
-    description: The number of resource records transferred. Useful when the event source reports a count without shipping every record.
-  observables:
-    caption: Observables
-    requirement: recommended
-    definition: v1.10.0-dev/classes/base_event.yaml
-  observation_point:
-    caption: Observation Point
-    requirement: optional
-    definition: v1.10.0-dev/classes/network.yaml
-  observation_point_id:
-    caption: Observation Point ID
-    requirement: optional
-    definition: v1.10.0-dev/classes/network.yaml
-  osint:
-    caption: OSINT
-    requirement: required
-    profile: osint
-    definition: v1.10.0-dev/classes/base_event.yaml
-  packet_list:
-    caption: Packets
-    requirement: optional
-    definition: v1.10.0-dev/classes/network.yaml
-  policy:
-    caption: Policy
-    requirement: optional
-    profile: security_control
-    definition: v1.10.0-dev/classes/base_event.yaml
-  proxy:
-    caption: Proxy
-    requirement: recommended
-    definition: v1.10.0-dev/classes/network.yaml
-  proxy_connection_info:
-    caption: Proxy Connection Info
-    requirement: recommended
-    profile: network_proxy
-    definition: v1.10.0-dev/classes/network.yaml
-  proxy_endpoint:
-    caption: Proxy Endpoint
-    requirement: optional
-    profile: network_proxy
-    definition: v1.10.0-dev/classes/network.yaml
-  proxy_http_request:
-    caption: Proxy HTTP Request
-    requirement: optional
-    profile: network_proxy
-    definition: v1.10.0-dev/classes/network.yaml
-  proxy_http_response:
-    caption: Proxy HTTP Response
-    requirement: optional
-    profile: network_proxy
-    definition: v1.10.0-dev/classes/network.yaml
-  proxy_tls:
-    caption: Proxy TLS
-    requirement: recommended
-    profile: network_proxy
-    definition: v1.10.0-dev/classes/network.yaml
-  proxy_traffic:
-    caption: Proxy Traffic
-    requirement: recommended
-    profile: network_proxy
-    definition: v1.10.0-dev/classes/network.yaml
-  raw_data:
-    caption: Raw Data
-    requirement: optional
-    definition: v1.10.0-dev/classes/base_event.yaml
-  raw_data_hash:
-    caption: Raw Data Hash
-    requirement: optional
-    definition: v1.10.0-dev/classes/base_event.yaml
-  raw_data_size:
-    caption: Raw Data Size
-    requirement: optional
-    definition: v1.10.0-dev/classes/base_event.yaml
+  dst_endpoint: {caption: Destination Endpoint, type: object_t, object: network_endpoint, requirement: recommended, group: primary, observable: 20, from: network}
+  is_alert: {caption: Alert, type: boolean_t, requirement: recommended, group: primary, profile: security_control, from: base_event}
+  load_balancer: {caption: Load Balancer, type: object_t, object: load_balancer, requirement: recommended, group: primary, profile: load_balancer, from: network}
+  message: {caption: Message, type: string_t, requirement: recommended, group: primary, from: base_event}
+  observables: {caption: Observables, type: object_t, object: observable, array: true, requirement: recommended, group: primary, from: base_event}
+  proxy: {caption: Proxy, type: object_t, object: network_proxy, requirement: recommended, group: primary, observable: 20, deprecated: {since: 1.1.0, message: Use the `proxy_endpoint` attribute instead., superseded_by: [proxy_endpoint]}, from: network}
+  proxy_connection_info: {caption: Proxy Connection Info, type: object_t, object: network_connection_info, requirement: recommended, group: context, profile: network_proxy, from: network}
+  proxy_tls: {caption: Proxy TLS, type: object_t, object: tls, requirement: recommended, group: context, profile: network_proxy, from: network}
+  proxy_traffic: {caption: Proxy Traffic, type: object_t, object: network_traffic, requirement: recommended, group: context, profile: network_proxy, from: network}
   rcode:
     caption: Response Code
     type: string_t
@@ -390,73 +158,73 @@ attributes:
     sibling: rcode
     description: The normalized identifier of the DNS server response code. See RFC 6895.
     enum:
-      '0':
+      0:
         caption: NoError
         description: No Error.
-      '1':
+      1:
         caption: FormError
         description: Format Error.
-      '2':
+      2:
         caption: ServError
         description: Server Failure.
-      '3':
+      3:
         caption: NXDomain
         description: Non-Existent Domain.
-      '4':
+      4:
         caption: NotImp
         description: Not Implemented.
-      '5':
+      5:
         caption: Refused
         description: Query Refused. For a zone transfer, this typically indicates the transfer was blocked because the requesting client is not authorized.
-      '6':
+      6:
         caption: YXDomain
         description: Name Exists when it should not.
-      '7':
+      7:
         caption: YXRRSet
         description: RR Set Exists when it should not.
-      '8':
+      8:
         caption: NXRRSet
         description: RR Set that should exist does not.
-      '9':
+      9:
         caption: NotAuth
         description: Not Authorized or Server Not Authoritative for zone.
-      '10':
+      10:
         caption: NotZone
         description: Name not contained in zone.
-      '11':
+      11:
         caption: DSOTYPENI
         description: DSO-TYPE Not Implemented.
-      '16':
+      16:
         caption: BADVERS
         description: Bad EDNS OPT Version. Indicates that the client requested an EDNS version that the server does not support.
-      '17':
+      17:
         caption: BADKEY
         description: Key not recognized.
-      '18':
+      18:
         caption: BADTIME
         description: Signature out of time window.
-      '19':
+      19:
         caption: BADMODE
         description: Bad TKEY Mode.
-      '20':
+      20:
         caption: BADNAME
         description: Duplicate key name.
-      '21':
+      21:
         caption: BADALG
         description: Algorithm not supported.
-      '22':
+      22:
         caption: BADTRUNC
         description: Bad Truncation.
-      '23':
+      23:
         caption: BADCOOKIE
         description: Bad/missing Server Cookie.
-      '24':
+      24:
         caption: Unassigned
         description: 'The codes deemed to be unassigned by the RFC (unassigned codes: 12-15, 24-3840, 4096-65534).'
-      '25':
+      25:
         caption: Reserved
         description: 'The codes deemed to be reserved by the RFC (codes: 3841-4095, 65535).'
-      '99':
+      99:
         caption: Other
         description: The dns response code is not defined by the RFC.
   records:
@@ -467,91 +235,13 @@ attributes:
     requirement: recommended
     group: primary
     description: The resource records transferred for the zone. For an AXFR this is the complete set of zone records; for an IXFR this is the changed records that make up the delta.
-  risk_details:
-    caption: Risk Details
-    requirement: optional
-    profile: security_control
-    definition: v1.10.0-dev/classes/base_event.yaml
-  risk_level:
-    caption: Risk Level
-    requirement: optional
-    profile: security_control
-    definition: v1.10.0-dev/classes/base_event.yaml
-  risk_level_id:
-    caption: Risk Level ID
-    requirement: optional
-    profile: security_control
-    definition: v1.10.0-dev/classes/base_event.yaml
-  risk_score:
-    caption: Risk Score
-    requirement: optional
-    profile: security_control
-    definition: v1.10.0-dev/classes/base_event.yaml
-  severity:
-    caption: Severity
-    requirement: optional
-    definition: v1.10.0-dev/classes/base_event.yaml
-  severity_id:
-    caption: Severity ID
-    requirement: required
-    definition: v1.10.0-dev/classes/base_event.yaml
-  soa:
-    caption: SOA Record
-    type: object_t
-    object: dns_soa
-    requirement: optional
-    group: context
-    description: The current Start of Authority (SOA) record for the zone. For an IXFR request, this is the SOA the secondary already holds, i.e., the "from" serial that bounds the requested delta.
-  src_endpoint:
-    caption: Source Endpoint
-    requirement: recommended
-    definition: v1.10.0-dev/classes/network.yaml
-  start_time:
-    caption: Start Time
-    requirement: optional
-    definition: v1.10.0-dev/classes/base_event.yaml
-  start_time_dt:
-    caption: Start Time
-    requirement: optional
-    profile: datetime
-    definition: v1.10.0-dev/classes/base_event.yaml
-  status:
-    caption: Status
-    requirement: recommended
-    definition: v1.10.0-dev/classes/base_event.yaml
-  status_code:
-    caption: Status Code
-    requirement: recommended
-    definition: v1.10.0-dev/classes/base_event.yaml
-  status_detail:
-    caption: Status Detail
-    requirement: recommended
-    definition: v1.10.0-dev/classes/base_event.yaml
-  status_id:
-    caption: Status ID
-    requirement: recommended
-    definition: v1.10.0-dev/classes/base_event.yaml
-  time:
-    caption: Event Time
-    requirement: required
-    definition: v1.10.0-dev/classes/base_event.yaml
-  time_dt:
-    caption: Event Time
-    requirement: optional
-    profile: datetime
-    definition: v1.10.0-dev/classes/base_event.yaml
-  timezone_offset:
-    caption: Timezone Offset
-    requirement: recommended
-    definition: v1.10.0-dev/classes/base_event.yaml
-  tls:
-    caption: TLS
-    requirement: optional
-    definition: v1.10.0-dev/classes/network.yaml
-  traffic:
-    caption: Traffic
-    requirement: recommended
-    definition: v1.10.0-dev/classes/network.yaml
+  src_endpoint: {caption: Source Endpoint, type: object_t, object: network_endpoint, requirement: recommended, group: primary, observable: 20, from: network}
+  status: {caption: Status, type: string_t, requirement: recommended, group: primary, from: base_event}
+  status_code: {caption: Status Code, type: string_t, requirement: recommended, group: primary, from: base_event}
+  status_detail: {caption: Status Detail, type: string_t, requirement: recommended, group: primary, from: base_event}
+  status_id: {caption: Status ID, type: integer_t, requirement: recommended, group: primary, sibling: status, enum: {0: Unknown, 1: Success, 2: Failure, 99: Other}, from: base_event}
+  timezone_offset: {caption: Timezone Offset, type: integer_t, requirement: recommended, group: occurrence, from: base_event}
+  traffic: {caption: Traffic, type: object_t, object: network_traffic, requirement: recommended, group: primary, from: network}
   transaction_id:
     caption: DNS Transaction ID
     type: integer_t
@@ -572,50 +262,112 @@ attributes:
     sibling: transfer_type
     description: The normalized identifier of the zone transfer type. On a `Transfer Request` this is the type requested; on a `Transfer Response` or `Transfer` activity this is the type actually delivered.
     enum:
-      '0':
+      0:
         caption: Unknown
         description: The transfer type is unknown. For example, the event source reports a transfer without indicating whether it was full or incremental, or the message has no transfer type (such as a NOTIFY).
-      '1':
+      1:
         caption: Full Transfer (AXFR)
         description: A full zone transfer, in which the primary name server sends the complete contents of the zone.
-      '2':
+      2:
         caption: Incremental Transfer (IXFR)
         description: An incremental zone transfer, in which the primary name server sends only the changes since the secondary's known SOA serial.
-      '99':
+      99:
         caption: Other
         description: The transfer type is not mapped. See the `transfer_type` attribute, which contains a data source specific value.
-  type_name:
-    caption: Type Name
+  action: {caption: Action, type: string_t, requirement: optional, group: primary, profile: security_control, from: base_event}
+  activity_name: {caption: Activity, type: string_t, requirement: optional, group: classification, from: base_event}
+  actor: {caption: Actor, type: object_t, object: actor, requirement: optional, group: primary, profile: host, from: base_event}
+  ai_agent: {caption: AI Agent, type: object_t, object: ai_agent, requirement: optional, group: context, profile: ai_operation, from: network}
+  ai_capability: {caption: AI Capability, type: object_t, object: ai_capability, requirement: optional, group: context, profile: ai_operation, from: network}
+  ai_status: {caption: AI Status, type: object_t, object: ai_status, requirement: optional, group: context, profile: ai_operation, from: network}
+  api: {caption: API Details, type: object_t, object: api, requirement: optional, group: context, profile: cloud, from: base_event}
+  app_name: {caption: Application Name, type: string_t, requirement: optional, group: context, from: network}
+  app_protocol_name: {caption: Application Protocol Name, type: string_t, requirement: optional, group: context, from: network}
+  attacks: {caption: MITRE ATT&CK® and ATLAS™ Details, type: object_t, object: attack, array: true, requirement: optional, group: primary, profile: security_control, from: base_event}
+  attestation_list: {caption: Attestation List, type: object_t, object: attestation, array: true, requirement: optional, group: context, profile: record_integrity, from: base_event}
+  authority:
+    caption: DNS Authority Section
+    type: object_t
+    object: dns_resource_record
+    array: true
     requirement: optional
-    definition: v1.10.0-dev/classes/base_event.yaml
-  type_uid:
-    caption: Type ID
-    type: long_t
-    requirement: required
+    group: context
+    description: The DNS Authority section resource records. Contains NS records pointing to authoritative name servers, or a SOA record for negative responses (NXDOMAIN).
+  authorizations: {caption: Authorization Information, type: object_t, object: authorization, array: true, requirement: optional, group: primary, profile: security_control, from: base_event}
+  category_name:
+    caption: Category
+    type: string_t
+    requirement: optional
     group: classification
-    sibling: type_name
-    description: 'The event/finding type ID. It identifies the event''s semantics and structure. Producers and mappers must compute this as `class_uid * 100 + activity_id`. It uniquely identifies the combination of event class and activity across the entire schema. For example, `Detection Finding: Create` is `200401`.'
-    enum:
-      '401500':
-        caption: 'DNS Zone Transfer Activity: Unknown'
-      '401501':
-        caption: 'DNS Zone Transfer Activity: Transfer Request'
-        description: A request from a secondary name server to transfer a zone. Whether a full (AXFR) or incremental (IXFR) transfer was requested is conveyed by `transfer_type_id`.
-      '401502':
-        caption: 'DNS Zone Transfer Activity: Transfer Response'
-        description: A zone transfer response message from the primary name server. A single transfer may be delivered as a stream of multiple response messages. Whether the delivered data is a full (AXFR) or incremental (IXFR) transfer is conveyed by `transfer_type_id`; note that a server may answer an IXFR request with a full transfer when it cannot produce a delta.
-      '401503':
-        caption: 'DNS Zone Transfer Activity: Notify'
-        description: A NOTIFY exchange, comprising the primary name server's notification that the zone has changed and the secondary's acknowledgement, reported as a single record rather than as separate messages. NOTIFY has no transfer type; the outcome of the acknowledgement is conveyed by `status_id`.
-      '401504':
-        caption: 'DNS Zone Transfer Activity: Transfer'
-        description: A zone transfer reported as a single summary record rather than as separate request and response messages. Used by sources, such as name server logs, that emit one event per transfer with the zone, record count, byte count, duration, and peer. Whether the transfer was full (AXFR) or incremental (IXFR) is conveyed by `transfer_type_id`; whether it succeeded is conveyed by `status_id`.
-      '401599':
-        caption: 'DNS Zone Transfer Activity: Other'
-  unmapped:
-    caption: Unmapped Data
+    from: base_event
+    description: 'The event category name, as defined by category_uid value: `Network Activity`.'
+  class_name:
+    caption: Class
+    type: string_t
     requirement: optional
-    definition: v1.10.0-dev/classes/base_event.yaml
+    group: classification
+    from: base_event
+    description: 'The event class name, as defined by class_uid value: `DNS Zone Transfer Activity`.'
+  confidence: {caption: Confidence, type: string_t, requirement: optional, group: context, profile: security_control, from: base_event}
+  confidence_score: {caption: Confidence Score, type: integer_t, requirement: optional, group: context, profile: security_control, from: base_event}
+  count: {caption: Count, type: integer_t, requirement: optional, group: occurrence, from: base_event}
+  cumulative_traffic: {caption: Cumulative Traffic, type: object_t, object: network_traffic, requirement: optional, group: context, from: network}
+  delegation: {caption: Delegation, type: object_t, object: delegation, requirement: optional, group: context, profile: ai_operation, from: network}
+  disposition: {caption: Disposition, type: string_t, requirement: optional, group: primary, profile: security_control, from: base_event}
+  dns_additional:
+    caption: DNS Additional Section
+    type: object_t
+    object: dns_section
+    requirement: optional
+    group: context
+    description: The Additional section of this DNS message, carrying any supplementary resource records (such as an EDNS OPT pseudo-record) and an optional TSIG record. Because `activity_id` distinguishes the request from the response, each event represents a single DNS message with a single Additional section. The TSIG record authenticating the message is available via `dns_additional.tsig`; a `BADKEY` or `BADSIG` error commonly indicates an unauthorized transfer attempt.
+    references:
+    - description: RFC 2845 — Secret Key Transaction Authentication for DNS (TSIG).
+      url: https://www.rfc-editor.org/rfc/rfc2845
+  duration: {caption: Duration Milliseconds, type: long_t, requirement: optional, group: occurrence, from: base_event}
+  end_time: {caption: End Time, type: timestamp_t, requirement: optional, group: occurrence, from: base_event}
+  end_time_dt: {caption: End Time, type: datetime_t, requirement: optional, group: occurrence, profile: datetime, from: base_event}
+  enrichments: {caption: Enrichments, type: object_t, object: enrichment, array: true, requirement: optional, group: context, from: base_event}
+  firewall_rule: {caption: Firewall Rule, type: object_t, object: firewall_rule, requirement: optional, group: primary, profile: security_control, from: base_event}
+  ja4_fingerprint_list: {caption: JA4+ Fingerprints, type: object_t, object: ja4_fingerprint, array: true, requirement: optional, group: context, from: network}
+  malware: {caption: Malware, type: object_t, object: malware, array: true, requirement: optional, group: primary, profile: security_control, from: base_event}
+  malware_scan_info: {caption: Malware Scan Info, type: object_t, object: malware_scan_info, requirement: optional, group: primary, profile: security_control, from: base_event}
+  message_context: {caption: Message Context, type: object_t, object: message_context, requirement: optional, group: context, profile: ai_operation, from: network}
+  network_observation_point: {caption: Network Observation Point, type: object_t, object: network_endpoint, requirement: optional, group: context, observable: 20, from: network}
+  num_records:
+    caption: Number of Records
+    type: integer_t
+    requirement: optional
+    group: context
+    description: The number of resource records transferred. Useful when the event source reports a count without shipping every record.
+  observation_point: {caption: Observation Point, type: string_t, requirement: optional, group: context, from: network}
+  observation_point_id: {caption: Observation Point ID, type: integer_t, requirement: optional, group: context, sibling: observation_point, enum: {0: Unknown, 1: Source, 2: Destination, 3: Neither, 4: Both, 99: Other}, from: network}
+  packet_list: {caption: Packets, type: object_t, object: packet, array: true, requirement: optional, group: context, from: network}
+  policy: {caption: Policy, type: object_t, object: policy, requirement: optional, group: primary, profile: security_control, from: base_event}
+  proxy_endpoint: {caption: Proxy Endpoint, type: object_t, object: network_proxy, requirement: optional, group: context, profile: network_proxy, observable: 20, from: network}
+  proxy_http_request: {caption: Proxy HTTP Request, type: object_t, object: http_request, requirement: optional, group: context, profile: network_proxy, from: network}
+  proxy_http_response: {caption: Proxy HTTP Response, type: object_t, object: http_response, requirement: optional, group: context, profile: network_proxy, from: network}
+  raw_data: {caption: Raw Data, type: string_t, requirement: optional, group: context, from: base_event}
+  raw_data_hash: {caption: Raw Data Hash, type: object_t, object: fingerprint, requirement: optional, group: context, observable: 30, from: base_event}
+  raw_data_size: {caption: Raw Data Size, type: long_t, requirement: optional, group: context, from: base_event}
+  risk_details: {caption: Risk Details, type: string_t, requirement: optional, group: context, profile: security_control, from: base_event}
+  risk_level: {caption: Risk Level, type: string_t, requirement: optional, group: context, profile: security_control, from: base_event}
+  risk_level_id: {caption: Risk Level ID, type: integer_t, requirement: optional, group: context, profile: security_control, sibling: risk_level, enum: {0: Info, 1: Low, 2: Medium, 3: High, 4: Critical, 99: Other}, from: base_event}
+  risk_score: {caption: Risk Score, type: integer_t, requirement: optional, group: context, profile: security_control, from: base_event}
+  severity: {caption: Severity, type: string_t, requirement: optional, group: classification, from: base_event}
+  soa:
+    caption: SOA Record
+    type: object_t
+    object: dns_soa
+    requirement: optional
+    group: context
+    description: The current Start of Authority (SOA) record for the zone. For an IXFR request, this is the SOA the secondary already holds, i.e., the "from" serial that bounds the requested delta.
+  start_time: {caption: Start Time, type: timestamp_t, requirement: optional, group: occurrence, from: base_event}
+  start_time_dt: {caption: Start Time, type: datetime_t, requirement: optional, group: occurrence, profile: datetime, from: base_event}
+  time_dt: {caption: Event Time, type: datetime_t, requirement: optional, group: occurrence, profile: datetime, from: base_event}
+  tls: {caption: TLS, type: object_t, object: tls, requirement: optional, group: context, from: network}
+  type_name: {caption: Type Name, type: string_t, requirement: optional, group: classification, from: base_event}
+  unmapped: {caption: Unmapped Data, type: object_t, object: object, requirement: optional, group: context, from: base_event}
   updated_soa:
     caption: Updated SOA Record
     type: object_t

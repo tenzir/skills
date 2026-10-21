@@ -9,6 +9,16 @@ referenced_by:
   classes:
     datastore_activity: [table]
 attributes:
+  name:
+    caption: Name
+    type: string_t
+    requirement: recommended
+    description: The table name, ordinarily as assigned by a database administrator.
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: recommended
+    description: The unique identifier of the table.
   created_time:
     caption: Created Time
     type: timestamp_t
@@ -43,18 +53,8 @@ attributes:
     requirement: optional
     profile: datetime
     description: The most recent time when any changes, updates, or modifications were made within the table.
-  name:
-    caption: Name
-    type: string_t
-    requirement: recommended
-    description: The table name, ordinarily as assigned by a database administrator.
   size:
     caption: Size
     type: long_t
     requirement: optional
     description: The size of the data table in bytes.
-  uid:
-    caption: Unique ID
-    type: string_t
-    requirement: recommended
-    description: The unique identifier of the table.

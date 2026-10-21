@@ -1,5 +1,5 @@
-# Attributes with a `definition` path are inherited unchanged. Read that file
-# for their type, object, description, enum, and observable.
+# Attributes with `from` but no description are inherited unchanged. Their
+# descriptions are in the file of the item that `from` names.
 name: database
 caption: Database
 extends: _entity
@@ -18,17 +18,35 @@ referenced_by:
   objects:
     evidences: [database]
 attributes:
-  created_time:
-    caption: Created Time
-    type: timestamp_t
-    requirement: optional
-    description: The time when the database was known to have been created.
-  created_time_dt:
-    caption: Created Time
-    type: datetime_t
-    requirement: optional
-    profile: datetime
-    description: The time when the database was known to have been created.
+  type_id:
+    caption: Type ID
+    type: integer_t
+    requirement: required
+    sibling: type
+    description: The normalized identifier of the database type.
+    enum:
+      0:
+        caption: Unknown
+        description: The type is unknown.
+      1:
+        caption: Relational
+      2:
+        caption: Network
+      3:
+        caption: Object Oriented
+      4:
+        caption: Centralized
+      5:
+        caption: Operational
+      6:
+        caption: NoSQL
+      7:
+        caption: Vector
+      8:
+        caption: Knowledge Graph
+      99:
+        caption: Other
+        description: The type is not mapped. See the `type` attribute, which contains a data source specific value.
   data_classification:
     caption: Data Classification
     type: object_t
@@ -50,6 +68,32 @@ attributes:
     group: context
     profile: data_classification
     description: A list of Data Classification objects, that include information about data classification levels and data category types, identified by a classifier.
+  name:
+    caption: Name
+    type: string_t
+    requirement: recommended
+    description: The database name, ordinarily as assigned by a database administrator.
+  type:
+    caption: Type
+    type: string_t
+    requirement: recommended
+    description: The database type.
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: recommended
+    description: The unique identifier of the database.
+  created_time:
+    caption: Created Time
+    type: timestamp_t
+    requirement: optional
+    description: The time when the database was known to have been created.
+  created_time_dt:
+    caption: Created Time
+    type: datetime_t
+    requirement: optional
+    profile: datetime
+    description: The time when the database was known to have been created.
   desc:
     caption: Description
     type: string_t
@@ -78,56 +122,9 @@ attributes:
     requirement: optional
     profile: datetime
     description: The most recent time when any changes, updates, or modifications were made within the database.
-  name:
-    caption: Name
-    type: string_t
-    requirement: recommended
-    description: The database name, ordinarily as assigned by a database administrator.
   size:
     caption: Size
     type: long_t
     requirement: optional
     description: The size of the database in bytes.
-  type:
-    caption: Type
-    type: string_t
-    requirement: recommended
-    description: The database type.
-  type_id:
-    caption: Type ID
-    type: integer_t
-    requirement: required
-    sibling: type
-    description: The normalized identifier of the database type.
-    enum:
-      '0':
-        caption: Unknown
-        description: The type is unknown.
-      '1':
-        caption: Relational
-      '2':
-        caption: Network
-      '3':
-        caption: Object Oriented
-      '4':
-        caption: Centralized
-      '5':
-        caption: Operational
-      '6':
-        caption: NoSQL
-      '7':
-        caption: Vector
-      '8':
-        caption: Knowledge Graph
-      '99':
-        caption: Other
-        description: The type is not mapped. See the `type` attribute, which contains a data source specific value.
-  uid:
-    caption: Unique ID
-    type: string_t
-    requirement: recommended
-    description: The unique identifier of the database.
-  uid_numeric:
-    caption: Numeric Unique ID
-    requirement: optional
-    definition: v1.10.0-dev/objects/_entity.yaml
+  uid_numeric: {caption: Numeric Unique ID, type: long_t, requirement: optional, from: _entity}

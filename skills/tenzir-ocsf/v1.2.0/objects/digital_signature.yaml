@@ -7,11 +7,6 @@ referenced_by:
   objects:
     file: [signature]
 attributes:
-  algorithm:
-    caption: Algorithm
-    type: string_t
-    requirement: optional
-    description: The digital signature algorithm used to create the signature, normalized to the caption of 'algorithm_id'. In the case of 'Other', it is defined by the event source.
   algorithm_id:
     caption: Algorithm ID
     type: integer_t
@@ -19,22 +14,22 @@ attributes:
     sibling: algorithm
     description: The identifier of the normalized digital signature algorithm.
     enum:
-      '0':
+      0:
         caption: Unknown
         description: The algorithm is unknown.
-      '1':
+      1:
         caption: DSA
         description: Digital Signature Algorithm (DSA).
-      '2':
+      2:
         caption: RSA
         description: Rivest-Shamir-Adleman (RSA) Algorithm.
-      '3':
+      3:
         caption: ECDSA
         description: Elliptic Curve Digital Signature Algorithm.
-      '4':
+      4:
         caption: Authenticode
         description: Microsoft Authenticode Digital Signature Algorithm.
-      '99':
+      99:
         caption: Other
         description: The algorithm is not mapped. See the `algorithm` attribute, which contains a data source specific value.
   certificate:
@@ -43,6 +38,11 @@ attributes:
     object: certificate
     requirement: recommended
     description: The certificate object containing information about the digital certificate.
+  algorithm:
+    caption: Algorithm
+    type: string_t
+    requirement: optional
+    description: The digital signature algorithm used to create the signature, normalized to the caption of 'algorithm_id'. In the case of 'Other', it is defined by the event source.
   created_time:
     caption: Created Time
     type: timestamp_t

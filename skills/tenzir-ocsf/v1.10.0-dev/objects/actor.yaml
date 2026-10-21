@@ -118,25 +118,12 @@ attributes:
     object: application
     requirement: recommended
     description: The client application or service that initiated the activity. This can be in conjunction with the `user` if present. Note that `application` is distinct from the `process` if present.
-  authorizations:
-    caption: Authorization Information
-    type: object_t
-    object: authorization
-    array: true
-    requirement: optional
-    description: Provides details about an authorization, such as authorization outcome, and any associated policies related to the activity/event.
   iam_role:
     caption: IAM Role
     type: object_t
     object: iam_role
     requirement: recommended
     description: The actor's role, or as an alternative to `user` or `process` when the role is serving as a security principal for the operation that initiated the activity.
-  idp:
-    caption: Identity Provider
-    type: object_t
-    object: idp
-    requirement: optional
-    description: This object describes details about the Identity Provider used.
   invoked_by:
     caption: Invoked by
     type: string_t
@@ -166,3 +153,16 @@ attributes:
     requirement: recommended
     observable: 21
     description: The user that initiated the activity or the user context from which the activity was initiated.
+  authorizations:
+    caption: Authorization Information
+    type: object_t
+    object: authorization
+    array: true
+    requirement: optional
+    description: Provides details about an authorization, such as authorization outcome, and any associated policies related to the activity/event.
+  idp:
+    caption: Identity Provider
+    type: object_t
+    object: idp
+    requirement: optional
+    description: This object describes details about the Identity Provider used.

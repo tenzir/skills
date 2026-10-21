@@ -39,6 +39,20 @@ referenced_by:
     web_resource_access_activity: [actor]
     web_resources_activity: [actor]
 attributes:
+  process:
+    caption: Process
+    type: object_t
+    object: process
+    requirement: recommended
+    observable: 25
+    description: The process that initiated the activity.
+  user:
+    caption: User
+    type: object_t
+    object: user
+    requirement: recommended
+    observable: 21
+    description: The user that initiated the activity or the user context from which the activity was initiated.
   authorizations:
     caption: Authorization Information
     type: object_t
@@ -57,23 +71,9 @@ attributes:
     type: string_t
     requirement: optional
     description: The name of the service that invoked the activity as described in the event.
-  process:
-    caption: Process
-    type: object_t
-    object: process
-    requirement: recommended
-    observable: 25
-    description: The process that initiated the activity.
   session:
     caption: Session
     type: object_t
     object: session
     requirement: optional
     description: The user session from which the activity was initiated.
-  user:
-    caption: User
-    type: object_t
-    object: user
-    requirement: recommended
-    observable: 21
-    description: The user that initiated the activity or the user context from which the activity was initiated.

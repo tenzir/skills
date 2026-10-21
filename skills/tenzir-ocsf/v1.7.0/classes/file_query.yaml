@@ -1,5 +1,5 @@
-# Attributes with a `definition` path are inherited unchanged. Read that file
-# for their type, object, description, enum, and observable.
+# Attributes with `from` but no description are inherited unchanged. Their
+# descriptions are in the file of the item that `from` names.
 name: file_query
 caption: File Query
 uid: 5007
@@ -12,51 +12,7 @@ deprecated:
 description: File Query events report information about files that are present on the system.
 profiles: [cloud, container, data_classification, datetime, host, osint, security_control]
 attributes:
-  action:
-    caption: Action
-    requirement: optional
-    profile: security_control
-    definition: v1.7.0/classes/base_event.yaml
-  action_id:
-    caption: Action ID
-    requirement: recommended
-    profile: security_control
-    definition: v1.7.0/classes/base_event.yaml
-  activity_id:
-    caption: Activity ID
-    requirement: required
-    definition: v1.7.0/classes/discovery_result.yaml
-  activity_name:
-    caption: Activity
-    requirement: optional
-    definition: v1.7.0/classes/base_event.yaml
-  actor:
-    caption: Actor
-    requirement: optional
-    profile: host
-    definition: v1.7.0/classes/base_event.yaml
-  api:
-    caption: API Details
-    requirement: optional
-    profile: cloud
-    definition: v1.7.0/classes/base_event.yaml
-  attacks:
-    caption: MITRE ATT&CK® and ATLAS™ Details
-    requirement: optional
-    profile: security_control
-    definition: v1.7.0/classes/base_event.yaml
-  authorizations:
-    caption: Authorization Information
-    requirement: optional
-    profile: security_control
-    definition: v1.7.0/classes/base_event.yaml
-  category_name:
-    caption: Category
-    type: string_t
-    requirement: optional
-    group: classification
-    from: base_event
-    description: 'The event category name, as defined by category_uid value: `Discovery`.'
+  activity_id: {caption: Activity ID, type: integer_t, requirement: required, group: classification, sibling: activity_name, enum: {0: Unknown, 1: Query, 99: Other}, from: discovery_result}
   category_uid:
     caption: Category ID
     type: integer_t
@@ -66,16 +22,9 @@ attributes:
     sibling: category_name
     description: The category unique identifier of the event.
     enum:
-      '5':
+      5:
         caption: Discovery
         description: Discovery events report the existence and state of devices, files, configurations, processes, registry keys, and other objects.
-  class_name:
-    caption: Class
-    type: string_t
-    requirement: optional
-    group: classification
-    from: base_event
-    description: 'The event class name, as defined by class_uid value: `File Query`.'
   class_uid:
     caption: Class ID
     type: integer_t
@@ -84,65 +33,10 @@ attributes:
     sibling: class_name
     description: The unique identifier of a class. A class describes the attributes available in an event.
     enum:
-      '5007':
+      5007:
         caption: File Query
         description: File Query events report information about files that are present on the system.
-  cloud:
-    caption: Cloud
-    requirement: required
-    profile: cloud
-    definition: v1.7.0/classes/base_event.yaml
-  confidence:
-    caption: Confidence
-    requirement: optional
-    profile: security_control
-    definition: v1.7.0/classes/base_event.yaml
-  confidence_id:
-    caption: Confidence ID
-    requirement: recommended
-    profile: security_control
-    definition: v1.7.0/classes/base_event.yaml
-  confidence_score:
-    caption: Confidence Score
-    requirement: optional
-    profile: security_control
-    definition: v1.7.0/classes/base_event.yaml
-  count:
-    caption: Count
-    requirement: optional
-    definition: v1.7.0/classes/base_event.yaml
-  device:
-    caption: Device
-    requirement: recommended
-    profile: host
-    definition: v1.7.0/classes/base_event.yaml
-  disposition:
-    caption: Disposition
-    requirement: optional
-    profile: security_control
-    definition: v1.7.0/classes/base_event.yaml
-  disposition_id:
-    caption: Disposition ID
-    requirement: recommended
-    profile: security_control
-    definition: v1.7.0/classes/base_event.yaml
-  duration:
-    caption: Duration Milliseconds
-    requirement: optional
-    definition: v1.7.0/classes/base_event.yaml
-  end_time:
-    caption: End Time
-    requirement: optional
-    definition: v1.7.0/classes/base_event.yaml
-  end_time_dt:
-    caption: End Time
-    requirement: optional
-    profile: datetime
-    definition: v1.7.0/classes/base_event.yaml
-  enrichments:
-    caption: Enrichments
-    requirement: optional
-    definition: v1.7.0/classes/base_event.yaml
+  cloud: {caption: Cloud, type: object_t, object: cloud, requirement: required, group: primary, profile: cloud, from: base_event}
   file:
     caption: File
     type: object_t
@@ -151,142 +45,11 @@ attributes:
     group: primary
     observable: 24
     description: The file that is the target of the query.
-  firewall_rule:
-    caption: Firewall Rule
-    requirement: optional
-    profile: security_control
-    definition: v1.7.0/classes/base_event.yaml
-  is_alert:
-    caption: Alert
-    requirement: recommended
-    profile: security_control
-    definition: v1.7.0/classes/base_event.yaml
-  malware:
-    caption: Malware
-    requirement: optional
-    profile: security_control
-    definition: v1.7.0/classes/base_event.yaml
-  malware_scan_info:
-    caption: Malware Scan Info
-    requirement: optional
-    profile: security_control
-    definition: v1.7.0/classes/base_event.yaml
-  message:
-    caption: Message
-    requirement: recommended
-    definition: v1.7.0/classes/base_event.yaml
-  metadata:
-    caption: Metadata
-    requirement: required
-    definition: v1.7.0/classes/base_event.yaml
-  observables:
-    caption: Observables
-    requirement: recommended
-    definition: v1.7.0/classes/base_event.yaml
-  osint:
-    caption: OSINT
-    requirement: required
-    profile: osint
-    definition: v1.7.0/classes/base_event.yaml
-  policy:
-    caption: Policy
-    requirement: optional
-    profile: security_control
-    definition: v1.7.0/classes/base_event.yaml
-  query_info:
-    caption: Query Info
-    requirement: recommended
-    definition: v1.7.0/classes/discovery_result.yaml
-  query_result:
-    caption: Query Result
-    requirement: recommended
-    definition: v1.7.0/classes/discovery_result.yaml
-  query_result_id:
-    caption: Query Result ID
-    requirement: required
-    definition: v1.7.0/classes/discovery_result.yaml
-  raw_data:
-    caption: Raw Data
-    requirement: optional
-    definition: v1.7.0/classes/base_event.yaml
-  raw_data_hash:
-    caption: Raw Data Hash
-    requirement: optional
-    definition: v1.7.0/classes/base_event.yaml
-  raw_data_size:
-    caption: Raw Data Size
-    requirement: optional
-    definition: v1.7.0/classes/base_event.yaml
-  risk_details:
-    caption: Risk Details
-    requirement: optional
-    profile: security_control
-    definition: v1.7.0/classes/base_event.yaml
-  risk_level:
-    caption: Risk Level
-    requirement: optional
-    profile: security_control
-    definition: v1.7.0/classes/base_event.yaml
-  risk_level_id:
-    caption: Risk Level ID
-    requirement: optional
-    profile: security_control
-    definition: v1.7.0/classes/base_event.yaml
-  risk_score:
-    caption: Risk Score
-    requirement: optional
-    profile: security_control
-    definition: v1.7.0/classes/base_event.yaml
-  severity:
-    caption: Severity
-    requirement: optional
-    definition: v1.7.0/classes/base_event.yaml
-  severity_id:
-    caption: Severity ID
-    requirement: required
-    definition: v1.7.0/classes/base_event.yaml
-  start_time:
-    caption: Start Time
-    requirement: optional
-    definition: v1.7.0/classes/base_event.yaml
-  start_time_dt:
-    caption: Start Time
-    requirement: optional
-    profile: datetime
-    definition: v1.7.0/classes/base_event.yaml
-  status:
-    caption: Status
-    requirement: recommended
-    definition: v1.7.0/classes/base_event.yaml
-  status_code:
-    caption: Status Code
-    requirement: recommended
-    definition: v1.7.0/classes/base_event.yaml
-  status_detail:
-    caption: Status Detail
-    requirement: recommended
-    definition: v1.7.0/classes/base_event.yaml
-  status_id:
-    caption: Status ID
-    requirement: recommended
-    definition: v1.7.0/classes/base_event.yaml
-  time:
-    caption: Event Time
-    requirement: required
-    definition: v1.7.0/classes/base_event.yaml
-  time_dt:
-    caption: Event Time
-    requirement: optional
-    profile: datetime
-    definition: v1.7.0/classes/base_event.yaml
-  timezone_offset:
-    caption: Timezone Offset
-    requirement: recommended
-    definition: v1.7.0/classes/base_event.yaml
-  type_name:
-    caption: Type Name
-    requirement: optional
-    definition: v1.7.0/classes/base_event.yaml
+  metadata: {caption: Metadata, type: object_t, object: metadata, requirement: required, group: context, from: base_event}
+  osint: {caption: OSINT, type: object_t, object: osint, array: true, requirement: required, group: primary, profile: osint, from: base_event}
+  query_result_id: {caption: Query Result ID, type: integer_t, requirement: required, group: primary, sibling: query_result, enum: {0: Unknown, 1: Exists, 2: Partial, 3: Does not exist, 4: Error, 5: Unsupported, 99: Other}, from: discovery_result}
+  severity_id: {caption: Severity ID, type: integer_t, requirement: required, group: classification, sibling: severity, enum: {0: Unknown, 1: Informational, 2: Low, 3: Medium, 4: High, 5: Critical, 6: Fatal, 99: Other}, from: base_event}
+  time: {caption: Event Time, type: timestamp_t, requirement: required, group: occurrence, from: base_event}
   type_uid:
     caption: Type ID
     type: long_t
@@ -294,15 +57,99 @@ attributes:
     group: classification
     sibling: type_name
     description: 'The event/finding type ID. It identifies the event''s semantics and structure. The value is calculated by the logging system as: `class_uid * 100 + activity_id`.'
+  action_id: {caption: Action ID, type: integer_t, requirement: recommended, group: primary, profile: security_control, sibling: action, enum: {0: Unknown, 1: Allowed, 2: Denied, 3: Observed, 4: Modified, 99: Other}, from: base_event}
+  confidence_id: {caption: Confidence ID, type: integer_t, requirement: recommended, group: context, profile: security_control, sibling: confidence, enum: {0: Unknown, 1: Low, 2: Medium, 3: High, 99: Other}, from: base_event}
+  device: {caption: Device, type: object_t, object: device, requirement: recommended, group: primary, profile: host, observable: 20, from: base_event}
+  disposition_id:
+    caption: Disposition ID
+    type: integer_t
+    requirement: recommended
+    group: primary
+    profile: security_control
+    sibling: disposition
     enum:
-      '500700':
-        caption: 'File Query: Unknown'
-      '500701':
-        caption: 'File Query: Query'
-        description: The discovered results are via a query request.
-      '500799':
-        caption: 'File Query: Other'
-  unmapped:
-    caption: Unmapped Data
+      0: Unknown
+      1: Allowed
+      2: Blocked
+      3: Quarantined
+      4: Isolated
+      5: Deleted
+      6: Dropped
+      7: Custom Action
+      8: Approved
+      9: Restored
+      10: Exonerated
+      11: Corrected
+      12: Partially Corrected
+      13: Uncorrected
+      14: Delayed
+      15: Detected
+      16: No Action
+      17: Logged
+      18: Tagged
+      19: Alert
+      20: Count
+      21: Reset
+      22: Captcha
+      23: Challenge
+      24: Access Revoked
+      25: Rejected
+      26: Unauthorized
+      27: Error
+      99: Other
+    from: base_event
+  is_alert: {caption: Alert, type: boolean_t, requirement: recommended, group: primary, profile: security_control, from: base_event}
+  message: {caption: Message, type: string_t, requirement: recommended, group: primary, from: base_event}
+  observables: {caption: Observables, type: object_t, object: observable, array: true, requirement: recommended, group: primary, from: base_event}
+  query_info: {caption: Query Info, type: object_t, object: query_info, requirement: recommended, group: primary, from: discovery_result}
+  query_result: {caption: Query Result, type: string_t, requirement: recommended, group: primary, from: discovery_result}
+  status: {caption: Status, type: string_t, requirement: recommended, group: primary, from: base_event}
+  status_code: {caption: Status Code, type: string_t, requirement: recommended, group: primary, from: base_event}
+  status_detail: {caption: Status Detail, type: string_t, requirement: recommended, group: primary, from: base_event}
+  status_id: {caption: Status ID, type: integer_t, requirement: recommended, group: primary, sibling: status, enum: {0: Unknown, 1: Success, 2: Failure, 99: Other}, from: base_event}
+  timezone_offset: {caption: Timezone Offset, type: integer_t, requirement: recommended, group: occurrence, from: base_event}
+  action: {caption: Action, type: string_t, requirement: optional, group: primary, profile: security_control, from: base_event}
+  activity_name: {caption: Activity, type: string_t, requirement: optional, group: classification, from: base_event}
+  actor: {caption: Actor, type: object_t, object: actor, requirement: optional, group: primary, profile: host, from: base_event}
+  api: {caption: API Details, type: object_t, object: api, requirement: optional, group: context, profile: cloud, from: base_event}
+  attacks: {caption: MITRE ATT&CK® and ATLAS™ Details, type: object_t, object: attack, array: true, requirement: optional, group: primary, profile: security_control, from: base_event}
+  authorizations: {caption: Authorization Information, type: object_t, object: authorization, array: true, requirement: optional, group: primary, profile: security_control, from: base_event}
+  category_name:
+    caption: Category
+    type: string_t
     requirement: optional
-    definition: v1.7.0/classes/base_event.yaml
+    group: classification
+    from: base_event
+    description: 'The event category name, as defined by category_uid value: `Discovery`.'
+  class_name:
+    caption: Class
+    type: string_t
+    requirement: optional
+    group: classification
+    from: base_event
+    description: 'The event class name, as defined by class_uid value: `File Query`.'
+  confidence: {caption: Confidence, type: string_t, requirement: optional, group: context, profile: security_control, from: base_event}
+  confidence_score: {caption: Confidence Score, type: integer_t, requirement: optional, group: context, profile: security_control, from: base_event}
+  count: {caption: Count, type: integer_t, requirement: optional, group: occurrence, from: base_event}
+  disposition: {caption: Disposition, type: string_t, requirement: optional, group: primary, profile: security_control, from: base_event}
+  duration: {caption: Duration Milliseconds, type: long_t, requirement: optional, group: occurrence, from: base_event}
+  end_time: {caption: End Time, type: timestamp_t, requirement: optional, group: occurrence, from: base_event}
+  end_time_dt: {caption: End Time, type: datetime_t, requirement: optional, group: occurrence, profile: datetime, from: base_event}
+  enrichments: {caption: Enrichments, type: object_t, object: enrichment, array: true, requirement: optional, group: context, from: base_event}
+  firewall_rule: {caption: Firewall Rule, type: object_t, object: firewall_rule, requirement: optional, group: primary, profile: security_control, from: base_event}
+  malware: {caption: Malware, type: object_t, object: malware, array: true, requirement: optional, group: primary, profile: security_control, from: base_event}
+  malware_scan_info: {caption: Malware Scan Info, type: object_t, object: malware_scan_info, requirement: optional, group: primary, profile: security_control, from: base_event}
+  policy: {caption: Policy, type: object_t, object: policy, requirement: optional, group: primary, profile: security_control, from: base_event}
+  raw_data: {caption: Raw Data, type: string_t, requirement: optional, group: context, from: base_event}
+  raw_data_hash: {caption: Raw Data Hash, type: object_t, object: fingerprint, requirement: optional, group: context, observable: 30, from: base_event}
+  raw_data_size: {caption: Raw Data Size, type: long_t, requirement: optional, group: context, from: base_event}
+  risk_details: {caption: Risk Details, type: string_t, requirement: optional, group: context, profile: security_control, from: base_event}
+  risk_level: {caption: Risk Level, type: string_t, requirement: optional, group: context, profile: security_control, from: base_event}
+  risk_level_id: {caption: Risk Level ID, type: integer_t, requirement: optional, group: context, profile: security_control, sibling: risk_level, enum: {0: Info, 1: Low, 2: Medium, 3: High, 4: Critical, 99: Other}, from: base_event}
+  risk_score: {caption: Risk Score, type: integer_t, requirement: optional, group: context, profile: security_control, from: base_event}
+  severity: {caption: Severity, type: string_t, requirement: optional, group: classification, from: base_event}
+  start_time: {caption: Start Time, type: timestamp_t, requirement: optional, group: occurrence, from: base_event}
+  start_time_dt: {caption: Start Time, type: datetime_t, requirement: optional, group: occurrence, profile: datetime, from: base_event}
+  time_dt: {caption: Event Time, type: datetime_t, requirement: optional, group: occurrence, profile: datetime, from: base_event}
+  type_name: {caption: Type Name, type: string_t, requirement: optional, group: classification, from: base_event}
+  unmapped: {caption: Unmapped Data, type: object_t, object: object, requirement: optional, group: context, from: base_event}

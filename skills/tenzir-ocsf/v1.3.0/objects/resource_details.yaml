@@ -1,5 +1,5 @@
-# Attributes with a `definition` path are inherited unchanged. Read that file
-# for their type, object, description, enum, and observable.
+# Attributes with `from` but no description are inherited unchanged. Their
+# descriptions are in the file of the item that `from` names.
 name: resource_details
 caption: Resource Details
 extends: _resource
@@ -18,6 +18,16 @@ referenced_by:
     user_access: [resource]
     vulnerability_finding: [resource, resources]
 attributes:
+  data_classification: {caption: Data Classification, type: object_t, object: data_classification, requirement: recommended, group: context, profile: data_classification, from: _resource}
+  name: {caption: Name, type: string_t, requirement: recommended, from: _resource}
+  owner:
+    caption: Owner
+    type: object_t
+    object: user
+    requirement: recommended
+    observable: 21
+    description: The identity of the service or user account that owns the resource.
+  uid: {caption: Unique ID, type: string_t, requirement: recommended, from: _resource}
   agent_list:
     caption: Agent List
     type: object_t
@@ -36,55 +46,26 @@ attributes:
     type: string_t
     requirement: optional
     description: The criticality of the resource as defined by the event source.
-  data:
-    caption: Data
-    requirement: optional
-    definition: v1.3.0/objects/_resource.yaml
-  data_classification:
-    caption: Data Classification
-    requirement: recommended
-    profile: data_classification
-    definition: v1.3.0/objects/_resource.yaml
+  data: {caption: Data, type: json_t, requirement: optional, from: _resource}
   group:
     caption: Group
     type: object_t
     object: group
     requirement: optional
     description: The name of the related resource group.
-  labels:
-    caption: Labels
-    requirement: optional
-    definition: v1.3.0/objects/_resource.yaml
-  name:
-    caption: Name
-    requirement: recommended
-    definition: v1.3.0/objects/_resource.yaml
+  labels: {caption: Labels, type: string_t, array: true, requirement: optional, from: _resource}
   namespace:
     caption: Namespace
     type: string_t
     requirement: optional
     description: The namespace is useful when similar entities exist that you need to keep separate.
-  owner:
-    caption: Owner
-    type: object_t
-    object: user
-    requirement: recommended
-    observable: 21
-    description: The identity of the service or user account that owns the resource.
   region:
     caption: Region
     type: string_t
     requirement: optional
     profile: cloud
     description: The cloud region of the resource.
-  type:
-    caption: Type
-    requirement: optional
-    definition: v1.3.0/objects/_resource.yaml
-  uid:
-    caption: Unique ID
-    requirement: recommended
-    definition: v1.3.0/objects/_resource.yaml
+  type: {caption: Type, type: string_t, requirement: optional, from: _resource}
   version:
     caption: Version
     type: string_t

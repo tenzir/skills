@@ -8,6 +8,11 @@ referenced_by:
   objects:
     metadata: [extension, extensions]
 attributes:
+  version:
+    caption: Version
+    type: string_t
+    requirement: required
+    description: 'The schema extension version. For example: `1.0.0-alpha.2`.'
   name:
     caption: Name
     type: string_t
@@ -18,8 +23,3 @@ attributes:
     type: string_t
     requirement: recommended
     description: 'The schema extension unique identifier. For example: `999`.'
-  version:
-    caption: Version
-    type: string_t
-    requirement: required
-    description: 'The schema extension version. For example: `1.0.0-alpha.2`.'

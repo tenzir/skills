@@ -9,6 +9,46 @@ referenced_by:
   classes:
     datastore_activity: [database]
 attributes:
+  type_id:
+    caption: Type ID
+    type: integer_t
+    requirement: required
+    sibling: type
+    description: The normalized identifier of the database type.
+    enum:
+      0:
+        caption: Unknown
+        description: The type is unknown.
+      1:
+        caption: Relational
+      2:
+        caption: Network
+      3:
+        caption: Cloud
+      4:
+        caption: Centralized
+      5:
+        caption: Operational
+      6:
+        caption: NoSQL
+      99:
+        caption: Other
+        description: The type is not mapped. See the `type` attribute, which contains a data source specific value.
+  name:
+    caption: Name
+    type: string_t
+    requirement: recommended
+    description: The database name, ordinarily as assigned by a database administrator.
+  type:
+    caption: Type
+    type: string_t
+    requirement: recommended
+    description: The database type.
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: recommended
+    description: The unique identifier of the database.
   created_time:
     caption: Created Time
     type: timestamp_t
@@ -43,48 +83,8 @@ attributes:
     requirement: optional
     profile: datetime
     description: The most recent time when any changes, updates, or modifications were made within the database.
-  name:
-    caption: Name
-    type: string_t
-    requirement: recommended
-    description: The database name, ordinarily as assigned by a database administrator.
   size:
     caption: Size
     type: long_t
     requirement: optional
     description: The size of the database in bytes.
-  type:
-    caption: Type
-    type: string_t
-    requirement: recommended
-    description: The database type.
-  type_id:
-    caption: Type ID
-    type: integer_t
-    requirement: required
-    sibling: type
-    description: The normalized identifier of the database type.
-    enum:
-      '0':
-        caption: Unknown
-        description: The type is unknown.
-      '1':
-        caption: Relational
-      '2':
-        caption: Network
-      '3':
-        caption: Cloud
-      '4':
-        caption: Centralized
-      '5':
-        caption: Operational
-      '6':
-        caption: NoSQL
-      '99':
-        caption: Other
-        description: The type is not mapped. See the `type` attribute, which contains a data source specific value.
-  uid:
-    caption: Unique ID
-    type: string_t
-    requirement: recommended
-    description: The unique identifier of the database.

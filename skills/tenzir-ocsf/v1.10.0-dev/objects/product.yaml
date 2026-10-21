@@ -1,5 +1,5 @@
-# Attributes with a `definition` path are inherited unchanged. Read that file
-# for their type, object, description, enum, and observable.
+# Attributes with `from` but no description are inherited unchanged. Their
+# descriptions are in the file of the item that `from` names.
 name: product
 caption: Product
 extends: _entity
@@ -25,14 +25,6 @@ referenced_by:
     sbom: [product]
     transformation_info: [product]
 attributes:
-  cpe_name:
-    caption: The product CPE identifier
-    type: string_t
-    requirement: optional
-    description: 'The Common Platform Enumeration (CPE) name. For example: `cpe:/a:apple:safari:16.2`.'
-    references:
-    - description: NIST Products
-      url: https://nvd.nist.gov/products/cpe
   data_classification:
     caption: Data Classification
     type: object_t
@@ -54,6 +46,34 @@ attributes:
     group: context
     profile: data_classification
     description: A list of Data Classification objects, that include information about data classification levels and data category types, identified by a classifier.
+  name:
+    caption: Name
+    type: string_t
+    requirement: recommended
+    description: The name of the product.
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: recommended
+    description: The unique identifier of the product.
+  vendor_name:
+    caption: Vendor Name
+    type: string_t
+    requirement: recommended
+    description: The name of the vendor of the product.
+  version:
+    caption: Version
+    type: string_t
+    requirement: recommended
+    description: 'The version of the product, as defined by the event source. For example: `2013.1.3-beta`.'
+  cpe_name:
+    caption: The product CPE identifier
+    type: string_t
+    requirement: optional
+    description: 'The Common Platform Enumeration (CPE) name. For example: `cpe:/a:apple:safari:16.2`.'
+    references:
+    - description: NIST Products
+      url: https://nvd.nist.gov/products/cpe
   feature:
     caption: Feature
     type: object_t
@@ -68,38 +88,15 @@ attributes:
     references:
     - description: ISO 639-1
       url: https://en.wikipedia.org/wiki/ISO_639-1
-  name:
-    caption: Name
-    type: string_t
-    requirement: recommended
-    description: The name of the product.
   path:
     caption: Path
     type: string_t
     requirement: optional
     description: The installation path of the product.
-  uid:
-    caption: Unique ID
-    type: string_t
-    requirement: recommended
-    description: The unique identifier of the product.
-  uid_numeric:
-    caption: Numeric Unique ID
-    requirement: optional
-    definition: v1.10.0-dev/objects/_entity.yaml
+  uid_numeric: {caption: Numeric Unique ID, type: long_t, requirement: optional, from: _entity}
   url_string:
     caption: URL String
     type: url_t
     requirement: optional
     observable: 6
     description: The URL pointing towards the product.
-  vendor_name:
-    caption: Vendor Name
-    type: string_t
-    requirement: recommended
-    description: The name of the vendor of the product.
-  version:
-    caption: Version
-    type: string_t
-    requirement: recommended
-    description: 'The version of the product, as defined by the event source. For example: `2013.1.3-beta`.'

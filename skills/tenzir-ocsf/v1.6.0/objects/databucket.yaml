@@ -1,5 +1,5 @@
-# Attributes with a `definition` path are inherited unchanged. Read that file
-# for their type, object, description, enum, and observable.
+# Attributes with `from` but no description are inherited unchanged. Their
+# descriptions are in the file of the item that `from` names.
 name: databucket
 caption: Databucket
 extends: _resource
@@ -18,6 +18,85 @@ referenced_by:
   objects:
     evidences: [databucket]
 attributes:
+  type_id:
+    caption: Type ID
+    type: integer_t
+    requirement: required
+    sibling: type
+    description: The normalized identifier of the databucket type.
+    enum:
+      0:
+        caption: Unknown
+        description: The type is unknown.
+      1:
+        caption: S3
+      2:
+        caption: Azure Blob
+      3:
+        caption: GCP Bucket
+      99:
+        caption: Other
+        description: The type is not mapped. See the `type` attribute, which contains a data source specific value.
+  data_classification:
+    caption: Data Classification
+    type: object_t
+    object: data_classification
+    requirement: recommended
+    group: context
+    profile: data_classification
+    deprecated:
+      since: 1.4.0
+      message: Use the attribute `data_classifications` instead
+    description: The Data Classification object includes information about data classification levels and data category types.
+  data_classifications:
+    caption: Data Classification
+    type: object_t
+    object: data_classification
+    array: true
+    requirement: recommended
+    group: context
+    profile: data_classification
+    description: A list of Data Classification objects, that include information about data classification levels and data category types, identified by a classifier.
+  hostname:
+    caption: Hostname
+    type: hostname_t
+    requirement: recommended
+    observable: 1
+    description: The fully qualified hostname of the databucket.
+  ip:
+    caption: IP Address
+    type: ip_t
+    requirement: recommended
+    observable: 2
+    description: The IP address of the resource, in either IPv4 or IPv6 format.
+  is_public:
+    caption: Public
+    type: boolean_t
+    requirement: recommended
+    description: Indicates if the databucket is publicly accessible.
+  name:
+    caption: Name
+    type: string_t
+    requirement: recommended
+    description: The databucket name.
+  owner:
+    caption: Owner
+    type: object_t
+    object: user
+    requirement: recommended
+    observable: 21
+    description: The identity of the service or user account that owns the databucket.
+  type:
+    caption: Type
+    type: string_t
+    requirement: recommended
+    description: The databucket type.
+  uid:
+    caption: Unique ID
+    type: resource_uid_t
+    requirement: recommended
+    observable: 10
+    description: The unique identifier of the databucket.
   agent_list:
     caption: Agent List
     type: object_t
@@ -47,30 +126,7 @@ attributes:
     type: string_t
     requirement: optional
     description: The criticality of the databucket as defined by the event source.
-  data:
-    caption: Data
-    requirement: optional
-    definition: v1.6.0/objects/_resource.yaml
-  data_classification:
-    caption: Data Classification
-    type: object_t
-    object: data_classification
-    requirement: recommended
-    group: context
-    profile: data_classification
-    deprecated:
-      since: 1.4.0
-      message: Use the attribute `data_classifications` instead
-    description: The Data Classification object includes information about data classification levels and data category types.
-  data_classifications:
-    caption: Data Classification
-    type: object_t
-    object: data_classification
-    array: true
-    requirement: recommended
-    group: context
-    profile: data_classification
-    description: A list of Data Classification objects, that include information about data classification levels and data category types, identified by a classifier.
+  data: {caption: Data, type: json_t, requirement: optional, from: _resource}
   desc:
     caption: Description
     type: string_t
@@ -105,18 +161,6 @@ attributes:
     array: true
     requirement: optional
     description: The group names to which the databucket belongs.
-  hostname:
-    caption: Hostname
-    type: hostname_t
-    requirement: recommended
-    observable: 1
-    description: The fully qualified hostname of the databucket.
-  ip:
-    caption: IP Address
-    type: ip_t
-    requirement: recommended
-    observable: 2
-    description: The IP address of the resource, in either IPv4 or IPv6 format.
   is_backed_up:
     caption: Back Ups Configured
     type: boolean_t
@@ -127,15 +171,7 @@ attributes:
     type: boolean_t
     requirement: optional
     description: Indicates if the databucket is encrypted.
-  is_public:
-    caption: Public
-    type: boolean_t
-    requirement: recommended
-    description: Indicates if the databucket is publicly accessible.
-  labels:
-    caption: Labels
-    requirement: optional
-    definition: v1.6.0/objects/_resource.yaml
+  labels: {caption: Labels, type: string_t, array: true, requirement: optional, from: _resource}
   modified_time:
     caption: Modified Time
     type: timestamp_t
@@ -147,23 +183,11 @@ attributes:
     requirement: optional
     profile: datetime
     description: The most recent time when any changes, updates, or modifications were made within the databucket.
-  name:
-    caption: Name
-    type: string_t
-    requirement: recommended
-    description: The databucket name.
   namespace:
     caption: Namespace
     type: string_t
     requirement: optional
     description: The namespace is useful when similar entities exist that you need to keep separate.
-  owner:
-    caption: Owner
-    type: object_t
-    object: user
-    requirement: recommended
-    observable: 21
-    description: The identity of the service or user account that owns the databucket.
   region:
     caption: Region
     type: string_t
@@ -181,44 +205,8 @@ attributes:
     type: long_t
     requirement: optional
     description: The size of the databucket in bytes.
-  tags:
-    caption: Tags
-    requirement: optional
-    definition: v1.6.0/objects/_resource.yaml
-  type:
-    caption: Type
-    type: string_t
-    requirement: recommended
-    description: The databucket type.
-  type_id:
-    caption: Type ID
-    type: integer_t
-    requirement: required
-    sibling: type
-    description: The normalized identifier of the databucket type.
-    enum:
-      '0':
-        caption: Unknown
-        description: The type is unknown.
-      '1':
-        caption: S3
-      '2':
-        caption: Azure Blob
-      '3':
-        caption: GCP Bucket
-      '99':
-        caption: Other
-        description: The type is not mapped. See the `type` attribute, which contains a data source specific value.
-  uid:
-    caption: Unique ID
-    type: resource_uid_t
-    requirement: recommended
-    observable: 10
-    description: The unique identifier of the databucket.
-  uid_alt:
-    caption: Alternate ID
-    requirement: optional
-    definition: v1.6.0/objects/_resource.yaml
+  tags: {caption: Tags, type: object_t, object: key_value_object, array: true, requirement: optional, from: _resource}
+  uid_alt: {caption: Alternate ID, type: resource_uid_t, requirement: optional, observable: 10, from: _resource}
   version:
     caption: Version
     type: string_t

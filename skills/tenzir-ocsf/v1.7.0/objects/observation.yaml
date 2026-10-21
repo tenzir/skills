@@ -7,6 +7,11 @@ referenced_by:
     anomaly: [observations]
     baseline: [observations]
 attributes:
+  value:
+    caption: Value
+    type: string_t
+    requirement: required
+    description: The specific value, event, indicator or data point that was observed and recorded. This is the core piece of information being tracked.
   count:
     caption: Count
     type: integer_t
@@ -18,8 +23,3 @@ attributes:
     object: timespan
     requirement: recommended
     description: The time window when the value or event was first observed. It is used to analyze activity patterns, detect trends, or correlate events within a specific timeframe.
-  value:
-    caption: Value
-    type: string_t
-    requirement: required
-    description: The specific value, event, indicator or data point that was observed and recorded. This is the core piece of information being tracked.

@@ -82,12 +82,6 @@ referenced_by:
   objects:
     evidences: [api]
 attributes:
-  group:
-    caption: Group
-    type: object_t
-    object: group
-    requirement: optional
-    description: The information pertaining to the API group.
   operation:
     caption: Operation
     type: string_t
@@ -105,6 +99,12 @@ attributes:
     object: response
     requirement: recommended
     description: Details pertaining to the API response.
+  group:
+    caption: Group
+    type: object_t
+    object: group
+    requirement: optional
+    description: The information pertaining to the API group.
   service:
     caption: Service
     type: object_t

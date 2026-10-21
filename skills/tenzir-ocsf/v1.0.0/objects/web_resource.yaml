@@ -1,5 +1,5 @@
-# Attributes with a `definition` path are inherited unchanged. Read that file
-# for their type, object, description, enum, and observable.
+# Attributes with `from` but no description are inherited unchanged. Their
+# descriptions are in the file of the item that `from` names.
 name: web_resource
 caption: Web Resource
 extends: _resource
@@ -11,6 +11,12 @@ referenced_by:
     web_resource_access_activity: [web_resources]
     web_resources_activity: [web_resources, web_resources_result]
 attributes:
+  url_string:
+    caption: URL String
+    type: url_t
+    requirement: recommended
+    observable: 6
+    description: The URL pointing towards the source of the web resource.
   data:
     caption: Data
     type: json_t
@@ -21,10 +27,7 @@ attributes:
     type: string_t
     requirement: optional
     description: Description of the web resource.
-  labels:
-    caption: Labels
-    requirement: optional
-    definition: v1.0.0/objects/_resource.yaml
+  labels: {caption: Labels, type: string_t, array: true, requirement: optional, from: _resource}
   name:
     caption: Name
     type: string_t
@@ -40,9 +43,3 @@ attributes:
     type: string_t
     requirement: optional
     description: The unique identifier of the web resource.
-  url_string:
-    caption: URL String
-    type: url_t
-    requirement: recommended
-    observable: 6
-    description: The URL pointing towards the source of the web resource.

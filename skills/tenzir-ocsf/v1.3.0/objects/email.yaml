@@ -12,13 +12,19 @@ referenced_by:
     managed_entity: [email]
     osint: [email]
 attributes:
-  cc:
-    caption: Cc
+  from:
+    caption: From
+    type: email_t
+    requirement: required
+    observable: 5
+    description: The email header From values, as defined by RFC 5322.
+  to:
+    caption: To
     type: email_t
     array: true
-    requirement: optional
+    requirement: required
     observable: 5
-    description: The email header Cc values, as defined by RFC 5322.
+    description: The email header To values, as defined by RFC 5322.
   data_classification:
     caption: Data Classification
     type: object_t
@@ -27,28 +33,11 @@ attributes:
     group: context
     profile: data_classification
     description: The Data Classification object includes information about data classification levels and data category types.
-  delivered_to:
-    caption: Delivered To
-    type: email_t
-    requirement: optional
-    observable: 5
-    description: The Delivered-To email header field.
-  from:
-    caption: From
-    type: email_t
-    requirement: required
-    observable: 5
-    description: The email header From values, as defined by RFC 5322.
   message_uid:
     caption: Message UID
     type: string_t
     requirement: recommended
     description: The email header Message-Id value, as defined by RFC 5322.
-  raw_header:
-    caption: Raw Header
-    type: string_t
-    requirement: optional
-    description: The email authentication header.
   reply_to:
     caption: Reply To
     type: email_t
@@ -78,18 +67,29 @@ attributes:
     type: string_t
     requirement: recommended
     description: The email header Subject value, as defined by RFC 5322.
-  to:
-    caption: To
-    type: email_t
-    array: true
-    requirement: required
-    observable: 5
-    description: The email header To values, as defined by RFC 5322.
   uid:
     caption: Email UID
     type: string_t
     requirement: recommended
     description: The email unique identifier.
+  cc:
+    caption: Cc
+    type: email_t
+    array: true
+    requirement: optional
+    observable: 5
+    description: The email header Cc values, as defined by RFC 5322.
+  delivered_to:
+    caption: Delivered To
+    type: email_t
+    requirement: optional
+    observable: 5
+    description: The Delivered-To email header field.
+  raw_header:
+    caption: Raw Header
+    type: string_t
+    requirement: optional
+    description: The email authentication header.
   x_originating_ip:
     caption: X-Originating-IP
     type: ip_t

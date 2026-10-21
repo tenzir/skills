@@ -93,6 +93,26 @@ referenced_by:
   objects:
     evidences: [actor]
 attributes:
+  application:
+    caption: Application
+    type: object_t
+    object: application
+    requirement: recommended
+    description: The client application or service that initiated the activity. This can be in conjunction with the `user` if present. Note that `application` is distinct from the `process` if present.
+  process:
+    caption: Process
+    type: object_t
+    object: process
+    requirement: recommended
+    observable: 25
+    description: The process that initiated the activity.
+  user:
+    caption: User
+    type: object_t
+    object: user
+    requirement: recommended
+    observable: 21
+    description: The user that initiated the activity or the user context from which the activity was initiated.
   app_name:
     caption: Application Name
     type: string_t
@@ -111,12 +131,6 @@ attributes:
       message: Use the `application.uid` attribute instead.
       superseded_by: [application.uid]
     description: The unique identifier of the client application or service that initiated the activity. This can be in conjunction with the `user` if present. Note that `app_name` is distinct from the `process.pid` or `process.uid` if present.
-  application:
-    caption: Application
-    type: object_t
-    object: application
-    requirement: recommended
-    description: The client application or service that initiated the activity. This can be in conjunction with the `user` if present. Note that `application` is distinct from the `process` if present.
   authorizations:
     caption: Authorization Information
     type: object_t
@@ -145,23 +159,9 @@ attributes:
       message: Use the `application` attribute instead.
       superseded_by: [application]
     description: The name of the service that invoked the activity as described in the event.
-  process:
-    caption: Process
-    type: object_t
-    object: process
-    requirement: recommended
-    observable: 25
-    description: The process that initiated the activity.
   session:
     caption: Session
     type: object_t
     object: session
     requirement: optional
     description: The user session from which the activity was initiated.
-  user:
-    caption: User
-    type: object_t
-    object: user
-    requirement: recommended
-    observable: 21
-    description: The user that initiated the activity or the user context from which the activity was initiated.

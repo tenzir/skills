@@ -12,11 +12,40 @@ referenced_by:
     sbom: [package]
     vulnerability: [packages]
 attributes:
+  name:
+    caption: Name
+    type: string_t
+    requirement: required
+    description: The software package name.
+  version:
+    caption: Version
+    type: string_t
+    requirement: required
+    description: The software package version.
   architecture:
     caption: Architecture
     type: string_t
     requirement: recommended
     description: Architecture is a shorthand name describing the type of computer hardware the packaged software is meant to run on.
+  type_id:
+    caption: Type ID
+    type: integer_t
+    requirement: recommended
+    sibling: type
+    description: The type of software package.
+    enum:
+      0:
+        caption: Unknown
+        description: The type is unknown.
+      1:
+        caption: Application
+        description: An application software package.
+      2:
+        caption: Operating System
+        description: An operating system software package.
+      99:
+        caption: Other
+        description: The type is not mapped. See the `type` attribute, which contains a data source specific value.
   cpe_name:
     caption: The product CPE identifier
     type: string_t
@@ -45,11 +74,6 @@ attributes:
     requirement: optional
     observable: 6
     description: The URL pointing to the license applied on package or software. This is typically a `LICENSE.md` file within a repository.
-  name:
-    caption: Name
-    type: string_t
-    requirement: required
-    description: The software package name.
   package_manager:
     caption: Package Manager
     type: string_t
@@ -82,25 +106,6 @@ attributes:
     type: string_t
     requirement: optional
     description: The type of software package, normalized to the caption of the `type_id` value. In the case of 'Other', it is defined by the source.
-  type_id:
-    caption: Type ID
-    type: integer_t
-    requirement: recommended
-    sibling: type
-    description: The type of software package.
-    enum:
-      '0':
-        caption: Unknown
-        description: The type is unknown.
-      '1':
-        caption: Application
-        description: An application software package.
-      '2':
-        caption: Operating System
-        description: An operating system software package.
-      '99':
-        caption: Other
-        description: The type is not mapped. See the `type` attribute, which contains a data source specific value.
   uid:
     caption: Package UID
     type: string_t
@@ -111,8 +116,3 @@ attributes:
     type: string_t
     requirement: optional
     description: The name of the vendor who published the software package.
-  version:
-    caption: Version
-    type: string_t
-    requirement: required
-    description: The software package version.

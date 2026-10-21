@@ -19,11 +19,6 @@ referenced_by:
     unmanned_aerial_system: [location]
     unmanned_system_operating_area: [locations]
 attributes:
-  aerial_height:
-    caption: Aerial Height
-    type: string_t
-    requirement: optional
-    description: 'Expressed as either height above takeoff location or height above ground level (AGL) for a UAS current location. This value is provided in meters and must have a minimum resolution of 1 m. Special Values: `Invalid`, `No Value`, or `Unknown: -1000 m`.'
   city:
     caption: City
     type: string_t
@@ -34,6 +29,38 @@ attributes:
     type: string_t
     requirement: recommended
     description: The name of the continent.
+  country:
+    caption: Country
+    type: string_t
+    requirement: recommended
+    observable: 14
+    description: |-
+      The ISO 3166-1 Alpha-2 country code.
+
+      Note: The two letter country code should be capitalized. For example: `US` or `CA`.
+    references:
+    - description: ISO 3166-1 alpha-2 codes
+      url: https://www.iso.org/obp/ui/#iso:pub:PUB500001:en
+  postal_code:
+    caption: Postal Code
+    type: string_t
+    requirement: recommended
+    description: The postal code of the location.
+  region:
+    caption: Region
+    type: string_t
+    requirement: recommended
+    description: The alphanumeric code that identifies the principal subdivision (e.g. province or state) of the country. For example, 'CH-VD' for the Canton of Vaud, Switzerland
+    references:
+    - description: ISO Region Codes
+      url: https://www.iso.org/iso-3166-country-codes.html
+    - description: U.S. Region Codes
+      url: https://www.iso.org/obp/ui/#iso:code:3166:US
+  aerial_height:
+    caption: Aerial Height
+    type: string_t
+    requirement: optional
+    description: 'Expressed as either height above takeoff location or height above ground level (AGL) for a UAS current location. This value is provided in meters and must have a minimum resolution of 1 m. Special Values: `Invalid`, `No Value`, or `Unknown: -1000 m`.'
   coordinates:
     caption: Coordinates
     type: float_t
@@ -47,18 +74,6 @@ attributes:
     references:
     - description: GeoJSON
       url: https://geojson.org
-  country:
-    caption: Country
-    type: string_t
-    requirement: recommended
-    observable: 14
-    description: |-
-      The ISO 3166-1 Alpha-2 country code.
-
-      Note: The two letter country code should be capitalized. For example: `US` or `CA`.
-    references:
-    - description: ISO 3166-1 alpha-2 codes
-      url: https://www.iso.org/obp/ui/#iso:pub:PUB500001:en
   desc:
     caption: Description
     type: string_t
@@ -114,11 +129,6 @@ attributes:
     type: float_t
     requirement: optional
     description: 'The geographical Longitude coordinate represented in Decimal Degrees (DD). For example: `-71.057083`.'
-  postal_code:
-    caption: Postal Code
-    type: string_t
-    requirement: recommended
-    description: The postal code of the location.
   pressure_altitude:
     caption: Pressure Altitude
     type: string_t
@@ -129,13 +139,3 @@ attributes:
     type: string_t
     requirement: optional
     description: The provider of the geographical location data.
-  region:
-    caption: Region
-    type: string_t
-    requirement: recommended
-    description: The alphanumeric code that identifies the principal subdivision (e.g. province or state) of the country. For example, 'CH-VD' for the Canton of Vaud, Switzerland
-    references:
-    - description: ISO Region Codes
-      url: https://www.iso.org/iso-3166-country-codes.html
-    - description: U.S. Region Codes
-      url: https://www.iso.org/obp/ui/#iso:code:3166:US

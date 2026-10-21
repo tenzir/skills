@@ -20,11 +20,6 @@ referenced_by:
     software_component: [hash]
     tls: [ja3_hash, ja3s_hash]
 attributes:
-  algorithm:
-    caption: Algorithm
-    type: string_t
-    requirement: optional
-    description: The hash algorithm used to create the digital fingerprint, normalized to the caption of `algorithm_id`. In the case of `Other`, it is defined by the event source.
   algorithm_id:
     caption: Algorithm ID
     type: integer_t
@@ -32,31 +27,31 @@ attributes:
     sibling: algorithm
     description: The identifier of the normalized hash algorithm, which was used to create the digital fingerprint.
     enum:
-      '0':
+      0:
         caption: Unknown
         description: The algorithm is unknown.
-      '1':
+      1:
         caption: MD5
         description: MD5 message-digest algorithm producing a 128-bit (16-byte) hash value.
-      '2':
+      2:
         caption: SHA-1
         description: Secure Hash Algorithm 1 producing a 160-bit (20-byte) hash value.
-      '3':
+      3:
         caption: SHA-256
         description: Secure Hash Algorithm 2 producing a 256-bit (32-byte) hash value.
-      '4':
+      4:
         caption: SHA-512
         description: Secure Hash Algorithm 2 producing a 512-bit (64-byte) hash value.
-      '5':
+      5:
         caption: CTPH
         description: The ssdeep generated fuzzy checksum. Also known as Context Triggered Piecewise Hash (CTPH).
-      '6':
+      6:
         caption: TLSH
         description: The TLSH fuzzy hashing algorithm.
-      '7':
+      7:
         caption: quickXorHash
         description: Microsoft simple non-cryptographic hash algorithm that works by XORing the bytes in a circular-shifting fashion.
-      '99':
+      99:
         caption: Other
         description: The algorithm is not mapped. See the `algorithm` attribute, which contains a data source specific value.
   value:
@@ -65,3 +60,8 @@ attributes:
     requirement: required
     observable: 8
     description: The digital fingerprint value.
+  algorithm:
+    caption: Algorithm
+    type: string_t
+    requirement: optional
+    description: The hash algorithm used to create the digital fingerprint, normalized to the caption of `algorithm_id`. In the case of `Other`, it is defined by the event source.

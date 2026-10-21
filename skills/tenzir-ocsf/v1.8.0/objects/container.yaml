@@ -34,17 +34,27 @@ attributes:
     object: image
     requirement: recommended
     description: The container image used as a template to run the container.
+  name:
+    caption: Name
+    type: string_t
+    requirement: recommended
+    description: The container name.
+  size:
+    caption: Size
+    type: long_t
+    requirement: recommended
+    description: The size of the container image.
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: recommended
+    description: 'The full container unique identifier for this instantiation of the container. For example: `ac2ea168264a08f9aaca0dfc82ff3551418dfd22d02b713142a6843caa2f61bf`.'
   labels:
     caption: Labels
     type: string_t
     array: true
     requirement: optional
     description: The list of labels associated to the container.
-  name:
-    caption: Name
-    type: string_t
-    requirement: recommended
-    description: The container name.
   network_driver:
     caption: Network Driver
     type: string_t
@@ -65,11 +75,6 @@ attributes:
     type: string_t
     requirement: optional
     description: The backend running the container, such as containerd or cri-o.
-  size:
-    caption: Size
-    type: long_t
-    requirement: recommended
-    description: The size of the container image.
   tag:
     caption: Image Tag
     type: string_t
@@ -85,8 +90,3 @@ attributes:
     array: true
     requirement: optional
     description: The list of tags; `{key:value}` pairs associated to the container.
-  uid:
-    caption: Unique ID
-    type: string_t
-    requirement: recommended
-    description: 'The full container unique identifier for this instantiation of the container. For example: `ac2ea168264a08f9aaca0dfc82ff3551418dfd22d02b713142a6843caa2f61bf`.'

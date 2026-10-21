@@ -12,6 +12,11 @@ referenced_by:
   objects:
     dns_section: [records]
 attributes:
+  rdata:
+    caption: DNS RData
+    type: string_t
+    requirement: required
+    description: The data describing the DNS resource. The meaning of this data depends on the type and class of the resource record.
   class:
     caption: Resource Record Class
     type: string_t
@@ -23,11 +28,6 @@ attributes:
     requirement: recommended
     observable: 1
     description: 'The owner name of the resource record. For example: `www.example.com`.'
-  rdata:
-    caption: DNS RData
-    type: string_t
-    requirement: required
-    description: The data describing the DNS resource. The meaning of this data depends on the type and class of the resource record.
   ttl:
     caption: TTL
     type: integer_t

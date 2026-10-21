@@ -1,5 +1,5 @@
-# Attributes with a `definition` path are inherited unchanged. Read that file
-# for their type, object, description, enum, and observable.
+# Attributes with `from` but no description are inherited unchanged. Their
+# descriptions are in the file of the item that `from` names.
 name: extension
 caption: Schema Extension
 extends: _entity
@@ -13,6 +13,11 @@ referenced_by:
   objects:
     metadata: [extension, extensions]
 attributes:
+  version:
+    caption: Version
+    type: string_t
+    requirement: required
+    description: 'The schema extension version. For example: `1.0.0-alpha.2`.'
   name:
     caption: Name
     type: string_t
@@ -23,12 +28,4 @@ attributes:
     type: string_t
     requirement: recommended
     description: 'The schema extension unique identifier. For example: `999`.'
-  uid_numeric:
-    caption: Numeric Unique ID
-    requirement: optional
-    definition: v1.10.0-dev/objects/_entity.yaml
-  version:
-    caption: Version
-    type: string_t
-    requirement: required
-    description: 'The schema extension version. For example: `1.0.0-alpha.2`.'
+  uid_numeric: {caption: Numeric Unique ID, type: long_t, requirement: optional, from: _entity}

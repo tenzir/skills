@@ -1,5 +1,5 @@
-# Attributes with a `definition` path are inherited unchanged. Read that file
-# for their type, object, description, enum, and observable.
+# Attributes with `from` but no description are inherited unchanged. Their
+# descriptions are in the file of the item that `from` names.
 name: unmanned_system_operating_area
 caption: Unmanned System Operating Area
 extends: location
@@ -13,10 +13,42 @@ referenced_by:
     airborne_broadcast_activity: [unmanned_system_operating_area]
     drone_flights_activity: [unmanned_system_operating_area]
 attributes:
-  aerial_height:
-    caption: Aerial Height
-    requirement: optional
-    definition: v1.4.0/objects/location.yaml
+  city: {caption: City, type: string_t, requirement: recommended, from: location}
+  continent: {caption: Continent, type: string_t, requirement: recommended, from: location}
+  count:
+    caption: Count
+    type: integer_t
+    requirement: recommended
+    description: Indicates the number of UAS in the operating area.
+  country: {caption: Country, type: string_t, requirement: recommended, observable: 14, from: location}
+  locations:
+    caption: Operating Polygon
+    type: object_t
+    object: location
+    array: true
+    requirement: recommended
+    observable: 26
+    description: A list of Position Location Information (PLI) (latitude/longitude pairs) defining the area where a group or Intent-Based Network Participant operation is taking place. (This field is only applicable to Network Remote ID.)
+  type_id:
+    caption: Type ID
+    type: integer_t
+    requirement: recommended
+    sibling: type
+    description: The operating area type identifier.
+    enum:
+      0:
+        caption: Unknown/Undeclared
+        description: The UA type is empty or not declared.
+      1:
+        caption: Takeoff Location
+      2:
+        caption: Fixed Location
+      3:
+        caption: Dynamic Location
+      99:
+        caption: Other
+        description: The type is not mapped. See the `type` attribute, which contains a data source specific value.
+  aerial_height: {caption: Aerial Height, type: string_t, requirement: optional, from: location}
   altitude_ceiling:
     caption: Altitude Ceiling
     type: string_t
@@ -27,31 +59,8 @@ attributes:
     type: string_t
     requirement: optional
     description: 'Minimum altitude (WGS-84 HAE) for a group or an Intent-Based Network Participant. Measured in meters. Special Values: `Invalid`, `No Value`, or `Unknown: -1000 m`.'
-  city:
-    caption: City
-    requirement: recommended
-    definition: v1.4.0/objects/location.yaml
-  continent:
-    caption: Continent
-    requirement: recommended
-    definition: v1.4.0/objects/location.yaml
-  coordinates:
-    caption: Coordinates
-    requirement: optional
-    definition: v1.4.0/objects/location.yaml
-  count:
-    caption: Count
-    type: integer_t
-    requirement: recommended
-    description: Indicates the number of UAS in the operating area.
-  country:
-    caption: Country
-    requirement: recommended
-    definition: v1.4.0/objects/location.yaml
-  desc:
-    caption: Description
-    requirement: optional
-    definition: v1.4.0/objects/location.yaml
+  coordinates: {caption: Coordinates, type: float_t, array: true, requirement: optional, deprecated: {since: 1.2.0, message: 'Use specific `lat, long` attributes instead.'}, from: location}
+  desc: {caption: Description, type: string_t, requirement: optional, from: location}
   end_time:
     caption: End Time
     type: timestamp_t
@@ -63,67 +72,23 @@ attributes:
     requirement: optional
     profile: datetime
     description: The date and time at which a group or an Intent-Based Network Participant operation ends. (This field is only applicable to Network Remote ID.)
-  geodetic_altitude:
-    caption: Geodetic Altitude
-    requirement: optional
-    definition: v1.4.0/objects/location.yaml
-  geodetic_vertical_accuracy:
-    caption: Geodetic Vertical Accuracy
-    requirement: optional
-    definition: v1.4.0/objects/location.yaml
-  geohash:
-    caption: Geohash
-    requirement: optional
-    definition: v1.4.0/objects/location.yaml
-  horizontal_accuracy:
-    caption: Horizontal Accuracy
-    requirement: optional
-    definition: v1.4.0/objects/location.yaml
-  is_on_premises:
-    caption: On Premises
-    requirement: optional
-    definition: v1.4.0/objects/location.yaml
-  isp:
-    caption: ISP
-    requirement: optional
-    definition: v1.4.0/objects/location.yaml
-  lat:
-    caption: Latitude
-    requirement: optional
-    definition: v1.4.0/objects/location.yaml
-  locations:
-    caption: Operating Polygon
-    type: object_t
-    object: location
-    array: true
-    requirement: recommended
-    observable: 26
-    description: A list of Position Location Information (PLI) (latitude/longitude pairs) defining the area where a group or Intent-Based Network Participant operation is taking place. (This field is only applicable to Network Remote ID.)
-  long:
-    caption: Longitude
-    requirement: optional
-    definition: v1.4.0/objects/location.yaml
-  postal_code:
-    caption: Postal Code
-    requirement: optional
-    definition: v1.4.0/objects/location.yaml
-  pressure_altitude:
-    caption: Pressure Altitude
-    requirement: optional
-    definition: v1.4.0/objects/location.yaml
-  provider:
-    caption: Provider
-    requirement: optional
-    definition: v1.4.0/objects/location.yaml
+  geodetic_altitude: {caption: Geodetic Altitude, type: string_t, requirement: optional, from: location}
+  geodetic_vertical_accuracy: {caption: Geodetic Vertical Accuracy, type: string_t, requirement: optional, from: location}
+  geohash: {caption: Geohash, type: string_t, requirement: optional, from: location}
+  horizontal_accuracy: {caption: Horizontal Accuracy, type: string_t, requirement: optional, from: location}
+  is_on_premises: {caption: On Premises, type: boolean_t, requirement: optional, from: location}
+  isp: {caption: ISP, type: string_t, requirement: optional, from: location}
+  lat: {caption: Latitude, type: float_t, requirement: optional, from: location}
+  long: {caption: Longitude, type: float_t, requirement: optional, from: location}
+  postal_code: {caption: Postal Code, type: string_t, requirement: optional, from: location}
+  pressure_altitude: {caption: Pressure Altitude, type: string_t, requirement: optional, from: location}
+  provider: {caption: Provider, type: string_t, requirement: optional, from: location}
   radius:
     caption: Operating Area Radius
     type: string_t
     requirement: optional
     description: 'Farthest horizontal distance from the reported location at which any UA in a group may be located (meters). Also allows defining the area where an Intent-Based Network Participant operation is taking place. Default: 0 m.'
-  region:
-    caption: Region
-    requirement: optional
-    definition: v1.4.0/objects/location.yaml
+  region: {caption: Region, type: string_t, requirement: optional, from: location}
   start_time:
     caption: Start Time
     type: timestamp_t
@@ -140,22 +105,3 @@ attributes:
     type: string_t
     requirement: optional
     description: The type of operating area. For example, `Takeoff Location`, `Fixed Location`, `Dynamic Location`.
-  type_id:
-    caption: Type ID
-    type: integer_t
-    requirement: recommended
-    sibling: type
-    description: The operating area type identifier.
-    enum:
-      '0':
-        caption: Unknown/Undeclared
-        description: The UA type is empty or not declared.
-      '1':
-        caption: Takeoff Location
-      '2':
-        caption: Fixed Location
-      '3':
-        caption: Dynamic Location
-      '99':
-        caption: Other
-        description: The type is not mapped. See the `type` attribute, which contains a data source specific value.

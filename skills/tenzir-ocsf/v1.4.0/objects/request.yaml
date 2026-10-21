@@ -8,6 +8,11 @@ referenced_by:
   objects:
     api: [request]
 attributes:
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: required
+    description: The unique request identifier.
   containers:
     caption: Containers
     type: object_t
@@ -27,8 +32,3 @@ attributes:
     array: true
     requirement: optional
     description: The communication flags that are associated with the api request.
-  uid:
-    caption: Unique ID
-    type: string_t
-    requirement: required
-    description: The unique request identifier.

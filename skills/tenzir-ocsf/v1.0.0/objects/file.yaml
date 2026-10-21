@@ -16,6 +16,52 @@ referenced_by:
     module: [file]
     process: [file]
 attributes:
+  name:
+    caption: Name
+    type: file_name_t
+    requirement: required
+    observable: 7
+    description: 'The name of the file. For example: `svchost.exe`'
+  type_id:
+    caption: Type ID
+    type: integer_t
+    requirement: required
+    sibling: type
+    description: The file type ID.
+    enum:
+      0:
+        caption: Unknown
+        description: The type is unknown.
+      1:
+        caption: Regular File
+      2:
+        caption: Folder
+      3:
+        caption: Character Device
+      4:
+        caption: Block Device
+      5:
+        caption: Local Socket
+      6:
+        caption: Named Pipe
+      7:
+        caption: Symbolic Link
+      99:
+        caption: Other
+        description: The type is not mapped. See the `type` attribute, which may contain a data source specific value.
+  hashes:
+    caption: Hashes
+    type: object_t
+    object: fingerprint
+    array: true
+    requirement: recommended
+    observable: 30
+    description: An array of hash attributes.
+  path:
+    caption: Path
+    type: string_t
+    requirement: recommended
+    description: 'The full path to the file. For example: `c:\windows\system32\svchost.exe`.'
   accessed_time:
     caption: Accessed Time
     type: timestamp_t
@@ -56,17 +102,17 @@ attributes:
     sibling: confidentiality
     description: The normalized identifier of the file content confidentiality indicator.
     enum:
-      '0':
+      0:
         caption: Unknown
-      '1':
+      1:
         caption: Not Confidential
-      '2':
+      2:
         caption: Confidential
-      '3':
+      3:
         caption: Secret
-      '4':
+      4:
         caption: Top Secret
-      '99':
+      99:
         caption: Other
   created_time:
     caption: Created Time
@@ -91,14 +137,6 @@ attributes:
     type: string_t
     requirement: optional
     description: 'The description of the file, as returned by file system. For example: the description as returned by the Unix file command or the Windows file type.'
-  hashes:
-    caption: Hashes
-    type: object_t
-    object: fingerprint
-    array: true
-    requirement: recommended
-    observable: 30
-    description: An array of hash attributes.
   is_system:
     caption: System
     type: boolean_t
@@ -127,12 +165,6 @@ attributes:
     requirement: optional
     observable: 21
     description: The user that last modified the file.
-  name:
-    caption: Name
-    type: file_name_t
-    requirement: required
-    observable: 7
-    description: 'The name of the file. For example: `svchost.exe`'
   owner:
     caption: Owner
     type: object_t
@@ -145,11 +177,6 @@ attributes:
     type: string_t
     requirement: optional
     description: 'The parent folder in which the file resides. For example: `c:\windows\system32`'
-  path:
-    caption: Path
-    type: string_t
-    requirement: recommended
-    description: 'The full path to the file. For example: `c:\windows\system32\svchost.exe`.'
   product:
     caption: Product
     type: object_t
@@ -177,33 +204,6 @@ attributes:
     type: string_t
     requirement: optional
     description: The file type.
-  type_id:
-    caption: Type ID
-    type: integer_t
-    requirement: required
-    sibling: type
-    description: The file type ID.
-    enum:
-      '0':
-        caption: Unknown
-        description: The type is unknown.
-      '1':
-        caption: Regular File
-      '2':
-        caption: Folder
-      '3':
-        caption: Character Device
-      '4':
-        caption: Block Device
-      '5':
-        caption: Local Socket
-      '6':
-        caption: Named Pipe
-      '7':
-        caption: Symbolic Link
-      '99':
-        caption: Other
-        description: The type is not mapped. See the `type` attribute, which may contain a data source specific value.
   uid:
     caption: Unique ID
     type: string_t

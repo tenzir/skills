@@ -1,5 +1,5 @@
-# Attributes with a `definition` path are inherited unchanged. Read that file
-# for their type, object, description, enum, and observable.
+# Attributes with `from` but no description are inherited unchanged. Their
+# descriptions are in the file of the item that `from` names.
 name: mitigation
 caption: MITRE Mitigation
 extends: _entity
@@ -17,6 +17,16 @@ referenced_by:
   objects:
     attack: [mitigation]
 attributes:
+  name:
+    caption: Name
+    type: string_t
+    requirement: recommended
+    description: 'The Mitigation name that is associated with the attack technique. For example: `Password Policies`, or `Code Signing`.'
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: recommended
+    description: 'The Mitigation ID that is associated with the attack technique. For example: `M1027`, or `AML.M0013`.'
   countermeasures:
     caption: Countermeasures
     type: object_t
@@ -24,23 +34,10 @@ attributes:
     array: true
     requirement: optional
     description: 'The D3FEND countermeasures that are associated with the attack technique. For example: ATT&CK Technique `T1003` is addressed by Mitigation `M1027`, and D3FEND Technique `D3-OTP`.'
-  name:
-    caption: Name
-    type: string_t
-    requirement: recommended
-    description: 'The Mitigation name that is associated with the attack technique. For example: `Password Policies`, or `Code Signing`.'
   src_url:
     caption: Source URL
     type: url_t
     requirement: optional
     observable: 6
     description: 'The versioned permalink of the Mitigation. For example: `https://attack.mitre.org/versions/v14/mitigations/M1027`.'
-  uid:
-    caption: Unique ID
-    type: string_t
-    requirement: recommended
-    description: 'The Mitigation ID that is associated with the attack technique. For example: `M1027`, or `AML.M0013`.'
-  uid_numeric:
-    caption: Numeric Unique ID
-    requirement: optional
-    definition: v1.9.0/objects/_entity.yaml
+  uid_numeric: {caption: Numeric Unique ID, type: long_t, requirement: optional, from: _entity}

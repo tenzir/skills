@@ -59,6 +59,11 @@ attributes:
     type: string_t
     requirement: required
     description: The name of the attribute to which the enriched data pertains.
+  value:
+    caption: Value
+    type: string_t
+    requirement: required
+    description: The value of the attribute to which the enriched data pertains.
   provider:
     caption: Provider
     type: string_t
@@ -69,8 +74,3 @@ attributes:
     type: string_t
     requirement: recommended
     description: 'The enrichment type. For example: `location`.'
-  value:
-    caption: Value
-    type: string_t
-    requirement: required
-    description: The value of the attribute to which the enriched data pertains.

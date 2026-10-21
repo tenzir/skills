@@ -97,11 +97,6 @@ referenced_by:
     software_component: [hash]
     tls: [ja3_hash, ja3s_hash]
 attributes:
-  algorithm:
-    caption: Algorithm
-    type: string_t
-    requirement: optional
-    description: The hash algorithm used to create the digital fingerprint, normalized to the caption of `algorithm_id`. In the case of `Other`, it is defined by the event source.
   algorithm_id:
     caption: Algorithm ID
     type: integer_t
@@ -109,103 +104,103 @@ attributes:
     sibling: algorithm
     description: The identifier of the normalized hash algorithm, which was used to create the digital fingerprint.
     enum:
-      '0':
+      0:
         caption: Unknown
         description: The algorithm is unknown.
-      '1':
+      1:
         caption: MD5
         description: MD5 message-digest algorithm producing a 128-bit (16-byte) hash value.
         references:
         - description: RFC 1321
           url: https://www.rfc-editor.org/rfc/rfc1321
-      '2':
+      2:
         caption: SHA-1
         description: Secure Hash Algorithm 1 producing a 160-bit (20-byte) hash value.
         references:
         - description: FIPS 180
           url: https://csrc.nist.gov/pubs/fips/180-4/upd1/final
-      '3':
+      3:
         caption: SHA-256
         description: Secure Hash Algorithm 2 producing a 256-bit (32-byte) hash value.
         references:
         - description: FIPS 180
           url: https://csrc.nist.gov/pubs/fips/180-4/upd1/final
-      '4':
+      4:
         caption: SHA-512
         description: Secure Hash Algorithm 2 producing a 512-bit (64-byte) hash value.
         references:
         - description: FIPS 180
           url: https://csrc.nist.gov/pubs/fips/180-4/upd1/final
-      '5':
+      5:
         caption: CTPH
         description: The ssdeep generated fuzzy checksum. Also known as Context Triggered Piecewise Hash (CTPH).
-      '6':
+      6:
         caption: TLSH
         description: The TLSH fuzzy hashing algorithm.
-      '7':
+      7:
         caption: quickXorHash
         description: Microsoft simple non-cryptographic hash algorithm that works by XORing the bytes in a circular-shifting fashion.
-      '8':
+      8:
         caption: SHA-224
         description: Secure Hash Algorithm 2 producing a 224-bit (28-byte) hash value.
         references:
         - description: FIPS 180
           url: https://csrc.nist.gov/pubs/fips/180-4/upd1/final
-      '9':
+      9:
         caption: SHA-384
         description: Secure Hash Algorithm 2 producing a 384-bit (48-byte) hash value.
         references:
         - description: FIPS 180
           url: https://csrc.nist.gov/pubs/fips/180-4/upd1/final
-      '10':
+      10:
         caption: SHA-512/224
         description: Secure Hash Algorithm 2 producing a 512-bit (64-byte) hash value truncated to a 224-bit (28-byte) hash value.
         references:
         - description: FIPS 180
           url: https://csrc.nist.gov/pubs/fips/180-4/upd1/final
-      '11':
+      11:
         caption: SHA-512/256
         description: Secure Hash Algorithm 2 producing a 512-bit (64-byte) hash value truncated to a 256-bit (32-byte) hash value.
         references:
         - description: FIPS 180
           url: https://csrc.nist.gov/pubs/fips/180-4/upd1/final
-      '12':
+      12:
         caption: SHA3-224
         description: Secure Hash Algorithm 3 producing a 224-bit (28-byte) hash value.
         references:
         - description: FIPS 202
           url: https://csrc.nist.gov/pubs/fips/202/final
-      '13':
+      13:
         caption: SHA3-256
         description: Secure Hash Algorithm 3 producing a 256-bit (32-byte) hash value.
         references:
         - description: FIPS 202
           url: https://csrc.nist.gov/pubs/fips/202/final
-      '14':
+      14:
         caption: SHA3-384
         description: Secure Hash Algorithm 3 producing a 384-bit (48-byte) hash value.
         references:
         - description: FIPS 202
           url: https://csrc.nist.gov/pubs/fips/202/final
-      '15':
+      15:
         caption: SHA3-512
         description: Secure Hash Algorithm 3 producing a 512-bit (64-byte) hash value.
         references:
         - description: FIPS 202
           url: https://csrc.nist.gov/pubs/fips/202/final
-      '16':
+      16:
         caption: xxHash H3 64-bit
         description: xxHash H3 producing a 64-bit hash value.
         references:
         - description: xxHASH H3
           url: https://xxhash.com/doc/v0.8.3/group___x_x_h3__family.html
-      '17':
+      17:
         caption: xxHash H3 128-bit
         description: xxHash H3 producing a 128-bit hash value.
         references:
         - description: xxHASH H3
           url: https://xxhash.com/doc/v0.8.3/group___x_x_h3__family.html
-      '99':
+      99:
         caption: Other
         description: The algorithm is not mapped. See the `algorithm` attribute, which contains a data source specific value.
   value:
@@ -214,3 +209,8 @@ attributes:
     requirement: required
     observable: 8
     description: The digital fingerprint value.
+  algorithm:
+    caption: Algorithm
+    type: string_t
+    requirement: optional
+    description: The hash algorithm used to create the digital fingerprint, normalized to the caption of `algorithm_id`. In the case of `Other`, it is defined by the event source.

@@ -12,34 +12,12 @@ attributes:
     type: timestamp_t
     requirement: recommended
     description: The time that the authentication token was created.
-  created_time_dt:
-    caption: Created Time
-    type: datetime_t
-    requirement: optional
-    profile: datetime
-    description: The time that the authentication token was created.
   encryption_details:
     caption: Encryption Details
     type: object_t
     object: encryption_details
     requirement: recommended
     description: The encryption details of the authentication token.
-  expiration_time:
-    caption: Expiration Time
-    type: timestamp_t
-    requirement: optional
-    description: The expiration time of the authentication token.
-  expiration_time_dt:
-    caption: Expiration Time
-    type: datetime_t
-    requirement: optional
-    profile: datetime
-    description: The expiration time of the authentication token.
-  is_renewable:
-    caption: Renewable
-    type: boolean_t
-    requirement: optional
-    description: Indicates whether the authentication token is renewable.
   kerberos_flags:
     caption: Kerberos Flags
     type: string_t
@@ -62,24 +40,46 @@ attributes:
     sibling: type
     description: The normalized authentication token type identifier.
     enum:
-      '0':
+      0:
         caption: Unknown
         description: The Authentication token type is unknown.
-      '1':
+      1:
         caption: Ticket Granting Ticket
         description: Ticket Granting Ticket (TGT) for Kerberos.
-      '2':
+      2:
         caption: Service Ticket
         description: Service Ticket (ST) for Kerberos.
-      '3':
+      3:
         caption: Identity Token
         description: Identity (ID) Token for OIDC.
-      '4':
+      4:
         caption: Refresh Token
         description: Refresh Token for OIDC.
-      '5':
+      5:
         caption: SAML Assertion
         description: Authentication Assertion for SAML.
-      '99':
+      99:
         caption: Other
         description: The type is not mapped. See the `type` attribute, which contains a data source specific value.
+  created_time_dt:
+    caption: Created Time
+    type: datetime_t
+    requirement: optional
+    profile: datetime
+    description: The time that the authentication token was created.
+  expiration_time:
+    caption: Expiration Time
+    type: timestamp_t
+    requirement: optional
+    description: The expiration time of the authentication token.
+  expiration_time_dt:
+    caption: Expiration Time
+    type: datetime_t
+    requirement: optional
+    profile: datetime
+    description: The expiration time of the authentication token.
+  is_renewable:
+    caption: Renewable
+    type: boolean_t
+    requirement: optional
+    description: Indicates whether the authentication token is renewable.

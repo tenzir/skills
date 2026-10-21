@@ -1,5 +1,5 @@
-# Attributes with a `definition` path are inherited unchanged. Read that file
-# for their type, object, description, enum, and observable.
+# Attributes with `from` but no description are inherited unchanged. Their
+# descriptions are in the file of the item that `from` names.
 name: logger
 caption: Logger
 extends: _entity
@@ -18,6 +18,42 @@ attributes:
     requirement: recommended
     observable: 20
     description: The device where the events are logged.
+  log_name:
+    caption: Log Name
+    type: string_t
+    requirement: recommended
+    description: The log name for the logging provider log, or the file name of the system log. This may be an intermediate store-and-forward log or a vendor destination log. For example /archive/server1/var/log/messages.0 or /var/log/.
+  log_provider:
+    caption: Log Provider
+    type: string_t
+    requirement: recommended
+    description: The logging provider or logging service that logged the event. This may be an intermediate application store-and-forward log or a vendor destination log.
+  logged_time:
+    caption: Logged Time
+    type: timestamp_t
+    requirement: recommended
+    description: The time when this logger received and logged the event. For the last logger in the pipeline, this value should match `metadata.logged_time`.
+  name:
+    caption: Name
+    type: string_t
+    requirement: recommended
+    description: The name of the logging product instance.
+  product:
+    caption: Product
+    type: object_t
+    object: product
+    requirement: recommended
+    description: The product logging the event.  This may be the event source product, a management server product, a scanning product, a SIEM, etc.
+  transmit_time:
+    caption: Transmission Time
+    type: timestamp_t
+    requirement: recommended
+    description: The time when the event was transmitted from the logging device to it's next destination.
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: recommended
+    description: The unique identifier of the logging product instance.
   event_uid:
     caption: Event UID
     type: string_t
@@ -40,79 +76,79 @@ attributes:
     sibling: log_facility
     description: 'The facility of the source syslog message, identifying the originating subsystem that generated it. The facility is independent of severity and is not recoverable from `severity_id`. A relay may rewrite or regenerate a message, so this reflects the source (original) facility rather than a value guaranteed to be stable across hops, and it should be populated only when the source is syslog or an equivalent facility mapping is unambiguous. There is no `Unknown` value: `0` is the kernel (`kern`) facility, so an absent or malformed PRI must not be mapped to `0`; use `99` (Other) for a known nonstandard or source-defined facility.'
     enum:
-      '0':
+      0:
         caption: kern
         description: Kernel messages.
-      '1':
+      1:
         caption: user
         description: User-level messages.
-      '2':
+      2:
         caption: mail
         description: Mail system.
-      '3':
+      3:
         caption: daemon
         description: System daemons.
-      '4':
+      4:
         caption: auth
         description: Security and authorization messages.
-      '5':
+      5:
         caption: syslog
         description: Messages generated internally by the syslog process.
-      '6':
+      6:
         caption: lpr
         description: Line printer subsystem.
-      '7':
+      7:
         caption: news
         description: Network news subsystem.
-      '8':
+      8:
         caption: uucp
         description: UUCP subsystem.
-      '9':
+      9:
         caption: cron
         description: Clock daemon.
-      '10':
+      10:
         caption: authpriv
         description: Security and authorization messages, distinguished from facility 4 by convention and conventionally reserved for privileged access.
-      '11':
+      11:
         caption: ftp
         description: FTP daemon.
-      '12':
+      12:
         caption: ntp
         description: NTP subsystem.
-      '13':
+      13:
         caption: audit
         description: Log audit.
-      '14':
+      14:
         caption: console
         description: Console messages, per the RFC 5427 SyslogFacility mapping. RFC 5424 Table 1 lists facility 14 as 'log alert'.
-      '15':
+      15:
         caption: cron2
         description: A second cron or clock daemon facility used by some systems such as Solaris, distinct from facility 9, per the RFC 5427 SyslogFacility mapping. RFC 5424 Table 1 lists facility 15 as 'clock daemon'.
-      '16':
+      16:
         caption: local0
         description: Local use 0.
-      '17':
+      17:
         caption: local1
         description: Local use 1.
-      '18':
+      18:
         caption: local2
         description: Local use 2.
-      '19':
+      19:
         caption: local3
         description: Local use 3.
-      '20':
+      20:
         caption: local4
         description: Local use 4.
-      '21':
+      21:
         caption: local5
         description: Local use 5.
-      '22':
+      22:
         caption: local6
         description: Local use 6.
-      '23':
+      23:
         caption: local7
         description: Local use 7.
-      '99':
+      99:
         caption: Other
         description: The facility is not mapped. See the `log_facility` attribute, which contains a data source specific value.
     references:
@@ -130,63 +166,24 @@ attributes:
     type: string_t
     requirement: optional
     description: The level at which an event was logged. This can be log provider specific. For example the audit level.
-  log_name:
-    caption: Log Name
-    type: string_t
-    requirement: recommended
-    description: The log name for the logging provider log, or the file name of the system log. This may be an intermediate store-and-forward log or a vendor destination log. For example /archive/server1/var/log/messages.0 or /var/log/.
-  log_provider:
-    caption: Log Provider
-    type: string_t
-    requirement: recommended
-    description: The logging provider or logging service that logged the event. This may be an intermediate application store-and-forward log or a vendor destination log.
   log_version:
     caption: Log Version
     type: string_t
     requirement: optional
     description: The event log schema version of the original event. For example the syslog version or the Cisco Log Schema version
-  logged_time:
-    caption: Logged Time
-    type: timestamp_t
-    requirement: recommended
-    description: The time when this logger received and logged the event. For the last logger in the pipeline, this value should match `metadata.logged_time`.
   logged_time_dt:
     caption: Logged Time
     type: datetime_t
     requirement: optional
     profile: datetime
     description: The time when this logger received and logged the event. For the last logger in the pipeline, this value should match `metadata.logged_time`.
-  name:
-    caption: Name
-    type: string_t
-    requirement: recommended
-    description: The name of the logging product instance.
-  product:
-    caption: Product
-    type: object_t
-    object: product
-    requirement: recommended
-    description: The product logging the event.  This may be the event source product, a management server product, a scanning product, a SIEM, etc.
-  transmit_time:
-    caption: Transmission Time
-    type: timestamp_t
-    requirement: recommended
-    description: The time when the event was transmitted from the logging device to it's next destination.
   transmit_time_dt:
     caption: Transmission Time
     type: datetime_t
     requirement: optional
     profile: datetime
     description: The time when the event was transmitted from the logging device to it's next destination.
-  uid:
-    caption: Unique ID
-    type: string_t
-    requirement: recommended
-    description: The unique identifier of the logging product instance.
-  uid_numeric:
-    caption: Numeric Unique ID
-    requirement: optional
-    definition: v1.10.0-dev/objects/_entity.yaml
+  uid_numeric: {caption: Numeric Unique ID, type: long_t, requirement: optional, from: _entity}
   untruncated_size:
     caption: Untruncated Size
     type: integer_t

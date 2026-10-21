@@ -7,6 +7,13 @@ referenced_by:
   objects:
     vulnerability: [affected_code]
 attributes:
+  file:
+    caption: File
+    type: object_t
+    object: file
+    requirement: required
+    observable: 24
+    description: Details about the file that contains the affected code block.
   end_column:
     caption: End Column
     type: integer_t
@@ -17,26 +24,6 @@ attributes:
     type: integer_t
     requirement: recommended
     description: The line number of the last line of code block identified as vulnerable.
-  file:
-    caption: File
-    type: object_t
-    object: file
-    requirement: required
-    observable: 24
-    description: Details about the file that contains the affected code block.
-  owner:
-    caption: Owner
-    type: object_t
-    object: user
-    requirement: optional
-    observable: 21
-    description: Details about the user that owns the affected file.
-  remediation:
-    caption: Remediation Guidance
-    type: object_t
-    object: remediation
-    requirement: optional
-    description: Describes the recommended remediation steps to address identified issue(s).
   rule:
     caption: Related Rule
     type: object_t
@@ -53,3 +40,16 @@ attributes:
     type: integer_t
     requirement: recommended
     description: The line number of the first line of code block identified as vulnerable.
+  owner:
+    caption: Owner
+    type: object_t
+    object: user
+    requirement: optional
+    observable: 21
+    description: Details about the user that owns the affected file.
+  remediation:
+    caption: Remediation Guidance
+    type: object_t
+    object: remediation
+    requirement: optional
+    description: Describes the recommended remediation steps to address identified issue(s).

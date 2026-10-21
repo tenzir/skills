@@ -1,5 +1,5 @@
-# Attributes with a `definition` path are inherited unchanged. Read that file
-# for their type, object, description, enum, and observable.
+# Attributes with `from` but no description are inherited unchanged. Their
+# descriptions are in the file of the item that `from` names.
 name: ai_agent
 caption: AI Agent
 extends: _entity
@@ -60,13 +60,6 @@ attributes:
     object: ai_model
     requirement: recommended
     description: The AI model backing this agent at the time of the recorded event. An agent's model may change across instances or versions; this captures the model in use for the specific logged activity or delegation.
-  charter:
-    caption: Agent Charter
-    type: object_t
-    object: file
-    requirement: optional
-    observable: 24
-    description: A document that defines an AI agent's durable role, responsibilities, constraints, and operating boundaries. When available, populate `hashes` on the file for content integrity and `signatures` for provenance. Integrity of the event that reports this agent is provided separately by the `record_integrity` profile.
   instance_uid:
     caption: AI Agent Instance ID
     type: string_t
@@ -77,11 +70,6 @@ attributes:
     type: string_t
     requirement: recommended
     description: 'Human-readable name for the agent. For example: `Q4 Analysis Agent` or `Model Tester Agent`.'
-  type:
-    caption: Agent Type
-    type: string_t
-    requirement: optional
-    description: The agent framework, normalized to the caption of the `type_id` value.
   type_id:
     caption: Agent Type ID
     type: integer_t
@@ -89,22 +77,22 @@ attributes:
     sibling: type
     description: The normalized identifier for the agent framework. Different agent frameworks have different identity, tool-call, and delegation semantics, so recording the framework enables cross-framework normalization. Communication protocols (e.g., MCP, A2A) are a property of individual operations rather than the agent itself, and are surfaced on the relevant operation rather than here.
     enum:
-      '0':
+      0:
         caption: Unknown
         description: The agent framework is unknown.
-      '1':
+      1:
         caption: Native
         description: A first-party or proprietary agent built without a third-party agent framework. For example, a custom orchestrator or an LLM provider's own agent SDK.
-      '2':
+      2:
         caption: LangChain
         description: An agent built with the LangChain framework.
-      '3':
+      3:
         caption: AutoGen
         description: An agent built with the AutoGen framework for multi-agent conversation and orchestration.
-      '4':
+      4:
         caption: CrewAI
         description: An agent built with the CrewAI framework for role-based multi-agent collaboration.
-      '99':
+      99:
         caption: Other
         description: The agent framework is not listed. Use the `type` attribute to describe it.
   uid:
@@ -112,12 +100,21 @@ attributes:
     type: string_t
     requirement: recommended
     description: 'The stable logical identifier for the agent, assigned by the agent''s authoritative source (e.g., its control plane, registry, or issuing identity provider). Persists across restarts and instances. Producers populate this from whatever identity they observe: for a runtime that owns the agent, this is its issued ID; for a gateway or proxy, it is typically derived from the agent''s credential. Multiple producers logging the same agent should converge on the same `uid` when they share an authoritative source.'
-  uid_numeric:
-    caption: Numeric Unique ID
-    requirement: optional
-    definition: v1.10.0-dev/objects/_entity.yaml
   version:
     caption: AI Agent Version
     type: string_t
     requirement: recommended
     description: 'The version of the agent: the agent''s own code or configuration revision (e.g., `1.4.2`), distinct from the version of the model backing it (carried on `ai_model.version`). Enables correlation of behavioral changes with charter or configuration revisions across agent versions.'
+  charter:
+    caption: Agent Charter
+    type: object_t
+    object: file
+    requirement: optional
+    observable: 24
+    description: A document that defines an AI agent's durable role, responsibilities, constraints, and operating boundaries. When available, populate `hashes` on the file for content integrity and `signatures` for provenance. Integrity of the event that reports this agent is provided separately by the `record_integrity` profile.
+  type:
+    caption: Agent Type
+    type: string_t
+    requirement: optional
+    description: The agent framework, normalized to the caption of the `type_id` value.
+  uid_numeric: {caption: Numeric Unique ID, type: long_t, requirement: optional, from: _entity}

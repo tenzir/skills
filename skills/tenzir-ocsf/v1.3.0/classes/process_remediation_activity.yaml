@@ -1,5 +1,5 @@
-# Attributes with a `definition` path are inherited unchanged. Read that file
-# for their type, object, description, enum, and observable.
+# Attributes with `from` but no description are inherited unchanged. Their
+# descriptions are in the file of the item that `from` names.
 name: process_remediation_activity
 caption: Process Remediation Activity
 uid: 7003
@@ -9,31 +9,7 @@ extends: remediation_activity
 description: Process Remediation Activity events report on attempts at remediating processes. It follows the MITRE countermeasures defined by the D3FEND™ [Matrix](https://d3fend.mitre.org/). Sub-techniques will include Process, such as Process Termination or Kernel-based Process Isolation.
 profiles: [cloud, container, data_classification, datetime, host, osint]
 attributes:
-  activity_id:
-    caption: Activity ID
-    requirement: required
-    definition: v1.3.0/classes/remediation_activity.yaml
-  activity_name:
-    caption: Activity
-    requirement: optional
-    definition: v1.3.0/classes/base_event.yaml
-  actor:
-    caption: Actor
-    requirement: optional
-    profile: host
-    definition: v1.3.0/classes/remediation_activity.yaml
-  api:
-    caption: API Details
-    requirement: optional
-    profile: cloud
-    definition: v1.3.0/classes/base_event.yaml
-  category_name:
-    caption: Category
-    type: string_t
-    requirement: optional
-    group: classification
-    from: base_event
-    description: 'The event category name, as defined by category_uid value: `Remediation`.'
+  activity_id: {caption: Activity ID, type: integer_t, requirement: required, group: classification, sibling: activity_name, enum: {0: Unknown, 1: Isolate, 2: Evict, 3: Restore, 4: Harden, 99: Other}, from: remediation_activity}
   category_uid:
     caption: Category ID
     type: integer_t
@@ -43,16 +19,9 @@ attributes:
     sibling: category_name
     description: The category unique identifier of the event.
     enum:
-      '7':
+      7:
         caption: Remediation
         description: Remediation events report the results of remediation commands targeting files, processes, and other objects.
-  class_name:
-    caption: Class
-    type: string_t
-    requirement: optional
-    group: classification
-    from: base_event
-    description: 'The event class name, as defined by class_uid value: `Process Remediation Activity`.'
   class_uid:
     caption: Class ID
     type: integer_t
@@ -61,65 +30,13 @@ attributes:
     sibling: class_name
     description: The unique identifier of a class. A class describes the attributes available in an event.
     enum:
-      '7003':
+      7003:
         caption: Process Remediation Activity
         description: Process Remediation Activity events report on attempts at remediating processes. It follows the MITRE countermeasures defined by the D3FEND™ [Matrix](https://d3fend.mitre.org/). Sub-techniques will include Process, such as Process Termination or Kernel-based Process Isolation.
-  cloud:
-    caption: Cloud
-    requirement: required
-    profile: cloud
-    definition: v1.3.0/classes/base_event.yaml
-  command_uid:
-    caption: Command UID
-    requirement: required
-    definition: v1.3.0/classes/remediation_activity.yaml
-  count:
-    caption: Count
-    requirement: optional
-    definition: v1.3.0/classes/base_event.yaml
-  countermeasures:
-    caption: Countermeasures
-    requirement: recommended
-    definition: v1.3.0/classes/remediation_activity.yaml
-  device:
-    caption: Device
-    requirement: recommended
-    profile: host
-    definition: v1.3.0/classes/remediation_activity.yaml
-  duration:
-    caption: Duration Milliseconds
-    requirement: optional
-    definition: v1.3.0/classes/base_event.yaml
-  end_time:
-    caption: End Time
-    requirement: optional
-    definition: v1.3.0/classes/base_event.yaml
-  end_time_dt:
-    caption: End Time
-    requirement: optional
-    profile: datetime
-    definition: v1.3.0/classes/base_event.yaml
-  enrichments:
-    caption: Enrichments
-    requirement: optional
-    definition: v1.3.0/classes/base_event.yaml
-  message:
-    caption: Message
-    requirement: recommended
-    definition: v1.3.0/classes/base_event.yaml
-  metadata:
-    caption: Metadata
-    requirement: required
-    definition: v1.3.0/classes/base_event.yaml
-  observables:
-    caption: Observables
-    requirement: recommended
-    definition: v1.3.0/classes/base_event.yaml
-  osint:
-    caption: OSINT
-    requirement: required
-    profile: osint
-    definition: v1.3.0/classes/base_event.yaml
+  cloud: {caption: Cloud, type: object_t, object: cloud, requirement: required, group: primary, profile: cloud, from: base_event}
+  command_uid: {caption: Command UID, type: string_t, requirement: required, group: primary, from: remediation_activity}
+  metadata: {caption: Metadata, type: object_t, object: metadata, requirement: required, group: context, from: base_event}
+  osint: {caption: OSINT, type: object_t, object: osint, array: true, requirement: required, group: primary, profile: osint, from: base_event}
   process:
     caption: Process
     type: object_t
@@ -128,68 +45,8 @@ attributes:
     group: primary
     observable: 25
     description: The process that pertains to the remediation event.
-  raw_data:
-    caption: Raw Data
-    requirement: optional
-    definition: v1.3.0/classes/base_event.yaml
-  remediation:
-    caption: Remediation Guidance
-    requirement: optional
-    definition: v1.3.0/classes/remediation_activity.yaml
-  scan:
-    caption: Scan
-    requirement: optional
-    definition: v1.3.0/classes/remediation_activity.yaml
-  severity:
-    caption: Severity
-    requirement: optional
-    definition: v1.3.0/classes/base_event.yaml
-  severity_id:
-    caption: Severity ID
-    requirement: required
-    definition: v1.3.0/classes/base_event.yaml
-  start_time:
-    caption: Start Time
-    requirement: optional
-    definition: v1.3.0/classes/base_event.yaml
-  start_time_dt:
-    caption: Start Time
-    requirement: optional
-    profile: datetime
-    definition: v1.3.0/classes/base_event.yaml
-  status:
-    caption: Status
-    requirement: recommended
-    definition: v1.3.0/classes/base_event.yaml
-  status_code:
-    caption: Status Code
-    requirement: recommended
-    definition: v1.3.0/classes/base_event.yaml
-  status_detail:
-    caption: Status Detail
-    requirement: recommended
-    definition: v1.3.0/classes/base_event.yaml
-  status_id:
-    caption: Status ID
-    requirement: recommended
-    definition: v1.3.0/classes/remediation_activity.yaml
-  time:
-    caption: Event Time
-    requirement: required
-    definition: v1.3.0/classes/base_event.yaml
-  time_dt:
-    caption: Event Time
-    requirement: optional
-    profile: datetime
-    definition: v1.3.0/classes/base_event.yaml
-  timezone_offset:
-    caption: Timezone Offset
-    requirement: recommended
-    definition: v1.3.0/classes/base_event.yaml
-  type_name:
-    caption: Type Name
-    requirement: optional
-    definition: v1.3.0/classes/base_event.yaml
+  severity_id: {caption: Severity ID, type: integer_t, requirement: required, group: classification, sibling: severity, enum: {0: Unknown, 1: Informational, 2: Low, 3: Medium, 4: High, 5: Critical, 6: Fatal, 99: Other}, from: base_event}
+  time: {caption: Event Time, type: timestamp_t, requirement: required, group: occurrence, from: base_event}
   type_uid:
     caption: Type ID
     type: long_t
@@ -197,24 +54,43 @@ attributes:
     group: classification
     sibling: type_name
     description: 'The event/finding type ID. It identifies the event''s semantics and structure. The value is calculated by the logging system as: `class_uid * 100 + activity_id`.'
-    enum:
-      '700300':
-        caption: 'Process Remediation Activity: Unknown'
-      '700301':
-        caption: 'Process Remediation Activity: Isolate'
-        description: Creates logical or physical barriers in a system which reduces opportunities for adversaries to create further accesses. Defined by D3FEND™ [d3f:Isolate](https://d3fend.mitre.org/d3f:Isolate/).
-      '700302':
-        caption: 'Process Remediation Activity: Evict'
-        description: Removes an adversary or malicious resource from a device or computer network. Defined by D3FEND™ [d3f:Evict](https://d3fend.mitre.org/d3f:Evict/).
-      '700303':
-        caption: 'Process Remediation Activity: Restore'
-        description: Returns the system to a better state. Defined by D3FEND™ [d3f:Restore](https://d3fend.mitre.org/d3f:Restore/).
-      '700304':
-        caption: 'Process Remediation Activity: Harden'
-        description: Increases the opportunity cost of computer network exploitation. Defined by D3FEND™ [d3f:Harden](https://d3fend.mitre.org/d3f:Harden/).
-      '700399':
-        caption: 'Process Remediation Activity: Other'
-  unmapped:
-    caption: Unmapped Data
+  countermeasures: {caption: Countermeasures, type: object_t, object: d3fend, array: true, requirement: recommended, group: primary, from: remediation_activity}
+  device: {caption: Device, type: object_t, object: device, requirement: recommended, group: primary, profile: host, observable: 20, from: remediation_activity}
+  message: {caption: Message, type: string_t, requirement: recommended, group: primary, from: base_event}
+  observables: {caption: Observables, type: object_t, object: observable, array: true, requirement: recommended, group: primary, from: base_event}
+  status: {caption: Status, type: string_t, requirement: recommended, group: primary, from: base_event}
+  status_code: {caption: Status Code, type: string_t, requirement: recommended, group: primary, from: base_event}
+  status_detail: {caption: Status Detail, type: string_t, requirement: recommended, group: primary, from: base_event}
+  status_id: {caption: Status ID, type: integer_t, requirement: recommended, group: primary, sibling: status, enum: {0: Unknown, 1: Success, 2: Failure, 3: Does Not Exist, 4: Partial, 5: Unsupported, 6: Error, 99: Other}, from: remediation_activity}
+  timezone_offset: {caption: Timezone Offset, type: integer_t, requirement: recommended, group: occurrence, from: base_event}
+  activity_name: {caption: Activity, type: string_t, requirement: optional, group: classification, from: base_event}
+  actor: {caption: Actor, type: object_t, object: actor, requirement: optional, group: primary, profile: host, from: remediation_activity}
+  api: {caption: API Details, type: object_t, object: api, requirement: optional, group: context, profile: cloud, from: base_event}
+  category_name:
+    caption: Category
+    type: string_t
     requirement: optional
-    definition: v1.3.0/classes/base_event.yaml
+    group: classification
+    from: base_event
+    description: 'The event category name, as defined by category_uid value: `Remediation`.'
+  class_name:
+    caption: Class
+    type: string_t
+    requirement: optional
+    group: classification
+    from: base_event
+    description: 'The event class name, as defined by class_uid value: `Process Remediation Activity`.'
+  count: {caption: Count, type: integer_t, requirement: optional, group: occurrence, from: base_event}
+  duration: {caption: Duration Milliseconds, type: long_t, requirement: optional, group: occurrence, from: base_event}
+  end_time: {caption: End Time, type: timestamp_t, requirement: optional, group: occurrence, from: base_event}
+  end_time_dt: {caption: End Time, type: datetime_t, requirement: optional, group: occurrence, profile: datetime, from: base_event}
+  enrichments: {caption: Enrichments, type: object_t, object: enrichment, array: true, requirement: optional, group: context, from: base_event}
+  raw_data: {caption: Raw Data, type: string_t, requirement: optional, group: context, from: base_event}
+  remediation: {caption: Remediation Guidance, type: object_t, object: remediation, requirement: optional, group: context, from: remediation_activity}
+  scan: {caption: Scan, type: object_t, object: scan, requirement: optional, group: context, from: remediation_activity}
+  severity: {caption: Severity, type: string_t, requirement: optional, group: classification, from: base_event}
+  start_time: {caption: Start Time, type: timestamp_t, requirement: optional, group: occurrence, from: base_event}
+  start_time_dt: {caption: Start Time, type: datetime_t, requirement: optional, group: occurrence, profile: datetime, from: base_event}
+  time_dt: {caption: Event Time, type: datetime_t, requirement: optional, group: occurrence, profile: datetime, from: base_event}
+  type_name: {caption: Type Name, type: string_t, requirement: optional, group: classification, from: base_event}
+  unmapped: {caption: Unmapped Data, type: object_t, object: object, requirement: optional, group: context, from: base_event}

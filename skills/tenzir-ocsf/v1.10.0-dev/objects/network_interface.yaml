@@ -1,5 +1,5 @@
-# Attributes with a `definition` path are inherited unchanged. Read that file
-# for their type, object, description, enum, and observable.
+# Attributes with `from` but no description are inherited unchanged. Their
+# descriptions are in the file of the item that `from` names.
 name: network_interface
 caption: Network Interface
 extends: _entity
@@ -41,6 +41,32 @@ attributes:
     type: string_t
     requirement: recommended
     description: The name of the network interface.
+  type_id:
+    caption: Type ID
+    type: integer_t
+    requirement: recommended
+    sibling: type
+    description: The network interface type identifier.
+    enum:
+      0:
+        caption: Unknown
+        description: The type is unknown.
+      1:
+        caption: Wired
+      2:
+        caption: Wireless
+      3:
+        caption: Mobile
+      4:
+        caption: Tunnel
+      99:
+        caption: Other
+        description: The type is not mapped. See the `type` attribute, which contains a data source specific value.
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: recommended
+    description: The unique identifier for the network interface.
   namespace:
     caption: Namespace
     type: string_t
@@ -63,33 +89,4 @@ attributes:
     type: string_t
     requirement: optional
     description: The type of network interface.
-  type_id:
-    caption: Type ID
-    type: integer_t
-    requirement: recommended
-    sibling: type
-    description: The network interface type identifier.
-    enum:
-      '0':
-        caption: Unknown
-        description: The type is unknown.
-      '1':
-        caption: Wired
-      '2':
-        caption: Wireless
-      '3':
-        caption: Mobile
-      '4':
-        caption: Tunnel
-      '99':
-        caption: Other
-        description: The type is not mapped. See the `type` attribute, which contains a data source specific value.
-  uid:
-    caption: Unique ID
-    type: string_t
-    requirement: recommended
-    description: The unique identifier for the network interface.
-  uid_numeric:
-    caption: Numeric Unique ID
-    requirement: optional
-    definition: v1.10.0-dev/objects/_entity.yaml
+  uid_numeric: {caption: Numeric Unique ID, type: long_t, requirement: optional, from: _entity}

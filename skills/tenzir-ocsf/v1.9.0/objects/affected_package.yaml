@@ -1,5 +1,5 @@
-# Attributes with a `definition` path are inherited unchanged. Read that file
-# for their type, object, description, enum, and observable.
+# Attributes with `from` but no description are inherited unchanged. Their
+# descriptions are in the file of the item that `from` names.
 name: affected_package
 caption: Affected Software Package
 extends: package
@@ -12,88 +12,37 @@ referenced_by:
   objects:
     vulnerability: [affected_packages]
 attributes:
-  architecture:
-    caption: Architecture
-    requirement: recommended
-    definition: v1.9.0/objects/package.yaml
-  cpe_name:
-    caption: The product CPE identifier
-    requirement: optional
-    definition: v1.9.0/objects/package.yaml
-  epoch:
-    caption: Epoch
-    requirement: optional
-    definition: v1.9.0/objects/package.yaml
+  name: {caption: Name, type: string_t, requirement: required, from: package}
+  version: {caption: Version, type: string_t, requirement: required, from: package}
+  architecture: {caption: Architecture, type: string_t, requirement: recommended, from: package}
+  type_id: {caption: Type ID, type: integer_t, requirement: recommended, sibling: type, enum: {0: Unknown, 1: Application, 2: Operating System, 99: Other}, from: package}
+  cpe_name: {caption: The product CPE identifier, type: string_t, requirement: optional, from: package}
+  epoch: {caption: Epoch, type: integer_t, requirement: optional, from: package}
   fixed_in_version:
     caption: Fixed In Version
     type: string_t
     requirement: optional
     description: The software package version in which a reported vulnerability was patched/fixed.
-  hash:
-    caption: Hash
-    requirement: optional
-    definition: v1.9.0/objects/package.yaml
-  license:
-    caption: Software License
-    requirement: optional
-    definition: v1.9.0/objects/package.yaml
-  license_url:
-    caption: Software License URL
-    requirement: optional
-    definition: v1.9.0/objects/package.yaml
-  name:
-    caption: Name
-    requirement: required
-    definition: v1.9.0/objects/package.yaml
-  package_manager:
-    caption: Package Manager
-    requirement: optional
-    definition: v1.9.0/objects/package.yaml
-  package_manager_url:
-    caption: Package Manager URL
-    requirement: optional
-    definition: v1.9.0/objects/package.yaml
+  hash: {caption: Hash, type: object_t, object: fingerprint, requirement: optional, observable: 30, from: package}
+  license: {caption: Software License, type: string_t, requirement: optional, from: package}
+  license_url: {caption: Software License URL, type: url_t, requirement: optional, observable: 6, from: package}
+  package_manager: {caption: Package Manager, type: string_t, requirement: optional, from: package}
+  package_manager_url: {caption: Package Manager URL, type: url_t, requirement: optional, observable: 6, from: package}
   path:
     caption: Path
     type: file_path_t
     requirement: optional
     observable: 45
     description: The installation path of the affected package.
-  purl:
-    caption: Package URL
-    requirement: optional
-    definition: v1.9.0/objects/package.yaml
-  release:
-    caption: Software Release Details
-    requirement: optional
-    definition: v1.9.0/objects/package.yaml
+  purl: {caption: Package URL, type: string_t, requirement: optional, from: package}
+  release: {caption: Software Release Details, type: string_t, requirement: optional, from: package}
   remediation:
     caption: Remediation Guidance
     type: object_t
     object: remediation
     requirement: optional
     description: Describes the recommended remediation steps to address identified issue(s).
-  src_url:
-    caption: Source URL
-    requirement: optional
-    definition: v1.9.0/objects/package.yaml
-  type:
-    caption: Type
-    requirement: optional
-    definition: v1.9.0/objects/package.yaml
-  type_id:
-    caption: Type ID
-    requirement: recommended
-    definition: v1.9.0/objects/package.yaml
-  uid:
-    caption: Package UID
-    requirement: optional
-    definition: v1.9.0/objects/package.yaml
-  vendor_name:
-    caption: Vendor Name
-    requirement: optional
-    definition: v1.9.0/objects/package.yaml
-  version:
-    caption: Version
-    requirement: required
-    definition: v1.9.0/objects/package.yaml
+  src_url: {caption: Source URL, type: url_t, requirement: optional, observable: 6, from: package}
+  type: {caption: Type, type: string_t, requirement: optional, from: package}
+  uid: {caption: Package UID, type: string_t, requirement: optional, from: package}
+  vendor_name: {caption: Vendor Name, type: string_t, requirement: optional, from: package}

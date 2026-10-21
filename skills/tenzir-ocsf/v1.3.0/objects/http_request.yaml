@@ -26,11 +26,6 @@ referenced_by:
     web_resource_access_activity: [http_request, proxy_http_request]
     web_resources_activity: [http_request, proxy_http_request]
 attributes:
-  args:
-    caption: HTTP Arguments
-    type: string_t
-    requirement: optional
-    description: The arguments sent along with the HTTP request.
   http_headers:
     caption: HTTP Headers
     type: object_t
@@ -68,21 +63,6 @@ attributes:
       TRACE:
         caption: Trace
         description: The TRACE method performs a message loop-back test along the path to the target resource.
-  length:
-    caption: Request Length
-    type: integer_t
-    requirement: optional
-    description: The HTTP request length, in number of bytes.
-  referrer:
-    caption: HTTP Referrer
-    type: string_t
-    requirement: optional
-    description: The request header that identifies the address of the previous web page, which is linked to the current web page or resource being requested.
-  uid:
-    caption: Unique ID
-    type: string_t
-    requirement: optional
-    description: The unique identifier of the http request.
   url:
     caption: URL
     type: object_t
@@ -101,6 +81,26 @@ attributes:
     type: string_t
     requirement: recommended
     description: The Hypertext Transfer Protocol (HTTP) version.
+  args:
+    caption: HTTP Arguments
+    type: string_t
+    requirement: optional
+    description: The arguments sent along with the HTTP request.
+  length:
+    caption: Request Length
+    type: integer_t
+    requirement: optional
+    description: The HTTP request length, in number of bytes.
+  referrer:
+    caption: HTTP Referrer
+    type: string_t
+    requirement: optional
+    description: The request header that identifies the address of the previous web page, which is linked to the current web page or resource being requested.
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: optional
+    description: The unique identifier of the http request.
   x_forwarded_for:
     caption: X-Forwarded-For
     type: ip_t

@@ -29,14 +29,28 @@ referenced_by:
     evidences: [connection_info]
     query_evidence: [connection_info]
 attributes:
-  boundary:
-    caption: Boundary
-    type: string_t
-    requirement: optional
-    description: |-
-      The boundary of the connection, normalized to the caption of 'boundary_id'. In the case of 'Other', it is defined by the event source.
-
-      For cloud connections, this translates to the traffic-boundary(same VPC, through IGW, etc.). For traditional networks, this is described as Local, Internal, or External.
+  direction_id:
+    caption: Direction ID
+    type: integer_t
+    requirement: required
+    sibling: direction
+    description: The normalized identifier of the direction of the initiated connection, traffic, or email.
+    enum:
+      0:
+        caption: Unknown
+        description: The connection direction is unknown.
+      1:
+        caption: Inbound
+        description: Inbound network connection. The connection was originated from the Internet or outside network, destined for services on the inside network.
+      2:
+        caption: Outbound
+        description: Outbound network connection. The connection was originated from inside the network, destined for services on the Internet or outside network.
+      3:
+        caption: Lateral
+        description: Lateral network connection. The connection was originated from inside the network, destined for services on the inside network.
+      99:
+        caption: Other
+        description: The direction is not mapped. See the `direction` attribute, which contains a data source specific value.
   boundary_id:
     caption: Boundary ID
     type: integer_t
@@ -47,88 +61,45 @@ attributes:
 
       For cloud connections, this translates to the traffic-boundary (same VPC, through IGW, etc.). For traditional networks, this is described as Local, Internal, or External.
     enum:
-      '0':
+      0:
         caption: Unknown
         description: The connection boundary is unknown.
-      '1':
+      1:
         caption: Localhost
         description: Local network traffic on the same endpoint.
-      '2':
+      2:
         caption: Internal
         description: Internal network traffic between two endpoints inside network.
-      '3':
+      3:
         caption: External
         description: External network traffic between two endpoints on the Internet or outside the network.
-      '4':
+      4:
         caption: Same VPC
         description: Through another resource in the same VPC
-      '5':
+      5:
         caption: Internet/VPC Gateway
         description: Through an Internet gateway or a gateway VPC endpoint
-      '6':
+      6:
         caption: Virtual Private Gateway
         description: Through a virtual private gateway
-      '7':
+      7:
         caption: Intra-region VPC
         description: Through an intra-region VPC peering connection
-      '8':
+      8:
         caption: Inter-region VPC
         description: Through an inter-region VPC peering connection
-      '9':
+      9:
         caption: Local Gateway
         description: Through a local gateway
-      '10':
+      10:
         caption: Gateway VPC
         description: Through a gateway VPC endpoint (Nitro-based instances only)
-      '11':
+      11:
         caption: Internet Gateway
         description: Through an Internet gateway (Nitro-based instances only)
-      '99':
+      99:
         caption: Other
         description: The boundary is not mapped. See the `boundary` attribute, which contains a data source specific value.
-  community_uid:
-    caption: Community ID
-    type: string_t
-    requirement: optional
-    description: The Community ID of the network connection.
-    references:
-    - description: Community ID definition.
-      url: https://github.com/corelight/community-id-spec
-  direction:
-    caption: Direction
-    type: string_t
-    requirement: optional
-    description: The direction of the initiated connection, traffic, or email, normalized to the caption of the direction_id value. In the case of 'Other', it is defined by the event source.
-  direction_id:
-    caption: Direction ID
-    type: integer_t
-    requirement: required
-    sibling: direction
-    description: The normalized identifier of the direction of the initiated connection, traffic, or email.
-    enum:
-      '0':
-        caption: Unknown
-        description: The connection direction is unknown.
-      '1':
-        caption: Inbound
-        description: Inbound network connection. The connection was originated from the Internet or outside network, destined for services on the inside network.
-      '2':
-        caption: Outbound
-        description: Outbound network connection. The connection was originated from inside the network, destined for services on the Internet or outside network.
-      '3':
-        caption: Lateral
-        description: Lateral network connection. The connection was originated from inside the network, destined for services on the inside network.
-      '99':
-        caption: Other
-        description: The direction is not mapped. See the `direction` attribute, which contains a data source specific value.
-  flag_history:
-    caption: Connection Flag History
-    type: string_t
-    requirement: optional
-    description: The Connection Flag History summarizes events in a network connection. For example flags  `ShAD`  representing SYN, SYN/ACK, ACK and Data exchange.
-    references:
-    - description: Zeek History
-      url: https://docs.zeek.org/en/master/scripts/base/protocols/conn/main.zeek.html#detailed-interface:~:text=Records%20the%20state%20history%20of%20connections%20as%20a%20string%20of%20letters.%20The%20meaning%20of%20those%20letters%20is
   protocol_name:
     caption: Protocol Name
     type: string_t
@@ -145,11 +116,6 @@ attributes:
     references:
     - description: IANA Protocol Numbers
       url: https://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml
-  protocol_ver:
-    caption: IP Version
-    type: string_t
-    requirement: optional
-    description: The Internet Protocol version.
   protocol_ver_id:
     caption: IP Version ID
     type: integer_t
@@ -157,16 +123,55 @@ attributes:
     sibling: protocol_ver
     description: The Internet Protocol version identifier.
     enum:
-      '0':
+      0:
         caption: Unknown
         description: The protocol version is unknown.
-      '4':
+      4:
         caption: Internet Protocol version 4 (IPv4)
-      '6':
+      6:
         caption: Internet Protocol version 6 (IPv6)
-      '99':
+      99:
         caption: Other
         description: The protocol version is not mapped. See the `protocol_ver` attribute, which contains a data source specific value.
+  uid:
+    caption: Connection UID
+    type: string_t
+    requirement: recommended
+    description: The unique identifier of the connection.
+  boundary:
+    caption: Boundary
+    type: string_t
+    requirement: optional
+    description: |-
+      The boundary of the connection, normalized to the caption of 'boundary_id'. In the case of 'Other', it is defined by the event source.
+
+      For cloud connections, this translates to the traffic-boundary(same VPC, through IGW, etc.). For traditional networks, this is described as Local, Internal, or External.
+  community_uid:
+    caption: Community ID
+    type: string_t
+    requirement: optional
+    description: The Community ID of the network connection.
+    references:
+    - description: Community ID definition.
+      url: https://github.com/corelight/community-id-spec
+  direction:
+    caption: Direction
+    type: string_t
+    requirement: optional
+    description: The direction of the initiated connection, traffic, or email, normalized to the caption of the direction_id value. In the case of 'Other', it is defined by the event source.
+  flag_history:
+    caption: Connection Flag History
+    type: string_t
+    requirement: optional
+    description: The Connection Flag History summarizes events in a network connection. For example flags  `ShAD`  representing SYN, SYN/ACK, ACK and Data exchange.
+    references:
+    - description: Zeek History
+      url: https://docs.zeek.org/en/master/scripts/base/protocols/conn/main.zeek.html#detailed-interface:~:text=Records%20the%20state%20history%20of%20connections%20as%20a%20string%20of%20letters.%20The%20meaning%20of%20those%20letters%20is
+  protocol_ver:
+    caption: IP Version
+    type: string_t
+    requirement: optional
+    description: The Internet Protocol version.
   session:
     caption: Session
     type: object_t
@@ -178,8 +183,3 @@ attributes:
     type: integer_t
     requirement: optional
     description: The network connection TCP header flags (i.e., control bits).
-  uid:
-    caption: Connection UID
-    type: string_t
-    requirement: recommended
-    description: The unique identifier of the connection.

@@ -22,13 +22,13 @@ attributes:
     type: string_t
     requirement: recommended
     description: The name of an organizational unit, Google Cloud Folder, or AWS Org Unit. For example, the  `GCP Project Name` , or  `Dev_Prod_OU` .
-  ou_uid:
-    caption: Org Unit ID
-    type: string_t
-    requirement: optional
-    description: The unique identifier of an organizational unit, Google Cloud Folder, or AWS Org Unit. For example, an  `Oracle Cloud Tenancy ID` ,  `AWS OU ID` , or  `GCP Folder ID` .
   uid:
     caption: Unique ID
     type: string_t
     requirement: recommended
     description: The unique identifier of the organization, Oracle Cloud Tenancy, Google Cloud Organization, or AWS Organization. For example, an  `AWS Org ID`  or  `Oracle Cloud Domain ID` .
+  ou_uid:
+    caption: Org Unit ID
+    type: string_t
+    requirement: optional
+    description: The unique identifier of an organizational unit, Google Cloud Folder, or AWS Org Unit. For example, an  `Oracle Cloud Tenancy ID` ,  `AWS OU ID` , or  `GCP Folder ID` .

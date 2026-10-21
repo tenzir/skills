@@ -8,6 +8,11 @@ referenced_by:
   objects:
     api: [request]
 attributes:
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: required
+    description: The unique request identifier.
   containers:
     caption: Containers
     type: object_t
@@ -27,8 +32,3 @@ attributes:
     array: true
     requirement: optional
     description: The list of communication flags, normalized to the captions of the flag_ids values. In the case of 'Other', they are defined by the event source.
-  uid:
-    caption: Unique ID
-    type: string_t
-    requirement: required
-    description: The unique request identifier.

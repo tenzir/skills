@@ -38,6 +38,16 @@ referenced_by:
     web_resource_access_activity: [cloud]
     web_resources_activity: [cloud]
 attributes:
+  provider:
+    caption: Provider
+    type: string_t
+    requirement: required
+    description: The unique name of the Cloud services provider, such as AWS, MS Azure, GCP, etc.
+  region:
+    caption: Region
+    type: string_t
+    requirement: recommended
+    description: The name of the cloud region, as defined by the cloud provider.
   account:
     caption: Account
     type: object_t
@@ -55,16 +65,6 @@ attributes:
     type: string_t
     requirement: optional
     description: The unique identifier of a Cloud project.
-  provider:
-    caption: Provider
-    type: string_t
-    requirement: required
-    description: The unique name of the Cloud services provider, such as AWS, MS Azure, GCP, etc.
-  region:
-    caption: Region
-    type: string_t
-    requirement: recommended
-    description: The name of the cloud region, as defined by the cloud provider.
   zone:
     caption: Network Zone
     type: string_t

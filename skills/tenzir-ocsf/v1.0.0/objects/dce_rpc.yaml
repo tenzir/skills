@@ -6,6 +6,18 @@ referenced_by:
   classes:
     smb_activity: [dce_rpc]
 attributes:
+  flags:
+    caption: Flags
+    type: string_t
+    array: true
+    requirement: required
+    description: The list of interface flags.
+  rpc_interface:
+    caption: Remote Procedure Call Interface
+    type: object_t
+    object: rpc_interface
+    requirement: required
+    description: The RPC Interface object describes the details pertaining to the remote procedure call interface.
   command:
     caption: Command
     type: string_t
@@ -16,20 +28,8 @@ attributes:
     type: string_t
     requirement: recommended
     description: The reply to the request command (e.g. RESPONSE, BINDACK or FAULT).
-  flags:
-    caption: Flags
-    type: string_t
-    array: true
-    requirement: required
-    description: The list of interface flags.
   opnum:
     caption: Opnum
     type: integer_t
     requirement: recommended
     description: An operation number used to identify a specific remote procedure call (RPC) method or a method in an interface.
-  rpc_interface:
-    caption: Remote Procedure Call Interface
-    type: object_t
-    object: rpc_interface
-    requirement: required
-    description: The RPC Interface object describes the details pertaining to the remote procedure call interface.

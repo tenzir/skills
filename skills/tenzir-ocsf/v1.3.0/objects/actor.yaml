@@ -72,6 +72,20 @@ referenced_by:
   objects:
     evidences: [actor]
 attributes:
+  process:
+    caption: Process
+    type: object_t
+    object: process
+    requirement: recommended
+    observable: 25
+    description: The process that initiated the activity.
+  user:
+    caption: User
+    type: object_t
+    object: user
+    requirement: recommended
+    observable: 21
+    description: The user that initiated the activity or the user context from which the activity was initiated.
   app_name:
     caption: Application Name
     type: string_t
@@ -103,23 +117,9 @@ attributes:
       since: 1.2.0
       message: Use  `app_name, app_uid`  attributes instead.
     description: The name of the service that invoked the activity as described in the event.
-  process:
-    caption: Process
-    type: object_t
-    object: process
-    requirement: recommended
-    observable: 25
-    description: The process that initiated the activity.
   session:
     caption: Session
     type: object_t
     object: session
     requirement: optional
     description: The user session from which the activity was initiated.
-  user:
-    caption: User
-    type: object_t
-    object: user
-    requirement: recommended
-    observable: 21
-    description: The user that initiated the activity or the user context from which the activity was initiated.

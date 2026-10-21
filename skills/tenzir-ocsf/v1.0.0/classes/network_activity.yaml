@@ -1,5 +1,5 @@
-# Attributes with a `definition` path are inherited unchanged. Read that file
-# for their type, object, description, enum, and observable.
+# Attributes with `from` but no description are inherited unchanged. Their
+# descriptions are in the file of the item that `from` names.
 name: network_activity
 caption: Network Activity
 uid: 4001
@@ -17,69 +17,30 @@ attributes:
     sibling: activity_name
     description: The normalized identifier of the activity that triggered the event.
     enum:
-      '0':
+      0:
         caption: Unknown
         description: The event activity is unknown.
-      '1':
+      1:
         caption: Open
         description: A new network connection was opened.
-      '2':
+      2:
         caption: Close
         description: The network connection was closed.
-      '3':
+      3:
         caption: Reset
         description: The network connection was abnormally terminated or closed by a middle device like firewalls.
-      '4':
+      4:
         caption: Fail
         description: The network connection failed. For example a connection timeout or no route to host.
-      '5':
+      5:
         caption: Refuse
         description: The network connection was refused. For example an attempt to connect to a server port which is not open.
-      '6':
+      6:
         caption: Traffic
         description: Network traffic report.
-      '99':
+      99:
         caption: Other
         description: The event activity is not mapped.
-  activity_name:
-    caption: Activity
-    requirement: optional
-    definition: v1.0.0/classes/base_event.yaml
-  actor:
-    caption: Actor
-    type: object_t
-    object: actor
-    requirement: optional
-    group: primary
-    profile: host
-    description: The actor object describes details about the user/role/process that was the source of the activity.
-  api:
-    caption: API Details
-    requirement: optional
-    profile: cloud
-    definition: v1.0.0/classes/base_event.yaml
-  app_name:
-    caption: Application Name
-    type: string_t
-    requirement: optional
-    group: context
-    description: The name of the application that is associated with the event or object.
-  attacks:
-    caption: Attacks
-    type: object_t
-    object: attack
-    array: true
-    requirement: recommended
-    group: primary
-    profile: security_control
-    description: An array of attacks associated with an event.
-  category_name:
-    caption: Category
-    type: string_t
-    requirement: optional
-    group: classification
-    from: base_event
-    description: 'The event category name, as defined by category_uid value: `Network Activity`.'
   category_uid:
     caption: Category ID
     type: integer_t
@@ -89,16 +50,9 @@ attributes:
     sibling: category_name
     description: The category unique identifier of the event.
     enum:
-      '4':
+      4:
         caption: Network Activity
         description: Network Activity events.
-  class_name:
-    caption: Class
-    type: string_t
-    requirement: optional
-    group: classification
-    from: base_event
-    description: 'The event class name, as defined by class_uid value: `Network Activity`.'
   class_uid:
     caption: Class ID
     type: integer_t
@@ -107,41 +61,10 @@ attributes:
     sibling: class_name
     description: The unique identifier of a class. A Class describes the attributes available in an event.
     enum:
-      '4001':
+      4001:
         caption: Network Activity
         description: Network Activity events report network connection and traffic activity.
-  cloud:
-    caption: Cloud
-    requirement: required
-    profile: cloud
-    definition: v1.0.0/classes/base_event.yaml
-  connection_info:
-    caption: Connection Info
-    type: object_t
-    object: network_connection_info
-    requirement: recommended
-    group: primary
-    description: The network connection information.
-  count:
-    caption: Count
-    requirement: optional
-    definition: v1.0.0/classes/base_event.yaml
-  device:
-    caption: Device
-    type: object_t
-    object: device
-    requirement: recommended
-    group: primary
-    profile: host
-    observable: 20
-    description: An addressable device, computer system or host.
-  disposition:
-    caption: Disposition
-    type: string_t
-    requirement: optional
-    group: primary
-    profile: security_control
-    description: The event disposition name, normalized to the caption of the disposition_id value. In the case of 'Other', it is defined by the event source.
+  cloud: {caption: Cloud, type: object_t, object: cloud, requirement: required, group: primary, profile: cloud, from: base_event}
   disposition_id:
     caption: Disposition ID
     type: integer_t
@@ -151,49 +74,49 @@ attributes:
     sibling: disposition
     description: When security issues, such as malware or policy violations, are detected and possibly corrected, then `disposition_id` describes the action taken by the security product.
     enum:
-      '0':
+      0:
         caption: Unknown
-      '1':
+      1:
         caption: Allowed
-      '2':
+      2:
         caption: Blocked
-      '3':
+      3:
         caption: Quarantined
-      '4':
+      4:
         caption: Isolated
-      '5':
+      5:
         caption: Deleted
-      '6':
+      6:
         caption: Dropped
-      '7':
+      7:
         caption: Custom Action
         description: Executed custom action such as run a command script.
-      '8':
+      8:
         caption: Approved
-      '9':
+      9:
         caption: Restored
-      '10':
+      10:
         caption: Exonerated
         description: No longer suspicious (re-scored).
-      '11':
+      11:
         caption: Corrected
-      '12':
+      12:
         caption: Partially Corrected
-      '13':
+      13:
         caption: Uncorrected
-      '14':
+      14:
         caption: Delayed
         description: Requires reboot to finish the operation.
-      '15':
+      15:
         caption: Detected
-      '16':
+      16:
         caption: No Action
-      '17':
+      17:
         caption: Logged
-      '18':
+      18:
         caption: Tagged
         description: Marked with extended attributes.
-      '99':
+      99:
         caption: Other
   dst_endpoint:
     caption: Destination Endpoint
@@ -203,23 +126,94 @@ attributes:
     group: primary
     observable: 20
     description: The responder (server) in a network connection.
-  duration:
-    caption: Duration
+  metadata: {caption: Metadata, type: object_t, object: metadata, requirement: required, group: context, from: base_event}
+  severity_id: {caption: Severity ID, type: integer_t, requirement: required, group: classification, sibling: severity, enum: {0: Unknown, 1: Informational, 2: Low, 3: Medium, 4: High, 5: Critical, 6: Fatal, 99: Other}, from: base_event}
+  src_endpoint:
+    caption: Source Endpoint
+    type: object_t
+    object: network_endpoint
+    requirement: required
+    group: primary
+    observable: 20
+    description: The initiator (client) of the network connection.
+  time: {caption: Event Time, type: timestamp_t, requirement: required, group: occurrence, from: base_event}
+  type_uid:
+    caption: Type ID
+    type: integer_t
+    requirement: required
+    group: classification
+    sibling: type_name
+    description: 'The event type ID. It identifies the event''s semantics and structure. The value is calculated by the logging system as: `class_uid * 100 + activity_id`.'
+  attacks:
+    caption: Attacks
+    type: object_t
+    object: attack
+    array: true
+    requirement: recommended
+    group: primary
+    profile: security_control
+    description: An array of attacks associated with an event.
+  connection_info:
+    caption: Connection Info
+    type: object_t
+    object: network_connection_info
+    requirement: recommended
+    group: primary
+    description: The network connection information.
+  device:
+    caption: Device
+    type: object_t
+    object: device
+    requirement: recommended
+    group: primary
+    profile: host
+    observable: 20
+    description: An addressable device, computer system or host.
+  message: {caption: Message, type: string_t, requirement: recommended, group: primary, from: base_event}
+  status_id: {caption: Status ID, type: integer_t, requirement: recommended, group: primary, sibling: status, enum: {0: Unknown, 1: Success, 2: Failure, 99: Other}, from: base_event}
+  timezone_offset: {caption: Timezone Offset, type: integer_t, requirement: recommended, group: occurrence, from: base_event}
+  activity_name: {caption: Activity, type: string_t, requirement: optional, group: classification, from: base_event}
+  actor:
+    caption: Actor
+    type: object_t
+    object: actor
     requirement: optional
-    definition: v1.0.0/classes/base_event.yaml
-  end_time:
-    caption: End Time
+    group: primary
+    profile: host
+    description: The actor object describes details about the user/role/process that was the source of the activity.
+  api: {caption: API Details, type: object_t, object: api, requirement: optional, group: context, profile: cloud, from: base_event}
+  app_name:
+    caption: Application Name
+    type: string_t
     requirement: optional
-    definition: v1.0.0/classes/base_event.yaml
-  end_time_dt:
-    caption: End Time
+    group: context
+    description: The name of the application that is associated with the event or object.
+  category_name:
+    caption: Category
+    type: string_t
     requirement: optional
-    profile: datetime
-    definition: v1.0.0/classes/base_event.yaml
-  enrichments:
-    caption: Enrichments
+    group: classification
+    from: base_event
+    description: 'The event category name, as defined by category_uid value: `Network Activity`.'
+  class_name:
+    caption: Class
+    type: string_t
     requirement: optional
-    definition: v1.0.0/classes/base_event.yaml
+    group: classification
+    from: base_event
+    description: 'The event class name, as defined by class_uid value: `Network Activity`.'
+  count: {caption: Count, type: integer_t, requirement: optional, group: occurrence, from: base_event}
+  disposition:
+    caption: Disposition
+    type: string_t
+    requirement: optional
+    group: primary
+    profile: security_control
+    description: The event disposition name, normalized to the caption of the disposition_id value. In the case of 'Other', it is defined by the event source.
+  duration: {caption: Duration, type: integer_t, requirement: optional, group: occurrence, from: base_event}
+  end_time: {caption: End Time, type: timestamp_t, requirement: optional, group: occurrence, from: base_event}
+  end_time_dt: {caption: End Time, type: datetime_t, requirement: optional, group: occurrence, profile: datetime, from: base_event}
+  enrichments: {caption: Enrichments, type: object_t, object: enrichment, array: true, requirement: optional, group: context, from: base_event}
   malware:
     caption: Malware
     type: object_t
@@ -229,18 +223,7 @@ attributes:
     group: primary
     profile: security_control
     description: The list of malware identified by a finding.
-  message:
-    caption: Message
-    requirement: recommended
-    definition: v1.0.0/classes/base_event.yaml
-  metadata:
-    caption: Metadata
-    requirement: required
-    definition: v1.0.0/classes/base_event.yaml
-  observables:
-    caption: Observables
-    requirement: optional
-    definition: v1.0.0/classes/base_event.yaml
+  observables: {caption: Observables, type: object_t, object: observable, array: true, requirement: optional, group: primary, from: base_event}
   proxy:
     caption: Proxy
     type: object_t
@@ -249,64 +232,14 @@ attributes:
     group: primary
     observable: 20
     description: If a proxy connection is present, the connection from the client to the proxy server.
-  raw_data:
-    caption: Raw Data
-    requirement: optional
-    definition: v1.0.0/classes/base_event.yaml
-  severity:
-    caption: Severity
-    requirement: optional
-    definition: v1.0.0/classes/base_event.yaml
-  severity_id:
-    caption: Severity ID
-    requirement: required
-    definition: v1.0.0/classes/base_event.yaml
-  src_endpoint:
-    caption: Source Endpoint
-    type: object_t
-    object: network_endpoint
-    requirement: required
-    group: primary
-    observable: 20
-    description: The initiator (client) of the network connection.
-  start_time:
-    caption: Start Time
-    requirement: optional
-    definition: v1.0.0/classes/base_event.yaml
-  start_time_dt:
-    caption: Start Time
-    requirement: optional
-    profile: datetime
-    definition: v1.0.0/classes/base_event.yaml
-  status:
-    caption: Status
-    requirement: optional
-    definition: v1.0.0/classes/base_event.yaml
-  status_code:
-    caption: Status Code
-    requirement: optional
-    definition: v1.0.0/classes/base_event.yaml
-  status_detail:
-    caption: Status Details
-    requirement: optional
-    definition: v1.0.0/classes/base_event.yaml
-  status_id:
-    caption: Status ID
-    requirement: recommended
-    definition: v1.0.0/classes/base_event.yaml
-  time:
-    caption: Event Time
-    requirement: required
-    definition: v1.0.0/classes/base_event.yaml
-  time_dt:
-    caption: Event Time
-    requirement: optional
-    profile: datetime
-    definition: v1.0.0/classes/base_event.yaml
-  timezone_offset:
-    caption: Timezone Offset
-    requirement: recommended
-    definition: v1.0.0/classes/base_event.yaml
+  raw_data: {caption: Raw Data, type: string_t, requirement: optional, group: context, from: base_event}
+  severity: {caption: Severity, type: string_t, requirement: optional, group: classification, from: base_event}
+  start_time: {caption: Start Time, type: timestamp_t, requirement: optional, group: occurrence, from: base_event}
+  start_time_dt: {caption: Start Time, type: datetime_t, requirement: optional, group: occurrence, profile: datetime, from: base_event}
+  status: {caption: Status, type: string_t, requirement: optional, group: primary, from: base_event}
+  status_code: {caption: Status Code, type: string_t, requirement: optional, group: primary, from: base_event}
+  status_detail: {caption: Status Details, type: string_t, requirement: optional, group: primary, from: base_event}
+  time_dt: {caption: Event Time, type: datetime_t, requirement: optional, group: occurrence, profile: datetime, from: base_event}
   tls:
     caption: TLS
     type: object_t
@@ -321,41 +254,5 @@ attributes:
     requirement: optional
     group: primary
     description: The network traffic refers to the amount of data moving across a network at a given point of time. Intended to be used alongside Network Connection.
-  type_name:
-    caption: Type Name
-    requirement: optional
-    definition: v1.0.0/classes/base_event.yaml
-  type_uid:
-    caption: Type ID
-    type: integer_t
-    requirement: required
-    group: classification
-    sibling: type_name
-    description: 'The event type ID. It identifies the event''s semantics and structure. The value is calculated by the logging system as: `class_uid * 100 + activity_id`.'
-    enum:
-      '400100':
-        caption: 'Network Activity: Unknown'
-      '400101':
-        caption: 'Network Activity: Open'
-        description: A new network connection was opened.
-      '400102':
-        caption: 'Network Activity: Close'
-        description: The network connection was closed.
-      '400103':
-        caption: 'Network Activity: Reset'
-        description: The network connection was abnormally terminated or closed by a middle device like firewalls.
-      '400104':
-        caption: 'Network Activity: Fail'
-        description: The network connection failed. For example a connection timeout or no route to host.
-      '400105':
-        caption: 'Network Activity: Refuse'
-        description: The network connection was refused. For example an attempt to connect to a server port which is not open.
-      '400106':
-        caption: 'Network Activity: Traffic'
-        description: Network traffic report.
-      '400199':
-        caption: 'Network Activity: Other'
-  unmapped:
-    caption: Unmapped Data
-    requirement: optional
-    definition: v1.0.0/classes/base_event.yaml
+  type_name: {caption: Type Name, type: string_t, requirement: optional, group: classification, from: base_event}
+  unmapped: {caption: Unmapped Data, type: object_t, object: object, requirement: optional, group: context, from: base_event}

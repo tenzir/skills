@@ -97,17 +97,6 @@ referenced_by:
     privilege_attack_info: [attack]
     related_event: [attacks]
 attributes:
-  mitigation:
-    caption: MITRE Mitigation
-    type: object_t
-    object: mitigation
-    requirement: optional
-    description: The Mitigation object describes the MITRE ATT&CK® or ATLAS™ Mitigation ID and/or name that is associated to an attack.
-    references:
-    - description: ATT&CK® Matrix
-      url: https://attack.mitre.org
-    - description: ATLAS™ Matrix
-      url: https://atlas.mitre.org/matrices/ATLAS
   sub_technique:
     caption: MITRE Sub-technique
     type: object_t
@@ -130,20 +119,6 @@ attributes:
       url: https://attack.mitre.org
     - description: ATLAS™ Matrix
       url: https://atlas.mitre.org/matrices/ATLAS
-  tactics:
-    caption: Tactics
-    type: object_t
-    object: tactic
-    array: true
-    requirement: optional
-    deprecated:
-      since: 1.1.0
-      message: Use the `tactic` attribute instead.
-      superseded_by: [tactic]
-    description: The Tactics associated with the attack technique.
-    references:
-    - description: ATT&CK® Matrix
-      url: https://attack.mitre.org/wiki/ATT&CK_Matrix
   technique:
     caption: MITRE Technique
     type: object_t
@@ -160,3 +135,28 @@ attributes:
     type: string_t
     requirement: recommended
     description: The ATT&CK® or ATLAS™ Matrix version.
+  mitigation:
+    caption: MITRE Mitigation
+    type: object_t
+    object: mitigation
+    requirement: optional
+    description: The Mitigation object describes the MITRE ATT&CK® or ATLAS™ Mitigation ID and/or name that is associated to an attack.
+    references:
+    - description: ATT&CK® Matrix
+      url: https://attack.mitre.org
+    - description: ATLAS™ Matrix
+      url: https://atlas.mitre.org/matrices/ATLAS
+  tactics:
+    caption: Tactics
+    type: object_t
+    object: tactic
+    array: true
+    requirement: optional
+    deprecated:
+      since: 1.1.0
+      message: Use the `tactic` attribute instead.
+      superseded_by: [tactic]
+    description: The Tactics associated with the attack technique.
+    references:
+    - description: ATT&CK® Matrix
+      url: https://attack.mitre.org/wiki/ATT&CK_Matrix

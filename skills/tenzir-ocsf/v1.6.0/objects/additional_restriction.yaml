@@ -12,11 +12,6 @@ attributes:
     object: policy
     requirement: required
     description: Detailed information about the policy document that defines this restriction, including policy metadata, type, scope, and the specific rules or conditions that implement the access control.
-  status:
-    caption: Status
-    type: string_t
-    requirement: optional
-    description: The current status of the policy restriction, normalized to the caption of the `status_id` enum value.
   status_id:
     caption: Status ID
     type: integer_t
@@ -24,18 +19,23 @@ attributes:
     sibling: status
     description: The normalized status identifier indicating the applicability of this policy restriction.
     enum:
-      '0':
+      0:
         caption: Unknown
         description: The status is unknown.
-      '1':
+      1:
         caption: Applicable
         description: This restriction is currently applicable and being enforced.
-      '2':
+      2:
         caption: Inapplicable
         description: This restriction is not applicable.
-      '3':
+      3:
         caption: Evaluation Error
         description: This restriction could not be properly evaluated due to an error.
-      '99':
+      99:
         caption: Other
         description: The status is not mapped. See the `status` attribute, which contains a data source specific value.
+  status:
+    caption: Status
+    type: string_t
+    requirement: optional
+    description: The current status of the policy restriction, normalized to the caption of the `status_id` enum value.

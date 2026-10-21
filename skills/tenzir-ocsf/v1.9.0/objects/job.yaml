@@ -32,17 +32,79 @@ attributes:
     type: timestamp_t
     requirement: recommended
     description: The time when the job was created.
+  desc:
+    caption: Description
+    type: string_t
+    requirement: recommended
+    description: The description of the job.
+  last_run_time:
+    caption: Last Run
+    type: timestamp_t
+    requirement: recommended
+    deprecated:
+      since: 1.9.0
+      message: Use the `job_trigger.last_run_time` attribute instead.
+      superseded_by: [job_trigger.last_run_time]
+    description: The time when the job was last run.
+  name:
+    caption: Name
+    type: string_t
+    requirement: recommended
+    description: The name of the job.
+  run_state_id:
+    caption: Run State ID
+    type: integer_t
+    requirement: recommended
+    sibling: run_state
+    description: The run state ID of the job.
+    enum:
+      0:
+        caption: Unknown
+        description: The run state is unknown.
+      1:
+        caption: Ready
+      2:
+        caption: Queued
+      3:
+        caption: Running
+      4:
+        caption: Stopped
+      5:
+        caption: Disabled
+      99:
+        caption: Other
+        description: The run state is not mapped. See the `run_state` attribute, which contains a data source specific value.
+  type_id:
+    caption: Type ID
+    type: integer_t
+    requirement: recommended
+    sibling: type
+    description: The job type, i.e. the mechanism that executes the job.
+    enum:
+      0:
+        caption: Unknown
+        description: The job orchestration mechanism is unknown.
+      1:
+        caption: Task Scheduler
+        description: The job is executed by the Task Scheduler on Windows.
+      2:
+        caption: Cron
+        description: The job is executed by `cron` on Linux, macOS, or another a Unix-like OS.
+      3:
+        caption: Systemd
+        description: The job is executed by `systemd` on Linux.
+      4:
+        caption: Launchd
+        description: The job is executed by `launchd` on macOS.
+      99:
+        caption: Other
+        description: The job orchestration mechanism is not mapped. See the `type` attribute, which contains a data source specific value.
   created_time_dt:
     caption: Created Time
     type: datetime_t
     requirement: optional
     profile: datetime
     description: The time when the job was created.
-  desc:
-    caption: Description
-    type: string_t
-    requirement: recommended
-    description: The description of the job.
   file:
     caption: File
     type: object_t
@@ -64,15 +126,6 @@ attributes:
     array: true
     requirement: optional
     description: An array of conditions or events that, when met, will initiate the job to perform specified actions.
-  last_run_time:
-    caption: Last Run
-    type: timestamp_t
-    requirement: recommended
-    deprecated:
-      since: 1.9.0
-      message: Use the `job_trigger.last_run_time` attribute instead.
-      superseded_by: [job_trigger.last_run_time]
-    description: The time when the job was last run.
   last_run_time_dt:
     caption: Last Run
     type: datetime_t
@@ -83,11 +136,6 @@ attributes:
       message: Use the `job_trigger.last_run_time` attribute instead.
       superseded_by: [job_trigger.last_run_time]
     description: The time when the job was last run.
-  name:
-    caption: Name
-    type: string_t
-    requirement: recommended
-    description: The name of the job.
   next_run_time:
     caption: Next Run
     type: timestamp_t
@@ -112,59 +160,11 @@ attributes:
     type: string_t
     requirement: optional
     description: The run state of the job.
-  run_state_id:
-    caption: Run State ID
-    type: integer_t
-    requirement: recommended
-    sibling: run_state
-    description: The run state ID of the job.
-    enum:
-      '0':
-        caption: Unknown
-        description: The run state is unknown.
-      '1':
-        caption: Ready
-      '2':
-        caption: Queued
-      '3':
-        caption: Running
-      '4':
-        caption: Stopped
-      '5':
-        caption: Disabled
-      '99':
-        caption: Other
-        description: The run state is not mapped. See the `run_state` attribute, which contains a data source specific value.
   type:
     caption: Type
     type: string_t
     requirement: optional
     description: The job type, normalized to the caption of the `type_id` value. In the case of 'Other', it is defined by the event source.
-  type_id:
-    caption: Type ID
-    type: integer_t
-    requirement: recommended
-    sibling: type
-    description: The job type, i.e. the mechanism that executes the job.
-    enum:
-      '0':
-        caption: Unknown
-        description: The job orchestration mechanism is unknown.
-      '1':
-        caption: Task Scheduler
-        description: The job is executed by the Task Scheduler on Windows.
-      '2':
-        caption: Cron
-        description: The job is executed by `cron` on Linux, macOS, or another a Unix-like OS.
-      '3':
-        caption: Systemd
-        description: The job is executed by `systemd` on Linux.
-      '4':
-        caption: Launchd
-        description: The job is executed by `launchd` on macOS.
-      '99':
-        caption: Other
-        description: The job orchestration mechanism is not mapped. See the `type` attribute, which contains a data source specific value.
   uid:
     caption: Unique ID
     type: string_t

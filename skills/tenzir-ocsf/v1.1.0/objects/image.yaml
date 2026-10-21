@@ -7,17 +7,22 @@ referenced_by:
     container: [image]
     device: [image]
 attributes:
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: required
+    description: 'The unique image ID. For example: `77af4d6b9913`.'
+  name:
+    caption: Name
+    type: string_t
+    requirement: recommended
+    description: 'The image name. For example: `elixir`.'
   labels:
     caption: Labels
     type: string_t
     array: true
     requirement: optional
     description: The image labels.
-  name:
-    caption: Name
-    type: string_t
-    requirement: recommended
-    description: 'The image name. For example: `elixir`.'
   path:
     caption: Path
     type: string_t
@@ -28,8 +33,3 @@ attributes:
     type: string_t
     requirement: optional
     description: 'The image tag. For example: `1.11-alpine`.'
-  uid:
-    caption: Unique ID
-    type: string_t
-    requirement: required
-    description: 'The unique image ID. For example: `77af4d6b9913`.'

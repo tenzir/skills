@@ -16,6 +16,21 @@ attributes:
     type: timestamp_t
     requirement: recommended
     description: The time when the session was created.
+  is_remote:
+    caption: Remote
+    type: boolean_t
+    requirement: recommended
+    description: The indication of whether the session is remote.
+  issuer:
+    caption: Issuer Details
+    type: string_t
+    requirement: recommended
+    description: The identifier of the session issuer.
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: recommended
+    description: The unique identifier of the session.
   created_time_dt:
     caption: Created Time
     type: datetime_t
@@ -38,21 +53,6 @@ attributes:
     requirement: optional
     profile: datetime
     description: The session expiration time.
-  is_remote:
-    caption: Remote
-    type: boolean_t
-    requirement: recommended
-    description: The indication of whether the session is remote.
-  issuer:
-    caption: Issuer Details
-    type: string_t
-    requirement: recommended
-    description: The identifier of the session issuer.
-  uid:
-    caption: Unique ID
-    type: string_t
-    requirement: recommended
-    description: The unique identifier of the session.
   uuid:
     caption: UUID
     type: uuid_t

@@ -9,11 +9,6 @@ referenced_by:
     finding_info: [kill_chain]
     related_event: [kill_chain]
 attributes:
-  phase:
-    caption: Kill Chain Phase
-    type: string_t
-    requirement: recommended
-    description: The cyber kill chain phase.
   phase_id:
     caption: Kill Chain Phase ID
     type: integer_t
@@ -21,30 +16,35 @@ attributes:
     sibling: phase
     description: The cyber kill chain phase identifier.
     enum:
-      '0':
+      0:
         caption: Unknown
         description: The kill chain phase is unknown.
-      '1':
+      1:
         caption: Reconnaissance
         description: The attackers pick a target and perform a detailed analysis, start collecting information (email addresses, conferences information, etc.) and evaluate the victim’s vulnerabilities to determine how to exploit them.
-      '2':
+      2:
         caption: Weaponization
         description: The attackers develop a malware weapon and aim to exploit the discovered vulnerabilities.
-      '3':
+      3:
         caption: Delivery
         description: The intruders will use various tactics, such as phishing, infected USB drives, etc.
-      '4':
+      4:
         caption: Exploitation
         description: The intruders start leveraging vulnerabilities to executed code on the victim’s system.
-      '5':
+      5:
         caption: Installation
         description: The intruders install malware on the victim’s system.
-      '6':
+      6:
         caption: Command & Control
         description: Malware opens a command channel to enable the intruders to remotely manipulate the victim's system.
-      '7':
+      7:
         caption: Actions on Objectives
         description: With hands-on keyboard access, intruders accomplish the mission’s goal.
-      '99':
+      99:
         caption: Other
         description: The kill chain phase is not mapped. See the `phase` attribute, which contains a data source specific value.
+  phase:
+    caption: Kill Chain Phase
+    type: string_t
+    requirement: recommended
+    description: The cyber kill chain phase.

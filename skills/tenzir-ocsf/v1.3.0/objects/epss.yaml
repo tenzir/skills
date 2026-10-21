@@ -7,11 +7,21 @@ referenced_by:
   objects:
     cve: [epss]
 attributes:
+  score:
+    caption: EPPS Score
+    type: string_t
+    requirement: required
+    description: The EPSS score representing the probability [0-1] of exploitation in the wild in the next 30 days (following score publication).
   created_time:
     caption: Created Time
     type: timestamp_t
     requirement: recommended
     description: The timestamp indicating when the EPSS score was calculated.
+  version:
+    caption: Version
+    type: string_t
+    requirement: recommended
+    description: The version of the EPSS model used to calculate the score.
   created_time_dt:
     caption: Created Time
     type: datetime_t
@@ -23,13 +33,3 @@ attributes:
     type: float_t
     requirement: optional
     description: The EPSS score's percentile representing relative importance and ranking of the score in the larger EPSS dataset.
-  score:
-    caption: EPPS Score
-    type: string_t
-    requirement: required
-    description: The EPSS score representing the probability [0-1] of exploitation in the wild in the next 30 days (following score publication).
-  version:
-    caption: Version
-    type: string_t
-    requirement: recommended
-    description: The version of the EPSS model used to calculate the score.

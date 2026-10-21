@@ -1,5 +1,5 @@
-# Attributes with a `definition` path are inherited unchanged. Read that file
-# for their type, object, description, enum, and observable.
+# Attributes with `from` but no description are inherited unchanged. Their
+# descriptions are in the file of the item that `from` names.
 name: network_proxy
 caption: Network Proxy Endpoint
 extends: network_endpoint
@@ -26,101 +26,46 @@ referenced_by:
     network_endpoint: [proxy_endpoint]
     network_proxy: [proxy_endpoint]
 attributes:
-  container:
-    caption: Container
-    requirement: recommended
-    profile: container
-    definition: v1.1.0/objects/endpoint.yaml
-  domain:
-    caption: Domain
-    requirement: optional
-    definition: v1.1.0/objects/endpoint.yaml
-  hostname:
-    caption: Hostname
-    requirement: recommended
-    definition: v1.1.0/objects/endpoint.yaml
-  hw_info:
-    caption: Hardware Info
-    requirement: optional
-    definition: v1.1.0/objects/endpoint.yaml
-  instance_uid:
-    caption: Instance ID
-    requirement: recommended
-    definition: v1.1.0/objects/endpoint.yaml
-  interface_name:
-    caption: Network Interface Name
-    requirement: recommended
-    definition: v1.1.0/objects/endpoint.yaml
-  interface_uid:
-    caption: Network Interface ID
-    requirement: recommended
-    definition: v1.1.0/objects/endpoint.yaml
-  intermediate_ips:
-    caption: Intermediate IP Addresses
-    requirement: optional
-    definition: v1.1.0/objects/network_endpoint.yaml
-  ip:
-    caption: IP Address
-    requirement: recommended
-    definition: v1.1.0/objects/endpoint.yaml
-  location:
-    caption: Geo Location
-    requirement: optional
-    definition: v1.1.0/objects/endpoint.yaml
-  mac:
-    caption: MAC Address
-    requirement: optional
-    definition: v1.1.0/objects/endpoint.yaml
-  name:
-    caption: Name
-    requirement: recommended
-    definition: v1.1.0/objects/endpoint.yaml
-  namespace_pid:
-    caption: Namespace PID
-    requirement: recommended
-    profile: container
-    definition: v1.1.0/objects/endpoint.yaml
-  os:
-    caption: OS
-    requirement: optional
-    definition: v1.1.0/objects/endpoint.yaml
-  port:
-    caption: Port
-    requirement: recommended
-    definition: v1.1.0/objects/network_endpoint.yaml
-  proxy_endpoint:
-    caption: Proxy Endpoint
-    requirement: optional
-    definition: v1.1.0/objects/network_endpoint.yaml
-  subnet_uid:
-    caption: Subnet UID
-    requirement: optional
-    definition: v1.1.0/objects/endpoint.yaml
-  svc_name:
-    caption: Service Name
-    requirement: recommended
-    definition: v1.1.0/objects/network_endpoint.yaml
-  type:
-    caption: Type
-    requirement: optional
-    definition: v1.1.0/objects/network_endpoint.yaml
+  container: {caption: Container, type: object_t, object: container, requirement: recommended, group: context, profile: container, observable: 27, from: endpoint}
+  hostname: {caption: Hostname, type: hostname_t, requirement: recommended, observable: 1, from: endpoint}
+  instance_uid: {caption: Instance ID, type: string_t, requirement: recommended, from: endpoint}
+  interface_name: {caption: Network Interface Name, type: string_t, requirement: recommended, from: endpoint}
+  interface_uid: {caption: Network Interface ID, type: string_t, requirement: recommended, from: endpoint}
+  ip: {caption: IP Address, type: ip_t, requirement: recommended, observable: 2, from: endpoint}
+  name: {caption: Name, type: string_t, requirement: recommended, from: endpoint}
+  namespace_pid: {caption: Namespace PID, type: integer_t, requirement: recommended, group: context, profile: container, from: endpoint}
+  port: {caption: Port, type: port_t, requirement: recommended, from: network_endpoint}
+  svc_name: {caption: Service Name, type: string_t, requirement: recommended, from: network_endpoint}
   type_id:
     caption: Type ID
+    type: integer_t
     requirement: recommended
-    definition: v1.1.0/objects/network_endpoint.yaml
-  uid:
-    caption: Unique ID
-    requirement: recommended
-    definition: v1.1.0/objects/endpoint.yaml
-  vlan_uid:
-    caption: VLAN
-    requirement: optional
-    definition: v1.1.0/objects/endpoint.yaml
-  vpc_uid:
-    caption: VPC UID
-    requirement: optional
-    definition: v1.1.0/objects/endpoint.yaml
-  zone:
-    caption: Network Zone
-    requirement: optional
-    definition: v1.1.0/objects/endpoint.yaml
+    sibling: type
+    enum:
+      0: Unknown
+      1: Server
+      2: Desktop
+      3: Laptop
+      4: Tablet
+      5: Mobile
+      6: Virtual
+      7: IOT
+      8: Browser
+      9: Firewall
+      10: Switch
+      11: Hub
+      99: Other
+    from: network_endpoint
+  uid: {caption: Unique ID, type: string_t, requirement: recommended, from: endpoint}
+  domain: {caption: Domain, type: string_t, requirement: optional, from: endpoint}
+  hw_info: {caption: Hardware Info, type: object_t, object: device_hw_info, requirement: optional, from: endpoint}
+  intermediate_ips: {caption: Intermediate IP Addresses, type: ip_t, array: true, requirement: optional, observable: 2, from: network_endpoint}
+  location: {caption: Geo Location, type: object_t, object: location, requirement: optional, observable: 26, from: endpoint}
+  mac: {caption: MAC Address, type: mac_t, requirement: optional, observable: 3, from: endpoint}
+  os: {caption: OS, type: object_t, object: os, requirement: optional, from: endpoint}
+  proxy_endpoint: {caption: Proxy Endpoint, type: object_t, object: network_proxy, requirement: optional, observable: 20, from: network_endpoint}
+  subnet_uid: {caption: Subnet UID, type: string_t, requirement: optional, from: endpoint}
+  type: {caption: Type, type: string_t, requirement: optional, from: network_endpoint}
+  vlan_uid: {caption: VLAN, type: string_t, requirement: optional, from: endpoint}
+  vpc_uid: {caption: VPC UID, type: string_t, requirement: optional, from: endpoint}
+  zone: {caption: Network Zone, type: string_t, requirement: optional, from: endpoint}

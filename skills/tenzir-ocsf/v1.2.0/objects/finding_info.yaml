@@ -11,6 +11,16 @@ referenced_by:
     incident_finding: [finding_info_list]
     vulnerability_finding: [finding_info]
 attributes:
+  title:
+    caption: Title
+    type: string_t
+    requirement: required
+    description: A title or a brief phrase summarizing the reported finding.
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: required
+    description: The unique identifier of the reported finding.
   analytic:
     caption: Analytic
     type: object_t
@@ -123,19 +133,9 @@ attributes:
     requirement: optional
     observable: 6
     description: The URL pointing to the source of the finding.
-  title:
-    caption: Title
-    type: string_t
-    requirement: required
-    description: A title or a brief phrase summarizing the reported finding.
   types:
     caption: Types
     type: string_t
     array: true
     requirement: optional
     description: One or more types of the reported finding.
-  uid:
-    caption: Unique ID
-    type: string_t
-    requirement: required
-    description: The unique identifier of the reported finding.

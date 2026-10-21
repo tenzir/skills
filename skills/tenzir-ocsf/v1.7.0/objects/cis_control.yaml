@@ -7,11 +7,6 @@ referenced_by:
     cis_benchmark: [cis_controls]
     remediation: [cis_controls]
 attributes:
-  desc:
-    caption: Description
-    type: string_t
-    requirement: optional
-    description: 'The CIS Control description. For example: Uninstall or disable unnecessary services on enterprise assets and software, such as an unused file sharing service, web application module, or service function.'
   name:
     caption: Name
     type: string_t
@@ -22,3 +17,8 @@ attributes:
     type: string_t
     requirement: recommended
     description: 'The CIS Control version. For example: v8.'
+  desc:
+    caption: Description
+    type: string_t
+    requirement: optional
+    description: 'The CIS Control description. For example: Uninstall or disable unnecessary services on enterprise assets and software, such as an unused file sharing service, web application module, or service function.'

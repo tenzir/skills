@@ -11,12 +11,22 @@ referenced_by:
     incident_finding: [finding_info_list]
     vulnerability_finding: [finding_info]
 attributes:
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: required
+    description: The unique identifier of the reported finding.
   analytic:
     caption: Analytic
     type: object_t
     object: analytic
     requirement: recommended
     description: The analytic technique used to analyze and derive insights from the data or information that led to the finding or conclusion.
+  title:
+    caption: Title
+    type: string_t
+    requirement: recommended
+    description: A title or a brief phrase summarizing the reported finding.
   attacks:
     caption: MITRE ATT&CK® Details
     type: object_t
@@ -144,22 +154,12 @@ attributes:
     array: true
     requirement: optional
     description: The list of tags; `{key:value}` pairs associated with the finding.
-  title:
-    caption: Title
-    type: string_t
-    requirement: recommended
-    description: A title or a brief phrase summarizing the reported finding.
   types:
     caption: Types
     type: string_t
     array: true
     requirement: optional
     description: One or more types of the reported finding.
-  uid:
-    caption: Unique ID
-    type: string_t
-    requirement: required
-    description: The unique identifier of the reported finding.
   uid_alt:
     caption: Alternate ID
     type: string_t

@@ -17,6 +17,23 @@ referenced_by:
     actor: [application]
     message_context: [application]
 attributes:
+  name:
+    caption: Application Name
+    type: string_t
+    requirement: recommended
+    description: The name of the application.
+  owner:
+    caption: Owner
+    type: object_t
+    object: user
+    requirement: recommended
+    observable: 21
+    description: The identity of the service or user account that owns the application.
+  uid:
+    caption: Application ID
+    type: string_t
+    requirement: recommended
+    description: The unique identifier for the application.
   created_time:
     caption: Created Time
     type: timestamp_t
@@ -40,22 +57,22 @@ attributes:
     sibling: criticality
     description: Criticality or relative importance of a resource/object in question.
     enum:
-      '0':
+      0:
         caption: Unknown
         description: The criticality level is unknown.
-      '1':
+      1:
         caption: Low
         description: Minimal operational or security importance.
-      '2':
+      2:
         caption: Medium
         description: Affects localized functions or specific business processes.
-      '3':
+      3:
         caption: High
         description: Critical to core operations. Compromise leads to significant, but recoverable disruptions.
-      '4':
+      4:
         caption: Very High
         description: Mission critical, essential to business survival. Compromise could result in catastrophic consequences.
-      '99':
+      99:
         caption: Other
         description: The criticality level is not mapped. See the `criticality` attribute, which contains a data source specific value.
   data:
@@ -119,18 +136,6 @@ attributes:
     requirement: optional
     profile: datetime
     description: The time when the application was last known to have been modified.
-  name:
-    caption: Application Name
-    type: string_t
-    requirement: recommended
-    description: The name of the application.
-  owner:
-    caption: Owner
-    type: object_t
-    object: user
-    requirement: recommended
-    observable: 21
-    description: The identity of the service or user account that owns the application.
   product:
     caption: Product
     type: object_t
@@ -161,17 +166,17 @@ attributes:
     sibling: risk_level
     description: The normalized risk level id.
     enum:
-      '0':
+      0:
         caption: Info
-      '1':
+      1:
         caption: Low
-      '2':
+      2:
         caption: Medium
-      '3':
+      3:
         caption: High
-      '4':
+      4:
         caption: Critical
-      '99':
+      99:
         caption: Other
         description: The risk level is not mapped. See the `risk_level` attribute, which contains a data source specific value.
   risk_score:
@@ -203,11 +208,6 @@ attributes:
     type: string_t
     requirement: optional
     description: The type of application as defined by the event source, e.g., `GitHub`, `Azure Logic App`, or `Amazon Elastic BeanStalk`.
-  uid:
-    caption: Application ID
-    type: string_t
-    requirement: recommended
-    description: The unique identifier for the application.
   uid_alt:
     caption: Application Alternative ID
     type: string_t

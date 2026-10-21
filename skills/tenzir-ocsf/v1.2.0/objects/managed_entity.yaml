@@ -8,11 +8,6 @@ referenced_by:
   classes:
     entity_management: [entity, entity_result]
 attributes:
-  data:
-    caption: Data
-    type: json_t
-    requirement: optional
-    description: The managed entity content as a JSON object.
   name:
     caption: Name
     type: string_t
@@ -33,3 +28,8 @@ attributes:
     type: string_t
     requirement: recommended
     description: 'The version of the managed entity. For example: `1.2.3`.'
+  data:
+    caption: Data
+    type: json_t
+    requirement: optional
+    description: The managed entity content as a JSON object.

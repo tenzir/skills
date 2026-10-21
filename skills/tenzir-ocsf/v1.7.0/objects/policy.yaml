@@ -95,6 +95,26 @@ referenced_by:
     managed_entity: [policy]
     permission_analysis_result: [policy]
 attributes:
+  is_applied:
+    caption: Applied
+    type: boolean_t
+    requirement: recommended
+    description: A determination if the content of a policy was applied to a target or request, or not.
+  name:
+    caption: Name
+    type: string_t
+    requirement: recommended
+    description: 'The policy name. For example: `AdministratorAccess Policy`.'
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: recommended
+    description: A unique identifier of the policy instance.
+  version:
+    caption: Version
+    type: string_t
+    requirement: recommended
+    description: The policy version number.
   data:
     caption: Data
     type: json_t
@@ -111,28 +131,8 @@ attributes:
     object: group
     requirement: optional
     description: The policy group.
-  is_applied:
-    caption: Applied
-    type: boolean_t
-    requirement: recommended
-    description: A determination if the content of a policy was applied to a target or request, or not.
-  name:
-    caption: Name
-    type: string_t
-    requirement: recommended
-    description: 'The policy name. For example: `AdministratorAccess Policy`.'
   type:
     caption: Type
     type: string_t
     requirement: optional
     description: 'The policy type. For example: `Identity Policy, Resource Policy, Service Control Policy, etc./code>.`'
-  uid:
-    caption: Unique ID
-    type: string_t
-    requirement: recommended
-    description: A unique identifier of the policy instance.
-  version:
-    caption: Version
-    type: string_t
-    requirement: recommended
-    description: The policy version number.

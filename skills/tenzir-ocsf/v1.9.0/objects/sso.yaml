@@ -7,6 +7,22 @@ referenced_by:
   objects:
     idp: [sso]
 attributes:
+  certificate:
+    caption: SAML Certificate
+    type: object_t
+    object: certificate
+    requirement: recommended
+    description: Digital Signature associated with the SSO resource, e.g., SAML X.509 certificate details.
+  name:
+    caption: Name
+    type: string_t
+    requirement: recommended
+    description: The name of the SSO resource.
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: recommended
+    description: A unique identifier for a SSO resource.
   auth_protocol:
     caption: Auth Protocol
     type: string_t
@@ -19,42 +35,36 @@ attributes:
     sibling: auth_protocol
     description: The normalized identifier of the authentication protocol used by the SSO resource.
     enum:
-      '0':
+      0:
         caption: Unknown
         description: The authentication protocol is unknown.
-      '1':
+      1:
         caption: NTLM
-      '2':
+      2:
         caption: Kerberos
-      '3':
+      3:
         caption: Digest
-      '4':
+      4:
         caption: OpenID
-      '5':
+      5:
         caption: SAML
-      '6':
+      6:
         caption: OAUTH 2.0
-      '7':
+      7:
         caption: PAP
-      '8':
+      8:
         caption: CHAP
-      '9':
+      9:
         caption: EAP
-      '10':
+      10:
         caption: RADIUS
-      '11':
+      11:
         caption: Basic Authentication
-      '12':
+      12:
         caption: LDAP
-      '99':
+      99:
         caption: Other
         description: The authentication protocol is not mapped. See the `auth_protocol` attribute, which contains a data source specific value.
-  certificate:
-    caption: SAML Certificate
-    type: object_t
-    object: certificate
-    requirement: recommended
-    description: Digital Signature associated with the SSO resource, e.g., SAML X.509 certificate details.
   created_time:
     caption: Created Time
     type: timestamp_t
@@ -105,11 +115,6 @@ attributes:
     requirement: optional
     profile: datetime
     description: The most recent time when the SSO resource was updated.
-  name:
-    caption: Name
-    type: string_t
-    requirement: recommended
-    description: The name of the SSO resource.
   protocol_name:
     caption: Supported Protocol
     type: string_t
@@ -121,11 +126,6 @@ attributes:
     array: true
     requirement: optional
     description: Scopes define the specific permissions or actions that the client is allowed to perform on behalf of the user. Each scope represents a different set of permissions, and the user can selectively grant or deny access to specific scopes during the authorization process.
-  uid:
-    caption: Unique ID
-    type: string_t
-    requirement: recommended
-    description: A unique identifier for a SSO resource.
   vendor_name:
     caption: Service Provider
     type: string_t

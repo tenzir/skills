@@ -7,11 +7,6 @@ profiles: [data_classification]
 constraints:
   at_least_one: [name, uid]
 attributes:
-  data:
-    caption: Data
-    type: json_t
-    requirement: optional
-    description: Additional data describing the resource.
   data_classification:
     caption: Data Classification
     type: object_t
@@ -20,24 +15,29 @@ attributes:
     group: context
     profile: data_classification
     description: The Data Classification object includes information about data classification levels and data category types.
+  name:
+    caption: Name
+    type: string_t
+    requirement: recommended
+    description: The name of the resource.
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: recommended
+    description: The unique identifier of the resource.
+  data:
+    caption: Data
+    type: json_t
+    requirement: optional
+    description: Additional data describing the resource.
   labels:
     caption: Labels
     type: string_t
     array: true
     requirement: optional
     description: The list of labels/tags associated to a resource.
-  name:
-    caption: Name
-    type: string_t
-    requirement: recommended
-    description: The name of the resource.
   type:
     caption: Type
     type: string_t
     requirement: optional
     description: The resource type as defined by the event source.
-  uid:
-    caption: Unique ID
-    type: string_t
-    requirement: recommended
-    description: The unique identifier of the resource.

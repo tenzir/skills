@@ -7,6 +7,11 @@ referenced_by:
   objects:
     permission_analysis_result: [service_privilege_analysis_list]
 attributes:
+  name:
+    caption: Name
+    type: string_t
+    requirement: required
+    description: 'The service or namespace identifier. Examples: `s3`, `ec2` (AWS); `Microsoft.Storage` (Azure); `storage` (GCP).'
   all_privileges_unused:
     caption: All Privileges Unused
     type: boolean_t
@@ -33,11 +38,6 @@ attributes:
     requirement: optional
     profile: datetime
     description: The most recent time any privilege in this service was used.
-  name:
-    caption: Name
-    type: string_t
-    requirement: required
-    description: 'The service or namespace identifier. Examples: `s3`, `ec2` (AWS); `Microsoft.Storage` (Azure); `storage` (GCP).'
   privilege_attack_info_list:
     caption: Privilege Attack Info List
     type: object_t

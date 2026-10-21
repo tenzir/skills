@@ -11,6 +11,21 @@ referenced_by:
   classes:
     dns_zone_transfer_activity: [soa, updated_soa]
 attributes:
+  primary_server:
+    caption: Primary Server
+    type: string_t
+    requirement: recommended
+    description: 'The DNS SOA MNAME field: the fully qualified domain name of the primary name server that is the original source of data for the zone. For example: `ns1.example.com`.'
+  responsible_party:
+    caption: Responsible Party
+    type: string_t
+    requirement: recommended
+    description: 'The DNS SOA RNAME field: the email address of the party responsible for the zone, encoded as a domain name (the first label is the local part of the address). For example: `hostmaster.example.com` represents `hostmaster@example.com`.'
+  sequence_number:
+    caption: Sequence Number
+    type: long_t
+    requirement: recommended
+    description: 'The DNS SOA SERIAL field: the unsigned 32-bit version number of the zone, incremented when the zone contents change. Secondary name servers compare this value to decide whether a zone transfer is needed.'
   expire_interval:
     caption: Expire Interval
     type: object_t
@@ -23,30 +38,15 @@ attributes:
     object: timespan
     requirement: optional
     description: 'The DNS SOA MINIMUM field: the time interval that defines the TTL for negative caching of records from this zone. Populate `duration_secs`, as the wire value is always a count of seconds.'
-  primary_server:
-    caption: Primary Server
-    type: string_t
-    requirement: recommended
-    description: 'The DNS SOA MNAME field: the fully qualified domain name of the primary name server that is the original source of data for the zone. For example: `ns1.example.com`.'
   refresh_interval:
     caption: Refresh Interval
     type: object_t
     object: timespan
     requirement: optional
     description: 'The DNS SOA REFRESH field: the time interval before a secondary name server should query the primary to check for zone updates. Populate `duration_secs`, as the wire value is always a count of seconds.'
-  responsible_party:
-    caption: Responsible Party
-    type: string_t
-    requirement: recommended
-    description: 'The DNS SOA RNAME field: the email address of the party responsible for the zone, encoded as a domain name (the first label is the local part of the address). For example: `hostmaster.example.com` represents `hostmaster@example.com`.'
   retry_interval:
     caption: Retry Interval
     type: object_t
     object: timespan
     requirement: optional
     description: 'The DNS SOA RETRY field: the time interval before a secondary name server should retry a failed zone refresh. Populate `duration_secs`, as the wire value is always a count of seconds.'
-  sequence_number:
-    caption: Sequence Number
-    type: long_t
-    requirement: recommended
-    description: 'The DNS SOA SERIAL field: the unsigned 32-bit version number of the zone, incremented when the zone contents change. Secondary name servers compare this value to decide whether a zone transfer is needed.'

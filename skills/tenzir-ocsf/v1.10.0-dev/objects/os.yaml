@@ -14,6 +14,59 @@ referenced_by:
     network_endpoint: [os]
     network_proxy: [os]
 attributes:
+  name:
+    caption: Name
+    type: string_t
+    requirement: required
+    description: The operating system name.
+  type_id:
+    caption: Type ID
+    type: integer_t
+    requirement: required
+    sibling: type
+    description: The type identifier of the operating system.
+    enum:
+      0:
+        caption: Unknown
+        description: The type is unknown.
+      99:
+        caption: Other
+        description: The type is not mapped. See the `type` attribute, which contains a data source specific value.
+      100:
+        caption: Windows
+      101:
+        caption: Windows Mobile
+      200:
+        caption: Linux
+      201:
+        caption: Android
+      300:
+        caption: macOS
+      301:
+        caption: iOS
+      302:
+        caption: iPadOS
+      400:
+        caption: Solaris
+      401:
+        caption: AIX
+      402:
+        caption: HP-UX
+  sp_name:
+    caption: OS Service Pack
+    type: string_t
+    requirement: recommended
+    description: The name of the latest Service Pack.
+  sp_ver:
+    caption: OS Service Pack Version
+    type: integer_t
+    requirement: recommended
+    description: The version number of the latest Service Pack.
+  version:
+    caption: Version
+    type: string_t
+    requirement: recommended
+    description: 'The version of the OS running on the device that originated the event. For example: "Windows 10", "OS X 10.7", or "iOS 9".'
   build:
     caption: OS Build
     type: string_t
@@ -62,61 +115,8 @@ attributes:
     references:
     - description: ISO 639-1
       url: https://en.wikipedia.org/wiki/ISO_639-1
-  name:
-    caption: Name
-    type: string_t
-    requirement: required
-    description: The operating system name.
-  sp_name:
-    caption: OS Service Pack
-    type: string_t
-    requirement: recommended
-    description: The name of the latest Service Pack.
-  sp_ver:
-    caption: OS Service Pack Version
-    type: integer_t
-    requirement: recommended
-    description: The version number of the latest Service Pack.
   type:
     caption: Type
     type: string_t
     requirement: optional
     description: The type of the operating system.
-  type_id:
-    caption: Type ID
-    type: integer_t
-    requirement: required
-    sibling: type
-    description: The type identifier of the operating system.
-    enum:
-      '0':
-        caption: Unknown
-        description: The type is unknown.
-      '99':
-        caption: Other
-        description: The type is not mapped. See the `type` attribute, which contains a data source specific value.
-      '100':
-        caption: Windows
-      '101':
-        caption: Windows Mobile
-      '200':
-        caption: Linux
-      '201':
-        caption: Android
-      '300':
-        caption: macOS
-      '301':
-        caption: iOS
-      '302':
-        caption: iPadOS
-      '400':
-        caption: Solaris
-      '401':
-        caption: AIX
-      '402':
-        caption: HP-UX
-  version:
-    caption: Version
-    type: string_t
-    requirement: recommended
-    description: 'The version of the OS running on the device that originated the event. For example: "Windows 10", "OS X 10.7", or "iOS 9".'

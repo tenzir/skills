@@ -7,13 +7,6 @@ profiles: [container]
 constraints:
   at_least_one: [ip, uid, name, hostname, instance_uid, interface_uid, interface_name]
 attributes:
-  agent_list:
-    caption: Agent List
-    type: object_t
-    object: agent
-    array: true
-    requirement: optional
-    description: A list of `agent` objects associated with a device, endpoint, or resource.
   container:
     caption: Container
     type: object_t
@@ -23,23 +16,12 @@ attributes:
     profile: container
     observable: 27
     description: The information describing an instance of a container. A container is a prepackaged, portable system image that runs isolated on an existing system using a container runtime like containerd.
-  domain:
-    caption: Domain
-    type: string_t
-    requirement: optional
-    description: The name of the domain.
   hostname:
     caption: Hostname
     type: hostname_t
     requirement: recommended
     observable: 1
     description: The fully qualified name of the endpoint.
-  hw_info:
-    caption: Hardware Info
-    type: object_t
-    object: device_hw_info
-    requirement: optional
-    description: The endpoint hardware information.
   instance_uid:
     caption: Instance ID
     type: string_t
@@ -61,6 +43,94 @@ attributes:
     requirement: recommended
     observable: 2
     description: The IP address of the endpoint, in either IPv4 or IPv6 format.
+  name:
+    caption: Name
+    type: string_t
+    requirement: recommended
+    description: The short name of the endpoint.
+  namespace_pid:
+    caption: Namespace PID
+    type: integer_t
+    requirement: recommended
+    group: context
+    profile: container
+    description: If running under a process namespace (such as in a container), the process identifier within that process namespace.
+  owner:
+    caption: Owner
+    type: object_t
+    object: user
+    requirement: recommended
+    observable: 21
+    description: The identity of the service or user account that owns the endpoint or was last logged into it.
+  type_id:
+    caption: Type ID
+    type: integer_t
+    requirement: recommended
+    sibling: type
+    description: The endpoint type ID.
+    enum:
+      0:
+        caption: Unknown
+        description: The type is unknown.
+      1:
+        caption: Server
+        description: A [server](https://d3fend.mitre.org/dao/artifact/d3f:Server/).
+      2:
+        caption: Desktop
+        description: A [desktop computer](https://d3fend.mitre.org/dao/artifact/d3f:DesktopComputer/).
+      3:
+        caption: Laptop
+        description: A [laptop computer](https://d3fend.mitre.org/dao/artifact/d3f:LaptopComputer/).
+      4:
+        caption: Tablet
+        description: A [tablet computer](https://d3fend.mitre.org/dao/artifact/d3f:TabletComputer/).
+      5:
+        caption: Mobile
+        description: A [mobile phone](https://d3fend.mitre.org/dao/artifact/d3f:MobilePhone/).
+      6:
+        caption: Virtual
+        description: A [virtual machine](https://d3fend.mitre.org/dao/artifact/d3f:VirtualizationSoftware/).
+      7:
+        caption: IOT
+        description: A [IOT (Internet of Things) device](https://www.techtarget.com/iotagenda/definition/IoT-device).
+      8:
+        caption: Browser
+        description: A [web browser](https://d3fend.mitre.org/dao/artifact/d3f:Browser/).
+      9:
+        caption: Firewall
+        description: A [networking firewall](https://d3fend.mitre.org/dao/artifact/d3f:Firewall/).
+      10:
+        caption: Switch
+        description: A [networking switch](https://d3fend.mitre.org/dao/artifact/d3f:Switch/).
+      11:
+        caption: Hub
+        description: A [networking hub](https://en.wikipedia.org/wiki/Ethernet_hub).
+      99:
+        caption: Other
+        description: The type is not mapped. See the `type` attribute, which contains a data source specific value.
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: recommended
+    description: The unique identifier of the endpoint.
+  agent_list:
+    caption: Agent List
+    type: object_t
+    object: agent
+    array: true
+    requirement: optional
+    description: A list of `agent` objects associated with a device, endpoint, or resource.
+  domain:
+    caption: Domain
+    type: string_t
+    requirement: optional
+    description: The name of the domain.
+  hw_info:
+    caption: Hardware Info
+    type: object_t
+    object: device_hw_info
+    requirement: optional
+    description: The endpoint hardware information.
   location:
     caption: Geo Location
     type: object_t
@@ -74,31 +144,12 @@ attributes:
     requirement: optional
     observable: 3
     description: The Media Access Control (MAC) address of the endpoint.
-  name:
-    caption: Name
-    type: string_t
-    requirement: recommended
-    description: The short name of the endpoint.
-  namespace_pid:
-    caption: Namespace PID
-    type: integer_t
-    requirement: recommended
-    group: context
-    profile: container
-    description: If running under a process namespace (such as in a container), the process identifier within that process namespace.
   os:
     caption: OS
     type: object_t
     object: os
     requirement: optional
     description: The endpoint operating system.
-  owner:
-    caption: Owner
-    type: object_t
-    object: user
-    requirement: recommended
-    observable: 21
-    description: The identity of the service or user account that owns the endpoint or was last logged into it.
   subnet_uid:
     caption: Subnet UID
     type: string_t
@@ -109,57 +160,6 @@ attributes:
     type: string_t
     requirement: optional
     description: 'The endpoint type. For example: `unknown`, `server`, `desktop`, `laptop`, `tablet`, `mobile`, `virtual`, `browser`, or `other`.'
-  type_id:
-    caption: Type ID
-    type: integer_t
-    requirement: recommended
-    sibling: type
-    description: The endpoint type ID.
-    enum:
-      '0':
-        caption: Unknown
-        description: The type is unknown.
-      '1':
-        caption: Server
-        description: A [server](https://d3fend.mitre.org/dao/artifact/d3f:Server/).
-      '2':
-        caption: Desktop
-        description: A [desktop computer](https://d3fend.mitre.org/dao/artifact/d3f:DesktopComputer/).
-      '3':
-        caption: Laptop
-        description: A [laptop computer](https://d3fend.mitre.org/dao/artifact/d3f:LaptopComputer/).
-      '4':
-        caption: Tablet
-        description: A [tablet computer](https://d3fend.mitre.org/dao/artifact/d3f:TabletComputer/).
-      '5':
-        caption: Mobile
-        description: A [mobile phone](https://d3fend.mitre.org/dao/artifact/d3f:MobilePhone/).
-      '6':
-        caption: Virtual
-        description: A [virtual machine](https://d3fend.mitre.org/dao/artifact/d3f:VirtualizationSoftware/).
-      '7':
-        caption: IOT
-        description: A [IOT (Internet of Things) device](https://www.techtarget.com/iotagenda/definition/IoT-device).
-      '8':
-        caption: Browser
-        description: A [web browser](https://d3fend.mitre.org/dao/artifact/d3f:Browser/).
-      '9':
-        caption: Firewall
-        description: A [networking firewall](https://d3fend.mitre.org/dao/artifact/d3f:Firewall/).
-      '10':
-        caption: Switch
-        description: A [networking switch](https://d3fend.mitre.org/dao/artifact/d3f:Switch/).
-      '11':
-        caption: Hub
-        description: A [networking hub](https://en.wikipedia.org/wiki/Ethernet_hub).
-      '99':
-        caption: Other
-        description: The type is not mapped. See the `type` attribute, which contains a data source specific value.
-  uid:
-    caption: Unique ID
-    type: string_t
-    requirement: recommended
-    description: The unique identifier of the endpoint.
   vlan_uid:
     caption: VLAN
     type: string_t

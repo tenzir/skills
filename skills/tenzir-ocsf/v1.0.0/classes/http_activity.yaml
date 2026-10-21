@@ -1,5 +1,5 @@
-# Attributes with a `definition` path are inherited unchanged. Read that file
-# for their type, object, description, enum, and observable.
+# Attributes with `from` but no description are inherited unchanged. Their
+# descriptions are in the file of the item that `from` names.
 name: http_activity
 caption: HTTP Activity
 uid: 4002
@@ -17,66 +17,36 @@ attributes:
     sibling: activity_name
     description: The normalized identifier of the activity that triggered the event.
     enum:
-      '0':
+      0:
         caption: Unknown
         description: The event activity is unknown.
-      '1':
+      1:
         caption: Connect
         description: The CONNECT method establishes a tunnel to the server identified by the target resource.
-      '2':
+      2:
         caption: Delete
         description: The DELETE method deletes the specified resource.
-      '3':
+      3:
         caption: Get
         description: The GET method requests a representation of the specified resource. Requests using GET should only retrieve data.
-      '4':
+      4:
         caption: Head
         description: The HEAD method asks for a response identical to a GET request, but without the response body.
-      '5':
+      5:
         caption: Options
         description: The OPTIONS method describes the communication options for the target resource.
-      '6':
+      6:
         caption: Post
         description: The POST method submits an entity to the specified resource, often causing a change in state or side effects on the server.
-      '7':
+      7:
         caption: Put
         description: The PUT method replaces all current representations of the target resource with the request payload.
-      '8':
+      8:
         caption: Trace
         description: The TRACE method performs a message loop-back test along the path to the target resource.
-      '99':
+      99:
         caption: Other
         description: The event activity is not mapped.
-  activity_name:
-    caption: Activity
-    requirement: optional
-    definition: v1.0.0/classes/base_event.yaml
-  actor:
-    caption: Actor
-    requirement: optional
-    profile: host
-    definition: v1.0.0/classes/network_activity.yaml
-  api:
-    caption: API Details
-    requirement: optional
-    profile: cloud
-    definition: v1.0.0/classes/base_event.yaml
-  app_name:
-    caption: Application Name
-    requirement: optional
-    definition: v1.0.0/classes/network_activity.yaml
-  attacks:
-    caption: Attacks
-    requirement: recommended
-    profile: security_control
-    definition: v1.0.0/classes/network_activity.yaml
-  category_name:
-    caption: Category
-    type: string_t
-    requirement: optional
-    group: classification
-    from: base_event
-    description: 'The event category name, as defined by category_uid value: `Network Activity`.'
   category_uid:
     caption: Category ID
     type: integer_t
@@ -86,16 +56,9 @@ attributes:
     sibling: category_name
     description: The category unique identifier of the event.
     enum:
-      '4':
+      4:
         caption: Network Activity
         description: Network Activity events.
-  class_name:
-    caption: Class
-    type: string_t
-    requirement: optional
-    group: classification
-    from: base_event
-    description: 'The event class name, as defined by class_uid value: `HTTP Activity`.'
   class_uid:
     caption: Class ID
     type: integer_t
@@ -104,58 +67,40 @@ attributes:
     sibling: class_name
     description: The unique identifier of a class. A Class describes the attributes available in an event.
     enum:
-      '4002':
+      4002:
         caption: HTTP Activity
         description: HTTP Activity events report HTTP connection and traffic information.
-  cloud:
-    caption: Cloud
-    requirement: required
-    profile: cloud
-    definition: v1.0.0/classes/base_event.yaml
-  connection_info:
-    caption: Connection Info
-    requirement: recommended
-    definition: v1.0.0/classes/network_activity.yaml
-  count:
-    caption: Count
-    requirement: optional
-    definition: v1.0.0/classes/base_event.yaml
-  device:
-    caption: Device
-    requirement: recommended
-    profile: host
-    definition: v1.0.0/classes/network_activity.yaml
-  disposition:
-    caption: Disposition
-    requirement: optional
-    profile: security_control
-    definition: v1.0.0/classes/network_activity.yaml
+  cloud: {caption: Cloud, type: object_t, object: cloud, requirement: required, group: primary, profile: cloud, from: base_event}
   disposition_id:
     caption: Disposition ID
+    type: integer_t
     requirement: required
+    group: primary
     profile: security_control
-    definition: v1.0.0/classes/network_activity.yaml
-  dst_endpoint:
-    caption: Destination Endpoint
-    requirement: required
-    definition: v1.0.0/classes/network_activity.yaml
-  duration:
-    caption: Duration
-    requirement: optional
-    definition: v1.0.0/classes/base_event.yaml
-  end_time:
-    caption: End Time
-    requirement: optional
-    definition: v1.0.0/classes/base_event.yaml
-  end_time_dt:
-    caption: End Time
-    requirement: optional
-    profile: datetime
-    definition: v1.0.0/classes/base_event.yaml
-  enrichments:
-    caption: Enrichments
-    requirement: optional
-    definition: v1.0.0/classes/base_event.yaml
+    sibling: disposition
+    enum:
+      0: Unknown
+      1: Allowed
+      2: Blocked
+      3: Quarantined
+      4: Isolated
+      5: Deleted
+      6: Dropped
+      7: Custom Action
+      8: Approved
+      9: Restored
+      10: Exonerated
+      11: Corrected
+      12: Partially Corrected
+      13: Uncorrected
+      14: Delayed
+      15: Detected
+      16: No Action
+      17: Logged
+      18: Tagged
+      99: Other
+    from: network_activity
+  dst_endpoint: {caption: Destination Endpoint, type: object_t, object: network_endpoint, requirement: required, group: primary, observable: 20, from: network_activity}
   http_request:
     caption: HTTP Request
     type: object_t
@@ -170,99 +115,10 @@ attributes:
     requirement: required
     group: primary
     description: The HTTP Response from a web server to a requester.
-  http_status:
-    caption: HTTP Status
-    type: integer_t
-    requirement: optional
-    group: primary
-    description: The Hypertext Transfer Protocol (HTTP) [status code](https://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml) returned to the client.
-  malware:
-    caption: Malware
-    requirement: optional
-    profile: security_control
-    definition: v1.0.0/classes/network_activity.yaml
-  message:
-    caption: Message
-    requirement: recommended
-    definition: v1.0.0/classes/base_event.yaml
-  metadata:
-    caption: Metadata
-    requirement: required
-    definition: v1.0.0/classes/base_event.yaml
-  observables:
-    caption: Observables
-    requirement: optional
-    definition: v1.0.0/classes/base_event.yaml
-  proxy:
-    caption: Proxy
-    requirement: optional
-    definition: v1.0.0/classes/network_activity.yaml
-  raw_data:
-    caption: Raw Data
-    requirement: optional
-    definition: v1.0.0/classes/base_event.yaml
-  severity:
-    caption: Severity
-    requirement: optional
-    definition: v1.0.0/classes/base_event.yaml
-  severity_id:
-    caption: Severity ID
-    requirement: required
-    definition: v1.0.0/classes/base_event.yaml
-  src_endpoint:
-    caption: Source Endpoint
-    requirement: required
-    definition: v1.0.0/classes/network_activity.yaml
-  start_time:
-    caption: Start Time
-    requirement: optional
-    definition: v1.0.0/classes/base_event.yaml
-  start_time_dt:
-    caption: Start Time
-    requirement: optional
-    profile: datetime
-    definition: v1.0.0/classes/base_event.yaml
-  status:
-    caption: Status
-    requirement: optional
-    definition: v1.0.0/classes/base_event.yaml
-  status_code:
-    caption: Status Code
-    requirement: optional
-    definition: v1.0.0/classes/base_event.yaml
-  status_detail:
-    caption: Status Details
-    requirement: optional
-    definition: v1.0.0/classes/base_event.yaml
-  status_id:
-    caption: Status ID
-    requirement: recommended
-    definition: v1.0.0/classes/base_event.yaml
-  time:
-    caption: Event Time
-    requirement: required
-    definition: v1.0.0/classes/base_event.yaml
-  time_dt:
-    caption: Event Time
-    requirement: optional
-    profile: datetime
-    definition: v1.0.0/classes/base_event.yaml
-  timezone_offset:
-    caption: Timezone Offset
-    requirement: recommended
-    definition: v1.0.0/classes/base_event.yaml
-  tls:
-    caption: TLS
-    requirement: optional
-    definition: v1.0.0/classes/network_activity.yaml
-  traffic:
-    caption: Traffic
-    requirement: optional
-    definition: v1.0.0/classes/network_activity.yaml
-  type_name:
-    caption: Type Name
-    requirement: optional
-    definition: v1.0.0/classes/base_event.yaml
+  metadata: {caption: Metadata, type: object_t, object: metadata, requirement: required, group: context, from: base_event}
+  severity_id: {caption: Severity ID, type: integer_t, requirement: required, group: classification, sibling: severity, enum: {0: Unknown, 1: Informational, 2: Low, 3: Medium, 4: High, 5: Critical, 6: Fatal, 99: Other}, from: base_event}
+  src_endpoint: {caption: Source Endpoint, type: object_t, object: network_endpoint, requirement: required, group: primary, observable: 20, from: network_activity}
+  time: {caption: Event Time, type: timestamp_t, requirement: required, group: occurrence, from: base_event}
   type_uid:
     caption: Type ID
     type: integer_t
@@ -270,36 +126,54 @@ attributes:
     group: classification
     sibling: type_name
     description: 'The event type ID. It identifies the event''s semantics and structure. The value is calculated by the logging system as: `class_uid * 100 + activity_id`.'
-    enum:
-      '400200':
-        caption: 'HTTP Activity: Unknown'
-      '400201':
-        caption: 'HTTP Activity: Connect'
-        description: The CONNECT method establishes a tunnel to the server identified by the target resource.
-      '400202':
-        caption: 'HTTP Activity: Delete'
-        description: The DELETE method deletes the specified resource.
-      '400203':
-        caption: 'HTTP Activity: Get'
-        description: The GET method requests a representation of the specified resource. Requests using GET should only retrieve data.
-      '400204':
-        caption: 'HTTP Activity: Head'
-        description: The HEAD method asks for a response identical to a GET request, but without the response body.
-      '400205':
-        caption: 'HTTP Activity: Options'
-        description: The OPTIONS method describes the communication options for the target resource.
-      '400206':
-        caption: 'HTTP Activity: Post'
-        description: The POST method submits an entity to the specified resource, often causing a change in state or side effects on the server.
-      '400207':
-        caption: 'HTTP Activity: Put'
-        description: The PUT method replaces all current representations of the target resource with the request payload.
-      '400208':
-        caption: 'HTTP Activity: Trace'
-        description: The TRACE method performs a message loop-back test along the path to the target resource.
-      '400299':
-        caption: 'HTTP Activity: Other'
-  unmapped:
-    caption: Unmapped Data
+  attacks: {caption: Attacks, type: object_t, object: attack, array: true, requirement: recommended, group: primary, profile: security_control, from: network_activity}
+  connection_info: {caption: Connection Info, type: object_t, object: network_connection_info, requirement: recommended, group: primary, from: network_activity}
+  device: {caption: Device, type: object_t, object: device, requirement: recommended, group: primary, profile: host, observable: 20, from: network_activity}
+  message: {caption: Message, type: string_t, requirement: recommended, group: primary, from: base_event}
+  status_id: {caption: Status ID, type: integer_t, requirement: recommended, group: primary, sibling: status, enum: {0: Unknown, 1: Success, 2: Failure, 99: Other}, from: base_event}
+  timezone_offset: {caption: Timezone Offset, type: integer_t, requirement: recommended, group: occurrence, from: base_event}
+  activity_name: {caption: Activity, type: string_t, requirement: optional, group: classification, from: base_event}
+  actor: {caption: Actor, type: object_t, object: actor, requirement: optional, group: primary, profile: host, from: network_activity}
+  api: {caption: API Details, type: object_t, object: api, requirement: optional, group: context, profile: cloud, from: base_event}
+  app_name: {caption: Application Name, type: string_t, requirement: optional, group: context, from: network_activity}
+  category_name:
+    caption: Category
+    type: string_t
     requirement: optional
-    definition: v1.0.0/classes/base_event.yaml
+    group: classification
+    from: base_event
+    description: 'The event category name, as defined by category_uid value: `Network Activity`.'
+  class_name:
+    caption: Class
+    type: string_t
+    requirement: optional
+    group: classification
+    from: base_event
+    description: 'The event class name, as defined by class_uid value: `HTTP Activity`.'
+  count: {caption: Count, type: integer_t, requirement: optional, group: occurrence, from: base_event}
+  disposition: {caption: Disposition, type: string_t, requirement: optional, group: primary, profile: security_control, from: network_activity}
+  duration: {caption: Duration, type: integer_t, requirement: optional, group: occurrence, from: base_event}
+  end_time: {caption: End Time, type: timestamp_t, requirement: optional, group: occurrence, from: base_event}
+  end_time_dt: {caption: End Time, type: datetime_t, requirement: optional, group: occurrence, profile: datetime, from: base_event}
+  enrichments: {caption: Enrichments, type: object_t, object: enrichment, array: true, requirement: optional, group: context, from: base_event}
+  http_status:
+    caption: HTTP Status
+    type: integer_t
+    requirement: optional
+    group: primary
+    description: The Hypertext Transfer Protocol (HTTP) [status code](https://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml) returned to the client.
+  malware: {caption: Malware, type: object_t, object: malware, array: true, requirement: optional, group: primary, profile: security_control, from: network_activity}
+  observables: {caption: Observables, type: object_t, object: observable, array: true, requirement: optional, group: primary, from: base_event}
+  proxy: {caption: Proxy, type: object_t, object: network_proxy, requirement: optional, group: primary, observable: 20, from: network_activity}
+  raw_data: {caption: Raw Data, type: string_t, requirement: optional, group: context, from: base_event}
+  severity: {caption: Severity, type: string_t, requirement: optional, group: classification, from: base_event}
+  start_time: {caption: Start Time, type: timestamp_t, requirement: optional, group: occurrence, from: base_event}
+  start_time_dt: {caption: Start Time, type: datetime_t, requirement: optional, group: occurrence, profile: datetime, from: base_event}
+  status: {caption: Status, type: string_t, requirement: optional, group: primary, from: base_event}
+  status_code: {caption: Status Code, type: string_t, requirement: optional, group: primary, from: base_event}
+  status_detail: {caption: Status Details, type: string_t, requirement: optional, group: primary, from: base_event}
+  time_dt: {caption: Event Time, type: datetime_t, requirement: optional, group: occurrence, profile: datetime, from: base_event}
+  tls: {caption: TLS, type: object_t, object: tls, requirement: optional, group: primary, from: network_activity}
+  traffic: {caption: Traffic, type: object_t, object: network_traffic, requirement: optional, group: primary, from: network_activity}
+  type_name: {caption: Type Name, type: string_t, requirement: optional, group: classification, from: base_event}
+  unmapped: {caption: Unmapped Data, type: object_t, object: object, requirement: optional, group: context, from: base_event}

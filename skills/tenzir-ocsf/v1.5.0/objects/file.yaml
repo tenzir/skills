@@ -37,6 +37,78 @@ referenced_by:
     query_evidence: [file, folder]
     script: [file]
 attributes:
+  name:
+    caption: Name
+    type: file_name_t
+    requirement: required
+    observable: 7
+    description: 'The name of the file. For example: `svchost.exe`'
+  type_id:
+    caption: Type ID
+    type: integer_t
+    requirement: required
+    sibling: type
+    description: The file type ID.
+    enum:
+      0:
+        caption: Unknown
+        description: The type is unknown.
+      1:
+        caption: Regular File
+      2:
+        caption: Folder
+      3:
+        caption: Character Device
+      4:
+        caption: Block Device
+      5:
+        caption: Local Socket
+      6:
+        caption: Named Pipe
+      7:
+        caption: Symbolic Link
+      99:
+        caption: Other
+        description: The type is not mapped. See the `type` attribute, which contains a data source specific value.
+  data_classification:
+    caption: Data Classification
+    type: object_t
+    object: data_classification
+    requirement: recommended
+    group: context
+    profile: data_classification
+    deprecated:
+      since: 1.4.0
+      message: Use the attribute `data_classifications` instead
+    description: The Data Classification object includes information about data classification levels and data category types.
+  data_classifications:
+    caption: Data Classification
+    type: object_t
+    object: data_classification
+    array: true
+    requirement: recommended
+    group: context
+    profile: data_classification
+    description: A list of Data Classification objects, that include information about data classification levels and data category types, indentified by a classifier.
+  ext:
+    caption: File Extension
+    type: string_t
+    requirement: recommended
+    description: 'The extension of the file, excluding the leading dot. For example: `exe` from `svchost.exe`, or `gz` from `export.tar.gz`.'
+  hashes:
+    caption: Hashes
+    type: object_t
+    object: fingerprint
+    array: true
+    requirement: recommended
+    observable: 30
+    description: An array of hash attributes.
+  path:
+    caption: Path
+    type: file_path_t
+    requirement: recommended
+    observable: 45
+    description: 'The full path to the file. For example: `c:\windows\system32\svchost.exe`.'
   accessed_time:
     caption: Accessed Time
     type: timestamp_t
@@ -77,22 +149,22 @@ attributes:
     sibling: confidentiality
     description: The normalized identifier of the file content confidentiality indicator.
     enum:
-      '0':
+      0:
         caption: Unknown
         description: The confidentiality is unknown.
-      '1':
+      1:
         caption: Not Confidential
-      '2':
+      2:
         caption: Confidential
-      '3':
+      3:
         caption: Secret
-      '4':
+      4:
         caption: Top Secret
-      '5':
+      5:
         caption: Private
-      '6':
+      6:
         caption: Restricted
-      '99':
+      99:
         caption: Other
         description: The confidentiality is not mapped. See the `confidentiality` attribute, which contains a data source specific value.
   created_time:
@@ -113,26 +185,6 @@ attributes:
     requirement: optional
     observable: 21
     description: The user that created the file.
-  data_classification:
-    caption: Data Classification
-    type: object_t
-    object: data_classification
-    requirement: recommended
-    group: context
-    profile: data_classification
-    deprecated:
-      since: 1.4.0
-      message: Use the attribute `data_classifications` instead
-    description: The Data Classification object includes information about data classification levels and data category types.
-  data_classifications:
-    caption: Data Classification
-    type: object_t
-    object: data_classification
-    array: true
-    requirement: recommended
-    group: context
-    profile: data_classification
-    description: A list of Data Classification objects, that include information about data classification levels and data category types, indentified by a classifier.
   desc:
     caption: Description
     type: string_t
@@ -150,25 +202,25 @@ attributes:
     sibling: drive_type
     description: Identifies the type of a disk drive, i.e. fixed, removable, etc.
     enum:
-      '0':
+      0:
         caption: Unknown
         description: The drive type is unknown.
-      '1':
+      1:
         caption: Removable
         description: The drive has removable media; for example, a floppy drive, thumb drive, or flash card reader.
-      '2':
+      2:
         caption: Fixed
         description: The drive has fixed media; for example, a hard disk drive or flash drive.
-      '3':
+      3:
         caption: Remote
         description: The drive is a remote (network) drive.
-      '4':
+      4:
         caption: CD-ROM
         description: The drive is a CD-ROM drive.
-      '5':
+      5:
         caption: RAM Disk
         description: The drive is a RAM disk.
-      '99':
+      99:
         caption: Other
         description: The drive type is not mapped. See the `drive_type` attribute, which contains a data source specific value.
   encryption_details:
@@ -177,19 +229,6 @@ attributes:
     object: encryption_details
     requirement: optional
     description: The encryption details of the file. Should be populated if the file is encrypted.
-  ext:
-    caption: File Extension
-    type: string_t
-    requirement: recommended
-    description: 'The extension of the file, excluding the leading dot. For example: `exe` from `svchost.exe`, or `gz` from `export.tar.gz`.'
-  hashes:
-    caption: Hashes
-    type: object_t
-    object: fingerprint
-    array: true
-    requirement: recommended
-    observable: 30
-    description: An array of hash attributes.
   internal_name:
     caption: Internal Name
     type: string_t
@@ -239,12 +278,6 @@ attributes:
     requirement: optional
     observable: 21
     description: The user that last modified the file.
-  name:
-    caption: Name
-    type: file_name_t
-    requirement: required
-    observable: 7
-    description: 'The name of the file. For example: `svchost.exe`'
   owner:
     caption: Owner
     type: object_t
@@ -257,12 +290,6 @@ attributes:
     type: string_t
     requirement: optional
     description: 'The parent folder in which the file resides. For example: `c:\windows\system32`'
-  path:
-    caption: Path
-    type: file_path_t
-    requirement: recommended
-    observable: 45
-    description: 'The full path to the file. For example: `c:\windows\system32\svchost.exe`.'
   product:
     caption: Product
     type: object_t
@@ -303,33 +330,6 @@ attributes:
     type: string_t
     requirement: optional
     description: The file type.
-  type_id:
-    caption: Type ID
-    type: integer_t
-    requirement: required
-    sibling: type
-    description: The file type ID.
-    enum:
-      '0':
-        caption: Unknown
-        description: The type is unknown.
-      '1':
-        caption: Regular File
-      '2':
-        caption: Folder
-      '3':
-        caption: Character Device
-      '4':
-        caption: Block Device
-      '5':
-        caption: Local Socket
-      '6':
-        caption: Named Pipe
-      '7':
-        caption: Symbolic Link
-      '99':
-        caption: Other
-        description: The type is not mapped. See the `type` attribute, which contains a data source specific value.
   uid:
     caption: Unique ID
     type: string_t

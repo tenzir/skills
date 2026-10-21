@@ -1,5 +1,5 @@
-# Attributes with a `definition` path are inherited unchanged. Read that file
-# for their type, object, description, enum, and observable.
+# Attributes with `from` but no description are inherited unchanged. Their
+# descriptions are in the file of the item that `from` names.
 name: table
 caption: Table
 extends: _entity
@@ -13,6 +13,16 @@ referenced_by:
     data_security_finding: [table]
     datastore_activity: [table]
 attributes:
+  name:
+    caption: Name
+    type: string_t
+    requirement: recommended
+    description: The table name, ordinarily as assigned by a database administrator.
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: recommended
+    description: The unique identifier of the table.
   created_time:
     caption: Created Time
     type: timestamp_t
@@ -47,22 +57,9 @@ attributes:
     requirement: optional
     profile: datetime
     description: The most recent time when any changes, updates, or modifications were made within the table.
-  name:
-    caption: Name
-    type: string_t
-    requirement: recommended
-    description: The table name, ordinarily as assigned by a database administrator.
   size:
     caption: Size
     type: long_t
     requirement: optional
     description: The size of the data table in bytes.
-  uid:
-    caption: Unique ID
-    type: string_t
-    requirement: recommended
-    description: The unique identifier of the table.
-  uid_numeric:
-    caption: Numeric Unique ID
-    requirement: optional
-    definition: v1.9.0/objects/_entity.yaml
+  uid_numeric: {caption: Numeric Unique ID, type: long_t, requirement: optional, from: _entity}

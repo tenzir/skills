@@ -1,5 +1,5 @@
-# Attributes with a `definition` path are inherited unchanged. Read that file
-# for their type, object, description, enum, and observable.
+# Attributes with `from` but no description are inherited unchanged. Their
+# descriptions are in the file of the item that `from` names.
 name: feature
 caption: Feature
 extends: _entity
@@ -20,12 +20,9 @@ attributes:
     type: string_t
     requirement: recommended
     description: The unique identifier of the feature.
-  uid_numeric:
-    caption: Numeric Unique ID
-    requirement: optional
-    definition: v1.9.0/objects/_entity.yaml
   version:
     caption: Version
     type: string_t
     requirement: recommended
     description: The version of the feature.
+  uid_numeric: {caption: Numeric Unique ID, type: long_t, requirement: optional, from: _entity}

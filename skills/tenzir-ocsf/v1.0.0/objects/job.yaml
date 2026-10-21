@@ -7,6 +7,18 @@ referenced_by:
   classes:
     scheduled_job_activity: [job]
 attributes:
+  file:
+    caption: File
+    type: object_t
+    object: file
+    requirement: required
+    observable: 24
+    description: The file that pertains to the job.
+  name:
+    caption: Name
+    type: string_t
+    requirement: required
+    description: The name of the job.
   cmd_line:
     caption: Command Line
     type: string_t
@@ -17,40 +29,47 @@ attributes:
     type: timestamp_t
     requirement: recommended
     description: The time when the job was created.
+  desc:
+    caption: Description
+    type: string_t
+    requirement: recommended
+    description: The description of the job.
+  last_run_time:
+    caption: Last Run
+    type: timestamp_t
+    requirement: recommended
+    description: The time when the job was last run.
+  run_state_id:
+    caption: Run State ID
+    type: integer_t
+    requirement: recommended
+    sibling: run_state
+    description: The run state ID of the job.
+    enum:
+      0:
+        caption: Unknown
+      1:
+        caption: Ready
+      2:
+        caption: Queued
+      3:
+        caption: Running
+      4:
+        caption: Stopped
+      99:
+        caption: Other
   created_time_dt:
     caption: Created Time
     type: datetime_t
     requirement: optional
     profile: datetime
     description: The time when the job was created.
-  desc:
-    caption: Description
-    type: string_t
-    requirement: recommended
-    description: The description of the job.
-  file:
-    caption: File
-    type: object_t
-    object: file
-    requirement: required
-    observable: 24
-    description: The file that pertains to the job.
-  last_run_time:
-    caption: Last Run
-    type: timestamp_t
-    requirement: recommended
-    description: The time when the job was last run.
   last_run_time_dt:
     caption: Last Run
     type: datetime_t
     requirement: optional
     profile: datetime
     description: The time when the job was last run.
-  name:
-    caption: Name
-    type: string_t
-    requirement: required
-    description: The name of the job.
   next_run_time:
     caption: Next Run
     type: timestamp_t
@@ -67,25 +86,6 @@ attributes:
     type: string_t
     requirement: optional
     description: The run state of the job.
-  run_state_id:
-    caption: Run State ID
-    type: integer_t
-    requirement: recommended
-    sibling: run_state
-    description: The run state ID of the job.
-    enum:
-      '0':
-        caption: Unknown
-      '1':
-        caption: Ready
-      '2':
-        caption: Queued
-      '3':
-        caption: Running
-      '4':
-        caption: Stopped
-      '99':
-        caption: Other
   user:
     caption: User
     type: object_t

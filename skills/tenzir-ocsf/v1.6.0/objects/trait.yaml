@@ -9,26 +9,26 @@ referenced_by:
     finding_info: [traits]
     related_event: [traits]
 attributes:
-  category:
-    caption: Category
-    type: string_t
-    requirement: optional
-    description: The high-level grouping or classification this trait belongs to.
   name:
     caption: Name
     type: string_t
     requirement: recommended
     description: The name of the trait.
-  type:
-    caption: Type
-    type: string_t
-    requirement: optional
-    description: The type of the trait. For example, this can be used to indicate if the trait acts as a contributing factor (increases risk/severity) or a mitigating factor (decreases risk/severity), in the context of the related finding.
   uid:
     caption: Unique ID
     type: string_t
     requirement: recommended
     description: The unique identifier of the trait.
+  category:
+    caption: Category
+    type: string_t
+    requirement: optional
+    description: The high-level grouping or classification this trait belongs to.
+  type:
+    caption: Type
+    type: string_t
+    requirement: optional
+    description: The type of the trait. For example, this can be used to indicate if the trait acts as a contributing factor (increases risk/severity) or a mitigating factor (decreases risk/severity), in the context of the related finding.
   values:
     caption: Values
     type: string_t

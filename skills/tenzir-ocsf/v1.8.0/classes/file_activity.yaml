@@ -1,5 +1,5 @@
-# Attributes with a `definition` path are inherited unchanged. Read that file
-# for their type, object, description, enum, and observable.
+# Attributes with `from` but no description are inherited unchanged. Their
+# descriptions are in the file of the item that `from` names.
 name: file_activity
 caption: File System Activity
 uid: 1001
@@ -15,22 +15,6 @@ references:
 - description: D3FEND™ Ontology d3f:FileEvent
   url: https://d3fend.mitre.org/event/d3f:FileEvent/
 attributes:
-  access_mask:
-    caption: Access Mask
-    type: integer_t
-    requirement: optional
-    group: context
-    description: The access mask in a platform-native format.
-  action:
-    caption: Action
-    requirement: optional
-    profile: security_control
-    definition: v1.8.0/classes/base_event.yaml
-  action_id:
-    caption: Action ID
-    requirement: recommended
-    profile: security_control
-    definition: v1.8.0/classes/base_event.yaml
   activity_id:
     caption: Activity ID
     type: integer_t
@@ -39,58 +23,54 @@ attributes:
     sibling: activity_name
     description: The normalized identifier of the activity that triggered the event.
     enum:
-      '0':
+      0:
         caption: Unknown
         description: The event activity is unknown.
-      '1':
+      1:
         caption: Create
         description: A request to create a new file on a file system.
-      '2':
+      2:
         caption: Read
         description: A request to read data from a file on a file system.
-      '3':
+      3:
         caption: Update
         description: A request to write data to a file on a file system.
-      '4':
+      4:
         caption: Delete
         description: A request to delete a file on a file system.
-      '5':
+      5:
         caption: Rename
         description: A request to rename a file on a file system.
-      '6':
+      6:
         caption: Set Attributes
         description: A request to set attributes for a file on a file system.
-      '7':
+      7:
         caption: Set Security
         description: A request to set security for a file on a file system.
-      '8':
+      8:
         caption: Get Attributes
         description: A request to get attributes for a file on a file system.
-      '9':
+      9:
         caption: Get Security
         description: A request to get security for a file on a file system.
-      '10':
+      10:
         caption: Encrypt
         description: A request to encrypt a file on a file system.
-      '11':
+      11:
         caption: Decrypt
         description: A request to decrypt a file on a file system.
-      '12':
+      12:
         caption: Mount
         description: A request to mount a file on a file system.
-      '13':
+      13:
         caption: Unmount
         description: A request to unmount a file from a file system.
-      '14':
+      14:
         caption: Open
         description: A request to create a file handle.
-      '99':
+      99:
         caption: Other
         description: The event activity is not mapped. See the `activity_name` attribute, which contains a data source specific value.
-  activity_name:
-    caption: Activity
-    requirement: optional
-    definition: v1.8.0/classes/base_event.yaml
   actor:
     caption: Actor
     type: object_t
@@ -98,28 +78,6 @@ attributes:
     requirement: required
     group: primary
     description: The actor that performed the activity on the `file` object
-  api:
-    caption: API Details
-    requirement: optional
-    profile: cloud
-    definition: v1.8.0/classes/base_event.yaml
-  attacks:
-    caption: MITRE ATT&CK® and ATLAS™ Details
-    requirement: optional
-    profile: security_control
-    definition: v1.8.0/classes/base_event.yaml
-  authorizations:
-    caption: Authorization Information
-    requirement: optional
-    profile: security_control
-    definition: v1.8.0/classes/base_event.yaml
-  category_name:
-    caption: Category
-    type: string_t
-    requirement: optional
-    group: classification
-    from: base_event
-    description: 'The event category name, as defined by category_uid value: `System Activity`.'
   category_uid:
     caption: Category ID
     type: integer_t
@@ -129,16 +87,9 @@ attributes:
     sibling: category_name
     description: The category unique identifier of the event.
     enum:
-      '1':
+      1:
         caption: System Activity
         description: System Activity events.
-  class_name:
-    caption: Class
-    type: string_t
-    requirement: optional
-    group: classification
-    from: base_event
-    description: 'The event class name, as defined by class_uid value: `File System Activity`.'
   class_uid:
     caption: Class ID
     type: integer_t
@@ -147,14 +98,31 @@ attributes:
     sibling: class_name
     description: The unique identifier of a class. A class describes the attributes available in an event.
     enum:
-      '1001':
+      1001:
         caption: File System Activity
         description: File System Activity events report when a process performs an action on a file or folder.
-  cloud:
-    caption: Cloud
+  cloud: {caption: Cloud, type: object_t, object: cloud, requirement: required, group: primary, profile: cloud, from: base_event}
+  device: {caption: Device, type: object_t, object: device, requirement: required, group: primary, observable: 20, from: system}
+  file:
+    caption: File
+    type: object_t
+    object: file
     requirement: required
-    profile: cloud
-    definition: v1.8.0/classes/base_event.yaml
+    group: primary
+    observable: 24
+    description: The file that is the target of the activity.
+  metadata: {caption: Metadata, type: object_t, object: metadata, requirement: required, group: context, from: base_event}
+  osint: {caption: OSINT, type: object_t, object: osint, array: true, requirement: required, group: primary, profile: osint, from: base_event}
+  severity_id: {caption: Severity ID, type: integer_t, requirement: required, group: classification, sibling: severity, enum: {0: Unknown, 1: Informational, 2: Low, 3: Medium, 4: High, 5: Critical, 6: Fatal, 99: Other}, from: base_event}
+  time: {caption: Event Time, type: timestamp_t, requirement: required, group: occurrence, from: base_event}
+  type_uid:
+    caption: Type ID
+    type: long_t
+    requirement: required
+    group: classification
+    sibling: type_name
+    description: 'The event/finding type ID. It identifies the event''s semantics and structure. The value is calculated by the logging system as: `class_uid * 100 + activity_id`.'
+  action_id: {caption: Action ID, type: integer_t, requirement: recommended, group: primary, profile: security_control, sibling: action, enum: {0: Unknown, 1: Allowed, 2: Denied, 3: Observed, 4: Modified, 99: Other}, from: base_event}
   component:
     caption: Component
     type: string_t
@@ -164,76 +132,51 @@ attributes:
       The name or relative pathname of a sub-component of the data object, if applicable.
 
       For example: `attachment.doc`, `attachment.zip/bad.doc`, or `part.mime/part.cab/part.uue/part.doc`.
-  confidence:
-    caption: Confidence
-    requirement: optional
-    profile: security_control
-    definition: v1.8.0/classes/base_event.yaml
-  confidence_id:
-    caption: Confidence ID
-    requirement: recommended
-    profile: security_control
-    definition: v1.8.0/classes/base_event.yaml
-  confidence_score:
-    caption: Confidence Score
-    requirement: optional
-    profile: security_control
-    definition: v1.8.0/classes/base_event.yaml
-  connection_uid:
-    caption: Connection Identifier
-    type: string_t
-    requirement: optional
-    group: context
-    description: The network connection identifier.
-  count:
-    caption: Count
-    requirement: optional
-    definition: v1.8.0/classes/base_event.yaml
+  confidence_id: {caption: Confidence ID, type: integer_t, requirement: recommended, group: context, profile: security_control, sibling: confidence, enum: {0: Unknown, 1: Low, 2: Medium, 3: High, 99: Other}, from: base_event}
   create_mask:
     caption: Create Mask
     type: string_t
     requirement: recommended
     group: primary
     description: The original Windows mask that is required to create the object.
-  device:
-    caption: Device
-    requirement: required
-    definition: v1.8.0/classes/system.yaml
-  disposition:
-    caption: Disposition
-    requirement: optional
-    profile: security_control
-    definition: v1.8.0/classes/base_event.yaml
   disposition_id:
     caption: Disposition ID
+    type: integer_t
     requirement: recommended
-    profile: security_control
-    definition: v1.8.0/classes/base_event.yaml
-  duration:
-    caption: Duration Milliseconds
-    requirement: optional
-    definition: v1.8.0/classes/base_event.yaml
-  end_time:
-    caption: End Time
-    requirement: optional
-    definition: v1.8.0/classes/base_event.yaml
-  end_time_dt:
-    caption: End Time
-    requirement: optional
-    profile: datetime
-    definition: v1.8.0/classes/base_event.yaml
-  enrichments:
-    caption: Enrichments
-    requirement: optional
-    definition: v1.8.0/classes/base_event.yaml
-  file:
-    caption: File
-    type: object_t
-    object: file
-    requirement: required
     group: primary
-    observable: 24
-    description: The file that is the target of the activity.
+    profile: security_control
+    sibling: disposition
+    enum:
+      0: Unknown
+      1: Allowed
+      2: Blocked
+      3: Quarantined
+      4: Isolated
+      5: Deleted
+      6: Dropped
+      7: Custom Action
+      8: Approved
+      9: Restored
+      10: Exonerated
+      11: Corrected
+      12: Partially Corrected
+      13: Uncorrected
+      14: Delayed
+      15: Detected
+      16: No Action
+      17: Logged
+      18: Tagged
+      19: Alert
+      20: Count
+      21: Reset
+      22: Captcha
+      23: Challenge
+      24: Access Revoked
+      25: Rejected
+      26: Unauthorized
+      27: Error
+      99: Other
+    from: base_event
   file_diff:
     caption: File Diff
     type: string_t
@@ -248,185 +191,67 @@ attributes:
     group: primary
     observable: 24
     description: The resulting file object when the activity was allowed and successful.
-  firewall_rule:
-    caption: Firewall Rule
+  is_alert: {caption: Alert, type: boolean_t, requirement: recommended, group: primary, profile: security_control, from: base_event}
+  message: {caption: Message, type: string_t, requirement: recommended, group: primary, from: base_event}
+  observables: {caption: Observables, type: object_t, object: observable, array: true, requirement: recommended, group: primary, from: base_event}
+  status: {caption: Status, type: string_t, requirement: recommended, group: primary, from: base_event}
+  status_code: {caption: Status Code, type: string_t, requirement: recommended, group: primary, from: base_event}
+  status_detail: {caption: Status Detail, type: string_t, requirement: recommended, group: primary, from: base_event}
+  status_id: {caption: Status ID, type: integer_t, requirement: recommended, group: primary, sibling: status, enum: {0: Unknown, 1: Success, 2: Failure, 99: Other}, from: base_event}
+  timezone_offset: {caption: Timezone Offset, type: integer_t, requirement: recommended, group: occurrence, from: base_event}
+  access_mask:
+    caption: Access Mask
+    type: integer_t
     requirement: optional
-    profile: security_control
-    definition: v1.8.0/classes/base_event.yaml
-  is_alert:
-    caption: Alert
-    requirement: recommended
-    profile: security_control
-    definition: v1.8.0/classes/base_event.yaml
-  malware:
-    caption: Malware
+    group: context
+    description: The access mask in a platform-native format.
+  action: {caption: Action, type: string_t, requirement: optional, group: primary, profile: security_control, from: base_event}
+  activity_name: {caption: Activity, type: string_t, requirement: optional, group: classification, from: base_event}
+  api: {caption: API Details, type: object_t, object: api, requirement: optional, group: context, profile: cloud, from: base_event}
+  attacks: {caption: MITRE ATT&CK® and ATLAS™ Details, type: object_t, object: attack, array: true, requirement: optional, group: primary, profile: security_control, from: base_event}
+  authorizations: {caption: Authorization Information, type: object_t, object: authorization, array: true, requirement: optional, group: primary, profile: security_control, from: base_event}
+  category_name:
+    caption: Category
+    type: string_t
     requirement: optional
-    profile: security_control
-    definition: v1.8.0/classes/base_event.yaml
-  malware_scan_info:
-    caption: Malware Scan Info
-    requirement: optional
-    profile: security_control
-    definition: v1.8.0/classes/base_event.yaml
-  message:
-    caption: Message
-    requirement: recommended
-    definition: v1.8.0/classes/base_event.yaml
-  metadata:
-    caption: Metadata
-    requirement: required
-    definition: v1.8.0/classes/base_event.yaml
-  observables:
-    caption: Observables
-    requirement: recommended
-    definition: v1.8.0/classes/base_event.yaml
-  osint:
-    caption: OSINT
-    requirement: required
-    profile: osint
-    definition: v1.8.0/classes/base_event.yaml
-  policy:
-    caption: Policy
-    requirement: optional
-    profile: security_control
-    definition: v1.8.0/classes/base_event.yaml
-  raw_data:
-    caption: Raw Data
-    requirement: optional
-    definition: v1.8.0/classes/base_event.yaml
-  raw_data_hash:
-    caption: Raw Data Hash
-    requirement: optional
-    definition: v1.8.0/classes/base_event.yaml
-  raw_data_size:
-    caption: Raw Data Size
-    requirement: optional
-    definition: v1.8.0/classes/base_event.yaml
-  risk_details:
-    caption: Risk Details
-    requirement: optional
-    profile: security_control
-    definition: v1.8.0/classes/base_event.yaml
-  risk_level:
-    caption: Risk Level
-    requirement: optional
-    profile: security_control
-    definition: v1.8.0/classes/base_event.yaml
-  risk_level_id:
-    caption: Risk Level ID
-    requirement: optional
-    profile: security_control
-    definition: v1.8.0/classes/base_event.yaml
-  risk_score:
-    caption: Risk Score
-    requirement: optional
-    profile: security_control
-    definition: v1.8.0/classes/base_event.yaml
-  severity:
-    caption: Severity
-    requirement: optional
-    definition: v1.8.0/classes/base_event.yaml
-  severity_id:
-    caption: Severity ID
-    requirement: required
-    definition: v1.8.0/classes/base_event.yaml
-  start_time:
-    caption: Start Time
-    requirement: optional
-    definition: v1.8.0/classes/base_event.yaml
-  start_time_dt:
-    caption: Start Time
-    requirement: optional
-    profile: datetime
-    definition: v1.8.0/classes/base_event.yaml
-  status:
-    caption: Status
-    requirement: recommended
-    definition: v1.8.0/classes/base_event.yaml
-  status_code:
-    caption: Status Code
-    requirement: recommended
-    definition: v1.8.0/classes/base_event.yaml
-  status_detail:
-    caption: Status Detail
-    requirement: recommended
-    definition: v1.8.0/classes/base_event.yaml
-  status_id:
-    caption: Status ID
-    requirement: recommended
-    definition: v1.8.0/classes/base_event.yaml
-  time:
-    caption: Event Time
-    requirement: required
-    definition: v1.8.0/classes/base_event.yaml
-  time_dt:
-    caption: Event Time
-    requirement: optional
-    profile: datetime
-    definition: v1.8.0/classes/base_event.yaml
-  timezone_offset:
-    caption: Timezone Offset
-    requirement: recommended
-    definition: v1.8.0/classes/base_event.yaml
-  type_name:
-    caption: Type Name
-    requirement: optional
-    definition: v1.8.0/classes/base_event.yaml
-  type_uid:
-    caption: Type ID
-    type: long_t
-    requirement: required
     group: classification
-    sibling: type_name
-    description: 'The event/finding type ID. It identifies the event''s semantics and structure. The value is calculated by the logging system as: `class_uid * 100 + activity_id`.'
-    enum:
-      '100100':
-        caption: 'File System Activity: Unknown'
-      '100101':
-        caption: 'File System Activity: Create'
-        description: A request to create a new file on a file system.
-      '100102':
-        caption: 'File System Activity: Read'
-        description: A request to read data from a file on a file system.
-      '100103':
-        caption: 'File System Activity: Update'
-        description: A request to write data to a file on a file system.
-      '100104':
-        caption: 'File System Activity: Delete'
-        description: A request to delete a file on a file system.
-      '100105':
-        caption: 'File System Activity: Rename'
-        description: A request to rename a file on a file system.
-      '100106':
-        caption: 'File System Activity: Set Attributes'
-        description: A request to set attributes for a file on a file system.
-      '100107':
-        caption: 'File System Activity: Set Security'
-        description: A request to set security for a file on a file system.
-      '100108':
-        caption: 'File System Activity: Get Attributes'
-        description: A request to get attributes for a file on a file system.
-      '100109':
-        caption: 'File System Activity: Get Security'
-        description: A request to get security for a file on a file system.
-      '100110':
-        caption: 'File System Activity: Encrypt'
-        description: A request to encrypt a file on a file system.
-      '100111':
-        caption: 'File System Activity: Decrypt'
-        description: A request to decrypt a file on a file system.
-      '100112':
-        caption: 'File System Activity: Mount'
-        description: A request to mount a file on a file system.
-      '100113':
-        caption: 'File System Activity: Unmount'
-        description: A request to unmount a file from a file system.
-      '100114':
-        caption: 'File System Activity: Open'
-        description: A request to create a file handle.
-      '100199':
-        caption: 'File System Activity: Other'
-  unmapped:
-    caption: Unmapped Data
+    from: base_event
+    description: 'The event category name, as defined by category_uid value: `System Activity`.'
+  class_name:
+    caption: Class
+    type: string_t
     requirement: optional
-    definition: v1.8.0/classes/base_event.yaml
+    group: classification
+    from: base_event
+    description: 'The event class name, as defined by class_uid value: `File System Activity`.'
+  confidence: {caption: Confidence, type: string_t, requirement: optional, group: context, profile: security_control, from: base_event}
+  confidence_score: {caption: Confidence Score, type: integer_t, requirement: optional, group: context, profile: security_control, from: base_event}
+  connection_uid:
+    caption: Connection Identifier
+    type: string_t
+    requirement: optional
+    group: context
+    description: The network connection identifier.
+  count: {caption: Count, type: integer_t, requirement: optional, group: occurrence, from: base_event}
+  disposition: {caption: Disposition, type: string_t, requirement: optional, group: primary, profile: security_control, from: base_event}
+  duration: {caption: Duration Milliseconds, type: long_t, requirement: optional, group: occurrence, from: base_event}
+  end_time: {caption: End Time, type: timestamp_t, requirement: optional, group: occurrence, from: base_event}
+  end_time_dt: {caption: End Time, type: datetime_t, requirement: optional, group: occurrence, profile: datetime, from: base_event}
+  enrichments: {caption: Enrichments, type: object_t, object: enrichment, array: true, requirement: optional, group: context, from: base_event}
+  firewall_rule: {caption: Firewall Rule, type: object_t, object: firewall_rule, requirement: optional, group: primary, profile: security_control, from: base_event}
+  malware: {caption: Malware, type: object_t, object: malware, array: true, requirement: optional, group: primary, profile: security_control, from: base_event}
+  malware_scan_info: {caption: Malware Scan Info, type: object_t, object: malware_scan_info, requirement: optional, group: primary, profile: security_control, from: base_event}
+  policy: {caption: Policy, type: object_t, object: policy, requirement: optional, group: primary, profile: security_control, from: base_event}
+  raw_data: {caption: Raw Data, type: string_t, requirement: optional, group: context, from: base_event}
+  raw_data_hash: {caption: Raw Data Hash, type: object_t, object: fingerprint, requirement: optional, group: context, observable: 30, from: base_event}
+  raw_data_size: {caption: Raw Data Size, type: long_t, requirement: optional, group: context, from: base_event}
+  risk_details: {caption: Risk Details, type: string_t, requirement: optional, group: context, profile: security_control, from: base_event}
+  risk_level: {caption: Risk Level, type: string_t, requirement: optional, group: context, profile: security_control, from: base_event}
+  risk_level_id: {caption: Risk Level ID, type: integer_t, requirement: optional, group: context, profile: security_control, sibling: risk_level, enum: {0: Info, 1: Low, 2: Medium, 3: High, 4: Critical, 99: Other}, from: base_event}
+  risk_score: {caption: Risk Score, type: integer_t, requirement: optional, group: context, profile: security_control, from: base_event}
+  severity: {caption: Severity, type: string_t, requirement: optional, group: classification, from: base_event}
+  start_time: {caption: Start Time, type: timestamp_t, requirement: optional, group: occurrence, from: base_event}
+  start_time_dt: {caption: Start Time, type: datetime_t, requirement: optional, group: occurrence, profile: datetime, from: base_event}
+  time_dt: {caption: Event Time, type: datetime_t, requirement: optional, group: occurrence, profile: datetime, from: base_event}
+  type_name: {caption: Type Name, type: string_t, requirement: optional, group: classification, from: base_event}
+  unmapped: {caption: Unmapped Data, type: object_t, object: object, requirement: optional, group: context, from: base_event}

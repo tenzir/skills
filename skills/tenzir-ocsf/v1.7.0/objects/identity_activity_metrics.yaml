@@ -7,6 +7,11 @@ referenced_by:
   classes:
     iam_analysis_finding: [identity_activity_metrics]
 attributes:
+  last_seen_time:
+    caption: Last Seen
+    type: timestamp_t
+    requirement: recommended
+    description: The timestamp of the most recent activity performed by this identity, including authentication, resource access, or API calls. This is the most comprehensive indicator of identity usage recency.
   first_seen_time:
     caption: First Seen
     type: timestamp_t
@@ -29,11 +34,6 @@ attributes:
     requirement: optional
     profile: datetime
     description: The timestamp when this identity last successfully authenticated to any system or service. This differs from `last_seen_time` as it specifically tracks authentication events rather than all activities.
-  last_seen_time:
-    caption: Last Seen
-    type: timestamp_t
-    requirement: recommended
-    description: The timestamp of the most recent activity performed by this identity, including authentication, resource access, or API calls. This is the most comprehensive indicator of identity usage recency.
   last_seen_time_dt:
     caption: Last Seen
     type: datetime_t

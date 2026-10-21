@@ -13,16 +13,16 @@ attributes:
     type: string_t
     requirement: required
     description: The class of the peripheral device.
-  model:
-    caption: Model
-    type: string_t
-    requirement: recommended
-    description: The peripheral device model.
   name:
     caption: Name
     type: string_t
     requirement: required
     description: The name of the peripheral device.
+  model:
+    caption: Model
+    type: string_t
+    requirement: recommended
+    description: The peripheral device model.
   serial_number:
     caption: Serial Number
     type: string_t

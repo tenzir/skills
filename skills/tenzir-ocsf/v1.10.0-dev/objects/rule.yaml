@@ -1,5 +1,5 @@
-# Attributes with a `definition` path are inherited unchanged. Read that file
-# for their type, object, description, enum, and observable.
+# Attributes with `from` but no description are inherited unchanged. Their
+# descriptions are in the file of the item that `from` names.
 name: rule
 caption: Rule
 extends: _entity
@@ -12,6 +12,16 @@ referenced_by:
     cis_benchmark_result: [rule]
     discovery_details: [rule]
 attributes:
+  name:
+    caption: Name
+    type: string_t
+    requirement: recommended
+    description: The name of the rule that generated the event.
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: recommended
+    description: The unique identifier of the rule that generated the event.
   category:
     caption: Category
     type: string_t
@@ -22,25 +32,12 @@ attributes:
     type: string_t
     requirement: optional
     description: The description of the rule that generated the event.
-  name:
-    caption: Name
-    type: string_t
-    requirement: recommended
-    description: The name of the rule that generated the event.
   type:
     caption: Type
     type: string_t
     requirement: optional
     description: The rule type.
-  uid:
-    caption: Unique ID
-    type: string_t
-    requirement: recommended
-    description: The unique identifier of the rule that generated the event.
-  uid_numeric:
-    caption: Numeric Unique ID
-    requirement: optional
-    definition: v1.10.0-dev/objects/_entity.yaml
+  uid_numeric: {caption: Numeric Unique ID, type: long_t, requirement: optional, from: _entity}
   version:
     caption: Version
     type: string_t

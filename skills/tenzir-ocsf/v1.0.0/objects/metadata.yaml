@@ -39,6 +39,32 @@ referenced_by:
     web_resource_access_activity: [metadata]
     web_resources_activity: [metadata]
 attributes:
+  product:
+    caption: Product
+    type: object_t
+    object: product
+    requirement: required
+    description: The product that reported the event.
+  version:
+    caption: Version
+    type: string_t
+    requirement: required
+    description: 'The version of the OCSF schema, using Semantic Versioning Specification ([SemVer](https://semver.org)). For example: 1.0.0. Event consumers use the version to determine the available event attributes.'
+  log_name:
+    caption: Log Name
+    type: string_t
+    requirement: recommended
+    description: 'The event log name. For example, syslog file name or Windows logging subsystem: Security.'
+  log_provider:
+    caption: Log Provider
+    type: string_t
+    requirement: recommended
+    description: The logging provider or logging service that logged the event. For example, Microsoft-Windows-Security-Auditing.
+  original_time:
+    caption: Original Time
+    type: string_t
+    requirement: recommended
+    description: The original event time as reported by the event source. For example, the time in the original format from system event log such as Syslog on Unix/Linux and the System event file on Windows. Omit if event is generated instead of collected via logs.
   correlation_uid:
     caption: Correlation UID
     type: string_t
@@ -64,16 +90,6 @@ attributes:
       The list of category labels attached to the event or specific attributes. Labels are user defined tags or aliases added at normalization time.
 
       For example: `["network", "connection.ip:destination", "device.ip:source"]`
-  log_name:
-    caption: Log Name
-    type: string_t
-    requirement: recommended
-    description: 'The event log name. For example, syslog file name or Windows logging subsystem: Security.'
-  log_provider:
-    caption: Log Provider
-    type: string_t
-    requirement: recommended
-    description: The logging provider or logging service that logged the event. For example, Microsoft-Windows-Security-Auditing.
   log_version:
     caption: Log Version
     type: string_t
@@ -107,11 +123,6 @@ attributes:
     requirement: optional
     profile: datetime
     description: The time when the event was last modified or enriched.
-  original_time:
-    caption: Original Time
-    type: string_t
-    requirement: recommended
-    description: The original event time as reported by the event source. For example, the time in the original format from system event log such as Syslog on Unix/Linux and the System event file on Windows. Omit if event is generated instead of collected via logs.
   processed_time:
     caption: Processed Time
     type: timestamp_t
@@ -123,12 +134,6 @@ attributes:
     requirement: optional
     profile: datetime
     description: The event processed time, such as an ETL operation.
-  product:
-    caption: Product
-    type: object_t
-    object: product
-    requirement: required
-    description: The product that reported the event.
   profiles:
     caption: Profiles
     type: string_t
@@ -145,8 +150,3 @@ attributes:
     type: string_t
     requirement: optional
     description: The logging system-assigned unique identifier of an event instance.
-  version:
-    caption: Version
-    type: string_t
-    requirement: required
-    description: 'The version of the OCSF schema, using Semantic Versioning Specification ([SemVer](https://semver.org)). For example: 1.0.0. Event consumers use the version to determine the available event attributes.'

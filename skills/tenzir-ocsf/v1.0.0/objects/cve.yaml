@@ -8,16 +8,15 @@ referenced_by:
     malware: [cves]
     vulnerability: [cve]
 attributes:
+  uid:
+    caption: CVE ID
+    type: string_t
+    requirement: required
+    description: 'The Common Vulnerabilities and Exposures unique number assigned to a specific computer vulnerability. A CVE Identifier begins with 4 digits representing the year followed by a sequence of digits that acts as a unique identifier. For example: `CVE-2021-12345`.'
   created_time:
     caption: Record Creation Date
     type: timestamp_t
     requirement: recommended
-    description: The Record Creation Date identifies when the CVE ID was issued to a CVE Numbering Authority (CNA) or the CVE Record was published on the CVE List. Note that the Record Creation Date does not necessarily indicate when this vulnerability was discovered, shared with the affected vendor, publicly disclosed, or updated in CVE.
-  created_time_dt:
-    caption: Record Creation Date
-    type: datetime_t
-    requirement: optional
-    profile: datetime
     description: The Record Creation Date identifies when the CVE ID was issued to a CVE Numbering Authority (CNA) or the CVE Record was published on the CVE List. Note that the Record Creation Date does not necessarily indicate when this vulnerability was discovered, shared with the affected vendor, publicly disclosed, or updated in CVE.
   cvss:
     caption: CVSS Score
@@ -25,6 +24,20 @@ attributes:
     object: cvss
     requirement: recommended
     description: The CVSS object details Common Vulnerability Scoring System ([CVSS](https://www.first.org/cvss/)) scores from the advisory that are related to the vulnerability.
+  type:
+    caption: Vulnerability Type
+    type: string_t
+    requirement: recommended
+    description: |-
+      The vulnerability type as selected from a large dropdown menu during CVE refinement.
+
+      Most frequently used vulnerability types are: `DoS`, `Code Execution`, `Overflow`, `Memory Corruption`, `Sql Injection`, `XSS`, `Directory Traversal`, `Http Response Splitting`, `Bypass something`, `Gain Information`, `Gain Privileges`, `CSRF`, `File Inclusion`. For more information see [Vulnerabilities By Type](https://www.cvedetails.com/vulnerabilities-by-types.php) distributions.
+  created_time_dt:
+    caption: Record Creation Date
+    type: datetime_t
+    requirement: optional
+    profile: datetime
+    description: The Record Creation Date identifies when the CVE ID was issued to a CVE Numbering Authority (CNA) or the CVE Record was published on the CVE List. Note that the Record Creation Date does not necessarily indicate when this vulnerability was discovered, shared with the affected vendor, publicly disclosed, or updated in CVE.
   cwe_uid:
     caption: CWE UID
     type: string_t
@@ -53,16 +66,3 @@ attributes:
     object: product
     requirement: optional
     description: The product where the vulnerability was discovered.
-  type:
-    caption: Vulnerability Type
-    type: string_t
-    requirement: recommended
-    description: |-
-      The vulnerability type as selected from a large dropdown menu during CVE refinement.
-
-      Most frequently used vulnerability types are: `DoS`, `Code Execution`, `Overflow`, `Memory Corruption`, `Sql Injection`, `XSS`, `Directory Traversal`, `Http Response Splitting`, `Bypass something`, `Gain Information`, `Gain Privileges`, `CSRF`, `File Inclusion`. For more information see [Vulnerabilities By Type](https://www.cvedetails.com/vulnerabilities-by-types.php) distributions.
-  uid:
-    caption: CVE ID
-    type: string_t
-    requirement: required
-    description: 'The Common Vulnerabilities and Exposures unique number assigned to a specific computer vulnerability. A CVE Identifier begins with 4 digits representing the year followed by a sequence of digits that acts as a unique identifier. For example: `CVE-2021-12345`.'

@@ -1,5 +1,5 @@
-# Attributes with a `definition` path are inherited unchanged. Read that file
-# for their type, object, description, enum, and observable.
+# Attributes with `from` but no description are inherited unchanged. Their
+# descriptions are in the file of the item that `from` names.
 name: win/win_resource
 caption: Windows Resource
 extension: win
@@ -12,70 +12,6 @@ referenced_by:
   classes:
     win/windows_resource_activity: [win_resource]
 attributes:
-  created_time:
-    caption: Created Time
-    requirement: optional
-    definition: v1.8.0/objects/_resource.yaml
-  created_time_dt:
-    caption: Created Time
-    type: datetime_t
-    requirement: optional
-    profile: datetime
-    from: _resource
-    description: The time when the resource was created.
-  data:
-    caption: Data
-    requirement: optional
-    definition: v1.8.0/objects/_resource.yaml
-  data_classification:
-    caption: Data Classification
-    requirement: recommended
-    profile: data_classification
-    definition: v1.8.0/objects/_resource.yaml
-  data_classifications:
-    caption: Data Classification
-    requirement: recommended
-    profile: data_classification
-    definition: v1.8.0/objects/_resource.yaml
-  details:
-    caption: Details
-    type: string_t
-    requirement: optional
-    description: The string detailing the attributes of the resource object.
-  labels:
-    caption: Labels
-    requirement: optional
-    definition: v1.8.0/objects/_resource.yaml
-  modified_time:
-    caption: Modified Time
-    requirement: optional
-    definition: v1.8.0/objects/_resource.yaml
-  modified_time_dt:
-    caption: Modified Time
-    type: datetime_t
-    requirement: optional
-    profile: datetime
-    from: _resource
-    description: The time when the resource was last modified.
-  name:
-    caption: Name
-    type: string_t
-    requirement: recommended
-    description: The name of the resource object.
-  svc_name:
-    caption: Service Name
-    type: string_t
-    requirement: optional
-    description: The Windows service acting as the object server for the resource object, such as Security or Security Account Manager.
-  tags:
-    caption: Tags
-    requirement: optional
-    definition: v1.8.0/objects/_resource.yaml
-  type:
-    caption: Type
-    type: string_t
-    requirement: optional
-    description: The type of the Windows resource object.
   type_id:
     caption: Type ID
     type: integer_t
@@ -83,215 +19,253 @@ attributes:
     sibling: type
     description: The normalized type identifier of the Windows resource object accessed.
     enum:
-      '0':
+      0:
         caption: Unknown
         description: The resource object type is unknown.
-      '1':
+      1:
         caption: Directory
         references:
         - description: Object Manager Directory Objects
           url: https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/object-directories
-      '2':
+      2:
         caption: Event
         references:
         - description: Event Objects and CreateEvent Function
           url: https://learn.microsoft.com/en-us/windows/win32/sync/event-objects
-      '3':
+      3:
         caption: Timer
         references:
         - description: Timer Objects and CreateWaitableTimer Function
           url: https://learn.microsoft.com/en-us/windows/win32/sync/waitable-timer-objects
-      '4':
+      4:
         caption: Device
         references:
         - description: Device Objects and I/O Manager
           url: https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/device-objects-and-device-stacks
-      '5':
+      5:
         caption: Mutant
         references:
         - description: Mutex Objects and CreateMutex Function
           url: https://learn.microsoft.com/en-us/windows/win32/sync/mutex-objects
-      '6':
+      6:
         caption: Type
-      '7':
+      7:
         caption: File
         references:
         - description: File objects
           url: https://learn.microsoft.com/en-us/windows/win32/fileio/file-objects
-      '8':
+      8:
         caption: Token
         references:
         - description: Access Tokens and Token objects
           url: https://learn.microsoft.com/en-us/windows/win32/secauthz/access-tokens
-      '9':
+      9:
         caption: Thread
         references:
         - description: Thread Objects and CreateThread Function
           url: https://learn.microsoft.com/en-us/windows/win32/procthread/creating-threads
-      '10':
+      10:
         caption: Section
         references:
         - description: Section object
           url: https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/section-objects-and-views
-      '11':
+      11:
         caption: WindowStation
         references:
         - description: Window Station objects
           url: https://learn.microsoft.com/en-us/windows/win32/winstation/window-stations
-      '12':
+      12:
         caption: DebugObject
-      '13':
+      13:
         caption: FilterCommunicationPort
-      '14':
+      14:
         caption: EventPair
-      '15':
+      15:
         caption: Driver
         references:
         - description: Driver objects
           url: https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/introduction-to-driver-objects
-      '16':
+      16:
         caption: IoCompletion
         references:
         - description: I/O Completion Ports
           url: https://learn.microsoft.com/en-us/windows/win32/fileio/i-o-completion-ports
-      '17':
+      17:
         caption: Controller
         references:
         - description: Controller objects
           url: https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/introduction-to-controller-objects
-      '18':
+      18:
         caption: SymbolicLink
         references:
         - description: mklink function
           url: https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/mklink
-      '19':
+      19:
         caption: WmiGuid
         references:
         - description: WMI Class Qualifiers
           url: https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/wmi-class-qualifiers
-      '20':
+      20:
         caption: Process
         references:
         - description: Process objects and CreateProcess Function
           url: https://learn.microsoft.com/en-us/windows/win32/procthread/creating-processes
-      '21':
+      21:
         caption: Profile
         references:
         - description: User Profile objects
           url: https://learn.microsoft.com/en-us/windows/win32/shell/user-profiles
-      '22':
+      22:
         caption: Desktop
         references:
         - description: Desktop objects
           url: https://learn.microsoft.com/en-us/windows/win32/winstation/desktops
-      '23':
+      23:
         caption: KeyedEvent
         references:
         - description: NTAPI Keyed Events
           url: http://undocumented.ntinternals.net/index.html?page=UserMode%2FUndocumented%20Functions%2FNT%20Objects%2FKeyedEvent%2FNtCreateKeyedEvent.html
-      '24':
+      24:
         caption: Adapter
         references:
         - description: Adapter objects
           url: https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/adapter-objects-and-dma
-      '25':
+      25:
         caption: Key
-      '26':
+      26:
         caption: WaitablePort
-      '27':
+      27:
         caption: Callback
         references:
         - description: Callback objects
           url: https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/callback-objects
-      '28':
+      28:
         caption: Semaphore
         references:
         - description: Semaphore objects and CreateSemaphore Function
           url: https://learn.microsoft.com/en-us/windows/win32/sync/semaphore-objects
-      '29':
+      29:
         caption: Job
         references:
         - description: Job objects and CreateJobObject Function
           url: https://learn.microsoft.com/en-us/windows/win32/procthread/job-objects
-      '30':
+      30:
         caption: Port
-      '31':
+      31:
         caption: FilterConnectionPort
-      '32':
+      32:
         caption: ALPC Port
         references:
         - description: Advanced Local Procedure Call (ALPC) Class
           url: https://learn.microsoft.com/en-us/windows/win32/etw/alpc
-      '33':
+      33:
         caption: SAM_ALIAS
         references:
         - description: Security Account Manager (SAM) objects
           url: https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/auditing/audit-sam
-      '34':
+      34:
         caption: SAM_GROUP
         references:
         - description: Security Account Manager (SAM) objects
           url: https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/auditing/audit-sam
-      '35':
+      35:
         caption: SAM_USER
         references:
         - description: Security Account Manager (SAM) objects
           url: https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/auditing/audit-sam
-      '36':
+      36:
         caption: SAM_DOMAIN
         references:
         - description: Security Account Manager (SAM) Domain
           url: https://learn.microsoft.com/en-us/windows/win32/adschema/c-samdomain
-      '37':
+      37:
         caption: SAM_SERVER
         references:
         - description: Security Account Manager (SAM) Server
           url: https://learn.microsoft.com/en-us/windows/win32/adschema/c-samserver
-      '38':
+      38:
         caption: Atom
         references:
         - description: Atom Types
           url: https://learn.microsoft.com/en-us/windows/win32/dataxchg/about-atom-tables#atom-types
-      '39':
+      39:
         caption: WFP Filter
         references:
         - description: Windows Filtering Platform (WFP) Object Model
           url: https://learn.microsoft.com/en-us/windows/win32/fwp/object-model
-      '40':
+      40:
         caption: WFP Callout
         references:
         - description: Windows Filtering Platform (WFP) Object Model
           url: https://learn.microsoft.com/en-us/windows/win32/fwp/object-model
-      '41':
+      41:
         caption: WFP Layer
         references:
         - description: Windows Filtering Platform (WFP) Object Model
           url: https://learn.microsoft.com/en-us/windows/win32/fwp/object-model
-      '42':
+      42:
         caption: WFP Sub-layer
         references:
         - description: Windows Filtering Platform (WFP) Object Model
           url: https://learn.microsoft.com/en-us/windows/win32/fwp/object-model
-      '43':
+      43:
         caption: WFP Provider
         references:
         - description: Windows Filtering Platform (WFP) Object Model
           url: https://learn.microsoft.com/en-us/windows/win32/fwp/object-model
-      '44':
+      44:
         caption: WFP Provider Context
         references:
         - description: Windows Filtering Platform (WFP) Object Model
           url: https://learn.microsoft.com/en-us/windows/win32/fwp/object-model
-      '99':
+      99:
         caption: Other
         description: The resource object type is not mapped. See the `type` attribute, which may contain a data source specific value.
+  data_classification: {caption: Data Classification, type: object_t, object: data_classification, requirement: recommended, group: context, profile: data_classification, deprecated: {since: 1.4.0, message: Use the attribute `data_classifications` instead}, from: _resource}
+  data_classifications: {caption: Data Classification, type: object_t, object: data_classification, array: true, requirement: recommended, group: context, profile: data_classification, from: _resource}
+  name:
+    caption: Name
+    type: string_t
+    requirement: recommended
+    description: The name of the resource object.
   uid:
     caption: Unique ID
     type: resource_uid_t
     requirement: recommended
     observable: 10
     description: The Windows provided handle identifier for the resource object
-  uid_alt:
-    caption: Alternate ID
+  created_time: {caption: Created Time, type: timestamp_t, requirement: optional, from: _resource}
+  created_time_dt:
+    caption: Created Time
+    type: datetime_t
     requirement: optional
-    definition: v1.8.0/objects/_resource.yaml
+    profile: datetime
+    from: _resource
+    description: The time when the resource was created.
+  data: {caption: Data, type: json_t, requirement: optional, from: _resource}
+  details:
+    caption: Details
+    type: string_t
+    requirement: optional
+    description: The string detailing the attributes of the resource object.
+  labels: {caption: Labels, type: string_t, array: true, requirement: optional, from: _resource}
+  modified_time: {caption: Modified Time, type: timestamp_t, requirement: optional, from: _resource}
+  modified_time_dt:
+    caption: Modified Time
+    type: datetime_t
+    requirement: optional
+    profile: datetime
+    from: _resource
+    description: The time when the resource was last modified.
+  svc_name:
+    caption: Service Name
+    type: string_t
+    requirement: optional
+    description: The Windows service acting as the object server for the resource object, such as Security or Security Account Manager.
+  tags: {caption: Tags, type: object_t, object: key_value_object, array: true, requirement: optional, from: _resource}
+  type:
+    caption: Type
+    type: string_t
+    requirement: optional
+    description: The type of the Windows resource object.
+  uid_alt: {caption: Alternate ID, type: resource_uid_t, requirement: optional, observable: 10, from: _resource}

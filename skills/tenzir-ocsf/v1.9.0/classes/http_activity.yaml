@@ -1,5 +1,5 @@
-# Attributes with a `definition` path are inherited unchanged. Read that file
-# for their type, object, description, enum, and observable.
+# Attributes with `from` but no description are inherited unchanged. Their
+# descriptions are in the file of the item that `from` names.
 name: http_activity
 caption: HTTP Activity
 uid: 4002
@@ -14,16 +14,6 @@ references:
 - description: D3FEND™ Ontology d3f:HTTPEvent
   url: https://d3fend.mitre.org/event/d3f:HTTPEvent/
 attributes:
-  action:
-    caption: Action
-    requirement: optional
-    profile: security_control
-    definition: v1.9.0/classes/base_event.yaml
-  action_id:
-    caption: Action ID
-    requirement: recommended
-    profile: security_control
-    definition: v1.9.0/classes/base_event.yaml
   activity_id:
     caption: Activity ID
     type: integer_t
@@ -32,189 +22,135 @@ attributes:
     sibling: activity_name
     description: The normalized identifier of the activity that triggered the event. Each event class defines its own set of activity values. Use `0` (Unknown) when the activity cannot be determined. Use `99` (Other) when the activity does not match any defined value, in which case `activity_name` must be populated with the source-specific label.
     enum:
-      '0':
+      0:
         caption: Unknown
         description: The event activity is unknown.
-      '1':
+      1:
         caption: Connect
         description: The CONNECT method establishes a tunnel to the server identified by the target resource.
-      '2':
+      2:
         caption: Delete
         description: The DELETE method deletes the specified resource.
-      '3':
+      3:
         caption: Get
         description: The GET method requests a representation of the specified resource. Requests using GET should only retrieve data.
-      '4':
+      4:
         caption: Head
         description: The HEAD method asks for a response identical to a GET request, but without the response body.
-      '5':
+      5:
         caption: Options
         description: The OPTIONS method describes the communication options for the target resource.
-      '6':
+      6:
         caption: Post
         description: The POST method submits an entity to the specified resource, often causing a change in state or side effects on the server.
-      '7':
+      7:
         caption: Put
         description: The PUT method replaces all current representations of the target resource with the request payload.
-      '8':
+      8:
         caption: Trace
         description: The TRACE method performs a message loop-back test along the path to the target resource.
-      '9':
+      9:
         caption: Patch
         description: The PATCH method applies partial modifications to a resource.
-      '10':
+      10:
         caption: ACL
         description: The ACL method modifies the access control list of the specified resource.
-      '11':
+      11:
         caption: Baseline Control
         description: The BASELINE-CONTROL method places the specified collection resource under baseline control.
-      '12':
+      12:
         caption: Bind
         description: The BIND method adds a binding to the specified collection resource.
-      '13':
+      13:
         caption: Check In
         description: The CHECKIN method creates a new version from a checked-out version-controlled resource.
-      '14':
+      14:
         caption: Check Out
         description: The CHECKOUT method prepares a version-controlled resource for modification.
-      '15':
+      15:
         caption: Copy
         description: The COPY method duplicates the specified resource.
-      '16':
+      16:
         caption: Label
         description: The LABEL method adds, sets, or removes labels on a version-controlled resource.
-      '17':
+      17:
         caption: Link
         description: The LINK method establishes one or more links between resources.
-      '18':
+      18:
         caption: Lock
         description: The LOCK method acquires or refreshes a lock on the specified resource.
-      '19':
+      19:
         caption: Merge
         description: The MERGE method merges changes from another resource into the specified resource.
-      '20':
+      20:
         caption: Make Activity
         description: The MKACTIVITY method creates a new activity resource.
-      '21':
+      21:
         caption: Make Calendar
         description: The MKCALENDAR method creates a new calendar collection resource.
-      '22':
+      22:
         caption: Make Collection
         description: The MKCOL method creates a new collection resource.
-      '23':
+      23:
         caption: Make Redirect Reference
         description: The MKREDIRECTREF method creates a new redirect reference resource.
-      '24':
+      24:
         caption: Make Workspace
         description: The MKWORKSPACE method creates a new workspace resource.
-      '25':
+      25:
         caption: Move
         description: The MOVE method atomically duplicates and deletes the specified resource.
-      '26':
+      26:
         caption: Order Patch
         description: The ORDERPATCH method changes the ordering of members in an ordered collection.
-      '27':
+      27:
         caption: PRI
         description: The PRI method appears in the HTTP/2 connection preface to confirm the protocol.
-      '28':
+      28:
         caption: Property Find
         description: The PROPFIND method retrieves properties defined on the specified resource.
-      '29':
+      29:
         caption: Property Patch
         description: The PROPPATCH method sets and/or removes properties defined on the specified resource.
-      '30':
+      30:
         caption: Query
         description: The QUERY method performs a safe query request that can include a request body.
-      '31':
+      31:
         caption: Rebind
         description: The REBIND method moves a binding from one collection to another.
-      '32':
+      32:
         caption: Report
         description: The REPORT method retrieves a report about the specified resource.
-      '33':
+      33:
         caption: Search
         description: The SEARCH method searches a resource or collection using the request payload.
-      '34':
+      34:
         caption: Unbind
         description: The UNBIND method removes a binding from the specified collection resource.
-      '35':
+      35:
         caption: Un-Check Out
         description: The UNCHECKOUT method cancels a checkout and restores the resource to its previous state.
-      '36':
+      36:
         caption: Unlink
         description: The UNLINK method removes one or more links between resources.
-      '37':
+      37:
         caption: Unlock
         description: The UNLOCK method releases a lock on the specified resource.
-      '38':
+      38:
         caption: Update
         description: The UPDATE method updates a version-controlled resource to match a specified version.
-      '39':
+      39:
         caption: Update Redirect Reference
         description: The UPDATEREDIRECTREF method changes the target of a redirect reference resource.
-      '40':
+      40:
         caption: Version Control
         description: The VERSION-CONTROL method places the specified resource under version control.
-      '99':
+      99:
         caption: Other
         description: The event activity is not mapped. See the `activity_name` attribute, which contains a data source specific value.
     references:
     - description: IANA HTTP Method Registry
       url: https://www.iana.org/assignments/http-methods/http-methods.xhtml
-  activity_name:
-    caption: Activity
-    requirement: optional
-    definition: v1.9.0/classes/base_event.yaml
-  actor:
-    caption: Actor
-    requirement: optional
-    profile: host
-    definition: v1.9.0/classes/base_event.yaml
-  ai_agent:
-    caption: AI Agent
-    requirement: optional
-    profile: ai_operation
-    definition: v1.9.0/classes/network.yaml
-  ai_model:
-    caption: AI Model
-    requirement: recommended
-    profile: ai_operation
-    definition: v1.9.0/classes/network.yaml
-  api:
-    caption: API Details
-    requirement: optional
-    profile: cloud
-    definition: v1.9.0/classes/base_event.yaml
-  app_name:
-    caption: Application Name
-    requirement: optional
-    definition: v1.9.0/classes/network.yaml
-  app_protocol_name:
-    caption: Application Protocol Name
-    requirement: optional
-    definition: v1.9.0/classes/network.yaml
-  attacks:
-    caption: MITRE ATT&CK® and ATLAS™ Details
-    requirement: optional
-    profile: security_control
-    definition: v1.9.0/classes/base_event.yaml
-  attestation_list:
-    caption: Attestation List
-    requirement: optional
-    profile: record_integrity
-    definition: v1.9.0/classes/base_event.yaml
-  authorizations:
-    caption: Authorization Information
-    requirement: optional
-    profile: security_control
-    definition: v1.9.0/classes/base_event.yaml
-  category_name:
-    caption: Category
-    type: string_t
-    requirement: optional
-    group: classification
-    from: base_event
-    description: 'The event category name, as defined by category_uid value: `Network Activity`.'
   category_uid:
     caption: Category ID
     type: integer_t
@@ -224,16 +160,9 @@ attributes:
     sibling: category_name
     description: The category unique identifier of the event. Each event class belongs to exactly one category. Producers and mappers must set this to the category defined by the event class being used.
     enum:
-      '4':
+      4:
         caption: Network Activity
         description: Network Activity events.
-  class_name:
-    caption: Class
-    type: string_t
-    requirement: optional
-    group: classification
-    from: base_event
-    description: 'The event class name, as defined by class_uid value: `HTTP Activity`.'
   class_uid:
     caption: Class ID
     type: integer_t
@@ -242,95 +171,65 @@ attributes:
     sibling: class_name
     description: The unique identifier of a class. A class describes the attributes available in an event. Producers and mappers must set this to the `uid` defined in the event class definition. For example, `Detection Finding` is `2004`.
     enum:
-      '4002':
+      4002:
         caption: HTTP Activity
         description: HTTP Activity events report HTTP connection and traffic information.
-  cloud:
-    caption: Cloud
+  cloud: {caption: Cloud, type: object_t, object: cloud, requirement: required, group: primary, profile: cloud, from: base_event}
+  metadata: {caption: Metadata, type: object_t, object: metadata, requirement: required, group: context, from: base_event}
+  osint: {caption: OSINT, type: object_t, object: osint, array: true, requirement: required, group: primary, profile: osint, from: base_event}
+  severity_id: {caption: Severity ID, type: integer_t, requirement: required, group: classification, sibling: severity, enum: {0: Unknown, 1: Informational, 2: Low, 3: Medium, 4: High, 5: Critical, 6: Fatal, 99: Other}, from: base_event}
+  time: {caption: Event Time, type: timestamp_t, requirement: required, group: occurrence, from: base_event}
+  type_uid:
+    caption: Type ID
+    type: long_t
     requirement: required
-    profile: cloud
-    definition: v1.9.0/classes/base_event.yaml
-  confidence:
-    caption: Confidence
-    requirement: optional
-    profile: security_control
-    definition: v1.9.0/classes/base_event.yaml
-  confidence_id:
-    caption: Confidence ID
-    requirement: recommended
-    profile: security_control
-    definition: v1.9.0/classes/base_event.yaml
-  confidence_score:
-    caption: Confidence Score
-    requirement: optional
-    profile: security_control
-    definition: v1.9.0/classes/base_event.yaml
-  connection_info:
-    caption: Connection Info
-    requirement: recommended
-    definition: v1.9.0/classes/network.yaml
-  count:
-    caption: Count
-    requirement: optional
-    definition: v1.9.0/classes/base_event.yaml
-  cumulative_traffic:
-    caption: Cumulative Traffic
-    requirement: optional
-    definition: v1.9.0/classes/network.yaml
-  delegation:
-    caption: Delegation
-    requirement: optional
-    profile: ai_operation
-    definition: v1.9.0/classes/network.yaml
-  device:
-    caption: Device
-    requirement: recommended
-    profile: host
-    definition: v1.9.0/classes/base_event.yaml
-  disposition:
-    caption: Disposition
-    requirement: optional
-    profile: security_control
-    definition: v1.9.0/classes/base_event.yaml
+    group: classification
+    sibling: type_name
+    description: 'The event/finding type ID. It identifies the event''s semantics and structure. Producers and mappers must compute this as `class_uid * 100 + activity_id`. It uniquely identifies the combination of event class and activity across the entire schema. For example, `Detection Finding: Create` is `200401`.'
+  action_id: {caption: Action ID, type: integer_t, requirement: recommended, group: primary, profile: security_control, sibling: action, enum: {0: Unknown, 1: Allowed, 2: Denied, 3: Observed, 4: Modified, 99: Other}, from: base_event}
+  ai_model: {caption: AI Model, type: object_t, object: ai_model, requirement: recommended, group: context, profile: ai_operation, from: network}
+  confidence_id: {caption: Confidence ID, type: integer_t, requirement: recommended, group: context, profile: security_control, sibling: confidence, enum: {0: Unknown, 1: Low, 2: Medium, 3: High, 99: Other}, from: base_event}
+  connection_info: {caption: Connection Info, type: object_t, object: network_connection_info, requirement: recommended, group: primary, from: network}
+  device: {caption: Device, type: object_t, object: device, requirement: recommended, group: primary, profile: host, observable: 20, from: base_event}
   disposition_id:
     caption: Disposition ID
+    type: integer_t
     requirement: recommended
+    group: primary
     profile: security_control
-    definition: v1.9.0/classes/base_event.yaml
-  dst_endpoint:
-    caption: Destination Endpoint
-    requirement: recommended
-    definition: v1.9.0/classes/network.yaml
-  duration:
-    caption: Duration Milliseconds
-    requirement: optional
-    definition: v1.9.0/classes/base_event.yaml
-  end_time:
-    caption: End Time
-    requirement: optional
-    definition: v1.9.0/classes/base_event.yaml
-  end_time_dt:
-    caption: End Time
-    requirement: optional
-    profile: datetime
-    definition: v1.9.0/classes/base_event.yaml
-  enrichments:
-    caption: Enrichments
-    requirement: optional
-    definition: v1.9.0/classes/base_event.yaml
-  file:
-    caption: File
-    type: object_t
-    object: file
-    requirement: optional
-    group: context
-    observable: 24
-    description: The file that is the target of the HTTP activity.
-  firewall_rule:
-    caption: Firewall Rule
-    requirement: optional
-    profile: security_control
-    definition: v1.9.0/classes/base_event.yaml
+    sibling: disposition
+    enum:
+      0: Unknown
+      1: Allowed
+      2: Blocked
+      3: Quarantined
+      4: Isolated
+      5: Deleted
+      6: Dropped
+      7: Custom Action
+      8: Approved
+      9: Restored
+      10: Exonerated
+      11: Corrected
+      12: Partially Corrected
+      13: Uncorrected
+      14: Delayed
+      15: Detected
+      16: No Action
+      17: Logged
+      18: Tagged
+      19: Alert
+      20: Count
+      21: Reset
+      22: Captcha
+      23: Challenge
+      24: Access Revoked
+      25: Rejected
+      26: Unauthorized
+      27: Error
+      99: Other
+    from: base_event
+  dst_endpoint: {caption: Destination Endpoint, type: object_t, object: network_endpoint, requirement: recommended, group: primary, observable: 20, from: network}
   http_cookies:
     caption: HTTP Cookies
     type: object_t
@@ -366,193 +265,20 @@ attributes:
     references:
     - description: HTTP Status Codes
       url: https://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml
-  is_alert:
-    caption: Alert
-    requirement: recommended
-    profile: security_control
-    definition: v1.9.0/classes/base_event.yaml
-  ja4_fingerprint_list:
-    caption: JA4+ Fingerprints
-    requirement: optional
-    definition: v1.9.0/classes/network.yaml
-  load_balancer:
-    caption: Load Balancer
-    requirement: recommended
-    profile: load_balancer
-    definition: v1.9.0/classes/network.yaml
-  malware:
-    caption: Malware
-    requirement: optional
-    profile: security_control
-    definition: v1.9.0/classes/base_event.yaml
-  malware_scan_info:
-    caption: Malware Scan Info
-    requirement: optional
-    profile: security_control
-    definition: v1.9.0/classes/base_event.yaml
-  message:
-    caption: Message
-    requirement: recommended
-    definition: v1.9.0/classes/base_event.yaml
-  message_context:
-    caption: Message Context
-    requirement: optional
-    profile: ai_operation
-    definition: v1.9.0/classes/network.yaml
-  metadata:
-    caption: Metadata
-    requirement: required
-    definition: v1.9.0/classes/base_event.yaml
-  network_observation_point:
-    caption: Network Observation Point
-    requirement: optional
-    definition: v1.9.0/classes/network.yaml
-  observables:
-    caption: Observables
-    requirement: recommended
-    definition: v1.9.0/classes/base_event.yaml
-  observation_point:
-    caption: Observation Point
-    requirement: optional
-    definition: v1.9.0/classes/network.yaml
-  observation_point_id:
-    caption: Observation Point ID
-    requirement: optional
-    definition: v1.9.0/classes/network.yaml
-  osint:
-    caption: OSINT
-    requirement: required
-    profile: osint
-    definition: v1.9.0/classes/base_event.yaml
-  packet_list:
-    caption: Packets
-    requirement: optional
-    definition: v1.9.0/classes/network.yaml
-  policy:
-    caption: Policy
-    requirement: optional
-    profile: security_control
-    definition: v1.9.0/classes/base_event.yaml
-  proxy:
-    caption: Proxy
-    requirement: recommended
-    definition: v1.9.0/classes/network.yaml
-  proxy_connection_info:
-    caption: Proxy Connection Info
-    requirement: recommended
-    profile: network_proxy
-    definition: v1.9.0/classes/network.yaml
-  proxy_endpoint:
-    caption: Proxy Endpoint
-    requirement: optional
-    profile: network_proxy
-    definition: v1.9.0/classes/network.yaml
-  proxy_http_request:
-    caption: Proxy HTTP Request
-    requirement: optional
-    profile: network_proxy
-    definition: v1.9.0/classes/network.yaml
-  proxy_http_response:
-    caption: Proxy HTTP Response
-    requirement: optional
-    profile: network_proxy
-    definition: v1.9.0/classes/network.yaml
-  proxy_tls:
-    caption: Proxy TLS
-    requirement: recommended
-    profile: network_proxy
-    definition: v1.9.0/classes/network.yaml
-  proxy_traffic:
-    caption: Proxy Traffic
-    requirement: recommended
-    profile: network_proxy
-    definition: v1.9.0/classes/network.yaml
-  raw_data:
-    caption: Raw Data
-    requirement: optional
-    definition: v1.9.0/classes/base_event.yaml
-  raw_data_hash:
-    caption: Raw Data Hash
-    requirement: optional
-    definition: v1.9.0/classes/base_event.yaml
-  raw_data_size:
-    caption: Raw Data Size
-    requirement: optional
-    definition: v1.9.0/classes/base_event.yaml
-  risk_details:
-    caption: Risk Details
-    requirement: optional
-    profile: security_control
-    definition: v1.9.0/classes/base_event.yaml
-  risk_level:
-    caption: Risk Level
-    requirement: optional
-    profile: security_control
-    definition: v1.9.0/classes/base_event.yaml
-  risk_level_id:
-    caption: Risk Level ID
-    requirement: optional
-    profile: security_control
-    definition: v1.9.0/classes/base_event.yaml
-  risk_score:
-    caption: Risk Score
-    requirement: optional
-    profile: security_control
-    definition: v1.9.0/classes/base_event.yaml
-  severity:
-    caption: Severity
-    requirement: optional
-    definition: v1.9.0/classes/base_event.yaml
-  severity_id:
-    caption: Severity ID
-    requirement: required
-    definition: v1.9.0/classes/base_event.yaml
-  src_endpoint:
-    caption: Source Endpoint
-    requirement: recommended
-    definition: v1.9.0/classes/network.yaml
-  start_time:
-    caption: Start Time
-    requirement: optional
-    definition: v1.9.0/classes/base_event.yaml
-  start_time_dt:
-    caption: Start Time
-    requirement: optional
-    profile: datetime
-    definition: v1.9.0/classes/base_event.yaml
-  status:
-    caption: Status
-    requirement: recommended
-    definition: v1.9.0/classes/base_event.yaml
-  status_code:
-    caption: Status Code
-    requirement: recommended
-    definition: v1.9.0/classes/base_event.yaml
-  status_detail:
-    caption: Status Detail
-    requirement: recommended
-    definition: v1.9.0/classes/base_event.yaml
-  status_id:
-    caption: Status ID
-    requirement: recommended
-    definition: v1.9.0/classes/base_event.yaml
-  time:
-    caption: Event Time
-    requirement: required
-    definition: v1.9.0/classes/base_event.yaml
-  time_dt:
-    caption: Event Time
-    requirement: optional
-    profile: datetime
-    definition: v1.9.0/classes/base_event.yaml
-  timezone_offset:
-    caption: Timezone Offset
-    requirement: recommended
-    definition: v1.9.0/classes/base_event.yaml
-  tls:
-    caption: TLS
-    requirement: optional
-    definition: v1.9.0/classes/network.yaml
+  is_alert: {caption: Alert, type: boolean_t, requirement: recommended, group: primary, profile: security_control, from: base_event}
+  load_balancer: {caption: Load Balancer, type: object_t, object: load_balancer, requirement: recommended, group: primary, profile: load_balancer, from: network}
+  message: {caption: Message, type: string_t, requirement: recommended, group: primary, from: base_event}
+  observables: {caption: Observables, type: object_t, object: observable, array: true, requirement: recommended, group: primary, from: base_event}
+  proxy: {caption: Proxy, type: object_t, object: network_proxy, requirement: recommended, group: primary, observable: 20, deprecated: {since: 1.1.0, message: Use the `proxy_endpoint` attribute instead., superseded_by: [proxy_endpoint]}, from: network}
+  proxy_connection_info: {caption: Proxy Connection Info, type: object_t, object: network_connection_info, requirement: recommended, group: context, profile: network_proxy, from: network}
+  proxy_tls: {caption: Proxy TLS, type: object_t, object: tls, requirement: recommended, group: context, profile: network_proxy, from: network}
+  proxy_traffic: {caption: Proxy Traffic, type: object_t, object: network_traffic, requirement: recommended, group: context, profile: network_proxy, from: network}
+  src_endpoint: {caption: Source Endpoint, type: object_t, object: network_endpoint, requirement: recommended, group: primary, observable: 20, from: network}
+  status: {caption: Status, type: string_t, requirement: recommended, group: primary, from: base_event}
+  status_code: {caption: Status Code, type: string_t, requirement: recommended, group: primary, from: base_event}
+  status_detail: {caption: Status Detail, type: string_t, requirement: recommended, group: primary, from: base_event}
+  status_id: {caption: Status ID, type: integer_t, requirement: recommended, group: primary, sibling: status, enum: {0: Unknown, 1: Success, 2: Failure, 99: Other}, from: base_event}
+  timezone_offset: {caption: Timezone Offset, type: integer_t, requirement: recommended, group: occurrence, from: base_event}
   trace:
     caption: Trace
     type: object_t
@@ -561,147 +287,73 @@ attributes:
     group: primary
     profile: trace
     description: The trace object contains information about distributed traces which are critical to observability and describe how requests move through a system, capturing each step's timing and status.
-  traffic:
-    caption: Traffic
-    requirement: recommended
-    definition: v1.9.0/classes/network.yaml
-  type_name:
-    caption: Type Name
+  traffic: {caption: Traffic, type: object_t, object: network_traffic, requirement: recommended, group: primary, from: network}
+  action: {caption: Action, type: string_t, requirement: optional, group: primary, profile: security_control, from: base_event}
+  activity_name: {caption: Activity, type: string_t, requirement: optional, group: classification, from: base_event}
+  actor: {caption: Actor, type: object_t, object: actor, requirement: optional, group: primary, profile: host, from: base_event}
+  ai_agent: {caption: AI Agent, type: object_t, object: ai_agent, requirement: optional, group: context, profile: ai_operation, from: network}
+  api: {caption: API Details, type: object_t, object: api, requirement: optional, group: context, profile: cloud, from: base_event}
+  app_name: {caption: Application Name, type: string_t, requirement: optional, group: context, from: network}
+  app_protocol_name: {caption: Application Protocol Name, type: string_t, requirement: optional, group: context, from: network}
+  attacks: {caption: MITRE ATT&CK® and ATLAS™ Details, type: object_t, object: attack, array: true, requirement: optional, group: primary, profile: security_control, from: base_event}
+  attestation_list: {caption: Attestation List, type: object_t, object: attestation, array: true, requirement: optional, group: context, profile: record_integrity, from: base_event}
+  authorizations: {caption: Authorization Information, type: object_t, object: authorization, array: true, requirement: optional, group: primary, profile: security_control, from: base_event}
+  category_name:
+    caption: Category
+    type: string_t
     requirement: optional
-    definition: v1.9.0/classes/base_event.yaml
-  type_uid:
-    caption: Type ID
-    type: long_t
-    requirement: required
     group: classification
-    sibling: type_name
-    description: 'The event/finding type ID. It identifies the event''s semantics and structure. Producers and mappers must compute this as `class_uid * 100 + activity_id`. It uniquely identifies the combination of event class and activity across the entire schema. For example, `Detection Finding: Create` is `200401`.'
-    enum:
-      '400200':
-        caption: 'HTTP Activity: Unknown'
-      '400201':
-        caption: 'HTTP Activity: Connect'
-        description: The CONNECT method establishes a tunnel to the server identified by the target resource.
-      '400202':
-        caption: 'HTTP Activity: Delete'
-        description: The DELETE method deletes the specified resource.
-      '400203':
-        caption: 'HTTP Activity: Get'
-        description: The GET method requests a representation of the specified resource. Requests using GET should only retrieve data.
-      '400204':
-        caption: 'HTTP Activity: Head'
-        description: The HEAD method asks for a response identical to a GET request, but without the response body.
-      '400205':
-        caption: 'HTTP Activity: Options'
-        description: The OPTIONS method describes the communication options for the target resource.
-      '400206':
-        caption: 'HTTP Activity: Post'
-        description: The POST method submits an entity to the specified resource, often causing a change in state or side effects on the server.
-      '400207':
-        caption: 'HTTP Activity: Put'
-        description: The PUT method replaces all current representations of the target resource with the request payload.
-      '400208':
-        caption: 'HTTP Activity: Trace'
-        description: The TRACE method performs a message loop-back test along the path to the target resource.
-      '400209':
-        caption: 'HTTP Activity: Patch'
-        description: The PATCH method applies partial modifications to a resource.
-      '400210':
-        caption: 'HTTP Activity: ACL'
-        description: The ACL method modifies the access control list of the specified resource.
-      '400211':
-        caption: 'HTTP Activity: Baseline Control'
-        description: The BASELINE-CONTROL method places the specified collection resource under baseline control.
-      '400212':
-        caption: 'HTTP Activity: Bind'
-        description: The BIND method adds a binding to the specified collection resource.
-      '400213':
-        caption: 'HTTP Activity: Check In'
-        description: The CHECKIN method creates a new version from a checked-out version-controlled resource.
-      '400214':
-        caption: 'HTTP Activity: Check Out'
-        description: The CHECKOUT method prepares a version-controlled resource for modification.
-      '400215':
-        caption: 'HTTP Activity: Copy'
-        description: The COPY method duplicates the specified resource.
-      '400216':
-        caption: 'HTTP Activity: Label'
-        description: The LABEL method adds, sets, or removes labels on a version-controlled resource.
-      '400217':
-        caption: 'HTTP Activity: Link'
-        description: The LINK method establishes one or more links between resources.
-      '400218':
-        caption: 'HTTP Activity: Lock'
-        description: The LOCK method acquires or refreshes a lock on the specified resource.
-      '400219':
-        caption: 'HTTP Activity: Merge'
-        description: The MERGE method merges changes from another resource into the specified resource.
-      '400220':
-        caption: 'HTTP Activity: Make Activity'
-        description: The MKACTIVITY method creates a new activity resource.
-      '400221':
-        caption: 'HTTP Activity: Make Calendar'
-        description: The MKCALENDAR method creates a new calendar collection resource.
-      '400222':
-        caption: 'HTTP Activity: Make Collection'
-        description: The MKCOL method creates a new collection resource.
-      '400223':
-        caption: 'HTTP Activity: Make Redirect Reference'
-        description: The MKREDIRECTREF method creates a new redirect reference resource.
-      '400224':
-        caption: 'HTTP Activity: Make Workspace'
-        description: The MKWORKSPACE method creates a new workspace resource.
-      '400225':
-        caption: 'HTTP Activity: Move'
-        description: The MOVE method atomically duplicates and deletes the specified resource.
-      '400226':
-        caption: 'HTTP Activity: Order Patch'
-        description: The ORDERPATCH method changes the ordering of members in an ordered collection.
-      '400227':
-        caption: 'HTTP Activity: PRI'
-        description: The PRI method appears in the HTTP/2 connection preface to confirm the protocol.
-      '400228':
-        caption: 'HTTP Activity: Property Find'
-        description: The PROPFIND method retrieves properties defined on the specified resource.
-      '400229':
-        caption: 'HTTP Activity: Property Patch'
-        description: The PROPPATCH method sets and/or removes properties defined on the specified resource.
-      '400230':
-        caption: 'HTTP Activity: Query'
-        description: The QUERY method performs a safe query request that can include a request body.
-      '400231':
-        caption: 'HTTP Activity: Rebind'
-        description: The REBIND method moves a binding from one collection to another.
-      '400232':
-        caption: 'HTTP Activity: Report'
-        description: The REPORT method retrieves a report about the specified resource.
-      '400233':
-        caption: 'HTTP Activity: Search'
-        description: The SEARCH method searches a resource or collection using the request payload.
-      '400234':
-        caption: 'HTTP Activity: Unbind'
-        description: The UNBIND method removes a binding from the specified collection resource.
-      '400235':
-        caption: 'HTTP Activity: Un-Check Out'
-        description: The UNCHECKOUT method cancels a checkout and restores the resource to its previous state.
-      '400236':
-        caption: 'HTTP Activity: Unlink'
-        description: The UNLINK method removes one or more links between resources.
-      '400237':
-        caption: 'HTTP Activity: Unlock'
-        description: The UNLOCK method releases a lock on the specified resource.
-      '400238':
-        caption: 'HTTP Activity: Update'
-        description: The UPDATE method updates a version-controlled resource to match a specified version.
-      '400239':
-        caption: 'HTTP Activity: Update Redirect Reference'
-        description: The UPDATEREDIRECTREF method changes the target of a redirect reference resource.
-      '400240':
-        caption: 'HTTP Activity: Version Control'
-        description: The VERSION-CONTROL method places the specified resource under version control.
-      '400299':
-        caption: 'HTTP Activity: Other'
-  unmapped:
-    caption: Unmapped Data
+    from: base_event
+    description: 'The event category name, as defined by category_uid value: `Network Activity`.'
+  class_name:
+    caption: Class
+    type: string_t
     requirement: optional
-    definition: v1.9.0/classes/base_event.yaml
+    group: classification
+    from: base_event
+    description: 'The event class name, as defined by class_uid value: `HTTP Activity`.'
+  confidence: {caption: Confidence, type: string_t, requirement: optional, group: context, profile: security_control, from: base_event}
+  confidence_score: {caption: Confidence Score, type: integer_t, requirement: optional, group: context, profile: security_control, from: base_event}
+  count: {caption: Count, type: integer_t, requirement: optional, group: occurrence, from: base_event}
+  cumulative_traffic: {caption: Cumulative Traffic, type: object_t, object: network_traffic, requirement: optional, group: context, from: network}
+  delegation: {caption: Delegation, type: object_t, object: delegation, requirement: optional, group: context, profile: ai_operation, from: network}
+  disposition: {caption: Disposition, type: string_t, requirement: optional, group: primary, profile: security_control, from: base_event}
+  duration: {caption: Duration Milliseconds, type: long_t, requirement: optional, group: occurrence, from: base_event}
+  end_time: {caption: End Time, type: timestamp_t, requirement: optional, group: occurrence, from: base_event}
+  end_time_dt: {caption: End Time, type: datetime_t, requirement: optional, group: occurrence, profile: datetime, from: base_event}
+  enrichments: {caption: Enrichments, type: object_t, object: enrichment, array: true, requirement: optional, group: context, from: base_event}
+  file:
+    caption: File
+    type: object_t
+    object: file
+    requirement: optional
+    group: context
+    observable: 24
+    description: The file that is the target of the HTTP activity.
+  firewall_rule: {caption: Firewall Rule, type: object_t, object: firewall_rule, requirement: optional, group: primary, profile: security_control, from: base_event}
+  ja4_fingerprint_list: {caption: JA4+ Fingerprints, type: object_t, object: ja4_fingerprint, array: true, requirement: optional, group: context, from: network}
+  malware: {caption: Malware, type: object_t, object: malware, array: true, requirement: optional, group: primary, profile: security_control, from: base_event}
+  malware_scan_info: {caption: Malware Scan Info, type: object_t, object: malware_scan_info, requirement: optional, group: primary, profile: security_control, from: base_event}
+  message_context: {caption: Message Context, type: object_t, object: message_context, requirement: optional, group: context, profile: ai_operation, from: network}
+  network_observation_point: {caption: Network Observation Point, type: object_t, object: network_endpoint, requirement: optional, group: context, observable: 20, from: network}
+  observation_point: {caption: Observation Point, type: string_t, requirement: optional, group: context, from: network}
+  observation_point_id: {caption: Observation Point ID, type: integer_t, requirement: optional, group: context, sibling: observation_point, enum: {0: Unknown, 1: Source, 2: Destination, 3: Neither, 4: Both, 99: Other}, from: network}
+  packet_list: {caption: Packets, type: object_t, object: packet, array: true, requirement: optional, group: context, from: network}
+  policy: {caption: Policy, type: object_t, object: policy, requirement: optional, group: primary, profile: security_control, from: base_event}
+  proxy_endpoint: {caption: Proxy Endpoint, type: object_t, object: network_proxy, requirement: optional, group: context, profile: network_proxy, observable: 20, from: network}
+  proxy_http_request: {caption: Proxy HTTP Request, type: object_t, object: http_request, requirement: optional, group: context, profile: network_proxy, from: network}
+  proxy_http_response: {caption: Proxy HTTP Response, type: object_t, object: http_response, requirement: optional, group: context, profile: network_proxy, from: network}
+  raw_data: {caption: Raw Data, type: string_t, requirement: optional, group: context, from: base_event}
+  raw_data_hash: {caption: Raw Data Hash, type: object_t, object: fingerprint, requirement: optional, group: context, observable: 30, from: base_event}
+  raw_data_size: {caption: Raw Data Size, type: long_t, requirement: optional, group: context, from: base_event}
+  risk_details: {caption: Risk Details, type: string_t, requirement: optional, group: context, profile: security_control, from: base_event}
+  risk_level: {caption: Risk Level, type: string_t, requirement: optional, group: context, profile: security_control, from: base_event}
+  risk_level_id: {caption: Risk Level ID, type: integer_t, requirement: optional, group: context, profile: security_control, sibling: risk_level, enum: {0: Info, 1: Low, 2: Medium, 3: High, 4: Critical, 99: Other}, from: base_event}
+  risk_score: {caption: Risk Score, type: integer_t, requirement: optional, group: context, profile: security_control, from: base_event}
+  severity: {caption: Severity, type: string_t, requirement: optional, group: classification, from: base_event}
+  start_time: {caption: Start Time, type: timestamp_t, requirement: optional, group: occurrence, from: base_event}
+  start_time_dt: {caption: Start Time, type: datetime_t, requirement: optional, group: occurrence, profile: datetime, from: base_event}
+  time_dt: {caption: Event Time, type: datetime_t, requirement: optional, group: occurrence, profile: datetime, from: base_event}
+  tls: {caption: TLS, type: object_t, object: tls, requirement: optional, group: context, from: network}
+  type_name: {caption: Type Name, type: string_t, requirement: optional, group: classification, from: base_event}
+  unmapped: {caption: Unmapped Data, type: object_t, object: object, requirement: optional, group: context, from: base_event}

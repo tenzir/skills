@@ -13,13 +13,40 @@ referenced_by:
     evidences: [script]
     osint: [script]
 attributes:
-  file:
-    caption: File
+  script_content:
+    caption: Script Content
     type: object_t
-    object: file
-    requirement: optional
-    observable: 24
-    description: Present if this script is associated with a file. Not present in the case of a file-less script.
+    object: long_string
+    requirement: required
+    observable: 36
+    description: The script content, normalized to UTF-8 encoding irrespective of its original encoding. When emitting this attribute, it may be appropriate to truncate large scripts. When consuming this attribute, large scripts should be anticipated.
+  type_id:
+    caption: Type ID
+    type: integer_t
+    requirement: required
+    sibling: type
+    description: The normalized script type ID.
+    enum:
+      0:
+        caption: Unknown
+        description: The script type is unknown.
+      1:
+        caption: Windows Command Prompt
+      2:
+        caption: PowerShell
+      3:
+        caption: Python
+      4:
+        caption: JavaScript
+      5:
+        caption: VBScript
+      6:
+        caption: Unix Shell
+      7:
+        caption: VBA
+      99:
+        caption: Other
+        description: The script type is not mapped. See the `type` attribute which contains an event source specific value.
   hashes:
     caption: Hashes
     type: object_t
@@ -28,6 +55,13 @@ attributes:
     requirement: recommended
     observable: 30
     description: An array of the script's cryptographic hashes. Note that these hashes are calculated on the script in its original encoding, and not on the normalized UTF-8 encoding found in the `script_content` attribute.
+  file:
+    caption: File
+    type: object_t
+    object: file
+    requirement: optional
+    observable: 24
+    description: Present if this script is associated with a file. Not present in the case of a file-less script.
   name:
     caption: Name
     type: string_t
@@ -38,45 +72,11 @@ attributes:
     type: string_t
     requirement: optional
     description: This attribute relates a sub-script to a parent script having the matching `uid` attribute. In the case of PowerShell, sub-script execution can be identified by matching the activity correlation ID of the raw ETW events provided by the OS.
-  script_content:
-    caption: Script Content
-    type: object_t
-    object: long_string
-    requirement: required
-    observable: 36
-    description: The script content, normalized to UTF-8 encoding irrespective of its original encoding. When emitting this attribute, it may be appropriate to truncate large scripts. When consuming this attribute, large scripts should be anticipated.
   type:
     caption: Type
     type: string_t
     requirement: optional
     description: The script type, normalized to the caption of the `type_id` value. In the case of 'Other', it is defined by the event source.
-  type_id:
-    caption: Type ID
-    type: integer_t
-    requirement: required
-    sibling: type
-    description: The normalized script type ID.
-    enum:
-      '0':
-        caption: Unknown
-        description: The script type is unknown.
-      '1':
-        caption: Windows Command Prompt
-      '2':
-        caption: PowerShell
-      '3':
-        caption: Python
-      '4':
-        caption: JavaScript
-      '5':
-        caption: VBScript
-      '6':
-        caption: Unix Shell
-      '7':
-        caption: VBA
-      '99':
-        caption: Other
-        description: The script type is not mapped. See the `type` attribute which contains an event source specific value.
   uid:
     caption: Unique ID
     type: string_t

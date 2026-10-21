@@ -1,5 +1,5 @@
-# Attributes with a `definition` path are inherited unchanged. Read that file
-# for their type, object, description, enum, and observable.
+# Attributes with `from` but no description are inherited unchanged. Their
+# descriptions are in the file of the item that `from` names.
 name: logger
 caption: Logger
 extends: _entity
@@ -18,6 +18,42 @@ attributes:
     requirement: recommended
     observable: 20
     description: The device where the events are logged.
+  log_name:
+    caption: Log Name
+    type: string_t
+    requirement: recommended
+    description: The log name for the logging provider log, or the file name of the system log. This may be an intermediate store-and-forward log or a vendor destination log. For example /archive/server1/var/log/messages.0 or /var/log/.
+  log_provider:
+    caption: Log Provider
+    type: string_t
+    requirement: recommended
+    description: The logging provider or logging service that logged the event. This may be an intermediate application store-and-forward log or a vendor destination log.
+  logged_time:
+    caption: Logged Time
+    type: timestamp_t
+    requirement: recommended
+    description: The time when this logger received and logged the event. For the last logger in the pipeline, this value should match `metadata.logged_time`.
+  name:
+    caption: Name
+    type: string_t
+    requirement: recommended
+    description: The name of the logging product instance.
+  product:
+    caption: Product
+    type: object_t
+    object: product
+    requirement: recommended
+    description: The product logging the event.  This may be the event source product, a management server product, a scanning product, a SIEM, etc.
+  transmit_time:
+    caption: Transmission Time
+    type: timestamp_t
+    requirement: recommended
+    description: The time when the event was transmitted from the logging device to it's next destination.
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: recommended
+    description: The unique identifier of the logging product instance.
   event_uid:
     caption: Event UID
     type: string_t
@@ -38,63 +74,24 @@ attributes:
     type: string_t
     requirement: optional
     description: The level at which an event was logged. This can be log provider specific. For example the audit level.
-  log_name:
-    caption: Log Name
-    type: string_t
-    requirement: recommended
-    description: The log name for the logging provider log, or the file name of the system log. This may be an intermediate store-and-forward log or a vendor destination log. For example /archive/server1/var/log/messages.0 or /var/log/.
-  log_provider:
-    caption: Log Provider
-    type: string_t
-    requirement: recommended
-    description: The logging provider or logging service that logged the event. This may be an intermediate application store-and-forward log or a vendor destination log.
   log_version:
     caption: Log Version
     type: string_t
     requirement: optional
     description: The event log schema version of the original event. For example the syslog version or the Cisco Log Schema version
-  logged_time:
-    caption: Logged Time
-    type: timestamp_t
-    requirement: recommended
-    description: The time when this logger received and logged the event. For the last logger in the pipeline, this value should match `metadata.logged_time`.
   logged_time_dt:
     caption: Logged Time
     type: datetime_t
     requirement: optional
     profile: datetime
     description: The time when this logger received and logged the event. For the last logger in the pipeline, this value should match `metadata.logged_time`.
-  name:
-    caption: Name
-    type: string_t
-    requirement: recommended
-    description: The name of the logging product instance.
-  product:
-    caption: Product
-    type: object_t
-    object: product
-    requirement: recommended
-    description: The product logging the event.  This may be the event source product, a management server product, a scanning product, a SIEM, etc.
-  transmit_time:
-    caption: Transmission Time
-    type: timestamp_t
-    requirement: recommended
-    description: The time when the event was transmitted from the logging device to it's next destination.
   transmit_time_dt:
     caption: Transmission Time
     type: datetime_t
     requirement: optional
     profile: datetime
     description: The time when the event was transmitted from the logging device to it's next destination.
-  uid:
-    caption: Unique ID
-    type: string_t
-    requirement: recommended
-    description: The unique identifier of the logging product instance.
-  uid_numeric:
-    caption: Numeric Unique ID
-    requirement: optional
-    definition: v1.9.0/objects/_entity.yaml
+  uid_numeric: {caption: Numeric Unique ID, type: long_t, requirement: optional, from: _entity}
   untruncated_size:
     caption: Untruncated Size
     type: integer_t

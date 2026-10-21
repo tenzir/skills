@@ -1,5 +1,5 @@
-# Attributes with a `definition` path are inherited unchanged. Read that file
-# for their type, object, description, enum, and observable.
+# Attributes with `from` but no description are inherited unchanged. Their
+# descriptions are in the file of the item that `from` names.
 name: aircraft
 caption: Aircraft
 extends: _entity
@@ -17,11 +17,6 @@ attributes:
     requirement: recommended
     observable: 26
     description: The detailed geographical location usually associated with an IP address.
-  model:
-    caption: Model
-    type: string_t
-    requirement: optional
-    description: The model name of the aircraft or unmanned system.
   name:
     caption: Name
     type: string_t
@@ -33,6 +28,21 @@ attributes:
     requirement: recommended
     observable: 37
     description: The serial number of the aircraft.
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: recommended
+    description: The primary identification identifier for an aircraft, such as the 24-bit International Civil Aviation Organization (ICAO) identifier of the aircraft, as 6 hex digits.
+  uid_alt:
+    caption: Alternate ID
+    type: string_t
+    requirement: recommended
+    description: A secondary identification identifier for an aircraft, such as the 4-digit squawk (octal representation).
+  model:
+    caption: Model
+    type: string_t
+    requirement: optional
+    description: The model name of the aircraft or unmanned system.
   speed:
     caption: Speed
     type: string_t
@@ -48,20 +58,7 @@ attributes:
     type: string_t
     requirement: optional
     description: Direction of flight expressed as a “True North-based” ground track angle. This value is provided in clockwise degrees with a minimum resolution of 1 degree. If aircraft is not moving horizontally, use the “Unknown” value
-  uid:
-    caption: Unique ID
-    type: string_t
-    requirement: recommended
-    description: The primary identification identifier for an aircraft, such as the 24-bit International Civil Aviation Organization (ICAO) identifier of the aircraft, as 6 hex digits.
-  uid_alt:
-    caption: Alternate ID
-    type: string_t
-    requirement: recommended
-    description: A secondary identification identifier for an aircraft, such as the 4-digit squawk (octal representation).
-  uid_numeric:
-    caption: Numeric Unique ID
-    requirement: optional
-    definition: v1.10.0-dev/objects/_entity.yaml
+  uid_numeric: {caption: Numeric Unique ID, type: long_t, requirement: optional, from: _entity}
   vertical_speed:
     caption: Vertical Speed
     type: string_t

@@ -7,6 +7,37 @@ referenced_by:
   objects:
     idp: [scim]
 attributes:
+  name:
+    caption: Name
+    type: string_t
+    requirement: recommended
+    description: The name of the SCIM resource.
+  scim_group_schema:
+    caption: SCIM Group Schema
+    type: json_t
+    requirement: recommended
+    description: 'SCIM provides a schema for representing groups, identified using the following schema URI: `urn:ietf:params:scim:schemas:core:2.0:Group` as defined in [RFC-7634](https://datatracker.ietf.org/doc/html/rfc7643). This attribute will capture key-value pairs for the scheme implemented in a SCIM resource.'
+    references:
+    - description: System for Cross-domain Identity Management (SCIM) RFC spec.
+      url: https://datatracker.ietf.org/doc/html/rfc7643
+  scim_user_schema:
+    caption: SCIM User Schema
+    type: json_t
+    requirement: recommended
+    description: 'SCIM provides a resource type for user resources. The core schema for user is identified using the following schema URI: `urn:ietf:params:scim:schemas:core:2.0:User` as defined in [RFC-7634](https://datatracker.ietf.org/doc/html/rfc7643). his attribute will capture key-value pairs for the scheme implemented in a SCIM resource. This object is inclusive of both the basic and Enterprise User Schema Extension.'
+    references:
+    - description: System for Cross-domain Identity Management (SCIM) RFC spec.
+      url: https://datatracker.ietf.org/doc/html/rfc7643
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: recommended
+    description: A unique identifier for a SCIM resource as defined by the service provider.
+  version:
+    caption: SCIM Version
+    type: string_t
+    requirement: recommended
+    description: SCIM protocol version supported e.g., `SCIM 2.0`.
   auth_protocol:
     caption: Auth Protocol
     type: string_t
@@ -19,32 +50,32 @@ attributes:
     sibling: auth_protocol
     description: The normalized identifier of the authorization protocol used by the SCIM resource.
     enum:
-      '0':
+      0:
         caption: Unknown
         description: The authentication protocol is unknown.
-      '1':
+      1:
         caption: NTLM
-      '2':
+      2:
         caption: Kerberos
-      '3':
+      3:
         caption: Digest
-      '4':
+      4:
         caption: OpenID
-      '5':
+      5:
         caption: SAML
-      '6':
+      6:
         caption: OAUTH 2.0
-      '7':
+      7:
         caption: PAP
-      '8':
+      8:
         caption: CHAP
-      '9':
+      9:
         caption: EAP
-      '10':
+      10:
         caption: RADIUS
-      '11':
+      11:
         caption: Basic Authentication
-      '99':
+      99:
         caption: Other
         description: The authentication protocol is not mapped. See the `auth_protocol` attribute, which contains a data source specific value.
   created_time:
@@ -95,11 +126,6 @@ attributes:
     requirement: optional
     profile: datetime
     description: The most recent time when the SCIM resource was updated at the service provider.
-  name:
-    caption: Name
-    type: string_t
-    requirement: recommended
-    description: The name of the SCIM resource.
   protocol_name:
     caption: Supported Protocol
     type: string_t
@@ -110,22 +136,6 @@ attributes:
     type: integer_t
     requirement: optional
     description: Maximum number of requests allowed by the SCIM resource within a specified time frame to avoid throttling.
-  scim_group_schema:
-    caption: SCIM Group Schema
-    type: json_t
-    requirement: recommended
-    description: 'SCIM provides a schema for representing groups, identified using the following schema URI: `urn:ietf:params:scim:schemas:core:2.0:Group` as defined in [RFC-7634](https://datatracker.ietf.org/doc/html/rfc7643). This attribute will capture key-value pairs for the scheme implemented in a SCIM resource.'
-    references:
-    - description: System for Cross-domain Identity Management (SCIM) RFC spec.
-      url: https://datatracker.ietf.org/doc/html/rfc7643
-  scim_user_schema:
-    caption: SCIM User Schema
-    type: json_t
-    requirement: recommended
-    description: 'SCIM provides a resource type for user resources. The core schema for user is identified using the following schema URI: `urn:ietf:params:scim:schemas:core:2.0:User` as defined in [RFC-7634](https://datatracker.ietf.org/doc/html/rfc7643). his attribute will capture key-value pairs for the scheme implemented in a SCIM resource. This object is inclusive of both the basic and Enterprise User Schema Extension.'
-    references:
-    - description: System for Cross-domain Identity Management (SCIM) RFC spec.
-      url: https://datatracker.ietf.org/doc/html/rfc7643
   state:
     caption: State
     type: string_t
@@ -138,29 +148,24 @@ attributes:
     sibling: state
     description: The normalized state ID of the SCIM resource to reflect its activation status.
     enum:
-      '0':
+      0:
         caption: Unknown
         description: The provisioning state of the SCIM resource is unknown.
-      '1':
+      1:
         caption: Pending
         description: The SCIM resource is Pending activation or creation.
-      '2':
+      2:
         caption: Active
         description: The SCIM resource is in an Active state, or otherwise enabled.
-      '3':
+      3:
         caption: Failed
         description: The SCIM resource is in a Failed state.
-      '4':
+      4:
         caption: Deleted
         description: The SCIM resource is in a Deleted state, or otherwise disabled.
-      '99':
+      99:
         caption: Other
         description: The provisioning state of the SCIM resource is not mapped. See the `state` attribute, which contains a data source specific value.
-  uid:
-    caption: Unique ID
-    type: string_t
-    requirement: recommended
-    description: A unique identifier for a SCIM resource as defined by the service provider.
   uid_alt:
     caption: External ID
     type: string_t
@@ -177,8 +182,3 @@ attributes:
     type: string_t
     requirement: optional
     description: Name of the vendor or service provider implementing SCIM. E.g., `Okta`, `Auth0`, `Microsoft`.
-  version:
-    caption: SCIM Version
-    type: string_t
-    requirement: recommended
-    description: SCIM protocol version supported e.g., `SCIM 2.0`.

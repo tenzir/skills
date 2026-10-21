@@ -6,6 +6,14 @@ referenced_by:
   classes:
     iam_analysis_finding: [access_analysis_result]
 attributes:
+  accessors:
+    caption: Accessors
+    type: object_t
+    object: user
+    array: true
+    requirement: required
+    observable: 21
+    description: The identities that are granted access through the analyzed policy configuration. This identifies the specific entity that can exercise the permissions and helps assess the access relationship and potential security implications. Examples include user accounts, service principals, roles, account identifiers, or system identities.
   access_level:
     caption: Access Level
     type: string_t
@@ -16,14 +24,6 @@ attributes:
     type: string_t
     requirement: optional
     description: The type or category of access being granted to the identity. This describes the nature of the access relationship, such as cross-account access, public access, federated access, or third-party integration access. Examples include 'Cross-Account', 'Public', 'Federated', 'Service-to-Service', etc.
-  accessors:
-    caption: Accessors
-    type: object_t
-    object: user
-    array: true
-    requirement: required
-    observable: 21
-    description: The identities that are granted access through the analyzed policy configuration. This identifies the specific entity that can exercise the permissions and helps assess the access relationship and potential security implications. Examples include user accounts, service principals, roles, account identifiers, or system identities.
   additional_restrictions:
     caption: Additional Restrictions
     type: object_t

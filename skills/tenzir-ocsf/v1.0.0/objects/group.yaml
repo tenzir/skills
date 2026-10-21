@@ -14,16 +14,21 @@ referenced_by:
     resource_details: [group]
     user: [groups]
 attributes:
-  desc:
-    caption: Description
-    type: string_t
-    requirement: optional
-    description: The group description.
   name:
     caption: Name
     type: string_t
     requirement: recommended
     description: The group name.
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: recommended
+    description: The unique identifier of the group. For example, for Windows events this is the security identifier (SID) of the group.
+  desc:
+    caption: Description
+    type: string_t
+    requirement: optional
+    description: The group description.
   privileges:
     caption: Privileges
     type: string_t
@@ -35,8 +40,3 @@ attributes:
     type: string_t
     requirement: optional
     description: The type of the group or account.
-  uid:
-    caption: Unique ID
-    type: string_t
-    requirement: recommended
-    description: The unique identifier of the group. For example, for Windows events this is the security identifier (SID) of the group.

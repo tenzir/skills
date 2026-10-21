@@ -19,16 +19,31 @@ referenced_by:
     process: [session]
     query_evidence: [session]
 attributes:
-  count:
-    caption: Count
-    type: integer_t
-    requirement: optional
-    description: The number of identical sessions spawned from the same source IP, destination IP, application, and content/threat type seen over a period of time.
   created_time:
     caption: Created Time
     type: timestamp_t
     requirement: recommended
     description: The time when the session was created.
+  is_remote:
+    caption: Remote
+    type: boolean_t
+    requirement: recommended
+    description: The indication of whether the session is remote.
+  issuer:
+    caption: Issuer Details
+    type: string_t
+    requirement: recommended
+    description: The identifier of the session issuer.
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: recommended
+    description: The unique identifier of the session.
+  count:
+    caption: Count
+    type: integer_t
+    requirement: optional
+    description: The number of identical sessions spawned from the same source IP, destination IP, application, and content/threat type seen over a period of time.
   created_time_dt:
     caption: Created Time
     type: datetime_t
@@ -62,31 +77,16 @@ attributes:
     type: boolean_t
     requirement: optional
     description: Indicates whether Multi Factor Authentication was used during authentication.
-  is_remote:
-    caption: Remote
-    type: boolean_t
-    requirement: recommended
-    description: The indication of whether the session is remote.
   is_vpn:
     caption: VPN Session
     type: boolean_t
     requirement: optional
     description: The indication of whether the session is a VPN session.
-  issuer:
-    caption: Issuer Details
-    type: string_t
-    requirement: recommended
-    description: The identifier of the session issuer.
   terminal:
     caption: Terminal
     type: string_t
     requirement: optional
     description: 'The Pseudo Terminal associated with the session. Ex: the tty or pts value.'
-  uid:
-    caption: Unique ID
-    type: string_t
-    requirement: recommended
-    description: The unique identifier of the session.
   uid_alt:
     caption: Alternate ID
     type: string_t

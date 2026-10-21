@@ -14,17 +14,6 @@ referenced_by:
   objects:
     authorization: [policy]
 attributes:
-  desc:
-    caption: Description
-    type: string_t
-    requirement: optional
-    description: The description of the policy.
-  group:
-    caption: Group
-    type: object_t
-    object: group
-    requirement: optional
-    description: The policy group.
   name:
     caption: Name
     type: string_t
@@ -40,3 +29,14 @@ attributes:
     type: string_t
     requirement: recommended
     description: The policy version number.
+  desc:
+    caption: Description
+    type: string_t
+    requirement: optional
+    description: The description of the policy.
+  group:
+    caption: Group
+    type: object_t
+    object: group
+    requirement: optional
+    description: The policy group.

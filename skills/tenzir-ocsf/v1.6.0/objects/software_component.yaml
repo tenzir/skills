@@ -6,11 +6,69 @@ referenced_by:
   objects:
     sbom: [software_components]
 attributes:
+  name:
+    caption: Name
+    type: string_t
+    requirement: required
+    description: The software component name.
+  version:
+    caption: Version
+    type: string_t
+    requirement: required
+    description: The software component version.
   author:
     caption: Author
     type: string_t
     requirement: recommended
     description: The author(s) who published the software component.
+  purl:
+    caption: Package URL
+    type: string_t
+    requirement: recommended
+    description: The Package URL (PURL) to identify the software component. This is a URL that uniquely identifies the component, including the component's name, version, and type. The URL is used to locate and retrieve the component's metadata and content.
+  related_component:
+    caption: Related Component
+    type: string_t
+    requirement: recommended
+    description: The package URL (PURL) of the component that this software component has a relationship with.
+  relationship_id:
+    caption: Relationship ID
+    type: integer_t
+    requirement: recommended
+    sibling: relationship
+    description: The normalized identifier of the relationship between two software components.
+    enum:
+      0:
+        caption: Unknown
+        description: The relationship is unknown.
+      1:
+        caption: Depends On
+        description: The component is a dependency of another component. Can be used to define both direct and transitive dependencies.
+      99:
+        caption: Other
+        description: The relationship is not mapped. See the `relationship` attribute, which contains a data source specific value.
+  type_id:
+    caption: Type ID
+    type: integer_t
+    requirement: recommended
+    sibling: type
+    description: The type of software component.
+    enum:
+      0:
+        caption: Unknown
+        description: The type is unknown.
+      1:
+        caption: Framework
+        description: A software framework.
+      2:
+        caption: Library
+        description: A software library.
+      3:
+        caption: Operating System
+        description: An operating system. Useful for SBOMs of container images.
+      99:
+        caption: Other
+        description: The type is not mapped. See the `type` attribute, which contains a data source specific value.
   hash:
     caption: Hash
     type: object_t
@@ -23,71 +81,13 @@ attributes:
     type: string_t
     requirement: optional
     description: The software license applied to this component.
-  name:
-    caption: Name
-    type: string_t
-    requirement: required
-    description: The software component name.
-  purl:
-    caption: Package URL
-    type: string_t
-    requirement: recommended
-    description: The Package URL (PURL) to identify the software component. This is a URL that uniquely identifies the component, including the component's name, version, and type. The URL is used to locate and retrieve the component's metadata and content.
-  related_component:
-    caption: Related Component
-    type: string_t
-    requirement: recommended
-    description: The package URL (PURL) of the component that this software component has a relationship with.
   relationship:
     caption: Relationship
     type: string_t
     requirement: optional
     description: The relationship between two software components, normalized to the caption of the `relationship_id` value. In the case of 'Other', it is defined by the source.
-  relationship_id:
-    caption: Relationship ID
-    type: integer_t
-    requirement: recommended
-    sibling: relationship
-    description: The normalized identifier of the relationship between two software components.
-    enum:
-      '0':
-        caption: Unknown
-        description: The relationship is unknown.
-      '1':
-        caption: Depends On
-        description: The component is a dependency of another component. Can be used to define both direct and transitive dependencies.
-      '99':
-        caption: Other
-        description: The relationship is not mapped. See the `relationship` attribute, which contains a data source specific value.
   type:
     caption: Type
     type: string_t
     requirement: optional
     description: The type of software component, normalized to the caption of the `type_id` value. In the case of 'Other', it is defined by the source.
-  type_id:
-    caption: Type ID
-    type: integer_t
-    requirement: recommended
-    sibling: type
-    description: The type of software component.
-    enum:
-      '0':
-        caption: Unknown
-        description: The type is unknown.
-      '1':
-        caption: Framework
-        description: A software framework.
-      '2':
-        caption: Library
-        description: A software library.
-      '3':
-        caption: Operating System
-        description: An operating system. Useful for SBOMs of container images.
-      '99':
-        caption: Other
-        description: The type is not mapped. See the `type` attribute, which contains a data source specific value.
-  version:
-    caption: Version
-    type: string_t
-    requirement: required
-    description: The software component version.

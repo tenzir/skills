@@ -11,11 +11,6 @@ attributes:
     type: string_t
     requirement: required
     description: The name of the threat actor.
-  type:
-    caption: Threat Actor Type
-    type: string_t
-    requirement: optional
-    description: The classification of the threat actor based on their motivations, capabilities, or affiliations. Common types include nation-state actors, cybercriminal groups, hacktivists, or insider threats.
   type_id:
     caption: Threat Actor Type ID
     type: integer_t
@@ -23,17 +18,22 @@ attributes:
     sibling: type
     description: The normalized datastore resource type identifier.
     enum:
-      '0':
+      0:
         caption: Unknown
         description: The threat actor type is unknown.
-      '1':
+      1:
         caption: Nation-state
-      '2':
+      2:
         caption: Cybercriminal
-      '3':
+      3:
         caption: Hacktivists
-      '4':
+      4:
         caption: Insider
-      '99':
+      99:
         caption: Other
         description: The threat actor type is not mapped.
+  type:
+    caption: Threat Actor Type
+    type: string_t
+    requirement: optional
+    description: The classification of the threat actor based on their motivations, capabilities, or affiliations. Common types include nation-state actors, cybercriminal groups, hacktivists, or insider threats.

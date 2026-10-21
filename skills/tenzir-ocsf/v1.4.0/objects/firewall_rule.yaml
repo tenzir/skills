@@ -1,5 +1,5 @@
-# Attributes with a `definition` path are inherited unchanged. Read that file
-# for their type, object, description, enum, and observable.
+# Attributes with `from` but no description are inherited unchanged. Their
+# descriptions are in the file of the item that `from` names.
 name: firewall_rule
 caption: Firewall Rule
 extends: rule
@@ -81,19 +81,15 @@ referenced_by:
     web_resource_access_activity: [firewall_rule]
     web_resources_activity: [firewall_rule]
 attributes:
-  category:
-    caption: Category
-    requirement: optional
-    definition: v1.4.0/objects/rule.yaml
+  name: {caption: Name, type: string_t, requirement: recommended, from: rule}
+  uid: {caption: Unique ID, type: string_t, requirement: recommended, from: rule}
+  category: {caption: Category, type: string_t, requirement: optional, from: rule}
   condition:
     caption: Condition
     type: string_t
     requirement: optional
     description: 'The rule trigger condition for the rule. For example: SQL_INJECTION.'
-  desc:
-    caption: Description
-    requirement: optional
-    definition: v1.4.0/objects/rule.yaml
+  desc: {caption: Description, type: string_t, requirement: optional, from: rule}
   duration:
     caption: Duration Milliseconds
     type: long_t
@@ -110,10 +106,6 @@ attributes:
     type: string_t
     requirement: optional
     description: 'The location of the matched data in the source which resulted in the triggered firewall rule. For example: HEADER.'
-  name:
-    caption: Name
-    requirement: recommended
-    definition: v1.4.0/objects/rule.yaml
   rate_limit:
     caption: Rate Limit
     type: integer_t
@@ -124,15 +116,5 @@ attributes:
     type: string_t
     requirement: optional
     description: 'The sensitivity of the firewall rule in the matched event. For example: HIGH.'
-  type:
-    caption: Type
-    requirement: optional
-    definition: v1.4.0/objects/rule.yaml
-  uid:
-    caption: Unique ID
-    requirement: recommended
-    definition: v1.4.0/objects/rule.yaml
-  version:
-    caption: Version
-    requirement: optional
-    definition: v1.4.0/objects/rule.yaml
+  type: {caption: Type, type: string_t, requirement: optional, from: rule}
+  version: {caption: Version, type: string_t, requirement: optional, from: rule}

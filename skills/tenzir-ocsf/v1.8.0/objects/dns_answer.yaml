@@ -1,5 +1,5 @@
-# Attributes with a `definition` path are inherited unchanged. Read that file
-# for their type, object, description, enum, and observable.
+# Attributes with `from` but no description are inherited unchanged. Their
+# descriptions are in the file of the item that `from` names.
 name: dns_answer
 caption: DNS Answer
 extends: _dns
@@ -13,6 +13,11 @@ referenced_by:
   objects:
     osint: [answers]
 attributes:
+  rdata:
+    caption: DNS RData
+    type: string_t
+    requirement: required
+    description: The data describing the DNS resource. The meaning of this data depends on the type and class of the resource record.
   class:
     caption: Resource Record Class
     type: string_t
@@ -26,39 +31,25 @@ attributes:
     sibling: flags
     description: The list of DNS answer header flag IDs.
     enum:
-      '0':
+      0:
         caption: Unknown
         description: The flag is unknown.
-      '1':
+      1:
         caption: Authoritative Answer
-      '2':
+      2:
         caption: Truncated Response
-      '3':
+      3:
         caption: Recursion Desired
-      '4':
+      4:
         caption: Recursion Available
-      '5':
+      5:
         caption: Authentic Data
-      '6':
+      6:
         caption: Checking Disabled
-      '99':
+      99:
         caption: Other
         description: The flag is not mapped. See the `flags` attribute, which contains a data source specific value.
-  flags:
-    caption: DNS Header Flags
-    type: string_t
-    array: true
-    requirement: optional
-    description: The list of DNS answer header flags.
-  packet_uid:
-    caption: Packet UID
-    requirement: recommended
-    definition: v1.8.0/objects/_dns.yaml
-  rdata:
-    caption: DNS RData
-    type: string_t
-    requirement: required
-    description: The data describing the DNS resource. The meaning of this data depends on the type and class of the resource record.
+  packet_uid: {caption: Packet UID, type: integer_t, requirement: recommended, from: _dns}
   ttl:
     caption: TTL
     type: integer_t
@@ -69,3 +60,9 @@ attributes:
     type: string_t
     requirement: recommended
     description: 'The type of data contained in this resource record. See [RFC1035](https://www.rfc-editor.org/rfc/rfc1035.txt). For example: `CNAME`.'
+  flags:
+    caption: DNS Header Flags
+    type: string_t
+    array: true
+    requirement: optional
+    description: The list of DNS answer header flags.

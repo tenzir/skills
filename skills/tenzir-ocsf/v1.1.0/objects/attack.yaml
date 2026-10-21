@@ -34,6 +34,11 @@ referenced_by:
     finding_info: [attacks]
     related_event: [attacks]
 attributes:
+  version:
+    caption: Version
+    type: string_t
+    requirement: recommended
+    description: The [ATT&CK MatrixTM](https://attack.mitre.org/wiki/ATT&CK_Matrix) version.
   sub_technique:
     caption: Sub Technique
     type: object_t
@@ -62,8 +67,3 @@ attributes:
     object: technique
     requirement: optional
     description: The Technique object describes the technique ID and/or name associated to an attack, as defined by [ATT&CK MatrixTM](https://attack.mitre.org/wiki/ATT&CK_Matrix).
-  version:
-    caption: Version
-    type: string_t
-    requirement: recommended
-    description: The [ATT&CK MatrixTM](https://attack.mitre.org/wiki/ATT&CK_Matrix) version.

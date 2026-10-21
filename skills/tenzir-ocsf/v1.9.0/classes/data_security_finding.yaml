@@ -1,5 +1,5 @@
-# Attributes with a `definition` path are inherited unchanged. Read that file
-# for their type, object, description, enum, and observable.
+# Attributes with `from` but no description are inherited unchanged. Their
+# descriptions are in the file of the item that `from` names.
 name: data_security_finding
 caption: Data Security Finding
 uid: 2006
@@ -14,16 +14,6 @@ description: |-
   Note: If the Finding is an incident, i.e. requires incident workflow, also apply the `incident` profile or aggregate this finding into an `Incident Finding`.
 profiles: [cloud, container, data_classification, datetime, host, incident, osint, record_integrity, security_control]
 attributes:
-  action:
-    caption: Action
-    requirement: optional
-    profile: security_control
-    definition: v1.9.0/classes/base_event.yaml
-  action_id:
-    caption: Action ID
-    requirement: recommended
-    profile: security_control
-    definition: v1.9.0/classes/base_event.yaml
   activity_id:
     caption: Activity ID
     type: integer_t
@@ -32,78 +22,28 @@ attributes:
     sibling: activity_name
     description: The normalized identifier of the Data Security Finding activity.
     enum:
-      '0':
+      0:
         caption: Unknown
         description: The event activity is unknown.
-      '1':
+      1:
         caption: Create
         description: A new Data Security finding is created.
-      '2':
+      2:
         caption: Update
         description: An existing Data Security finding is updated with more information.
-      '3':
+      3:
         caption: Close
         description: An existing Data Security finding is closed, this can be due to any resolution (e.g., True Positive, False Positive, etc.).
-      '4':
+      4:
         caption: Suppressed
         description: An existing Data Security finding is suppressed due to inaccurate detection techniques or a known true negative.
         deprecated:
           since: 1.4.0
           message: Use `status_id` attribute instead.
           superseded_by: [status_id]
-      '99':
+      99:
         caption: Other
         description: The event activity is not mapped. See the `activity_name` attribute, which contains a data source specific value.
-  activity_name:
-    caption: Activity
-    type: string_t
-    requirement: optional
-    group: classification
-    description: The Data Security finding activity name, as defined by the `activity_id`.
-  actor:
-    caption: Actor
-    type: object_t
-    object: actor
-    requirement: recommended
-    group: context
-    description: Describes details about the actor implicated in the data security finding. Either an actor that owns a particular digital file or information store, or an actor which accessed classified or sensitive data.
-  api:
-    caption: API Details
-    requirement: optional
-    profile: cloud
-    definition: v1.9.0/classes/base_event.yaml
-  assignee:
-    caption: Assignee
-    requirement: optional
-    profile: incident
-    definition: v1.9.0/classes/finding.yaml
-  assignee_group:
-    caption: Assignee Group
-    requirement: optional
-    profile: incident
-    definition: v1.9.0/classes/finding.yaml
-  attacks:
-    caption: MITRE ATT&CK® and ATLAS™ Details
-    requirement: optional
-    profile: security_control
-    definition: v1.9.0/classes/base_event.yaml
-  attestation_list:
-    caption: Attestation List
-    requirement: optional
-    profile: record_integrity
-    definition: v1.9.0/classes/base_event.yaml
-  authorizations:
-    caption: Authorization Information
-    requirement: optional
-    profile: security_control
-    definition: v1.9.0/classes/base_event.yaml
-  category_name:
-    caption: Category
-    type: string_t
-    requirement: optional
-    group: classification
-    from: base_event
-    description: 'The event category name, as defined by category_uid value: `Findings`.'
   category_uid:
     caption: Category ID
     type: integer_t
@@ -113,16 +53,9 @@ attributes:
     sibling: category_name
     description: The category unique identifier of the event. Each event class belongs to exactly one category. Producers and mappers must set this to the category defined by the event class being used.
     enum:
-      '2':
+      2:
         caption: Findings
         description: Findings events report findings, detections, and possible resolutions of malware, anomalies, or other actions performed by security products.
-  class_name:
-    caption: Class
-    type: string_t
-    requirement: optional
-    group: classification
-    from: base_event
-    description: 'The event class name, as defined by class_uid value: `Data Security Finding`.'
   class_uid:
     caption: Class ID
     type: integer_t
@@ -131,26 +64,32 @@ attributes:
     sibling: class_name
     description: The unique identifier of a class. A class describes the attributes available in an event. Producers and mappers must set this to the `uid` defined in the event class definition. For example, `Detection Finding` is `2004`.
     enum:
-      '2006':
+      2006:
         caption: Data Security Finding
         description: |-
           A Data Security Finding describes detections or alerts generated by various data security products such as Data Loss Prevention (DLP), Data Classification, Secrets Management, Digital Rights Management (DRM), Data Security Posture Management (DSPM), and similar tools. These detections or alerts can be created using fingerprinting, statistical analysis, machine learning or other methodologies. The finding describes the actors and endpoints who accessed or own the sensitive data, as well as the resources which store the sensitive data. Note: if the event producer is a security control, the `security_control` profile should be applied and its `attacks` information, if present, should be duplicated into the `finding_info` object.
           Note: If the Finding is an incident, i.e. requires incident workflow, also apply the `incident` profile or aggregate this finding into an `Incident Finding`.
-  cloud:
-    caption: Cloud
+  cloud: {caption: Cloud, type: object_t, object: cloud, requirement: required, group: primary, profile: cloud, from: base_event}
+  finding_info: {caption: Finding Information, type: object_t, object: finding_info, requirement: required, group: primary, from: finding}
+  metadata: {caption: Metadata, type: object_t, object: metadata, requirement: required, group: context, from: base_event}
+  osint: {caption: OSINT, type: object_t, object: osint, array: true, requirement: required, group: primary, profile: osint, from: base_event}
+  severity_id: {caption: Severity ID, type: integer_t, requirement: required, group: classification, sibling: severity, enum: {0: Unknown, 1: Informational, 2: Low, 3: Medium, 4: High, 5: Critical, 6: Fatal, 99: Other}, from: base_event}
+  time: {caption: Event Time, type: timestamp_t, requirement: required, group: occurrence, from: finding}
+  type_uid:
+    caption: Type ID
+    type: long_t
     requirement: required
-    profile: cloud
-    definition: v1.9.0/classes/base_event.yaml
-  comment:
-    caption: Comment
-    requirement: optional
-    definition: v1.9.0/classes/finding.yaml
-  confidence:
-    caption: Confidence
-    type: string_t
-    requirement: optional
+    group: classification
+    sibling: type_name
+    description: 'The event/finding type ID. It identifies the event''s semantics and structure. Producers and mappers must compute this as `class_uid * 100 + activity_id`. It uniquely identifies the combination of event class and activity across the entire schema. For example, `Detection Finding: Create` is `200401`.'
+  action_id: {caption: Action ID, type: integer_t, requirement: recommended, group: primary, profile: security_control, sibling: action, enum: {0: Unknown, 1: Allowed, 2: Denied, 3: Observed, 4: Modified, 99: Other}, from: base_event}
+  actor:
+    caption: Actor
+    type: object_t
+    object: actor
+    requirement: recommended
     group: context
-    description: The confidence, normalized to the caption of the confidence_id value. In the case of 'Other', it is defined by the event source and should be the same as `confidence_score` if also populated..
+    description: Describes details about the actor implicated in the data security finding. Either an actor that owns a particular digital file or information store, or an actor which accessed classified or sensitive data.
   confidence_id:
     caption: Confidence ID
     type: integer_t
@@ -159,28 +98,18 @@ attributes:
     sibling: confidence
     description: The normalized confidence refers to the accuracy of the analytics that produced the finding. An analytic with a low confidence means that the finding scope is wide and may create finding reports that are noisy or may not be malicious in nature.
     enum:
-      '0':
+      0:
         caption: Unknown
         description: The normalized confidence is unknown.
-      '1':
+      1:
         caption: Low
-      '2':
+      2:
         caption: Medium
-      '3':
+      3:
         caption: High
-      '99':
+      99:
         caption: Other
         description: The confidence is not mapped to the defined enum values. See the `confidence` attribute, which contains a data source specific value.
-  confidence_score:
-    caption: Confidence Score
-    type: integer_t
-    requirement: optional
-    group: context
-    description: The confidence score as reported by the event source. If `confidence_id` is 99 'Other', it should be the same as `confidence` if both are populated.
-  count:
-    caption: Count
-    requirement: optional
-    definition: v1.9.0/classes/base_event.yaml
   data_security:
     caption: Data Security
     type: object_t
@@ -210,16 +139,44 @@ attributes:
     group: context
     observable: 20
     description: Describes the device where classified or sensitive data is stored in, or was accessed from.
-  disposition:
-    caption: Disposition
-    requirement: optional
-    profile: security_control
-    definition: v1.9.0/classes/base_event.yaml
   disposition_id:
     caption: Disposition ID
+    type: integer_t
     requirement: recommended
+    group: primary
     profile: security_control
-    definition: v1.9.0/classes/base_event.yaml
+    sibling: disposition
+    enum:
+      0: Unknown
+      1: Allowed
+      2: Blocked
+      3: Quarantined
+      4: Isolated
+      5: Deleted
+      6: Dropped
+      7: Custom Action
+      8: Approved
+      9: Restored
+      10: Exonerated
+      11: Corrected
+      12: Partially Corrected
+      13: Uncorrected
+      14: Delayed
+      15: Detected
+      16: No Action
+      17: Logged
+      18: Tagged
+      19: Alert
+      20: Count
+      21: Reset
+      22: Captcha
+      23: Challenge
+      24: Access Revoked
+      25: Rejected
+      26: Unauthorized
+      27: Error
+      99: Other
+    from: base_event
   dst_endpoint:
     caption: Destination Endpoint
     type: object_t
@@ -228,26 +185,6 @@ attributes:
     group: context
     observable: 20
     description: Describes the endpoint where classified or sensitive data is stored in, or was accessed from.
-  duration:
-    caption: Duration Milliseconds
-    requirement: optional
-    definition: v1.9.0/classes/base_event.yaml
-  end_time:
-    caption: End Time
-    requirement: optional
-    definition: v1.9.0/classes/finding.yaml
-  end_time_dt:
-    caption: End Time
-    type: datetime_t
-    requirement: optional
-    group: occurrence
-    profile: datetime
-    from: finding
-    description: The time of the most recent event or finding that contributed to this finding.
-  enrichments:
-    caption: Enrichments
-    requirement: optional
-    definition: v1.9.0/classes/base_event.yaml
   file:
     caption: File
     type: object_t
@@ -256,15 +193,103 @@ attributes:
     group: primary
     observable: 24
     description: Describes a file that contains classified or sensitive data.
-  finding_info:
-    caption: Finding Information
-    requirement: required
-    definition: v1.9.0/classes/finding.yaml
-  firewall_rule:
-    caption: Firewall Rule
+  is_alert:
+    caption: Alert
+    type: boolean_t
+    requirement: recommended
+    group: primary
+    description: Indicates that the event is considered to be an alertable signal. For example, an `activity_id` of 'Create' could constitute an alertable signal and the value would be `true`, while 'Close' likely would not and either omit the attribute or set its value to `false`. Note that other events with the `security_control` profile may also be deemed alertable signals and may also carry `is_alert = true` attributes.
+  message: {caption: Message, type: string_t, requirement: recommended, group: primary, from: base_event}
+  observables: {caption: Observables, type: object_t, object: observable, array: true, requirement: recommended, group: primary, from: base_event}
+  priority_id: {caption: Priority ID, type: integer_t, requirement: recommended, group: context, profile: incident, sibling: priority, enum: {0: Unknown, 1: Low, 2: Medium, 3: High, 4: Critical, 99: Other}, from: finding}
+  resources:
+    caption: Additional Resources
+    type: object_t
+    object: resource_details
+    array: true
+    requirement: recommended
+    group: primary
+    description: |-
+      Describes details about additional resources, where classified or sensitive data is stored in, or was accessed from.
+
+      You can populate this object, if the specific resource type objects available in the class (`database, databucket, table, file`) aren't sufficient; OR
+       You can also choose to duplicate `uid, name` of the specific resources objects, for a consistent access to resource uids across all findings.
+  src_endpoint:
+    caption: Source Endpoint
+    type: object_t
+    object: network_endpoint
+    requirement: recommended
+    group: context
+    observable: 20
+    description: Details about the source endpoint where classified or sensitive data was accessed from.
+  src_url: {caption: Source URL, type: url_t, requirement: recommended, group: primary, profile: incident, observable: 6, from: finding}
+  status_code: {caption: Status Code, type: string_t, requirement: recommended, group: primary, from: base_event}
+  status_detail: {caption: Status Detail, type: string_t, requirement: recommended, group: primary, from: base_event}
+  status_id: {caption: Status ID, type: integer_t, requirement: recommended, group: context, sibling: status, enum: {0: Unknown, 1: New, 2: In Progress, 3: Suppressed, 4: Resolved, 5: Archived, 6: Deleted, 99: Other}, from: finding}
+  table:
+    caption: Table
+    type: object_t
+    object: table
+    requirement: recommended
+    group: primary
+    description: Describes the table where classified or sensitive data is stored in, or was accessed from. The table object represents a table within a structured relational database, warehouse, lake, or similar.
+  timezone_offset: {caption: Timezone Offset, type: integer_t, requirement: recommended, group: occurrence, from: base_event}
+  verdict: {caption: Verdict, type: string_t, requirement: recommended, group: primary, profile: incident, from: finding}
+  verdict_id: {caption: Verdict ID, type: integer_t, requirement: recommended, group: primary, profile: incident, sibling: verdict, enum: {0: Unknown, 1: False Positive, 2: True Positive, 3: Disregard, 4: Suspicious, 5: Benign, 6: Test, 7: Insufficient Data, 8: Security Risk, 9: Managed Externally, 10: Duplicate, 99: Other}, from: finding}
+  action: {caption: Action, type: string_t, requirement: optional, group: primary, profile: security_control, from: base_event}
+  activity_name:
+    caption: Activity
+    type: string_t
     requirement: optional
-    profile: security_control
-    definition: v1.9.0/classes/base_event.yaml
+    group: classification
+    description: The Data Security finding activity name, as defined by the `activity_id`.
+  api: {caption: API Details, type: object_t, object: api, requirement: optional, group: context, profile: cloud, from: base_event}
+  assignee: {caption: Assignee, type: object_t, object: user, requirement: optional, group: context, profile: incident, observable: 21, from: finding}
+  assignee_group: {caption: Assignee Group, type: object_t, object: group, requirement: optional, group: context, profile: incident, from: finding}
+  attacks: {caption: MITRE ATT&CK® and ATLAS™ Details, type: object_t, object: attack, array: true, requirement: optional, group: primary, profile: security_control, from: base_event}
+  attestation_list: {caption: Attestation List, type: object_t, object: attestation, array: true, requirement: optional, group: context, profile: record_integrity, from: base_event}
+  authorizations: {caption: Authorization Information, type: object_t, object: authorization, array: true, requirement: optional, group: primary, profile: security_control, from: base_event}
+  category_name:
+    caption: Category
+    type: string_t
+    requirement: optional
+    group: classification
+    from: base_event
+    description: 'The event category name, as defined by category_uid value: `Findings`.'
+  class_name:
+    caption: Class
+    type: string_t
+    requirement: optional
+    group: classification
+    from: base_event
+    description: 'The event class name, as defined by class_uid value: `Data Security Finding`.'
+  comment: {caption: Comment, type: string_t, requirement: optional, group: context, deprecated: {since: 1.9.0, message: Use the `notes` attribute instead., superseded_by: [notes]}, from: finding}
+  confidence:
+    caption: Confidence
+    type: string_t
+    requirement: optional
+    group: context
+    description: The confidence, normalized to the caption of the confidence_id value. In the case of 'Other', it is defined by the event source and should be the same as `confidence_score` if also populated..
+  confidence_score:
+    caption: Confidence Score
+    type: integer_t
+    requirement: optional
+    group: context
+    description: The confidence score as reported by the event source. If `confidence_id` is 99 'Other', it should be the same as `confidence` if both are populated.
+  count: {caption: Count, type: integer_t, requirement: optional, group: occurrence, from: base_event}
+  disposition: {caption: Disposition, type: string_t, requirement: optional, group: primary, profile: security_control, from: base_event}
+  duration: {caption: Duration Milliseconds, type: long_t, requirement: optional, group: occurrence, from: base_event}
+  end_time: {caption: End Time, type: timestamp_t, requirement: optional, group: occurrence, from: finding}
+  end_time_dt:
+    caption: End Time
+    type: datetime_t
+    requirement: optional
+    group: occurrence
+    profile: datetime
+    from: finding
+    description: The time of the most recent event or finding that contributed to this finding.
+  enrichments: {caption: Enrichments, type: object_t, object: enrichment, array: true, requirement: optional, group: context, from: base_event}
+  firewall_rule: {caption: Firewall Rule, type: object_t, object: firewall_rule, requirement: optional, group: primary, profile: security_control, from: base_event}
   impact:
     caption: Impact
     type: string_t
@@ -279,22 +304,22 @@ attributes:
     sibling: impact
     description: The normalized impact of the incident or finding. Per NIST, this is the magnitude of harm that can be expected to result from the consequences of unauthorized disclosure, modification, destruction, or loss of information or information system availability.
     enum:
-      '0':
+      0:
         caption: Unknown
         description: The normalized impact is unknown.
-      '1':
+      1:
         caption: Low
         description: The magnitude of harm is low.
-      '2':
+      2:
         caption: Medium
         description: The magnitude of harm is moderate.
-      '3':
+      3:
         caption: High
         description: The magnitude of harm is high.
-      '4':
+      4:
         caption: Critical
         description: The magnitude of harm is high and the scope is widespread.
-      '99':
+      99:
         caption: Other
         description: The impact is not mapped. See the `impact` attribute, which contains a data source specific value.
     references:
@@ -308,87 +333,15 @@ attributes:
     requirement: optional
     group: context
     description: The impact as an integer value of the finding, valid range 0-100.
-  is_alert:
-    caption: Alert
-    type: boolean_t
-    requirement: recommended
-    group: primary
-    description: Indicates that the event is considered to be an alertable signal. For example, an `activity_id` of 'Create' could constitute an alertable signal and the value would be `true`, while 'Close' likely would not and either omit the attribute or set its value to `false`. Note that other events with the `security_control` profile may also be deemed alertable signals and may also carry `is_alert = true` attributes.
-  is_suspected_breach:
-    caption: Suspected Breach
-    requirement: optional
-    profile: incident
-    definition: v1.9.0/classes/finding.yaml
-  malware:
-    caption: Malware
-    requirement: optional
-    profile: security_control
-    definition: v1.9.0/classes/base_event.yaml
-  malware_scan_info:
-    caption: Malware Scan Info
-    requirement: optional
-    profile: security_control
-    definition: v1.9.0/classes/base_event.yaml
-  message:
-    caption: Message
-    requirement: recommended
-    definition: v1.9.0/classes/base_event.yaml
-  metadata:
-    caption: Metadata
-    requirement: required
-    definition: v1.9.0/classes/base_event.yaml
-  notes:
-    caption: Notes
-    requirement: optional
-    definition: v1.9.0/classes/finding.yaml
-  observables:
-    caption: Observables
-    requirement: recommended
-    definition: v1.9.0/classes/base_event.yaml
-  osint:
-    caption: OSINT
-    requirement: required
-    profile: osint
-    definition: v1.9.0/classes/base_event.yaml
-  policy:
-    caption: Policy
-    requirement: optional
-    profile: security_control
-    definition: v1.9.0/classes/base_event.yaml
-  priority:
-    caption: Priority
-    requirement: optional
-    profile: incident
-    definition: v1.9.0/classes/finding.yaml
-  priority_id:
-    caption: Priority ID
-    requirement: recommended
-    profile: incident
-    definition: v1.9.0/classes/finding.yaml
-  raw_data:
-    caption: Raw Data
-    requirement: optional
-    definition: v1.9.0/classes/base_event.yaml
-  raw_data_hash:
-    caption: Raw Data Hash
-    requirement: optional
-    definition: v1.9.0/classes/base_event.yaml
-  raw_data_size:
-    caption: Raw Data Size
-    requirement: optional
-    definition: v1.9.0/classes/base_event.yaml
-  resources:
-    caption: Additional Resources
-    type: object_t
-    object: resource_details
-    array: true
-    requirement: recommended
-    group: primary
-    description: |-
-      Describes details about additional resources, where classified or sensitive data is stored in, or was accessed from.
-
-      You can populate this object, if the specific resource type objects available in the class (`database, databucket, table, file`) aren't sufficient; OR
-       You can also choose to duplicate `uid, name` of the specific resources objects, for a consistent access to resource uids across all findings.
+  is_suspected_breach: {caption: Suspected Breach, type: boolean_t, requirement: optional, group: context, profile: incident, from: finding}
+  malware: {caption: Malware, type: object_t, object: malware, array: true, requirement: optional, group: primary, profile: security_control, from: base_event}
+  malware_scan_info: {caption: Malware Scan Info, type: object_t, object: malware_scan_info, requirement: optional, group: primary, profile: security_control, from: base_event}
+  notes: {caption: Notes, type: object_t, object: note, array: true, requirement: optional, group: context, from: finding}
+  policy: {caption: Policy, type: object_t, object: policy, requirement: optional, group: primary, profile: security_control, from: base_event}
+  priority: {caption: Priority, type: string_t, requirement: optional, group: context, profile: incident, from: finding}
+  raw_data: {caption: Raw Data, type: string_t, requirement: optional, group: context, from: base_event}
+  raw_data_hash: {caption: Raw Data Hash, type: object_t, object: fingerprint, requirement: optional, group: context, observable: 30, from: base_event}
+  raw_data_size: {caption: Raw Data Size, type: long_t, requirement: optional, group: context, from: base_event}
   risk_details:
     caption: Risk Details
     type: string_t
@@ -409,17 +362,17 @@ attributes:
     sibling: risk_level
     description: The normalized risk level id.
     enum:
-      '0':
+      0:
         caption: Info
-      '1':
+      1:
         caption: Low
-      '2':
+      2:
         caption: Medium
-      '3':
+      3:
         caption: High
-      '4':
+      4:
         caption: Critical
-      '99':
+      99:
         caption: Other
         description: The risk level is not mapped. See the `risk_level` attribute, which contains a data source specific value.
   risk_score:
@@ -428,31 +381,8 @@ attributes:
     requirement: optional
     group: context
     description: The risk score as reported by the event source.
-  severity:
-    caption: Severity
-    requirement: optional
-    definition: v1.9.0/classes/base_event.yaml
-  severity_id:
-    caption: Severity ID
-    requirement: required
-    definition: v1.9.0/classes/base_event.yaml
-  src_endpoint:
-    caption: Source Endpoint
-    type: object_t
-    object: network_endpoint
-    requirement: recommended
-    group: context
-    observable: 20
-    description: Details about the source endpoint where classified or sensitive data was accessed from.
-  src_url:
-    caption: Source URL
-    requirement: recommended
-    profile: incident
-    definition: v1.9.0/classes/finding.yaml
-  start_time:
-    caption: Start Time
-    requirement: optional
-    definition: v1.9.0/classes/finding.yaml
+  severity: {caption: Severity, type: string_t, requirement: optional, group: classification, from: base_event}
+  start_time: {caption: Start Time, type: timestamp_t, requirement: optional, group: occurrence, from: finding}
   start_time_dt:
     caption: Start Time
     type: datetime_t
@@ -461,43 +391,9 @@ attributes:
     profile: datetime
     from: finding
     description: The time of the earliest event or finding that contributed to this finding.
-  status:
-    caption: Status
-    requirement: optional
-    definition: v1.9.0/classes/finding.yaml
-  status_code:
-    caption: Status Code
-    requirement: recommended
-    definition: v1.9.0/classes/base_event.yaml
-  status_detail:
-    caption: Status Detail
-    requirement: recommended
-    definition: v1.9.0/classes/base_event.yaml
-  status_id:
-    caption: Status ID
-    requirement: recommended
-    definition: v1.9.0/classes/finding.yaml
-  table:
-    caption: Table
-    type: object_t
-    object: table
-    requirement: recommended
-    group: primary
-    description: Describes the table where classified or sensitive data is stored in, or was accessed from. The table object represents a table within a structured relational database, warehouse, lake, or similar.
-  ticket:
-    caption: Ticket
-    requirement: optional
-    profile: incident
-    definition: v1.9.0/classes/finding.yaml
-  tickets:
-    caption: Tickets
-    requirement: optional
-    profile: incident
-    definition: v1.9.0/classes/finding.yaml
-  time:
-    caption: Event Time
-    requirement: required
-    definition: v1.9.0/classes/finding.yaml
+  status: {caption: Status, type: string_t, requirement: optional, group: context, from: finding}
+  ticket: {caption: Ticket, type: object_t, object: ticket, requirement: optional, group: context, profile: incident, deprecated: {since: 1.5.0, message: Use `tickets` instead., superseded_by: [tickets]}, from: finding}
+  tickets: {caption: Tickets, type: object_t, object: ticket, array: true, requirement: optional, group: context, profile: incident, from: finding}
   time_dt:
     caption: Event Time
     type: datetime_t
@@ -506,57 +402,6 @@ attributes:
     profile: datetime
     from: finding
     description: The finding creation time - when the finding was first generated, not when the underlying activity occurred. For the time range of contributing events, use `start_time` and `end_time`.
-  timezone_offset:
-    caption: Timezone Offset
-    requirement: recommended
-    definition: v1.9.0/classes/base_event.yaml
-  type_name:
-    caption: Type Name
-    requirement: optional
-    definition: v1.9.0/classes/base_event.yaml
-  type_uid:
-    caption: Type ID
-    type: long_t
-    requirement: required
-    group: classification
-    sibling: type_name
-    description: 'The event/finding type ID. It identifies the event''s semantics and structure. Producers and mappers must compute this as `class_uid * 100 + activity_id`. It uniquely identifies the combination of event class and activity across the entire schema. For example, `Detection Finding: Create` is `200401`.'
-    enum:
-      '200600':
-        caption: 'Data Security Finding: Unknown'
-      '200601':
-        caption: 'Data Security Finding: Create'
-        description: A new Data Security finding is created.
-      '200602':
-        caption: 'Data Security Finding: Update'
-        description: An existing Data Security finding is updated with more information.
-      '200603':
-        caption: 'Data Security Finding: Close'
-        description: An existing Data Security finding is closed, this can be due to any resolution (e.g., True Positive, False Positive, etc.).
-      '200604':
-        caption: 'Data Security Finding: Suppressed'
-        description: An existing Data Security finding is suppressed due to inaccurate detection techniques or a known true negative.
-        deprecated:
-          since: 1.4.0
-          message: Use `status_id` attribute instead.
-          superseded_by: [status_id]
-      '200699':
-        caption: 'Data Security Finding: Other'
-  unmapped:
-    caption: Unmapped Data
-    requirement: optional
-    definition: v1.9.0/classes/base_event.yaml
-  vendor_attributes:
-    caption: Vendor Attributes
-    requirement: optional
-    definition: v1.9.0/classes/finding.yaml
-  verdict:
-    caption: Verdict
-    requirement: recommended
-    profile: incident
-    definition: v1.9.0/classes/finding.yaml
-  verdict_id:
-    caption: Verdict ID
-    requirement: recommended
-    profile: incident
-    definition: v1.9.0/classes/finding.yaml
+  type_name: {caption: Type Name, type: string_t, requirement: optional, group: classification, from: base_event}
+  unmapped: {caption: Unmapped Data, type: object_t, object: object, requirement: optional, group: context, from: base_event}
+  vendor_attributes: {caption: Vendor Attributes, type: object_t, object: vendor_attributes, requirement: optional, group: context, from: finding}

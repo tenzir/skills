@@ -1,5 +1,5 @@
-# Attributes with a `definition` path are inherited unchanged. Read that file
-# for their type, object, description, enum, and observable.
+# Attributes with `from` but no description are inherited unchanged. Their
+# descriptions are in the file of the item that `from` names.
 name: device
 caption: Device
 extends: endpoint
@@ -40,6 +40,68 @@ referenced_by:
     web_resource_access_activity: [device]
     web_resources_activity: [device]
 attributes:
+  type_id:
+    caption: Type ID
+    type: integer_t
+    requirement: required
+    sibling: type
+    description: The device type ID.
+    enum:
+      0:
+        caption: Unknown
+        description: The type is unknown.
+      1:
+        caption: Server
+      2:
+        caption: Desktop
+      3:
+        caption: Laptop
+      4:
+        caption: Tablet
+      5:
+        caption: Mobile
+      6:
+        caption: Virtual
+      7:
+        caption: IOT
+      8:
+        caption: Browser
+      99:
+        caption: Other
+        description: The type is not mapped. See the `type` attribute, which may contain a data source specific value.
+  hostname:
+    caption: Hostname
+    type: hostname_t
+    requirement: recommended
+    observable: 1
+    description: The device hostname.
+  instance_uid: {caption: Instance ID, type: string_t, requirement: recommended, from: endpoint}
+  interface_name: {caption: Network Interface Name, type: string_t, requirement: recommended, from: endpoint}
+  interface_uid: {caption: Network Interface ID, type: string_t, requirement: recommended, from: endpoint}
+  ip:
+    caption: IP Address
+    type: ip_t
+    requirement: recommended
+    observable: 2
+    description: The device IP address, in either IPv4 or IPv6 format.
+  name:
+    caption: Name
+    type: string_t
+    requirement: recommended
+    description: |-
+      The alternate device name, ordinarily as assigned by an administrator.
+
+      Note: The Name could be any other string that helps to identify the device, such as a phone number; for example `310-555-1234`.
+  region:
+    caption: Region
+    type: string_t
+    requirement: recommended
+    description: The region where the virtual machine is located. For example, an AWS Region.
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: recommended
+    description: The unique identifier of the device. For example the Windows TargetSID or AWS EC2 ARN.
   autoscale_uid:
     caption: Autoscale UID
     type: string_t
@@ -84,12 +146,6 @@ attributes:
     array: true
     requirement: optional
     description: 'The group names to which the device belongs. For example: `["Windows Laptops", "Engineering"].`'
-  hostname:
-    caption: Hostname
-    type: hostname_t
-    requirement: recommended
-    observable: 1
-    description: The device hostname.
   hw_info:
     caption: Hardware Info
     type: object_t
@@ -112,24 +168,6 @@ attributes:
     type: string_t
     requirement: optional
     description: The International Mobile Station Equipment Identifier that is associated with the device.
-  instance_uid:
-    caption: Instance ID
-    requirement: recommended
-    definition: v1.0.0/objects/endpoint.yaml
-  interface_name:
-    caption: Network Interface Name
-    requirement: recommended
-    definition: v1.0.0/objects/endpoint.yaml
-  interface_uid:
-    caption: Network Interface ID
-    requirement: recommended
-    definition: v1.0.0/objects/endpoint.yaml
-  ip:
-    caption: IP Address
-    type: ip_t
-    requirement: recommended
-    observable: 2
-    description: The device IP address, in either IPv4 or IPv6 format.
   is_compliant:
     caption: Compliant Device
     type: boolean_t
@@ -185,14 +223,6 @@ attributes:
     requirement: optional
     profile: datetime
     description: The time when the device was last known to have been modified.
-  name:
-    caption: Name
-    type: string_t
-    requirement: recommended
-    description: |-
-      The alternate device name, ordinarily as assigned by an administrator.
-
-      Note: The Name could be any other string that helps to identify the device, such as a phone number; for example `310-555-1234`.
   network_interfaces:
     caption: Network Interfaces
     type: object_t
@@ -215,11 +245,6 @@ attributes:
     object: os
     requirement: optional
     description: The device operating system.
-  region:
-    caption: Region
-    type: string_t
-    requirement: recommended
-    description: The region where the virtual machine is located. For example, an AWS Region.
   risk_level:
     caption: Risk Level
     type: string_t
@@ -232,15 +257,15 @@ attributes:
     sibling: risk_level
     description: The normalized risk level id.
     enum:
-      '0':
+      0:
         caption: Info
-      '1':
+      1:
         caption: Low
-      '2':
+      2:
         caption: Medium
-      '3':
+      3:
         caption: High
-      '4':
+      4:
         caption: Critical
   risk_score:
     caption: Risk Score
@@ -252,59 +277,16 @@ attributes:
     type: subnet_t
     requirement: optional
     description: The subnet mask.
-  subnet_uid:
-    caption: Subnet UID
-    requirement: optional
-    definition: v1.0.0/objects/endpoint.yaml
+  subnet_uid: {caption: Subnet UID, type: string_t, requirement: optional, from: endpoint}
   type:
     caption: Type
     type: string_t
     requirement: optional
     description: 'The device type. For example: `unknown`, `server`, `desktop`, `laptop`, `tablet`, `mobile`, `virtual`, `browser`, or `other`.'
-  type_id:
-    caption: Type ID
-    type: integer_t
-    requirement: required
-    sibling: type
-    description: The device type ID.
-    enum:
-      '0':
-        caption: Unknown
-        description: The type is unknown.
-      '1':
-        caption: Server
-      '2':
-        caption: Desktop
-      '3':
-        caption: Laptop
-      '4':
-        caption: Tablet
-      '5':
-        caption: Mobile
-      '6':
-        caption: Virtual
-      '7':
-        caption: IOT
-      '8':
-        caption: Browser
-      '99':
-        caption: Other
-        description: The type is not mapped. See the `type` attribute, which may contain a data source specific value.
-  uid:
-    caption: Unique ID
-    type: string_t
-    requirement: recommended
-    description: The unique identifier of the device. For example the Windows TargetSID or AWS EC2 ARN.
   uid_alt:
     caption: Alternate ID
     type: string_t
     requirement: optional
     description: An alternate unique identifier of the device if any. For example the ActiveDirectory DN.
-  vlan_uid:
-    caption: VLAN
-    requirement: optional
-    definition: v1.0.0/objects/endpoint.yaml
-  vpc_uid:
-    caption: VPC UID
-    requirement: optional
-    definition: v1.0.0/objects/endpoint.yaml
+  vlan_uid: {caption: VLAN, type: string_t, requirement: optional, from: endpoint}
+  vpc_uid: {caption: VPC UID, type: string_t, requirement: optional, from: endpoint}

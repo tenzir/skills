@@ -16,6 +16,12 @@ referenced_by:
     evidences: [reg_key]
     query_evidence: [reg_key]
 attributes:
+  path:
+    caption: Path
+    type: reg_key_path_t
+    requirement: required
+    observable: 46
+    description: The full path to the registry key.
   is_system:
     caption: System
     type: boolean_t
@@ -32,12 +38,6 @@ attributes:
     requirement: optional
     profile: datetime
     description: The time when the registry key was last modified.
-  path:
-    caption: Path
-    type: reg_key_path_t
-    requirement: required
-    observable: 46
-    description: The full path to the registry key.
   security_descriptor:
     caption: Security Descriptor
     type: string_t

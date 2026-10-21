@@ -16,11 +16,6 @@ attributes:
     type: string_t
     requirement: recommended
     description: 'The HMAC algorithm used to compute the MAC. For example: `hmac-sha256`.'
-  error:
-    caption: TSIG Error
-    type: string_t
-    requirement: optional
-    description: The TSIG error, normalized to the caption of the `error_id` value. In the case of 'Other', it is defined by the event source.
   error_id:
     caption: TSIG Error ID
     type: integer_t
@@ -28,19 +23,19 @@ attributes:
     sibling: error
     description: The normalized TSIG-specific error code as defined in RFC 2845 and RFC 6895. This is independent of the DNS message header RCODE.
     enum:
-      '0':
+      0:
         caption: NoError
         description: No error.
-      '16':
+      16:
         caption: BADSIG
         description: TSIG signature failure.
-      '17':
+      17:
         caption: BADKEY
         description: Key not recognized.
-      '18':
+      18:
         caption: BADTIME
         description: Signature out of time window.
-      '99':
+      99:
         caption: Other
         description: The TSIG error code is not listed. See the `error` attribute, which contains a data source specific value.
   key_name:
@@ -48,3 +43,8 @@ attributes:
     type: string_t
     requirement: recommended
     description: 'The name of the shared secret key used to sign the DNS message. For example: `my-tsig-key.example.com.`'
+  error:
+    caption: TSIG Error
+    type: string_t
+    requirement: optional
+    description: The TSIG error, normalized to the caption of the `error_id` value. In the case of 'Other', it is defined by the event source.

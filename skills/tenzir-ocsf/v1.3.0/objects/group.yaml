@@ -21,6 +21,16 @@ referenced_by:
     table: [groups]
     user: [groups]
 attributes:
+  name:
+    caption: Name
+    type: string_t
+    requirement: recommended
+    description: The group name.
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: recommended
+    description: The unique identifier of the group. For example, for Windows events this is the security identifier (SID) of the group.
   desc:
     caption: Description
     type: string_t
@@ -31,11 +41,6 @@ attributes:
     type: string_t
     requirement: optional
     description: 'The domain where the group is defined. For example: the LDAP or Active Directory domain.'
-  name:
-    caption: Name
-    type: string_t
-    requirement: recommended
-    description: The group name.
   privileges:
     caption: Privileges
     type: string_t
@@ -47,8 +52,3 @@ attributes:
     type: string_t
     requirement: optional
     description: The type of the group or account.
-  uid:
-    caption: Unique ID
-    type: string_t
-    requirement: recommended
-    description: The unique identifier of the group. For example, for Windows events this is the security identifier (SID) of the group.

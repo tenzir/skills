@@ -9,6 +9,16 @@ referenced_by:
     affected_code: [rule]
     cis_benchmark_result: [rule]
 attributes:
+  name:
+    caption: Name
+    type: string_t
+    requirement: recommended
+    description: The name of the rule that generated the event.
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: recommended
+    description: The unique identifier of the rule that generated the event.
   category:
     caption: Category
     type: string_t
@@ -19,21 +29,11 @@ attributes:
     type: string_t
     requirement: optional
     description: The description of the rule that generated the event.
-  name:
-    caption: Name
-    type: string_t
-    requirement: recommended
-    description: The name of the rule that generated the event.
   type:
     caption: Type
     type: string_t
     requirement: optional
     description: The rule type.
-  uid:
-    caption: Unique ID
-    type: string_t
-    requirement: recommended
-    description: The unique identifier of the rule that generated the event.
   version:
     caption: Version
     type: string_t

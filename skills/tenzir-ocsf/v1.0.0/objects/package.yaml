@@ -6,6 +6,16 @@ referenced_by:
   objects:
     vulnerability: [packages]
 attributes:
+  name:
+    caption: Name
+    type: string_t
+    requirement: required
+    description: The software package name.
+  version:
+    caption: Version
+    type: string_t
+    requirement: required
+    description: The software package version.
   architecture:
     caption: Architecture
     type: string_t
@@ -21,18 +31,8 @@ attributes:
     type: string_t
     requirement: optional
     description: The software license applied to this package.
-  name:
-    caption: Name
-    type: string_t
-    requirement: required
-    description: The software package name.
   release:
     caption: Software Release Details
     type: string_t
     requirement: optional
     description: Release is the number of times a version of the software has been packaged.
-  version:
-    caption: Version
-    type: string_t
-    requirement: required
-    description: The software package version.

@@ -1,5 +1,5 @@
-# Attributes with a `definition` path are inherited unchanged. Read that file
-# for their type, object, description, enum, and observable.
+# Attributes with `from` but no description are inherited unchanged. Their
+# descriptions are in the file of the item that `from` names.
 name: user_management
 caption: User Management
 uid: 3007
@@ -17,16 +17,6 @@ references:
 - description: D3FEND™ Ontology d3f:PermissionGrantingEvent
   url: https://d3fend.mitre.org/event/d3f:PermissionGrantingEvent/
 attributes:
-  action:
-    caption: Action
-    requirement: optional
-    profile: security_control
-    definition: v1.9.0/classes/base_event.yaml
-  action_id:
-    caption: Action ID
-    requirement: recommended
-    profile: security_control
-    definition: v1.9.0/classes/base_event.yaml
   activity_id:
     caption: Activity ID
     type: integer_t
@@ -35,122 +25,69 @@ attributes:
     sibling: activity_name
     description: The normalized identifier of the activity that triggered the event. The target of each activity is the `user` attribute.
     enum:
-      '0':
+      0:
         caption: Unknown
         description: The event activity is unknown.
-      '1':
+      1:
         caption: Create
         description: Create a user. Populate the `user` object with details of the user.
-      '2':
+      2:
         caption: Update
         description: Update the user. The updated user details should be populated in the `updated_user` attribute.
-      '3':
+      3:
         caption: Delete
         description: Delete the user.
-      '4':
+      4:
         caption: Enable
         description: Enable the user.
-      '5':
+      5:
         caption: Disable
         description: Disable the user.
-      '6':
+      6:
         caption: Lock
         description: Lock out the user.
-      '7':
+      7:
         caption: Unlock
         description: Unlock a previously locked out user.
-      '8':
+      8:
         caption: Password Change
         description: An attempt to change the user's password.
-      '9':
+      9:
         caption: Password Reset
         description: An attempt to reset the user's password.
-      '10':
+      10:
         caption: Attach Policies
         description: Attach one or more IAM Policies to the user. Use `policies` as policies to be attached.
-      '11':
+      11:
         caption: Detach Policies
         description: Detach one or more IAM Policies from the user. Use `policies` as policies to be detached.
-      '12':
+      12:
         caption: Enable MFA Factors
         description: Enable one or more authentication factors for the user. Use `auth_factors` as factors to be enabled.
-      '13':
+      13:
         caption: Disable MFA Factors
         description: Disable one or more authentication factors for the user. Use `auth_factors` as factors to be disabled.
-      '14':
+      14:
         caption: Assign Privileges
         description: Assign privileges to the user. Use `privileges` as privileges to be assigned.
-      '15':
+      15:
         caption: Remove Privileges
         description: Remove privileges from the user. Use `privileges` as privileges to be removed.
-      '16':
+      16:
         caption: Assign Roles
         description: Assign one or more roles to the user. Use `iam_roles` as roles to be assigned.
-      '17':
+      17:
         caption: Remove Roles
         description: Remove one or more roles from the user. Use `iam_roles` as roles to be removed.
-      '18':
+      18:
         caption: Add Programmatic Credentials
         description: Add credentials to a role. Use `programmatic_credentials` as credentials to be added.
-      '19':
+      19:
         caption: Remove Programmatic Credentials
         description: Remove credentials from a role. Use `programmatic_credentials` as credentials to be removed.
-      '99':
+      99:
         caption: Other
         description: The event activity is not mapped. See the `activity_name` attribute, which contains a data source specific value.
-  activity_name:
-    caption: Activity
-    requirement: optional
-    definition: v1.9.0/classes/base_event.yaml
-  actor:
-    caption: Actor
-    requirement: recommended
-    definition: v1.9.0/classes/iam.yaml
-  ai_agent:
-    caption: AI Agent
-    requirement: optional
-    profile: ai_operation
-    definition: v1.9.0/classes/iam.yaml
-  ai_model:
-    caption: AI Model
-    requirement: recommended
-    profile: ai_operation
-    definition: v1.9.0/classes/iam.yaml
-  api:
-    caption: API Details
-    requirement: optional
-    profile: cloud
-    definition: v1.9.0/classes/base_event.yaml
-  attacks:
-    caption: MITRE ATT&CK® and ATLAS™ Details
-    requirement: optional
-    profile: security_control
-    definition: v1.9.0/classes/base_event.yaml
-  attestation_list:
-    caption: Attestation List
-    requirement: optional
-    profile: record_integrity
-    definition: v1.9.0/classes/base_event.yaml
-  auth_factors:
-    caption: Authentication Factors
-    type: object_t
-    object: auth_factor
-    array: true
-    requirement: recommended
-    group: context
-    description: Details about the authentication factors associated with the MFA Factor Enable/Disable activities.
-  authorizations:
-    caption: Authorization Information
-    requirement: optional
-    profile: security_control
-    definition: v1.9.0/classes/base_event.yaml
-  category_name:
-    caption: Category
-    type: string_t
-    requirement: optional
-    group: classification
-    from: base_event
-    description: 'The event category name, as defined by category_uid value: `Identity & Access Management`.'
   category_uid:
     caption: Category ID
     type: integer_t
@@ -160,16 +97,9 @@ attributes:
     sibling: category_name
     description: The category unique identifier of the event. Each event class belongs to exactly one category. Producers and mappers must set this to the category defined by the event class being used.
     enum:
-      '3':
+      3:
         caption: Identity & Access Management
         description: Identity & Access Management (IAM) events relate to the supervision of the system's authentication and access control model. Examples of such events are the success or failure of authentication, granting of authority, password change, entity change, privileged use etc.
-  class_name:
-    caption: Class
-    type: string_t
-    requirement: optional
-    group: classification
-    from: base_event
-    description: 'The event class name, as defined by class_uid value: `User Management`.'
   class_uid:
     caption: Class ID
     type: integer_t
@@ -178,242 +108,14 @@ attributes:
     sibling: class_name
     description: The unique identifier of a class. A class describes the attributes available in an event. Producers and mappers must set this to the `uid` defined in the event class definition. For example, `Detection Finding` is `2004`.
     enum:
-      '3007':
+      3007:
         caption: User Management
         description: 'User Management events report lifecycle management of a user and account management tasks that are performed, such as a password change or reset, a user being created, updated, deleted, disabled, enabled, locked out or unlocked. There are two ways updates to the state of a user may be expressed: Using the `Update` activity, for example when updating multiple items at one time, the `updated_user` reflects the changes made to `user`. Using discrete activities, such as `Assign Privileges` the state change is expressed by the `privileges` attribute. Optionally, on successful changes, the `updated_user` reflects the new state of the user.'
-  cloud:
-    caption: Cloud
-    requirement: required
-    profile: cloud
-    definition: v1.9.0/classes/base_event.yaml
-  confidence:
-    caption: Confidence
-    requirement: optional
-    profile: security_control
-    definition: v1.9.0/classes/base_event.yaml
-  confidence_id:
-    caption: Confidence ID
-    requirement: recommended
-    profile: security_control
-    definition: v1.9.0/classes/base_event.yaml
-  confidence_score:
-    caption: Confidence Score
-    requirement: optional
-    profile: security_control
-    definition: v1.9.0/classes/base_event.yaml
-  count:
-    caption: Count
-    requirement: optional
-    definition: v1.9.0/classes/base_event.yaml
-  delegation:
-    caption: Delegation
-    requirement: optional
-    profile: ai_operation
-    definition: v1.9.0/classes/iam.yaml
-  device:
-    caption: Device
-    requirement: recommended
-    profile: host
-    definition: v1.9.0/classes/base_event.yaml
-  disposition:
-    caption: Disposition
-    requirement: optional
-    profile: security_control
-    definition: v1.9.0/classes/base_event.yaml
-  disposition_id:
-    caption: Disposition ID
-    requirement: recommended
-    profile: security_control
-    definition: v1.9.0/classes/base_event.yaml
-  duration:
-    caption: Duration Milliseconds
-    requirement: optional
-    definition: v1.9.0/classes/base_event.yaml
-  end_time:
-    caption: End Time
-    requirement: optional
-    definition: v1.9.0/classes/base_event.yaml
-  end_time_dt:
-    caption: End Time
-    requirement: optional
-    profile: datetime
-    definition: v1.9.0/classes/base_event.yaml
-  enrichments:
-    caption: Enrichments
-    requirement: optional
-    definition: v1.9.0/classes/base_event.yaml
-  firewall_rule:
-    caption: Firewall Rule
-    requirement: optional
-    profile: security_control
-    definition: v1.9.0/classes/base_event.yaml
-  http_request:
-    caption: HTTP Request
-    requirement: optional
-    definition: v1.9.0/classes/iam.yaml
-  http_response:
-    caption: HTTP Response
-    requirement: optional
-    definition: v1.9.0/classes/iam.yaml
-  iam_roles:
-    caption: IAM Roles
-    type: object_t
-    object: iam_role
-    array: true
-    requirement: recommended
-    group: primary
-    description: One or more roles assigned to or removed from a user.
-  is_alert:
-    caption: Alert
-    requirement: recommended
-    profile: security_control
-    definition: v1.9.0/classes/base_event.yaml
-  malware:
-    caption: Malware
-    requirement: optional
-    profile: security_control
-    definition: v1.9.0/classes/base_event.yaml
-  malware_scan_info:
-    caption: Malware Scan Info
-    requirement: optional
-    profile: security_control
-    definition: v1.9.0/classes/base_event.yaml
-  message:
-    caption: Message
-    requirement: recommended
-    definition: v1.9.0/classes/base_event.yaml
-  message_context:
-    caption: Message Context
-    requirement: optional
-    profile: ai_operation
-    definition: v1.9.0/classes/iam.yaml
-  metadata:
-    caption: Metadata
-    requirement: required
-    definition: v1.9.0/classes/base_event.yaml
-  observables:
-    caption: Observables
-    requirement: recommended
-    definition: v1.9.0/classes/base_event.yaml
-  osint:
-    caption: OSINT
-    requirement: required
-    profile: osint
-    definition: v1.9.0/classes/base_event.yaml
-  policies:
-    caption: Policies
-    type: object_t
-    object: policy
-    array: true
-    requirement: recommended
-    group: context
-    description: Details about the IAM policies associated with the Attach/Detach Policy activities.
-  policy:
-    caption: Policy
-    requirement: optional
-    profile: security_control
-    definition: v1.9.0/classes/base_event.yaml
-  privileges:
-    caption: Privileges
-    type: string_t
-    array: true
-    requirement: recommended
-    group: primary
-    description: Set of privileges assigned to a user.
-  raw_data:
-    caption: Raw Data
-    requirement: optional
-    definition: v1.9.0/classes/base_event.yaml
-  raw_data_hash:
-    caption: Raw Data Hash
-    requirement: optional
-    definition: v1.9.0/classes/base_event.yaml
-  raw_data_size:
-    caption: Raw Data Size
-    requirement: optional
-    definition: v1.9.0/classes/base_event.yaml
-  resources:
-    caption: Resources Array
-    type: object_t
-    object: resource_details
-    array: true
-    requirement: recommended
-    group: primary
-    description: Resources that the privileges, policies, and roles give access to.
-  risk_details:
-    caption: Risk Details
-    requirement: optional
-    profile: security_control
-    definition: v1.9.0/classes/base_event.yaml
-  risk_level:
-    caption: Risk Level
-    requirement: optional
-    profile: security_control
-    definition: v1.9.0/classes/base_event.yaml
-  risk_level_id:
-    caption: Risk Level ID
-    requirement: optional
-    profile: security_control
-    definition: v1.9.0/classes/base_event.yaml
-  risk_score:
-    caption: Risk Score
-    requirement: optional
-    profile: security_control
-    definition: v1.9.0/classes/base_event.yaml
-  severity:
-    caption: Severity
-    requirement: optional
-    definition: v1.9.0/classes/base_event.yaml
-  severity_id:
-    caption: Severity ID
-    requirement: required
-    definition: v1.9.0/classes/base_event.yaml
-  src_endpoint:
-    caption: Source Endpoint
-    requirement: recommended
-    definition: v1.9.0/classes/iam.yaml
-  start_time:
-    caption: Start Time
-    requirement: optional
-    definition: v1.9.0/classes/base_event.yaml
-  start_time_dt:
-    caption: Start Time
-    requirement: optional
-    profile: datetime
-    definition: v1.9.0/classes/base_event.yaml
-  status:
-    caption: Status
-    requirement: recommended
-    definition: v1.9.0/classes/base_event.yaml
-  status_code:
-    caption: Status Code
-    requirement: recommended
-    definition: v1.9.0/classes/base_event.yaml
-  status_detail:
-    caption: Status Detail
-    requirement: recommended
-    definition: v1.9.0/classes/base_event.yaml
-  status_id:
-    caption: Status ID
-    requirement: recommended
-    definition: v1.9.0/classes/base_event.yaml
-  time:
-    caption: Event Time
-    requirement: required
-    definition: v1.9.0/classes/base_event.yaml
-  time_dt:
-    caption: Event Time
-    requirement: optional
-    profile: datetime
-    definition: v1.9.0/classes/base_event.yaml
-  timezone_offset:
-    caption: Timezone Offset
-    requirement: recommended
-    definition: v1.9.0/classes/base_event.yaml
-  type_name:
-    caption: Type Name
-    requirement: optional
-    definition: v1.9.0/classes/base_event.yaml
+  cloud: {caption: Cloud, type: object_t, object: cloud, requirement: required, group: primary, profile: cloud, from: base_event}
+  metadata: {caption: Metadata, type: object_t, object: metadata, requirement: required, group: context, from: base_event}
+  osint: {caption: OSINT, type: object_t, object: osint, array: true, requirement: required, group: primary, profile: osint, from: base_event}
+  severity_id: {caption: Severity ID, type: integer_t, requirement: required, group: classification, sibling: severity, enum: {0: Unknown, 1: Informational, 2: Low, 3: Medium, 4: High, 5: Critical, 6: Fatal, 99: Other}, from: base_event}
+  time: {caption: Event Time, type: timestamp_t, requirement: required, group: occurrence, from: base_event}
   type_uid:
     caption: Type ID
     type: long_t
@@ -421,80 +123,6 @@ attributes:
     group: classification
     sibling: type_name
     description: 'The event/finding type ID. It identifies the event''s semantics and structure. Producers and mappers must compute this as `class_uid * 100 + activity_id`. It uniquely identifies the combination of event class and activity across the entire schema. For example, `Detection Finding: Create` is `200401`.'
-    enum:
-      '300700':
-        caption: 'User Management: Unknown'
-      '300701':
-        caption: 'User Management: Create'
-        description: Create a user. Populate the `user` object with details of the user.
-      '300702':
-        caption: 'User Management: Update'
-        description: Update the user. The updated user details should be populated in the `updated_user` attribute.
-      '300703':
-        caption: 'User Management: Delete'
-        description: Delete the user.
-      '300704':
-        caption: 'User Management: Enable'
-        description: Enable the user.
-      '300705':
-        caption: 'User Management: Disable'
-        description: Disable the user.
-      '300706':
-        caption: 'User Management: Lock'
-        description: Lock out the user.
-      '300707':
-        caption: 'User Management: Unlock'
-        description: Unlock a previously locked out user.
-      '300708':
-        caption: 'User Management: Password Change'
-        description: An attempt to change the user's password.
-      '300709':
-        caption: 'User Management: Password Reset'
-        description: An attempt to reset the user's password.
-      '300710':
-        caption: 'User Management: Attach Policies'
-        description: Attach one or more IAM Policies to the user. Use `policies` as policies to be attached.
-      '300711':
-        caption: 'User Management: Detach Policies'
-        description: Detach one or more IAM Policies from the user. Use `policies` as policies to be detached.
-      '300712':
-        caption: 'User Management: Enable MFA Factors'
-        description: Enable one or more authentication factors for the user. Use `auth_factors` as factors to be enabled.
-      '300713':
-        caption: 'User Management: Disable MFA Factors'
-        description: Disable one or more authentication factors for the user. Use `auth_factors` as factors to be disabled.
-      '300714':
-        caption: 'User Management: Assign Privileges'
-        description: Assign privileges to the user. Use `privileges` as privileges to be assigned.
-      '300715':
-        caption: 'User Management: Remove Privileges'
-        description: Remove privileges from the user. Use `privileges` as privileges to be removed.
-      '300716':
-        caption: 'User Management: Assign Roles'
-        description: Assign one or more roles to the user. Use `iam_roles` as roles to be assigned.
-      '300717':
-        caption: 'User Management: Remove Roles'
-        description: Remove one or more roles from the user. Use `iam_roles` as roles to be removed.
-      '300718':
-        caption: 'User Management: Add Programmatic Credentials'
-        description: Add credentials to a role. Use `programmatic_credentials` as credentials to be added.
-      '300719':
-        caption: 'User Management: Remove Programmatic Credentials'
-        description: Remove credentials from a role. Use `programmatic_credentials` as credentials to be removed.
-      '300799':
-        caption: 'User Management: Other'
-  unmapped:
-    caption: Unmapped Data
-    requirement: optional
-    definition: v1.9.0/classes/base_event.yaml
-  updated_user:
-    caption: Updated User
-    type: object_t
-    object: user
-    requirement: recommended
-    group: primary
-    observable: 21
-    description: The intended state of the `user` after the update. On `Success`, represents the actual post-update state.
   user:
     caption: User
     type: object_t
@@ -503,3 +131,152 @@ attributes:
     group: primary
     observable: 21
     description: The user that was a target of an activity.
+  action_id: {caption: Action ID, type: integer_t, requirement: recommended, group: primary, profile: security_control, sibling: action, enum: {0: Unknown, 1: Allowed, 2: Denied, 3: Observed, 4: Modified, 99: Other}, from: base_event}
+  actor: {caption: Actor, type: object_t, object: actor, requirement: recommended, group: context, from: iam}
+  ai_model: {caption: AI Model, type: object_t, object: ai_model, requirement: recommended, group: context, profile: ai_operation, from: iam}
+  auth_factors:
+    caption: Authentication Factors
+    type: object_t
+    object: auth_factor
+    array: true
+    requirement: recommended
+    group: context
+    description: Details about the authentication factors associated with the MFA Factor Enable/Disable activities.
+  confidence_id: {caption: Confidence ID, type: integer_t, requirement: recommended, group: context, profile: security_control, sibling: confidence, enum: {0: Unknown, 1: Low, 2: Medium, 3: High, 99: Other}, from: base_event}
+  device: {caption: Device, type: object_t, object: device, requirement: recommended, group: primary, profile: host, observable: 20, from: base_event}
+  disposition_id:
+    caption: Disposition ID
+    type: integer_t
+    requirement: recommended
+    group: primary
+    profile: security_control
+    sibling: disposition
+    enum:
+      0: Unknown
+      1: Allowed
+      2: Blocked
+      3: Quarantined
+      4: Isolated
+      5: Deleted
+      6: Dropped
+      7: Custom Action
+      8: Approved
+      9: Restored
+      10: Exonerated
+      11: Corrected
+      12: Partially Corrected
+      13: Uncorrected
+      14: Delayed
+      15: Detected
+      16: No Action
+      17: Logged
+      18: Tagged
+      19: Alert
+      20: Count
+      21: Reset
+      22: Captcha
+      23: Challenge
+      24: Access Revoked
+      25: Rejected
+      26: Unauthorized
+      27: Error
+      99: Other
+    from: base_event
+  iam_roles:
+    caption: IAM Roles
+    type: object_t
+    object: iam_role
+    array: true
+    requirement: recommended
+    group: primary
+    description: One or more roles assigned to or removed from a user.
+  is_alert: {caption: Alert, type: boolean_t, requirement: recommended, group: primary, profile: security_control, from: base_event}
+  message: {caption: Message, type: string_t, requirement: recommended, group: primary, from: base_event}
+  observables: {caption: Observables, type: object_t, object: observable, array: true, requirement: recommended, group: primary, from: base_event}
+  policies:
+    caption: Policies
+    type: object_t
+    object: policy
+    array: true
+    requirement: recommended
+    group: context
+    description: Details about the IAM policies associated with the Attach/Detach Policy activities.
+  privileges:
+    caption: Privileges
+    type: string_t
+    array: true
+    requirement: recommended
+    group: primary
+    description: Set of privileges assigned to a user.
+  resources:
+    caption: Resources Array
+    type: object_t
+    object: resource_details
+    array: true
+    requirement: recommended
+    group: primary
+    description: Resources that the privileges, policies, and roles give access to.
+  src_endpoint: {caption: Source Endpoint, type: object_t, object: network_endpoint, requirement: recommended, group: primary, observable: 20, from: iam}
+  status: {caption: Status, type: string_t, requirement: recommended, group: primary, from: base_event}
+  status_code: {caption: Status Code, type: string_t, requirement: recommended, group: primary, from: base_event}
+  status_detail: {caption: Status Detail, type: string_t, requirement: recommended, group: primary, from: base_event}
+  status_id: {caption: Status ID, type: integer_t, requirement: recommended, group: primary, sibling: status, enum: {0: Unknown, 1: Success, 2: Failure, 99: Other}, from: base_event}
+  timezone_offset: {caption: Timezone Offset, type: integer_t, requirement: recommended, group: occurrence, from: base_event}
+  updated_user:
+    caption: Updated User
+    type: object_t
+    object: user
+    requirement: recommended
+    group: primary
+    observable: 21
+    description: The intended state of the `user` after the update. On `Success`, represents the actual post-update state.
+  action: {caption: Action, type: string_t, requirement: optional, group: primary, profile: security_control, from: base_event}
+  activity_name: {caption: Activity, type: string_t, requirement: optional, group: classification, from: base_event}
+  ai_agent: {caption: AI Agent, type: object_t, object: ai_agent, requirement: optional, group: context, profile: ai_operation, from: iam}
+  api: {caption: API Details, type: object_t, object: api, requirement: optional, group: context, profile: cloud, from: base_event}
+  attacks: {caption: MITRE ATT&CK® and ATLAS™ Details, type: object_t, object: attack, array: true, requirement: optional, group: primary, profile: security_control, from: base_event}
+  attestation_list: {caption: Attestation List, type: object_t, object: attestation, array: true, requirement: optional, group: context, profile: record_integrity, from: base_event}
+  authorizations: {caption: Authorization Information, type: object_t, object: authorization, array: true, requirement: optional, group: primary, profile: security_control, from: base_event}
+  category_name:
+    caption: Category
+    type: string_t
+    requirement: optional
+    group: classification
+    from: base_event
+    description: 'The event category name, as defined by category_uid value: `Identity & Access Management`.'
+  class_name:
+    caption: Class
+    type: string_t
+    requirement: optional
+    group: classification
+    from: base_event
+    description: 'The event class name, as defined by class_uid value: `User Management`.'
+  confidence: {caption: Confidence, type: string_t, requirement: optional, group: context, profile: security_control, from: base_event}
+  confidence_score: {caption: Confidence Score, type: integer_t, requirement: optional, group: context, profile: security_control, from: base_event}
+  count: {caption: Count, type: integer_t, requirement: optional, group: occurrence, from: base_event}
+  delegation: {caption: Delegation, type: object_t, object: delegation, requirement: optional, group: context, profile: ai_operation, from: iam}
+  disposition: {caption: Disposition, type: string_t, requirement: optional, group: primary, profile: security_control, from: base_event}
+  duration: {caption: Duration Milliseconds, type: long_t, requirement: optional, group: occurrence, from: base_event}
+  end_time: {caption: End Time, type: timestamp_t, requirement: optional, group: occurrence, from: base_event}
+  end_time_dt: {caption: End Time, type: datetime_t, requirement: optional, group: occurrence, profile: datetime, from: base_event}
+  enrichments: {caption: Enrichments, type: object_t, object: enrichment, array: true, requirement: optional, group: context, from: base_event}
+  firewall_rule: {caption: Firewall Rule, type: object_t, object: firewall_rule, requirement: optional, group: primary, profile: security_control, from: base_event}
+  http_request: {caption: HTTP Request, type: object_t, object: http_request, requirement: optional, group: context, from: iam}
+  http_response: {caption: HTTP Response, type: object_t, object: http_response, requirement: optional, group: context, from: iam}
+  malware: {caption: Malware, type: object_t, object: malware, array: true, requirement: optional, group: primary, profile: security_control, from: base_event}
+  malware_scan_info: {caption: Malware Scan Info, type: object_t, object: malware_scan_info, requirement: optional, group: primary, profile: security_control, from: base_event}
+  message_context: {caption: Message Context, type: object_t, object: message_context, requirement: optional, group: context, profile: ai_operation, from: iam}
+  policy: {caption: Policy, type: object_t, object: policy, requirement: optional, group: primary, profile: security_control, from: base_event}
+  raw_data: {caption: Raw Data, type: string_t, requirement: optional, group: context, from: base_event}
+  raw_data_hash: {caption: Raw Data Hash, type: object_t, object: fingerprint, requirement: optional, group: context, observable: 30, from: base_event}
+  raw_data_size: {caption: Raw Data Size, type: long_t, requirement: optional, group: context, from: base_event}
+  risk_details: {caption: Risk Details, type: string_t, requirement: optional, group: context, profile: security_control, from: base_event}
+  risk_level: {caption: Risk Level, type: string_t, requirement: optional, group: context, profile: security_control, from: base_event}
+  risk_level_id: {caption: Risk Level ID, type: integer_t, requirement: optional, group: context, profile: security_control, sibling: risk_level, enum: {0: Info, 1: Low, 2: Medium, 3: High, 4: Critical, 99: Other}, from: base_event}
+  risk_score: {caption: Risk Score, type: integer_t, requirement: optional, group: context, profile: security_control, from: base_event}
+  severity: {caption: Severity, type: string_t, requirement: optional, group: classification, from: base_event}
+  start_time: {caption: Start Time, type: timestamp_t, requirement: optional, group: occurrence, from: base_event}
+  start_time_dt: {caption: Start Time, type: datetime_t, requirement: optional, group: occurrence, profile: datetime, from: base_event}
+  time_dt: {caption: Event Time, type: datetime_t, requirement: optional, group: occurrence, profile: datetime, from: base_event}
+  type_name: {caption: Type Name, type: string_t, requirement: optional, group: classification, from: base_event}
+  unmapped: {caption: Unmapped Data, type: object_t, object: object, requirement: optional, group: context, from: base_event}

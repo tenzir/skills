@@ -84,11 +84,17 @@ referenced_by:
     web_resource_access_activity: [metadata]
     web_resources_activity: [metadata]
 attributes:
-  correlation_uid:
-    caption: Correlation UID
+  product:
+    caption: Product
+    type: object_t
+    object: product
+    requirement: required
+    description: The product that reported the event.
+  version:
+    caption: Version
     type: string_t
-    requirement: optional
-    description: The unique identifier used to correlate events.
+    requirement: required
+    description: 'The version of the OCSF schema, using Semantic Versioning Specification ([SemVer](https://semver.org)). For example: `1.0.0.` Event consumers use the version to determine the available event attributes.'
   data_classification:
     caption: Data Classification
     type: object_t
@@ -109,6 +115,31 @@ attributes:
     group: context
     profile: data_classification
     description: A list of Data Classification objects, that include information about data classification levels and data category types, identified by a classifier.
+  log_name:
+    caption: Log Name
+    type: string_t
+    requirement: recommended
+    description: 'The event log name. For example, syslog file name or Windows logging subsystem: Security.'
+  log_provider:
+    caption: Log Provider
+    type: string_t
+    requirement: recommended
+    description: The logging provider or logging service that logged the event. For example, Microsoft-Windows-Security-Auditing.
+  original_time:
+    caption: Original Time
+    type: string_t
+    requirement: recommended
+    description: The original event time as reported by the event source. For example, the time in the original format from system event log such as Syslog on Unix/Linux and the System event file on Windows. Omit if event is generated instead of collected via logs.
+  tenant_uid:
+    caption: Tenant UID
+    type: string_t
+    requirement: recommended
+    description: The unique tenant identifier.
+  correlation_uid:
+    caption: Correlation UID
+    type: string_t
+    requirement: optional
+    description: The unique identifier used to correlate events.
   debug:
     caption: Debug Information
     type: string_t
@@ -152,16 +183,6 @@ attributes:
     type: string_t
     requirement: optional
     description: The audit level at which an event was generated.
-  log_name:
-    caption: Log Name
-    type: string_t
-    requirement: recommended
-    description: 'The event log name. For example, syslog file name or Windows logging subsystem: Security.'
-  log_provider:
-    caption: Log Provider
-    type: string_t
-    requirement: recommended
-    description: The logging provider or logging service that logged the event. For example, Microsoft-Windows-Security-Auditing.
   log_version:
     caption: Log Version
     type: string_t
@@ -202,11 +223,6 @@ attributes:
     requirement: optional
     profile: datetime
     description: The time when the event was last modified or enriched.
-  original_time:
-    caption: Original Time
-    type: string_t
-    requirement: recommended
-    description: The original event time as reported by the event source. For example, the time in the original format from system event log such as Syslog on Unix/Linux and the System event file on Windows. Omit if event is generated instead of collected via logs.
   processed_time:
     caption: Processed Time
     type: timestamp_t
@@ -218,12 +234,6 @@ attributes:
     requirement: optional
     profile: datetime
     description: The event processed time, such as an ETL operation.
-  product:
-    caption: Product
-    type: object_t
-    object: product
-    requirement: required
-    description: The product that reported the event.
   profiles:
     caption: Profiles
     type: string_t
@@ -242,11 +252,6 @@ attributes:
     array: true
     requirement: optional
     description: The list of tags; `{key:value}` pairs associated to the event.
-  tenant_uid:
-    caption: Tenant UID
-    type: string_t
-    requirement: recommended
-    description: The unique tenant identifier.
   transformation_info_list:
     caption: Transformation Info
     type: object_t
@@ -264,8 +269,3 @@ attributes:
     type: integer_t
     requirement: optional
     description: The original size of the OCSF event data in kilobytes before any truncation occurred. This field is typically populated when `is_truncated` is `true` to indicate the full size of the original event.
-  version:
-    caption: Version
-    type: string_t
-    requirement: required
-    description: 'The version of the OCSF schema, using Semantic Versioning Specification ([SemVer](https://semver.org)). For example: `1.0.0.` Event consumers use the version to determine the available event attributes.'

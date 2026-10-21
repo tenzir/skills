@@ -1,5 +1,5 @@
-# Attributes with a `definition` path are inherited unchanged. Read that file
-# for their type, object, description, enum, and observable.
+# Attributes with `from` but no description are inherited unchanged. Their
+# descriptions are in the file of the item that `from` names.
 name: authorize_session
 caption: Authorize Session
 uid: 3003
@@ -22,39 +22,18 @@ attributes:
     sibling: activity_name
     description: The normalized identifier of the activity that triggered the event.
     enum:
-      '0':
+      0:
         caption: Unknown
         description: The event activity is unknown.
-      '1':
+      1:
         caption: Assign Privileges
         description: Assign special privileges to a new logon.
-      '2':
+      2:
         caption: Assign Groups
         description: Assign special groups to a new logon.
-      '99':
+      99:
         caption: Other
         description: The event activity is not mapped. See the `activity_name` attribute, which contains a data source specific value.
-  activity_name:
-    caption: Activity
-    requirement: optional
-    definition: v1.1.0/classes/base_event.yaml
-  actor:
-    caption: Actor
-    requirement: optional
-    profile: host
-    definition: v1.1.0/classes/iam.yaml
-  api:
-    caption: API Details
-    requirement: optional
-    profile: cloud
-    definition: v1.1.0/classes/base_event.yaml
-  category_name:
-    caption: Category
-    type: string_t
-    requirement: optional
-    group: classification
-    from: base_event
-    description: 'The event category name, as defined by category_uid value: `Identity & Access Management`.'
   category_uid:
     caption: Category ID
     type: integer_t
@@ -64,16 +43,9 @@ attributes:
     sibling: category_name
     description: The category unique identifier of the event.
     enum:
-      '3':
+      3:
         caption: Identity & Access Management
         description: Identity & Access Management (IAM) events relate to the supervision of the system's authentication and access control model. Examples of such events are the success or failure of authentication, granting of authority, password change, entity change, privileged use etc.
-  class_name:
-    caption: Class
-    type: string_t
-    requirement: optional
-    group: classification
-    from: base_event
-    description: 'The event class name, as defined by class_uid value: `Authorize Session`.'
   class_uid:
     caption: Class ID
     type: integer_t
@@ -82,135 +54,13 @@ attributes:
     sibling: class_name
     description: The unique identifier of a class. A Class describes the attributes available in an event.
     enum:
-      '3003':
+      3003:
         caption: Authorize Session
         description: Authorize Session events report privileges or groups assigned to a new user session, usually at login time.
-  cloud:
-    caption: Cloud
-    requirement: required
-    profile: cloud
-    definition: v1.1.0/classes/base_event.yaml
-  count:
-    caption: Count
-    requirement: optional
-    definition: v1.1.0/classes/base_event.yaml
-  device:
-    caption: Device
-    requirement: recommended
-    profile: host
-    definition: v1.1.0/classes/iam.yaml
-  dst_endpoint:
-    caption: Destination Endpoint
-    type: object_t
-    object: network_endpoint
-    requirement: optional
-    group: context
-    observable: 20
-    description: The Endpoint for which the user session was targeted.
-  duration:
-    caption: Duration
-    requirement: optional
-    definition: v1.1.0/classes/base_event.yaml
-  end_time:
-    caption: End Time
-    requirement: optional
-    definition: v1.1.0/classes/base_event.yaml
-  end_time_dt:
-    caption: End Time
-    requirement: optional
-    profile: datetime
-    definition: v1.1.0/classes/base_event.yaml
-  enrichments:
-    caption: Enrichments
-    requirement: optional
-    definition: v1.1.0/classes/base_event.yaml
-  group:
-    caption: Group
-    type: object_t
-    object: group
-    requirement: recommended
-    group: primary
-    description: Group that was assigned to the new user session.
-  message:
-    caption: Message
-    requirement: recommended
-    definition: v1.1.0/classes/base_event.yaml
-  metadata:
-    caption: Metadata
-    requirement: required
-    definition: v1.1.0/classes/base_event.yaml
-  observables:
-    caption: Observables
-    requirement: optional
-    definition: v1.1.0/classes/base_event.yaml
-  privileges:
-    caption: Privileges
-    type: string_t
-    array: true
-    requirement: recommended
-    group: primary
-    description: The list of sensitive privileges, assigned to the new user session.
-  raw_data:
-    caption: Raw Data
-    requirement: optional
-    definition: v1.1.0/classes/base_event.yaml
-  session:
-    caption: Session
-    type: object_t
-    object: session
-    requirement: recommended
-    group: primary
-    description: The user session with the assigned privileges.
-  severity:
-    caption: Severity
-    requirement: optional
-    definition: v1.1.0/classes/base_event.yaml
-  severity_id:
-    caption: Severity ID
-    requirement: required
-    definition: v1.1.0/classes/base_event.yaml
-  start_time:
-    caption: Start Time
-    requirement: optional
-    definition: v1.1.0/classes/base_event.yaml
-  start_time_dt:
-    caption: Start Time
-    requirement: optional
-    profile: datetime
-    definition: v1.1.0/classes/base_event.yaml
-  status:
-    caption: Status
-    requirement: optional
-    definition: v1.1.0/classes/base_event.yaml
-  status_code:
-    caption: Status Code
-    requirement: optional
-    definition: v1.1.0/classes/base_event.yaml
-  status_detail:
-    caption: Status Details
-    requirement: optional
-    definition: v1.1.0/classes/base_event.yaml
-  status_id:
-    caption: Status ID
-    requirement: recommended
-    definition: v1.1.0/classes/base_event.yaml
-  time:
-    caption: Event Time
-    requirement: required
-    definition: v1.1.0/classes/base_event.yaml
-  time_dt:
-    caption: Event Time
-    requirement: optional
-    profile: datetime
-    definition: v1.1.0/classes/base_event.yaml
-  timezone_offset:
-    caption: Timezone Offset
-    requirement: recommended
-    definition: v1.1.0/classes/base_event.yaml
-  type_name:
-    caption: Type Name
-    requirement: optional
-    definition: v1.1.0/classes/base_event.yaml
+  cloud: {caption: Cloud, type: object_t, object: cloud, requirement: required, group: primary, profile: cloud, from: base_event}
+  metadata: {caption: Metadata, type: object_t, object: metadata, requirement: required, group: context, from: base_event}
+  severity_id: {caption: Severity ID, type: integer_t, requirement: required, group: classification, sibling: severity, enum: {0: Unknown, 1: Informational, 2: Low, 3: Medium, 4: High, 5: Critical, 6: Fatal, 99: Other}, from: base_event}
+  time: {caption: Event Time, type: timestamp_t, requirement: required, group: occurrence, from: base_event}
   type_uid:
     caption: Type ID
     type: long_t
@@ -218,21 +68,6 @@ attributes:
     group: classification
     sibling: type_name
     description: 'The event/finding type ID. It identifies the event''s semantics and structure. The value is calculated by the logging system as: `class_uid * 100 + activity_id`.'
-    enum:
-      '300300':
-        caption: 'Authorize Session: Unknown'
-      '300301':
-        caption: 'Authorize Session: Assign Privileges'
-        description: Assign special privileges to a new logon.
-      '300302':
-        caption: 'Authorize Session: Assign Groups'
-        description: Assign special groups to a new logon.
-      '300399':
-        caption: 'Authorize Session: Other'
-  unmapped:
-    caption: Unmapped Data
-    requirement: optional
-    definition: v1.1.0/classes/base_event.yaml
   user:
     caption: User
     type: object_t
@@ -241,3 +76,69 @@ attributes:
     group: primary
     observable: 21
     description: The user to which new privileges were assigned.
+  device: {caption: Device, type: object_t, object: device, requirement: recommended, group: primary, profile: host, observable: 20, from: iam}
+  group:
+    caption: Group
+    type: object_t
+    object: group
+    requirement: recommended
+    group: primary
+    description: Group that was assigned to the new user session.
+  message: {caption: Message, type: string_t, requirement: recommended, group: primary, from: base_event}
+  privileges:
+    caption: Privileges
+    type: string_t
+    array: true
+    requirement: recommended
+    group: primary
+    description: The list of sensitive privileges, assigned to the new user session.
+  session:
+    caption: Session
+    type: object_t
+    object: session
+    requirement: recommended
+    group: primary
+    description: The user session with the assigned privileges.
+  status_id: {caption: Status ID, type: integer_t, requirement: recommended, group: primary, sibling: status, enum: {0: Unknown, 1: Success, 2: Failure, 99: Other}, from: base_event}
+  timezone_offset: {caption: Timezone Offset, type: integer_t, requirement: recommended, group: occurrence, from: base_event}
+  activity_name: {caption: Activity, type: string_t, requirement: optional, group: classification, from: base_event}
+  actor: {caption: Actor, type: object_t, object: actor, requirement: optional, group: primary, profile: host, from: iam}
+  api: {caption: API Details, type: object_t, object: api, requirement: optional, group: context, profile: cloud, from: base_event}
+  category_name:
+    caption: Category
+    type: string_t
+    requirement: optional
+    group: classification
+    from: base_event
+    description: 'The event category name, as defined by category_uid value: `Identity & Access Management`.'
+  class_name:
+    caption: Class
+    type: string_t
+    requirement: optional
+    group: classification
+    from: base_event
+    description: 'The event class name, as defined by class_uid value: `Authorize Session`.'
+  count: {caption: Count, type: integer_t, requirement: optional, group: occurrence, from: base_event}
+  dst_endpoint:
+    caption: Destination Endpoint
+    type: object_t
+    object: network_endpoint
+    requirement: optional
+    group: context
+    observable: 20
+    description: The Endpoint for which the user session was targeted.
+  duration: {caption: Duration, type: integer_t, requirement: optional, group: occurrence, from: base_event}
+  end_time: {caption: End Time, type: timestamp_t, requirement: optional, group: occurrence, from: base_event}
+  end_time_dt: {caption: End Time, type: datetime_t, requirement: optional, group: occurrence, profile: datetime, from: base_event}
+  enrichments: {caption: Enrichments, type: object_t, object: enrichment, array: true, requirement: optional, group: context, from: base_event}
+  observables: {caption: Observables, type: object_t, object: observable, array: true, requirement: optional, group: primary, from: base_event}
+  raw_data: {caption: Raw Data, type: string_t, requirement: optional, group: context, from: base_event}
+  severity: {caption: Severity, type: string_t, requirement: optional, group: classification, from: base_event}
+  start_time: {caption: Start Time, type: timestamp_t, requirement: optional, group: occurrence, from: base_event}
+  start_time_dt: {caption: Start Time, type: datetime_t, requirement: optional, group: occurrence, profile: datetime, from: base_event}
+  status: {caption: Status, type: string_t, requirement: optional, group: primary, from: base_event}
+  status_code: {caption: Status Code, type: string_t, requirement: optional, group: primary, from: base_event}
+  status_detail: {caption: Status Details, type: string_t, requirement: optional, group: primary, from: base_event}
+  time_dt: {caption: Event Time, type: datetime_t, requirement: optional, group: occurrence, profile: datetime, from: base_event}
+  type_name: {caption: Type Name, type: string_t, requirement: optional, group: classification, from: base_event}
+  unmapped: {caption: Unmapped Data, type: object_t, object: object, requirement: optional, group: context, from: base_event}

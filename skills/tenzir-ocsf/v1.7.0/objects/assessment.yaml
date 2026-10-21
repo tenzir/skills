@@ -10,26 +10,26 @@ referenced_by:
   objects:
     compliance: [assessments]
 attributes:
-  category:
-    caption: Category
-    type: string_t
-    requirement: optional
-    description: 'The category that the assessment is part of. For example: `Prevention` or `Windows 10`.'
-  desc:
-    caption: Description
-    type: string_t
-    requirement: recommended
-    description: The description of the assessment criteria, or a description of the specific configuration or signal the assessment is targeting.
   meets_criteria:
     caption: Meets Criteria
     type: boolean_t
     requirement: required
     description: Determines whether the assessment against the specific configuration or signal meets the assessments criteria. For example, if the assessment checks if a `Datastore` is encrypted or not, having encryption would be evaluated as `true`.
+  desc:
+    caption: Description
+    type: string_t
+    requirement: recommended
+    description: The description of the assessment criteria, or a description of the specific configuration or signal the assessment is targeting.
   name:
     caption: Name
     type: string_t
     requirement: recommended
     description: 'The name of the configuration or signal being assessed. For example: `Kernel Mode Code Integrity (KMCI)` or `publicAccessibilityState`.'
+  category:
+    caption: Category
+    type: string_t
+    requirement: optional
+    description: 'The category that the assessment is part of. For example: `Prevention` or `Windows 10`.'
   policy:
     caption: Assessment Policy
     type: object_t

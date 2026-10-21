@@ -1,5 +1,5 @@
-# Attributes with a `definition` path are inherited unchanged. Read that file
-# for their type, object, description, enum, and observable.
+# Attributes with `from` but no description are inherited unchanged. Their
+# descriptions are in the file of the item that `from` names.
 name: win/win_resource
 caption: Windows Resource
 extension: win
@@ -12,24 +12,101 @@ referenced_by:
   classes:
     win/resource_activity: [win_resource]
 attributes:
-  data:
-    caption: Data
-    requirement: optional
-    definition: v1.2.0/objects/_resource.yaml
-  data_classification:
-    caption: Data Classification
-    requirement: recommended
-    profile: data_classification
-    definition: v1.2.0/objects/_resource.yaml
+  type_id:
+    caption: Type ID
+    type: integer_t
+    requirement: required
+    sibling: type
+    description: The normalized type identifier of the Windows resource object accessed.
+    enum:
+      0:
+        caption: Unknown
+        description: The resource object type is unknown.
+      1:
+        caption: Directory
+      2:
+        caption: Event
+      3:
+        caption: Timer
+      4:
+        caption: Device
+      5:
+        caption: Mutant
+      6:
+        caption: Type
+      7:
+        caption: File
+      8:
+        caption: Token
+      9:
+        caption: Thread
+      10:
+        caption: Section
+      11:
+        caption: WindowStation
+      12:
+        caption: DebugObject
+      13:
+        caption: FilterCommunicationPort
+      14:
+        caption: EventPair
+      15:
+        caption: Driver
+      16:
+        caption: IoCompletion
+      17:
+        caption: Controller
+      18:
+        caption: SymbolicLink
+      19:
+        caption: WmiGuid
+      20:
+        caption: Process
+      21:
+        caption: Profile
+      22:
+        caption: Desktop
+      23:
+        caption: KeyedEvent
+      24:
+        caption: Adapter
+      25:
+        caption: Key
+      26:
+        caption: WaitablePort
+      27:
+        caption: Callback
+      28:
+        caption: Semaphore
+      29:
+        caption: Job
+      30:
+        caption: Port
+      31:
+        caption: FilterConnectionPort
+      32:
+        caption: ALPC Port
+      33:
+        caption: SAM_ALIAS
+      34:
+        caption: SAM_GROUP
+      35:
+        caption: SAM_USER
+      36:
+        caption: SAM_DOMAIN
+      37:
+        caption: SAM_SERVER
+      99:
+        caption: Other
+        description: The resource object type is not mapped. See the `type` attribute, which may contain a data source specific value.
+  data_classification: {caption: Data Classification, type: object_t, object: data_classification, requirement: recommended, group: context, profile: data_classification, from: _resource}
+  data: {caption: Data, type: json_t, requirement: optional, from: _resource}
   details:
     caption: Details
     type: string_t
     requirement: optional
     description: The string detailing the attributes of the resource object.
-  labels:
-    caption: Labels
-    requirement: optional
-    definition: v1.2.0/objects/_resource.yaml
+  labels: {caption: Labels, type: string_t, array: true, requirement: optional, from: _resource}
   name:
     caption: Name
     type: string_t
@@ -45,93 +122,6 @@ attributes:
     type: string_t
     requirement: optional
     description: The type of the Windows resource object.
-  type_id:
-    caption: Type ID
-    type: integer_t
-    requirement: required
-    sibling: type
-    description: The normalized type identifier of the Windows resource object accessed.
-    enum:
-      '0':
-        caption: Unknown
-        description: The resource object type is unknown.
-      '1':
-        caption: Directory
-      '2':
-        caption: Event
-      '3':
-        caption: Timer
-      '4':
-        caption: Device
-      '5':
-        caption: Mutant
-      '6':
-        caption: Type
-      '7':
-        caption: File
-      '8':
-        caption: Token
-      '9':
-        caption: Thread
-      '10':
-        caption: Section
-      '11':
-        caption: WindowStation
-      '12':
-        caption: DebugObject
-      '13':
-        caption: FilterCommunicationPort
-      '14':
-        caption: EventPair
-      '15':
-        caption: Driver
-      '16':
-        caption: IoCompletion
-      '17':
-        caption: Controller
-      '18':
-        caption: SymbolicLink
-      '19':
-        caption: WmiGuid
-      '20':
-        caption: Process
-      '21':
-        caption: Profile
-      '22':
-        caption: Desktop
-      '23':
-        caption: KeyedEvent
-      '24':
-        caption: Adapter
-      '25':
-        caption: Key
-      '26':
-        caption: WaitablePort
-      '27':
-        caption: Callback
-      '28':
-        caption: Semaphore
-      '29':
-        caption: Job
-      '30':
-        caption: Port
-      '31':
-        caption: FilterConnectionPort
-      '32':
-        caption: ALPC Port
-      '33':
-        caption: SAM_ALIAS
-      '34':
-        caption: SAM_GROUP
-      '35':
-        caption: SAM_USER
-      '36':
-        caption: SAM_DOMAIN
-      '37':
-        caption: SAM_SERVER
-      '99':
-        caption: Other
-        description: The resource object type is not mapped. See the `type` attribute, which may contain a data source specific value.
   uid:
     caption: Unique ID
     type: string_t

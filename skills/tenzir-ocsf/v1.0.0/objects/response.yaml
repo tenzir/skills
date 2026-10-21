@@ -24,14 +24,14 @@ attributes:
     type: string_t
     requirement: recommended
     description: Error Message
+  message:
+    caption: Message
+    type: string_t
+    requirement: recommended
+    description: The description of the event, as defined by the event source.
   flags:
     caption: Flags
     type: string_t
     array: true
     requirement: optional
     description: The list of communication flags, normalized to the captions of the flag_ids values. In the case of 'Other', they are defined by the event source.
-  message:
-    caption: Message
-    type: string_t
-    requirement: recommended
-    description: The description of the event, as defined by the event source.

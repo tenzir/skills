@@ -1,5 +1,5 @@
-# Attributes with a `definition` path are inherited unchanged. Read that file
-# for their type, object, description, enum, and observable.
+# Attributes with `from` but no description are inherited unchanged. Their
+# descriptions are in the file of the item that `from` names.
 name: module_activity
 caption: Module Activity
 uid: 1005
@@ -12,16 +12,7 @@ associations:
   device: [actor.user]
   actor.user: [device]
 attributes:
-  action:
-    caption: Action
-    requirement: optional
-    profile: security_control
-    definition: v1.1.0/classes/system.yaml
-  action_id:
-    caption: Action ID
-    requirement: required
-    profile: security_control
-    definition: v1.1.0/classes/system.yaml
+  action_id: {caption: Action ID, type: integer_t, requirement: required, group: primary, profile: security_control, sibling: action, enum: {0: Unknown, 1: Allowed, 2: Denied, 99: Other}, from: system}
   activity_id:
     caption: Activity ID
     type: integer_t
@@ -30,20 +21,16 @@ attributes:
     sibling: activity_name
     description: The normalized identifier of the activity that triggered the event.
     enum:
-      '0':
+      0:
         caption: Unknown
         description: The event activity is unknown.
-      '1':
+      1:
         caption: Load
-      '2':
+      2:
         caption: Unload
-      '99':
+      99:
         caption: Other
         description: The event activity is not mapped. See the `activity_name` attribute, which contains a data source specific value.
-  activity_name:
-    caption: Activity
-    requirement: optional
-    definition: v1.1.0/classes/base_event.yaml
   actor:
     caption: Actor
     type: object_t
@@ -51,28 +38,6 @@ attributes:
     requirement: required
     group: primary
     description: The actor that loaded or unloaded the `module`.
-  api:
-    caption: API Details
-    requirement: optional
-    profile: cloud
-    definition: v1.1.0/classes/base_event.yaml
-  attacks:
-    caption: MITRE ATT&CK® Details
-    requirement: optional
-    profile: security_control
-    definition: v1.1.0/classes/system.yaml
-  authorizations:
-    caption: Authorization Information
-    requirement: optional
-    profile: security_control
-    definition: v1.1.0/classes/system.yaml
-  category_name:
-    caption: Category
-    type: string_t
-    requirement: optional
-    group: classification
-    from: base_event
-    description: 'The event category name, as defined by category_uid value: `System Activity`.'
   category_uid:
     caption: Category ID
     type: integer_t
@@ -82,16 +47,9 @@ attributes:
     sibling: category_name
     description: The category unique identifier of the event.
     enum:
-      '1':
+      1:
         caption: System Activity
         description: System Activity events.
-  class_name:
-    caption: Class
-    type: string_t
-    requirement: optional
-    group: classification
-    from: base_event
-    description: 'The event class name, as defined by class_uid value: `Module Activity`.'
   class_uid:
     caption: Class ID
     type: integer_t
@@ -100,67 +58,12 @@ attributes:
     sibling: class_name
     description: The unique identifier of a class. A Class describes the attributes available in an event.
     enum:
-      '1005':
+      1005:
         caption: Module Activity
         description: Module Activity events report when a process loads or unloads the `module`.
-  cloud:
-    caption: Cloud
-    requirement: required
-    profile: cloud
-    definition: v1.1.0/classes/base_event.yaml
-  count:
-    caption: Count
-    requirement: optional
-    definition: v1.1.0/classes/base_event.yaml
-  device:
-    caption: Device
-    requirement: required
-    definition: v1.1.0/classes/system.yaml
-  disposition:
-    caption: Disposition
-    requirement: optional
-    profile: security_control
-    definition: v1.1.0/classes/system.yaml
-  disposition_id:
-    caption: Disposition ID
-    requirement: recommended
-    profile: security_control
-    definition: v1.1.0/classes/system.yaml
-  duration:
-    caption: Duration
-    requirement: optional
-    definition: v1.1.0/classes/base_event.yaml
-  end_time:
-    caption: End Time
-    requirement: optional
-    definition: v1.1.0/classes/base_event.yaml
-  end_time_dt:
-    caption: End Time
-    requirement: optional
-    profile: datetime
-    definition: v1.1.0/classes/base_event.yaml
-  enrichments:
-    caption: Enrichments
-    requirement: optional
-    definition: v1.1.0/classes/base_event.yaml
-  firewall_rule:
-    caption: Firewall Rule
-    requirement: optional
-    profile: security_control
-    definition: v1.1.0/classes/system.yaml
-  malware:
-    caption: Malware
-    requirement: optional
-    profile: security_control
-    definition: v1.1.0/classes/system.yaml
-  message:
-    caption: Message
-    requirement: recommended
-    definition: v1.1.0/classes/base_event.yaml
-  metadata:
-    caption: Metadata
-    requirement: required
-    definition: v1.1.0/classes/base_event.yaml
+  cloud: {caption: Cloud, type: object_t, object: cloud, requirement: required, group: primary, profile: cloud, from: base_event}
+  device: {caption: Device, type: object_t, object: device, requirement: required, group: primary, observable: 20, from: system}
+  metadata: {caption: Metadata, type: object_t, object: metadata, requirement: required, group: context, from: base_event}
   module:
     caption: Module
     type: object_t
@@ -168,64 +71,8 @@ attributes:
     requirement: required
     group: primary
     description: The module that was loaded or unloaded.
-  observables:
-    caption: Observables
-    requirement: optional
-    definition: v1.1.0/classes/base_event.yaml
-  raw_data:
-    caption: Raw Data
-    requirement: optional
-    definition: v1.1.0/classes/base_event.yaml
-  severity:
-    caption: Severity
-    requirement: optional
-    definition: v1.1.0/classes/base_event.yaml
-  severity_id:
-    caption: Severity ID
-    requirement: required
-    definition: v1.1.0/classes/base_event.yaml
-  start_time:
-    caption: Start Time
-    requirement: optional
-    definition: v1.1.0/classes/base_event.yaml
-  start_time_dt:
-    caption: Start Time
-    requirement: optional
-    profile: datetime
-    definition: v1.1.0/classes/base_event.yaml
-  status:
-    caption: Status
-    requirement: optional
-    definition: v1.1.0/classes/base_event.yaml
-  status_code:
-    caption: Status Code
-    requirement: optional
-    definition: v1.1.0/classes/base_event.yaml
-  status_detail:
-    caption: Status Details
-    requirement: optional
-    definition: v1.1.0/classes/base_event.yaml
-  status_id:
-    caption: Status ID
-    requirement: recommended
-    definition: v1.1.0/classes/base_event.yaml
-  time:
-    caption: Event Time
-    requirement: required
-    definition: v1.1.0/classes/base_event.yaml
-  time_dt:
-    caption: Event Time
-    requirement: optional
-    profile: datetime
-    definition: v1.1.0/classes/base_event.yaml
-  timezone_offset:
-    caption: Timezone Offset
-    requirement: recommended
-    definition: v1.1.0/classes/base_event.yaml
-  type_name:
-    caption: Type Name
-    requirement: optional
-    definition: v1.1.0/classes/base_event.yaml
+  severity_id: {caption: Severity ID, type: integer_t, requirement: required, group: classification, sibling: severity, enum: {0: Unknown, 1: Informational, 2: Low, 3: Medium, 4: High, 5: Critical, 6: Fatal, 99: Other}, from: base_event}
+  time: {caption: Event Time, type: timestamp_t, requirement: required, group: occurrence, from: base_event}
   type_uid:
     caption: Type ID
     type: long_t
@@ -233,16 +80,82 @@ attributes:
     group: classification
     sibling: type_name
     description: 'The event/finding type ID. It identifies the event''s semantics and structure. The value is calculated by the logging system as: `class_uid * 100 + activity_id`.'
+  disposition_id:
+    caption: Disposition ID
+    type: integer_t
+    requirement: recommended
+    group: primary
+    profile: security_control
+    sibling: disposition
     enum:
-      '100500':
-        caption: 'Module Activity: Unknown'
-      '100501':
-        caption: 'Module Activity: Load'
-      '100502':
-        caption: 'Module Activity: Unload'
-      '100599':
-        caption: 'Module Activity: Other'
-  unmapped:
-    caption: Unmapped Data
+      0: Unknown
+      1: Allowed
+      2: Blocked
+      3: Quarantined
+      4: Isolated
+      5: Deleted
+      6: Dropped
+      7: Custom Action
+      8: Approved
+      9: Restored
+      10: Exonerated
+      11: Corrected
+      12: Partially Corrected
+      13: Uncorrected
+      14: Delayed
+      15: Detected
+      16: No Action
+      17: Logged
+      18: Tagged
+      19: Alert
+      20: Count
+      21: Reset
+      22: Captcha
+      23: Challenge
+      24: Access Revoked
+      25: Rejected
+      26: Unauthorized
+      27: Error
+      99: Other
+    from: system
+  message: {caption: Message, type: string_t, requirement: recommended, group: primary, from: base_event}
+  status_id: {caption: Status ID, type: integer_t, requirement: recommended, group: primary, sibling: status, enum: {0: Unknown, 1: Success, 2: Failure, 99: Other}, from: base_event}
+  timezone_offset: {caption: Timezone Offset, type: integer_t, requirement: recommended, group: occurrence, from: base_event}
+  action: {caption: Action, type: string_t, requirement: optional, group: primary, profile: security_control, from: system}
+  activity_name: {caption: Activity, type: string_t, requirement: optional, group: classification, from: base_event}
+  api: {caption: API Details, type: object_t, object: api, requirement: optional, group: context, profile: cloud, from: base_event}
+  attacks: {caption: MITRE ATT&CK® Details, type: object_t, object: attack, array: true, requirement: optional, group: primary, profile: security_control, from: system}
+  authorizations: {caption: Authorization Information, type: object_t, object: authorization, array: true, requirement: optional, group: primary, profile: security_control, from: system}
+  category_name:
+    caption: Category
+    type: string_t
     requirement: optional
-    definition: v1.1.0/classes/base_event.yaml
+    group: classification
+    from: base_event
+    description: 'The event category name, as defined by category_uid value: `System Activity`.'
+  class_name:
+    caption: Class
+    type: string_t
+    requirement: optional
+    group: classification
+    from: base_event
+    description: 'The event class name, as defined by class_uid value: `Module Activity`.'
+  count: {caption: Count, type: integer_t, requirement: optional, group: occurrence, from: base_event}
+  disposition: {caption: Disposition, type: string_t, requirement: optional, group: primary, profile: security_control, from: system}
+  duration: {caption: Duration, type: integer_t, requirement: optional, group: occurrence, from: base_event}
+  end_time: {caption: End Time, type: timestamp_t, requirement: optional, group: occurrence, from: base_event}
+  end_time_dt: {caption: End Time, type: datetime_t, requirement: optional, group: occurrence, profile: datetime, from: base_event}
+  enrichments: {caption: Enrichments, type: object_t, object: enrichment, array: true, requirement: optional, group: context, from: base_event}
+  firewall_rule: {caption: Firewall Rule, type: object_t, object: firewall_rule, requirement: optional, group: primary, profile: security_control, from: system}
+  malware: {caption: Malware, type: object_t, object: malware, array: true, requirement: optional, group: primary, profile: security_control, from: system}
+  observables: {caption: Observables, type: object_t, object: observable, array: true, requirement: optional, group: primary, from: base_event}
+  raw_data: {caption: Raw Data, type: string_t, requirement: optional, group: context, from: base_event}
+  severity: {caption: Severity, type: string_t, requirement: optional, group: classification, from: base_event}
+  start_time: {caption: Start Time, type: timestamp_t, requirement: optional, group: occurrence, from: base_event}
+  start_time_dt: {caption: Start Time, type: datetime_t, requirement: optional, group: occurrence, profile: datetime, from: base_event}
+  status: {caption: Status, type: string_t, requirement: optional, group: primary, from: base_event}
+  status_code: {caption: Status Code, type: string_t, requirement: optional, group: primary, from: base_event}
+  status_detail: {caption: Status Details, type: string_t, requirement: optional, group: primary, from: base_event}
+  time_dt: {caption: Event Time, type: datetime_t, requirement: optional, group: occurrence, profile: datetime, from: base_event}
+  type_name: {caption: Type Name, type: string_t, requirement: optional, group: classification, from: base_event}
+  unmapped: {caption: Unmapped Data, type: object_t, object: object, requirement: optional, group: context, from: base_event}

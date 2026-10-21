@@ -6,6 +6,17 @@ referenced_by:
   objects:
     finding: [related_events]
 attributes:
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: required
+    description: The unique identifier of the related event.
+  type_uid:
+    caption: Type ID
+    type: integer_t
+    requirement: recommended
+    sibling: type_name
+    description: 'The unique identifier of the related event type. For example: 100701.'
   product_uid:
     caption: Product Identifier
     type: string_t
@@ -16,14 +27,3 @@ attributes:
     type: string_t
     requirement: optional
     description: 'The type of the related event. For example: Process Activity: Launch.'
-  type_uid:
-    caption: Type ID
-    type: integer_t
-    requirement: recommended
-    sibling: type_name
-    description: 'The unique identifier of the related event type. For example: 100701.'
-  uid:
-    caption: Unique ID
-    type: string_t
-    requirement: required
-    description: The unique identifier of the related event.

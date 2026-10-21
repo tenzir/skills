@@ -8,11 +8,6 @@ referenced_by:
     file: [signature, signatures]
     osint: [signatures]
 attributes:
-  algorithm:
-    caption: Algorithm
-    type: string_t
-    requirement: optional
-    description: The digital signature algorithm used to create the signature, normalized to the caption of 'algorithm_id'. In the case of 'Other', it is defined by the event source.
   algorithm_id:
     caption: Algorithm ID
     type: integer_t
@@ -20,22 +15,22 @@ attributes:
     sibling: algorithm
     description: The identifier of the normalized digital signature algorithm.
     enum:
-      '0':
+      0:
         caption: Unknown
         description: The algorithm is unknown.
-      '1':
+      1:
         caption: DSA
         description: Digital Signature Algorithm (DSA).
-      '2':
+      2:
         caption: RSA
         description: Rivest-Shamir-Adleman (RSA) Algorithm.
-      '3':
+      3:
         caption: ECDSA
         description: Elliptic Curve Digital Signature Algorithm.
-      '4':
+      4:
         caption: Authenticode
         description: Microsoft Authenticode Digital Signature Algorithm.
-      '99':
+      99:
         caption: Other
         description: The algorithm is not mapped. See the `algorithm` attribute, which contains a data source specific value.
   certificate:
@@ -44,6 +39,11 @@ attributes:
     object: certificate
     requirement: recommended
     description: The certificate object containing information about the digital certificate.
+  algorithm:
+    caption: Algorithm
+    type: string_t
+    requirement: optional
+    description: The digital signature algorithm used to create the signature, normalized to the caption of 'algorithm_id'. In the case of 'Other', it is defined by the event source.
   created_time:
     caption: Created Time
     type: timestamp_t
@@ -79,39 +79,39 @@ attributes:
     sibling: state
     description: The normalized identifier of the signature state.
     enum:
-      '0':
+      0:
         caption: Unknown
         description: The state is unknown.
-      '1':
+      1:
         caption: Valid
         description: The digital signature is valid.
-      '2':
+      2:
         caption: Expired
         description: The digital signature is invalid because its timestamp does not fall within the certificate's validity period.
-      '3':
+      3:
         caption: Revoked
         description: The digital signature is invalid due to certificate revocation.
-      '4':
+      4:
         caption: Suspended
         description: The digital signature is invalid due to certificate suspension.
-      '5':
+      5:
         caption: Pending
         description: The digital signature state is pending.
-      '6':
+      6:
         caption: Untrusted
         description: The digital signature is invalid because the certificate is rooted in an untrusted CA or is an untrusted self-signed certificate.
-      '7':
+      7:
         caption: Distrusted
         description: The digital signature is invalid because the certificate is explicitly distrusted. Note that whereas revocation is global, distrust reflects local IT/security policy.
-      '8':
+      8:
         caption: WrongUsage
         description: The digital signature is invalid because the certificate is not intended for code signing purposes.
-      '9':
+      9:
         caption: Bad
         description: The digital signature is cryptographically invalid, e.g. a mismatched digest. This indicates possible tampering.
-      '10':
+      10:
         caption: Broken
         description: The digital signature is malformed and could not be processed.
-      '99':
+      99:
         caption: Other
         description: The state is not mapped. See the `state` attribute, which contains a data source specific value.

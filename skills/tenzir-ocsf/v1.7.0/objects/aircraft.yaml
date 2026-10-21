@@ -15,16 +15,21 @@ attributes:
     requirement: recommended
     observable: 26
     description: The detailed geographical location usually associated with an IP address.
-  model:
-    caption: Model
-    type: string_t
-    requirement: optional
-    description: The model name of the aircraft or unmanned system.
   name:
     caption: Name
     type: string_t
     requirement: recommended
     description: The name of the aircraft, such as the such as the flight name or callsign.
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: recommended
+    description: The primary identification identifier for an aircraft, such as the 24-bit International Civil Aviation Organization (ICAO) identifier of the aircraft, as 6 hex digits.
+  model:
+    caption: Model
+    type: string_t
+    requirement: optional
+    description: The model name of the aircraft or unmanned system.
   serial_number:
     caption: Serial Number
     type: string_t
@@ -46,11 +51,6 @@ attributes:
     type: string_t
     requirement: optional
     description: Direction of flight expressed as a “True North-based” ground track angle. This value is provided in clockwise degrees with a minimum resolution of 1 degree. If aircraft is not moving horizontally, use the “Unknown” value
-  uid:
-    caption: Unique ID
-    type: string_t
-    requirement: recommended
-    description: The primary identification identifier for an aircraft, such as the 24-bit International Civil Aviation Organization (ICAO) identifier of the aircraft, as 6 hex digits.
   uid_alt:
     caption: Alternate ID
     type: string_t

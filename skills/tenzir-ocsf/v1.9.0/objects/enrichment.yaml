@@ -86,43 +86,31 @@ referenced_by:
     web_resource_access_activity: [enrichments]
     web_resources_activity: [enrichments]
 attributes:
-  created_time:
-    caption: Created Time
-    type: timestamp_t
-    requirement: recommended
-    description: The time when the enrichment data was generated.
-  created_time_dt:
-    caption: Created Time
-    type: datetime_t
-    requirement: optional
-    profile: datetime
-    description: The time when the enrichment data was generated.
   data:
     caption: Data
     type: json_t
     requirement: required
     description: The enrichment data associated with the attribute and value. The meaning of this data depends on the type the enrichment record.
-  desc:
-    caption: Description
-    type: string_t
-    requirement: optional
-    description: A long description of the enrichment data.
   name:
     caption: Name
     type: string_t
     requirement: required
     description: The name of the attribute to which the enriched data pertains.
+  value:
+    caption: Value
+    type: string_t
+    requirement: required
+    description: The value of the attribute to which the enriched data pertains.
+  created_time:
+    caption: Created Time
+    type: timestamp_t
+    requirement: recommended
+    description: The time when the enrichment data was generated.
   provider:
     caption: Provider
     type: string_t
     requirement: recommended
     description: The enrichment data provider name.
-  reputation:
-    caption: Reputation Scores
-    type: object_t
-    object: reputation
-    requirement: optional
-    description: The reputation of the enrichment data.
   short_desc:
     caption: Short Description
     type: string_t
@@ -139,8 +127,20 @@ attributes:
     type: string_t
     requirement: recommended
     description: 'The enrichment type. For example: `location`.'
-  value:
-    caption: Value
+  created_time_dt:
+    caption: Created Time
+    type: datetime_t
+    requirement: optional
+    profile: datetime
+    description: The time when the enrichment data was generated.
+  desc:
+    caption: Description
     type: string_t
-    requirement: required
-    description: The value of the attribute to which the enriched data pertains.
+    requirement: optional
+    description: A long description of the enrichment data.
+  reputation:
+    caption: Reputation Scores
+    type: object_t
+    object: reputation
+    requirement: optional
+    description: The reputation of the enrichment data.

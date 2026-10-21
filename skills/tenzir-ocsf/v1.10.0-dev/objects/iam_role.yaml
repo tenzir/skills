@@ -1,5 +1,5 @@
-# Attributes with a `definition` path are inherited unchanged. Read that file
-# for their type, object, description, enum, and observable.
+# Attributes with `from` but no description are inherited unchanged. Their
+# descriptions are in the file of the item that `from` names.
 name: iam_role
 caption: IAM Role
 extends: _entity
@@ -17,18 +17,24 @@ referenced_by:
   objects:
     actor: [iam_role]
 attributes:
-  account:
-    caption: Account
-    type: object_t
-    object: account
-    requirement: optional
-    description: The account associated with the role. For example, can be a cross-account role, different from the user or group account, granting access within this account.
   name:
     caption: Name
     type: string_t
     requirement: recommended
     observable: 49
     description: The role name. For example, `Power Users`.
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: recommended
+    observable: 50
+    description: The unique role identifier. For example, the Windows role SID, or AWS role ARN.
+  account:
+    caption: Account
+    type: object_t
+    object: account
+    requirement: optional
+    description: The account associated with the role. For example, can be a cross-account role, different from the user or group account, granting access within this account.
   policies:
     caption: Policies
     type: object_t
@@ -62,18 +68,9 @@ attributes:
     object: session
     requirement: optional
     description: The session where the role is active. Some roles may be temporary and expire when the session expires.
-  uid:
-    caption: Unique ID
-    type: string_t
-    requirement: recommended
-    observable: 50
-    description: The unique role identifier. For example, the Windows role SID, or AWS role ARN.
   uid_alt:
     caption: Alternate ID
     type: string_t
     requirement: optional
     description: The alternate user identifier. For example, the Active Directory role GUID or the associated LDAP group DN.
-  uid_numeric:
-    caption: Numeric Unique ID
-    requirement: optional
-    definition: v1.10.0-dev/objects/_entity.yaml
+  uid_numeric: {caption: Numeric Unique ID, type: long_t, requirement: optional, from: _entity}

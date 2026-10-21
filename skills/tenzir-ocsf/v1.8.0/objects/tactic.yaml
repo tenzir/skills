@@ -18,14 +18,14 @@ attributes:
     type: string_t
     requirement: recommended
     description: 'The Tactic name that is associated with the attack technique. For example: `Reconnaissance` or `ML Model Access`.'
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: recommended
+    description: 'The Tactic ID that is associated with the attack technique. For example: `TA0043`, or `AML.TA0000`.'
   src_url:
     caption: Source URL
     type: url_t
     requirement: optional
     observable: 6
     description: 'The versioned permalink of the Tactic. For example: `https://attack.mitre.org/versions/v14/tactics/TA0043/`.'
-  uid:
-    caption: Unique ID
-    type: string_t
-    requirement: recommended
-    description: 'The Tactic ID that is associated with the attack technique. For example: `TA0043`, or `AML.TA0000`.'

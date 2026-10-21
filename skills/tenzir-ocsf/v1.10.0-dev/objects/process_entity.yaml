@@ -1,5 +1,5 @@
-# Attributes with a `definition` path are inherited unchanged. Read that file
-# for their type, object, description, enum, and observable.
+# Attributes with `from` but no description are inherited unchanged. Their
+# descriptions are in the file of the item that `from` names.
 name: process_entity
 caption: Process Entity
 extends: _entity
@@ -30,12 +30,6 @@ attributes:
     type: timestamp_t
     requirement: recommended
     description: The time when the process was created/started.
-  created_time_dt:
-    caption: Created Time
-    type: datetime_t
-    requirement: optional
-    profile: datetime
-    description: The time when the process was created/started.
   name:
     caption: Name
     type: process_name_t
@@ -59,7 +53,10 @@ attributes:
     requirement: recommended
     observable: 39
     description: A unique identifier for this process assigned by the producer (tool).  Facilitates correlation of a process event with other events for that process.
-  uid_numeric:
-    caption: Numeric Unique ID
+  created_time_dt:
+    caption: Created Time
+    type: datetime_t
     requirement: optional
-    definition: v1.10.0-dev/objects/_entity.yaml
+    profile: datetime
+    description: The time when the process was created/started.
+  uid_numeric: {caption: Numeric Unique ID, type: long_t, requirement: optional, from: _entity}

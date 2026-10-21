@@ -17,6 +17,21 @@ referenced_by:
     data_classification: [policy]
     data_security: [policy]
 attributes:
+  name:
+    caption: Name
+    type: string_t
+    requirement: recommended
+    description: 'The policy name. For example: `IAM Policy`.'
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: recommended
+    description: A unique identifier of the policy instance.
+  version:
+    caption: Version
+    type: string_t
+    requirement: recommended
+    description: The policy version number.
   desc:
     caption: Description
     type: string_t
@@ -33,18 +48,3 @@ attributes:
     type: boolean_t
     requirement: optional
     description: A determination if the content of a policy was applied to a target or request, or not.
-  name:
-    caption: Name
-    type: string_t
-    requirement: recommended
-    description: 'The policy name. For example: `IAM Policy`.'
-  uid:
-    caption: Unique ID
-    type: string_t
-    requirement: recommended
-    description: A unique identifier of the policy instance.
-  version:
-    caption: Version
-    type: string_t
-    requirement: recommended
-    description: The policy version number.

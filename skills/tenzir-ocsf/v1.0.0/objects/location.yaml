@@ -10,6 +10,12 @@ referenced_by:
     network_endpoint: [location]
     network_proxy: [location]
 attributes:
+  coordinates:
+    caption: Coordinates
+    type: float_t
+    array: true
+    requirement: required
+    description: 'A two-element array, containing a longitude/latitude pair. The format conforms with [GeoJSON](https://geojson.org). For example: `[-73.983, 40.719]`.'
   city:
     caption: City
     type: string_t
@@ -20,12 +26,6 @@ attributes:
     type: string_t
     requirement: recommended
     description: The name of the continent.
-  coordinates:
-    caption: Coordinates
-    type: float_t
-    array: true
-    requirement: required
-    description: 'A two-element array, containing a longitude/latitude pair. The format conforms with [GeoJSON](https://geojson.org). For example: `[-73.983, 40.719]`.'
   country:
     caption: Country
     type: string_t

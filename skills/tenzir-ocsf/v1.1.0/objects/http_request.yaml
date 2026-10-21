@@ -21,11 +21,6 @@ referenced_by:
     web_resource_access_activity: [http_request, proxy_http_request]
     web_resources_activity: [http_request, proxy_http_request]
 attributes:
-  args:
-    caption: HTTP Arguments
-    type: string_t
-    requirement: optional
-    description: The arguments sent along with the HTTP request.
   http_headers:
     caption: HTTP Headers
     type: object_t
@@ -33,6 +28,28 @@ attributes:
     array: true
     requirement: recommended
     description: Additional HTTP headers of an HTTP request or response.
+  url:
+    caption: URL
+    type: object_t
+    object: url
+    requirement: recommended
+    observable: 23
+    description: The URL object that pertains to the request.
+  user_agent:
+    caption: HTTP User-Agent
+    type: string_t
+    requirement: recommended
+    description: The request header that identifies the operating system and web browser.
+  version:
+    caption: HTTP Version
+    type: string_t
+    requirement: recommended
+    description: The Hypertext Transfer Protocol (HTTP) version.
+  args:
+    caption: HTTP Arguments
+    type: string_t
+    requirement: optional
+    description: The arguments sent along with the HTTP request.
   http_method:
     caption: HTTP Method
     type: string_t
@@ -78,23 +95,6 @@ attributes:
     type: string_t
     requirement: optional
     description: The unique identifier of the http request.
-  url:
-    caption: URL
-    type: object_t
-    object: url
-    requirement: recommended
-    observable: 23
-    description: The URL object that pertains to the request.
-  user_agent:
-    caption: HTTP User-Agent
-    type: string_t
-    requirement: recommended
-    description: The request header that identifies the operating system and web browser.
-  version:
-    caption: HTTP Version
-    type: string_t
-    requirement: recommended
-    description: The Hypertext Transfer Protocol (HTTP) version.
   x_forwarded_for:
     caption: X-Forwarded-For
     type: ip_t

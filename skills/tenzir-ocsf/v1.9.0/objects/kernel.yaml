@@ -12,16 +12,33 @@ referenced_by:
   objects:
     query_evidence: [kernel]
 attributes:
-  is_system:
-    caption: System
-    type: boolean_t
-    requirement: optional
-    description: The indication of whether the object is part of the operating system.
   name:
     caption: Name
     type: string_t
     requirement: required
     description: The name of the kernel resource.
+  type_id:
+    caption: Type ID
+    type: integer_t
+    requirement: required
+    sibling: type
+    description: The type of the kernel resource.
+    enum:
+      0:
+        caption: Unknown
+        description: The type is unknown.
+      1:
+        caption: Shared Mutex
+      2:
+        caption: System Call
+      99:
+        caption: Other
+        description: The type is not mapped. See the `type` attribute, which contains a data source specific value.
+  is_system:
+    caption: System
+    type: boolean_t
+    requirement: optional
+    description: The indication of whether the object is part of the operating system.
   path:
     caption: Path
     type: file_path_t
@@ -38,20 +55,3 @@ attributes:
     type: string_t
     requirement: optional
     description: The type of the kernel resource.
-  type_id:
-    caption: Type ID
-    type: integer_t
-    requirement: required
-    sibling: type
-    description: The type of the kernel resource.
-    enum:
-      '0':
-        caption: Unknown
-        description: The type is unknown.
-      '1':
-        caption: Shared Mutex
-      '2':
-        caption: System Call
-      '99':
-        caption: Other
-        description: The type is not mapped. See the `type` attribute, which contains a data source specific value.

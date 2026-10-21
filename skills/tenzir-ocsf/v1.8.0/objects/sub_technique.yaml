@@ -18,14 +18,14 @@ attributes:
     type: string_t
     requirement: recommended
     description: 'The name of the attack sub-technique. For example: `Scanning IP Blocks` or `User Execution: Unsafe ML Artifacts`.'
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: recommended
+    description: 'The unique identifier of the attack sub-technique. For example: `T1595.001` or `AML.T0011.000`.'
   src_url:
     caption: Source URL
     type: url_t
     requirement: optional
     observable: 6
     description: 'The versioned permalink of the attack sub-technique. For example: `https://attack.mitre.org/versions/v14/techniques/T1595/001/`.'
-  uid:
-    caption: Unique ID
-    type: string_t
-    requirement: recommended
-    description: 'The unique identifier of the attack sub-technique. For example: `T1595.001` or `AML.T0011.000`.'

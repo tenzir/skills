@@ -1,5 +1,5 @@
-# Attributes with a `definition` path are inherited unchanged. Read that file
-# for their type, object, description, enum, and observable.
+# Attributes with `from` but no description are inherited unchanged. Their
+# descriptions are in the file of the item that `from` names.
 name: dns_query
 caption: DNS Query
 extends: _dns
@@ -13,56 +13,47 @@ referenced_by:
   objects:
     evidences: [query]
 attributes:
-  class:
-    caption: Resource Record Class
-    requirement: recommended
-    definition: v1.5.0/objects/_dns.yaml
   hostname:
     caption: Hostname
     type: hostname_t
     requirement: required
     observable: 1
     description: 'The hostname or domain being queried. For example: `www.example.com`'
-  opcode:
-    caption: DNS Opcode
-    type: string_t
-    requirement: optional
-    description: The DNS opcode specifies the type of the query message.
+  class: {caption: Resource Record Class, type: string_t, requirement: recommended, from: _dns}
   opcode_id:
     caption: DNS Opcode ID
     type: integer_t
     requirement: recommended
     description: The DNS opcode ID specifies the normalized query message type as defined in [RFC-5395](https://www.rfc-editor.org/rfc/rfc5395.html).
     enum:
-      '0':
+      0:
         caption: Query
         description: Standard query
-      '1':
+      1:
         caption: Inverse Query
         description: Inverse query, obsolete
-      '2':
+      2:
         caption: Status
         description: Server status request
-      '3':
+      3:
         caption: Reserved
         description: Reserved, not used
-      '4':
+      4:
         caption: Notify
         description: Zone change notification
-      '5':
+      5:
         caption: Update
         description: Dynamic DNS update
-      '6':
+      6:
         caption: DSO Message
         description: DNS Stateful Operations (DSO)
-      '99':
+      99:
         caption: Other
         description: The DNS Opcode is not defined by the RFC. See the `opcode` attribute, which contains a data source specific value.
-  packet_uid:
-    caption: Packet UID
-    requirement: recommended
-    definition: v1.5.0/objects/_dns.yaml
-  type:
-    caption: Resource Record Type
-    requirement: recommended
-    definition: v1.5.0/objects/_dns.yaml
+  packet_uid: {caption: Packet UID, type: integer_t, requirement: recommended, from: _dns}
+  type: {caption: Resource Record Type, type: string_t, requirement: recommended, from: _dns}
+  opcode:
+    caption: DNS Opcode
+    type: string_t
+    requirement: optional
+    description: The DNS opcode specifies the type of the query message.

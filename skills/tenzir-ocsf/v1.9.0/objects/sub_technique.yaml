@@ -1,5 +1,5 @@
-# Attributes with a `definition` path are inherited unchanged. Read that file
-# for their type, object, description, enum, and observable.
+# Attributes with `from` but no description are inherited unchanged. Their
+# descriptions are in the file of the item that `from` names.
 name: sub_technique
 caption: MITRE Sub-technique
 extends: _entity
@@ -20,18 +20,15 @@ attributes:
     type: string_t
     requirement: recommended
     description: 'The name of the attack sub-technique. For example: `Scanning IP Blocks` or `User Execution: Unsafe ML Artifacts`.'
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: recommended
+    description: 'The unique identifier of the attack sub-technique. For example: `T1595.001` or `AML.T0011.000`.'
   src_url:
     caption: Source URL
     type: url_t
     requirement: optional
     observable: 6
     description: 'The versioned permalink of the attack sub-technique. For example: `https://attack.mitre.org/versions/v14/techniques/T1595/001/`.'
-  uid:
-    caption: Unique ID
-    type: string_t
-    requirement: recommended
-    description: 'The unique identifier of the attack sub-technique. For example: `T1595.001` or `AML.T0011.000`.'
-  uid_numeric:
-    caption: Numeric Unique ID
-    requirement: optional
-    definition: v1.9.0/objects/_entity.yaml
+  uid_numeric: {caption: Numeric Unique ID, type: long_t, requirement: optional, from: _entity}

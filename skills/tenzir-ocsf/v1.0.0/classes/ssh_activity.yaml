@@ -1,5 +1,5 @@
-# Attributes with a `definition` path are inherited unchanged. Read that file
-# for their type, object, description, enum, and observable.
+# Attributes with `from` but no description are inherited unchanged. Their
+# descriptions are in the file of the item that `from` names.
 name: ssh_activity
 caption: SSH Activity
 uid: 4007
@@ -9,40 +9,7 @@ extends: network_activity
 description: SSH Activity events report remote client connections to a server using the Secure Shell (SSH) Protocol.
 profiles: [cloud, container, datetime, host, security_control]
 attributes:
-  activity_id:
-    caption: Activity ID
-    requirement: required
-    definition: v1.0.0/classes/network_activity.yaml
-  activity_name:
-    caption: Activity
-    requirement: optional
-    definition: v1.0.0/classes/base_event.yaml
-  actor:
-    caption: Actor
-    requirement: optional
-    profile: host
-    definition: v1.0.0/classes/network_activity.yaml
-  api:
-    caption: API Details
-    requirement: optional
-    profile: cloud
-    definition: v1.0.0/classes/base_event.yaml
-  app_name:
-    caption: Application Name
-    requirement: optional
-    definition: v1.0.0/classes/network_activity.yaml
-  attacks:
-    caption: Attacks
-    requirement: recommended
-    profile: security_control
-    definition: v1.0.0/classes/network_activity.yaml
-  category_name:
-    caption: Category
-    type: string_t
-    requirement: optional
-    group: classification
-    from: base_event
-    description: 'The event category name, as defined by category_uid value: `Network Activity`.'
+  activity_id: {caption: Activity ID, type: integer_t, requirement: required, group: classification, sibling: activity_name, enum: {0: Unknown, 1: Open, 2: Close, 3: Reset, 4: Fail, 5: Refuse, 6: Traffic, 99: Other}, from: network_activity}
   category_uid:
     caption: Category ID
     type: integer_t
@@ -52,16 +19,9 @@ attributes:
     sibling: category_name
     description: The category unique identifier of the event.
     enum:
-      '4':
+      4:
         caption: Network Activity
         description: Network Activity events.
-  class_name:
-    caption: Class
-    type: string_t
-    requirement: optional
-    group: classification
-    from: base_event
-    description: 'The event class name, as defined by class_uid value: `SSH Activity`.'
   class_uid:
     caption: Class ID
     type: integer_t
@@ -70,165 +30,44 @@ attributes:
     sibling: class_name
     description: The unique identifier of a class. A Class describes the attributes available in an event.
     enum:
-      '4007':
+      4007:
         caption: SSH Activity
         description: SSH Activity events report remote client connections to a server using the Secure Shell (SSH) Protocol.
-  client_hassh:
-    caption: Client HASSH
-    type: object_t
-    object: hassh
-    requirement: recommended
-    group: primary
-    description: The Client HASSH fingerprinting object.
-  cloud:
-    caption: Cloud
-    requirement: required
-    profile: cloud
-    definition: v1.0.0/classes/base_event.yaml
-  connection_info:
-    caption: Connection Info
-    requirement: recommended
-    definition: v1.0.0/classes/network_activity.yaml
-  count:
-    caption: Count
-    requirement: optional
-    definition: v1.0.0/classes/base_event.yaml
-  device:
-    caption: Device
-    requirement: recommended
-    profile: host
-    definition: v1.0.0/classes/network_activity.yaml
-  disposition:
-    caption: Disposition
-    requirement: optional
-    profile: security_control
-    definition: v1.0.0/classes/network_activity.yaml
+  cloud: {caption: Cloud, type: object_t, object: cloud, requirement: required, group: primary, profile: cloud, from: base_event}
   disposition_id:
     caption: Disposition ID
+    type: integer_t
     requirement: required
-    profile: security_control
-    definition: v1.0.0/classes/network_activity.yaml
-  dst_endpoint:
-    caption: Destination Endpoint
-    requirement: required
-    definition: v1.0.0/classes/network_activity.yaml
-  duration:
-    caption: Duration
-    requirement: optional
-    definition: v1.0.0/classes/base_event.yaml
-  end_time:
-    caption: End Time
-    requirement: optional
-    definition: v1.0.0/classes/base_event.yaml
-  end_time_dt:
-    caption: End Time
-    requirement: optional
-    profile: datetime
-    definition: v1.0.0/classes/base_event.yaml
-  enrichments:
-    caption: Enrichments
-    requirement: optional
-    definition: v1.0.0/classes/base_event.yaml
-  malware:
-    caption: Malware
-    requirement: optional
-    profile: security_control
-    definition: v1.0.0/classes/network_activity.yaml
-  message:
-    caption: Message
-    requirement: recommended
-    definition: v1.0.0/classes/base_event.yaml
-  metadata:
-    caption: Metadata
-    requirement: required
-    definition: v1.0.0/classes/base_event.yaml
-  observables:
-    caption: Observables
-    requirement: optional
-    definition: v1.0.0/classes/base_event.yaml
-  protocol_ver:
-    caption: SSH Version
-    type: string_t
-    requirement: recommended
-    group: context
-    description: The Secure Shell Protocol version.
-  proxy:
-    caption: Proxy
-    requirement: optional
-    definition: v1.0.0/classes/network_activity.yaml
-  raw_data:
-    caption: Raw Data
-    requirement: optional
-    definition: v1.0.0/classes/base_event.yaml
-  server_hassh:
-    caption: Server HASSH
-    type: object_t
-    object: hassh
-    requirement: recommended
     group: primary
-    description: The Server HASSH fingerprinting object.
-  severity:
-    caption: Severity
-    requirement: optional
-    definition: v1.0.0/classes/base_event.yaml
-  severity_id:
-    caption: Severity ID
-    requirement: required
-    definition: v1.0.0/classes/base_event.yaml
-  src_endpoint:
-    caption: Source Endpoint
-    requirement: required
-    definition: v1.0.0/classes/network_activity.yaml
-  start_time:
-    caption: Start Time
-    requirement: optional
-    definition: v1.0.0/classes/base_event.yaml
-  start_time_dt:
-    caption: Start Time
-    requirement: optional
-    profile: datetime
-    definition: v1.0.0/classes/base_event.yaml
-  status:
-    caption: Status
-    requirement: optional
-    definition: v1.0.0/classes/base_event.yaml
-  status_code:
-    caption: Status Code
-    requirement: optional
-    definition: v1.0.0/classes/base_event.yaml
-  status_detail:
-    caption: Status Details
-    requirement: optional
-    definition: v1.0.0/classes/base_event.yaml
-  status_id:
-    caption: Status ID
-    requirement: recommended
-    definition: v1.0.0/classes/base_event.yaml
-  time:
-    caption: Event Time
-    requirement: required
-    definition: v1.0.0/classes/base_event.yaml
-  time_dt:
-    caption: Event Time
-    requirement: optional
-    profile: datetime
-    definition: v1.0.0/classes/base_event.yaml
-  timezone_offset:
-    caption: Timezone Offset
-    requirement: recommended
-    definition: v1.0.0/classes/base_event.yaml
-  tls:
-    caption: TLS
-    requirement: optional
-    definition: v1.0.0/classes/network_activity.yaml
-  traffic:
-    caption: Traffic
-    requirement: optional
-    definition: v1.0.0/classes/network_activity.yaml
-  type_name:
-    caption: Type Name
-    requirement: optional
-    definition: v1.0.0/classes/base_event.yaml
+    profile: security_control
+    sibling: disposition
+    enum:
+      0: Unknown
+      1: Allowed
+      2: Blocked
+      3: Quarantined
+      4: Isolated
+      5: Deleted
+      6: Dropped
+      7: Custom Action
+      8: Approved
+      9: Restored
+      10: Exonerated
+      11: Corrected
+      12: Partially Corrected
+      13: Uncorrected
+      14: Delayed
+      15: Detected
+      16: No Action
+      17: Logged
+      18: Tagged
+      99: Other
+    from: network_activity
+  dst_endpoint: {caption: Destination Endpoint, type: object_t, object: network_endpoint, requirement: required, group: primary, observable: 20, from: network_activity}
+  metadata: {caption: Metadata, type: object_t, object: metadata, requirement: required, group: context, from: base_event}
+  severity_id: {caption: Severity ID, type: integer_t, requirement: required, group: classification, sibling: severity, enum: {0: Unknown, 1: Informational, 2: Low, 3: Medium, 4: High, 5: Critical, 6: Fatal, 99: Other}, from: base_event}
+  src_endpoint: {caption: Source Endpoint, type: object_t, object: network_endpoint, requirement: required, group: primary, observable: 20, from: network_activity}
+  time: {caption: Event Time, type: timestamp_t, requirement: required, group: occurrence, from: base_event}
   type_uid:
     caption: Type ID
     type: integer_t
@@ -236,30 +75,68 @@ attributes:
     group: classification
     sibling: type_name
     description: 'The event type ID. It identifies the event''s semantics and structure. The value is calculated by the logging system as: `class_uid * 100 + activity_id`.'
-    enum:
-      '400700':
-        caption: 'SSH Activity: Unknown'
-      '400701':
-        caption: 'SSH Activity: Open'
-        description: A new network connection was opened.
-      '400702':
-        caption: 'SSH Activity: Close'
-        description: The network connection was closed.
-      '400703':
-        caption: 'SSH Activity: Reset'
-        description: The network connection was abnormally terminated or closed by a middle device like firewalls.
-      '400704':
-        caption: 'SSH Activity: Fail'
-        description: The network connection failed. For example a connection timeout or no route to host.
-      '400705':
-        caption: 'SSH Activity: Refuse'
-        description: The network connection was refused. For example an attempt to connect to a server port which is not open.
-      '400706':
-        caption: 'SSH Activity: Traffic'
-        description: Network traffic report.
-      '400799':
-        caption: 'SSH Activity: Other'
-  unmapped:
-    caption: Unmapped Data
+  attacks: {caption: Attacks, type: object_t, object: attack, array: true, requirement: recommended, group: primary, profile: security_control, from: network_activity}
+  client_hassh:
+    caption: Client HASSH
+    type: object_t
+    object: hassh
+    requirement: recommended
+    group: primary
+    description: The Client HASSH fingerprinting object.
+  connection_info: {caption: Connection Info, type: object_t, object: network_connection_info, requirement: recommended, group: primary, from: network_activity}
+  device: {caption: Device, type: object_t, object: device, requirement: recommended, group: primary, profile: host, observable: 20, from: network_activity}
+  message: {caption: Message, type: string_t, requirement: recommended, group: primary, from: base_event}
+  protocol_ver:
+    caption: SSH Version
+    type: string_t
+    requirement: recommended
+    group: context
+    description: The Secure Shell Protocol version.
+  server_hassh:
+    caption: Server HASSH
+    type: object_t
+    object: hassh
+    requirement: recommended
+    group: primary
+    description: The Server HASSH fingerprinting object.
+  status_id: {caption: Status ID, type: integer_t, requirement: recommended, group: primary, sibling: status, enum: {0: Unknown, 1: Success, 2: Failure, 99: Other}, from: base_event}
+  timezone_offset: {caption: Timezone Offset, type: integer_t, requirement: recommended, group: occurrence, from: base_event}
+  activity_name: {caption: Activity, type: string_t, requirement: optional, group: classification, from: base_event}
+  actor: {caption: Actor, type: object_t, object: actor, requirement: optional, group: primary, profile: host, from: network_activity}
+  api: {caption: API Details, type: object_t, object: api, requirement: optional, group: context, profile: cloud, from: base_event}
+  app_name: {caption: Application Name, type: string_t, requirement: optional, group: context, from: network_activity}
+  category_name:
+    caption: Category
+    type: string_t
     requirement: optional
-    definition: v1.0.0/classes/base_event.yaml
+    group: classification
+    from: base_event
+    description: 'The event category name, as defined by category_uid value: `Network Activity`.'
+  class_name:
+    caption: Class
+    type: string_t
+    requirement: optional
+    group: classification
+    from: base_event
+    description: 'The event class name, as defined by class_uid value: `SSH Activity`.'
+  count: {caption: Count, type: integer_t, requirement: optional, group: occurrence, from: base_event}
+  disposition: {caption: Disposition, type: string_t, requirement: optional, group: primary, profile: security_control, from: network_activity}
+  duration: {caption: Duration, type: integer_t, requirement: optional, group: occurrence, from: base_event}
+  end_time: {caption: End Time, type: timestamp_t, requirement: optional, group: occurrence, from: base_event}
+  end_time_dt: {caption: End Time, type: datetime_t, requirement: optional, group: occurrence, profile: datetime, from: base_event}
+  enrichments: {caption: Enrichments, type: object_t, object: enrichment, array: true, requirement: optional, group: context, from: base_event}
+  malware: {caption: Malware, type: object_t, object: malware, array: true, requirement: optional, group: primary, profile: security_control, from: network_activity}
+  observables: {caption: Observables, type: object_t, object: observable, array: true, requirement: optional, group: primary, from: base_event}
+  proxy: {caption: Proxy, type: object_t, object: network_proxy, requirement: optional, group: primary, observable: 20, from: network_activity}
+  raw_data: {caption: Raw Data, type: string_t, requirement: optional, group: context, from: base_event}
+  severity: {caption: Severity, type: string_t, requirement: optional, group: classification, from: base_event}
+  start_time: {caption: Start Time, type: timestamp_t, requirement: optional, group: occurrence, from: base_event}
+  start_time_dt: {caption: Start Time, type: datetime_t, requirement: optional, group: occurrence, profile: datetime, from: base_event}
+  status: {caption: Status, type: string_t, requirement: optional, group: primary, from: base_event}
+  status_code: {caption: Status Code, type: string_t, requirement: optional, group: primary, from: base_event}
+  status_detail: {caption: Status Details, type: string_t, requirement: optional, group: primary, from: base_event}
+  time_dt: {caption: Event Time, type: datetime_t, requirement: optional, group: occurrence, profile: datetime, from: base_event}
+  tls: {caption: TLS, type: object_t, object: tls, requirement: optional, group: primary, from: network_activity}
+  traffic: {caption: Traffic, type: object_t, object: network_traffic, requirement: optional, group: primary, from: network_activity}
+  type_name: {caption: Type Name, type: string_t, requirement: optional, group: classification, from: base_event}
+  unmapped: {caption: Unmapped Data, type: object_t, object: object, requirement: optional, group: context, from: base_event}

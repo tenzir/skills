@@ -19,6 +19,39 @@ referenced_by:
     process: [user]
     resource_details: [owner]
 attributes:
+  type_id:
+    caption: Type ID
+    type: integer_t
+    requirement: required
+    sibling: type
+    description: The account type identifier.
+    enum:
+      0:
+        caption: Unknown
+        description: The type is unknown.
+      1:
+        caption: User
+        description: Regular user account.
+      2:
+        caption: Admin
+        description: Admin/root user account.
+      3:
+        caption: System
+        description: System account. For example, Windows computer accounts with a trailing dollar sign ($).
+      99:
+        caption: Other
+        description: The type is not mapped. See the `type` attribute, which may contain a data source specific value.
+  name:
+    caption: Name
+    type: username_t
+    requirement: recommended
+    observable: 4
+    description: The username. For example, `janedoe1`.
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: recommended
+    description: The unique user identifier. For example, the Windows user SID, ActiveDirectory DN or AWS user ARN.
   account:
     caption: Account
     type: object_t
@@ -53,12 +86,6 @@ attributes:
     array: true
     requirement: optional
     description: The administrative groups to which the user belongs.
-  name:
-    caption: Name
-    type: username_t
-    requirement: recommended
-    observable: 4
-    description: The username. For example, `janedoe1`.
   org:
     caption: Organization
     type: object_t
@@ -70,33 +97,6 @@ attributes:
     type: string_t
     requirement: optional
     description: The type of the user. For example, System, AWS IAM User, etc.
-  type_id:
-    caption: Type ID
-    type: integer_t
-    requirement: required
-    sibling: type
-    description: The account type identifier.
-    enum:
-      '0':
-        caption: Unknown
-        description: The type is unknown.
-      '1':
-        caption: User
-        description: Regular user account.
-      '2':
-        caption: Admin
-        description: Admin/root user account.
-      '3':
-        caption: System
-        description: System account. For example, Windows computer accounts with a trailing dollar sign ($).
-      '99':
-        caption: Other
-        description: The type is not mapped. See the `type` attribute, which may contain a data source specific value.
-  uid:
-    caption: Unique ID
-    type: string_t
-    requirement: recommended
-    description: The unique user identifier. For example, the Windows user SID, ActiveDirectory DN or AWS user ARN.
   uid_alt:
     caption: Alternate ID
     type: string_t

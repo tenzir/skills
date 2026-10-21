@@ -35,6 +35,18 @@ referenced_by:
     table: [groups]
     user: [groups]
 attributes:
+  name:
+    caption: Name
+    type: string_t
+    requirement: recommended
+    observable: 32
+    description: The group name.
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: recommended
+    observable: 33
+    description: The unique identifier of the group. For example, for Windows events this is the security identifier (SID) of the group. Another example, pool id or desktop id that the device belongs to.
   desc:
     caption: Description
     type: string_t
@@ -45,12 +57,6 @@ attributes:
     type: string_t
     requirement: optional
     description: 'The domain where the group is defined. For example: the LDAP or Active Directory domain.'
-  name:
-    caption: Name
-    type: string_t
-    requirement: recommended
-    observable: 32
-    description: The group name.
   privileges:
     caption: Privileges
     type: string_t
@@ -62,12 +68,6 @@ attributes:
     type: string_t
     requirement: optional
     description: The type of the group.
-  uid:
-    caption: Unique ID
-    type: string_t
-    requirement: recommended
-    observable: 33
-    description: The unique identifier of the group. For example, for Windows events this is the security identifier (SID) of the group. Another example, pool id or desktop id that the device belongs to.
   uid_alt:
     caption: Alternate ID
     type: string_t

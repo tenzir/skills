@@ -12,6 +12,11 @@ references:
 - description: Getting to Know the CIS Benchmarks
   url: https://www.cisecurity.org/insights/blog/getting-to-know-the-cis-benchmarks
 attributes:
+  name:
+    caption: Name
+    type: string_t
+    requirement: required
+    description: 'The CIS Benchmark name. For example: Ensure mounting of cramfs filesystems is disabled.'
   cis_controls:
     caption: CIS Controls
     type: object_t
@@ -24,8 +29,3 @@ attributes:
     type: string_t
     requirement: optional
     description: 'The CIS Benchmark description. For example: The cramfs filesystem type is a compressed read-only Linux filesystem embedded in small footprint systems. A cramfs image can be used without having to first decompress the image.'
-  name:
-    caption: Name
-    type: string_t
-    requirement: required
-    description: 'The CIS Benchmark name. For example: Ensure mounting of cramfs filesystems is disabled.'

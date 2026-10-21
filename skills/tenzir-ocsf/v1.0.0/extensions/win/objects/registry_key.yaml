@@ -9,6 +9,11 @@ referenced_by:
   classes:
     win/registry_key_activity: [prev_reg_key, reg_key]
 attributes:
+  path:
+    caption: Path
+    type: string_t
+    requirement: required
+    description: The full path to the registry key.
   is_system:
     caption: System
     type: boolean_t
@@ -25,11 +30,6 @@ attributes:
     requirement: optional
     profile: datetime
     description: The time when the registry key was last modified.
-  path:
-    caption: Path
-    type: string_t
-    requirement: required
-    description: The full path to the registry key.
   security_descriptor:
     caption: Security Descriptor
     type: string_t

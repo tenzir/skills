@@ -1,5 +1,5 @@
-# Attributes with a `definition` path are inherited unchanged. Read that file
-# for their type, object, description, enum, and observable.
+# Attributes with `from` but no description are inherited unchanged. Their
+# descriptions are in the file of the item that `from` names.
 name: dns_answer
 caption: DNS Answer
 extends: dns_resource_record
@@ -15,10 +15,8 @@ referenced_by:
   objects:
     osint: [answers]
 attributes:
-  class:
-    caption: Resource Record Class
-    requirement: recommended
-    definition: v1.9.0/objects/dns_resource_record.yaml
+  rdata: {caption: DNS RData, type: string_t, requirement: required, from: dns_resource_record}
+  class: {caption: Resource Record Class, type: string_t, requirement: recommended, from: dns_resource_record}
   flag_ids:
     caption: DNS Header Flags
     type: integer_t
@@ -31,24 +29,36 @@ attributes:
       superseded_by: [dns_activity.flag_ids]
     description: The list of DNS answer header flag IDs.
     enum:
-      '0':
+      0:
         caption: Unknown
         description: The flag is unknown.
-      '1':
+      1:
         caption: Authoritative Answer
-      '2':
+      2:
         caption: Truncated Response
-      '3':
+      3:
         caption: Recursion Desired
-      '4':
+      4:
         caption: Recursion Available
-      '5':
+      5:
         caption: Authentic Data
-      '6':
+      6:
         caption: Checking Disabled
-      '99':
+      99:
         caption: Other
         description: The flag is not mapped. See the `flags` attribute, which contains a data source specific value.
+  hostname: {caption: Hostname, type: hostname_t, requirement: recommended, observable: 1, from: dns_resource_record}
+  packet_uid:
+    caption: Packet UID
+    type: integer_t
+    requirement: recommended
+    deprecated:
+      since: 1.9.0
+      message: Use `dns_activity.transaction_id` instead.
+      superseded_by: [dns_activity.transaction_id]
+    description: The DNS packet identifier assigned by the program that generated the query. The identifier is copied to the response.
+  ttl: {caption: TTL, type: integer_t, requirement: recommended, from: dns_resource_record}
+  type: {caption: Resource Record Type, type: string_t, requirement: recommended, from: dns_resource_record}
   flags:
     caption: DNS Header Flags
     type: string_t
@@ -59,28 +69,3 @@ attributes:
       message: Use `dns_activity.flags` instead.
       superseded_by: [dns_activity.flags]
     description: The list of DNS answer header flags.
-  hostname:
-    caption: Hostname
-    requirement: recommended
-    definition: v1.9.0/objects/dns_resource_record.yaml
-  packet_uid:
-    caption: Packet UID
-    type: integer_t
-    requirement: recommended
-    deprecated:
-      since: 1.9.0
-      message: Use `dns_activity.transaction_id` instead.
-      superseded_by: [dns_activity.transaction_id]
-    description: The DNS packet identifier assigned by the program that generated the query. The identifier is copied to the response.
-  rdata:
-    caption: DNS RData
-    requirement: required
-    definition: v1.9.0/objects/dns_resource_record.yaml
-  ttl:
-    caption: TTL
-    requirement: recommended
-    definition: v1.9.0/objects/dns_resource_record.yaml
-  type:
-    caption: Resource Record Type
-    requirement: recommended
-    definition: v1.9.0/objects/dns_resource_record.yaml

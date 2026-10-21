@@ -1,5 +1,5 @@
-# Attributes with a `definition` path are inherited unchanged. Read that file
-# for their type, object, description, enum, and observable.
+# Attributes with `from` but no description are inherited unchanged. Their
+# descriptions are in the file of the item that `from` names.
 name: account_change
 caption: Account Change
 uid: 3001
@@ -17,62 +17,39 @@ attributes:
     sibling: activity_name
     description: The normalized identifier of the activity that triggered the event.
     enum:
-      '0':
+      0:
         caption: Unknown
         description: The event activity is unknown.
-      '1':
+      1:
         caption: Create
         description: A user/role was created.
-      '2':
+      2:
         caption: Enable
         description: A user/role was enabled.
-      '3':
+      3:
         caption: Password Change
         description: An attempt was made to change an account's password.
-      '4':
+      4:
         caption: Password Reset
         description: An attempt was made to reset an account's password.
-      '5':
+      5:
         caption: Disable
         description: A user/role was disabled.
-      '6':
+      6:
         caption: Delete
         description: A user/role was deleted.
-      '7':
+      7:
         caption: Attach Policy
         description: A user/role was changed.
-      '8':
+      8:
         caption: Detach Policy
         description: A user/role was changed.
-      '9':
+      9:
         caption: Lock
         description: A user account was locked out.
-      '99':
+      99:
         caption: Other
         description: The event activity is not mapped.
-  activity_name:
-    caption: Activity
-    requirement: optional
-    definition: v1.0.0/classes/base_event.yaml
-  actor:
-    caption: Actor
-    type: object_t
-    object: actor
-    requirement: recommended
-    group: context
-    description: The actor object describes details about the user/role/process that was the source of the activity.
-  api:
-    caption: API Details
-    requirement: optional
-    profile: cloud
-    definition: v1.0.0/classes/base_event.yaml
-  category_name:
-    caption: Category
-    type: string_t
-    requirement: optional
-    group: classification
-    from: base_event
-    description: 'The event category name, as defined by category_uid value: `Identity & Access Management`.'
   category_uid:
     caption: Category ID
     type: integer_t
@@ -82,16 +59,9 @@ attributes:
     sibling: category_name
     description: The category unique identifier of the event.
     enum:
-      '3':
+      3:
         caption: Identity & Access Management
         description: Identity & Access Management (IAM) events relate to the supervision of the system's authentication and access control model. Examples of such events are the success or failure of authentication, granting of authority, password change, entity change, privileged use etc.
-  class_name:
-    caption: Class
-    type: string_t
-    requirement: optional
-    group: classification
-    from: base_event
-    description: 'The event class name, as defined by class_uid value: `Account Change`.'
   class_uid:
     caption: Class ID
     type: integer_t
@@ -100,121 +70,13 @@ attributes:
     sibling: class_name
     description: The unique identifier of a class. A Class describes the attributes available in an event.
     enum:
-      '3001':
+      3001:
         caption: Account Change
         description: Account Change events report when specific user account management tasks are performed, such as a user/role being created, changed, deleted, renamed, disabled, enabled, locked out or unlocked.
-  cloud:
-    caption: Cloud
-    requirement: required
-    profile: cloud
-    definition: v1.0.0/classes/base_event.yaml
-  count:
-    caption: Count
-    requirement: optional
-    definition: v1.0.0/classes/base_event.yaml
-  device:
-    caption: Device
-    requirement: recommended
-    profile: host
-    definition: v1.0.0/classes/iam.yaml
-  duration:
-    caption: Duration
-    requirement: optional
-    definition: v1.0.0/classes/base_event.yaml
-  end_time:
-    caption: End Time
-    requirement: optional
-    definition: v1.0.0/classes/base_event.yaml
-  end_time_dt:
-    caption: End Time
-    requirement: optional
-    profile: datetime
-    definition: v1.0.0/classes/base_event.yaml
-  enrichments:
-    caption: Enrichments
-    requirement: optional
-    definition: v1.0.0/classes/base_event.yaml
-  http_request:
-    caption: HTTP Request
-    type: object_t
-    object: http_request
-    requirement: optional
-    group: context
-    description: Details about the underlying http request.
-  message:
-    caption: Message
-    requirement: recommended
-    definition: v1.0.0/classes/base_event.yaml
-  metadata:
-    caption: Metadata
-    requirement: required
-    definition: v1.0.0/classes/base_event.yaml
-  observables:
-    caption: Observables
-    requirement: optional
-    definition: v1.0.0/classes/base_event.yaml
-  raw_data:
-    caption: Raw Data
-    requirement: optional
-    definition: v1.0.0/classes/base_event.yaml
-  severity:
-    caption: Severity
-    requirement: optional
-    definition: v1.0.0/classes/base_event.yaml
-  severity_id:
-    caption: Severity ID
-    requirement: required
-    definition: v1.0.0/classes/base_event.yaml
-  src_endpoint:
-    caption: Source Endpoint
-    type: object_t
-    object: network_endpoint
-    requirement: recommended
-    group: primary
-    observable: 20
-    description: Details about the source of the activity.
-  start_time:
-    caption: Start Time
-    requirement: optional
-    definition: v1.0.0/classes/base_event.yaml
-  start_time_dt:
-    caption: Start Time
-    requirement: optional
-    profile: datetime
-    definition: v1.0.0/classes/base_event.yaml
-  status:
-    caption: Status
-    requirement: optional
-    definition: v1.0.0/classes/base_event.yaml
-  status_code:
-    caption: Status Code
-    requirement: optional
-    definition: v1.0.0/classes/base_event.yaml
-  status_detail:
-    caption: Status Details
-    requirement: optional
-    definition: v1.0.0/classes/base_event.yaml
-  status_id:
-    caption: Status ID
-    requirement: recommended
-    definition: v1.0.0/classes/base_event.yaml
-  time:
-    caption: Event Time
-    requirement: required
-    definition: v1.0.0/classes/base_event.yaml
-  time_dt:
-    caption: Event Time
-    requirement: optional
-    profile: datetime
-    definition: v1.0.0/classes/base_event.yaml
-  timezone_offset:
-    caption: Timezone Offset
-    requirement: recommended
-    definition: v1.0.0/classes/base_event.yaml
-  type_name:
-    caption: Type Name
-    requirement: optional
-    definition: v1.0.0/classes/base_event.yaml
+  cloud: {caption: Cloud, type: object_t, object: cloud, requirement: required, group: primary, profile: cloud, from: base_event}
+  metadata: {caption: Metadata, type: object_t, object: metadata, requirement: required, group: context, from: base_event}
+  severity_id: {caption: Severity ID, type: integer_t, requirement: required, group: classification, sibling: severity, enum: {0: Unknown, 1: Informational, 2: Low, 3: Medium, 4: High, 5: Critical, 6: Fatal, 99: Other}, from: base_event}
+  time: {caption: Event Time, type: timestamp_t, requirement: required, group: occurrence, from: base_event}
   type_uid:
     caption: Type ID
     type: integer_t
@@ -222,42 +84,6 @@ attributes:
     group: classification
     sibling: type_name
     description: 'The event type ID. It identifies the event''s semantics and structure. The value is calculated by the logging system as: `class_uid * 100 + activity_id`.'
-    enum:
-      '300100':
-        caption: 'Account Change: Unknown'
-      '300101':
-        caption: 'Account Change: Create'
-        description: A user/role was created.
-      '300102':
-        caption: 'Account Change: Enable'
-        description: A user/role was enabled.
-      '300103':
-        caption: 'Account Change: Password Change'
-        description: An attempt was made to change an account's password.
-      '300104':
-        caption: 'Account Change: Password Reset'
-        description: An attempt was made to reset an account's password.
-      '300105':
-        caption: 'Account Change: Disable'
-        description: A user/role was disabled.
-      '300106':
-        caption: 'Account Change: Delete'
-        description: A user/role was deleted.
-      '300107':
-        caption: 'Account Change: Attach Policy'
-        description: A user/role was changed.
-      '300108':
-        caption: 'Account Change: Detach Policy'
-        description: A user/role was changed.
-      '300109':
-        caption: 'Account Change: Lock'
-        description: A user account was locked out.
-      '300199':
-        caption: 'Account Change: Other'
-  unmapped:
-    caption: Unmapped Data
-    requirement: optional
-    definition: v1.0.0/classes/base_event.yaml
   user:
     caption: User
     type: object_t
@@ -266,6 +92,64 @@ attributes:
     group: primary
     observable: 21
     description: The user that was a target of an activity.
+  actor:
+    caption: Actor
+    type: object_t
+    object: actor
+    requirement: recommended
+    group: context
+    description: The actor object describes details about the user/role/process that was the source of the activity.
+  device: {caption: Device, type: object_t, object: device, requirement: recommended, group: primary, profile: host, observable: 20, from: iam}
+  message: {caption: Message, type: string_t, requirement: recommended, group: primary, from: base_event}
+  src_endpoint:
+    caption: Source Endpoint
+    type: object_t
+    object: network_endpoint
+    requirement: recommended
+    group: primary
+    observable: 20
+    description: Details about the source of the activity.
+  status_id: {caption: Status ID, type: integer_t, requirement: recommended, group: primary, sibling: status, enum: {0: Unknown, 1: Success, 2: Failure, 99: Other}, from: base_event}
+  timezone_offset: {caption: Timezone Offset, type: integer_t, requirement: recommended, group: occurrence, from: base_event}
+  activity_name: {caption: Activity, type: string_t, requirement: optional, group: classification, from: base_event}
+  api: {caption: API Details, type: object_t, object: api, requirement: optional, group: context, profile: cloud, from: base_event}
+  category_name:
+    caption: Category
+    type: string_t
+    requirement: optional
+    group: classification
+    from: base_event
+    description: 'The event category name, as defined by category_uid value: `Identity & Access Management`.'
+  class_name:
+    caption: Class
+    type: string_t
+    requirement: optional
+    group: classification
+    from: base_event
+    description: 'The event class name, as defined by class_uid value: `Account Change`.'
+  count: {caption: Count, type: integer_t, requirement: optional, group: occurrence, from: base_event}
+  duration: {caption: Duration, type: integer_t, requirement: optional, group: occurrence, from: base_event}
+  end_time: {caption: End Time, type: timestamp_t, requirement: optional, group: occurrence, from: base_event}
+  end_time_dt: {caption: End Time, type: datetime_t, requirement: optional, group: occurrence, profile: datetime, from: base_event}
+  enrichments: {caption: Enrichments, type: object_t, object: enrichment, array: true, requirement: optional, group: context, from: base_event}
+  http_request:
+    caption: HTTP Request
+    type: object_t
+    object: http_request
+    requirement: optional
+    group: context
+    description: Details about the underlying http request.
+  observables: {caption: Observables, type: object_t, object: observable, array: true, requirement: optional, group: primary, from: base_event}
+  raw_data: {caption: Raw Data, type: string_t, requirement: optional, group: context, from: base_event}
+  severity: {caption: Severity, type: string_t, requirement: optional, group: classification, from: base_event}
+  start_time: {caption: Start Time, type: timestamp_t, requirement: optional, group: occurrence, from: base_event}
+  start_time_dt: {caption: Start Time, type: datetime_t, requirement: optional, group: occurrence, profile: datetime, from: base_event}
+  status: {caption: Status, type: string_t, requirement: optional, group: primary, from: base_event}
+  status_code: {caption: Status Code, type: string_t, requirement: optional, group: primary, from: base_event}
+  status_detail: {caption: Status Details, type: string_t, requirement: optional, group: primary, from: base_event}
+  time_dt: {caption: Event Time, type: datetime_t, requirement: optional, group: occurrence, profile: datetime, from: base_event}
+  type_name: {caption: Type Name, type: string_t, requirement: optional, group: classification, from: base_event}
+  unmapped: {caption: Unmapped Data, type: object_t, object: object, requirement: optional, group: context, from: base_event}
   user_result:
     caption: User Result
     type: object_t

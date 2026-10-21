@@ -12,6 +12,45 @@ attributes:
     type: timestamp_t
     requirement: recommended
     description: The time that the token was created.
+  type:
+    caption: Type
+    type: string_t
+    requirement: recommended
+    description: The type of the token, normalized to the caption of the `type_id` value. This indicates whether the token is a Client Token, API Token, or one of the protocol-specific token types.
+  type_id:
+    caption: Type ID
+    type: integer_t
+    requirement: recommended
+    sibling: type
+    description: 'The normalized token type identifier. Valid values: 0 (Unknown), 1 (Ticket Granting Ticket - Kerberos), 2 (Service Ticket - Kerberos), 3 (Identity Token - OIDC), 4 (Refresh Token - OIDC), 5 (SAML Assertion), 6 (Client Token - IdP-issued), 7 (API Token - generic API keys), 99 (Other).'
+    enum:
+      0:
+        caption: Unknown
+        description: The token type is unknown.
+      1:
+        caption: Ticket Granting Ticket
+        description: Ticket Granting Ticket (TGT) for Kerberos.
+      2:
+        caption: Service Ticket
+        description: Service Ticket (ST) for Kerberos.
+      3:
+        caption: Identity Token
+        description: Identity (ID) Token for OIDC.
+      4:
+        caption: Refresh Token
+        description: Refresh Token for OIDC.
+      5:
+        caption: SAML Assertion
+        description: Authentication Assertion for SAML.
+      6:
+        caption: Client Token
+        description: 'Client Token issued by an Identity Provider (IdP) for application authentication. Use this value for IdP-issued tokens used for service-to-service authentication. Examples: Microsoft Entra ID Application Registration client secrets, Okta API tokens, Auth0 Machine-to-Machine tokens. Key characteristic: These tokens are issued by Identity Providers, not by individual services.'
+      7:
+        caption: API Token
+        description: 'A generic API token or API key used for authenticating API requests. Use this value for service-specific API authentication tokens that are NOT issued by Identity Providers. Examples: REST API keys, GraphQL API keys, Stripe API keys, Twilio API keys, AWS API keys. Key characteristic: These tokens are issued by individual services/platforms, not by Identity Providers.'
+      99:
+        caption: Other
+        description: The type is not mapped. See the `type` attribute, which contains a data source specific value.
   created_time_dt:
     caption: Created Time
     type: datetime_t
@@ -55,45 +94,6 @@ attributes:
     type: string_t
     requirement: optional
     description: The unique identifier of the tenant or organization that owns the token or key, or the tenant context in which the token is authorized for use. This is particularly relevant in multi-tenant Identity Provider scenarios where tokens are scoped to specific tenants.
-  type:
-    caption: Type
-    type: string_t
-    requirement: recommended
-    description: The type of the token, normalized to the caption of the `type_id` value. This indicates whether the token is a Client Token, API Token, or one of the protocol-specific token types.
-  type_id:
-    caption: Type ID
-    type: integer_t
-    requirement: recommended
-    sibling: type
-    description: 'The normalized token type identifier. Valid values: 0 (Unknown), 1 (Ticket Granting Ticket - Kerberos), 2 (Service Ticket - Kerberos), 3 (Identity Token - OIDC), 4 (Refresh Token - OIDC), 5 (SAML Assertion), 6 (Client Token - IdP-issued), 7 (API Token - generic API keys), 99 (Other).'
-    enum:
-      '0':
-        caption: Unknown
-        description: The token type is unknown.
-      '1':
-        caption: Ticket Granting Ticket
-        description: Ticket Granting Ticket (TGT) for Kerberos.
-      '2':
-        caption: Service Ticket
-        description: Service Ticket (ST) for Kerberos.
-      '3':
-        caption: Identity Token
-        description: Identity (ID) Token for OIDC.
-      '4':
-        caption: Refresh Token
-        description: Refresh Token for OIDC.
-      '5':
-        caption: SAML Assertion
-        description: Authentication Assertion for SAML.
-      '6':
-        caption: Client Token
-        description: 'Client Token issued by an Identity Provider (IdP) for application authentication. Use this value for IdP-issued tokens used for service-to-service authentication. Examples: Microsoft Entra ID Application Registration client secrets, Okta API tokens, Auth0 Machine-to-Machine tokens. Key characteristic: These tokens are issued by Identity Providers, not by individual services.'
-      '7':
-        caption: API Token
-        description: 'A generic API token or API key used for authenticating API requests. Use this value for service-specific API authentication tokens that are NOT issued by Identity Providers. Examples: REST API keys, GraphQL API keys, Stripe API keys, Twilio API keys, AWS API keys. Key characteristic: These tokens are issued by individual services/platforms, not by Identity Providers.'
-      '99':
-        caption: Other
-        description: The type is not mapped. See the `type` attribute, which contains a data source specific value.
   uid:
     caption: Unique ID
     type: string_t

@@ -14,6 +14,11 @@ attributes:
     requirement: recommended
     observable: 6
     description: The url of a ticket in the ticket system.
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: recommended
+    description: Unique ticket identifier like ticket id.
   title:
     caption: Title
     type: string_t
@@ -31,18 +36,13 @@ attributes:
     sibling: type
     description: The normalized identifier for the ticket type.
     enum:
-      '0':
+      0:
         caption: Unknown
         description: The type is unknown.
-      '1':
+      1:
         caption: Internal
-      '2':
+      2:
         caption: External
-      '99':
+      99:
         caption: Other
         description: The type is not mapped. See the `type` attribute, which contains a data source specific value.
-  uid:
-    caption: Unique ID
-    type: string_t
-    requirement: recommended
-    description: Unique ticket identifier like ticket id.

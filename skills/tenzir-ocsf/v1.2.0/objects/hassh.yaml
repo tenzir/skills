@@ -6,11 +6,6 @@ referenced_by:
   classes:
     ssh_activity: [client_hassh, server_hassh]
 attributes:
-  algorithm:
-    caption: Algorithm
-    type: string_t
-    requirement: recommended
-    description: 'The concatenation of key exchange, encryption, authentication and compression algorithms (separated by '';''). NOTE: This is not the underlying algorithm for the hash implementation.'
   fingerprint:
     caption: Fingerprint
     type: object_t
@@ -18,3 +13,8 @@ attributes:
     requirement: required
     observable: 30
     description: The hash of the key exchange, encryption, authentication and compression algorithms.
+  algorithm:
+    caption: Algorithm
+    type: string_t
+    requirement: recommended
+    description: 'The concatenation of key exchange, encryption, authentication and compression algorithms (separated by '';''). NOTE: This is not the underlying algorithm for the hash implementation.'

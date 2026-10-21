@@ -17,25 +17,6 @@ referenced_by:
     managed_entity: [email]
     osint: [email]
 attributes:
-  cc:
-    caption: Cc
-    type: email_t
-    array: true
-    requirement: optional
-    observable: 5
-    description: The machine-readable email header Cc values, as defined by RFC 5322. For example `example.user@usersdomain.com`.
-    references:
-    - description: RFC 5322
-      url: https://www.rfc-editor.org/rfc/rfc5322
-  cc_mailboxes:
-    caption: Cc Mailboxes
-    type: string_t
-    array: true
-    requirement: optional
-    description: The human-readable email header Cc Mailbox values. For example `'Example User <example.user@usersdomain.com>'`.
-    references:
-    - description: RFC 5322
-      url: https://www.rfc-editor.org/rfc/rfc5322#section-3.4
   data_classification:
     caption: Data Classification
     type: object_t
@@ -56,33 +37,6 @@ attributes:
     group: context
     profile: data_classification
     description: A list of Data Classification objects, that include information about data classification levels and data category types, indentified by a classifier.
-  delivered_to:
-    caption: Delivered To
-    type: email_t
-    requirement: optional
-    observable: 5
-    deprecated:
-      since: 1.4.0
-      message: Use the  `delivered_to_list`  attribute instead.
-    description: The machine-readable Delivered-To email header field. For example `example.user@usersdomain.com`
-  delivered_to_list:
-    caption: Delivered To
-    type: email_t
-    array: true
-    requirement: optional
-    observable: 5
-    description: The machine-readable Delivered-To email header values. For example `example.user@usersdomain.com`
-    references:
-    - description: RFC 9228
-      url: https://www.rfc-editor.org/rfc/rfc9228
-  files:
-    caption: Files
-    type: object_t
-    object: file
-    array: true
-    requirement: optional
-    observable: 24
-    description: The files embedded or attached to the email.
   from:
     caption: From
     type: email_t
@@ -92,26 +46,6 @@ attributes:
     references:
     - description: RFC 5322
       url: https://www.rfc-editor.org/rfc/rfc5322
-  from_mailbox:
-    caption: From Mailbox
-    type: string_t
-    requirement: optional
-    description: The human-readable email header From Mailbox value. For example `'Example User <example.user@usersdomain.com>'`.
-    references:
-    - description: RFC 5322
-      url: https://www.rfc-editor.org/rfc/rfc5322#section-3.4
-  http_headers:
-    caption: HTTP Headers
-    type: object_t
-    object: http_header
-    array: true
-    requirement: optional
-    description: Additional HTTP headers of an HTTP request or response.
-  is_read:
-    caption: Read
-    type: boolean_t
-    requirement: optional
-    description: The indication of whether the email has been read.
   message_uid:
     caption: Message UID
     type: string_t
@@ -121,11 +55,6 @@ attributes:
     references:
     - description: RFC 5322
       url: https://www.rfc-editor.org/rfc/rfc5322
-  raw_header:
-    caption: Raw Header
-    type: string_t
-    requirement: optional
-    description: The email authentication header.
   reply_to:
     caption: Reply To
     type: email_t
@@ -138,15 +67,6 @@ attributes:
     references:
     - description: RFC 5322
       url: https://www.rfc-editor.org/rfc/rfc5322
-  reply_to_mailboxes:
-    caption: Reply To Mailboxes
-    type: string_t
-    array: true
-    requirement: optional
-    description: The human-readable email header Reply To Mailbox values. For example `'Example User <example.user@usersdomain.com>'`.
-    references:
-    - description: RFC 5322
-      url: https://www.rfc-editor.org/rfc/rfc5322#section-3.4
   size:
     caption: Size
     type: long_t
@@ -190,6 +110,92 @@ attributes:
     references:
     - description: RFC 5322
       url: https://www.rfc-editor.org/rfc/rfc5322
+  uid:
+    caption: Email Thread UID
+    type: string_t
+    requirement: recommended
+    observable: 41
+    description: The unique identifier of the email thread.
+  cc:
+    caption: Cc
+    type: email_t
+    array: true
+    requirement: optional
+    observable: 5
+    description: The machine-readable email header Cc values, as defined by RFC 5322. For example `example.user@usersdomain.com`.
+    references:
+    - description: RFC 5322
+      url: https://www.rfc-editor.org/rfc/rfc5322
+  cc_mailboxes:
+    caption: Cc Mailboxes
+    type: string_t
+    array: true
+    requirement: optional
+    description: The human-readable email header Cc Mailbox values. For example `'Example User <example.user@usersdomain.com>'`.
+    references:
+    - description: RFC 5322
+      url: https://www.rfc-editor.org/rfc/rfc5322#section-3.4
+  delivered_to:
+    caption: Delivered To
+    type: email_t
+    requirement: optional
+    observable: 5
+    deprecated:
+      since: 1.4.0
+      message: Use the  `delivered_to_list`  attribute instead.
+    description: The machine-readable Delivered-To email header field. For example `example.user@usersdomain.com`
+  delivered_to_list:
+    caption: Delivered To
+    type: email_t
+    array: true
+    requirement: optional
+    observable: 5
+    description: The machine-readable Delivered-To email header values. For example `example.user@usersdomain.com`
+    references:
+    - description: RFC 9228
+      url: https://www.rfc-editor.org/rfc/rfc9228
+  files:
+    caption: Files
+    type: object_t
+    object: file
+    array: true
+    requirement: optional
+    observable: 24
+    description: The files embedded or attached to the email.
+  from_mailbox:
+    caption: From Mailbox
+    type: string_t
+    requirement: optional
+    description: The human-readable email header From Mailbox value. For example `'Example User <example.user@usersdomain.com>'`.
+    references:
+    - description: RFC 5322
+      url: https://www.rfc-editor.org/rfc/rfc5322#section-3.4
+  http_headers:
+    caption: HTTP Headers
+    type: object_t
+    object: http_header
+    array: true
+    requirement: optional
+    description: Additional HTTP headers of an HTTP request or response.
+  is_read:
+    caption: Read
+    type: boolean_t
+    requirement: optional
+    description: The indication of whether the email has been read.
+  raw_header:
+    caption: Raw Header
+    type: string_t
+    requirement: optional
+    description: The email authentication header.
+  reply_to_mailboxes:
+    caption: Reply To Mailboxes
+    type: string_t
+    array: true
+    requirement: optional
+    description: The human-readable email header Reply To Mailbox values. For example `'Example User <example.user@usersdomain.com>'`.
+    references:
+    - description: RFC 5322
+      url: https://www.rfc-editor.org/rfc/rfc5322#section-3.4
   to_mailboxes:
     caption: To Mailboxes
     type: string_t
@@ -199,12 +205,6 @@ attributes:
     references:
     - description: RFC 5322
       url: https://www.rfc-editor.org/rfc/rfc5322#section-3.4
-  uid:
-    caption: Email Thread UID
-    type: string_t
-    requirement: recommended
-    observable: 41
-    description: The unique identifier of the email thread.
   urls:
     caption: URLs
     type: object_t

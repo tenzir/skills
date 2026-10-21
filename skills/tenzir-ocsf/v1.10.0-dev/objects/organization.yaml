@@ -1,5 +1,5 @@
-# Attributes with a `definition` path are inherited unchanged. Read that file
-# for their type, object, description, enum, and observable.
+# Attributes with `from` but no description are inherited unchanged. Their
+# descriptions are in the file of the item that `from` names.
 name: organization
 caption: Organization
 extends: _entity
@@ -24,17 +24,14 @@ attributes:
     type: string_t
     requirement: recommended
     description: The name of an organizational unit, Google Cloud Folder, or AWS Org Unit. For example, the  `GCP Project Name` , or  `Dev_Prod_OU` .
-  ou_uid:
-    caption: Org Unit ID
-    type: string_t
-    requirement: optional
-    description: The unique identifier of an organizational unit, Google Cloud Folder, or AWS Org Unit. For example, an  `Oracle Cloud Tenancy ID` ,  `AWS OU ID` , or  `GCP Folder ID` .
   uid:
     caption: Unique ID
     type: string_t
     requirement: recommended
     description: The unique identifier of the organization, Oracle Cloud Tenancy, Google Cloud Organization, or AWS Organization. For example, an  `AWS Org ID`  or  `Oracle Cloud Domain ID` .
-  uid_numeric:
-    caption: Numeric Unique ID
+  ou_uid:
+    caption: Org Unit ID
+    type: string_t
     requirement: optional
-    definition: v1.10.0-dev/objects/_entity.yaml
+    description: The unique identifier of an organizational unit, Google Cloud Folder, or AWS Org Unit. For example, an  `Oracle Cloud Tenancy ID` ,  `AWS OU ID` , or  `GCP Folder ID` .
+  uid_numeric: {caption: Numeric Unique ID, type: long_t, requirement: optional, from: _entity}

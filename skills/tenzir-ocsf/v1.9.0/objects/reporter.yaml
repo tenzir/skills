@@ -1,5 +1,5 @@
-# Attributes with a `definition` path are inherited unchanged. Read that file
-# for their type, object, description, enum, and observable.
+# Attributes with `from` but no description are inherited unchanged. Their
+# descriptions are in the file of the item that `from` names.
 name: reporter
 caption: Reporter
 extends: _entity
@@ -27,18 +27,15 @@ attributes:
     type: string_t
     requirement: recommended
     description: The name of the entity from which the event or finding was reported.
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: recommended
+    description: The unique identifier of the entity from which the event or finding was reported.
   org:
     caption: Organization
     type: object_t
     object: organization
     requirement: optional
     description: The organization properties of the entity that reported the event or finding.
-  uid:
-    caption: Unique ID
-    type: string_t
-    requirement: recommended
-    description: The unique identifier of the entity from which the event or finding was reported.
-  uid_numeric:
-    caption: Numeric Unique ID
-    requirement: optional
-    definition: v1.9.0/objects/_entity.yaml
+  uid_numeric: {caption: Numeric Unique ID, type: long_t, requirement: optional, from: _entity}

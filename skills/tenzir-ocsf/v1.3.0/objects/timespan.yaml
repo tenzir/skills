@@ -48,11 +48,6 @@ attributes:
     type: integer_t
     requirement: recommended
     description: The duration of the time span in years.
-  type:
-    caption: Time Span Type
-    type: string_t
-    requirement: optional
-    description: The type of time span duration the object represents.
   type_id:
     caption: Time Span Type ID
     type: integer_t
@@ -60,25 +55,30 @@ attributes:
     sibling: type
     description: The normalized identifier for the time span duration type.
     enum:
-      '0':
+      0:
         caption: Unknown
         description: The type is unknown.
-      '1':
+      1:
         caption: Milliseconds
-      '2':
+      2:
         caption: Seconds
-      '3':
+      3:
         caption: Minutes
-      '4':
+      4:
         caption: Hours
-      '5':
+      5:
         caption: Days
-      '6':
+      6:
         caption: Weeks
-      '7':
+      7:
         caption: Months
-      '8':
+      8:
         caption: Years
-      '99':
+      99:
         caption: Other
         description: The type is not mapped. See the `type` attribute, which contains a data source specific value.
+  type:
+    caption: Time Span Type
+    type: string_t
+    requirement: optional
+    description: The type of time span duration the object represents.

@@ -1,5 +1,5 @@
-# Attributes with a `definition` path are inherited unchanged. Read that file
-# for their type, object, description, enum, and observable.
+# Attributes with `from` but no description are inherited unchanged. Their
+# descriptions are in the file of the item that `from` names.
 name: _resource
 caption: Resource
 abstract: true
@@ -9,16 +9,6 @@ profiles: [data_classification]
 constraints:
   at_least_one: [name, uid]
 attributes:
-  created_time:
-    caption: Created Time
-    type: timestamp_t
-    requirement: optional
-    description: The time when the resource was created.
-  data:
-    caption: Data
-    type: json_t
-    requirement: optional
-    description: Additional data describing the resource.
   data_classification:
     caption: Data Classification
     type: object_t
@@ -40,6 +30,27 @@ attributes:
     group: context
     profile: data_classification
     description: A list of Data Classification objects, that include information about data classification levels and data category types, identified by a classifier.
+  name:
+    caption: Name
+    type: string_t
+    requirement: recommended
+    description: The name of the resource.
+  uid:
+    caption: Unique ID
+    type: resource_uid_t
+    requirement: recommended
+    observable: 10
+    description: The unique identifier of the resource.
+  created_time:
+    caption: Created Time
+    type: timestamp_t
+    requirement: optional
+    description: The time when the resource was created.
+  data:
+    caption: Data
+    type: json_t
+    requirement: optional
+    description: Additional data describing the resource.
   labels:
     caption: Labels
     type: string_t
@@ -51,11 +62,6 @@ attributes:
     type: timestamp_t
     requirement: optional
     description: The time when the resource was last modified.
-  name:
-    caption: Name
-    type: string_t
-    requirement: recommended
-    description: The name of the resource.
   tags:
     caption: Tags
     type: object_t
@@ -68,19 +74,10 @@ attributes:
     type: string_t
     requirement: optional
     description: The resource type as defined by the event source.
-  uid:
-    caption: Unique ID
-    type: resource_uid_t
-    requirement: recommended
-    observable: 10
-    description: The unique identifier of the resource.
   uid_alt:
     caption: Alternate ID
     type: resource_uid_t
     requirement: optional
     observable: 10
     description: The alternative unique identifier of the resource.
-  uid_numeric:
-    caption: Numeric Unique ID
-    requirement: optional
-    definition: v1.9.0/objects/_entity.yaml
+  uid_numeric: {caption: Numeric Unique ID, type: long_t, requirement: optional, from: _entity}

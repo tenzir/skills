@@ -160,16 +160,16 @@ incident:
       sibling: confidence
       description: The normalized confidence refers to the accuracy of the analytics that produced the alert or finding. See specific usage.
       enum:
-        '0':
+        0:
           caption: Unknown
           description: The normalized confidence is unknown.
-        '1':
+        1:
           caption: Low
-        '2':
+        2:
           caption: Medium
-        '3':
+        3:
           caption: High
-        '99':
+        99:
           caption: Other
           description: The confidence is not mapped to the defined enum values. See the `confidence` attribute, which contains a data source specific value.
     impact:
@@ -186,22 +186,22 @@ incident:
       sibling: impact
       description: The normalized impact of the incident or finding. Per NIST, this is the magnitude of harm that can be expected to result from the consequences of unauthorized disclosure, modification, destruction, or loss of information or information system availability.
       enum:
-        '0':
+        0:
           caption: Unknown
           description: The normalized impact is unknown.
-        '1':
+        1:
           caption: Low
           description: The magnitude of harm is low.
-        '2':
+        2:
           caption: Medium
           description: The magnitude of harm is moderate.
-        '3':
+        3:
           caption: High
           description: The magnitude of harm is high.
-        '4':
+        4:
           caption: Critical
           description: The magnitude of harm is high and the scope is widespread.
-        '99':
+        99:
           caption: Other
           description: The impact is not mapped. See the `impact` attribute, which contains a data source specific value.
       references:
@@ -235,22 +235,22 @@ incident:
       sibling: priority
       description: The normalized priority. Priority identifies the relative importance of the incident or finding. It is a measurement of urgency.
       enum:
-        '0':
+        0:
           caption: Unknown
           description: No priority is assigned.
-        '1':
+        1:
           caption: Low
           description: Application or personal procedure is unusable, where a workaround is available or a repair is possible.
-        '2':
+        2:
           caption: Medium
           description: Non-critical function or procedure is unusable or hard to use causing operational disruptions with no direct impact on a service's availability. A workaround is available.
-        '3':
+        3:
           caption: High
           description: Critical functionality or network access is interrupted, degraded or unusable, having a severe impact on services availability. No acceptable alternative is possible.
-        '4':
+        4:
           caption: Critical
           description: Interruption making a critical functionality inaccessible or a complete network interruption causing a severe impact on services availability. There is no possible alternative.
-        '99':
+        99:
           caption: Other
           description: The priority is not normalized.
     src_url:
@@ -293,40 +293,40 @@ incident:
       sibling: verdict
       description: The normalized verdict of an Incident.
       enum:
-        '0':
+        0:
           caption: Unknown
           description: The type is unknown.
-        '1':
+        1:
           caption: False Positive
           description: The incident is a false positive.
-        '2':
+        2:
           caption: True Positive
           description: The incident is a true positive.
-        '3':
+        3:
           caption: Disregard
           description: The incident can be disregarded as it is unimportant, an error or accident.
-        '4':
+        4:
           caption: Suspicious
           description: The incident is suspicious.
-        '5':
+        5:
           caption: Benign
           description: The incident is benign.
-        '6':
+        6:
           caption: Test
           description: The incident is a test.
-        '7':
+        7:
           caption: Insufficient Data
           description: The incident has insufficient data to make a verdict.
-        '8':
+        8:
           caption: Security Risk
           description: The incident is a security risk.
-        '9':
+        9:
           caption: Managed Externally
           description: The incident remediation or required actions are managed externally.
-        '10':
+        10:
           caption: Duplicate
           description: The incident is a duplicate.
-        '99':
+        99:
           caption: Other
           description: The type is not mapped. See the `type` attribute, which contains a data source specific value.
 load_balancer:
@@ -439,22 +439,22 @@ security_control:
       sibling: action
       description: The action taken by a control or other policy-based system leading to an outcome or disposition. An unknown action may still correspond to a known disposition. Refer to `disposition_id` for the outcome of the action.
       enum:
-        '0':
+        0:
           caption: Unknown
           description: The action was unknown. The `disposition_id` attribute may still be set to a non-unknown value, for example 'Custom Action', 'Challenge'.
-        '1':
+        1:
           caption: Allowed
           description: The activity was allowed. The `disposition_id` attribute should be set to a value that conforms to this action, for example 'Allowed', 'Approved', 'Delayed', 'No Action', 'Count' etc.
-        '2':
+        2:
           caption: Denied
           description: The attempted activity was denied. The `disposition_id` attribute should be set to a value that conforms to this action, for example 'Blocked', 'Rejected', 'Quarantined', 'Isolated', 'Dropped', 'Access Revoked, etc.
-        '3':
+        3:
           caption: Observed
           description: The activity was observed, but neither explicitly allowed nor denied. This is common with IDS and EDR controls that report additional information on observed behavior such as TTPs. The `disposition_id` attribute should be set to a value that conforms to this action, for example 'Logged', 'Alert', 'Detected', 'Count', etc.
-        '4':
+        4:
           caption: Modified
           description: The activity was modified, adjusted, or corrected. The `disposition_id` attribute should be set appropriately, for example 'Restored', 'Corrected', 'Delayed', 'Captcha', 'Tagged'.
-        '99':
+        99:
           caption: Other
           description: The action is not mapped. See the `action` attribute which contains a data source specific value.
     attacks:
@@ -492,16 +492,16 @@ security_control:
       sibling: confidence
       description: The normalized confidence refers to the accuracy of the security control or alert. An analytic with a low confidence means that the alerts may be noisy or may not be malicious in nature.
       enum:
-        '0':
+        0:
           caption: Unknown
           description: The normalized confidence is unknown.
-        '1':
+        1:
           caption: Low
-        '2':
+        2:
           caption: Medium
-        '3':
+        3:
           caption: High
-        '99':
+        99:
           caption: Other
           description: The confidence is not mapped to the defined enum values. See the `confidence` attribute, which contains a data source specific value.
     confidence_score:
@@ -524,91 +524,91 @@ security_control:
       sibling: disposition
       description: Describes the outcome or action taken by a security control, such as access control checks, malware detections or various types of policy violations.
       enum:
-        '0':
+        0:
           caption: Unknown
           description: The disposition is unknown.
-        '1':
+        1:
           caption: Allowed
           description: Granted access or allowed the action to the protected resource.
-        '2':
+        2:
           caption: Blocked
           description: Denied access or blocked the action to the protected resource.
-        '3':
+        3:
           caption: Quarantined
           description: A suspicious file or other content was moved to a benign location.
-        '4':
+        4:
           caption: Isolated
           description: A session was isolated on the network or within a browser.
-        '5':
+        5:
           caption: Deleted
           description: A file or other content was deleted.
-        '6':
+        6:
           caption: Dropped
           description: The request was detected as a threat and resulted in the connection being dropped.
-        '7':
+        7:
           caption: Custom Action
           description: A custom action was executed such as running of a command script. Use the `message` attribute of the base class for details.
-        '8':
+        8:
           caption: Approved
           description: A request or submission was approved. For example, when a form was properly filled out and submitted. This is distinct from `1` 'Allowed'.
-        '9':
+        9:
           caption: Restored
           description: A quarantined file or other content was restored to its original location.
-        '10':
+        10:
           caption: Exonerated
           description: A suspicious or risky entity was deemed to no longer be suspicious (re-scored).
-        '11':
+        11:
           caption: Corrected
           description: A corrupt file or configuration was corrected.
-        '12':
+        12:
           caption: Partially Corrected
           description: A corrupt file or configuration was partially corrected.
-        '13':
+        13:
           caption: Uncorrected
           description: A corrupt file or configuration was not corrected.
-        '14':
+        14:
           caption: Delayed
           description: An operation was delayed, for example if a restart was required to finish the operation.
-        '15':
+        15:
           caption: Detected
           description: Suspicious activity or a policy violation was detected without further action.
-        '16':
+        16:
           caption: No Action
           description: The outcome of an operation had no action taken.
-        '17':
+        17:
           caption: Logged
           description: The operation or action was logged without further action.
-        '18':
+        18:
           caption: Tagged
           description: A file or other entity was marked with extended attributes.
-        '19':
+        19:
           caption: Alert
           description: The request or activity was detected as a threat and resulted in a notification but request was not blocked.
-        '20':
+        20:
           caption: Count
           description: Counted the request or activity but did not determine whether to allow it or block it.
-        '21':
+        21:
           caption: Reset
           description: The request was detected as a threat and resulted in the connection being reset.
-        '22':
+        22:
           caption: Captcha
           description: Required the end user to solve a CAPTCHA puzzle to prove that a human being is sending the request.
-        '23':
+        23:
           caption: Challenge
           description: Ran a silent challenge that required the client session to verify that it's a browser, and not a bot.
-        '24':
+        24:
           caption: Access Revoked
           description: 'The requestor''s access has been revoked due to security policy enforcements. Note: use the `Host` profile if the `User` or `Actor` requestor is not present in the event class.'
-        '25':
+        25:
           caption: Rejected
           description: A request or submission was rejected. For example, when a form was improperly filled out and submitted. This is distinct from `2` 'Blocked'.
-        '26':
+        26:
           caption: Unauthorized
           description: An attempt to access a resource was denied due to an authorization check that failed. This is a more specific disposition than `2` 'Blocked' and can be complemented with the `authorizations` attribute for more detail.
-        '27':
+        27:
           caption: Error
           description: An error occurred during the processing of the activity or request. Use the `message` attribute of the base class for details.
-        '99':
+        99:
           caption: Other
           description: The disposition is not mapped. See the `disposition` attribute, which contains a data source specific value.
     firewall_rule:
@@ -666,17 +666,17 @@ security_control:
       sibling: risk_level
       description: The normalized risk level id.
       enum:
-        '0':
+        0:
           caption: Info
-        '1':
+        1:
           caption: Low
-        '2':
+        2:
           caption: Medium
-        '3':
+        3:
           caption: High
-        '4':
+        4:
           caption: Critical
-        '99':
+        99:
           caption: Other
           description: The risk level is not mapped. See the `risk_level` attribute, which contains a data source specific value.
     risk_score:

@@ -7,14 +7,14 @@ referenced_by:
     cis_benchmark_result: [remediation]
     finding: [remediation]
 attributes:
-  desc:
-    caption: Description
-    type: string_t
-    requirement: optional
-    description: The description of the remediation strategy.
   kb_articles:
     caption: Knowledgebase Articles
     type: string_t
     array: true
     requirement: recommended
     description: The KB article/s related to the entity
+  desc:
+    caption: Description
+    type: string_t
+    requirement: optional
+    description: The description of the remediation strategy.

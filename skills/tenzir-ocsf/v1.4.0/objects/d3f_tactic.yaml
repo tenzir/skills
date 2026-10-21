@@ -1,5 +1,5 @@
-# Attributes with a `definition` path are inherited unchanged. Read that file
-# for their type, object, description, enum, and observable.
+# Attributes with `from` but no description are inherited unchanged. Their
+# descriptions are in the file of the item that `from` names.
 name: d3f_tactic
 caption: MITRE D3FEND™ Tactic
 extends: _entity
@@ -13,6 +13,7 @@ referenced_by:
   objects:
     d3fend: [d3f_tactic]
 attributes:
+  uid: {caption: Unique ID, type: string_t, requirement: recommended, from: _entity}
   name:
     caption: Name
     type: string_t
@@ -30,7 +31,3 @@ attributes:
     references:
     - description: D3FEND™ Matrix
       url: https://d3fend.mitre.org
-  uid:
-    caption: Unique ID
-    requirement: recommended
-    definition: v1.4.0/objects/_entity.yaml

@@ -22,6 +22,21 @@ referenced_by:
     session_query: [query_info]
     user_query: [query_info]
 attributes:
+  query_string:
+    caption: Query String
+    type: string_t
+    requirement: required
+    description: 'A string representing the query code being run. For example: `SELECT * FROM my_table`'
+  name:
+    caption: Name
+    type: string_t
+    requirement: recommended
+    description: The query name for a saved or scheduled query.
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: recommended
+    description: The unique identifier of the query.
   bytes:
     caption: Total Bytes
     type: long_t
@@ -32,16 +47,6 @@ attributes:
     type: json_t
     requirement: optional
     description: The data returned from the query execution.
-  name:
-    caption: Name
-    type: string_t
-    requirement: recommended
-    description: The query name for a saved or scheduled query.
-  query_string:
-    caption: Query String
-    type: string_t
-    requirement: required
-    description: 'A string representing the query code being run. For example: `SELECT * FROM my_table`'
   query_time:
     caption: Query Time
     type: timestamp_t
@@ -53,8 +58,3 @@ attributes:
     requirement: optional
     profile: datetime
     description: The time when the query was run.
-  uid:
-    caption: Unique ID
-    type: string_t
-    requirement: recommended
-    description: The unique identifier of the query.

@@ -1,6 +1,18 @@
 ---
 name: tenzir-ocsf
-description: Answer questions about OCSF (Open Cybersecurity Schema Framework). Use when the user asks about OCSF classes, objects, attributes, profiles, extensions, or event normalization.
+description: >-
+  Answer questions and produce mappings for the Open Cybersecurity Schema
+  Framework (OCSF): event classes, categories, activities, objects,
+  attributes, requirement levels, enum values, `class_uid`, `type_uid`,
+  profiles, extensions, observables, and schema versions. Use when
+  normalizing logs or security telemetry into OCSF, writing TQL mappings to
+  OCSF, choosing an OCSF event class, or working with OCSF data such as
+  Amazon Security Lake.
+metadata:
+  uses:
+    skills:
+      - name: tenzir
+        when: writing TQL that maps events to OCSF
 ---
 
 # OCSF
@@ -63,26 +75,44 @@ Files refer to each other by name within the same version:
 | `patched_by: [linux]` | `{version}/extensions/linux/{classes or objects}/{same name}.yaml` |
 | `referenced_by`, `used_by`, `applies_to` | class names resolve like `extends` in a class, object names like `object` |
 
+## Mapping rules
+
+Write OCSF mappings as TQL with the `tenzir` skill. Use this skill for the
+schema decisions:
+
+- Choose the version, then the class and its `activity_id` from `activities` in
+  `v1.9.0/classes.yaml`, then the profiles the source supports.
+- Set `class_uid`, `category_uid`, `activity_id`, `type_uid`, `severity_id`,
+  `time`, `metadata.version`, and `metadata.product`. `type_uid` is
+  `class_uid * 100 + activity_id`.
+- List applied profiles in `metadata.profiles`, then fill the attributes those
+  profiles add.
+- Fill required attributes first, then recommended ones. Inside an object, its
+  own requirement levels apply once you set the object. Satisfy `constraints`.
+- Set `_id` attributes and leave their string siblings to `ocsf_derive`. For
+  `99` (Other), set the sibling to the source value.
+- Keep source fields without an OCSF target in `unmapped`.
+- Finish with `ocsf_derive`, then `ocsf_cast`. The mapping is complete when
+  `ocsf_cast` emits no warnings.
+
 ## Reading class and object files
 
 `attributes` lists every attribute of the class or object, including
-inherited attributes and attributes added by profiles. An attribute that is
-not listed is not part of that class or object.
+inherited attributes and attributes added by profiles, ordered by
+requirement: required, recommended, then optional. An attribute that is not
+listed is not part of that class or object.
 
-Inherited attributes that are unchanged from their parent list only `caption`,
-`requirement`, `profile`, and a `definition` path. Read that path for the
-attribute's type, object, description, enum, and observable. The requirement
-in the class or object file is the one that applies there:
+Inherited attributes that are unchanged from their parent omit their
+description and take one line, unless they have a long enum. They carry
+everything a mapping needs. The description is in the file of the item that
+`from` names:
 
 ```yaml
-severity_id:
-  caption: Severity ID
-  requirement: required
-  definition: v1.9.0/classes/base_event.yaml
+severity_id: {caption: Severity ID, type: integer_t, requirement: required, group: classification, sibling: severity, enum: {0: Unknown, 1: Informational, 2: Low, 3: Medium, 4: High, 5: Critical, 6: Fatal, 99: Other}, from: base_event}
 ```
 
 Attributes that change anything besides the requirement, such as `activity_id`
-with class-specific enum values, are listed in full.
+with class-specific enum values, are listed in full with descriptions.
 
 Top-level fields:
 
@@ -111,14 +141,14 @@ Attribute fields:
   the object. `array: true` marks a list of values.
 - `profile`: the attribute belongs to that profile and is present only when the
   profile is applied. Attributes without `profile` always belong to the item.
-- `from`: the ancestor that defines a fully listed attribute. Attributes
-  without `from` or `definition` are defined by the item itself.
+- `from`: the ancestor that defines the attribute. Attributes without `from`
+  are defined by the item itself.
 - `group` (classes): `classification`, `context`, `occurrence`, or `primary`.
 - `sibling`: the string attribute that carries the caption of this enum
   attribute, e.g. `activity_name` for `activity_id`.
 - `observable`: the observable `type_id` for this attribute, from the
   attribute itself, its data type, or its object.
-- `enum`: the allowed values. Keys are the values, `caption` is the label the
+- `enum`: the allowed values. Keys are the integer values, `caption` is the label the
   sibling attribute takes.
 
 ## Searching
@@ -129,13 +159,14 @@ common questions without opening many files:
 - Find a class by keyword: `grep -n -i "keyword" v1.9.0/classes.yaml`
 - Look up an attribute everywhere: `grep -n -A 12 "^src_endpoint:" v1.9.0/attributes.yaml`
 - Jump to an attribute in a class: `grep -n -A 20 "^  actor:" v1.9.0/classes/process_activity.yaml`
-- Follow a `definition`: `grep -n -A 30 "^  severity_id:" v1.9.0/classes/base_event.yaml`
+- Read the description of an inherited attribute: `grep -n -A 30 "^  severity_id:" v1.9.0/classes/base_event.yaml`
 - Find classes that hold an object: read `referenced_by` in `v1.9.0/objects/{name}.yaml`
 
 ## Question routing
 
 | Question pattern | Start here |
 | --- | --- |
+| How do I map source X to OCSF? | Mapping rules above → `classes.yaml` → the class file; the `tenzir` skill for TQL |
 | Which class fits event X? | Category table below → `classes.yaml` → candidate class files |
 | What attributes does class or object Y have? | `classes.yaml` or `objects.yaml` → the item's file |
 | Which values can enum attribute Z take? | The `enum` of Z in the class or object file |
@@ -192,8 +223,8 @@ Use the category range to narrow scope before reading individual class files.
 - Arrays use plural names: `answers`, `enrichments`, `attacks`.
 - When `_id` is `Other` (`99`), the sibling string **must** be populated with
   the source value. For other values, the sibling takes the enum caption.
-- `type_uid` is `class_uid * 100 + activity_id`. Class files list the
-  resulting values in the `type_uid` enum.
+- `type_uid` is `class_uid * 100 + activity_id`, e.g. `100701` for Process
+  Activity: Launch.
 
 Key suffixes:
 

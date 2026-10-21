@@ -28,23 +28,12 @@ attributes:
     type: timestamp_t
     requirement: recommended
     description: The time when the process was created/started.
-  created_time_dt:
-    caption: Created Time
-    type: datetime_t
-    requirement: optional
-    profile: datetime
-    description: The time when the process was created/started.
   name:
     caption: Name
     type: process_name_t
     requirement: recommended
     observable: 9
     description: 'The friendly name of the process, for example: `Notepad++`.'
-  path:
-    caption: Path
-    type: string_t
-    requirement: optional
-    description: The process file path.
   pid:
     caption: Process ID
     type: integer_t
@@ -57,3 +46,14 @@ attributes:
     requirement: recommended
     observable: 39
     description: A unique identifier for this process assigned by the producer (tool).  Facilitates correlation of a process event with other events for that process.
+  created_time_dt:
+    caption: Created Time
+    type: datetime_t
+    requirement: optional
+    profile: datetime
+    description: The time when the process was created/started.
+  path:
+    caption: Path
+    type: string_t
+    requirement: optional
+    description: The process file path.

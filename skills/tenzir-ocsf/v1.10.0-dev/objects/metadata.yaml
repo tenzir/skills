@@ -90,11 +90,20 @@ referenced_by:
     web_resource_access_activity: [metadata]
     web_resources_activity: [metadata]
 attributes:
-  correlation_uid:
-    caption: Correlation UID
+  product:
+    caption: Product
+    type: object_t
+    object: product
+    requirement: required
+    description: The product that reported the event.
+  version:
+    caption: Version
     type: string_t
-    requirement: optional
-    description: A unique identifier used to correlate this OCSF event with other related OCSF events, distinct from the event's `uid` value. This enables linking multiple OCSF events that are part of the same activity, transaction, or security incident across different systems or time periods.
+    requirement: required
+    description: 'The version of the OCSF schema, using Semantic Versioning Specification (SemVer). For example: `1.0.0`. Event consumers use the version to determine the available event attributes.'
+    references:
+    - description: Semantic Versioning Specification (SemVer)
+      url: https://semver.org
   data_classification:
     caption: Data Classification
     type: object_t
@@ -116,6 +125,32 @@ attributes:
     group: context
     profile: data_classification
     description: A list of Data Classification objects, that include information about data classification levels and data category types, identified by a classifier.
+  log_name:
+    caption: Log Name
+    type: string_t
+    requirement: recommended
+    description: The event log name, typically for the consumer of the event. For example, the storage bucket name, SIEM repository index name, etc.
+  original_time:
+    caption: Original Time
+    type: string_t
+    requirement: recommended
+    description: The original event time as reported by the event source, preserved as a pass-through string in its native format (e.g., Syslog timestamp, Windows event time). This is not normalized to `timestamp_t` - the normalized equivalent is the base event `time` attribute. Omit if the event is generated rather than collected via logs.
+  reporter:
+    caption: Reporter
+    type: object_t
+    object: reporter
+    requirement: recommended
+    description: The entity from which the event or finding was first reported.
+  tenant_uid:
+    caption: Tenant UID
+    type: string_t
+    requirement: recommended
+    description: The unique tenant identifier.
+  correlation_uid:
+    caption: Correlation UID
+    type: string_t
+    requirement: optional
+    description: A unique identifier used to correlate this OCSF event with other related OCSF events, distinct from the event's `uid` value. This enables linking multiple OCSF events that are part of the same activity, transaction, or security incident across different systems or time periods.
   debug:
     caption: Debug Information
     type: string_t
@@ -167,79 +202,79 @@ attributes:
     sibling: log_facility
     description: 'The facility of the source syslog message, identifying the originating subsystem that generated it. The facility is independent of severity and is not recoverable from `severity_id`. A relay may rewrite or regenerate a message, so this reflects the source (original) facility rather than a value guaranteed to be stable across hops, and it should be populated only when the source is syslog or an equivalent facility mapping is unambiguous. There is no `Unknown` value: `0` is the kernel (`kern`) facility, so an absent or malformed PRI must not be mapped to `0`; use `99` (Other) for a known nonstandard or source-defined facility.'
     enum:
-      '0':
+      0:
         caption: kern
         description: Kernel messages.
-      '1':
+      1:
         caption: user
         description: User-level messages.
-      '2':
+      2:
         caption: mail
         description: Mail system.
-      '3':
+      3:
         caption: daemon
         description: System daemons.
-      '4':
+      4:
         caption: auth
         description: Security and authorization messages.
-      '5':
+      5:
         caption: syslog
         description: Messages generated internally by the syslog process.
-      '6':
+      6:
         caption: lpr
         description: Line printer subsystem.
-      '7':
+      7:
         caption: news
         description: Network news subsystem.
-      '8':
+      8:
         caption: uucp
         description: UUCP subsystem.
-      '9':
+      9:
         caption: cron
         description: Clock daemon.
-      '10':
+      10:
         caption: authpriv
         description: Security and authorization messages, distinguished from facility 4 by convention and conventionally reserved for privileged access.
-      '11':
+      11:
         caption: ftp
         description: FTP daemon.
-      '12':
+      12:
         caption: ntp
         description: NTP subsystem.
-      '13':
+      13:
         caption: audit
         description: Log audit.
-      '14':
+      14:
         caption: console
         description: Console messages, per the RFC 5427 SyslogFacility mapping. RFC 5424 Table 1 lists facility 14 as 'log alert'.
-      '15':
+      15:
         caption: cron2
         description: A second cron or clock daemon facility used by some systems such as Solaris, distinct from facility 9, per the RFC 5427 SyslogFacility mapping. RFC 5424 Table 1 lists facility 15 as 'clock daemon'.
-      '16':
+      16:
         caption: local0
         description: Local use 0.
-      '17':
+      17:
         caption: local1
         description: Local use 1.
-      '18':
+      18:
         caption: local2
         description: Local use 2.
-      '19':
+      19:
         caption: local3
         description: Local use 3.
-      '20':
+      20:
         caption: local4
         description: Local use 4.
-      '21':
+      21:
         caption: local5
         description: Local use 5.
-      '22':
+      22:
         caption: local6
         description: Local use 6.
-      '23':
+      23:
         caption: local7
         description: Local use 7.
-      '99':
+      99:
         caption: Other
         description: The facility is not mapped. See the `log_facility` attribute, which contains a data source specific value.
     references:
@@ -257,11 +292,6 @@ attributes:
     type: string_t
     requirement: optional
     description: The level at which an event was logged. This can be log provider specific. For example the audit level.
-  log_name:
-    caption: Log Name
-    type: string_t
-    requirement: recommended
-    description: The event log name, typically for the consumer of the event. For example, the storage bucket name, SIEM repository index name, etc.
   log_provider:
     caption: Log Provider
     type: string_t
@@ -311,11 +341,6 @@ attributes:
     type: string_t
     requirement: optional
     description: The unique identifier assigned to the event in its original logging system before transformation to OCSF format. This field preserves the source system's native event identifier, enabling traceability back to the raw log entry. For example, a Windows Event Record ID, a syslog message ID, a Splunk _cd value, or a database transaction log sequence number.
-  original_time:
-    caption: Original Time
-    type: string_t
-    requirement: recommended
-    description: The original event time as reported by the event source, preserved as a pass-through string in its native format (e.g., Syslog timestamp, Windows event time). This is not normalized to `timestamp_t` - the normalized equivalent is the base event `time` attribute. Omit if the event is generated rather than collected via logs.
   processed_time:
     caption: Processed Time
     type: timestamp_t
@@ -327,24 +352,12 @@ attributes:
     requirement: optional
     profile: datetime
     description: The time when the event was processed by an intermediate system (e.g., ETL pipeline, event processor) before reaching its final destination. Can be used with `logged_time` to calculate queuing duration via `total_queued_duration`.
-  product:
-    caption: Product
-    type: object_t
-    object: product
-    requirement: required
-    description: The product that reported the event.
   profiles:
     caption: Profiles
     type: string_t
     array: true
     requirement: optional
     description: The list of profiles used to create the event. Profiles should be referenced by their `name` attribute for core profiles, or `extension/name` for profiles from extensions.
-  reporter:
-    caption: Reporter
-    type: object_t
-    object: reporter
-    requirement: recommended
-    description: The entity from which the event or finding was first reported.
   sequence:
     caption: Sequence Number
     type: integer_t
@@ -362,11 +375,6 @@ attributes:
     array: true
     requirement: optional
     description: The list of tags; `{key:value}` pairs associated to the event.
-  tenant_uid:
-    caption: Tenant UID
-    type: string_t
-    requirement: recommended
-    description: The unique tenant identifier.
   total_queued_duration:
     caption: Total Queued Duration
     type: object_t
@@ -406,11 +414,3 @@ attributes:
     type: integer_t
     requirement: optional
     description: The original size of the OCSF event data in kilobytes before any truncation occurred. This field is typically populated when `is_truncated` is `true` to indicate the full size of the original event.
-  version:
-    caption: Version
-    type: string_t
-    requirement: required
-    description: 'The version of the OCSF schema, using Semantic Versioning Specification (SemVer). For example: `1.0.0`. Event consumers use the version to determine the available event attributes.'
-    references:
-    - description: Semantic Versioning Specification (SemVer)
-      url: https://semver.org

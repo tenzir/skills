@@ -1,5 +1,5 @@
-# Attributes with a `definition` path are inherited unchanged. Read that file
-# for their type, object, description, enum, and observable.
+# Attributes with `from` but no description are inherited unchanged. Their
+# descriptions are in the file of the item that `from` names.
 name: authentication
 caption: Authentication
 uid: 3002
@@ -24,54 +24,73 @@ attributes:
     sibling: activity_name
     description: The normalized identifier of the activity that triggered the event.
     enum:
-      '0':
+      0:
         caption: Unknown
         description: The event activity is unknown.
-      '1':
+      1:
         caption: Logon
         description: A new logon session was requested.
-      '2':
+      2:
         caption: Logoff
         description: A logon session was terminated and no longer exists.
-      '3':
+      3:
         caption: Authentication Ticket
         description: A Kerberos authentication ticket (TGT) was requested.
-      '4':
+      4:
         caption: Service Ticket Request
         description: A Kerberos service ticket was requested.
-      '5':
+      5:
         caption: Service Ticket Renew
         description: A Kerberos service ticket was renewed.
-      '6':
+      6:
         caption: Preauth
         description: A preauthentication stage was engaged.
-      '99':
+      99:
         caption: Other
         description: The event activity is not mapped. See the `activity_name` attribute, which contains a data source specific value.
-  activity_name:
-    caption: Activity
-    requirement: optional
-    definition: v1.3.0/classes/base_event.yaml
-  actor:
-    caption: Actor
+  category_uid:
+    caption: Category ID
+    type: integer_t
+    requirement: required
+    group: classification
+    from: base_event
+    sibling: category_name
+    description: The category unique identifier of the event.
+    enum:
+      3:
+        caption: Identity & Access Management
+        description: Identity & Access Management (IAM) events relate to the supervision of the system's authentication and access control model. Examples of such events are the success or failure of authentication, granting of authority, password change, entity change, privileged use etc.
+  class_uid:
+    caption: Class ID
+    type: integer_t
+    requirement: required
+    group: classification
+    sibling: class_name
+    description: The unique identifier of a class. A class describes the attributes available in an event.
+    enum:
+      3002:
+        caption: Authentication
+        description: Authentication events report authentication session activities such as user attempts a logon or logoff, successfully or otherwise.
+  cloud: {caption: Cloud, type: object_t, object: cloud, requirement: required, group: primary, profile: cloud, from: base_event}
+  metadata: {caption: Metadata, type: object_t, object: metadata, requirement: required, group: context, from: base_event}
+  osint: {caption: OSINT, type: object_t, object: osint, array: true, requirement: required, group: primary, profile: osint, from: base_event}
+  severity_id: {caption: Severity ID, type: integer_t, requirement: required, group: classification, sibling: severity, enum: {0: Unknown, 1: Informational, 2: Low, 3: Medium, 4: High, 5: Critical, 6: Fatal, 99: Other}, from: base_event}
+  time: {caption: Event Time, type: timestamp_t, requirement: required, group: occurrence, from: base_event}
+  type_uid:
+    caption: Type ID
+    type: long_t
+    requirement: required
+    group: classification
+    sibling: type_name
+    description: 'The event/finding type ID. It identifies the event''s semantics and structure. The value is calculated by the logging system as: `class_uid * 100 + activity_id`.'
+  user:
+    caption: User
     type: object_t
-    object: actor
-    requirement: optional
-    group: context
-    description: The actor that requested the authentication.
-  api:
-    caption: API Details
-    requirement: optional
-    profile: cloud
-    definition: v1.3.0/classes/base_event.yaml
-  auth_factors:
-    caption: Authentication Factors
-    type: object_t
-    object: auth_factor
-    array: true
-    requirement: optional
-    group: context
-    description: Describes a category of methods used for identity verification in an authentication attempt.
+    object: user
+    requirement: required
+    group: primary
+    observable: 21
+    description: The subject (user/role or account) to authenticate.
   auth_protocol:
     caption: Auth Protocol
     type: string_t
@@ -86,51 +105,32 @@ attributes:
     sibling: auth_protocol
     description: The normalized identifier of the authentication protocol used to create the user session.
     enum:
-      '0':
+      0:
         caption: Unknown
         description: The authentication protocol is unknown.
-      '1':
+      1:
         caption: NTLM
-      '2':
+      2:
         caption: Kerberos
-      '3':
+      3:
         caption: Digest
-      '4':
+      4:
         caption: OpenID
-      '5':
+      5:
         caption: SAML
-      '6':
+      6:
         caption: OAUTH 2.0
-      '7':
+      7:
         caption: PAP
-      '8':
+      8:
         caption: CHAP
-      '9':
+      9:
         caption: EAP
-      '10':
+      10:
         caption: RADIUS
-      '99':
+      99:
         caption: Other
         description: The authentication protocol is not mapped. See the `auth_protocol` attribute, which contains a data source specific value.
-  category_name:
-    caption: Category
-    type: string_t
-    requirement: optional
-    group: classification
-    from: base_event
-    description: 'The event category name, as defined by category_uid value: `Identity & Access Management`.'
-  category_uid:
-    caption: Category ID
-    type: integer_t
-    requirement: required
-    group: classification
-    from: base_event
-    sibling: category_name
-    description: The category unique identifier of the event.
-    enum:
-      '3':
-        caption: Identity & Access Management
-        description: Identity & Access Management (IAM) events relate to the supervision of the system's authentication and access control model. Examples of such events are the success or failure of authentication, granting of authority, password change, entity change, privileged use etc.
   certificate:
     caption: Certificate
     type: object_t
@@ -138,38 +138,7 @@ attributes:
     requirement: recommended
     group: primary
     description: The certificate associated with the authentication or pre-authentication (Kerberos).
-  class_name:
-    caption: Class
-    type: string_t
-    requirement: optional
-    group: classification
-    from: base_event
-    description: 'The event class name, as defined by class_uid value: `Authentication`.'
-  class_uid:
-    caption: Class ID
-    type: integer_t
-    requirement: required
-    group: classification
-    sibling: class_name
-    description: The unique identifier of a class. A class describes the attributes available in an event.
-    enum:
-      '3002':
-        caption: Authentication
-        description: Authentication events report authentication session activities such as user attempts a logon or logoff, successfully or otherwise.
-  cloud:
-    caption: Cloud
-    requirement: required
-    profile: cloud
-    definition: v1.3.0/classes/base_event.yaml
-  count:
-    caption: Count
-    requirement: optional
-    definition: v1.3.0/classes/base_event.yaml
-  device:
-    caption: Device
-    requirement: recommended
-    profile: host
-    definition: v1.3.0/classes/iam.yaml
+  device: {caption: Device, type: object_t, object: device, requirement: recommended, group: primary, profile: host, observable: 20, from: iam}
   dst_endpoint:
     caption: Destination Endpoint
     type: object_t
@@ -178,62 +147,18 @@ attributes:
     group: primary
     observable: 20
     description: The endpoint to which the authentication was targeted.
-  duration:
-    caption: Duration Milliseconds
-    requirement: optional
-    definition: v1.3.0/classes/base_event.yaml
-  end_time:
-    caption: End Time
-    requirement: optional
-    definition: v1.3.0/classes/base_event.yaml
-  end_time_dt:
-    caption: End Time
-    requirement: optional
-    profile: datetime
-    definition: v1.3.0/classes/base_event.yaml
-  enrichments:
-    caption: Enrichments
-    requirement: optional
-    definition: v1.3.0/classes/base_event.yaml
-  http_request:
-    caption: HTTP Request
-    requirement: optional
-    definition: v1.3.0/classes/iam.yaml
-  is_cleartext:
-    caption: Cleartext Credentials
-    type: boolean_t
-    requirement: optional
-    group: context
-    description: |-
-      Indicates whether the credentials were passed in clear text.
-
-      Note: True if the credentials were passed in a clear text protocol such as FTP or TELNET, or if Windows detected that a user's logon password was passed to the authentication package in clear text.
   is_mfa:
     caption: Multi Factor Authentication
     type: boolean_t
     requirement: recommended
     group: primary
     description: Indicates whether Multi Factor Authentication was used during authentication.
-  is_new_logon:
-    caption: New Logon
-    type: boolean_t
-    requirement: optional
-    group: context
-    description: Indicates logon is from a device not seen before or a first time account logon.
   is_remote:
     caption: Remote
     type: boolean_t
     requirement: recommended
     group: primary
     description: The attempted authentication is over a remote connection.
-  logon_process:
-    caption: Logon Process
-    type: object_t
-    object: process
-    requirement: optional
-    group: context
-    observable: 25
-    description: The trusted process that validated the authentication credentials.
   logon_type:
     caption: Logon Type
     type: string_t
@@ -248,69 +173,50 @@ attributes:
     sibling: logon_type
     description: The normalized logon type identifier.
     enum:
-      '0':
+      0:
         caption: Unknown
         description: The logon type is unknown.
-      '1':
+      1:
         caption: System
         description: Used only by the System account, for example at system startup.
-      '2':
+      2:
         caption: Interactive
         description: A local logon to device console.
-      '3':
+      3:
         caption: Network
         description: A user or device logged onto this device from the network.
-      '4':
+      4:
         caption: Batch
         description: A batch server logon, where processes may be executing on behalf of a user without their direct intervention.
-      '5':
+      5:
         caption: OS Service
         description: A logon by a service or daemon that was started by the OS.
-      '7':
+      7:
         caption: Unlock
         description: A user unlocked the device.
-      '8':
+      8:
         caption: Network Cleartext
         description: A user logged on to this device from the network. The user's password in the authentication package was not hashed.
-      '9':
+      9:
         caption: New Credentials
         description: A caller cloned its current token and specified new credentials for outbound connections. The new logon session has the same local identity, but uses different credentials for other network connections.
-      '10':
+      10:
         caption: Remote Interactive
         description: A remote logon using Terminal Services or remote desktop application.
-      '11':
+      11:
         caption: Cached Interactive
         description: A user logged on to this device with network credentials that were stored locally on the device and the domain controller was not contacted to verify the credentials.
-      '12':
+      12:
         caption: Cached Remote Interactive
         description: Same as Remote Interactive. This is used for internal auditing.
-      '13':
+      13:
         caption: Cached Unlock
         description: Workstation logon.
-      '99':
+      99:
         caption: Other
         description: The logon type is not mapped. See the `logon_type` attribute, which contains a data source specific value.
-  message:
-    caption: Message
-    requirement: recommended
-    definition: v1.3.0/classes/base_event.yaml
-  metadata:
-    caption: Metadata
-    requirement: required
-    definition: v1.3.0/classes/base_event.yaml
-  observables:
-    caption: Observables
-    requirement: recommended
-    definition: v1.3.0/classes/base_event.yaml
-  osint:
-    caption: OSINT
-    requirement: required
-    profile: osint
-    definition: v1.3.0/classes/base_event.yaml
-  raw_data:
-    caption: Raw Data
-    requirement: optional
-    definition: v1.3.0/classes/base_event.yaml
+  message: {caption: Message, type: string_t, requirement: recommended, group: primary, from: base_event}
+  observables: {caption: Observables, type: object_t, object: observable, array: true, requirement: recommended, group: primary, from: base_event}
   service:
     caption: Service
     type: object_t
@@ -325,35 +231,9 @@ attributes:
     requirement: recommended
     group: primary
     description: The authenticated user or service session.
-  severity:
-    caption: Severity
-    requirement: optional
-    definition: v1.3.0/classes/base_event.yaml
-  severity_id:
-    caption: Severity ID
-    requirement: required
-    definition: v1.3.0/classes/base_event.yaml
-  src_endpoint:
-    caption: Source Endpoint
-    requirement: recommended
-    definition: v1.3.0/classes/iam.yaml
-  start_time:
-    caption: Start Time
-    requirement: optional
-    definition: v1.3.0/classes/base_event.yaml
-  start_time_dt:
-    caption: Start Time
-    requirement: optional
-    profile: datetime
-    definition: v1.3.0/classes/base_event.yaml
-  status:
-    caption: Status
-    requirement: recommended
-    definition: v1.3.0/classes/base_event.yaml
-  status_code:
-    caption: Status Code
-    requirement: recommended
-    definition: v1.3.0/classes/base_event.yaml
+  src_endpoint: {caption: Source Endpoint, type: object_t, object: network_endpoint, requirement: recommended, group: primary, observable: 20, from: iam}
+  status: {caption: Status, type: string_t, requirement: recommended, group: primary, from: base_event}
+  status_code: {caption: Status Code, type: string_t, requirement: recommended, group: primary, from: base_event}
   status_detail:
     caption: Status Detail
     type: string_t
@@ -374,66 +254,72 @@ attributes:
       - ACCOUNT_DISABLED
       - ACCOUNT_LOCKED_OUT
       - PASSWORD_EXPIRED
-  status_id:
-    caption: Status ID
-    requirement: recommended
-    definition: v1.3.0/classes/base_event.yaml
-  time:
-    caption: Event Time
-    requirement: required
-    definition: v1.3.0/classes/base_event.yaml
-  time_dt:
-    caption: Event Time
-    requirement: optional
-    profile: datetime
-    definition: v1.3.0/classes/base_event.yaml
-  timezone_offset:
-    caption: Timezone Offset
-    requirement: recommended
-    definition: v1.3.0/classes/base_event.yaml
-  type_name:
-    caption: Type Name
-    requirement: optional
-    definition: v1.3.0/classes/base_event.yaml
-  type_uid:
-    caption: Type ID
-    type: long_t
-    requirement: required
-    group: classification
-    sibling: type_name
-    description: 'The event/finding type ID. It identifies the event''s semantics and structure. The value is calculated by the logging system as: `class_uid * 100 + activity_id`.'
-    enum:
-      '300200':
-        caption: 'Authentication: Unknown'
-      '300201':
-        caption: 'Authentication: Logon'
-        description: A new logon session was requested.
-      '300202':
-        caption: 'Authentication: Logoff'
-        description: A logon session was terminated and no longer exists.
-      '300203':
-        caption: 'Authentication: Authentication Ticket'
-        description: A Kerberos authentication ticket (TGT) was requested.
-      '300204':
-        caption: 'Authentication: Service Ticket Request'
-        description: A Kerberos service ticket was requested.
-      '300205':
-        caption: 'Authentication: Service Ticket Renew'
-        description: A Kerberos service ticket was renewed.
-      '300206':
-        caption: 'Authentication: Preauth'
-        description: A preauthentication stage was engaged.
-      '300299':
-        caption: 'Authentication: Other'
-  unmapped:
-    caption: Unmapped Data
-    requirement: optional
-    definition: v1.3.0/classes/base_event.yaml
-  user:
-    caption: User
+  status_id: {caption: Status ID, type: integer_t, requirement: recommended, group: primary, sibling: status, enum: {0: Unknown, 1: Success, 2: Failure, 99: Other}, from: base_event}
+  timezone_offset: {caption: Timezone Offset, type: integer_t, requirement: recommended, group: occurrence, from: base_event}
+  activity_name: {caption: Activity, type: string_t, requirement: optional, group: classification, from: base_event}
+  actor:
+    caption: Actor
     type: object_t
-    object: user
-    requirement: required
-    group: primary
-    observable: 21
-    description: The subject (user/role or account) to authenticate.
+    object: actor
+    requirement: optional
+    group: context
+    description: The actor that requested the authentication.
+  api: {caption: API Details, type: object_t, object: api, requirement: optional, group: context, profile: cloud, from: base_event}
+  auth_factors:
+    caption: Authentication Factors
+    type: object_t
+    object: auth_factor
+    array: true
+    requirement: optional
+    group: context
+    description: Describes a category of methods used for identity verification in an authentication attempt.
+  category_name:
+    caption: Category
+    type: string_t
+    requirement: optional
+    group: classification
+    from: base_event
+    description: 'The event category name, as defined by category_uid value: `Identity & Access Management`.'
+  class_name:
+    caption: Class
+    type: string_t
+    requirement: optional
+    group: classification
+    from: base_event
+    description: 'The event class name, as defined by class_uid value: `Authentication`.'
+  count: {caption: Count, type: integer_t, requirement: optional, group: occurrence, from: base_event}
+  duration: {caption: Duration Milliseconds, type: long_t, requirement: optional, group: occurrence, from: base_event}
+  end_time: {caption: End Time, type: timestamp_t, requirement: optional, group: occurrence, from: base_event}
+  end_time_dt: {caption: End Time, type: datetime_t, requirement: optional, group: occurrence, profile: datetime, from: base_event}
+  enrichments: {caption: Enrichments, type: object_t, object: enrichment, array: true, requirement: optional, group: context, from: base_event}
+  http_request: {caption: HTTP Request, type: object_t, object: http_request, requirement: optional, group: context, from: iam}
+  is_cleartext:
+    caption: Cleartext Credentials
+    type: boolean_t
+    requirement: optional
+    group: context
+    description: |-
+      Indicates whether the credentials were passed in clear text.
+
+      Note: True if the credentials were passed in a clear text protocol such as FTP or TELNET, or if Windows detected that a user's logon password was passed to the authentication package in clear text.
+  is_new_logon:
+    caption: New Logon
+    type: boolean_t
+    requirement: optional
+    group: context
+    description: Indicates logon is from a device not seen before or a first time account logon.
+  logon_process:
+    caption: Logon Process
+    type: object_t
+    object: process
+    requirement: optional
+    group: context
+    observable: 25
+    description: The trusted process that validated the authentication credentials.
+  raw_data: {caption: Raw Data, type: string_t, requirement: optional, group: context, from: base_event}
+  severity: {caption: Severity, type: string_t, requirement: optional, group: classification, from: base_event}
+  start_time: {caption: Start Time, type: timestamp_t, requirement: optional, group: occurrence, from: base_event}
+  start_time_dt: {caption: Start Time, type: datetime_t, requirement: optional, group: occurrence, profile: datetime, from: base_event}
+  time_dt: {caption: Event Time, type: datetime_t, requirement: optional, group: occurrence, profile: datetime, from: base_event}
+  type_name: {caption: Type Name, type: string_t, requirement: optional, group: classification, from: base_event}
+  unmapped: {caption: Unmapped Data, type: object_t, object: object, requirement: optional, group: context, from: base_event}

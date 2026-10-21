@@ -11,11 +11,6 @@ attributes:
     type: string_t
     requirement: required
     description: 'The specific parameter or property being monitored. Examples include: CPU usage percentage, API response time in milliseconds, HTTP error rate, memory utilization, network latency, transaction volume, etc.'
-  observation_type:
-    caption: Observation Type
-    type: string_t
-    requirement: recommended
-    description: 'The type of analysis being performed to establish baseline behavior. Common types include: Frequency Analysis, Time Pattern Analysis, Volume Analysis, Sequence Analysis, Distribution Analysis, etc.'
   observations:
     caption: Observations
     type: object_t
@@ -23,6 +18,11 @@ attributes:
     array: true
     requirement: required
     description: Collection of actual measured values, data points and observations recorded for this baseline.
+  observation_type:
+    caption: Observation Type
+    type: string_t
+    requirement: recommended
+    description: 'The type of analysis being performed to establish baseline behavior. Common types include: Frequency Analysis, Time Pattern Analysis, Volume Analysis, Sequence Analysis, Distribution Analysis, etc.'
   observed_pattern:
     caption: Observed Pattern
     type: string_t

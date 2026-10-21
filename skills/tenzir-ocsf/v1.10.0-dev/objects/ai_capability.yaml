@@ -1,5 +1,5 @@
-# Attributes with a `definition` path are inherited unchanged. Read that file
-# for their type, object, description, enum, and observable.
+# Attributes with `from` but no description are inherited unchanged. Their
+# descriptions are in the file of the item that `from` names.
 name: ai_capability
 caption: AI Capability
 extends: _entity
@@ -55,6 +55,66 @@ referenced_by:
     web_resource_access_activity: [ai_capability]
     web_resources_activity: [ai_capability]
 attributes:
+  name:
+    caption: Name
+    type: string_t
+    requirement: required
+    description: 'The name of the capability as advertised by its provider: the MCP tool, resource, or prompt name, the function name of a framework-native tool, or the identifier of a built-in tool. For example: `get_weather`.'
+  service:
+    caption: Service
+    type: object_t
+    object: service
+    requirement: recommended
+    description: 'The logical serving system that advertised and served the capability - for MCP, the MCP server. This is provenance, not a network endpoint: when a gateway or proxy sits in the path, `dst_endpoint` identifies the gateway that was contacted, while this attribute identifies the logical server that actually served the primitive behind it. For `stdio`-transported servers there is no network endpoint at all, and this attribute is the only record of the serving system.'
+  source_id:
+    caption: Source ID
+    type: integer_t
+    requirement: recommended
+    sibling: source
+    description: 'The normalized identifier of the mechanism through which the capability was provided to the AI system. Orthogonal to `type_id`, which is the kind of primitive: a `Tool` may be sourced via MCP, via framework-native function calling, or as a model provider''s built-in. In the case of ''Other'', it is defined by the event source and carried by the `source` attribute.'
+    enum:
+      0:
+        caption: Unknown
+        description: The tool source is unknown.
+      1:
+        caption: MCP
+        description: The capability was provided by a Model Context Protocol server.
+      2:
+        caption: Function
+        description: The capability is a framework-native or application-defined function tool, registered directly with the agent or model call (e.g., function calling / tool-use definitions).
+      3:
+        caption: Built-in
+        description: The capability is built into the model provider's platform (e.g., a provider-hosted web search or code execution tool).
+      99:
+        caption: Other
+        description: The tool source is not mapped. See the `source` attribute, which contains a data source specific value.
+  type_id:
+    caption: Capability Type ID
+    type: integer_t
+    requirement: recommended
+    sibling: type
+    description: The normalized identifier of the kind of capability primitive, per the Model Context Protocol primitive taxonomy. The three primitives carry different risk profiles; a first-class discriminator makes questions like "resource reads vs. tool calls" queryable rather than buried in free-text operation names.
+    enum:
+      0:
+        caption: Unknown
+        description: The primitive kind is unknown.
+      1:
+        caption: Tool
+        description: A model-invocable executable function; it may retrieve data or cause side effects.
+      2:
+        caption: Resource
+        description: Application-controlled contextual data or content, typically identified by a URI.
+      3:
+        caption: Prompt Template
+        description: A reusable, user-selectable prompt template; this is not the end user's prompt text.
+      99:
+        caption: Other
+        description: The primitive kind is not mapped. See the `type` attribute, which contains a data source specific value.
+  uid:
+    caption: AI Capability ID
+    type: string_t
+    requirement: recommended
+    description: 'The stable identifier of the capability itself, when one exists: a registry or catalog identifier, or a producer-derived stable key (e.g., serving server identity plus capability name). Identifies the capability across invocations; per-invocation correlation is carried by `transaction_uid` instead.'
   baseline_fingerprint:
     caption: Baseline Fingerprint
     type: object_t
@@ -75,16 +135,16 @@ attributes:
     sibling: cache_scope
     description: 'The normalized identifier of the cache scope the serving system declared for this capability''s results, modeled on the MCP `cacheScope` field (itself modeled on HTTP Cache-Control). Determines whether shared intermediaries may cache the result - a data-exposure signal: a `Private` result cached in a shared scope is a cross-user exposure. Note this is declared caching metadata observed on the serving response, not an invariant property of the capability itself.'
     enum:
-      '0':
+      0:
         caption: Unknown
         description: The cache scope is unknown or was not declared.
-      '1':
+      1:
         caption: Public
         description: 'The result may be cached by shared intermediaries and served across users, per MCP `cacheScope: public`.'
-      '2':
+      2:
         caption: Private
         description: 'The result is specific to a single user or client and must not be served from a shared cache, per MCP `cacheScope: private`.'
-      '99':
+      99:
         caption: Other
         description: The cache scope is not mapped. See the `cache_scope` attribute, which contains a data source specific value.
   cache_ttl:
@@ -131,11 +191,6 @@ attributes:
     type: string_t
     requirement: optional
     description: The declared MIME type of the capability's content. Primarily for `Resource` primitives, e.g. `text/markdown` or `application/json`.
-  name:
-    caption: Name
-    type: string_t
-    requirement: required
-    description: 'The name of the capability as advertised by its provider: the MCP tool, resource, or prompt name, the function name of a framework-native tool, or the identifier of a built-in tool. For example: `get_weather`.'
   namespace:
     caption: Namespace
     type: string_t
@@ -148,39 +203,11 @@ attributes:
     requirement: optional
     observable: 30
     description: 'A fingerprint of the capability''s declared structured-output contract, identifying the contract version without embedding the schema body in the event. Use `serialization_id: JCS` when the fingerprint is computed over canonicalized JSON.'
-  service:
-    caption: Service
-    type: object_t
-    object: service
-    requirement: recommended
-    description: 'The logical serving system that advertised and served the capability - for MCP, the MCP server. This is provenance, not a network endpoint: when a gateway or proxy sits in the path, `dst_endpoint` identifies the gateway that was contacted, while this attribute identifies the logical server that actually served the primitive behind it. For `stdio`-transported servers there is no network endpoint at all, and this attribute is the only record of the serving system.'
   source:
     caption: Source
     type: string_t
     requirement: optional
     description: The tool source, normalized to the caption of `source_id`. In the case of `Other`, it is defined by the event source.
-  source_id:
-    caption: Source ID
-    type: integer_t
-    requirement: recommended
-    sibling: source
-    description: 'The normalized identifier of the mechanism through which the capability was provided to the AI system. Orthogonal to `type_id`, which is the kind of primitive: a `Tool` may be sourced via MCP, via framework-native function calling, or as a model provider''s built-in. In the case of ''Other'', it is defined by the event source and carried by the `source` attribute.'
-    enum:
-      '0':
-        caption: Unknown
-        description: The tool source is unknown.
-      '1':
-        caption: MCP
-        description: The capability was provided by a Model Context Protocol server.
-      '2':
-        caption: Function
-        description: The capability is a framework-native or application-defined function tool, registered directly with the agent or model call (e.g., function calling / tool-use definitions).
-      '3':
-        caption: Built-in
-        description: The capability is built into the model provider's platform (e.g., a provider-hosted web search or code execution tool).
-      '99':
-        caption: Other
-        description: The tool source is not mapped. See the `source` attribute, which contains a data source specific value.
   task_uid:
     caption: Task UID
     type: string_t
@@ -204,19 +231,19 @@ attributes:
     sibling: transport
     description: 'The normalized identifier of the transport binding the client used to reach the serving system. Distinguishes a local subprocess server from a remote networked server - a real trust boundary, and the reason an event''s network endpoint attributes may legitimately be absent (a `stdio` server has no network endpoint). Not an IP-layer protocol: `protocol_name` does not apply, and `stdio` is not a network protocol at all.'
     enum:
-      '0':
+      0:
         caption: Unknown
         description: The transport is unknown.
-      '1':
+      1:
         caption: stdio
         description: The server runs as a local subprocess and communicates over standard input/output, per the MCP stdio transport.
-      '2':
+      2:
         caption: Streamable HTTP
         description: The server is reached over HTTP using the MCP Streamable HTTP transport.
-      '3':
+      3:
         caption: HTTP+SSE
         description: The server is reached over the deprecated MCP HTTP with Server-Sent Events transport, retained for producers observing legacy servers.
-      '99':
+      99:
         caption: Other
         description: The transport is not mapped, e.g. a custom transport. See the `transport` attribute, which contains a data source specific value.
   type:
@@ -224,37 +251,7 @@ attributes:
     type: string_t
     requirement: optional
     description: The kind of capability primitive, normalized to the caption of the `type_id` value. In the case of 'Other', it is defined by the event source.
-  type_id:
-    caption: Capability Type ID
-    type: integer_t
-    requirement: recommended
-    sibling: type
-    description: The normalized identifier of the kind of capability primitive, per the Model Context Protocol primitive taxonomy. The three primitives carry different risk profiles; a first-class discriminator makes questions like "resource reads vs. tool calls" queryable rather than buried in free-text operation names.
-    enum:
-      '0':
-        caption: Unknown
-        description: The primitive kind is unknown.
-      '1':
-        caption: Tool
-        description: A model-invocable executable function; it may retrieve data or cause side effects.
-      '2':
-        caption: Resource
-        description: Application-controlled contextual data or content, typically identified by a URI.
-      '3':
-        caption: Prompt Template
-        description: A reusable, user-selectable prompt template; this is not the end user's prompt text.
-      '99':
-        caption: Other
-        description: The primitive kind is not mapped. See the `type` attribute, which contains a data source specific value.
-  uid:
-    caption: AI Capability ID
-    type: string_t
-    requirement: recommended
-    description: 'The stable identifier of the capability itself, when one exists: a registry or catalog identifier, or a producer-derived stable key (e.g., serving server identity plus capability name). Identifies the capability across invocations; per-invocation correlation is carried by `transaction_uid` instead.'
-  uid_numeric:
-    caption: Numeric Unique ID
-    requirement: optional
-    definition: v1.10.0-dev/objects/_entity.yaml
+  uid_numeric: {caption: Numeric Unique ID, type: long_t, requirement: optional, from: _entity}
   uri:
     caption: URI
     type: url_t

@@ -25,15 +25,6 @@ attributes:
     type: string_t
     requirement: recommended
     description: The name of the continent.
-  coordinates:
-    caption: Coordinates
-    type: float_t
-    array: true
-    requirement: optional
-    deprecated:
-      since: 1.2.0
-      message: Use specific  `lat, long`  attributes instead.
-    description: 'A two-element array, containing a longitude/latitude pair. The format conforms with [GeoJSON](https://geojson.org). For example: `[-73.983, 40.719]`.'
   country:
     caption: Country
     type: string_t
@@ -43,6 +34,15 @@ attributes:
       The ISO 3166-1 Alpha-2 country code. For the complete list of country codes see [ISO 3166-1 alpha-2 codes](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en).
 
       Note: The two letter country code should be capitalized. For example: `US` or `CA`.
+  coordinates:
+    caption: Coordinates
+    type: float_t
+    array: true
+    requirement: optional
+    deprecated:
+      since: 1.2.0
+      message: Use specific  `lat, long`  attributes instead.
+    description: 'A two-element array, containing a longitude/latitude pair. The format conforms with [GeoJSON](https://geojson.org). For example: `[-73.983, 40.719]`.'
   desc:
     caption: Description
     type: string_t

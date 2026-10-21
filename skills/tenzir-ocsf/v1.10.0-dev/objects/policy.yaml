@@ -1,5 +1,5 @@
-# Attributes with a `definition` path are inherited unchanged. Read that file
-# for their type, object, description, enum, and observable.
+# Attributes with `from` but no description are inherited unchanged. Their
+# descriptions are in the file of the item that `from` names.
 name: policy
 caption: Policy
 extends: _entity
@@ -103,22 +103,6 @@ referenced_by:
     managed_entity: [policy]
     permission_analysis_result: [policy]
 attributes:
-  data:
-    caption: Data
-    type: json_t
-    requirement: optional
-    description: Additional data about the policy such as the underlying JSON policy itself or other details.
-  desc:
-    caption: Description
-    type: string_t
-    requirement: optional
-    description: The description of the policy.
-  group:
-    caption: Group
-    type: object_t
-    object: group
-    requirement: optional
-    description: The policy group.
   is_applied:
     caption: Applied
     type: boolean_t
@@ -139,12 +123,25 @@ attributes:
     type: string_t
     requirement: recommended
     description: A unique identifier of the policy instance.
-  uid_numeric:
-    caption: Numeric Unique ID
-    requirement: optional
-    definition: v1.10.0-dev/objects/_entity.yaml
   version:
     caption: Version
     type: string_t
     requirement: recommended
     description: The policy version number.
+  data:
+    caption: Data
+    type: json_t
+    requirement: optional
+    description: Additional data about the policy such as the underlying JSON policy itself or other details.
+  desc:
+    caption: Description
+    type: string_t
+    requirement: optional
+    description: The description of the policy.
+  group:
+    caption: Group
+    type: object_t
+    object: group
+    requirement: optional
+    description: The policy group.
+  uid_numeric: {caption: Numeric Unique ID, type: long_t, requirement: optional, from: _entity}

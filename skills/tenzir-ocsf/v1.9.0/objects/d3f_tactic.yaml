@@ -1,5 +1,5 @@
-# Attributes with a `definition` path are inherited unchanged. Read that file
-# for their type, object, description, enum, and observable.
+# Attributes with `from` but no description are inherited unchanged. Their
+# descriptions are in the file of the item that `from` names.
 name: d3f_tactic
 caption: Defensive Tactic
 extends: _entity
@@ -18,6 +18,11 @@ attributes:
     type: string_t
     requirement: recommended
     description: 'The tactic name that is associated with the defensive technique. For example: `Isolate`.'
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: recommended
+    description: The unique identifier of the defensive tactic.
   src_url:
     caption: Source URL
     type: url_t
@@ -27,12 +32,4 @@ attributes:
     references:
     - description: 'Example: Isolate tactic'
       url: https://d3fend.mitre.org/tactic/d3f:Isolate/
-  uid:
-    caption: Unique ID
-    type: string_t
-    requirement: recommended
-    description: The unique identifier of the defensive tactic.
-  uid_numeric:
-    caption: Numeric Unique ID
-    requirement: optional
-    definition: v1.9.0/objects/_entity.yaml
+  uid_numeric: {caption: Numeric Unique ID, type: long_t, requirement: optional, from: _entity}

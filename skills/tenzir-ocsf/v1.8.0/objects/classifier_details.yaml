@@ -7,16 +7,16 @@ referenced_by:
     data_classification: [classifier_details]
     data_security: [classifier_details]
 attributes:
-  name:
-    caption: Name
-    type: string_t
-    requirement: recommended
-    description: The name of the classifier.
   type:
     caption: Type
     type: string_t
     requirement: required
     description: The type of the classifier.
+  name:
+    caption: Name
+    type: string_t
+    requirement: recommended
+    description: The name of the classifier.
   uid:
     caption: Unique ID
     type: string_t
