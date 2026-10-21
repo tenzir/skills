@@ -30,16 +30,16 @@ attributes:
     group: primary
 ```
 
-Attributes are ordered by requirement level, enum values use integer keys as
-in TQL, and inherited attributes take a single line that carries everything a
-mapping needs, with the description left to the parent:
+Attributes are ordered by requirement level, enum values use integer keys, and
+inherited attributes take a single line that carries everything a mapping needs,
+with the description left to the parent:
 
 ```yaml
   severity_id: {caption: Severity ID, type: integer_t, requirement: required, group: classification, sibling: severity, enum: {0: Unknown, 1: Informational, 2: Low, 3: Medium, 4: High, 5: Critical, 6: Fatal, 99: Other}, from: base_event}
 ```
 
 The class index lists the activities of each class, and the skill now includes
-mapping rules that pair with Tenzir's `ocsf_derive` and `ocsf_cast` operators.
+step-by-step guidance for mapping events to OCSF.
 
 Objects now list the classes and objects that reference them, and the attribute
 dictionary lists where each attribute is used. Extension classes, objects, and

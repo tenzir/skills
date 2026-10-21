@@ -1075,11 +1075,6 @@ SKILL_TEMPLATE = string.Template(
     """---
 name: tenzir-ocsf
 description: Answer questions about OCSF (Open Cybersecurity Schema Framework). Use when the user asks about OCSF classes, objects, attributes, profiles, extensions, or event normalization.
-metadata:
-  uses:
-    skills:
-      - name: tenzir
-        when: writing TQL that maps events to OCSF
 ---
 
 # OCSF
@@ -1165,8 +1160,7 @@ Fields that need explanation:
 
 ## Mapping events
 
-Write the TQL with the `tenzir` skill. Use this skill for the schema
-decisions:
+Make the schema decisions in this order:
 
 1. Pick the class by its category and the `activities` in `classes.yaml`;
    read the candidate class files and compare them. `activities` omits `0`
@@ -1178,11 +1172,9 @@ decisions:
    and fill the attributes they add.
 4. Fill required attributes, then recommended ones. A nested object's own
    requirement levels apply once you set it. Satisfy `constraints`.
-5. Set `_id` attributes and let `ocsf_derive` fill their string siblings. For
-   `99` (Other), set the sibling to the source value.
+5. For an `_id` attribute set to `99` (Other), set its `sibling` to the source
+   value.
 6. Keep source fields without an OCSF target in `unmapped`.
-7. Run `ocsf_derive`, then `ocsf_cast`. The mapping is complete when
-   `ocsf_cast` emits no warnings.
 
 ## Docs
 
