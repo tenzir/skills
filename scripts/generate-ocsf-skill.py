@@ -127,10 +127,6 @@ def dump_yaml(data: Any) -> str:
     return text
 
 
-def write_yaml(path: Path, data: Any) -> None:
-    write_file(path, dump_yaml(data))
-
-
 def list_stable_versions() -> list[str]:
     result = subprocess.run(
         ["git", "ls-remote", "--tags", OCSF_SCHEMA_REPO],
@@ -618,6 +614,38 @@ def render_patch(
     return out
 
 
+SHORT_ATTRIBUTE_FIELDS = ("caption", "requirement", "profile", "profiles")
+SHORT_ATTRIBUTE_NOTE = (
+    "# Attributes with a `definition` path are inherited unchanged. Read that file\n"
+    "# for their type, object, description, enum, and observable.\n"
+)
+
+
+def shorten_inherited_attributes(documents: dict, slug: str) -> None:
+    """Replace inherited attributes by a reference to the file that defines
+    them in full. An attribute stays complete when anything other than its
+    requirement differs from that definition, e.g. a narrowed enum."""
+    for path, document in documents.items():
+        section = "classes" if "/classes/" in path else "objects" if "/objects/" in path else None
+        if section is None or "patches" in document:
+            continue
+        for name, attribute in document["attributes"].items():
+            source = attribute.get("from")
+            if source is None:
+                continue
+            definition = entity_path(slug, section, source)
+            defined = documents.get(definition, {}).get("attributes", {}).get(name)
+            if defined is None or "from" in defined:
+                continue
+            rest = {key: value for key, value in attribute.items() if key not in SHORT_ATTRIBUTE_FIELDS}
+            rest.pop("from")
+            if rest != {key: value for key, value in defined.items() if key not in SHORT_ATTRIBUTE_FIELDS}:
+                continue
+            short = {key: attribute[key] for key in SHORT_ATTRIBUTE_FIELDS if key in attribute}
+            short["definition"] = definition
+            document["attributes"][name] = short
+
+
 def render_types(compiled_types: dict, *, extension_types: dict) -> dict:
     rendered: dict[str, dict] = {}
     for name, data in sorted({**compiled_types, **extension_types}.items()):
@@ -821,6 +849,7 @@ def build_version(version: str, schema_dir: Path, *, ref: str, is_stable: bool) 
         )
     )
     object_index.sort(key=lambda entry: ("/" in entry["name"], entry["name"]))
+    shorten_inherited_attributes(documents, slug)
 
     documents[f"{slug}/categories.yaml"] = rendered_categories
     documents[f"{slug}/classes.yaml"] = {"classes": class_index}
@@ -890,6 +919,11 @@ def check_references(version_data: dict) -> None:
 
     def check_attributes(path: str, attributes: dict) -> None:
         for attribute_name, attribute in attributes.items():
+            if "definition" in attribute:
+                defined = documents.get(attribute["definition"], {}).get("attributes", {})
+                if "type" not in defined.get(attribute_name, {}):
+                    errors.append(f"{path}: `{attribute_name}` has no definition in {attribute['definition']}")
+                continue
             if "object" in attribute:
                 expect(path, "object", attribute["object"], objects)
             for profile in attribute.get("profiles", [attribute.get("profile")]):
@@ -1053,9 +1087,24 @@ def render_skill(version_lines: list[str], latest_slug: str) -> str:
             "",
             "## Reading class and object files",
             "",
-            "Each file is complete: `attributes` lists every attribute of the class or",
-            "object, including inherited attributes and attributes added by profiles. An",
-            "attribute that is not listed is not part of that class or object.",
+            "`attributes` lists every attribute of the class or object, including",
+            "inherited attributes and attributes added by profiles. An attribute that is",
+            "not listed is not part of that class or object.",
+            "",
+            "Inherited attributes that are unchanged from their parent list only `caption`,",
+            "`requirement`, `profile`, and a `definition` path. Read that path for the",
+            "attribute's type, object, description, enum, and observable. The requirement",
+            "in the class or object file is the one that applies there:",
+            "",
+            "```yaml",
+            "severity_id:",
+            "  caption: Severity ID",
+            "  requirement: required",
+            f"  definition: {latest_slug}/classes/base_event.yaml",
+            "```",
+            "",
+            "Attributes that change anything besides the requirement, such as `activity_id`",
+            "with class-specific enum values, are listed in full.",
             "",
             "Top-level fields:",
             "",
@@ -1084,8 +1133,8 @@ def render_skill(version_lines: list[str], latest_slug: str) -> str:
             "  the object. `array: true` marks a list of values.",
             "- `profile`: the attribute belongs to that profile and is present only when the",
             "  profile is applied. Attributes without `profile` always belong to the item.",
-            "- `from`: the ancestor or profile owner that defines the attribute. Attributes",
-            "  without `from` are defined by the item itself.",
+            "- `from`: the ancestor that defines a fully listed attribute. Attributes",
+            "  without `from` or `definition` are defined by the item itself.",
             "- `group` (classes): `classification`, `context`, `occurrence`, or `primary`.",
             "- `sibling`: the string attribute that carries the caption of this enum",
             "  attribute, e.g. `activity_name` for `activity_id`.",
@@ -1102,6 +1151,7 @@ def render_skill(version_lines: list[str], latest_slug: str) -> str:
             f"- Find a class by keyword: `grep -n -i \"keyword\" {latest_slug}/classes.yaml`",
             f"- Look up an attribute everywhere: `grep -n -A 12 \"^src_endpoint:\" {latest_slug}/attributes.yaml`",
             f"- Jump to an attribute in a class: `grep -n -A 20 \"^  actor:\" {latest_slug}/classes/process_activity.yaml`",
+            f"- Follow a `definition`: `grep -n -A 30 \"^  severity_id:\" {latest_slug}/classes/base_event.yaml`",
             f"- Find classes that hold an object: read `referenced_by` in `{latest_slug}/objects/{{name}}.yaml`",
             "",
             "## Question routing",
@@ -1291,7 +1341,10 @@ def main() -> None:
 
         for data in version_docs:
             for path, document in data["documents"].items():
-                write_yaml(output_dir / path, document)
+                text = dump_yaml(document)
+                if any("definition" in attribute for attribute in document.get("attributes", {}).values()):
+                    text = SHORT_ATTRIBUTE_NOTE + text
+                write_file(output_dir / path, text)
 
         print(f"Generated OCSF skill in {output_dir}")
     finally:
