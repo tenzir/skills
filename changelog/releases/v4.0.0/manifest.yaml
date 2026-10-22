@@ -1,0 +1,9 @@
+created: 2026-10-22
+title: Plugin support and structured OCSF schema data
+intro: >-
+  This release ships the skills as Claude Code and Codex plugins and rebuilds the
+  OCSF skill on structured YAML schema data from the official OCSF compiler. It also
+  removes the developer and package management skills from the public collection.
+source:
+  mode: sync-stable-queue
+  previous_stable: v3.0.0
