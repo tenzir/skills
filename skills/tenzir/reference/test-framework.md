@@ -92,13 +92,27 @@ my-package/
   * `--root` with `tests/` → **project mode**.
   * `--root` (or its parent when named `tests`) with a `package.yaml` → **package mode**.
 
-* In **package mode** the harness exposes:
+* All built-in runners, including `shell`, provide `TENZIR_INPUTS` for [input data](test-framework.md#inputs). Custom runners can obtain it through `run.get_test_env_and_config_args(test)`.
 
-  * `TENZIR_PACKAGE_ROOT` – Absolute package directory.
-  * `TENZIR_INPUTS` – `<package>/tests/inputs/` unless a directory `test.yaml` or the test frontmatter overrides it.
-  * `--package-dirs=<package>` – Passed automatically to the `tenzir` binary.
+* The built-in `tenzir` and `python` runners automatically prepare package context for tests inside a package:
+
+  * Set `TENZIR_PACKAGE_ROOT` to the absolute package directory.
+  * Resolve `TENZIR_INPUTS` to the nearest `inputs/` directory within the owning package boundary, falling back to `<package>/tests/inputs/`. Explicit directory `test.yaml` or test frontmatter overrides take precedence.
+  * Include `--package-dirs=<package>` in `tenzir` runner invocations and Python `Executor` commands.
 
 * Without a manifest the harness stays in **project mode**, recursively discovers tests under `tests/`, and applies global fixtures, runners, and inputs.
+
+### Package directories
+
+The built-in `python` and `tenzir` runners use the same package-directory resolution. The harness combines these sources in order:
+
+1. The package that owns the test, if any.
+2. The effective directory-level `package-dirs` setting from `test.yaml`.
+3. The CLI `--package-dirs` entries.
+
+The harness expands library directories into their packages, normalizes paths, and removes duplicates while preserving the first occurrence. A nonempty result replaces ambient `TENZIR_PACKAGE_DIRS` with the comma-separated list. With no computed entries, the harness leaves the ambient value unchanged and adds no package flag to the Python fixture context. The `shell` runner and `DiffRunner` do not automatically compute this package list.
+
+For Python tests, package preparation happens before fixture activation, so fixture factories can read the prepared values from `FixtureContext.env`. Factory-returned environment mappings overlay the child Python environment afterward and can override these values. These returned mappings are not progressively propagated to later fixture factories.
 
 ## CLI reference
 
@@ -115,7 +129,7 @@ Useful options:
 * `--jobs N`: Control concurrency (`4 * CPU cores` by default).
 * `--coverage` and `--coverage-source-dir`: Enable LLVM coverage.
 * `--keep`: Preserve per-test scratch directories instead of deleting them (same as setting `TENZIR_KEEP_TMP_DIRS=1`).
-* `--package-dirs <path>`: Extra package directories for Tenzir binaries. Repeatable and accepts comma-separated lists. Entries merge with any `package-dirs:` declared in directory `test.yaml` files, then get normalized, de-duplicated, and exported via `TENZIR_PACKAGE_DIRS`.
+* `--package-dirs <path>`: Extra package directories for Tenzir binaries. Repeatable and accepts comma-separated lists. Entries follow the owning package and effective directory YAML entries in the [package-directory resolution order](test-framework.md#package-directories).
 * `--debug`: Emit framework-level diagnostics (fixture lifecycle, discovery notes, comparison targets, etc.) and automatically enable verbose output so you see all test results (pass/skip/fail) instead of only failures. The same mode is available via `TENZIR_TEST_DEBUG=1`.
 * `--summary`: Print the tabular breakdown and failure tree after each project.
 * `--report-json FILE`: Write a versioned JSON report. Use `-` to emit tagged JSON records in stdout for CI wrappers and sandboxed builds. Reports also work with `--no-hooks` and `--no-diff`, but not with standalone `--fixture` mode.
@@ -566,6 +580,12 @@ Selection flow:
 3. A `runner: <name>` frontmatter entry overrides the automatic choice.
 4. If no runner claims the extension and none is specified in frontmatter, the harness fails with an error instead of guessing.
 
+### Python runner
+
+The built-in `python` runner passes the prepared package environment to the Python subprocess. Its fixture context carries only the resolved package flag in `config_args`, not `--config` arguments from adjacent `tenzir.yaml` files. This does not introduce general Tenzir configuration inheritance for Python tests.
+
+Use [`Executor`](https://tenzir.com/docs/reference/test-framework.md#executor) to capture the prepared package directories and pass them as a CLI argument to Tenzir commands. Other Python subprocesses inherit `TENZIR_PACKAGE_DIRS` by default, so Tenzir commands can also load these packages through the environment. The harness does not add CLI arguments to arbitrary Python subprocess calls.
+
 ### Shell runner
 
 Place scripts (for example under `tests/shell/`) with the `.sh` suffix to run them under `bash -eu` via the `shell` runner. The harness also prepends `<root>/_shell` to `PATH` so project-specific helper binaries become discoverable. The runner captures stdout and stderr (like `2>&1`) and compares the combined output with `<test>.txt`; run `tenzir-test --update path/to/test.sh` when you need to refresh the baseline.
@@ -610,9 +630,19 @@ Common frontmatter keys:
 | `retry`        | integer         | `1`       | Total attempt budget for flaky tests (see below).                                                                                                                                              |
 | `package-dirs` | list of strings | inherit   | Directory-only; extra packages merged with CLI `--package-dirs`.                                                                                                                               |
 
-`test.yaml` files accept the same keys and apply recursively to child directories. A relative `inputs:` value resolves against the file that defines it, so `inputs: ../data` inside `tests/alerts/test.yaml` points at `tests/data/`. Frontmatter values follow the same rule and win over directory defaults. Adjacent `tenzir.yaml` files still configure the Tenzir binary; the harness appends `--config=<file>` automatically. The lookup keeps working even when you point the CLI at extra directories on the command line.
+`test.yaml` files accept the same keys and apply recursively to child directories. A relative `inputs:` value resolves against the file that defines it, so `inputs: ../data` inside `tests/alerts/test.yaml` points at `tests/data/`. Frontmatter values follow the same rule and win over directory defaults. Adjacent `tenzir.yaml` files configure the bundled Tenzir runners as described in [Tenzir configuration files](test-framework.md#tenzir-configuration-files). This lookup also works for extra directories selected on the command line; it does not add `--config` arguments to the Python runner’s fixture context.
 
 `retry` represents the **total number of attempts** the harness should make before declaring the test failed. Intermediate attempts stay quiet; the final outcome line includes `attempts=N/M` whenever the budget exceeds one. Keep the value small and treat it as a temporary guardrail while you fix the underlying flakiness.
+
+### Directory package settings
+
+The directory-only key `package-dirs` (also accepted as `package_dirs`) lists extra package directories or libraries:
+
+```yaml
+package-dirs: [../../shared-packages]
+```
+
+Relative entries resolve against the directory containing the declaring `test.yaml`, including when inherited by descendants. A child `test.yaml` replaces the inherited list rather than extending it. Set `package-dirs: []` to clear inherited YAML entries; this does not remove the automatic owning package or CLI entries.
 
 ### Runtime warning suppression
 
@@ -699,7 +729,7 @@ Capability probes are runner-aware. Each runner implements its own `check_requir
 ### Tenzir configuration files
 
 * The harness inspects the directory that owns each test. If it finds `tenzir.yaml`, it appends `--config=<path>` to every invocation of the bundled `tenzir`/`tql`/`diff` runners. The path also seeds `TENZIR_CONFIG` unless you set that variable yourself. Custom runners that call the Tenzir binary should either use `run.get_test_env_and_config_args(test)` or honour the exported environment variables explicitly.
-* The built-in `node` fixture uses the same discovery process and starts `tenzir-node` from the directory that owns the test file, so relative paths inside `tenzir-node.yaml` resolve against the test location. See the [built-in node fixture](test-framework.md#built-in-node-fixture) section for precedence rules.
+* The built-in `node` fixture anchors configuration discovery and the working directory to the test’s path, or the first member’s path for a suite. Relative paths inside `tenzir-node.yaml` resolve from that directory. See the [built-in node fixture](test-framework.md#built-in-node-fixture) for precedence rules.
 * This lets you keep one config for CLI-driven scenarios while passing a different config to the embedded node, for example to tweak endpoints or data directories independently.
 
 ## Fixtures
@@ -748,6 +778,14 @@ result = executor.run("from_file 'inputs/events.ndjson' | where severity >= 5\n"
 assert result.returncode == 0
 ```
 
+### Executor
+
+The `Executor(env=...)` helper selects `env or os.environ` as its configuration source, so an empty mapping falls back to `os.environ`. It captures `TENZIR_PACKAGE_DIRS` at construction, along with the client binary, endpoint, and timeout.
+
+If the captured package value is nonempty, each command appends `--package-dirs=<captured value>` after the binary command prefix. The value is passed unchanged, without further path expansion or deduplication. This flag takes precedence over earlier package flags in the prefix. Later mutations to the selected source mapping or ambient environment do not change it.
+
+An empty or absent captured value generates no package flag. It does not suppress `TENZIR_PACKAGE_DIRS` inherited through the subprocess’s actual environment. The selected mapping is not forwarded wholesale as the subprocess environment; the subprocess inherits the environment at execution time.
+
 ### Built-in node fixture
 
 * Request the fixture with `fixtures: [node]`; the harness will start `tenzir-node` with the binaries discovered for the current test.
@@ -755,10 +793,12 @@ assert result.returncode == 0
 * Configuration precedence:
 
   1. `TENZIR_NODE_CONFIG` in the environment.
-  2. A `tenzir-node.yaml` placed next to the test file (exported automatically).
+  2. A `tenzir-node.yaml` next to the test file, or the first member for a suite (exported automatically).
   3. The Tenzir defaults (no config file).
 
-* The node process inherits the test directory as its current working directory, letting `tenzir-node.yaml` reference files with relative paths (for example `state/` or `schemas/`).
+* The node process uses the test’s directory, or the first member’s directory for a suite, as its working directory. Relative paths in `tenzir-node.yaml` (for example `state/` or `schemas/`) resolve from there.
+
+* A suite’s shared node is configured once at suite startup, anchored to the first member’s path but using the suite-directory package configuration. Member-specific settings do not reconfigure an already-running node.
 
 * Each controller reuses its state and cache directories across `start()`/`stop()` cycles. By default, they and the node process logs live under the per-test scratch directory (`TENZIR_TMP_DIR/tenzir-node-*`). The harness removes the scratch directory after the run unless you pass `--keep`. Starting a fresh controller (for example in another test run) yields a brand-new workspace.
 
@@ -1019,6 +1059,7 @@ The [fixture guide](../guides/testing/create-fixtures.md#add-fixture-assertions)
 * `TENZIR_TEST_ROOT` – Default test root when `--root` is omitted.
 * `TENZIR_BINARY` / `TENZIR_NODE_BINARY` – Override binary auto-detection. Supports multi-part commands like `TENZIR_BINARY="uvx tenzir"` or `TENZIR_NODE_BINARY="docker exec container tenzir-node"`.
 * `TENZIR_INPUTS` – Preferred data directory. Defaults to the nearest `inputs/` directory walking up from the test, falling back to the project-level inputs folder. Reflects any `inputs:` override from `test.yaml` or frontmatter.
+* `TENZIR_PACKAGE_DIRS` – Comma-separated package directories. The built-in `tenzir` and [Python runner](test-framework.md#python-runner) prepare this value for tests and fixtures as described in [Package directories](test-framework.md#package-directories). [`Executor`](https://tenzir.com/docs/reference/test-framework.md#executor) captures it when constructed.
 * `TENZIR_INPUT` – Path to the inline input file when a `.input` file exists next to the test. Not set otherwise.
 * `TENZIR_STDIN` – Path to the stdin file when a `.stdin` file exists next to the test. The harness pipes this file’s content to the subprocess stdin. Not set otherwise.
 * `TENZIR_KEEP_TMP_DIRS` – Keep per-test scratch directories (equivalent to `--keep`).

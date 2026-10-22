@@ -25,6 +25,8 @@ Pick the function that matches what the encrypted data must still allow:
 
 Our explanation of [encryption](../../explanations/encryption.md) describes the trade-offs behind these choices in detail.
 
+To protect complete archive files, our guide on [encrypting archived files](../store/write-partitioned-files.md#encrypt-archived-files) shows how to encrypt Parquet columns and footers before uploading them to object storage, and decrypt them when reading them back.
+
 ## Manage keys
 
 Encryption is only as strong as the protection of its keys. Generate random keys, keep them in a secret store, and load them into pipelines with the [`secret`](https://tenzir.com/docs/reference/functions/secret.md) function.

@@ -38,12 +38,12 @@ The field came in as a string, but the expression treats it as a number, so the 
 
 ## Check a field’s type
 
-When a value looks right but behaves wrong, confirm its type with [`type_of`](https://tenzir.com/docs/reference/functions/type_of.md). The `.kind` field gives the readable type name:
+When a value looks right but behaves wrong, confirm its type with [`type_kind`](https://tenzir.com/docs/reference/functions/type_kind.md):
 
 ```tql
 from {count: "3", port: 443}
-count_type = count.type_of().kind
-port_type = port.type_of().kind
+count_type = count.type_kind()
+port_type = port.type_kind()
 ```
 
 ```tql
@@ -129,7 +129,7 @@ The field is `source_ip`, not `src_ip`. If a field is legitimately absent from s
 
 ## See also
 
-* [`type_of`](https://tenzir.com/docs/reference/functions/type_of.md)
+* [`type_kind`](https://tenzir.com/docs/reference/functions/type_kind.md)
 * [`int`](https://tenzir.com/docs/reference/functions/int.md)
 * [Transform values](../shape/transform-values.md)
 * [Filter and select data](../optimize/filter-and-select-data.md)

@@ -12,7 +12,7 @@ section: "Docs"
 Reads events from a Parquet byte stream.
 
 ```tql
-read_parquet
+read_parquet [encryption_key=secret]
 ```
 
 ## Description
@@ -24,6 +24,16 @@ Reads events from a [Parquet](https://parquet.apache.org/) byte stream.
 Limitation
 
 Tenzir currently assumes that all Parquet files use metadata recognized by Tenzir. We plan to lift this restriction in the future.
+
+### `encryption_key = secret (optional)`
+
+Decrypts Parquet data using the supplied raw AES key. Pass the same 16-, 24-, or 32-byte key that [`write_parquet`](https://tenzir.com/docs/reference/operators/write_parquet.md) used. The reader does not decode the key. If your secret stores base64 text, pass `encryption_key=decode_base64(secret("PARQUET_KEY"))`. For hexadecimal text, use `decode_hex` instead.
+
+When you supply this argument, the reader rejects plaintext files and reports an error for an incorrect key or an authentication failure. Without it, the reader cannot read files with an encrypted footer. Specify `read_parquet` explicitly when reading encrypted files, because automatic format detection cannot supply the key.
+
+Encrypted files written by DuckDB 1.5.6 are incompatible with this reader. DuckDB can read encrypted files written by Tenzir.
+
+Decryption works with both buffered byte streams and seekable files, including S3 range reads, projection, filtering, and limits.
 
 ## Optimizations
 
@@ -69,6 +79,14 @@ from_s3 "s3://logs/2026/events.parquet" {
 }
 select timestamp, message
 head 100
+```
+
+Read encrypted Parquet from S3 using the same `PARQUET_KEY` secret used when writing the file. This example assumes that the secret contains base64 text and decodes it explicitly:
+
+```tql
+from_s3 "s3://security-archive/events.parquet" {
+  read_parquet encryption_key=decode_base64(secret("PARQUET_KEY"))
+}
 ```
 
 ## See Also

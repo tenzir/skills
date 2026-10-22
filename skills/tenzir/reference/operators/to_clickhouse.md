@@ -21,7 +21,7 @@ to_clickhouse [table=string,
 
 ## Catch-all columns
 
-In an existing table, mark one writable, top-level `JSON` column with `COMMENT 'tenzir:catch_all'` to collect fields that do not map to other columns. The catch-all column must use plain `JSON` without a default expression, and its name must not contain dots.
+In an existing table, mark one writable, top-level `JSON` column with `COMMENT 'tenzir:catch_all'` to collect fields that do not map to other columns. The catch-all column must be a `JSON` column without a default expression. It may set `max_dynamic_paths` and `max_dynamic_types`, but not typed paths or `SKIP` clauses, and its name must not contain dots.
 
 Our [ClickHouse integration guide](../../integrations/clickhouse.md#catch-all-columns) covers table setup, OCSF examples, type and JSON behavior, restrictions, and schema changes.
 

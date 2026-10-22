@@ -121,7 +121,7 @@ Since secrets cannot be stored in events, they never reach the [`python`](https:
 
 ## Ad-hoc Secrets
 
-**Ad-hoc secrets** are secrets implicitly created from a `string` within [TQL](language.md). This happens when you provide a `string` to an operator or function that expects a `secret`. Functions also accept a constant `blob`, which suits binary keys, such as `key=decode_hex("000102030405060708090a0b0c0d0e0f")`.
+**Ad-hoc secrets** are secrets implicitly created from a `string` within [TQL](language.md). This happens when you provide a `string` to an operator or function that expects a `secret`. Operators and functions also accept a constant `blob`, which suits binary keys, such as `key=decode_hex("000102030405060708090a0b0c0d0e0f")`.
 
 Plain string values are useful when developing pipelines and you don’t want to add the secret to the configuration or a secret store. This approach also works well for arguments that you don’t consider sensitive, avoiding the need to create a managed secret.
 

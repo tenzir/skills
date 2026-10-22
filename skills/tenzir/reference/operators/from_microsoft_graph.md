@@ -91,6 +91,33 @@ The Microsoft Graph API version to use for the initial request. Supported values
 
 TLS options for Microsoft Graph requests. Use a record to configure options such as `cacert` when a local proxy or custom trust store intercepts HTTPS traffic.
 
+## Optimizations
+
+The operator applies the [`where`](https://tenzir.com/docs/reference/operators/where.md), [`select`](https://tenzir.com/docs/reference/operators/select.md), and [`head`](https://tenzir.com/docs/reference/operators/head.md) operators that follow it to each page as it arrives:
+
+* **Filters** run in Tenzir with exact TQL semantics and never become a `$filter`, because Microsoft Graph doesn’t document its comparison, `null`, and literal semantics precisely enough to guarantee the same matches.
+* **Limits** count the events that pass all filters. Once the [`head`](https://tenzir.com/docs/reference/operators/head.md) has enough events, the operator stops following `@odata.nextLink` and stops polling for delta changes. A limit of zero sends no request at all.
+
+When the operator lists `users` in the `v1.0` API without `delta=true`, it also asks Microsoft Graph for less data:
+
+* **Limits** set the page size with `$top`, up to the maximum of 999, but only if no [`where`](https://tenzir.com/docs/reference/operators/where.md) precedes the [`head`](https://tenzir.com/docs/reference/operators/head.md). When your `odata` options select or filter on `signInActivity`, Microsoft Graph returns at most 500 users per page, and the operator follows `@odata.nextLink` for the rest.
+* **Projections** become a `$select` if all fields that the pipeline reads, including those of the filters, belong to the [default properties](https://learn.microsoft.com/graph/api/user-list?view=graph-rest-1.0) that Microsoft Graph returns for users: `businessPhones`, `displayName`, `givenName`, `id`, `jobTitle`, `mail`, `mobilePhone`, `officeLocation`, `preferredLanguage`, `surname`, and `userPrincipalName`.
+
+For example, this pipeline requests a single page of ten users with only three properties each:
+
+```tql
+from_microsoft_graph "users",
+  auth={
+    tenant_id: secret("ms-graph-tenant-id"),
+    client_id: secret("ms-graph-client-id"),
+    client_secret: secret("ms-graph-client-secret"),
+  }
+select id, displayName, mail
+head 10
+```
+
+The `select` and `top` fields of `odata` take precedence over the translated `$select` and `$top`. Other resources, the `beta` API, and delta queries send the request unchanged.
+
 ## Examples
 
 ### Read Microsoft Entra sign-in logs

@@ -312,13 +312,13 @@ In `sql` mode, the [`from_clickhouse`](https://tenzir.com/docs/reference/operato
 
 Typed columns follow these rules:
 
-* Missing columns use ClickHouse defaults. Explicit nulls remain null in nullable columns; an explicit null in a non-nullable typed column causes Tenzir to drop the event with a warning.
+* Missing columns use ClickHouse defaults. Explicit nulls remain null in nullable columns. In a non-nullable column, an explicit null gets the column’s `DEFAULT` like a missing value; without a `DEFAULT`, Tenzir drops the event with a warning.
 * In tables with a catch-all, `UInt8` accepts unsigned integers from 0 to 255. Tables without a catch-all retain the boolean-to-`UInt8` mapping.
 * Durations map to `Int64` nanoseconds. Annotations such as `tenzir:type=duration(milliseconds)` are not supported.
 
 ### Table restrictions
 
-The catch-all must use plain `JSON` without `DEFAULT`, `MATERIALIZED`, `ALIAS`, or `EPHEMERAL` expressions. Writable mapped columns cannot have overlapping paths such as `src` and `src.port`, use `Tuple` types, or use parameterized `JSON(...)` declarations. Column comments containing `tenzir:type=` annotations are not supported anywhere in a table with a catch-all.
+The catch-all must be a `JSON` column without `DEFAULT`, `MATERIALIZED`, `ALIAS`, or `EPHEMERAL` expressions. Writable mapped columns cannot have overlapping paths such as `src` and `src.port` or use `Tuple` types. `JSON` declarations, including the catch-all’s, may set `max_dynamic_paths` and `max_dynamic_types`, but not typed paths or `SKIP` clauses, because ClickHouse could change or drop values. Column comments containing `tenzir:type=` annotations are not supported anywhere in a table with a catch-all.
 
 Each worker validates a destination before its first write, including when the pipeline chooses table names dynamically.
 

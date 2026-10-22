@@ -11,6 +11,12 @@ section: "Docs"
 
 Retrieves the type definition of an expression.
 
+Deprecated
+
+This function is deprecated and emits a warning. Use [`type_kind`](https://tenzir.com/docs/reference/functions/type_kind.md) instead: replace `type_of(x).kind` with `type_kind(x)`.
+
+Until its removal, `type_of` reports the type names of the old data model, such as `int64`, `uint64`, and `double`, where [`type_kind`](https://tenzir.com/docs/reference/functions/type_kind.md) reports `int`, `uint`, and `float`.
+
 ```tql
 type_of(x:any) -> record
 ```
@@ -43,7 +49,7 @@ this = type_of(this)
         name: "x",
         type: {
           name: null,
-          kind: "int",
+          kind: "int64",
           attributes: [],
           state: null,
         },
@@ -65,3 +71,4 @@ this = type_of(this)
 ## See Also
 
 * [`type_id`](https://tenzir.com/docs/reference/functions/type_id.md)
+* [`type_kind`](https://tenzir.com/docs/reference/functions/type_kind.md)
