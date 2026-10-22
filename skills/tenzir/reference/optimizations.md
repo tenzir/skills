@@ -59,6 +59,7 @@ These operators act on hints:
 | [`from_clickhouse`](https://tenzir.com/docs/reference/operators/from_clickhouse.md)                       | In the query                 | Including tuple fields     | In the query           | In the query          |
 | [`from_duckdb`](https://tenzir.com/docs/reference/operators/from_duckdb.md)                               | In the query                 | Top-level columns          | In the query           | In the query          |
 | [`from_microsoft_defender`](https://tenzir.com/docs/reference/operators/from_microsoft_defender.md)       | As prefilters in the query   | Top-level columns          | Without filters        | No                    |
+| [`from_microsoft_graph`](https://tenzir.com/docs/reference/operators/from_microsoft_graph.md)             | While paging                 | Default `users` properties | Stops paging           | No                    |
 | [`from_microsoft_sql`](https://tenzir.com/docs/reference/operators/from_microsoft_sql.md)                 | In the query                 | Top-level columns          | In the query           | In the query          |
 | [`from_mysql`](https://tenzir.com/docs/reference/operators/from_mysql.md)                                 | In the query                 | Top-level columns          | In the query           | In the query          |
 | [`from_sentinelone_data_lake`](https://tenzir.com/docs/reference/operators/from_sentinelone_data_lake.md) | As prefilters in the query   | Including nested fields    | Without filters        | No                    |

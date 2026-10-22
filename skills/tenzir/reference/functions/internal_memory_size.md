@@ -61,4 +61,5 @@ to_amqp "amqp://user:pass@localhost:5672/"
 ## See Also
 
 * [`type_id`](https://tenzir.com/docs/reference/functions/type_id.md)
+* [`type_kind`](https://tenzir.com/docs/reference/functions/type_kind.md)
 * [`type_of`](https://tenzir.com/docs/reference/functions/type_of.md)

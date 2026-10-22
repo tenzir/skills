@@ -2055,9 +2055,17 @@ Retrieves the type id of an expression.
 type_id(1 + 3.2)
 ```
 
+### [type\_kind](functions/type_kind.md)
+
+Retrieves the kind of the type of a value.
+
+```tql
+type_kind(this)
+```
+
 ### [type\_of](functions/type_of.md)
 
-Retrieves the type definition of an expression.
+Deprecated: Retrieves the type definition of an expression.
 
 ```tql
 type_of(this)

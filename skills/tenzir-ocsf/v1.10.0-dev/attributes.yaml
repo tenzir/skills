@@ -473,6 +473,12 @@ attributes:
   description: The bitmask value that represents the file attributes.
   used_by:
     objects: [file]
+audience:
+  caption: Audience
+  type: string_t
+  description: The service or resource a grant or token may be exercised against - the relying party that should accept it, and that should reject it if presented elsewhere. See specific usage.
+  used_by:
+    objects: [delegation]
 auid:
   caption: Audit User ID
   type: integer_t
@@ -2291,14 +2297,14 @@ expiration_time:
   description: The expiration time. See specific usage.
   used_by:
     classes: [file_hosting, network_file_activity]
-    objects: [authentication_token, certificate, http_cookie, osint, session, token]
+    objects: [authentication_token, certificate, delegation, http_cookie, osint, session, token]
 expiration_time_dt:
   caption: Expiration Time
   type: datetime_t
   description: The expiration time. See specific usage.
   used_by:
     classes: [file_hosting, network_file_activity]
-    objects: [authentication_token, certificate, http_cookie, osint, session, token]
+    objects: [authentication_token, certificate, delegation, http_cookie, osint, session, token]
 expire_interval:
   caption: Expire Interval
   type: object_t
@@ -5695,7 +5701,7 @@ scopes:
   array: true
   description: Scopes define the specific permissions or actions that the client is allowed to perform on behalf of the user. Each scope represents a different set of permissions, and the user can selectively grant or deny access to specific scopes during the authorization process.
   used_by:
-    objects: [sso]
+    objects: [delegation, sso]
 score:
   caption: Reputation Score
   type: string_t

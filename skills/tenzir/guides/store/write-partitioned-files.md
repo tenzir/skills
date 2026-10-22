@@ -66,6 +66,45 @@ to_s3 "s3://my-bucket/events/**/events_{uuid}.parquet",
 
 Each partition rotates independently. The operator checks `max_size` after it receives an output chunk from the writer, so the resulting file can exceed the threshold by that chunk and by final format metadata. Treat `max_size` as a rotation threshold, not a strict upper bound.
 
+## Encrypt archived files
+
+Encrypt Parquet files before uploading them when the storage provider should not have the decryption key. Configure AWS authentication as described in our [Amazon S3 integration](../../integrations/amazon/s3.md), and use a Tenzir node with access to your secret store for both writing and reading.
+
+1. Generate 32 random bytes, a 256-bit AES key, in standard base64 format:
+
+   ```sh
+   openssl rand -base64 32
+   ```
+
+2. Store the output as a [Tenzir secret](../../explanations/secrets.md) named `PARQUET_KEY`. Keep the base64 text unchanged, including any trailing `=` padding. The `encryption_key` argument expects raw bytes, so decode this text with `decode_base64` when passing it to an operator.
+
+3. Write each partition with [`write_parquet`](https://tenzir.com/docs/reference/operators/write_parquet.md) and the decoded secret:
+
+   ```tql
+   from {region: "eu", message: "login"},
+        {region: "us", message: "scan"}
+   to_s3 "s3://my-bucket/encrypted-events/**/events_{uuid}.parquet",
+     partition_by=[region] {
+     write_parquet encryption_key=decode_base64(secret("PARQUET_KEY"))
+   }
+   ```
+
+   Each file’s columns and footer are encrypted with the same key using `AES_GCM_V1`. Partitioning and rotation work as for unencrypted output.
+
+4. Read the files with an explicit [`read_parquet`](https://tenzir.com/docs/reference/operators/read_parquet.md) subpipeline and the same secret:
+
+   ```tql
+   from_s3 "s3://my-bucket/encrypted-events/**/events_*.parquet" {
+     read_parquet encryption_key=decode_base64(secret("PARQUET_KEY"))
+   }
+   ```
+
+   The Tenzir node decrypts the data as it reads. Automatic format detection cannot supply the key, so keep the explicit reader. The `decode_base64` function rejects invalid base64. The reader fails if the key is missing, its decoded length is unsupported, or authentication fails. Our [`read_parquet`](https://tenzir.com/docs/reference/operators/read_parquet.md) reference describes reader behavior and compatibility limits.
+
+Keep the original key available for as long as you retain the files. Replacing `PARQUET_KEY` does not re-encrypt existing files; older files still need their original key.
+
+File encryption protects the contents of the Parquet file. Object names, partition paths, and object sizes remain visible to the storage provider, so keep sensitive values out of partition fields and filenames. Control access to the Tenzir node and secret store separately, because a reader that can retrieve the key can decrypt the archive.
+
 ## Account for buffering operators
 
 Size-based rotation depends on the writer subpipeline producing bytes while it receives events. A streaming pipeline such as `write_parquet` emits data as batches arrive, which lets the destination observe the growing file.

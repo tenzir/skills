@@ -1063,6 +1063,10 @@ Stream security telemetry into Hydrolix tables and query it back.
 
 Send security events to IBM Security QRadar for SIEM analytics and incident investigation.
 
+#### [isMalicious integration](integrations/ismalicious.md)
+
+Load STIX threat intelligence over TAXII into a local lookup table and enrich OCSF events in the stream.
+
 #### [Kafka integration](integrations/kafka.md)
 
 Publish, subscribe, store, and process streams of records in a distributed messaging system.

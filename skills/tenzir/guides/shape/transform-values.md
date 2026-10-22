@@ -787,7 +787,7 @@ Examine data types at runtime:
 
 ### Get type information
 
-Use [`type_of`](https://tenzir.com/docs/reference/functions/type_of.md) to inspect value types. Note that this function returns detailed type information as objects:
+Use [`type_kind`](https://tenzir.com/docs/reference/functions/type_kind.md) to inspect the kind of a value’s type:
 
 ```tql
 from {
@@ -798,12 +798,12 @@ from {
   arr: [1, 2, 3],
   obj: {key: "value"}
 }
-str_type = str.type_of()
-num_type = num.type_of()
-float_type = float.type_of()
-bool_type = bool.type_of()
-arr_type = arr.type_of()
-obj_type = obj.type_of()
+str_type = str.type_kind()
+num_type = num.type_kind()
+float_type = float.type_kind()
+bool_type = bool.type_kind()
+arr_type = arr.type_kind()
+obj_type = obj.type_kind()
 ```
 
 ```tql
@@ -814,12 +814,12 @@ obj_type = obj.type_of()
   bool: true,
   arr: [1, 2, 3],
   obj: {key: "value"},
-  str_type: {name: null, kind: "string", attributes: [], state: null},
-  num_type: {name: null, kind: "int", attributes: [], state: null},
-  float_type: {name: null, kind: "float", attributes: [], state: null},
-  bool_type: {name: null, kind: "bool", attributes: [], state: null},
-  arr_type: {name: null, kind: "list", attributes: [], state: {type: {name: null, kind: "int", attributes: [], state: null}}},
-  obj_type: {name: null, kind: "record", attributes: [], state: {fields: [{name: "key", type: {name: null, kind: "string", attributes: [], state: null}}]}}
+  str_type: "string",
+  num_type: "int",
+  float_type: "float",
+  bool_type: "bool",
+  arr_type: "list",
+  obj_type: "record",
 }
 ```
 
