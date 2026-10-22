@@ -28,6 +28,7 @@ All paths are relative to this skill's directory. Run searches from there.
 | File | Contents |
 | --- | --- |
 | `v1.9.0/version.yaml` | Status, source commit, extensions, and changes since the previous version |
+| `v1.9.0/changelog.md` | Upstream release notes: added, improved, deprecated, and fixed items with PR links |
 | `v1.9.0/categories.yaml` | Categories with UID and classes |
 | `v1.9.0/classes.yaml` | Class index: UID, category, summary, `activities`, path |
 | `v1.9.0/classes/{name}.yaml` | One class, fully resolved |
@@ -117,4 +118,4 @@ Make the schema decisions in this order:
 | Profiles | [Profiles](docs/introduction/profiles.md), then `profiles.yaml` |
 | Extending the schema | [Extensions](docs/introduction/extensions.md), [Patching the Core Schema](docs/articles/patching-core-using-extensions.md) |
 | Observables, alerts, process parentage | [Articles](docs/articles.md) |
-| Changes between versions | `changes` in `version.yaml`, then diff the item files |
+| Changes between versions | `changelog.md` of the newer version, `changes` in `version.yaml`, then diff the item files |

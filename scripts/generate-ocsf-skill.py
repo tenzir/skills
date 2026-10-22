@@ -1066,6 +1066,19 @@ def fetch_text(client: httpx.Client, url: str) -> str:
     return response.text
 
 
+def split_changelog(text: str) -> dict[str, str]:
+    """Split the upstream CHANGELOG into one section per release, keyed by
+    version (`1.9.0`) or `Unreleased`, each starting with its heading."""
+    sections: dict[str, str] = {}
+    matches = list(re.finditer(r"^## \[v?([^\]]+)\].*$", text, flags=re.MULTILINE))
+    for match, following in zip(matches, [*matches[1:], None]):
+        body = text[match.end() : following.start() if following else len(text)].strip()
+        if body:
+            heading = match.group(0).removeprefix("## ").strip()
+            sections[match.group(1)] = f"# OCSF changelog: {heading}\n\n{body}\n"
+    return sections
+
+
 def parse_heading(markdown: str, fallback: str) -> str:
     match = re.search(r"^#\s+(.+)$", markdown, flags=re.MULTILINE)
     return match.group(1).strip() if match else fallback
@@ -1116,6 +1129,7 @@ All paths are relative to this skill's directory. Run searches from there.
 | File | Contents |
 | --- | --- |
 | `${latest}/version.yaml` | Status, source commit, extensions, and changes since the previous version |
+| `${latest}/changelog.md` | Upstream release notes: added, improved, deprecated, and fixed items with PR links |
 | `${latest}/categories.yaml` | Categories with UID and classes |
 | `${latest}/classes.yaml` | Class index: UID, category, summary, `activities`, path |
 | `${latest}/classes/{name}.yaml` | One class, fully resolved |
@@ -1205,7 +1219,7 @@ Make the schema decisions in this order:
 | Profiles | [Profiles](docs/introduction/profiles.md), then `profiles.yaml` |
 | Extending the schema | [Extensions](docs/introduction/extensions.md), [Patching the Core Schema](docs/articles/patching-core-using-extensions.md) |
 | Observables, alerts, process parentage | [Articles](docs/articles.md) |
-| Changes between versions | `changes` in `version.yaml`, then diff the item files |
+| Changes between versions | `changelog.md` of the newer version, `changes` in `version.yaml`, then diff the item files |
 """
 )
 
@@ -1243,6 +1257,7 @@ def main() -> None:
             faqs = fetch_pages(client, "faqs")
             articles = fetch_pages(client, "articles")
             overview = fetch_text(client, f"{OCSF_DOCS_RAW}/overview/understanding-ocsf.md")
+            changelog = split_changelog(fetch_text(client, f"{OCSF_SCHEMA_RAW}/CHANGELOG.md"))
 
         for idx, data in enumerate(version_docs):
             add_version_changes(data, version_docs[idx - 1] if idx > 0 else None)
@@ -1309,6 +1324,9 @@ def main() -> None:
             )
 
         for data in version_docs:
+            section = changelog.get(data["version"] if data["is_stable"] else "Unreleased")
+            if section is not None:
+                write_file(output_dir / data["slug"] / "changelog.md", section)
             for path, document in data["documents"].items():
                 text = dump_yaml(document)
                 if any(
