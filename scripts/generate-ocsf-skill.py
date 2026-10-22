@@ -433,7 +433,7 @@ def render_references(references: object) -> list[dict]:
 
 def render_enum(enum: dict) -> dict:
     """Render enum values keyed by value. Numeric values become integer keys,
-    as TQL compares them, e.g. `activity_id == 1`."""
+    matching the values that events carry, e.g. `activity_id: 1`."""
     items = list(enum.items())
     if all(re.fullmatch(r"-?\d+", key) for key, _ in items):
         items = sorted(((int(key), value) for key, value in items), key=lambda item: item[0])
@@ -652,9 +652,10 @@ INHERITED_ATTRIBUTE_NOTE = (
 
 
 def compact_inherited_attributes(documents: dict, slug: str) -> None:
-    """Write inherited attributes on one line without their descriptions,
-    which the defining item's file holds. An attribute stays complete when
-    anything other than its requirement differs from that definition, e.g.
+    """Write inherited attributes without their descriptions, which the
+    defining item's file holds: on one line, or with enum captions below when
+    the enum is large. An attribute stays complete when anything other than
+    its caption, requirement, or profiles differs from that definition, e.g.
     a narrowed enum."""
     for path, document in documents.items():
         section = "classes" if "/classes/" in path else "objects" if "/objects/" in path else None
@@ -726,13 +727,17 @@ def render_dictionary(attributes: dict, *, types: dict, objects: dict) -> dict:
     return rendered
 
 
-def render_profile(profile: dict, *, name: str, types: dict, objects: dict, extension: str | None) -> dict:
+def render_profile(
+    profile: dict, *, name: str, types: dict, objects: dict, extension: str | None, links: object = None
+) -> dict:
+    """Render a profile. `links` overrides the profile's own back-references,
+    so core profiles can list the extension classes that apply them."""
     out: dict[str, Any] = {}
     set_if(out, "caption", profile.get("caption"))
     set_if(out, "extension", extension)
     set_if(out, "deprecated", render_deprecation(profile.get("@deprecated")))
     set_if(out, "description", clean_description(profile.get("description", "")))
-    set_if(out, "applies_to", render_links(profile.get("_links"), with_attributes=False))
+    set_if(out, "applies_to", render_links(links or profile.get("_links"), with_attributes=False))
     out["attributes"] = {
         attribute_name: render_attribute(attribute, owner=name, types=types, objects=objects)
         for attribute_name, attribute in sorted((profile.get("attributes") or {}).items())
@@ -860,7 +865,14 @@ def build_version(version: str, schema_dir: Path, *, ref: str, is_stable: bool) 
 
     profiles: dict[str, dict] = {}
     for name, profile in sorted(core["profiles"].items()):
-        profiles[name] = render_profile(profile, name=name, types=types, objects=core_objects, extension=None)
+        profiles[name] = render_profile(
+            profile,
+            name=name,
+            types=types,
+            objects=core_objects,
+            extension=None,
+            links=full["profiles"].get(name, {}).get("_links"),
+        )
     for name, profile in sorted(full["profiles"].items()):
         if "/" in name:
             profiles[name] = render_profile(
@@ -966,8 +978,10 @@ def check_references(version_data: dict) -> None:
         if name not in known:
             errors.append(f"{path}: unknown {what} `{name}`")
 
-    def check_attributes(path: str, attributes: dict) -> None:
+    def check_attributes(path: str, attributes: dict, sources: set[str] | None = None) -> None:
         for attribute_name, attribute in attributes.items():
+            if sources is not None and "from" in attribute:
+                expect(path, "source", attribute["from"], sources)
             if "object" in attribute:
                 expect(path, "object", attribute["object"], objects)
             for profile in attribute.get("profiles", [attribute.get("profile")]):
@@ -996,7 +1010,7 @@ def check_references(version_data: dict) -> None:
             for extension in document.get("patched_by", []):
                 expect(path, "extension", extension, extensions)
             check_links(path, document.get("referenced_by", {}))
-            check_attributes(path, document["attributes"])
+            check_attributes(path, document["attributes"], known)
     for name, profile in documents[f"{slug}/profiles.yaml"].items():
         path = f"{slug}/profiles.yaml#{name}"
         check_links(path, profile.get("applies_to", {}))
@@ -1133,8 +1147,10 @@ attributes, ordered required, recommended, then optional. Attributes that
 `patched_by` extensions add live only in the extension patch files; an item
 without `patched_by` has no patches.
 
-Attributes with `from` but no description are inherited unchanged and fit on
-one line; the description is in the file that `from` names:
+Attributes with `from` but no description are inherited unchanged; the
+description is in the file that `from` names. They take one line, except that
+enums with more than 12 values list their captions on the lines below, so
+grep with `-A`:
 
 ```yaml
 severity_id: {caption: Severity ID, type: integer_t, requirement: required, group: classification, sibling: severity, enum: {0: Unknown, 1: Informational, 2: Low, 3: Medium, 4: High, 5: Critical, 6: Fatal, 99: Other}, from: base_event}
@@ -1148,7 +1164,8 @@ Fields that need explanation:
   `requirement` apply only when that profile is applied.
 - `sibling`: the string attribute that takes the enum caption, e.g.
   `activity_name` for `activity_id`.
-- `enum`: integer keys mapped to captions, or to `caption` and `description`.
+- `enum`: keys mapped to captions, or to `caption` and `description`. Keys are
+  integers, except for string-typed attributes such as `tlp`.
 - `observable`: the observable `type_id` of the attribute or object.
 - `constraints`: the complete, resolved constraints, inherited ones included:
   `at_least_one` (one or more listed attributes set) or `just_one` (exactly

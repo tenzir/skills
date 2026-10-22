@@ -59,8 +59,10 @@ attributes, ordered required, recommended, then optional. Attributes that
 `patched_by` extensions add live only in the extension patch files; an item
 without `patched_by` has no patches.
 
-Attributes with `from` but no description are inherited unchanged and fit on
-one line; the description is in the file that `from` names:
+Attributes with `from` but no description are inherited unchanged; the
+description is in the file that `from` names. They take one line, except that
+enums with more than 12 values list their captions on the lines below, so
+grep with `-A`:
 
 ```yaml
 severity_id: {caption: Severity ID, type: integer_t, requirement: required, group: classification, sibling: severity, enum: {0: Unknown, 1: Informational, 2: Low, 3: Medium, 4: High, 5: Critical, 6: Fatal, 99: Other}, from: base_event}
@@ -74,7 +76,8 @@ Fields that need explanation:
   `requirement` apply only when that profile is applied.
 - `sibling`: the string attribute that takes the enum caption, e.g.
   `activity_name` for `activity_id`.
-- `enum`: integer keys mapped to captions, or to `caption` and `description`.
+- `enum`: keys mapped to captions, or to `caption` and `description`. Keys are
+  integers, except for string-typed attributes such as `tlp`.
 - `observable`: the observable `type_id` of the attribute or object.
 - `constraints`: the complete, resolved constraints, inherited ones included:
   `at_least_one` (one or more listed attributes set) or `just_one` (exactly

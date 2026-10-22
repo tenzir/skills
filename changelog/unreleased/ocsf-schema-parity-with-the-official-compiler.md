@@ -26,7 +26,7 @@ Additional fixes:
   observable type ID. Profiles list the objects they apply to.
 - Data types show observable type IDs, and the Observable object lists all
   observable `type_id` values.
-- Classes show the class-specific `class_uid` and `type_uid` values.
+- Classes show their class-specific `class_uid` value.
 - Findings and Discovery are listed as base classes rather than event classes.
 - Windows extension classes show their full class UID, for example `201001` for
   Registry Key Activity, and extension objects use their schema names, such as
