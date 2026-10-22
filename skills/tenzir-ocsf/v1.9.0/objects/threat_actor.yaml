@@ -1,0 +1,39 @@
+name: threat_actor
+caption: Threat Actor
+extends: object
+description: Threat actor is responsible for the observed malicious activity.
+referenced_by:
+  objects:
+    osint: [threat_actor]
+attributes:
+  name:
+    caption: Name
+    type: string_t
+    requirement: required
+    description: The name of the threat actor.
+  type_id:
+    caption: Threat Actor Type ID
+    type: integer_t
+    requirement: recommended
+    sibling: type
+    description: The normalized datastore resource type identifier.
+    enum:
+      0:
+        caption: Unknown
+        description: The threat actor type is unknown.
+      1:
+        caption: Nation-state
+      2:
+        caption: Cybercriminal
+      3:
+        caption: Hacktivists
+      4:
+        caption: Insider
+      99:
+        caption: Other
+        description: The threat actor type is not mapped.
+  type:
+    caption: Threat Actor Type
+    type: string_t
+    requirement: optional
+    description: The classification of the threat actor based on their motivations, capabilities, or affiliations. Common types include nation-state actors, cybercriminal groups, hacktivists, or insider threats.

@@ -1,0 +1,51 @@
+name: related_event
+caption: Related Event
+extends: object
+description: The Related Event object describes an event related to a finding or detection as identified by the security product.
+referenced_by:
+  objects:
+    finding: [related_events]
+    finding_info: [related_events]
+attributes:
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: required
+    description: The unique identifier of the related event.
+  type_uid:
+    caption: Type ID
+    type: long_t
+    requirement: recommended
+    sibling: type_name
+    description: 'The unique identifier of the related event type. For example: 100701.'
+  attacks:
+    caption: MITRE ATT&CK® Details
+    type: object_t
+    object: attack
+    array: true
+    requirement: optional
+    description: An array of [MITRE ATT&CK®](https://attack.mitre.org) objects describing the tactics, techniques & sub-techniques identified by a security control or finding.
+  kill_chain:
+    caption: Kill Chain
+    type: object_t
+    object: kill_chain_phase
+    array: true
+    requirement: optional
+    description: The [Cyber Kill Chain®](https://www.lockheedmartin.com/en-us/capabilities/cyber/cyber-kill-chain.html) provides a detailed description of each phase and its associated activities within the broader context of a cyber attack.
+  observables:
+    caption: Observables
+    type: object_t
+    object: observable
+    array: true
+    requirement: optional
+    description: The observables associated with the event or a finding.
+  product_uid:
+    caption: Product Identifier
+    type: string_t
+    requirement: optional
+    description: The unique identifier of the product that reported the related event.
+  type:
+    caption: Type
+    type: string_t
+    requirement: optional
+    description: 'The type of the related event. For example: Process Activity: Launch.'

@@ -1,0 +1,30 @@
+name: port_info
+caption: Port Information
+extends: object
+description: The Port Information object describes a port and its associated protocol details.
+referenced_by:
+  objects:
+    network_interface: [open_ports]
+attributes:
+  port:
+    caption: Port
+    type: port_t
+    requirement: required
+    observable: 11
+    description: 'The port number. For example: `80`, `443`, `22`.'
+  protocol_name:
+    caption: Protocol Name
+    type: string_t
+    requirement: recommended
+    description: 'The IP protocol name in lowercase, as defined by the Internet Assigned Numbers Authority (IANA). For example: `tcp` or `udp`.'
+    references:
+    - description: IANA Protocol Numbers
+      url: https://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml
+  protocol_num:
+    caption: Protocol Number
+    type: integer_t
+    requirement: optional
+    description: 'The IP protocol number, as defined by the Internet Assigned Numbers Authority (IANA). For example: `6` for TCP and `17` for UDP.'
+    references:
+    - description: IANA Protocol Numbers
+      url: https://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml

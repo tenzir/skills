@@ -1,0 +1,38 @@
+name: key_value_object
+caption: Key:Value object
+extends: object
+description: A generic object allowing to define a `{key:value}` pair.
+constraints:
+  at_least_one: [value, values]
+referenced_by:
+  objects:
+    account: [tags]
+    compliance: [control_parameters]
+    container: [tags]
+    databucket: [tags]
+    file: [tags]
+    finding_info: [tags]
+    image: [tags]
+    ldap_person: [tags]
+    metadata: [tags]
+    related_event: [tags]
+    resource_details: [tags]
+    service: [tags]
+    web_resource: [tags]
+attributes:
+  name:
+    caption: Name
+    type: string_t
+    requirement: required
+    description: The name of the key.
+  value:
+    caption: Value
+    type: string_t
+    requirement: optional
+    description: The value associated to the key.
+  values:
+    caption: Values
+    type: string_t
+    array: true
+    requirement: optional
+    description: Optional, the values associated to the key. You can populate this attribute, when you have multiple values for the same key.

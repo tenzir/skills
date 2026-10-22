@@ -1,0 +1,303 @@
+# Attributes with `from` but no description are inherited unchanged. Their
+# descriptions are in the file of the item that `from` names.
+name: network
+caption: Network
+category: network
+abstract: true
+extends: base_event
+description: Network event is a generic event that defines a set of attributes available in the Network category.
+profiles: [cloud, datetime, host, load_balancer, network_proxy, osint, security_control]
+constraints:
+  at_least_one: [dst_endpoint, src_endpoint]
+references:
+- description: D3FEND™ Ontology d3f:NetworkEvent
+  url: https://d3fend.mitre.org/event/d3f:NetworkEvent/
+attributes:
+  activity_id: {caption: Activity ID, type: integer_t, requirement: required, group: classification, sibling: activity_name, enum: {0: Unknown, 99: Other}, from: base_event}
+  category_uid: {caption: Category ID, type: integer_t, requirement: required, group: classification, sibling: category_name, enum: {0: Uncategorized}, from: base_event}
+  class_uid:
+    caption: Class ID
+    type: integer_t
+    requirement: required
+    group: classification
+    from: base_event
+    sibling: class_name
+    description: The unique identifier of a class. A class describes the attributes available in an event.
+    enum:
+      0:
+        caption: Base Event
+  cloud: {caption: Cloud, type: object_t, object: cloud, requirement: required, group: primary, profile: cloud, from: base_event}
+  metadata: {caption: Metadata, type: object_t, object: metadata, requirement: required, group: context, from: base_event}
+  osint: {caption: OSINT, type: object_t, object: osint, array: true, requirement: required, group: primary, profile: osint, from: base_event}
+  severity_id: {caption: Severity ID, type: integer_t, requirement: required, group: classification, sibling: severity, enum: {0: Unknown, 1: Informational, 2: Low, 3: Medium, 4: High, 5: Critical, 6: Fatal, 99: Other}, from: base_event}
+  time: {caption: Event Time, type: timestamp_t, requirement: required, group: occurrence, from: base_event}
+  type_uid: {caption: Type ID, type: long_t, requirement: required, group: classification, sibling: type_name, from: base_event}
+  action_id: {caption: Action ID, type: integer_t, requirement: recommended, group: primary, profile: security_control, sibling: action, enum: {0: Unknown, 1: Allowed, 2: Denied, 3: Observed, 4: Modified, 99: Other}, from: base_event}
+  confidence_id: {caption: Confidence ID, type: integer_t, requirement: recommended, group: context, profile: security_control, sibling: confidence, enum: {0: Unknown, 1: Low, 2: Medium, 3: High, 99: Other}, from: base_event}
+  connection_info:
+    caption: Connection Info
+    type: object_t
+    object: network_connection_info
+    requirement: recommended
+    group: primary
+    description: The network connection information.
+  device: {caption: Device, type: object_t, object: device, requirement: recommended, group: primary, profile: host, observable: 20, from: base_event}
+  disposition_id:
+    caption: Disposition ID
+    type: integer_t
+    requirement: recommended
+    group: primary
+    profile: security_control
+    sibling: disposition
+    enum:
+      0: Unknown
+      1: Allowed
+      2: Blocked
+      3: Quarantined
+      4: Isolated
+      5: Deleted
+      6: Dropped
+      7: Custom Action
+      8: Approved
+      9: Restored
+      10: Exonerated
+      11: Corrected
+      12: Partially Corrected
+      13: Uncorrected
+      14: Delayed
+      15: Detected
+      16: No Action
+      17: Logged
+      18: Tagged
+      19: Alert
+      20: Count
+      21: Reset
+      22: Captcha
+      23: Challenge
+      24: Access Revoked
+      25: Rejected
+      26: Unauthorized
+      27: Error
+      99: Other
+    from: base_event
+  dst_endpoint:
+    caption: Destination Endpoint
+    type: object_t
+    object: network_endpoint
+    requirement: recommended
+    group: primary
+    observable: 20
+    description: The responder (server) in a network connection.
+  is_alert: {caption: Alert, type: boolean_t, requirement: recommended, group: primary, profile: security_control, from: base_event}
+  load_balancer:
+    caption: Load Balancer
+    type: object_t
+    object: load_balancer
+    requirement: recommended
+    group: primary
+    profile: load_balancer
+    description: The Load Balancer object contains information related to the device that is distributing incoming traffic to specified destinations.
+  message: {caption: Message, type: string_t, requirement: recommended, group: primary, from: base_event}
+  observables: {caption: Observables, type: object_t, object: observable, array: true, requirement: recommended, group: primary, from: base_event}
+  proxy:
+    caption: Proxy
+    type: object_t
+    object: network_proxy
+    requirement: recommended
+    group: primary
+    observable: 20
+    deprecated:
+      since: 1.1.0
+      message: Use the `proxy_endpoint` attribute instead.
+    description: The proxy (server) in a network connection.
+  proxy_connection_info:
+    caption: Proxy Connection Info
+    type: object_t
+    object: network_connection_info
+    requirement: recommended
+    group: context
+    profile: network_proxy
+    description: The connection information from the proxy server to the remote server.
+  proxy_tls:
+    caption: Proxy TLS
+    type: object_t
+    object: tls
+    requirement: recommended
+    group: context
+    profile: network_proxy
+    description: The TLS protocol negotiated between the proxy server and the remote server.
+  proxy_traffic:
+    caption: Proxy Traffic
+    type: object_t
+    object: network_traffic
+    requirement: recommended
+    group: context
+    profile: network_proxy
+    description: The network traffic refers to the amount of data moving across a network, from proxy to remote server at a given point of time.
+  src_endpoint:
+    caption: Source Endpoint
+    type: object_t
+    object: network_endpoint
+    requirement: recommended
+    group: primary
+    observable: 20
+    description: The initiator (client) of the network connection.
+  status: {caption: Status, type: string_t, requirement: recommended, group: primary, from: base_event}
+  status_code: {caption: Status Code, type: string_t, requirement: recommended, group: primary, from: base_event}
+  status_detail: {caption: Status Detail, type: string_t, requirement: recommended, group: primary, from: base_event}
+  status_id: {caption: Status ID, type: integer_t, requirement: recommended, group: primary, sibling: status, enum: {0: Unknown, 1: Success, 2: Failure, 99: Other}, from: base_event}
+  timezone_offset: {caption: Timezone Offset, type: integer_t, requirement: recommended, group: occurrence, from: base_event}
+  traffic:
+    caption: Traffic
+    type: object_t
+    object: network_traffic
+    requirement: recommended
+    group: primary
+    description: 'The network traffic for this observation period. Use when reporting: (1) delta values (bytes/packets transferred since the last observation), (2) instantaneous measurements at a specific point in time, or (3) standalone single-event metrics. This attribute represents a point-in-time measurement or incremental change, not a running total. For accumulated totals across multiple observations or the lifetime of a flow, use `cumulative_traffic` instead.'
+  action: {caption: Action, type: string_t, requirement: optional, group: primary, profile: security_control, from: base_event}
+  activity_name: {caption: Activity, type: string_t, requirement: optional, group: classification, from: base_event}
+  actor: {caption: Actor, type: object_t, object: actor, requirement: optional, group: primary, profile: host, from: base_event}
+  api: {caption: API Details, type: object_t, object: api, requirement: optional, group: context, profile: cloud, from: base_event}
+  app_name:
+    caption: Application Name
+    type: string_t
+    requirement: optional
+    group: context
+    description: The network application name identified by tools such as NBAR or App ID (e.g., youtube, facebook, webex). This represents a specific network application that uses standard protocols (such as https or quic) to deliver its service.
+  app_protocol_name:
+    caption: Application Protocol Name
+    type: string_t
+    requirement: optional
+    group: context
+    description: |-
+      The application-layer (Layer 7) protocol name identified by deep packet inspection or packet parsing (e.g., `https`, `quic`, `ssh`, `dns`), expressed as an IANA-registered service name from the IANA Service Name and Transport Protocol Port Number Registry.
+
+      Note: Port numbers alone are not always a reliable indicator of the actual application protocol in use.
+    references:
+    - description: IANA Service Name and Transport Protocol Port Number Registry
+      url: https://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xhtml
+  attacks: {caption: MITRE ATT&CK® and ATLAS™ Details, type: object_t, object: attack, array: true, requirement: optional, group: primary, profile: security_control, from: base_event}
+  authorizations: {caption: Authorization Information, type: object_t, object: authorization, array: true, requirement: optional, group: primary, profile: security_control, from: base_event}
+  category_name: {caption: Category, type: string_t, requirement: optional, group: classification, from: base_event}
+  class_name:
+    caption: Class
+    type: string_t
+    requirement: optional
+    group: classification
+    from: base_event
+    description: The event class name, as defined by class_uid value.
+  confidence: {caption: Confidence, type: string_t, requirement: optional, group: context, profile: security_control, from: base_event}
+  confidence_score: {caption: Confidence Score, type: integer_t, requirement: optional, group: context, profile: security_control, from: base_event}
+  count: {caption: Count, type: integer_t, requirement: optional, group: occurrence, from: base_event}
+  cumulative_traffic:
+    caption: Cumulative Traffic
+    type: object_t
+    object: network_traffic
+    requirement: optional
+    group: context
+    description: 'The cumulative (running total) network traffic aggregated from the start of a flow or session. Use when reporting: (1) total accumulated bytes/packets since flow initiation, (2) combined aggregation models where both incremental deltas and running totals are reported together (populate both `traffic` for the delta and this attribute for the cumulative total), or (3) final summary metrics when a long-lived connection closes. This represents the sum of all activity from flow start to the current observation, not a delta or point-in-time value.'
+  disposition: {caption: Disposition, type: string_t, requirement: optional, group: primary, profile: security_control, from: base_event}
+  duration: {caption: Duration Milliseconds, type: long_t, requirement: optional, group: occurrence, from: base_event}
+  end_time: {caption: End Time, type: timestamp_t, requirement: optional, group: occurrence, from: base_event}
+  enrichments: {caption: Enrichments, type: object_t, object: enrichment, array: true, requirement: optional, group: context, from: base_event}
+  firewall_rule: {caption: Firewall Rule, type: object_t, object: firewall_rule, requirement: optional, group: primary, profile: security_control, from: base_event}
+  ja4_fingerprint_list:
+    caption: JA4+ Fingerprints
+    type: object_t
+    object: ja4_fingerprint
+    array: true
+    requirement: optional
+    group: context
+    description: A list of the JA4+ network fingerprints.
+  malware: {caption: Malware, type: object_t, object: malware, array: true, requirement: optional, group: primary, profile: security_control, from: base_event}
+  malware_scan_info: {caption: Malware Scan Info, type: object_t, object: malware_scan_info, requirement: optional, group: primary, profile: security_control, from: base_event}
+  network_observation_point:
+    caption: Network Observation Point
+    type: object_t
+    object: network_endpoint
+    requirement: optional
+    group: context
+    observable: 20
+    description: The network endpoint that observes or inspects network traffic as a third-party system, used when the observer is neither the source nor the destination of the communication (when `observation_point_id` = 3). Examples include network taps, span ports, inline security devices, or packet capture systems that monitor traffic between other endpoints.
+  observation_point:
+    caption: Observation Point
+    type: string_t
+    requirement: optional
+    description: Indicates whether the source network endpoint, destination network endpoint, or neither served as the observation point for the activity. The value is normalized to the caption of the `observation_point_id`.
+  observation_point_id:
+    caption: Observation Point ID
+    type: integer_t
+    requirement: optional
+    sibling: observation_point
+    description: The normalized identifier of the observation point. The observation point identifier indicates whether the source network endpoint, destination network endpoint, or neither served as the observation point for the activity.
+    enum:
+      0:
+        caption: Unknown
+        description: The observation point is unknown.
+      1:
+        caption: Source
+        description: The source network endpoint is the observation point.
+      2:
+        caption: Destination
+        description: The destination network endpoint is the observation point.
+      3:
+        caption: Neither
+        description: Neither the source nor destination network endpoint is the observation point. Refer to the `network_observation_point` attribute for details.
+      4:
+        caption: Both
+        description: Both the source and destination network endpoint are the observation point. This typically occurs in localhost or internal communications where the source and destination are the same endpoint, often resulting in a `connection_info.direction` of `Local`.
+      99:
+        caption: Other
+        description: The observation point is not mapped. See the `observation_point` attribute for a data source specific value.
+  packet_list:
+    caption: Packets
+    type: object_t
+    object: packet
+    array: true
+    requirement: optional
+    group: context
+    description: The list of packet objects describing captured network packets.
+  policy: {caption: Policy, type: object_t, object: policy, requirement: optional, group: primary, profile: security_control, from: base_event}
+  proxy_endpoint:
+    caption: Proxy Endpoint
+    type: object_t
+    object: network_proxy
+    requirement: optional
+    group: context
+    profile: network_proxy
+    observable: 20
+    description: The proxy (server) in a network connection.
+  proxy_http_request:
+    caption: Proxy HTTP Request
+    type: object_t
+    object: http_request
+    requirement: optional
+    group: context
+    profile: network_proxy
+    description: The HTTP Request from the proxy server to the remote server.
+  proxy_http_response:
+    caption: Proxy HTTP Response
+    type: object_t
+    object: http_response
+    requirement: optional
+    group: context
+    profile: network_proxy
+    description: The HTTP Response from the remote server to the proxy server.
+  raw_data: {caption: Raw Data, type: string_t, requirement: optional, group: context, from: base_event}
+  raw_data_hash: {caption: Raw Data Hash, type: object_t, object: fingerprint, requirement: optional, group: context, observable: 30, from: base_event}
+  raw_data_size: {caption: Raw Data Size, type: long_t, requirement: optional, group: context, from: base_event}
+  risk_details: {caption: Risk Details, type: string_t, requirement: optional, group: context, profile: security_control, from: base_event}
+  risk_level: {caption: Risk Level, type: string_t, requirement: optional, group: context, profile: security_control, from: base_event}
+  risk_level_id: {caption: Risk Level ID, type: integer_t, requirement: optional, group: context, profile: security_control, sibling: risk_level, enum: {0: Info, 1: Low, 2: Medium, 3: High, 4: Critical, 99: Other}, from: base_event}
+  risk_score: {caption: Risk Score, type: integer_t, requirement: optional, group: context, profile: security_control, from: base_event}
+  severity: {caption: Severity, type: string_t, requirement: optional, group: classification, from: base_event}
+  start_time: {caption: Start Time, type: timestamp_t, requirement: optional, group: occurrence, from: base_event}
+  tls:
+    caption: TLS
+    type: object_t
+    object: tls
+    requirement: optional
+    group: context
+    description: The Transport Layer Security (TLS) attributes.
+  type_name: {caption: Type Name, type: string_t, requirement: optional, group: classification, from: base_event}
+  unmapped: {caption: Unmapped Data, type: object_t, object: object, requirement: optional, group: context, from: base_event}

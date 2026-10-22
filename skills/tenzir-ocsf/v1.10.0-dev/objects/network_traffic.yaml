@@ -1,0 +1,105 @@
+name: network_traffic
+caption: Network Traffic
+extends: object
+description: The Network Traffic object describes characteristics of network traffic over a time period. The metrics represent network data transferred between source and destination during an observation window.
+profiles: [datetime]
+references:
+- description: D3FEND™ Ontology d3f:NetworkTraffic
+  url: https://d3fend.mitre.org/dao/artifact/d3f:NetworkTraffic/
+referenced_by:
+  classes:
+    airborne_broadcast_activity: [traffic]
+    dhcp_activity: [cumulative_traffic, proxy_traffic, traffic]
+    dns_activity: [cumulative_traffic, proxy_traffic, traffic]
+    dns_zone_transfer_activity: [cumulative_traffic, proxy_traffic, traffic]
+    drone_flights_activity: [traffic]
+    ftp_activity: [cumulative_traffic, proxy_traffic, traffic]
+    http_activity: [cumulative_traffic, proxy_traffic, traffic]
+    network_activity: [cumulative_traffic, proxy_traffic, traffic]
+    network_file_activity: [cumulative_traffic, proxy_traffic, traffic]
+    ntp_activity: [cumulative_traffic, proxy_traffic, traffic]
+    rdp_activity: [cumulative_traffic, proxy_traffic, traffic]
+    smb_activity: [cumulative_traffic, proxy_traffic, traffic]
+    ssh_activity: [cumulative_traffic, proxy_traffic, traffic]
+    tunnel_activity: [cumulative_traffic, proxy_traffic, traffic]
+    web_resource_access_activity: [proxy_traffic]
+    web_resources_activity: [proxy_traffic]
+attributes:
+  bytes:
+    caption: Total Bytes
+    type: long_t
+    requirement: recommended
+    description: The total number of bytes transferred in both directions (sum of bytes_in and bytes_out).
+  packets:
+    caption: Total Packets
+    type: long_t
+    requirement: recommended
+    description: The total number of packets transferred in both directions (sum of packets_in and packets_out).
+  bytes_in:
+    caption: Bytes In
+    type: long_t
+    requirement: optional
+    description: The number of bytes sent from the destination to the source (inbound direction).
+  bytes_missed:
+    caption: Bytes Missed
+    type: long_t
+    requirement: optional
+    description: The number of bytes that were missed during observation, typically due to packet loss or sampling limitations.
+  bytes_out:
+    caption: Bytes Out
+    type: long_t
+    requirement: optional
+    description: The number of bytes sent from the source to the destination (outbound direction).
+  chunks:
+    caption: Chunks
+    type: long_t
+    requirement: optional
+    description: The total number of chunks transferred in both directions (sum of chunks_in and chunks_out).
+  chunks_in:
+    caption: Chunks In
+    type: long_t
+    requirement: optional
+    description: The number of chunks sent from the destination to the source (inbound direction).
+  chunks_out:
+    caption: Chunks Out
+    type: long_t
+    requirement: optional
+    description: The number of chunks sent from the source to the destination (outbound direction).
+  end_time:
+    caption: End Time
+    type: timestamp_t
+    requirement: optional
+    description: The end time of the observation or reporting period.
+  end_time_dt:
+    caption: End Time
+    type: datetime_t
+    requirement: optional
+    profile: datetime
+    description: The end time of the observation or reporting period.
+  packets_in:
+    caption: Packets In
+    type: long_t
+    requirement: optional
+    description: The number of packets sent from the destination to the source (inbound direction).
+  packets_out:
+    caption: Packets Out
+    type: long_t
+    requirement: optional
+    description: The number of packets sent from the source to the destination (outbound direction).
+  start_time:
+    caption: Start Time
+    type: timestamp_t
+    requirement: optional
+    description: The start time of the observation or reporting period.
+  start_time_dt:
+    caption: Start Time
+    type: datetime_t
+    requirement: optional
+    profile: datetime
+    description: The start time of the observation or reporting period.
+  timespan:
+    caption: Time Span
+    type: object_t
+    object: timespan
+    requirement: optional
+    description: The time span object representing the duration of the observation or reporting period.

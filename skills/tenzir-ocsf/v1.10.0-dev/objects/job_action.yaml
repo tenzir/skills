@@ -1,0 +1,73 @@
+name: job_action
+caption: Job Action
+description: The action that will be performed by the job when certain conditions are met.
+profiles: [container, data_classification]
+referenced_by:
+  objects:
+    job: [job_actions]
+attributes:
+  type_id:
+    caption: Type ID
+    type: integer_t
+    requirement: required
+    sibling: type
+    description: The job action type.
+    enum:
+      0:
+        caption: Unknown
+        description: The performed action is unknown.
+      1:
+        caption: COM Handler
+        description: The action fires a COM handler. When this type is used, `com_class_uuid` and `file` attributes may be populated.
+      2:
+        caption: Execute
+        description: The action executes a command-line operation. When this type is used, `cmd_line` and `file` attributes may be populated.
+      3:
+        caption: E-mail
+        description: The action sends an email.
+      4:
+        caption: Show Message
+        description: The action shows a message box with specified message and title.
+      99:
+        caption: Other
+        description: The performed action is not mapped. See the `type` attribute, which contains a data source specific value.
+  properties:
+    caption: Properties
+    type: object_t
+    object: key_value_object
+    array: true
+    requirement: recommended
+    description: |-
+      The list of properties associated with the performed action.
+      Can be populated with additional attributes of a program execution process, COM object attributes, fields of a message box or an email.
+  type:
+    caption: Type
+    type: string_t
+    requirement: recommended
+    description: The job action type, normalized to the caption of the `type_id` value. In the case of 'Other', it is defined by the event source.
+  cmd_line:
+    caption: Command Line
+    type: string_t
+    requirement: optional
+    observable: 13
+    description: |-
+      When `type_id` is `Execute (2)`, this describes the command line that is executed.
+
+      When `type_id` is `COM Handler (1)`, this may describe the DLL path stored in the COM component's `InprocServer32` key or the command line stored in the COM component's `LocalServer32` key.
+  com_class_uuid:
+    caption: COM Class Identifier
+    type: uuid_t
+    requirement: optional
+    description: When `type_id` is `COM Handler (1)`, this describes the COM Class Identifier (CLSID).
+  file:
+    caption: File
+    type: object_t
+    object: file
+    requirement: optional
+    observable: 24
+    description: When known, describes the image file that is executed when `type_id` is `COM Handler` or `Execute`. Note that this attribute is intended to supplement the `com_class_uid` or `cmd_line` attributes, and is not an alternative to them.
+  working_directory:
+    caption: Working Directory
+    type: string_t
+    requirement: optional
+    description: When `type_id` is `Execute (2)`, this describes the working directory of a program that is run by the job.

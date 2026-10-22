@@ -1,0 +1,37 @@
+name: peripheral_device
+caption: Peripheral Device
+extends: _entity
+description: The peripheral device object describes the identity, vendor and model of a peripheral device.
+constraints:
+  at_least_one: [name, uid]
+attributes:
+  class:
+    caption: Class
+    type: string_t
+    requirement: required
+    description: The class of the peripheral device.
+  name:
+    caption: Name
+    type: string_t
+    requirement: required
+    description: The name of the peripheral device.
+  model:
+    caption: Model
+    type: string_t
+    requirement: recommended
+    description: The peripheral device model.
+  serial_number:
+    caption: Serial Number
+    type: string_t
+    requirement: recommended
+    description: The peripheral device serial number.
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: recommended
+    description: The unique identifier of the peripheral device.
+  vendor_name:
+    caption: Vendor Name
+    type: string_t
+    requirement: recommended
+    description: The peripheral device vendor.

@@ -1,0 +1,206 @@
+name: endpoint
+caption: Endpoint
+extends: _entity
+observable: 20
+description: The Endpoint object describes a physical or virtual device that connects to and exchanges information with a computer network. Some examples of endpoints are mobile devices, desktop computers, virtual machines, embedded devices, and servers. Internet-of-Things devices—like cameras, lighting, refrigerators, security systems, smart speakers, and thermostats—are also endpoints.
+profiles: [container]
+constraints:
+  at_least_one: [ip, uid, name, hostname, instance_uid, interface_uid, interface_name]
+references:
+- description: D3FEND™ Ontology d3f:Host.
+  url: https://d3fend.mitre.org/dao/artifact/d3f:ComputerNetworkNode/
+attributes:
+  container:
+    caption: Container
+    type: object_t
+    object: container
+    requirement: recommended
+    group: context
+    profile: container
+    observable: 27
+    description: The information describing an instance of a container. A container is a prepackaged, portable system image that runs isolated on an existing system using a container runtime like containerd.
+  hostname:
+    caption: Hostname
+    type: hostname_t
+    requirement: recommended
+    observable: 1
+    description: The fully qualified name of the endpoint.
+  instance_uid:
+    caption: Instance ID
+    type: string_t
+    requirement: recommended
+    description: The unique identifier of a VM instance.
+  interface_name:
+    caption: Network Interface Name
+    type: string_t
+    requirement: recommended
+    description: The name of the network interface (e.g. eth2).
+  interface_uid:
+    caption: Network Interface ID
+    type: string_t
+    requirement: recommended
+    description: The unique identifier of the network interface.
+  ip:
+    caption: IP Address
+    type: ip_t
+    requirement: recommended
+    observable: 2
+    description: The IP address of the endpoint, in either IPv4 or IPv6 format.
+  name:
+    caption: Name
+    type: string_t
+    requirement: recommended
+    description: The short name of the endpoint.
+  namespace_pid:
+    caption: Namespace PID
+    type: integer_t
+    requirement: recommended
+    group: context
+    profile: container
+    description: If running under a process namespace (such as in a container), the process identifier within that process namespace.
+  owner:
+    caption: Owner
+    type: object_t
+    object: user
+    requirement: recommended
+    observable: 21
+    description: The identity of the service or user account that owns the endpoint or was last logged into it.
+  type_id:
+    caption: Type ID
+    type: integer_t
+    requirement: recommended
+    sibling: type
+    description: The endpoint type ID.
+    enum:
+      0:
+        caption: Unknown
+        description: The type is unknown.
+      1:
+        caption: Server
+        description: A [server](https://d3fend.mitre.org/dao/artifact/d3f:Server/).
+      2:
+        caption: Desktop
+        description: A [desktop computer](https://d3fend.mitre.org/dao/artifact/d3f:DesktopComputer/).
+      3:
+        caption: Laptop
+        description: A [laptop computer](https://d3fend.mitre.org/dao/artifact/d3f:LaptopComputer/).
+      4:
+        caption: Tablet
+        description: A [tablet computer](https://d3fend.mitre.org/dao/artifact/d3f:TabletComputer/).
+      5:
+        caption: Mobile
+        description: A [mobile phone](https://d3fend.mitre.org/dao/artifact/d3f:MobilePhone/).
+      6:
+        caption: Virtual
+        description: A [virtual machine](https://d3fend.mitre.org/dao/artifact/d3f:VirtualizationSoftware/).
+      7:
+        caption: IOT
+        description: An [IOT (Internet of Things) device](https://www.techtarget.com/iotagenda/definition/IoT-device).
+      8:
+        caption: Browser
+        description: A [web browser](https://d3fend.mitre.org/dao/artifact/d3f:Browser/).
+      9:
+        caption: Firewall
+        description: A [networking firewall](https://d3fend.mitre.org/dao/artifact/d3f:Firewall/).
+      10:
+        caption: Switch
+        description: A [networking switch](https://d3fend.mitre.org/dao/artifact/d3f:Switch/).
+      11:
+        caption: Hub
+        description: A [networking hub](https://en.wikipedia.org/wiki/Ethernet_hub).
+      12:
+        caption: Router
+        description: A [networking router](https://d3fend.mitre.org/dao/artifact/d3f:Router/).
+      13:
+        caption: IDS
+        description: An [intrusion detection system](https://d3fend.mitre.org/dao/artifact/d3f:IntrusionDetectionSystem/).
+      14:
+        caption: IPS
+        description: An [intrusion prevention system](https://d3fend.mitre.org/dao/artifact/d3f:IntrusionPreventionSystem/).
+      15:
+        caption: Load Balancer
+        description: A [Load Balancer device.](https://en.wikipedia.org/wiki/Load_balancing_(computing))
+      99:
+        caption: Other
+        description: The type is not mapped. See the `type` attribute, which contains a data source specific value.
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: recommended
+    description: The unique identifier of the endpoint.
+  agent_list:
+    caption: Agent List
+    type: object_t
+    object: agent
+    array: true
+    requirement: optional
+    description: A list of `agent` objects associated with a device, endpoint, or resource.
+  domain:
+    caption: Domain
+    type: string_t
+    requirement: optional
+    description: The name of the domain that the endpoint belongs to or that corresponds to the endpoint.
+  hw_info:
+    caption: Hardware Info
+    type: object_t
+    object: device_hw_info
+    requirement: optional
+    description: The endpoint hardware information.
+  location:
+    caption: Geo Location
+    type: object_t
+    object: location
+    requirement: optional
+    observable: 26
+    description: The geographical location of the endpoint.
+  mac:
+    caption: MAC Address
+    type: mac_t
+    requirement: optional
+    observable: 3
+    description: The Media Access Control (MAC) address of the endpoint.
+  mac_vendor:
+    caption: MAC Vendor
+    type: string_t
+    requirement: optional
+    description: The vendor or manufacturer of the endpoint's network interface controller (NIC), as identified from the MAC address.
+    references:
+    - description: IEEE Registration Authority
+      url: https://standards.ieee.org/products-programs/regauth/
+  os:
+    caption: OS
+    type: object_t
+    object: os
+    requirement: optional
+    description: The endpoint operating system.
+  pool:
+    caption: Pool
+    type: object_t
+    object: group
+    requirement: optional
+    description: The pool of desktops or virtual machines to which the endpoint belongs.
+  subnet_uid:
+    caption: Subnet UID
+    type: string_t
+    requirement: optional
+    description: The unique identifier of a virtual subnet.
+  type:
+    caption: Type
+    type: string_t
+    requirement: optional
+    description: 'The endpoint type. For example: `unknown`, `server`, `desktop`, `laptop`, `tablet`, `mobile`, `virtual`, `browser`, or `other`.'
+  vlan_uid:
+    caption: VLAN
+    type: string_t
+    requirement: optional
+    description: The Virtual LAN identifier.
+  vpc_uid:
+    caption: VPC UID
+    type: string_t
+    requirement: optional
+    description: The unique identifier of the Virtual Private Cloud (VPC).
+  zone:
+    caption: Network Zone
+    type: string_t
+    requirement: optional
+    description: The network zone or LAN segment.

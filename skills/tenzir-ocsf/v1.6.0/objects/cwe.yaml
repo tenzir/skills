@@ -1,0 +1,27 @@
+name: cwe
+caption: CWE
+extends: object
+description: The CWE object represents a weakness in a software system that can be exploited by a threat actor to perform an attack. The CWE object is based on the [Common Weakness Enumeration (CWE)](https://cwe.mitre.org/) catalog.
+referenced_by:
+  objects:
+    advisory: [related_cwes]
+    cve: [cwe, related_cwes]
+    vulnerability: [cwe]
+attributes:
+  uid:
+    caption: CWE ID
+    type: string_t
+    requirement: required
+    observable: 17
+    description: 'The Common Weakness Enumeration unique number assigned to a specific weakness. A CWE Identifier begins "CWE" followed by a sequence of digits that acts as a unique identifier. For example: `CWE-123`.'
+  caption:
+    caption: Caption
+    type: string_t
+    requirement: optional
+    description: The caption assigned to the Common Weakness Enumeration unique identifier.
+  src_url:
+    caption: Source URL
+    type: url_t
+    requirement: optional
+    observable: 6
+    description: URL pointing to the CWE Specification. For more information see [CWE.](https://cwe.mitre.org/)

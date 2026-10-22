@@ -1,0 +1,34 @@
+name: _resource
+caption: Resource
+abstract: true
+extends: _entity
+description: The Resource object contains attributes that provide information about a particular resource. It serves as a base object, offering attributes that help identify and classify the resource effectively.
+constraints:
+  at_least_one: [name, uid]
+attributes:
+  data:
+    caption: Data
+    type: json_t
+    requirement: optional
+    description: Additional data describing the resource.
+  labels:
+    caption: Labels
+    type: string_t
+    array: true
+    requirement: optional
+    description: The list of labels/tags associated to a resource.
+  name:
+    caption: Name
+    type: string_t
+    requirement: optional
+    description: The name of the resource.
+  type:
+    caption: Type
+    type: string_t
+    requirement: optional
+    description: The resource type as defined by the event source.
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: optional
+    description: The unique identifier of the resource.

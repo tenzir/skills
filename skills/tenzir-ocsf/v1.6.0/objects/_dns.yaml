@@ -1,0 +1,21 @@
+name: _dns
+caption: DNS
+abstract: true
+extends: object
+description: The Domain Name System (DNS) object represents the shared information associated with the DNS query and answer objects.
+attributes:
+  class:
+    caption: Resource Record Class
+    type: string_t
+    requirement: recommended
+    description: 'The class of resource records being queried. See [RFC1035](https://www.rfc-editor.org/rfc/rfc1035.txt). For example: `IN`.'
+  packet_uid:
+    caption: Packet UID
+    type: integer_t
+    requirement: recommended
+    description: The DNS packet identifier assigned by the program that generated the query. The identifier is copied to the response.
+  type:
+    caption: Resource Record Type
+    type: string_t
+    requirement: recommended
+    description: 'The type of resource records being queried. See [RFC1035](https://www.rfc-editor.org/rfc/rfc1035.txt). For example: A, AAAA, CNAME, MX, and NS.'

@@ -1,0 +1,101 @@
+name: account
+caption: Account
+extends: _entity
+description: The Account object contains details about the account that initiated or performed a specific activity within a system or application. Additionally, the Account object refers to logical Cloud and Software-as-a-Service (SaaS) based containers such as AWS Accounts, Azure Subscriptions, Oracle Cloud Compartments, Google Cloud Projects, and otherwise.
+constraints:
+  at_least_one: [name, uid]
+references:
+- description: D3FEND™ Ontology d3f:UserAccount.
+  url: https://d3fend.mitre.org/dao/artifact/d3f:UserAccount/
+- description: D3FEND™ Ontology d3f:CloudUserAccount.
+  url: https://d3fend.mitre.org/dao/artifact/d3f:CloudUserAccount/
+referenced_by:
+  objects:
+    cloud: [account]
+    user: [account]
+attributes:
+  name:
+    caption: Name
+    type: string_t
+    requirement: recommended
+    observable: 34
+    description: The name of the account (e.g.  `GCP Project name` ,  `Linux Account name`  or  `AWS Account name`).
+  type_id:
+    caption: Type ID
+    type: integer_t
+    requirement: recommended
+    sibling: type
+    description: The normalized account type identifier.
+    enum:
+      0:
+        caption: Unknown
+        description: The account type is unknown.
+      1:
+        caption: LDAP Account
+      2:
+        caption: Windows Account
+      3:
+        caption: AWS IAM User
+        deprecated:
+          since: 1.6.0
+          message: Utilize `user.type_id` to represent this information.
+      4:
+        caption: AWS IAM Role
+        deprecated:
+          since: 1.6.0
+          message: Utilize `user.type_id` to represent this information.
+      5:
+        caption: GCP Account
+      6:
+        caption: Azure AD Account
+      7:
+        caption: Mac OS Account
+      8:
+        caption: Apple Account
+      9:
+        caption: Linux Account
+      10:
+        caption: AWS Account
+      11:
+        caption: GCP Project
+      12:
+        caption: OCI Compartment
+      13:
+        caption: Azure Subscription
+      14:
+        caption: Salesforce Account
+      15:
+        caption: Google Workspace
+      16:
+        caption: Servicenow Instance
+      17:
+        caption: M365 Tenant
+      18:
+        caption: Email Account
+      99:
+        caption: Other
+        description: The account type is not mapped.
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: recommended
+    observable: 35
+    description: The unique identifier of the account (e.g.  `AWS Account ID` ,  `OCID` ,  `GCP Project ID` ,  `Azure Subscription ID` ,  `Google Workspace Customer ID` , or  `M365 Tenant UID`).
+  labels:
+    caption: Labels
+    type: string_t
+    array: true
+    requirement: optional
+    description: The list of labels associated to the account.
+  tags:
+    caption: Tags
+    type: object_t
+    object: key_value_object
+    array: true
+    requirement: optional
+    description: The list of tags; `{key:value}` pairs associated to the account.
+  type:
+    caption: Type
+    type: string_t
+    requirement: optional
+    description: The account type, normalized to the caption of 'account_type_id'. In the case of 'Other', it is defined by the event source.

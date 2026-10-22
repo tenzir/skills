@@ -1,0 +1,119 @@
+name: tls
+caption: Transport Layer Security (TLS)
+extends: object
+description: The Transport Layer Security (TLS) object describes the negotiated TLS protocol used for secure communications over an establish network connection.
+referenced_by:
+  classes:
+    airborne_broadcast_activity: [tls]
+    dhcp_activity: [proxy_tls, tls]
+    dns_activity: [proxy_tls, tls]
+    drone_flights_activity: [tls]
+    ftp_activity: [proxy_tls, tls]
+    http_activity: [proxy_tls, tls]
+    network_activity: [proxy_tls, tls]
+    network_file_activity: [proxy_tls, tls]
+    ntp_activity: [proxy_tls, tls]
+    rdp_activity: [proxy_tls, tls]
+    smb_activity: [proxy_tls, tls]
+    ssh_activity: [proxy_tls, tls]
+    tunnel_activity: [proxy_tls, tls]
+    web_resource_access_activity: [proxy_tls, tls]
+    web_resources_activity: [proxy_tls, tls]
+  objects:
+    evidences: [tls]
+attributes:
+  version:
+    caption: Version
+    type: string_t
+    requirement: required
+    description: The TLS protocol version.
+  certificate:
+    caption: Certificate
+    type: object_t
+    object: certificate
+    requirement: recommended
+    description: The certificate object containing information about the digital certificate.
+  certificate_chain:
+    caption: Certificate Chain
+    type: string_t
+    array: true
+    requirement: recommended
+    description: The Chain of Certificate Serial Numbers field provides a chain of Certificate Issuer Serial Numbers leading to the Root Certificate Issuer.
+  cipher:
+    caption: Cipher Suite
+    type: string_t
+    requirement: recommended
+    description: The negotiated cipher suite.
+  client_ciphers:
+    caption: Client Cipher Suites
+    type: string_t
+    array: true
+    requirement: recommended
+    description: The client cipher suites that were exchanged during the TLS handshake negotiation.
+  ja3_hash:
+    caption: JA3 Hash
+    type: object_t
+    object: fingerprint
+    requirement: recommended
+    observable: 30
+    description: The MD5 hash of a JA3 string.
+  ja3s_hash:
+    caption: JA3S Hash
+    type: object_t
+    object: fingerprint
+    requirement: recommended
+    observable: 30
+    description: The MD5 hash of a JA3S string.
+  sni:
+    caption: Server Name Indication
+    type: string_t
+    requirement: recommended
+    description: The Server Name Indication (SNI) extension sent by the client.
+  alert:
+    caption: Client TLS Alert
+    type: integer_t
+    requirement: optional
+    description: The integer value of TLS alert if present. The alerts are defined in the TLS specification in [RFC-2246](https://datatracker.ietf.org/doc/html/rfc2246).
+  extension_list:
+    caption: Extension List
+    type: object_t
+    object: tls_extension
+    array: true
+    requirement: optional
+    deprecated:
+      since: 1.1.0
+      message: Use the `tls_extension_list` attribute instead.
+    description: The list of TLS extensions.
+  handshake_dur:
+    caption: Handshake Duration
+    type: integer_t
+    requirement: optional
+    description: The amount of total time for the TLS handshake to complete after the TCP connection is established, including client-side delays, in milliseconds.
+  key_length:
+    caption: Key Length
+    type: integer_t
+    requirement: optional
+    description: The length of the encryption key.
+  sans:
+    caption: Subject Alternative Names
+    type: object_t
+    object: san
+    array: true
+    requirement: optional
+    deprecated:
+      since: 1.4.0
+      message: Use `tls.certificate.sans` attribute instead.
+    description: The list of subject alternative names that are secured by a specific certificate.
+  server_ciphers:
+    caption: Server Cipher Suites
+    type: string_t
+    array: true
+    requirement: optional
+    description: The server cipher suites that were exchanged during the TLS handshake negotiation.
+  tls_extension_list:
+    caption: TLS Extension List
+    type: object_t
+    object: tls_extension
+    array: true
+    requirement: optional
+    description: The list of TLS extensions.

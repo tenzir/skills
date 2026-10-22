@@ -1,0 +1,55 @@
+name: occurrence_details
+caption: Occurrence Details
+extends: object
+description: Details about where in the target entity, specified information was discovered. Only the attributes, relevant to the target entity type should be populuated.
+constraints:
+  at_least_one: [cell_name, column_name, column_number, end_line, json_path, page_number, record_index_in_array, row_number, start_line]
+referenced_by:
+  objects:
+    discovery_details: [occurrence_details]
+attributes:
+  cell_name:
+    caption: Cell Name
+    type: string_t
+    requirement: optional
+    description: The cell name/reference in a spreadsheet. e.g `A2`
+  column_name:
+    caption: Column Name
+    type: string_t
+    requirement: optional
+    description: The column name in a spreadsheet, where the information was discovered.
+  column_number:
+    caption: Column Number
+    type: integer_t
+    requirement: optional
+    description: The column number in a spreadsheet or a plain text document, where the information was discovered.
+  end_line:
+    caption: End Line
+    type: integer_t
+    requirement: optional
+    description: The line number of the last line of the file, where the information was discovered.
+  json_path:
+    caption: JSON Path
+    type: string_t
+    requirement: optional
+    description: The JSON path of the attribute in a json record, where the information was discovered
+  page_number:
+    caption: Page Number
+    type: integer_t
+    requirement: optional
+    description: The page number in a document, where the information was discovered.
+  record_index_in_array:
+    caption: Record Index in Array
+    type: integer_t
+    requirement: optional
+    description: The index of the record in the array of records, where the information was discovered. e.g. the index of a record in an array of JSON records in a file.
+  row_number:
+    caption: Row Number
+    type: integer_t
+    requirement: optional
+    description: The row number in a spreadsheet, where the information was discovered.
+  start_line:
+    caption: Start Line
+    type: integer_t
+    requirement: optional
+    description: The line number of the first line of the file, where the information was discovered.

@@ -1,0 +1,129 @@
+name: api
+caption: API
+extends: object
+description: The API, or Application Programming Interface, object represents  information pertaining to an API request and response.
+referenced_by:
+  classes:
+    account_change: [api]
+    admin_group_query: [api]
+    airborne_broadcast_activity: [api]
+    api_activity: [api]
+    application_error: [api]
+    application_lifecycle: [api]
+    application_security_posture_finding: [api]
+    authentication: [api]
+    authorize_session: [api]
+    base_event: [api]
+    clipboard_activity: [api]
+    cloud_resources_inventory_info: [api]
+    compliance_finding: [api]
+    config_state: [api]
+    data_security_finding: [api]
+    datastore_activity: [api]
+    detection_finding: [api]
+    device_config_state_change: [api]
+    device_power_state_activity: [api]
+    dhcp_activity: [api]
+    dns_activity: [api]
+    drone_flights_activity: [api]
+    email_activity: [api]
+    email_file_activity: [api]
+    email_url_activity: [api]
+    entity_management: [api]
+    event_log_actvity: [api]
+    evidence_info: [api]
+    file_activity: [api]
+    file_hosting: [api]
+    file_query: [api]
+    file_remediation_activity: [api]
+    folder_query: [api]
+    ftp_activity: [api]
+    group_management: [api]
+    http_activity: [api]
+    iam_analysis_finding: [api]
+    incident_finding: [api]
+    inventory_info: [api]
+    job_query: [api]
+    kernel_activity: [api]
+    kernel_extension_activity: [api]
+    kernel_object_query: [api]
+    memory_activity: [api]
+    module_activity: [api]
+    module_query: [api]
+    network_activity: [api]
+    network_connection_query: [api]
+    network_file_activity: [api]
+    network_remediation_activity: [api]
+    networks_query: [api]
+    ntp_activity: [api]
+    osint_inventory_info: [api]
+    patch_state: [api]
+    peripheral_activity: [api]
+    peripheral_device_query: [api]
+    process_activity: [api]
+    process_query: [api]
+    process_remediation_activity: [api]
+    rdp_activity: [api]
+    remediation_activity: [api]
+    role_management: [api]
+    scan_activity: [api]
+    scheduled_job_activity: [api]
+    script_activity: [api]
+    security_finding: [api]
+    service_query: [api]
+    session_query: [api]
+    smb_activity: [api]
+    software_info: [api]
+    ssh_activity: [api]
+    startup_item_query: [api]
+    tunnel_activity: [api]
+    user_access: [api]
+    user_inventory: [api]
+    user_management: [api]
+    user_query: [api]
+    vulnerability_finding: [api]
+    web_resource_access_activity: [api]
+    web_resources_activity: [api]
+  objects:
+    evidences: [api]
+attributes:
+  operation:
+    caption: Operation
+    type: string_t
+    requirement: required
+    description: Verb/Operation associated with the request
+  request:
+    caption: API Request Details
+    type: object_t
+    object: request
+    requirement: recommended
+    description: Details pertaining to the API request.
+  response:
+    caption: API Response Details
+    type: object_t
+    object: response
+    requirement: recommended
+    description: Details pertaining to the API response.
+  group:
+    caption: Group
+    type: object_t
+    object: group
+    requirement: optional
+    description: The information pertaining to the API group.
+  service:
+    caption: Service
+    type: object_t
+    object: service
+    requirement: optional
+    description: The information pertaining to the API service.
+  token:
+    caption: Token
+    type: object_t
+    object: token
+    requirement: optional
+    description: 'The API or client token used to authenticate or authorize the API request. This attribute contains the base `token` object that represents: (1) IdP-issued client tokens (type_id: 6) such as Okta API tokens or Microsoft Entra ID Application Registration client secrets, or (2) generic API tokens/keys (type_id: 7) used for SaaS application authentication. Use this attribute when the API request was authenticated using a token that should be tracked as part of the API activity event. Note: Protocol-specific authentication tokens (Kerberos, OIDC, SAML) should be represented using `authentication_token` in authentication events, not in API activity events.'
+  version:
+    caption: Version
+    type: string_t
+    requirement: optional
+    description: The version of the API service.

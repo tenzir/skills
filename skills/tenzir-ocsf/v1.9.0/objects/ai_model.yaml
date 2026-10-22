@@ -1,0 +1,79 @@
+# Attributes with `from` but no description are inherited unchanged. Their
+# descriptions are in the file of the item that `from` names.
+name: ai_model
+caption: AI Model
+extends: _entity
+description: The AI Model object describes the characteristics of an AI/ML model. Examples include language models like GPT-4, embedding models like text-embedding-ada-002, and computer vision models like CLIP.
+constraints:
+  at_least_one: [name, uid]
+references:
+- description: AI Model Registry and Documentation Standards
+  url: https://huggingface.co/docs/hub/models
+- description: OpenAI Model Documentation
+  url: https://platform.openai.com/docs/models
+referenced_by:
+  classes:
+    account_change: [ai_model]
+    api_activity: [ai_model]
+    application_error: [ai_model]
+    application_lifecycle: [ai_model]
+    authentication: [ai_model]
+    authorize_session: [ai_model]
+    clipboard_activity: [ai_model]
+    datastore_activity: [ai_model]
+    device_power_state_activity: [ai_model]
+    dhcp_activity: [ai_model]
+    dns_activity: [ai_model]
+    email_activity: [ai_model]
+    entity_management: [ai_model]
+    event_log_actvity: [ai_model]
+    file_activity: [ai_model]
+    file_hosting: [ai_model]
+    ftp_activity: [ai_model]
+    group_management: [ai_model]
+    http_activity: [ai_model]
+    kernel_activity: [ai_model]
+    kernel_extension_activity: [ai_model]
+    memory_activity: [ai_model]
+    module_activity: [ai_model]
+    network_activity: [ai_model]
+    network_file_activity: [ai_model]
+    ntp_activity: [ai_model]
+    peripheral_activity: [ai_model]
+    process_activity: [ai_model]
+    rdp_activity: [ai_model]
+    role_management: [ai_model]
+    scan_activity: [ai_model]
+    scheduled_job_activity: [ai_model]
+    script_activity: [ai_model]
+    smb_activity: [ai_model]
+    ssh_activity: [ai_model]
+    tunnel_activity: [ai_model]
+    user_access: [ai_model]
+    user_management: [ai_model]
+    web_resource_access_activity: [ai_model]
+    web_resources_activity: [ai_model]
+  objects:
+    ai_agent: [ai_model]
+attributes:
+  ai_provider:
+    caption: AI Provider
+    type: string_t
+    requirement: required
+    description: 'AI service provider or organization name. For example: `OpenAI`, `Anthropic`, `Google`, or `Internal`.'
+  name:
+    caption: Name
+    type: string_t
+    requirement: required
+    description: 'Human-readable model name. For example: `gpt-4o`, `claude-3-sonnet`, or `text-embedding-ada-002`.'
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: recommended
+    description: The unique identifier of the AI model.
+  version:
+    caption: Version
+    type: string_t
+    requirement: recommended
+    description: 'Model version identifier. For example: `2024-05-13`, `v2.1.0`, or `beta`.'
+  uid_numeric: {caption: Numeric Unique ID, type: long_t, requirement: optional, from: _entity}

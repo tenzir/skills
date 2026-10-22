@@ -1,0 +1,234 @@
+# Attributes with `from` but no description are inherited unchanged. Their
+# descriptions are in the file of the item that `from` names.
+name: rdp_activity
+caption: RDP Activity
+uid: 4005
+category: network
+category_uid: 4
+extends: network
+description: Remote Desktop Protocol (RDP) Activity events report remote client connections to a server as seen on the network.
+profiles: [cloud, container, data_classification, datetime, host, load_balancer, network_proxy, security_control]
+attributes:
+  action_id: {caption: Action ID, type: integer_t, requirement: required, group: primary, profile: security_control, sibling: action, enum: {0: Unknown, 1: Allowed, 2: Denied, 99: Other}, from: network}
+  activity_id:
+    caption: Activity ID
+    type: integer_t
+    requirement: required
+    group: classification
+    sibling: activity_name
+    description: The normalized identifier of the activity that triggered the event.
+    enum:
+      0:
+        caption: Unknown
+        description: The event activity is unknown.
+      1:
+        caption: Initial Request
+        description: The initial RDP request.
+      2:
+        caption: Initial Response
+        description: The initial RDP response.
+      3:
+        caption: Connect Request
+        description: An RDP connection request.
+      4:
+        caption: Connect Response
+        description: An RDP connection response.
+      5:
+        caption: TLS Handshake
+        description: The TLS handshake.
+      6:
+        caption: Traffic
+        description: Network traffic report.
+      99:
+        caption: Other
+        description: The event activity is not mapped. See the `activity_name` attribute, which contains a data source specific value.
+  category_uid:
+    caption: Category ID
+    type: integer_t
+    requirement: required
+    group: classification
+    from: base_event
+    sibling: category_name
+    description: The category unique identifier of the event.
+    enum:
+      4:
+        caption: Network Activity
+        description: Network Activity events.
+  class_uid:
+    caption: Class ID
+    type: integer_t
+    requirement: required
+    group: classification
+    sibling: class_name
+    description: The unique identifier of a class. A class describes the attributes available in an event.
+    enum:
+      4005:
+        caption: RDP Activity
+        description: Remote Desktop Protocol (RDP) Activity events report remote client connections to a server as seen on the network.
+  cloud: {caption: Cloud, type: object_t, object: cloud, requirement: required, group: primary, profile: cloud, from: base_event}
+  dst_endpoint: {caption: Destination Endpoint, type: object_t, object: network_endpoint, requirement: required, group: primary, observable: 20, from: network}
+  metadata: {caption: Metadata, type: object_t, object: metadata, requirement: required, group: context, from: base_event}
+  severity_id: {caption: Severity ID, type: integer_t, requirement: required, group: classification, sibling: severity, enum: {0: Unknown, 1: Informational, 2: Low, 3: Medium, 4: High, 5: Critical, 6: Fatal, 99: Other}, from: base_event}
+  src_endpoint: {caption: Source Endpoint, type: object_t, object: network_endpoint, requirement: required, group: primary, observable: 20, from: network}
+  time: {caption: Event Time, type: timestamp_t, requirement: required, group: occurrence, from: base_event}
+  type_uid:
+    caption: Type ID
+    type: long_t
+    requirement: required
+    group: classification
+    sibling: type_name
+    description: 'The event/finding type ID. It identifies the event''s semantics and structure. The value is calculated by the logging system as: `class_uid * 100 + activity_id`.'
+  certificate_chain:
+    caption: Certificate Chain
+    type: string_t
+    array: true
+    requirement: recommended
+    group: primary
+    description: The list of observed certificates in an RDP TLS connection.
+  connection_info: {caption: Connection Info, type: object_t, object: network_connection_info, requirement: recommended, group: primary, from: network}
+  disposition_id:
+    caption: Disposition ID
+    type: integer_t
+    requirement: recommended
+    group: primary
+    profile: security_control
+    sibling: disposition
+    enum:
+      0: Unknown
+      1: Allowed
+      2: Blocked
+      3: Quarantined
+      4: Isolated
+      5: Deleted
+      6: Dropped
+      7: Custom Action
+      8: Approved
+      9: Restored
+      10: Exonerated
+      11: Corrected
+      12: Partially Corrected
+      13: Uncorrected
+      14: Delayed
+      15: Detected
+      16: No Action
+      17: Logged
+      18: Tagged
+      19: Alert
+      20: Count
+      21: Reset
+      22: Captcha
+      23: Challenge
+      24: Access Revoked
+      25: Rejected
+      26: Unauthorized
+      27: Error
+      99: Other
+    from: network
+  load_balancer: {caption: Load Balancer, type: object_t, object: load_balancer, requirement: recommended, group: primary, profile: load_balancer, from: network}
+  message: {caption: Message, type: string_t, requirement: recommended, group: primary, from: base_event}
+  observables: {caption: Observables, type: object_t, object: observable, array: true, requirement: recommended, group: primary, from: base_event}
+  protocol_ver:
+    caption: RDP Version
+    type: string_t
+    requirement: recommended
+    group: context
+    description: The Remote Desktop Protocol version.
+  proxy: {caption: Proxy, type: object_t, object: network_proxy, requirement: recommended, group: primary, observable: 20, deprecated: {since: 1.1.0, message: Use the  `proxy_endpoint`  attribute instead.}, from: network}
+  proxy_connection_info: {caption: Proxy Connection Info, type: object_t, object: network_connection_info, requirement: recommended, group: context, profile: network_proxy, from: network}
+  proxy_tls: {caption: Proxy TLS, type: object_t, object: tls, requirement: recommended, group: context, profile: network_proxy, from: network}
+  proxy_traffic: {caption: Proxy Traffic, type: object_t, object: network_traffic, requirement: recommended, group: context, profile: network_proxy, from: network}
+  request:
+    caption: API Request Details
+    type: object_t
+    object: request
+    requirement: recommended
+    group: primary
+    description: The client request in an RDP network connection.
+  response:
+    caption: API Response Details
+    type: object_t
+    object: response
+    requirement: recommended
+    group: primary
+    description: The server response in an RDP network connection.
+  status: {caption: Status, type: string_t, requirement: recommended, group: primary, from: base_event}
+  status_code: {caption: Status Code, type: string_t, requirement: recommended, group: primary, from: base_event}
+  status_detail: {caption: Status Details, type: string_t, requirement: recommended, group: primary, from: base_event}
+  status_id: {caption: Status ID, type: integer_t, requirement: recommended, group: primary, sibling: status, enum: {0: Unknown, 1: Success, 2: Failure, 99: Other}, from: base_event}
+  timezone_offset: {caption: Timezone Offset, type: integer_t, requirement: recommended, group: occurrence, from: base_event}
+  traffic: {caption: Traffic, type: object_t, object: network_traffic, requirement: recommended, group: primary, from: network}
+  action: {caption: Action, type: string_t, requirement: optional, group: primary, profile: security_control, from: network}
+  activity_name: {caption: Activity, type: string_t, requirement: optional, group: classification, from: base_event}
+  actor: {caption: Actor, type: object_t, object: actor, requirement: optional, group: primary, profile: host, from: network}
+  api: {caption: API Details, type: object_t, object: api, requirement: optional, group: context, profile: cloud, from: base_event}
+  app_name: {caption: Application Name, type: string_t, requirement: optional, group: context, from: network}
+  attacks: {caption: MITRE ATT&CK® Details, type: object_t, object: attack, array: true, requirement: optional, group: primary, profile: security_control, from: network}
+  authorizations: {caption: Authorization Information, type: object_t, object: authorization, array: true, requirement: optional, group: primary, profile: security_control, from: network}
+  capabilities:
+    caption: Capabilities
+    type: string_t
+    array: true
+    requirement: optional
+    description: A list of RDP capabilities.
+  category_name:
+    caption: Category
+    type: string_t
+    requirement: optional
+    group: classification
+    from: base_event
+    description: 'The event category name, as defined by category_uid value: `Network Activity`.'
+  class_name:
+    caption: Class
+    type: string_t
+    requirement: optional
+    group: classification
+    from: base_event
+    description: 'The event class name, as defined by class_uid value: `RDP Activity`.'
+  count: {caption: Count, type: integer_t, requirement: optional, group: occurrence, from: base_event}
+  device:
+    caption: Device
+    type: object_t
+    object: device
+    requirement: optional
+    group: primary
+    profile: host
+    observable: 20
+    description: The device instigating the RDP connection.
+  disposition: {caption: Disposition, type: string_t, requirement: optional, group: primary, profile: security_control, from: network}
+  duration: {caption: Duration, type: integer_t, requirement: optional, group: occurrence, from: base_event}
+  end_time: {caption: End Time, type: timestamp_t, requirement: optional, group: occurrence, from: base_event}
+  end_time_dt: {caption: End Time, type: datetime_t, requirement: optional, group: occurrence, profile: datetime, from: base_event}
+  enrichments: {caption: Enrichments, type: object_t, object: enrichment, array: true, requirement: optional, group: context, from: base_event}
+  file:
+    caption: File
+    type: object_t
+    object: file
+    requirement: optional
+    group: context
+    observable: 24
+    description: The file that is the target of the RDP activity.
+  firewall_rule: {caption: Firewall Rule, type: object_t, object: firewall_rule, requirement: optional, group: primary, profile: security_control, from: network}
+  identifier_cookie:
+    caption: Identifier Cookie
+    type: string_t
+    requirement: optional
+    group: context
+    description: The client identifier cookie during client/server exchange.
+  malware: {caption: Malware, type: object_t, object: malware, array: true, requirement: optional, group: primary, profile: security_control, from: network}
+  proxy_endpoint: {caption: Proxy Endpoint, type: object_t, object: network_proxy, requirement: optional, group: context, profile: network_proxy, observable: 20, from: network}
+  proxy_http_request: {caption: Proxy HTTP Request, type: object_t, object: http_request, requirement: optional, group: context, profile: network_proxy, from: network}
+  proxy_http_response: {caption: Proxy HTTP Response, type: object_t, object: http_response, requirement: optional, group: context, profile: network_proxy, from: network}
+  raw_data: {caption: Raw Data, type: string_t, requirement: optional, group: context, from: base_event}
+  remote_display:
+    caption: Remote Display
+    type: object_t
+    object: display
+    requirement: optional
+    description: The remote display affiliated with the event
+  severity: {caption: Severity, type: string_t, requirement: optional, group: classification, from: base_event}
+  start_time: {caption: Start Time, type: timestamp_t, requirement: optional, group: occurrence, from: base_event}
+  start_time_dt: {caption: Start Time, type: datetime_t, requirement: optional, group: occurrence, profile: datetime, from: base_event}
+  time_dt: {caption: Event Time, type: datetime_t, requirement: optional, group: occurrence, profile: datetime, from: base_event}
+  tls: {caption: TLS, type: object_t, object: tls, requirement: optional, group: primary, from: network}
+  type_name: {caption: Type Name, type: string_t, requirement: optional, group: classification, from: base_event}
+  unmapped: {caption: Unmapped Data, type: object_t, object: object, requirement: optional, group: context, from: base_event}

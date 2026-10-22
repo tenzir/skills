@@ -1,0 +1,87 @@
+name: evidences
+caption: Evidence Artifacts
+extends: object
+description: A collection of evidence artifacts associated to the activity/activities that triggered a security detection.
+profiles: [container, data_classification]
+constraints:
+  at_least_one: [actor, api, connection_info, data, database, databucket, dst_endpoint, file, process, query, src_endpoint]
+referenced_by:
+  classes:
+    detection_finding: [evidences]
+attributes:
+  actor:
+    caption: Actor
+    type: object_t
+    object: actor
+    requirement: recommended
+    description: Describes details about the user/role/process that was the source of the activity that triggered the detection.
+  api:
+    caption: API Details
+    type: object_t
+    object: api
+    requirement: recommended
+    description: Describes details about the API call associated to the activity that triggered the detection.
+  connection_info:
+    caption: Connection Info
+    type: object_t
+    object: network_connection_info
+    requirement: recommended
+    description: Describes details about the network connection associated to the activity that triggered the detection.
+  container:
+    caption: Container
+    type: object_t
+    object: container
+    requirement: recommended
+    observable: 27
+    description: Describes details about the container associated to the activity that triggered the detection.
+  database:
+    caption: Database
+    type: object_t
+    object: database
+    requirement: recommended
+    description: Describes details about the database associated to the activity that triggered the detection.
+  databucket:
+    caption: Databucket
+    type: object_t
+    object: databucket
+    requirement: recommended
+    description: Describes details about the databucket associated to the activity that triggered the detection.
+  dst_endpoint:
+    caption: Destination Endpoint
+    type: object_t
+    object: network_endpoint
+    requirement: recommended
+    observable: 20
+    description: Describes details about the destination of the network activity that triggered the detection.
+  file:
+    caption: File
+    type: object_t
+    object: file
+    requirement: recommended
+    observable: 24
+    description: Describes details about the file associated to the activity that triggered the detection.
+  process:
+    caption: Process
+    type: object_t
+    object: process
+    requirement: recommended
+    observable: 25
+    description: Describes details about the process associated to the activity that triggered the detection.
+  query:
+    caption: DNS Query
+    type: object_t
+    object: dns_query
+    requirement: recommended
+    description: Describes details about the DNS query associated to the activity that triggered the detection.
+  src_endpoint:
+    caption: Source Endpoint
+    type: object_t
+    object: network_endpoint
+    requirement: recommended
+    observable: 20
+    description: Describes details about the source of the network activity that triggered the detection.
+  data:
+    caption: Data
+    type: json_t
+    requirement: optional
+    description: Additional evidence data that is not accounted for in the specific evidence attributes. `Use only when absolutely necessary.`

@@ -1,0 +1,29 @@
+name: d3f_tactic
+caption: MITRE D3FEND™ Tactic
+extends: _entity
+description: The MITRE D3FEND™ Tactic object describes the tactic ID and/or name that is associated to an attack.
+constraints:
+  at_least_one: [name, uid]
+references:
+- description: D3FEND™ Matrix
+  url: https://d3fend.mitre.org
+referenced_by:
+  objects:
+    d3fend: [d3f_tactic]
+attributes:
+  name:
+    caption: Name
+    type: string_t
+    requirement: recommended
+    description: 'The tactic name that is associated with the defensive technique. For example: `Isolate`.'
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: recommended
+    description: The unique identifier of the defensive tactic.
+  src_url:
+    caption: Source URL
+    type: url_t
+    requirement: optional
+    observable: 6
+    description: 'The versioned permalink of the defensive tactic. For example: `https://d3fend.mitre.org/tactic/d3f:Isolate/`.'

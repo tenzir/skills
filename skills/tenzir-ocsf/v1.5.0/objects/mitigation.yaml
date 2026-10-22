@@ -1,0 +1,40 @@
+name: mitigation
+caption: MITRE Mitigation
+extends: _entity
+description: The MITRE Mitigation object describes the ATT&CK® or ATLAS™ Mitigation ID and/or name that is associated to an attack.
+constraints:
+  at_least_one: [name, uid]
+references:
+- description: ATT&CK® Matrix
+  url: https://attack.mitre.org/wiki/ATT&CK_Matrix
+- description: ATLAS™ Matrix
+  url: https://atlas.mitre.org/matrices/ATLAS
+- description: ATT&CK® Mitigation to D3FEND™ Technique Mappings
+  url: https://d3fend.mitre.org/mappings/attack-mitigations/
+referenced_by:
+  objects:
+    attack: [mitigation]
+attributes:
+  name:
+    caption: Name
+    type: string_t
+    requirement: recommended
+    description: 'The Mitigation name that is associated with the attack technique. For example: `Password Policies`, or `Code Signing`.'
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: recommended
+    description: 'The Mitigation ID that is associated with the attack technique. For example: `M1027`, or `AML.M0013`.'
+  countermeasures:
+    caption: Countermeasures
+    type: object_t
+    object: d3fend
+    array: true
+    requirement: optional
+    description: 'The D3FEND countermeasures that are associated with the attack technique. For example: ATT&CK Technique `T1003` is addressed by Mitigation `M1027`, and D3FEND Technique `D3-OTP`.'
+  src_url:
+    caption: Source URL
+    type: url_t
+    requirement: optional
+    observable: 6
+    description: 'The versioned permalink of the Mitigation. For example: `https://attack.mitre.org/versions/v14/mitigations/M1027`.'

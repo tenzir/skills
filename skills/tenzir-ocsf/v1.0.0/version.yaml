@@ -1,0 +1,21 @@
+version: 1.0.0
+status: stable
+source:
+  repository: https://github.com/ocsf/ocsf-schema.git
+  ref: v1.0.0
+  commit: 9608805fe0b61035cb821bb9068096fe47fed12d
+  compiler: ocsf-schema-compiler 1.1.1
+extensions:
+  linux:
+    uid: 1
+    caption: Linux
+    description: The Linux extension defines Linux specific attributes.
+    profiles: [linux/linux_users]
+    patches:
+      objects: [process]
+  win:
+    uid: 2
+    caption: Windows
+    description: The Windows extension defines Windows specific attributes.
+    classes: [win/registry_key_activity, win/registry_value_activity, win/resource_activity]
+    objects: [win/registry_key, win/registry_value, win/win_resource]

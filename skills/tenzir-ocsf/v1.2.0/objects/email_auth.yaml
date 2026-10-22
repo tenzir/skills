@@ -1,0 +1,43 @@
+name: email_auth
+caption: Email Authentication
+extends: object
+description: The Email Authentication object describes the Sender Policy Framework (SPF), DomainKeys Identified Mail (DKIM) and Domain-based Message Authentication, Reporting and Conformance (DMARC) attributes of an email.
+referenced_by:
+  classes:
+    email_activity: [email_auth]
+attributes:
+  dkim:
+    caption: DKIM Status
+    type: string_t
+    requirement: recommended
+    description: The DomainKeys Identified Mail (DKIM) status of the email.
+  dkim_domain:
+    caption: DKIM Domain
+    type: string_t
+    requirement: recommended
+    description: The DomainKeys Identified Mail (DKIM) signing domain of the email.
+  dkim_signature:
+    caption: DKIM Signature
+    type: string_t
+    requirement: recommended
+    description: The DomainKeys Identified Mail (DKIM) signature used by the sending/receiving system.
+  dmarc:
+    caption: DMARC Status
+    type: string_t
+    requirement: recommended
+    description: The Domain-based Message Authentication, Reporting and Conformance (DMARC) status of the email.
+  dmarc_override:
+    caption: DMARC Override
+    type: string_t
+    requirement: recommended
+    description: The Domain-based Message Authentication, Reporting and Conformance (DMARC) override action.
+  dmarc_policy:
+    caption: DMARC Policy
+    type: string_t
+    requirement: recommended
+    description: The Domain-based Message Authentication, Reporting and Conformance (DMARC) policy status.
+  spf:
+    caption: SPF Status
+    type: string_t
+    requirement: recommended
+    description: The Sender Policy Framework (SPF) status of the email.

@@ -1,0 +1,47 @@
+# Attributes with `from` but no description are inherited unchanged. Their
+# descriptions are in the file of the item that `from` names.
+name: web_resource
+caption: Web Resource
+extends: _resource
+description: The Web Resource object describes characteristics of a web resource that was affected by the activity/event.
+profiles: [data_classification]
+constraints:
+  at_least_one: [name, uid]
+referenced_by:
+  classes:
+    web_resource_access_activity: [web_resources]
+    web_resources_activity: [web_resources, web_resources_result]
+attributes:
+  data_classification: {caption: Data Classification, type: object_t, object: data_classification, requirement: recommended, group: context, profile: data_classification, from: _resource}
+  name:
+    caption: Name
+    type: string_t
+    requirement: recommended
+    description: The name of the web resource.
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: recommended
+    description: The unique identifier of the web resource.
+  url_string:
+    caption: URL String
+    type: url_t
+    requirement: recommended
+    observable: 6
+    description: The URL pointing towards the source of the web resource.
+  data:
+    caption: Data
+    type: json_t
+    requirement: optional
+    description: Details of the web resource, e.g, `file` details, `search` results or application-defined resource.
+  desc:
+    caption: Description
+    type: string_t
+    requirement: optional
+    description: Description of the web resource.
+  labels: {caption: Labels, type: string_t, array: true, requirement: optional, from: _resource}
+  type:
+    caption: Type
+    type: string_t
+    requirement: optional
+    description: The web resource type as defined by the event source.

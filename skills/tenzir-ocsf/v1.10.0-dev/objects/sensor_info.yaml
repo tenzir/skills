@@ -1,0 +1,54 @@
+# Attributes with `from` but no description are inherited unchanged. Their
+# descriptions are in the file of the item that `from` names.
+name: sensor_info
+caption: Sensor Information
+extends: _entity
+description: The Sensor Information object describes a control point sensor that emits data, or originates detections. It can be part of an endpoint or agent running on an OS, a SaaS application, a network device, a Cyber Threat Intelligence (CTI) system, or other detection and enforcement technologies.
+constraints:
+  at_least_one: [name, uid]
+referenced_by:
+  objects:
+    analytic: [sensor_info_list]
+attributes:
+  sensor_layer_id:
+    caption: Sensor Layer ID
+    type: integer_t
+    requirement: required
+    sibling: sensor_layer
+    description: The normalized identifier of the sensor layer that emitted the data. For example, use this to classify the detection surface (e.g., IPS sensor, endpoint agent, email gateway). When the type is not listed, use `99` (Other) and populate `sensor_layer` with the source-specific label.
+    enum:
+      0:
+        caption: Unknown
+        description: The sensor layer type is Unknown.
+      1:
+        caption: Network
+        description: The analyzed data is emitted by, or originates from a network, firewall, or IPS sensor.
+      2:
+        caption: Endpoint
+        description: The analyzed data is emitted by, or originates from an endpoint device or agent running on an OS.
+      3:
+        caption: Email
+        description: The analyzed data is emitted by, or originates from an email gateway or email security system.
+      4:
+        caption: IAM
+        description: The analyzed data is emitted by, or originates from an identity and access management (IAM) system or service.
+      5:
+        caption: Proxy
+        description: The analyzed data is emitted by, or originates from a proxy server (e.g., forward or reverse proxy, web gateway).
+      6:
+        caption: Threat Intel
+        description: The analyzed data is emitted by, or originates from a cyber threat intelligence (CTI) system or by matching observables against a threat intelligence feed or report.
+      7:
+        caption: Application
+        description: The analyzed data is emitted by, or originates from an application (e.g., web application, SaaS platform, or custom business application).
+      99:
+        caption: Other
+        description: The sensor layer type is not mapped. See the `sensor_layer` attribute, which contains a data source specific value.
+  name: {caption: Name, type: string_t, requirement: recommended, from: _entity}
+  uid: {caption: Unique ID, type: string_t, requirement: recommended, from: _entity}
+  sensor_layer:
+    caption: Sensor Layer
+    type: string_t
+    requirement: optional
+    description: The technology or sensor layer that emitted the data, normalized to the caption of `sensor_layer_id`. When `sensor_layer_id` is `99` (Other), this attribute must contain the source-specific label.
+  uid_numeric: {caption: Numeric Unique ID, type: long_t, requirement: optional, from: _entity}

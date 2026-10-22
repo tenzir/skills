@@ -1,0 +1,62 @@
+name: _resource
+caption: Resource
+abstract: true
+extends: _entity
+description: The Resource object contains attributes that provide information about a particular resource. It serves as a base object, offering attributes that help identify and classify the resource effectively.
+profiles: [data_classification]
+constraints:
+  at_least_one: [name, uid]
+attributes:
+  data_classification:
+    caption: Data Classification
+    type: object_t
+    object: data_classification
+    requirement: recommended
+    group: context
+    profile: data_classification
+    deprecated:
+      since: 1.4.0
+      message: Use the attribute `data_classifications` instead
+    description: The Data Classification object includes information about data classification levels and data category types.
+  data_classifications:
+    caption: Data Classification
+    type: object_t
+    object: data_classification
+    array: true
+    requirement: recommended
+    group: context
+    profile: data_classification
+    description: A list of Data Classification objects, that include information about data classification levels and data category types, indentified by a classifier.
+  name:
+    caption: Name
+    type: string_t
+    requirement: recommended
+    description: The name of the resource.
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: recommended
+    description: The unique identifier of the resource.
+  data:
+    caption: Data
+    type: json_t
+    requirement: optional
+    description: Additional data describing the resource.
+  labels:
+    caption: Labels
+    type: string_t
+    array: true
+    requirement: optional
+    description: The list of labels associated to the resource.
+  tags:
+    caption: Tags
+    type: object_t
+    object: key_value_object
+    array: true
+    requirement: optional
+    description: The list of tags; `{key:value}` pairs associated to the resource.
+  type:
+    caption: Type
+    type: string_t
+    requirement: optional
+    description: The resource type as defined by the event source.

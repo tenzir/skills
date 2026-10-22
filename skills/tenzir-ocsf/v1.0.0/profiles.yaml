@@ -1,0 +1,173 @@
+cloud:
+  caption: Cloud
+  description: The attributes that describe information specific to Cloud services/applications.
+  applies_to:
+    classes: [account_change, api_activity, application_lifecycle, authentication, authorize_session, base_event, config_state, dhcp_activity, dns_activity, email_activity, email_file_activity, email_url_activity, entity_management, file_activity, ftp_activity, group_management, http_activity, inventory_info, kernel_activity, kernel_extension, memory_activity, module_activity, network_activity, network_file_activity, process_activity, rdp_activity, scheduled_job_activity, security_finding, smb_activity, ssh_activity, user_access, web_resource_access_activity, web_resources_activity, win/registry_key_activity, win/registry_value_activity, win/resource_activity]
+  attributes:
+    api:
+      caption: API Details
+      type: object_t
+      object: api
+      requirement: optional
+      group: context
+      description: Describes details about a typical API (Application Programming Interface) call.
+    cloud:
+      caption: Cloud
+      type: object_t
+      object: cloud
+      requirement: required
+      group: primary
+      description: Describes details about the Cloud environment where the event was originally created or logged.
+container:
+  caption: Container
+  description: The container context for a process.
+  applies_to:
+    objects: [process]
+  attributes:
+    container:
+      caption: Container
+      type: object_t
+      object: container
+      requirement: recommended
+      observable: 27
+      description: The information describing an instance of a container. A container is a prepackaged, portable system image that runs isolated on an existing system using a container runtime like containerd.
+    namespace_pid:
+      caption: Namespace PID
+      type: integer_t
+      requirement: recommended
+      description: If running under a process namespace (such as in a container), the process identifier within that process namespace.
+datetime:
+  caption: Date/Time
+  description: This profile defines date/time attributes as defined in RFC-3339. For example 1985-04-12T23:20:50.52Z.
+  applies_to:
+    classes: [account_change, api_activity, application_lifecycle, authentication, authorize_session, base_event, config_state, dhcp_activity, dns_activity, email_activity, email_file_activity, email_url_activity, entity_management, file_activity, ftp_activity, group_management, http_activity, inventory_info, kernel_activity, kernel_extension, memory_activity, module_activity, network_activity, network_file_activity, process_activity, rdp_activity, scheduled_job_activity, security_finding, smb_activity, ssh_activity, user_access, web_resource_access_activity, web_resources_activity, win/registry_key_activity, win/registry_value_activity, win/resource_activity]
+  attributes: {}
+host:
+  caption: Host
+  description: The attributes that identify host/device attributes.
+  applies_to:
+    classes: [account_change, application_lifecycle, authentication, authorize_session, config_state, dhcp_activity, dns_activity, email_activity, email_file_activity, email_url_activity, entity_management, file_activity, ftp_activity, group_management, http_activity, inventory_info, kernel_activity, kernel_extension, memory_activity, module_activity, network_activity, process_activity, rdp_activity, scheduled_job_activity, smb_activity, ssh_activity, user_access, web_resource_access_activity, web_resources_activity, win/registry_key_activity, win/registry_value_activity, win/resource_activity]
+  attributes:
+    actor:
+      caption: Actor
+      type: object_t
+      object: actor
+      requirement: optional
+      group: primary
+      description: The actor object describes details about the user/role/process that was the source of the activity.
+    device:
+      caption: Device
+      type: object_t
+      object: device
+      requirement: recommended
+      group: primary
+      observable: 20
+      description: An addressable device, computer system or host.
+security_control:
+  caption: Security Control
+  description: The attributes that identify security controls such as malware or policy violations.
+  applies_to:
+    classes: [dns_activity, email_activity, email_file_activity, email_url_activity, file_activity, ftp_activity, http_activity, kernel_activity, kernel_extension, memory_activity, module_activity, network_activity, process_activity, rdp_activity, scheduled_job_activity, smb_activity, ssh_activity, win/registry_key_activity, win/registry_value_activity, win/resource_activity]
+  attributes:
+    attacks:
+      caption: Attacks
+      type: object_t
+      object: attack
+      array: true
+      requirement: recommended
+      group: primary
+      description: An array of attacks associated with an event.
+    disposition:
+      caption: Disposition
+      type: string_t
+      requirement: optional
+      group: primary
+      description: The event disposition name, normalized to the caption of the disposition_id value. In the case of 'Other', it is defined by the event source.
+    disposition_id:
+      caption: Disposition ID
+      type: integer_t
+      requirement: required
+      group: primary
+      sibling: disposition
+      description: When security issues, such as malware or policy violations, are detected and possibly corrected, then `disposition_id` describes the action taken by the security product.
+      enum:
+        0:
+          caption: Unknown
+        1:
+          caption: Allowed
+        2:
+          caption: Blocked
+        3:
+          caption: Quarantined
+        4:
+          caption: Isolated
+        5:
+          caption: Deleted
+        6:
+          caption: Dropped
+        7:
+          caption: Custom Action
+          description: Executed custom action such as run a command script.
+        8:
+          caption: Approved
+        9:
+          caption: Restored
+        10:
+          caption: Exonerated
+          description: No longer suspicious (re-scored).
+        11:
+          caption: Corrected
+        12:
+          caption: Partially Corrected
+        13:
+          caption: Uncorrected
+        14:
+          caption: Delayed
+          description: Requires reboot to finish the operation.
+        15:
+          caption: Detected
+        16:
+          caption: No Action
+        17:
+          caption: Logged
+        18:
+          caption: Tagged
+          description: Marked with extended attributes.
+        99:
+          caption: Other
+    malware:
+      caption: Malware
+      type: object_t
+      object: malware
+      array: true
+      requirement: optional
+      group: primary
+      description: The list of malware identified by a finding.
+linux/linux_users:
+  caption: Linux
+  extension: linux
+  description: The attributes that Linux uses to identify user information.
+  applies_to:
+    objects: [process]
+  attributes:
+    auid:
+      caption: Audit User ID
+      type: integer_t
+      requirement: optional
+      description: The audit user assigned at login by the audit subsystem.
+    egid:
+      caption: Effective Group ID
+      type: integer_t
+      requirement: optional
+      description: The effective group under which this process is running.
+    euid:
+      caption: Effective User ID
+      type: integer_t
+      requirement: optional
+      description: The effective user under which this process is running.
+    group:
+      caption: Group
+      type: object_t
+      object: group
+      requirement: recommended
+      description: The group under which this process is running.

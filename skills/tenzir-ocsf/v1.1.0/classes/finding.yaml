@@ -1,0 +1,185 @@
+# Attributes with `from` but no description are inherited unchanged. Their
+# descriptions are in the file of the item that `from` names.
+name: finding
+caption: Finding
+category: findings
+abstract: true
+extends: base_event
+description: The Finding event is a generic event that defines a set of attributes available in the Findings category.
+profiles: [cloud, datetime, host]
+attributes:
+  activity_id:
+    caption: Activity ID
+    type: integer_t
+    requirement: required
+    group: classification
+    sibling: activity_name
+    description: The normalized identifier of the finding activity.
+    enum:
+      0:
+        caption: Unknown
+        description: The event activity is unknown.
+      1:
+        caption: Create
+        description: A finding was created.
+      2:
+        caption: Update
+        description: A finding was updated.
+      3:
+        caption: Close
+        description: A finding was closed.
+      99:
+        caption: Other
+        description: The event activity is not mapped. See the `activity_name` attribute, which contains a data source specific value.
+  category_uid: {caption: Category ID, type: integer_t, requirement: required, group: classification, sibling: category_name, enum: {0: Uncategorized}, from: base_event}
+  class_uid:
+    caption: Class ID
+    type: integer_t
+    requirement: required
+    group: classification
+    from: base_event
+    sibling: class_name
+    description: The unique identifier of a class. A Class describes the attributes available in an event.
+    enum:
+      0:
+        caption: Base Event
+  cloud: {caption: Cloud, type: object_t, object: cloud, requirement: required, group: primary, profile: cloud, from: base_event}
+  finding_info:
+    caption: Finding Information
+    type: object_t
+    object: finding_info
+    requirement: required
+    group: primary
+    description: Describes the supporting information about a generated finding.
+  metadata: {caption: Metadata, type: object_t, object: metadata, requirement: required, group: context, from: base_event}
+  severity_id: {caption: Severity ID, type: integer_t, requirement: required, group: classification, sibling: severity, enum: {0: Unknown, 1: Informational, 2: Low, 3: Medium, 4: High, 5: Critical, 6: Fatal, 99: Other}, from: base_event}
+  time: {caption: Event Time, type: timestamp_t, requirement: required, group: occurrence, from: base_event}
+  type_uid: {caption: Type ID, type: long_t, requirement: required, group: classification, sibling: type_name, from: base_event}
+  confidence_id:
+    caption: Confidence Id
+    type: integer_t
+    requirement: recommended
+    group: context
+    description: The normalized confidence refers to the accuracy of the rule that created the finding. A rule with a low confidence means that the finding scope is wide and may create finding reports that may not be malicious in nature.
+    enum:
+      0:
+        caption: Unknown
+        description: The normalized confidence is unknown.
+      1:
+        caption: Low
+      2:
+        caption: Medium
+      3:
+        caption: High
+      99:
+        caption: Other
+        description: The confidence is not mapped to the defined enum values. See the `confidence` attribute, which contains a data source specific value.
+  message: {caption: Message, type: string_t, requirement: recommended, group: primary, from: base_event}
+  status_id:
+    caption: Status ID
+    type: integer_t
+    requirement: recommended
+    group: context
+    sibling: status
+    description: The normalized status identifier of the Finding, set by the consumer.
+    enum:
+      0:
+        caption: Unknown
+        description: The status is unknown.
+      1:
+        caption: New
+        description: The Finding is new and yet to be reviewed.
+      2:
+        caption: In Progress
+        description: The Finding is under review.
+      3:
+        caption: Suppressed
+        description: The Finding was reviewed, determined to be benign or a false positive and is now suppressed.
+      4:
+        caption: Resolved
+        description: The Finding was reviewed, remediated and is now considered resolved.
+      99:
+        caption: Other
+        description: The event status is not mapped. See the `status` attribute, which contains a data source specific value.
+  timezone_offset: {caption: Timezone Offset, type: integer_t, requirement: recommended, group: occurrence, from: base_event}
+  activity_name:
+    caption: Activity
+    type: string_t
+    requirement: optional
+    group: classification
+    description: The finding activity name, as defined by the `activity_id`.
+  actor:
+    caption: Actor
+    type: object_t
+    object: actor
+    requirement: optional
+    group: primary
+    profile: host
+    description: The actor object describes details about the user/role/process that was the source of the activity.
+  api: {caption: API Details, type: object_t, object: api, requirement: optional, group: context, profile: cloud, from: base_event}
+  category_name: {caption: Category, type: string_t, requirement: optional, group: classification, from: base_event}
+  class_name:
+    caption: Class
+    type: string_t
+    requirement: optional
+    group: classification
+    from: base_event
+    description: The event class name, as defined by class_uid value.
+  comment:
+    caption: Comment
+    type: string_t
+    requirement: optional
+    group: context
+    description: A user provided comment about the finding.
+  confidence:
+    caption: Confidence
+    type: string_t
+    requirement: optional
+    group: context
+    description: The confidence, normalized to the caption of the confidence_id value. In the case of 'Other', it is defined by the event source.
+  confidence_score:
+    caption: Confidence Score
+    type: integer_t
+    requirement: optional
+    group: context
+    description: The confidence score as reported by the event source.
+  count: {caption: Count, type: integer_t, requirement: optional, group: occurrence, from: base_event}
+  device:
+    caption: Device
+    type: object_t
+    object: device
+    requirement: optional
+    group: primary
+    profile: host
+    observable: 20
+    description: |-
+      Describes the affected device/host. It can be used in conjunction with `Affected Resource(s)`.
+
+      e.g. Specific details about an AWS EC2 instance, that is affected by the Finding.
+  duration: {caption: Duration, type: integer_t, requirement: optional, group: occurrence, from: base_event}
+  end_time:
+    caption: End Time
+    type: timestamp_t
+    requirement: optional
+    group: occurrence
+    description: The time of the most recent event included in the finding.
+  enrichments: {caption: Enrichments, type: object_t, object: enrichment, array: true, requirement: optional, group: context, from: base_event}
+  observables: {caption: Observables, type: object_t, object: observable, array: true, requirement: optional, group: primary, from: base_event}
+  raw_data: {caption: Raw Data, type: string_t, requirement: optional, group: context, from: base_event}
+  severity: {caption: Severity, type: string_t, requirement: optional, group: classification, from: base_event}
+  start_time:
+    caption: Start Time
+    type: timestamp_t
+    requirement: optional
+    group: occurrence
+    description: The time of the least recent event included in the finding.
+  status:
+    caption: Status
+    type: string_t
+    requirement: optional
+    group: context
+    description: The normalized status of the Finding set by the consumer normalized to the caption of the status_id value. In the case of 'Other', it is defined by the source.
+  status_code: {caption: Status Code, type: string_t, requirement: optional, group: primary, from: base_event}
+  status_detail: {caption: Status Details, type: string_t, requirement: optional, group: primary, from: base_event}
+  type_name: {caption: Type Name, type: string_t, requirement: optional, group: classification, from: base_event}
+  unmapped: {caption: Unmapped Data, type: object_t, object: object, requirement: optional, group: context, from: base_event}

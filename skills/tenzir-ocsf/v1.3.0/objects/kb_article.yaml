@@ -1,0 +1,110 @@
+name: kb_article
+caption: KB Article
+extends: object
+description: The KB Article object contains metadata that describes the patch or update.
+profiles: [data_classification, datetime]
+referenced_by:
+  classes:
+    patch_state: [kb_article_list]
+  objects:
+    compliance: [compliance_references, compliance_standards]
+    remediation: [kb_article_list]
+    vulnerability: [kb_article_list]
+attributes:
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: required
+    description: The unique identifier for the kb article.
+  install_state:
+    caption: Install State
+    type: string_t
+    requirement: recommended
+    description: The install state of the kb article.
+  install_state_id:
+    caption: Install State ID
+    type: integer_t
+    requirement: recommended
+    sibling: install_state
+    description: The normalized install state ID of the kb article.
+    enum:
+      0:
+        caption: Unknown
+        description: The normalized install state is unknown.
+      1:
+        caption: Installed
+        description: The item is installed.
+      2:
+        caption: Not Installed
+        description: The item is not installed.
+      3:
+        caption: Installed Pending Reboot
+        description: The item is installed pending reboot operation.
+      99:
+        caption: Other
+        description: The install state is not mapped. See the `install_state` attribute, which contains a data source specific value.
+  os:
+    caption: OS
+    type: object_t
+    object: os
+    requirement: recommended
+    description: The operating system the kb article applies.
+  severity:
+    caption: Severity
+    type: string_t
+    requirement: recommended
+    description: The severity of the kb article.
+  title:
+    caption: Title
+    type: string_t
+    requirement: recommended
+    description: The title of the kb article.
+  avg_timespan:
+    caption: Average Timespan
+    type: object_t
+    object: timespan
+    requirement: optional
+    description: The average time to patch.
+  bulletin:
+    caption: Patch Bulletin
+    type: string_t
+    requirement: optional
+    description: The kb article bulletin identifier.
+  classification:
+    caption: Classification
+    type: string_t
+    requirement: optional
+    description: The vendors classification of the kb article.
+  created_time:
+    caption: Created Time
+    type: timestamp_t
+    requirement: optional
+    description: The date the kb article was released by the vendor.
+  created_time_dt:
+    caption: Created Time
+    type: datetime_t
+    requirement: optional
+    profile: datetime
+    description: The date the kb article was released by the vendor.
+  is_superseded:
+    caption: The patch is superseded.
+    type: boolean_t
+    requirement: optional
+    description: The kb article has been replaced by another.
+  product:
+    caption: Product
+    type: object_t
+    object: product
+    requirement: optional
+    description: The product details the kb article applies.
+  size:
+    caption: Size
+    type: long_t
+    requirement: optional
+    description: The size in bytes for the kb article.
+  src_url:
+    caption: Source URL
+    type: url_t
+    requirement: optional
+    observable: 6
+    description: The kb article link from the source vendor.

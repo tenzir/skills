@@ -1,0 +1,38 @@
+name: reporter
+caption: Reporter
+extends: _entity
+description: The entity from which an event or finding was reported.
+constraints:
+  at_least_one: [hostname, ip, name, uid]
+referenced_by:
+  objects:
+    metadata: [reporter]
+attributes:
+  hostname:
+    caption: Hostname
+    type: hostname_t
+    requirement: recommended
+    observable: 1
+    description: The hostname of the entity from which the event or finding was reported.
+  ip:
+    caption: IP Address
+    type: ip_t
+    requirement: recommended
+    observable: 2
+    description: The IP address of the entity from which the event or finding was reported.
+  name:
+    caption: Name
+    type: string_t
+    requirement: recommended
+    description: The name of the entity from which the event or finding was reported.
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: recommended
+    description: The unique identifier of the entity from which the event or finding was reported.
+  org:
+    caption: Organization
+    type: object_t
+    object: organization
+    requirement: optional
+    description: The organization properties of the entity that reported the event or finding.

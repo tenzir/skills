@@ -1,0 +1,312 @@
+# Attributes with `from` but no description are inherited unchanged. Their
+# descriptions are in the file of the item that `from` names.
+name: file_hosting
+caption: File Hosting Activity
+uid: 6006
+category: application
+category_uid: 6
+extends: application
+description: File Hosting Activity events report the actions taken by file management applications, including file sharing servers like Sharepoint and services such as Box, MS OneDrive, Google Drive, or network file share services.
+profiles: [cloud, container, data_classification, datetime, host, osint, security_control]
+attributes:
+  activity_id:
+    caption: Activity ID
+    type: integer_t
+    requirement: required
+    group: classification
+    sibling: activity_name
+    description: The normalized identifier of the activity that triggered the event.
+    enum:
+      0:
+        caption: Unknown
+        description: The event activity is unknown.
+      1:
+        caption: Upload
+        description: Upload a file.
+      2:
+        caption: Download
+        description: Download a file.
+      3:
+        caption: Update
+        description: Update a file.
+      4:
+        caption: Delete
+        description: Delete a file.
+      5:
+        caption: Rename
+        description: Rename a file.
+      6:
+        caption: Copy
+        description: Copy a file.
+      7:
+        caption: Move
+        description: Move a file.
+      8:
+        caption: Restore
+        description: Restore a file.
+      9:
+        caption: Preview
+        description: Preview a file.
+      10:
+        caption: Lock
+        description: Lock a file.
+      11:
+        caption: Unlock
+        description: Unlock a file.
+      12:
+        caption: Share
+        description: Share a file.
+      13:
+        caption: Unshare
+        description: Unshare a file.
+      14:
+        caption: Open
+        description: Open a file.
+      15:
+        caption: Sync
+        description: Mark a file or folder to sync with a computer.
+      16:
+        caption: Unsync
+        description: Mark a file or folder to not sync with a computer.
+      17:
+        caption: Access Check
+        description: Access check for a file. The `security_control` profile can be used to add the access check results.
+      99:
+        caption: Other
+        description: The event activity is not mapped. See the `activity_name` attribute, which contains a data source specific value.
+  actor:
+    caption: Actor
+    type: object_t
+    object: actor
+    requirement: required
+    group: primary
+    description: The actor that performed the activity on the target file.
+  category_uid:
+    caption: Category ID
+    type: integer_t
+    requirement: required
+    group: classification
+    from: base_event
+    sibling: category_name
+    description: The category unique identifier of the event.
+    enum:
+      6:
+        caption: Application Activity
+        description: Application Activity events report detailed information about the behavior of applications and services.
+  class_uid:
+    caption: Class ID
+    type: integer_t
+    requirement: required
+    group: classification
+    sibling: class_name
+    description: The unique identifier of a class. A class describes the attributes available in an event.
+    enum:
+      6006:
+        caption: File Hosting Activity
+        description: File Hosting Activity events report the actions taken by file management applications, including file sharing servers like Sharepoint and services such as Box, MS OneDrive, Google Drive, or network file share services.
+  cloud: {caption: Cloud, type: object_t, object: cloud, requirement: required, group: primary, profile: cloud, from: base_event}
+  file:
+    caption: File
+    type: object_t
+    object: file
+    requirement: required
+    group: primary
+    observable: 24
+    description: The file that is the target of the activity.
+  metadata: {caption: Metadata, type: object_t, object: metadata, requirement: required, group: context, from: base_event}
+  osint: {caption: OSINT, type: object_t, object: osint, array: true, requirement: required, group: primary, profile: osint, from: base_event}
+  severity_id: {caption: Severity ID, type: integer_t, requirement: required, group: classification, sibling: severity, enum: {0: Unknown, 1: Informational, 2: Low, 3: Medium, 4: High, 5: Critical, 6: Fatal, 99: Other}, from: base_event}
+  src_endpoint:
+    caption: Source Endpoint
+    type: object_t
+    object: network_endpoint
+    requirement: required
+    group: primary
+    observable: 20
+    description: The endpoint that performed the activity on the target file.
+  time: {caption: Event Time, type: timestamp_t, requirement: required, group: occurrence, from: base_event}
+  type_uid:
+    caption: Type ID
+    type: long_t
+    requirement: required
+    group: classification
+    sibling: type_name
+    description: 'The event/finding type ID. It identifies the event''s semantics and structure. The value is calculated by the logging system as: `class_uid * 100 + activity_id`.'
+  action_id: {caption: Action ID, type: integer_t, requirement: recommended, group: primary, profile: security_control, sibling: action, enum: {0: Unknown, 1: Allowed, 2: Denied, 3: Observed, 4: Modified, 99: Other}, from: base_event}
+  confidence_id: {caption: Confidence ID, type: integer_t, requirement: recommended, group: context, profile: security_control, sibling: confidence, enum: {0: Unknown, 1: Low, 2: Medium, 3: High, 99: Other}, from: base_event}
+  device: {caption: Device, type: object_t, object: device, requirement: recommended, group: primary, profile: host, observable: 20, from: base_event}
+  disposition_id:
+    caption: Disposition ID
+    type: integer_t
+    requirement: recommended
+    group: primary
+    profile: security_control
+    sibling: disposition
+    enum:
+      0: Unknown
+      1: Allowed
+      2: Blocked
+      3: Quarantined
+      4: Isolated
+      5: Deleted
+      6: Dropped
+      7: Custom Action
+      8: Approved
+      9: Restored
+      10: Exonerated
+      11: Corrected
+      12: Partially Corrected
+      13: Uncorrected
+      14: Delayed
+      15: Detected
+      16: No Action
+      17: Logged
+      18: Tagged
+      19: Alert
+      20: Count
+      21: Reset
+      22: Captcha
+      23: Challenge
+      24: Access Revoked
+      25: Rejected
+      26: Unauthorized
+      27: Error
+      99: Other
+    from: base_event
+  dst_endpoint:
+    caption: Destination Endpoint
+    type: object_t
+    object: network_endpoint
+    requirement: recommended
+    observable: 20
+    description: The endpoint that received the activity on the target file.
+  is_alert: {caption: Alert, type: boolean_t, requirement: recommended, group: primary, profile: security_control, from: base_event}
+  message: {caption: Message, type: string_t, requirement: recommended, group: primary, from: base_event}
+  observables: {caption: Observables, type: object_t, object: observable, array: true, requirement: recommended, group: primary, from: base_event}
+  status: {caption: Status, type: string_t, requirement: recommended, group: primary, from: base_event}
+  status_code: {caption: Status Code, type: string_t, requirement: recommended, group: primary, from: base_event}
+  status_detail: {caption: Status Detail, type: string_t, requirement: recommended, group: primary, from: base_event}
+  status_id: {caption: Status ID, type: integer_t, requirement: recommended, group: primary, sibling: status, enum: {0: Unknown, 1: Success, 2: Failure, 99: Other}, from: base_event}
+  timezone_offset: {caption: Timezone Offset, type: integer_t, requirement: recommended, group: occurrence, from: base_event}
+  access_list:
+    caption: Access List
+    type: string_t
+    array: true
+    requirement: optional
+    group: context
+    description: The list of requested access rights.
+  access_mask:
+    caption: Access Mask
+    type: integer_t
+    requirement: optional
+    group: context
+    description: The sum of hexadecimal values of requested access rights.
+  access_result:
+    caption: Access Check Result
+    type: json_t
+    requirement: optional
+    group: context
+    description: The list of access check results.
+  action: {caption: Action, type: string_t, requirement: optional, group: primary, profile: security_control, from: base_event}
+  activity_name: {caption: Activity, type: string_t, requirement: optional, group: classification, from: base_event}
+  api: {caption: API Details, type: object_t, object: api, requirement: optional, group: context, profile: cloud, from: base_event}
+  attacks: {caption: MITRE ATT&CK® and ATLAS™ Details, type: object_t, object: attack, array: true, requirement: optional, group: primary, profile: security_control, from: base_event}
+  authorizations: {caption: Authorization Information, type: object_t, object: authorization, array: true, requirement: optional, group: primary, profile: security_control, from: base_event}
+  category_name:
+    caption: Category
+    type: string_t
+    requirement: optional
+    group: classification
+    from: base_event
+    description: 'The event category name, as defined by category_uid value: `Application Activity`.'
+  class_name:
+    caption: Class
+    type: string_t
+    requirement: optional
+    group: classification
+    from: base_event
+    description: 'The event class name, as defined by class_uid value: `File Hosting Activity`.'
+  confidence: {caption: Confidence, type: string_t, requirement: optional, group: context, profile: security_control, from: base_event}
+  confidence_score: {caption: Confidence Score, type: integer_t, requirement: optional, group: context, profile: security_control, from: base_event}
+  connection_info:
+    caption: Connection Info
+    type: object_t
+    object: network_connection_info
+    requirement: optional
+    group: context
+    description: The network connection information.
+  count: {caption: Count, type: integer_t, requirement: optional, group: occurrence, from: base_event}
+  disposition: {caption: Disposition, type: string_t, requirement: optional, group: primary, profile: security_control, from: base_event}
+  duration: {caption: Duration Milliseconds, type: long_t, requirement: optional, group: occurrence, from: base_event}
+  end_time: {caption: End Time, type: timestamp_t, requirement: optional, group: occurrence, from: base_event}
+  end_time_dt: {caption: End Time, type: datetime_t, requirement: optional, group: occurrence, profile: datetime, from: base_event}
+  enrichments: {caption: Enrichments, type: object_t, object: enrichment, array: true, requirement: optional, group: context, from: base_event}
+  expiration_time:
+    caption: Expiration Time
+    type: timestamp_t
+    requirement: optional
+    group: context
+    description: The share expiration time.
+  expiration_time_dt:
+    caption: Expiration Time
+    type: datetime_t
+    requirement: optional
+    group: context
+    profile: datetime
+    description: The share expiration time.
+  file_result:
+    caption: File Result
+    type: object_t
+    object: file
+    requirement: optional
+    group: context
+    observable: 24
+    description: The resulting file object when the activity was allowed and successful.
+  firewall_rule: {caption: Firewall Rule, type: object_t, object: firewall_rule, requirement: optional, group: primary, profile: security_control, from: base_event}
+  malware: {caption: Malware, type: object_t, object: malware, array: true, requirement: optional, group: primary, profile: security_control, from: base_event}
+  malware_scan_info: {caption: Malware Scan Info, type: object_t, object: malware_scan_info, requirement: optional, group: primary, profile: security_control, from: base_event}
+  policy: {caption: Policy, type: object_t, object: policy, requirement: optional, group: primary, profile: security_control, from: base_event}
+  raw_data: {caption: Raw Data, type: string_t, requirement: optional, group: context, from: base_event}
+  raw_data_size: {caption: Raw Data Size, type: long_t, requirement: optional, group: context, from: base_event}
+  risk_details: {caption: Risk Details, type: string_t, requirement: optional, group: context, profile: security_control, from: base_event}
+  risk_level: {caption: Risk Level, type: string_t, requirement: optional, group: context, profile: security_control, from: base_event}
+  risk_level_id: {caption: Risk Level ID, type: integer_t, requirement: optional, group: context, profile: security_control, sibling: risk_level, enum: {0: Info, 1: Low, 2: Medium, 3: High, 4: Critical, 99: Other}, from: base_event}
+  risk_score: {caption: Risk Score, type: integer_t, requirement: optional, group: context, profile: security_control, from: base_event}
+  severity: {caption: Severity, type: string_t, requirement: optional, group: classification, from: base_event}
+  share:
+    caption: Share
+    type: string_t
+    requirement: optional
+    group: context
+    description: The share name.
+  share_type:
+    caption: Share Type
+    type: string_t
+    requirement: optional
+    group: context
+    description: The share type, normalized to the caption of the share_type_id value. In the case of 'Other', it is defined by the event source.
+  share_type_id:
+    caption: Share Type ID
+    type: integer_t
+    requirement: optional
+    group: context
+    sibling: share_type
+    description: The normalized identifier of the share type.
+    enum:
+      0:
+        caption: Unknown
+        description: The share type is unknown.
+      1:
+        caption: File
+      2:
+        caption: Pipe
+      3:
+        caption: Print
+      99:
+        caption: Other
+        description: The share type is not mapped. See the `share_type` attribute, which contains a data source specific value.
+  start_time: {caption: Start Time, type: timestamp_t, requirement: optional, group: occurrence, from: base_event}
+  start_time_dt: {caption: Start Time, type: datetime_t, requirement: optional, group: occurrence, profile: datetime, from: base_event}
+  time_dt: {caption: Event Time, type: datetime_t, requirement: optional, group: occurrence, profile: datetime, from: base_event}
+  type_name: {caption: Type Name, type: string_t, requirement: optional, group: classification, from: base_event}
+  unmapped: {caption: Unmapped Data, type: object_t, object: object, requirement: optional, group: context, from: base_event}

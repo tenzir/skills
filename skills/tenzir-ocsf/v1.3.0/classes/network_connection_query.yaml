@@ -1,0 +1,155 @@
+# Attributes with `from` but no description are inherited unchanged. Their
+# descriptions are in the file of the item that `from` names.
+name: network_connection_query
+caption: Network Connection Query
+uid: 5012
+category: discovery
+category_uid: 5
+extends: discovery_result
+description: Network Connection Query events report information about active network connections.
+profiles: [cloud, container, data_classification, datetime, host, osint]
+attributes:
+  activity_id: {caption: Activity ID, type: integer_t, requirement: required, group: classification, sibling: activity_name, enum: {0: Unknown, 1: Query, 99: Other}, from: discovery_result}
+  category_uid:
+    caption: Category ID
+    type: integer_t
+    requirement: required
+    group: classification
+    from: base_event
+    sibling: category_name
+    description: The category unique identifier of the event.
+    enum:
+      5:
+        caption: Discovery
+        description: Discovery events report the existence and state of devices, files, configurations, processes, registry keys, and other objects.
+  class_uid:
+    caption: Class ID
+    type: integer_t
+    requirement: required
+    group: classification
+    sibling: class_name
+    description: The unique identifier of a class. A class describes the attributes available in an event.
+    enum:
+      5012:
+        caption: Network Connection Query
+        description: Network Connection Query events report information about active network connections.
+  cloud: {caption: Cloud, type: object_t, object: cloud, requirement: required, group: primary, profile: cloud, from: base_event}
+  connection_info:
+    caption: Connection Info
+    type: object_t
+    object: network_connection_info
+    requirement: required
+    group: primary
+    description: The network connection information.
+  metadata: {caption: Metadata, type: object_t, object: metadata, requirement: required, group: context, from: base_event}
+  osint: {caption: OSINT, type: object_t, object: osint, array: true, requirement: required, group: primary, profile: osint, from: base_event}
+  process:
+    caption: Process
+    type: object_t
+    object: process
+    requirement: required
+    group: primary
+    observable: 25
+    description: The process that owns the socket.
+  query_result_id: {caption: Query Result ID, type: integer_t, requirement: required, group: primary, sibling: query_result, enum: {0: Unknown, 1: Exists, 2: Partial, 3: Does not exist, 4: Error, 5: Unsupported, 99: Other}, from: discovery_result}
+  severity_id: {caption: Severity ID, type: integer_t, requirement: required, group: classification, sibling: severity, enum: {0: Unknown, 1: Informational, 2: Low, 3: Medium, 4: High, 5: Critical, 6: Fatal, 99: Other}, from: base_event}
+  state_id:
+    caption: State ID
+    type: integer_t
+    requirement: required
+    group: primary
+    sibling: state
+    description: The state of the socket.
+    enum:
+      0:
+        caption: Unknown
+        description: The socket state is unknown.
+      1:
+        caption: ESTABLISHED
+        description: The socket has an established connection between a local application and a remote peer.
+      2:
+        caption: SYN_SENT
+        description: The socket is actively trying to establish a connection to a remote peer.
+      3:
+        caption: SYN_RECV
+        description: The socket has passively received a connection request from a remote peer.
+      4:
+        caption: FIN_WAIT1
+        description: The socket connection has been closed by the local application, the remote peer has not yet acknowledged the close, and the system is waiting for it to close its half of the connection.
+      5:
+        caption: FIN_WAIT2
+        description: The socket connection has been closed by the local application, the remote peer has acknowledged the close, and the system is waiting for it to close its half of the connection.
+      6:
+        caption: TIME_WAIT
+        description: The socket connection has been closed by the local application, the remote peer has closed its half of the connection, and the system is waiting to be sure that the remote peer received the last acknowledgement.
+      7:
+        caption: CLOSED
+        description: The socket is not in use.
+      8:
+        caption: CLOSE_WAIT
+        description: The socket connection has been closed by the remote peer, and the system is waiting for the local application to close its half of the connection.
+      9:
+        caption: LAST_ACK
+        description: The socket connection has been closed by the remote peer, the local application has closed its half of the connection, and the system is waiting for the remote peer to acknowledge the close.
+      10:
+        caption: LISTEN
+        description: The socket is listening for incoming connections.
+      11:
+        caption: CLOSING
+        description: The socket connection has been closed by the local application and the remote peer simultaneously, and the remote peer has not yet acknowledged the close attempt of the local application.
+      99:
+        caption: Other
+        description: The state is not mapped. See the `state` attribute, which contains a data source specific value.
+  time: {caption: Event Time, type: timestamp_t, requirement: required, group: occurrence, from: base_event}
+  type_uid:
+    caption: Type ID
+    type: long_t
+    requirement: required
+    group: classification
+    sibling: type_name
+    description: 'The event/finding type ID. It identifies the event''s semantics and structure. The value is calculated by the logging system as: `class_uid * 100 + activity_id`.'
+  device: {caption: Device, type: object_t, object: device, requirement: recommended, group: primary, profile: host, observable: 20, from: discovery_result}
+  message: {caption: Message, type: string_t, requirement: recommended, group: primary, from: base_event}
+  observables: {caption: Observables, type: object_t, object: observable, array: true, requirement: recommended, group: primary, from: base_event}
+  query_info: {caption: Query Info, type: object_t, object: query_info, requirement: recommended, group: primary, from: discovery_result}
+  query_result: {caption: Query Result, type: string_t, requirement: recommended, group: primary, from: discovery_result}
+  state:
+    caption: State
+    type: string_t
+    requirement: recommended
+    group: primary
+    description: The state of the socket, normalized to the caption of the state_id value. In the case of 'Other', it is defined by the event source.
+  status: {caption: Status, type: string_t, requirement: recommended, group: primary, from: base_event}
+  status_code: {caption: Status Code, type: string_t, requirement: recommended, group: primary, from: base_event}
+  status_detail: {caption: Status Detail, type: string_t, requirement: recommended, group: primary, from: base_event}
+  status_id: {caption: Status ID, type: integer_t, requirement: recommended, group: primary, sibling: status, enum: {0: Unknown, 1: Success, 2: Failure, 99: Other}, from: base_event}
+  timezone_offset: {caption: Timezone Offset, type: integer_t, requirement: recommended, group: occurrence, from: base_event}
+  activity_name: {caption: Activity, type: string_t, requirement: optional, group: classification, from: base_event}
+  actor: {caption: Actor, type: object_t, object: actor, requirement: optional, group: primary, profile: host, from: discovery_result}
+  api: {caption: API Details, type: object_t, object: api, requirement: optional, group: context, profile: cloud, from: base_event}
+  category_name:
+    caption: Category
+    type: string_t
+    requirement: optional
+    group: classification
+    from: base_event
+    description: 'The event category name, as defined by category_uid value: `Discovery`.'
+  class_name:
+    caption: Class
+    type: string_t
+    requirement: optional
+    group: classification
+    from: base_event
+    description: 'The event class name, as defined by class_uid value: `Network Connection Query`.'
+  count: {caption: Count, type: integer_t, requirement: optional, group: occurrence, from: base_event}
+  duration: {caption: Duration Milliseconds, type: long_t, requirement: optional, group: occurrence, from: base_event}
+  end_time: {caption: End Time, type: timestamp_t, requirement: optional, group: occurrence, from: base_event}
+  end_time_dt: {caption: End Time, type: datetime_t, requirement: optional, group: occurrence, profile: datetime, from: base_event}
+  enrichments: {caption: Enrichments, type: object_t, object: enrichment, array: true, requirement: optional, group: context, from: base_event}
+  raw_data: {caption: Raw Data, type: string_t, requirement: optional, group: context, from: base_event}
+  severity: {caption: Severity, type: string_t, requirement: optional, group: classification, from: base_event}
+  start_time: {caption: Start Time, type: timestamp_t, requirement: optional, group: occurrence, from: base_event}
+  start_time_dt: {caption: Start Time, type: datetime_t, requirement: optional, group: occurrence, profile: datetime, from: base_event}
+  time_dt: {caption: Event Time, type: datetime_t, requirement: optional, group: occurrence, profile: datetime, from: base_event}
+  type_name: {caption: Type Name, type: string_t, requirement: optional, group: classification, from: base_event}
+  unmapped: {caption: Unmapped Data, type: object_t, object: object, requirement: optional, group: context, from: base_event}

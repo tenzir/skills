@@ -1,0 +1,214 @@
+# Attributes with `from` but no description are inherited unchanged. Their
+# descriptions are in the file of the item that `from` names.
+name: resource_details
+caption: Resource Details
+extends: _resource
+description: The Resource Details object describes details about a resource (including a user) affected by or related to the activity or finding. The `name` and/or `uid` should correspond to the resource for which the details pertain. Use `role_id` to characterize the role of the resource.
+profiles: [cloud, container, data_classification, datetime]
+constraints:
+  at_least_one: [name, uid]
+referenced_by:
+  classes:
+    api_activity: [resources]
+    application_security_posture_finding: [resources]
+    cloud_resources_inventory_info: [resources]
+    compliance_finding: [resource, resources]
+    data_security_finding: [resources]
+    detection_finding: [resources]
+    group_management: [resource, resources]
+    iam_analysis_finding: [resources]
+    role_management: [resources]
+    security_finding: [resources]
+    user_access: [resource, resources]
+    user_management: [resources]
+    vulnerability_finding: [resource, resources]
+  objects:
+    check: [resource]
+    evidences: [resources]
+    iam_role: [resources]
+attributes:
+  data_classification: {caption: Data Classification, type: object_t, object: data_classification, requirement: recommended, group: context, profile: data_classification, deprecated: {since: 1.4.0, message: Use the attribute `data_classifications` instead, superseded_by: [data_classifications]}, from: _resource}
+  data_classifications: {caption: Data Classification, type: object_t, object: data_classification, array: true, requirement: recommended, group: context, profile: data_classification, from: _resource}
+  hostname:
+    caption: Hostname
+    type: hostname_t
+    requirement: recommended
+    observable: 1
+    description: The fully qualified name of the resource. If the resource is a device, this should match `device.hostname`.
+  ip:
+    caption: IP Address
+    type: ip_t
+    requirement: recommended
+    observable: 2
+    description: The IP address of the resource, in either IPv4 or IPv6 format. If the resource is a device, this should match `device.ip`.
+  name:
+    caption: Name
+    type: string_t
+    requirement: recommended
+    observable: 38
+    description: The name of the resource.
+  owner:
+    caption: Owner
+    type: object_t
+    object: user
+    requirement: recommended
+    observable: 21
+    description: The details of the entity that owns the resource. Usually not the same as `user` that may not own the resource. For example the owner of the directory server but not a user in the directory. This object includes properties such as the owner's name, unique identifier, type, domain, and other relevant attributes that help identify the resource owner within the environment.
+  role_id:
+    caption: Role ID
+    type: integer_t
+    requirement: recommended
+    sibling: role
+    description: The normalized identifier of the resource's role in the context of the event or finding.
+    enum:
+      0:
+        caption: Unknown
+        description: The role is unknown.
+      1:
+        caption: Target
+        description: The resource is the primary target or subject of the event/finding.
+      2:
+        caption: Actor
+        description: The resource is acting as the initiator or performer in the context of the event/finding.
+      3:
+        caption: Affected
+        description: The resource was impacted or affected by the event/finding.
+      4:
+        caption: Related
+        description: The resource is related to or associated with the event/finding.
+      99:
+        caption: Other
+        description: The role is not mapped. See the role attribute, which contains a data source specific value.
+  uid: {caption: Unique ID, type: resource_uid_t, requirement: recommended, observable: 10, from: _resource}
+  agent_list:
+    caption: Agent List
+    type: object_t
+    object: agent
+    array: true
+    requirement: optional
+    description: A list of `agent` objects associated with a device, endpoint, or resource.
+  cloud_partition:
+    caption: Cloud Partition
+    type: string_t
+    requirement: optional
+    profile: cloud
+    description: The logical grouping or isolated segment within a cloud provider's infrastructure where the resource is located. Examples include AWS partitions (aws, aws-cn, aws-us-gov), Azure cloud environments (AzureCloud, AzureUSGovernment, AzureChinaCloud), or similar logical divisions in other cloud providers.
+  created_time: {caption: Created Time, type: timestamp_t, requirement: optional, from: _resource}
+  created_time_dt:
+    caption: Created Time
+    type: datetime_t
+    requirement: optional
+    profile: datetime
+    from: _resource
+    description: The time when the resource was created.
+  criticality:
+    caption: Criticality
+    type: string_t
+    requirement: optional
+    description: |-
+      Criticality or relative importance of this resource, normalized to the caption of `criticality_id`. In the case of Other, the value is defined by the event source.
+
+      Note: For versions prior to 1.9, `criticality_id` was not available and this is a source specific value.
+  criticality_id:
+    caption: Criticality Level ID
+    type: integer_t
+    requirement: optional
+    sibling: criticality
+    description: The normalized identifier for the criticality or relative importance of this resource. Select the value that best reflects the operational and security impact if the resource were compromised or made unavailable. See the `criticality` sibling attribute for the corresponding human-readable label.
+    enum:
+      0:
+        caption: Unknown
+        description: The criticality level is unknown.
+      1:
+        caption: Low
+        description: Minimal operational or security importance.
+      2:
+        caption: Medium
+        description: Affects localized functions or specific business processes.
+      3:
+        caption: High
+        description: Critical to core operations. Compromise leads to significant, but recoverable disruptions.
+      4:
+        caption: Very High
+        description: Mission critical, essential to business survival. Compromise could result in catastrophic consequences.
+      99:
+        caption: Other
+        description: The criticality level is not mapped. See the `criticality` attribute, which contains a data source specific value.
+  data: {caption: Data, type: json_t, requirement: optional, from: _resource}
+  device:
+    caption: Device
+    type: object_t
+    object: device
+    requirement: optional
+    observable: 20
+    description: The device details when the resource type is a device — for example, a cloud compute instance, a laptop, or a network appliance. Provides structured device attributes (OS, type, hardware, agent) that the resource's scalar fields cannot represent — beyond what the `hostname` and `ip` attributes capture. The `device.name` and `device.uid` should match the `name` and `uid` of this objects; the `device.hostname` value should match the `hostname` attribute of this object. The top-level `hostname` and `ip` remain the primary identifiers for the device resource.
+  group:
+    caption: Group
+    type: object_t
+    object: group
+    requirement: optional
+    description: The name of the related resource group.
+  is_backed_up:
+    caption: Back Ups Configured
+    type: boolean_t
+    requirement: optional
+    description: Indicates whether the device or resource has a backup enabled, such as an automated snapshot or a cloud backup. For example, this is indicated by the `cloudBackupEnabled` value within JAMF Pro mobile devices or the registration of an AWS ARN with the AWS Backup service.
+  labels: {caption: Labels, type: string_t, array: true, requirement: optional, from: _resource}
+  modified_time: {caption: Modified Time, type: timestamp_t, requirement: optional, from: _resource}
+  modified_time_dt:
+    caption: Modified Time
+    type: datetime_t
+    requirement: optional
+    profile: datetime
+    from: _resource
+    description: The time when the resource was last modified.
+  namespace:
+    caption: Namespace
+    type: string_t
+    requirement: optional
+    description: The namespace is useful when similar entities exist that you need to keep separate.
+  provider:
+    caption: Cloud Provider
+    type: string_t
+    requirement: optional
+    profile: cloud
+    description: The cloud service provider that hosts or manages the resource. This field is typically used when the resource is managed by a different provider than the one generating the event or finding. Examples include AWS, Azure, GCP (Google Cloud Platform), Oracle Cloud, IBM Cloud, Alibaba Cloud, or other public, private, or hybrid cloud providers.
+  region:
+    caption: Region
+    type: string_t
+    requirement: optional
+    profile: cloud
+    description: The cloud region where the resource is hosted, as defined by the cloud provider. This represents the physical or logical geographic area containing the infrastructure supporting the resource. Examples include AWS regions (us-east-1, eu-west-1), Azure regions (East US, West Europe), GCP regions (us-central1, europe-west1), or Oracle Cloud regions (us-ashburn-1, uk-london-1).
+  resource_relationship:
+    caption: Resource Relationship
+    type: object_t
+    object: graph
+    requirement: optional
+    description: A graph representation showing how this resource relates to and interacts with other entities in the environment. This can include parent/child relationships, dependencies, or other connections.
+  role:
+    caption: Role
+    type: string_t
+    requirement: optional
+    description: The role of the resource in the context of the event or finding, normalized to the caption of the role_id value. In the case of 'Other', it is defined by the event source.
+  tags: {caption: Tags, type: object_t, object: key_value_object, array: true, requirement: optional, from: _resource}
+  type: {caption: Type, type: string_t, requirement: optional, from: _resource}
+  uid_alt: {caption: Alternate ID, type: resource_uid_t, requirement: optional, observable: 10, from: _resource}
+  uid_numeric: {caption: Numeric Unique ID, type: long_t, requirement: optional, from: _entity}
+  user:
+    caption: User
+    type: object_t
+    object: user
+    requirement: optional
+    observable: 21
+    description: The user represented by this resource — for example, a cloud IAM user, a local account, or an application identity. Provides structured user attributes (email, groups, privileges) that this object's scalar fields such as `name` cannot represent. Distinct from `owner`, which identifies the entity responsible for managing the resource. The `user.name` value should match the `name` attribute of this object, `user.uid` should match the `uid` of this object.
+  version:
+    caption: Version
+    type: string_t
+    requirement: optional
+    description: The version of the resource. For example `1.2.3`.
+  zone:
+    caption: Cloud Availability Zone
+    type: string_t
+    requirement: optional
+    profile: cloud
+    description: The availability zone within a cloud region where the resource is located. Examples include AWS availability zones (us-east-1a, us-east-1b), Azure availability zones (1, 2, 3 within a region), GCP zones (us-central1-a, us-central1-b), or Oracle Cloud availability domains (AD-1, AD-2, AD-3).

@@ -1,0 +1,57 @@
+name: http_response
+caption: HTTP Response
+extends: object
+description: The HTTP Response object contains detailed information about the response sent from a web server to the requester. It encompasses attributes and metadata that describe the response status, headers, body content, and other relevant information.
+referenced_by:
+  classes:
+    dhcp_activity: [proxy_http_response]
+    dns_activity: [proxy_http_response]
+    ftp_activity: [proxy_http_response]
+    http_activity: [http_response, proxy_http_response]
+    network_activity: [proxy_http_response]
+    network_file_activity: [proxy_http_response]
+    ntp_activity: [proxy_http_response]
+    rdp_activity: [proxy_http_response]
+    smb_activity: [proxy_http_response]
+    ssh_activity: [proxy_http_response]
+    tunnel_activity: [proxy_http_response]
+    web_resource_access_activity: [http_response, proxy_http_response]
+    web_resources_activity: [http_response, proxy_http_response]
+attributes:
+  code:
+    caption: Response Code
+    type: integer_t
+    requirement: required
+    description: The Hypertext Transfer Protocol (HTTP) status code returned from the web server to the client. For example, 200.
+  http_headers:
+    caption: HTTP Headers
+    type: object_t
+    object: http_header
+    array: true
+    requirement: recommended
+    description: Additional HTTP headers of an HTTP request or response.
+  content_type:
+    caption: HTTP Content Type
+    type: string_t
+    requirement: optional
+    description: The request header that identifies the original [media type](https://www.iana.org/assignments/media-types/media-types.xhtml)  of the resource (prior to any content encoding applied for sending).
+  latency:
+    caption: Latency
+    type: integer_t
+    requirement: optional
+    description: The HTTP response latency measured in milliseconds.
+  length:
+    caption: Response Length
+    type: integer_t
+    requirement: optional
+    description: The HTTP response length, in number of bytes.
+  message:
+    caption: Message
+    type: string_t
+    requirement: optional
+    description: The description of the event/finding, as defined by the source.
+  status:
+    caption: Status
+    type: string_t
+    requirement: optional
+    description: 'The response status. For example: A successful HTTP status of ''OK'' which corresponds to a code of 200.'

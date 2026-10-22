@@ -1,0 +1,122 @@
+# Attributes with `from` but no description are inherited unchanged. Their
+# descriptions are in the file of the item that `from` names.
+name: firewall_rule
+caption: Firewall Rule
+extends: rule
+description: The Firewall Rule object represents a specific rule within a firewall policy or event. It contains information about a rule's configuration, properties, and associated actions that define how network traffic is handled by the firewall.
+constraints:
+  at_least_one: [name, uid]
+referenced_by:
+  classes:
+    account_change: [firewall_rule]
+    admin_group_query: [firewall_rule]
+    airborne_broadcast_activity: [firewall_rule]
+    api_activity: [firewall_rule]
+    application_error: [firewall_rule]
+    application_lifecycle: [firewall_rule]
+    application_security_posture_finding: [firewall_rule]
+    authentication: [firewall_rule]
+    authorize_session: [firewall_rule]
+    base_event: [firewall_rule]
+    cloud_resources_inventory_info: [firewall_rule]
+    compliance_finding: [firewall_rule]
+    config_state: [firewall_rule]
+    data_security_finding: [firewall_rule]
+    datastore_activity: [firewall_rule]
+    detection_finding: [firewall_rule]
+    device_config_state_change: [firewall_rule]
+    dhcp_activity: [firewall_rule]
+    dns_activity: [firewall_rule]
+    drone_flights_activity: [firewall_rule]
+    email_activity: [firewall_rule]
+    email_file_activity: [firewall_rule]
+    email_url_activity: [firewall_rule]
+    entity_management: [firewall_rule]
+    event_log_actvity: [firewall_rule]
+    evidence_info: [firewall_rule]
+    file_activity: [firewall_rule]
+    file_hosting: [firewall_rule]
+    file_query: [firewall_rule]
+    file_remediation_activity: [firewall_rule]
+    folder_query: [firewall_rule]
+    ftp_activity: [firewall_rule]
+    group_management: [firewall_rule]
+    http_activity: [firewall_rule]
+    incident_finding: [firewall_rule]
+    inventory_info: [firewall_rule]
+    job_query: [firewall_rule]
+    kernel_activity: [firewall_rule]
+    kernel_extension_activity: [firewall_rule]
+    kernel_object_query: [firewall_rule]
+    memory_activity: [firewall_rule]
+    module_activity: [firewall_rule]
+    module_query: [firewall_rule]
+    network_activity: [firewall_rule]
+    network_connection_query: [firewall_rule]
+    network_file_activity: [firewall_rule]
+    network_remediation_activity: [firewall_rule]
+    networks_query: [firewall_rule]
+    ntp_activity: [firewall_rule]
+    osint_inventory_info: [firewall_rule]
+    patch_state: [firewall_rule]
+    peripheral_device_query: [firewall_rule]
+    process_activity: [firewall_rule]
+    process_query: [firewall_rule]
+    process_remediation_activity: [firewall_rule]
+    rdp_activity: [firewall_rule]
+    remediation_activity: [firewall_rule]
+    scan_activity: [firewall_rule]
+    scheduled_job_activity: [firewall_rule]
+    script_activity: [firewall_rule]
+    security_finding: [firewall_rule]
+    service_query: [firewall_rule]
+    session_query: [firewall_rule]
+    smb_activity: [firewall_rule]
+    software_info: [firewall_rule]
+    ssh_activity: [firewall_rule]
+    startup_item_query: [firewall_rule]
+    tunnel_activity: [firewall_rule]
+    user_access: [firewall_rule]
+    user_inventory: [firewall_rule]
+    user_query: [firewall_rule]
+    vulnerability_finding: [firewall_rule]
+    web_resource_access_activity: [firewall_rule]
+    web_resources_activity: [firewall_rule]
+attributes:
+  name: {caption: Name, type: string_t, requirement: recommended, from: rule}
+  uid: {caption: Unique ID, type: string_t, requirement: recommended, from: rule}
+  category: {caption: Category, type: string_t, requirement: optional, from: rule}
+  condition:
+    caption: Condition
+    type: string_t
+    requirement: optional
+    description: 'The rule trigger condition for the rule. For example: SQL_INJECTION.'
+  desc: {caption: Description, type: string_t, requirement: optional, from: rule}
+  duration:
+    caption: Duration Milliseconds
+    type: long_t
+    requirement: optional
+    description: The rule response time duration, usually used for challenge completion time.
+  match_details:
+    caption: Match Details
+    type: string_t
+    array: true
+    requirement: optional
+    description: 'The data in a request that rule matched. For example: ''["10","and","1"]''.'
+  match_location:
+    caption: Match Location
+    type: string_t
+    requirement: optional
+    description: 'The location of the matched data in the source which resulted in the triggered firewall rule. For example: HEADER.'
+  rate_limit:
+    caption: Rate Limit
+    type: integer_t
+    requirement: optional
+    description: The rate limit for a rate-based rule.
+  sensitivity:
+    caption: Sensitivity
+    type: string_t
+    requirement: optional
+    description: 'The sensitivity of the firewall rule in the matched event. For example: HIGH.'
+  type: {caption: Type, type: string_t, requirement: optional, from: rule}
+  version: {caption: Version, type: string_t, requirement: optional, from: rule}

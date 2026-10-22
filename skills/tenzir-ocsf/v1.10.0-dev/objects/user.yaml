@@ -1,0 +1,213 @@
+# Attributes with `from` but no description are inherited unchanged. Their
+# descriptions are in the file of the item that `from` names.
+name: user
+caption: User
+extends: _entity
+observable: 21
+description: The User object describes the characteristics of a user/person or a security principal.
+constraints:
+  at_least_one: [account, name, uid]
+references:
+- description: D3FEND™ Ontology d3f:UserAccount
+  url: https://d3fend.mitre.org/dao/artifact/d3f:UserAccount/
+referenced_by:
+  classes:
+    account_change: [user, user_result]
+    admin_group_query: [users]
+    airborne_broadcast_activity: [unmanned_system_operator]
+    application_security_posture_finding: [assignee]
+    authentication: [user]
+    authorize_session: [user]
+    compliance_finding: [assignee]
+    data_security_finding: [assignee]
+    detection_finding: [assignee]
+    drone_flights_activity: [unmanned_system_operator]
+    group_management: [user, users]
+    iam_analysis_finding: [assignee, user]
+    incident_finding: [assignee]
+    rdp_activity: [user]
+    tunnel_activity: [user]
+    user_access: [user]
+    user_inventory: [user]
+    user_management: [updated_user, user]
+    user_query: [user]
+    vulnerability_finding: [assignee]
+  objects:
+    access_analysis_result: [accessors]
+    actor: [user]
+    affected_code: [owner]
+    application: [owner]
+    databucket: [owner]
+    device: [owner]
+    endpoint: [owner]
+    evidences: [user]
+    file: [accessor, creator, modifier, owner]
+    job: [user]
+    job_trigger: [user]
+    ldap_person: [manager]
+    managed_entity: [user]
+    network_endpoint: [owner]
+    network_proxy: [owner]
+    note: [owner]
+    osint: [creator]
+    process: [user]
+    query_evidence: [user, users]
+    resource_details: [owner, user]
+attributes:
+  account:
+    caption: Account
+    type: object_t
+    object: account
+    requirement: recommended
+    description: The user's account or the account associated with the user.
+  has_mfa:
+    caption: MFA Assigned
+    type: boolean_t
+    requirement: recommended
+    description: The user has a multi-factor or secondary-factor device assigned.
+  name:
+    caption: Name
+    type: username_t
+    requirement: recommended
+    observable: 4
+    description: The username. For example, `janedoe1`.
+  type_id:
+    caption: Type ID
+    type: integer_t
+    requirement: recommended
+    sibling: type
+    description: The account type identifier.
+    enum:
+      0:
+        caption: Unknown
+        description: The type is unknown.
+      1:
+        caption: User
+        description: Regular user account.
+      2:
+        caption: Admin
+        description: Admin/root user account.
+      3:
+        caption: System
+        description: System account. For example, Windows computer accounts with a trailing dollar sign ($).
+      4:
+        caption: Service
+        description: Service account. For example, Windows service account.
+      99:
+        caption: Other
+        description: The type is not mapped. See the `type` attribute, which contains a data source specific value.
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: recommended
+    observable: 31
+    description: The unique user identifier. For example, the Windows user SID, ActiveDirectory DN or AWS user ARN.
+  credential_uid:
+    caption: User Credential ID
+    type: string_t
+    requirement: optional
+    observable: 19
+    deprecated:
+      since: 1.6.0
+      message: Use `programmatic_credentials` instead.
+      superseded_by: [programmatic_credentials]
+    description: The unique identifier of the user's credential. For example, AWS Access Key ID.
+  display_name:
+    caption: Display Name
+    type: string_t
+    requirement: optional
+    description: The display name of the user, as reported by the product.
+  domain:
+    caption: Domain
+    type: string_t
+    requirement: optional
+    description: 'The domain where the user is defined. For example: the LDAP or Active Directory domain.'
+  email_addr:
+    caption: Email Address
+    type: email_t
+    requirement: optional
+    observable: 5
+    description: The user's primary email address.
+  forward_addr:
+    caption: Forwarding Address
+    type: email_t
+    requirement: optional
+    observable: 5
+    description: The user's forwarding email address.
+  full_name:
+    caption: Full Name
+    type: string_t
+    requirement: optional
+    description: The full name of the user, as reported by the product.
+  groups:
+    caption: Groups
+    type: object_t
+    object: group
+    array: true
+    requirement: optional
+    description: The administrative groups to which the user belongs.
+  ldap_person:
+    caption: LDAP Person
+    type: object_t
+    object: ldap_person
+    requirement: optional
+    description: The additional LDAP attributes that describe a person.
+  org:
+    caption: Organization
+    type: object_t
+    object: organization
+    requirement: optional
+    description: Organization and org unit related to the user.
+  phone_number:
+    caption: Telephone Number
+    type: string_t
+    requirement: optional
+    description: The telephone number of the user.
+  programmatic_credentials:
+    caption: Programmatic Credentials
+    type: object_t
+    object: programmatic_credential
+    array: true
+    requirement: optional
+    description: Details about the programmatic credential (API keys, access tokens, certificates, etc) associated to the user.
+  risk_level:
+    caption: Risk Level
+    type: string_t
+    requirement: optional
+    description: The risk level, normalized to the caption of the risk_level_id value.
+  risk_level_id:
+    caption: Risk Level ID
+    type: integer_t
+    requirement: optional
+    sibling: risk_level
+    description: The normalized risk level id.
+    enum:
+      0:
+        caption: Info
+      1:
+        caption: Low
+      2:
+        caption: Medium
+      3:
+        caption: High
+      4:
+        caption: Critical
+      99:
+        caption: Other
+        description: The risk level is not mapped. See the `risk_level` attribute, which contains a data source specific value.
+  risk_score:
+    caption: Risk Score
+    type: integer_t
+    requirement: optional
+    description: The risk score as reported by the event source.
+  type:
+    caption: Type
+    type: string_t
+    requirement: optional
+    description: The type of the user. For example, System, AWS IAM User, etc.
+  uid_alt:
+    caption: Alternate ID
+    type: string_t
+    requirement: optional
+    description: The alternate user identifier. For example, the Active Directory user GUID or AWS user Principal ID.
+  uid_numeric: {caption: Numeric Unique ID, type: long_t, requirement: optional, from: _entity}

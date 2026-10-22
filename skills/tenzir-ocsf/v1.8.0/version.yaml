@@ -1,0 +1,38 @@
+version: 1.8.0
+status: stable
+source:
+  repository: https://github.com/ocsf/ocsf-schema.git
+  ref: v1.8.0
+  commit: 6fa6499a0f8c9f449d342816e90e5f687c224b0a
+  compiler: ocsf-schema-compiler 1.1.1
+extensions:
+  linux:
+    uid: 1
+    caption: Linux
+    version: 1.8.0
+    description: The Linux extension defines Linux specific attributes, profiles, objects, and classes.
+    profiles: [linux/linux_users]
+    patches:
+      objects: [process]
+  macos:
+    uid: 3
+    caption: macOS
+    version: 1.8.0
+    description: The macOS extension defines macOS specific attributes, profiles, objects, and classes.
+    profiles: [macos/macos_users]
+    patches:
+      objects: [process]
+  win:
+    uid: 2
+    caption: Windows
+    version: 1.8.0
+    description: The Windows extension defines Windows specific attributes, objects, and classes.
+    classes: [win/prefetch_query, win/registry_key_activity, win/registry_key_query, win/registry_value_activity, win/registry_value_query, win/windows_resource_activity, win/windows_service_activity]
+    objects: [win/reg_key, win/reg_value, win/win_resource, win/win_service]
+    patches:
+      objects: [evidences, process, query_evidence, startup_item]
+previous: 1.7.0
+changes:
+  added:
+    objects: [ai_model, gpu_info, message_context, packet, privilege_attack_info, privilege_info, service_privilege_analysis, token]
+    profiles: [ai_operation]

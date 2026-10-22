@@ -1,0 +1,30 @@
+version: 1.5.0
+status: stable
+source:
+  repository: https://github.com/ocsf/ocsf-schema.git
+  ref: v1.5.0
+  commit: f0c227b4383ba64f223c3c9d82a2936ee96e7f04
+  compiler: ocsf-schema-compiler 1.1.1
+extensions:
+  linux:
+    uid: 1
+    caption: Linux
+    version: 1.5.0
+    description: The Linux extension defines Linux specific attributes, objects and classes.
+    profiles: [linux/linux_users]
+    patches:
+      objects: [process]
+  win:
+    uid: 2
+    caption: Windows
+    version: 1.5.0
+    description: The Windows extension defines Windows specific attributes, objects and classes.
+    classes: [win/prefetch_query, win/registry_key_activity, win/registry_key_query, win/registry_value_activity, win/registry_value_query, win/windows_resource_activity, win/windows_service_activity]
+    objects: [win/reg_key, win/reg_value, win/win_resource, win/win_service]
+    patches:
+      objects: [evidences, query_evidence, startup_item]
+previous: 1.4.0
+changes:
+  added:
+    classes: [application_security_posture_finding, evidence_info]
+    objects: [analysis_target, anomaly, anomaly_analysis, application, assessment, authentication_token, baseline, campaign, check, edge, graph, malware_scan_info, mitigation, node, observation, query_evidence, threat_actor, trait, transformation_info]

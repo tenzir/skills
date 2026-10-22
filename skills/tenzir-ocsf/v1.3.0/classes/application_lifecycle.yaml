@@ -1,0 +1,143 @@
+# Attributes with `from` but no description are inherited unchanged. Their
+# descriptions are in the file of the item that `from` names.
+name: application_lifecycle
+caption: Application Lifecycle
+uid: 6002
+category: application
+category_uid: 6
+extends: application
+description: Application Lifecycle events report installation, removal, start, stop of an application or service.
+profiles: [cloud, container, data_classification, datetime, host, osint]
+attributes:
+  activity_id:
+    caption: Activity ID
+    type: integer_t
+    requirement: required
+    group: classification
+    sibling: activity_name
+    description: The normalized identifier of the activity that triggered the event.
+    enum:
+      0:
+        caption: Unknown
+        description: The event activity is unknown.
+      1:
+        caption: Install
+        description: Install the application.
+      2:
+        caption: Remove
+        description: Remove the application.
+      3:
+        caption: Start
+        description: Start the application.
+      4:
+        caption: Stop
+        description: Stop the application.
+      5:
+        caption: Restart
+        description: Restart the application.
+      6:
+        caption: Enable
+        description: Enable the application.
+      7:
+        caption: Disable
+        description: Disable the application.
+      8:
+        caption: Update
+        description: Update the application.
+      99:
+        caption: Other
+        description: The event activity is not mapped. See the `activity_name` attribute, which contains a data source specific value.
+  app:
+    caption: Application
+    type: object_t
+    object: product
+    requirement: required
+    group: primary
+    description: The application that was affected by the lifecycle event.  This also applies to self-updating application systems.
+  category_uid:
+    caption: Category ID
+    type: integer_t
+    requirement: required
+    group: classification
+    from: base_event
+    sibling: category_name
+    description: The category unique identifier of the event.
+    enum:
+      6:
+        caption: Application Activity
+        description: Application Activity events report detailed information about the behavior of applications and services.
+  class_uid:
+    caption: Class ID
+    type: integer_t
+    requirement: required
+    group: classification
+    sibling: class_name
+    description: The unique identifier of a class. A class describes the attributes available in an event.
+    enum:
+      6002:
+        caption: Application Lifecycle
+        description: Application Lifecycle events report installation, removal, start, stop of an application or service.
+  cloud: {caption: Cloud, type: object_t, object: cloud, requirement: required, group: primary, profile: cloud, from: base_event}
+  metadata: {caption: Metadata, type: object_t, object: metadata, requirement: required, group: context, from: base_event}
+  osint: {caption: OSINT, type: object_t, object: osint, array: true, requirement: required, group: primary, profile: osint, from: base_event}
+  severity_id: {caption: Severity ID, type: integer_t, requirement: required, group: classification, sibling: severity, enum: {0: Unknown, 1: Informational, 2: Low, 3: Medium, 4: High, 5: Critical, 6: Fatal, 99: Other}, from: base_event}
+  time: {caption: Event Time, type: timestamp_t, requirement: required, group: occurrence, from: base_event}
+  type_uid:
+    caption: Type ID
+    type: long_t
+    requirement: required
+    group: classification
+    sibling: type_name
+    description: 'The event/finding type ID. It identifies the event''s semantics and structure. The value is calculated by the logging system as: `class_uid * 100 + activity_id`.'
+  device:
+    caption: Device
+    type: object_t
+    object: device
+    requirement: recommended
+    group: primary
+    profile: host
+    observable: 20
+    description: An addressable device, computer system or host.
+  message: {caption: Message, type: string_t, requirement: recommended, group: primary, from: base_event}
+  observables: {caption: Observables, type: object_t, object: observable, array: true, requirement: recommended, group: primary, from: base_event}
+  status: {caption: Status, type: string_t, requirement: recommended, group: primary, from: base_event}
+  status_code: {caption: Status Code, type: string_t, requirement: recommended, group: primary, from: base_event}
+  status_detail: {caption: Status Detail, type: string_t, requirement: recommended, group: primary, from: base_event}
+  status_id: {caption: Status ID, type: integer_t, requirement: recommended, group: primary, sibling: status, enum: {0: Unknown, 1: Success, 2: Failure, 99: Other}, from: base_event}
+  timezone_offset: {caption: Timezone Offset, type: integer_t, requirement: recommended, group: occurrence, from: base_event}
+  activity_name: {caption: Activity, type: string_t, requirement: optional, group: classification, from: base_event}
+  actor:
+    caption: Actor
+    type: object_t
+    object: actor
+    requirement: optional
+    group: primary
+    profile: host
+    description: The actor object describes details about the user/role/process that was the source of the activity.
+  api: {caption: API Details, type: object_t, object: api, requirement: optional, group: context, profile: cloud, from: base_event}
+  category_name:
+    caption: Category
+    type: string_t
+    requirement: optional
+    group: classification
+    from: base_event
+    description: 'The event category name, as defined by category_uid value: `Application Activity`.'
+  class_name:
+    caption: Class
+    type: string_t
+    requirement: optional
+    group: classification
+    from: base_event
+    description: 'The event class name, as defined by class_uid value: `Application Lifecycle`.'
+  count: {caption: Count, type: integer_t, requirement: optional, group: occurrence, from: base_event}
+  duration: {caption: Duration Milliseconds, type: long_t, requirement: optional, group: occurrence, from: base_event}
+  end_time: {caption: End Time, type: timestamp_t, requirement: optional, group: occurrence, from: base_event}
+  end_time_dt: {caption: End Time, type: datetime_t, requirement: optional, group: occurrence, profile: datetime, from: base_event}
+  enrichments: {caption: Enrichments, type: object_t, object: enrichment, array: true, requirement: optional, group: context, from: base_event}
+  raw_data: {caption: Raw Data, type: string_t, requirement: optional, group: context, from: base_event}
+  severity: {caption: Severity, type: string_t, requirement: optional, group: classification, from: base_event}
+  start_time: {caption: Start Time, type: timestamp_t, requirement: optional, group: occurrence, from: base_event}
+  start_time_dt: {caption: Start Time, type: datetime_t, requirement: optional, group: occurrence, profile: datetime, from: base_event}
+  time_dt: {caption: Event Time, type: datetime_t, requirement: optional, group: occurrence, profile: datetime, from: base_event}
+  type_name: {caption: Type Name, type: string_t, requirement: optional, group: classification, from: base_event}
+  unmapped: {caption: Unmapped Data, type: object_t, object: object, requirement: optional, group: context, from: base_event}

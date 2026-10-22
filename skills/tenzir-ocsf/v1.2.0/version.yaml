@@ -1,0 +1,29 @@
+version: 1.2.0
+status: stable
+source:
+  repository: https://github.com/ocsf/ocsf-schema.git
+  ref: v1.2.0
+  commit: 7234a336ddcd5a2359e1afa79f9651150061e0dc
+  compiler: ocsf-schema-compiler 1.1.1
+extensions:
+  linux:
+    uid: 1
+    caption: Linux
+    version: 1.2.0
+    description: The Linux extension defines Linux specific attributes, objects and classes.
+    profiles: [linux/linux_users]
+    patches:
+      objects: [process]
+  win:
+    uid: 2
+    caption: Windows
+    version: 1.2.0
+    description: The Windows extension defines Windows specific attributes, objects and classes.
+    classes: [win/prefetch_query, win/registry_key_activity, win/registry_key_query, win/registry_value_activity, win/registry_value_query, win/resource_activity]
+    objects: [win/reg_key, win/reg_value, win/win_resource]
+previous: 1.1.0
+changes:
+  added:
+    classes: [admin_group_query, data_security_finding, file_query, folder_query, job_query, kernel_object_query, module_query, network_connection_query, networks_query, peripheral_device_query, process_query, service_query, session_query, tunnel_activity, user_query]
+    objects: [agent, auth_factor, autonomous_system, data_classification, data_security]
+    profiles: [data_classification]

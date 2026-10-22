@@ -1,0 +1,190 @@
+name: metadata
+caption: Metadata
+extends: object
+description: The Metadata object describes the metadata associated with the event. Defined by D3FEND [d3f:Metadata](https://d3fend.mitre.org/dao/artifact/d3f:Metadata/).
+profiles: [container, datetime]
+referenced_by:
+  classes:
+    account_change: [metadata]
+    api_activity: [metadata]
+    application_lifecycle: [metadata]
+    authentication: [metadata]
+    authorize_session: [metadata]
+    base_event: [metadata]
+    compliance_finding: [metadata]
+    config_state: [metadata]
+    datastore_activity: [metadata]
+    detection_finding: [metadata]
+    device_config_state_change: [metadata]
+    dhcp_activity: [metadata]
+    dns_activity: [metadata]
+    email_activity: [metadata]
+    email_file_activity: [metadata]
+    email_url_activity: [metadata]
+    entity_management: [metadata]
+    file_activity: [metadata]
+    file_hosting: [metadata]
+    ftp_activity: [metadata]
+    group_management: [metadata]
+    http_activity: [metadata]
+    incident_finding: [metadata]
+    inventory_info: [metadata]
+    kernel_activity: [metadata]
+    kernel_extension: [metadata]
+    memory_activity: [metadata]
+    module_activity: [metadata]
+    network_activity: [metadata]
+    network_file_activity: [metadata]
+    ntp_activity: [metadata]
+    patch_state: [metadata]
+    process_activity: [metadata]
+    rdp_activity: [metadata]
+    scan_activity: [metadata]
+    scheduled_job_activity: [metadata]
+    security_finding: [metadata]
+    smb_activity: [metadata]
+    ssh_activity: [metadata]
+    user_access: [metadata]
+    user_inventory: [metadata]
+    vulnerability_finding: [metadata]
+    web_resource_access_activity: [metadata]
+    web_resources_activity: [metadata]
+attributes:
+  product:
+    caption: Product
+    type: object_t
+    object: product
+    requirement: required
+    description: The product that reported the event.
+  version:
+    caption: Version
+    type: string_t
+    requirement: required
+    description: 'The version of the OCSF schema, using Semantic Versioning Specification ([SemVer](https://semver.org)). For example: 1.0.0. Event consumers use the version to determine the available event attributes.'
+  log_name:
+    caption: Log Name
+    type: string_t
+    requirement: recommended
+    description: 'The event log name. For example, syslog file name or Windows logging subsystem: Security.'
+  log_provider:
+    caption: Log Provider
+    type: string_t
+    requirement: recommended
+    description: The logging provider or logging service that logged the event. For example, Microsoft-Windows-Security-Auditing.
+  original_time:
+    caption: Original Time
+    type: string_t
+    requirement: recommended
+    description: The original event time as reported by the event source. For example, the time in the original format from system event log such as Syslog on Unix/Linux and the System event file on Windows. Omit if event is generated instead of collected via logs.
+  tenant_uid:
+    caption: Tenant UID
+    type: string_t
+    requirement: recommended
+    description: The unique tenant identifier.
+  correlation_uid:
+    caption: Correlation UID
+    type: string_t
+    requirement: optional
+    description: The unique identifier used to correlate events.
+  event_code:
+    caption: Event Code
+    type: string_t
+    requirement: optional
+    description: The Event ID or Code that the product uses to describe the event.
+  extension:
+    caption: Schema Extension
+    type: object_t
+    object: extension
+    requirement: optional
+    deprecated:
+      since: 1.1.0
+      message: Use the  `extensions`  attribute instead.
+    description: The schema extension used to create the event.
+  extensions:
+    caption: Schema Extensions
+    type: object_t
+    object: extension
+    array: true
+    requirement: optional
+    description: The schema extensions used to create the event.
+  labels:
+    caption: Labels
+    type: string_t
+    array: true
+    requirement: optional
+    description: |-
+      The list of category labels attached to the event or specific attributes. Labels are user defined tags or aliases added at normalization time.
+
+      For example: `["network", "connection.ip:destination", "device.ip:source"]`
+  log_level:
+    caption: Log Level
+    type: string_t
+    requirement: optional
+    description: The audit level at which an event was generated.
+  log_version:
+    caption: Log Version
+    type: string_t
+    requirement: optional
+    description: The event log schema version that specifies the format of the original event. For example syslog version or Cisco Log Schema Version.
+  logged_time:
+    caption: Logged Time
+    type: timestamp_t
+    requirement: optional
+    description: |-
+      The time when the logging system collected and logged the event.
+
+      This attribute is distinct from the event time in that event time typically contain the time extracted from the original event. Most of the time, these two times will be different.
+  logged_time_dt:
+    caption: Logged Time
+    type: datetime_t
+    requirement: optional
+    profile: datetime
+    description: |-
+      The time when the logging system collected and logged the event.
+
+      This attribute is distinct from the event time in that event time typically contain the time extracted from the original event. Most of the time, these two times will be different.
+  loggers:
+    caption: Loggers
+    type: object_t
+    object: logger
+    array: true
+    requirement: optional
+    description: An array of Logger objects that describe the devices and logging products between the event source and its eventual destination. Note, this attribute can be used when there is a complex end-to-end path of event flow.
+  modified_time:
+    caption: Modified Time
+    type: timestamp_t
+    requirement: optional
+    description: The time when the event was last modified or enriched.
+  modified_time_dt:
+    caption: Modified Time
+    type: datetime_t
+    requirement: optional
+    profile: datetime
+    description: The time when the event was last modified or enriched.
+  processed_time:
+    caption: Processed Time
+    type: timestamp_t
+    requirement: optional
+    description: The event processed time, such as an ETL operation.
+  processed_time_dt:
+    caption: Processed Time
+    type: datetime_t
+    requirement: optional
+    profile: datetime
+    description: The event processed time, such as an ETL operation.
+  profiles:
+    caption: Profiles
+    type: string_t
+    array: true
+    requirement: optional
+    description: The list of profiles used to create the event.
+  sequence:
+    caption: Sequence Number
+    type: integer_t
+    requirement: optional
+    description: Sequence number of the event. The sequence number is a value available in some events, to make the exact ordering of events unambiguous, regardless of the event time precision.
+  uid:
+    caption: Event UID
+    type: string_t
+    requirement: optional
+    description: The logging system-assigned unique identifier of an event instance.

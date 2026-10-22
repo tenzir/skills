@@ -1,0 +1,93 @@
+name: location
+caption: Geo Location
+extends: object
+observable: 26
+description: The Geo Location object describes a geographical location, usually associated with an IP address. Defined by D3FEND [d3f:PhysicalLocation](https://d3fend.mitre.org/dao/artifact/d3f:PhysicalLocation/).
+constraints:
+  at_least_one: [city, country, postal_code, region]
+referenced_by:
+  objects:
+    device: [location]
+    domain_contact: [location]
+    endpoint: [location]
+    ldap_person: [location]
+    network_endpoint: [location]
+    network_proxy: [location]
+    osint: [location]
+attributes:
+  city:
+    caption: City
+    type: string_t
+    requirement: recommended
+    description: The name of the city.
+  continent:
+    caption: Continent
+    type: string_t
+    requirement: recommended
+    description: The name of the continent.
+  country:
+    caption: Country
+    type: string_t
+    requirement: recommended
+    observable: 14
+    description: |-
+      The ISO 3166-1 Alpha-2 country code. For the complete list of country codes see [ISO 3166-1 alpha-2 codes](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en).
+
+      Note: The two letter country code should be capitalized. For example: `US` or `CA`.
+  coordinates:
+    caption: Coordinates
+    type: float_t
+    array: true
+    requirement: optional
+    deprecated:
+      since: 1.2.0
+      message: Use specific  `lat, long`  attributes instead.
+    description: 'A two-element array, containing a longitude/latitude pair. The format conforms with [GeoJSON](https://geojson.org). For example: `[-73.983, 40.719]`.'
+  desc:
+    caption: Description
+    type: string_t
+    requirement: optional
+    description: The description of the geographical location.
+  geohash:
+    caption: Geohash
+    type: string_t
+    requirement: optional
+    description: |-
+      Geohash of the geo-coordinates (latitude and longitude).
+
+      [Geohashing](https://en.wikipedia.org/wiki/Geohash) is a geocoding system used to encode geographic coordinates in decimal degrees, to a single string.
+  is_on_premises:
+    caption: On Premises
+    type: boolean_t
+    requirement: optional
+    description: The indication of whether the location is on premises.
+  isp:
+    caption: ISP
+    type: string_t
+    requirement: optional
+    description: The name of the Internet Service Provider (ISP).
+  lat:
+    caption: Latitude
+    type: float_t
+    requirement: optional
+    description: 'The geographical Latitude coordinate represented in Decimal Degrees (DD). For example: `42.361145`.'
+  long:
+    caption: Longitude
+    type: float_t
+    requirement: optional
+    description: 'The geographical Longitude coordinate represented in Decimal Degrees (DD). For example: `-71.057083`.'
+  postal_code:
+    caption: Postal Code
+    type: string_t
+    requirement: optional
+    description: The postal code of the location.
+  provider:
+    caption: Provider
+    type: string_t
+    requirement: optional
+    description: The provider of the geographical location data.
+  region:
+    caption: Region
+    type: string_t
+    requirement: optional
+    description: The alphanumeric code that identifies the principal subdivision (e.g. province or state) of the country. Region codes are defined at [ISO 3166-2](https://www.iso.org/iso-3166-country-codes.html) and have a limit of three characters. For example, see [the region codes for the US](https://www.iso.org/obp/ui/#iso:code:3166:US).

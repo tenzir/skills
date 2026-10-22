@@ -1,0 +1,139 @@
+name: cve
+caption: CVE
+extends: object
+description: The Common Vulnerabilities and Exposures (CVE) object represents publicly disclosed cybersecurity vulnerabilities defined in CVE Program catalog (CVE). There is one CVE Record for each vulnerability in the catalog.
+profiles: [data_classification, datetime]
+references:
+- description: CVE Program catalog
+  url: https://cve.org/
+referenced_by:
+  objects:
+    advisory: [related_cves]
+    malware: [cves]
+    vulnerability: [cve]
+attributes:
+  uid:
+    caption: CVE ID
+    type: string_t
+    requirement: required
+    observable: 18
+    description: 'The Common Vulnerabilities and Exposures unique number assigned to a specific computer vulnerability. A CVE Identifier begins with 4 digits representing the year followed by a sequence of digits that acts as a unique identifier. For example: `CVE-2021-12345`.'
+  created_time:
+    caption: Created Time
+    type: timestamp_t
+    requirement: recommended
+    description: The Record Creation Date identifies when the CVE ID was issued to a CVE Numbering Authority (CNA) or the CVE Record was published on the CVE List. Note that the Record Creation Date does not necessarily indicate when this vulnerability was discovered, shared with the affected vendor, publicly disclosed, or updated in CVE.
+  cvss:
+    caption: CVSS Score
+    type: object_t
+    object: cvss
+    array: true
+    requirement: recommended
+    description: The CVSS object details Common Vulnerability Scoring System scores from the advisory that are related to the vulnerability.
+    references:
+    - description: CVSS
+      url: https://www.first.org/cvss/
+  references:
+    caption: References
+    type: string_t
+    array: true
+    requirement: recommended
+    description: A list of reference URLs with additional information about the CVE Record.
+  title:
+    caption: Title
+    type: string_t
+    requirement: recommended
+    description: A title or a brief phrase summarizing the CVE record.
+  type:
+    caption: Vulnerability Type
+    type: string_t
+    requirement: recommended
+    description: |-
+      The vulnerability type as classified in the CVE catalog.
+
+      Most frequently used vulnerability types are: `DoS`, `Code Execution`, `Overflow`, `Memory Corruption`, `Sql Injection`, `XSS`, `Directory Traversal`, `Http Response Splitting`, `Bypass something`, `Gain Information`, `Gain Privileges`, `CSRF`, `File Inclusion`. For more information see Vulnerabilities By Type distributions.
+    references:
+    - description: Vulnerabilities by Type distributions
+      url: https://www.cvedetails.com/vulnerabilities-by-types.php
+  created_time_dt:
+    caption: Created Time
+    type: datetime_t
+    requirement: optional
+    profile: datetime
+    description: The Record Creation Date identifies when the CVE ID was issued to a CVE Numbering Authority (CNA) or the CVE Record was published on the CVE List. Note that the Record Creation Date does not necessarily indicate when this vulnerability was discovered, shared with the affected vendor, publicly disclosed, or updated in CVE.
+  cwe:
+    caption: CWE
+    type: object_t
+    object: cwe
+    requirement: optional
+    deprecated:
+      since: 1.4.0
+      message: Use `related_cwes` attribute instead.
+      superseded_by: [related_cwes]
+    description: The CWE object represents a weakness in a software system that can be exploited by a threat actor to perform an attack. The CWE object is based on the Common Weakness Enumeration (CWE) catalog.
+    references:
+    - description: CWE
+      url: https://cwe.mitre.org/
+  cwe_uid:
+    caption: CWE UID
+    type: string_t
+    requirement: optional
+    deprecated:
+      since: 1.1.0
+      message: Use the `related_cwes[*].uid` attribute instead.
+      superseded_by: ['related_cwes[*].uid']
+    description: 'The Common Weakness Enumeration (CWE) unique identifier. For example: `CWE-787`.'
+    references:
+    - description: CWE
+      url: https://cwe.mitre.org/
+  cwe_url:
+    caption: CWE URL
+    type: url_t
+    requirement: optional
+    observable: 6
+    deprecated:
+      since: 1.1.0
+      message: Use the `related_cwes[*].src_url` attribute instead.
+      superseded_by: ['related_cwes[*].src_url']
+    description: 'Common Weakness Enumeration (CWE) definition URL. For example: `https://cwe.mitre.org/data/definitions/787.html`.'
+  desc:
+    caption: Description
+    type: string_t
+    requirement: optional
+    description: A brief description of the CVE Record.
+  epss:
+    caption: EPSS
+    type: object_t
+    object: epss
+    requirement: optional
+    description: The Exploit Prediction Scoring System (EPSS) object describes the estimated probability a vulnerability will be exploited. EPSS is a community-driven effort to combine descriptive information about vulnerabilities (CVEs) with evidence of actual exploitation in-the-wild.
+    references:
+    - description: EPSS
+      url: https://www.first.org/epss/
+  modified_time:
+    caption: Modified Time
+    type: timestamp_t
+    requirement: optional
+    description: The Record Modified Date identifies when the CVE record was last updated.
+  modified_time_dt:
+    caption: Modified Time
+    type: datetime_t
+    requirement: optional
+    profile: datetime
+    description: The Record Modified Date identifies when the CVE record was last updated.
+  product:
+    caption: Product
+    type: object_t
+    object: product
+    requirement: optional
+    description: The product where the vulnerability was discovered.
+  related_cwes:
+    caption: Related CWEs
+    type: object_t
+    object: cwe
+    array: true
+    requirement: optional
+    description: Describes the Common Weakness Enumeration details related to the CVE Record.
+    references:
+    - description: Common Weakness Enumeration (CWE)
+      url: https://cwe.mitre.org/

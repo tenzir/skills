@@ -1,0 +1,116 @@
+# Attributes with `from` but no description are inherited unchanged. Their
+# descriptions are in the file of the item that `from` names.
+name: idp
+caption: Identity Provider
+extends: _entity
+description: The Identity Provider object contains detailed information about a provider responsible for creating, maintaining, and managing identity information while offering authentication services to applications. An Identity Provider (IdP) serves as a trusted authority that verifies the identity of users and issues authentication tokens or assertions to enable secure access to applications or services.
+profiles: [container]
+constraints:
+  at_least_one: [name, uid]
+referenced_by:
+  classes:
+    cloud_resources_inventory_info: [idp]
+  objects:
+    actor: [idp]
+attributes:
+  name:
+    caption: Name
+    type: string_t
+    requirement: recommended
+    description: The name of the Identity Provider.
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: recommended
+    description: The unique identifier of the Identity Provider.
+  auth_factors:
+    caption: Authentication Factors
+    type: object_t
+    object: auth_factor
+    array: true
+    requirement: optional
+    description: The Authentication Factors object describes the different types of Multi-Factor Authentication (MFA) methods and/or devices supported by the Identity Provider.
+  domain:
+    caption: Domain
+    type: string_t
+    requirement: optional
+    description: The primary domain associated with the Identity Provider.
+  fingerprint:
+    caption: Certificate Fingerprint
+    type: object_t
+    object: fingerprint
+    requirement: optional
+    observable: 30
+    description: The fingerprint of the X.509 certificate used by the Identity Provider.
+  has_mfa:
+    caption: MFA Enforced
+    type: boolean_t
+    requirement: optional
+    description: The Identity Provider enforces Multi Factor Authentication (MFA).
+  issuer:
+    caption: Issuer Details
+    type: string_t
+    requirement: optional
+    description: The unique identifier (often a URL) used by the Identity Provider as its issuer.
+  protocol_name:
+    caption: Supported Protocol
+    type: string_t
+    requirement: optional
+    description: The supported protocol of the Identity Provider. E.g., `SAML`, `OIDC`, or `OAuth2`.
+  scim:
+    caption: SCIM
+    type: object_t
+    object: scim
+    requirement: optional
+    description: The System for Cross-domain Identity Management (SCIM) resource object as defined in RFC 7634 provides a structured set of attributes related to SCIM protocols used for identity provisioning and management across cloud-based platforms. It standardizes user and group provisioning details, enabling identity synchronization and lifecycle management with compatible Identity Providers (IdPs) and applications.
+    references:
+    - description: RFC 7634.
+      url: https://datatracker.ietf.org/doc/html/rfc7643
+  sso:
+    caption: SSO
+    type: object_t
+    object: sso
+    requirement: optional
+    description: The Single Sign-On (SSO) object provides a structure for normalizing SSO attributes, configuration, and/or settings from Identity Providers.
+  state:
+    caption: State
+    type: string_t
+    requirement: optional
+    description: The configuration state of the Identity Provider, normalized to the caption of the `state_id` value. In the case of `Other`, it is defined by the event source.
+  state_id:
+    caption: State ID
+    type: integer_t
+    requirement: optional
+    sibling: state
+    description: The normalized state ID of the Identity Provider to reflect its configuration or activation status.
+    enum:
+      0:
+        caption: Unknown
+        description: The configuration state of the Identity Provider is unknown.
+      1:
+        caption: Active
+        description: The Identity Provider is in an Active state, or otherwise enabled.
+      2:
+        caption: Suspended
+        description: The Identity Provider is in a Suspended state.
+      3:
+        caption: Deprecated
+        description: The Identity Provider is in a Deprecated state, or is otherwise disabled.
+      4:
+        caption: Deleted
+        description: The Identity Provider is in a Deleted state.
+      99:
+        caption: Other
+        description: The configuration state of the Identity Provider is not mapped. See the `state` attribute, which contains a data source specific value.
+  tenant_uid:
+    caption: Tenant UID
+    type: string_t
+    requirement: optional
+    description: The tenant ID associated with the Identity Provider.
+  uid_numeric: {caption: Numeric Unique ID, type: long_t, requirement: optional, from: _entity}
+  url_string:
+    caption: Configuration URL
+    type: url_t
+    requirement: optional
+    observable: 6
+    description: The URL for accessing the configuration or metadata of the Identity Provider.

@@ -1,0 +1,88 @@
+name: win/reg_value
+caption: Registry Value
+extension: win
+extends: object
+observable: 29
+description: The registry value object describes a Windows registry value.
+profiles: [datetime]
+referenced_by:
+  classes:
+    win/registry_value_activity: [prev_reg_value, reg_value]
+    win/registry_value_query: [reg_value]
+  objects:
+    evidences: [reg_value]
+attributes:
+  name:
+    caption: Name
+    type: string_t
+    requirement: required
+    description: The name of the registry value.
+  path:
+    caption: Path
+    type: string_t
+    requirement: required
+    description: The full path to the registry key, where the value is located.
+  type_id:
+    caption: Type ID
+    type: integer_t
+    requirement: recommended
+    sibling: type
+    description: The value type ID.
+    enum:
+      0:
+        caption: Unknown
+        description: The type is unknown.
+      1:
+        caption: REG_BINARY
+      2:
+        caption: REG_DWORD
+      3:
+        caption: REG_DWORD_BIG_ENDIAN
+      4:
+        caption: REG_EXPAND_SZ
+      5:
+        caption: REG_LINK
+      6:
+        caption: REG_MULTI_SZ
+      7:
+        caption: REG_NONE
+      8:
+        caption: REG_QWORD
+      9:
+        caption: REG_QWORD_LITTLE_ENDIAN
+      10:
+        caption: REG_SZ
+      99:
+        caption: Other
+        description: The type is not mapped. See the `type` attribute, which contains a data source specific value.
+  data:
+    caption: Data
+    type: json_t
+    requirement: optional
+    description: The data of the registry value.
+  is_default:
+    caption: Default Value
+    type: boolean_t
+    requirement: optional
+    description: The indication of whether the value is from a default value name. For example, the value name could be missing.
+  is_system:
+    caption: System
+    type: boolean_t
+    requirement: optional
+    description: The indication of whether the object is part of the operating system.
+  modified_time:
+    caption: Modified Time
+    type: timestamp_t
+    requirement: optional
+    description: The time when the registry value was last modified.
+  modified_time_dt:
+    caption: Modified Time
+    type: datetime_t
+    requirement: optional
+    profile: datetime
+    description: The time when the registry value was last modified.
+  type:
+    caption: Type
+    type: string_t
+    requirement: optional
+    description: A string representation of the value type as specified in [Registry Value Types](https://learn.microsoft.com/en-us/windows/win32/sysinfo/registry-value-types).

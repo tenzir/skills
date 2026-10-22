@@ -1,0 +1,227 @@
+name: application
+caption: Application
+extends: object
+description: An Application describes the details for an inventoried application as reported by an Application Security tool or other Developer-centric tooling. Applications can be defined as Kubernetes resources, Containerized resources, or application hosting-specific cloud sources such as AWS Elastic BeanStalk, AWS Lightsail, or Azure Logic Apps.
+profiles: [data_classification, datetime, cloud]
+constraints:
+  at_least_one: [uid, name]
+references:
+- description: D3FEND™ Ontology d3f:Application.
+  url: https://d3fend.mitre.org/dao/artifact/d3f:Application/
+referenced_by:
+  classes:
+    application_lifecycle: [application]
+    application_security_posture_finding: [application]
+    iam_analysis_finding: [applications]
+  objects:
+    actor: [application]
+    message_context: [application]
+attributes:
+  name:
+    caption: Application Name
+    type: string_t
+    requirement: recommended
+    description: The name of the application.
+  owner:
+    caption: Owner
+    type: object_t
+    object: user
+    requirement: recommended
+    observable: 21
+    description: The identity of the service or user account that owns the application.
+  uid:
+    caption: Application ID
+    type: string_t
+    requirement: recommended
+    description: The unique identifier for the application.
+  created_time:
+    caption: Created Time
+    type: timestamp_t
+    requirement: optional
+    description: The time when the application was known to have been created.
+  created_time_dt:
+    caption: Created Time
+    type: datetime_t
+    requirement: optional
+    profile: datetime
+    description: The time when the application was known to have been created.
+  criticality:
+    caption: Business Criticality
+    type: string_t
+    requirement: optional
+    description: Criticality or relative importance of a resource/object in question, normalized to the caption of `criticality_id`. In the case of Other, the value is defined by the event source.
+  criticality_id:
+    caption: Criticality Level ID
+    type: integer_t
+    requirement: optional
+    sibling: criticality
+    description: Criticality or relative importance of a resource/object in question.
+    enum:
+      0:
+        caption: Unknown
+        description: The criticality level is unknown.
+      1:
+        caption: Low
+        description: Minimal operational or security importance.
+      2:
+        caption: Medium
+        description: Affects localized functions or specific business processes.
+      3:
+        caption: High
+        description: Critical to core operations. Compromise leads to significant, but recoverable disruptions.
+      4:
+        caption: Very High
+        description: Mission critical, essential to business survival. Compromise could result in catastrophic consequences.
+      99:
+        caption: Other
+        description: The criticality level is not mapped. See the `criticality` attribute, which contains a data source specific value.
+  data:
+    caption: Data
+    type: json_t
+    requirement: optional
+    description: Additional data describing the application.
+  desc:
+    caption: Application Description
+    type: string_t
+    requirement: optional
+    description: A description or commentary for an application, usually retrieved from an upstream system.
+  first_seen_time:
+    caption: First Seen
+    type: timestamp_t
+    requirement: optional
+    description: The initial discovery time of the application.
+  first_seen_time_dt:
+    caption: First Seen
+    type: datetime_t
+    requirement: optional
+    profile: datetime
+    description: The initial discovery time of the application.
+  group:
+    caption: Group
+    type: object_t
+    object: group
+    requirement: optional
+    description: The name of the related application or associated resource group.
+  hostname:
+    caption: Hostname
+    type: hostname_t
+    requirement: optional
+    observable: 1
+    description: The fully qualified name of the application.
+  labels:
+    caption: Labels
+    type: string_t
+    array: true
+    requirement: optional
+    description: The list of labels associated to the application.
+  last_seen_time:
+    caption: Last Seen
+    type: timestamp_t
+    requirement: optional
+    description: The most recent discovery time of the application.
+  last_seen_time_dt:
+    caption: Last Seen
+    type: datetime_t
+    requirement: optional
+    profile: datetime
+    description: The most recent discovery time of the application.
+  modified_time:
+    caption: Modified Time
+    type: timestamp_t
+    requirement: optional
+    description: The time when the application was last known to have been modified.
+  modified_time_dt:
+    caption: Modified Time
+    type: datetime_t
+    requirement: optional
+    profile: datetime
+    description: The time when the application was last known to have been modified.
+  product:
+    caption: Product
+    type: object_t
+    object: product
+    requirement: optional
+    description: The software product that this application is an instance of, carrying product identity such as `vendor_name`, `cpe_name`, and canonical `version`.
+  region:
+    caption: Region
+    type: string_t
+    requirement: optional
+    profile: cloud
+    description: The cloud region of the resource.
+  resource_relationship:
+    caption: Application Relationship
+    type: object_t
+    object: graph
+    requirement: optional
+    description: A graph representation showing how this application relates to and interacts with other entities in the environment. This can include parent/child relationships, dependencies, or other connections.
+  risk_level:
+    caption: Risk Level
+    type: string_t
+    requirement: optional
+    description: The risk level, normalized to the caption of the risk_level_id value.
+  risk_level_id:
+    caption: Risk Level ID
+    type: integer_t
+    requirement: optional
+    sibling: risk_level
+    description: The normalized risk level id.
+    enum:
+      0:
+        caption: Info
+      1:
+        caption: Low
+      2:
+        caption: Medium
+      3:
+        caption: High
+      4:
+        caption: Critical
+      99:
+        caption: Other
+        description: The risk level is not mapped. See the `risk_level` attribute, which contains a data source specific value.
+  risk_score:
+    caption: Risk Score
+    type: integer_t
+    requirement: optional
+    description: The risk score as reported by the event source.
+  sbom:
+    caption: Related SBOM
+    type: object_t
+    object: sbom
+    requirement: optional
+    description: The Software Bill of Materials (SBOM) associated with the application
+  src_url:
+    caption: Source URL
+    type: url_t
+    requirement: optional
+    observable: 6
+    description: The URL to the application's record or detail page within the reporting event source (e.g., a link to the application in the security tool's UI).
+  tags:
+    caption: Tags
+    type: object_t
+    object: key_value_object
+    array: true
+    requirement: optional
+    description: The list of tags; `{key:value}` pairs associated to the application.
+  type:
+    caption: Application Type
+    type: string_t
+    requirement: optional
+    description: The type of application as defined by the event source, e.g., `GitHub`, `Azure Logic App`, or `Amazon Elastic BeanStalk`.
+  uid_alt:
+    caption: Application Alternative ID
+    type: string_t
+    requirement: optional
+    description: An alternative or contextual identifier for the application, such as a configuration, organization, or license UID.
+  url:
+    caption: URL
+    type: object_t
+    object: url
+    requirement: optional
+    observable: 23
+    description: The URL of the application.
+  version:
+    caption: Application Version
+    type: string_t
+    requirement: optional
+    description: The semantic version of the application, e.g., `1.7.4`.

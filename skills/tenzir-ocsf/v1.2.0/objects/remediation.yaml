@@ -1,0 +1,43 @@
+name: remediation
+caption: Remediation
+extends: object
+description: The Remediation object describes the recommended remediation steps to address identified issue(s).
+profiles: [data_classification]
+referenced_by:
+  classes:
+    compliance_finding: [remediation]
+    detection_finding: [remediation]
+  objects:
+    affected_code: [remediation]
+    affected_package: [remediation]
+    cis_benchmark_result: [remediation]
+    finding: [remediation]
+    vulnerability: [remediation]
+attributes:
+  desc:
+    caption: Description
+    type: string_t
+    requirement: required
+    description: The description of the remediation strategy.
+  kb_article_list:
+    caption: Knowledgebase Articles
+    type: object_t
+    object: kb_article
+    array: true
+    requirement: optional
+    description: A list of KB articles or patches related to an endpoint. A KB Article contains metadata that describes the patch or an update.
+  kb_articles:
+    caption: Knowledgebase Articles
+    type: string_t
+    array: true
+    requirement: optional
+    deprecated:
+      since: 1.1.0
+      message: Use the  `kb_article_list`  attribute instead.
+    description: The KB article/s related to the entity. A KB Article contains metadata that describes the patch or an update.
+  references:
+    caption: References
+    type: string_t
+    array: true
+    requirement: optional
+    description: A list of supporting URL/s, references that help describe the remediation strategy.

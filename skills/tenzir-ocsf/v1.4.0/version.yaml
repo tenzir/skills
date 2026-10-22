@@ -1,0 +1,33 @@
+version: 1.4.0
+status: stable
+source:
+  repository: https://github.com/ocsf/ocsf-schema.git
+  ref: v1.4.0
+  commit: 6109cc5e834c1adfee67dda6c9bcfa5e37f79012
+  compiler: ocsf-schema-compiler 1.1.1
+extensions:
+  linux:
+    uid: 1
+    caption: Linux
+    version: 1.4.0
+    description: The Linux extension defines Linux specific attributes, objects and classes.
+    profiles: [linux/linux_users]
+    patches:
+      objects: [process]
+  win:
+    uid: 2
+    caption: Windows
+    version: 1.4.0
+    description: The Windows extension defines Windows specific attributes, objects and classes.
+    classes: [win/prefetch_query, win/registry_key_activity, win/registry_key_query, win/registry_value_activity, win/registry_value_query, win/windows_resource_activity, win/windows_service_activity]
+    objects: [win/reg_key, win/reg_value, win/win_resource, win/win_service]
+    patches:
+      objects: [evidences, startup_item]
+previous: 1.3.0
+changes:
+  added:
+    classes: [airborne_broadcast_activity, application_error, cloud_resources_inventory_info, drone_flights_activity, event_log_actvity, kernel_extension_activity, osint_inventory_info, script_activity, startup_item_query]
+    objects: [advisory, aircraft, classifier_details, discovery_details, encryption_details, environment_variable, key_value_object, long_string, occurrence_details, process_entity, sbom, scim, script, software_component, span, sso, startup_item, trace, unmanned_aerial_system, unmanned_system_operating_area, vendor_attributes]
+    profiles: [incident, trace]
+  removed:
+    classes: [event_log, kernel_extension]

@@ -1,0 +1,93 @@
+# Attributes with `from` but no description are inherited unchanged. Their
+# descriptions are in the file of the item that `from` names.
+name: network_proxy
+caption: Network Proxy Endpoint
+extends: network_endpoint
+observable: 20
+description: The network proxy endpoint object describes a proxy server, which acts as an intermediary between a client requesting a resource and the server providing that resource.
+profiles: [container]
+constraints:
+  at_least_one: [ip, uid, name, hostname, svc_name, instance_uid, interface_uid, interface_name, domain]
+references:
+- description: D3FEND™ Ontology d3f:ProxyServer
+  url: https://d3fend.mitre.org/dao/artifact/d3f:ProxyServer/
+referenced_by:
+  classes:
+    airborne_broadcast_activity: [proxy_endpoint]
+    dhcp_activity: [proxy, proxy_endpoint]
+    dns_activity: [proxy, proxy_endpoint]
+    dns_zone_transfer_activity: [proxy, proxy_endpoint]
+    drone_flights_activity: [proxy_endpoint]
+    ftp_activity: [proxy, proxy_endpoint]
+    http_activity: [proxy, proxy_endpoint]
+    network_activity: [proxy, proxy_endpoint]
+    network_file_activity: [proxy, proxy_endpoint]
+    ntp_activity: [proxy, proxy_endpoint]
+    rdp_activity: [proxy, proxy_endpoint]
+    smb_activity: [proxy, proxy_endpoint]
+    ssh_activity: [proxy, proxy_endpoint]
+    tunnel_activity: [proxy, proxy_endpoint]
+    web_resource_access_activity: [proxy, proxy_endpoint]
+    web_resources_activity: [proxy_endpoint]
+  objects:
+    network_endpoint: [proxy_endpoint]
+    network_proxy: [proxy_endpoint]
+attributes:
+  container: {caption: Container, type: object_t, object: container, requirement: recommended, group: context, profile: container, observable: 27, from: endpoint}
+  domain: {caption: Domain, type: string_t, requirement: recommended, from: network_endpoint}
+  hostname: {caption: Hostname, type: hostname_t, requirement: recommended, observable: 1, from: endpoint}
+  instance_uid: {caption: Instance ID, type: string_t, requirement: recommended, from: endpoint}
+  interface_name: {caption: Network Interface Name, type: string_t, requirement: recommended, from: endpoint}
+  interface_uid: {caption: Network Interface ID, type: string_t, requirement: recommended, from: endpoint}
+  ip: {caption: IP Address, type: ip_t, requirement: recommended, observable: 2, from: endpoint}
+  name: {caption: Name, type: string_t, requirement: recommended, from: endpoint}
+  namespace_pid: {caption: Namespace PID, type: integer_t, requirement: recommended, group: context, profile: container, from: endpoint}
+  owner: {caption: Owner, type: object_t, object: user, requirement: recommended, observable: 21, from: endpoint}
+  port: {caption: Port, type: port_t, requirement: recommended, observable: 11, from: network_endpoint}
+  svc_name: {caption: Service Name, type: string_t, requirement: recommended, from: network_endpoint}
+  type_id:
+    caption: Type ID
+    type: integer_t
+    requirement: recommended
+    sibling: type
+    enum:
+      0: Unknown
+      1: Server
+      2: Desktop
+      3: Laptop
+      4: Tablet
+      5: Mobile
+      6: Virtual
+      7: IOT
+      8: Browser
+      9: Firewall
+      10: Switch
+      11: Hub
+      12: Router
+      13: IDS
+      14: IPS
+      15: Load Balancer
+      99: Other
+    from: network_endpoint
+  uid: {caption: Unique ID, type: string_t, requirement: recommended, observable: 48, from: network_endpoint}
+  agent_list: {caption: Agent List, type: object_t, object: agent, array: true, requirement: optional, from: endpoint}
+  autonomous_system: {caption: Autonomous System, type: object_t, object: autonomous_system, requirement: optional, from: network_endpoint}
+  fingerprints: {caption: Fingerprints, type: object_t, object: fingerprint, array: true, requirement: optional, observable: 30, from: network_endpoint}
+  hw_info: {caption: Hardware Info, type: object_t, object: device_hw_info, requirement: optional, from: endpoint}
+  intermediate_ips: {caption: Intermediate IP Addresses, type: ip_t, array: true, requirement: optional, observable: 2, from: network_endpoint}
+  isp: {caption: ISP Name, type: string_t, requirement: optional, from: network_endpoint}
+  isp_org: {caption: ISP Org, type: string_t, requirement: optional, from: network_endpoint}
+  location: {caption: Geo Location, type: object_t, object: location, requirement: optional, observable: 26, from: endpoint}
+  mac: {caption: MAC Address, type: mac_t, requirement: optional, observable: 3, from: endpoint}
+  mac_vendor: {caption: MAC Vendor, type: string_t, requirement: optional, from: endpoint}
+  network_scope: {caption: Network Scope, type: string_t, requirement: optional, from: network_endpoint}
+  network_scope_id: {caption: Network Scope ID, type: integer_t, requirement: optional, sibling: network_scope, enum: {0: Unknown, 1: Internal, 2: External, 99: Other}, from: network_endpoint}
+  os: {caption: OS, type: object_t, object: os, requirement: optional, from: endpoint}
+  pool: {caption: Pool, type: object_t, object: group, requirement: optional, from: endpoint}
+  proxy_endpoint: {caption: Proxy Endpoint, type: object_t, object: network_proxy, requirement: optional, observable: 20, from: network_endpoint}
+  subnet_uid: {caption: Subnet UID, type: string_t, requirement: optional, from: endpoint}
+  type: {caption: Type, type: string_t, requirement: optional, from: network_endpoint}
+  uid_numeric: {caption: Numeric Unique ID, type: long_t, requirement: optional, from: _entity}
+  vlan_uid: {caption: VLAN, type: string_t, requirement: optional, from: endpoint}
+  vpc_uid: {caption: VPC UID, type: string_t, requirement: optional, from: endpoint}
+  zone: {caption: Network Zone, type: string_t, requirement: optional, from: endpoint}

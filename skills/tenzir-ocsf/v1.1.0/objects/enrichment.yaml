@@ -1,0 +1,76 @@
+name: enrichment
+caption: Enrichment
+extends: object
+description: The Enrichment object provides inline enrichment data for specific attributes of interest within an event. It serves as a mechanism to enhance or supplement the information associated with the event by adding additional relevant details or context.
+referenced_by:
+  classes:
+    account_change: [enrichments]
+    api_activity: [enrichments]
+    application_lifecycle: [enrichments]
+    authentication: [enrichments]
+    authorize_session: [enrichments]
+    base_event: [enrichments]
+    compliance_finding: [enrichments]
+    config_state: [enrichments]
+    datastore_activity: [enrichments]
+    detection_finding: [enrichments]
+    device_config_state_change: [enrichments]
+    dhcp_activity: [enrichments]
+    dns_activity: [enrichments]
+    email_activity: [enrichments]
+    email_file_activity: [enrichments]
+    email_url_activity: [enrichments]
+    entity_management: [enrichments]
+    file_activity: [enrichments]
+    file_hosting: [enrichments]
+    ftp_activity: [enrichments]
+    group_management: [enrichments]
+    http_activity: [enrichments]
+    incident_finding: [enrichments]
+    inventory_info: [enrichments]
+    kernel_activity: [enrichments]
+    kernel_extension: [enrichments]
+    memory_activity: [enrichments]
+    module_activity: [enrichments]
+    network_activity: [enrichments]
+    network_file_activity: [enrichments]
+    ntp_activity: [enrichments]
+    patch_state: [enrichments]
+    process_activity: [enrichments]
+    rdp_activity: [enrichments]
+    scan_activity: [enrichments]
+    scheduled_job_activity: [enrichments]
+    security_finding: [enrichments]
+    smb_activity: [enrichments]
+    ssh_activity: [enrichments]
+    user_access: [enrichments]
+    user_inventory: [enrichments]
+    vulnerability_finding: [enrichments]
+    web_resource_access_activity: [enrichments]
+    web_resources_activity: [enrichments]
+attributes:
+  data:
+    caption: Data
+    type: json_t
+    requirement: required
+    description: The enrichment data associated with the attribute and value. The meaning of this data depends on the type the enrichment record.
+  name:
+    caption: Name
+    type: string_t
+    requirement: required
+    description: The name of the attribute to which the enriched data pertains.
+  value:
+    caption: Value
+    type: string_t
+    requirement: required
+    description: The value of the attribute to which the enriched data pertains.
+  provider:
+    caption: Provider
+    type: string_t
+    requirement: recommended
+    description: The enrichment data provider name.
+  type:
+    caption: Type
+    type: string_t
+    requirement: recommended
+    description: 'The enrichment type. For example: `location`.'

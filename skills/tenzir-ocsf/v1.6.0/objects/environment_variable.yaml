@@ -1,0 +1,18 @@
+name: environment_variable
+caption: Environment Variable
+extends: object
+description: An environment variable.
+referenced_by:
+  objects:
+    process: [environment_variables]
+attributes:
+  name:
+    caption: Name
+    type: string_t
+    requirement: required
+    description: The name of the environment variable.
+  value:
+    caption: Value
+    type: string_t
+    requirement: required
+    description: The value of the environment variable.

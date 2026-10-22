@@ -1,0 +1,129 @@
+name: policy
+caption: Policy
+extends: _entity
+description: |-
+  The Policy object describes the policies that are applicable.
+
+  Policy attributes provide traceability to the operational state of the security product at the time that the event was captured, facilitating forensics, troubleshooting, and policy tuning/adjustments.
+constraints:
+  at_least_one: [name, uid]
+referenced_by:
+  classes:
+    account_change: [policies, policy]
+    admin_group_query: [policy]
+    airborne_broadcast_activity: [policy]
+    api_activity: [policy]
+    application_error: [policy]
+    application_lifecycle: [policy]
+    application_security_posture_finding: [policy]
+    authentication: [policy]
+    authorize_session: [policy]
+    base_event: [policy]
+    cloud_resources_inventory_info: [policy]
+    compliance_finding: [policy]
+    config_state: [policy]
+    data_security_finding: [policy]
+    datastore_activity: [policy]
+    detection_finding: [policy]
+    device_config_state_change: [policy]
+    dhcp_activity: [policy]
+    dns_activity: [policy]
+    drone_flights_activity: [policy]
+    email_activity: [policy]
+    email_file_activity: [policy]
+    email_url_activity: [policy]
+    entity_management: [policy]
+    event_log_actvity: [policy]
+    evidence_info: [policy]
+    file_activity: [policy]
+    file_hosting: [policy]
+    file_query: [policy]
+    file_remediation_activity: [policy]
+    folder_query: [policy]
+    ftp_activity: [policy]
+    group_management: [policy]
+    http_activity: [policy]
+    incident_finding: [policy]
+    inventory_info: [policy]
+    job_query: [policy]
+    kernel_activity: [policy]
+    kernel_extension_activity: [policy]
+    kernel_object_query: [policy]
+    memory_activity: [policy]
+    module_activity: [policy]
+    module_query: [policy]
+    network_activity: [policy]
+    network_connection_query: [policy]
+    network_file_activity: [policy]
+    network_remediation_activity: [policy]
+    networks_query: [policy]
+    ntp_activity: [policy]
+    osint_inventory_info: [policy]
+    patch_state: [policy]
+    peripheral_device_query: [policy]
+    process_activity: [policy]
+    process_query: [policy]
+    process_remediation_activity: [policy]
+    rdp_activity: [policy]
+    remediation_activity: [policy]
+    scan_activity: [policy]
+    scheduled_job_activity: [policy]
+    script_activity: [policy]
+    security_finding: [policy]
+    service_query: [policy]
+    session_query: [policy]
+    smb_activity: [policy]
+    software_info: [policy]
+    ssh_activity: [policy]
+    startup_item_query: [policy]
+    tunnel_activity: [policy]
+    user_access: [policy]
+    user_inventory: [policy]
+    user_query: [policy]
+    vulnerability_finding: [policy]
+    web_resource_access_activity: [policy]
+    web_resources_activity: [policy]
+  objects:
+    agent: [policies]
+    assessment: [policy]
+    authorization: [policy]
+    data_classification: [policy]
+    data_security: [policy]
+    managed_entity: [policy]
+attributes:
+  is_applied:
+    caption: Applied
+    type: boolean_t
+    requirement: recommended
+    description: A determination if the content of a policy was applied to a target or request, or not.
+  name:
+    caption: Name
+    type: string_t
+    requirement: recommended
+    description: 'The policy name. For example: `IAM Policy`.'
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: recommended
+    description: A unique identifier of the policy instance.
+  version:
+    caption: Version
+    type: string_t
+    requirement: recommended
+    description: The policy version number.
+  data:
+    caption: Data
+    type: json_t
+    requirement: optional
+    description: Additional data about the policy such as the underlying JSON policy itself or other details.
+  desc:
+    caption: Description
+    type: string_t
+    requirement: optional
+    description: The description of the policy.
+  group:
+    caption: Group
+    type: object_t
+    object: group
+    requirement: optional
+    description: The policy group.

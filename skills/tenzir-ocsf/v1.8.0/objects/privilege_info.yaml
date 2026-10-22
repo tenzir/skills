@@ -1,0 +1,57 @@
+name: privilege_info
+caption: Privilege Info
+extends: object
+description: The Privilege Info object describes information about a specific privilege, action, or permission. It captures the privilege name, type, usage status, and when it was last used.
+profiles: [datetime]
+referenced_by:
+  objects:
+    privilege_attack_info: [privilege_info_list]
+attributes:
+  name:
+    caption: Name
+    type: string_t
+    requirement: required
+    description: 'The name of the privilege, action, or permission. Examples: `GetObject`, `CreateStoreImageTask` (AWS); `Microsoft.Storage/storageAccounts/read` (Azure); `storage.objects.get` (GCP).'
+  is_unused:
+    caption: Is Unused
+    type: boolean_t
+    requirement: optional
+    description: Indicates whether the privilege is unused within the analysis timeframe.
+  last_used_time:
+    caption: Last Used Time
+    type: timestamp_t
+    requirement: optional
+    description: The most recent time this privilege was used.
+  last_used_time_dt:
+    caption: Last Used Time
+    type: datetime_t
+    requirement: optional
+    profile: datetime
+    description: The most recent time this privilege was used.
+  type:
+    caption: Type
+    type: string_t
+    requirement: optional
+    description: The type or category of the privilege, normalized to the caption of the `type_id` value. In the case of 'Other', it is defined by the event source.
+  type_id:
+    caption: Type ID
+    type: integer_t
+    requirement: optional
+    sibling: type
+    description: The normalized type of the privilege.
+    enum:
+      0:
+        caption: Unknown
+        description: The privilege type is unknown.
+      1:
+        caption: Read
+        description: 'A read-type privilege that permits viewing or retrieving data. Examples: `s3:GetObject`, `Microsoft.Storage/storageAccounts/read`, `storage.objects.get`.'
+      2:
+        caption: Write
+        description: 'A write-type privilege that permits creating, modifying, or deleting data. Examples: `s3:PutObject`, `Microsoft.Storage/storageAccounts/write`, `storage.objects.create`.'
+      3:
+        caption: Execute
+        description: 'An execute-type privilege that permits running operations or invoking functions. Examples: `lambda:InvokeFunction`, `Microsoft.Compute/virtualMachines/start/action`.'
+      99:
+        caption: Other
+        description: The privilege type is not mapped. See the `type` attribute, which contains a data source specific value.

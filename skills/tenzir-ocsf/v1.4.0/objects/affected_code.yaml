@@ -1,0 +1,39 @@
+name: affected_code
+caption: Affected Code
+extends: object
+description: The Affected Code object describes details about a code block identified as vulnerable.
+profiles: [data_classification]
+referenced_by:
+  objects:
+    vulnerability: [affected_code]
+attributes:
+  file:
+    caption: File
+    type: object_t
+    object: file
+    requirement: required
+    observable: 24
+    description: Details about the file that contains the affected code block.
+  end_line:
+    caption: End Line
+    type: integer_t
+    requirement: recommended
+    description: The line number of the last line of code block identified as vulnerable.
+  start_line:
+    caption: Start Line
+    type: integer_t
+    requirement: recommended
+    description: The line number of the first line of code block identified as vulnerable.
+  owner:
+    caption: Owner
+    type: object_t
+    object: user
+    requirement: optional
+    observable: 21
+    description: Details about the user that owns the affected file.
+  remediation:
+    caption: Remediation Guidance
+    type: object_t
+    object: remediation
+    requirement: optional
+    description: Describes the recommended remediation steps to address identified issue(s).

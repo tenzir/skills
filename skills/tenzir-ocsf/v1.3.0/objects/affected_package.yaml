@@ -1,0 +1,44 @@
+# Attributes with `from` but no description are inherited unchanged. Their
+# descriptions are in the file of the item that `from` names.
+name: affected_package
+caption: Affected Software Package
+extends: package
+description: The Affected Package object describes details about a software package identified as affected by a vulnerability/vulnerabilities.
+profiles: [data_classification]
+referenced_by:
+  objects:
+    vulnerability: [affected_packages]
+attributes:
+  name: {caption: Name, type: string_t, requirement: required, from: package}
+  version: {caption: Version, type: string_t, requirement: required, from: package}
+  architecture: {caption: Architecture, type: string_t, requirement: recommended, from: package}
+  type_id: {caption: Type ID, type: integer_t, requirement: recommended, sibling: type, enum: {0: Unknown, 1: Application, 2: Operating System, 99: Other}, from: package}
+  cpe_name: {caption: The product CPE identifier, type: string_t, requirement: optional, from: package}
+  epoch: {caption: Epoch, type: integer_t, requirement: optional, from: package}
+  fixed_in_version:
+    caption: Fixed In Version
+    type: string_t
+    requirement: optional
+    description: The software package version in which a reported vulnerability was patched/fixed.
+  hash: {caption: Hash, type: object_t, object: fingerprint, requirement: optional, observable: 30, from: package}
+  license: {caption: Software License, type: string_t, requirement: optional, from: package}
+  package_manager:
+    caption: Package Manager
+    type: string_t
+    requirement: optional
+    description: The software packager manager utilized to manage a package on a system, e.g. npm, yum, dpkg etc.
+  path:
+    caption: Path
+    type: string_t
+    requirement: optional
+    description: The installation path of the affected package.
+  purl: {caption: Package URL, type: string_t, requirement: optional, from: package}
+  release: {caption: Software Release Details, type: string_t, requirement: optional, from: package}
+  remediation:
+    caption: Remediation Guidance
+    type: object_t
+    object: remediation
+    requirement: optional
+    description: Describes the recommended remediation steps to address identified issue(s).
+  type: {caption: Type, type: string_t, requirement: optional, from: package}
+  vendor_name: {caption: Vendor Name, type: string_t, requirement: optional, from: package}

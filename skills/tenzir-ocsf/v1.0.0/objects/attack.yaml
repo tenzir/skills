@@ -1,0 +1,43 @@
+name: attack
+caption: Attack
+extends: object
+description: The Attack object describes the technique and associated tactics related to an attack. See [MITRE ATT&CK®](https://attack.mitre.org).
+referenced_by:
+  classes:
+    dns_activity: [attacks]
+    email_activity: [attacks]
+    email_file_activity: [attacks]
+    email_url_activity: [attacks]
+    file_activity: [attacks]
+    ftp_activity: [attacks]
+    http_activity: [attacks]
+    kernel_activity: [attacks]
+    kernel_extension: [attacks]
+    memory_activity: [attacks]
+    module_activity: [attacks]
+    network_activity: [attacks]
+    process_activity: [attacks]
+    rdp_activity: [attacks]
+    scheduled_job_activity: [attacks]
+    security_finding: [attacks]
+    smb_activity: [attacks]
+    ssh_activity: [attacks]
+attributes:
+  tactics:
+    caption: Tactics
+    type: object_t
+    object: tactic
+    array: true
+    requirement: required
+    description: The a list of tactic ID's/names that are associated with the attack technique, as defined by [ATT&CK MatrixTM](https://attack.mitre.org/wiki/ATT&CK_Matrix).
+  technique:
+    caption: Technique
+    type: object_t
+    object: technique
+    requirement: required
+    description: The attack technique.
+  version:
+    caption: Version
+    type: string_t
+    requirement: required
+    description: The ATT&CK Matrix version.

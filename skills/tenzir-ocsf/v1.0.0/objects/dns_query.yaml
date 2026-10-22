@@ -1,0 +1,51 @@
+# Attributes with `from` but no description are inherited unchanged. Their
+# descriptions are in the file of the item that `from` names.
+name: dns_query
+caption: DNS Query
+extends: _dns
+description: The DNS query object represents a specific request made to the Domain Name System (DNS) to retrieve information about a domain or perform a DNS operation. This object encapsulates the necessary attributes and methods to construct and send DNS queries, specify the query type (e.g., A, AAAA, MX). Defined by D3FEND [d3f:DNSLookup](https://d3fend.mitre.org/dao/artifact/d3f:DNSLookup/).
+referenced_by:
+  classes:
+    dns_activity: [query]
+attributes:
+  class: {caption: Resource Record Class, type: string_t, requirement: required, from: _dns}
+  hostname:
+    caption: Hostname
+    type: hostname_t
+    requirement: required
+    observable: 1
+    description: 'The hostname or domain being queried. For example: `www.example.com`'
+  type: {caption: Resource Record Type, type: string_t, requirement: required, from: _dns}
+  opcode_id:
+    caption: DNS Opcode ID
+    type: integer_t
+    requirement: recommended
+    description: The DNS opcode ID specifies the normalized query message type.
+    enum:
+      0:
+        caption: Query
+        description: Standard query
+      1:
+        caption: Inverse Query
+        description: Inverse query, obsolete
+      2:
+        caption: Status
+        description: Server status request
+      3:
+        caption: Reserved
+        description: Reserved, not used
+      4:
+        caption: Notify
+        description: Zone change notification
+      5:
+        caption: Update
+        description: Dynamic DNS update
+      6:
+        caption: DSO Message
+        description: DNS Stateful Operations (DSO)
+  packet_uid: {caption: Packet UID, type: integer_t, requirement: recommended, from: _dns}
+  opcode:
+    caption: DNS Opcode
+    type: string_t
+    requirement: optional
+    description: The DNS opcode specifies the type of the query message.

@@ -1,0 +1,156 @@
+name: data_classification
+caption: Data Classification
+extends: object
+description: The Data Classification object includes information about data classification levels and data category types.
+constraints:
+  at_least_one: [category_id, confidentiality_id]
+referenced_by:
+  objects:
+    database: [data_classification, data_classifications]
+    databucket: [data_classification, data_classifications]
+    email: [data_classification, data_classifications]
+    file: [data_classification, data_classifications]
+    metadata: [data_classification, data_classifications]
+    product: [data_classification, data_classifications]
+    resource_details: [data_classification, data_classifications]
+    web_resource: [data_classification, data_classifications]
+attributes:
+  category_id:
+    caption: Category ID
+    type: integer_t
+    requirement: recommended
+    sibling: category
+    description: The normalized identifier of the data classification category.
+    enum:
+      0:
+        caption: Unknown
+        description: The type is not mapped. See the `data_type` attribute, which contains a data source specific value.
+      1:
+        caption: Personal
+        description: Any Personally Identifiable Information (PII), Electronic Personal Health Information (ePHI), or similarly personal information. E.g., full name, home address, date of birth, etc.
+      2:
+        caption: Governmental
+        description: Any sensitive government identification number related to a person or other classified material. E.g., Passport numbers, driver license numbers, business identification, taxation identifiers, etc.
+      3:
+        caption: Financial
+        description: Any financially-related sensitive information or Cardholder Data (CHD). E.g., banking account numbers, credit card numbers, International Banking Account Numbers (IBAN), SWIFT codes, etc.
+      4:
+        caption: Business
+        description: Any business-specific sensitive data such as intellectual property, trademarks, copyrights, human resource data, Board of Directors meeting minutes, and similar.
+      5:
+        caption: Military and Law Enforcement
+        description: Any mission-specific sensitive data for military, law enforcement, or other government agencies such as specifically classified data, weapon systems information, or other planning data.
+      6:
+        caption: Security
+        description: Any sensitive security-related data such as passwords, passkeys, IP addresses, API keys, credentials and similar secrets. E.g., AWS Access Secret Key, SaaS API Keys, user passwords, database credentials, etc.
+      99:
+        caption: Other
+        description: Any other type of data classification or a multi-variate classification made up of several other classification categories.
+  classifier_details:
+    caption: Classifier Details
+    type: object_t
+    object: classifier_details
+    requirement: recommended
+    description: Describes details about the classifier used for data classification.
+  confidentiality_id:
+    caption: Confidentiality ID
+    type: integer_t
+    requirement: recommended
+    sibling: confidentiality
+    description: The normalized identifier of the file content confidentiality indicator.
+    enum:
+      0:
+        caption: Unknown
+        description: The confidentiality is unknown.
+      1:
+        caption: Not Confidential
+      2:
+        caption: Confidential
+      3:
+        caption: Secret
+      4:
+        caption: Top Secret
+      5:
+        caption: Private
+      6:
+        caption: Restricted
+      99:
+        caption: Other
+        description: The confidentiality is not mapped. See the `confidentiality` attribute, which contains a data source specific value.
+  status:
+    caption: Status
+    type: string_t
+    requirement: recommended
+    description: The resultant status of the classification job normalized to the caption of the `status_id` value. In the case of 'Other', it is defined by the event source.
+  status_id:
+    caption: Status ID
+    type: integer_t
+    requirement: recommended
+    sibling: status
+    description: The normalized status identifier of the classification job.
+    enum:
+      0:
+        caption: Unknown
+        description: The status is unknown.
+      1:
+        caption: Complete
+        description: The classification job completed for the evaluated resource.
+      2:
+        caption: Partial
+        description: The classification job partially completed for the evaluated resource.
+      3:
+        caption: Fail
+        description: The classification job failed for the evaluated resource.
+      99:
+        caption: Other
+        description: The classification job type id is not mapped.
+  category:
+    caption: Category
+    type: string_t
+    requirement: optional
+    description: The name of the data classification category that data matched into, e.g. Financial, Personal, Governmental, etc.
+  confidentiality:
+    caption: Confidentiality
+    type: string_t
+    requirement: optional
+    description: The file content confidentiality, normalized to the confidentiality_id value. In the case of 'Other', it is defined by the event source.
+  discovery_details:
+    caption: Discovery Details
+    type: object_t
+    object: discovery_details
+    array: true
+    requirement: optional
+    description: Details about the data discovered by classification job.
+  policy:
+    caption: Policy
+    type: object_t
+    object: policy
+    requirement: optional
+    description: Details about the data policy that governs data handling and security measures related to classification.
+  size:
+    caption: Size
+    type: long_t
+    requirement: optional
+    description: Size of the data classified.
+  src_url:
+    caption: Source URL
+    type: url_t
+    requirement: optional
+    observable: 6
+    description: The source URL pointing towards the full classifcation job details.
+  status_details:
+    caption: Status Details
+    type: string_t
+    array: true
+    requirement: optional
+    description: The contextual description of the `status, status_id` value.
+  total:
+    caption: Total
+    type: integer_t
+    requirement: optional
+    description: The total count of discovered entities, by the classification job.
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: optional
+    description: The unique identifier of the classification job.

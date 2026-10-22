@@ -1,0 +1,69 @@
+name: domain_contact
+caption: Domain Contact
+extends: object
+description: The contact information related to a domain registration, e.g., registrant, administrator, abuse, billing, or technical contact.
+referenced_by:
+  objects:
+    whois: [domain_contacts]
+attributes:
+  type_id:
+    caption: Domain Contact Type ID
+    type: integer_t
+    requirement: required
+    sibling: type
+    description: The normalized domain contact type ID.
+    enum:
+      0:
+        caption: Unknown
+        description: The type is unknown.
+      1:
+        caption: Registrant
+        description: The contact information provided is for the domain registrant.
+      2:
+        caption: Administrative
+        description: The contact information provided is for the domain administrator.
+      3:
+        caption: Technical
+        description: The contact information provided is for the domain technical lead.
+      4:
+        caption: Billing
+        description: The contact information provided is for the domain billing lead.
+      5:
+        caption: Abuse
+        description: The contact information provided is for the domain abuse contact.
+      99:
+        caption: Other
+        description: The type is not mapped. See the `type` attribute, which contains a data source specific value.
+  email_addr:
+    caption: Contact Email
+    type: email_t
+    requirement: recommended
+    observable: 5
+    description: The user's primary email address.
+  location:
+    caption: Contact Location Information
+    type: object_t
+    object: location
+    requirement: recommended
+    observable: 26
+    description: Location details for the contract such as the city, state/province, country, etc.
+  name:
+    caption: Name
+    type: string_t
+    requirement: optional
+    description: The individual or organization name for the contact.
+  phone_number:
+    caption: Phone Number
+    type: string_t
+    requirement: optional
+    description: The number associated with the phone.
+  type:
+    caption: Domain Contact Type
+    type: string_t
+    requirement: optional
+    description: The Domain Contact type, normalized to the caption of the `type_id` value. In the case of 'Other', it is defined by the source
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: optional
+    description: The unique identifier of the contact information, typically provided in WHOIS information.

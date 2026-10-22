@@ -1,0 +1,24 @@
+name: query_evidence
+caption: Query Evidence
+extension: win
+patches: query_evidence
+description: The resulting evidence information that was queried.
+constraints:
+  just_one: [connection_info, file, folder, group, job, kernel, module, network_interfaces, peripheral_device, process, reg_key, reg_value, service, session, startup_item, user]
+attributes:
+  reg_key:
+    caption: Registry Key
+    type: object_t
+    object: win/reg_key
+    requirement: recommended
+    group: primary
+    observable: 28
+    description: The registry key object describes a Windows registry key.
+  reg_value:
+    caption: Registry Value
+    type: object_t
+    object: win/reg_value
+    requirement: recommended
+    group: primary
+    observable: 29
+    description: The registry key object describes a Windows registry value.

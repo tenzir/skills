@@ -1,0 +1,42 @@
+name: sbom
+caption: Software Bill of Materials
+extends: object
+description: The Software Bill of Materials object describes characteristics of a generated SBOM.
+profiles: [data_classification, datetime]
+referenced_by:
+  classes:
+    software_info: [sbom]
+attributes:
+  package:
+    caption: Software Package
+    type: object_t
+    object: package
+    requirement: required
+    description: The device software that is being discovered by an inventory process.
+    references:
+    - description: D3FEND™ Ontology d3f:SoftwarePackage.
+      url: https://d3fend.mitre.org/dao/artifact/d3f:SoftwarePackage/
+  software_components:
+    caption: Software Components
+    type: object_t
+    object: software_component
+    array: true
+    requirement: required
+    description: The list of software components used in the software package.
+  created_time:
+    caption: Created Time
+    type: timestamp_t
+    requirement: recommended
+    description: The time when the SBOM was created.
+  product:
+    caption: Product
+    type: object_t
+    object: product
+    requirement: recommended
+    description: The product that generated the SBOM e.g. cdxgen or Syft.
+  created_time_dt:
+    caption: Created Time
+    type: datetime_t
+    requirement: optional
+    profile: datetime
+    description: The time when the SBOM was created.

@@ -1,0 +1,33 @@
+name: organization
+caption: Organization
+extends: _entity
+description: The Organization object describes characteristics of an organization or company and its division if any.
+constraints:
+  at_least_one: [name, uid]
+referenced_by:
+  objects:
+    cloud: [org]
+    device: [org]
+    managed_entity: [org]
+    user: [org]
+attributes:
+  name:
+    caption: Name
+    type: string_t
+    requirement: recommended
+    description: The name of the organization. For example, Widget, Inc.
+  ou_name:
+    caption: Org Unit Name
+    type: string_t
+    requirement: recommended
+    description: The name of the organizational unit, within an organization.  For example, Finance, IT, R&D
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: recommended
+    description: The unique identifier of the organization. For example, its Active Directory or AWS Org ID.
+  ou_uid:
+    caption: Org Unit ID
+    type: string_t
+    requirement: optional
+    description: The alternate identifier for an entity's unique identifier. For example, its Active Directory OU DN or AWS OU ID.

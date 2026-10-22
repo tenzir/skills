@@ -1,0 +1,25 @@
+name: autonomous_system
+caption: Autonomous System
+extends: object
+description: An autonomous system (AS) is a collection of connected Internet Protocol (IP) routing prefixes under the control of one or more network operators on behalf of a single administrative entity or domain that presents a common, clearly defined routing policy to the internet.
+constraints:
+  at_least_one: [number, name]
+referenced_by:
+  objects:
+    network_endpoint: [autonomous_system]
+    network_proxy: [autonomous_system]
+    osint: [autonomous_system]
+    whois: [autonomous_system]
+attributes:
+  name:
+    caption: Name
+    type: string_t
+    requirement: recommended
+    group: context
+    description: Organization name for the Autonomous System.
+  number:
+    caption: Number
+    type: integer_t
+    requirement: recommended
+    group: context
+    description: Unique number that the AS is identified by.

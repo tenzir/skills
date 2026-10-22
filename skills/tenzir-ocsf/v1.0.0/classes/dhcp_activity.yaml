@@ -1,0 +1,193 @@
+# Attributes with `from` but no description are inherited unchanged. Their
+# descriptions are in the file of the item that `from` names.
+name: dhcp_activity
+caption: DHCP Activity
+uid: 4004
+category: network
+category_uid: 4
+extends: base_event
+description: DHCP Activity events report MAC to IP assignment via DHCP from a client or server.
+profiles: [cloud, container, datetime, host]
+attributes:
+  activity_id:
+    caption: Activity ID
+    type: integer_t
+    requirement: required
+    group: classification
+    sibling: activity_name
+    description: The normalized identifier of the activity that triggered the event.
+    enum:
+      0:
+        caption: Unknown
+        description: The event activity is unknown.
+      1:
+        caption: Discover
+        description: DHCPDISCOVER
+      2:
+        caption: Offer
+        description: DHCPOFFER
+      3:
+        caption: Request
+        description: DHCPREQUEST
+      4:
+        caption: Decline
+        description: DHCPDECLINE
+      5:
+        caption: Ack
+        description: 'DHCPACK: The server accepts the request by sending the client a DHCP Acknowledgment message.'
+      6:
+        caption: Nak
+        description: DHCPNAK
+      7:
+        caption: Release
+        description: 'DHCPRELEASE: A DHCP client sends a DHCPRELEASE packet to the server to release the IP address and cancel any remaining lease.'
+      8:
+        caption: Inform
+        description: DHCPINFORM
+      9:
+        caption: Expire
+        description: 'DHCPEXPIRE: A DHCP lease expired.'
+      99:
+        caption: Other
+        description: The event activity is not mapped.
+  category_uid:
+    caption: Category ID
+    type: integer_t
+    requirement: required
+    group: classification
+    from: base_event
+    sibling: category_name
+    description: The category unique identifier of the event.
+    enum:
+      4:
+        caption: Network Activity
+        description: Network Activity events.
+  class_uid:
+    caption: Class ID
+    type: integer_t
+    requirement: required
+    group: classification
+    sibling: class_name
+    description: The unique identifier of a class. A Class describes the attributes available in an event.
+    enum:
+      4004:
+        caption: DHCP Activity
+        description: DHCP Activity events report MAC to IP assignment via DHCP from a client or server.
+  cloud:
+    caption: Cloud
+    type: object_t
+    object: cloud
+    requirement: required
+    group: primary
+    profile: cloud
+    description: Describes details about the Cloud environment where the event was originally created or logged.
+  metadata: {caption: Metadata, type: object_t, object: metadata, requirement: required, group: context, from: base_event}
+  severity_id: {caption: Severity ID, type: integer_t, requirement: required, group: classification, sibling: severity, enum: {0: Unknown, 1: Informational, 2: Low, 3: Medium, 4: High, 5: Critical, 6: Fatal, 99: Other}, from: base_event}
+  time: {caption: Event Time, type: timestamp_t, requirement: required, group: occurrence, from: base_event}
+  type_uid:
+    caption: Type ID
+    type: integer_t
+    requirement: required
+    group: classification
+    sibling: type_name
+    description: 'The event type ID. It identifies the event''s semantics and structure. The value is calculated by the logging system as: `class_uid * 100 + activity_id`.'
+  device:
+    caption: Device
+    type: object_t
+    object: device
+    requirement: recommended
+    group: primary
+    profile: host
+    observable: 20
+    description: An addressable device, computer system or host.
+  dst_endpoint:
+    caption: Destination Endpoint
+    type: object_t
+    object: network_endpoint
+    requirement: recommended
+    group: primary
+    observable: 20
+    description: The responder (server) of the DHCP connection.
+  message: {caption: Message, type: string_t, requirement: recommended, group: primary, from: base_event}
+  src_endpoint:
+    caption: Source Endpoint
+    type: object_t
+    object: network_endpoint
+    requirement: recommended
+    group: primary
+    observable: 20
+    description: The initiator (client) of the DHCP connection.
+  status_id: {caption: Status ID, type: integer_t, requirement: recommended, group: primary, sibling: status, enum: {0: Unknown, 1: Success, 2: Failure, 99: Other}, from: base_event}
+  timezone_offset: {caption: Timezone Offset, type: integer_t, requirement: recommended, group: occurrence, from: base_event}
+  activity_name: {caption: Activity, type: string_t, requirement: optional, group: classification, from: base_event}
+  actor:
+    caption: Actor
+    type: object_t
+    object: actor
+    requirement: optional
+    group: primary
+    profile: host
+    description: The actor object describes details about the user/role/process that was the source of the activity.
+  api:
+    caption: API Details
+    type: object_t
+    object: api
+    requirement: optional
+    group: context
+    profile: cloud
+    description: Describes details about a typical API (Application Programming Interface) call.
+  category_name:
+    caption: Category
+    type: string_t
+    requirement: optional
+    group: classification
+    from: base_event
+    description: 'The event category name, as defined by category_uid value: `Network Activity`.'
+  class_name:
+    caption: Class
+    type: string_t
+    requirement: optional
+    group: classification
+    from: base_event
+    description: 'The event class name, as defined by class_uid value: `DHCP Activity`.'
+  count: {caption: Count, type: integer_t, requirement: optional, group: occurrence, from: base_event}
+  duration: {caption: Duration, type: integer_t, requirement: optional, group: occurrence, from: base_event}
+  end_time: {caption: End Time, type: timestamp_t, requirement: optional, group: occurrence, from: base_event}
+  end_time_dt: {caption: End Time, type: datetime_t, requirement: optional, group: occurrence, profile: datetime, from: base_event}
+  enrichments: {caption: Enrichments, type: object_t, object: enrichment, array: true, requirement: optional, group: context, from: base_event}
+  is_renewal:
+    caption: Renewal
+    type: boolean_t
+    requirement: optional
+    group: primary
+    description: The indication of whether this is a lease/session renewal event.
+  lease_dur:
+    caption: Lease Duration
+    type: integer_t
+    requirement: optional
+    group: primary
+    description: This represents the length of the DHCP lease in seconds. This is present in DHCP Ack events. (activity_id = 1)
+  observables: {caption: Observables, type: object_t, object: observable, array: true, requirement: optional, group: primary, from: base_event}
+  raw_data: {caption: Raw Data, type: string_t, requirement: optional, group: context, from: base_event}
+  relay:
+    caption: Relay
+    type: object_t
+    object: network_interface
+    requirement: optional
+    group: primary
+    description: The network relay that is associated with the event.
+  severity: {caption: Severity, type: string_t, requirement: optional, group: classification, from: base_event}
+  start_time: {caption: Start Time, type: timestamp_t, requirement: optional, group: occurrence, from: base_event}
+  start_time_dt: {caption: Start Time, type: datetime_t, requirement: optional, group: occurrence, profile: datetime, from: base_event}
+  status: {caption: Status, type: string_t, requirement: optional, group: primary, from: base_event}
+  status_code: {caption: Status Code, type: string_t, requirement: optional, group: primary, from: base_event}
+  status_detail: {caption: Status Details, type: string_t, requirement: optional, group: primary, from: base_event}
+  time_dt: {caption: Event Time, type: datetime_t, requirement: optional, group: occurrence, profile: datetime, from: base_event}
+  transaction_uid:
+    caption: Transaction UID
+    type: string_t
+    requirement: optional
+    group: primary
+    description: The unique identifier of the transaction. This is typically a random number generated from the client to associate a dhcp request/response pair.
+  type_name: {caption: Type Name, type: string_t, requirement: optional, group: classification, from: base_event}
+  unmapped: {caption: Unmapped Data, type: object_t, object: object, requirement: optional, group: context, from: base_event}

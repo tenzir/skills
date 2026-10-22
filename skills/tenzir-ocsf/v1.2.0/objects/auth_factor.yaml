@@ -1,0 +1,108 @@
+name: auth_factor
+caption: Authentication Factor
+extends: object
+description: An Authentication Factor object describes a category of methods used for identity verification in an authentication attempt.
+profiles: [container]
+constraints:
+  just_one: [email_addr, phone_number, security_questions]
+referenced_by:
+  classes:
+    authentication: [auth_factors]
+attributes:
+  factor_type_id:
+    caption: Factor Type ID
+    type: integer_t
+    requirement: required
+    group: primary
+    sibling: factor_type
+    description: The normalized identifier for the authentication factor.
+    enum:
+      0:
+        caption: Unknown
+      1:
+        caption: SMS
+        description: User receives and inputs a code sent to their mobile device via SMS text message.
+      2:
+        caption: Security Question
+        description: The user responds to a security question as part of a question-based authentication factor
+      3:
+        caption: Phone Call
+        description: System calls the user's registered phone number and requires the user to answer and provide a response.
+      4:
+        caption: Biometric
+        description: Devices that verify identity-based on user's physical identifiers, such as fingerprint scanners or retina scanners.
+      5:
+        caption: Push Notification
+        description: Push notification is sent to user's registered device and requires the user to acknowledge.
+      6:
+        caption: Hardware Token
+        description: Physical device that generates a code to be used for authentication.
+      7:
+        caption: OTP
+        description: Application generates a one-time password (OTP) for use in authentication.
+      8:
+        caption: Email
+        description: A code or link is sent to a user's registered email address.
+      9:
+        caption: U2F
+        description: Typically involves a hardware token, which the user physically interacts with to authenticate.
+      10:
+        caption: WebAuthn
+        description: Web-based API that enables users to register devices as authentication factors.
+      11:
+        caption: Password
+        description: The user enters a password that they have previously established.
+      99:
+        caption: Other
+  device:
+    caption: Device
+    type: object_t
+    object: device
+    requirement: recommended
+    group: primary
+    observable: 20
+    description: Device used to complete an authentication request.
+  factor_type:
+    caption: Factor Type
+    type: string_t
+    requirement: recommended
+    group: primary
+    description: The type of authentication factor used in an authentication attempt.
+  is_hotp:
+    caption: HMAC-based One-time Password (HOTP)
+    type: boolean_t
+    requirement: recommended
+    group: context
+    description: Whether the authentication factor is an HMAC-based One-time Password (HOTP).
+  is_totp:
+    caption: Time-based One-time Password (TOTP)
+    type: boolean_t
+    requirement: recommended
+    group: context
+    description: Whether the authentication factor is a Time-based One-time Password (TOTP).
+  provider:
+    caption: Provider
+    type: string_t
+    requirement: recommended
+    group: context
+    description: The name of provider for an authentication factor.
+  email_addr:
+    caption: Email Address
+    type: email_t
+    requirement: optional
+    group: context
+    observable: 5
+    description: The email address used in an email-based authentication factor.
+  phone_number:
+    caption: Phone Number
+    type: string_t
+    requirement: optional
+    group: context
+    description: The phone number used for a telephony-based authentication request.
+  security_questions:
+    caption: Security Questions
+    type: string_t
+    array: true
+    requirement: optional
+    group: context
+    description: The question(s) provided to user for a question-based authentication factor.

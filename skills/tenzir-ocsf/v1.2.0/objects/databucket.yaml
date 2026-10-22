@@ -1,0 +1,102 @@
+name: databucket
+caption: Databucket
+extends: _entity
+description: The databucket object is a basic container that holds data, typically organized through the use of data partitions.
+profiles: [data_classification, datetime]
+constraints:
+  at_least_one: [name, uid]
+referenced_by:
+  classes:
+    data_security_finding: [databucket]
+    datastore_activity: [databucket]
+  objects:
+    evidences: [databucket]
+attributes:
+  type_id:
+    caption: Type ID
+    type: integer_t
+    requirement: required
+    sibling: type
+    description: The normalized identifier of the databucket type.
+    enum:
+      0:
+        caption: Unknown
+        description: The type is unknown.
+      1:
+        caption: S3
+      2:
+        caption: Azure Blob
+      3:
+        caption: GCP Bucket
+      99:
+        caption: Other
+        description: The type is not mapped. See the `type` attribute, which contains a data source specific value.
+  data_classification:
+    caption: Data Classification
+    type: object_t
+    object: data_classification
+    requirement: recommended
+    group: context
+    profile: data_classification
+    description: The Data Classification object includes information about data classification levels and data category types.
+  name:
+    caption: Name
+    type: string_t
+    requirement: recommended
+    description: The databucket name.
+  type:
+    caption: Type
+    type: string_t
+    requirement: recommended
+    description: The databucket type.
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: recommended
+    description: The unique identifier of the databucket.
+  created_time:
+    caption: Created Time
+    type: timestamp_t
+    requirement: optional
+    description: The time when the databucket was known to have been created.
+  created_time_dt:
+    caption: Created Time
+    type: datetime_t
+    requirement: optional
+    profile: datetime
+    description: The time when the databucket was known to have been created.
+  desc:
+    caption: Description
+    type: string_t
+    requirement: optional
+    description: The description of the databucket.
+  file:
+    caption: File
+    type: object_t
+    object: file
+    requirement: optional
+    observable: 24
+    description: A file within a databucket.
+  groups:
+    caption: Groups
+    type: object_t
+    object: group
+    array: true
+    requirement: optional
+    description: The group names to which the databucket belongs.
+  modified_time:
+    caption: Modified Time
+    type: timestamp_t
+    requirement: optional
+    description: The most recent time when any changes, updates, or modifications were made within the databucket.
+  modified_time_dt:
+    caption: Modified Time
+    type: datetime_t
+    requirement: optional
+    profile: datetime
+    description: The most recent time when any changes, updates, or modifications were made within the databucket.
+  size:
+    caption: Size
+    type: long_t
+    requirement: optional
+    description: The size of the databucket in bytes.

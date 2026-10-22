@@ -1,0 +1,76 @@
+# Attributes with `from` but no description are inherited unchanged. Their
+# descriptions are in the file of the item that `from` names.
+name: iam_role
+caption: IAM Role
+extends: _entity
+description: The IAM Role object describes permission characteristics (or privileges) associated with a user or group of users as security principals against one or more resources. In some cases only the name or ID of the role is known hence other attributes are optional. In some systems a user or group of users can have multiple roles, imparting the union of privileges to the principal. In some systems the role can serve as a temporary security principal without its own credentials on behalf of the actual security principal.
+profiles: [cloud, container, data_classification]
+constraints:
+  at_least_one: [name, uid]
+referenced_by:
+  classes:
+    authorize_session: [iam_roles]
+    group_management: [iam_roles]
+    role_management: [iam_role, updated_role]
+    user_access: [iam_role]
+    user_management: [iam_roles]
+  objects:
+    actor: [iam_role]
+attributes:
+  name:
+    caption: Name
+    type: string_t
+    requirement: recommended
+    observable: 49
+    description: The role name. For example, `Power Users`.
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: recommended
+    observable: 50
+    description: The unique role identifier. For example, the Windows role SID, or AWS role ARN.
+  account:
+    caption: Account
+    type: object_t
+    object: account
+    requirement: optional
+    description: The account associated with the role. For example, can be a cross-account role, different from the user or group account, granting access within this account.
+  policies:
+    caption: Policies
+    type: object_t
+    object: policy
+    array: true
+    requirement: optional
+    description: IAM policies associated with the role.
+  privileges:
+    caption: Privileges
+    type: string_t
+    array: true
+    requirement: optional
+    description: List of privileges assigned to a role.
+  programmatic_credentials:
+    caption: Programmatic Credentials
+    type: object_t
+    object: programmatic_credential
+    array: true
+    requirement: optional
+    description: Programmatic credential (API keys, access tokens, certificates, etc) associated with the role.
+  resources:
+    caption: Resources Array
+    type: object_t
+    object: resource_details
+    array: true
+    requirement: optional
+    description: Resources that the role applies to.
+  session:
+    caption: Session
+    type: object_t
+    object: session
+    requirement: optional
+    description: The session where the role is active. Some roles may be temporary and expire when the session expires.
+  uid_alt:
+    caption: Alternate ID
+    type: string_t
+    requirement: optional
+    description: The alternate user identifier. For example, the Active Directory role GUID or the associated LDAP group DN.
+  uid_numeric: {caption: Numeric Unique ID, type: long_t, requirement: optional, from: _entity}

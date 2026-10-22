@@ -1,0 +1,86 @@
+# Attributes with `from` but no description are inherited unchanged. Their
+# descriptions are in the file of the item that `from` names.
+name: load_balancer
+caption: Load Balancer
+extends: _entity
+description: The load balancer object describes the load balancer entity and contains additional information regarding the distribution of traffic across a network.
+profiles: [container]
+constraints:
+  at_least_one: [name, uid]
+referenced_by:
+  classes:
+    dhcp_activity: [load_balancer]
+    dns_activity: [load_balancer]
+    ftp_activity: [load_balancer]
+    http_activity: [load_balancer]
+    network_activity: [load_balancer]
+    network_file_activity: [load_balancer]
+    ntp_activity: [load_balancer]
+    rdp_activity: [load_balancer]
+    smb_activity: [load_balancer]
+    ssh_activity: [load_balancer]
+    tunnel_activity: [load_balancer]
+attributes:
+  code:
+    caption: Response Code
+    type: integer_t
+    requirement: recommended
+    description: The numeric response status code detailing the connection from the load balancer to the destination target.
+  dst_endpoint:
+    caption: Destination Endpoint
+    type: object_t
+    object: network_endpoint
+    requirement: recommended
+    observable: 20
+    description: The destination to which the load balancer is distributing traffic.
+  endpoint_connections:
+    caption: Endpoint Connections
+    type: object_t
+    object: endpoint_connection
+    array: true
+    requirement: recommended
+    description: An object detailing the load balancer connection attempts and responses.
+  name:
+    caption: Name
+    type: string_t
+    requirement: recommended
+    description: The name of the load balancer.
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: recommended
+    description: The unique identifier for the load balancer.
+  classification:
+    caption: Classification
+    type: string_t
+    requirement: optional
+    description: The request classification as defined by the load balancer.
+  error_message:
+    caption: Error Message
+    type: string_t
+    requirement: optional
+    description: The load balancer error message.
+  ip:
+    caption: IP Address
+    type: ip_t
+    requirement: optional
+    observable: 2
+    description: 'The IP address of the load balancer node that handled the client request. Note: the load balancer may have other IP addresses, and this is not an IP address of the target/distribution endpoint - see `dst_endpoint`.'
+  message:
+    caption: Message
+    type: string_t
+    requirement: optional
+    description: The load balancer message.
+  metrics:
+    caption: Metrics
+    type: object_t
+    object: metric
+    array: true
+    requirement: optional
+    description: General purpose metrics associated with the load balancer.
+  status_detail:
+    caption: Status Detail
+    type: string_t
+    requirement: optional
+    description: The status detail contains additional status information about the load balancer distribution event.
+  uid_numeric: {caption: Numeric Unique ID, type: long_t, requirement: optional, from: _entity}

@@ -1,0 +1,70 @@
+# Attributes with `from` but no description are inherited unchanged. Their
+# descriptions are in the file of the item that `from` names.
+name: web_resource
+caption: Web Resource
+extends: _resource
+description: The Web Resource object describes characteristics of a web resource that was affected by the activity/event.
+profiles: [data_classification, datetime]
+constraints:
+  at_least_one: [name, uid]
+references:
+- description: D3FEND™ Ontology d3f:WebResource.
+  url: https://d3fend.mitre.org/dao/artifact/d3f:WebResource/
+referenced_by:
+  classes:
+    web_resource_access_activity: [web_resources]
+    web_resources_activity: [web_resources, web_resources_result]
+attributes:
+  data_classification: {caption: Data Classification, type: object_t, object: data_classification, requirement: recommended, group: context, profile: data_classification, deprecated: {since: 1.4.0, message: Use the attribute `data_classifications` instead}, from: _resource}
+  data_classifications: {caption: Data Classification, type: object_t, object: data_classification, array: true, requirement: recommended, group: context, profile: data_classification, from: _resource}
+  name:
+    caption: Name
+    type: string_t
+    requirement: recommended
+    description: The name of the web resource.
+  uid:
+    caption: Unique ID
+    type: resource_uid_t
+    requirement: recommended
+    observable: 10
+    description: The unique identifier of the web resource.
+  url_string:
+    caption: URL String
+    type: url_t
+    requirement: recommended
+    observable: 6
+    description: The URL pointing towards the source of the web resource.
+  created_time: {caption: Created Time, type: timestamp_t, requirement: optional, from: _resource}
+  created_time_dt:
+    caption: Created Time
+    type: datetime_t
+    requirement: optional
+    profile: datetime
+    from: _resource
+    description: The time when the resource was created.
+  data:
+    caption: Data
+    type: json_t
+    requirement: optional
+    description: Details of the web resource, e.g, `file` details, `search` results or application-defined resource.
+  desc:
+    caption: Description
+    type: string_t
+    requirement: optional
+    description: Description of the web resource.
+  labels: {caption: Labels, type: string_t, array: true, requirement: optional, from: _resource}
+  modified_time: {caption: Modified Time, type: timestamp_t, requirement: optional, from: _resource}
+  modified_time_dt:
+    caption: Modified Time
+    type: datetime_t
+    requirement: optional
+    profile: datetime
+    from: _resource
+    description: The time when the resource was last modified.
+  tags: {caption: Tags, type: object_t, object: key_value_object, array: true, requirement: optional, from: _resource}
+  type:
+    caption: Type
+    type: string_t
+    requirement: optional
+    description: The web resource type as defined by the event source.
+  uid_alt: {caption: Alternate ID, type: resource_uid_t, requirement: optional, observable: 10, from: _resource}

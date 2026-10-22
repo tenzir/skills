@@ -1,0 +1,16 @@
+name: kernel_driver
+caption: Kernel Extension
+extends: object
+description: The Kernel Extension object describes a kernel driver that has been loaded or unloaded into the operating system (OS) kernel. Defined by D3FEND [d3f:KernelModule](https://d3fend.mitre.org/dao/artifact/d3f:KernelModule/).
+referenced_by:
+  classes:
+    kernel_extension: [driver]
+attributes:
+  file:
+    caption: File
+    type: object_t
+    object: file
+    requirement: required
+    group: primary
+    observable: 24
+    description: The driver/extension file object.

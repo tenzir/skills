@@ -1,0 +1,104 @@
+name: user
+caption: User
+extends: _entity
+observable: 21
+description: The User object describes the characteristics of a user/person or a security principal. Defined by D3FEND [d3f:UserAccount](https://d3fend.mitre.org/dao/artifact/d3f:UserAccount/).
+constraints:
+  at_least_one: [name, uid]
+referenced_by:
+  classes:
+    account_change: [user, user_result]
+    authentication: [user]
+    authorize_session: [user]
+    group_management: [user]
+    user_access: [user]
+  objects:
+    actor: [user]
+    file: [accessor, creator, modifier, owner]
+    job: [user]
+    process: [user]
+    resource_details: [owner]
+attributes:
+  type_id:
+    caption: Type ID
+    type: integer_t
+    requirement: required
+    sibling: type
+    description: The account type identifier.
+    enum:
+      0:
+        caption: Unknown
+        description: The type is unknown.
+      1:
+        caption: User
+        description: Regular user account.
+      2:
+        caption: Admin
+        description: Admin/root user account.
+      3:
+        caption: System
+        description: System account. For example, Windows computer accounts with a trailing dollar sign ($).
+      99:
+        caption: Other
+        description: The type is not mapped. See the `type` attribute, which may contain a data source specific value.
+  name:
+    caption: Name
+    type: username_t
+    requirement: recommended
+    observable: 4
+    description: The username. For example, `janedoe1`.
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: recommended
+    description: The unique user identifier. For example, the Windows user SID, ActiveDirectory DN or AWS user ARN.
+  account:
+    caption: Account
+    type: object_t
+    object: account
+    requirement: optional
+    description: The user's account or the account associated with the user.
+  credential_uid:
+    caption: User Credential ID
+    type: string_t
+    requirement: optional
+    description: The unique identifier of the user's credential. For example, AWS Access Key ID.
+  domain:
+    caption: Domain
+    type: string_t
+    requirement: optional
+    description: 'The domain where the user is defined. For example: the LDAP or Active Directory domain.'
+  email_addr:
+    caption: Email Address
+    type: email_t
+    requirement: optional
+    observable: 5
+    description: The user's email address.
+  full_name:
+    caption: Full Name
+    type: string_t
+    requirement: optional
+    description: The full name of the person, as per the LDAP Common Name attribute (cn).
+  groups:
+    caption: Groups
+    type: object_t
+    object: group
+    array: true
+    requirement: optional
+    description: The administrative groups to which the user belongs.
+  org:
+    caption: Organization
+    type: object_t
+    object: organization
+    requirement: optional
+    description: Organization and org unit related to the user.
+  type:
+    caption: Type
+    type: string_t
+    requirement: optional
+    description: The type of the user. For example, System, AWS IAM User, etc.
+  uid_alt:
+    caption: Alternate ID
+    type: string_t
+    requirement: optional
+    description: The alternate user identifier. For example, the Active Directory user GUID or AWS user Principal ID.

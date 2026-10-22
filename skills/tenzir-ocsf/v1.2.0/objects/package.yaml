@@ -1,0 +1,43 @@
+name: package
+caption: Software Package
+extends: object
+description: The Software Package object describes details about a software package. Defined by D3FEND [d3f:SoftwarePackage](https://d3fend.mitre.org/dao/artifact/d3f:SoftwarePackage/).
+referenced_by:
+  objects:
+    vulnerability: [packages]
+attributes:
+  name:
+    caption: Name
+    type: string_t
+    requirement: required
+    description: The software package name.
+  version:
+    caption: Version
+    type: string_t
+    requirement: required
+    description: The software package version.
+  architecture:
+    caption: Architecture
+    type: string_t
+    requirement: recommended
+    description: Architecture is a shorthand name describing the type of computer hardware the packaged software is meant to run on.
+  epoch:
+    caption: Epoch
+    type: integer_t
+    requirement: optional
+    description: The software package epoch. Epoch is a way to define weighted dependencies based on version numbers.
+  license:
+    caption: Software License
+    type: string_t
+    requirement: optional
+    description: The software license applied to this package.
+  purl:
+    caption: Package URL
+    type: string_t
+    requirement: optional
+    description: A purl is a URL string used to identify and locate a software package in a mostly universal and uniform way across programming languages, package managers, packaging conventions, tools, APIs and databases.
+  release:
+    caption: Software Release Details
+    type: string_t
+    requirement: optional
+    description: Release is the number of times a version of the software has been packaged.

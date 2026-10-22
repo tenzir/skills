@@ -1,0 +1,17 @@
+name: analysis_target
+caption: Analysis Target
+description: The analysis target defines the scope of monitored activities, specifying what entity, system or process is analyzed for activity patterns.
+referenced_by:
+  objects:
+    anomaly_analysis: [analysis_targets]
+attributes:
+  name:
+    caption: Name
+    type: string_t
+    requirement: required
+    description: The specific name or identifier of the analysis target, such as the username of a User Account, the name of a Kubernetes Cluster, the identifier of a Network Namespace, or the name of an Application Component.
+  type:
+    caption: Type
+    type: string_t
+    requirement: optional
+    description: The category of the analysis target, such as User Account, Kubernetes Cluster, Network Namespace, or Application Component.

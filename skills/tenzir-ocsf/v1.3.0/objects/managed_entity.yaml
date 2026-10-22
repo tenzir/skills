@@ -1,0 +1,106 @@
+name: managed_entity
+caption: Managed Entity
+extends: _entity
+description: The Managed Entity object describes the type and version of an entity, such as a user, device, or policy. For types in the `type_id` enum list, an associated attribute should be populated. If the type of entity is not in the `type_id` list, information can be put into the `data` attribute and the `type` attribute should identify the entity.
+profiles: [container, data_classification]
+constraints:
+  at_least_one: [name, uid, device, group, org, policy, user]
+referenced_by:
+  classes:
+    entity_management: [entity, entity_result]
+attributes:
+  device:
+    caption: Device
+    type: object_t
+    object: device
+    requirement: recommended
+    observable: 20
+    description: An addressable device, computer system or host.
+  email:
+    caption: Email
+    type: object_t
+    object: email
+    requirement: recommended
+    observable: 22
+    description: The email object.
+  group:
+    caption: Group
+    type: object_t
+    object: group
+    requirement: recommended
+    description: The group object associated with an entity such as user, policy, or rule.
+  name:
+    caption: Name
+    type: string_t
+    requirement: recommended
+    description: The name of the managed entity.
+  org:
+    caption: Organization
+    type: object_t
+    object: organization
+    requirement: recommended
+    description: Organization and org unit relevant to the event or object.
+  policy:
+    caption: Policy
+    type: object_t
+    object: policy
+    requirement: recommended
+    description: Describes details of a managed policy.
+  type:
+    caption: Type
+    type: string_t
+    requirement: recommended
+    description: 'The managed entity type. For example: `policy`, `user`, `organizational unit`, `device`.'
+  type_id:
+    caption: Type ID
+    type: integer_t
+    requirement: recommended
+    sibling: type
+    description: The type of the Managed Entity. It is recommended to also populate the `type` attribute with the associated label, or the source specific name if `Other`.
+    enum:
+      0:
+        caption: Unknown
+        description: The type is unknown.
+      1:
+        caption: Device
+        description: A managed Device entity. This item corresponds to population of the `device` attribute.
+      2:
+        caption: User
+        description: A managed User entity. This item corresponds to population of the `user` attribute.
+      3:
+        caption: Group
+        description: A managed Group entity. This item corresponds to population of the `group` attribute.
+      4:
+        caption: Organization
+        description: A managed Organization entity. This item corresponds to population of the `org` attribute.
+      5:
+        caption: Policy
+        description: A managed Policy entity. This item corresponds to population of the `policy` attribute.
+      6:
+        caption: Email
+        description: A managed Email entity. This item corresponds to population of the `email` attribute.
+      99:
+        caption: Other
+        description: The type is not mapped. See the `type` attribute, which contains a data source specific value.
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: recommended
+    description: The identifier of the managed entity.
+  user:
+    caption: User
+    type: object_t
+    object: user
+    requirement: recommended
+    observable: 21
+    description: The user that pertains to the event or object.
+  version:
+    caption: Version
+    type: string_t
+    requirement: recommended
+    description: 'The version of the managed entity. For example: `1.2.3`.'
+  data:
+    caption: Data
+    type: json_t
+    requirement: optional
+    description: The managed entity content as a JSON object.

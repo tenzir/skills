@@ -1,0 +1,18 @@
+name: metric
+caption: Metric
+extends: object
+description: The Metric object defines a simple name/value pair entity for a metric.
+referenced_by:
+  objects:
+    cvss: [metrics]
+attributes:
+  name:
+    caption: Name
+    type: string_t
+    requirement: required
+    description: The name of the metric.
+  value:
+    caption: Value
+    type: string_t
+    requirement: required
+    description: The value of the metric.

@@ -1,0 +1,141 @@
+name: enrichment
+caption: Enrichment
+extends: object
+description: The Enrichment object provides inline enrichment data for specific attributes of interest within an event. It serves as a mechanism to enhance or supplement the information associated with the event by adding additional relevant details or context.
+profiles: [datetime]
+referenced_by:
+  classes:
+    account_change: [enrichments]
+    admin_group_query: [enrichments]
+    airborne_broadcast_activity: [enrichments]
+    api_activity: [enrichments]
+    application_error: [enrichments]
+    application_lifecycle: [enrichments]
+    application_security_posture_finding: [enrichments]
+    authentication: [enrichments]
+    authorize_session: [enrichments]
+    base_event: [enrichments]
+    cloud_resources_inventory_info: [enrichments]
+    compliance_finding: [enrichments]
+    config_state: [enrichments]
+    data_security_finding: [enrichments]
+    datastore_activity: [enrichments]
+    detection_finding: [enrichments]
+    device_config_state_change: [enrichments]
+    dhcp_activity: [enrichments]
+    dns_activity: [enrichments]
+    drone_flights_activity: [enrichments]
+    email_activity: [enrichments]
+    email_file_activity: [enrichments]
+    email_url_activity: [enrichments]
+    entity_management: [enrichments]
+    event_log_actvity: [enrichments]
+    evidence_info: [enrichments]
+    file_activity: [enrichments]
+    file_hosting: [enrichments]
+    file_query: [enrichments]
+    file_remediation_activity: [enrichments]
+    folder_query: [enrichments]
+    ftp_activity: [enrichments]
+    group_management: [enrichments]
+    http_activity: [enrichments]
+    iam_analysis_finding: [enrichments]
+    incident_finding: [enrichments]
+    inventory_info: [enrichments]
+    job_query: [enrichments]
+    kernel_activity: [enrichments]
+    kernel_extension_activity: [enrichments]
+    kernel_object_query: [enrichments]
+    memory_activity: [enrichments]
+    module_activity: [enrichments]
+    module_query: [enrichments]
+    network_activity: [enrichments]
+    network_connection_query: [enrichments]
+    network_file_activity: [enrichments]
+    network_remediation_activity: [enrichments]
+    networks_query: [enrichments]
+    ntp_activity: [enrichments]
+    osint_inventory_info: [enrichments]
+    patch_state: [enrichments]
+    peripheral_device_query: [enrichments]
+    process_activity: [enrichments]
+    process_query: [enrichments]
+    process_remediation_activity: [enrichments]
+    rdp_activity: [enrichments]
+    remediation_activity: [enrichments]
+    scan_activity: [enrichments]
+    scheduled_job_activity: [enrichments]
+    script_activity: [enrichments]
+    security_finding: [enrichments]
+    service_query: [enrichments]
+    session_query: [enrichments]
+    smb_activity: [enrichments]
+    software_info: [enrichments]
+    ssh_activity: [enrichments]
+    startup_item_query: [enrichments]
+    tunnel_activity: [enrichments]
+    user_access: [enrichments]
+    user_inventory: [enrichments]
+    user_query: [enrichments]
+    vulnerability_finding: [enrichments]
+    web_resource_access_activity: [enrichments]
+    web_resources_activity: [enrichments]
+attributes:
+  data:
+    caption: Data
+    type: json_t
+    requirement: required
+    description: The enrichment data associated with the attribute and value. The meaning of this data depends on the type the enrichment record.
+  name:
+    caption: Name
+    type: string_t
+    requirement: required
+    description: The name of the attribute to which the enriched data pertains.
+  value:
+    caption: Value
+    type: string_t
+    requirement: required
+    description: The value of the attribute to which the enriched data pertains.
+  created_time:
+    caption: Created Time
+    type: timestamp_t
+    requirement: recommended
+    description: The time when the enrichment data was generated.
+  provider:
+    caption: Provider
+    type: string_t
+    requirement: recommended
+    description: The enrichment data provider name.
+  short_desc:
+    caption: Short Description
+    type: string_t
+    requirement: recommended
+    description: A short description of the enrichment data.
+  src_url:
+    caption: Source URL
+    type: url_t
+    requirement: recommended
+    observable: 6
+    description: The URL of the source of the enrichment data.
+  type:
+    caption: Type
+    type: string_t
+    requirement: recommended
+    description: 'The enrichment type. For example: `location`.'
+  created_time_dt:
+    caption: Created Time
+    type: datetime_t
+    requirement: optional
+    profile: datetime
+    description: The time when the enrichment data was generated.
+  desc:
+    caption: Description
+    type: string_t
+    requirement: optional
+    description: A long description of the enrichment data.
+  reputation:
+    caption: Reputation Scores
+    type: object_t
+    object: reputation
+    requirement: optional
+    description: The reputation of the enrichment data.

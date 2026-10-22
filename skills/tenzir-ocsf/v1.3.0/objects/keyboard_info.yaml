@@ -1,0 +1,33 @@
+name: keyboard_info
+caption: Keyboard Information
+extends: object
+description: The Keyboard Information object contains details and attributes related to a computer or device keyboard. It encompasses information that describes the characteristics, capabilities, and configuration of the keyboard.
+referenced_by:
+  objects:
+    device_hw_info: [keyboard_info]
+attributes:
+  function_keys:
+    caption: Function Keys
+    type: integer_t
+    requirement: optional
+    description: The number of function keys on client keyboard.
+  ime:
+    caption: IME
+    type: string_t
+    requirement: optional
+    description: The Input Method Editor (IME) file name.
+  keyboard_layout:
+    caption: Keyboard Layout
+    type: string_t
+    requirement: optional
+    description: The keyboard locale identifier name (e.g., en-US).
+  keyboard_subtype:
+    caption: Keyboard Subtype
+    type: integer_t
+    requirement: optional
+    description: The keyboard numeric code.
+  keyboard_type:
+    caption: Keyboard Type
+    type: string_t
+    requirement: optional
+    description: The keyboard type (e.g., xt, ico).

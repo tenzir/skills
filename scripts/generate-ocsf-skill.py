@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 # /// script
-# requires-python = ">=3.12"
+# requires-python = ">=3.14"
 # dependencies = [
 #   "httpx>=0.28.0",
 #   "markdownify>=1.1.0",
+#   "ocsf-schema-compiler==1.1.1",
 #   "packaging>=24.0",
+#   "pyyaml>=6.0.0",
 # ]
 # ///
 
@@ -12,15 +14,21 @@ from __future__ import annotations
 
 import argparse
 import json
+import logging
 import re
 import shutil
+import string
 import subprocess
 import tempfile
 from dataclasses import dataclass
 from pathlib import Path
+from typing import Any
 
 import httpx
+import yaml
 from markdownify import markdownify
+from ocsf_schema_compiler.compiler import SchemaCompiler
+from ocsf_schema_compiler.ocsf_utils import is_hidden_class, is_hidden_object
 from packaging.version import Version
 
 
@@ -28,13 +36,14 @@ OCSF_SCHEMA_REPO = "https://github.com/ocsf/ocsf-schema.git"
 OCSF_SCHEMA_RAW = "https://raw.githubusercontent.com/ocsf/ocsf-schema/main"
 OCSF_DOCS_API = "https://api.github.com/repos/ocsf/ocsf-docs/contents"
 OCSF_DOCS_RAW = "https://raw.githubusercontent.com/ocsf/ocsf-docs/main"
+OCSF_COMPILER = "ocsf-schema-compiler 1.1.1"
 HTTP_HEADERS = {
     "User-Agent": "tenzir-skills-generator",
     "Accept": "application/json",
 }
 SEMVER_RE = re.compile(r"^(\d+)\.(\d+)\.(\d+)$")
 DEV_VERSION_RE = re.compile(r"^(\d+)\.(\d+)\.(\d+)-dev$")
-MARKDOWN_LINK_RE = re.compile(r"(?<!!)\[([^\]]+)\]\(([^)]+)\)")
+SENTENCE_END_RE = re.compile(r"(?<=[.!?])\s+(?=[A-Z`(\"])")
 
 
 @dataclass(frozen=True, slots=True)
@@ -48,33 +57,8 @@ def version_to_slug(version: str) -> str:
     return f"v{version}"
 
 
-def name_to_slug(name: str) -> str:
-    return name.replace("/", "_")
-
-
-def rewrite_markdown_links(text: str, relative_link_prefix: str = "") -> str:
-    def replace(match: re.Match[str]) -> str:
-        label, href = match.groups()
-        if href.startswith(("http://", "https://", "mailto:", "tel:", "#")):
-            return match.group(0)
-
-        link_target = href
-        anchor = ""
-        if "#" in link_target:
-            link_target, anchor = link_target.split("#", 1)
-            anchor = f"#{anchor}"
-        if "?" in link_target:
-            return match.group(0)
-        if not link_target.endswith(".md"):
-            link_target = f"{link_target}.md"
-        if relative_link_prefix and not link_target.startswith(("./", "../")):
-            link_target = f"{relative_link_prefix}{link_target}"
-        return f"[{label}]({link_target}{anchor})"
-
-    return MARKDOWN_LINK_RE.sub(replace, text)
-
-
-def clean_description(text: str, *, relative_link_prefix: str = "") -> str:
+def clean_description(text: str) -> str:
+    """Convert the HTML fragments in OCSF descriptions to Markdown."""
     if not text:
         return ""
     if re.search(r"</?[A-Za-z][^>]*>", text):
@@ -90,50 +74,14 @@ def clean_description(text: str, *, relative_link_prefix: str = "") -> str:
     rendered = rendered.replace("\r\n", "\n")
     rendered = re.sub(r"\n{3,}", "\n\n", rendered)
     rendered = re.sub(r"[ \t]+$", "", rendered, flags=re.MULTILINE)
-    rendered = rewrite_markdown_links(rendered, relative_link_prefix=relative_link_prefix)
     return rendered.strip()
 
 
-def format_deprecation(
-    deprecation: object,
-    *,
-    relative_link_prefix: str = "",
-) -> str:
-    if not isinstance(deprecation, dict):
-        return ""
-
-    since = deprecation.get("since")
-    if isinstance(since, str) and since:
-        version = since if since.startswith("v") else f"v{since}"
-        notice = f"**Deprecated since {version}.**"
-    else:
-        notice = "**Deprecated.**"
-
-    message = clean_description(
-        deprecation.get("message", ""),
-        relative_link_prefix=relative_link_prefix,
-    )
-    if message:
-        return f"{notice} {message}"
-
-    superseded_by = deprecation.get("superseded_by")
-    if isinstance(superseded_by, list) and superseded_by:
-        replacements = ", ".join(f"`{name}`" for name in superseded_by)
-        return f"{notice} Superseded by {replacements}."
-    return notice
-
-
-def format_blockquote(text: str) -> str:
-    return "\n".join(f"> {line}" if line else ">" for line in text.splitlines())
-
-
-def format_meta_list(entries: list[tuple[str, object]]) -> str:
-    lines = [
-        f"- **{label}**: {value}"
-        for label, value in entries
-        if value not in (None, "")
-    ]
-    return "\n".join(lines)
+def summarize(text: str) -> str:
+    """Return the first sentence of a description on a single line."""
+    flat = " ".join(clean_description(text).split())
+    match = SENTENCE_END_RE.search(flat)
+    return flat[: match.start()] if match else flat
 
 
 def read_json(path: Path) -> dict:
@@ -143,6 +91,50 @@ def read_json(path: Path) -> dict:
 def write_file(path: Path, content: str) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(content, encoding="utf-8")
+
+
+class _NoAliasSafeDumper(yaml.SafeDumper):
+    def ignore_aliases(self, data: Any) -> bool:
+        return True
+
+
+def _represent_str(dumper: yaml.Dumper, data: str) -> yaml.Node:
+    style = "|" if "\n" in data else None
+    return dumper.represent_scalar("tag:yaml.org,2002:str", data, style=style)
+
+
+def _represent_list(dumper: yaml.Dumper, data: list) -> yaml.Node:
+    # Lists of names stay on one line so that a grep hit shows all of them.
+    flow = bool(data) and all(
+        isinstance(item, (int, str)) and "\n" not in str(item) for item in data
+    )
+    return dumper.represent_sequence("tag:yaml.org,2002:seq", data, flow_style=flow)
+
+
+class Flow(dict):
+    """A mapping written on one line, so that a grep hit shows all of it."""
+
+
+def _represent_flow(dumper: yaml.Dumper, data: Flow) -> yaml.Node:
+    return dumper.represent_mapping("tag:yaml.org,2002:map", data, flow_style=True)
+
+
+_NoAliasSafeDumper.add_representer(str, _represent_str)
+_NoAliasSafeDumper.add_representer(Flow, _represent_flow)
+_NoAliasSafeDumper.add_representer(list, _represent_list)
+
+
+def dump_yaml(data: Any) -> str:
+    text = yaml.dump(
+        data,
+        Dumper=_NoAliasSafeDumper,
+        allow_unicode=True,
+        sort_keys=False,
+        width=1_000_000,
+    )
+    if yaml.safe_load(text) != data:
+        raise ValueError("YAML output does not round-trip to the source data")
+    return text
 
 
 def list_stable_versions() -> list[str]:
@@ -166,7 +158,8 @@ def list_stable_versions() -> list[str]:
     return [str(version) for version in sorted((Version(version) for version in versions))]
 
 
-def clone_schema(version: str, ref: str, temp_root: Path) -> Path:
+def clone_schema(version: str, ref: str, temp_root: Path) -> tuple[Path, str]:
+    """Clone the schema at `ref` and return the checkout and the ref used."""
     repo_dir = temp_root / f"ocsf-schema-{version}"
     refs = [ref]
     if ref == version:
@@ -179,10 +172,20 @@ def clone_schema(version: str, ref: str, temp_root: Path) -> Path:
                 capture_output=True,
                 text=True,
             )
-            return repo_dir
+            return repo_dir, candidate
         except subprocess.CalledProcessError:
             pass
     raise RuntimeError(f"Failed to clone OCSF schema for version {version} from ref {ref}")
+
+
+def resolve_commit(repo_dir: Path) -> str:
+    result = subprocess.run(
+        ["git", "-C", str(repo_dir), "rev-parse", "HEAD"],
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    return result.stdout.strip()
 
 
 def parse_semver_triplet(version: str) -> tuple[int, int, int]:
@@ -234,117 +237,22 @@ def collect_version_specs(client: httpx.Client, requested_version: str | None) -
 
 
 def load_directory_json(directory: Path) -> dict[str, dict]:
+    """Load all JSON files in a directory, keyed by the item's schema name.
+    Extension patches have no `name` and are keyed by the item they extend."""
     if not directory.exists():
         return {}
-    return {
-        path.stem: read_json(path)
-        for path in sorted(directory.glob("*.json"))
-        if path.is_file()
-    }
-
-
-def load_classes(schema_dir: Path) -> tuple[dict[str, dict], dict[str, dict]]:
-    """Load event classes and intermediate (category-level) base classes.
-
-    Returns (classes, intermediate_classes) where intermediate_classes
-    are the abstract category base classes like ``network``, ``system``,
-    ``iam`` etc. that concrete classes extend.
-    """
-    classes: dict[str, dict] = {}
-    intermediates: dict[str, dict] = {}
-    events_dir = schema_dir / "events"
-    if not events_dir.exists():
-        return classes, intermediates
-
-    base_event_path = events_dir / "base_event.json"
-    if base_event_path.exists():
-        classes["base_event"] = read_json(base_event_path)
-
-    for category_dir in sorted(path for path in events_dir.iterdir() if path.is_dir()):
-        category_key = category_dir.name
-        for entry in sorted(category_dir.glob("*.json")):
-            data = read_json(entry)
-            class_name = data.get("name") or entry.stem
-            data["category_key"] = category_key
-            if entry.stem == category_key:
-                intermediates[class_name] = data
-                continue
-            classes[class_name] = data
-    return classes, intermediates
-
-
-def resolve_profiles(
-    class_data: dict,
-    *parent_mappings: dict[str, dict],
-) -> list[str]:
-    """Collect profile names registered on a class and its ancestors."""
-    seen: set[str] = set()
-    profiles: list[str] = []
-    current: dict | None = class_data
-    while current is not None:
-        for name in current.get("profiles") or []:
-            if name not in seen:
-                seen.add(name)
-                profiles.append(name)
-        extends = current.get("extends")
-        if not extends:
-            break
-        current = lookup_schema(extends, *parent_mappings)
-    return profiles
-
-
-def format_doc_link(
-    name: str,
-    data: dict,
-    *,
-    target: str,
-    include_schema_name: bool = False,
-) -> str:
-    caption = data.get("caption") or name
-    label = f"{caption} ({name})" if include_schema_name else caption
-    return f"[{label}]({target})"
-
-
-def format_class_doc_link(
-    name: str,
-    class_data: dict,
-    *,
-    link_prefix: str,
-    include_schema_name: bool = False,
-) -> str:
-    return format_doc_link(
-        name,
-        class_data,
-        target=f"{link_prefix}{name_to_slug(name)}.md",
-        include_schema_name=include_schema_name,
-    )
-
-
-def format_named_links(
-    names: list[str],
-    *,
-    data_by_name: dict[str, dict],
-    link_by_name: dict[str, str],
-    include_schema_name: bool = False,
-) -> str:
-    rendered: list[str] = []
-    for name in names:
-        target = link_by_name.get(name)
-        if target is None:
-            rendered.append(f"`{name}`")
+    result: dict[str, dict] = {}
+    for path in sorted(directory.glob("*.json")):
+        if not path.is_file():
             continue
-        rendered.append(
-            format_doc_link(
-                name,
-                data_by_name.get(name, {}),
-                target=target,
-                include_schema_name=include_schema_name,
-            )
-        )
-    return ", ".join(rendered)
+        data = read_json(path)
+        result[data.get("name") or data.get("extends") or path.stem] = data
+    return result
 
 
 def load_extensions(schema_dir: Path) -> dict[str, dict]:
+    """Load the raw extension definitions, keyed by the extension's scope name
+    (e.g. `win`), which prefixes the names of its classes and objects."""
     result: dict[str, dict] = {}
     extensions_dir = schema_dir / "extensions"
     if not extensions_dir.exists():
@@ -354,328 +262,60 @@ def load_extensions(schema_dir: Path) -> dict[str, dict]:
         meta_path = extension_dir / "extension.json"
         if not meta_path.exists():
             continue
-        dictionary_path = extension_dir / "dictionary.json"
-        result[extension_dir.name] = {
-            "meta": read_json(meta_path),
-            "dictionary": read_json(dictionary_path) if dictionary_path.exists() else {},
+        meta = read_json(meta_path)
+        result[meta.get("name") or extension_dir.name] = {
+            "meta": meta,
+            "classes": load_directory_json(extension_dir / "events"),
             "objects": load_directory_json(extension_dir / "objects"),
             "profiles": load_directory_json(extension_dir / "profiles"),
-            "events": load_directory_json(extension_dir / "events"),
         }
     return result
 
 
-def merge_dictionaries(base: dict, extra: dict | None = None) -> dict:
-    merged = dict(base)
-    merged["attributes"] = dict(base.get("attributes", {}))
-    merged["types"] = dict(base.get("types", {}))
-    if not extra:
-        return merged
-    if isinstance(extra.get("attributes"), dict):
-        merged["attributes"].update(extra["attributes"])
-    if isinstance(extra.get("types"), dict):
-        merged["types"].update(extra["types"])
-    return merged
+class _SkillSchemaCompiler(SchemaCompiler):
+    """Schema compiler that also keeps the hidden (abstract) classes and
+    objects, such as `system` or `_entity`, which the compiler resolves but
+    drops from its output. The skill documents them as abstract items."""
+
+    def __init__(self, *args, **kwargs) -> None:
+        super().__init__(*args, **kwargs)
+        self._hidden_classes: dict = {}
+        self._hidden_objects: dict = {}
+
+    def _resolve_extends(self, items: dict, kind: str) -> None:
+        super()._resolve_extends(items, kind)
+        for name, item in items.items():
+            if kind == "Class" and is_hidden_class(name, item):
+                self._hidden_classes[name] = item
+            elif kind == "Object" and is_hidden_object(name):
+                self._hidden_objects[name] = item
+
+    def compile(self) -> dict:
+        output = super().compile()
+        for hidden, kind, key in (
+            (self._hidden_classes, "class", "classes"),
+            (self._hidden_objects, "object", "objects"),
+        ):
+            self._ensure_item_attributes_have_requirement(hidden, kind, [])
+            self._finish_item_attributes(hidden, kind)
+            output[key].update(hidden)
+        return output
 
 
-def lookup_schema(name: str, *mappings: dict[str, dict]) -> dict | None:
-    for mapping in mappings:
-        if name in mapping:
-            return mapping[name]
-    return None
+def compile_schema(schema_dir: Path, *, ignore_platform_extensions: bool) -> dict:
+    """Compile a raw OCSF schema checkout with the official OCSF schema
+    compiler in browser mode, which records each attribute's `_source` and
+    the back-references between items in `_links`."""
+    logging.getLogger("ocsf_schema_compiler").setLevel(logging.ERROR)
+    return _SkillSchemaCompiler(
+        schema_dir,
+        ignore_platform_extensions=ignore_platform_extensions,
+        browser_mode=True,
+    ).compile()
 
 
-def resolve_constraints(entity_data: dict, *mappings: dict[str, dict]) -> dict | None:
-    """Return the entity's effective constraints, mirroring the OCSF schema
-    compiler: an entity inherits the constraints of the nearest ancestor along
-    the extends chain that has a `constraints` key, and an explicitly empty
-    `constraints` clears inherited ones. Mappings are searched in order, but an
-    extension patch that extends its own name resolves to the base entity."""
-    visited: list[dict] = []
-    current: dict | None = entity_data
-    while current is not None and not any(current is v for v in visited):
-        if "constraints" in current:
-            return current["constraints"] or None
-        visited.append(current)
-        extends = current.get("extends")
-        if not extends:
-            break
-        current = next(
-            (
-                mapping[extends]
-                for mapping in mappings
-                if extends in mapping
-                and not any(mapping[extends] is v for v in visited)
-            ),
-            None,
-        )
-    return None
-
-
-def resolve_attribute(name: str, local_data: object, dictionary: dict) -> dict:
-    base = dictionary.get("attributes", {}).get(name, {})
-    if not isinstance(base, dict):
-        base = {}
-    if not isinstance(local_data, dict):
-        local_data = {}
-    return {**base, **local_data}
-
-
-def format_attribute(
-    name: str,
-    data: dict,
-    object_links: dict[str, str] | None = None,
-    *,
-    relative_link_prefix: str = "",
-) -> str:
-    desc = clean_description(
-        data.get("description") or data.get("caption") or "",
-        relative_link_prefix=relative_link_prefix,
-    )
-    lines = [f"### `{name}`", ""]
-    # Build the type display, optionally linking to the object page.
-    type_name = data.get("object_type") or data.get("type") or ""
-    if type_name and object_links is not None and type_name in object_links:
-        link_target = object_links[type_name]
-        type_display = f"[`{type_name}`]({link_target})"
-    elif type_name:
-        type_display = f"`{type_name}`"
-    else:
-        type_display = ""
-    meta = format_meta_list(
-        [
-            ("Type", type_display),
-            ("Requirement", data.get("requirement")),
-            ("Observable", data.get("observable")),
-            ("Group", data.get("group")),
-            ("Sibling", f"`{data['sibling']}`" if data.get("sibling") else ""),
-        ]
-    )
-    if meta:
-        lines.extend([meta, ""])
-    if isinstance(data.get("range"), list):
-        lines.extend([f"- **Range**: `{data['range'][0]}` to `{data['range'][1]}`", ""])
-    if data.get("regex"):
-        lines.extend([f"- **Regex**: `{data['regex']}`", ""])
-    if isinstance(data.get("values"), list) and data["values"]:
-        values = ", ".join(f"`{value}`" for value in data["values"])
-        lines.extend([f"- **Values**: {values}", ""])
-    if isinstance(data.get("enum"), dict) and data["enum"]:
-        lines.extend(["#### Enum values", ""])
-        for key, value in data["enum"].items():
-            enum_desc = clean_description(
-                value.get("description", ""),
-                relative_link_prefix=relative_link_prefix,
-            )
-            label = value.get("caption") or key
-            suffix = f" - {enum_desc}" if enum_desc else ""
-            lines.append(f"- `{key}`: `{label}`{suffix}")
-            deprecation = format_deprecation(
-                value.get("@deprecated"),
-                relative_link_prefix=relative_link_prefix,
-            )
-            if deprecation:
-                lines.append(f"  - {deprecation}")
-        lines.append("")
-    deprecation = format_deprecation(
-        data.get("@deprecated"),
-        relative_link_prefix=relative_link_prefix,
-    )
-    if deprecation:
-        lines.extend([format_blockquote(deprecation), ""])
-    if desc:
-        lines.extend([desc, ""])
-    return "\n".join(lines)
-
-
-def format_constraints(constraints: dict) -> str:
-    """Render an OCSF constraints dict as Markdown."""
-    lines: list[str] = []
-    for kind in ("at_least_one", "just_one"):
-        attrs = constraints.get(kind)
-        if not attrs:
-            continue
-        label = "At least one of" if kind == "at_least_one" else "Exactly one of"
-        attrs_str = ", ".join(f"`{a}`" for a in attrs)
-        lines.append(f"- **{label}**: {attrs_str}")
-    return "\n".join(lines)
-
-
-def format_associations(associations: dict) -> str:
-    """Render an OCSF associations dict as Markdown."""
-    lines: list[str] = []
-    for source, targets in associations.items():
-        targets_str = ", ".join(f"`{t}`" for t in targets)
-        lines.append(f"- `{source}` ↔ {targets_str}")
-    return "\n".join(lines)
-
-
-def collect_inherited_attributes(
-    entity_data: dict,
-    dictionary: dict,
-    *parent_mappings: dict[str, dict],
-) -> list[tuple[str, list[tuple[str, str]]]]:
-    """Walk the extends chain and collect required/recommended attributes
-    from each ancestor.  Returns a list of (ancestor_name, [(attr, requirement), ...])."""
-    result: list[tuple[str, list[tuple[str, str]]]] = []
-    own_attrs = set((entity_data.get("attributes") or {}).keys())
-    extends = entity_data.get("extends")
-    seen_parents: set[str] = set()
-    while extends:
-        if extends in seen_parents:
-            break
-        seen_parents.add(extends)
-        parent = lookup_schema(extends, *parent_mappings)
-        if parent is None:
-            break
-        parent_caption = parent.get("caption") or extends
-        parent_attrs = parent.get("attributes") or {}
-        important: list[tuple[str, str]] = []
-        for attr_name, attr_data in parent_attrs.items():
-            if attr_name.startswith("$") or attr_name in own_attrs:
-                continue
-            resolved = resolve_attribute(attr_name, attr_data, dictionary)
-            # Any nearer ancestor shadows the same attribute higher in the chain,
-            # even if the nearer definition downgrades it to optional.
-            own_attrs.add(attr_name)
-            requirement = resolved.get("requirement", "")
-            if requirement in ("required", "recommended"):
-                important.append((attr_name, requirement))
-        if important:
-            important.sort(key=lambda pair: (0 if pair[1] == "required" else 1, pair[0]))
-            result.append((parent_caption, important))
-        extends = parent.get("extends")
-    return result
-
-
-def render_entity_page(
-    *,
-    title: str,
-    description: str | None,
-    meta_entries: list[tuple[str, object]],
-    attributes: list[tuple[str, dict]],
-    deprecation: object = None,
-    constraints: dict | None = None,
-    associations: dict | None = None,
-    inherited_attributes: list[tuple[str, list[tuple[str, str]]]] | None = None,
-    object_links: dict[str, str] | None = None,
-    relative_link_prefix: str = "",
-) -> str:
-    lines = [f"# {title}", ""]
-    if description:
-        lines.extend([clean_description(description, relative_link_prefix=relative_link_prefix), ""])
-    deprecation_notice = format_deprecation(
-        deprecation,
-        relative_link_prefix=relative_link_prefix,
-    )
-    if deprecation_notice:
-        lines.extend([format_blockquote(deprecation_notice), ""])
-    meta = format_meta_list(meta_entries)
-    if meta:
-        lines.extend([meta, ""])
-    if constraints:
-        rendered = format_constraints(constraints)
-        if rendered:
-            lines.extend(["## Constraints", "", rendered, ""])
-    if associations:
-        rendered = format_associations(associations)
-        if rendered:
-            lines.extend(["## Associations", "", rendered, ""])
-    if inherited_attributes:
-        lines.extend(["## Inherited attributes", ""])
-        for ancestor_name, attrs in inherited_attributes:
-            lines.append(f"**From {ancestor_name}:**")
-            for attr_name, requirement in attrs:
-                lines.append(f"- `{attr_name}` ({requirement})")
-            lines.append("")
-    if attributes:
-        lines.extend(["## Attributes", ""])
-        for attr_name, attr_data in attributes:
-            lines.append(format_attribute(
-                attr_name, attr_data,
-                object_links=object_links,
-                relative_link_prefix=relative_link_prefix,
-            ))
-    content = re.sub(r"\n{3,}", "\n\n", "\n".join(lines)).strip()
-    return content + "\n"
-
-
-def build_version_docs(version: str, schema_dir: Path) -> dict:
-    slug = version_to_slug(version)
-    categories = read_json(schema_dir / "categories.json").get("attributes", {})
-    dictionary = read_json(schema_dir / "dictionary.json")
-    classes, intermediates = load_classes(schema_dir)
-    objects = load_directory_json(schema_dir / "objects")
-    profiles = load_directory_json(schema_dir / "profiles")
-    extensions = load_extensions(schema_dir)
-    types = dictionary.get("types", {}).get("attributes", {})
-
-    return {
-        "version": version,
-        "slug": slug,
-        "categories": categories,
-        "dictionary": dictionary,
-        "classes": classes,
-        "intermediates": intermediates,
-        "objects": objects,
-        "profiles": profiles,
-        "extensions": extensions,
-        "types": types,
-    }
-
-
-def generate_classes_overview(version_data: dict) -> str:
-    lines = [f"# Classes ({version_data['version']})", ""]
-    for category_key, category in version_data["categories"].items():
-        category_bases = sorted(
-            (
-                (name, data)
-                for name, data in version_data["intermediates"].items()
-                if data.get("category_key") == category_key
-            ),
-            key=lambda item: (item[1].get("caption") or item[0]).casefold(),
-        )
-        category_classes = sorted(
-            (
-                (name, data)
-                for name, data in version_data["classes"].items()
-                if data.get("category_key") == category_key
-            ),
-            key=lambda item: (item[1].get("caption") or item[0]).casefold(),
-        )
-        if not category_bases and not category_classes:
-            continue
-        lines.extend([f"## {category['caption']}", "", clean_description(category.get("description", "")), ""])
-        for name, data in category_bases:
-            lines.append(
-                f"- {format_class_doc_link(name, data, link_prefix='classes/', include_schema_name=True)}"
-                " [base class]"
-            )
-        for name, data in category_classes:
-            lines.append(f"- {format_class_doc_link(name, data, link_prefix='classes/')}")
-        lines.append("")
-    if "base_event" in version_data["classes"]:
-        lines.extend([
-            "## Base Event",
-            "",
-            f"- {format_class_doc_link('base_event', version_data['classes']['base_event'], link_prefix='classes/')}",
-            "",
-        ])
-    content = re.sub(r"\n{3,}", "\n\n", "\n".join(lines)).strip()
-    return content + "\n"
-
-
-def generate_named_overview(version_data: dict, title: str, section: str) -> str:
-    items = version_data[section]
-    lines = [f"# {title} ({version_data['version']})", ""]
-    for name, data in sorted(items.items(), key=lambda item: (item[1].get("caption") or item[0]).casefold()):
-        lines.append(f"- [{data.get('caption') or name}]({section}/{name_to_slug(name)}.md)")
-    return "\n".join(lines) + "\n"
-
-
-# Semantic grouping for objects overview.  Each entry maps a group
-# heading to a set of object names.  Objects not listed land in the
-# catch-all group at the end.
+# Semantic grouping for the objects index.  Each entry maps a group
+# name to a set of object names.  Objects not listed land in "Other".
 _OBJECT_GROUPS: list[tuple[str, set[str]]] = [
     ("Base", {
         "object", "_entity", "_resource",
@@ -749,162 +389,645 @@ _OBJECT_GROUPS: list[tuple[str, set[str]]] = [
 ]
 
 
-def generate_objects_overview(version_data: dict) -> str:
-    objects = version_data["objects"]
-    assigned: set[str] = set()
-    lines = [f"# Objects ({version_data['version']})", ""]
+def object_group(name: str) -> str:
+    base = name.split("/", 1)[-1]
+    return next((title for title, names in _OBJECT_GROUPS if base in names), "Other")
 
-    for group_title, group_names in _OBJECT_GROUPS:
-        group_items = sorted(
-            ((name, data) for name, data in objects.items() if name in group_names),
-            key=lambda item: (item[1].get("caption") or item[0]).casefold(),
-        )
-        if not group_items:
+
+def entity_path(slug: str, section: str, name: str, *, patch_of: str | None = None) -> str:
+    """Path of a class or object file relative to the skill root. Scoped
+    names (`win/reg_key`) and extension patches live below the extension."""
+    if patch_of is not None:
+        return f"{slug}/extensions/{patch_of}/{section}/{name}.yaml"
+    if "/" in name:
+        scope, base = name.split("/", 1)
+        return f"{slug}/extensions/{scope}/{section}/{base}.yaml"
+    return f"{slug}/{section}/{name}.yaml"
+
+
+def set_if(out: dict, key: str, value: Any) -> None:
+    if value not in (None, "", [], {}):
+        out[key] = value
+
+
+def render_deprecation(deprecation: object) -> dict | None:
+    if not isinstance(deprecation, dict):
+        return None
+    out: dict[str, Any] = {}
+    set_if(out, "since", deprecation.get("since"))
+    set_if(out, "message", clean_description(deprecation.get("message", "")))
+    set_if(out, "superseded_by", list(deprecation.get("superseded_by") or []))
+    return out or {"since": None}
+
+
+def render_references(references: object) -> list[dict]:
+    rendered: list[dict] = []
+    for reference in references or []:
+        entry: dict[str, Any] = {}
+        set_if(entry, "description", clean_description(reference.get("description", "")))
+        set_if(entry, "url", reference.get("url"))
+        if entry:
+            rendered.append(entry)
+    return rendered
+
+
+def render_enum(enum: dict) -> dict:
+    """Render enum values keyed by value. Numeric values become integer keys,
+    matching the values that events carry, e.g. `activity_id: 1`."""
+    items = list(enum.items())
+    if all(re.fullmatch(r"-?\d+", key) for key, _ in items):
+        items = sorted(((int(key), value) for key, value in items), key=lambda item: item[0])
+    rendered: dict[int | str, dict] = {}
+    for key, value in items:
+        entry: dict[str, Any] = {"caption": value.get("caption") or str(key)}
+        set_if(entry, "description", clean_description(value.get("description", "")))
+        set_if(entry, "deprecated", render_deprecation(value.get("@deprecated")))
+        set_if(entry, "references", render_references(value.get("references")))
+        rendered[key] = entry
+    return rendered
+
+
+def effective_observable(attribute: dict, types: dict, objects: dict) -> int | None:
+    """The observable type ID of an attribute: defined on the attribute itself
+    (dictionary or class level), or else by its data type or object."""
+    if attribute.get("observable") is not None:
+        return attribute["observable"]
+    observable = (types.get(attribute.get("type") or "") or {}).get("observable")
+    if observable is not None:
+        return observable
+    return (objects.get(attribute.get("object_type") or "") or {}).get("observable")
+
+
+def render_attribute(attribute: dict, *, owner: str, types: dict, objects: dict) -> dict:
+    out: dict[str, Any] = {}
+    set_if(out, "caption", attribute.get("caption"))
+    set_if(out, "type", attribute.get("type"))
+    set_if(out, "object", attribute.get("object_type"))
+    if attribute.get("is_array"):
+        out["array"] = True
+    set_if(out, "requirement", attribute.get("requirement"))
+    set_if(out, "group", attribute.get("group"))
+    profiles = attribute.get("profiles") or []
+    if len(profiles) == 1:
+        out["profile"] = profiles[0]
+    else:
+        set_if(out, "profiles", list(profiles))
+    source = attribute.get("_source")
+    if source and source != owner:
+        out["from"] = source
+    set_if(out, "sibling", attribute.get("sibling"))
+    set_if(out, "observable", effective_observable(attribute, types, objects))
+    set_if(out, "deprecated", render_deprecation(attribute.get("@deprecated")))
+    set_if(out, "description", clean_description(attribute.get("description", "")))
+    if isinstance(attribute.get("enum"), dict) and attribute["enum"]:
+        out["enum"] = render_enum(attribute["enum"])
+    set_if(out, "references", render_references(attribute.get("references")))
+    return out
+
+
+def render_links(links: object, *, with_attributes: bool) -> dict:
+    """Group compiler back-references (`_links`) by class and object."""
+    classes: dict[str, list[str]] = {}
+    objects: dict[str, list[str]] = {}
+    for link in links or []:
+        target = {"class": classes, "object": objects}.get(link.get("group"))
+        if target is None:
             continue
-        lines.extend([f"## {group_title}", ""])
-        for name, data in group_items:
-            lines.append(f"- [{data.get('caption') or name}](objects/{name_to_slug(name)}.md)")
-            assigned.add(name)
-        lines.append("")
+        keys = target.setdefault(link["type"], [])
+        for key in link.get("attribute_keys") or []:
+            if key not in keys:
+                keys.append(key)
+    out: dict[str, Any] = {}
+    for key, entries in (("classes", classes), ("objects", objects)):
+        if not entries:
+            continue
+        names = sorted(entries)
+        out[key] = {name: sorted(entries[name]) for name in names} if with_attributes else names
+    return out
 
-    # Catch-all for objects not assigned to any group.
-    remaining = sorted(
-        ((name, data) for name, data in objects.items() if name not in assigned),
-        key=lambda item: (item[1].get("caption") or item[0]).casefold(),
+
+def item_profiles(item: dict) -> list[str]:
+    """Profiles that apply to an item: those registered on it and its
+    ancestors, plus those whose attributes the compiler merged in."""
+    profiles = list(item.get("profiles") or [])
+    for attribute in (item.get("attributes") or {}).values():
+        for name in attribute.get("profiles") or []:
+            if name not in profiles:
+                profiles.append(name)
+    return profiles
+
+
+# Attributes are listed by requirement, so the top of a file is the list of
+# attributes every event must set.
+REQUIREMENT_ORDER = {"required": 0, "recommended": 1, "optional": 2}
+
+
+def render_item(
+    item: dict,
+    *,
+    name: str,
+    kind: str,
+    types: dict,
+    objects: dict,
+    categories: dict,
+    extension: str | None = None,
+    patches: str | None = None,
+    patched_by: list[str] | None = None,
+    attribute_names: list[str] | None = None,
+) -> dict:
+    """Render a compiled class or object as a self-contained document."""
+    out: dict[str, Any] = {"name": name}
+    set_if(out, "caption", item.get("caption"))
+    abstract = (
+        is_hidden_class(name, item) if kind == "class" else is_hidden_object(name)
+    ) and patches is None
+    if kind == "class" and patches is None:
+        set_if(out, "uid", item.get("uid"))
+        category = item.get("category")
+        if category in categories:
+            out["category"] = category
+        set_if(out, "category_uid", item.get("category_uid"))
+    if abstract:
+        out["abstract"] = True
+    set_if(out, "extension", extension)
+    if patches is not None:
+        out["patches"] = patches
+    else:
+        set_if(out, "extends", item.get("extends"))
+    if kind == "object":
+        set_if(out, "observable", item.get("observable"))
+    set_if(out, "deprecated", render_deprecation(item.get("@deprecated")))
+    set_if(
+        out,
+        "supersedes",
+        [
+            {key: value for key, value in (("name", entry.get("type")), ("since", entry.get("since"))) if value}
+            for entry in item.get("_supersedes") or []
+        ],
     )
-    if remaining:
-        lines.extend(["## Other", ""])
-        for name, data in remaining:
-            lines.append(f"- [{data.get('caption') or name}](objects/{name_to_slug(name)}.md)")
-        lines.append("")
-
-    content = re.sub(r"\n{3,}", "\n\n", "\n".join(lines)).strip()
-    return content + "\n"
-
-
-def generate_extensions_overview(version_data: dict) -> str:
-    lines = [f"# Extensions ({version_data['version']})", ""]
-    for name, data in sorted(
-        version_data["extensions"].items(),
-        key=lambda item: (item[1]["meta"].get("caption") or item[0]).casefold(),
-    ):
-        lines.append(
-            f"- [{data['meta'].get('caption') or name}](extensions/{name_to_slug(name)}/index.md)"
+    set_if(out, "description", clean_description(item.get("description", "")))
+    if patches is None:
+        set_if(out, "profiles", item_profiles(item))
+    set_if(out, "constraints", item.get("constraints"))
+    set_if(out, "associations", item.get("associations"))
+    set_if(out, "references", render_references(item.get("references")))
+    set_if(out, "patched_by", patched_by)
+    if kind == "object" and patches is None:
+        set_if(out, "referenced_by", render_links(item.get("_links"), with_attributes=True))
+    compiled_attributes = item.get("attributes") or {}
+    names = attribute_names if attribute_names is not None else list(compiled_attributes)
+    names = sorted(
+        (attribute_name for attribute_name in names if attribute_name in compiled_attributes),
+        key=lambda attribute_name: (
+            REQUIREMENT_ORDER.get(compiled_attributes[attribute_name].get("requirement"), len(REQUIREMENT_ORDER)),
+            attribute_name,
+        ),
+    )
+    out["attributes"] = {
+        attribute_name: render_attribute(
+            compiled_attributes[attribute_name],
+            owner=name,
+            types=types,
+            objects=objects,
         )
-    return "\n".join(lines) + "\n"
+        for attribute_name in names
+    }
+    # `type_uid` is `class_uid * 100 + activity_id`; SKILL.md states the rule
+    # instead of listing every combination.
+    out["attributes"].get("type_uid", {}).pop("enum", None)
+    return out
 
 
-def build_name_link_map(names: list[str] | set[str], *, prefix: str) -> dict[str, str]:
+def render_patch(
+    raw_patch: dict,
+    compiled_item: dict,
+    *,
+    name: str,
+    kind: str,
+    scope: str,
+    types: dict,
+    objects: dict,
+    categories: dict,
+) -> dict:
+    """Render an extension patch: the attributes, profiles, and constraints it
+    adds to a core item, resolved against the patched item."""
+    profiles = list(raw_patch.get("profiles") or [])
+    attribute_names = sorted(
+        attribute_name
+        for attribute_name, attribute in (compiled_item.get("attributes") or {}).items()
+        if attribute_name in (raw_patch.get("attributes") or {})
+        or set(attribute.get("profiles") or []) & set(profiles)
+    )
+    full = render_item(
+        compiled_item,
+        name=name,
+        kind=kind,
+        types=types,
+        objects=objects,
+        categories=categories,
+        patches=name,
+        attribute_names=attribute_names,
+    )
+    out: dict[str, Any] = {"name": name}
+    set_if(out, "caption", raw_patch.get("caption"))
+    out["extension"] = scope
+    out["patches"] = name
+    set_if(out, "description", clean_description(raw_patch.get("description", "")))
+    set_if(out, "profiles", profiles)
+    if "constraints" in raw_patch:
+        set_if(out, "constraints", compiled_item.get("constraints"))
+    out["attributes"] = full["attributes"]
+    return out
+
+
+# Fields in which an inherited attribute may differ from its definition and
+# still count as unchanged.
+INHERITED_ATTRIBUTE_FIELDS = ("caption", "requirement", "profile", "profiles")
+# Larger enums keep one value per line instead of one long flow line.
+MAX_FLOW_ENUM_VALUES = 12
+INHERITED_ATTRIBUTE_NOTE = (
+    "# Attributes with `from` but no description are inherited unchanged. Their\n"
+    "# descriptions are in the file of the item that `from` names.\n"
+)
+
+
+def compact_inherited_attributes(documents: dict, slug: str) -> None:
+    """Write inherited attributes without their descriptions, which the
+    defining item's file holds: on one line, or with enum captions below when
+    the enum is large. An attribute stays complete when anything other than
+    its caption, requirement, or profiles differs from that definition, e.g.
+    a narrowed enum."""
+    for path, document in documents.items():
+        section = "classes" if "/classes/" in path else "objects" if "/objects/" in path else None
+        if section is None or "patches" in document:
+            continue
+        for name, attribute in document["attributes"].items():
+            source = attribute.get("from")
+            if source is None:
+                continue
+            defined = documents.get(entity_path(slug, section, source), {}).get("attributes", {}).get(name)
+            if defined is None or "from" in defined:
+                continue
+            rest = {key: value for key, value in attribute.items() if key not in INHERITED_ATTRIBUTE_FIELDS}
+            rest.pop("from")
+            if rest != {key: value for key, value in defined.items() if key not in INHERITED_ATTRIBUTE_FIELDS}:
+                continue
+            compact = {
+                key: value
+                for key, value in attribute.items()
+                if key not in ("description", "references", "enum", "from")
+            }
+            enum = attribute.get("enum")
+            if enum:
+                captions = {key: value["caption"] for key, value in enum.items()}
+                compact["enum"] = Flow(captions) if len(captions) <= MAX_FLOW_ENUM_VALUES else captions
+            compact["from"] = source
+            if enum and len(enum) > MAX_FLOW_ENUM_VALUES:
+                document["attributes"][name] = compact
+            else:
+                document["attributes"][name] = Flow(compact)
+
+
+def render_types(compiled_types: dict, *, extension_types: dict) -> dict:
+    rendered: dict[str, dict] = {}
+    for name, data in sorted({**compiled_types, **extension_types}.items()):
+        entry: dict[str, Any] = {}
+        set_if(entry, "caption", data.get("caption"))
+        set_if(entry, "base", data.get("type"))
+        set_if(entry, "extension", data.get("extension"))
+        set_if(entry, "max_len", data.get("max_len"))
+        set_if(entry, "range", data.get("range"))
+        set_if(entry, "regex", data.get("regex"))
+        if isinstance(data.get("values"), list):
+            entry["values"] = data["values"]
+        set_if(entry, "observable", data.get("observable"))
+        set_if(entry, "deprecated", render_deprecation(data.get("@deprecated")))
+        set_if(entry, "description", clean_description(data.get("description", "")))
+        set_if(entry, "references", render_references(data.get("references")))
+        rendered[name] = entry
+    return rendered
+
+
+def render_dictionary(attributes: dict, *, types: dict, objects: dict) -> dict:
+    rendered: dict[str, dict] = {}
+    for name, data in sorted(attributes.items()):
+        entry: dict[str, Any] = {}
+        set_if(entry, "caption", data.get("caption"))
+        set_if(entry, "type", data.get("type"))
+        set_if(entry, "object", data.get("object_type"))
+        if data.get("is_array"):
+            entry["array"] = True
+        set_if(entry, "extension", data.get("extension"))
+        set_if(entry, "sibling", data.get("sibling"))
+        set_if(entry, "observable", effective_observable(data, types, objects))
+        set_if(entry, "deprecated", render_deprecation(data.get("@deprecated")))
+        set_if(entry, "description", clean_description(data.get("description", "")))
+        set_if(entry, "used_by", render_links(data.get("_links"), with_attributes=False))
+        rendered[name] = entry
+    return rendered
+
+
+def render_profile(
+    profile: dict, *, name: str, types: dict, objects: dict, extension: str | None, links: object = None
+) -> dict:
+    """Render a profile. `links` overrides the profile's own back-references,
+    so core profiles can list the extension classes that apply them."""
+    out: dict[str, Any] = {}
+    set_if(out, "caption", profile.get("caption"))
+    set_if(out, "extension", extension)
+    set_if(out, "deprecated", render_deprecation(profile.get("@deprecated")))
+    set_if(out, "description", clean_description(profile.get("description", "")))
+    set_if(out, "applies_to", render_links(links or profile.get("_links"), with_attributes=False))
+    out["attributes"] = {
+        attribute_name: render_attribute(attribute, owner=name, types=types, objects=objects)
+        for attribute_name, attribute in sorted((profile.get("attributes") or {}).items())
+    }
+    return out
+
+
+def index_entry(document: dict, *, path: str, extra: dict | None = None) -> dict:
+    entry: dict[str, Any] = {"name": document["name"]}
+    for key in ("caption", "uid", "category", "abstract", "extension", "extends", "observable"):
+        set_if(entry, key, document.get(key))
+    entry.update(extra or {})
+    if "deprecated" in document:
+        entry["deprecated"] = True
+    set_if(entry, "summary", summarize(document.get("description", "")))
+    if "uid" in document and not document.get("abstract"):
+        # Unknown (0) and Other (99) exist in every class.
+        enum = document["attributes"].get("activity_id", {}).get("enum", {})
+        set_if(
+            entry,
+            "activities",
+            Flow({key: value["caption"] for key, value in enum.items() if key not in (0, 99)}),
+        )
+    entry["path"] = path
+    return entry
+
+
+def build_version(version: str, schema_dir: Path, *, ref: str, is_stable: bool) -> dict:
+    """Render all documents of one schema version, keyed by output path."""
+    slug = version_to_slug(version)
+    core = compile_schema(schema_dir, ignore_platform_extensions=True)
+    full = compile_schema(schema_dir, ignore_platform_extensions=False)
+    raw_extensions = load_extensions(schema_dir)
+    categories = core["categories"].get("attributes", core["categories"])
+    core_types = core["dictionary"]["types"]["attributes"]
+    full_types = full["dictionary"]["types"]["attributes"]
+    extension_types = {name: data for name, data in full_types.items() if name not in core_types}
+    types = {**core_types, **extension_types}
+
+    documents: dict[str, Any] = {}
+    class_index: list[dict] = []
+    object_index: list[dict] = []
+    patched_by: dict[tuple[str, str], list[str]] = {}
+    extension_summaries: dict[str, dict] = {}
+
+    # Extension patches modify core items in place, so find them first to
+    # mark the patched core items.
+    for scope, extension in raw_extensions.items():
+        for section in ("classes", "objects"):
+            for name, item in extension[section].items():
+                if item.get("extends") == name:
+                    patched_by.setdefault((section, name), []).append(scope)
+
+    core_objects = core["objects"]
+    for section, kind, items, index in (
+        ("classes", "class", core["classes"], class_index),
+        ("objects", "object", core_objects, object_index),
+    ):
+        for name, item in items.items():
+            document = render_item(
+                item,
+                name=name,
+                kind=kind,
+                types=types,
+                objects=core_objects,
+                categories=categories,
+                patched_by=patched_by.get((section, name)),
+            )
+            path = entity_path(slug, section, name)
+            documents[path] = document
+            extra = {"group": object_group(name)} if kind == "object" else None
+            index.append(index_entry(document, path=path, extra=extra))
+
+    full_objects = full["objects"]
+    for scope, extension in raw_extensions.items():
+        summary: dict[str, Any] = {}
+        meta = extension["meta"]
+        set_if(summary, "uid", meta.get("uid"))
+        set_if(summary, "caption", meta.get("caption"))
+        set_if(summary, "version", meta.get("version"))
+        set_if(summary, "description", clean_description(meta.get("description", "")))
+        patches: dict[str, list[str]] = {}
+        for section, kind, compiled_items, index in (
+            ("classes", "class", full["classes"], class_index),
+            ("objects", "object", full_objects, object_index),
+        ):
+            own: list[str] = []
+            for name, raw_item in extension[section].items():
+                if raw_item.get("extends") == name:
+                    documents[entity_path(slug, section, name, patch_of=scope)] = render_patch(
+                        raw_item,
+                        compiled_items[name],
+                        name=name,
+                        kind=kind,
+                        scope=scope,
+                        types=types,
+                        objects=full_objects,
+                        categories=categories,
+                    )
+                    patches.setdefault(section, []).append(name)
+                    continue
+                scoped = f"{scope}/{name}"
+                document = render_item(
+                    compiled_items[scoped],
+                    name=scoped,
+                    kind=kind,
+                    types=types,
+                    objects=full_objects,
+                    categories=categories,
+                    extension=scope,
+                )
+                path = entity_path(slug, section, scoped)
+                documents[path] = document
+                extra = {"group": object_group(scoped)} if kind == "object" else None
+                index.append(index_entry(document, path=path, extra=extra))
+                own.append(scoped)
+            set_if(summary, section, sorted(own))
+        set_if(
+            summary,
+            "profiles",
+            sorted(f"{scope}/{name}" for name in extension["profiles"]),
+        )
+        set_if(summary, "patches", {key: sorted(value) for key, value in patches.items()})
+        extension_summaries[scope] = summary
+
+    profiles: dict[str, dict] = {}
+    for name, profile in sorted(core["profiles"].items()):
+        profiles[name] = render_profile(
+            profile,
+            name=name,
+            types=types,
+            objects=core_objects,
+            extension=None,
+            links=full["profiles"].get(name, {}).get("_links"),
+        )
+    for name, profile in sorted(full["profiles"].items()):
+        if "/" in name:
+            profiles[name] = render_profile(
+                profile, name=name, types=types, objects=full_objects, extension=name.split("/", 1)[0],
+            )
+
+    category_classes: dict[str, list[str]] = {}
+    for entry in class_index:
+        if entry.get("category") and not entry.get("abstract"):
+            category_classes.setdefault(entry["category"], []).append(entry["name"])
+    rendered_categories: dict[str, dict] = {}
+    for name, category in sorted(categories.items(), key=lambda item: item[1].get("uid", 0)):
+        entry: dict[str, Any] = {}
+        set_if(entry, "uid", category.get("uid"))
+        set_if(entry, "caption", category.get("caption"))
+        set_if(entry, "description", clean_description(category.get("description", "")))
+        set_if(entry, "classes", sorted(category_classes.get(name, [])))
+        rendered_categories[name] = entry
+
+    dictionary = {
+        **core["dictionary"]["attributes"],
+        **{
+            name: data
+            for name, data in full["dictionary"]["attributes"].items()
+            if name not in core["dictionary"]["attributes"]
+        },
+    }
+
+    class_index.sort(
+        key=lambda entry: (
+            categories.get(entry.get("category", ""), {}).get("uid", 0),
+            "/" in entry["name"],
+            not entry.get("abstract", False),
+            entry["name"],
+        )
+    )
+    object_index.sort(key=lambda entry: ("/" in entry["name"], entry["name"]))
+    compact_inherited_attributes(documents, slug)
+
+    documents[f"{slug}/categories.yaml"] = rendered_categories
+    documents[f"{slug}/classes.yaml"] = {"classes": class_index}
+    documents[f"{slug}/objects.yaml"] = {"objects": object_index}
+    documents[f"{slug}/profiles.yaml"] = profiles
+    documents[f"{slug}/attributes.yaml"] = render_dictionary(dictionary, types=types, objects=full_objects)
+    documents[f"{slug}/types.yaml"] = render_types(core_types, extension_types=extension_types)
+
+    version_document: dict[str, Any] = {
+        "version": version,
+        "status": "stable" if is_stable else "development",
+        "source": {
+            "repository": OCSF_SCHEMA_REPO,
+            "ref": ref,
+            "commit": resolve_commit(schema_dir),
+            "compiler": OCSF_COMPILER,
+        },
+    }
+    set_if(version_document, "extensions", extension_summaries)
+    documents[f"{slug}/version.yaml"] = version_document
+
     return {
-        name: f"{prefix}{name_to_slug(name)}.md"
-        for name in sorted(names)
+        "version": version,
+        "slug": slug,
+        "is_stable": is_stable,
+        "documents": documents,
+        "names": {
+            "classes": sorted(entry["name"] for entry in class_index if "/" not in entry["name"] and not entry.get("abstract")),
+            "objects": sorted(entry["name"] for entry in object_index if "/" not in entry["name"]),
+            "profiles": sorted(name for name in profiles if "/" not in name),
+        },
     }
 
 
-def build_extension_index_page(name: str, extension_data: dict) -> str:
-    lines = [f"# {extension_data['meta'].get('caption') or name}", ""]
-    desc = clean_description(extension_data["meta"].get("description", ""))
-    if desc:
-        lines.extend([desc, ""])
-    lines.append(f"- **Name**: `{extension_data['meta'].get('name') or name}`")
-    if extension_data["meta"].get("version"):
-        lines.append(f"- **Version**: `{extension_data['meta']['version']}`")
-    if extension_data["meta"].get("uid") is not None:
-        lines.append(f"- **UID**: `{extension_data['meta']['uid']}`")
-    lines.append("")
-
-    for section_title, key in (
-        ("Events", "events"),
-        ("Objects", "objects"),
-        ("Profiles", "profiles"),
-    ):
-        section_items = extension_data[key]
-        if not section_items:
-            continue
-        lines.extend([f"## {section_title}", ""])
-        for item_name, item_data in sorted(
-            section_items.items(),
-            key=lambda item: (item[1].get("caption") or item[0]).casefold(),
-        ):
-            lines.append(
-                f"- [{item_data.get('caption') or item_name}]({key}/{name_to_slug(item_name)}.md)"
-            )
-        lines.append("")
-
-    return "\n".join(lines) + "\n"
-
-
-def generate_types_overview(version_data: dict) -> str:
-    lines = [f"# Types ({version_data['version']})", ""]
-    for name, data in sorted(
-        version_data["types"].items(),
-        key=lambda item: (item[1].get("caption") or item[0]).casefold(),
-    ):
-        lines.extend([f"## `{name}`", "", f"- **Caption**: {data.get('caption') or name}"])
-        if data.get("type_name"):
-            lines.append(f"- **Base type**: `{data['type_name']}`")
-        if data.get("regex"):
-            lines.append(f"- **Regex**: `{data['regex']}`")
-        if isinstance(data.get("range"), list):
-            lines.append(f"- **Range**: `{data['range'][0]}` to `{data['range'][1]}`")
-        if isinstance(data.get("values"), list) and data["values"]:
-            values = ", ".join(f"`{value}`" for value in data["values"])
-            lines.append(f"- **Values**: {values}")
-        desc = clean_description(data.get("description", ""))
-        if desc:
-            lines.extend(["", desc])
-        lines.append("")
-    content = re.sub(r"\n{3,}", "\n\n", "\n".join(lines)).strip()
-    return content + "\n"
-
-
-def generate_changelog(current: dict, previous: dict | None) -> str:
-    """Generate a compact 'What's new' section comparing two version dicts."""
+def add_version_changes(current: dict, previous: dict | None) -> None:
+    """Record the core classes, objects, and profiles added or removed since
+    the previous version in the version document."""
     if previous is None:
-        return ""
-
-    def _caption_set(section: dict) -> dict[str, str]:
-        return {name: data.get("caption") or name for name, data in section.items()}
-
-    lines: list[str] = []
-    for label, key in [("Classes", "classes"), ("Objects", "objects"), ("Profiles", "profiles")]:
-        cur_names = _caption_set(current[key])
-        prev_names = _caption_set(previous[key])
-        added = sorted(set(cur_names) - set(prev_names))
-        removed = sorted(set(prev_names) - set(cur_names))
-        if added:
-            lines.append(f"**New {label.lower()}:** {', '.join(cur_names[n] for n in added)}")
-        if removed:
-            lines.append(f"**Removed {label.lower()}:** {', '.join(prev_names[n] for n in removed)}")
-
-    if not lines:
-        return ""
-    return "## What's new\n\n" + "\n\n".join(lines) + "\n"
+        return
+    version_document = current["documents"][f"{current['slug']}/version.yaml"]
+    version_document["previous"] = previous["version"]
+    changes: dict[str, dict] = {}
+    for key in ("classes", "objects", "profiles"):
+        cur = set(current["names"][key])
+        prev = set(previous["names"][key])
+        set_if(changes.setdefault("added", {}), key, sorted(cur - prev))
+        set_if(changes.setdefault("removed", {}), key, sorted(prev - cur))
+    set_if(version_document, "changes", {key: value for key, value in changes.items() if value})
 
 
-def generate_version_overview(version_data: dict, previous: dict | None = None) -> str:
-    lines = [f"# OCSF {version_data['version']}", ""]
-    lines.append(f"- **Classes**: {len(version_data['classes'])}")
-    lines.append(f"- **Objects**: {len(version_data['objects'])}")
-    lines.append(f"- **Profiles**: {len(version_data['profiles'])}")
-    lines.append(f"- **Extensions**: {len(version_data['extensions'])}")
-    lines.extend(
-        [
-            f"- **Types**: {len(version_data['types'])}",
-            "",
-            f"- [Classes]({version_data['slug']}/classes.md)",
-            f"- [Objects]({version_data['slug']}/objects.md)",
-            f"- [Profiles]({version_data['slug']}/profiles.md)",
-            f"- [Extensions]({version_data['slug']}/extensions.md)",
-            f"- [Types]({version_data['slug']}/types.md)",
-            "",
-        ]
-    )
+def check_references(version_data: dict) -> None:
+    """Fail when a name in a generated document does not resolve, since the
+    YAML files refer to each other by name only."""
+    slug = version_data["slug"]
+    documents = version_data["documents"]
+    classes = {entry["name"] for entry in documents[f"{slug}/classes.yaml"]["classes"]}
+    objects = {entry["name"] for entry in documents[f"{slug}/objects.yaml"]["objects"]}
+    profiles = set(documents[f"{slug}/profiles.yaml"])
+    types = set(documents[f"{slug}/types.yaml"])
+    categories = set(documents[f"{slug}/categories.yaml"])
+    extensions = set(documents[f"{slug}/version.yaml"].get("extensions", {}))
+    errors: list[str] = []
 
-    changelog = generate_changelog(version_data, previous)
-    if changelog:
-        lines.extend([changelog, ""])
-    return "\n".join(lines) + "\n"
+    def expect(path: str, what: str, name: object, known: set[str]) -> None:
+        if name not in known:
+            errors.append(f"{path}: unknown {what} `{name}`")
+
+    def check_attributes(path: str, attributes: dict, sources: set[str] | None = None) -> None:
+        for attribute_name, attribute in attributes.items():
+            if sources is not None and "from" in attribute:
+                expect(path, "source", attribute["from"], sources)
+            if "object" in attribute:
+                expect(path, "object", attribute["object"], objects)
+            for profile in attribute.get("profiles", [attribute.get("profile")]):
+                if profile is not None:
+                    expect(path, "profile", profile, profiles)
+            if attribute.get("type") != "object_t":
+                expect(path, "type", attribute.get("type"), types)
+
+    def check_links(path: str, links: dict) -> None:
+        for name in links.get("classes", []):
+            expect(path, "class", name, classes)
+        for name in links.get("objects", []):
+            expect(path, "object", name, objects)
+
+    for path, document in documents.items():
+        if "/classes/" in path or "/objects/" in path:
+            known = classes if "/classes/" in path else objects
+            if "extends" in document:
+                expect(path, "parent", document["extends"], known)
+            if "patches" in document:
+                expect(path, "patched item", document["patches"], known)
+            if "category" in document:
+                expect(path, "category", document["category"], categories)
+            for profile in document.get("profiles", []):
+                expect(path, "profile", profile, profiles)
+            for extension in document.get("patched_by", []):
+                expect(path, "extension", extension, extensions)
+            check_links(path, document.get("referenced_by", {}))
+            check_attributes(path, document["attributes"], known)
+    for name, profile in documents[f"{slug}/profiles.yaml"].items():
+        path = f"{slug}/profiles.yaml#{name}"
+        check_links(path, profile.get("applies_to", {}))
+        check_attributes(path, profile["attributes"])
+    for name, attribute in documents[f"{slug}/attributes.yaml"].items():
+        path = f"{slug}/attributes.yaml#{name}"
+        if "object" in attribute:
+            expect(path, "object", attribute["object"], objects)
+        check_links(path, attribute.get("used_by", {}))
+    for name, category in documents[f"{slug}/categories.yaml"].items():
+        for class_name in category.get("classes", []):
+            expect(f"{slug}/categories.yaml#{name}", "class", class_name, classes)
+    for entry in documents[f"{slug}/classes.yaml"]["classes"] + documents[f"{slug}/objects.yaml"]["objects"]:
+        if entry["path"] not in documents:
+            errors.append(f"{slug}: index entry `{entry['name']}` points to missing {entry['path']}")
+    if errors:
+        raise ValueError("Unresolved references:\n" + "\n".join(errors[:50]))
 
 
 def split_introduction(text: str) -> list[dict[str, str]]:
@@ -962,6 +1085,135 @@ def fetch_pages(client: httpx.Client, section: str) -> list[dict[str, str]]:
     return pages
 
 
+SKILL_TEMPLATE = string.Template(
+    """---
+name: tenzir-ocsf
+description: Answer questions about OCSF (Open Cybersecurity Schema Framework). Use when the user asks about OCSF classes, objects, attributes, profiles, extensions, or event normalization.
+---
+
+# OCSF
+
+Answer OCSF questions and make OCSF mapping decisions from the files in this
+skill. The YAML schema files are authoritative for names, types, requirements,
+enum values, and constraints. The Markdown docs under `docs/` explain concepts
+and mapping practice; they are not versioned, so the YAML wins when they
+disagree. State only facts from files you read, and say when the
+files do not cover a question.
+
+## Versions
+
+Use ${latest}${latest_note} unless the user asks for another one. Stay
+within one version per answer.
+
+Available: ${available}.
+
+Paths below use `${latest}/`; swap in the version you need.
+
+## Data files
+
+All paths are relative to this skill's directory. Run searches from there.
+
+| File | Contents |
+| --- | --- |
+| `${latest}/version.yaml` | Status, source commit, extensions, and changes since the previous version |
+| `${latest}/categories.yaml` | Categories with UID and classes |
+| `${latest}/classes.yaml` | Class index: UID, category, summary, `activities`, path |
+| `${latest}/classes/{name}.yaml` | One class, fully resolved |
+| `${latest}/objects.yaml` | Object index: group, summary, path |
+| `${latest}/objects/{name}.yaml` | One object, fully resolved |
+| `${latest}/profiles.yaml` | Profiles with their attributes and `applies_to` |
+| `${latest}/attributes.yaml` | Attribute dictionary with `used_by` |
+| `${latest}/types.yaml` | Data types with base type, constraints, and observable type ID |
+| `${latest}/extensions/{ext}/{classes,objects}/{name}.yaml` | Extension classes and objects, and patches of core items |
+
+Names resolve within the same version: `object: actor` →
+`objects/actor.yaml`; `object: win/reg_key` →
+`extensions/win/objects/reg_key.yaml`; `extends` → the parent class or object
+file; `type`, `profile`, and `category` → the key in `types.yaml`,
+`profiles.yaml`, or `categories.yaml`; `patched_by: [linux]` →
+`extensions/linux/{classes,objects}/{same name}.yaml`.
+
+Searches that avoid opening many files:
+
+- Find a class: `grep -n -i "keyword" ${latest}/classes.yaml`
+- Find an attribute and where it is used: `grep -n -A 12 "^src_endpoint:" ${latest}/attributes.yaml`
+- Jump to an attribute in a class: `grep -n -A 20 "^  actor:" ${latest}/classes/process_activity.yaml`
+- Find what holds an object: `referenced_by` in `${latest}/objects/{name}.yaml`
+
+## Reading class and object files
+
+`attributes` lists every attribute, including inherited and profile
+attributes, ordered required, recommended, then optional. Attributes that
+`patched_by` extensions add live only in the extension patch files; an item
+without `patched_by` has no patches.
+
+Attributes with `from` but no description are inherited unchanged; the
+description is in the file that `from` names. They take one line, except that
+enums with more than 12 values list their captions on the lines below, so
+grep with `-A`:
+
+```yaml
+severity_id: {caption: Severity ID, type: integer_t, requirement: required, group: classification, sibling: severity, enum: {0: Unknown, 1: Informational, 2: Low, 3: Medium, 4: High, 5: Critical, 6: Fatal, 99: Other}, from: base_event}
+```
+
+Fields that need explanation:
+
+- `uid`, `category_uid`: the class's `class_uid` and `category_uid` values.
+- `abstract: true`: a parent that events never use directly.
+- `profile` / `profiles` on an attribute: the attribute and its
+  `requirement` apply only when that profile is applied.
+- `sibling`: the string attribute that takes the enum caption, e.g.
+  `activity_name` for `activity_id`.
+- `enum`: keys mapped to captions, or to `caption` and `description`. Keys are
+  integers, except for string-typed attributes such as `tlp`.
+- `observable`: the observable `type_id` of the attribute or object.
+- `constraints`: the complete, resolved constraints, inherited ones included:
+  `at_least_one` (one or more listed attributes set) or `just_one` (exactly
+  one set).
+- `associations`: attributes that describe the same entity.
+- `referenced_by` (objects): classes and objects that hold this object, with
+  the attribute names.
+- `extension`, `patches`: the defining extension and, for a patch, the core
+  item it extends. A patch lists only what it adds or changes.
+- `deprecated`, `supersedes`: deprecation details and the items this one
+  replaces.
+
+## Mapping events
+
+Make the schema decisions in this order:
+
+1. Pick the class by its category and the `activities` in `classes.yaml`;
+   read the candidate class files and compare them. `activities` omits `0`
+   (Unknown) and `99` (Other), which every class allows.
+2. Set `class_uid`, `category_uid`, `activity_id`, `type_uid`
+   (`class_uid * 100 + activity_id`), `severity_id`, `time`,
+   `metadata.version`, and `metadata.product`.
+3. Apply the profiles the source supports: list them in `metadata.profiles`
+   and fill the attributes they add.
+4. Fill required attributes, then recommended ones. A nested object's own
+   requirement levels apply once you set it. Satisfy `constraints`. When the
+   source lacks a value for a required `_id` attribute, use `0` (Unknown).
+5. For an `_id` attribute set to `99` (Other), set its `sibling` to the source
+   value.
+6. Keep source fields without an OCSF target in `unmapped`.
+
+## Docs
+
+| Topic | Start here |
+| --- | --- |
+| Framework concepts and design | [Introduction](docs/introduction.md), [FAQs](docs/faqs.md) |
+| Profiles | [Profiles](docs/introduction/profiles.md), then `profiles.yaml` |
+| Extending the schema | [Extensions](docs/introduction/extensions.md), [Patching the Core Schema](docs/articles/patching-core-using-extensions.md) |
+| Observables, alerts, process parentage | [Articles](docs/articles.md) |
+| Changes between versions | `changes` in `version.yaml`, then diff the item files |
+"""
+)
+
+
+def render_skill(*, latest: str, latest_note: str, available: str) -> str:
+    return SKILL_TEMPLATE.substitute(latest=latest, latest_note=latest_note, available=available)
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
     parser.add_argument("--output-dir", required=True)
@@ -983,171 +1235,41 @@ def main() -> None:
                 version_specs = [version_specs[-1]]
 
             for spec in version_specs:
-                schema_dir = clone_schema(spec.version, spec.ref, temp_root)
-                version_docs.append(build_version_docs(spec.version, schema_dir))
+                schema_dir, ref = clone_schema(spec.version, spec.ref, temp_root)
+                version_docs.append(
+                    build_version(spec.version, schema_dir, ref=ref, is_stable=spec.is_stable)
+                )
 
             faqs = fetch_pages(client, "faqs")
             articles = fetch_pages(client, "articles")
             overview = fetch_text(client, f"{OCSF_DOCS_RAW}/overview/understanding-ocsf.md")
 
-        latest_stable = next((data for data in reversed(version_docs) if not data["version"].endswith("-dev")), None)
-        latest_dev = next((data for data in reversed(version_docs) if data["version"].endswith("-dev")), None)
+        for idx, data in enumerate(version_docs):
+            add_version_changes(data, version_docs[idx - 1] if idx > 0 else None)
+            check_references(data)
+
+        latest_stable = next((data for data in reversed(version_docs) if data["is_stable"]), None)
+        latest_dev = next((data for data in reversed(version_docs) if not data["is_stable"]), None)
         latest_reference = latest_stable or version_docs[-1]
 
         shutil.rmtree(output_dir, ignore_errors=True)
         output_dir.mkdir(parents=True, exist_ok=True)
 
-        # Build annotated version list.
-        version_lines: list[str] = []
-        for data in version_docs:
-            link = f"[{data['version']}]({data['slug']}.md)"
-            if data == latest_stable:
-                version_lines.append(f"- **{link}** ← latest stable")
-            elif data == latest_dev:
-                version_lines.append(f"- {link} ← unreleased development snapshot")
-            else:
-                version_lines.append(f"- {link}")
-
+        slugs = [data["slug"] for data in version_docs if data["is_stable"]]
+        available = f"{slugs[0]} through {slugs[-1]}" if len(slugs) > 1 else ", ".join(slugs)
+        if latest_dev is not None:
+            dev = f"{latest_dev['slug']} (unreleased)"
+            available = f"{available} and {dev}" if available else dev
         write_file(
             output_dir / "SKILL.md",
-            "\n".join(
-                [
-                    "---",
-                    "name: tenzir-ocsf",
-                    "description: Answer questions about OCSF (Open Cybersecurity Schema Framework). Use when the user asks about OCSF classes, objects, attributes, profiles, extensions, or event normalization.",
-                    "---",
-                    "",
-                    "# OCSF",
-                    "",
-                    "Look up OCSF reference documentation and answer from those sources. Only state",
-                    "facts from files you read. Never invent schema details. If the documentation",
-                    "does not cover the question, say so.",
-                    "",
-                    "## Versions",
-                    "",
-                    "Use the latest stable version unless the user requests a specific one. Stick to",
-                    "one version per answer.",
-                    "",
-                    *version_lines,
-                    "",
-                    "Each version page links to its classes, objects, profiles, extensions, and",
-                    "types.",
-                    "",
-                    "## File layout",
-                    "",
-                    "```",
-                    "introduction.md          # OCSF overview and conceptual sections",
-                    "introduction/{section}.md",
-                    "faqs.md                  # Schema design rationale",
-                    "faqs/{slug}.md",
-                    "articles.md              # Deep-dive guides on specific topics",
-                    "articles/{slug}.md",
-                    "{version}.md             # Version summary (what's new, counts)",
-                    "{version}/classes.md     # Class index grouped by category",
-                    "{version}/classes/{name}.md",
-                    "{version}/objects.md",
-                    "{version}/objects/{name}.md",
-                    "{version}/profiles.md",
-                    "{version}/profiles/{name}.md",
-                    "{version}/extensions.md",
-                    "{version}/extensions/{name}/index.md",
-                    "{version}/extensions/{name}/events/{event}.md",
-                    "{version}/extensions/{name}/objects/{object}.md",
-                    "{version}/extensions/{name}/profiles/{profile}.md",
-                    "{version}/types.md",
-                    "```",
-                    "",
-                    "## Question routing",
-                    "",
-                    "Pick the shortest reading path for the question type.",
-                    "",
-                    "| Question pattern | Start here |",
-                    "| --- | --- |",
-                    "| Which class fits event X? | Category table below → version classes index → candidate class pages |",
-                    "| What attributes does class/object Y have? | Version classes or objects index → the specific page |",
-                    "| How do profiles work? / Which profile for X? | [Introduction: Profiles](introduction/profiles.md) → version profiles index |",
-                    "| How do I extend the schema? | [Introduction: Extensions](introduction/extensions.md) or [Patching the Core Schema](articles/patching-core-using-extensions.md) |",
-                    "| How do I populate observables / model alerts? | [FAQs](faqs.md) and [Articles](articles.md) |",
-                    "| What changed between versions? | Compare the two version pages |",
-                    "| Conceptual / design question | [Introduction](introduction.md) → [FAQs](faqs.md) |",
-                    "",
-                    "When the question asks you to pick a class, read multiple candidates and explain",
-                    "trade-offs.",
-                    "",
-                    "## Domain knowledge",
-                    "",
-                    "### Core concepts",
-                    "",
-                    "**Attributes** are named fields with a data type. Every OCSF field has a",
-                    "requirement level: required, recommended, or optional.",
-                    "",
-                    "**Objects** group related attributes into reusable structures. Objects can nest",
-                    "other objects.",
-                    "",
-                    "**Event classes** define schemas for specific security events. Each class belongs",
-                    "to a category and inherits from Base Event.",
-                    "",
-                    "**Base Event** provides universal attributes and serves as a catch-all when no",
-                    "more specific class fits.",
-                    "",
-                    "**Profiles** are mix-ins that add cross-cutting attributes. A class can apply",
-                    "multiple profiles.",
-                    "",
-                    "**Extensions** add vendor-specific attributes without modifying the core schema.",
-                    "",
-                    "### Event categories",
-                    "",
-                    "Use the category range to narrow scope before diving into individual class",
-                    "pages.",
-                    "",
-                    "| Range | Category | Focus |",
-                    "| ----- | -------- | ----- |",
-                    "| 1xxx | System Activity | OS-level: process, file, module, memory, kernel, registry |",
-                    "| 2xxx | Findings | Detections, vulnerabilities, incidents, compliance |",
-                    "| 3xxx | IAM | Authentication, authorization, account and group changes |",
-                    "| 4xxx | Network Activity | General traffic and protocol-specific activity |",
-                    "| 5xxx | Discovery | Device, user, service, and resource enumeration |",
-                    "| 6xxx | Application Activity | Web resources, API calls, file hosting, datastore operations |",
-                    "| 7xxx | Remediation | File, process, network, and entity remediation actions |",
-                    "| 8xxx | Unmanned | Drones, vehicles, and robots |",
-                    "",
-                    "### Naming conventions",
-                    "",
-                    "- `snake_case` everywhere: `process_activity`, `network_endpoint`.",
-                    "- Arrays use plural names: `answers`, `enrichments`, `attacks`.",
-                    "- When `_id` is `Other` (`99`), the sibling string **must** be populated with",
-                    "  the source value.",
-                    "",
-                    "Key suffixes:",
-                    "",
-                    "| Suffix | Meaning |",
-                    "| ------ | ------- |",
-                    "| `_id` | Enum integer identifier with a sibling string (same name minus `_id`). `0` = Unknown, `99` = Other. |",
-                    "| `_uid` | Schema-unique or external unique identifier (integer for classification attrs, string otherwise). Sibling uses `_name`. |",
-                    "| `_uuid` | Globally unique 128-bit identifier (string). No sibling. |",
-                    "| `_name` | Friendly name / caption sibling for `_uid` or `_id` attributes. |",
-                    "| `_time` | Timestamp (`timestamp_t`, milliseconds since epoch). |",
-                    "| `_dt` | Datetime (`datetime_t`, RFC 3339 string). Added by the Date/Time profile alongside `_time` attributes. |",
-                    "| `_info` / `_detail` | Object carrying supplementary information. |",
-                    "| `_process` | Reference to a Process object. |",
-                    "| `_ver` | Version string. |",
-                    "| `_list` | Array of values. |",
-                    "",
-                    "## Answering principles",
-                    "",
-                    "- Read before answering. Every claim must trace back to a file you read.",
-                    "- Use the question routing table and category table to narrow scope before",
-                    "  reading class or object pages.",
-                    "- Consult [FAQs](faqs.md) for schema design rationale and ambiguous mappings.",
-                    "- Consult [Articles](articles.md) for deep-dive topics like observables, alerts,",
-                    "  process parentage, and extensions.",
-                    "- Read [Introduction](introduction.md) sections for conceptual questions about",
-                    "  the framework itself.",
-                    "",
-                ]
+            render_skill(
+                latest=latest_reference["slug"],
+                latest_note=", the latest stable version," if latest_stable is not None else "",
+                available=available,
             ),
         )
 
+        docs_dir = output_dir / "docs"
         intro_sections = split_introduction(overview)
         if intro_sections:
             toc_lines = ["# Introduction", "", "OCSF overview split into focused sections.", ""]
@@ -1156,501 +1278,45 @@ def main() -> None:
                 section_content = section["content"]
                 if not section_content.endswith("\n"):
                     section_content += "\n"
-                write_file(output_dir / "introduction" / f"{section['slug']}.md", section_content)
-            write_file(output_dir / "introduction.md", "\n".join(toc_lines) + "\n")
+                write_file(docs_dir / "introduction" / f"{section['slug']}.md", section_content)
+            write_file(docs_dir / "introduction.md", "\n".join(toc_lines) + "\n")
         else:
             write_file(
-                output_dir / "introduction.md",
+                docs_dir / "introduction.md",
                 overview if overview.endswith("\n") else f"{overview}\n",
             )
 
         write_file(
-            output_dir / "faqs.md",
+            docs_dir / "faqs.md",
             "\n".join(["# FAQs", "", *[f"- [{page['title']}](faqs/{page['slug']}.md)" for page in faqs], ""]),
         )
         for faq in faqs:
             write_file(
-                output_dir / "faqs" / f"{faq['slug']}.md",
+                docs_dir / "faqs" / f"{faq['slug']}.md",
                 faq["content"] if faq["content"].endswith("\n") else f"{faq['content']}\n",
             )
 
         write_file(
-            output_dir / "articles.md",
+            docs_dir / "articles.md",
             "\n".join(
                 ["# Articles", "", *[f"- [{page['title']}](articles/{page['slug']}.md)" for page in articles], ""]
             ),
         )
         for article in articles:
             write_file(
-                output_dir / "articles" / f"{article['slug']}.md",
+                docs_dir / "articles" / f"{article['slug']}.md",
                 article["content"] if article["content"].endswith("\n") else f"{article['content']}\n",
             )
 
-        for idx, data in enumerate(version_docs):
-            prev = version_docs[idx - 1] if idx > 0 else None
-            class_names = set(data["classes"].keys()) | set(data["intermediates"].keys())
-            obj_names = set(data["objects"].keys())
-            profile_names = set(data["profiles"].keys())
-            object_links = build_name_link_map(obj_names, prefix="")
-            profile_links = build_name_link_map(profile_names, prefix="../profiles/")
-            object_links_from_class_pages = build_name_link_map(obj_names, prefix="../objects/")
-            write_file(output_dir / f"{data['slug']}.md", generate_version_overview(data, prev))
-            write_file(output_dir / data["slug"] / "classes.md", generate_classes_overview(data))
-            write_file(output_dir / data["slug"] / "objects.md", generate_objects_overview(data))
-            write_file(output_dir / data["slug"] / "profiles.md", generate_named_overview(data, "Profiles", "profiles"))
-            write_file(output_dir / data["slug"] / "extensions.md", generate_extensions_overview(data))
-            write_file(output_dir / data["slug"] / "types.md", generate_types_overview(data))
-
-            for name, class_data in data["classes"].items():
-                category_info = data["categories"].get(class_data.get("category_key"), {})
-                category_uid = category_info.get("uid")
-                relative_uid = class_data.get("uid")
-                class_uid = (
-                    category_uid * 1000 + relative_uid
-                    if category_uid is not None and relative_uid is not None
-                    else None
-                )
-                class_profiles = resolve_profiles(
-                    class_data, data["classes"], data["intermediates"],
-                )
-                constraints = resolve_constraints(
-                    class_data, data["classes"], data["intermediates"],
-                )
-                associations = class_data.get("associations")
-                if not associations:
-                    parent = data["intermediates"].get(class_data.get("extends", ""))
-                    if parent:
-                        associations = parent.get("associations")
-                page = render_entity_page(
-                    title=f"{class_data.get('caption') or name} ({name})",
-                    description=class_data.get("description"),
-                    deprecation=class_data.get("@deprecated"),
-                    meta_entries=[
-                        ("Class UID", f"`{class_uid}`" if class_uid is not None else ""),
-                        (
-                            "Category",
-                            category_info.get("caption")
-                            or class_data.get("category_key")
-                            or "",
-                        ),
-                        (
-                            "Extends",
-                            format_class_doc_link(
-                                class_data["extends"],
-                                data["classes"].get(class_data["extends"])
-                                or data["intermediates"].get(class_data["extends"], {}),
-                                link_prefix="",
-                                include_schema_name=True,
-                            )
-                            if class_data.get("extends")
-                            else "",
-                        ),
-                        (
-                            "Profiles",
-                            format_named_links(
-                                class_profiles,
-                                data_by_name=data["profiles"],
-                                link_by_name=profile_links,
-                            )
-                            if class_profiles
-                            else "",
-                        ),
-                    ],
-                    constraints=constraints,
-                    associations=associations,
-                    inherited_attributes=collect_inherited_attributes(
-                        class_data, data["dictionary"], data["classes"], data["intermediates"],
-                    ),
-                    attributes=[
-                        (attr_name, resolve_attribute(attr_name, attr_data, data["dictionary"]))
-                        for attr_name, attr_data in (class_data.get("attributes") or {}).items()
-                        if not attr_name.startswith("$")
-                    ],
-                    object_links=object_links_from_class_pages,
-                )
-                write_file(output_dir / data["slug"] / "classes" / f"{name_to_slug(name)}.md", page)
-
-            for name, intermediate_data in data["intermediates"].items():
-                category_info = data["categories"].get(intermediate_data.get("category_key"), {})
-                intermediate_profiles = resolve_profiles(
-                    intermediate_data, data["classes"], data["intermediates"],
-                )
-                page = render_entity_page(
-                    title=f"{intermediate_data.get('caption') or name} ({name})",
-                    description=(
-                        f"Abstract base class for {category_info.get('caption', name)} event classes. "
-                        "Concrete classes in this category extend this class and inherit its attributes."
-                    ),
-                    deprecation=intermediate_data.get("@deprecated"),
-                    meta_entries=[
-                        (
-                            "Category",
-                            category_info.get("caption")
-                            or intermediate_data.get("category_key")
-                            or "",
-                        ),
-                        (
-                            "Extends",
-                            format_class_doc_link(
-                                intermediate_data["extends"],
-                                data["classes"].get(intermediate_data["extends"])
-                                or data["intermediates"].get(intermediate_data["extends"], {}),
-                                link_prefix="",
-                                include_schema_name=True,
-                            )
-                            if intermediate_data.get("extends")
-                            else "",
-                        ),
-                        (
-                            "Profiles",
-                            format_named_links(
-                                intermediate_profiles,
-                                data_by_name=data["profiles"],
-                                link_by_name=profile_links,
-                            )
-                            if intermediate_profiles
-                            else "",
-                        ),
-                    ],
-                    constraints=resolve_constraints(
-                        intermediate_data, data["classes"], data["intermediates"],
-                    ),
-                    associations=intermediate_data.get("associations"),
-                    inherited_attributes=collect_inherited_attributes(
-                        intermediate_data, data["dictionary"], data["classes"], data["intermediates"],
-                    ),
-                    attributes=[
-                        (attr_name, resolve_attribute(attr_name, attr_data, data["dictionary"]))
-                        for attr_name, attr_data in (intermediate_data.get("attributes") or {}).items()
-                        if not attr_name.startswith("$")
-                    ],
-                    object_links=object_links_from_class_pages,
-                )
-                write_file(output_dir / data["slug"] / "classes" / f"{name_to_slug(name)}.md", page)
-
-            for name, object_data in data["objects"].items():
-                extends = object_data.get("extends")
-                page = render_entity_page(
-                    title=f"{object_data.get('caption') or name} ({name})",
-                    description=object_data.get("description"),
-                    deprecation=object_data.get("@deprecated"),
-                    meta_entries=[
-                        (
-                            "Extends",
-                            format_doc_link(
-                                extends,
-                                data["objects"].get(extends, {}),
-                                target=object_links.get(extends, f"{name_to_slug(extends)}.md"),
-                                include_schema_name=True,
-                            )
-                            if extends
-                            else "",
-                        ),
-                    ],
-                    attributes=[
-                        (attr_name, resolve_attribute(attr_name, attr_data, data["dictionary"]))
-                        for attr_name, attr_data in (object_data.get("attributes") or {}).items()
-                        if not attr_name.startswith("$")
-                    ],
-                    constraints=resolve_constraints(object_data, data["objects"]),
-                    object_links=object_links,
-                )
-                write_file(output_dir / data["slug"] / "objects" / f"{name_to_slug(name)}.md", page)
-
-            # Build reverse mapping: profile name → list of classes that register for it.
-            profile_to_classes: dict[str, list[str]] = {}
-            for cname, cdata in {**data["classes"], **data["intermediates"]}.items():
-                for pname in resolve_profiles(cdata, data["classes"], data["intermediates"]):
-                    profile_to_classes.setdefault(pname, []).append(cdata.get("caption") or cname)
-            for pname, consumers in profile_to_classes.items():
-                profile_to_classes[pname] = sorted(set(consumers), key=str.casefold)
-
-            for name, profile_data in data["profiles"].items():
-                applies_to = profile_to_classes.get(name, [])
-                applies_section = (
-                    "\n".join(f"- {cls}" for cls in applies_to)
-                    if applies_to
-                    else ""
-                )
-                extra_sections = ""
-                if applies_section:
-                    extra_sections = f"\n\n## Applies to\n\n{applies_section}\n"
-                page = render_entity_page(
-                    title=f"{profile_data.get('caption') or name} ({name})",
-                    description=profile_data.get("description"),
-                    deprecation=profile_data.get("@deprecated"),
-                    meta_entries=[],
-                    attributes=[
-                        (attr_name, resolve_attribute(attr_name, attr_data, data["dictionary"]))
-                        for attr_name, attr_data in (profile_data.get("attributes") or {}).items()
-                        if not attr_name.startswith("$")
-                    ],
-                    object_links=object_links_from_class_pages,
-                )
-                if extra_sections:
-                    # Insert "Applies to" before ## Attributes (or at end if no attributes).
-                    if "## Attributes" in page:
-                        page = page.replace("## Attributes", f"{extra_sections.strip()}\n\n## Attributes")
-                    else:
-                        page = page.rstrip("\n") + "\n" + extra_sections
-                write_file(output_dir / data["slug"] / "profiles" / f"{name_to_slug(name)}.md", page)
-
-            for name, extension_data in data["extensions"].items():
-                extension_slug = name_to_slug(name)
-                extension_output_dir = output_dir / data["slug"] / "extensions" / extension_slug
-                extension_dictionary = merge_dictionaries(
-                    data["dictionary"],
-                    extension_data.get("dictionary"),
-                )
-                extension_events = extension_data["events"]
-                extension_objects = extension_data["objects"]
-                extension_profiles = extension_data["profiles"]
-                extension_object_links = build_name_link_map(
-                    data["objects"].keys(),
-                    prefix="../../../objects/",
-                )
-                extension_object_links.update(
-                    build_name_link_map(extension_objects.keys(), prefix="../objects/")
-                )
-                extension_class_links = build_name_link_map(
-                    class_names,
-                    prefix="../../../classes/",
-                )
-                extension_class_links.update(
-                    build_name_link_map(extension_events.keys(), prefix="../events/")
-                )
-                qualified_extension_profiles = {
-                    f"{name}/{profile_name}": profile_data
-                    for profile_name, profile_data in extension_profiles.items()
-                }
-                extension_profile_links = build_name_link_map(
-                    data["profiles"].keys(),
-                    prefix="../../../profiles/",
-                )
-                extension_profile_links.update(
-                    build_name_link_map(extension_profiles.keys(), prefix="../profiles/")
-                )
-                extension_profile_links.update(
-                    {
-                        qualified_name: f"../profiles/{name_to_slug(profile_name)}.md"
-                        for qualified_name, profile_name in (
-                            (f"{name}/{profile_name}", profile_name)
-                            for profile_name in extension_profiles
-                        )
-                    }
-                )
-                extension_profile_data = {
-                    **data["profiles"],
-                    **extension_profiles,
-                    **qualified_extension_profiles,
-                }
-
-                write_file(
-                    extension_output_dir / "index.md",
-                    build_extension_index_page(name, extension_data),
-                )
-
-                for event_name, event_data in extension_events.items():
-                    extends = event_data.get("extends")
-                    parent = lookup_schema(
-                        extends or "",
-                        data["classes"],
-                        data["intermediates"],
-                        extension_events,
-                    )
-                    parent_category_key = (
-                        parent.get("category_key")
-                        if parent is not None
-                        else ""
-                    )
-                    category_info = data["categories"].get(parent_category_key, {})
-                    event_profiles = resolve_profiles(
-                        event_data,
-                        extension_events,
-                        data["classes"],
-                        data["intermediates"],
-                    )
-                    constraints = resolve_constraints(
-                        event_data,
-                        extension_events,
-                        data["classes"],
-                        data["intermediates"],
-                    )
-                    associations = event_data.get("associations")
-                    if not associations and parent is not None:
-                        associations = parent.get("associations")
-                    page = render_entity_page(
-                        title=f"{event_data.get('caption') or event_name} ({event_name})",
-                        description=event_data.get("description"),
-                        deprecation=event_data.get("@deprecated"),
-                        meta_entries=[
-                            ("Event UID", f"`{event_data['uid']}`" if event_data.get("uid") is not None else ""),
-                            (
-                                "Category",
-                                category_info.get("caption") or parent_category_key or "",
-                            ),
-                            (
-                                "Extends",
-                                format_doc_link(
-                                    extends,
-                                    parent or {},
-                                    target=extension_class_links.get(
-                                        extends,
-                                        f"../../../classes/{name_to_slug(extends)}.md",
-                                    ),
-                                    include_schema_name=True,
-                                )
-                                if extends
-                                else "",
-                            ),
-                            (
-                                "Profiles",
-                                format_named_links(
-                                    event_profiles,
-                                    data_by_name=extension_profile_data,
-                                    link_by_name=extension_profile_links,
-                                )
-                                if event_profiles
-                                else "",
-                            ),
-                        ],
-                        constraints=constraints,
-                        associations=associations,
-                        inherited_attributes=collect_inherited_attributes(
-                            event_data,
-                            extension_dictionary,
-                            extension_events,
-                            data["classes"],
-                            data["intermediates"],
-                        ),
-                        attributes=[
-                            (
-                                attr_name,
-                                resolve_attribute(attr_name, attr_data, extension_dictionary),
-                            )
-                            for attr_name, attr_data in (event_data.get("attributes") or {}).items()
-                            if not attr_name.startswith("$")
-                        ],
-                        object_links=extension_object_links,
-                    )
-                    write_file(
-                        extension_output_dir / "events" / f"{name_to_slug(event_name)}.md",
-                        page,
-                    )
-
-                for object_name, object_data in extension_objects.items():
-                    extends = object_data.get("extends")
-                    object_profiles = list(object_data.get("profiles") or [])
-                    parent = lookup_schema(extends or "", data["objects"], extension_objects)
-                    page = render_entity_page(
-                        title=f"{object_data.get('caption') or object_name} ({object_name})",
-                        description=object_data.get("description"),
-                        deprecation=object_data.get("@deprecated"),
-                        meta_entries=[
-                            (
-                                "Extends",
-                                format_doc_link(
-                                    extends,
-                                    parent or {},
-                                    target=(
-                                        f"../../../objects/{name_to_slug(extends)}.md"
-                                        if extends in data["objects"]
-                                        else f"../objects/{name_to_slug(extends)}.md"
-                                    ),
-                                    include_schema_name=True,
-                                )
-                                if extends
-                                else "",
-                            ),
-                            (
-                                "Profiles",
-                                format_named_links(
-                                    object_profiles,
-                                    data_by_name=extension_profile_data,
-                                    link_by_name=extension_profile_links,
-                                )
-                                if object_profiles
-                                else "",
-                            ),
-                        ],
-                        inherited_attributes=collect_inherited_attributes(
-                            object_data,
-                            extension_dictionary,
-                            data["objects"],
-                            extension_objects,
-                        ),
-                        attributes=[
-                            (
-                                attr_name,
-                                resolve_attribute(attr_name, attr_data, extension_dictionary),
-                            )
-                            for attr_name, attr_data in (object_data.get("attributes") or {}).items()
-                            if not attr_name.startswith("$")
-                        ],
-                        constraints=resolve_constraints(
-                            object_data,
-                            extension_objects,
-                            data["objects"],
-                        ),
-                        object_links=extension_object_links,
-                    )
-                    write_file(
-                        extension_output_dir / "objects" / f"{name_to_slug(object_name)}.md",
-                        page,
-                    )
-
-                extension_profile_to_entities: dict[str, list[str]] = {}
-                for entity_name, entity_data in {**extension_events, **extension_objects}.items():
-                    for profile_name in entity_data.get("profiles") or []:
-                        extension_profile_to_entities.setdefault(profile_name, []).append(
-                            entity_data.get("caption") or entity_name
-                        )
-                for profile_name, consumers in extension_profile_to_entities.items():
-                    extension_profile_to_entities[profile_name] = sorted(
-                        set(consumers),
-                        key=str.casefold,
-                    )
-
-                for profile_name, profile_data in extension_profiles.items():
-                    applies_to = sorted(
-                        {
-                            *extension_profile_to_entities.get(profile_name, []),
-                            *extension_profile_to_entities.get(f"{name}/{profile_name}", []),
-                        },
-                        key=str.casefold,
-                    )
-                    applies_section = (
-                        "\n".join(f"- {item}" for item in applies_to)
-                        if applies_to
-                        else ""
-                    )
-                    extra_sections = ""
-                    if applies_section:
-                        extra_sections = f"\n\n## Applies to\n\n{applies_section}\n"
-                    page = render_entity_page(
-                        title=f"{profile_data.get('caption') or profile_name} ({profile_name})",
-                        description=profile_data.get("description"),
-                        deprecation=profile_data.get("@deprecated"),
-                        meta_entries=[],
-                        attributes=[
-                            (
-                                attr_name,
-                                resolve_attribute(attr_name, attr_data, extension_dictionary),
-                            )
-                            for attr_name, attr_data in (profile_data.get("attributes") or {}).items()
-                            if not attr_name.startswith("$")
-                        ],
-                        object_links=extension_object_links,
-                    )
-                    if extra_sections:
-                        if "## Attributes" in page:
-                            page = page.replace("## Attributes", f"{extra_sections.strip()}\n\n## Attributes")
-                        else:
-                            page = page.rstrip("\n") + "\n" + extra_sections
-                    write_file(
-                        extension_output_dir / "profiles" / f"{name_to_slug(profile_name)}.md",
-                        page,
-                    )
+        for data in version_docs:
+            for path, document in data["documents"].items():
+                text = dump_yaml(document)
+                if any(
+                    "from" in attribute and "description" not in attribute
+                    for attribute in document.get("attributes", {}).values()
+                ):
+                    text = INHERITED_ATTRIBUTE_NOTE + text
+                write_file(output_dir / path, text)
 
         print(f"Generated OCSF skill in {output_dir}")
     finally:

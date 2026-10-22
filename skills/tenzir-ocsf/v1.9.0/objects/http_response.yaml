@@ -1,0 +1,85 @@
+name: http_response
+caption: HTTP Response
+extends: object
+description: The HTTP Response object contains detailed information about the response sent from a web server to the requester. It encompasses attributes and metadata that describe the response status, headers, body content, and other relevant information.
+references:
+- description: D3FEND™ Ontology d3f:InboundInternetNetworkTraffic.
+  url: https://d3fend.mitre.org/dao/artifact/d3f:InboundInternetNetworkTraffic/
+referenced_by:
+  classes:
+    account_change: [http_response]
+    api_activity: [http_response]
+    authentication: [http_response]
+    authorize_session: [http_response]
+    datastore_activity: [http_response]
+    dhcp_activity: [proxy_http_response]
+    dns_activity: [proxy_http_response]
+    entity_management: [http_response]
+    file_hosting: [http_response]
+    ftp_activity: [proxy_http_response]
+    group_management: [http_response]
+    http_activity: [http_response, proxy_http_response]
+    network_activity: [proxy_http_response]
+    network_file_activity: [proxy_http_response]
+    ntp_activity: [proxy_http_response]
+    rdp_activity: [proxy_http_response]
+    role_management: [http_response]
+    smb_activity: [proxy_http_response]
+    ssh_activity: [proxy_http_response]
+    tunnel_activity: [proxy_http_response]
+    user_access: [http_response]
+    user_management: [http_response]
+    web_resource_access_activity: [http_response, proxy_http_response]
+    web_resources_activity: [http_response, proxy_http_response]
+  objects:
+    evidences: [http_response]
+attributes:
+  code:
+    caption: Response Code
+    type: integer_t
+    requirement: required
+    description: The Hypertext Transfer Protocol (HTTP) status code returned from the web server to the client. For example, 200.
+  http_headers:
+    caption: HTTP Headers
+    type: object_t
+    object: http_header
+    array: true
+    requirement: recommended
+    description: Additional HTTP headers of an HTTP request or response.
+  body_length:
+    caption: Response Body Length
+    type: integer_t
+    requirement: optional
+    description: The actual length of the HTTP response body, in number of bytes, independent of a potentially existing Content-Length header.
+  content_type:
+    caption: HTTP Content Type
+    type: string_t
+    requirement: optional
+    description: The HTTP request header that identifies the original media type of the resource (prior to any content encoding applied for sending).
+    references:
+    - description: IANA Media Types
+      url: https://www.iana.org/assignments/media-types/media-types.xhtml
+  latency:
+    caption: Latency
+    type: integer_t
+    requirement: optional
+    description: The HTTP response latency measured in milliseconds.
+  length:
+    caption: Response Length
+    type: integer_t
+    requirement: optional
+    description: The length of the entire HTTP response, in number of bytes.
+  message:
+    caption: Message
+    type: string_t
+    requirement: optional
+    deprecated:
+      since: 1.9.0
+      message: Redundant with the `code` and `status` attributes, which together convey the HTTP status code and its reason phrase. Use `code` for the numeric value and `status` for the human-readable label.
+      superseded_by: [code, status]
+    description: The HTTP status code and reason phrase returned from the server.
+  status:
+    caption: Status
+    type: string_t
+    requirement: optional
+    description: 'The response status. For example: A successful HTTP status of ''OK'' which corresponds to a code of 200.'

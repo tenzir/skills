@@ -1,0 +1,142 @@
+name: application
+caption: Application
+extends: object
+description: An Application describes the details for an inventoried application as reported by an Application Security tool or other Developer-centric tooling. Applications can be defined as Kubernetes resources, Containerized resources, or application hosting-specific cloud sources such as AWS Elastic BeanStalk, AWS Lightsail, or Azure Logic Apps.
+profiles: [data_classification, cloud]
+constraints:
+  at_least_one: [uid, name]
+references:
+- description: D3FEND™ Ontology d3f:Application.
+  url: https://d3fend.mitre.org/dao/artifact/d3f:Application/
+referenced_by:
+  classes:
+    application_security_posture_finding: [application]
+    iam_analysis_finding: [applications]
+attributes:
+  name:
+    caption: Application Name
+    type: string_t
+    requirement: recommended
+    description: The name of the application.
+  owner:
+    caption: Owner
+    type: object_t
+    object: user
+    requirement: recommended
+    observable: 21
+    description: The identity of the service or user account that owns the application.
+  uid:
+    caption: Application ID
+    type: string_t
+    requirement: recommended
+    description: The unique identifier for the application.
+  criticality:
+    caption: Business Criticality
+    type: string_t
+    requirement: optional
+    description: The criticality of the application as defined by the event source.
+  data:
+    caption: Data
+    type: json_t
+    requirement: optional
+    description: Additional data describing the application.
+  desc:
+    caption: Application Description
+    type: string_t
+    requirement: optional
+    description: A description or commentary for an application, usually retrieved from an upstream system.
+  group:
+    caption: Group
+    type: object_t
+    object: group
+    requirement: optional
+    description: The name of the related application or associated resource group.
+  hostname:
+    caption: Hostname
+    type: hostname_t
+    requirement: optional
+    observable: 1
+    description: The fully qualified name of the application.
+  labels:
+    caption: Labels
+    type: string_t
+    array: true
+    requirement: optional
+    description: The list of labels associated to the application.
+  region:
+    caption: Region
+    type: string_t
+    requirement: optional
+    profile: cloud
+    description: The cloud region of the resource.
+  resource_relationship:
+    caption: Application Relationship
+    type: object_t
+    object: graph
+    requirement: optional
+    description: A graph representation showing how this application relates to and interacts with other entities in the environment. This can include parent/child relationships, dependencies, or other connections.
+  risk_level:
+    caption: Risk Level
+    type: string_t
+    requirement: optional
+    description: The risk level, normalized to the caption of the risk_level_id value.
+  risk_level_id:
+    caption: Risk Level ID
+    type: integer_t
+    requirement: optional
+    sibling: risk_level
+    description: The normalized risk level id.
+    enum:
+      0:
+        caption: Info
+      1:
+        caption: Low
+      2:
+        caption: Medium
+      3:
+        caption: High
+      4:
+        caption: Critical
+      99:
+        caption: Other
+        description: The risk level is not mapped. See the `risk_level` attribute, which contains a data source specific value.
+  risk_score:
+    caption: Risk Score
+    type: integer_t
+    requirement: optional
+    description: The risk score as reported by the event source.
+  sbom:
+    caption: Related SBOM
+    type: object_t
+    object: sbom
+    requirement: optional
+    description: The Software Bill of Materials (SBOM) associated with the application
+  tags:
+    caption: Tags
+    type: object_t
+    object: key_value_object
+    array: true
+    requirement: optional
+    description: The list of tags; `{key:value}` pairs associated to the application.
+  type:
+    caption: Application Type
+    type: string_t
+    requirement: optional
+    description: The type of application as defined by the event source, e.g., `GitHub`, `Azure Logic App`, or `Amazon Elastic BeanStalk`.
+  uid_alt:
+    caption: Application Alternative ID
+    type: string_t
+    requirement: optional
+    description: An alternative or contextual identifier for the application, such as a configuration, organization, or license UID.
+  url:
+    caption: URL
+    type: object_t
+    object: url
+    requirement: optional
+    observable: 23
+    description: The URL of the application.
+  version:
+    caption: Application Version
+    type: string_t
+    requirement: optional
+    description: The semantic version of the application, e.g., `1.7.4`.

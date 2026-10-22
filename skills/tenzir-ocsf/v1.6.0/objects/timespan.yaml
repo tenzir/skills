@@ -1,0 +1,115 @@
+name: timespan
+caption: Time Span
+extends: object
+description: |-
+  The Time Span object represents different time period durations. If a timespan is fractional, i.e. crosses one period, e.g. a week and 3 days, more than one may be populated since each member is of integral type. In that case `type_id` if present should be set to `Other.`
+
+  A timespan may also be defined by its time interval boundaries, `start_time` and `end_time`.
+profiles: [datetime]
+constraints:
+  at_least_one: [duration, duration_days, duration_hours, duration_mins, duration_months, duration_secs, duration_weeks, duration_years, end_time, start_time]
+referenced_by:
+  objects:
+    advisory: [avg_timespan]
+    kb_article: [avg_timespan]
+    observation: [timespan]
+attributes:
+  duration:
+    caption: Duration Milliseconds
+    type: long_t
+    requirement: recommended
+    description: The duration of the time span in milliseconds.
+  duration_days:
+    caption: Duration Days
+    type: integer_t
+    requirement: recommended
+    description: The duration of the time span in days.
+  duration_hours:
+    caption: Duration Hours
+    type: integer_t
+    requirement: recommended
+    description: The duration of the time span in hours.
+  duration_mins:
+    caption: Duration Minutes
+    type: integer_t
+    requirement: recommended
+    description: The duration of the time span in minutes.
+  duration_months:
+    caption: Duration Months
+    type: integer_t
+    requirement: recommended
+    description: The duration of the time span in months.
+  duration_secs:
+    caption: Duration Seconds
+    type: integer_t
+    requirement: recommended
+    description: The duration of the time span in seconds.
+  duration_weeks:
+    caption: Duration Weeks
+    type: integer_t
+    requirement: recommended
+    description: The duration of the time span in weeks.
+  duration_years:
+    caption: Duration Years
+    type: integer_t
+    requirement: recommended
+    description: The duration of the time span in years.
+  end_time:
+    caption: End Time
+    type: timestamp_t
+    requirement: recommended
+    description: The end time or conclusion of the timespan's interval.
+  start_time:
+    caption: Start Time
+    type: timestamp_t
+    requirement: recommended
+    description: The start time or beginning of the timespan's interval.
+  type_id:
+    caption: Time Span Type ID
+    type: integer_t
+    requirement: recommended
+    sibling: type
+    description: The normalized identifier for the time span duration type.
+    enum:
+      0:
+        caption: Unknown
+        description: The type is unknown.
+      1:
+        caption: Milliseconds
+      2:
+        caption: Seconds
+      3:
+        caption: Minutes
+      4:
+        caption: Hours
+      5:
+        caption: Days
+      6:
+        caption: Weeks
+      7:
+        caption: Months
+      8:
+        caption: Years
+      9:
+        caption: Time Interval
+        description: The `start_time` and `end_time` should be set.
+      99:
+        caption: Other
+        description: The type is not mapped. See the `type` attribute, which contains a data source specific value.
+  end_time_dt:
+    caption: End Time
+    type: datetime_t
+    requirement: optional
+    profile: datetime
+    description: The end time or conclusion of the timespan's interval.
+  start_time_dt:
+    caption: Start Time
+    type: datetime_t
+    requirement: optional
+    profile: datetime
+    description: The start time or beginning of the timespan's interval.
+  type:
+    caption: Time Span Type
+    type: string_t
+    requirement: optional
+    description: The type of time span duration the object represents.

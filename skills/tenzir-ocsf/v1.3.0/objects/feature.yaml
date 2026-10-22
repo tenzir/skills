@@ -1,0 +1,25 @@
+name: feature
+caption: Feature
+extends: _entity
+description: The Feature object provides information about the software product feature that generated a specific event. It encompasses details related to the capabilities, components, user interface (UI) design, and performance upgrades associated with the feature.
+constraints:
+  at_least_one: [name, uid]
+referenced_by:
+  objects:
+    product: [feature]
+attributes:
+  name:
+    caption: Name
+    type: string_t
+    requirement: recommended
+    description: The name of the feature.
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: recommended
+    description: The unique identifier of the feature.
+  version:
+    caption: Version
+    type: string_t
+    requirement: recommended
+    description: The version of the feature.

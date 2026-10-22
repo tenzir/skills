@@ -1,0 +1,65 @@
+name: network_traffic
+caption: Network Traffic
+extends: object
+description: The Network Traffic object describes characteristics of network traffic. Network traffic refers to data moving across a network at a given point of time. Defined by D3FEND [d3f:NetworkTraffic](https://d3fend.mitre.org/dao/artifact/d3f:NetworkTraffic/).
+referenced_by:
+  classes:
+    dhcp_activity: [proxy_traffic, traffic]
+    dns_activity: [proxy_traffic, traffic]
+    ftp_activity: [proxy_traffic, traffic]
+    http_activity: [proxy_traffic, traffic]
+    network_activity: [proxy_traffic, traffic]
+    network_file_activity: [proxy_traffic, traffic]
+    ntp_activity: [proxy_traffic, traffic]
+    rdp_activity: [proxy_traffic, traffic]
+    smb_activity: [proxy_traffic, traffic]
+    ssh_activity: [proxy_traffic, traffic]
+    tunnel_activity: [proxy_traffic, traffic]
+    web_resource_access_activity: [proxy_traffic]
+    web_resources_activity: [proxy_traffic]
+attributes:
+  bytes:
+    caption: Total Bytes
+    type: long_t
+    requirement: recommended
+    description: The total number of bytes (in and out).
+  packets:
+    caption: Total Packets
+    type: long_t
+    requirement: recommended
+    description: The total number of packets (in and out).
+  bytes_in:
+    caption: Bytes In
+    type: long_t
+    requirement: optional
+    description: The number of bytes sent from the destination to the source.
+  bytes_out:
+    caption: Bytes Out
+    type: long_t
+    requirement: optional
+    description: The number of bytes sent from the source to the destination.
+  chunks:
+    caption: Chunks
+    type: long_t
+    requirement: optional
+    description: The total number of chunks (in and out).
+  chunks_in:
+    caption: Chunks In
+    type: long_t
+    requirement: optional
+    description: The number of chunks sent from the destination to the source.
+  chunks_out:
+    caption: Chunks Out
+    type: long_t
+    requirement: optional
+    description: The number of chunks sent from the source to the destination.
+  packets_in:
+    caption: Packets In
+    type: long_t
+    requirement: optional
+    description: The number of packets sent from the destination to the source.
+  packets_out:
+    caption: Packets Out
+    type: long_t
+    requirement: optional
+    description: The number of packets sent from the source to the destination.

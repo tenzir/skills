@@ -1,0 +1,33 @@
+name: service
+caption: Service
+extends: _entity
+description: The Service object describes characteristics of a service,  `e.g. AWS EC2.`
+constraints:
+  at_least_one: [name, uid]
+referenced_by:
+  classes:
+    authentication: [service]
+  objects:
+    api: [service]
+attributes:
+  name:
+    caption: Name
+    type: string_t
+    requirement: recommended
+    description: The name of the service.
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: recommended
+    description: The unique identifier of the service.
+  version:
+    caption: Version
+    type: string_t
+    requirement: recommended
+    description: The version of the service.
+  labels:
+    caption: Labels
+    type: string_t
+    array: true
+    requirement: optional
+    description: The list of labels associated with the service.

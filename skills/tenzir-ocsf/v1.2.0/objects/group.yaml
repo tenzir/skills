@@ -1,0 +1,53 @@
+name: group
+caption: Group
+extends: _entity
+description: The Group object represents a collection or association of entities, such as users, policies, or devices. It serves as a logical grouping mechanism to organize and manage entities with similar characteristics or permissions within a system or organization.
+constraints:
+  at_least_one: [name, uid]
+referenced_by:
+  classes:
+    admin_group_query: [group]
+    authorize_session: [group]
+    group_management: [group]
+    incident_finding: [assignee_group]
+  objects:
+    api: [group]
+    database: [groups]
+    databucket: [groups]
+    device: [groups]
+    policy: [group]
+    resource_details: [group]
+    table: [groups]
+    user: [groups]
+attributes:
+  name:
+    caption: Name
+    type: string_t
+    requirement: recommended
+    description: The group name.
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: recommended
+    description: The unique identifier of the group. For example, for Windows events this is the security identifier (SID) of the group.
+  desc:
+    caption: Description
+    type: string_t
+    requirement: optional
+    description: The group description.
+  domain:
+    caption: Domain
+    type: string_t
+    requirement: optional
+    description: 'The domain where the group is defined. For example: the LDAP or Active Directory domain.'
+  privileges:
+    caption: Privileges
+    type: string_t
+    array: true
+    requirement: optional
+    description: The group privileges.
+  type:
+    caption: Account Type
+    type: string_t
+    requirement: optional
+    description: The type of the group or account.

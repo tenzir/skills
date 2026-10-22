@@ -1,0 +1,239 @@
+name: job
+caption: Job
+extends: object
+description: The Job object provides information about a scheduled job or task, including its name, command line, and state. It encompasses attributes that describe the properties and status of the scheduled job.
+profiles: [container, data_classification, datetime]
+constraints:
+  at_least_one: [name, type_id]
+references:
+- description: D3FEND™ Ontology d3f:ScheduledJob.
+  url: https://d3fend.mitre.org/dao/artifact/d3f:ScheduledJob/
+referenced_by:
+  classes:
+    job_query: [job]
+    scheduled_job_activity: [job, updated_job]
+  objects:
+    evidences: [job]
+    query_evidence: [job]
+    startup_item: [job]
+attributes:
+  cmd_line:
+    caption: Command Line
+    type: string_t
+    requirement: recommended
+    observable: 13
+    deprecated:
+      since: 1.9.0
+      message: Use the `job_action.cmd_line` attribute instead.
+      superseded_by: [job_action.cmd_line]
+    description: The job command line.
+  created_time:
+    caption: Created Time
+    type: timestamp_t
+    requirement: recommended
+    description: The time when the job was created.
+  desc:
+    caption: Description
+    type: string_t
+    requirement: recommended
+    description: The description of the job.
+  last_run_time:
+    caption: Last Run
+    type: timestamp_t
+    requirement: recommended
+    deprecated:
+      since: 1.9.0
+      message: Use the `job_trigger.last_run_time` attribute instead.
+      superseded_by: [job_trigger.last_run_time]
+    description: The time when the job was last run.
+  name:
+    caption: Name
+    type: string_t
+    requirement: recommended
+    description: The name of the job.
+  run_state_id:
+    caption: Run State ID
+    type: integer_t
+    requirement: recommended
+    sibling: run_state
+    description: The run state ID of the job.
+    enum:
+      0:
+        caption: Unknown
+        description: The run state is unknown.
+      1:
+        caption: Ready
+      2:
+        caption: Queued
+      3:
+        caption: Running
+      4:
+        caption: Stopped
+      5:
+        caption: Disabled
+      99:
+        caption: Other
+        description: The run state is not mapped. See the `run_state` attribute, which contains a data source specific value.
+  type_id:
+    caption: Type ID
+    type: integer_t
+    requirement: recommended
+    sibling: type
+    description: The job type, i.e. the mechanism that executes the job.
+    enum:
+      0:
+        caption: Unknown
+        description: The job orchestration mechanism is unknown.
+      1:
+        caption: Task Scheduler
+        description: The job is executed by the Task Scheduler on Windows.
+      2:
+        caption: Cron
+        description: The job is executed by `cron` on Linux, macOS, or another a Unix-like OS.
+      3:
+        caption: Systemd
+        description: The job is executed by `systemd` on Linux.
+      4:
+        caption: Launchd
+        description: The job is executed by `launchd` on macOS.
+      99:
+        caption: Other
+        description: The job orchestration mechanism is not mapped. See the `type` attribute, which contains a data source specific value.
+  bytes_processed:
+    caption: Bytes Processed
+    type: long_t
+    requirement: optional
+    description: The number of bytes the job read or examined while performing its work.
+  bytes_written:
+    caption: Bytes Written
+    type: long_t
+    requirement: optional
+    description: The number of bytes the job committed to the destination, after any compression or deduplication was applied.
+  created_time_dt:
+    caption: Created Time
+    type: datetime_t
+    requirement: optional
+    profile: datetime
+    description: The time when the job was created.
+  file:
+    caption: File
+    type: object_t
+    object: file
+    requirement: optional
+    observable: 24
+    description: The file that pertains to the job.
+  job_actions:
+    caption: Job Actions
+    type: object_t
+    object: job_action
+    array: true
+    requirement: optional
+    description: An array of actions that will be performed by the job when certain conditions are met.
+  job_triggers:
+    caption: Job Triggers
+    type: object_t
+    object: job_trigger
+    array: true
+    requirement: optional
+    description: An array of conditions or events that, when met, will initiate the job to perform specified actions.
+  last_run_time_dt:
+    caption: Last Run
+    type: datetime_t
+    requirement: optional
+    profile: datetime
+    deprecated:
+      since: 1.9.0
+      message: Use the `job_trigger.last_run_time` attribute instead.
+      superseded_by: [job_trigger.last_run_time]
+    description: The time when the job was last run.
+  next_run_time:
+    caption: Next Run
+    type: timestamp_t
+    requirement: optional
+    deprecated:
+      since: 1.9.0
+      message: Use the `job_trigger.next_run_time` attribute instead.
+      superseded_by: [job_trigger.next_run_time]
+    description: The time when the job will next be run.
+  next_run_time_dt:
+    caption: Next Run
+    type: datetime_t
+    requirement: optional
+    profile: datetime
+    deprecated:
+      since: 1.9.0
+      message: Use the `job_trigger.next_run_time` attribute instead.
+      superseded_by: [job_trigger.next_run_time]
+    description: The time when the job will next be run.
+  progress_current:
+    caption: Progress Current
+    type: long_t
+    requirement: optional
+    description: The units of work the job has completed so far, counted in `progress_unit`.
+  progress_total:
+    caption: Progress Total
+    type: long_t
+    requirement: optional
+    description: The total units of work the job is expected to perform, counted in `progress_unit`.
+  progress_unit:
+    caption: Progress Unit
+    type: string_t
+    requirement: optional
+    description: The unit that the job's `progress_current` and `progress_total` are counted in, normalized to the caption of the `progress_unit_id` value. In the case of 'Other', it is defined by the event source.
+  progress_unit_id:
+    caption: Progress Unit ID
+    type: integer_t
+    requirement: optional
+    sibling: progress_unit
+    description: The normalized identifier of the unit that the job's `progress_current` and `progress_total` are counted in.
+    enum:
+      0:
+        caption: Unknown
+        description: The unit is unknown.
+      1:
+        caption: Bytes
+        description: Bytes of data.
+      2:
+        caption: Files
+        description: Files or file-system objects.
+      3:
+        caption: Records
+        description: Records, such as database rows, documents, or log records.
+      4:
+        caption: Items
+        description: Generic countable items or work units.
+      99:
+        caption: Other
+        description: The unit is not mapped. See the `progress_unit` attribute, which contains a data source specific value.
+  queue_name:
+    caption: Queue Name
+    type: string_t
+    requirement: optional
+    description: The name of the queue that the job was dispatched to.
+  run_state:
+    caption: Run State
+    type: string_t
+    requirement: optional
+    description: The run state of the job.
+  throughput:
+    caption: Throughput
+    type: long_t
+    requirement: optional
+    description: The rate at which the job processed data, in bytes per second.
+  type:
+    caption: Type
+    type: string_t
+    requirement: optional
+    description: The job type, normalized to the caption of the `type_id` value. In the case of 'Other', it is defined by the event source.
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: optional
+    description: The unique job identifier.
+  user:
+    caption: User
+    type: object_t
+    object: user
+    requirement: optional
+    observable: 21
+    description: The user that created the job.

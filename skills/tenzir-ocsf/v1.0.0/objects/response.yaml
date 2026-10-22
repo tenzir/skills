@@ -1,0 +1,37 @@
+name: response
+caption: Response Elements
+extends: object
+description: The Response Elements object describes characteristics of an API response.
+referenced_by:
+  classes:
+    rdp_activity: [response]
+    smb_activity: [response]
+  objects:
+    api: [response]
+attributes:
+  code:
+    caption: Response Code
+    type: integer_t
+    requirement: recommended
+    description: The numeric response sent to a request.
+  error:
+    caption: Error Code
+    type: string_t
+    requirement: recommended
+    description: Error Code
+  error_message:
+    caption: Error Message
+    type: string_t
+    requirement: recommended
+    description: Error Message
+  message:
+    caption: Message
+    type: string_t
+    requirement: recommended
+    description: The description of the event, as defined by the event source.
+  flags:
+    caption: Flags
+    type: string_t
+    array: true
+    requirement: optional
+    description: The list of communication flags, normalized to the captions of the flag_ids values. In the case of 'Other', they are defined by the event source.

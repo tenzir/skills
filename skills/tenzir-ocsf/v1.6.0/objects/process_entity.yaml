@@ -1,0 +1,59 @@
+name: process_entity
+caption: Process Entity
+extends: _entity
+description: The Process Entity object provides critical fields for referencing a process.
+profiles: [datetime]
+constraints:
+  at_least_one: [cmd_line, name, path, pid, uid, cpid]
+referenced_by:
+  objects:
+    process: [ancestry]
+attributes:
+  cmd_line:
+    caption: Command Line
+    type: string_t
+    requirement: recommended
+    observable: 13
+    description: 'The full command line used to launch an application, service, process, or job. For example: `ssh user@10.0.0.10`. If the command line is unavailable or missing, the empty string `''''` is to be used.'
+  cpid:
+    caption: Common Process Identifier
+    type: uuid_t
+    requirement: recommended
+    description: A unique process identifier that can be assigned deterministically by multiple system data producers.
+    references:
+    - description: OCSF Common Process Identifier (CPID) Specification
+      url: https://github.com/ocsf/common-process-id
+  created_time:
+    caption: Created Time
+    type: timestamp_t
+    requirement: recommended
+    description: The time when the process was created/started.
+  name:
+    caption: Name
+    type: process_name_t
+    requirement: recommended
+    observable: 9
+    description: 'The friendly name of the process, for example: `Notepad++`.'
+  pid:
+    caption: Process ID
+    type: integer_t
+    requirement: recommended
+    observable: 15
+    description: The process identifier, as reported by the operating system. Process ID (PID) is a number used by the operating system to uniquely identify an active process.
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: recommended
+    observable: 39
+    description: A unique identifier for this process assigned by the producer (tool).  Facilitates correlation of a process event with other events for that process.
+  created_time_dt:
+    caption: Created Time
+    type: datetime_t
+    requirement: optional
+    profile: datetime
+    description: The time when the process was created/started.
+  path:
+    caption: Path
+    type: string_t
+    requirement: optional
+    description: The process file path.

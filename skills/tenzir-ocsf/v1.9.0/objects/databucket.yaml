@@ -1,0 +1,223 @@
+# Attributes with `from` but no description are inherited unchanged. Their
+# descriptions are in the file of the item that `from` names.
+name: databucket
+caption: Databucket
+extends: _resource
+description: The databucket object is a basic container that holds data, typically organized through the use of data partitions.
+profiles: [cloud, container, data_classification, datetime]
+constraints:
+  at_least_one: [name, uid]
+references:
+- description: D3FEND™ Ontology d3f:CloudStorage.
+  url: https://d3fend.mitre.org/dao/artifact/d3f:CloudStorage/
+referenced_by:
+  classes:
+    cloud_resources_inventory_info: [databucket]
+    data_security_finding: [databucket]
+    datastore_activity: [databucket]
+  objects:
+    evidences: [databucket]
+attributes:
+  type_id:
+    caption: Type ID
+    type: integer_t
+    requirement: required
+    sibling: type
+    description: The normalized identifier of the databucket type.
+    enum:
+      0:
+        caption: Unknown
+        description: The type is unknown.
+      1:
+        caption: S3
+      2:
+        caption: Azure Blob
+      3:
+        caption: GCP Bucket
+      99:
+        caption: Other
+        description: The type is not mapped. See the `type` attribute, which contains a data source specific value.
+  data_classification:
+    caption: Data Classification
+    type: object_t
+    object: data_classification
+    requirement: recommended
+    group: context
+    profile: data_classification
+    deprecated:
+      since: 1.4.0
+      message: Use the attribute `data_classifications` instead
+      superseded_by: [data_classifications]
+    description: The Data Classification object includes information about data classification levels and data category types.
+  data_classifications:
+    caption: Data Classification
+    type: object_t
+    object: data_classification
+    array: true
+    requirement: recommended
+    group: context
+    profile: data_classification
+    description: A list of Data Classification objects, that include information about data classification levels and data category types, identified by a classifier.
+  hostname:
+    caption: Hostname
+    type: hostname_t
+    requirement: recommended
+    observable: 1
+    description: The fully qualified hostname of the databucket.
+  ip:
+    caption: IP Address
+    type: ip_t
+    requirement: recommended
+    observable: 2
+    description: The IP address of the resource, in either IPv4 or IPv6 format.
+  is_public:
+    caption: Public
+    type: boolean_t
+    requirement: recommended
+    description: Indicates if the databucket is publicly accessible.
+  name:
+    caption: Name
+    type: string_t
+    requirement: recommended
+    description: The databucket name.
+  owner:
+    caption: Owner
+    type: object_t
+    object: user
+    requirement: recommended
+    observable: 21
+    description: The identity of the service or user account that owns the databucket.
+  type:
+    caption: Type
+    type: string_t
+    requirement: recommended
+    description: The databucket type.
+  uid:
+    caption: Unique ID
+    type: resource_uid_t
+    requirement: recommended
+    observable: 10
+    description: The unique identifier of the databucket.
+  agent_list:
+    caption: Agent List
+    type: object_t
+    object: agent
+    array: true
+    requirement: optional
+    description: A list of `agent` objects associated with a device, endpoint, or resource.
+  cloud_partition:
+    caption: Cloud Partition
+    type: string_t
+    requirement: optional
+    profile: cloud
+    description: The logical grouping or isolated segment within a cloud provider's infrastructure where the databucket is located.
+  created_time:
+    caption: Created Time
+    type: timestamp_t
+    requirement: optional
+    description: The time when the databucket was known to have been created.
+  created_time_dt:
+    caption: Created Time
+    type: datetime_t
+    requirement: optional
+    profile: datetime
+    description: The time when the databucket was known to have been created.
+  criticality:
+    caption: Criticality
+    type: string_t
+    requirement: optional
+    description: The criticality of the databucket as defined by the event source.
+  data: {caption: Data, type: json_t, requirement: optional, from: _resource}
+  desc:
+    caption: Description
+    type: string_t
+    requirement: optional
+    description: The description of the databucket.
+  encryption_details:
+    caption: Encryption Details
+    type: object_t
+    object: encryption_details
+    requirement: optional
+    description: The encryption details of the databucket. Should be populated if the databucket is encrypted.
+  file:
+    caption: File
+    type: object_t
+    object: file
+    requirement: optional
+    observable: 24
+    description: Details about the file/object within a databucket.
+  group:
+    caption: Group
+    type: object_t
+    object: group
+    requirement: optional
+    deprecated:
+      since: 1.6.0
+      message: Use the `groups` attribute instead.
+      superseded_by: [groups]
+    description: The name of the related resource group.
+  groups:
+    caption: Groups
+    type: object_t
+    object: group
+    array: true
+    requirement: optional
+    description: The group names to which the databucket belongs.
+  is_backed_up:
+    caption: Back Ups Configured
+    type: boolean_t
+    requirement: optional
+    description: Indicates whether the device or resource has a backup enabled, such as an automated snapshot or a cloud backup. For example, this is indicated by the `cloudBackupEnabled` value within JAMF Pro mobile devices or the registration of an AWS ARN with the AWS Backup service.
+  is_encrypted:
+    caption: Encrypted
+    type: boolean_t
+    requirement: optional
+    description: Indicates if the databucket is encrypted.
+  labels: {caption: Labels, type: string_t, array: true, requirement: optional, from: _resource}
+  modified_time:
+    caption: Modified Time
+    type: timestamp_t
+    requirement: optional
+    description: The most recent time when any changes, updates, or modifications were made within the databucket.
+  modified_time_dt:
+    caption: Modified Time
+    type: datetime_t
+    requirement: optional
+    profile: datetime
+    description: The most recent time when any changes, updates, or modifications were made within the databucket.
+  namespace:
+    caption: Namespace
+    type: string_t
+    requirement: optional
+    description: The namespace is useful when similar entities exist that you need to keep separate.
+  region:
+    caption: Region
+    type: string_t
+    requirement: optional
+    profile: cloud
+    description: The cloud region of the databucket.
+  resource_relationship:
+    caption: Resource Relationship
+    type: object_t
+    object: graph
+    requirement: optional
+    description: A graph representation showing how this databucket relates to and interacts with other entities in the environment. This can include parent/child relationships, dependencies, or other connections.
+  size:
+    caption: Size
+    type: long_t
+    requirement: optional
+    description: The size of the databucket in bytes.
+  tags: {caption: Tags, type: object_t, object: key_value_object, array: true, requirement: optional, from: _resource}
+  uid_alt: {caption: Alternate ID, type: resource_uid_t, requirement: optional, observable: 10, from: _resource}
+  uid_numeric: {caption: Numeric Unique ID, type: long_t, requirement: optional, from: _entity}
+  version:
+    caption: Version
+    type: string_t
+    requirement: optional
+    description: The version of the resource. For example `1.2.3`.
+  zone:
+    caption: Cloud Availability Zone
+    type: string_t
+    requirement: optional
+    profile: cloud
+    description: The specific availability zone within a cloud region where the databucket is located.

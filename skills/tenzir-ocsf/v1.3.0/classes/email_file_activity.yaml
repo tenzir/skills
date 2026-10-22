@@ -1,0 +1,299 @@
+# Attributes with `from` but no description are inherited unchanged. Their
+# descriptions are in the file of the item that `from` names.
+name: email_file_activity
+caption: Email File Activity
+uid: 4011
+category: network
+category_uid: 4
+extends: base_event
+description: Email File Activity events report files within emails.
+profiles: [cloud, container, data_classification, datetime, host, osint, security_control]
+attributes:
+  action_id:
+    caption: Action ID
+    type: integer_t
+    requirement: required
+    group: primary
+    profile: security_control
+    sibling: action
+    description: The action taken by a control or other policy-based system leading to an outcome or disposition. Dispositions conform to an action of `1` 'Allowed' or `2` 'Denied' in most cases. Note that `99` 'Other' is not an option. No action would equate to `1` 'Allowed'. An unknown action may still correspond to a known disposition. Refer to `disposition_id` for the outcome of the action.
+    enum:
+      0:
+        caption: Unknown
+        description: The action was unknown. The `disposition_id` attribute may still be set to a non-unknown value, for example 'Count', 'Uncorrected', 'Isolated', 'Quarantined' or 'Exonerated'.
+      1:
+        caption: Allowed
+        description: The activity was allowed. The `disposition_id` attribute should be set to a value that conforms to this action, for example 'Allowed', 'Approved', 'Delayed', 'No Action', 'Count' etc.
+      2:
+        caption: Denied
+        description: The attempted activity was denied. The `disposition_id` attribute should be set to a value that conforms to this action, for example 'Blocked', 'Rejected', 'Quarantined', 'Isolated', 'Dropped', 'Access Revoked, etc.
+      99:
+        caption: Other
+        description: The action was not mapped. See the `action` attribute, which contains a data source specific value.
+  category_uid:
+    caption: Category ID
+    type: integer_t
+    requirement: required
+    group: classification
+    from: base_event
+    sibling: category_name
+    description: The category unique identifier of the event.
+    enum:
+      4:
+        caption: Network Activity
+        description: Network Activity events.
+  class_uid:
+    caption: Class ID
+    type: integer_t
+    requirement: required
+    group: classification
+    sibling: class_name
+    description: The unique identifier of a class. A class describes the attributes available in an event.
+    enum:
+      4011:
+        caption: Email File Activity
+        description: Email File Activity events report files within emails.
+  cloud: {caption: Cloud, type: object_t, object: cloud, requirement: required, group: primary, profile: cloud, from: base_event}
+  email_uid:
+    caption: Email UID
+    type: string_t
+    requirement: required
+    group: primary
+    description: The unique identifier of the email, used to correlate related email alert and activity events.
+  file:
+    caption: File
+    type: object_t
+    object: file
+    requirement: required
+    group: primary
+    observable: 24
+    description: The email file attachment.
+  metadata: {caption: Metadata, type: object_t, object: metadata, requirement: required, group: context, from: base_event}
+  osint: {caption: OSINT, type: object_t, object: osint, array: true, requirement: required, group: primary, profile: osint, from: base_event}
+  severity_id: {caption: Severity ID, type: integer_t, requirement: required, group: classification, sibling: severity, enum: {0: Unknown, 1: Informational, 2: Low, 3: Medium, 4: High, 5: Critical, 6: Fatal, 99: Other}, from: base_event}
+  time: {caption: Event Time, type: timestamp_t, requirement: required, group: occurrence, from: base_event}
+  type_uid:
+    caption: Type ID
+    type: long_t
+    requirement: required
+    group: classification
+    sibling: type_name
+    description: 'The event/finding type ID. It identifies the event''s semantics and structure. The value is calculated by the logging system as: `class_uid * 100 + activity_id`.'
+  device:
+    caption: Device
+    type: object_t
+    object: device
+    requirement: recommended
+    group: primary
+    profile: host
+    observable: 20
+    description: An addressable device, computer system or host.
+  disposition_id:
+    caption: Disposition ID
+    type: integer_t
+    requirement: recommended
+    group: primary
+    profile: security_control
+    sibling: disposition
+    description: Describes the outcome or action taken by a security control, such as access control checks, malware detections or various types of policy violations.
+    enum:
+      0:
+        caption: Unknown
+        description: The disposition is unknown.
+      1:
+        caption: Allowed
+        description: Granted access or allowed the action to the protected resource.
+      2:
+        caption: Blocked
+        description: Denied access or blocked the action to the protected resource.
+      3:
+        caption: Quarantined
+        description: A suspicious file or other content was moved to a benign location.
+      4:
+        caption: Isolated
+        description: A session was isolated on the network or within a browser.
+      5:
+        caption: Deleted
+        description: A file or other content was deleted.
+      6:
+        caption: Dropped
+        description: The request was detected as a threat and resulted in the connection being dropped.
+      7:
+        caption: Custom Action
+        description: A custom action was executed such as running of a command script. Use the `message` attribute of the base class for details.
+      8:
+        caption: Approved
+        description: A request or submission was approved. For example, when a form was properly filled out and submitted. This is distinct from `1` 'Allowed'.
+      9:
+        caption: Restored
+        description: A quarantined file or other content was restored to its original location.
+      10:
+        caption: Exonerated
+        description: A suspicious or risky entity was deemed to no longer be suspicious (re-scored).
+      11:
+        caption: Corrected
+        description: A corrupt file or configuration was corrected.
+      12:
+        caption: Partially Corrected
+        description: A corrupt file or configuration was partially corrected.
+      13:
+        caption: Uncorrected
+        description: A corrupt file or configuration was not corrected.
+      14:
+        caption: Delayed
+        description: An operation was delayed, for example if a restart was required to finish the operation.
+      15:
+        caption: Detected
+        description: Suspicious activity or a policy violation was detected without further action.
+      16:
+        caption: No Action
+        description: The outcome of an operation had no action taken.
+      17:
+        caption: Logged
+        description: The operation or action was logged without further action.
+      18:
+        caption: Tagged
+        description: A file or other entity was marked with extended attributes.
+      19:
+        caption: Alert
+        description: The request or activity was detected as a threat and resulted in a notification but request was not blocked.
+      20:
+        caption: Count
+        description: Counted the request or activity but did not determine whether to allow it or block it.
+      21:
+        caption: Reset
+        description: The request was detected as a threat and resulted in the connection being reset.
+      22:
+        caption: Captcha
+        description: Required the end user to solve a CAPTCHA puzzle to prove that a human being is sending the request.
+      23:
+        caption: Challenge
+        description: Ran a silent challenge that required the client session to verify that it's a browser, and not a bot.
+      24:
+        caption: Access Revoked
+        description: 'The requestor''s access has been revoked due to security policy enforcements. Note: use the `Host` profile if the `User` or `Actor` requestor is not present in the event class.'
+      25:
+        caption: Rejected
+        description: A request or submission was rejected. For example, when a form was improperly filled out and submitted. This is distinct from `2` 'Blocked'.
+      26:
+        caption: Unauthorized
+        description: An attempt to access a resource was denied due to an authorization check that failed. This is a more specific disposition than `2` 'Blocked' and can be complemented with the `authorizations` attribute for more detail.
+      27:
+        caption: Error
+        description: An error occurred during the processing of the activity or request. Use the `message` attribute of the base class for details.
+      99:
+        caption: Other
+        description: The disposition is not mapped. See the `disposition` attribute, which contains a data source specific value.
+  message: {caption: Message, type: string_t, requirement: recommended, group: primary, from: base_event}
+  observables: {caption: Observables, type: object_t, object: observable, array: true, requirement: recommended, group: primary, from: base_event}
+  status: {caption: Status, type: string_t, requirement: recommended, group: primary, from: base_event}
+  status_code: {caption: Status Code, type: string_t, requirement: recommended, group: primary, from: base_event}
+  status_detail: {caption: Status Detail, type: string_t, requirement: recommended, group: primary, from: base_event}
+  status_id: {caption: Status ID, type: integer_t, requirement: recommended, group: primary, sibling: status, enum: {0: Unknown, 1: Success, 2: Failure, 99: Other}, from: base_event}
+  timezone_offset: {caption: Timezone Offset, type: integer_t, requirement: recommended, group: occurrence, from: base_event}
+  action:
+    caption: Action
+    type: string_t
+    requirement: optional
+    group: primary
+    profile: security_control
+    description: The normalized caption of `action_id`.
+  activity_id:
+    caption: Activity ID
+    type: integer_t
+    requirement: optional
+    group: classification
+    sibling: activity_name
+    description: The normalized identifier of the activity that triggered the event.
+    enum:
+      0:
+        caption: Unknown
+        description: The event activity is unknown.
+      1:
+        caption: Send
+      2:
+        caption: Receive
+      3:
+        caption: Scan
+        description: 'Email file being scanned (example: security scanning).'
+      99:
+        caption: Other
+        description: The event activity is not mapped. See the `activity_name` attribute, which contains a data source specific value.
+  activity_name: {caption: Activity, type: string_t, requirement: optional, group: classification, from: base_event}
+  actor:
+    caption: Actor
+    type: object_t
+    object: actor
+    requirement: optional
+    group: primary
+    profile: host
+    description: The actor object describes details about the user/role/process that was the source of the activity.
+  api: {caption: API Details, type: object_t, object: api, requirement: optional, group: context, profile: cloud, from: base_event}
+  attacks:
+    caption: MITRE ATT&CK® Details
+    type: object_t
+    object: attack
+    array: true
+    requirement: optional
+    group: primary
+    profile: security_control
+    description: An array of [MITRE ATT&CK®](https://attack.mitre.org) objects describing the tactics, techniques & sub-techniques identified by a security control or finding.
+  authorizations:
+    caption: Authorization Information
+    type: object_t
+    object: authorization
+    array: true
+    requirement: optional
+    group: primary
+    profile: security_control
+    description: Provides details about an authorization, such as authorization outcome, and any associated policies related to the activity/event.
+  category_name:
+    caption: Category
+    type: string_t
+    requirement: optional
+    group: classification
+    from: base_event
+    description: 'The event category name, as defined by category_uid value: `Network Activity`.'
+  class_name:
+    caption: Class
+    type: string_t
+    requirement: optional
+    group: classification
+    from: base_event
+    description: 'The event class name, as defined by class_uid value: `Email File Activity`.'
+  count: {caption: Count, type: integer_t, requirement: optional, group: occurrence, from: base_event}
+  disposition:
+    caption: Disposition
+    type: string_t
+    requirement: optional
+    group: primary
+    profile: security_control
+    description: The disposition name, normalized to the caption of the disposition_id value. In the case of 'Other', it is defined by the event source.
+  duration: {caption: Duration Milliseconds, type: long_t, requirement: optional, group: occurrence, from: base_event}
+  end_time: {caption: End Time, type: timestamp_t, requirement: optional, group: occurrence, from: base_event}
+  end_time_dt: {caption: End Time, type: datetime_t, requirement: optional, group: occurrence, profile: datetime, from: base_event}
+  enrichments: {caption: Enrichments, type: object_t, object: enrichment, array: true, requirement: optional, group: context, from: base_event}
+  firewall_rule:
+    caption: Firewall Rule
+    type: object_t
+    object: firewall_rule
+    requirement: optional
+    group: primary
+    profile: security_control
+    description: The firewall rule that triggered the event.
+  malware:
+    caption: Malware
+    type: object_t
+    object: malware
+    array: true
+    requirement: optional
+    group: primary
+    profile: security_control
+    description: A list of Malware objects, describing details about the identified malware.
+  raw_data: {caption: Raw Data, type: string_t, requirement: optional, group: context, from: base_event}
+  severity: {caption: Severity, type: string_t, requirement: optional, group: classification, from: base_event}
+  start_time: {caption: Start Time, type: timestamp_t, requirement: optional, group: occurrence, from: base_event}
+  start_time_dt: {caption: Start Time, type: datetime_t, requirement: optional, group: occurrence, profile: datetime, from: base_event}
+  time_dt: {caption: Event Time, type: datetime_t, requirement: optional, group: occurrence, profile: datetime, from: base_event}
+  type_name: {caption: Type Name, type: string_t, requirement: optional, group: classification, from: base_event}
+  unmapped: {caption: Unmapped Data, type: object_t, object: object, requirement: optional, group: context, from: base_event}
