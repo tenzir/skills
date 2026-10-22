@@ -3,6 +3,8 @@ title: OCSF release notes in the OCSF skill
 type: feature
 authors:
   - zedoraps
+prs:
+  - 44
 created: 2026-10-22T16:35:28.147942Z
 ---
 
