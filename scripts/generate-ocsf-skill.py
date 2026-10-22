@@ -1082,7 +1082,8 @@ description: Answer questions about OCSF (Open Cybersecurity Schema Framework). 
 Answer OCSF questions and make OCSF mapping decisions from the files in this
 skill. The YAML schema files are authoritative for names, types, requirements,
 enum values, and constraints. The Markdown docs under `docs/` explain concepts
-and mapping practice. State only facts from files you read, and say when the
+and mapping practice; they are not versioned, so the YAML wins when they
+disagree. State only facts from files you read, and say when the
 files do not cover a question.
 
 ## Versions
@@ -1129,7 +1130,8 @@ Searches that avoid opening many files:
 
 `attributes` lists every attribute, including inherited and profile
 attributes, ordered required, recommended, then optional. Attributes that
-`patched_by` extensions add live only in the extension patch files.
+`patched_by` extensions add live only in the extension patch files; an item
+without `patched_by` has no patches.
 
 Attributes with `from` but no description are inherited unchanged and fit on
 one line; the description is in the file that `from` names:
@@ -1142,14 +1144,15 @@ Fields that need explanation:
 
 - `uid`, `category_uid`: the class's `class_uid` and `category_uid` values.
 - `abstract: true`: a parent that events never use directly.
-- `profile` / `profiles` on an attribute: present only when that profile is
-  applied.
+- `profile` / `profiles` on an attribute: the attribute and its
+  `requirement` apply only when that profile is applied.
 - `sibling`: the string attribute that takes the enum caption, e.g.
   `activity_name` for `activity_id`.
 - `enum`: integer keys mapped to captions, or to `caption` and `description`.
 - `observable`: the observable `type_id` of the attribute or object.
-- `constraints`: `at_least_one` (one or more listed attributes set) or
-  `just_one` (exactly one set).
+- `constraints`: the complete, resolved constraints, inherited ones included:
+  `at_least_one` (one or more listed attributes set) or `just_one` (exactly
+  one set).
 - `associations`: attributes that describe the same entity.
 - `referenced_by` (objects): classes and objects that hold this object, with
   the attribute names.
@@ -1171,7 +1174,8 @@ Make the schema decisions in this order:
 3. Apply the profiles the source supports: list them in `metadata.profiles`
    and fill the attributes they add.
 4. Fill required attributes, then recommended ones. A nested object's own
-   requirement levels apply once you set it. Satisfy `constraints`.
+   requirement levels apply once you set it. Satisfy `constraints`. When the
+   source lacks a value for a required `_id` attribute, use `0` (Unknown).
 5. For an `_id` attribute set to `99` (Other), set its `sibling` to the source
    value.
 6. Keep source fields without an OCSF target in `unmapped`.
