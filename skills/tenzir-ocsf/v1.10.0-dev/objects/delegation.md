@@ -6,12 +6,26 @@ A durable authorization context that a principal issues to a delegate (e.g., an 
 
 ## Attributes
 
+### `audience`
+
+- **Type**: `string_t`
+- **Requirement**: optional
+
+The service or resource this delegation may be exercised against - the relying party that should accept it, and that should reject it if presented anywhere else. When the delegation is carried by an issued token, this is the audience the token names, typically a URI or service identifier for the relying party. The issuer populates it at delegation time from the grant it minted, so an issuer that scopes a delegation to a particular relying party already holds the value; issuers that mint unscoped delegations omit it, which is why the attribute is optional. Note this is the party the authority is exercised on, not the party that later reads or audits the record - a delegation restricted to one payments API keeps that restriction on record regardless of who consumes the event afterwards.
+
 ### `created_time`
 
 - **Type**: `timestamp_t`
 - **Requirement**: recommended
 
 The time when the delegation was issued by the issuing authority.
+
+### `expiration_time`
+
+- **Type**: `timestamp_t`
+- **Requirement**: optional
+
+The time when this delegation's granted authority expires. After this time the delegation no longer conveys authority, independent of any revocation.
 
 ### `issuer_uid`
 
@@ -26,6 +40,13 @@ The unique identifier of the trusted issuing authority (e.g., an OAuth authoriza
 - **Requirement**: optional
 
 The delegation identifier of the parent delegation, if this delegation was created by re-delegating authority to another party (e.g., a downstream service or automated process). This creates a parent-child relationship that enables tracking the complete chain of delegation ancestry. Does not indicate that the delegate was instantiated or spawned by the parent's delegate; that relationship, if any, is tracked separately.
+
+### `scopes`
+
+- **Type**: `string_t`
+- **Requirement**: optional
+
+The authorization scopes granted at this delegation node, bounding what the delegate is authorized to do on the principal's behalf (e.g., OAuth scope labels). Comparing a delegation's scopes with its parent's scopes reveals scope attenuation across the chain.
 
 ### `uid`
 
