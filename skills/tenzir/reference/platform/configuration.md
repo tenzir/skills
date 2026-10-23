@@ -130,6 +130,17 @@ TENZIR_PLATFORM_OIDC_CLI_CLIENT_ID=
 # The client ID and client secret for the Tenzir UI.
 TENZIR_PLATFORM_OIDC_UI_CLIENT_ID=
 TENZIR_PLATFORM_OIDC_UI_CLIENT_SECRET=
+
+
+# Federated credentials let workloads authenticate with OIDC tokens from an
+# external issuer. By default, the platform fetches the issuer's discovery
+# document and JWKS only from hosts that resolve to public addresses. List
+# hosts here to skip this check, e.g., for a GitLab or Keycloak instance on a
+# private network. Use a comma-separated list of case-insensitive hostnames,
+# e.g., `gitlab.internal,keycloak.corp`. Listed hosts must still use https. If
+# the issuer serves its JWKS from a different host, list that host as well.
+# Defaults to an empty list.
+TENZIR_PLATFORM_FEDERATION_PRIVATE_ISSUER_HOSTS=
 ```
 
 ### Database

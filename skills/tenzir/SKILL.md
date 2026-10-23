@@ -1211,6 +1211,10 @@ Send and receive lightweight, connectionless datagrams over IP networks.
 
 Collect, monitor, and analyze endpoint data for digital forensics and incident response.
 
+#### [VictoriaLogs integration](integrations/victorialogs.md)
+
+Store logs in a fast, resource-efficient database and search them with LogsQL.
+
 #### [Wazuh integration](integrations/wazuh.md)
 
 Collects security telemetry and runs detections.

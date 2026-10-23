@@ -104,7 +104,7 @@ These operators preserve event structure instead of requiring a `message` expres
 
 ### Analytics platforms
 
-Send data to platforms like [Splunk](../../integrations/splunk.md), [OpenSearch](../../integrations/opensearch.md), and [Elasticsearch](../../integrations/elasticsearch.md).
+Send data to platforms like [Splunk](../../integrations/splunk.md), [OpenSearch](../../integrations/opensearch.md), [Elasticsearch](../../integrations/elasticsearch.md), and [VictoriaLogs](../../integrations/victorialogs.md), which accepts the same bulk API as OpenSearch.
 
 Send to a Splunk HEC endpoint with [`to_splunk`](https://tenzir.com/docs/reference/operators/to_splunk.md):
 

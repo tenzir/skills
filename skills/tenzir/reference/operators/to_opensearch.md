@@ -143,5 +143,6 @@ to_opensearch "localhost:9200", action="create", index="main"
 * [Map to ECS](../../guides/normalize/map-to-ecs.md)
 * [OpenSearch](../../integrations/opensearch.md)
 * [Elasticsearch](../../integrations/elasticsearch.md)
+* [VictoriaLogs](../../integrations/victorialogs.md)
 
 Parallelizable: a parallel pipeline may run this operator on several cores at once.
