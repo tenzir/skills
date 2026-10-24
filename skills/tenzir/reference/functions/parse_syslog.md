@@ -12,7 +12,7 @@ section: "Docs"
 Parses a string as a Syslog message.
 
 ```tql
-parse_syslog [octet_counting=bool, raw=bool, schema=string, selector=string,
+parse_syslog [accept_pri_only=bool, octet_counting=bool, raw=bool, schema=string, selector=string,
               schema_only=bool, unflatten_separator=string]
 ```
 
@@ -22,9 +22,45 @@ Parses a string as a [Syslog](https://en.wikipedia.org/wiki/Syslog) message.
 
 Tenzir supports reading syslog messages in both the standardized “Syslog Protocol” format ([RFC 5424](https://tools.ietf.org/html/rfc5424)), and the older “BSD syslog Protocol” format ([RFC 3164](https://tools.ietf.org/html/rfc3164)).
 
+The function also accepts Cisco headers, including ASA timestamps and headers with a hostname before the timestamp. A Cisco prefix such as `%ASA-6-302014:` becomes `app_name: "ASA-6-302014"`, and `content` contains the remaining description. The `facility` and `severity` fields come from the syslog PRI value. See [`read_syslog`](https://tenzir.com/docs/reference/operators/read_syslog.md) for input and output examples.
+
+Input without a recognized header produces a warning and null by default.
+
 ### `input: string`
 
 The string to parse as a syslog message.
+
+### `accept_pri_only = bool (optional)`
+
+Defaults to `false`. When enabled, the function tries recognized RFC and Cisco headers first, then accepts a priority prefix from `<0>` through `<191>` and preserves everything after `>` in `content`:
+
+```tql
+parsed = message.parse_syslog(accept_pri_only=true)
+```
+
+Use this option when a source intentionally sends PRI-prefixed plain text. Leave it disabled when malformed syslog should produce a warning and null.
+
+The priority must have no sign or leading zeros. Missing `timestamp`, `hostname`, `app_name`, and `process_id` fields are null. This fallback also accepts malformed headers with a valid PRI as text, without a parsing warning. Input without a recognized header or valid PRI still produces a warning and null.
+
+For example, this message lacks the separator between structured data and the message body:
+
+```text
+<34>1 2003-10-11T22:14:15.003Z host app - - [sd@1 a="1"]missing separator
+```
+
+The default call returns null with a warning. With `accept_pri_only=true`, it instead returns the following record without a warning:
+
+```json
+{
+  "facility": 4,
+  "severity": 2,
+  "timestamp": null,
+  "hostname": null,
+  "app_name": null,
+  "process_id": null,
+  "content": "1 2003-10-11T22:14:15.003Z host app - - [sd@1 a=\"1\"]missing separator"
+}
+```
 
 ### `octet_counting = bool (optional)`
 

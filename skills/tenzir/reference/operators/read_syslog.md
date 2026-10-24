@@ -12,7 +12,7 @@ section: "Docs"
 Parses an incoming Syslog stream into events.
 
 ```tql
-read_syslog [octet_counting=bool, raw_message=field, merge=bool, raw=bool, schema=string, selector=string, schema_only=bool, unflatten_separator=string]
+read_syslog [accept_pri_only=bool, octet_counting=bool, raw_message=field, merge=bool, raw=bool, schema=string, selector=string, schema_only=bool, unflatten_separator=string]
 ```
 
 ## Description
@@ -110,6 +110,96 @@ Some RFC 3164 emitters prepend structured-data blocks to the message content usi
 ```
 
 If the leading brackets don’t contain valid structured data, the parser leaves the content intact and uses the regular `syslog.rfc3164` schema.
+
+### Cisco headers
+
+For supported Cisco legacy dialects, the parser stores the Cisco message identifier in `app_name`, without the leading `%` or trailing colon. The remaining description goes into `content`. For example:
+
+```text
+<189>: 2026 Apr 4 08:45:52 PDT: %SYS-5-CONFIG_I: Configured from console by console
+```
+
+```json
+{
+  "facility": 23,
+  "severity": 5,
+  "timestamp": "2026 Apr 4 08:45:52 PDT",
+  "hostname": null,
+  "app_name": "SYS-5-CONFIG_I",
+  "process_id": null,
+  "content": "Configured from console by console"
+}
+```
+
+The `facility` and `severity` fields come from the syslog PRI value. The embedded Cisco severity stays in `app_name` as part of the message identifier.
+
+The parser also accepts ASA timestamps with an optional year and fractional seconds, followed by a colon:
+
+```text
+<166>Sep 01 2026 16:46:57: %ASA-6-302014: Teardown TCP connection
+```
+
+```json
+{
+  "facility": 20,
+  "severity": 6,
+  "timestamp": "Sep 01 2026 16:46:57",
+  "hostname": null,
+  "app_name": "ASA-6-302014",
+  "process_id": null,
+  "content": "Teardown TCP connection"
+}
+```
+
+For Cisco headers with a hostname before the timestamp, the parser extracts `hostname`. These additional header forms require a Cisco message identifier such as `%ASA-6-302014:` or `%FW-6-SESS_AUDIT_TRAIL:`:
+
+```text
+<45>: HOSTNAME-123: Jan 14 05:25:06.737: %FW-6-SESS_AUDIT_TRAIL: tcp session
+```
+
+```json
+{
+  "facility": 5,
+  "severity": 5,
+  "timestamp": "Jan 14 05:25:06.737",
+  "hostname": "HOSTNAME-123",
+  "app_name": "FW-6-SESS_AUDIT_TRAIL",
+  "process_id": null,
+  "content": "tcp session"
+}
+```
+
+### `accept_pri_only = bool (optional)`
+
+Defaults to `false`. Enable this option to accept text prefixed with a syslog priority after RFC 5424, RFC 3164, and Cisco header parsing fail:
+
+```tql
+read_syslog accept_pri_only=true
+```
+
+Use this option for sources that intentionally send `<PRI>` followed by plain text instead of a complete syslog header. A valid PRI alone does not prove that the rest of a message is valid syslog, so this fallback is disabled by default.
+
+For input such as `<45>Some message`, the priority must be between 0 and 191, without a sign or leading zeros. The result uses the `syslog.rfc3164` schema:
+
+```json
+{
+  "facility": 5,
+  "severity": 5,
+  "timestamp": null,
+  "hostname": null,
+  "app_name": null,
+  "process_id": null,
+  "content": "Some message"
+}
+```
+
+When enabled, this fallback preserves everything after `>`, including leading whitespace and unrecognized or malformed headers. It also accepts an empty body. Each line with a valid PRI prefix starts a new event instead of continuing the previous event. Lines without a recognized header can still continue a previous event.
+
+Automatic format detection with [`read_auto`](https://tenzir.com/docs/reference/operators/read_auto.md) requires a recognizable syslog header; a PRI prefix alone is insufficient. Select `read_syslog` explicitly for streams containing only PRI-prefixed text. Set `accept_pri_only=true` for those streams. Automatic detection leaves this option disabled, including after it selects `read_syslog`.
+
+**Enabling this option can hide malformed syslog headers.** For example, an RFC 5424 message missing the space between structured data and its message body can be returned successfully as PRI-prefixed text. Only `facility` and `severity` are extracted; the malformed header and body remain in `content`, and the other header fields are null. No warning identifies this fallback.
+
+With the option disabled, unrecognized input keeps the existing behavior: an unmatched line can continue the preceding message, or becomes an unknown record if there is no preceding recognized message.
 
 ### `octet_counting = bool (optional)`
 

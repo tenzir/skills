@@ -21,10 +21,11 @@ The `ocsf_cast` function casts the record `x` to the OCSF event class type selec
 
 Use the function when the OCSF event lives in a field rather than at the top level of the event, for example next to `raw_data` in an envelope, or in a list of events that you process with [`map`](https://tenzir.com/docs/reference/functions/map.md). Use the operator when the whole event is the OCSF event.
 
-The function differs from the operator in two ways:
+The function differs from the operator in three ways:
 
 * It returns `null` with a warning when it cannot resolve the OCSF version or class of `x`, where the operator drops the event. The rest of the event stays intact, so you can route such events instead of losing them.
 * It does not assign `@name`, because the schema name belongs to the whole event rather than to a field.
+* It warns when `x` lacks a field that the schema requires, or violates an OCSF constraint that needs at least one or exactly one of a set of fields. These checks only emit warnings and never change the result.
 
 The function also returns `null` with a warning when `x` is not a record, and returns `null` without a warning when `x` is `null`.
 
@@ -118,7 +119,7 @@ events = events.map(x => ocsf_cast(x))
 }
 ```
 
-The second event emits a warning because `activity_id` must be an integer.
+The second event emits a warning because `activity_id` must be an integer. Both events also emit warnings for the required fields they lack.
 
 ### Keep events that fail to cast
 
@@ -153,7 +154,30 @@ validated = ocsf_cast(ocsf)
 }
 ```
 
-The second event emits a warning because it lacks `metadata`. A subsequent `where validated == null` selects the events to inspect or route elsewhere.
+The second event emits a warning because it lacks `metadata`. The first event emits warnings for the required fields it lacks, but still casts. A subsequent `where validated == null` selects the events to inspect or route elsewhere.
+
+### Find missing required fields
+
+```tql
+let $event = {
+  class_uid: 3002,
+  category_uid: 3,
+  activity_id: 1,
+  type_uid: 300201,
+  severity_id: 1,
+  time: 2026-01-01,
+  metadata: {
+    version: "1.9.0",
+    product: {name: "OpenSSH", vendor_name: "OpenBSD"},
+  },
+  service: {name: "sshd"},
+}
+from {ocsf: $event},
+     {ocsf: {...$event, user: {type_id: 1}}}
+ocsf = ocsf_cast(ocsf)
+```
+
+The function returns both events unchanged. The first event emits a warning because Authentication requires `user`. The second event has a `user`, but emits a warning because a user needs at least one of `account`, `name`, or `uid`.
 
 ## See Also
 
