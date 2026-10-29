@@ -35,6 +35,8 @@
     7. Added new activity `Listen` to `Network Activity` and relax requirement of `src_endpoint`. [#1147](https://github.com/ocsf/ocsf-schema/pull/1147)
     8. Added `state`, `state_id` to `Device Config State Change`. [#1143](https://github.com/ocsf/ocsf-schema/pull/1143)
     9. Added `resources` attribute to `Vulnerability Finding` and `Compliance Finding`. [#1150](https://github.com/ocsf/ocsf-schema/pull/1150)
+   10. Added `access_mask` to Entity Management class. [#1114](https://github.com/ocsf/ocsf-schema/pull/1114)
+   11. Added `access_list` to Entity Management class. [#1114](https://github.com/ocsf/ocsf-schema/pull/1114)
 * #### Profiles
     n/a
 * #### Objects

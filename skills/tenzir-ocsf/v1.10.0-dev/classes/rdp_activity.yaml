@@ -192,6 +192,7 @@ attributes:
   action: {caption: Action, type: string_t, requirement: optional, group: primary, profile: security_control, from: base_event}
   activity_name: {caption: Activity, type: string_t, requirement: optional, group: classification, from: base_event}
   actor: {caption: Actor, type: object_t, object: actor, requirement: optional, group: primary, profile: host, from: base_event}
+  additional_firewall_rules: {caption: Additional Security Control Rules, type: object_t, object: firewall_rule_evaluation, array: true, requirement: optional, group: primary, profile: security_control, from: base_event}
   ai_agent: {caption: AI Agent, type: object_t, object: ai_agent, requirement: optional, group: context, profile: ai_operation, from: network}
   ai_capability: {caption: AI Capability, type: object_t, object: ai_capability, requirement: optional, group: context, profile: ai_operation, from: network}
   ai_status: {caption: AI Status, type: object_t, object: ai_status, requirement: optional, group: context, profile: ai_operation, from: network}
@@ -248,7 +249,7 @@ attributes:
     group: context
     observable: 24
     description: The file that is the target of the RDP activity.
-  firewall_rule: {caption: Firewall Rule, type: object_t, object: firewall_rule, requirement: optional, group: primary, profile: security_control, from: base_event}
+  firewall_rule: {caption: Security Control Rule, type: object_t, object: firewall_rule, requirement: optional, group: primary, profile: security_control, from: base_event}
   identifier_cookie:
     caption: Identifier Cookie
     type: string_t

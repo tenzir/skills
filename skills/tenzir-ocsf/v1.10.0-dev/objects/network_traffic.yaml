@@ -29,7 +29,7 @@ attributes:
     caption: Total Bytes
     type: long_t
     requirement: recommended
-    description: The total number of bytes transferred in both directions (sum of bytes_in and bytes_out).
+    description: The total number of bytes transferred in both directions (sum of `bytes_in` and `bytes_out`). Counts bytes in Layer 3 (Network Layer) packets, including IP header and payload.
   packets:
     caption: Total Packets
     type: long_t
@@ -39,17 +39,17 @@ attributes:
     caption: Bytes In
     type: long_t
     requirement: optional
-    description: The number of bytes sent from the destination to the source (inbound direction).
+    description: The number of bytes sent from the destination to the source. Counts bytes in Layer 3 (Network Layer) packets, including IP header and payload.
   bytes_missed:
     caption: Bytes Missed
     type: long_t
     requirement: optional
-    description: The number of bytes that were missed during observation, typically due to packet loss or sampling limitations.
+    description: The number of bytes that were missed during observation, typically due to packet loss or sampling limitations. Counts bytes in Layer 3 (Network Layer) packets, including IP header and payload.
   bytes_out:
     caption: Bytes Out
     type: long_t
     requirement: optional
-    description: The number of bytes sent from the source to the destination (outbound direction).
+    description: The number of bytes sent from the source to the destination. Counts bytes in Layer 3 (Network Layer) packets, including IP header and payload.
   chunks:
     caption: Chunks
     type: long_t
@@ -65,6 +65,21 @@ attributes:
     type: long_t
     requirement: optional
     description: The number of chunks sent from the source to the destination (outbound direction).
+  data_bytes:
+    caption: Total Data Bytes
+    type: long_t
+    requirement: optional
+    description: 'The total number of data bytes transferred in both directions (sum of `data_bytes_in` and `data_bytes_out`). Counts the data carried by the Layer 4 (Transport Layer) protocol, excluding the IP header and the transport header (such as TCP, UDP, etc.). Not applicable to protocols carried directly over IP without a transport header, such as ICMP, ICMPv6, IGMP, GRE, ESP and OSPF: leave it unset for those flows, whose bytes are counted by `bytes`, `bytes_in` and `bytes_out`.'
+  data_bytes_in:
+    caption: Data Bytes In
+    type: long_t
+    requirement: optional
+    description: 'The number of data bytes sent from the destination to the source. Counts the data carried by the Layer 4 (Transport Layer) protocol, excluding the IP header and the transport header (such as TCP, UDP, etc.). Not applicable to protocols carried directly over IP without a transport header, such as ICMP, ICMPv6, IGMP, GRE, ESP and OSPF: leave it unset for those flows, whose bytes are counted by `bytes`, `bytes_in` and `bytes_out`.'
+  data_bytes_out:
+    caption: Data Bytes Out
+    type: long_t
+    requirement: optional
+    description: 'The number of data bytes sent from the source to the destination. Counts the data carried by the Layer 4 (Transport Layer) protocol, excluding the IP header and the transport header (such as TCP, UDP, etc.). Not applicable to protocols carried directly over IP without a transport header, such as ICMP, ICMPv6, IGMP, GRE, ESP and OSPF: leave it unset for those flows, whose bytes are counted by `bytes`, `bytes_in` and `bytes_out`.'
   end_time:
     caption: End Time
     type: timestamp_t

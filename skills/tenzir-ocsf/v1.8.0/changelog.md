@@ -93,7 +93,7 @@
 
 ### Bugfixes
 * #### Event Classes
-  1. Removed erroneous `at_least_one` constraint in `Live Evidence Info` class [#1357](https://github.com/ocsf/ocsf-schema/pull/1537)
+  1. Removed erroneous `at_least_one` constraint in `Live Evidence Info` class [#1537](https://github.com/ocsf/ocsf-schema/pull/1537)
 
 ### Deprecated
 1. Deprecated the `signature` attribute of the file object in favour of the `signatures` attribute. [#1546](https://github.com/ocsf/ocsf-schema/pull/1546)

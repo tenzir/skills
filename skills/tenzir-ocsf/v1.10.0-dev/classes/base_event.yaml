@@ -119,7 +119,7 @@ attributes:
     group: primary
     profile: security_control
     sibling: action
-    description: The action taken by a control or other policy-based system leading to an outcome or disposition. An unknown action may still correspond to a known disposition. Refer to `disposition_id` for the outcome of the action.
+    description: The normalized action taken by the security control for the activity or finding represented by this event. An unknown action may still correspond to a known disposition. Refer to the event-level `disposition_id` for the outcome of the action.
     enum:
       0:
         caption: Unknown
@@ -176,7 +176,7 @@ attributes:
     group: primary
     profile: security_control
     sibling: disposition
-    description: Describes the outcome or action taken by a security control, such as access control checks, malware detections or various types of policy violations.
+    description: The normalized outcome reported by the security control for the activity or finding represented by this event. Dispositions in `additional_firewall_rules` describe the individual rule evaluations and do not imply this event-level outcome.
     enum:
       0:
         caption: Unknown
@@ -339,7 +339,7 @@ attributes:
     requirement: optional
     group: primary
     profile: security_control
-    description: The normalized caption of `action_id`.
+    description: The normalized caption of the event-level `action_id`. When `action_id` is `99` (Other), this attribute contains the source-specific action.
   activity_name:
     caption: Activity
     type: string_t
@@ -354,6 +354,15 @@ attributes:
     group: primary
     profile: host
     description: The user, process, or service that initiated the activity on the host. For system-level events this is typically a process; for IAM events it is typically a user or role.
+  additional_firewall_rules:
+    caption: Additional Security Control Rules
+    type: object_t
+    object: firewall_rule_evaluation
+    array: true
+    requirement: optional
+    group: primary
+    profile: security_control
+    description: Additional security control rule evaluations associated with the activity represented by the event. Excludes the evaluation represented by `firewall_rule`, when present. This array may be populated when `firewall_rule` is absent. Entries may represent separate evaluations of the same rule. The array does not imply evaluation order, a parent-child relationship, or a complete record of all evaluated rules.
   api:
     caption: API Details
     type: object_t
@@ -432,7 +441,7 @@ attributes:
     requirement: optional
     group: primary
     profile: security_control
-    description: The disposition name, normalized to the caption of the disposition_id value. In the case of 'Other', it is defined by the event source.
+    description: The normalized caption of the event-level `disposition_id`. When `disposition_id` is `99` (Other), this attribute contains the source-specific disposition.
   duration:
     caption: Duration Milliseconds
     type: long_t
@@ -461,13 +470,13 @@ attributes:
     group: context
     description: 'The additional information from an external data source, which is associated with the event or a finding. For example add location information for the IP address in the DNS answers:`[{"name": "answers.ip", "value": "92.24.47.250", "type": "location", "data": {"city": "Socotra", "continent": "Asia", "coordinates": [-25.4153, 17.0743], "country": "YE", "desc": "Yemen"}}]`'
   firewall_rule:
-    caption: Firewall Rule
+    caption: Security Control Rule
     type: object_t
     object: firewall_rule
     requirement: optional
     group: primary
     profile: security_control
-    description: The firewall rule that pertains to the control that triggered the event, if applicable.
+    description: The security control rule to which the event-level action or disposition is attributed, when that attribution is known. The rule may be evaluated by a firewall, intrusion detection or prevention system, network proxy, endpoint protection system, or another security control. Other reported rule evaluations are recorded in `additional_firewall_rules`.
   malware:
     caption: Malware
     type: object_t

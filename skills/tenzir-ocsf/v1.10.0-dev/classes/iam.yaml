@@ -101,6 +101,7 @@ attributes:
   timezone_offset: {caption: Timezone Offset, type: integer_t, requirement: recommended, group: occurrence, from: base_event}
   action: {caption: Action, type: string_t, requirement: optional, group: primary, profile: security_control, from: base_event}
   activity_name: {caption: Activity, type: string_t, requirement: optional, group: classification, from: base_event}
+  additional_firewall_rules: {caption: Additional Security Control Rules, type: object_t, object: firewall_rule_evaluation, array: true, requirement: optional, group: primary, profile: security_control, from: base_event}
   ai_agent:
     caption: AI Agent
     type: object_t
@@ -152,7 +153,7 @@ attributes:
   duration: {caption: Duration Milliseconds, type: long_t, requirement: optional, group: occurrence, from: base_event}
   end_time: {caption: End Time, type: timestamp_t, requirement: optional, group: occurrence, from: base_event}
   enrichments: {caption: Enrichments, type: object_t, object: enrichment, array: true, requirement: optional, group: context, from: base_event}
-  firewall_rule: {caption: Firewall Rule, type: object_t, object: firewall_rule, requirement: optional, group: primary, profile: security_control, from: base_event}
+  firewall_rule: {caption: Security Control Rule, type: object_t, object: firewall_rule, requirement: optional, group: primary, profile: security_control, from: base_event}
   http_request:
     caption: HTTP Request
     type: object_t

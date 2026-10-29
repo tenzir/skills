@@ -1,0 +1,173 @@
+name: wifi
+caption: Wireless Network
+extends: object
+description: 'The Wireless Network object describes an IEEE 802.11 wireless link: the identity of the network, the radio parameters it operates on, and the security negotiated for it.'
+constraints:
+  at_least_one: [ssid, bssid]
+references:
+- description: IEEE 802.11 Wireless LAN Medium Access Control and Physical Layer Specifications
+  url: https://standards.ieee.org/ieee/802.11/7028/
+referenced_by:
+  objects:
+    network_endpoint: [wifi]
+    network_interface: [wifi]
+    network_proxy: [wifi]
+attributes:
+  bssid:
+    caption: BSSID
+    type: mac_t
+    requirement: recommended
+    observable: 3
+    description: The Basic Service Set Identifier, the address of the access point radio that serves a wireless network.
+  security_protocol_id:
+    caption: Security Protocol ID
+    type: integer_t
+    requirement: recommended
+    sibling: security_protocol
+    description: The authentication and key management suite that protects the wireless link.
+    enum:
+      0:
+        caption: Unknown
+        description: The security protocol is unknown.
+      1:
+        caption: Open
+        description: The wireless network is unauthenticated and unencrypted.
+      2:
+        caption: WEP
+        description: Wired Equivalent Privacy, the original IEEE 802.11 security mechanism, which uses a static shared key. It is deprecated.
+      3:
+        caption: WPA
+        description: Wi-Fi Protected Access, which uses TKIP with a pre-shared key or IEEE 802.1X authentication.
+      4:
+        caption: WPA2-Personal
+        description: Wi-Fi Protected Access 2 with a pre-shared key.
+      5:
+        caption: WPA2-Enterprise
+        description: Wi-Fi Protected Access 2 with IEEE 802.1X authentication.
+      6:
+        caption: WPA3-Personal
+        description: Wi-Fi Protected Access 3 with Simultaneous Authentication of Equals (SAE) in place of a pre-shared key handshake.
+      7:
+        caption: WPA3-Enterprise
+        description: Wi-Fi Protected Access 3 with IEEE 802.1X authentication, including the optional 192-bit security mode.
+      8:
+        caption: Opportunistic Wireless Encryption
+        description: Opportunistic Wireless Encryption (RFC 8110), which encrypts an open network without authentication.
+      99:
+        caption: Other
+        description: The security protocol is not mapped. See the `security_protocol` attribute, which contains a data source specific value.
+  ssid:
+    caption: SSID
+    type: string_t
+    requirement: recommended
+    description: The Service Set Identifier, the advertised name of a wireless network.
+  access_point_status:
+    caption: Access Point Status
+    type: string_t
+    requirement: optional
+    description: The access point classification, normalized to the caption of the `access_point_status_id` value. In the case of 'Other', it is defined by the event source.
+  access_point_status_id:
+    caption: Access Point Status ID
+    type: integer_t
+    requirement: optional
+    sibling: access_point_status
+    description: The classification assigned to an observed access point by a wireless intrusion detection or prevention system.
+    enum:
+      0:
+        caption: Unknown
+        description: The classification is unknown.
+      1:
+        caption: Authorized
+        description: The access point is a known, sanctioned device, for example an access point of the monitored infrastructure.
+      2:
+        caption: Unclassified
+        description: The access point has been observed but not yet classified.
+      3:
+        caption: Rogue
+        description: The access point is unsanctioned and is treated as a threat.
+      4:
+        caption: Contained
+        description: The access point is being actively contained, over the air or on the wired network.
+      99:
+        caption: Other
+        description: The classification is not mapped. See the `access_point_status` attribute, which contains a data source specific value.
+  band:
+    caption: Band
+    type: string_t
+    requirement: optional
+    description: The radio frequency band that the wireless link operates in, normalized to the caption of the `band_id` value. In the case of `Other`, it is defined by the event source.
+  band_id:
+    caption: Band ID
+    type: integer_t
+    requirement: optional
+    sibling: band
+    description: The radio frequency band that the wireless link operates in.
+    enum:
+      0:
+        caption: Unknown
+        description: The band is unknown.
+      1:
+        caption: 2.4 GHz
+        description: The 2.4 GHz band, used by IEEE 802.11b, 802.11g, 802.11n, 802.11ax and 802.11be.
+      2:
+        caption: 5 GHz
+        description: The 5 GHz band, used by IEEE 802.11a, 802.11n, 802.11ac, 802.11ax and 802.11be.
+      3:
+        caption: 6 GHz
+        description: The 6 GHz band, used by IEEE 802.11ax and 802.11be.
+      4:
+        caption: 60 GHz
+        description: The 60 GHz band, used by IEEE 802.11ad and 802.11ay.
+      99:
+        caption: Other
+        description: The band is not mapped. See the `band` attribute, which contains a data source specific value.
+  channel_number:
+    caption: Channel Number
+    type: integer_t
+    requirement: optional
+    description: The channel number that the wireless link operates on.
+  cipher:
+    caption: Cipher
+    type: string_t
+    requirement: optional
+    description: 'The negotiated encryption cipher. For example: `AES-CCMP`, `GCMP-256` or `TKIP`.'
+  data_rate:
+    caption: Data Rate
+    type: float_t
+    requirement: optional
+    description: 'The negotiated physical layer data rate, in megabits per second. For example: `5.5` or `866.7`.'
+  is_access_point_on_wired_network:
+    caption: Access Point On Wired Network
+    type: boolean_t
+    requirement: optional
+    description: Indicates that the observed access point was also detected on the monitored wired network, for example by a wireless intrusion detection or prevention system. It applies to an observed access point, not to a client, and distinguishes an access point attached to the monitored infrastructure from a neighboring one.
+  noise_floor:
+    caption: Noise Floor
+    type: integer_t
+    requirement: optional
+    description: The measured background noise power, in decibel-milliwatts.
+  rssi:
+    caption: RSSI
+    type: integer_t
+    requirement: optional
+    description: The Received Signal Strength Indicator reported for the wireless link, on the reporting vendor's own scale, which may be a relative index or a power level. For the received power in decibel-milliwatts, see `signal_strength`.
+  security_protocol:
+    caption: Security Protocol
+    type: string_t
+    requirement: optional
+    description: The Wi-Fi security protocol, normalized to the caption of the `security_protocol_id` value. In the case of `Other`, it is defined by the event source.
+  signal_noise_ratio:
+    caption: Signal-to-Noise Ratio
+    type: integer_t
+    requirement: optional
+    description: The power of the received radio signal relative to the noise floor, in decibels (dB).
+  signal_strength:
+    caption: Signal Strength
+    type: integer_t
+    requirement: optional
+    description: The measured power of the received radio signal, in decibel-milliwatts.
+  standard:
+    caption: Standard
+    type: string_t
+    requirement: optional
+    description: 'The IEEE 802.11 amendment that the link operates under. For example: `802.11ax` or `802.11ac`.'

@@ -90,3 +90,9 @@ attributes:
     requirement: optional
     description: The type of network interface.
   uid_numeric: {caption: Numeric Unique ID, type: long_t, requirement: optional, from: _entity}
+  wifi:
+    caption: Wireless Network
+    type: object_t
+    object: wifi
+    requirement: optional
+    description: The wireless network that this interface is associated with, or that it advertises when the device is an access point.

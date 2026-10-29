@@ -508,11 +508,17 @@ objects:
   summary: The Fingerprint object provides detailed information about a fingerprint, which is a compact representation of data used to identify a longer piece of information, such as a public key, file content, or application implementation.
   path: v1.10.0-dev/objects/fingerprint.yaml
 - name: firewall_rule
-  caption: Firewall Rule
+  caption: Security Control Rule
   extends: rule
   group: Findings & Compliance
-  summary: The Firewall Rule object represents a specific rule within a firewall policy or event.
+  summary: The Security Control Rule object describes a rule used by a security control to observe activity, detect threats or policy violations, or enforce security policy.
   path: v1.10.0-dev/objects/firewall_rule.yaml
+- name: firewall_rule_evaluation
+  caption: Security Control Rule Evaluation
+  extends: firewall_rule
+  group: Other
+  summary: The Security Control Rule Evaluation object describes a reported evaluation of a security control rule, including its properties, match context, and action and disposition.
+  path: v1.10.0-dev/objects/firewall_rule_evaluation.yaml
 - name: function_invocation
   caption: Function Invocation
   extends: object
@@ -1181,6 +1187,12 @@ objects:
   group: Location & Geography
   summary: The resources of a WHOIS record for a given domain.
   path: v1.10.0-dev/objects/whois.yaml
+- name: wifi
+  caption: Wireless Network
+  extends: object
+  group: Other
+  summary: 'The Wireless Network object describes an IEEE 802.11 wireless link: the identity of the network, the radio parameters it operates on, and the security negotiated for it.'
+  path: v1.10.0-dev/objects/wifi.yaml
 - name: win/reg_key
   caption: Registry Key
   extension: win

@@ -24,6 +24,19 @@ access_mask:
   description: The access mask in a platform-native format.
   used_by:
     classes: [entity_management, file_activity, file_hosting]
+access_point_status:
+  caption: Access Point Status
+  type: string_t
+  description: The access point classification, normalized to the caption of the `access_point_status_id` value. In the case of 'Other', it is defined by the event source.
+  used_by:
+    objects: [wifi]
+access_point_status_id:
+  caption: Access Point Status ID
+  type: integer_t
+  sibling: access_point_status
+  description: The classification assigned to an observed access point by a wireless intrusion detection or prevention system.
+  used_by:
+    objects: [wifi]
 access_result:
   caption: Access Check Result
   type: json_t
@@ -103,6 +116,7 @@ action:
   description: The normalized caption of 'action_id' or the source specific action.
   used_by:
     classes: [account_change, admin_group_query, airborne_broadcast_activity, api_activity, application_error, application_lifecycle, application_security_posture_finding, authentication, authorize_session, base_event, clipboard_activity, cloud_resources_inventory_info, compliance_finding, config_state, data_security_finding, datastore_activity, detection_finding, device_config_state_change, device_power_state_activity, dhcp_activity, dns_activity, dns_zone_transfer_activity, drone_flights_activity, email_activity, email_file_activity, email_url_activity, entity_management, event_log_actvity, evidence_info, file_activity, file_hosting, file_query, file_remediation_activity, folder_query, ftp_activity, group_management, http_activity, iam_analysis_finding, incident_finding, inventory_info, job_query, kernel_activity, kernel_extension_activity, kernel_object_query, memory_activity, module_activity, module_query, network_activity, network_connection_query, network_file_activity, network_remediation_activity, networks_query, ntp_activity, osint_inventory_info, patch_state, peripheral_activity, peripheral_device_query, process_activity, process_query, process_remediation_activity, rdp_activity, remediation_activity, role_management, scan_activity, scheduled_job_activity, script_activity, security_finding, service_query, session_query, smb_activity, software_info, ssh_activity, startup_item_query, tunnel_activity, user_access, user_inventory, user_management, user_query, vulnerability_finding, web_resource_access_activity, web_resources_activity]
+    objects: [firewall_rule_evaluation]
 action_id:
   caption: Action ID
   type: integer_t
@@ -110,6 +124,7 @@ action_id:
   description: The normalized action taken by a control or other policy-based system leading to an outcome or disposition.
   used_by:
     classes: [account_change, admin_group_query, airborne_broadcast_activity, api_activity, application_error, application_lifecycle, application_security_posture_finding, authentication, authorize_session, base_event, clipboard_activity, cloud_resources_inventory_info, compliance_finding, config_state, data_security_finding, datastore_activity, detection_finding, device_config_state_change, device_power_state_activity, dhcp_activity, dns_activity, dns_zone_transfer_activity, drone_flights_activity, email_activity, email_file_activity, email_url_activity, entity_management, event_log_actvity, evidence_info, file_activity, file_hosting, file_query, file_remediation_activity, folder_query, ftp_activity, group_management, http_activity, iam_analysis_finding, incident_finding, inventory_info, job_query, kernel_activity, kernel_extension_activity, kernel_object_query, memory_activity, module_activity, module_query, network_activity, network_connection_query, network_file_activity, network_remediation_activity, networks_query, ntp_activity, osint_inventory_info, patch_state, peripheral_activity, peripheral_device_query, process_activity, process_query, process_remediation_activity, rdp_activity, remediation_activity, role_management, scan_activity, scheduled_job_activity, script_activity, security_finding, service_query, session_query, smb_activity, software_info, ssh_activity, startup_item_query, tunnel_activity, user_access, user_inventory, user_management, user_query, vulnerability_finding, web_resource_access_activity, web_resources_activity]
+    objects: [firewall_rule_evaluation]
 activity_id:
   caption: Activity ID
   type: integer_t
@@ -137,6 +152,14 @@ actual_permissions:
   description: The permissions that were granted in a platform-native format. See specific usage.
   used_by:
     classes: [memory_activity, process_activity]
+additional_firewall_rules:
+  caption: Additional Security Control Rules
+  type: object_t
+  object: firewall_rule_evaluation
+  array: true
+  description: Additional security control rule evaluations associated with the activity represented by the event. Excludes the evaluation represented by `firewall_rule`, when present. This array may be populated when `firewall_rule` is absent. Entries may represent separate evaluations of the same rule. The array does not imply evaluation order, a parent-child relationship, or a complete record of all evaluated rules.
+  used_by:
+    classes: [account_change, admin_group_query, airborne_broadcast_activity, api_activity, application_error, application_lifecycle, application_security_posture_finding, authentication, authorize_session, base_event, clipboard_activity, cloud_resources_inventory_info, compliance_finding, config_state, data_security_finding, datastore_activity, detection_finding, device_config_state_change, device_power_state_activity, dhcp_activity, dns_activity, dns_zone_transfer_activity, drone_flights_activity, email_activity, email_file_activity, email_url_activity, entity_management, event_log_actvity, evidence_info, file_activity, file_hosting, file_query, file_remediation_activity, folder_query, ftp_activity, group_management, http_activity, iam_analysis_finding, incident_finding, inventory_info, job_query, kernel_activity, kernel_extension_activity, kernel_object_query, memory_activity, module_activity, module_query, network_activity, network_connection_query, network_file_activity, network_remediation_activity, networks_query, ntp_activity, osint_inventory_info, patch_state, peripheral_activity, peripheral_device_query, process_activity, process_query, process_remediation_activity, rdp_activity, remediation_activity, role_management, scan_activity, scheduled_job_activity, script_activity, security_finding, service_query, session_query, smb_activity, software_info, ssh_activity, startup_item_query, tunnel_activity, user_access, user_inventory, user_management, user_query, vulnerability_finding, web_resource_access_activity, web_resources_activity]
 additional_restrictions:
   caption: Additional Restrictions
   type: object_t
@@ -576,6 +599,19 @@ avg_timespan:
   description: The average time span of an activity.
   used_by:
     objects: [advisory, kb_article]
+band:
+  caption: Band
+  type: string_t
+  description: The radio frequency band, normalized to the caption of the `band_id` value. In the case of 'Other', it is defined by the event source. See specific usage.
+  used_by:
+    objects: [wifi]
+band_id:
+  caption: Band ID
+  type: integer_t
+  sibling: band
+  description: The normalized identifier of the radio frequency band. See specific usage.
+  used_by:
+    objects: [wifi]
 banner:
   caption: Protocol Banner
   type: string_t
@@ -693,6 +729,13 @@ boundary_id:
     For cloud connections, this translates to the traffic-boundary (same VPC, through IGW, etc.). For traditional networks, this is described as Local, Internal, or External.
   used_by:
     objects: [network_connection_info]
+bssid:
+  caption: BSSID
+  type: mac_t
+  observable: 3
+  description: The Basic Service Set Identifier, the address of the access point radio that serves a wireless network.
+  used_by:
+    objects: [wifi]
 build:
   caption: OS Build
   type: string_t
@@ -806,7 +849,7 @@ category:
   type: string_t
   description: The object category, normalized to the caption of `category_id`. See specific usage.
   used_by:
-    objects: [analytic, assessment, compliance, data_classification, data_security, firewall_rule, osint, rule, trait, vulnerability]
+    objects: [analytic, assessment, compliance, data_classification, data_security, firewall_rule, firewall_rule_evaluation, osint, rule, trait, vulnerability]
 category_id:
   caption: Category ID
   type: integer_t
@@ -878,6 +921,12 @@ chain_uid:
   description: Identifier of an append-only chain, such as a forensic or audit log, that groups a sequence of attested events for independent verification. Stable for the lifetime of the chain.
   used_by:
     objects: [attestation]
+channel_number:
+  caption: Channel Number
+  type: integer_t
+  description: The channel number. See specific usage.
+  used_by:
+    objects: [wifi]
 charter:
   caption: Charter
   type: object_t
@@ -923,7 +972,7 @@ cipher:
   type: string_t
   description: The negotiated cipher suite.
   used_by:
-    objects: [tls]
+    objects: [tls, wifi]
 cis_benchmark:
   caption: CIS Benchmark
   type: object_t
@@ -1202,7 +1251,7 @@ condition:
   type: string_t
   description: The condition that was evaluated in a rule, policy. See specific usage.
   used_by:
-    objects: [firewall_rule]
+    objects: [firewall_rule, firewall_rule_evaluation]
 condition_keys:
   caption: Condition Keys
   type: object_t
@@ -1573,6 +1622,24 @@ data:
   description: The additional data that is associated with the event or object. See specific usage.
   used_by:
     objects: [application, databucket, edge, enrichment, evidences, managed_entity, node, policy, query_info, request, resource_details, response, tls_extension, web_resource]
+data_bytes:
+  caption: Total Data Bytes
+  type: long_t
+  description: The total number of data bytes (in and out). See specific usage.
+  used_by:
+    objects: [network_traffic]
+data_bytes_in:
+  caption: Data Bytes In
+  type: long_t
+  description: The number of data bytes sent from the destination to the source. See specific usage.
+  used_by:
+    objects: [network_traffic]
+data_bytes_out:
+  caption: Data Bytes Out
+  type: long_t
+  description: The number of data bytes sent from the source to the destination. See specific usage.
+  used_by:
+    objects: [network_traffic]
 data_classification:
   caption: Data Classification
   type: object_t
@@ -1601,6 +1668,12 @@ data_lifecycle_state_id:
   description: The stage or state that the data was in when it was assessed or scanned by a data security tool.
   used_by:
     objects: [data_security]
+data_rate:
+  caption: Data Rate
+  type: float_t
+  description: 'The negotiated physical layer data rate, in megabits per second. For example: `5.5` or `866.7`.'
+  used_by:
+    objects: [wifi]
 data_security:
   caption: Data Security
   type: object_t
@@ -1720,7 +1793,7 @@ desc:
   description: The description that pertains to the object or event. See specific usage.
   used_by:
     classes: [incident_finding]
-    objects: [advisory, analytic, application, assessment, check, cis_benchmark, cis_benchmark_result, cis_control, compliance, cve, database, databucket, device, enrichment, file, finding, finding_info, firewall_rule, graph, group, job, location, node, osint, policy, related_event, remediation, rule, table, unmanned_system_operating_area, vulnerability, web_resource]
+    objects: [advisory, analytic, application, assessment, check, cis_benchmark, cis_benchmark_result, cis_control, compliance, cve, database, databucket, device, enrichment, file, finding, finding_info, firewall_rule, firewall_rule_evaluation, graph, group, job, location, node, osint, policy, related_event, remediation, rule, table, unmanned_system_operating_area, vulnerability, web_resource]
 desc_fingerprint:
   caption: Description Fingerprint
   type: object_t
@@ -1853,6 +1926,7 @@ disposition:
   description: The disposition name, normalized to the caption of the disposition_id value. In the case of 'Other', it is defined by the event source.
   used_by:
     classes: [account_change, admin_group_query, airborne_broadcast_activity, api_activity, application_error, application_lifecycle, application_security_posture_finding, authentication, authorize_session, base_event, clipboard_activity, cloud_resources_inventory_info, compliance_finding, config_state, data_security_finding, datastore_activity, detection_finding, device_config_state_change, device_power_state_activity, dhcp_activity, dns_activity, dns_zone_transfer_activity, drone_flights_activity, email_activity, email_file_activity, email_url_activity, entity_management, event_log_actvity, evidence_info, file_activity, file_hosting, file_query, file_remediation_activity, folder_query, ftp_activity, group_management, http_activity, iam_analysis_finding, incident_finding, inventory_info, job_query, kernel_activity, kernel_extension_activity, kernel_object_query, memory_activity, module_activity, module_query, network_activity, network_connection_query, network_file_activity, network_remediation_activity, networks_query, ntp_activity, osint_inventory_info, patch_state, peripheral_activity, peripheral_device_query, process_activity, process_query, process_remediation_activity, rdp_activity, remediation_activity, role_management, scan_activity, scheduled_job_activity, script_activity, security_finding, service_query, session_query, smb_activity, software_info, ssh_activity, startup_item_query, tunnel_activity, user_access, user_inventory, user_management, user_query, vulnerability_finding, web_resource_access_activity, web_resources_activity]
+    objects: [firewall_rule_evaluation]
 disposition_id:
   caption: Disposition ID
   type: integer_t
@@ -1860,6 +1934,7 @@ disposition_id:
   description: Describes the outcome or action taken by a security control, such as access control checks, malware detections or various types of policy violations.
   used_by:
     classes: [account_change, admin_group_query, airborne_broadcast_activity, api_activity, application_error, application_lifecycle, application_security_posture_finding, authentication, authorize_session, base_event, clipboard_activity, cloud_resources_inventory_info, compliance_finding, config_state, data_security_finding, datastore_activity, detection_finding, device_config_state_change, device_power_state_activity, dhcp_activity, dns_activity, dns_zone_transfer_activity, drone_flights_activity, email_activity, email_file_activity, email_url_activity, entity_management, event_log_actvity, evidence_info, file_activity, file_hosting, file_query, file_remediation_activity, folder_query, ftp_activity, group_management, http_activity, iam_analysis_finding, incident_finding, inventory_info, job_query, kernel_activity, kernel_extension_activity, kernel_object_query, memory_activity, module_activity, module_query, network_activity, network_connection_query, network_file_activity, network_remediation_activity, networks_query, ntp_activity, osint_inventory_info, patch_state, peripheral_activity, peripheral_device_query, process_activity, process_query, process_remediation_activity, rdp_activity, remediation_activity, role_management, scan_activity, scheduled_job_activity, script_activity, security_finding, service_query, session_query, smb_activity, software_info, ssh_activity, startup_item_query, tunnel_activity, user_access, user_inventory, user_management, user_query, vulnerability_finding, web_resource_access_activity, web_resources_activity]
+    objects: [firewall_rule_evaluation]
 dkim:
   caption: DKIM Status
   type: string_t
@@ -1985,7 +2060,7 @@ duration:
   description: This represents the duration of the activity in milliseconds. See specific usage.
   used_by:
     classes: [account_change, admin_group_query, airborne_broadcast_activity, api_activity, application_error, application_lifecycle, application_security_posture_finding, authentication, authorize_session, base_event, clipboard_activity, cloud_resources_inventory_info, compliance_finding, config_state, data_security_finding, datastore_activity, detection_finding, device_config_state_change, device_power_state_activity, dhcp_activity, dns_activity, dns_zone_transfer_activity, drone_flights_activity, email_activity, email_file_activity, email_url_activity, entity_management, event_log_actvity, evidence_info, file_activity, file_hosting, file_query, file_remediation_activity, folder_query, ftp_activity, group_management, http_activity, iam_analysis_finding, incident_finding, inventory_info, job_query, kernel_activity, kernel_extension_activity, kernel_object_query, memory_activity, module_activity, module_query, network_activity, network_connection_query, network_file_activity, network_remediation_activity, networks_query, ntp_activity, osint_inventory_info, patch_state, peripheral_activity, peripheral_device_query, process_activity, process_query, process_remediation_activity, rdp_activity, remediation_activity, role_management, scan_activity, scheduled_job_activity, script_activity, security_finding, service_query, session_query, smb_activity, software_info, ssh_activity, startup_item_query, tunnel_activity, user_access, user_inventory, user_management, user_query, vulnerability_finding, web_resource_access_activity, web_resources_activity]
-    objects: [firewall_rule, span, timespan, trace]
+    objects: [firewall_rule, firewall_rule_evaluation, span, timespan, trace]
 duration_days:
   caption: Duration Days
   type: integer_t
@@ -2479,10 +2554,10 @@ fingerprints:
   used_by:
     objects: [certificate, network_endpoint, network_proxy]
 firewall_rule:
-  caption: Firewall Rule
+  caption: Security Control Rule
   type: object_t
   object: firewall_rule
-  description: The firewall rule that triggered the event.
+  description: The security control rule to which the event-level action or disposition is attributed, when that attribution is known. Examples of security controls include firewalls, intrusion detection and prevention systems, network proxies, and endpoint protection systems.
   used_by:
     classes: [account_change, admin_group_query, airborne_broadcast_activity, api_activity, application_error, application_lifecycle, application_security_posture_finding, authentication, authorize_session, base_event, clipboard_activity, cloud_resources_inventory_info, compliance_finding, config_state, data_security_finding, datastore_activity, detection_finding, device_config_state_change, device_power_state_activity, dhcp_activity, dns_activity, dns_zone_transfer_activity, drone_flights_activity, email_activity, email_file_activity, email_url_activity, entity_management, event_log_actvity, evidence_info, file_activity, file_hosting, file_query, file_remediation_activity, folder_query, ftp_activity, group_management, http_activity, iam_analysis_finding, incident_finding, inventory_info, job_query, kernel_activity, kernel_extension_activity, kernel_object_query, memory_activity, module_activity, module_query, network_activity, network_connection_query, network_file_activity, network_remediation_activity, networks_query, ntp_activity, osint_inventory_info, patch_state, peripheral_activity, peripheral_device_query, process_activity, process_query, process_remediation_activity, rdp_activity, remediation_activity, role_management, scan_activity, scheduled_job_activity, script_activity, security_finding, service_query, session_query, smb_activity, software_info, ssh_activity, startup_item_query, tunnel_activity, user_access, user_inventory, user_management, user_query, vulnerability_finding, web_resource_access_activity, web_resources_activity]
 first_seen_time:
@@ -3079,6 +3154,12 @@ ip:
   description: The IP address, in either IPv4 or IPv6 format.
   used_by:
     objects: [databucket, device, endpoint, load_balancer, network_endpoint, network_interface, network_proxy, reporter, resource_details]
+is_access_point_on_wired_network:
+  caption: Access Point On Wired Network
+  type: boolean_t
+  description: Indicates that the observed access point was also detected on the monitored wired network, for example by a wireless intrusion detection or prevention system. It applies to an observed access point, not to a client, and distinguishes an access point attached to the monitored infrastructure from a neighboring one.
+  used_by:
+    objects: [wifi]
 is_alert:
   caption: Alert
   type: boolean_t
@@ -3946,13 +4027,13 @@ match_details:
   array: true
   description: 'The data in a request that rule matched. For example: ''["10","and","1"]''.'
   used_by:
-    objects: [firewall_rule]
+    objects: [firewall_rule, firewall_rule_evaluation]
 match_location:
   caption: Match Location
   type: string_t
   description: 'The location of the matched data in the source which resulted in the triggered firewall rule. For example: HEADER.'
   used_by:
-    objects: [firewall_rule]
+    objects: [firewall_rule, firewall_rule_evaluation]
 meets_criteria:
   caption: Meets Criteria
   type: boolean_t
@@ -4074,7 +4155,7 @@ name:
   description: The name of the entity. See specific usage.
   used_by:
     classes: [ftp_activity]
-    objects: [account, affected_package, agent, ai_agent, ai_capability, ai_model, aircraft, analysis_target, analytic, application, assessment, authentication_token, autonomous_system, campaign, check, cis_benchmark, cis_benchmark_result, cis_control, classifier_details, clipboard, container, d3f_tactic, d3f_technique, database, databucket, device, domain_contact, edge, endpoint, enrichment, environment_variable, evidences, extension, feature, file, firewall_rule, graph, group, http_cookie, http_header, iam_role, idp, image, job, kernel, key_value_object, load_balancer, logger, malware, malware_scan_info, managed_entity, message_context, metric, mitigation, network_endpoint, network_interface, network_proxy, node, observable, organization, os, osint, package, parameter, peripheral_device, policy, privilege_info, process, process_entity, product, query_info, reporter, resource_details, rule, san, scan, scim, script, sensor_info, service, service_privilege_analysis, software_component, sso, startup_item, sub_technique, table, tactic, technique, threat_actor, token, trait, transformation_info, unmanned_aerial_system, user, web_resource]
+    objects: [account, affected_package, agent, ai_agent, ai_capability, ai_model, aircraft, analysis_target, analytic, application, assessment, authentication_token, autonomous_system, campaign, check, cis_benchmark, cis_benchmark_result, cis_control, classifier_details, clipboard, container, d3f_tactic, d3f_technique, database, databucket, device, domain_contact, edge, endpoint, enrichment, environment_variable, evidences, extension, feature, file, firewall_rule, firewall_rule_evaluation, graph, group, http_cookie, http_header, iam_role, idp, image, job, kernel, key_value_object, load_balancer, logger, malware, malware_scan_info, managed_entity, message_context, metric, mitigation, network_endpoint, network_interface, network_proxy, node, observable, organization, os, osint, package, parameter, peripheral_device, policy, privilege_info, process, process_entity, product, query_info, reporter, resource_details, rule, san, scan, scim, script, sensor_info, service, service_privilege_analysis, software_component, sso, startup_item, sub_technique, table, tactic, technique, threat_actor, token, trait, transformation_info, unmanned_aerial_system, user, web_resource]
 name_servers:
   caption: Name Servers
   type: string_t
@@ -4168,6 +4249,12 @@ nodes:
   description: The list of node objects that are part of the graph.
   used_by:
     objects: [graph]
+noise_floor:
+  caption: Noise Floor
+  type: integer_t
+  description: The measured background noise power, in decibel-milliwatts.
+  used_by:
+    objects: [wifi]
 notes:
   caption: Notes
   type: object_t
@@ -5148,7 +5235,7 @@ rate_limit:
   type: integer_t
   description: The rate limit for a rate-based rule.
   used_by:
-    objects: [firewall_rule, scim]
+    objects: [firewall_rule, firewall_rule_evaluation, scim]
 raw_data:
   caption: Raw Data
   type: string_t
@@ -5582,6 +5669,7 @@ rssi:
   description: Received Signal Strength Indicator (RSSI) is a measurement of the power of a radio signal. See specific usage.
   used_by:
     classes: [airborne_broadcast_activity]
+    objects: [wifi]
 rule:
   caption: Rule
   type: object_t
@@ -5784,6 +5872,19 @@ security_level_id:
   description: The current security level of the entity
   used_by:
     classes: [device_config_state_change]
+security_protocol:
+  caption: Security Protocol
+  type: string_t
+  description: The security protocol, normalized to the caption of the `security_protocol_id` value. In the case of 'Other', it is defined by the event source. See specific usage.
+  used_by:
+    objects: [wifi]
+security_protocol_id:
+  caption: Security Protocol ID
+  type: integer_t
+  sibling: security_protocol
+  description: The normalized identifier of the security protocol. See specific usage.
+  used_by:
+    objects: [wifi]
 security_questions:
   caption: Security Questions
   type: string_t
@@ -5817,7 +5918,7 @@ sensitivity:
   type: string_t
   description: 'The sensitivity of the firewall rule in the matched event. For example: HIGH.'
   used_by:
-    objects: [firewall_rule]
+    objects: [firewall_rule, firewall_rule_evaluation]
 sensor_info_list:
   caption: Sensor Information List
   type: object_t
@@ -5957,6 +6058,18 @@ short_desc:
   description: The short description that pertains to the object or event. See specific usage.
   used_by:
     objects: [enrichment]
+signal_noise_ratio:
+  caption: Signal-to-Noise Ratio
+  type: integer_t
+  description: The power of the received radio signal relative to the noise floor, in decibels (dB).
+  used_by:
+    objects: [wifi]
+signal_strength:
+  caption: Signal Strength
+  type: integer_t
+  description: The measured power of the received radio signal, in decibel-milliwatts.
+  used_by:
+    objects: [wifi]
 signature:
   caption: Digital Signature
   type: object_t
@@ -6114,6 +6227,12 @@ src_url:
   used_by:
     classes: [application_security_posture_finding, compliance_finding, data_security_finding, detection_finding, iam_analysis_finding, incident_finding, vulnerability_finding]
     objects: [advisory, affected_package, application, cvss, cwe, d3f_tactic, d3f_technique, data_classification, data_security, download_info, enrichment, finding, finding_info, kb_article, mitigation, osint, package, sub_technique, tactic, technique, ticket]
+ssid:
+  caption: SSID
+  type: string_t
+  description: The Service Set Identifier, the advertised name of a wireless network.
+  used_by:
+    objects: [wifi]
 sso:
   caption: SSO
   type: object_t
@@ -6121,6 +6240,12 @@ sso:
   description: The Single Sign-On (SSO) object provides a structure for normalizing SSO attributes, configuration, and/or settings from Identity Providers.
   used_by:
     objects: [idp]
+standard:
+  caption: Standard
+  type: string_t
+  description: The published standard that the link conforms to. See specific usage.
+  used_by:
+    objects: [wifi]
 standards:
   caption: 'Compliance Standards: List'
   type: string_t
@@ -6729,7 +6854,7 @@ type:
   description: The type of an object or value, normalized to the caption of the type_id value. In the case of 'Other', it is defined by the event source. See specific usage.
   used_by:
     classes: [datastore_activity, ftp_activity]
-    objects: [account, affected_package, agent, ai_agent, ai_capability, analysis_target, analytic, application, authentication_token, classifier_details, cve, database, databucket, device, discovery_details, dns_answer, dns_query, dns_resource_record, domain_contact, download_info, encryption_details, endpoint, enrichment, file, firewall_rule, graph, group, ja4_fingerprint, job, job_action, job_trigger, kernel, malware_scan_info, managed_entity, metadata, module, network_endpoint, network_interface, network_proxy, node, observable, os, osint, package, peripheral_device, policy, privilege_info, programmatic_credential, related_event, resource_details, rule, san, sbom, scan, script, software_component, startup_item, threat_actor, ticket, timespan, tls_extension, token, trait, unmanned_aerial_system, unmanned_system_operating_area, user, web_resource]
+    objects: [account, affected_package, agent, ai_agent, ai_capability, analysis_target, analytic, application, authentication_token, classifier_details, cve, database, databucket, device, discovery_details, dns_answer, dns_query, dns_resource_record, domain_contact, download_info, encryption_details, endpoint, enrichment, file, firewall_rule, firewall_rule_evaluation, graph, group, ja4_fingerprint, job, job_action, job_trigger, kernel, malware_scan_info, managed_entity, metadata, module, network_endpoint, network_interface, network_proxy, node, observable, os, osint, package, peripheral_device, policy, privilege_info, programmatic_credential, related_event, resource_details, rule, san, sbom, scan, script, software_component, startup_item, threat_actor, ticket, timespan, tls_extension, token, trait, unmanned_aerial_system, unmanned_system_operating_area, user, web_resource]
 type_id:
   caption: Type ID
   type: integer_t
@@ -6771,7 +6896,7 @@ uid:
   type: string_t
   description: The unique identifier. See specific usage.
   used_by:
-    objects: [account, advisory, affected_package, agent, ai_agent, ai_capability, ai_model, aircraft, analytic, application, assessment, attestation, authentication_token, certificate, check, classifier_details, container, cve, cwe, d3f_tactic, d3f_technique, data_classification, data_security, database, databucket, delegation, device, domain_contact, edge, email, endpoint, evidences, extension, feature, file, finding, finding_info, firewall_rule, graph, group, http_request, iam_role, idp, image, job, kb_article, load_balancer, logger, malware, malware_scan_info, managed_entity, message_context, metadata, mitigation, network_connection_info, network_endpoint, network_interface, network_proxy, node, note, organization, osint, package, peripheral_device, policy, prev_event, process, process_entity, product, programmatic_credential, query_info, related_event, reporter, request, resource_details, rule, sbom, scan, scim, script, sensor_info, service, session, span, sso, sub_technique, table, tactic, technique, ticket, token, trace, trait, transformation_info, unmanned_aerial_system, user, web_resource]
+    objects: [account, advisory, affected_package, agent, ai_agent, ai_capability, ai_model, aircraft, analytic, application, assessment, attestation, authentication_token, certificate, check, classifier_details, container, cve, cwe, d3f_tactic, d3f_technique, data_classification, data_security, database, databucket, delegation, device, domain_contact, edge, email, endpoint, evidences, extension, feature, file, finding, finding_info, firewall_rule, firewall_rule_evaluation, graph, group, http_request, iam_role, idp, image, job, kb_article, load_balancer, logger, malware, malware_scan_info, managed_entity, message_context, metadata, mitigation, network_connection_info, network_endpoint, network_interface, network_proxy, node, note, organization, osint, package, peripheral_device, policy, prev_event, process, process_entity, product, programmatic_credential, query_info, related_event, reporter, request, resource_details, rule, sbom, scan, scim, script, sensor_info, service, session, span, sso, sub_technique, table, tactic, technique, ticket, token, trace, trait, transformation_info, unmanned_aerial_system, user, web_resource]
 uid_alt:
   caption: Alternate ID
   type: string_t
@@ -6783,7 +6908,7 @@ uid_numeric:
   type: long_t
   description: The unique identifier in numeric form. See specific usage.
   used_by:
-    objects: [account, ai_agent, ai_capability, ai_model, aircraft, analytic, assessment, d3f_tactic, d3f_technique, database, databucket, device, edge, endpoint, evidences, extension, feature, file, firewall_rule, graph, group, iam_role, idp, image, load_balancer, logger, malware, malware_scan_info, managed_entity, message_context, mitigation, network_endpoint, network_interface, network_proxy, organization, peripheral_device, policy, process, process_entity, product, query_info, reporter, resource_details, rule, scan, sensor_info, service, sub_technique, table, tactic, technique, trait, transformation_info, unmanned_aerial_system, user, web_resource]
+    objects: [account, ai_agent, ai_capability, ai_model, aircraft, analytic, assessment, d3f_tactic, d3f_technique, database, databucket, device, edge, endpoint, evidences, extension, feature, file, firewall_rule, firewall_rule_evaluation, graph, group, iam_role, idp, image, load_balancer, logger, malware, malware_scan_info, managed_entity, message_context, mitigation, network_endpoint, network_interface, network_proxy, organization, peripheral_device, policy, process, process_entity, product, query_info, reporter, resource_details, rule, scan, sensor_info, service, sub_technique, table, tactic, technique, trait, transformation_info, unmanned_aerial_system, user, web_resource]
 unique_malware_count:
   caption: Unique Malware Count
   type: integer_t
@@ -7048,7 +7173,7 @@ version:
   description: The version that pertains to the event or object. See specific usage.
   used_by:
     classes: [ntp_activity]
-    objects: [affected_package, agent, ai_agent, ai_capability, ai_model, analytic, api, application, attack, certificate, check, cis_control, cis_csc, cvss, d3fend, databucket, epss, extension, feature, file, firewall_rule, http_request, logger, managed_entity, metadata, os, package, policy, product, resource_details, rpc_interface, rule, sbom, scim, service, software_component, tls]
+    objects: [affected_package, agent, ai_agent, ai_capability, ai_model, analytic, api, application, attack, certificate, check, cis_control, cis_csc, cvss, d3fend, databucket, epss, extension, feature, file, firewall_rule, firewall_rule_evaluation, http_request, logger, managed_entity, metadata, os, package, policy, product, resource_details, rpc_interface, rule, sbom, scim, service, software_component, tls]
 vertical_speed:
   caption: Vertical Speed
   type: string_t
@@ -7133,6 +7258,13 @@ whois:
   description: The resources of a WHOIS record for a given domain. This can include domain names, IP address blocks, autonomous system information, and/or contact and registration information for a domain.
   used_by:
     objects: [osint]
+wifi:
+  caption: Wireless Network
+  type: object_t
+  object: wifi
+  description: The wireless network attributes.
+  used_by:
+    objects: [network_endpoint, network_interface, network_proxy]
 win/hosted_services:
   caption: Hosted Services
   type: object_t

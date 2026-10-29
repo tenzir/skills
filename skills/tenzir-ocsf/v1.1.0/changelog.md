@@ -58,7 +58,6 @@
     15. Added firewall, router, switch, hub to endpoint `type_id` enum. [#921](https://github.com/ocsf/ocsf-schema/pull/921)
     16. Added `is_vpn` to the `session` object. [#922](https://github.com/ocsf/ocsf-schema/pull/922)
     17. Added `state` to `network_connection_info` object. [#932](https://github.com/ocsf/ocsf-schema/pull/932)
-    18. Added `community_uid` to `network_connection_info` object. [#1202](https://github.com/ocsf/ocsf-schema/pull/1202)
 
 ### Bugfixes
 `n/a`

@@ -145,6 +145,7 @@
     1. Added `sans` array to `certificate` object. [#1325](https://github.com/ocsf/ocsf-schema/pull/1325)
     1. Added `flag_history` attribute to the `network_connection_info` object. [#1316](https://github.com/ocsf/ocsf-schema/pull/1316)
     1. Added `bytes_missed` attribute to the `network_traffic` object. [#1316](https://github.com/ocsf/ocsf-schema/pull/1316)
+    1. Added `community_uid` to `network_connection_info` object. [#1202](https://github.com/ocsf/ocsf-schema/pull/1202)
 
 ### Bugfixes
 1. Added sibling definition to `confidence_id` in dictionary, accurately associating `confidence` as its sibling. [#1180](https://github.com/ocsf/ocsf-schema/pull/1180)

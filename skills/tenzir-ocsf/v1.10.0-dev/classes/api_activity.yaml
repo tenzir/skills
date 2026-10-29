@@ -182,6 +182,7 @@ attributes:
     description: The trace object contains information about distributed traces which are critical to observability and describe how requests move through a system, capturing each step's timing and status.
   action: {caption: Action, type: string_t, requirement: optional, group: primary, profile: security_control, from: base_event}
   activity_name: {caption: Activity, type: string_t, requirement: optional, group: classification, from: base_event}
+  additional_firewall_rules: {caption: Additional Security Control Rules, type: object_t, object: firewall_rule_evaluation, array: true, requirement: optional, group: primary, profile: security_control, from: base_event}
   ai_agent: {caption: AI Agent, type: object_t, object: ai_agent, requirement: optional, group: context, profile: ai_operation, from: application}
   ai_capability: {caption: AI Capability, type: object_t, object: ai_capability, requirement: optional, group: context, profile: ai_operation, from: application}
   ai_status: {caption: AI Status, type: object_t, object: ai_status, requirement: optional, group: context, profile: ai_operation, from: application}
@@ -211,7 +212,7 @@ attributes:
   end_time: {caption: End Time, type: timestamp_t, requirement: optional, group: occurrence, from: base_event}
   end_time_dt: {caption: End Time, type: datetime_t, requirement: optional, group: occurrence, profile: datetime, from: base_event}
   enrichments: {caption: Enrichments, type: object_t, object: enrichment, array: true, requirement: optional, group: context, from: base_event}
-  firewall_rule: {caption: Firewall Rule, type: object_t, object: firewall_rule, requirement: optional, group: primary, profile: security_control, from: base_event}
+  firewall_rule: {caption: Security Control Rule, type: object_t, object: firewall_rule, requirement: optional, group: primary, profile: security_control, from: base_event}
   malware: {caption: Malware, type: object_t, object: malware, array: true, requirement: optional, group: primary, profile: security_control, from: base_event}
   malware_scan_info: {caption: Malware Scan Info, type: object_t, object: malware_scan_info, requirement: optional, group: primary, profile: security_control, from: base_event}
   message_context: {caption: Message Context, type: object_t, object: message_context, requirement: optional, group: context, profile: ai_operation, from: application}

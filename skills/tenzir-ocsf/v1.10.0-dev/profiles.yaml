@@ -441,7 +441,7 @@ record_integrity:
       description: One or more cryptographic `attestation` objects over an event, each providing integrity, authenticity, and non-repudiation. Independent attesters over the same event — for example a producer at write time and a downstream processor at ingest — each contribute a separate attestation, distinct from co-signers on a single attestation, which share its `signatures` array. Carried on the `record_integrity` profile; the object itself is domain-agnostic.
 security_control:
   caption: Security Control
-  description: The attributes including disposition that represent the outcome of a security control including but not limited to access control, malware or policy violation, network proxy, intrusion detection, firewall, or data control. The profile is intended to augment activities or findings with an outcome when a security control has observed or intervened. If the control detected a security violation, and the `disposition_id` or `action_id` is an alertable outcome or action, the `is_alert` flag may be set to `true`.
+  description: The Security Control profile describes the action and disposition reported by a security control for the activity or finding represented by an event. It applies when a control observes or intervenes, including access control, malware detection, policy enforcement, network proxy, intrusion detection, firewall, and data protection. Event-level action and disposition describe the reported outcome. The `firewall_rule` attribute identifies the rule associated with that outcome, when known, and `additional_firewall_rules` records other rule evaluations with their own actions and dispositions. If the control detected a security violation and the action or disposition is alertable, the `is_alert` flag may be set to `true`.
   applies_to:
     classes: [account_change, admin_group_query, airborne_broadcast_activity, api_activity, application_error, application_lifecycle, application_security_posture_finding, authentication, authorize_session, base_event, clipboard_activity, cloud_resources_inventory_info, compliance_finding, config_state, data_security_finding, datastore_activity, detection_finding, device_config_state_change, device_power_state_activity, dhcp_activity, dns_activity, dns_zone_transfer_activity, drone_flights_activity, email_activity, email_file_activity, email_url_activity, entity_management, event_log_actvity, evidence_info, file_activity, file_hosting, file_query, file_remediation_activity, folder_query, ftp_activity, group_management, http_activity, iam_analysis_finding, incident_finding, inventory_info, job_query, kernel_activity, kernel_extension_activity, kernel_object_query, memory_activity, module_activity, module_query, network_activity, network_connection_query, network_file_activity, network_remediation_activity, networks_query, ntp_activity, osint_inventory_info, patch_state, peripheral_activity, peripheral_device_query, process_activity, process_query, process_remediation_activity, rdp_activity, remediation_activity, role_management, scan_activity, scheduled_job_activity, script_activity, security_finding, service_query, session_query, smb_activity, software_info, ssh_activity, startup_item_query, tunnel_activity, user_access, user_inventory, user_management, user_query, vulnerability_finding, web_resource_access_activity, web_resources_activity, win/prefetch_query, win/registry_key_activity, win/registry_key_query, win/registry_value_activity, win/registry_value_query, win/windows_resource_activity, win/windows_service_activity]
   attributes:
@@ -450,14 +450,14 @@ security_control:
       type: string_t
       requirement: optional
       group: primary
-      description: The normalized caption of `action_id`.
+      description: The normalized caption of the event-level `action_id`. When `action_id` is `99` (Other), this attribute contains the source-specific action.
     action_id:
       caption: Action ID
       type: integer_t
       requirement: recommended
       group: primary
       sibling: action
-      description: The action taken by a control or other policy-based system leading to an outcome or disposition. An unknown action may still correspond to a known disposition. Refer to `disposition_id` for the outcome of the action.
+      description: The normalized action taken by the security control for the activity or finding represented by this event. An unknown action may still correspond to a known disposition. Refer to the event-level `disposition_id` for the outcome of the action.
       enum:
         0:
           caption: Unknown
@@ -477,6 +477,14 @@ security_control:
         99:
           caption: Other
           description: The action is not mapped. See the `action` attribute which contains a data source specific value.
+    additional_firewall_rules:
+      caption: Additional Security Control Rules
+      type: object_t
+      object: firewall_rule_evaluation
+      array: true
+      requirement: optional
+      group: primary
+      description: Additional security control rule evaluations associated with the activity represented by the event. Excludes the evaluation represented by `firewall_rule`, when present. This array may be populated when `firewall_rule` is absent. Entries may represent separate evaluations of the same rule. The array does not imply evaluation order, a parent-child relationship, or a complete record of all evaluated rules.
     attacks:
       caption: MITRE ATT&CK® and ATLAS™ Details
       type: object_t
@@ -535,14 +543,14 @@ security_control:
       type: string_t
       requirement: optional
       group: primary
-      description: The disposition name, normalized to the caption of the disposition_id value. In the case of 'Other', it is defined by the event source.
+      description: The normalized caption of the event-level `disposition_id`. When `disposition_id` is `99` (Other), this attribute contains the source-specific disposition.
     disposition_id:
       caption: Disposition ID
       type: integer_t
       requirement: recommended
       group: primary
       sibling: disposition
-      description: Describes the outcome or action taken by a security control, such as access control checks, malware detections or various types of policy violations.
+      description: The normalized outcome reported by the security control for the activity or finding represented by this event. Dispositions in `additional_firewall_rules` describe the individual rule evaluations and do not imply this event-level outcome.
       enum:
         0:
           caption: Unknown
@@ -632,12 +640,12 @@ security_control:
           caption: Other
           description: The disposition is not mapped. See the `disposition` attribute, which contains a data source specific value.
     firewall_rule:
-      caption: Firewall Rule
+      caption: Security Control Rule
       type: object_t
       object: firewall_rule
       requirement: optional
       group: primary
-      description: The firewall rule that pertains to the control that triggered the event, if applicable.
+      description: The security control rule to which the event-level action or disposition is attributed, when that attribution is known. The rule may be evaluated by a firewall, intrusion detection or prevention system, network proxy, endpoint protection system, or another security control. Other reported rule evaluations are recorded in `additional_firewall_rules`.
     is_alert:
       caption: Alert
       type: boolean_t

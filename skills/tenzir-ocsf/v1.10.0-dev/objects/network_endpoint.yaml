@@ -246,4 +246,10 @@ attributes:
   uid_numeric: {caption: Numeric Unique ID, type: long_t, requirement: optional, from: _entity}
   vlan_uid: {caption: VLAN, type: string_t, requirement: optional, from: endpoint}
   vpc_uid: {caption: VPC UID, type: string_t, requirement: optional, from: endpoint}
+  wifi:
+    caption: Wireless Network
+    type: object_t
+    object: wifi
+    requirement: optional
+    description: The wireless network that this endpoint is associated with, or that this endpoint advertises when it is an access point.
   zone: {caption: Network Zone, type: string_t, requirement: optional, from: endpoint}

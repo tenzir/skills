@@ -1,9 +1,9 @@
 # Attributes with `from` but no description are inherited unchanged. Their
 # descriptions are in the file of the item that `from` names.
 name: firewall_rule
-caption: Firewall Rule
+caption: Security Control Rule
 extends: rule
-description: The Firewall Rule object represents a specific rule within a firewall policy or event. It contains information about a rule's configuration, properties, and associated actions that define how network traffic is handled by the firewall.
+description: The Security Control Rule object describes a rule used by a security control to observe activity, detect threats or policy violations, or enforce security policy. It includes the rule's identity, configuration, and match context. Examples of security controls include firewalls, intrusion detection and prevention systems, network proxies, and endpoint protection systems.
 constraints:
   at_least_one: [name, uid]
 referenced_by:
@@ -90,15 +90,27 @@ referenced_by:
     web_resource_access_activity: [firewall_rule]
     web_resources_activity: [firewall_rule]
 attributes:
-  name: {caption: Name, type: string_t, requirement: recommended, from: rule}
-  uid: {caption: Unique ID, type: string_t, requirement: recommended, from: rule}
+  name:
+    caption: Name
+    type: string_t
+    requirement: recommended
+    description: The name of the security control rule.
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: recommended
+    description: The unique identifier of the security control rule.
   category: {caption: Category, type: string_t, requirement: optional, from: rule}
   condition:
     caption: Condition
     type: string_t
     requirement: optional
     description: 'The rule trigger condition for the rule. For example: SQL_INJECTION.'
-  desc: {caption: Description, type: string_t, requirement: optional, from: rule}
+  desc:
+    caption: Description
+    type: string_t
+    requirement: optional
+    description: The description of the security control rule.
   duration:
     caption: Duration Milliseconds
     type: long_t
