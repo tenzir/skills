@@ -36,6 +36,9 @@ attributes:
       6:
         caption: SM2
         description: ShangMi Cryptographic Algorithm
+      7:
+        caption: RC4
+        description: Rivest Cipher 4 Algorithm, a stream cipher. For example, the RC4-HMAC encryption type used for Kerberos tickets and session keys.
       99:
         caption: Other
         description: The algorithm is not mapped. See the `algorithm` attribute, which contains a data source specific value.

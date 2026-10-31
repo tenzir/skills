@@ -6033,6 +6033,12 @@ severity_id:
   used_by:
     classes: [account_change, admin_group_query, airborne_broadcast_activity, api_activity, application_error, application_lifecycle, application_security_posture_finding, authentication, authorize_session, base_event, clipboard_activity, cloud_resources_inventory_info, compliance_finding, config_state, data_security_finding, datastore_activity, detection_finding, device_config_state_change, device_power_state_activity, dhcp_activity, dns_activity, dns_zone_transfer_activity, drone_flights_activity, email_activity, email_file_activity, email_url_activity, entity_management, event_log_actvity, evidence_info, file_activity, file_hosting, file_query, file_remediation_activity, folder_query, ftp_activity, group_management, http_activity, iam_analysis_finding, incident_finding, inventory_info, job_query, kernel_activity, kernel_extension_activity, kernel_object_query, memory_activity, module_activity, module_query, network_activity, network_connection_query, network_file_activity, network_remediation_activity, networks_query, ntp_activity, osint_inventory_info, patch_state, peripheral_activity, peripheral_device_query, process_activity, process_query, process_remediation_activity, rdp_activity, remediation_activity, role_management, scan_activity, scheduled_job_activity, script_activity, security_finding, service_query, session_query, smb_activity, software_info, ssh_activity, startup_item_query, tunnel_activity, user_access, user_inventory, user_management, user_query, vulnerability_finding, web_resource_access_activity, web_resources_activity]
     objects: [check, malware, osint, related_event, vendor_attributes]
+shannon_entropy:
+  caption: Shannon Entropy
+  type: float_t
+  description: The Shannon entropy absolute value. For file content, with an alphabet size of 256, the measure is bits per byte over the distribution of byte values, ranging from `0.0` to `8.0`. For domain names, with an alphabet size of 37 (26 characters, 10 numbers, hyphen), the maximum value is 5.2. For files, values close to maximum indicate content that is compressed, encrypted, or packed, while plain text and uncompressed data typically score lower. For domain names, a high entropy can be indicative of automated generation by malware or a phishing kit.
+  used_by:
+    objects: [file]
 share:
   caption: Share
   type: string_t
