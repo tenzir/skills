@@ -41,13 +41,14 @@ An operator that understands a hint acts on it, for example by turning a filter 
 
 ## Results stay the same
 
-An optimization never changes the result of a pipeline, with three deliberate exceptions that let common filters reach a database:
+An optimization never changes the result of a pipeline, with a few deliberate exceptions that let common filters reach a database or Splunk:
 
 * **Case-insensitive matching.** `starts_with` and `ends_with` with `ignore_case=true` use the database’s lowercase mapping. It agrees with TQL’s case folding for ASCII and most other text, but TQL folds `ß` to `ss`, so `"Straße".starts_with("strass", ignore_case=true)` is `true` in TQL and matches no row in the database.
 * **Regular expressions.** `match_regex` uses the database’s release of RE2, which may disagree with TQL’s on rarely used syntax and on text that is not valid UTF-8.
 * **IP addresses in string columns.** In TQL, a string never equals an `ip` value, so the comparison is `false`. When a database source compares a text column with an address, as in `src == 1.1.1.1`, it compares the canonical text of the address, `1.1.1.1`, instead, so that the common way of storing addresses as text works.
+* **Splunk searches.** The prefilters of [`from_splunk`](https://tenzir.com/docs/reference/operators/from_splunk.md) use Splunk’s `search` command, which may parse different strings as numbers than Tenzir, such as values with surrounding whitespace, and may fold the case of non-ASCII characters differently. A prefilter can then drop an event that Tenzir alone would keep.
 
-The [database pages](optimizations.md#filters-by-database) state which databases use these exceptions. Everything else the database cannot evaluate exactly like TQL runs in Tenzir, including when it would merely differ for `null` values, `NaN`, or text that differs only in case, accents, or trailing spaces.
+The [database pages](optimizations.md#filters-by-database) state which databases use these exceptions, and the [SPL page](optimizations/spl.md#filters-are-prefilters) describes the Splunk cases. Everything else the database cannot evaluate exactly like TQL runs in Tenzir, including when it would merely differ for `null` values, `NaN`, or text that differs only in case, accents, or trailing spaces.
 
 ## Operators that optimize
 
@@ -63,6 +64,7 @@ These operators act on hints:
 | [`from_microsoft_sql`](https://tenzir.com/docs/reference/operators/from_microsoft_sql.md)                 | In the query                 | Top-level columns          | In the query           | In the query          |
 | [`from_mysql`](https://tenzir.com/docs/reference/operators/from_mysql.md)                                 | In the query                 | Top-level columns          | In the query           | In the query          |
 | [`from_sentinelone_data_lake`](https://tenzir.com/docs/reference/operators/from_sentinelone_data_lake.md) | As prefilters in the query   | Including nested fields    | Without filters        | No                    |
+| [`from_splunk`](https://tenzir.com/docs/reference/operators/from_splunk.md)                               | As prefilters in the search  | Top-level fields           | Without filters        | No                    |
 | [`read_parquet`](https://tenzir.com/docs/reference/operators/read_parquet.md)                             | While decoding, by row group | Including record fields    | Stops decoding         | No                    |
 | [`subscribe`](https://tenzir.com/docs/reference/operators/subscribe.md)                                   | At the node                  | No                         | No                     | No                    |
 | [`sort`](https://tenzir.com/docs/reference/operators/sort.md)                                             | Moved before the sort        | Passed on                  | Keeps the top `N`      | No                    |
@@ -158,6 +160,17 @@ Generated TQL reads handle PQ’s 1,000-row cap transparently: a capped response
 * **The time window** never narrows, since a time field in your query’s output need not refer to the time that `start` and `end` select.
 
 Our [KQL optimization reference](optimizations/kql.md) lists the filters that translate and the queries that stay unchanged.
+
+## SPL source
+
+[`from_splunk`](https://tenzir.com/docs/reference/operators/from_splunk.md) runs a Splunk search. With `search`, you write the search in SPL, and the operator appends `search`, `fields`, and `head` stages to it. With `index`, Tenzir writes the search for the indexes, and the prefilters extend it:
+
+* **Filters are prefilters.** Splunk returns every value as a string, and its `search` command matches strings case-insensitively and reads `*` as a wildcard. A pushed filter therefore keeps every event that could match, and Tenzir evaluates every original predicate as well.
+* **Projections** become a `fields` stage. Without a projection, the operator appends `fields *`, since Splunk otherwise returns only the fields that the search references.
+* **Limits** go into the search only if no [`where`](https://tenzir.com/docs/reference/operators/where.md) precedes the [`head`](https://tenzir.com/docs/reference/operators/head.md), and never into a search with commands that have side effects, such as `outputlookup`.
+* **The time window** never narrows, since a `_time` field in the results need not refer to the time that `earliest` and `latest` select.
+
+Our [SPL optimization reference](optimizations/spl.md) lists the filters that translate and the searches that stay unchanged.
 
 ## Filters by database
 

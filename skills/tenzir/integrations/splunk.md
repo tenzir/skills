@@ -34,18 +34,21 @@ For more details, see the documentation for the [`to_splunk`](https://tenzir.com
 
 ### Collect Splunk search results
 
-Use [`from_splunk`](https://tenzir.com/docs/reference/operators/from_splunk.md) to run a bounded search through the Search Head management API and emit every result as an event:
+Use [`from_splunk`](https://tenzir.com/docs/reference/operators/from_splunk.md) to run a bounded search through the Search Head management API and emit every result as an event. Name the indexes to read with `index` and filter the events in TQL:
 
 ```tql
 from_splunk "https://splunk.example.com:8089",
-  search="search index=main sourcetype=linux_secure",
+  index="main",
   earliest="-15m",
   latest="-5m",
   headers={
     Authorization: secret("splunk-rest-authorization"),
   }
+where sourcetype == "linux_secure" and user == "root"
 publish "splunk-results"
 ```
+
+Tenzir adds the filters to the search that it sends as prefilters, so Splunk drops most non-matching events before returning results. Splunk’s `search` command matches strings case-insensitively, so it can still return a few extra events, such as `ROOT` for `user == "root"`, and Tenzir applies the exact filter to every result. Tenzir also infers numbers, booleans, IP addresses, and timestamps from the strings that Splunk returns. To run your own SPL instead, pass a search as you would type it in Splunk Web, such as `search="index=main sourcetype=linux_secure | stats count by user"`. Our [SPL optimization reference](../reference/optimizations/spl.md) describes which filters reach Splunk.
 
 Tenzir initiates the connection to Splunk. Store the complete REST API authorization header value, such as `Bearer <authentication-token>`, `Splunk <session-key>`, or `Basic <base64-encoded-credentials>`, in the `splunk-rest-authorization` secret. A HEC token doesn’t authenticate search requests.
 

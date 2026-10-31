@@ -12,21 +12,50 @@ section: "Docs"
 Runs a Splunk search and returns its results as events.
 
 ```tql
-from_splunk url:string, search=string, earliest=string|time, latest=string|time,
-            headers=record, [options=record, tls=record, timeout=duration,
+from_splunk url:string, [search=string], [index=string|list<string>],
+            earliest=string|time, latest=string|time, headers=record,
+            [options=record, tls=record, timeout=duration,
             connection_timeout=duration, max_retry_count=int,
-            retry_delay=duration]
+            retry_delay=duration, raw=bool]
 ```
 
 ## Description
 
 The `from_splunk` operator sends one search request to a Splunk Search Head and returns every search result as a Tenzir event. Tenzir initiates the connection to Splunk. Splunk doesn’t need outbound network access to Tenzir.
 
-For each invocation, the operator sends a form-encoded `POST` request to the Splunk management API endpoint `/services/search/v2/jobs/export`. It requests final JSON results and streams them into the pipeline without buffering the complete response. The export endpoint returns one streamed HTTP response, so the operator doesn’t issue pagination requests. Splunk envelope fields such as `preview`, `offset`, and `lastrow` aren’t included in the output.
+Pass exactly one of `index` and `search`. With `index`, Tenzir writes the search for the events of one or more indexes, and you filter the events in TQL. With `search`, Tenzir runs your Splunk Search Processing Language (SPL) search. In both cases, the operator adds the work of the [`where`](https://tenzir.com/docs/reference/operators/where.md), [`select`](https://tenzir.com/docs/reference/operators/select.md), and [`head`](https://tenzir.com/docs/reference/operators/head.md) operators that follow it to the search, so that Splunk returns fewer results, as [Optimizations](from_splunk.md#optimizations) describes.
 
-The operator preserves the fields inside each Splunk `result` record and assigns the schema name `tenzir.splunk` to the resulting events. It infers Tenzir types from supported string representations, but doesn’t parse `_raw` or normalize field names.
+For each invocation, the operator sends a form-encoded `POST` request to the Splunk management API endpoint `/services/search/v2/jobs/export`. It requests final JSON results and streams them into the pipeline without buffering the complete response. The export endpoint returns one streamed HTTP response, so the operator doesn’t issue pagination requests.
 
-Splunk `ERROR` and `FATAL` response messages fail the pipeline. The diagnostic includes Splunk’s message and the submitted SPL query. Splunk `WARN` messages produce Tenzir warnings without discarding valid search results.
+Splunk `ERROR` and `FATAL` response messages fail the pipeline. The diagnostic includes Splunk’s message and the search as Tenzir sent it, including the stages that Tenzir appended. Splunk `WARN` messages produce Tenzir warnings without discarding valid search results.
+
+### Result fields
+
+The operator preserves the fields inside each Splunk `result` record and assigns the schema name `tenzir.splunk` to the resulting events. It removes Splunk’s `preview`, `offset`, and `lastrow` export-envelope fields.
+
+Splunk’s export endpoint returns only the fields that a search references, plus default fields such as `_raw`, `_time`, `host`, `source`, `sourcetype`, `index`, `splunk_server`, and `linecount`. To return every extracted field, the operator appends `| fields *` to the search. When an operator that follows, such as [`select`](https://tenzir.com/docs/reference/operators/select.md), names the fields that the pipeline needs, the operator appends a `fields` stage with these fields instead.
+
+The appended `fields *` doesn’t bring back fields that an earlier `fields - <field>` command in your search removed. After a transforming command such as `stats` or `table`, it has no effect. Splunk result fields such as `_raw`, `_bkt`, and `_indextime` are available unless the search removes them.
+
+Splunk field names are flat. The operator keeps a name such as `obj.k` or `tags{}` as a single top-level field, so refer to it as `this["obj.k"]` in TQL. The operator doesn’t normalize field names and doesn’t parse the event text in `_raw` into fields.
+
+### Result types
+
+Splunk returns every field value as a string. The operator infers numbers, booleans, IP addresses, subnets, timestamps, and durations from these strings, so that you can compare the values like other typed values, as in `where status >= 500`. Strings that don’t spell one of these types remain strings. Splunk returns multivalue fields as lists, and the operator infers the types of their elements in the same way.
+
+Inference can change how a value reads. For example, the string `"007"` becomes the number `7`. Set [`raw=true`](https://tenzir.com/docs/reference/operators/from_splunk.md#raw--bool-optional) to keep every value as the string that Splunk returns.
+
+Splunk renders `_time` as a string in the search user’s time zone. Tenzir infers a `time` value when the string uses a supported timestamp format. This includes timestamps with `GMT`, `UTC`, `UT`, `Z`, or a numeric UTC offset.
+
+Tenzir currently doesn’t parse named non-zero-offset zones such as `PDT`, `EST`, or `CET`. These abbreviations can be ambiguous, so `_time` remains a string when Splunk returns one of them. Format `_time` with a numeric offset in the search to get a `time` value regardless of the search user’s time zone:
+
+```tql
+search=r#"index=main | eval _time=strftime(_time, "%FT%T.%Q%:z")"#
+```
+
+For example, Splunk formats a UTC timestamp as `2025-01-01T00:00:00.000+00:00`, which Tenzir infers as a `time` value.
+
+Tenzir sends a comparison of `_time` with a timestamp to Splunk in epoch seconds, which matches Splunk’s own `_time` values. Since a search like this one changes `_time`, the operator keeps such comparisons in Tenzir whenever your `search` contains the text `_time`, so a [`where`](https://tenzir.com/docs/reference/operators/where.md) on `_time` still works after the `eval`.
 
 ### `url: string`
 
@@ -36,19 +65,21 @@ For Splunk Cloud Platform, use `https://<deployment-name>.splunkcloud.com:8089`.
 
 ### `search = string`
 
-The Splunk Search Processing Language (SPL) query to run.
+The SPL search to run. Use exactly one of `search` and `index`.
 
-The Splunk account must have permission to run the query and read every index that the query accesses.
+The Splunk account must have permission to run the search and read every index that the search accesses.
 
-An ordinary search copied from Splunk Web, such as `index=main`, must begin with the `search` command when you submit it through the REST API. Generating commands usually begin with `|` and don’t need the prefix.
+Write the search as you would type it in Splunk Web, such as `index=main sourcetype=linux_secure`. The REST API requires a search to begin with a command, so Tenzir prepends the `search` command unless your search already begins with `search` or with `|`, as generating commands such as `| makeresults` or `| tstats` do. Leading whitespace and comments don’t count for this check. The search must contain more than whitespace.
 
-Use a [raw string](../expressions.md#string) when the SPL query contains quotes:
+The operator appends stages to your search for the operators that follow it, as [Optimizations](from_splunk.md#optimizations) describes. To read events without writing SPL, use `index` and filter the events in TQL.
+
+Use a [raw string](../expressions.md#string) when the search contains quotes:
 
 ```tql
-search=r#"search index=main user="Jane Doe" | eval label="login event""#
+search=r#"index=main user="Jane Doe" | eval label="login event""#
 ```
 
-Use a [format string](../expressions.md#format-strings-f-strings) to include TQL variables in the query. Escape quotes that belong to the resulting SPL query:
+Use a [format string](../expressions.md#format-strings-f-strings) to include TQL variables in the search. Escape quotes that belong to the resulting SPL search:
 
 ```tql
 let $index = "main"
@@ -56,13 +87,21 @@ let $user = "Jane Doe"
 
 
 from_splunk "https://splunk-search-head.example.com:8089",
-  search=f"search index={$index} user=\"{$user}\"",
+  search=f"index={$index} user=\"{$user}\"",
   earliest="-15m",
   latest="-5m",
   headers={
     Authorization: secret("splunk-rest-authorization"),
   }
 ```
+
+### `index = string|list<string>`
+
+The Splunk indexes to read. Use exactly one of `search` and `index`.
+
+Tenzir writes the search for you. A single index, such as `index="main"`, becomes the search `search index="main"`. A list, such as `index=["main", "web_*"]`, becomes `search index IN ("main", "web_*")`. Index names can contain the `*` wildcard. Tenzir adds the filters of the [`where`](https://tenzir.com/docs/reference/operators/where.md) operators that follow to this search, so you can filter the events in TQL instead of SPL.
+
+Each index name must be a nonempty string, and a list must contain at least one name. The Splunk account must have permission to read every index.
 
 ### `earliest = string|time`
 
@@ -146,6 +185,12 @@ The base delay between retry attempts. The operator uses the same retry behavior
 
 Defaults to `1s`.
 
+### `raw = bool (optional)`
+
+Whether to keep every field value as the string that Splunk returns instead of inferring types, as [Result types](from_splunk.md#result-types) describes.
+
+Defaults to `false`. With `raw=true`, filters compare strings, as in `where status == "500"`.
+
 ### `tls = record (optional)`
 
 TLS configuration. Provide an empty record (`tls={}`) to enable TLS with defaults or set fields to customize it.
@@ -175,47 +220,83 @@ To trust a private certificate authority, set `tls.cacert` to its CA bundle:
 tls={cacert: "/etc/tenzir/splunk-ca.pem"}
 ```
 
+## Optimizations
+
+The operator adds SPL to the search for the [`where`](https://tenzir.com/docs/reference/operators/where.md), [`select`](https://tenzir.com/docs/reference/operators/select.md), and [`head`](https://tenzir.com/docs/reference/operators/head.md) operators that follow it, so that Splunk returns fewer results and fields. With `search`, the operator appends `search`, `fields`, and `head` stages to your search, each on a new line. With `index`, the prefilters extend the search that Tenzir writes. For example, the pipeline in [Filter the events of an index](from_splunk.md#filter-the-events-of-an-index) sends this search:
+
+```text
+search index="main" source="tenzir-docs-auth" outcome="fail*"
+| fields outcome, src_ip, user, _time, source
+```
+
+* **Filters** become prefilters that keep every result that could match. Splunk’s `search` command matches strings case-insensitively and reads `*` as a wildcard, so Tenzir still evaluates every predicate locally. Comparisons of top-level fields with numbers, strings, and booleans, comparisons of `_time` with timestamps unless your `search` contains `_time`, `in` lists, `starts_with`, `ends_with`, substring tests, and `!= null` reach Splunk. Negation, `!=` against a value, `== null`, regular expressions, IP comparisons, nested field paths, and arithmetic stay local, as do other predicates on `_time` and predicates on fields named like search modifiers, such as `earliest` or `latest`.
+* **Projections** become a `fields` stage with the fields that the pipeline reads, including those of local predicates. Without a projection, the operator appends `fields *`.
+* **Limits** become a `head` stage only if no [`where`](https://tenzir.com/docs/reference/operators/where.md) precedes the [`head`](https://tenzir.com/docs/reference/operators/head.md). Searches with commands that have side effects, such as `outputlookup` or `collect`, or with macros never get a `head` stage. The operator stops reading results once it reaches the limit, which can still end such a search early, as [Limitations](from_splunk.md#limitations) describes.
+
+Splunk and Tenzir can disagree on what parses as a number and on case folding beyond ASCII. In such rare cases, a prefilter can drop a result that Tenzir alone would keep.
+
+The operator never narrows the `earliest` and `latest` window. It sends a search unchanged, without `fields *`, if it can’t tokenize the search, such as one with an unterminated string or a lone apostrophe as in `user=O'Brien`, or if the search ends in `|`. The page on [SPL optimizations](../optimizations/spl.md) describes the rules in detail.
+
 ## Examples
 
-### Query authentication events
+### Filter the events of an index
 
-Assume Splunk already contains two authentication events under the source `tenzir-docs-auth`:
+Assume the `main` index in Splunk contains three authentication events under the source `tenzir-docs-auth`:
 
 Events in Splunk
 
 ```tql
-{_time: 2025-01-01T00:00:00Z, user: "alice", outcome: "success"}
-{_time: 2025-01-01T00:01:00Z, user: "bob", outcome: "failure"}
+{_time: 2025-01-01T00:00:00Z, user: "alice", action: "login", src_ip: "192.0.2.10", outcome: "success"}
+{_time: 2025-01-01T00:01:00Z, user: "bob", action: "login", src_ip: "198.51.100.24", outcome: "failure"}
+{_time: 2025-01-01T00:02:00Z, user: "alice", action: "logout", src_ip: "192.0.2.10", outcome: "success"}
 ```
 
-Query the events and select the fields that the pipeline needs:
+Read the failed attempts and select the fields that the pipeline needs:
 
 ```tql
 from_splunk "https://splunk-search-head.example.com:8089",
-  search=r#"search index=main source="tenzir-docs-auth" | fields _time user outcome | sort 0 user"#,
+  index="main",
   earliest="1735689599",
   latest="1735689780",
   headers={
     Authorization: secret("splunk-rest-authorization"),
   }
+where source == "tenzir-docs-auth" and outcome.starts_with("fail")
+select _time, user, src_ip, outcome
 ```
 
 ```tql
-{_time: 2025-01-01T00:00:00Z, user: "alice", outcome: "success"}
-{_time: 2025-01-01T00:01:00Z, user: "bob", outcome: "failure"}
+{_time: 2025-01-01T00:01:00Z, user: "bob", src_ip: 198.51.100.24, outcome: "failure"}
 ```
 
-Splunk renders `_time` as a JSON string in the search user’s time zone. Tenzir infers a `time` value when the string uses a supported timestamp format. This includes timestamps with `GMT`, `UTC`, `UT`, `Z`, or a numeric UTC offset.
+The filter reaches Splunk as part of the search, as [Optimizations](from_splunk.md#optimizations) shows, and Tenzir infers the `time` and `ip` values from the strings that Splunk returns. Pass a list, such as `index=["main", "web_*"]`, to read several indexes.
 
-Tenzir currently doesn’t parse named non-zero-offset zones such as `PDT`, `EST`, or `CET`. These abbreviations can be ambiguous, so `_time` remains a string when Splunk returns one of them. Format `_time` with a numeric offset in the SPL query to get a `time` value regardless of the search user’s time zone:
+### Run an SPL search
+
+Use `search` to run SPL, such as a statistics search over the same events:
 
 ```tql
-search=r#"search index=main | eval _time=strftime(_time, "%FT%T.%Q%:z")"#
+from_splunk "https://splunk-search-head.example.com:8089",
+  search=r#"index=main source="tenzir-docs-auth" | stats count by user"#,
+  earliest="1735689599",
+  latest="1735689780",
+  headers={
+    Authorization: secret("splunk-rest-authorization"),
+  }
+where count > 1
 ```
 
-For example, Splunk formats a UTC timestamp as `2025-01-01T00:00:00.000+00:00`, which Tenzir infers as a `time` value.
+```tql
+{user: "alice", count: 2}
+```
 
-Splunk result fields such as `_raw`, `_bkt`, and `_indextime` are available unless the SPL query removes them. The operator always removes Splunk’s `preview`, `offset`, and `lastrow` export-envelope fields.
+Splunk counts the events, and the filter applies to the statistics rows in Splunk and again in Tenzir. Splunk receives this search:
+
+```text
+search index=main source="tenzir-docs-auth" | stats count by user
+| search count>1
+| fields *
+```
 
 ### Use Tenzir times as search boundaries
 
@@ -227,7 +308,7 @@ let $end = 2026-07-14T09:00:00Z
 
 
 from_splunk "https://splunk-search-head.example.com:8089",
-  search="search index=main sourcetype=linux_secure",
+  search="index=main sourcetype=linux_secure",
   earliest=$start,
   latest=$end,
   headers={
@@ -242,7 +323,7 @@ Use Splunk index-time bounds to collect events that arrived late. This example r
 ```tql
 every 5m {
   from_splunk "https://splunk-search-head.example.com:8089",
-    search="search index=main sourcetype=linux_secure",
+    search="index=main sourcetype=linux_secure",
     earliest="-24h",
     latest="-5m",
     options={
@@ -263,6 +344,8 @@ The `now` parameter gives every relative boundary in one invocation the same anc
 ## Limitations
 
 The operator runs one finite export request per invocation. It rejects real-time bounds and search parameters before sending the request. It doesn’t create search jobs, poll search IDs, manage saved searches, schedule requests, persist checkpoints, or deduplicate results. Scheduling and stateful processing belong in the surrounding pipeline.
+
+When the pipeline ends early, for example because a [`head`](https://tenzir.com/docs/reference/operators/head.md) has enough events, the operator closes the export request, which may end the Splunk search before its side effects complete. Don’t follow a search with commands such as `outputlookup` or `collect` by [`head`](https://tenzir.com/docs/reference/operators/head.md) if the side effects must complete.
 
 ## See also
 

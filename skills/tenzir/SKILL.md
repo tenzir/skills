@@ -905,6 +905,7 @@ Functions appear in expressions and take positional and/or named arguments, prod
 - [Microsoft SQL Server](reference/optimizations/microsoft-sql.md)
 - [MySQL](reference/optimizations/mysql.md)
 - [SentinelOne](reference/optimizations/sentinelone.md)
+- [SPL](reference/optimizations/spl.md)
 
 #### Platform Index
 
