@@ -163,7 +163,7 @@ Our [KQL optimization reference](optimizations/kql.md) lists the filters that tr
 
 ## SPL source
 
-[`from_splunk`](https://tenzir.com/docs/reference/operators/from_splunk.md) runs a Splunk search. With `search`, you write the search in SPL, and the operator appends `search`, `fields`, and `head` stages to it. With `index`, Tenzir writes the search for the indexes, and the prefilters extend it:
+[`from_splunk`](https://tenzir.com/docs/reference/operators/from_splunk.md) runs a Splunk search. With `search`, you write the search in SPL, and the operator appends `search`, `where`, `fields`, and `head` stages to it. With `index`, Tenzir writes the search for the indexes, and the prefilters extend it:
 
 * **Filters are prefilters.** Splunk returns every value as a string, and its `search` command matches strings case-insensitively and reads `*` as a wildcard. A pushed filter therefore keeps every event that could match, and Tenzir evaluates every original predicate as well.
 * **Projections** become a `fields` stage. Without a projection, the operator appends `fields *`, since Splunk otherwise returns only the fields that the search references.

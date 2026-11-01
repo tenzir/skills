@@ -17,11 +17,12 @@ The operator extends the search in one of two ways, depending on whether you pas
 
 ### Searches that you write
 
-With `search`, the operator first prepends the `search` command unless your search begins with `search` or with `|`, as Splunk Web does. Leading whitespace and comments don’t count for this check. It then sends your search as you wrote it and appends up to three stages, each on a new line, in this order:
+With `search`, the operator first prepends the `search` command unless your search begins with `search` or with `|`, as Splunk Web does. Leading whitespace and comments don’t count for this check. It then sends your search as you wrote it and appends up to four stages, each on a new line, in this order:
 
 1. A `search` stage with the [prefilters](spl.md#filters-are-prefilters) of the [`where`](https://tenzir.com/docs/reference/operators/where.md) operators that follow the source.
-2. A `fields` stage with the top-level fields that the pipeline reads.
-3. A `head` stage with the limit of a [`head`](https://tenzir.com/docs/reference/operators/head.md), if no [`where`](https://tenzir.com/docs/reference/operators/where.md) precedes it.
+2. A `where` stage with the [negations](spl.md#negations) among these prefilters.
+3. A `fields` stage with the top-level fields that the pipeline reads.
+4. A `head` stage with the limit of a [`head`](https://tenzir.com/docs/reference/operators/head.md), if no [`where`](https://tenzir.com/docs/reference/operators/where.md) precedes it.
 
 Without a projection, the `fields` stage is `fields *`, as [Fields](spl.md#fields) explains, so a search that only a [`head`](https://tenzir.com/docs/reference/operators/head.md) follows ends in `| fields *` and `| head N`. For example, the pipeline
 
@@ -47,7 +48,7 @@ The stages apply to the results of your search, so they work with any search tha
 
 ### Searches for indexes
 
-With `index`, Tenzir writes the search itself. The search consists of a `search` command for the indexes, and the prefilters extend this command instead of following in a stage of their own. The `fields` and `head` stages follow as before. For example, the pipeline
+With `index`, Tenzir writes the search itself. The search consists of a `search` command for the indexes, and the prefilters extend this command instead of following in a stage of their own. The `where`, `fields`, and `head` stages follow as before. For example, the pipeline
 
 ```tql
 from_splunk "https://splunk.example.com:8089",
@@ -94,29 +95,79 @@ These predicates on top-level fields go into the search:
 * `starts_with`, `ends_with`, and substring search with `"needle" in haystack`, including `ignore_case=true` with an ASCII string literal.
 * Equality and list membership after `to_lower()` or `to_upper()`, with ASCII string literals.
 * Presence checks with `!= null`.
+* [Negations](spl.md#negations) with `!=`, `not (x == …)`, and `not (x in […])` against strings, numbers, and booleans.
+* [IP address](spl.md#ip-addresses) equality, address lists, and subnet membership, also after `ip()`.
 * The boolean operators `and` and `or` of these predicates.
 
 Predicates on `_time` and on fields named like Splunk search modifiers follow [stricter rules](spl.md#filters-that-stay-in-tenzir). The following table shows how the predicates translate:
 
-| TQL predicate              | SPL term                   |
-| -------------------------- | -------------------------- |
-| `n > 6`                    | `n>6`                      |
-| `n == 7`                   | `n=7`                      |
-| `user == "alice"`          | `user="alice"`             |
-| `flag`                     | `flag=true`                |
-| `user in ["alice", "bob"]` | `user IN ("alice", "bob")` |
-| `n in [5, 7]`              | `n IN (5, 7)`              |
-| `user.starts_with("al")`   | `user="al*"`               |
-| `user.ends_with("ce")`     | `user="*ce"`               |
-| `"lic" in user`            | `user="*lic*"`             |
-| `action != null`           | `action=*`                 |
-| `n > 6 or user == "bob"`   | `(n>6 OR user="bob")`      |
+| TQL predicate              | SPL term                                               |
+| -------------------------- | ------------------------------------------------------ |
+| `n > 6`                    | `n>6`                                                  |
+| `n == 7`                   | `n=7`                                                  |
+| `user == "alice"`          | `user="alice"`                                         |
+| `flag`                     | `flag=true`                                            |
+| `user in ["alice", "bob"]` | `user IN ("alice", "bob")`                             |
+| `n in [5, 7]`              | `n IN (5, 7)`                                          |
+| `user.starts_with("al")`   | `user="al*"`                                           |
+| `user.ends_with("ce")`     | `user="*ce"`                                           |
+| `"lic" in user`            | `user="*lic*"`                                         |
+| `action != null`           | `action=*`                                             |
+| `src == 192.0.2.10`        | `(src="192.0.2.10/32" OR src="::ffff:192.0.2.10/128")` |
+| `src in 10.0.0.0/8`        | `(src="10.0.0.0/8" OR src="::ffff:10.0.0.0/104")`      |
+| `src == 2001:db8::1`       | `src="2001:db8::1/128"`                                |
+| `n > 6 or user == "bob"`   | `(n>6 OR user="bob")`                                  |
 
 The `search` command combines terms separated by spaces with `AND`, so the prefilters of several predicates follow each other on one line.
 
 Numbers go into the search without an exponent, so a floating-point literal that needs one, such as `0.0000001`, stays local. Integer literals from −2^53 through 2^53 are supported. At either endpoint, a strict `<` or `>` becomes `<=` or `>=` in the prefilter, and Tenzir still evaluates the original strict comparison locally.
 
 Field names that aren’t plain identifiers, or that are keywords of the `search` command such as `AND`, `OR`, `NOT`, `IN`, `TERM`, and `CASE`, go into the search in double quotes, as in `"weird field"="x"`. Strings escape `"` and `\` with a backslash.
+
+### Negations
+
+TQL’s `!=` holds for events without the field, and for fields with several values, which Tenzir reads as a list that differs from every string or number. The `search` command can’t keep both: `NOT user="alice"` drops an event if any value of a multivalue `user` matches, and `user!="alice"` also drops events without `user`. Negations therefore go into a `where` stage after the `search` terms, which keeps these events explicitly and compares the remaining values exactly and case-sensitively:
+
+| TQL predicate                    | `where` expression                                                                       |
+| -------------------------------- | ---------------------------------------------------------------------------------------- |
+| `user != "alice"`                | `(isnull(user) OR mvcount(user)>1 OR if(user=="alice", false(), true()))`                |
+| `not (user == "alice")`          | `(isnull(user) OR mvcount(user)>1 OR if(user=="alice", false(), true()))`                |
+| `not (user in ["alice", "bob"])` | `(isnull(user) OR mvcount(user)>1 OR if(user=="alice" OR user=="bob", false(), true()))` |
+| `n != 5`                         | `(isnull(n) OR mvcount(n)>1 OR if(n==5, false(), true()))`                               |
+| `flag != true`                   | `(isnull(flag) OR mvcount(flag)>1 OR if(flag=="true", false(), true()))`                 |
+
+The `if` also keeps values that don’t compare, such as the string `"abc"` in `n != 5`, as TQL does. Several negations join with `AND` in one `where` stage. For example, `search="index=main"` followed by `where user != "alice" and n > 6` sends:
+
+```text
+search index=main
+| search n>6
+| where (isnull(user) OR mvcount(user)>1 OR if(user=="alice", false(), true()))
+| fields *
+```
+
+A disjunction can’t mix `search` terms and negations, so `where user != "alice" or n > 6` stays in Tenzir. A conjunction inside a disjunction drops its negations, which only widens the prefilter.
+
+The following negations stay in Tenzir:
+
+* Strings that the operator infers as another type, such as `"5"`, `"true"`, or `"192.0.2.1"`. Splunk’s `"5"` arrives in Tenzir as the number `5`, which differs from the string `"5"`, so `x != "5"` keeps it.
+* Strings with `"` or `\`.
+* Negations of numbers and booleans with `raw=true`, where Splunk’s `"5"` stays a string that differs from the number `5`.
+* Integer literals of exactly ±2^53, also in lists, since an adjacent integer can round onto them.
+* Negations of other predicates, such as `not (n > 6)` or `not user.starts_with("a")`.
+
+### IP addresses
+
+Splunk’s CIDR matching parses the values of a field as addresses, so IP predicates go into the search as networks. An address becomes a single-host network, which matches every spelling of it, such as `2001:0db8:0:0:0:0:0:1` for `2001:db8::1`:
+
+| TQL predicate                      | SPL term                                                                        |
+| ---------------------------------- | ------------------------------------------------------------------------------- |
+| `src == 192.0.2.10`                | `(src="192.0.2.10/32" OR src="::ffff:192.0.2.10/128")`                          |
+| `src.ip() == 192.0.2.10`           | `(src="192.0.2.10/32" OR src="::ffff:192.0.2.10/128")`                          |
+| `src in [192.0.2.10, 2001:db8::1]` | `(src="192.0.2.10/32" OR src="::ffff:192.0.2.10/128" OR src="2001:db8::1/128")` |
+| `src in 10.0.0.0/8`                | `(src="10.0.0.0/8" OR src="::ffff:10.0.0.0/104")`                               |
+| `src in 2001:db8::/32`             | `src="2001:db8::/32"`                                                           |
+
+Tenzir reads an IPv4 address and its IPv4-mapped IPv6 spelling, such as `::ffff:192.0.2.10`, as the same address, so an IPv4 predicate also names the mapped spelling. Splunk matches an IPv4 network only against IPv4 addresses and an IPv6 network only against IPv6 addresses, so a network that covers both, such as `::/0`, stays in Tenzir, as do ordering comparisons and negations of addresses.
 
 ### Timestamps
 
@@ -145,13 +196,13 @@ Splunk holds other fields with timestamps as text, which the `search` command ca
 
 Everything else runs only in Tenzir, with the same result. This includes:
 
-* Negation with `not`, inequality with `!=` against a value, and `== null`.
+* `== null`, and the negations that [Negations](spl.md#negations) excludes.
 * Ordering comparisons with strings.
 * Comparisons of fields other than `_time` with timestamps.
 * Comparisons of `_time` with timestamps when your `search` contains the text `_time`, as [Timestamps](spl.md#timestamps) explains.
 * Predicates on `_time` other than comparisons with a timestamp and `!= null`, such as string equality, `in` lists, `starts_with`, `ends_with`, substring search, and comparisons with numbers. Splunk holds `_time` as epoch seconds, while Tenzir receives a formatted string.
 * Predicates on fields named like Splunk search modifiers, such as `earliest`, `latest`, `starttime`, `hosttag`, or `savedsearch`, since `name=value` would act as a modifier instead of a comparison. The names compare case-insensitively, so `Latest` counts as well. A `fields` stage still names these fields.
-* Regular expressions, IP address comparisons, and subnet membership.
+* Regular expressions, ordering comparisons and negations of IP addresses, and networks that span IPv4 and IPv6, such as `::/0`.
 * Recursive string search with the `search` function.
 * Case-insensitive string matching with non-ASCII literals.
 * Arithmetic, comparisons between two fields, and function calls outside the supported patterns.
