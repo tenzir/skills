@@ -875,12 +875,14 @@ has_error = "error" in message
 
 To negate membership tests, use `not in` or `not (value in container)`.
 
-A list may hold elements of different types. `in` compares the value against each element, so it finds a match regardless of the other elements’ types:
+A list may hold elements of different types. `in` compares the value against each element with `==`, so it finds a match regardless of the other elements’ types. Booleans and numbers are different types, so `false in [0, 1]` is `false`, while numbers match across their types, so `1 in [1.0]` is `true`:
 
 ```tql
 from {
   found: "x" in [1d, "x"],
   missing: "y" in [1d, "x"],
+  bool_vs_number: false in [0, 1],
+  number_vs_float: 1 in [1.0],
 }
 ```
 
@@ -888,6 +890,8 @@ from {
 {
   found: true,
   missing: false,
+  bool_vs_number: false,
+  number_vs_float: true,
 }
 ```
 

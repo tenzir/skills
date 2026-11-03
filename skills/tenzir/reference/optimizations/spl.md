@@ -91,7 +91,7 @@ These predicates on top-level fields go into the search:
 * Comparisons with `==`, `<`, `<=`, `>`, and `>=` between a field and a number, with the number on either side.
 * Equality between a field and a string or a boolean, including a bare boolean field, as in `where flag`.
 * Comparisons of `_time` with a [timestamp](spl.md#timestamps).
-* Membership with `in` and a list of string, number, or boolean literals.
+* Membership with `in` and a list of string, number, or boolean literals, also of several types, as in `x in [1, "a", true]`.
 * `starts_with`, `ends_with`, and substring search with `"needle" in haystack`, including `ignore_case=true` with an ASCII string literal.
 * Equality and list membership after `to_lower()` or `to_upper()`, with ASCII string literals.
 * Presence checks with `!= null`.
@@ -109,6 +109,8 @@ Predicates on `_time` and on fields named like Splunk search modifiers follow [s
 | `flag`                     | `flag=true`                                            |
 | `user in ["alice", "bob"]` | `user IN ("alice", "bob")`                             |
 | `n in [5, 7]`              | `n IN (5, 7)`                                          |
+| `flag in [true]`           | `flag IN (true)`                                       |
+| `x in [1, "a", false]`     | `x IN (1, "a", false)`                                 |
 | `user.starts_with("al")`   | `user="al*"`                                           |
 | `user.ends_with("ce")`     | `user="*ce"`                                           |
 | `"lic" in user`            | `user="*lic*"`                                         |
@@ -151,6 +153,7 @@ The following negations stay in Tenzir:
 
 * Strings that the operator infers as another type, such as `"5"`, `"true"`, or `"192.0.2.1"`. Splunk’s `"5"` arrives in Tenzir as the number `5`, which differs from the string `"5"`, so `x != "5"` keeps it.
 * Strings with `"` or `\`.
+* Negations of fields whose names contain characters other than letters, digits, non-ASCII characters, spaces, and `_-.{}@/`, or that start or end with a space. Splunk’s `where` stage fails the search for names with `|` or brackets, and reads another field for names with `\` or `::`.
 * Negations of numbers and booleans with `raw=true`, where Splunk’s `"5"` stays a string that differs from the number `5`.
 * Integer literals of exactly ±2^53, also in lists, since an adjacent integer can round onto them.
 * Negations of other predicates, such as `not (n > 6)` or `not user.starts_with("a")`.
@@ -196,6 +199,7 @@ Splunk holds other fields with timestamps as text, which the `search` command ca
 
 Everything else runs only in Tenzir, with the same result. This includes:
 
+* All predicates of a search that contains `fieldformat` or a macro, including negations and IP address filters. Its results show formatted values while the `search` and `where` stages compare the original ones. The projection and the limit still apply.
 * `== null`, and the negations that [Negations](spl.md#negations) excludes.
 * Ordering comparisons with strings.
 * Comparisons of fields other than `_time` with timestamps.
@@ -254,6 +258,79 @@ search index IN ("main", "web_*")
 | fields user
 | head 1
 ```
+
+## Aggregations
+
+When a [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) follows [`from_splunk`](https://tenzir.com/docs/reference/operators/from_splunk.md), either directly or after [`where`](https://tenzir.com/docs/reference/operators/where.md) operators with [exact filters](spl.md#exact-filters), uses only the functions and fields below, and isn’t a summary that [stays in Tenzir](spl.md#summaries-that-stay-in-tenzir), Splunk computes the summary with `stats` and returns one row per group instead of every result of the search. This also applies to [`top`](https://tenzir.com/docs/reference/operators/top.md) and [`rare`](https://tenzir.com/docs/reference/operators/rare.md), and to summaries behind [`select`](https://tenzir.com/docs/reference/operators/select.md), [`drop`](https://tenzir.com/docs/reference/operators/drop.md), [`set`](https://tenzir.com/docs/reference/operators/set.md), and assignments that keep or rename the fields that the summary reads. For example, `index="main"` followed by `summarize sourcetype, events=count(), users=count(user)` sends:
+
+```text
+search index="main"
+| eval tenzir_aggregate_0=case(isnull('sourcetype'), "n", mvcount('sourcetype')!=1, "m", match('sourcetype', "\x00"), "z", true(), "v" . 'sourcetype'), tenzir_aggregate_2=if(isnull('user'), null(), 1)
+| stats count as tenzir_count, count(tenzir_aggregate_2) as tenzir_aggregate_2 by tenzir_aggregate_0
+| appendpipe [stats count as tenzir_groups]
+```
+
+Splunk computes group keys on top-level fields, `count()`, `count(field)` as the number of events that have the field, and `min` and `max` of fields whose values are integers with up to 15 digits. The `eval` stage spells each key so that `stats` keeps events without the field, which [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) groups as `null`, and keeps an event with several values in one group instead of one per value. The last row counts the groups, because Splunk answers a search that fails to run with an empty response.
+
+Splunk returns every value as text and groups by that text. Tenzir checks each result and summarizes the events itself, with the same result, when:
+
+* type inference makes two keys equal, such as `5`, `005`, and `5.0`, or `::1` and `0:0:0:0:0:0:0:1`. With `raw=true`, keys stay text.
+* a key has several values or is a time relative to now, such as `now`.
+* a key contains a NUL character, at which `stats` cuts the key off.
+* a `min` or `max` sees a value other than such an integer, such as `2.5`, `x`, or `7`.
+* a group has an event that an [exact filter](spl.md#exact-filters) can’t decide.
+* rows are missing, Splunk reports a warning or an error, or the request fails.
+
+When Tenzir falls back, it sends the search a second time, without the summary. Exact filters stay in the second search as a `where` stage, and Tenzir evaluates them again on its results. Tenzir doesn’t report the messages or the failure of the first search, while those of the second search apply as for any search: warnings become Tenzir warnings, and errors fail the pipeline. Both requests carry Splunk’s `now` parameter with the time at which the first one started, so relative bounds such as `earliest="-1h"` and `latest="now"`, time modifiers in the search, `now()`, and `addinfo` cover the same window. Events that Splunk indexes between the two requests, such as late arrivals, and wall-clock values such as `time()` or the `_time` of `makeresults` can still differ. Tenzir emits the result of the second search.
+
+Groups arrive in Splunk’s order. Use [`sort`](https://tenzir.com/docs/reference/operators/sort.md) when you need a specific order.
+
+### Exact filters
+
+A [prefilter](spl.md#filters-are-prefilters) may keep events that the filter drops, because Tenzir drops them afterwards. A summary that Splunk computes leaves nothing to drop, so the filters before it must keep exactly the events that Tenzir keeps. These filters go into a `where` stage before the summary instead of the `search` command, since `where` compares strings byte by byte, while `search` ignores case and expands `*`. The following predicates on top-level fields are exact:
+
+* `==` and `in` with strings that type inference keeps as strings. Strings such as `"5"`, `"true"`, `"192.0.2.1"`, or `"now"`, which type inference turns into a number, a boolean, an IP address, or a time, aren’t exact. With `raw=true`, every string is.
+* `==` and `in` with `true` or `false`, and a bare field, as in `where flag`.
+* `==`, `<`, `<=`, `>`, `>=`, and `in` with numbers of up to 15 significant digits that need no exponent, such as `6`, `-1.5`, or `0.0001`.
+* `in` with a list that mixes these strings, booleans, and numbers, such as `x in [1, "a", true]`. As in TQL, each element compares by its own type.
+* `== null` and `!= null`.
+* [Negations](spl.md#negations) of these equalities and memberships with `!=`, `not (x == …)`, and `not (x in […])`.
+* The boolean operators `and` and `or` of these predicates.
+
+Comparisons with booleans and numbers are exact only without `raw=true`. The following table shows how the predicates translate:
+
+| TQL predicate              | SPL `where` expression                                                        |
+| -------------------------- | ----------------------------------------------------------------------------- |
+| `user == "alice"`          | `(mvcount('user')==1 AND 'user'=="alice")`                                    |
+| `user in ["alice", "bob"]` | `(mvcount('user')==1 AND ('user'=="alice" OR 'user'=="bob"))`                 |
+| `flag`                     | `(mvcount('flag')==1 AND 'flag'=="true")`                                     |
+| `user != "bob"`            | `(isnull('user') OR mvcount('user')>1 OR if('user'=="bob", false(), true()))` |
+| `action == null`           | `isnull('action')`                                                            |
+| `action != null`           | `isnotnull('action')`                                                         |
+
+The `mvcount` check keeps a field with several values from matching: Tenzir reads it as a list, which equals no string.
+
+Splunk and Tenzir compare integers of up to 15 digits alike. Type inference also reads values such as `7.5`, `+8`, `1e3`, `1e999`, or `inf` as numbers, which Splunk compares differently. For `n > 6`, the `where` stage therefore keeps the integers greater than 6 and every value that may be a number, and an `eval` stage flags the events that only the latter keeps:
+
+```text
+| where (mvcount('n')==1 AND ((match('n', "^-?[0-9]{1,15}$") AND tonumber('n')>6) OR (NOT match('n', "^-?[0-9]{1,15}$") AND match('n', "[0-9]|[iI][nN][fF]|[nN][aA][nN]"))))
+| eval tenzir_filter_check=if((mvcount('n')==1 AND match('n', "^-?[0-9]{1,15}$") AND tonumber('n')>6), 0, 1)
+```
+
+If a group contains a flagged event, Tenzir falls back and summarizes the events itself.
+
+The search for a summary contains the `where` stage, but no `search` terms for the filters. Splunk thus reads every event of your search before it filters. To narrow a large search, put conditions on indexed fields, such as `sourcetype`, into your `search`.
+
+### Summaries that stay in Tenzir
+
+Everything else runs in Tenzir:
+
+* A summary after a [`where`](https://tenzir.com/docs/reference/operators/where.md) whose filter isn’t [exact](spl.md#exact-filters), such as ordering comparisons with strings, `starts_with`, regular expressions, IP addresses, `in` lists with `null` or with an element that isn’t exact on its own, such as `"5"`, other negations, strings with control characters, and filters whose `where` stage would exceed 16 KiB. Filters on `_time` aren’t exact either, since Splunk renders `_time` in the user’s time zone, which Tenzir may not parse. Put such filters into your `search`, and choose the time window with `earliest` and `latest`.
+* Other aggregation functions, and `min` and `max` with `raw=true`.
+* Fields that start with `_`, such as `_time` and `_raw`, and nested fields.
+* The `options` argument, and searches with commands that have side effects, such as `outputlookup` or `collect`, or with macros, since Tenzir may have to send the search twice.
+* Searches with `fieldformat`, whose formatted values `stats` doesn’t see.
+* Searches whose results may lack fields. Splunk returns no results when none of them has a field, while `stats` still counts them. A summary therefore runs in Splunk only for a search that starts with `search`, as every search for `index` does, or with `makeresults` without the `format` and `data` options, and then uses only commands that keep the fields of the results, such as `eval`, `rex`, `where`, `lookup`, `dedup`, `sort`, `head`, `spath`, `eventstats`, `streamstats`, and `fields` without `-`. Commands such as `fields -`, `table`, `rename`, `stats`, or `inputlookup` keep the summary in Tenzir. A field stays in the results even if `eval` assigns it `null()`: Splunk then returns the result as an empty object, which [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) counts as `stats` does.
 
 ## Time window
 

@@ -48,7 +48,7 @@ An optimization never changes the result of a pipeline, with a few deliberate ex
 * **IP addresses in string columns.** In TQL, a string never equals an `ip` value, so the comparison is `false`. When a database source compares a text column with an address, as in `src == 1.1.1.1`, it compares the canonical text of the address, `1.1.1.1`, instead, so that the common way of storing addresses as text works.
 * **Splunk searches.** The prefilters of [`from_splunk`](https://tenzir.com/docs/reference/operators/from_splunk.md) use Splunk’s `search` command, which may parse different strings as numbers than Tenzir, such as values with surrounding whitespace, and may fold the case of non-ASCII characters differently. A prefilter can then drop an event that Tenzir alone would keep.
 
-The [database pages](optimizations.md#filters-by-database) state which databases use these exceptions, and the [SPL page](optimizations/spl.md#filters-are-prefilters) describes the Splunk cases. Everything else the database cannot evaluate exactly like TQL runs in Tenzir, including when it would merely differ for `null` values, `NaN`, or text that differs only in case, accents, or trailing spaces.
+The [database pages](optimizations.md#filters-by-database) state which databases use these exceptions, and our [SPL page](optimizations/spl.md#filters-are-prefilters) describes the Splunk cases. Everything else the database cannot evaluate exactly like TQL runs in Tenzir, including when it would merely differ for `null` values, `NaN`, or text that differs only in case, accents, or trailing spaces.
 
 ## Operators that optimize
 
@@ -64,7 +64,7 @@ These operators act on hints:
 | [`from_microsoft_sql`](https://tenzir.com/docs/reference/operators/from_microsoft_sql.md)                 | In the query                 | Top-level columns          | In the query           | In the query          |
 | [`from_mysql`](https://tenzir.com/docs/reference/operators/from_mysql.md)                                 | In the query                 | Top-level columns          | In the query           | In the query          |
 | [`from_sentinelone_data_lake`](https://tenzir.com/docs/reference/operators/from_sentinelone_data_lake.md) | As prefilters in the query   | Including nested fields    | Without filters        | No                    |
-| [`from_splunk`](https://tenzir.com/docs/reference/operators/from_splunk.md)                               | As prefilters in the search  | Top-level fields           | Without filters        | No                    |
+| [`from_splunk`](https://tenzir.com/docs/reference/operators/from_splunk.md)                               | As prefilters in the search  | Top-level fields           | Without filters        | Without filters       |
 | [`read_parquet`](https://tenzir.com/docs/reference/operators/read_parquet.md)                             | While decoding, by row group | Including record fields    | Stops decoding         | No                    |
 | [`subscribe`](https://tenzir.com/docs/reference/operators/subscribe.md)                                   | At the node                  | No                         | No                     | No                    |
 | [`sort`](https://tenzir.com/docs/reference/operators/sort.md)                                             | Moved before the sort        | Passed on                  | Keeps the top `N`      | No                    |
@@ -126,7 +126,9 @@ If the source finds out only when it runs that it cannot compute the summary, fo
 
 [`from_clickhouse`](https://tenzir.com/docs/reference/operators/from_clickhouse.md), [`from_duckdb`](https://tenzir.com/docs/reference/operators/from_duckdb.md), [`from_microsoft_sql`](https://tenzir.com/docs/reference/operators/from_microsoft_sql.md), and [`from_mysql`](https://tenzir.com/docs/reference/operators/from_mysql.md) compute summaries with group keys, `count`, `min`, and `max`. The pages on [ClickHouse](optimizations/clickhouse.md#aggregations), [DuckDB](optimizations/duckdb.md#aggregations), [MySQL](optimizations/mysql.md#aggregations), and [SQL Server](optimizations/microsoft-sql.md#aggregations) list the details.
 
-[`from_sentinelone_data_lake`](https://tenzir.com/docs/reference/operators/from_sentinelone_data_lake.md) computes summaries with group keys and `count()` in SentinelOne when no filter restricts the events of its time window. Tenzir checks each result and summarizes the events itself when SentinelOne might group differently. The [SentinelOne page](optimizations/sentinelone.md#aggregations) lists the details. The other sources still aggregate in Tenzir.
+[`from_sentinelone_data_lake`](https://tenzir.com/docs/reference/operators/from_sentinelone_data_lake.md) computes summaries with group keys and `count()` in SentinelOne when no filter restricts the events of its time window. Tenzir checks each result and summarizes the events itself when SentinelOne might group differently. The [SentinelOne page](optimizations/sentinelone.md#aggregations) lists the details.
+
+[`from_splunk`](https://tenzir.com/docs/reference/operators/from_splunk.md) computes summaries with group keys, `count()`, `count(field)`, and `min` and `max` of integers in Splunk with `stats` if every [`where`](https://tenzir.com/docs/reference/operators/where.md) before the summary has an exact spelling in SPL and the search qualifies. Tenzir checks each result and summarizes the events itself when Splunk might group or aggregate differently, for example when type inference merges two keys. Our [SPL page](optimizations/spl.md#aggregations) lists the details. The other sources still aggregate in Tenzir.
 
 ## Database sources
 
@@ -168,6 +170,7 @@ Our [KQL optimization reference](optimizations/kql.md) lists the filters that tr
 * **Filters are prefilters.** Splunk returns every value as a string, and its `search` command matches strings case-insensitively and reads `*` as a wildcard. A pushed filter therefore keeps every event that could match, and Tenzir evaluates every original predicate as well.
 * **Projections** become a `fields` stage. Without a projection, the operator appends `fields *`, since Splunk otherwise returns only the fields that the search references.
 * **Limits** go into the search only if no [`where`](https://tenzir.com/docs/reference/operators/where.md) precedes the [`head`](https://tenzir.com/docs/reference/operators/head.md), and never into a search with commands that have side effects, such as `outputlookup`.
+* **Aggregations** run in Splunk with `stats` when a [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) follows the source directly or after [`where`](https://tenzir.com/docs/reference/operators/where.md) operators with exact filters, uses only supported functions and fields, and the search qualifies. Tenzir checks each result and summarizes the events itself when Splunk might group differently.
 * **The time window** never narrows, since a `_time` field in the results need not refer to the time that `earliest` and `latest` select.
 
 Our [SPL optimization reference](optimizations/spl.md) lists the filters that translate and the searches that stay unchanged.

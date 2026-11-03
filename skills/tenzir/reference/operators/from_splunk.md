@@ -21,13 +21,13 @@ from_splunk url:string, [search=string], [index=string|list<string>],
 
 ## Description
 
-The `from_splunk` operator sends one search request to a Splunk Search Head and returns every search result as a Tenzir event. Tenzir initiates the connection to Splunk. Splunk doesn’t need outbound network access to Tenzir.
+The `from_splunk` operator sends a search request to a Splunk Search Head and returns every search result as a Tenzir event. When Splunk computes a [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) that follows the operator, the operator may send the search a second time, as [Optimizations](from_splunk.md#optimizations) describes. Tenzir initiates the connection to Splunk. Splunk doesn’t need outbound network access to Tenzir.
 
 Pass exactly one of `index` and `search`. With `index`, Tenzir writes the search for the events of one or more indexes, and you filter the events in TQL. With `search`, Tenzir runs your Splunk Search Processing Language (SPL) search. In both cases, the operator adds the work of the [`where`](https://tenzir.com/docs/reference/operators/where.md), [`select`](https://tenzir.com/docs/reference/operators/select.md), and [`head`](https://tenzir.com/docs/reference/operators/head.md) operators that follow it to the search, so that Splunk returns fewer results, as [Optimizations](from_splunk.md#optimizations) describes.
 
-For each invocation, the operator sends a form-encoded `POST` request to the Splunk management API endpoint `/services/search/v2/jobs/export`. It requests final JSON results and streams them into the pipeline without buffering the complete response. The export endpoint returns one streamed HTTP response, so the operator doesn’t issue pagination requests.
+For each search, the operator sends a form-encoded `POST` request to the Splunk management API endpoint `/services/search/v2/jobs/export`. It requests final JSON results and streams them into the pipeline without buffering the complete response. The export endpoint returns one streamed HTTP response, so the operator doesn’t issue pagination requests.
 
-Splunk `ERROR` and `FATAL` response messages fail the pipeline. The diagnostic includes Splunk’s message and the search as Tenzir sent it, including the stages that Tenzir appended. Splunk `WARN` messages produce Tenzir warnings without discarding valid search results.
+Splunk `ERROR` and `FATAL` response messages fail the pipeline. The diagnostic includes Splunk’s message and the search as Tenzir sent it, including the stages that Tenzir appended. Splunk `WARN` messages produce Tenzir warnings without discarding valid search results. A search that computes a summary in Splunk is the exception: a message of any level, or a failed request, makes Tenzir send the search again without the summary and summarize the events itself, and messages and failures of that second search apply as usual.
 
 ### Result fields
 
@@ -231,6 +231,7 @@ search index="main" source="tenzir-docs-auth" outcome="fail*"
 
 * **Filters** become prefilters that keep every result that could match. Splunk’s `search` command matches strings case-insensitively and reads `*` as a wildcard, so Tenzir still evaluates every predicate locally. Comparisons of top-level fields with numbers, strings, and booleans, comparisons of `_time` with timestamps unless your `search` contains `_time`, `in` lists, `starts_with`, `ends_with`, substring tests, `!= null`, negations such as `user != "alice"` in a `where` stage, and IP address equality and subnet membership reach Splunk. `== null`, regular expressions, nested field paths, and arithmetic stay local, as do other predicates on `_time` and predicates on fields named like search modifiers, such as `earliest` or `latest`.
 * **Projections** become a `fields` stage with the fields that the pipeline reads, including those of local predicates. Without a projection, the operator appends `fields *`.
+* **Aggregations** run in Splunk with `stats` when a [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) follows the operator, directly or after [`where`](https://tenzir.com/docs/reference/operators/where.md) operators with [exact filters](../optimizations/spl.md#exact-filters) such as string equality or integer comparisons, uses only group keys, `count()`, `count(field)`, and `min` and `max` of integers, and the search qualifies, as our [SPL page](../optimizations/spl.md#aggregations) describes. Tenzir checks each result and summarizes the events itself when Splunk might group differently.
 * **Limits** become a `head` stage only if no [`where`](https://tenzir.com/docs/reference/operators/where.md) precedes the [`head`](https://tenzir.com/docs/reference/operators/head.md). Searches with commands that have side effects, such as `outputlookup` or `collect`, or with macros never get a `head` stage. The operator stops reading results once it reaches the limit, which can still end such a search early, as [Limitations](from_splunk.md#limitations) describes.
 
 Splunk and Tenzir can disagree on what parses as a number and on case folding beyond ASCII. In such rare cases, a prefilter can drop a result that Tenzir alone would keep.
@@ -343,7 +344,7 @@ The `now` parameter gives every relative boundary in one invocation the same anc
 
 ## Limitations
 
-The operator runs one finite export request per invocation. It rejects real-time bounds and search parameters before sending the request. It doesn’t create search jobs, poll search IDs, manage saved searches, schedule requests, persist checkpoints, or deduplicate results. Scheduling and stateful processing belong in the surrounding pipeline.
+The operator runs one finite export request per invocation, or two when a summary in Splunk falls back to summarizing in Tenzir. It rejects real-time bounds and search parameters before sending the request. It doesn’t create search jobs, poll search IDs, manage saved searches, schedule requests, persist checkpoints, or deduplicate results. Scheduling and stateful processing belong in the surrounding pipeline.
 
 When the pipeline ends early, for example because a [`head`](https://tenzir.com/docs/reference/operators/head.md) has enough events, the operator closes the export request, which may end the Splunk search before its side effects complete. Don’t follow a search with commands such as `outputlookup` or `collect` by [`head`](https://tenzir.com/docs/reference/operators/head.md) if the side effects must complete.
 
