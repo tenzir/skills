@@ -19,12 +19,12 @@ from markdown_it import MarkdownIt
 
 
 # Strip the site origin so absolute documentation links resolve within the
-# skill tree: docs pages live under /docs/ on tenzir.com but at the tree
-# root here; integration pages keep their /integrations/ prefix. The
-# retired docs.tenzir.com origin stays supported for links in older
-# content.
+# skill tree: docs pages live under /docs/ on tenzir.com, or under
+# /docs/v<version>/ for a single release, but at the tree root here;
+# integration pages keep their /integrations/ prefix. The retired
+# docs.tenzir.com origin stays supported for links in older content.
 DOCS_URL_PREFIX = re.compile(
-    r"^https?://(?:docs\.tenzir\.com|tenzir\.com/docs(?=/)|tenzir\.com(?=/integrations/))"
+    r"^https?://(?:docs\.tenzir\.com|tenzir\.com/docs(?:/v\d+\.\d+\.\d+)?(?=/)|tenzir\.com(?=/integrations/))"
 )
 EXCLUDED_SOURCE_PATHS = frozenset(
     {

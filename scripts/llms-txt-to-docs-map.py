@@ -86,7 +86,9 @@ def parse_llms_txt(text: str) -> tuple[dict[str, Page], dict[str, list[Subsectio
                 # Preamble bullets: the docs landing page and one landing
                 # page per category. Capture the latter as section links.
                 for name in DOCS_SECTIONS:
-                    if url.endswith(f"/docs/{name.lower()}.md"):
+                    if re.search(
+                        rf"/docs/(?:v\d+\.\d+\.\d+/)?{name.lower()}\.md$", url
+                    ):
                         landings[name] = current
             elif section == "Docs" and docs_section and subsection is not None:
                 subsection.pages.append(current)

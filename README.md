@@ -7,8 +7,9 @@ Skills for coding agents in the Tenzir ecosystem, built on the
 
 ### 🛡️ Tenzir Users
 
-- `tenzir`: Tenzir documentation — TQL, operators, functions, integrations,
-  deployment — plus entry points to the changelog, blog, and product pages
+- `tenzir`: Tenzir documentation of the latest release — TQL, operators,
+  functions, integrations, deployment — plus entry points to the changelog,
+  blog, and product pages
 
 ### 🧬 Schemas
 
@@ -75,6 +76,23 @@ npx skills add tenzir/skills@tenzir-edm
 npx skills add tenzir/skills@tenzir-leef
 npx skills add tenzir/skills@tenzir-ocsf
 npx skills add tenzir/skills@tenzir-udm
+```
+
+### Tenzir 7 preview
+
+The `tenzir-7` branch carries the `tenzir` skill built from the Tenzir 7
+documentation, which is not released yet. It syncs nightly. Install it in
+place of the `tenzir` skill:
+
+```bash
+npx skills add https://github.com/tenzir/skills/tree/tenzir-7/skills/tenzir
+```
+
+To keep both side by side, install it under its own name with
+[skeel](https://github.com/mavam/skeel):
+
+```bash
+skeel add tenzir/skills tenzir@tenzir-7 --name tenzir-7 --apply
 ```
 
 ## 📄 License
