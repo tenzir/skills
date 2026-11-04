@@ -132,6 +132,8 @@ The `state` argument is the content that the model evaluates. A string is sent a
 
 By default, `state` is the whole event without the `ai` field and without the `into` field. This keeps the results of earlier AI operators out of the request. Pass `state=this` to send the event unchanged. Prefer a small record with only the fields that the question needs: the model reads less, answers faster, and decision models have a limited context.
 
+The operator sends no requests for events that a later [`where`](https://tenzir.com/docs/reference/operators/where.md) drops when the filter doesn’t read the result field, because the filter then runs before the operator. This applies to each condition of a filter that combines conditions with `and`: in `where severity == "high" and ai.decide.answer.score > 0.5`, only the second condition stays after the operator. A filter moves only if every operator between it and `ai_decide` lets it pass. For example, a filter after [`head`](https://tenzir.com/docs/reference/operators/head.md) or [`tail`](https://tenzir.com/docs/reference/operators/tail.md) stays where it is. Likewise, a [`head`](https://tenzir.com/docs/reference/operators/head.md) after the operator lets sources that support limits stop reading early, unless a filter stays between them.
+
 ### Check questions before the pipeline runs
 
 Tenzir validates the questions when it compiles the pipeline. The pipeline doesn’t start if:

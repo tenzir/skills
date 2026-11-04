@@ -346,39 +346,41 @@ protocol_num = $protocols[proto]? else 255
 
 Use `match` when you route events by comparing one value against a finite set of cases. This keeps dispatching logic close to the field it depends on, and the final `_` arm makes the fallback explicit.
 
-✅ Clear:
+✅ Select different transformations for different event kinds:
 
 ```tql
-from {action: "allow"},
-     {action: "deny"},
-     {action: "reset"}
-match action {
-  "allow" => {
-    verdict = "allowed"
+from {kind: "process", command: "whoami"},
+     {kind: "file", path: "/etc/hosts"},
+     {kind: "other", description: "Session started"}
+match kind {
+  "process" => {
+    process = {cmd_line: move command}
   }
-  "deny" => {
-    verdict = "blocked"
+  "file" => {
+    file = {path: move path}
   }
   _ => {
-    verdict = "unknown"
+    message = move description?
   }
 }
 ```
 
 ```tql
 {
-  action: "allow",
-  verdict: "allowed",
+  kind: "process",
+  process: {cmd_line: "whoami"},
 }
 {
-  action: "deny",
-  verdict: "blocked",
+  kind: "file",
+  file: {path: "/etc/hosts"},
 }
 {
-  action: "reset",
-  verdict: "unknown",
+  kind: "other",
+  message: "Session started",
 }
 ```
+
+Each branch consumes different source fields and builds a different object. The source discriminator `kind` remains available to downstream consumers. For repetitive mappings from exact string keys to constant values, prefer a [record lookup](learn-idiomatic-tql.md#use-record-constants-for-value-mappings). A short `match` can still make the recognized cases and fallback clearer. Keep `match` for ranges, guards, and composite patterns, even when the result is a label.
 
 Match arms should describe values or ranges of the expression after `match`. Use a [guard](../reference/statements.md#guards) when the case also depends on another field, and let one guard cover every pattern it applies to instead of repeating an `if` in each arm:
 
@@ -466,7 +468,7 @@ if event_code.starts_with("user.") {
 }
 ```
 
-If the source value has a documented structure, extract its categorical part and match that value instead. Match the runtime expression directly, because `let` only binds constants.
+If the source value has a documented structure, extract its categorical part and match that value instead. This short dispatch makes the recognized categories and the fallback explicit. Match the runtime expression directly, because `let` only binds constants.
 
 ✅ Match on the extracted category:
 
@@ -484,7 +486,7 @@ match event_code.split(".")[0] {
 }
 ```
 
-A match expression can also be a list when several fields form one finite category:
+When several fields form a category, a `match` expression can be a list. This expresses composite patterns directly without constructing string keys:
 
 ```tql
 match [src_role, dst_role] {
@@ -502,7 +504,7 @@ match [src_role, dst_role] {
 
 List patterns compare element by element, so a `null` in either field falls through to `_`.
 
-Keep `if` for predicates, branch selection that depends on which field or schema is present, null checks, and binary control flow. Use record constants when you only map keys to values and don’t need to run different statements.
+Keep `if` for predicates and binary control flow that select different work. Don’t introduce a branch merely because a field might be null. Our section on [streamlining transformations](learn-idiomatic-tql.md#streamline-transformations-instead-of-branching) shows how optional access, fallbacks, and lookups replace those guards.
 
 ### Use `in` for multi-value membership tests
 
@@ -602,6 +604,258 @@ tags = concatenate(concatenate(base_tags, ["monitored"]), extra_tags)
 When a fragment may be missing, use optional access such as `...profile?` or `...custom_tags?`.
 
 Keep [`merge`](https://tenzir.com/docs/reference/functions/merge.md) and [`concatenate`](https://tenzir.com/docs/reference/functions/concatenate.md) in mind when you read existing code or need an explicit two-argument function. For new transformations, prefer spread when you are constructing the resulting record or list.
+
+## Streamline transformations instead of branching
+
+Start with the record you want to produce, not a list of conditions under which you might assign each field. A field whose value is `null` is usually a useful representation of missing information. It does not need its own branch.
+
+Statement-level branches can add routing and execution overhead, and repeated guards make the transformation harder to inspect. Prefer direct expressions when they express the same contract. This is not a rule to remove every condition: keep branches that select different work or protect a real precondition. Measure representative pipelines before claiming a speedup.
+
+Use this order when choosing a construct:
+
+| Need                                         | Prefer                                            |
+| -------------------------------------------- | ------------------------------------------------- |
+| Copy or convert an optional value            | Optional access and a null-propagating expression |
+| Pick the first non-null value                | An `else` fallback chain                          |
+| Choose between two values                    | One inline `if … else` expression                 |
+| Map a finite key to values                   | A constant record or list lookup                  |
+| Execute different pipelines for finite cases | A `match` statement                               |
+| Gate work on a predicate                     | An `if` statement                                 |
+
+### Build records with nullable fields
+
+Suppose a source record can contain a hostname, a user ID, and a session ID. Don’t turn each optional field into a separate control-flow decision.
+
+❌ A branch for every field:
+
+```tql
+normalized = {}
+if raw.host? != null {
+  normalized.device.hostname = move raw.host
+}
+if raw.user_id? != null {
+  normalized.user.uid = move raw.user_id
+}
+if raw.session_id? != null {
+  normalized.session_uid = move raw.session_id
+}
+```
+
+✅ One record that shows the target shape:
+
+```tql
+normalized = {
+  device: {hostname: move raw.host?},
+  user: {uid: move raw.user_id?},
+  session_uid: move raw.session_id?,
+}
+```
+
+The streamlined version deliberately retains null fields. A user record with a null UID is not the same shape as an absent user record. Use this form when that distinction does not matter to the consumer; keep a presence guard when the existence of the object itself carries meaning.
+
+### Let conversions propagate null
+
+A null check before a null-propagating function repeats the function’s work. For example, [`time`](https://tenzir.com/docs/reference/functions/time.md) and [`to_lower`](https://tenzir.com/docs/reference/functions/to_lower.md) accept null input and return null.
+
+❌ Guarded assignments with explicit null defaults:
+
+```tql
+first_seen = null
+if raw.first_seen? != null {
+  first_seen = time(move raw.first_seen)
+}
+tool_name = null
+if raw.tool?.name? != null {
+  tool_name = raw.tool.name.to_lower()
+}
+```
+
+✅ Direct conversions:
+
+```tql
+first_seen = time(move raw.first_seen?)
+tool_name = raw.tool?.name?.to_lower()
+```
+
+The conversion already handles null, so neither a statement-level guard nor an inline conditional is needed.
+
+Optional access permits absence, not malformed values. An invalid non-null timestamp still produces a warning. With `move`, the original value is consumed even when conversion fails. Omit `move` if you need to retain that value for investigation or preserve it under `unmapped`.
+
+Keep required fields non-optional. Check or test a function’s null behavior before applying this pattern; not every function reference documents it.
+
+### Use fallbacks instead of presence ladders
+
+When several fields can supply the same value, express their priority with `else`.
+
+❌ Repeating the assignment for each candidate:
+
+```tql
+if raw.file_path? != null {
+  path = raw.file_path
+} else if raw.path? != null {
+  path = raw.path
+} else if raw.target_file? != null {
+  path = raw.target_file
+} else {
+  path = null
+}
+```
+
+✅ Read the preference order from left to right:
+
+```tql
+path = raw.file_path? else raw.path? else raw.target_file?
+```
+
+If every candidate is absent or null, the result is null. Don’t add `else ""` unless an empty string is actually the desired result. The fallback operator does not treat `""`, `0`, or `false` as missing. Normalize source-specific placeholders with [`replace`](https://tenzir.com/docs/reference/operators/replace.md) when the source contract calls for it.
+
+### Don’t guard predicates against null
+
+In a predicate position, null is falsy: the event skips the `if` body, taking `else` if present, and fails a `where` filter, without a warning. Only `true` enters the `if` body or passes the filter. Don’t replace null with an empty string merely to call a string predicate.
+
+❌ Checking presence before a null-propagating predicate:
+
+```tql
+if raw.reason? != null and (raw.reason? else "").starts_with("policy:") {
+  policy_name = raw.reason.split(":")[1]
+}
+```
+
+✅ Keep the meaningful condition:
+
+```tql
+if raw.reason?.starts_with("policy:") {
+  policy_name = raw.reason.split(":")[1]
+}
+```
+
+The same applies to filtering:
+
+```tql
+where raw.reason?.starts_with("policy:")
+```
+
+That filter intentionally removes events with missing reasons. It is not a replacement for an assignment when you need to retain every event.
+
+### Map nullable lists without special cases
+
+The [`map`](https://tenzir.com/docs/reference/functions/map.md) function returns null for a null input list without evaluating its lambda. An empty list stays empty.
+
+❌ Separate paths for absent, empty, and populated lists:
+
+```tql
+related_events = null
+if raw.event_ids? != null {
+  if raw.event_ids.length() > 0 {
+    related_events = raw.event_ids.map(id => {uid: id})
+  } else {
+    related_events = []
+  }
+}
+```
+
+✅ Express the element transformation once:
+
+```tql
+related_events = raw.event_ids?.map(id => {uid: id})
+```
+
+Use `raw.event_ids?.map(id => {uid: id}) else []` only if the consumer requires an empty list rather than null. When constructing a list with spread, no fallback is needed: spreading null contributes no elements.
+
+```tql
+related_events = [
+  ...raw.event_ids?.map(id => {uid: id}),
+  ...raw.parent_ids?.map(id => {uid: id}),
+]
+```
+
+Here the result is an empty list if both source lists are absent.
+
+### Classify once and look up the presentation
+
+Don’t repeat the same outcome conditions to produce a status, a label, and a message. Map related values together, or compute one outcome key in the branch that already decides the event’s meaning.
+
+❌ Parallel conditional chains that can drift apart:
+
+```tql
+status_id = 1 if outcome == "success" else 2 if outcome == "denied" else 0
+label = "completed" if outcome == "success" else "blocked" if outcome == "denied" else "pending"
+message = f"Tool {tool} completed" if outcome == "success" else
+          f"Tool {tool} blocked" if outcome == "denied" else
+          f"Tool {tool} pending"
+```
+
+✅ One lookup, then one format string:
+
+```tql
+let $outcomes = {
+  success: {status_id: 1, label: "completed"},
+  denied: {status_id: 2, label: "blocked"},
+}
+
+
+result = $outcomes[outcome]? else {status_id: 0, label: "pending"}
+status_id = result.status_id
+label = result.label
+message = f"Tool {tool} {result.label}"
+drop result
+```
+
+This also works when the key comes from a necessary branch: assign a key such as `"approved"`, `"rejected"`, or `"inferred"` there, then look up the wording. Don’t reconstruct the decision from several status fields downstream.
+
+Keep static mappings in `let` bindings. A runtime record evaluates every field; selecting one field does not make the others lazy. For example, this emits a division-by-zero warning even though the selected field is `fallback`:
+
+```tql
+from {total: 0, key: "fallback"}
+result = {ratio: 1 / total, fallback: 0}[key]
+```
+
+Look up static fragments and format once, or use `match` when the alternatives perform different work.
+
+### Don’t branch just to tidy the output
+
+After moving fields, a source record can be empty or contain only nulls. That is not, by itself, a reason to add another branch to every event.
+
+❌ Cleanup after every transfer:
+
+```tql
+agent_name = move raw.agent.name
+if raw.agent.skill_id? == null {
+  drop raw.agent
+}
+if raw.action?.is_empty() {
+  drop raw.action
+}
+```
+
+✅ Move what you map and retain the rest:
+
+```tql
+agent_name = move raw.agent.name
+```
+
+The first version can lose data: a null skill ID says nothing about other attributes in `raw.agent`. Preserve those attributes for downstream consumers or under `unmapped`. Empty records and null fields can remain in the pipeline.
+
+If a destination requires null fields to be omitted, use [`drop_null_fields`](https://tenzir.com/docs/reference/operators/drop_null_fields.md) at that boundary rather than individual presence checks throughout the mapping. It removes null fields, not empty records. Don’t add cleanup merely to make an intermediate event look shorter.
+
+### Keep conditions that protect meaning or validity
+
+Streamlined TQL still needs conditions. Keep them when they do one of the following:
+
+* Choose different parsers, event classes, enrichments, or destinations.
+* Prevent an invalid operation, such as division by zero.
+* Avoid an external request or other expensive work for inapplicable events.
+* Distinguish an absent entity from an entity with unknown attributes.
+
+For example, this ratio is meaningful only for a positive total:
+
+```tql
+ratio = failures / total if total > 0 else null
+```
+
+The inline conditional evaluates only the selected branch. At zero, it returns null without attempting division. Unguarded division also returns null at zero, but emits a warning. Keep this guard when a zero total is expected, so the warning channel remains useful for unexpected input.
+
+A missing user ID, by contrast, usually needs only `user.uid = raw.user_id?`. Ask whether a guard protects a semantic distinction or merely avoids writing null. Remove the guard in the latter case.
 
 ## Field management
 
@@ -713,23 +967,26 @@ Benefits of using `replace`:
 
 * **Clear intent**: The operator name explicitly states what you’re doing
 * **No branching**: Avoid nested conditionals that are hard to follow
-* **Composable**: Chain with `drop_null_fields` for complete cleanup
+* **Composable**: Add `drop_null_fields` if the destination requires omission
 * **Maintainable**: Easy to add more placeholder values if needed
 
-✅ Handling multiple placeholder values:
+Apply placeholder replacement only to fields where the source defines those values as missing. Keep null fields during transformation; add cleanup at the destination only when needed.
+
+✅ Handling multiple placeholders for a source whose `user` and `referrer` fields use them to mean missing:
 
 ```tql
-replace what="-", with=null
-replace what="N/A", with=null
-replace what="", with=null
-drop_null_fields
+replace raw.user, raw.referrer, what="-", with=null
+replace raw.user, raw.referrer, what="N/A", with=null
+replace raw.user, raw.referrer, what="", with=null
 ```
+
+The selected placeholders become null. Other fields keep their values, including empty strings.
 
 Operator vs. function
 
 Don’t confuse the [`replace`](https://tenzir.com/docs/reference/operators/replace.md) operator with the [`replace`](https://tenzir.com/docs/reference/functions/replace.md) function:
 
-* **Operator**: Replaces entire values across all fields in events (e.g., replace all `"-"` with `null`)
+* **Operator**: Replaces entire values in the selected fields, or across the event if no fields are specified.
 * **Function**: Replaces substrings within a string (e.g., `"hello".replace("l", "r")` → `"herro"`)
 
 ### Use meaningful names for computed fields
@@ -987,7 +1244,7 @@ severity_level = "critical" if score > 90 else "high" if score > 70 else "medium
 result = "blocked" if is_malicious else "allowed" if is_trusted else "quarantine" if risk > 0.8 else "review" if risk > 0.5 else "log"
 ```
 
-When you see a statement-level `if`/`else if` ladder over one field, reach for `match` first. It models finite dispatch directly, keeps each branch as its own pipeline, and forces you to write an explicit fallback. Use a record constant only when every branch is a pure key-to-value lookup.
+When you see an `if`/`else if` ladder over one field, first ask whether it maps values or selects different work. Prefer a record constant for repetitive value mappings, including mappings that produce several related fields. Use `match` for different pipelines, or when a small set of explicit cases reads more clearly. The goal is to remove redundant decisions, not every branch.
 
 Nested inline chains are a serious anti-pattern because:
 
@@ -1006,7 +1263,7 @@ activity_name = $activity_names[activity_id]? else "Other"
 disposition = $dispositions[action]? else {id: 0, name: "Unknown"}
 ```
 
-The `else` keyword provides a fallback value when:
+The `else` keyword provides a fallback value when its left operand is null, including these cases:
 
 * A field doesn’t exist (`field? else default`)
 * An array index is out of bounds (`array[index]? else default`)
@@ -1019,33 +1276,7 @@ This pattern is particularly powerful for:
 * Providing sensible defaults for missing data
 * Creating reusable transformation logic
 
-✅ Use `match` for branch pipelines:
-
-```tql
-from {action: "BLOCKED"}
-match action {
-  "BLOCKED" | "DENIED" => {
-    disposition = {id: 2, name: "Blocked"}
-    outcome = "failure"
-  }
-  "ALLOWED" => {
-    disposition = {id: 1, name: "Allowed"}
-    outcome = "success"
-  }
-  _ => {
-    disposition = {id: 0, name: "Unknown"}
-    outcome = "unknown"
-  }
-}
-```
-
-```tql
-{
-  action: "BLOCKED",
-  disposition: {id: 2, name: "Blocked"},
-  outcome: "failure"
-}
-```
+For branches that consume different source fields or run different operators, use [finite case branching](learn-idiomatic-tql.md#use-match-for-finite-case-branching) instead.
 
 ## Writing comments
 
