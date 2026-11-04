@@ -15,7 +15,8 @@ on:
       llms_path:
         description: "Index to build from: /llms.txt for the latest release, /docs/v<version>/llms.txt for one release"
         required: false
-        default: "/llms.txt"
+        # This branch carries the Tenzir 7 preview.
+        default: "/docs/v7.0.0/llms.txt"
         type: string
 
 permissions:
@@ -74,7 +75,7 @@ jobs:
         shell: bash
         env:
           BASE_URL: ${{ inputs.base_url || 'https://tenzir.com' }}
-          LLMS_PATH: ${{ inputs.llms_path || '/llms.txt' }}
+          LLMS_PATH: ${{ inputs.llms_path || '/docs/v7.0.0/llms.txt' }}
         run: |
           set -euo pipefail
 
@@ -139,7 +140,7 @@ jobs:
       - name: Commit changes
         uses: planetscale/ghcommit-action@v0.2.0
         with:
-          commit_message: "Sync tenzir skill from ${{ inputs.base_url || 'https://tenzir.com' }}${{ inputs.llms_path || '/llms.txt' }}"
+          commit_message: "Sync tenzir skill from ${{ inputs.base_url || 'https://tenzir.com' }}${{ inputs.llms_path || '/docs/v7.0.0/llms.txt' }}"
           repo: ${{ github.repository }}
           branch: ${{ github.ref_name }}
           empty: false
