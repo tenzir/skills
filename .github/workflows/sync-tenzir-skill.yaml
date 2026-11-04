@@ -12,6 +12,11 @@ on:
         required: false
         default: "https://tenzir.com"
         type: string
+      llms_path:
+        description: "Index to build from: /llms.txt for the latest release, /docs/v<version>/llms.txt for one release"
+        required: false
+        default: "/llms.txt"
+        type: string
 
 permissions:
   contents: write
@@ -21,6 +26,29 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  # Scheduled runs only fire on the default branch. Branches that carry the
+  # skill for an unreleased version, such as tenzir-7, set their own
+  # llms_path default; start their sync from here so they stay fresh too.
+  sync-branches:
+    name: Start syncs on version branches
+    if: github.event_name == 'schedule'
+    runs-on: ubuntu-latest
+    permissions:
+      actions: write
+    env:
+      GH_TOKEN: ${{ github.token }}
+      BRANCHES: tenzir-7
+    steps:
+      - name: Dispatch existing branches
+        shell: bash
+        run: |
+          set -euo pipefail
+          for branch in $BRANCHES; do
+            if gh api "repos/${{ github.repository }}/branches/$branch" --silent 2>/dev/null; then
+              gh workflow run sync-tenzir-skill.yaml --repo "${{ github.repository }}" --ref "$branch"
+            fi
+          done
+
   sync:
     name: Rebuild tenzir
     runs-on: ubuntu-latest
@@ -46,19 +74,21 @@ jobs:
         shell: bash
         env:
           BASE_URL: ${{ inputs.base_url || 'https://tenzir.com' }}
+          LLMS_PATH: ${{ inputs.llms_path || '/llms.txt' }}
         run: |
           set -euo pipefail
 
           base="${BASE_URL%/}"
           mkdir -p /tmp/tenzir-skill
-          curl -fsSL --retry 3 --retry-all-errors -o /tmp/llms.txt "$base/llms.txt"
+          curl -fsSL --retry 3 --retry-all-errors -o /tmp/llms.txt "$base$LLMS_PATH"
 
           # llms.txt is the manifest: every documentation page appears as a
           # markdown link. The generator navigates a docs-map heading tree,
-          # so convert first. Docs pages live under /docs/ on the website but
-          # at the tree root for the skill generator; integration pages keep
-          # their integrations/ prefix. Skip the changelog and pages outside
-          # the docs tree.
+          # so convert first. Docs pages live under /docs/ on the website, or
+          # under /docs/v<version>/ for a single release, but at the tree root
+          # for the skill generator; integration pages keep their
+          # integrations/ prefix. Skip the changelog and pages outside the
+          # docs tree.
           uv run scripts/llms-txt-to-docs-map.py /tmp/llms.txt /tmp/docs-map.md
 
           grep -oE "$base/[A-Za-z0-9./_-]+\.md" /tmp/docs-map.md \
@@ -68,7 +98,12 @@ jobs:
             local url="$1" path
             path="${url#"$base"/}"
             case "$path" in
-              docs/*) path="${path#docs/}" ;;
+              docs/*)
+                path="${path#docs/}"
+                if [[ $path =~ ^v[0-9]+\.[0-9]+\.[0-9]+/ ]]; then
+                  path="${path#*/}"
+                fi
+                ;;
               integrations/*) ;;
               *) return 0 ;;
             esac
@@ -104,7 +139,7 @@ jobs:
       - name: Commit changes
         uses: planetscale/ghcommit-action@v0.2.0
         with:
-          commit_message: "Sync tenzir skill from ${{ inputs.base_url || 'https://tenzir.com' }}"
+          commit_message: "Sync tenzir skill from ${{ inputs.base_url || 'https://tenzir.com' }}${{ inputs.llms_path || '/llms.txt' }}"
           repo: ${{ github.repository }}
           branch: ${{ github.ref_name }}
           empty: false
