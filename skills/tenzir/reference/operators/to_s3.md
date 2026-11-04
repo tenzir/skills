@@ -1,7 +1,7 @@
 ---
 title: "to_s3"
-canonical: https://tenzir.com/docs/reference/operators/to_s3
-source: https://tenzir.com/docs/reference/operators/to_s3.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/to_s3
+source: https://tenzir.com/docs/v7.0.0/reference/operators/to_s3.md
 section: "Docs"
 ---
 
@@ -150,7 +150,7 @@ to_s3 "s3://my-bucket/logs/events_{uuid}.json.gz", max_size=10M {
 
 ## See Also
 
-* [`from_s3`](https://tenzir.com/docs/reference/operators/from_s3.md)
-* [`to_s3`](https://tenzir.com/docs/reference/operators/to_s3.md)
-* [`to_file`](https://tenzir.com/docs/reference/operators/to_file.md)
-* [Amazon S3](../../integrations/amazon/s3.md)
+* [`from_s3`](https://tenzir.com/docs/v7.0.0/reference/operators/from_s3.md)
+* [`to_s3`](https://tenzir.com/docs/v7.0.0/reference/operators/to_s3.md)
+* [`to_file`](https://tenzir.com/docs/v7.0.0/reference/operators/to_file.md)
+* [S3](https://docs.tenzir.com/integrations/amazon/s3)

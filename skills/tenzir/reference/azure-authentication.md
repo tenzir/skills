@@ -1,7 +1,7 @@
 ---
 title: "Azure Authentication"
-canonical: https://tenzir.com/docs/reference/azure-authentication
-source: https://tenzir.com/docs/reference/azure-authentication.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/azure-authentication
+source: https://tenzir.com/docs/v7.0.0/reference/azure-authentication.md
 section: "Docs"
 ---
 
@@ -9,7 +9,7 @@ section: "Docs"
 
 > Tenzir’s Azure operators authenticate with Microsoft Entra ID using the Azure SDK’s default credential chain, a shared account key, an application client secret, or workload identity federation. This page describes the shared azureauth option used by fromazureblobstorage and toazureblobstorage.
 
-Tenzir’s Azure operators authenticate with Microsoft Entra ID using the Azure SDK’s default credential chain, a shared account key, an application client secret, or workload identity federation. This page describes the shared `azure_auth` option used by [`from_azure_blob_storage`](https://tenzir.com/docs/reference/operators/from_azure_blob_storage.md) and [`to_azure_blob_storage`](https://tenzir.com/docs/reference/operators/to_azure_blob_storage.md).
+Tenzir’s Azure operators authenticate with Microsoft Entra ID using the Azure SDK’s default credential chain, a shared account key, an application client secret, or workload identity federation. This page describes the shared `azure_auth` option used by [`from_azure_blob_storage`](https://tenzir.com/docs/v7.0.0/reference/operators/from_azure_blob_storage.md) and [`to_azure_blob_storage`](https://tenzir.com/docs/v7.0.0/reference/operators/to_azure_blob_storage.md).
 
 ## Ambient credentials
 
@@ -28,7 +28,7 @@ Operators that use ambient credentials share the node’s configured identity. U
 
 ## Account key
 
-Pass a storage account’s shared key with `account_key`. Wrap it with [`secret`](https://tenzir.com/docs/reference/functions/secret.md) so the key stays out of the pipeline definition:
+Pass a storage account’s shared key with `account_key`. Wrap it with [`secret`](https://tenzir.com/docs/v7.0.0/reference/functions/secret.md) so the key stays out of the pipeline definition:
 
 ```tql
 from_azure_blob_storage "abfss://logs@account.dfs.core.windows.net/**.json",
@@ -100,7 +100,7 @@ The `token_endpoint` record fetches the assertion from an HTTP endpoint:
 | `query_params` | `record`             | Query parameters to append to `url`, percent-encoded.                                                      |
 | `path`         | `string` or `null`   | JSON path to the token in the response. Defaults to `.access_token`. Use `null` for a plain-text response. |
 
-Both `headers` and `query_params` take `string` or [`secret`](https://tenzir.com/docs/reference/functions/secret.md) values. Existing query parameters in `url` are preserved.
+Both `headers` and `query_params` take `string` or [`secret`](https://tenzir.com/docs/v7.0.0/reference/functions/secret.md) values. Existing query parameters in `url` are preserved.
 
 Most providers name the audience parameter `audience`, and for Entra its value is always `api://AzureADTokenExchange`.
 
@@ -154,15 +154,15 @@ to_azure_blob_storage "abfss://results@account.dfs.core.windows.net/run.json",
 
 ## Microsoft Graph
 
-The [`from_microsoft_graph`](https://tenzir.com/docs/reference/operators/from_microsoft_graph.md) operator uses an `auth` record with `tenant_id`, `client_id`, `client_secret`, `scope`, and `authority`. It supports client-secret authentication and does not accept `web_identity`.
+The [`from_microsoft_graph`](https://tenzir.com/docs/v7.0.0/reference/operators/from_microsoft_graph.md) operator uses an `auth` record with `tenant_id`, `client_id`, `client_secret`, `scope`, and `authority`. It supports client-secret authentication and does not accept `web_identity`.
 
 ## Azure Log Analytics queries
 
-The experimental [`from_azure_log_analytics`](https://tenzir.com/docs/reference/operators/from_azure_log_analytics.md) operator requires an `azure_auth` record with `tenant_id`, `client_id`, and `client_secret`. It also accepts `scope` and `authority`; the default scope is `https://api.loganalytics.io/.default`. This differs from the Logs Ingestion API scope used by [`to_azure_log_analytics`](https://tenzir.com/docs/reference/operators/to_azure_log_analytics.md).
+The experimental [`from_azure_log_analytics`](https://tenzir.com/docs/v7.0.0/reference/operators/from_azure_log_analytics.md) operator requires an `azure_auth` record with `tenant_id`, `client_id`, and `client_secret`. It also accepts `scope` and `authority`; the default scope is `https://api.loganalytics.io/.default`. This differs from the Logs Ingestion API scope used by [`to_azure_log_analytics`](https://tenzir.com/docs/v7.0.0/reference/operators/to_azure_log_analytics.md).
 
 Grant the application query access to the target workspace, for example with the **Log Analytics Reader** role. The query operator doesn’t support ambient credentials or `web_identity`. It uses the shared client-credentials token provider rather than the Azure SDK credential chain.
 
 ## See Also
 
 * [AWS Authentication](aws-authentication.md)
-* [Azure Blob Storage](../integrations/microsoft/azure-blob-storage.md)
+* [Azure blob storage](https://docs.tenzir.com/integrations/microsoft/azure-blob-storage)

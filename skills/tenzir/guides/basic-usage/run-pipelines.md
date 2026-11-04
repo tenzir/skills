@@ -1,7 +1,7 @@
 ---
 title: "Run pipelines"
-canonical: https://tenzir.com/docs/guides/basic-usage/run-pipelines
-source: https://tenzir.com/docs/guides/basic-usage/run-pipelines.md
+canonical: https://tenzir.com/docs/v7.0.0/guides/basic-usage/run-pipelines
+source: https://tenzir.com/docs/v7.0.0/guides/basic-usage/run-pipelines.md
 section: "Docs"
 ---
 

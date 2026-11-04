@@ -1,7 +1,7 @@
 ---
 title: "frequency_table"
-canonical: https://tenzir.com/docs/reference/functions/frequency_table
-source: https://tenzir.com/docs/reference/functions/frequency_table.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/frequency_table
+source: https://tenzir.com/docs/v7.0.0/reference/functions/frequency_table.md
 section: "Docs"
 ---
 
@@ -17,7 +17,7 @@ frequency_table(xs:list) -> record
 
 ## Description
 
-The `frequency_table` function builds a [frequency table](https://en.wikipedia.org/wiki/Frequency_distribution) by counting every distinct non-null value in `xs`. Unlike [`value_counts`](https://tenzir.com/docs/reference/functions/value_counts.md), it returns a versioned model record that you can persist, merge with [`model_merge`](https://tenzir.com/docs/reference/functions/model_merge.md), query with [`frequency_table_count`](https://tenzir.com/docs/reference/functions/frequency_table_count.md), and compare with [`model_divergence`](https://tenzir.com/docs/reference/functions/model_divergence.md).
+The `frequency_table` function builds a [frequency table](https://en.wikipedia.org/wiki/Frequency_distribution) by counting every distinct non-null value in `xs`. Unlike [`value_counts`](https://tenzir.com/docs/v7.0.0/reference/functions/value_counts.md), it returns a versioned model record that you can persist, merge with [`model_merge`](https://tenzir.com/docs/v7.0.0/reference/functions/model_merge.md), query with [`frequency_table_count`](https://tenzir.com/docs/v7.0.0/reference/functions/frequency_table_count.md), and compare with [`model_divergence`](https://tenzir.com/docs/v7.0.0/reference/functions/model_divergence.md).
 
 The `values` list sorts entries by descending count. Equal counts use the engine’s strict weak value order.
 
@@ -88,7 +88,7 @@ select model, login_count = frequency_table_count(model, "login")
 
 ## See also
 
-* [`frequency_table_count`](https://tenzir.com/docs/reference/functions/frequency_table_count.md)
-* [`model_divergence`](https://tenzir.com/docs/reference/functions/model_divergence.md)
-* [`model_merge`](https://tenzir.com/docs/reference/functions/model_merge.md)
-* [`value_counts`](https://tenzir.com/docs/reference/functions/value_counts.md)
+* [`frequency_table_count`](https://tenzir.com/docs/v7.0.0/reference/functions/frequency_table_count.md)
+* [`model_divergence`](https://tenzir.com/docs/v7.0.0/reference/functions/model_divergence.md)
+* [`model_merge`](https://tenzir.com/docs/v7.0.0/reference/functions/model_merge.md)
+* [`value_counts`](https://tenzir.com/docs/v7.0.0/reference/functions/value_counts.md)

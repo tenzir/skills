@@ -1,7 +1,7 @@
 ---
 title: "read_delimited"
-canonical: https://tenzir.com/docs/reference/operators/read_delimited
-source: https://tenzir.com/docs/reference/operators/read_delimited.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/read_delimited
+source: https://tenzir.com/docs/v7.0.0/reference/operators/read_delimited.md
 section: "Docs"
 ---
 
@@ -89,9 +89,9 @@ from_file "binary.dat" {
 
 ## See Also
 
-* [`read_all`](https://tenzir.com/docs/reference/operators/read_all.md)
-* [`read_delimited_regex`](https://tenzir.com/docs/reference/operators/read_delimited_regex.md)
-* [`read_lines`](https://tenzir.com/docs/reference/operators/read_lines.md)
-* [`read_ssv`](https://tenzir.com/docs/reference/operators/read_ssv.md)
-* [`read_tsv`](https://tenzir.com/docs/reference/operators/read_tsv.md)
-* [`read_xsv`](https://tenzir.com/docs/reference/operators/read_xsv.md)
+* [`read_all`](https://tenzir.com/docs/v7.0.0/reference/operators/read_all.md)
+* [`read_delimited_regex`](https://tenzir.com/docs/v7.0.0/reference/operators/read_delimited_regex.md)
+* [`read_lines`](https://tenzir.com/docs/v7.0.0/reference/operators/read_lines.md)
+* [`read_ssv`](https://tenzir.com/docs/v7.0.0/reference/operators/read_ssv.md)
+* [`read_tsv`](https://tenzir.com/docs/v7.0.0/reference/operators/read_tsv.md)
+* [`read_xsv`](https://tenzir.com/docs/v7.0.0/reference/operators/read_xsv.md)

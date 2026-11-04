@@ -1,7 +1,7 @@
 ---
 title: "decode_base58"
-canonical: https://tenzir.com/docs/reference/functions/decode_base58
-source: https://tenzir.com/docs/reference/functions/decode_base58.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/decode_base58
+source: https://tenzir.com/docs/v7.0.0/reference/functions/decode_base58.md
 section: "Docs"
 ---
 
@@ -38,4 +38,4 @@ decoded = bytes.decode_base58()
 
 ## See Also
 
-* [`encode_base58`](https://tenzir.com/docs/reference/functions/encode_base58.md)
+* [`encode_base58`](https://tenzir.com/docs/v7.0.0/reference/functions/encode_base58.md)

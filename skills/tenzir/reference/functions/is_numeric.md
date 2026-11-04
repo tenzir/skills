@@ -1,7 +1,7 @@
 ---
 title: "is_numeric"
-canonical: https://tenzir.com/docs/reference/functions/is_numeric
-source: https://tenzir.com/docs/reference/functions/is_numeric.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/is_numeric
+source: https://tenzir.com/docs/v7.0.0/reference/functions/is_numeric.md
 section: "Docs"
 ---
 
@@ -33,7 +33,7 @@ from {x: "1234".is_numeric()}
 
 ## See Also
 
-* [`is_alnum`](https://tenzir.com/docs/reference/functions/is_alnum.md)
-* [`is_alpha`](https://tenzir.com/docs/reference/functions/is_alpha.md)
-* [`is_luhn_valid`](https://tenzir.com/docs/reference/functions/is_luhn_valid.md)
+* [`is_alnum`](https://tenzir.com/docs/v7.0.0/reference/functions/is_alnum.md)
+* [`is_alpha`](https://tenzir.com/docs/v7.0.0/reference/functions/is_alpha.md)
+* [`is_luhn_valid`](https://tenzir.com/docs/v7.0.0/reference/functions/is_luhn_valid.md)
 * [Manipulate strings](../../guides/shape/manipulate-strings.md)

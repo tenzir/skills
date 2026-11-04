@@ -1,7 +1,7 @@
 ---
 title: "luhn_check_digit"
-canonical: https://tenzir.com/docs/reference/functions/luhn_check_digit
-source: https://tenzir.com/docs/reference/functions/luhn_check_digit.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/luhn_check_digit
+source: https://tenzir.com/docs/v7.0.0/reference/functions/luhn_check_digit.md
 section: "Docs"
 ---
 
@@ -17,9 +17,9 @@ luhn_check_digit(x:string) -> int
 
 ## Description
 
-The `luhn_check_digit` function returns the digit from 0 to 9 that makes `x` pass the Luhn checksum of ISO/IEC 7812-1 when appended to it. Appending the digit turns a number without its check digit into a number that passes [`is_luhn_valid`](https://tenzir.com/docs/reference/functions/is_luhn_valid.md).
+The `luhn_check_digit` function returns the digit from 0 to 9 that makes `x` pass the Luhn checksum of ISO/IEC 7812-1 when appended to it. Appending the digit turns a number without its check digit into a number that passes [`is_luhn_valid`](https://tenzir.com/docs/v7.0.0/reference/functions/is_luhn_valid.md).
 
-The main use is to keep card numbers valid after format-preserving encryption. The [`encrypt_ff1`](https://tenzir.com/docs/reference/functions/encrypt_ff1.md) function preserves the length and the digits of a card number, but not its check digit. Encrypt the number without its check digit and append a new one to get a valid card number, as the example below shows.
+The main use is to keep card numbers valid after format-preserving encryption. The [`encrypt_ff1`](https://tenzir.com/docs/v7.0.0/reference/functions/encrypt_ff1.md) function preserves the length and the digits of a card number, but not its check digit. Encrypt the number without its check digit and append a new one to get a valid card number, as the example below shows.
 
 ### `x: string`
 
@@ -49,7 +49,7 @@ from {x: luhn_check_digit("7992739871")}
 
 ### Append a check digit
 
-Convert the digit with [`string`](https://tenzir.com/docs/reference/functions/string.md) and append it with `+`:
+Convert the digit with [`string`](https://tenzir.com/docs/v7.0.0/reference/functions/string.md) and append it with `+`:
 
 ```tql
 from {payload: "411111111111111"}
@@ -67,7 +67,7 @@ Prefer `+` over a format string: when the function returns `null`, the `+` opera
 
 ### Encrypt card numbers and keep them valid
 
-Encrypt the card number without its check digit with [`encrypt_ff1`](https://tenzir.com/docs/reference/functions/encrypt_ff1.md), and then append the check digit of the result:
+Encrypt the card number without its check digit with [`encrypt_ff1`](https://tenzir.com/docs/v7.0.0/reference/functions/encrypt_ff1.md), and then append the check digit of the result:
 
 ```tql
 let $key = secret("pii-key").decode_hex()
@@ -90,7 +90,7 @@ if card.is_luhn_valid() and card.length_bytes() >= 12 and card.length_bytes() <=
 }
 ```
 
-Decrypt the same way with [`decrypt_ff1`](https://tenzir.com/docs/reference/functions/decrypt_ff1.md):
+Decrypt the same way with [`decrypt_ff1`](https://tenzir.com/docs/v7.0.0/reference/functions/decrypt_ff1.md):
 
 ```tql
 let $key = secret("pii-key").decode_hex()
@@ -117,7 +117,7 @@ Decryption recomputes the check digit, so the round trip restores only valid car
 
 ## See Also
 
-* [`is_luhn_valid`](https://tenzir.com/docs/reference/functions/is_luhn_valid.md)
-* [`encrypt_ff1`](https://tenzir.com/docs/reference/functions/encrypt_ff1.md)
-* [`decrypt_ff1`](https://tenzir.com/docs/reference/functions/decrypt_ff1.md)
+* [`is_luhn_valid`](https://tenzir.com/docs/v7.0.0/reference/functions/is_luhn_valid.md)
+* [`encrypt_ff1`](https://tenzir.com/docs/v7.0.0/reference/functions/encrypt_ff1.md)
+* [`decrypt_ff1`](https://tenzir.com/docs/v7.0.0/reference/functions/decrypt_ff1.md)
 * [Encrypt sensitive data](../../guides/protect/encrypt-sensitive-data.md)

@@ -1,7 +1,7 @@
 ---
 title: "decrypt_ff1"
-canonical: https://tenzir.com/docs/reference/functions/decrypt_ff1
-source: https://tenzir.com/docs/reference/functions/decrypt_ff1.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/decrypt_ff1
+source: https://tenzir.com/docs/v7.0.0/reference/functions/decrypt_ff1.md
 section: "Docs"
 ---
 
@@ -17,23 +17,23 @@ decrypt_ff1(x:string, key=secret, [alphabet=string, tweak=blob|string]) -> strin
 
 ## Description
 
-The `decrypt_ff1` function decrypts the output of [`encrypt_ff1`](https://tenzir.com/docs/reference/functions/encrypt_ff1.md) with FF1 over AES, as specified in NIST SP 800-38G. The output has the same length as the input and uses the same alphabet.
+The `decrypt_ff1` function decrypts the output of [`encrypt_ff1`](https://tenzir.com/docs/v7.0.0/reference/functions/encrypt_ff1.md) with FF1 over AES, as specified in NIST SP 800-38G. The output has the same length as the input and uses the same alphabet.
 
 The function only decrypts the characters of the alphabet. All other characters pass through unchanged, so separators such as dashes and spaces stay in place.
 
 To restore the original value, pass the same key, alphabet, and tweak as during encryption.
 
-FF1 preserves the length and the alphabet, but not check digits. If you kept card numbers Luhn-valid by encrypting them without their check digit and appending a new one with [`luhn_check_digit`](https://tenzir.com/docs/reference/functions/luhn_check_digit.md), decrypt them the same way, as the example below shows.
+FF1 preserves the length and the alphabet, but not check digits. If you kept card numbers Luhn-valid by encrypting them without their check digit and appending a new one with [`luhn_check_digit`](https://tenzir.com/docs/v7.0.0/reference/functions/luhn_check_digit.md), decrypt them the same way, as the example below shows.
 
 FF1 does not authenticate
 
-FF1 can’t detect a wrong key or a modified ciphertext. Decrypting with the wrong key or tweak silently returns a wrong value of the right format. If you need to detect such errors, use authenticated encryption such as [`decrypt_aes_gcm_siv`](https://tenzir.com/docs/reference/functions/decrypt_aes_gcm_siv.md) or [`decrypt_aes_siv`](https://tenzir.com/docs/reference/functions/decrypt_aes_siv.md) instead.
+FF1 can’t detect a wrong key or a modified ciphertext. Decrypting with the wrong key or tweak silently returns a wrong value of the right format. If you need to detect such errors, use authenticated encryption such as [`decrypt_aes_gcm_siv`](https://tenzir.com/docs/v7.0.0/reference/functions/decrypt_aes_gcm_siv.md) or [`decrypt_aes_siv`](https://tenzir.com/docs/v7.0.0/reference/functions/decrypt_aes_siv.md) instead.
 
 ### `x: string`
 
 The string to decrypt.
 
-The input must contain at least as many characters from the alphabet as [`encrypt_ff1`](https://tenzir.com/docs/reference/functions/encrypt_ff1.md) requires: 6 with the default decimal alphabet, 5 with a hexadecimal alphabet, or 4 with a 36-character alphabet. It must contain at most 4096 characters from the alphabet. For shorter and longer values, the function returns `null` and emits a warning.
+The input must contain at least as many characters from the alphabet as [`encrypt_ff1`](https://tenzir.com/docs/v7.0.0/reference/functions/encrypt_ff1.md) requires: 6 with the default decimal alphabet, 5 with a hexadecimal alphabet, or 4 with a 36-character alphabet. It must contain at most 4096 characters from the alphabet. For shorter and longer values, the function returns `null` and emits a warning.
 
 The function returns `null` for `null` values. For values of other types, it returns `null` and emits a warning.
 
@@ -43,7 +43,7 @@ The key that encrypted the value, as a secret.
 
 The key size selects the AES variant: 16 bytes for AES-128, 24 bytes for AES-192, and 32 bytes for AES-256. A key of any other size is an error when the pipeline starts.
 
-Read the key with [`secret`](https://tenzir.com/docs/reference/functions/secret.md), so that it stays out of the pipeline definition. A constant string or blob also works as an [ad-hoc secret](../../explanations/secrets.md#ad-hoc-secrets), but then the key appears in the pipeline definition. The function uses the bytes of the secret as they are. If your secret store holds the key in hex or Base64 form, decode it with [`decode_hex`](https://tenzir.com/docs/reference/functions/decode_hex.md) or [`decode_base64`](https://tenzir.com/docs/reference/functions/decode_base64.md), for example `key=secret("pii-key").decode_hex()`.
+Read the key with [`secret`](https://tenzir.com/docs/v7.0.0/reference/functions/secret.md), so that it stays out of the pipeline definition. A constant string or blob also works as an [ad-hoc secret](../../explanations/secrets.md#ad-hoc-secrets), but then the key appears in the pipeline definition. The function uses the bytes of the secret as they are. If your secret store holds the key in hex or Base64 form, decode it with [`decode_hex`](https://tenzir.com/docs/v7.0.0/reference/functions/decode_hex.md) or [`decode_base64`](https://tenzir.com/docs/v7.0.0/reference/functions/decode_base64.md), for example `key=secret("pii-key").decode_hex()`.
 
 ### `alphabet = string (optional)`
 
@@ -83,7 +83,7 @@ card = decrypt_ff1(card, key=$key)
 
 ### Restore Luhn-valid card numbers
 
-Reverse the Luhn-valid encryption from the example of [`encrypt_ff1`](https://tenzir.com/docs/reference/functions/encrypt_ff1.md): decrypt the number without its check digit and append the check digit of the result:
+Reverse the Luhn-valid encryption from the example of [`encrypt_ff1`](https://tenzir.com/docs/v7.0.0/reference/functions/encrypt_ff1.md): decrypt the number without its check digit and append the check digit of the result:
 
 ```tql
 let $key = secret("pii-key").decode_hex()
@@ -163,12 +163,12 @@ wrong_tweak = decrypt_ff1(card, key=$key, tweak="card")
 
 ## See Also
 
-* [`encrypt_ff1`](https://tenzir.com/docs/reference/functions/encrypt_ff1.md)
-* [`is_luhn_valid`](https://tenzir.com/docs/reference/functions/is_luhn_valid.md)
-* [`luhn_check_digit`](https://tenzir.com/docs/reference/functions/luhn_check_digit.md)
-* [`decrypt_aes_gcm_siv`](https://tenzir.com/docs/reference/functions/decrypt_aes_gcm_siv.md)
-* [`decrypt_aes_gcm`](https://tenzir.com/docs/reference/functions/decrypt_aes_gcm.md)
-* [`decrypt_aes_siv`](https://tenzir.com/docs/reference/functions/decrypt_aes_siv.md)
-* [`decrypt_hpke`](https://tenzir.com/docs/reference/functions/decrypt_hpke.md)
+* [`encrypt_ff1`](https://tenzir.com/docs/v7.0.0/reference/functions/encrypt_ff1.md)
+* [`is_luhn_valid`](https://tenzir.com/docs/v7.0.0/reference/functions/is_luhn_valid.md)
+* [`luhn_check_digit`](https://tenzir.com/docs/v7.0.0/reference/functions/luhn_check_digit.md)
+* [`decrypt_aes_gcm_siv`](https://tenzir.com/docs/v7.0.0/reference/functions/decrypt_aes_gcm_siv.md)
+* [`decrypt_aes_gcm`](https://tenzir.com/docs/v7.0.0/reference/functions/decrypt_aes_gcm.md)
+* [`decrypt_aes_siv`](https://tenzir.com/docs/v7.0.0/reference/functions/decrypt_aes_siv.md)
+* [`decrypt_hpke`](https://tenzir.com/docs/v7.0.0/reference/functions/decrypt_hpke.md)
 * [Encrypt sensitive data](../../guides/protect/encrypt-sensitive-data.md)
 * [Encryption](../../explanations/encryption.md)

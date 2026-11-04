@@ -1,7 +1,7 @@
 ---
 title: "read_feather"
-canonical: https://tenzir.com/docs/reference/operators/read_feather
-source: https://tenzir.com/docs/reference/operators/read_feather.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/read_feather
+source: https://tenzir.com/docs/v7.0.0/reference/operators/read_feather.md
 section: "Docs"
 ---
 
@@ -32,5 +32,5 @@ publish "log"
 
 ## See Also
 
-* [`read_parquet`](https://tenzir.com/docs/reference/operators/read_parquet.md)
-* [`write_feather`](https://tenzir.com/docs/reference/operators/write_feather.md)
+* [`read_parquet`](https://tenzir.com/docs/v7.0.0/reference/operators/read_parquet.md)
+* [`write_feather`](https://tenzir.com/docs/v7.0.0/reference/operators/write_feather.md)

@@ -1,7 +1,7 @@
 ---
 title: "Configuration"
-canonical: https://tenzir.com/docs/reference/node/configuration
-source: https://tenzir.com/docs/reference/node/configuration.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/node/configuration
+source: https://tenzir.com/docs/v7.0.0/reference/node/configuration.md
 section: "Docs"
 ---
 

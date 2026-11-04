@@ -1,7 +1,7 @@
 ---
 title: "read_chunks"
-canonical: https://tenzir.com/docs/reference/operators/read_chunks
-source: https://tenzir.com/docs/reference/operators/read_chunks.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/read_chunks
+source: https://tenzir.com/docs/v7.0.0/reference/operators/read_chunks.md
 section: "Docs"
 ---
 
@@ -17,7 +17,7 @@ read_chunks
 
 ## Description
 
-The `read_chunks` operator turns each incoming byte chunk into a single event with a field called `data` of type `blob`. Unlike [`read_all`](https://tenzir.com/docs/reference/operators/read_all.md), which buffers the entire input and produces one event, `read_chunks` emits events as data arrives.
+The `read_chunks` operator turns each incoming byte chunk into a single event with a field called `data` of type `blob`. Unlike [`read_all`](https://tenzir.com/docs/v7.0.0/reference/operators/read_all.md), which buffers the entire input and produces one event, `read_chunks` emits events as data arrives.
 
 This is useful for piping binary data out `from_` operators, that can only emit events.
 
@@ -48,6 +48,6 @@ to_file "output.bin" {
 
 ## See Also
 
-* [`read_all`](https://tenzir.com/docs/reference/operators/read_all.md)
-* [`read_delimited`](https://tenzir.com/docs/reference/operators/read_delimited.md)
-* [`write_chunks`](https://tenzir.com/docs/reference/operators/write_chunks.md)
+* [`read_all`](https://tenzir.com/docs/v7.0.0/reference/operators/read_all.md)
+* [`read_delimited`](https://tenzir.com/docs/v7.0.0/reference/operators/read_delimited.md)
+* [`write_chunks`](https://tenzir.com/docs/v7.0.0/reference/operators/write_chunks.md)

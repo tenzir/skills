@@ -1,7 +1,7 @@
 ---
 title: "ecdf"
-canonical: https://tenzir.com/docs/reference/functions/ecdf
-source: https://tenzir.com/docs/reference/functions/ecdf.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/ecdf
+source: https://tenzir.com/docs/v7.0.0/reference/functions/ecdf.md
 section: "Docs"
 ---
 
@@ -45,6 +45,6 @@ select span_rank=ecdf([17, 100, 373, 1000], 373),
 
 ## See also
 
-* [`tdigest_cdf`](https://tenzir.com/docs/reference/functions/tdigest_cdf.md)
-* [`kolmogorov_smirnov`](https://tenzir.com/docs/reference/functions/kolmogorov_smirnov.md)
-* [`wasserstein`](https://tenzir.com/docs/reference/functions/wasserstein.md)
+* [`tdigest_cdf`](https://tenzir.com/docs/v7.0.0/reference/functions/tdigest_cdf.md)
+* [`kolmogorov_smirnov`](https://tenzir.com/docs/v7.0.0/reference/functions/kolmogorov_smirnov.md)
+* [`wasserstein`](https://tenzir.com/docs/v7.0.0/reference/functions/wasserstein.md)

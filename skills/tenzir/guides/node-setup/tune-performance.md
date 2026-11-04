@@ -1,7 +1,7 @@
 ---
 title: "Tune performance"
-canonical: https://tenzir.com/docs/guides/node-setup/tune-performance
-source: https://tenzir.com/docs/guides/node-setup/tune-performance.md
+canonical: https://tenzir.com/docs/v7.0.0/guides/node-setup/tune-performance
+source: https://tenzir.com/docs/v7.0.0/guides/node-setup/tune-performance.md
 section: "Docs"
 ---
 
@@ -15,7 +15,7 @@ This guide covers configuration options that affect node performance. You’ll l
 
 Back pressure limits how far producers can run ahead of consumers. The executor uses bounded channels between unfused jobs. When a channel fills, its producer waits for the consumer to make room. Operators inside a fused group hand batches directly to each other without an intermediate channel, as our [executor explanation](../../explanations/executor.md#jobs-and-channels) describes.
 
-The configuration section `tenzir.demand` controls buffering for in-memory topics used by [`publish`](https://tenzir.com/docs/reference/operators/publish.md) and [`subscribe`](https://tenzir.com/docs/reference/operators/subscribe.md), not every channel in an execution plan. Our [example configuration](../../reference/node/configuration.md) lists the available options.
+The configuration section `tenzir.demand` controls buffering for in-memory topics used by [`publish`](https://tenzir.com/docs/v7.0.0/reference/operators/publish.md) and [`subscribe`](https://tenzir.com/docs/v7.0.0/reference/operators/subscribe.md), not every channel in an execution plan. Our [example configuration](../../reference/node/configuration.md) lists the available options.
 
 For example, to reduce topic buffering at the cost of throughput, set the following option:
 
@@ -74,7 +74,7 @@ tenzir:
 
 The node setting accepts the same values as the directive. A pipeline directive overrides the node default.
 
-When only one section of a pipeline is the bottleneck, wrap it in [`parallel`](https://tenzir.com/docs/reference/operators/parallel.md) instead. The operators inside run on the given number of cores, and the rest of the pipeline stays on one:
+When only one section of a pipeline is the bottleneck, wrap it in [`parallel`](https://tenzir.com/docs/v7.0.0/reference/operators/parallel.md) instead. The operators inside run on the given number of cores, and the rest of the pipeline stays on one:
 
 ```tql
 from_file "/var/log/events/*.json", watch=10s
@@ -91,7 +91,7 @@ Parallel instances work at different speeds, so a parallel pipeline can emit eve
 
 ### Planner
 
-Not every operator can run on multiple cores. Filters like [`where`](https://tenzir.com/docs/reference/operators/where.md), assignments like `bytes = orig_bytes + resp_bytes`, shapers like [`drop`](https://tenzir.com/docs/reference/operators/drop.md), and mappers like [`ocsf_cast`](https://tenzir.com/docs/reference/operators/ocsf_cast.md) can, because they treat each event on its own. The planner leaves the remaining operators at a single instance.
+Not every operator can run on multiple cores. Filters like [`where`](https://tenzir.com/docs/v7.0.0/reference/operators/where.md), assignments like `bytes = orig_bytes + resp_bytes`, shapers like [`drop`](https://tenzir.com/docs/v7.0.0/reference/operators/drop.md), and mappers like [`ocsf_cast`](https://tenzir.com/docs/v7.0.0/reference/operators/ocsf_cast) can, because they treat each event on its own. The planner leaves the remaining operators at a single instance.
 
 These operators run on multiple cores:
 
@@ -99,50 +99,47 @@ These operators run on multiple cores:
      docs list styling: same bullets, indent, and item spacing as an authored
      list. -->
 
-* [`assert`](https://tenzir.com/docs/reference/operators/assert.md)
-* [`context_enrich`](https://tenzir.com/docs/reference/operators/context_enrich.md)
-* [`deduplicate`](https://tenzir.com/docs/reference/operators/deduplicate.md)
-* [`discard`](https://tenzir.com/docs/reference/operators/discard.md)
-* [`dns_lookup`](https://tenzir.com/docs/reference/operators/dns_lookup.md)
-* [`drop`](https://tenzir.com/docs/reference/operators/drop.md)
-* [`drop_null_fields`](https://tenzir.com/docs/reference/operators/drop_null_fields.md)
-* [`each`](https://tenzir.com/docs/reference/operators/each.md)
-* [`from_amqp`](https://tenzir.com/docs/reference/operators/from_amqp.md)
-* [`from_azure_blob_storage`](https://tenzir.com/docs/reference/operators/from_azure_blob_storage.md)
-* [`from_file`](https://tenzir.com/docs/reference/operators/from_file.md)
-* [`from_google_cloud_pubsub`](https://tenzir.com/docs/reference/operators/from_google_cloud_pubsub.md)
-* [`from_google_cloud_storage`](https://tenzir.com/docs/reference/operators/from_google_cloud_storage.md)
-* [`from_kafka`](https://tenzir.com/docs/reference/operators/from_kafka.md)
-* [`from_s3`](https://tenzir.com/docs/reference/operators/from_s3.md)
-* [`group`](https://tenzir.com/docs/reference/operators/group.md)
-* [`ocsf_cast`](https://tenzir.com/docs/reference/operators/ocsf_cast.md)
-* [`ocsf_derive`](https://tenzir.com/docs/reference/operators/ocsf_derive.md)
-* [`ocsf_trim`](https://tenzir.com/docs/reference/operators/ocsf_trim.md)
-* [`publish`](https://tenzir.com/docs/reference/operators/publish.md)
-* [`python`](https://tenzir.com/docs/reference/operators/python.md)
-* [`replace`](https://tenzir.com/docs/reference/operators/replace.md)
-* [`set`](https://tenzir.com/docs/reference/operators/set.md)
-* [`sigma`](https://tenzir.com/docs/reference/operators/sigma.md)
-* [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md)
-* [`to_amazon_cloudwatch`](https://tenzir.com/docs/reference/operators/to_amazon_cloudwatch.md)
-* [`to_amazon_kinesis`](https://tenzir.com/docs/reference/operators/to_amazon_kinesis.md)
-* [`to_amazon_sqs`](https://tenzir.com/docs/reference/operators/to_amazon_sqs.md)
-* [`to_amqp`](https://tenzir.com/docs/reference/operators/to_amqp.md)
-* [`to_azure_log_analytics`](https://tenzir.com/docs/reference/operators/to_azure_log_analytics.md)
-* [`to_elasticsearch`](https://tenzir.com/docs/reference/operators/to_elasticsearch.md)
-* [`to_google_cloud_logging`](https://tenzir.com/docs/reference/operators/to_google_cloud_logging.md)
-* [`to_google_cloud_pubsub`](https://tenzir.com/docs/reference/operators/to_google_cloud_pubsub.md)
-* [`to_google_secops`](https://tenzir.com/docs/reference/operators/to_google_secops.md)
-* [`to_hydrolix`](https://tenzir.com/docs/reference/operators/to_hydrolix.md)
-* [`to_kafka`](https://tenzir.com/docs/reference/operators/to_kafka.md)
-* [`to_nats`](https://tenzir.com/docs/reference/operators/to_nats.md)
-* [`to_opensearch`](https://tenzir.com/docs/reference/operators/to_opensearch.md)
-* [`to_sentinelone_data_lake`](https://tenzir.com/docs/reference/operators/to_sentinelone_data_lake.md)
-* [`to_splunk`](https://tenzir.com/docs/reference/operators/to_splunk.md)
-* [`unroll`](https://tenzir.com/docs/reference/operators/unroll.md)
-* [`where`](https://tenzir.com/docs/reference/operators/where.md)
+* [`assert`](https://tenzir.com/docs/v7.0.0/reference/operators/assert.md)
+* [`context_enrich`](https://tenzir.com/docs/v7.0.0/reference/operators/context_enrich.md)
+* [`deduplicate`](https://tenzir.com/docs/v7.0.0/reference/operators/deduplicate.md)
+* [`discard`](https://tenzir.com/docs/v7.0.0/reference/operators/discard.md)
+* [`dns_lookup`](https://tenzir.com/docs/v7.0.0/reference/operators/dns_lookup.md)
+* [`drop`](https://tenzir.com/docs/v7.0.0/reference/operators/drop.md)
+* [`drop_null_fields`](https://tenzir.com/docs/v7.0.0/reference/operators/drop_null_fields.md)
+* [`each`](https://tenzir.com/docs/v7.0.0/reference/operators/each.md)
+* [`from_amqp`](https://tenzir.com/docs/v7.0.0/reference/operators/from_amqp.md)
+* [`from_azure_blob_storage`](https://tenzir.com/docs/v7.0.0/reference/operators/from_azure_blob_storage.md)
+* [`from_file`](https://tenzir.com/docs/v7.0.0/reference/operators/from_file.md)
+* [`from_google_cloud_pubsub`](https://tenzir.com/docs/v7.0.0/reference/operators/from_google_cloud_pubsub.md)
+* [`from_google_cloud_storage`](https://tenzir.com/docs/v7.0.0/reference/operators/from_google_cloud_storage.md)
+* [`from_kafka`](https://tenzir.com/docs/v7.0.0/reference/operators/from_kafka.md)
+* [`from_s3`](https://tenzir.com/docs/v7.0.0/reference/operators/from_s3.md)
+* [`group`](https://tenzir.com/docs/v7.0.0/reference/operators/group.md)
+* [`publish`](https://tenzir.com/docs/v7.0.0/reference/operators/publish.md)
+* [`python`](https://tenzir.com/docs/v7.0.0/reference/operators/python.md)
+* [`replace`](https://tenzir.com/docs/v7.0.0/reference/operators/replace.md)
+* [`set`](https://tenzir.com/docs/v7.0.0/reference/operators/set.md)
+* [`sigma`](https://tenzir.com/docs/v7.0.0/reference/operators/sigma.md)
+* [`summarize`](https://tenzir.com/docs/v7.0.0/reference/operators/summarize.md)
+* [`to_amazon_cloudwatch`](https://tenzir.com/docs/v7.0.0/reference/operators/to_amazon_cloudwatch.md)
+* [`to_amazon_kinesis`](https://tenzir.com/docs/v7.0.0/reference/operators/to_amazon_kinesis.md)
+* [`to_amazon_sqs`](https://tenzir.com/docs/v7.0.0/reference/operators/to_amazon_sqs.md)
+* [`to_amqp`](https://tenzir.com/docs/v7.0.0/reference/operators/to_amqp.md)
+* [`to_azure_log_analytics`](https://tenzir.com/docs/v7.0.0/reference/operators/to_azure_log_analytics.md)
+* [`to_elasticsearch`](https://tenzir.com/docs/v7.0.0/reference/operators/to_elasticsearch.md)
+* [`to_google_cloud_logging`](https://tenzir.com/docs/v7.0.0/reference/operators/to_google_cloud_logging.md)
+* [`to_google_cloud_pubsub`](https://tenzir.com/docs/v7.0.0/reference/operators/to_google_cloud_pubsub.md)
+* [`to_google_secops`](https://tenzir.com/docs/v7.0.0/reference/operators/to_google_secops.md)
+* [`to_hydrolix`](https://tenzir.com/docs/v7.0.0/reference/operators/to_hydrolix.md)
+* [`to_kafka`](https://tenzir.com/docs/v7.0.0/reference/operators/to_kafka.md)
+* [`to_nats`](https://tenzir.com/docs/v7.0.0/reference/operators/to_nats.md)
+* [`to_opensearch`](https://tenzir.com/docs/v7.0.0/reference/operators/to_opensearch.md)
+* [`to_sentinelone_data_lake`](https://tenzir.com/docs/v7.0.0/reference/operators/to_sentinelone_data_lake.md)
+* [`to_splunk`](https://tenzir.com/docs/v7.0.0/reference/operators/to_splunk.md)
+* [`unroll`](https://tenzir.com/docs/v7.0.0/reference/operators/unroll.md)
+* [`where`](https://tenzir.com/docs/v7.0.0/reference/operators/where.md)
 
-Operators that group related events, such as [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md), [`group`](https://tenzir.com/docs/reference/operators/group.md), and [`deduplicate`](https://tenzir.com/docs/reference/operators/deduplicate.md), receive events partitioned by their keys. Tenzir runs them on at most 4 instances, because partitioning splits batches and the resulting per-event overhead grows with the number of partitions. Raise or lower that bound with `limit_partitions`:
+Operators that group related events, such as [`summarize`](https://tenzir.com/docs/v7.0.0/reference/operators/summarize.md), [`group`](https://tenzir.com/docs/v7.0.0/reference/operators/group.md), and [`deduplicate`](https://tenzir.com/docs/v7.0.0/reference/operators/deduplicate.md), receive events partitioned by their keys. Tenzir runs them on at most 4 instances, because partitioning splits batches and the resulting per-event overhead grows with the number of partitions. Raise or lower that bound with `limit_partitions`:
 
 ```tql
 // parallelism: max,limit_partitions=8
@@ -150,7 +147,7 @@ from_file "/var/log/flows/*.json"
 summarize dest_ip, bytes=sum(bytes)
 ```
 
-[`parallel`](https://tenzir.com/docs/reference/operators/parallel.md) accepts the same option for a single block:
+[`parallel`](https://tenzir.com/docs/v7.0.0/reference/operators/parallel.md) accepts the same option for a single block:
 
 ```tql
 parallel 8, limit_partitions=8 {
@@ -174,7 +171,7 @@ To opt a pipeline out of fusing entirely, add the `fuse=none` option to the para
 
 Setting `fuse=all` goes the other direction and fuses every channel in the pipeline, including the ones between lanes that would otherwise stay unfused. A parallel pipeline with the default `fuse=parallel` tends to hold less memory than the same pipeline running on a single core, not more. The difference is largest when a pipeline is back-pressured, for example when a slow sink lets every channel upstream of it fill up.
 
-[`parallel`](https://tenzir.com/docs/reference/operators/parallel.md) takes the same values as a `fuse` argument, scoped to the operators inside its block:
+[`parallel`](https://tenzir.com/docs/v7.0.0/reference/operators/parallel.md) takes the same values as a `fuse` argument, scoped to the operators inside its block:
 
 ```tql
 parallel 4, fuse="none" {
@@ -302,7 +299,7 @@ Tenzir processes log messages in a dedicated thread, which by default buffers up
 
 ## Caching
 
-Tenzir Nodes cache results for results for pipelines used in the Tenzir Platform’s Explorer. Internally, this utilizes the [`cache`](https://tenzir.com/docs/reference/operators/cache.md) operator.
+Tenzir Nodes cache results for results for pipelines used in the Tenzir Platform’s Explorer. Internally, this utilizes the [`cache`](https://tenzir.com/docs/v7.0.0/reference/operators/cache.md) operator.
 
 Caches have two primary tuning knobs:
 

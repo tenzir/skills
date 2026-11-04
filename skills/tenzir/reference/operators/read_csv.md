@@ -1,7 +1,7 @@
 ---
 title: "read_csv"
-canonical: https://tenzir.com/docs/reference/operators/read_csv
-source: https://tenzir.com/docs/reference/operators/read_csv.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/read_csv
+source: https://tenzir.com/docs/v7.0.0/reference/operators/read_csv.md
 section: "Docs"
 ---
 
@@ -205,10 +205,10 @@ read_csv header="message,count,ip"
 
 ## See Also
 
-* [`parse_csv`](https://tenzir.com/docs/reference/functions/parse_csv.md)
-* [`print_csv`](https://tenzir.com/docs/reference/functions/print_csv.md)
-* [`read_ssv`](https://tenzir.com/docs/reference/operators/read_ssv.md)
-* [`read_tsv`](https://tenzir.com/docs/reference/operators/read_tsv.md)
-* [`read_xsv`](https://tenzir.com/docs/reference/operators/read_xsv.md)
-* [`write_csv`](https://tenzir.com/docs/reference/operators/write_csv.md)
+* [`parse_csv`](https://tenzir.com/docs/v7.0.0/reference/functions/parse_csv.md)
+* [`print_csv`](https://tenzir.com/docs/v7.0.0/reference/functions/print_csv.md)
+* [`read_ssv`](https://tenzir.com/docs/v7.0.0/reference/operators/read_ssv.md)
+* [`read_tsv`](https://tenzir.com/docs/v7.0.0/reference/operators/read_tsv.md)
+* [`read_xsv`](https://tenzir.com/docs/v7.0.0/reference/operators/read_xsv.md)
+* [`write_csv`](https://tenzir.com/docs/v7.0.0/reference/operators/write_csv.md)
 * [Convert data formats](../../guides/shape/convert-data-formats.md)

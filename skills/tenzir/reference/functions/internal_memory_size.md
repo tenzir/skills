@@ -1,7 +1,7 @@
 ---
 title: "internal_memory_size"
-canonical: https://tenzir.com/docs/reference/functions/internal_memory_size
-source: https://tenzir.com/docs/reference/functions/internal_memory_size.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/internal_memory_size
+source: https://tenzir.com/docs/v7.0.0/reference/functions/internal_memory_size.md
 section: "Docs"
 ---
 
@@ -60,6 +60,6 @@ to_amqp "amqp://user:pass@localhost:5672/"
 
 ## See Also
 
-* [`type_id`](https://tenzir.com/docs/reference/functions/type_id.md)
-* [`type_kind`](https://tenzir.com/docs/reference/functions/type_kind.md)
-* [`type_of`](https://tenzir.com/docs/reference/functions/type_of.md)
+* [`type_id`](https://tenzir.com/docs/v7.0.0/reference/functions/type_id.md)
+* [`type_kind`](https://tenzir.com/docs/v7.0.0/reference/functions/type_kind.md)
+* [`type_of`](https://tenzir.com/docs/v7.0.0/reference/functions/type_of.md)

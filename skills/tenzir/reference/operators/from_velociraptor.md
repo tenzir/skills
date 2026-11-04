@@ -1,7 +1,7 @@
 ---
 title: "from_velociraptor"
-canonical: https://tenzir.com/docs/reference/operators/from_velociraptor
-source: https://tenzir.com/docs/reference/operators/from_velociraptor.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/from_velociraptor
+source: https://tenzir.com/docs/v7.0.0/reference/operators/from_velociraptor.md
 section: "Docs"
 ---
 
@@ -131,4 +131,4 @@ from_velociraptor subscribe="Windows"
 
 ## See Also
 
-* [Velociraptor](../../integrations/velociraptor.md)
+* [Velociraptor](https://docs.tenzir.com/integrations/velociraptor)

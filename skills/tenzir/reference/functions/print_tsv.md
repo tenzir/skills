@@ -1,7 +1,7 @@
 ---
 title: "print_tsv"
-canonical: https://tenzir.com/docs/reference/functions/print_tsv
-source: https://tenzir.com/docs/reference/functions/print_tsv.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/print_tsv
+source: https://tenzir.com/docs/v7.0.0/reference/functions/print_tsv.md
 section: "Docs"
 ---
 
@@ -57,5 +57,5 @@ output = this.print_tsv()
 
 ## See Also
 
-* [`write_tsv`](https://tenzir.com/docs/reference/operators/write_tsv.md)
-* [`parse_tsv`](https://tenzir.com/docs/reference/functions/parse_tsv.md)
+* [`write_tsv`](https://tenzir.com/docs/v7.0.0/reference/operators/write_tsv.md)
+* [`parse_tsv`](https://tenzir.com/docs/v7.0.0/reference/functions/parse_tsv.md)

@@ -1,7 +1,7 @@
 ---
 title: "first"
-canonical: https://tenzir.com/docs/reference/functions/first
-source: https://tenzir.com/docs/reference/functions/first.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/first
+source: https://tenzir.com/docs/v7.0.0/reference/functions/first.md
 section: "Docs"
 ---
 
@@ -38,5 +38,5 @@ summarize first_value=first(x)
 
 ## See Also
 
-* [`last`](https://tenzir.com/docs/reference/functions/last.md)
+* [`last`](https://tenzir.com/docs/v7.0.0/reference/functions/last.md)
 * [Aggregate event streams](../../guides/analyze/aggregate-event-streams.md)

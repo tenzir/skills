@@ -1,7 +1,7 @@
 ---
 title: "Build from source"
-canonical: https://tenzir.com/docs/guides/development/build-from-source
-source: https://tenzir.com/docs/guides/development/build-from-source.md
+canonical: https://tenzir.com/docs/v7.0.0/guides/development/build-from-source
+source: https://tenzir.com/docs/v7.0.0/guides/development/build-from-source.md
 section: "Docs"
 ---
 

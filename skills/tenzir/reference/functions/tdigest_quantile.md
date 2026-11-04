@@ -1,7 +1,7 @@
 ---
 title: "tdigest_quantile"
-canonical: https://tenzir.com/docs/reference/functions/tdigest_quantile
-source: https://tenzir.com/docs/reference/functions/tdigest_quantile.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/tdigest_quantile
+source: https://tenzir.com/docs/v7.0.0/reference/functions/tdigest_quantile.md
 section: "Docs"
 ---
 
@@ -40,5 +40,5 @@ select median = tdigest_quantile(model, 0.5),
 
 ## See also
 
-* [`tdigest`](https://tenzir.com/docs/reference/functions/tdigest.md)
-* [`tdigest_cdf`](https://tenzir.com/docs/reference/functions/tdigest_cdf.md)
+* [`tdigest`](https://tenzir.com/docs/v7.0.0/reference/functions/tdigest.md)
+* [`tdigest_cdf`](https://tenzir.com/docs/v7.0.0/reference/functions/tdigest_cdf.md)

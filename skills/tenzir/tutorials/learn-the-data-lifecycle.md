@@ -1,7 +1,7 @@
 ---
 title: "Learn the data lifecycle"
-canonical: https://tenzir.com/docs/tutorials/learn-the-data-lifecycle
-source: https://tenzir.com/docs/tutorials/learn-the-data-lifecycle.md
+canonical: https://tenzir.com/docs/v7.0.0/tutorials/learn-the-data-lifecycle
+source: https://tenzir.com/docs/v7.0.0/tutorials/learn-the-data-lifecycle.md
 section: "Docs"
 ---
 
@@ -15,7 +15,7 @@ The data lifecycle
 
 This page is the map. Each stage below gets a definition, a short snippet, and links to the guides that go deep. Read it once to learn the vocabulary, then come back to it when you need to find where something belongs.
 
-Only the first four stages have a required order. Data has to arrive before anything can parse it, parsing has to expose fields before shaping can prepare them, and normalization then maps them to a schema. Everything else depends on what you are building. A real deployment runs most of these at the same time in separate pipelines, connected by [`publish`](https://tenzir.com/docs/reference/operators/publish.md) and [`subscribe`](https://tenzir.com/docs/reference/operators/subscribe.md), so the picture is a vocabulary rather than a queue.
+Only the first four stages have a required order. Data has to arrive before anything can parse it, parsing has to expose fields before shaping can prepare them, and normalization then maps them to a schema. Everything else depends on what you are building. A real deployment runs most of these at the same time in separate pipelines, connected by [`publish`](https://tenzir.com/docs/v7.0.0/reference/operators/publish.md) and [`subscribe`](https://tenzir.com/docs/v7.0.0/reference/operators/subscribe.md), so the picture is a vocabulary rather than a queue.
 
 Every stage is ordinary TQL. Nothing on this page is a special mode, a plugin, or a configuration file.
 
@@ -128,7 +128,7 @@ window size=15min, on=time {
 }
 ```
 
-Analysis powers charts, dashboards, and baselines. It can also expose [rare values](../guides/analyze/find-unseen-and-rare-values.md), [set adaptive thresholds](../guides/analyze/set-adaptive-thresholds-from-a-baseline.md), [identify distribution drift](../guides/analyze/identify-distribution-drift.md), or [find a cardinality change](../guides/analyze/find-cardinality-spikes.md). None of these results decides by itself that the activity is malicious. See [aggregating event streams](../guides/analyze/aggregate-event-streams.md), [windowing event streams](../guides/analyze/window-event-streams.md), and [Plot data with charts](plot-data-with-charts.md).
+Analysis powers charts, dashboards, and baselines. It can also expose [rare values](../guides/analyze/find-unseen-and-rare-values.md), [set adaptive thresholds](../guides/analyze/set-adaptive-thresholds-from-a-baseline.md), [identify distribution drift](../guides/analyze/identify-distribution-drift.md), or [find a cardinality change](../guides/analyze/find-cardinality-spikes.md). None of these results decides by itself that the activity is malicious. See [aggregating event streams](../guides/analyze/aggregate-event-streams.md), [windowing event streams](../guides/analyze/window-event-streams.md), and [Plot data with charts](https://docs.tenzir.com/tutorials/plot-data-with-charts).
 
 ### Detect
 
@@ -185,7 +185,7 @@ fork {
 publish "ocsf.archive"
 ```
 
-The [`fork`](https://tenzir.com/docs/reference/operators/fork.md) operator sends a copy down a branch while the main stream continues, so one collection pipeline can feed a SIEM, an archive, and an alerting path. See [sending to destinations](../guides/route/send-to-destinations.md), [fanning out with subpipelines](../guides/route/fan-out-with-subpipelines.md), and [load balancing](../guides/route/load-balance-pipelines.md).
+The [`fork`](https://tenzir.com/docs/v7.0.0/reference/operators/fork.md) operator sends a copy down a branch while the main stream continues, so one collection pipeline can feed a SIEM, an archive, and an alerting path. See [sending to destinations](../guides/route/send-to-destinations.md), [fanning out with subpipelines](../guides/route/fan-out-with-subpipelines.md), and [load balancing](../guides/route/load-balance-pipelines.md).
 
 ## Close the loop
 
@@ -203,7 +203,7 @@ delay time, speed=20.0
 publish "ocsf.network"
 ```
 
-That is the arrow on the right of the diagram, and it is why storage matters beyond compliance. Replay drives a changed detection against a real incident, backfills after you fix a mapping, and paces a demo. Here [`timeshift`](https://tenzir.com/docs/reference/operators/timeshift.md) rewrites the timestamps and [`delay`](https://tenzir.com/docs/reference/operators/delay.md) controls the speed. The guide on [replaying historical events](../guides/replay/replay-historical-events.md) covers ordering large archives, preserving original timestamps, and isolating replay side effects.
+That is the arrow on the right of the diagram, and it is why storage matters beyond compliance. Replay drives a changed detection against a real incident, backfills after you fix a mapping, and paces a demo. Here [`timeshift`](https://tenzir.com/docs/v7.0.0/reference/operators/timeshift.md) rewrites the timestamps and [`delay`](https://tenzir.com/docs/v7.0.0/reference/operators/delay.md) controls the speed. The guide on [replaying historical events](../guides/replay/replay-historical-events.md) covers ordering large archives, preserving original timestamps, and isolating replay side effects.
 
 ## Put it together
 

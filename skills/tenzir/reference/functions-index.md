@@ -319,5 +319,5 @@
 
 ## Additional Pages
 
-- [contains](functions/contains.md): The `contains` function is a deprecated alias for [`search`](https://tenzir.com/docs/reference/functions/search.md). It still works, but emits a deprecation warning. Replace `contains(input, target)` with `search(input, target)`, or `input.contains(target)` with `input.search(target)`. The `exact` and `ignore_case` options are unchanged.
+- [contains](functions/contains.md): The `contains` function is a deprecated alias for [`search`](https://tenzir.com/docs/v7.0.0/reference/functions/search.md). It still works, but emits a deprecation warning. Replace `contains(input, target)` with `search(input, target)`, or `input.contains(target)` with `input.search(target)`. The `exact` and `ignore_case` options are unchanged.
 - [geo_distance](functions/geo_distance.md): Computes the surface distance between two geographic coordinates.

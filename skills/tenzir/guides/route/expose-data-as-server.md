@@ -1,7 +1,7 @@
 ---
 title: "Expose data as a server"
-canonical: https://tenzir.com/docs/guides/route/expose-data-as-server
-source: https://tenzir.com/docs/guides/route/expose-data-as-server.md
+canonical: https://tenzir.com/docs/v7.0.0/guides/route/expose-data-as-server
+source: https://tenzir.com/docs/v7.0.0/guides/route/expose-data-as-server.md
 section: "Docs"
 ---
 
@@ -13,7 +13,7 @@ This guide shows you how to make pipeline data available to external consumers b
 
 ## Spin up an HTTP server
 
-Use [`serve_http`](https://tenzir.com/docs/reference/operators/serve_http.md) at the end of a pipeline to start an HTTP server. The nested pipeline chooses how to serialize your events:
+Use [`serve_http`](https://tenzir.com/docs/v7.0.0/reference/operators/serve_http.md) at the end of a pipeline to start an HTTP server. The nested pipeline chooses how to serialize your events:
 
 ```tql
 from_file "example.yaml"
@@ -37,7 +37,7 @@ Multiple clients can connect simultaneously. Each connected client receives a co
 
 ### Choose a wire format
 
-Use the nested pipeline to control the response body format and content type. For example, use [`write_lines`](https://tenzir.com/docs/reference/operators/write_lines.md) to stream plain text instead of NDJSON:
+Use the nested pipeline to control the response body format and content type. For example, use [`write_lines`](https://tenzir.com/docs/v7.0.0/reference/operators/write_lines.md) to stream plain text instead of NDJSON:
 
 ```tql
 from_file "alerts.txt"
@@ -92,6 +92,6 @@ serve_http "0.0.0.0:8443",
 
 ## See Also
 
-* [`serve_http`](https://tenzir.com/docs/reference/operators/serve_http.md)
-* [`serve_tcp`](https://tenzir.com/docs/reference/operators/serve_tcp.md)
-* [`to_http`](https://tenzir.com/docs/reference/operators/to_http.md)
+* [`serve_http`](https://tenzir.com/docs/v7.0.0/reference/operators/serve_http.md)
+* [`serve_tcp`](https://tenzir.com/docs/v7.0.0/reference/operators/serve_tcp.md)
+* [`to_http`](https://tenzir.com/docs/v7.0.0/reference/operators/to_http.md)

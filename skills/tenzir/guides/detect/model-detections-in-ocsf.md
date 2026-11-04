@@ -1,8 +1,8 @@
 ---
 title: "Model detections in OCSF"
 description: "Choose an OCSF representation for alertable activity, create Detection Findings, and model their lifecycle"
-canonical: https://tenzir.com/docs/guides/detect/model-detections-in-ocsf
-source: https://tenzir.com/docs/guides/detect/model-detections-in-ocsf.md
+canonical: https://tenzir.com/docs/v7.0.0/guides/detect/model-detections-in-ocsf
+source: https://tenzir.com/docs/v7.0.0/guides/detect/model-detections-in-ocsf.md
 section: "Docs"
 ---
 
@@ -14,7 +14,7 @@ This guide shows you how to model detection results in [OCSF](https://schema.ocs
 
 Schema enforcement is optional
 
-The examples construct their intended OCSF records directly. Add [`ocsf_derive`](https://tenzir.com/docs/reference/operators/ocsf_derive.md) for enum sibling expansion or [`ocsf_cast`](https://tenzir.com/docs/reference/operators/ocsf_cast.md) for schema enforcement at a pipeline boundary when you need either behavior. They are not part of the detection semantics.
+The examples construct their intended OCSF records directly. Add [`ocsf_derive`](https://tenzir.com/docs/v7.0.0/reference/operators/ocsf_derive) for enum sibling expansion or [`ocsf_cast`](https://tenzir.com/docs/v7.0.0/reference/operators/ocsf_cast) for schema enforcement at a pipeline boundary when you need either behavior. They are not part of the detection semantics.
 
 ## Choose the OCSF representation
 

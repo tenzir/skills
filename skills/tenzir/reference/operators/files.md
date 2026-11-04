@@ -1,7 +1,7 @@
 ---
 title: "files"
-canonical: https://tenzir.com/docs/reference/operators/files
-source: https://tenzir.com/docs/reference/operators/files.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/files
+source: https://tenzir.com/docs/v7.0.0/reference/operators/files.md
 section: "Docs"
 ---
 
@@ -106,7 +106,7 @@ where type == "fifo"
 
 ## See Also
 
-* [`from_file`](https://tenzir.com/docs/reference/operators/from_file.md)
-* [`processes`](https://tenzir.com/docs/reference/operators/processes.md)
-* [`to_file`](https://tenzir.com/docs/reference/operators/to_file.md)
-* [`sockets`](https://tenzir.com/docs/reference/operators/sockets.md)
+* [`from_file`](https://tenzir.com/docs/v7.0.0/reference/operators/from_file.md)
+* [`processes`](https://tenzir.com/docs/v7.0.0/reference/operators/processes.md)
+* [`to_file`](https://tenzir.com/docs/v7.0.0/reference/operators/to_file.md)
+* [`sockets`](https://tenzir.com/docs/v7.0.0/reference/operators/sockets.md)

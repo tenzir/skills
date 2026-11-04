@@ -1,7 +1,7 @@
 ---
 title: "select_matching"
-canonical: https://tenzir.com/docs/reference/functions/select_matching
-source: https://tenzir.com/docs/reference/functions/select_matching.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/select_matching
+source: https://tenzir.com/docs/v7.0.0/reference/functions/select_matching.md
 section: "Docs"
 ---
 
@@ -79,8 +79,8 @@ select identifiers = this.select_matching("_id$")
 
 ## See Also
 
-* [`select`](https://tenzir.com/docs/reference/operators/select.md)
-* [`drop_matching`](https://tenzir.com/docs/reference/functions/drop_matching.md)
-* [`match_regex`](https://tenzir.com/docs/reference/functions/match_regex.md)
+* [`select`](https://tenzir.com/docs/v7.0.0/reference/operators/select.md)
+* [`drop_matching`](https://tenzir.com/docs/v7.0.0/reference/functions/drop_matching.md)
+* [`match_regex`](https://tenzir.com/docs/v7.0.0/reference/functions/match_regex.md)
 * [Shape records](../../guides/shape/shape-records.md)
 * [Filter and select data](../../guides/optimize/filter-and-select-data.md)

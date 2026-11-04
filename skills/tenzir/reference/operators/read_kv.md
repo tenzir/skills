@@ -1,7 +1,7 @@
 ---
 title: "read_kv"
-canonical: https://tenzir.com/docs/reference/operators/read_kv
-source: https://tenzir.com/docs/reference/operators/read_kv.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/read_kv
+source: https://tenzir.com/docs/v7.0.0/reference/operators/read_kv.md
 section: "Docs"
 ---
 
@@ -244,5 +244,5 @@ read_kv
 
 ## See Also
 
-* [`write_kv`](https://tenzir.com/docs/reference/operators/write_kv.md)
-* [`parse_kv`](https://tenzir.com/docs/reference/functions/parse_kv.md)
+* [`write_kv`](https://tenzir.com/docs/v7.0.0/reference/operators/write_kv.md)
+* [`parse_kv`](https://tenzir.com/docs/v7.0.0/reference/functions/parse_kv.md)

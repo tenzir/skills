@@ -1,7 +1,7 @@
 ---
 title: "to_ftp"
-canonical: https://tenzir.com/docs/reference/operators/to_ftp
-source: https://tenzir.com/docs/reference/operators/to_ftp.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/to_ftp
+source: https://tenzir.com/docs/v7.0.0/reference/operators/to_ftp.md
 section: "Docs"
 ---
 
@@ -58,13 +58,13 @@ See the [Node TLS Setup guide](../../guides/node-setup/configure-tls.md) for mor
 
 A required printing subpipeline.
 
-The subpipeline receives events and must return bytes. For example, use [`write_ndjson`](https://tenzir.com/docs/reference/operators/write_ndjson.md) to serialize events as newline-delimited JSON.
+The subpipeline receives events and must return bytes. For example, use [`write_ndjson`](https://tenzir.com/docs/v7.0.0/reference/operators/write_ndjson.md) to serialize events as newline-delimited JSON.
 
 ## Examples
 
 ### Upload events as NDJSON
 
-Use [`write_ndjson`](https://tenzir.com/docs/reference/operators/write_ndjson.md) to serialize each event as one JSON object per line before uploading it.
+Use [`write_ndjson`](https://tenzir.com/docs/v7.0.0/reference/operators/write_ndjson.md) to serialize each event as one JSON object per line before uploading it.
 
 ```tql
 from {
@@ -78,7 +78,7 @@ to_ftp "ftp://user:pass@ftp.example.org/events.ndjson" {
 
 ### Upload compressed NDJSON
 
-Add [`compress_gzip`](https://tenzir.com/docs/reference/operators/compress_gzip.md) to the printing subpipeline when you want to upload compressed output.
+Add [`compress_gzip`](https://tenzir.com/docs/v7.0.0/reference/operators/compress_gzip.md) to the printing subpipeline when you want to upload compressed output.
 
 ```tql
 from {
@@ -93,5 +93,5 @@ to_ftp "ftp://user:pass@ftp.example.org/events.ndjson.gz" {
 
 ## See Also
 
-* [`from_ftp`](https://tenzir.com/docs/reference/operators/from_ftp.md)
-* [FTP](../../integrations/ftp.md)
+* [`from_ftp`](https://tenzir.com/docs/v7.0.0/reference/operators/from_ftp.md)
+* [Ftp](https://docs.tenzir.com/integrations/ftp)

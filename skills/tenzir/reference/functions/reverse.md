@@ -1,7 +1,7 @@
 ---
 title: "reverse"
-canonical: https://tenzir.com/docs/reference/functions/reverse
-source: https://tenzir.com/docs/reference/functions/reverse.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/reverse
+source: https://tenzir.com/docs/v7.0.0/reference/functions/reverse.md
 section: "Docs"
 ---
 
@@ -35,6 +35,6 @@ from {x: reverse("hello")}
 
 ## See Also
 
-* [`slice`](https://tenzir.com/docs/reference/functions/slice.md)
-* [`length_chars`](https://tenzir.com/docs/reference/functions/length_chars.md)
+* [`slice`](https://tenzir.com/docs/v7.0.0/reference/functions/slice.md)
+* [`length_chars`](https://tenzir.com/docs/v7.0.0/reference/functions/length_chars.md)
 * [Manipulate strings](../../guides/shape/manipulate-strings.md)

@@ -1,7 +1,7 @@
 ---
 title: "Read from message brokers"
-canonical: https://tenzir.com/docs/guides/collect/read-from-message-brokers
-source: https://tenzir.com/docs/guides/collect/read-from-message-brokers.md
+canonical: https://tenzir.com/docs/v7.0.0/guides/collect/read-from-message-brokers
+source: https://tenzir.com/docs/v7.0.0/guides/collect/read-from-message-brokers.md
 section: "Docs"
 ---
 
@@ -13,7 +13,7 @@ This guide shows you how to receive events from message brokers using TQL. Youâ€
 
 ## Apache Kafka
 
-[Apache Kafka](../../integrations/kafka.md) is a distributed message broker commonly used for high-throughput event streaming. Use `from_kafka` to subscribe to topics.
+[Apache Kafka](https://docs.tenzir.com/integrations/kafka) is a distributed message broker commonly used for high-throughput event streaming. Use `from_kafka` to subscribe to topics.
 
 ### Subscribe to a topic
 
@@ -37,11 +37,11 @@ from_kafka "security-events",
   schema_registry="https://registry.example.com"
 ```
 
-The operator fetches the writer schema identified by each message. Configure `schema_registry_headers` and `schema_registry_tls` for registry authentication and TLS; the [`from_kafka`](https://tenzir.com/docs/reference/operators/from_kafka.md) reference describes these options.
+The operator fetches the writer schema identified by each message. Configure `schema_registry_headers` and `schema_registry_tls` for registry authentication and TLS; the [`from_kafka`](https://tenzir.com/docs/v7.0.0/reference/operators/from_kafka.md) reference describes these options.
 
-When each message contains a bare Avro datum without registry framing, decode the `message` string with [`parse_avro`](https://tenzir.com/docs/reference/functions/parse_avro.md) and the writer schema. Its reference includes a complete example.
+When each message contains a bare Avro datum without registry framing, decode the `message` string with [`parse_avro`](https://tenzir.com/docs/v7.0.0/reference/functions/parse_avro.md) and the writer schema. Its reference includes a complete example.
 
-Our [Apache Avro](../../integrations/avro.md) integration explains the difference between binary datums and Avro Object Container Files and how to decode each format.
+Our [Avro](https://docs.tenzir.com/integrations/avro) integration explains the difference between binary datums and Avro Object Container Files and how to decode each format.
 
 ### Control the read offset
 
@@ -69,7 +69,7 @@ from_kafka "events", group_id="tenzir-ingest"
 
 ### Connect to Amazon MSK
 
-[Amazon MSK](../../integrations/amazon/msk.md) is a managed Kafka service. Use the `aws_iam` option for IAM authentication:
+[Amazon MSK](https://docs.tenzir.com/integrations/amazon/msk) is a managed Kafka service. Use the `aws_iam` option for IAM authentication:
 
 ```tql
 from_kafka "security-logs",
@@ -79,7 +79,7 @@ from_kafka "security-logs",
 
 ## Amazon Kinesis
 
-[Amazon Kinesis Data Streams](../../integrations/amazon/kinesis.md) is a managed streaming service on AWS. Use `from_amazon_kinesis` to receive records from a stream.
+[Amazon Kinesis Data Streams](https://docs.tenzir.com/integrations/amazon/kinesis) is a managed streaming service on AWS. Use `from_amazon_kinesis` to receive records from a stream.
 
 ### Receive from a stream
 
@@ -92,7 +92,7 @@ The operator emits one event per Kinesis record. The raw payload is stored in th
 
 ## NATS JetStream
 
-[NATS](../../integrations/nats.md) is a messaging system for services, edge deployments, and cloud-native applications. Use `from_nats` to consume messages from JetStream subjects.
+[NATS](https://docs.tenzir.com/integrations/nats) is a messaging system for services, edge deployments, and cloud-native applications. Use `from_nats` to consume messages from JetStream subjects.
 
 ### Consume from a subject
 
@@ -117,7 +117,7 @@ nats_sequence = nats.stream_sequence
 
 ## AMQP (RabbitMQ)
 
-[AMQP](../../integrations/amqp.md) is supported by brokers such as RabbitMQ. Use `from_amqp` directly with AMQP URLs.
+[AMQP](https://docs.tenzir.com/integrations/amqp) is supported by brokers such as RabbitMQ. Use `from_amqp` directly with AMQP URLs.
 
 ### Receive from a queue
 
@@ -130,7 +130,7 @@ The URL structure is `amqp://user:password@host:port/vhost`. Configure additiona
 
 ## Amazon SQS
 
-[Amazon SQS](../../integrations/amazon/sqs.md) is a managed message queue. Use `from_amazon_sqs` to receive events from SQS queues.
+[Amazon SQS](https://docs.tenzir.com/integrations/amazon/sqs) is a managed message queue. Use `from_amazon_sqs` to receive events from SQS queues.
 
 ### Receive from a queue
 
@@ -155,7 +155,7 @@ from_amazon_sqs "sqs://my-queue", keep_messages=true, visibility_timeout=30s
 
 ## Google Cloud Pub/Sub
 
-[Google Cloud Pub/Sub](../../integrations/google/cloud-pubsub.md) provides managed messaging for Google Cloud. Use `from_google_cloud_pubsub` to subscribe.
+[Google Cloud Pub/Sub](https://docs.tenzir.com/integrations/google/cloud-pubsub) provides managed messaging for Google Cloud. Use `from_google_cloud_pubsub` to subscribe.
 
 ### Receive from a subscription
 
@@ -169,17 +169,17 @@ The operator produces events with a `message` field containing the raw message c
 
 ## Fetch data referenced in messages
 
-A broker message may contain a reference to data stored elsewhere instead of carrying the data itself. After parsing the message, use [`each`](https://tenzir.com/docs/reference/operators/each.md) to start a source subpipeline that fetches the referenced data.
+A broker message may contain a reference to data stored elsewhere instead of carrying the data itself. After parsing the message, use [`each`](https://tenzir.com/docs/v7.0.0/reference/operators/each.md) to start a source subpipeline that fetches the referenced data.
 
 See [Collect](../collect.md#fetch-data-referenced-in-events) for the general collection pattern.
 
 ## See also
 
 * [Parse string fields](../parse/parse-string-fields.md)
-* [Apache Avro](../../integrations/avro.md)
-* [Kafka](../../integrations/kafka.md)
-* [NATS](../../integrations/nats.md)
-* [AMQP](../../integrations/amqp.md)
-* [Amazon Kinesis](../../integrations/amazon/kinesis.md)
-* [Amazon SQS](../../integrations/amazon/sqs.md)
-* [Google Cloud Pub/Sub](../../integrations/google/cloud-pubsub.md)
+* [Avro](https://docs.tenzir.com/integrations/avro)
+* [Kafka](https://docs.tenzir.com/integrations/kafka)
+* [Nats](https://docs.tenzir.com/integrations/nats)
+* [Amqp](https://docs.tenzir.com/integrations/amqp)
+* [Kinesis](https://docs.tenzir.com/integrations/amazon/kinesis)
+* [Sqs](https://docs.tenzir.com/integrations/amazon/sqs)
+* [Cloud pubsub](https://docs.tenzir.com/integrations/google/cloud-pubsub)

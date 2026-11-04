@@ -1,7 +1,7 @@
 ---
 title: "month"
-canonical: https://tenzir.com/docs/reference/functions/month
-source: https://tenzir.com/docs/reference/functions/month.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/month
+source: https://tenzir.com/docs/v7.0.0/reference/functions/month.md
 section: "Docs"
 ---
 
@@ -43,9 +43,9 @@ month = ts.month()
 
 ## See Also
 
-* [`year`](https://tenzir.com/docs/reference/functions/year.md)
-* [`day`](https://tenzir.com/docs/reference/functions/day.md)
-* [`hour`](https://tenzir.com/docs/reference/functions/hour.md)
-* [`minute`](https://tenzir.com/docs/reference/functions/minute.md)
-* [`second`](https://tenzir.com/docs/reference/functions/second.md)
+* [`year`](https://tenzir.com/docs/v7.0.0/reference/functions/year.md)
+* [`day`](https://tenzir.com/docs/v7.0.0/reference/functions/day.md)
+* [`hour`](https://tenzir.com/docs/v7.0.0/reference/functions/hour.md)
+* [`minute`](https://tenzir.com/docs/v7.0.0/reference/functions/minute.md)
+* [`second`](https://tenzir.com/docs/v7.0.0/reference/functions/second.md)
 * [Calculate with time](../../guides/shape/calculate-with-time.md)

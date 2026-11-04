@@ -1,7 +1,7 @@
 ---
 title: "ocsf_type_name"
-canonical: https://tenzir.com/docs/reference/functions/ocsf_type_name
-source: https://tenzir.com/docs/reference/functions/ocsf_type_name.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/ocsf_type_name
+source: https://tenzir.com/docs/v7.0.0/reference/functions/ocsf_type_name.md
 section: "Docs"
 ---
 
@@ -23,4 +23,4 @@ The `type_uid` for which `type_name` should be returned.
 
 ## See Also
 
-* [`ocsf_type_uid`](https://tenzir.com/docs/reference/functions/ocsf_type_uid.md)
+* [`ocsf_type_uid`](https://tenzir.com/docs/v7.0.0/reference/functions/ocsf_type_uid.md)

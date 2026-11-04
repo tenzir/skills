@@ -1,7 +1,7 @@
 ---
 title: "load_balance"
-canonical: https://tenzir.com/docs/reference/operators/load_balance
-source: https://tenzir.com/docs/reference/operators/load_balance.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/load_balance
+source: https://tenzir.com/docs/v7.0.0/reference/operators/load_balance.md
 section: "Docs"
 ---
 
@@ -74,8 +74,8 @@ load_balance $cfg {
 
 ## See Also
 
-* [`fork`](https://tenzir.com/docs/reference/operators/fork.md)
-* [`group`](https://tenzir.com/docs/reference/operators/group.md)
-* [`publish`](https://tenzir.com/docs/reference/operators/publish.md)
+* [`fork`](https://tenzir.com/docs/v7.0.0/reference/operators/fork.md)
+* [`group`](https://tenzir.com/docs/v7.0.0/reference/operators/group.md)
+* [`publish`](https://tenzir.com/docs/v7.0.0/reference/operators/publish.md)
 * [Fan out with subpipelines](../../guides/route/fan-out-with-subpipelines.md)
 * [Load-balance pipelines](../../guides/route/load-balance-pipelines.md)

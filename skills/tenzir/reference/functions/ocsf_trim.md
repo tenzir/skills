@@ -1,7 +1,7 @@
 ---
 title: "ocsf_trim"
-canonical: https://tenzir.com/docs/reference/functions/ocsf_trim
-source: https://tenzir.com/docs/reference/functions/ocsf_trim.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/ocsf_trim
+source: https://tenzir.com/docs/v7.0.0/reference/functions/ocsf_trim.md
 section: "Docs"
 ---
 
@@ -17,9 +17,9 @@ ocsf_trim(x:record, [drop_optional=bool, drop_recommended=bool]) -> record
 
 ## Description
 
-The `ocsf_trim` function removes fields from the OCSF event `x` based on their requirement level in the OCSF schema. It applies the same rules as the [`ocsf_trim`](https://tenzir.com/docs/reference/operators/ocsf_trim.md) operator.
+The `ocsf_trim` function removes fields from the OCSF event `x` based on their requirement level in the OCSF schema. It applies the same rules as the [`ocsf_trim`](https://tenzir.com/docs/v7.0.0/reference/operators/ocsf_trim) operator.
 
-Use the function when the OCSF event lives in a field rather than at the top level of the event, for example next to `raw_data` in an envelope, or in a list of events that you process with [`map`](https://tenzir.com/docs/reference/functions/map.md). Use the operator when the whole event is the OCSF event.
+Use the function when the OCSF event lives in a field rather than at the top level of the event, for example next to `raw_data` in an envelope, or in a list of events that you process with [`map`](https://tenzir.com/docs/v7.0.0/reference/functions/map.md). Use the operator when the whole event is the OCSF event.
 
 Unlike the operator, which drops events whose OCSF version or class it cannot resolve, the function returns `null` with a warning and keeps the rest of the event. It also returns `null` with a warning when `x` is not a record, and returns `null` without a warning when `x` is `null`.
 
@@ -114,7 +114,7 @@ select retained, required
 
 ## See Also
 
-* [`ocsf_trim`](https://tenzir.com/docs/reference/operators/ocsf_trim.md)
-* [`ocsf_cast`](https://tenzir.com/docs/reference/functions/ocsf_cast.md)
-* [`ocsf_derive`](https://tenzir.com/docs/reference/functions/ocsf_derive.md)
+* [`ocsf_trim`](https://tenzir.com/docs/v7.0.0/reference/operators/ocsf_trim)
+* [`ocsf_cast`](https://tenzir.com/docs/v7.0.0/reference/functions/ocsf_cast.md)
+* [`ocsf_derive`](https://tenzir.com/docs/v7.0.0/reference/functions/ocsf_derive.md)
 * [Map to OCSF](../../guides/normalize/map-to-ocsf.md)

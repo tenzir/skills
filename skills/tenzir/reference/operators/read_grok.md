@@ -1,7 +1,7 @@
 ---
 title: "read_grok"
-canonical: https://tenzir.com/docs/reference/operators/read_grok
-source: https://tenzir.com/docs/reference/operators/read_grok.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/read_grok
+source: https://tenzir.com/docs/v7.0.0/reference/operators/read_grok.md
 section: "Docs"
 ---
 
@@ -193,4 +193,4 @@ read_grok $pattern
 
 ## See Also
 
-* [`parse_grok`](https://tenzir.com/docs/reference/functions/parse_grok.md)
+* [`parse_grok`](https://tenzir.com/docs/v7.0.0/reference/functions/parse_grok.md)

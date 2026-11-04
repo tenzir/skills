@@ -1,7 +1,7 @@
 ---
 title: "write_feather"
-canonical: https://tenzir.com/docs/reference/operators/write_feather
-source: https://tenzir.com/docs/reference/operators/write_feather.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/write_feather
+source: https://tenzir.com/docs/v7.0.0/reference/operators/write_feather.md
 section: "Docs"
 ---
 
@@ -56,7 +56,7 @@ to_file "output.feather" {
 
 ## See Also
 
-* [`read_bitz`](https://tenzir.com/docs/reference/operators/read_bitz.md)
-* [`read_feather`](https://tenzir.com/docs/reference/operators/read_feather.md)
-* [`write_bitz`](https://tenzir.com/docs/reference/operators/write_bitz.md)
-* [`write_parquet`](https://tenzir.com/docs/reference/operators/write_parquet.md)
+* [`read_bitz`](https://tenzir.com/docs/v7.0.0/reference/operators/read_bitz.md)
+* [`read_feather`](https://tenzir.com/docs/v7.0.0/reference/operators/read_feather.md)
+* [`write_bitz`](https://tenzir.com/docs/v7.0.0/reference/operators/write_bitz.md)
+* [`write_parquet`](https://tenzir.com/docs/v7.0.0/reference/operators/write_parquet.md)

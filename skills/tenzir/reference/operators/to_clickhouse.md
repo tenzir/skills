@@ -1,7 +1,7 @@
 ---
 title: "to_clickhouse"
-canonical: https://tenzir.com/docs/reference/operators/to_clickhouse
-source: https://tenzir.com/docs/reference/operators/to_clickhouse.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/to_clickhouse
+source: https://tenzir.com/docs/v7.0.0/reference/operators/to_clickhouse.md
 section: "Docs"
 ---
 
@@ -23,7 +23,7 @@ to_clickhouse [table=string,
 
 In an existing table, mark one writable, top-level `JSON` column with `COMMENT 'tenzir:catch_all'` to collect fields that do not map to other columns. The catch-all column must be a `JSON` column without a default expression. It may set `max_dynamic_paths` and `max_dynamic_types`, but not typed paths or `SKIP` clauses, and its name must not contain dots.
 
-Our [ClickHouse integration guide](../../integrations/clickhouse.md#catch-all-columns) covers table setup, OCSF examples, type and JSON behavior, restrictions, and schema changes.
+Our [ClickHouse integration guide](https://docs.tenzir.com/integrations/clickhouse#catch-all-columns) covers table setup, OCSF examples, type and JSON behavior, restrictions, and schema changes.
 
 ## Description
 
@@ -148,7 +148,7 @@ See the [Node TLS Setup guide](../../guides/node-setup/configure-tls.md) for mor
 
 ## Types
 
-This section describes automatic table creation and insertion into unmarked tables. Our ClickHouse integration guide describes the [type and JSON behavior of catch-all tables](../../integrations/clickhouse.md#json-values-and-type-restrictions).
+This section describes automatic table creation and insertion into unmarked tables. Our ClickHouse integration guide describes the [type and JSON behavior of catch-all tables](https://docs.tenzir.com/integrations/clickhouse#json-values-and-type-restrictions).
 
 Tenzir uses ClickHouse’s [clickhouse-cpp](https://github.com/ClickHouse/clickhouse-cpp) client library to communicate with ClickHouse. The below table explains the translation from Tenzir’s types to ClickHouse:
 
@@ -173,7 +173,7 @@ Tenzir also supports `Nullable` versions of the above types (or their nested typ
 
 ### Clickhouse JSON
 
-[`to_clickhouse`](https://tenzir.com/docs/reference/operators/to_clickhouse.md) can write to a ClickHouse `JSON` column for columns that already have this type in the table. By default, [`to_clickhouse`](https://tenzir.com/docs/reference/operators/to_clickhouse.md) will not create JSON columns on its own. Use the explicit `json` option or create the table on the server ahead of time.
+[`to_clickhouse`](https://tenzir.com/docs/v7.0.0/reference/operators/to_clickhouse.md) can write to a ClickHouse `JSON` column for columns that already have this type in the table. By default, [`to_clickhouse`](https://tenzir.com/docs/v7.0.0/reference/operators/to_clickhouse.md) will not create JSON columns on its own. Use the explicit `json` option or create the table on the server ahead of time.
 
 A `record` maps to a JSON object. A `string` is also accepted and written verbatim if its first non-whitespace character is `{`; ClickHouse validates the JSON. A value that is neither a record nor a JSON-object string is written as an empty object (`{}`) with a warning, because ClickHouse `JSON` columns only accept objects at the top level.
 
@@ -237,7 +237,7 @@ This writes to `security.alerts`.
 
 ### Send OCSF data to ClickHouse
 
-Use [`ocsf_cast`](https://tenzir.com/docs/reference/operators/ocsf_cast.md) to cast events to their OCSF class. Free-form fields and differences in OCSF classes, versions, profiles, or extensions can still produce different schemas.
+Use [`ocsf_cast`](https://tenzir.com/docs/v7.0.0/reference/operators/ocsf_cast) to cast events to their OCSF class. Free-form fields and differences in OCSF classes, versions, profiles, or extensions can still produce different schemas.
 
 ```tql
 subscribe "ocsf"
@@ -282,8 +282,8 @@ This creates the following table:
 
 ## See Also
 
-* [`from_clickhouse`](https://tenzir.com/docs/reference/operators/from_clickhouse.md)
-* [`ocsf_cast`](https://tenzir.com/docs/reference/operators/ocsf_cast.md)
+* [`from_clickhouse`](https://tenzir.com/docs/v7.0.0/reference/operators/from_clickhouse.md)
+* [`ocsf_cast`](https://tenzir.com/docs/v7.0.0/reference/operators/ocsf_cast)
 * [Send to destinations](../../guides/route/send-to-destinations.md)
-* [ClickHouse](../../integrations/clickhouse.md)
-* [nano](../../integrations/nano.md)
+* [Clickhouse](https://docs.tenzir.com/integrations/clickhouse)
+* [Nano](https://docs.tenzir.com/integrations/nano)

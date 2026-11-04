@@ -1,7 +1,7 @@
 ---
 title: "floor"
-canonical: https://tenzir.com/docs/reference/functions/floor
-source: https://tenzir.com/docs/reference/functions/floor.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/floor
+source: https://tenzir.com/docs/v7.0.0/reference/functions/floor.md
 section: "Docs"
 ---
 
@@ -61,5 +61,5 @@ from {
 
 ## See Also
 
-* [`ceil`](https://tenzir.com/docs/reference/functions/ceil.md)
-* [`round`](https://tenzir.com/docs/reference/functions/round.md)
+* [`ceil`](https://tenzir.com/docs/v7.0.0/reference/functions/ceil.md)
+* [`round`](https://tenzir.com/docs/v7.0.0/reference/functions/round.md)

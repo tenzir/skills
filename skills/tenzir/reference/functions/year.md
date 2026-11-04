@@ -1,7 +1,7 @@
 ---
 title: "year"
-canonical: https://tenzir.com/docs/reference/functions/year
-source: https://tenzir.com/docs/reference/functions/year.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/year
+source: https://tenzir.com/docs/v7.0.0/reference/functions/year.md
 section: "Docs"
 ---
 
@@ -43,10 +43,10 @@ year = ts.year()
 
 ## See Also
 
-* [`month`](https://tenzir.com/docs/reference/functions/month.md)
-* [`day`](https://tenzir.com/docs/reference/functions/day.md)
-* [`hour`](https://tenzir.com/docs/reference/functions/hour.md)
-* [`minute`](https://tenzir.com/docs/reference/functions/minute.md)
-* [`second`](https://tenzir.com/docs/reference/functions/second.md)
+* [`month`](https://tenzir.com/docs/v7.0.0/reference/functions/month.md)
+* [`day`](https://tenzir.com/docs/v7.0.0/reference/functions/day.md)
+* [`hour`](https://tenzir.com/docs/v7.0.0/reference/functions/hour.md)
+* [`minute`](https://tenzir.com/docs/v7.0.0/reference/functions/minute.md)
+* [`second`](https://tenzir.com/docs/v7.0.0/reference/functions/second.md)
 * [Calculate with time](../../guides/shape/calculate-with-time.md)
 * [Mask sensitive data](../../guides/protect/mask-sensitive-data.md)

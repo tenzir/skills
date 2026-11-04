@@ -1,7 +1,7 @@
 ---
 title: "Operators"
-canonical: https://tenzir.com/docs/reference/operators
-source: https://tenzir.com/docs/reference/operators.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators
+source: https://tenzir.com/docs/v7.0.0/reference/operators.md
 section: "Docs"
 ---
 
@@ -1093,7 +1093,7 @@ version
 
 ## OCSF
 
-### [ocsf\_cast](operators/ocsf_cast.md)
+### [ocsf\_cast](https://docs.tenzir.com/reference/operators/ocsf_cast)
 
 Casts incoming events to their OCSF type.
 
@@ -1101,7 +1101,7 @@ Casts incoming events to their OCSF type.
 ocsf_cast
 ```
 
-### [ocsf\_derive](operators/ocsf_derive.md)
+### [ocsf\_derive](https://docs.tenzir.com/reference/operators/ocsf_derive)
 
 Automatically assigns enum strings from their integer counterparts and vice versa.
 
@@ -1109,7 +1109,7 @@ Automatically assigns enum strings from their integer counterparts and vice vers
 ocsf_derive
 ```
 
-### [ocsf\_trim](operators/ocsf_trim.md)
+### [ocsf\_trim](https://docs.tenzir.com/reference/operators/ocsf_trim)
 
 Drops fields from OCSF events to reduce their size.
 

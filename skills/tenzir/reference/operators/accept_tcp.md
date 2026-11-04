@@ -1,7 +1,7 @@
 ---
 title: "accept_tcp"
-canonical: https://tenzir.com/docs/reference/operators/accept_tcp
-source: https://tenzir.com/docs/reference/operators/accept_tcp.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/accept_tcp
+source: https://tenzir.com/docs/v7.0.0/reference/operators/accept_tcp.md
 section: "Docs"
 ---
 
@@ -130,8 +130,8 @@ Use this mode when you migrate clients from plaintext TCP to TLS and need to kee
 
 ## See Also
 
-* [`from_tcp`](https://tenzir.com/docs/reference/operators/from_tcp.md)
-* [`to_tcp`](https://tenzir.com/docs/reference/operators/to_tcp.md)
-* [`serve_tcp`](https://tenzir.com/docs/reference/operators/serve_tcp.md)
-* [`accept_unix_socket`](https://tenzir.com/docs/reference/operators/accept_unix_socket.md)
-* [TCP](../../integrations/tcp.md)
+* [`from_tcp`](https://tenzir.com/docs/v7.0.0/reference/operators/from_tcp.md)
+* [`to_tcp`](https://tenzir.com/docs/v7.0.0/reference/operators/to_tcp.md)
+* [`serve_tcp`](https://tenzir.com/docs/v7.0.0/reference/operators/serve_tcp.md)
+* [`accept_unix_socket`](https://tenzir.com/docs/v7.0.0/reference/operators/accept_unix_socket.md)
+* [Tcp](https://docs.tenzir.com/integrations/tcp)

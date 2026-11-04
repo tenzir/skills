@@ -1,7 +1,7 @@
 ---
 title: "unroll"
-canonical: https://tenzir.com/docs/reference/operators/unroll
-source: https://tenzir.com/docs/reference/operators/unroll.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/unroll
+source: https://tenzir.com/docs/v7.0.0/reference/operators/unroll.md
 section: "Docs"
 ---
 
@@ -61,7 +61,7 @@ unroll y
 
 ## See Also
 
-* [`flatten`](https://tenzir.com/docs/reference/functions/flatten.md)
+* [`flatten`](https://tenzir.com/docs/v7.0.0/reference/functions/flatten.md)
 * [Enrich with threat intel](../../guides/enrich/enrich-with-threat-intel.md)
 * [Use lookup tables](../../guides/enrich/use-lookup-tables.md)
 

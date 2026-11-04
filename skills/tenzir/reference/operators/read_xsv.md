@@ -1,7 +1,7 @@
 ---
 title: "read_xsv"
-canonical: https://tenzir.com/docs/reference/operators/read_xsv
-source: https://tenzir.com/docs/reference/operators/read_xsv.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/read_xsv
+source: https://tenzir.com/docs/v7.0.0/reference/operators/read_xsv.md
 section: "Docs"
 ---
 
@@ -23,11 +23,11 @@ The `read_xsv` operator transforms a byte stream into a event stream by parsing 
 
 The following table lists existing XSV configurations:
 
-| Format                                                           | Field Separator | List Separator | Null Value |
-| ---------------------------------------------------------------- | --------------- | -------------- | ---------- |
-| [`csv`](https://tenzir.com/docs/reference/operators/read_csv.md) | `,`             | `;`            | empty      |
-| [`ssv`](https://tenzir.com/docs/reference/operators/read_ssv.md) | `<space>`       | `,`            | `-`        |
-| [`tsv`](https://tenzir.com/docs/reference/operators/read_tsv.md) | `\t`            | `,`            | `-`        |
+| Format                                                                  | Field Separator | List Separator | Null Value |
+| ----------------------------------------------------------------------- | --------------- | -------------- | ---------- |
+| [`csv`](https://tenzir.com/docs/v7.0.0/reference/operators/read_csv.md) | `,`             | `;`            | empty      |
+| [`ssv`](https://tenzir.com/docs/v7.0.0/reference/operators/read_ssv.md) | `<space>`       | `,`            | `-`        |
+| [`tsv`](https://tenzir.com/docs/v7.0.0/reference/operators/read_tsv.md) | `\t`            | `,`            | `-`        |
 
 ### `field_separator = string`
 
@@ -172,7 +172,7 @@ When you provide a `schema` or `selector`, the last value of a repeated key wins
 
 ## See Also
 
-* [`read_csv`](https://tenzir.com/docs/reference/operators/read_csv.md)
-* [`read_ssv`](https://tenzir.com/docs/reference/operators/read_ssv.md)
-* [`read_tsv`](https://tenzir.com/docs/reference/operators/read_tsv.md)
-* [`parse_xsv`](https://tenzir.com/docs/reference/functions/parse_xsv.md)
+* [`read_csv`](https://tenzir.com/docs/v7.0.0/reference/operators/read_csv.md)
+* [`read_ssv`](https://tenzir.com/docs/v7.0.0/reference/operators/read_ssv.md)
+* [`read_tsv`](https://tenzir.com/docs/v7.0.0/reference/operators/read_tsv.md)
+* [`parse_xsv`](https://tenzir.com/docs/v7.0.0/reference/functions/parse_xsv.md)

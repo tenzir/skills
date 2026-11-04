@@ -1,7 +1,7 @@
 ---
 title: "pipeline_activity"
-canonical: https://tenzir.com/docs/reference/operators/pipeline_activity
-source: https://tenzir.com/docs/reference/operators/pipeline_activity.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/pipeline_activity
+source: https://tenzir.com/docs/v7.0.0/reference/operators/pipeline_activity.md
 section: "Docs"
 ---
 
@@ -97,4 +97,4 @@ pipeline_activity range=20s, interval=20s
 
 ## See Also
 
-* [`pipeline_list`](https://tenzir.com/docs/reference/operators/pipeline_list.md)
+* [`pipeline_list`](https://tenzir.com/docs/v7.0.0/reference/operators/pipeline_list.md)

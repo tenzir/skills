@@ -1,8 +1,8 @@
 ---
 title: "Normalization"
 description: "Why Tenzir maps every source to OCSF first and translates from there"
-canonical: https://tenzir.com/docs/explanations/normalization
-source: https://tenzir.com/docs/explanations/normalization.md
+canonical: https://tenzir.com/docs/v7.0.0/explanations/normalization
+source: https://tenzir.com/docs/v7.0.0/explanations/normalization.md
 section: "Docs"
 ---
 
@@ -16,14 +16,14 @@ Normalization means giving events from different products the same field names a
 
 Security data has no single standard, and not for lack of trying. Every analytics platform defines the shape it wants to read:
 
-| Schema                                                                  | Defined by                                                                                          | Read by                                                             | Agent skill                                                                                         |
-| ----------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
-| [OCSF](https://schema.ocsf.io)                                          | The OCSF project, an open effort with contributors from AWS, Splunk, Cisco, CrowdStrike, and others | Amazon Security Lake, Splunk, Snowflake, and a growing set of tools | [`tenzir-ocsf`](https://tenzir.com/docs/guides/ai-workbench/use-agent-skills.md#use-the-ocsf-skill) |
-| [ASIM](https://learn.microsoft.com/en-us/azure/sentinel/normalization)  | Microsoft                                                                                           | Microsoft Sentinel                                                  | [`tenzir-asim`](https://tenzir.com/docs/guides/ai-workbench/use-agent-skills.md#use-the-asim-skill) |
-| [CIM](https://docs.splunk.com/Documentation/CIM)                        | Splunk                                                                                              | Splunk Enterprise Security                                          | [`tenzir-cim`](https://tenzir.com/docs/guides/ai-workbench/use-agent-skills.md#use-the-cim-skill)   |
-| [ECS](https://www.elastic.co/guide/en/ecs/current/index.html)           | Elastic, now converging with OpenTelemetry semantic conventions                                     | Elastic Security and Observability                                  | [`tenzir-ecs`](https://tenzir.com/docs/guides/ai-workbench/use-agent-skills.md#use-the-ecs-skill)   |
-| [UDM](https://cloud.google.com/chronicle/docs/reference/udm-field-list) | Google                                                                                              | Google SecOps                                                       | [`tenzir-udm`](https://tenzir.com/docs/guides/ai-workbench/use-agent-skills.md#use-the-udm-skill)   |
-| [EDM](https://docs.fortinet.com/product/fortisiem)                      | Fortinet                                                                                            | FortiSIEM                                                           | [`tenzir-edm`](https://tenzir.com/docs/guides/ai-workbench/use-agent-skills.md#use-the-edm-skill)   |
+| Schema                                                                  | Defined by                                                                                          | Read by                                                             | Agent skill                                                                                                |
+| ----------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| [OCSF](https://schema.ocsf.io)                                          | The OCSF project, an open effort with contributors from AWS, Splunk, Cisco, CrowdStrike, and others | Amazon Security Lake, Splunk, Snowflake, and a growing set of tools | [`tenzir-ocsf`](https://tenzir.com/docs/v7.0.0/guides/ai-workbench/use-agent-skills.md#use-the-ocsf-skill) |
+| [ASIM](https://learn.microsoft.com/en-us/azure/sentinel/normalization)  | Microsoft                                                                                           | Microsoft Sentinel                                                  | [`tenzir-asim`](https://tenzir.com/docs/v7.0.0/guides/ai-workbench/use-agent-skills.md#use-the-asim-skill) |
+| [CIM](https://docs.splunk.com/Documentation/CIM)                        | Splunk                                                                                              | Splunk Enterprise Security                                          | [`tenzir-cim`](https://tenzir.com/docs/v7.0.0/guides/ai-workbench/use-agent-skills.md#use-the-cim-skill)   |
+| [ECS](https://www.elastic.co/guide/en/ecs/current/index.html)           | Elastic, now converging with OpenTelemetry semantic conventions                                     | Elastic Security and Observability                                  | [`tenzir-ecs`](https://tenzir.com/docs/v7.0.0/guides/ai-workbench/use-agent-skills.md#use-the-ecs-skill)   |
+| [UDM](https://cloud.google.com/chronicle/docs/reference/udm-field-list) | Google                                                                                              | Google SecOps                                                       | [`tenzir-udm`](https://tenzir.com/docs/v7.0.0/guides/ai-workbench/use-agent-skills.md#use-the-udm-skill)   |
+| [EDM](https://docs.fortinet.com/product/fortisiem)                      | Fortinet                                                                                            | FortiSIEM                                                           | [`tenzir-edm`](https://tenzir.com/docs/v7.0.0/guides/ai-workbench/use-agent-skills.md#use-the-edm-skill)   |
 
 Alongside them sit the wire formats that carry their own field conventions: ArcSight [CEF](../guides/ai-workbench/use-agent-skills.md#use-the-cef-skill) and QRadar [LEEF](../guides/ai-workbench/use-agent-skills.md#use-the-leef-skill). And every source product emits its own shape on top of all that, which changes between versions.
 

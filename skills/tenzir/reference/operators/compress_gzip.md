@@ -1,7 +1,7 @@
 ---
 title: "compress_gzip"
-canonical: https://tenzir.com/docs/reference/operators/compress_gzip
-source: https://tenzir.com/docs/reference/operators/compress_gzip.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/compress_gzip
+source: https://tenzir.com/docs/v7.0.0/reference/operators/compress_gzip.md
 section: "Docs"
 ---
 
@@ -68,8 +68,8 @@ to_file "out.gzip" {
 
 ## See Also
 
-* [`compress_brotli`](https://tenzir.com/docs/reference/operators/compress_brotli.md)
-* [`compress_bz2`](https://tenzir.com/docs/reference/operators/compress_bz2.md)
-* [`compress_lz4`](https://tenzir.com/docs/reference/operators/compress_lz4.md)
-* [`compress_zstd`](https://tenzir.com/docs/reference/operators/compress_zstd.md)
-* [`decompress_gzip`](https://tenzir.com/docs/reference/operators/decompress_gzip.md)
+* [`compress_brotli`](https://tenzir.com/docs/v7.0.0/reference/operators/compress_brotli.md)
+* [`compress_bz2`](https://tenzir.com/docs/v7.0.0/reference/operators/compress_bz2.md)
+* [`compress_lz4`](https://tenzir.com/docs/v7.0.0/reference/operators/compress_lz4.md)
+* [`compress_zstd`](https://tenzir.com/docs/v7.0.0/reference/operators/compress_zstd.md)
+* [`decompress_gzip`](https://tenzir.com/docs/v7.0.0/reference/operators/decompress_gzip.md)

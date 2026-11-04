@@ -1,7 +1,7 @@
 ---
 title: "fork_merge"
-canonical: https://tenzir.com/docs/reference/operators/fork_merge
-source: https://tenzir.com/docs/reference/operators/fork_merge.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/fork_merge
+source: https://tenzir.com/docs/v7.0.0/reference/operators/fork_merge.md
 section: "Docs"
 ---
 
@@ -31,7 +31,7 @@ fork_merge {
 publish "out"
 ```
 
-Unlike [`fork`](https://tenzir.com/docs/reference/operators/fork.md), whose subpipeline must end in a sink and which forwards its input unchanged, `fork_merge` fans out independent computations and rejoins their results.
+Unlike [`fork`](https://tenzir.com/docs/v7.0.0/reference/operators/fork.md), whose subpipeline must end in a sink and which forwards its input unchanged, `fork_merge` fans out independent computations and rejoins their results.
 
 ### `{ … }`
 
@@ -39,7 +39,7 @@ The subpipelines to execute. Each receives a copy of the full input. Provide two
 
 Every subpipeline must transform events into events. Their outputs are merged into a single stream. Subpipelines must not end in a sink or produce bytes.
 
-Use [`pass`](https://tenzir.com/docs/reference/operators/pass.md) as a branch to forward the input unchanged alongside the other branches.
+Use [`pass`](https://tenzir.com/docs/v7.0.0/reference/operators/pass.md) as a branch to forward the input unchanged alongside the other branches.
 
 The order in which events from different branches appear in the output is not defined.
 
@@ -77,4 +77,4 @@ publish "prioritized"
 
 ## See Also
 
-* [`fork`](https://tenzir.com/docs/reference/operators/fork.md)
+* [`fork`](https://tenzir.com/docs/v7.0.0/reference/operators/fork.md)

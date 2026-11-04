@@ -1,7 +1,7 @@
 ---
 title: "type_id"
-canonical: https://tenzir.com/docs/reference/functions/type_id
-source: https://tenzir.com/docs/reference/functions/type_id.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/type_id
+source: https://tenzir.com/docs/v7.0.0/reference/functions/type_id.md
 section: "Docs"
 ---
 
@@ -33,5 +33,5 @@ from {x: type_id(1 + 3.2)}
 
 ## See Also
 
-* [`type_kind`](https://tenzir.com/docs/reference/functions/type_kind.md)
-* [`type_of`](https://tenzir.com/docs/reference/functions/type_of.md)
+* [`type_kind`](https://tenzir.com/docs/v7.0.0/reference/functions/type_kind.md)
+* [`type_of`](https://tenzir.com/docs/v7.0.0/reference/functions/type_of.md)

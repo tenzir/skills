@@ -1,7 +1,7 @@
 ---
 title: "read_parquet"
-canonical: https://tenzir.com/docs/reference/operators/read_parquet
-source: https://tenzir.com/docs/reference/operators/read_parquet.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/read_parquet
+source: https://tenzir.com/docs/v7.0.0/reference/operators/read_parquet.md
 section: "Docs"
 ---
 
@@ -27,7 +27,7 @@ Tenzir currently assumes that all Parquet files use metadata recognized by Tenzi
 
 ### `encryption_key = secret (optional)`
 
-Decrypts Parquet data using the supplied raw AES key. Pass the same 16-, 24-, or 32-byte key that [`write_parquet`](https://tenzir.com/docs/reference/operators/write_parquet.md) used. The reader does not decode the key. If your secret stores base64 text, pass `encryption_key=decode_base64(secret("PARQUET_KEY"))`. For hexadecimal text, use `decode_hex` instead.
+Decrypts Parquet data using the supplied raw AES key. Pass the same 16-, 24-, or 32-byte key that [`write_parquet`](https://tenzir.com/docs/v7.0.0/reference/operators/write_parquet.md) used. The reader does not decode the key. If your secret stores base64 text, pass `encryption_key=decode_base64(secret("PARQUET_KEY"))`. For hexadecimal text, use `decode_hex` instead.
 
 When you supply this argument, the reader rejects plaintext files and reports an error for an incorrect key or an authentication failure. Without it, the reader cannot read files with an encrypted footer. Specify `read_parquet` explicitly when reading encrypted files, because automatic format detection cannot supply the key.
 
@@ -39,13 +39,13 @@ Decryption works with both buffered byte streams and seekable files, including S
 
 The operator acts on the hints that the [optimizer](../../explanations/pipeline.md#optimization) pushes toward it:
 
-* [`where`](https://tenzir.com/docs/reference/operators/where.md) predicates are evaluated as each row group decodes. Row groups whose statistics show that no row can match are skipped entirely. This works best for comparisons of a sorted or clustered field, such as a timestamp, with a constant.
-* [`select`](https://tenzir.com/docs/reference/operators/select.md) narrows the decoded columns to the fields the pipeline reads, including fields that only the filter references. Selecting a field of a record decodes only that field. Fields inside lists and maps, and values such as subnets, are decoded whole.
-* [`head`](https://tenzir.com/docs/reference/operators/head.md) stops decoding once enough events pass the filter.
+* [`where`](https://tenzir.com/docs/v7.0.0/reference/operators/where.md) predicates are evaluated as each row group decodes. Row groups whose statistics show that no row can match are skipped entirely. This works best for comparisons of a sorted or clustered field, such as a timestamp, with a constant.
+* [`select`](https://tenzir.com/docs/v7.0.0/reference/operators/select.md) narrows the decoded columns to the fields the pipeline reads, including fields that only the filter references. Selecting a field of a record decodes only that field. Fields inside lists and maps, and values such as subnets, are decoded whole.
+* [`head`](https://tenzir.com/docs/v7.0.0/reference/operators/head.md) stops decoding once enough events pass the filter.
 
 The `where`, `select`, and `head` operators stay in the pipeline, so the result is the same whether or not the reader acts on the hints. A filter that calls a function conservatively keeps all columns.
 
-When `read_parquet` heads the subpipeline of [`from_file`](https://tenzir.com/docs/reference/operators/from_file.md), [`from_s3`](https://tenzir.com/docs/reference/operators/from_s3.md), [`from_google_cloud_storage`](https://tenzir.com/docs/reference/operators/from_google_cloud_storage.md), or [`from_azure_blob_storage`](https://tenzir.com/docs/reference/operators/from_azure_blob_storage.md), the hints also decide what gets fetched. The operator reads the file’s footer first and then only the column chunks of the selected columns, one row group at a time, stopping when the limit is met. On object stores, each fetch is a range request. For example,
+When `read_parquet` heads the subpipeline of [`from_file`](https://tenzir.com/docs/v7.0.0/reference/operators/from_file.md), [`from_s3`](https://tenzir.com/docs/v7.0.0/reference/operators/from_s3.md), [`from_google_cloud_storage`](https://tenzir.com/docs/v7.0.0/reference/operators/from_google_cloud_storage.md), or [`from_azure_blob_storage`](https://tenzir.com/docs/v7.0.0/reference/operators/from_azure_blob_storage.md), the hints also decide what gets fetched. The operator reads the file’s footer first and then only the column chunks of the selected columns, one row group at a time, stopping when the limit is met. On object stores, each fetch is a range request. For example,
 
 ```tql
 from_s3 "s3://logs/2026/events.parquet" {
@@ -59,7 +59,7 @@ downloads the footer and then the `timestamp` and `message` column chunks of one
 
 The scan is a stream: the operator fetches the next row group while it decodes the current one and releases each row group once it is decoded. Memory use is therefore bounded by the size of two row groups, not by the size of the file, so a full read of a file larger than the available memory works.
 
-Behind a source that cannot seek, such as [`from_tcp`](https://tenzir.com/docs/reference/operators/from_tcp.md), standard input, or a [`decompress_gzip`](https://tenzir.com/docs/reference/operators/decompress_gzip.md) in front of the reader, the operator buffers the whole byte stream before decoding, because Parquet keeps its metadata at the end of the file. Pipelines with checkpointing enabled also use this mode.
+Behind a source that cannot seek, such as [`from_tcp`](https://tenzir.com/docs/v7.0.0/reference/operators/from_tcp.md), standard input, or a [`decompress_gzip`](https://tenzir.com/docs/v7.0.0/reference/operators/decompress_gzip.md) in front of the reader, the operator buffers the whole byte stream before decoding, because Parquet keeps its metadata at the end of the file. Pipelines with checkpointing enabled also use this mode.
 
 ## Examples
 
@@ -91,5 +91,5 @@ from_s3 "s3://security-archive/events.parquet" {
 
 ## See Also
 
-* [`read_feather`](https://tenzir.com/docs/reference/operators/read_feather.md)
-* [`write_parquet`](https://tenzir.com/docs/reference/operators/write_parquet.md)
+* [`read_feather`](https://tenzir.com/docs/v7.0.0/reference/operators/read_feather.md)
+* [`write_parquet`](https://tenzir.com/docs/v7.0.0/reference/operators/write_parquet.md)

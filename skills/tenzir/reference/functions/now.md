@@ -1,7 +1,7 @@
 ---
 title: "now"
-canonical: https://tenzir.com/docs/reference/functions/now
-source: https://tenzir.com/docs/reference/functions/now.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/now
+source: https://tenzir.com/docs/v7.0.0/reference/functions/now.md
 section: "Docs"
 ---
 
@@ -47,7 +47,7 @@ select ts=now()
 
 ## See Also
 
-* [`from_epoch`](https://tenzir.com/docs/reference/functions/from_epoch.md)
-* [`since_epoch`](https://tenzir.com/docs/reference/functions/since_epoch.md)
+* [`from_epoch`](https://tenzir.com/docs/v7.0.0/reference/functions/from_epoch.md)
+* [`since_epoch`](https://tenzir.com/docs/v7.0.0/reference/functions/since_epoch.md)
 * [Calculate with time](../../guides/shape/calculate-with-time.md)
 * [Learn idiomatic TQL](../../tutorials/learn-idiomatic-tql.md)

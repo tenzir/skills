@@ -1,7 +1,7 @@
 ---
 title: "Configure identity provider"
-canonical: https://tenzir.com/docs/guides/platform-setup/configure-identity-provider
-source: https://tenzir.com/docs/guides/platform-setup/configure-identity-provider.md
+canonical: https://tenzir.com/docs/v7.0.0/guides/platform-setup/configure-identity-provider
+source: https://tenzir.com/docs/v7.0.0/guides/platform-setup/configure-identity-provider.md
 section: "Docs"
 ---
 

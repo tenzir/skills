@@ -1,7 +1,7 @@
 ---
 title: "Configure secret store"
-canonical: https://tenzir.com/docs/guides/platform-setup/configure-secret-store
-source: https://tenzir.com/docs/guides/platform-setup/configure-secret-store.md
+canonical: https://tenzir.com/docs/v7.0.0/guides/platform-setup/configure-secret-store
+source: https://tenzir.com/docs/v7.0.0/guides/platform-setup/configure-secret-store.md
 section: "Docs"
 ---
 
@@ -25,7 +25,7 @@ Add value to the Platform's secret store
 tenzir-platform secret add geheim --value=1528F9F3-FAFA-45B4-BC3C-B755D0E0D9C2
 ```
 
-Refer to the [CLI reference](../../reference/platform/command-line-interface.md#manage-secrets) for more details on updating or deleting secrets.
+Refer to the [CLI reference](https://docs.tenzir.com/reference/platform/command-line-interface#manage-secrets) for more details on updating or deleting secrets.
 
 ### Managing Secrets via Web Interface
 
@@ -51,7 +51,7 @@ tenzir-platform secret store add aws \
 * The Tenzir Platform must have permissions to read secrets under the specified prefix from the external store.
 * The platform must be able to assume the specified role in AWS.
 
-See the [CLI reference](../../reference/platform/command-line-interface.md#manage-external-secret-stores) for more details.
+See the [CLI reference](https://docs.tenzir.com/reference/platform/command-line-interface#manage-external-secret-stores) for more details.
 
 ### HashiCorp Vault
 
@@ -88,7 +88,7 @@ tenzir-platform secret store add vault \
   from_http "https://example.org", headers={"Authorization": secret("database:password")}
   ```
 
-See the [CLI reference](../../reference/platform/command-line-interface.md#manage-external-secret-stores) for more details.
+See the [CLI reference](https://docs.tenzir.com/reference/platform/command-line-interface#manage-external-secret-stores) for more details.
 
 ### Azure Key Vault
 
@@ -120,4 +120,4 @@ tenzir-platform secret store add azure \
 
 This uses the resource’s system-assigned identity. For a user-assigned identity, pass its client ID with `--managed-identity-client-id=<client_id>`. Managed identity authentication does not require an Azure tenant ID or client secret, and the platform does not store either credential in the workspace configuration.
 
-See the [CLI reference](../../reference/platform/command-line-interface.md#manage-external-secret-stores) for more details.
+See the [CLI reference](https://docs.tenzir.com/reference/platform/command-line-interface#manage-external-secret-stores) for more details.

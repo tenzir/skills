@@ -1,7 +1,7 @@
 ---
 title: "dns_lookup"
-canonical: https://tenzir.com/docs/reference/operators/dns_lookup
-source: https://tenzir.com/docs/reference/operators/dns_lookup.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/dns_lookup
+source: https://tenzir.com/docs/v7.0.0/reference/operators/dns_lookup.md
 section: "Docs"
 ---
 
@@ -154,6 +154,6 @@ dns_lookup destination, result=dest_ips
 
 ## See Also
 
-* [`set`](https://tenzir.com/docs/reference/operators/set.md)
+* [`set`](https://tenzir.com/docs/v7.0.0/reference/operators/set.md)
 
 Parallelizable: a parallel pipeline may run this operator on several cores at once.

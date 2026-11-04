@@ -1,7 +1,7 @@
 ---
 title: "value_counts"
-canonical: https://tenzir.com/docs/reference/functions/value_counts
-source: https://tenzir.com/docs/reference/functions/value_counts.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/value_counts
+source: https://tenzir.com/docs/v7.0.0/reference/functions/value_counts.md
 section: "Docs"
 ---
 
@@ -38,6 +38,6 @@ summarize counts=value_counts(x)
 
 ## See Also
 
-* [`mode`](https://tenzir.com/docs/reference/functions/mode.md)
-* [`distinct`](https://tenzir.com/docs/reference/functions/distinct.md)
+* [`mode`](https://tenzir.com/docs/v7.0.0/reference/functions/mode.md)
+* [`distinct`](https://tenzir.com/docs/v7.0.0/reference/functions/distinct.md)
 * [Aggregate event streams](../../guides/analyze/aggregate-event-streams.md)

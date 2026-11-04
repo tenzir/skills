@@ -1,7 +1,7 @@
 ---
 title: "enumerate"
-canonical: https://tenzir.com/docs/reference/operators/enumerate
-source: https://tenzir.com/docs/reference/operators/enumerate.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/enumerate
+source: https://tenzir.com/docs/v7.0.0/reference/operators/enumerate.md
 section: "Docs"
 ---
 

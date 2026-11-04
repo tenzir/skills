@@ -1,7 +1,7 @@
 ---
 title: "Calculate aggregate statistics"
-canonical: https://tenzir.com/docs/guides/analyze/calculate-aggregate-statistics
-source: https://tenzir.com/docs/guides/analyze/calculate-aggregate-statistics.md
+canonical: https://tenzir.com/docs/v7.0.0/guides/analyze/calculate-aggregate-statistics
+source: https://tenzir.com/docs/v7.0.0/guides/analyze/calculate-aggregate-statistics.md
 section: "Docs"
 ---
 
@@ -9,7 +9,7 @@ section: "Docs"
 
 > This guide shows you how to choose and combine aggregate functions for distributions, collected values, conditions, and operational summaries. Use summarize to calculate several measures in one pass and group them by the fields that define each population.
 
-This guide shows you how to choose and combine aggregate functions for distributions, collected values, conditions, and operational summaries. Use [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) to calculate several measures in one pass and group them by the fields that define each population.
+This guide shows you how to choose and combine aggregate functions for distributions, collected values, conditions, and operational summaries. Use [`summarize`](https://tenzir.com/docs/v7.0.0/reference/operators/summarize.md) to calculate several measures in one pass and group them by the fields that define each population.
 
 ## Statistical functions
 
@@ -17,7 +17,7 @@ Use statistical aggregation functions for deeper analysis.
 
 ### Percentiles and median
 
-Calculate distribution statistics with [`quantile`](https://tenzir.com/docs/reference/functions/quantile.md):
+Calculate distribution statistics with [`quantile`](https://tenzir.com/docs/v7.0.0/reference/functions/quantile.md):
 
 ```tql
 from {endpoint: "/api/users", latency: 120},
@@ -49,7 +49,7 @@ summarize p50 = quantile(latency, q=0.5),
 
 ### Standard deviation and variance
 
-Measure data spread with [`stddev`](https://tenzir.com/docs/reference/functions/stddev.md) and [`variance`](https://tenzir.com/docs/reference/functions/variance.md):
+Measure data spread with [`stddev`](https://tenzir.com/docs/v7.0.0/reference/functions/stddev.md) and [`variance`](https://tenzir.com/docs/v7.0.0/reference/functions/variance.md):
 
 ```tql
 from {server: "web1", cpu: 45},
@@ -81,7 +81,7 @@ summarize avg_cpu = mean(cpu),
 
 ### Mode and distinct values
 
-Find most common values and collect unique values with [`mode`](https://tenzir.com/docs/reference/functions/mode.md), [`distinct`](https://tenzir.com/docs/reference/functions/distinct.md), and [`count_if`](https://tenzir.com/docs/reference/functions/count_if.md):
+Find most common values and collect unique values with [`mode`](https://tenzir.com/docs/v7.0.0/reference/functions/mode.md), [`distinct`](https://tenzir.com/docs/v7.0.0/reference/functions/distinct.md), and [`count_if`](https://tenzir.com/docs/v7.0.0/reference/functions/count_if.md):
 
 ```tql
 from {user: "alice", browser: "chrome", action: "login"},
@@ -108,7 +108,7 @@ summarize most_common_browser = mode(browser),
 
 ### Value frequencies and entropy
 
-Analyze value distributions with [`value_counts`](https://tenzir.com/docs/reference/functions/value_counts.md) and [`entropy`](https://tenzir.com/docs/reference/functions/entropy.md):
+Analyze value distributions with [`value_counts`](https://tenzir.com/docs/v7.0.0/reference/functions/value_counts.md) and [`entropy`](https://tenzir.com/docs/v7.0.0/reference/functions/entropy.md):
 
 ```tql
 from {category: "A", value: 10},
@@ -144,16 +144,16 @@ summarize frequencies = value_counts(category),
 
 Use mergeable model aggregations when a distribution must survive the current pipeline or combine with later results:
 
-* [`frequency_table`](https://tenzir.com/docs/reference/functions/frequency_table.md) keeps exact counts for categorical values.
-* [`histogram`](https://tenzir.com/docs/reference/functions/histogram.md) keeps exact counts for fixed numeric ranges.
-* [`tdigest`](https://tenzir.com/docs/reference/functions/tdigest.md) approximates a numeric distribution in bounded state.
-* [`hll`](https://tenzir.com/docs/reference/functions/hll.md) estimates distinct values in bounded state.
+* [`frequency_table`](https://tenzir.com/docs/v7.0.0/reference/functions/frequency_table.md) keeps exact counts for categorical values.
+* [`histogram`](https://tenzir.com/docs/v7.0.0/reference/functions/histogram.md) keeps exact counts for fixed numeric ranges.
+* [`tdigest`](https://tenzir.com/docs/v7.0.0/reference/functions/tdigest.md) approximates a numeric distribution in bounded state.
+* [`hll`](https://tenzir.com/docs/v7.0.0/reference/functions/hll.md) estimates distinct values in bounded state.
 
 The models are ordinary TQL records that you can query, store in lookup tables, and merge across compatible windows or partitions. Our [analysis guides](../analyze.md) show how to use them for rare values, adaptive thresholds, distribution drift, and cardinality spikes.
 
 ## Collecting values
 
-Use [`collect`](https://tenzir.com/docs/reference/functions/collect.md) and [`distinct`](https://tenzir.com/docs/reference/functions/distinct.md) to gather values:
+Use [`collect`](https://tenzir.com/docs/v7.0.0/reference/functions/collect.md) and [`distinct`](https://tenzir.com/docs/v7.0.0/reference/functions/distinct.md) to gather values:
 
 ```tql
 from {user: "alice", action: "login", timestamp: 2024-01-15T10:00:00},
@@ -186,7 +186,7 @@ summarize all_actions = collect(action),
 
 ### First and last values
 
-Get boundary values with [`first`](https://tenzir.com/docs/reference/functions/first.md) and [`last`](https://tenzir.com/docs/reference/functions/last.md):
+Get boundary values with [`first`](https://tenzir.com/docs/v7.0.0/reference/functions/first.md) and [`last`](https://tenzir.com/docs/v7.0.0/reference/functions/last.md):
 
 ```tql
 from {sensor: "temp1", reading: 72, time: 2024-01-15T09:00:00},
@@ -217,7 +217,7 @@ summarize first_reading = first(reading),
 
 ### Group and collect values
 
-Use [`collect`](https://tenzir.com/docs/reference/functions/collect.md) with grouping to build hierarchical structures:
+Use [`collect`](https://tenzir.com/docs/v7.0.0/reference/functions/collect.md) with grouping to build hierarchical structures:
 
 ```tql
 from {dept: "Engineering", team: "Backend", member: "Alice"},
@@ -254,7 +254,7 @@ summarize dept, team, members=collect(member)
 
 ## Boolean aggregations
 
-Use [`all`](https://tenzir.com/docs/reference/functions/all.md) and [`any`](https://tenzir.com/docs/reference/functions/any.md) for boolean checks:
+Use [`all`](https://tenzir.com/docs/v7.0.0/reference/functions/all.md) and [`any`](https://tenzir.com/docs/v7.0.0/reference/functions/any.md) for boolean checks:
 
 ```tql
 from {test: "unit", passed: true, duration: 45},
@@ -456,14 +456,14 @@ error_rate = error_count / request_count
 
 ## Best practices
 
-1. **Choose appropriate functions**: Use [`mean`](https://tenzir.com/docs/reference/functions/mean.md) for averages, [`median`](https://tenzir.com/docs/reference/functions/median.md) for skewed data
+1. **Choose appropriate functions**: Use [`mean`](https://tenzir.com/docs/v7.0.0/reference/functions/mean.md) for averages, [`median`](https://tenzir.com/docs/v7.0.0/reference/functions/median.md) for skewed data
 2. **Handle empty collections**: Check if lists are empty before aggregating
 3. **Consider memory usage**: Large collections can consume significant memory
 4. **Combine aggregations**: Calculate multiple statistics in one pass for efficiency
 
 ## See also
 
-* [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md)
+* [`summarize`](https://tenzir.com/docs/v7.0.0/reference/operators/summarize.md)
 * [Aggregate event streams](aggregate-event-streams.md)
 * [Shape aggregation results](shape-aggregation-results.md)
 * [Shape lists](../shape/shape-lists.md)

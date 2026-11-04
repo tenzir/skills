@@ -1,7 +1,7 @@
 ---
 title: "search"
-canonical: https://tenzir.com/docs/reference/functions/search
-source: https://tenzir.com/docs/reference/functions/search.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/search
+source: https://tenzir.com/docs/v7.0.0/reference/functions/search.md
 section: "Docs"
 ---
 
@@ -228,7 +228,7 @@ exact_subnet = search(subnet, 10.0.0.0/8, exact=true)
 
 ## See Also
 
-* [`equals`](https://tenzir.com/docs/reference/functions/equals.md)
-* [`has`](https://tenzir.com/docs/reference/functions/has.md)
-* [`match_regex`](https://tenzir.com/docs/reference/functions/match_regex.md)
+* [`equals`](https://tenzir.com/docs/v7.0.0/reference/functions/equals.md)
+* [`has`](https://tenzir.com/docs/v7.0.0/reference/functions/has.md)
+* [`match_regex`](https://tenzir.com/docs/v7.0.0/reference/functions/match_regex.md)
 * [Manipulate strings](../../guides/shape/manipulate-strings.md)

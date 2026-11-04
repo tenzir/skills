@@ -1,7 +1,7 @@
 ---
 title: "deltas"
-canonical: https://tenzir.com/docs/reference/functions/deltas
-source: https://tenzir.com/docs/reference/functions/deltas.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/deltas
+source: https://tenzir.com/docs/v7.0.0/reference/functions/deltas.md
 section: "Docs"
 ---
 
@@ -53,8 +53,8 @@ select intervals = times.sort().deltas()
 
 ## See Also
 
-* [`mad`](https://tenzir.com/docs/reference/functions/mad.md)
-* [`skewness`](https://tenzir.com/docs/reference/functions/skewness.md)
-* [`sort`](https://tenzir.com/docs/reference/functions/sort.md)
-* [`zip`](https://tenzir.com/docs/reference/functions/zip.md)
+* [`mad`](https://tenzir.com/docs/v7.0.0/reference/functions/mad.md)
+* [`skewness`](https://tenzir.com/docs/v7.0.0/reference/functions/skewness.md)
+* [`sort`](https://tenzir.com/docs/v7.0.0/reference/functions/sort.md)
+* [`zip`](https://tenzir.com/docs/v7.0.0/reference/functions/zip.md)
 * [Shape lists](../../guides/shape/shape-lists.md)

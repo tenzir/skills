@@ -1,8 +1,8 @@
 ---
 title: "Repair out-of-order events"
 description: "Restore timestamp order in finite and live event streams without waiting indefinitely for input"
-canonical: https://tenzir.com/docs/guides/shape/repair-out-of-order-events
-source: https://tenzir.com/docs/guides/shape/repair-out-of-order-events.md
+canonical: https://tenzir.com/docs/v7.0.0/guides/shape/repair-out-of-order-events
+source: https://tenzir.com/docs/v7.0.0/guides/shape/repair-out-of-order-events.md
 section: "Docs"
 ---
 
@@ -14,7 +14,7 @@ Events often arrive in a different order than they occurred. Message-broker part
 
 Ordering matters when a pipeline compares consecutive observations, collects an activity sequence, calculates inter-arrival times, or replays events at their original cadence. Counts, sums, minima, maxima, and other order-independent calculations usually do not need it.
 
-This guide shows how to choose between [`sort`](https://tenzir.com/docs/reference/operators/sort.md), [`reorder`](https://tenzir.com/docs/reference/operators/reorder.md), and the late-event handling built into [`window`](https://tenzir.com/docs/reference/operators/window.md).
+This guide shows how to choose between [`sort`](https://tenzir.com/docs/v7.0.0/reference/operators/sort.md), [`reorder`](https://tenzir.com/docs/v7.0.0/reference/operators/reorder.md), and the late-event handling built into [`window`](https://tenzir.com/docs/v7.0.0/reference/operators/window.md).
 
 ## Start with typed timestamps
 
@@ -30,12 +30,12 @@ Follow the guide on [normalizing event timestamps](normalize-event-timestamps.md
 
 Choose based on whether the input ends and whether you can bound its timestamp skew:
 
-| Input and requirement                                   | Use                                                                                              | Trade-off                                                                             |
-| ------------------------------------------------------- | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------- |
-| Finite input, arbitrary disorder                        | [`sort`](https://tenzir.com/docs/reference/operators/sort.md)                                    | Waits for all input and holds it in memory.                                           |
-| Large or live input, bounded disorder                   | [`reorder`](https://tenzir.com/docs/reference/operators/reorder.md)                              | Adds buffering latency and drops only events whose timestamps precede emitted output. |
-| Event-time aggregation without sequence-dependent logic | [`window`](https://tenzir.com/docs/reference/operators/window.md) `tolerance=...`                | Accepts late window members without necessarily reordering them.                      |
-| Trailing event-time history                             | [`window`](https://tenzir.com/docs/reference/operators/window.md) `trailing=true, tolerance=...` | Reorders as part of maintaining the trailing history.                                 |
+| Input and requirement                                   | Use                                                                                                     | Trade-off                                                                             |
+| ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| Finite input, arbitrary disorder                        | [`sort`](https://tenzir.com/docs/v7.0.0/reference/operators/sort.md)                                    | Waits for all input and holds it in memory.                                           |
+| Large or live input, bounded disorder                   | [`reorder`](https://tenzir.com/docs/v7.0.0/reference/operators/reorder.md)                              | Adds buffering latency and drops only events whose timestamps precede emitted output. |
+| Event-time aggregation without sequence-dependent logic | [`window`](https://tenzir.com/docs/v7.0.0/reference/operators/window.md) `tolerance=...`                | Accepts late window members without necessarily reordering them.                      |
+| Trailing event-time history                             | [`window`](https://tenzir.com/docs/v7.0.0/reference/operators/window.md) `trailing=true, tolerance=...` | Reorders as part of maintaining the trailing history.                                 |
 
 Do not add `reorder` merely because events can arrive late. Add it when a later operator needs chronological input.
 
@@ -114,7 +114,7 @@ One `reorder` instance maintains one watermark. This provides one global order f
 reorder on=time, tolerance=30s
 ```
 
-A busy producer can advance that watermark far enough to make an event from a quiet producer late. Put `reorder` inside [`group`](https://tenzir.com/docs/reference/operators/group.md) when each source or entity needs an independent clock:
+A busy producer can advance that watermark far enough to make an event from a quiet producer late. Put `reorder` inside [`group`](https://tenzir.com/docs/v7.0.0/reference/operators/group.md) when each source or entity needs an independent clock:
 
 ```tql
 group device.uid {
@@ -124,13 +124,13 @@ group device.uid {
 }
 ```
 
-This guarantees order within each group. The merged output of `group` does not form one global timestamp sequence. Use the global form before [`delay`](https://tenzir.com/docs/reference/operators/delay.md) or another operator that consumes one shared timeline.
+This guarantees order within each group. The merged output of `group` does not form one global timestamp sequence. Use the global form before [`delay`](https://tenzir.com/docs/v7.0.0/reference/operators/delay.md) or another operator that consumes one shared timeline.
 
 ## Order sequence-dependent processing
 
 ### Collect activity in timestamp order
 
-A fixed event-time window uses `tolerance` to keep a window open for late events, but its subpipeline receives events in arrival order. Put `reorder` before it when an order-sensitive aggregate such as [`collect`](https://tenzir.com/docs/reference/functions/collect.md) must see timestamp order:
+A fixed event-time window uses `tolerance` to keep a window open for late events, but its subpipeline receives events in arrival order. Put `reorder` before it when an order-sensitive aggregate such as [`collect`](https://tenzir.com/docs/v7.0.0/reference/functions/collect.md) must see timestamp order:
 
 ```tql
 reorder on=time, tolerance=30s

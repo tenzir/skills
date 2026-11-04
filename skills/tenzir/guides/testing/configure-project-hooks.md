@@ -1,7 +1,7 @@
 ---
 title: "Configure project hooks"
-canonical: https://tenzir.com/docs/guides/testing/configure-project-hooks
-source: https://tenzir.com/docs/guides/testing/configure-project-hooks.md
+canonical: https://tenzir.com/docs/v7.0.0/guides/testing/configure-project-hooks
+source: https://tenzir.com/docs/v7.0.0/guides/testing/configure-project-hooks.md
 section: "Docs"
 ---
 
@@ -172,4 +172,4 @@ TENZIR_TEST_DISABLE_HOOKS=1 uvx tenzir-test
 
 * Use `shutdown` to emit final telemetry or clean up resources created during `startup`.
 * Use `test_start` and `test_finish` to record per-test timing or status in an external system.
-* Review the [test framework reference](../../reference/test-framework.md) for the full event list and CLI options.
+* Review the [test framework reference](https://docs.tenzir.com/reference/test-framework/) for the full event list and CLI options.

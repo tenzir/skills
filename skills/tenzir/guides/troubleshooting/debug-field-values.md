@@ -1,7 +1,7 @@
 ---
 title: "Debug field values"
-canonical: https://tenzir.com/docs/guides/troubleshooting/debug-field-values
-source: https://tenzir.com/docs/guides/troubleshooting/debug-field-values.md
+canonical: https://tenzir.com/docs/v7.0.0/guides/troubleshooting/debug-field-values
+source: https://tenzir.com/docs/v7.0.0/guides/troubleshooting/debug-field-values.md
 section: "Docs"
 ---
 
@@ -38,7 +38,7 @@ The field came in as a string, but the expression treats it as a number, so the 
 
 ## Check a field’s type
 
-When a value looks right but behaves wrong, confirm its type with [`type_kind`](https://tenzir.com/docs/reference/functions/type_kind.md):
+When a value looks right but behaves wrong, confirm its type with [`type_kind`](https://tenzir.com/docs/v7.0.0/reference/functions/type_kind.md):
 
 ```tql
 from {count: "3", port: 443}
@@ -57,7 +57,7 @@ from {severity: "5"}, {severity: "3"}
 where severity >= 4
 ```
 
-This drops every event and warns twice: once that the comparison isn’t defined for a string and a number, and once that `where` expected a `bool` but got `null`. Cast the field first with [`int`](https://tenzir.com/docs/reference/functions/int.md):
+This drops every event and warns twice: once that the comparison isn’t defined for a string and a number, and once that `where` expected a `bool` but got `null`. Cast the field first with [`int`](https://tenzir.com/docs/v7.0.0/reference/functions/int.md):
 
 ```tql
 from {severity: "5"}, {severity: "3"}
@@ -129,8 +129,8 @@ The field is `source_ip`, not `src_ip`. If a field is legitimately absent from s
 
 ## See also
 
-* [`type_kind`](https://tenzir.com/docs/reference/functions/type_kind.md)
-* [`int`](https://tenzir.com/docs/reference/functions/int.md)
+* [`type_kind`](https://tenzir.com/docs/v7.0.0/reference/functions/type_kind.md)
+* [`int`](https://tenzir.com/docs/v7.0.0/reference/functions/int.md)
 * [Transform values](../shape/transform-values.md)
 * [Filter and select data](../optimize/filter-and-select-data.md)
 * [Split and merge streams](../route/split-and-merge-streams.md)

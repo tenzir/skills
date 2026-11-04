@@ -1,7 +1,7 @@
 ---
 title: "print_leef"
-canonical: https://tenzir.com/docs/reference/functions/print_leef
-source: https://tenzir.com/docs/reference/functions/print_leef.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/print_leef
+source: https://tenzir.com/docs/v7.0.0/reference/functions/print_leef.md
 section: "Docs"
 ---
 
@@ -101,9 +101,9 @@ write_syslog
 
 ## See Also
 
-* [`read_leef`](https://tenzir.com/docs/reference/operators/read_leef.md)
-* [`read_syslog`](https://tenzir.com/docs/reference/operators/read_syslog.md)
-* [`write_syslog`](https://tenzir.com/docs/reference/operators/write_syslog.md)
-* [`parse_leef`](https://tenzir.com/docs/reference/functions/parse_leef.md)
-* [IBM QRadar](../../integrations/qradar.md)
-* [Syslog](../../integrations/syslog.md)
+* [`read_leef`](https://tenzir.com/docs/v7.0.0/reference/operators/read_leef.md)
+* [`read_syslog`](https://tenzir.com/docs/v7.0.0/reference/operators/read_syslog.md)
+* [`write_syslog`](https://tenzir.com/docs/v7.0.0/reference/operators/write_syslog.md)
+* [`parse_leef`](https://tenzir.com/docs/v7.0.0/reference/functions/parse_leef.md)
+* [Qradar](https://docs.tenzir.com/integrations/qradar)
+* [Syslog](https://docs.tenzir.com/integrations/syslog)

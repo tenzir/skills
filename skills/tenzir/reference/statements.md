@@ -1,7 +1,7 @@
 ---
 title: "Statements"
-canonical: https://tenzir.com/docs/reference/statements
-source: https://tenzir.com/docs/reference/statements.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/statements
+source: https://tenzir.com/docs/v7.0.0/reference/statements.md
 section: "Docs"
 ---
 
@@ -66,9 +66,9 @@ Operator Composition Example 1
 
 Let’s break it down:
 
-1. [`from_file`](https://tenzir.com/docs/reference/operators/from_file.md): A void-to-events input operator that reads events from a URI.
-2. [`where`](https://tenzir.com/docs/reference/operators/where.md): An events-to-events transformation operator that filters events matching a predicate.
-3. [`to_file`](https://tenzir.com/docs/reference/operators/to_file.md): An events-to-void output operator that writes to the specified URI.
+1. [`from_file`](https://tenzir.com/docs/v7.0.0/reference/operators/from_file.md): A void-to-events input operator that reads events from a URI.
+2. [`where`](https://tenzir.com/docs/v7.0.0/reference/operators/where.md): An events-to-events transformation operator that filters events matching a predicate.
+3. [`to_file`](https://tenzir.com/docs/v7.0.0/reference/operators/to_file.md): An events-to-void output operator that writes to the specified URI.
 
 Some source and sink operators infer the format of the data being read or written, i.e., JSON due to the `.json` extension and Parquet due to the `.parquet` extension. You can also write the specific operators for these operations yourself:
 
@@ -84,11 +84,11 @@ Operator Composition Example 2
 
 Here, we use a separate set of operators that go through bytes explicitly. Let’s break it down as well:
 
-1. [`from_kafka`](https://tenzir.com/docs/reference/operators/from_kafka.md): A void-to-events input operator that reads from a Kafka topic.
-2. [`read_ndjson`](https://tenzir.com/docs/reference/operators/read_ndjson.md): An bytes-to-events transformation operator (aka. *parser*) that reads newline-delimited JSON.
-3. [`select`](https://tenzir.com/docs/reference/operators/select.md): An events-to-events transformation operator that selects specific fields from events.
-4. [`write_yaml`](https://tenzir.com/docs/reference/operators/write_yaml.md): An events-to-bytes transformation operator that turns events to YAML foramt.
-5. [`to_zmq`](https://tenzir.com/docs/reference/operators/to_zmq.md): A bytes-to-void output operator that writes bytes to a ZeroMQ socket.
+1. [`from_kafka`](https://tenzir.com/docs/v7.0.0/reference/operators/from_kafka.md): A void-to-events input operator that reads from a Kafka topic.
+2. [`read_ndjson`](https://tenzir.com/docs/v7.0.0/reference/operators/read_ndjson.md): An bytes-to-events transformation operator (aka. *parser*) that reads newline-delimited JSON.
+3. [`select`](https://tenzir.com/docs/v7.0.0/reference/operators/select.md): An events-to-events transformation operator that selects specific fields from events.
+4. [`write_yaml`](https://tenzir.com/docs/v7.0.0/reference/operators/write_yaml.md): An events-to-bytes transformation operator that turns events to YAML foramt.
+5. [`to_zmq`](https://tenzir.com/docs/v7.0.0/reference/operators/to_zmq.md): A bytes-to-void output operator that writes bytes to a ZeroMQ socket.
 
 ### Line continuation
 
@@ -135,7 +135,7 @@ Assignments modify fields:
 risk_score = bytes / 1Ki * severity_weight
 ```
 
-When you write an assignment outside an explicit operator context, it implicitly uses the [`set`](https://tenzir.com/docs/reference/operators/set.md) operator:
+When you write an assignment outside an explicit operator context, it implicitly uses the [`set`](https://tenzir.com/docs/v7.0.0/reference/operators/set.md) operator:
 
 ```tql
 severity = "high"

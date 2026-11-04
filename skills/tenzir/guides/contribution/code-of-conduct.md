@@ -1,7 +1,7 @@
 ---
 title: "Code of Conduct"
-canonical: https://tenzir.com/docs/guides/contribution/code-of-conduct
-source: https://tenzir.com/docs/guides/contribution/code-of-conduct.md
+canonical: https://tenzir.com/docs/v7.0.0/guides/contribution/code-of-conduct
+source: https://tenzir.com/docs/v7.0.0/guides/contribution/code-of-conduct.md
 section: "Docs"
 ---
 

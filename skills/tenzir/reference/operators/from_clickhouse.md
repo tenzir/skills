@@ -1,7 +1,7 @@
 ---
 title: "from_clickhouse"
-canonical: https://tenzir.com/docs/reference/operators/from_clickhouse
-source: https://tenzir.com/docs/reference/operators/from_clickhouse.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/from_clickhouse
+source: https://tenzir.com/docs/v7.0.0/reference/operators/from_clickhouse.md
 section: "Docs"
 ---
 
@@ -19,7 +19,7 @@ from_clickhouse [table=string, sql=string,
 
 ## Description
 
-The [`from_clickhouse`](https://tenzir.com/docs/reference/operators/from_clickhouse.md) operator issues a query to a ClickHouse server. You can either provide a `table` to read or an `sql` query.
+The [`from_clickhouse`](https://tenzir.com/docs/v7.0.0/reference/operators/from_clickhouse.md) operator issues a query to a ClickHouse server. You can either provide a `table` to read or an `sql` query.
 
 ### `uri = string (optional)`
 
@@ -43,7 +43,7 @@ You can qualify the table as `<database>.<table>`. If you omit the database, Cli
 
 Use this mode when you want to read a table and preserve named tuple fields from the table schema. Tenzir pushes filters, field selections, and limits from the rest of the pipeline into the query it sends; see [Optimizations](from_clickhouse.md#optimizations).
 
-If the table has a [catch-all column](from_clickhouse.md#catch-all-tables), the operator returns the events that [`to_clickhouse`](https://tenzir.com/docs/reference/operators/to_clickhouse.md) wrote instead of the raw columns.
+If the table has a [catch-all column](from_clickhouse.md#catch-all-tables), the operator returns the events that [`to_clickhouse`](https://tenzir.com/docs/v7.0.0/reference/operators/to_clickhouse.md) wrote instead of the raw columns.
 
 Note
 
@@ -118,13 +118,13 @@ See the [Node TLS Setup guide](../../guides/node-setup/configure-tls.md) for mor
 
 ## Catch-all tables
 
-When you read a table with a [catch-all column](../../integrations/clickhouse.md#catch-all-columns) in `table` mode, the operator reverses how [`to_clickhouse`](https://tenzir.com/docs/reference/operators/to_clickhouse.md) split each event across the columns:
+When you read a table with a [catch-all column](https://docs.tenzir.com/integrations/clickhouse#catch-all-columns) in `table` mode, the operator reverses how [`to_clickhouse`](https://tenzir.com/docs/v7.0.0/reference/operators/to_clickhouse.md) split each event across the columns:
 
 * The fields of the catch-all column move back to the top level of the event, and the catch-all column itself disappears.
 * A column with a dotted name, such as `src_endpoint.ip`, becomes the nested field at that path and merges with the other fields of `src_endpoint`.
 * Other `JSON` columns become records again.
 
-If a column and the catch-all hold a value at the same path, the column wins. Tenzir infers the types of JSON values like [`parse_json`](https://tenzir.com/docs/reference/functions/parse_json.md) does, so IP addresses, subnets, timestamps, and durations come back with their types. Literal dotted keys such as `"a.b"` stay apart from nested fields such as `a.b`.
+If a column and the catch-all hold a value at the same path, the column wins. Tenzir infers the types of JSON values like [`parse_json`](https://tenzir.com/docs/v7.0.0/reference/functions/parse_json.md) does, so IP addresses, subnets, timestamps, and durations come back with their types. Literal dotted keys such as `"a.b"` stay apart from nested fields such as `a.b`.
 
 Some differences from the original events remain:
 
@@ -140,31 +140,31 @@ The `sql` mode and tables without a catch-all column return the columns as they 
 
 Tenzir maps ClickHouse types to Tenzir types as follows:
 
-| ClickHouse                                        | Tenzir      | Comment                                                                                                                                       |
-| ------------------------------------------------- | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| `Bool`                                            | `bool`      |                                                                                                                                               |
-| `Int8`, `Int16`, `Int32`, `Int64`                 | `int64`     |                                                                                                                                               |
-| `UInt8`, `UInt16`, `UInt32`, `UInt64`             | `uint64`    |                                                                                                                                               |
-| `Int128`, `UInt128`                               | `string`    | Emitted as integer text to preserve precision.                                                                                                |
-| `Time`, `Time64`                                  | `duration`  |                                                                                                                                               |
-| `LowCardinality(T)`                               | Same as `T` | Dictionary encoding does not change the resulting type.                                                                                       |
-| `Float32`, `Float64`                              | `double`    |                                                                                                                                               |
-| `String`, `FixedString(N)`                        | `string`    |                                                                                                                                               |
+| ClickHouse                                        | Tenzir      | Comment                                                                                                                                              |
+| ------------------------------------------------- | ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Bool`                                            | `bool`      |                                                                                                                                                      |
+| `Int8`, `Int16`, `Int32`, `Int64`                 | `int64`     |                                                                                                                                                      |
+| `UInt8`, `UInt16`, `UInt32`, `UInt64`             | `uint64`    |                                                                                                                                                      |
+| `Int128`, `UInt128`                               | `string`    | Emitted as integer text to preserve precision.                                                                                                       |
+| `Time`, `Time64`                                  | `duration`  |                                                                                                                                                      |
+| `LowCardinality(T)`                               | Same as `T` | Dictionary encoding does not change the resulting type.                                                                                              |
+| `Float32`, `Float64`                              | `double`    |                                                                                                                                                      |
+| `String`, `FixedString(N)`                        | `string`    |                                                                                                                                                      |
 | `JSON`                                            | `string`    | Emitted as one-line JSON text, except in [catch-all tables](from_clickhouse.md#catch-all-tables). |
-| `UUID`                                            | `string`    | Emitted as canonical UUID text.                                                                                                               |
-| `Enum8`, `Enum16`                                 | `string`    | Emitted as the enum label.                                                                                                                    |
-| `Decimal`, `Decimal32`, `Decimal64`, `Decimal128` | `string`    | Emitted as decimal text to preserve precision.                                                                                                |
-| `Date`, `Date32`, `DateTime`, `DateTime64`        | `time`      |                                                                                                                                               |
-| `IPv4`, `IPv6`                                    | `ip`        |                                                                                                                                               |
-| `Tuple(...)`                                      | `record`    |                                                                                                                                               |
-| `Array(T)`                                        | `list<T>`   |                                                                                                                                               |
-| `Array(UInt8)`                                    | `blob`      |                                                                                                                                               |
-| `Nullable(T)`                                     | `T`         | Null values stay null.                                                                                                                        |
-| `Map(K, V)`                                       | `record`    | One field per key; see below.                                                                                                                 |
+| `UUID`                                            | `string`    | Emitted as canonical UUID text.                                                                                                                      |
+| `Enum8`, `Enum16`                                 | `string`    | Emitted as the enum label.                                                                                                                           |
+| `Decimal`, `Decimal32`, `Decimal64`, `Decimal128` | `string`    | Emitted as decimal text to preserve precision.                                                                                                       |
+| `Date`, `Date32`, `DateTime`, `DateTime64`        | `time`      |                                                                                                                                                      |
+| `IPv4`, `IPv6`                                    | `ip`        |                                                                                                                                                      |
+| `Tuple(...)`                                      | `record`    |                                                                                                                                                      |
+| `Array(T)`                                        | `list<T>`   |                                                                                                                                                      |
+| `Array(UInt8)`                                    | `blob`      |                                                                                                                                                      |
+| `Nullable(T)`                                     | `T`         | Null values stay null.                                                                                                                               |
+| `Map(K, V)`                                       | `record`    | One field per key; see below.                                                                                                                        |
 
 Date and timestamp values outside Tenzir’s nanosecond timestamp range become null with a warning.
 
-JSON in [tables with a catch-all](../../integrations/clickhouse.md#preserve-dotted-json-keys) is written with `json_type_escape_dots_in_keys=1`. The `table` form enables this setting for such tables to restore literal dotted keys. With `sql`, add `SETTINGS json_type_escape_dots_in_keys=1` to your query. Otherwise, ClickHouse returns escaped keys such as `"a%2Eb"`.
+JSON in [tables with a catch-all](https://docs.tenzir.com/integrations/clickhouse#preserve-dotted-json-keys) is written with `json_type_escape_dots_in_keys=1`. The `table` form enables this setting for such tables to restore literal dotted keys. With `sql`, add `SETTINGS json_type_escape_dots_in_keys=1` to your query. Otherwise, ClickHouse returns escaped keys such as `"a%2Eb"`.
 
 A `Map(K, V)` becomes a record with one field per key, named by the key’s text, such as `200` for a `UInt16` key. The values convert like a column of type `V`. Rows can have different keys, an empty map becomes an empty record, and if a key repeats, the last value wins. Filters on map fields aren’t pushed down to ClickHouse, and since rows may lack a key, use `?` to access map fields, as in `where attributes.status? == "ok"`.
 
@@ -172,7 +172,7 @@ The operator drops columns of other unsupported types, such as geo types, with a
 
 ## Optimizations
 
-When the operator reads a table, it lets ClickHouse do the work of the [`where`](https://tenzir.com/docs/reference/operators/where.md), [`select`](https://tenzir.com/docs/reference/operators/select.md), [`head`](https://tenzir.com/docs/reference/operators/head.md), and [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) operators that follow it, so that ClickHouse returns only the rows, columns, and summaries that the pipeline needs. The page on [ClickHouse optimizations](../optimizations/clickhouse.md) describes which filters ClickHouse evaluates, and the [optimizations overview](../optimizations.md) explains how Tenzir optimizes pipelines in general.
+When the operator reads a table, it lets ClickHouse do the work of the [`where`](https://tenzir.com/docs/v7.0.0/reference/operators/where.md), [`select`](https://tenzir.com/docs/v7.0.0/reference/operators/select.md), [`head`](https://tenzir.com/docs/v7.0.0/reference/operators/head.md), and [`summarize`](https://tenzir.com/docs/v7.0.0/reference/operators/summarize.md) operators that follow it, so that ClickHouse returns only the rows, columns, and summaries that the pipeline needs. The page on [ClickHouse optimizations](../optimizations/clickhouse.md) describes which filters ClickHouse evaluates, and the [optimizations overview](../optimizations.md) explains how Tenzir optimizes pipelines in general.
 
 In a [catch-all table](from_clickhouse.md#catch-all-tables), supported filters on scalar columns go into the query, including columns with dotted names such as `src_endpoint.port`. Many filters on fields in the catch-all go into the query as prefilters that narrow the rows, and the filter still runs in Tenzir. The query reads every column. The [ClickHouse optimizations](../optimizations/clickhouse.md#catch-all-tables) page lists which filters qualify.
 
@@ -243,7 +243,7 @@ from_clickhouse sql="DESCRIBE TABLE events", tls=false
 
 ## See Also
 
-* [`to_clickhouse`](https://tenzir.com/docs/reference/operators/to_clickhouse.md)
+* [`to_clickhouse`](https://tenzir.com/docs/v7.0.0/reference/operators/to_clickhouse.md)
 * [Read from data stores](../../guides/collect/read-from-data-stores.md)
-* [ClickHouse](../../integrations/clickhouse.md)
-* [nano](../../integrations/nano.md)
+* [Clickhouse](https://docs.tenzir.com/integrations/clickhouse)
+* [Nano](https://docs.tenzir.com/integrations/nano)

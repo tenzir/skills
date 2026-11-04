@@ -1,7 +1,7 @@
 ---
 title: "is_empty"
-canonical: https://tenzir.com/docs/reference/functions/is_empty
-source: https://tenzir.com/docs/reference/functions/is_empty.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/is_empty
+source: https://tenzir.com/docs/v7.0.0/reference/functions/is_empty.md
 section: "Docs"
 ---
 
@@ -97,5 +97,5 @@ from {
 
 ## See Also
 
-* [`has`](https://tenzir.com/docs/reference/functions/has.md)
-* [`length`](https://tenzir.com/docs/reference/functions/length.md)
+* [`has`](https://tenzir.com/docs/v7.0.0/reference/functions/has.md)
+* [`length`](https://tenzir.com/docs/v7.0.0/reference/functions/length.md)

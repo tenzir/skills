@@ -103,11 +103,11 @@
 - [accept_http](operators/accept_http.md): Accepts incoming HTTP requests and forwards them as events.
 - [accept_opensearch](operators/accept_opensearch.md): Accepts incoming OpenSearch-compatible Bulk API requests and forwards them as events.
 - [accept_splunk](operators/accept_splunk.md): Receives events through a Splunk HTTP Event Collector (HEC) endpoint.
-- [accept_relp](operators/accept_relp.md): Receives Syslog messages over the [Reliable Event Logging Protocol (RELP)](https://tenzir.com/integrations/relp.md).
+- [accept_relp](operators/accept_relp.md): Receives Syslog messages over the [Reliable Event Logging Protocol (RELP)](https://tenzir.com/integrations/relp).
 - [accept_tcp](operators/accept_tcp.md): Listens for incoming TCP or TLS connections and receives events.
 - [accept_udp](operators/accept_udp.md): Receives UDP datagrams and outputs structured events.
 - [accept_unix_socket](operators/accept_unix_socket.md): Listens for incoming Unix domain socket connections and receives events.
-- [accept_wef](operators/accept_wef.md): Receives Windows events through [Windows Event Forwarding (WEF)](https://tenzir.com/integrations/microsoft/windows-event-forwarding.md).
+- [accept_wef](operators/accept_wef.md): Receives Windows events through [Windows Event Forwarding (WEF)](https://tenzir.com/integrations/microsoft/windows-event-forwarding).
 - [accept_zmq](operators/accept_zmq.md): Listens on a ZeroMQ endpoint and receives events.
 - [from_amazon_cloudwatch](operators/from_amazon_cloudwatch.md): Reads events from Amazon CloudWatch.
 - [from_amazon_kinesis](operators/from_amazon_kinesis.md): Receives records from an [Amazon Kinesis Data Streams](https://aws.amazon.com/kinesis/data-streams/) stream.
@@ -175,9 +175,9 @@
 
 ## OCSF
 
-- [ocsf_cast](operators/ocsf_cast.md): Casts incoming events to their OCSF type.
-- [ocsf_derive](operators/ocsf_derive.md): Automatically assigns enum strings from their integer counterparts and vice versa.
-- [ocsf_trim](operators/ocsf_trim.md): Drops fields from OCSF events to reduce their size.
+- [ocsf_cast](https://docs.tenzir.com/reference/operators/ocsf_cast)
+- [ocsf_derive](https://docs.tenzir.com/reference/operators/ocsf_derive)
+- [ocsf_trim](https://docs.tenzir.com/reference/operators/ocsf_trim)
 
 ## Outputs
 

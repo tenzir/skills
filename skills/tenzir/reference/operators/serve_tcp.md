@@ -1,7 +1,7 @@
 ---
 title: "serve_tcp"
-canonical: https://tenzir.com/docs/reference/operators/serve_tcp
-source: https://tenzir.com/docs/reference/operators/serve_tcp.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/serve_tcp
+source: https://tenzir.com/docs/v7.0.0/reference/operators/serve_tcp.md
 section: "Docs"
 ---
 
@@ -84,7 +84,7 @@ serve_tcp "0.0.0.0:8443", tls={certfile: "cert.pem", keyfile: "key.pem"} {
 
 ## See Also
 
-* [`accept_tcp`](https://tenzir.com/docs/reference/operators/accept_tcp.md)
-* [`from_tcp`](https://tenzir.com/docs/reference/operators/from_tcp.md)
-* [`to_tcp`](https://tenzir.com/docs/reference/operators/to_tcp.md)
-* [TCP](../../integrations/tcp.md)
+* [`accept_tcp`](https://tenzir.com/docs/v7.0.0/reference/operators/accept_tcp.md)
+* [`from_tcp`](https://tenzir.com/docs/v7.0.0/reference/operators/from_tcp.md)
+* [`to_tcp`](https://tenzir.com/docs/v7.0.0/reference/operators/to_tcp.md)
+* [Tcp](https://docs.tenzir.com/integrations/tcp)

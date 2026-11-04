@@ -1,7 +1,7 @@
 ---
 title: "print_xsv"
-canonical: https://tenzir.com/docs/reference/functions/print_xsv
-source: https://tenzir.com/docs/reference/functions/print_xsv.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/print_xsv
+source: https://tenzir.com/docs/v7.0.0/reference/functions/print_xsv.md
 section: "Docs"
 ---
 
@@ -21,11 +21,11 @@ The `parse_xsv` function prints a record’s values as delimiter separated strin
 
 The following table lists existing XSV configurations:
 
-| Format                                                            | Field Separator | List Separator | Null Value |
-| ----------------------------------------------------------------- | --------------- | -------------- | ---------- |
-| [`csv`](https://tenzir.com/docs/reference/functions/print_csv.md) | `,`             | `;`            | empty      |
-| [`ssv`](https://tenzir.com/docs/reference/functions/print_ssv.md) | `<space>`       | `,`            | `-`        |
-| [`tsv`](https://tenzir.com/docs/reference/functions/print_tsv.md) | `\t`            | `,`            | `-`        |
+| Format                                                                   | Field Separator | List Separator | Null Value |
+| ------------------------------------------------------------------------ | --------------- | -------------- | ---------- |
+| [`csv`](https://tenzir.com/docs/v7.0.0/reference/functions/print_csv.md) | `,`             | `;`            | empty      |
+| [`ssv`](https://tenzir.com/docs/v7.0.0/reference/functions/print_ssv.md) | `<space>`       | `,`            | `-`        |
+| [`tsv`](https://tenzir.com/docs/v7.0.0/reference/functions/print_tsv.md) | `\t`            | `,`            | `-`        |
 
 ### `field_separator = str`
 
@@ -64,5 +64,5 @@ output = this.print_xsv(
 
 ## See Also
 
-* [`parse_xsv`](https://tenzir.com/docs/reference/functions/parse_xsv.md)
-* [`write_xsv`](https://tenzir.com/docs/reference/operators/write_xsv.md)
+* [`parse_xsv`](https://tenzir.com/docs/v7.0.0/reference/functions/parse_xsv.md)
+* [`write_xsv`](https://tenzir.com/docs/v7.0.0/reference/operators/write_xsv.md)

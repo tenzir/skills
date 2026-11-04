@@ -1,7 +1,7 @@
 ---
 title: "repeat"
-canonical: https://tenzir.com/docs/reference/operators/repeat
-source: https://tenzir.com/docs/reference/operators/repeat.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/repeat
+source: https://tenzir.com/docs/v7.0.0/reference/operators/repeat.md
 section: "Docs"
 ---
 

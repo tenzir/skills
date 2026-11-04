@@ -1,7 +1,7 @@
 ---
 title: "measure"
-canonical: https://tenzir.com/docs/reference/operators/measure
-source: https://tenzir.com/docs/reference/operators/measure.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/measure
+source: https://tenzir.com/docs/v7.0.0/reference/operators/measure.md
 section: "Docs"
 ---
 

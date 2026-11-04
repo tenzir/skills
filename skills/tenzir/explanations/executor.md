@@ -1,8 +1,8 @@
 ---
 title: "Executor"
 description: "Understand how Tenzir compiles TQL into an execution plan and runs operators with fused handoffs, channels, subpipelines, and parallel jobs."
-canonical: https://tenzir.com/docs/explanations/executor
-source: https://tenzir.com/docs/explanations/executor.md
+canonical: https://tenzir.com/docs/v7.0.0/explanations/executor
+source: https://tenzir.com/docs/v7.0.0/explanations/executor.md
 section: "Docs"
 ---
 
@@ -52,7 +52,7 @@ The optimizer also tracks whether downstream operators depend on event order. Wh
 
 The planner turns the optimized IR into an executable directed acyclic graph (DAG). A linear pipeline remains a chain of operators, while static subpipelines become branches in the same graph. The plan therefore reflects the actual paths that events can take rather than the nesting of the TQL source.
 
-Conditionals such as [`if`](https://tenzir.com/docs/reference/statements.md#if) and [`match`](https://tenzir.com/docs/reference/statements.md#match) route each event through one branch. The [`fork`](https://tenzir.com/docs/reference/operators/fork.md) operator copies events into a side pipeline, while [`merge`](https://tenzir.com/docs/reference/operators/merge.md) adds events from another source. The [`fork_merge`](https://tenzir.com/docs/reference/operators/fork_merge.md) operator copies events across several branches and combines their results, and [`parallel`](https://tenzir.com/docs/reference/operators/parallel.md) lets eligible operators run in multiple parallel copies.
+Conditionals such as [`if`](https://tenzir.com/docs/v7.0.0/reference/statements.md#if) and [`match`](https://tenzir.com/docs/v7.0.0/reference/statements.md#match) route each event through one branch. The [`fork`](https://tenzir.com/docs/v7.0.0/reference/operators/fork.md) operator copies events into a side pipeline, while [`merge`](https://tenzir.com/docs/v7.0.0/reference/operators/merge.md) adds events from another source. The [`fork_merge`](https://tenzir.com/docs/v7.0.0/reference/operators/fork_merge.md) operator copies events across several branches and combines their results, and [`parallel`](https://tenzir.com/docs/v7.0.0/reference/operators/parallel.md) lets eligible operators run in multiple parallel copies.
 
 The IR shows one pipeline with nested subpipelines in merge, if, and fork. A hatched arrow points to the plan DAG, where merge adds a second source, if branches and rejoins, and fork splits off a sink.
 
@@ -86,7 +86,7 @@ Events routed across three parallel lanes so that every event with the same key 
 
 A parallel file source can assign files to jobs with a stable hash of each file path, so different instances do not read the same file. This source-level assignment differs from downstream exchanges, which partition data that already flows through channels.
 
-Kafka uses broker-managed assignment instead. Every [`from_kafka`](https://tenzir.com/docs/reference/operators/from_kafka.md#parallelism) instance joins the same consumer group, and the broker assigns and rebalances partitions among those instances. A partition can move between jobs and replay messages whose offsets have not yet been committed, so delivery remains at-least-once.
+Kafka uses broker-managed assignment instead. Every [`from_kafka`](https://tenzir.com/docs/v7.0.0/reference/operators/from_kafka.md#parallelism) instance joins the same consumer group, and the broker assigns and rebalances partitions among those instances. A partition can move between jobs and replay messages whose offsets have not yet been committed, so delivery remains at-least-once.
 
 Parallel jobs do not preserve one global event order. A gather receives output as jobs make progress, and a keyed shuffle intentionally separates the stream. If order affects the result, keep the relevant part sequential or restore order explicitly. Our guide on [tuning performance](../guides/node-setup/tune-performance.md#parallelism) explains how to enable parallelism and choose its degree.
 

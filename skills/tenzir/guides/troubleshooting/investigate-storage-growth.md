@@ -1,7 +1,7 @@
 ---
 title: "Investigate storage growth"
-canonical: https://tenzir.com/docs/guides/troubleshooting/investigate-storage-growth
-source: https://tenzir.com/docs/guides/troubleshooting/investigate-storage-growth.md
+canonical: https://tenzir.com/docs/v7.0.0/guides/troubleshooting/investigate-storage-growth
+source: https://tenzir.com/docs/v7.0.0/guides/troubleshooting/investigate-storage-growth.md
 section: "Docs"
 ---
 
@@ -35,7 +35,7 @@ This shows how fast the volume fills up, but it measures the whole filesystem, s
 
 ## Find what takes the space
 
-Events stored at the node live in partitions. The [`partitions`](https://tenzir.com/docs/reference/operators/partitions.md) operator reports the disk usage of every partition, so you can rank schemas by what they cost you:
+Events stored at the node live in partitions. The [`partitions`](https://tenzir.com/docs/v7.0.0/reference/operators/partitions.md) operator reports the disk usage of every partition, so you can rank schemas by what they cost you:
 
 ```tql
 partitions
@@ -90,8 +90,8 @@ For imported data, the node can delete or transform old events automatically, ei
 
 ## See also
 
-* [`metrics`](https://tenzir.com/docs/reference/operators/metrics.md)
-* [`partitions`](https://tenzir.com/docs/reference/operators/partitions.md)
+* [`metrics`](https://tenzir.com/docs/v7.0.0/reference/operators/metrics.md)
+* [`partitions`](https://tenzir.com/docs/v7.0.0/reference/operators/partitions.md)
 * [Show available schemas](../store/show-available-schemas.md)
 * [Transform data at rest](../store/transform-data-at-rest.md)
 * [Inspect a node](../observability/inspect-a-node.md)

@@ -1,7 +1,7 @@
 ---
 title: "pipeline_run"
-canonical: https://tenzir.com/docs/reference/operators/pipeline_run
-source: https://tenzir.com/docs/reference/operators/pipeline_run.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/pipeline_run
+source: https://tenzir.com/docs/v7.0.0/reference/operators/pipeline_run.md
 section: "Docs"
 ---
 
@@ -51,5 +51,5 @@ pipeline_run {
 
 ## See Also
 
-* [`pipeline_detach`](https://tenzir.com/docs/reference/operators/pipeline_detach.md)
-* [`pipeline_list`](https://tenzir.com/docs/reference/operators/pipeline_list.md)
+* [`pipeline_detach`](https://tenzir.com/docs/v7.0.0/reference/operators/pipeline_detach.md)
+* [`pipeline_list`](https://tenzir.com/docs/v7.0.0/reference/operators/pipeline_list.md)

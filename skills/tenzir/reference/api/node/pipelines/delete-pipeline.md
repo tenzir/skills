@@ -1,7 +1,7 @@
 ---
 title: "Delete an existing pipeline"
-canonical: https://tenzir.com/docs/reference/api/node/pipelines/delete-pipeline
-source: https://tenzir.com/docs/reference/api/node/pipelines/delete-pipeline.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/api/node/pipelines/delete-pipeline
+source: https://tenzir.com/docs/v7.0.0/reference/api/node/pipelines/delete-pipeline.md
 section: "Docs"
 ---
 

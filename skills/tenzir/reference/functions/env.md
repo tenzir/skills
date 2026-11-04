@@ -1,7 +1,7 @@
 ---
 title: "env"
-canonical: https://tenzir.com/docs/reference/functions/env
-source: https://tenzir.com/docs/reference/functions/env.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/env
+source: https://tenzir.com/docs/v7.0.0/reference/functions/env.md
 section: "Docs"
 ---
 
@@ -33,5 +33,5 @@ from {x: env("PATH")}
 
 ## See Also
 
-* [`config`](https://tenzir.com/docs/reference/functions/config.md)
-* [`secret`](https://tenzir.com/docs/reference/functions/secret.md)
+* [`config`](https://tenzir.com/docs/v7.0.0/reference/functions/config.md)
+* [`secret`](https://tenzir.com/docs/v7.0.0/reference/functions/secret.md)

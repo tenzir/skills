@@ -1,7 +1,7 @@
 ---
 title: "from_duckdb"
-canonical: https://tenzir.com/docs/reference/operators/from_duckdb
-source: https://tenzir.com/docs/reference/operators/from_duckdb.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/from_duckdb
+source: https://tenzir.com/docs/v7.0.0/reference/operators/from_duckdb.md
 section: "Docs"
 ---
 
@@ -20,7 +20,7 @@ from_duckdb uri:string, [token=secret], [tls=bool|record],
 
 The `from_duckdb` operator reads data from a [DuckDB](https://duckdb.org) database. Use a local file, an in-memory database, or a remote DuckDB server over Quack. Local databases run embedded inside Tenzir.
 
-Our [DuckDB integration](../../integrations/duckdb.md#extensions) describes the bundled extensions available to local queries.
+Our [DuckDB integration](https://docs.tenzir.com/integrations/duckdb#extensions) describes the bundled extensions available to local queries.
 
 The operator supports two query modes:
 
@@ -73,7 +73,7 @@ Enables continuous polling for new rows. The operator first emits every row in t
 
 Live mode assumes that rows commit in tracking order. A row that commits after a row with a larger tracking value was already emitted is skipped, for example when two writers pick keys concurrently and the larger one commits first.
 
-For local databases, live mode opens the database for writing so that it can share the database with [`to_duckdb`](https://tenzir.com/docs/reference/operators/to_duckdb.md) operators in the same node and see what they append. For Quack databases, it polls the server. See [Concurrency](from_duckdb.md#concurrency) for the local-file restrictions.
+For local databases, live mode opens the database for writing so that it can share the database with [`to_duckdb`](https://tenzir.com/docs/v7.0.0/reference/operators/to_duckdb.md) operators in the same node and see what they append. For Quack databases, it polls the server. See [Concurrency](from_duckdb.md#concurrency) for the local-file restrictions.
 
 Requires `table`. Defaults to `false`.
 
@@ -115,20 +115,20 @@ A `time` covers the years 1678 to 2261 with nanosecond precision. Timestamps and
 
 ## Optimizations
 
-When the operator reads a table, it lets DuckDB do the work of the [`where`](https://tenzir.com/docs/reference/operators/where.md), [`select`](https://tenzir.com/docs/reference/operators/select.md), [`head`](https://tenzir.com/docs/reference/operators/head.md), and [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) operators that follow it, so that DuckDB returns only the rows, columns, and summaries that the pipeline needs. The page on [DuckDB optimizations](../optimizations/duckdb.md) describes which filters DuckDB evaluates, and the [optimizations overview](../optimizations.md) explains how Tenzir optimizes pipelines in general.
+When the operator reads a table, it lets DuckDB do the work of the [`where`](https://tenzir.com/docs/v7.0.0/reference/operators/where.md), [`select`](https://tenzir.com/docs/v7.0.0/reference/operators/select.md), [`head`](https://tenzir.com/docs/v7.0.0/reference/operators/head.md), and [`summarize`](https://tenzir.com/docs/v7.0.0/reference/operators/summarize.md) operators that follow it, so that DuckDB returns only the rows, columns, and summaries that the pipeline needs. The page on [DuckDB optimizations](../optimizations/duckdb.md) describes which filters DuckDB evaluates, and the [optimizations overview](../optimizations.md) explains how Tenzir optimizes pipelines in general.
 
 ## Remote databases
 
 Each operator keeps its credentials and TLS settings isolated from other operators. Local-file locking rules do not apply to remote connections.
 
-Quack is a beta protocol. Our [DuckDB integration](../../integrations/duckdb.md#quack) describes the tested client and server versions.
+Remote connections require a DuckDB 2.0 server; DuckDB 1.x servers are not supported. Our [DuckDB integration](https://docs.tenzir.com/integrations/duckdb#quack) describes the tested client and server versions.
 
 ## Concurrency
 
 DuckDB enforces one rule for database files: a process opens a file either for reading or for writing. Within a Tenzir node, this has two consequences:
 
-* `from_duckdb` without `live` opens the file read-only, unless another pipeline already has it open for writing, in which case it shares that database and still only reads. While it reads, a [`to_duckdb`](https://tenzir.com/docs/reference/operators/to_duckdb.md) or a live `from_duckdb` on the same file cannot start.
-* `from_duckdb` with `live=true` opens the file for writing. It shares the database with every [`to_duckdb`](https://tenzir.com/docs/reference/operators/to_duckdb.md) and every other reader of the same file and sees what the writers append.
+* `from_duckdb` without `live` opens the file read-only, unless another pipeline already has it open for writing, in which case it shares that database and still only reads. While it reads, a [`to_duckdb`](https://tenzir.com/docs/v7.0.0/reference/operators/to_duckdb.md) or a live `from_duckdb` on the same file cannot start.
+* `from_duckdb` with `live=true` opens the file for writing. It shares the database with every [`to_duckdb`](https://tenzir.com/docs/v7.0.0/reference/operators/to_duckdb.md) and every other reader of the same file and sees what the writers append.
 
 Across processes, a file that any process has open for writing cannot be opened by another process at all. Read-only processes can share a file.
 
@@ -234,7 +234,7 @@ from_duckdb "events.duckdb", table="alerts", live=true, tracking_column="seq"
 ## See Also
 
 * [Read from data stores](../../guides/collect/read-from-data-stores.md)
-* [`to_duckdb`](https://tenzir.com/docs/reference/operators/to_duckdb.md)
-* [`from_clickhouse`](https://tenzir.com/docs/reference/operators/from_clickhouse.md)
-* [`from_mysql`](https://tenzir.com/docs/reference/operators/from_mysql.md)
-* [DuckDB](../../integrations/duckdb.md)
+* [`to_duckdb`](https://tenzir.com/docs/v7.0.0/reference/operators/to_duckdb.md)
+* [`from_clickhouse`](https://tenzir.com/docs/v7.0.0/reference/operators/from_clickhouse.md)
+* [`from_mysql`](https://tenzir.com/docs/v7.0.0/reference/operators/from_mysql.md)
+* [Duckdb](https://docs.tenzir.com/integrations/duckdb)

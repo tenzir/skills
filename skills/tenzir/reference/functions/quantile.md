@@ -1,7 +1,7 @@
 ---
 title: "quantile"
-canonical: https://tenzir.com/docs/reference/functions/quantile
-source: https://tenzir.com/docs/reference/functions/quantile.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/quantile
+source: https://tenzir.com/docs/v7.0.0/reference/functions/quantile.md
 section: "Docs"
 ---
 
@@ -42,6 +42,6 @@ summarize median_value=quantile(x, q=0.5)
 
 ## See Also
 
-* [`median`](https://tenzir.com/docs/reference/functions/median.md)
-* [`mean`](https://tenzir.com/docs/reference/functions/mean.md)
+* [`median`](https://tenzir.com/docs/v7.0.0/reference/functions/median.md)
+* [`mean`](https://tenzir.com/docs/v7.0.0/reference/functions/mean.md)
 * [Aggregate event streams](../../guides/analyze/aggregate-event-streams.md)

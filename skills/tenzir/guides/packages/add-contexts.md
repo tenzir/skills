@@ -1,7 +1,7 @@
 ---
 title: "Add contexts"
-canonical: https://tenzir.com/docs/guides/packages/add-contexts
-source: https://tenzir.com/docs/guides/packages/add-contexts.md
+canonical: https://tenzir.com/docs/v7.0.0/guides/packages/add-contexts
+source: https://tenzir.com/docs/v7.0.0/guides/packages/add-contexts.md
 section: "Docs"
 ---
 
@@ -57,7 +57,7 @@ Changes to context arguments only apply when the context is first created. Updat
 
 ## Populate contexts with data
 
-Use the [`context_update`](https://tenzir.com/docs/reference/operators/context_update.md) operator to populate a context. This typically happens in a pipeline that fetches data from an external source:
+Use the [`context_update`](https://tenzir.com/docs/v7.0.0/reference/operators/context_update.md) operator to populate a context. This typically happens in a pipeline that fetches data from an external source:
 
 pipelines/update-lookup-table.tql
 
@@ -81,7 +81,7 @@ The `key` parameter specifies which field to use as the lookup key. The entire e
 
 ## Use contexts for enrichment
 
-Use the [`context_enrich`](https://tenzir.com/docs/reference/operators/context_enrich.md) operator to look up values and add context data to events:
+Use the [`context_enrich`](https://tenzir.com/docs/v7.0.0/reference/operators/context_enrich.md) operator to look up values and add context data to events:
 
 ```tql
 subscribe "network-events"

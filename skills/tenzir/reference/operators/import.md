@@ -1,7 +1,7 @@
 ---
 title: "import"
-canonical: https://tenzir.com/docs/reference/operators/import
-source: https://tenzir.com/docs/reference/operators/import.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/import
+source: https://tenzir.com/docs/v7.0.0/reference/operators/import.md
 section: "Docs"
 ---
 
@@ -19,7 +19,7 @@ import
 
 The `import` operator persists events in a Tenzir node.
 
-This operator is the dual to [`export`](https://tenzir.com/docs/reference/operators/export.md).
+This operator is the dual to [`export`](https://tenzir.com/docs/v7.0.0/reference/operators/export.md).
 
 ## Examples
 
@@ -34,6 +34,6 @@ import
 
 ## See Also
 
-* [`export`](https://tenzir.com/docs/reference/operators/export.md)
-* [`publish`](https://tenzir.com/docs/reference/operators/publish.md)
+* [`export`](https://tenzir.com/docs/v7.0.0/reference/operators/export.md)
+* [`publish`](https://tenzir.com/docs/v7.0.0/reference/operators/publish.md)
 * [Import into a node](../../guides/store/import-into-a-node.md)

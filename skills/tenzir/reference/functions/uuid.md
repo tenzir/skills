@@ -1,7 +1,7 @@
 ---
 title: "uuid"
-canonical: https://tenzir.com/docs/reference/functions/uuid
-source: https://tenzir.com/docs/reference/functions/uuid.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/uuid
+source: https://tenzir.com/docs/v7.0.0/reference/functions/uuid.md
 section: "Docs"
 ---
 
@@ -67,4 +67,4 @@ from {guid: uuid(version="nil")}
 
 ## See Also
 
-* [`random`](https://tenzir.com/docs/reference/functions/random.md)
+* [`random`](https://tenzir.com/docs/v7.0.0/reference/functions/random.md)

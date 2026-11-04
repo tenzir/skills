@@ -1,7 +1,7 @@
 ---
 title: "trim_end"
-canonical: https://tenzir.com/docs/reference/functions/trim_end
-source: https://tenzir.com/docs/reference/functions/trim_end.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/trim_end
+source: https://tenzir.com/docs/v7.0.0/reference/functions/trim_end.md
 section: "Docs"
 ---
 
@@ -65,6 +65,6 @@ from {x: "hello/-/".trim_end("/-")}
 
 ## See Also
 
-* [`trim`](https://tenzir.com/docs/reference/functions/trim.md)
-* [`trim_start`](https://tenzir.com/docs/reference/functions/trim_start.md)
+* [`trim`](https://tenzir.com/docs/v7.0.0/reference/functions/trim.md)
+* [`trim_start`](https://tenzir.com/docs/v7.0.0/reference/functions/trim_start.md)
 * [Manipulate strings](../../guides/shape/manipulate-strings.md)

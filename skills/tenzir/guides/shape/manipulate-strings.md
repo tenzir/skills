@@ -1,7 +1,7 @@
 ---
 title: "Manipulate strings"
-canonical: https://tenzir.com/docs/guides/shape/manipulate-strings
-source: https://tenzir.com/docs/guides/shape/manipulate-strings.md
+canonical: https://tenzir.com/docs/v7.0.0/guides/shape/manipulate-strings
+source: https://tenzir.com/docs/v7.0.0/guides/shape/manipulate-strings.md
 section: "Docs"
 ---
 
@@ -37,10 +37,10 @@ cap_name = name.capitalize()
 
 Functions explained:
 
-* [`to_lower`](https://tenzir.com/docs/reference/functions/to_lower.md) - Converts all characters to lowercase
-* [`to_upper`](https://tenzir.com/docs/reference/functions/to_upper.md) - Converts all characters to uppercase
-* [`to_title`](https://tenzir.com/docs/reference/functions/to_title.md) - Capitalizes first letter of each word
-* [`capitalize`](https://tenzir.com/docs/reference/functions/capitalize.md) - Capitalizes only the first letter
+* [`to_lower`](https://tenzir.com/docs/v7.0.0/reference/functions/to_lower.md) - Converts all characters to lowercase
+* [`to_upper`](https://tenzir.com/docs/v7.0.0/reference/functions/to_upper.md) - Converts all characters to uppercase
+* [`to_title`](https://tenzir.com/docs/v7.0.0/reference/functions/to_title.md) - Capitalizes first letter of each word
+* [`capitalize`](https://tenzir.com/docs/v7.0.0/reference/functions/capitalize.md) - Capitalizes only the first letter
 
 ## Trim whitespace
 
@@ -70,9 +70,9 @@ no_suffix = suffix.trim_end()
 
 Functions:
 
-* [`trim`](https://tenzir.com/docs/reference/functions/trim.md) - Removes whitespace from both ends
-* [`trim_start`](https://tenzir.com/docs/reference/functions/trim_start.md) - Removes whitespace from beginning
-* [`trim_end`](https://tenzir.com/docs/reference/functions/trim_end.md) - Removes whitespace from end
+* [`trim`](https://tenzir.com/docs/v7.0.0/reference/functions/trim.md) - Removes whitespace from both ends
+* [`trim_start`](https://tenzir.com/docs/v7.0.0/reference/functions/trim_start.md) - Removes whitespace from beginning
+* [`trim_end`](https://tenzir.com/docs/v7.0.0/reference/functions/trim_end.md) - Removes whitespace from end
 
 ## Split and join strings
 
@@ -110,7 +110,7 @@ rejoined = parts.join("-")
 
 ### Split with regular expressions
 
-Use [`split_regex`](https://tenzir.com/docs/reference/functions/split_regex.md) for complex splitting:
+Use [`split_regex`](https://tenzir.com/docs/v7.0.0/reference/functions/split_regex.md) for complex splitting:
 
 ```tql
 from {text: "error:42|warning:7|info:125"}
@@ -157,7 +157,7 @@ filled = template.replace("{name}", "Alice").replace("{place}", "Tenzir")
 
 ### Pattern-based replacement
 
-Use [`replace_regex`](https://tenzir.com/docs/reference/functions/replace_regex.md) for complex replacements:
+Use [`replace_regex`](https://tenzir.com/docs/v7.0.0/reference/functions/replace_regex.md) for complex replacements:
 
 ```tql
 from {
@@ -208,13 +208,13 @@ is_pdf = file.ends_with(".pdf")
 
 Pattern matching functions:
 
-* [`match_regex`](https://tenzir.com/docs/reference/functions/match_regex.md) - Test against regular expression
-* [`starts_with`](https://tenzir.com/docs/reference/functions/starts_with.md) - Check string prefix
-* [`ends_with`](https://tenzir.com/docs/reference/functions/ends_with.md) - Check string suffix
+* [`match_regex`](https://tenzir.com/docs/v7.0.0/reference/functions/match_regex.md) - Test against regular expression
+* [`starts_with`](https://tenzir.com/docs/v7.0.0/reference/functions/starts_with.md) - Check string prefix
+* [`ends_with`](https://tenzir.com/docs/v7.0.0/reference/functions/ends_with.md) - Check string suffix
 
 ## Match case-insensitively
 
-Many string functions accept an `ignore_case` argument so you can match without first normalizing case with [`to_lower`](https://tenzir.com/docs/reference/functions/to_lower.md). Comparison uses full Unicode case folding, so it handles cases like the German `ß` folding to `ss`:
+Many string functions accept an `ignore_case` argument so you can match without first normalizing case with [`to_lower`](https://tenzir.com/docs/v7.0.0/reference/functions/to_lower.md). Comparison uses full Unicode case folding, so it handles cases like the German `ß` folding to `ss`:
 
 ```tql
 from {
@@ -234,14 +234,14 @@ from {
 
 Functions that support `ignore_case`:
 
-* [`starts_with`](https://tenzir.com/docs/reference/functions/starts_with.md) - Check string prefix
-* [`ends_with`](https://tenzir.com/docs/reference/functions/ends_with.md) - Check string suffix
-* [`search`](https://tenzir.com/docs/reference/functions/search.md) - Search for a substring
-* [`equals`](https://tenzir.com/docs/reference/functions/equals.md) - Compare two strings for equality
-* [`replace`](https://tenzir.com/docs/reference/functions/replace.md) - Replace a literal substring
-* [`split`](https://tenzir.com/docs/reference/functions/split.md) - Split on a literal delimiter
+* [`starts_with`](https://tenzir.com/docs/v7.0.0/reference/functions/starts_with.md) - Check string prefix
+* [`ends_with`](https://tenzir.com/docs/v7.0.0/reference/functions/ends_with.md) - Check string suffix
+* [`search`](https://tenzir.com/docs/v7.0.0/reference/functions/search.md) - Search for a substring
+* [`equals`](https://tenzir.com/docs/v7.0.0/reference/functions/equals.md) - Compare two strings for equality
+* [`replace`](https://tenzir.com/docs/v7.0.0/reference/functions/replace.md) - Replace a literal substring
+* [`split`](https://tenzir.com/docs/v7.0.0/reference/functions/split.md) - Split on a literal delimiter
 
-The argument defaults to `false`, preserving case-sensitive matching. For regex functions such as [`match_regex`](https://tenzir.com/docs/reference/functions/match_regex.md), [`replace_regex`](https://tenzir.com/docs/reference/functions/replace_regex.md), and [`split_regex`](https://tenzir.com/docs/reference/functions/split_regex.md), use the inline `(?i)` flag instead.
+The argument defaults to `false`, preserving case-sensitive matching. For regex functions such as [`match_regex`](https://tenzir.com/docs/v7.0.0/reference/functions/match_regex.md), [`replace_regex`](https://tenzir.com/docs/v7.0.0/reference/functions/replace_regex.md), and [`split_regex`](https://tenzir.com/docs/v7.0.0/reference/functions/split_regex.md), use the inline `(?i)` flag instead.
 
 ## Validate string content
 
@@ -281,13 +281,13 @@ has_upper = name.is_title()
 
 Validation functions:
 
-* [`is_numeric`](https://tenzir.com/docs/reference/functions/is_numeric.md) - Contains only digits
-* [`is_alpha`](https://tenzir.com/docs/reference/functions/is_alpha.md) - Contains only letters
-* [`is_alnum`](https://tenzir.com/docs/reference/functions/is_alnum.md) - Contains only letters and digits
-* [`is_lower`](https://tenzir.com/docs/reference/functions/is_lower.md) - All cased characters are lowercase
-* [`is_upper`](https://tenzir.com/docs/reference/functions/is_upper.md) - All cased characters are uppercase
-* [`is_title`](https://tenzir.com/docs/reference/functions/is_title.md) - String is in title case
-* [`is_printable`](https://tenzir.com/docs/reference/functions/is_printable.md) - Contains only printable characters
+* [`is_numeric`](https://tenzir.com/docs/v7.0.0/reference/functions/is_numeric.md) - Contains only digits
+* [`is_alpha`](https://tenzir.com/docs/v7.0.0/reference/functions/is_alpha.md) - Contains only letters
+* [`is_alnum`](https://tenzir.com/docs/v7.0.0/reference/functions/is_alnum.md) - Contains only letters and digits
+* [`is_lower`](https://tenzir.com/docs/v7.0.0/reference/functions/is_lower.md) - All cased characters are lowercase
+* [`is_upper`](https://tenzir.com/docs/v7.0.0/reference/functions/is_upper.md) - All cased characters are uppercase
+* [`is_title`](https://tenzir.com/docs/v7.0.0/reference/functions/is_title.md) - String is in title case
+* [`is_printable`](https://tenzir.com/docs/v7.0.0/reference/functions/is_printable.md) - Contains only printable characters
 
 ## Measure string properties
 
@@ -321,15 +321,15 @@ directory = path.parent_dir()
 
 String property functions:
 
-* [`length_chars`](https://tenzir.com/docs/reference/functions/length_chars.md) - Count Unicode characters
-* [`length_bytes`](https://tenzir.com/docs/reference/functions/length_bytes.md) - Count bytes
-* [`reverse`](https://tenzir.com/docs/reference/functions/reverse.md) - Reverse character order
-* [`file_name`](https://tenzir.com/docs/reference/functions/file_name.md) - Extract filename from path
-* [`parent_dir`](https://tenzir.com/docs/reference/functions/parent_dir.md) - Extract directory from path
+* [`length_chars`](https://tenzir.com/docs/v7.0.0/reference/functions/length_chars.md) - Count Unicode characters
+* [`length_bytes`](https://tenzir.com/docs/v7.0.0/reference/functions/length_bytes.md) - Count bytes
+* [`reverse`](https://tenzir.com/docs/v7.0.0/reference/functions/reverse.md) - Reverse character order
+* [`file_name`](https://tenzir.com/docs/v7.0.0/reference/functions/file_name.md) - Extract filename from path
+* [`parent_dir`](https://tenzir.com/docs/v7.0.0/reference/functions/parent_dir.md) - Extract directory from path
 
 ## Extract substrings
 
-Use [`slice`](https://tenzir.com/docs/reference/functions/slice.md) to extract portions of strings:
+Use [`slice`](https://tenzir.com/docs/v7.0.0/reference/functions/slice.md) to extract portions of strings:
 
 ```tql
 from {
@@ -383,7 +383,7 @@ decoded = encoded.decode_base64()
 
 ### Hex encoding
 
-Use [`encode_hex`](https://tenzir.com/docs/reference/functions/encode_hex.md) and [`decode_hex`](https://tenzir.com/docs/reference/functions/decode_hex.md):
+Use [`encode_hex`](https://tenzir.com/docs/v7.0.0/reference/functions/encode_hex.md) and [`decode_hex`](https://tenzir.com/docs/v7.0.0/reference/functions/decode_hex.md):
 
 ```tql
 from {data: "Hello", hex_string: "48656c6c6f"}
@@ -420,9 +420,9 @@ decoded = encoded.decode_url()
 
 Encoding functions:
 
-* [`encode_base64`](https://tenzir.com/docs/reference/functions/encode_base64.md) / [`decode_base64`](https://tenzir.com/docs/reference/functions/decode_base64.md)
-* [`encode_hex`](https://tenzir.com/docs/reference/functions/encode_hex.md) / [`decode_hex`](https://tenzir.com/docs/reference/functions/decode_hex.md)
-* [`encode_url`](https://tenzir.com/docs/reference/functions/encode_url.md) / [`decode_url`](https://tenzir.com/docs/reference/functions/decode_url.md)
+* [`encode_base64`](https://tenzir.com/docs/v7.0.0/reference/functions/encode_base64.md) / [`decode_base64`](https://tenzir.com/docs/v7.0.0/reference/functions/decode_base64.md)
+* [`encode_hex`](https://tenzir.com/docs/v7.0.0/reference/functions/encode_hex.md) / [`decode_hex`](https://tenzir.com/docs/v7.0.0/reference/functions/decode_hex.md)
+* [`encode_url`](https://tenzir.com/docs/v7.0.0/reference/functions/encode_url.md) / [`decode_url`](https://tenzir.com/docs/v7.0.0/reference/functions/decode_url.md)
 
 ## Pad strings
 
@@ -448,12 +448,12 @@ padded_code = code.pad_end(10, "-")
 
 Padding functions:
 
-* [`pad_start`](https://tenzir.com/docs/reference/functions/pad_start.md) - Add characters to the beginning
-* [`pad_end`](https://tenzir.com/docs/reference/functions/pad_end.md) - Add characters to the end
+* [`pad_start`](https://tenzir.com/docs/v7.0.0/reference/functions/pad_start.md) - Add characters to the beginning
+* [`pad_end`](https://tenzir.com/docs/v7.0.0/reference/functions/pad_end.md) - Add characters to the end
 
 ## Repeat strings
 
-Use [`repeat`](https://tenzir.com/docs/reference/functions/repeat.md) to repeat a string a fixed number of times:
+Use [`repeat`](https://tenzir.com/docs/v7.0.0/reference/functions/repeat.md) to repeat a string a fixed number of times:
 
 ```tql
 from {separator: "-"}
@@ -482,7 +482,7 @@ hostname = file_contents("/etc/hostname")
 }
 ```
 
-The [`file_contents`](https://tenzir.com/docs/reference/functions/file_contents.md) function reads the entire file as a string. The file path must be a constant expression. Use with caution on large files.
+The [`file_contents`](https://tenzir.com/docs/v7.0.0/reference/functions/file_contents.md) function reads the entire file as a string. The file path must be a constant expression. Use with caution on large files.
 
 ## Practical examples
 
@@ -582,17 +582,17 @@ xxh3 = data.hash_xxh3()
 
 Hash functions:
 
-* [`hash_md5`](https://tenzir.com/docs/reference/functions/hash_md5.md) - MD5 digest (128-bit)
-* [`hash_sha1`](https://tenzir.com/docs/reference/functions/hash_sha1.md) - SHA-1 digest (160-bit)
-* [`hash_sha224`](https://tenzir.com/docs/reference/functions/hash_sha224.md) - SHA-224 digest
-* [`hash_sha256`](https://tenzir.com/docs/reference/functions/hash_sha256.md) - SHA-256 digest
-* [`hash_sha384`](https://tenzir.com/docs/reference/functions/hash_sha384.md) - SHA-384 digest
-* [`hash_sha512`](https://tenzir.com/docs/reference/functions/hash_sha512.md) - SHA-512 digest
-* [`hash_sha3_224`](https://tenzir.com/docs/reference/functions/hash_sha3_224.md) - SHA3-224 digest
-* [`hash_sha3_256`](https://tenzir.com/docs/reference/functions/hash_sha3_256.md) - SHA3-256 digest
-* [`hash_sha3_384`](https://tenzir.com/docs/reference/functions/hash_sha3_384.md) - SHA3-384 digest
-* [`hash_sha3_512`](https://tenzir.com/docs/reference/functions/hash_sha3_512.md) - SHA3-512 digest
-* [`hash_xxh3`](https://tenzir.com/docs/reference/functions/hash_xxh3.md) - XXH3 digest (fast, 64-bit)
+* [`hash_md5`](https://tenzir.com/docs/v7.0.0/reference/functions/hash_md5.md) - MD5 digest (128-bit)
+* [`hash_sha1`](https://tenzir.com/docs/v7.0.0/reference/functions/hash_sha1.md) - SHA-1 digest (160-bit)
+* [`hash_sha224`](https://tenzir.com/docs/v7.0.0/reference/functions/hash_sha224.md) - SHA-224 digest
+* [`hash_sha256`](https://tenzir.com/docs/v7.0.0/reference/functions/hash_sha256.md) - SHA-256 digest
+* [`hash_sha384`](https://tenzir.com/docs/v7.0.0/reference/functions/hash_sha384.md) - SHA-384 digest
+* [`hash_sha512`](https://tenzir.com/docs/v7.0.0/reference/functions/hash_sha512.md) - SHA-512 digest
+* [`hash_sha3_224`](https://tenzir.com/docs/v7.0.0/reference/functions/hash_sha3_224.md) - SHA3-224 digest
+* [`hash_sha3_256`](https://tenzir.com/docs/v7.0.0/reference/functions/hash_sha3_256.md) - SHA3-256 digest
+* [`hash_sha3_384`](https://tenzir.com/docs/v7.0.0/reference/functions/hash_sha3_384.md) - SHA3-384 digest
+* [`hash_sha3_512`](https://tenzir.com/docs/v7.0.0/reference/functions/hash_sha3_512.md) - SHA3-512 digest
+* [`hash_xxh3`](https://tenzir.com/docs/v7.0.0/reference/functions/hash_xxh3.md) - XXH3 digest (fast, 64-bit)
 
 ### Create unique identifiers
 
@@ -646,7 +646,7 @@ Process network data with specialized security functions:
 
 ### Generate Community IDs
 
-Use [`community_id`](https://tenzir.com/docs/reference/functions/community_id.md) to create standardized flow hashes:
+Use [`community_id`](https://tenzir.com/docs/v7.0.0/reference/functions/community_id.md) to create standardized flow hashes:
 
 ```tql
 from {
@@ -678,7 +678,7 @@ flow_id = community_id(
 
 ### Anonymize IP addresses
 
-Use [`encrypt_cryptopan`](https://tenzir.com/docs/reference/functions/encrypt_cryptopan.md) for consistent IP anonymization:
+Use [`encrypt_cryptopan`](https://tenzir.com/docs/v7.0.0/reference/functions/encrypt_cryptopan.md) for consistent IP anonymization:
 
 ```tql
 from {

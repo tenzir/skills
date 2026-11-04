@@ -1,7 +1,7 @@
 ---
 title: "map"
-canonical: https://tenzir.com/docs/reference/functions/map
-source: https://tenzir.com/docs/reference/functions/map.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/map
+source: https://tenzir.com/docs/v7.0.0/reference/functions/map.md
 section: "Docs"
 ---
 
@@ -100,7 +100,7 @@ l = l.map(str => str.parse_grok($pattern))
 
 ### Map a nullable list before spreading
 
-If the input list is `null`, [`map`](https://tenzir.com/docs/reference/functions/map.md) returns `null`, and list spread contributes no elements:
+If the input list is `null`, [`map`](https://tenzir.com/docs/v7.0.0/reference/functions/map.md) returns `null`, and list spread contributes no elements:
 
 ```tql
 from {xs: null}
@@ -121,7 +121,7 @@ ys = [
 
 ### Mixed types in the result
 
-The list `l` contains three JSON strings: two objects and one array. Applying [`parse_json`](https://tenzir.com/docs/reference/functions/parse_json.md) to each element returns two records and one list, preserving their fields and types:
+The list `l` contains three JSON strings: two objects and one array. Applying [`parse_json`](https://tenzir.com/docs/v7.0.0/reference/functions/parse_json.md) to each element returns two records and one list, preserving their fields and types:
 
 ```tql
 from {
@@ -146,6 +146,6 @@ l = l.map(str => str.parse_json())
 
 ## See Also
 
-* [`where`](https://tenzir.com/docs/reference/functions/where.md)
-* [`zip`](https://tenzir.com/docs/reference/functions/zip.md)
+* [`where`](https://tenzir.com/docs/v7.0.0/reference/functions/where.md)
+* [`zip`](https://tenzir.com/docs/v7.0.0/reference/functions/zip.md)
 * [Shape lists](../../guides/shape/shape-lists.md)

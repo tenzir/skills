@@ -1,7 +1,7 @@
 ---
 title: "Pipeline"
-canonical: https://tenzir.com/docs/explanations/pipeline
-source: https://tenzir.com/docs/explanations/pipeline.md
+canonical: https://tenzir.com/docs/v7.0.0/explanations/pipeline
+source: https://tenzir.com/docs/v7.0.0/explanations/pipeline.md
 section: "Docs"
 ---
 
@@ -47,7 +47,7 @@ A single pipeline, and even a single batch, can hold events with multiple schema
 
 The schema variance begins early in the data flow, where parsers emit events with changing fields, and the same field may hold an IP address in one event and a hostname in the next. Tenzir keeps such events together in one batch. Every event keeps its own fields in their original order, and a field with values of different types stores them side by side. Neither a new field nor a changed type forces a new batch, so even a stream in which every event has a different schema than its predecessor flows in large batches and in its original order. Our explanation of the [data model](data-model.md) describes how batches achieve this.
 
-Some operators only work with exactly one schema at a time, such as the CSV printer [`write_csv`](https://tenzir.com/docs/reference/operators/write_csv.md), which first writes a header and then all subsequent rows have to adhere to the emitted schema. Such operators cannot handle events with changing schemas.
+Some operators only work with exactly one schema at a time, such as the CSV printer [`write_csv`](https://tenzir.com/docs/v7.0.0/reference/operators/write_csv.md), which first writes a header and then all subsequent rows have to adhere to the emitted schema. Such operators cannot handle events with changing schemas.
 
 Most transformations only need field names, for example `where id.orig_h in 10.0.0.0/8` or `select src_ip, dest_ip, proto`. Schemas are inferred automatically in parsers, but you can also seed a parser with a schema that you define explicitly.
 
@@ -55,20 +55,22 @@ Most transformations only need field names, for example `where id.orig_h in 10.0
 
 Before a pipeline runs, the **optimizer** rewrites it so that the source reads, transfers, and decodes only what the rest of the pipeline needs. It walks the pipeline from its last operator to its first and hands every operator a request from its downstream neighbor. The request captures four things:
 
-* **Predicates** from [`where`](https://tenzir.com/docs/reference/operators/where.md) that filter the operator’s output.
+* **Predicates** from [`where`](https://tenzir.com/docs/v7.0.0/reference/operators/where.md) that filter the operator’s output.
 * An **ordering** requirement: whether downstream depends on the event order.
-* A **limit** from [`head`](https://tenzir.com/docs/reference/operators/head.md): how many events downstream needs at most.
-* A **projection** from [`select`](https://tenzir.com/docs/reference/operators/select.md): the fields downstream reads.
+* A **limit** from [`head`](https://tenzir.com/docs/v7.0.0/reference/operators/head.md): how many events downstream needs at most.
+* A **projection** from [`select`](https://tenzir.com/docs/v7.0.0/reference/operators/select.md): the fields downstream reads.
 
-An operator that does not affect a requirement passes it on. One that does, adjusts or stops it: [`set`](https://tenzir.com/docs/reference/operators/set.md) rewrites a predicate over the fields it assigns, [`sort`](https://tenzir.com/docs/reference/operators/sort.md) stops a limit because it needs all of its input, and any reference to `this` widens a projection to all fields. The source at the start receives what survived and acts on the parts it understands.
+An operator that does not affect a requirement passes it on. One that does, adjusts or stops it: [`set`](https://tenzir.com/docs/v7.0.0/reference/operators/set.md) rewrites a predicate over the fields it assigns, [`sort`](https://tenzir.com/docs/v7.0.0/reference/operators/sort.md) stops a limit because it needs all of its input, and any reference to `this` widens a projection to all fields. The source at the start receives what survived and acts on the parts it understands.
 
-The rewrite through [`set`](https://tenzir.com/docs/reference/operators/set.md) lets a filter pass field renames, constants, record literals, and whole-event assignments such as `this = move this.ocsf`. For example, `y = x | where y == 42` turns into `where x == 42 | y = x`. A field that `move` or [`drop`](https://tenzir.com/docs/reference/operators/drop.md) removes reads as `null`. When a predicate reads a field without an exact equivalent in the input, for example one assigned from `now()`, the predicate stays after the assignment. This is how a filter on OCSF fields reaches the source through a normalization operator.
+The rewrite through [`set`](https://tenzir.com/docs/v7.0.0/reference/operators/set.md) lets a filter pass field renames, constants, record literals, and whole-event assignments such as `this = move this.ocsf`. For example, `y = x | where y == 42` turns into `where x == 42 | y = x`. A field that `move` or [`drop`](https://tenzir.com/docs/v7.0.0/reference/operators/drop.md) removes reads as `null`. When a predicate reads a field without an exact equivalent in the input, for example one assigned from `now()`, the predicate stays after the assignment. This is how a filter on OCSF fields reaches the source through a normalization operator.
 
 The operands of a top-level `and` move independently, because `where a and b` keeps the same events as `where a | where b`. After `t = now()`, the predicate `x == 1 and t > 2024-01-01` splits: `x == 1` moves in front of the assignment, and `t > 2024-01-01` stays after it. An `and` inside `or` or `not` stays whole. An operand runs only on the events that the operands before it keep. So when the left operand is `null`, the right one no longer runs, and its warnings and errors disappear. An operand that moves ahead can also warn for events that an operand left behind drops.
 
 On the way, the optimizer simplifies every predicate. It evaluates the parts that do not depend on the event and removes the branches of `and` and `or` that cannot change the result. After `class_uid = 3002`, the predicate `class_uid == 3002 and src_ip == 1.2.3.4` becomes `src_ip == 1.2.3.4`, and `class_uid == 4001` becomes `false`. The optimizer does not evaluate a part that would emit a warning at runtime, such as `1 / 0`. Removing a branch can still drop its warnings: `x == 1 / 0 or true` becomes `true` and no longer warns.
 
 A filter also moves in front of `if` and `match`. Every event takes exactly one branch, so the optimizer rewrites the predicate through each branch and combines the results with the conditions that send an event to that branch. For example, `if x == 1 { y = a } else { y = b } | where y == 42` turns into `where a == 42 if x == 1 else b == 42` in front of the `if`. Branches that can’t keep an event drop out of the predicate. Behind a `match` on the event ID whose arms assign different OCSF classes, `where class_uid == 3002` becomes a predicate on the event IDs of the arms that assign `3002`. A branch that ends in a sink still receives all of its events. The filter stays inside the branches if the optimizer can’t repeat the routing in a predicate, for example when the condition calls `random()`, or when a `match` pattern is a list or a record.
+
+A filter also reads through some functions whose result it accesses. Behind `this = ocsf_cast(this)`, the predicate `src_endpoint.hostname == "dc01"` turns into one on the input’s `src_endpoint.hostname`. A cast keeps or drops a field depending on the schema that an event resolves to, so the predicate first carries the schema lookup along. Once the mapping before the cast assigns `class_uid` and `metadata.version` as constants, the lookup folds away: the predicate becomes `Computer == "dc01"` for a mapping that copies `Computer`, plus a check that the value is a string, which the cast requires. Filters on the fields that [`select_matching`](https://tenzir.com/docs/v7.0.0/reference/functions/select_matching.md) and [`drop_matching`](https://tenzir.com/docs/v7.0.0/reference/functions/drop_matching.md) keep read the input, and those on fields they drop read `null`.
 
 Take this pipeline:
 
@@ -79,7 +81,7 @@ select id, message
 head 100
 ```
 
-Read literally, it fetches every row and column, then discards most of them. Instead, [`from_clickhouse`](https://tenzir.com/docs/reference/operators/from_clickhouse.md) sends a single query that does all of that on the server:
+Read literally, it fetches every row and column, then discards most of them. Instead, [`from_clickhouse`](https://tenzir.com/docs/v7.0.0/reference/operators/from_clickhouse.md) sends a single query that does all of that on the server:
 
 ```sql
 SELECT id, message, severity, source

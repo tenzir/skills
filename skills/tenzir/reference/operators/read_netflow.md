@@ -1,7 +1,7 @@
 ---
 title: "read_netflow"
-canonical: https://tenzir.com/docs/reference/operators/read_netflow
-source: https://tenzir.com/docs/reference/operators/read_netflow.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/read_netflow
+source: https://tenzir.com/docs/v7.0.0/reference/operators/read_netflow.md
 section: "Docs"
 ---
 
@@ -21,8 +21,8 @@ The `read_netflow` operator detects the protocol version of every message. You d
 
 The operator accepts two input forms:
 
-* A raw byte stream, such as the output of [`from_file`](https://tenzir.com/docs/reference/operators/from_file.md). Message boundaries can cross input chunks.
-* Events that each represent one binary NetFlow or IPFIX message. The `data` field must contain a `blob`. An optional `peer` record can provide the exporter endpoint as `{ip: ip, port: int64}`. The [`accept_udp`](https://tenzir.com/docs/reference/operators/accept_udp.md) operator produces this shape when you set `binary=true`, but other message-oriented sources can provide only `data` when exporter metadata isn’t available.
+* A raw byte stream, such as the output of [`from_file`](https://tenzir.com/docs/v7.0.0/reference/operators/from_file.md). Message boundaries can cross input chunks.
+* Events that each represent one binary NetFlow or IPFIX message. The `data` field must contain a `blob`. An optional `peer` record can provide the exporter endpoint as `{ip: ip, port: int64}`. The [`accept_udp`](https://tenzir.com/docs/v7.0.0/reference/operators/accept_udp.md) operator produces this shape when you set `binary=true`, but other message-oriented sources can provide only `data` when exporter metadata isn’t available.
 
 NetFlow v5 uses fixed records and doesn’t require template state. NetFlow v9 and IPFIX messages can define templates, options templates, and data sets. The operator retains templates across messages and buffers a data set when its template hasn’t arrived yet. It decodes the buffered data after the matching template arrives. The buffer and template state have fixed limits; the operator emits warnings when data expires or state must be evicted.
 
@@ -122,7 +122,7 @@ from_file "flows.fnf" {
 
 ### Receive NetFlow and IPFIX over UDP
 
-Set `binary=true` so that [`accept_udp`](https://tenzir.com/docs/reference/operators/accept_udp.md) preserves the datagram bytes:
+Set `binary=true` so that [`accept_udp`](https://tenzir.com/docs/v7.0.0/reference/operators/accept_udp.md) preserves the datagram bytes:
 
 ```tql
 accept_udp "0.0.0.0:2055", binary=true
@@ -146,7 +146,7 @@ from {
 read_netflow
 ```
 
-Each event must contain one complete message. The `peer` record is optional. If you omit it, the operator assigns the message to an implicit exporter. If you include it, the operator copies it to the output and uses it for exporter-specific template state, just as it does for events from [`accept_udp`](https://tenzir.com/docs/reference/operators/accept_udp.md).
+Each event must contain one complete message. The `peer` record is optional. If you omit it, the operator assigns the message to an implicit exporter. If you include it, the operator copies it to the output and uses it for exporter-specific template state, just as it does for events from [`accept_udp`](https://tenzir.com/docs/v7.0.0/reference/operators/accept_udp.md).
 
 ### Select options records
 
@@ -161,6 +161,6 @@ where netflow.record_type == "options"
 
 ## See Also
 
-* [`accept_udp`](https://tenzir.com/docs/reference/operators/accept_udp.md)
-* [`from_file`](https://tenzir.com/docs/reference/operators/from_file.md)
-* [NetFlow](../../integrations/netflow.md)
+* [`accept_udp`](https://tenzir.com/docs/v7.0.0/reference/operators/accept_udp.md)
+* [`from_file`](https://tenzir.com/docs/v7.0.0/reference/operators/from_file.md)
+* [Netflow](https://docs.tenzir.com/integrations/netflow)

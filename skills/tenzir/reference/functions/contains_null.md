@@ -1,7 +1,7 @@
 ---
 title: "contains_null"
-canonical: https://tenzir.com/docs/reference/functions/contains_null
-source: https://tenzir.com/docs/reference/functions/contains_null.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/contains_null
+source: https://tenzir.com/docs/v7.0.0/reference/functions/contains_null.md
 section: "Docs"
 ---
 
@@ -63,6 +63,6 @@ contains_null = this.contains_null()
 
 ## See Also
 
-* [`search`](https://tenzir.com/docs/reference/functions/search.md)
-* [`has`](https://tenzir.com/docs/reference/functions/has.md)
-* [`is_empty`](https://tenzir.com/docs/reference/functions/is_empty.md)
+* [`search`](https://tenzir.com/docs/v7.0.0/reference/functions/search.md)
+* [`has`](https://tenzir.com/docs/v7.0.0/reference/functions/has.md)
+* [`is_empty`](https://tenzir.com/docs/v7.0.0/reference/functions/is_empty.md)

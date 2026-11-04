@@ -1,7 +1,7 @@
 ---
 title: "Aggregate event streams"
-canonical: https://tenzir.com/docs/guides/analyze/aggregate-event-streams
-source: https://tenzir.com/docs/guides/analyze/aggregate-event-streams.md
+canonical: https://tenzir.com/docs/v7.0.0/guides/analyze/aggregate-event-streams
+source: https://tenzir.com/docs/v7.0.0/guides/analyze/aggregate-event-streams.md
 section: "Docs"
 ---
 
@@ -9,11 +9,11 @@ section: "Docs"
 
 > This guide shows you how to produce compact aggregate records with summarize. You’ll learn to count events, calculate basic measures, and maintain separate aggregate state for each group before choosing a more specialized aggregation task.
 
-This guide shows you how to produce compact aggregate records with [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md). You’ll learn to count events, calculate basic measures, and maintain separate aggregate state for each group before choosing a more specialized aggregation task.
+This guide shows you how to produce compact aggregate records with [`summarize`](https://tenzir.com/docs/v7.0.0/reference/operators/summarize.md). You’ll learn to count events, calculate basic measures, and maintain separate aggregate state for each group before choosing a more specialized aggregation task.
 
 ## Understanding the summarize operator
 
-The [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) operator groups events and applies aggregation functions. Its syntax is:
+The [`summarize`](https://tenzir.com/docs/v7.0.0/reference/operators/summarize.md) operator groups events and applies aggregation functions. Its syntax is:
 
 ```plaintext
 summarize <aggregation>, <aggregation>, ..., <group>, <group>, ...
@@ -21,7 +21,7 @@ summarize <aggregation>, <aggregation>, ..., <group>, <group>, ...
 
 Where:
 
-* Aggregations are expressions like [`sum`](https://tenzir.com/docs/reference/functions/sum.md), [`count`](https://tenzir.com/docs/reference/functions/count.md), [`mean`](https://tenzir.com/docs/reference/functions/mean.md), etc.
+* Aggregations are expressions like [`sum`](https://tenzir.com/docs/v7.0.0/reference/functions/sum.md), [`count`](https://tenzir.com/docs/v7.0.0/reference/functions/count.md), [`mean`](https://tenzir.com/docs/v7.0.0/reference/functions/mean.md), etc.
 * Groups are field names to group by
 
 ## Basic aggregations
@@ -30,7 +30,7 @@ Start with fundamental aggregation functions on event streams.
 
 ### Count events
 
-Count total events and unique values with [`count`](https://tenzir.com/docs/reference/functions/count.md) and [`count_distinct`](https://tenzir.com/docs/reference/functions/count_distinct.md):
+Count total events and unique values with [`count`](https://tenzir.com/docs/v7.0.0/reference/functions/count.md) and [`count_distinct`](https://tenzir.com/docs/v7.0.0/reference/functions/count_distinct.md):
 
 ```tql
 from {product: "apple", price: 100, category: "fruit"},
@@ -71,7 +71,7 @@ summarize total_revenue = sum(price * quantity), avg_price = mean(price), total_
 
 ### Min and max
 
-Find extreme values with [`min`](https://tenzir.com/docs/reference/functions/min.md) and [`max`](https://tenzir.com/docs/reference/functions/max.md):
+Find extreme values with [`min`](https://tenzir.com/docs/v7.0.0/reference/functions/min.md) and [`max`](https://tenzir.com/docs/v7.0.0/reference/functions/max.md):
 
 ```tql
 from {sensor: "A", temperature: 72, timestamp: 2024-01-15T10:00:00},
@@ -171,7 +171,7 @@ Aggregation becomes more specific when you need to preserve input events, bound 
 
 ## See also
 
-* [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md)
+* [`summarize`](https://tenzir.com/docs/v7.0.0/reference/operators/summarize.md)
 * [Shape aggregation results](shape-aggregation-results.md)
 * [Window event streams](window-event-streams.md)
 * [Calculate aggregate statistics](calculate-aggregate-statistics.md)

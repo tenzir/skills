@@ -1,7 +1,7 @@
 ---
 title: "Reference"
-canonical: https://tenzir.com/docs/reference
-source: https://tenzir.com/docs/reference.md
+canonical: https://tenzir.com/docs/v7.0.0/reference
+source: https://tenzir.com/docs/v7.0.0/reference.md
 section: "Docs"
 ---
 

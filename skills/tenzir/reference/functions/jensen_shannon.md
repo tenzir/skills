@@ -1,7 +1,7 @@
 ---
 title: "jensen_shannon"
-canonical: https://tenzir.com/docs/reference/functions/jensen_shannon
-source: https://tenzir.com/docs/reference/functions/jensen_shannon.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/jensen_shannon
+source: https://tenzir.com/docs/v7.0.0/reference/functions/jensen_shannon.md
 section: "Docs"
 ---
 
@@ -46,6 +46,6 @@ select lifecycle_drift=jensen_shannon([3, 1, 1, 0], [1, 1, 2, 1])
 
 ## See also
 
-* [`model_divergence`](https://tenzir.com/docs/reference/functions/model_divergence.md)
-* [`kolmogorov_smirnov`](https://tenzir.com/docs/reference/functions/kolmogorov_smirnov.md)
-* [`wasserstein`](https://tenzir.com/docs/reference/functions/wasserstein.md)
+* [`model_divergence`](https://tenzir.com/docs/v7.0.0/reference/functions/model_divergence.md)
+* [`kolmogorov_smirnov`](https://tenzir.com/docs/v7.0.0/reference/functions/kolmogorov_smirnov.md)
+* [`wasserstein`](https://tenzir.com/docs/v7.0.0/reference/functions/wasserstein.md)

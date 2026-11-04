@@ -1,7 +1,7 @@
 ---
 title: "write_pcap"
-canonical: https://tenzir.com/docs/reference/operators/write_pcap
-source: https://tenzir.com/docs/reference/operators/write_pcap.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/write_pcap
+source: https://tenzir.com/docs/v7.0.0/reference/operators/write_pcap.md
 section: "Docs"
 ---
 
@@ -19,7 +19,7 @@ write_pcap [format=string]
 
 The `write_pcap` operator transforms packet events into a [PCAP](https://datatracker.ietf.org/doc/id/draft-gharris-opsawg-pcap-00.html) or [PCAPNG](https://www.ietf.org/archive/id/draft-tuexen-opsawg-pcapng-05.html) byte stream.
 
-The operator accepts `pcap.packet` events. When present, it also uses `pcap.file_header` events emitted by [`read_pcap`](https://tenzir.com/docs/reference/operators/read_pcap.md) to preserve the original timestamp precision and byte order.
+The operator accepts `pcap.packet` events. When present, it also uses `pcap.file_header` events emitted by [`read_pcap`](https://tenzir.com/docs/v7.0.0/reference/operators/read_pcap.md) to preserve the original timestamp precision and byte order.
 
 Each packet needs a `linktype`, a `timestamp`, and its `data`. The lengths are optional:
 
@@ -28,7 +28,7 @@ Each packet needs a `linktype`, a `timestamp`, and its `data`. The lengths are o
 
 If no `pcap.file_header` event is present, `write_pcap` generates a file header from the first packet’s `linktype` and writes timestamps with nanosecond precision.
 
-The default `format="auto"` preserves PCAPNG input from [`read_pcap`](https://tenzir.com/docs/reference/operators/read_pcap.md) and otherwise writes classic PCAP.
+The default `format="auto"` preserves PCAPNG input from [`read_pcap`](https://tenzir.com/docs/v7.0.0/reference/operators/read_pcap.md) and otherwise writes classic PCAP.
 
 ### `format = string (optional)`
 
@@ -101,5 +101,5 @@ to_file "/tmp/trace-copy.pcap" {
 
 ## See Also
 
-* [`from_nic`](https://tenzir.com/docs/reference/operators/from_nic.md)
-* [`read_pcap`](https://tenzir.com/docs/reference/operators/read_pcap.md)
+* [`from_nic`](https://tenzir.com/docs/v7.0.0/reference/operators/from_nic.md)
+* [`read_pcap`](https://tenzir.com/docs/v7.0.0/reference/operators/read_pcap.md)

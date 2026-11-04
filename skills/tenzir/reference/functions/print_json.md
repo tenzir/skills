@@ -1,7 +1,7 @@
 ---
 title: "print_json"
-canonical: https://tenzir.com/docs/reference/functions/print_json
-source: https://tenzir.com/docs/reference/functions/print_json.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/print_json
+source: https://tenzir.com/docs/v7.0.0/reference/functions/print_json.md
 section: "Docs"
 ---
 
@@ -87,6 +87,6 @@ x = x.print_json(strip_null_fields=true)
 
 ## See Also
 
-* [`write_json`](https://tenzir.com/docs/reference/operators/write_json.md)
-* [`parse_json`](https://tenzir.com/docs/reference/functions/parse_json.md)
-* [`print_ndjson`](https://tenzir.com/docs/reference/functions/print_ndjson.md)
+* [`write_json`](https://tenzir.com/docs/v7.0.0/reference/operators/write_json.md)
+* [`parse_json`](https://tenzir.com/docs/v7.0.0/reference/functions/parse_json.md)
+* [`print_ndjson`](https://tenzir.com/docs/v7.0.0/reference/functions/print_ndjson.md)

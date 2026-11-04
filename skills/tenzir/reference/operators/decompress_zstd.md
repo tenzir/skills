@@ -1,7 +1,7 @@
 ---
 title: "decompress_zstd"
-canonical: https://tenzir.com/docs/reference/operators/decompress_zstd
-source: https://tenzir.com/docs/reference/operators/decompress_zstd.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/decompress_zstd
+source: https://tenzir.com/docs/v7.0.0/reference/operators/decompress_zstd.md
 section: "Docs"
 ---
 
@@ -33,8 +33,8 @@ import
 
 ## See Also
 
-* [`compress_zstd`](https://tenzir.com/docs/reference/operators/compress_zstd.md)
-* [`decompress_brotli`](https://tenzir.com/docs/reference/operators/decompress_brotli.md)
-* [`decompress_bz2`](https://tenzir.com/docs/reference/operators/decompress_bz2.md)
-* [`decompress_gzip`](https://tenzir.com/docs/reference/operators/decompress_gzip.md)
-* [`decompress_lz4`](https://tenzir.com/docs/reference/operators/decompress_lz4.md)
+* [`compress_zstd`](https://tenzir.com/docs/v7.0.0/reference/operators/compress_zstd.md)
+* [`decompress_brotli`](https://tenzir.com/docs/v7.0.0/reference/operators/decompress_brotli.md)
+* [`decompress_bz2`](https://tenzir.com/docs/v7.0.0/reference/operators/decompress_bz2.md)
+* [`decompress_gzip`](https://tenzir.com/docs/v7.0.0/reference/operators/decompress_gzip.md)
+* [`decompress_lz4`](https://tenzir.com/docs/v7.0.0/reference/operators/decompress_lz4.md)

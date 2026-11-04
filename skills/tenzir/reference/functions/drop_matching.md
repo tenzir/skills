@@ -1,7 +1,7 @@
 ---
 title: "drop_matching"
-canonical: https://tenzir.com/docs/reference/functions/drop_matching
-source: https://tenzir.com/docs/reference/functions/drop_matching.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/drop_matching
+source: https://tenzir.com/docs/v7.0.0/reference/functions/drop_matching.md
 section: "Docs"
 ---
 
@@ -81,8 +81,8 @@ select moved = this.select_matching($pattern),
 
 ## See Also
 
-* [`drop`](https://tenzir.com/docs/reference/operators/drop.md)
-* [`select_matching`](https://tenzir.com/docs/reference/functions/select_matching.md)
-* [`match_regex`](https://tenzir.com/docs/reference/functions/match_regex.md)
+* [`drop`](https://tenzir.com/docs/v7.0.0/reference/operators/drop.md)
+* [`select_matching`](https://tenzir.com/docs/v7.0.0/reference/functions/select_matching.md)
+* [`match_regex`](https://tenzir.com/docs/v7.0.0/reference/functions/match_regex.md)
 * [Shape records](../../guides/shape/shape-records.md)
 * [Filter and select data](../../guides/optimize/filter-and-select-data.md)

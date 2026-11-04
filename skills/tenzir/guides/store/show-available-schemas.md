@@ -1,7 +1,7 @@
 ---
 title: "Show available schemas"
-canonical: https://tenzir.com/docs/guides/store/show-available-schemas
-source: https://tenzir.com/docs/guides/store/show-available-schemas.md
+canonical: https://tenzir.com/docs/v7.0.0/guides/store/show-available-schemas
+source: https://tenzir.com/docs/v7.0.0/guides/store/show-available-schemas.md
 section: "Docs"
 ---
 
@@ -13,7 +13,7 @@ When you write a pipeline, you often reference field names. If you do not know t
 
 Many SQL databases have a `SHOW TABLES` command to show all available table names, and `SHOW COLUMNS` to display the individual fiels of a given table.
 
-In Tenzir, the [`fields`](https://tenzir.com/docs/reference/operators/fields.md) operator offers the ability for detailed schema introspection. Use it to display all schema fields; each event represents a single field.
+In Tenzir, the [`fields`](https://tenzir.com/docs/v7.0.0/reference/operators/fields.md) operator offers the ability for detailed schema introspection. Use it to display all schema fields; each event represents a single field.
 
 ```tql
 fields

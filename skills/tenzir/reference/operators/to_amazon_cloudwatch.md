@@ -1,7 +1,7 @@
 ---
 title: "to_amazon_cloudwatch"
-canonical: https://tenzir.com/docs/reference/operators/to_amazon_cloudwatch
-source: https://tenzir.com/docs/reference/operators/to_amazon_cloudwatch.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/to_amazon_cloudwatch
+source: https://tenzir.com/docs/v7.0.0/reference/operators/to_amazon_cloudwatch.md
 section: "Docs"
 ---
 
@@ -184,7 +184,7 @@ to_amazon_cloudwatch "/tenzir/events",
 
 ## See Also
 
-* [`from_amazon_cloudwatch`](https://tenzir.com/docs/reference/operators/from_amazon_cloudwatch.md)
-* [Amazon CloudWatch Logs](../../integrations/amazon/cloudwatch.md)
+* [`from_amazon_cloudwatch`](https://tenzir.com/docs/v7.0.0/reference/operators/from_amazon_cloudwatch.md)
+* [Cloudwatch](https://docs.tenzir.com/integrations/amazon/cloudwatch)
 
 Parallelizable: a parallel pipeline may run this operator on several cores at once.

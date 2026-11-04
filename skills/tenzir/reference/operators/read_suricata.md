@@ -1,7 +1,7 @@
 ---
 title: "read_suricata"
-canonical: https://tenzir.com/docs/reference/operators/read_suricata
-source: https://tenzir.com/docs/reference/operators/read_suricata.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/read_suricata
+source: https://tenzir.com/docs/v7.0.0/reference/operators/read_suricata.md
 section: "Docs"
 ---
 
@@ -19,7 +19,7 @@ read_suricata [schema_only=bool, raw=bool]
 
 The [Suricata](https://suricata.io) network security monitor converts network traffic into a stream of metadata events and provides a rule matching engine to generate alerts. Suricata emits events in the [EVE JSON](https://suricata.readthedocs.io/en/latest/output/eve/eve-json-output.html) format. The output is a single stream of events where the `event_type` field disambiguates the event type.
 
-Tenzir’s [`JSON`](https://tenzir.com/docs/reference/operators/read_json.md) can handle EVE JSON correctly, but for the schema names to match the value from the `event_type` field, you need to pass the option `selector=event_type:suricata`. The `suricata` parser does this by default.
+Tenzir’s [`JSON`](https://tenzir.com/docs/v7.0.0/reference/operators/read_json.md) can handle EVE JSON correctly, but for the schema names to match the value from the `event_type` field, you need to pass the option `selector=event_type:suricata`. The `suricata` parser does this by default.
 
 ### `schema_only = bool (optional)`
 
@@ -71,10 +71,10 @@ accept_unix_socket "/run/suricata/eve.sock" {
 }
 ```
 
-Suricata’s `unix-command` socket is separate from EVE output. It is a control socket for tools such as `suricatasc`, not an event stream for [`read_suricata`](https://tenzir.com/docs/reference/operators/read_suricata.md).
+Suricata’s `unix-command` socket is separate from EVE output. It is a control socket for tools such as `suricatasc`, not an event stream for [`read_suricata`](https://tenzir.com/docs/v7.0.0/reference/operators/read_suricata.md).
 
 ## See Also
 
-* [`read_json`](https://tenzir.com/docs/reference/operators/read_json.md)
-* [`accept_unix_socket`](https://tenzir.com/docs/reference/operators/accept_unix_socket.md)
-* [Suricata](../../integrations/suricata.md)
+* [`read_json`](https://tenzir.com/docs/v7.0.0/reference/operators/read_json.md)
+* [`accept_unix_socket`](https://tenzir.com/docs/v7.0.0/reference/operators/accept_unix_socket.md)
+* [Suricata](https://docs.tenzir.com/integrations/suricata)

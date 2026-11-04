@@ -1,7 +1,7 @@
 ---
 title: "discard"
-canonical: https://tenzir.com/docs/reference/operators/discard
-source: https://tenzir.com/docs/reference/operators/discard.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/discard
+source: https://tenzir.com/docs/v7.0.0/reference/operators/discard.md
 section: "Docs"
 ---
 

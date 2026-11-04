@@ -1,7 +1,7 @@
 ---
 title: "Deduplicate events"
-canonical: https://tenzir.com/docs/guides/optimize/deduplicate-events
-source: https://tenzir.com/docs/guides/optimize/deduplicate-events.md
+canonical: https://tenzir.com/docs/v7.0.0/guides/optimize/deduplicate-events
+source: https://tenzir.com/docs/v7.0.0/guides/optimize/deduplicate-events.md
 section: "Docs"
 ---
 
@@ -9,7 +9,7 @@ section: "Docs"
 
 > The deduplicate operator provides a powerful mechanism to remove duplicate events in a pipeline.
 
-The [`deduplicate`](https://tenzir.com/docs/reference/operators/deduplicate.md) operator provides a powerful mechanism to remove duplicate events in a pipeline.
+The [`deduplicate`](https://tenzir.com/docs/v7.0.0/reference/operators/deduplicate.md) operator provides a powerful mechanism to remove duplicate events in a pipeline.
 
 There are numerous use cases for deduplication, such as reducing noise, optimizing costs and making threat detection and response more efficient.
 
@@ -184,7 +184,7 @@ A high suppression count indicates persistent activity from a specific source, s
 
 1. **Choose fields carefully**: Deduplicate on fields that truly identify unique events for your use case. Too few fields may drop important events; too many may not deduplicate effectively.
 
-2. **Consider order**: The [`deduplicate`](https://tenzir.com/docs/reference/operators/deduplicate.md) operator keeps the *first* occurrence. If you need the latest, consider using [`reverse`](https://tenzir.com/docs/reference/operators/reverse.md) first:
+2. **Consider order**: The [`deduplicate`](https://tenzir.com/docs/v7.0.0/reference/operators/deduplicate.md) operator keeps the *first* occurrence. If you need the latest, consider using [`reverse`](https://tenzir.com/docs/v7.0.0/reference/operators/reverse.md) first:
 
    ```tql
    reverse | deduplicate user | reverse
@@ -192,7 +192,7 @@ A high suppression count indicates persistent activity from a specific source, s
 
 3. **Use timeout wisely**: For streaming data, `create_timeout` prevents memory from growing indefinitely while still reducing noise. Choose durations based on your threat detection windows.
 
-4. **Combine with other operators**: Often you’ll want to filter ([`where`](https://tenzir.com/docs/reference/operators/where.md)) or transform ([`set`](https://tenzir.com/docs/reference/operators/set.md)) data before deduplication to normalize keys:
+4. **Combine with other operators**: Often you’ll want to filter ([`where`](https://tenzir.com/docs/v7.0.0/reference/operators/where.md)) or transform ([`set`](https://tenzir.com/docs/v7.0.0/reference/operators/set.md)) data before deduplication to normalize keys:
 
    ```tql
    normalized_ip = src_ip.string()

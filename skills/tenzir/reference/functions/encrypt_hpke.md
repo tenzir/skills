@@ -1,7 +1,7 @@
 ---
 title: "encrypt_hpke"
-canonical: https://tenzir.com/docs/reference/functions/encrypt_hpke
-source: https://tenzir.com/docs/reference/functions/encrypt_hpke.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/encrypt_hpke
+source: https://tenzir.com/docs/v7.0.0/reference/functions/encrypt_hpke.md
 section: "Docs"
 ---
 
@@ -19,7 +19,7 @@ encrypt_hpke(x:blob|string, public_key=blob|string|secret, [aad=blob|string]) ->
 
 The `encrypt_hpke` function encrypts `x` with Hybrid Public Key Encryption (HPKE), as specified in RFC 9180. It uses the base mode with an empty `info`.
 
-HPKE is public-key encryption: anyone with the public key can encrypt, but only the holder of the private key can decrypt with [`decrypt_hpke`](https://tenzir.com/docs/reference/functions/decrypt_hpke.md). Your collectors therefore never hold a key that can decrypt the data they encrypt.
+HPKE is public-key encryption: anyone with the public key can encrypt, but only the holder of the private key can decrypt with [`decrypt_hpke`](https://tenzir.com/docs/v7.0.0/reference/functions/decrypt_hpke.md). Your collectors therefore never hold a key that can decrypt the data they encrypt.
 
 The type of the public key selects the HPKE suite:
 
@@ -41,7 +41,7 @@ The ciphertext has the same length as the input. Other RFC 9180 implementations 
 
 The function generates a fresh ephemeral key for every value, so the output differs on every run. This costs a key agreement per value, which makes HPKE roughly 100 times slower than the AES functions: expect about 10,000 values per second per pipeline on a laptop. Use HPKE for selected fields rather than for entire events.
 
-The function returns a `blob`, which JSON output renders as Base64. To turn the result into a string, encode it with [`encode_base64`](https://tenzir.com/docs/reference/functions/encode_base64.md) or [`encode_hex`](https://tenzir.com/docs/reference/functions/encode_hex.md).
+The function returns a `blob`, which JSON output renders as Base64. To turn the result into a string, encode it with [`encode_base64`](https://tenzir.com/docs/v7.0.0/reference/functions/encode_base64.md) or [`encode_hex`](https://tenzir.com/docs/v7.0.0/reference/functions/encode_hex.md).
 
 ### `x: blob|string`
 
@@ -63,7 +63,7 @@ The function interprets every key with 32 or 56 bytes that is not PEM-encoded as
 
 An invalid or unsupported key is an error when the pipeline starts.
 
-The function uses the bytes of the key as they are. If you have a raw key in hex or Base64 form, decode it first with [`decode_hex`](https://tenzir.com/docs/reference/functions/decode_hex.md) or [`decode_base64`](https://tenzir.com/docs/reference/functions/decode_base64.md). Pass a PEM-encoded key without decoding.
+The function uses the bytes of the key as they are. If you have a raw key in hex or Base64 form, decode it first with [`decode_hex`](https://tenzir.com/docs/v7.0.0/reference/functions/decode_hex.md) or [`decode_base64`](https://tenzir.com/docs/v7.0.0/reference/functions/decode_base64.md). Pass a PEM-encoded key without decoding.
 
 To create a key pair with OpenSSL, run:
 
@@ -80,7 +80,7 @@ Associated data that the function authenticates but does not encrypt. The value 
 
 Decryption only succeeds with the same associated data. Omitting `aad` is the same as passing an empty value.
 
-If `aad` is `null`, for example because an event lacks the field that holds it, the function returns `null` and emits a warning. To fall back to an empty value instead, use [`else`](https://tenzir.com/docs/reference/expressions.md#fallback-with-else), for example `aad=tenant? else ""`.
+If `aad` is `null`, for example because an event lacks the field that holds it, the function returns `null` and emits a warning. To fall back to an empty value instead, use [`else`](https://tenzir.com/docs/v7.0.0/reference/expressions.md#fallback-with-else), for example `aad=tenant? else ""`.
 
 ## Examples
 
@@ -136,7 +136,7 @@ drop encrypted
 
 ### Load the public key from a file
 
-Read a PEM-encoded key with [`file_contents`](https://tenzir.com/docs/reference/functions/file_contents.md), which requires an absolute path:
+Read a PEM-encoded key with [`file_contents`](https://tenzir.com/docs/v7.0.0/reference/functions/file_contents.md), which requires an absolute path:
 
 ```tql
 from {email: "alice@example.com"}
@@ -191,10 +191,10 @@ drop email
 
 ## See Also
 
-* [`decrypt_hpke`](https://tenzir.com/docs/reference/functions/decrypt_hpke.md)
-* [`encrypt_aes_gcm_siv`](https://tenzir.com/docs/reference/functions/encrypt_aes_gcm_siv.md)
-* [`encrypt_aes_gcm`](https://tenzir.com/docs/reference/functions/encrypt_aes_gcm.md)
-* [`encrypt_aes_siv`](https://tenzir.com/docs/reference/functions/encrypt_aes_siv.md)
-* [`encrypt_ff1`](https://tenzir.com/docs/reference/functions/encrypt_ff1.md)
+* [`decrypt_hpke`](https://tenzir.com/docs/v7.0.0/reference/functions/decrypt_hpke.md)
+* [`encrypt_aes_gcm_siv`](https://tenzir.com/docs/v7.0.0/reference/functions/encrypt_aes_gcm_siv.md)
+* [`encrypt_aes_gcm`](https://tenzir.com/docs/v7.0.0/reference/functions/encrypt_aes_gcm.md)
+* [`encrypt_aes_siv`](https://tenzir.com/docs/v7.0.0/reference/functions/encrypt_aes_siv.md)
+* [`encrypt_ff1`](https://tenzir.com/docs/v7.0.0/reference/functions/encrypt_ff1.md)
 * [Encrypt sensitive data](../../guides/protect/encrypt-sensitive-data.md)
 * [Encryption](../../explanations/encryption.md)

@@ -1,7 +1,7 @@
 ---
 title: "sum"
-canonical: https://tenzir.com/docs/reference/functions/sum
-source: https://tenzir.com/docs/reference/functions/sum.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/sum
+source: https://tenzir.com/docs/v7.0.0/reference/functions/sum.md
 section: "Docs"
 ---
 
@@ -38,10 +38,10 @@ summarize n=sum(x)
 
 ## See Also
 
-* [`collect`](https://tenzir.com/docs/reference/functions/collect.md)
-* [`max`](https://tenzir.com/docs/reference/functions/max.md)
-* [`mean`](https://tenzir.com/docs/reference/functions/mean.md)
-* [`min`](https://tenzir.com/docs/reference/functions/min.md)
+* [`collect`](https://tenzir.com/docs/v7.0.0/reference/functions/collect.md)
+* [`max`](https://tenzir.com/docs/v7.0.0/reference/functions/max.md)
+* [`mean`](https://tenzir.com/docs/v7.0.0/reference/functions/mean.md)
+* [`min`](https://tenzir.com/docs/v7.0.0/reference/functions/min.md)
 * [Aggregate event streams](../../guides/analyze/aggregate-event-streams.md)
-* [Plot data with charts](../../tutorials/plot-data-with-charts.md)
+* [Plot data with charts](https://docs.tenzir.com/tutorials/plot-data-with-charts)
 * [Learn idiomatic TQL](../../tutorials/learn-idiomatic-tql.md)

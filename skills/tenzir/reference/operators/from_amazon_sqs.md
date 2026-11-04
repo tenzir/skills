@@ -1,7 +1,7 @@
 ---
 title: "from_amazon_sqs"
-canonical: https://tenzir.com/docs/reference/operators/from_amazon_sqs
-source: https://tenzir.com/docs/reference/operators/from_amazon_sqs.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/from_amazon_sqs
+source: https://tenzir.com/docs/v7.0.0/reference/operators/from_amazon_sqs.md
 section: "Docs"
 ---
 
@@ -179,6 +179,6 @@ from_amazon_sqs "my-queue", aws_iam={
 
 ## See Also
 
-* [`to_amazon_sqs`](https://tenzir.com/docs/reference/operators/to_amazon_sqs.md)
+* [`to_amazon_sqs`](https://tenzir.com/docs/v7.0.0/reference/operators/to_amazon_sqs.md)
 * [Read from message brokers](../../guides/collect/read-from-message-brokers.md)
-* [Amazon SQS](../../integrations/amazon/sqs.md)
+* [Sqs](https://docs.tenzir.com/integrations/amazon/sqs)

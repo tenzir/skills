@@ -1,7 +1,7 @@
 ---
 title: "write_ndjson"
-canonical: https://tenzir.com/docs/reference/operators/write_ndjson
-source: https://tenzir.com/docs/reference/operators/write_ndjson.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/write_ndjson
+source: https://tenzir.com/docs/v7.0.0/reference/operators/write_ndjson.md
 section: "Docs"
 ---
 
@@ -92,10 +92,10 @@ write_ndjson strip_null_fields=true
 
 ## See Also
 
-* [`parse_json`](https://tenzir.com/docs/reference/functions/parse_json.md)
-* [`print_json`](https://tenzir.com/docs/reference/functions/print_json.md)
-* [`print_ndjson`](https://tenzir.com/docs/reference/functions/print_ndjson.md)
-* [`read_json`](https://tenzir.com/docs/reference/operators/read_json.md)
-* [`read_ndjson`](https://tenzir.com/docs/reference/operators/read_ndjson.md)
-* [`write_json`](https://tenzir.com/docs/reference/operators/write_json.md)
+* [`parse_json`](https://tenzir.com/docs/v7.0.0/reference/functions/parse_json.md)
+* [`print_json`](https://tenzir.com/docs/v7.0.0/reference/functions/print_json.md)
+* [`print_ndjson`](https://tenzir.com/docs/v7.0.0/reference/functions/print_ndjson.md)
+* [`read_json`](https://tenzir.com/docs/v7.0.0/reference/operators/read_json.md)
+* [`read_ndjson`](https://tenzir.com/docs/v7.0.0/reference/operators/read_ndjson.md)
+* [`write_json`](https://tenzir.com/docs/v7.0.0/reference/operators/write_json.md)
 * [Convert data formats](../../guides/shape/convert-data-formats.md)

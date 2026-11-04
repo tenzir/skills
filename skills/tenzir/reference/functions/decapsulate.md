@@ -1,7 +1,7 @@
 ---
 title: "decapsulate"
-canonical: https://tenzir.com/docs/reference/functions/decapsulate
-source: https://tenzir.com/docs/reference/functions/decapsulate.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/decapsulate
+source: https://tenzir.com/docs/v7.0.0/reference/functions/decapsulate.md
 section: "Docs"
 ---
 
@@ -17,7 +17,7 @@ decapsulate(packet:record) -> record
 
 ## Description
 
-The `decapsulate` function decodes binary PCAP packet data by extracting link, network, and transport layer information. The function takes a `packet` record as argument as produced by the [`read_pcap`](https://tenzir.com/docs/reference/operators/read_pcap.md) operator, which may look like this:
+The `decapsulate` function decodes binary PCAP packet data by extracting link, network, and transport layer information. The function takes a `packet` record as argument as produced by the [`read_pcap`](https://tenzir.com/docs/v7.0.0/reference/operators/read_pcap.md) operator, which may look like this:
 
 ```tql
 {

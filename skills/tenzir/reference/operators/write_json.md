@@ -1,7 +1,7 @@
 ---
 title: "write_json"
-canonical: https://tenzir.com/docs/reference/operators/write_json
-source: https://tenzir.com/docs/reference/operators/write_json.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/write_json
+source: https://tenzir.com/docs/v7.0.0/reference/operators/write_json.md
 section: "Docs"
 ---
 
@@ -23,7 +23,7 @@ Transforms the input event stream to a JSON byte stream.
 
 Newline-Delimited JSON (NDJSON)
 
-Use [`write_ndjson`](https://tenzir.com/docs/reference/operators/write_ndjson.md) operator to write Newline-Delimited JSON.
+Use [`write_ndjson`](https://tenzir.com/docs/v7.0.0/reference/operators/write_ndjson.md) operator to write Newline-Delimited JSON.
 
 ### `strip = bool (optional)`
 
@@ -95,8 +95,8 @@ write_json strip_null_fields=true
 
 ## See Also
 
-* [`parse_json`](https://tenzir.com/docs/reference/functions/parse_json.md)
-* [`print_json`](https://tenzir.com/docs/reference/functions/print_json.md)
-* [`read_json`](https://tenzir.com/docs/reference/operators/read_json.md)
-* [`write_tql`](https://tenzir.com/docs/reference/operators/write_tql.md)
+* [`parse_json`](https://tenzir.com/docs/v7.0.0/reference/functions/parse_json.md)
+* [`print_json`](https://tenzir.com/docs/v7.0.0/reference/functions/print_json.md)
+* [`read_json`](https://tenzir.com/docs/v7.0.0/reference/operators/read_json.md)
+* [`write_tql`](https://tenzir.com/docs/v7.0.0/reference/operators/write_tql.md)
 * [Convert data formats](../../guides/shape/convert-data-formats.md)

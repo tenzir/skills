@@ -1,7 +1,7 @@
 ---
 title: "collect"
-canonical: https://tenzir.com/docs/reference/functions/collect
-source: https://tenzir.com/docs/reference/functions/collect.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/collect
+source: https://tenzir.com/docs/v7.0.0/reference/functions/collect.md
 section: "Docs"
 ---
 
@@ -38,7 +38,7 @@ summarize values=collect(x)
 
 ## See Also
 
-* [`collect_record`](https://tenzir.com/docs/reference/functions/collect_record.md)
-* [`distinct`](https://tenzir.com/docs/reference/functions/distinct.md)
-* [`sum`](https://tenzir.com/docs/reference/functions/sum.md)
+* [`collect_record`](https://tenzir.com/docs/v7.0.0/reference/functions/collect_record.md)
+* [`distinct`](https://tenzir.com/docs/v7.0.0/reference/functions/distinct.md)
+* [`sum`](https://tenzir.com/docs/v7.0.0/reference/functions/sum.md)
 * [Aggregate event streams](../../guides/analyze/aggregate-event-streams.md)

@@ -1,7 +1,7 @@
 ---
 title: "nics"
-canonical: https://tenzir.com/docs/reference/operators/nics
-source: https://tenzir.com/docs/reference/operators/nics.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/nics
+source: https://tenzir.com/docs/v7.0.0/reference/operators/nics.md
 section: "Docs"
 ---
 
@@ -58,4 +58,4 @@ where status.connected
 
 ## See Also
 
-* [`from_nic`](https://tenzir.com/docs/reference/operators/from_nic.md)
+* [`from_nic`](https://tenzir.com/docs/v7.0.0/reference/operators/from_nic.md)

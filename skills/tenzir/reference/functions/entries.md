@@ -1,7 +1,7 @@
 ---
 title: "entries"
-canonical: https://tenzir.com/docs/reference/functions/entries
-source: https://tenzir.com/docs/reference/functions/entries.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/entries
+source: https://tenzir.com/docs/v7.0.0/reference/functions/entries.md
 section: "Docs"
 ---
 
@@ -28,9 +28,9 @@ The `entries` function turns the top-level fields of the record `x` into a list 
 
 Field names are used literally. A name with a dot, such as `"a.b"`, becomes one key and is not split into a path. Only top-level fields become entries: nested records and lists stay intact as values. Values of different types can appear in the same list, including `null`, lists, and records.
 
-The function is the inverse of [`collect_record`](https://tenzir.com/docs/reference/functions/collect_record.md). Passing the entries of a record to `collect_record` returns the original record, so `x.entries().collect_record()` equals `x`.
+The function is the inverse of [`collect_record`](https://tenzir.com/docs/v7.0.0/reference/functions/collect_record.md). Passing the entries of a record to `collect_record` returns the original record, so `x.entries().collect_record()` equals `x`.
 
-To get only the field names or only the values, use [`keys`](https://tenzir.com/docs/reference/functions/keys.md) or [`values`](https://tenzir.com/docs/reference/functions/values.md).
+To get only the field names or only the values, use [`keys`](https://tenzir.com/docs/v7.0.0/reference/functions/keys.md) or [`values`](https://tenzir.com/docs/v7.0.0/reference/functions/values.md).
 
 ### `x: record`
 
@@ -125,7 +125,7 @@ select entries=event.entries()
 
 ### Decode the entries again
 
-Use [`collect_record`](https://tenzir.com/docs/reference/functions/collect_record.md) to turn entries back into a record. The result equals the original record:
+Use [`collect_record`](https://tenzir.com/docs/v7.0.0/reference/functions/collect_record.md) to turn entries back into a record. The result equals the original record:
 
 ```tql
 from {
@@ -150,7 +150,7 @@ select user=user.entries().collect_record()
 
 ### Filter fields by value
 
-Process the entries with list functions, then decode the remaining ones. For example, use [`where`](https://tenzir.com/docs/reference/functions/where.md) to keep only the fields with a value above a threshold:
+Process the entries with list functions, then decode the remaining ones. For example, use [`where`](https://tenzir.com/docs/v7.0.0/reference/functions/where.md) to keep only the fields with a value above a threshold:
 
 ```tql
 from {
@@ -174,7 +174,7 @@ select top=scores.entries().where(e => e.value > 10).collect_record()
 
 ### Turn the fields of a record into events
 
-Combine `entries` with [`unroll`](https://tenzir.com/docs/reference/operators/unroll.md) to emit one event per field:
+Combine `entries` with [`unroll`](https://tenzir.com/docs/v7.0.0/reference/operators/unroll.md) to emit one event per field:
 
 ```tql
 from {
@@ -201,8 +201,8 @@ select name=entries.key, count=entries.value
 
 ## See Also
 
-* [`collect_record`](https://tenzir.com/docs/reference/functions/collect_record.md)
-* [`keys`](https://tenzir.com/docs/reference/functions/keys.md)
-* [`values`](https://tenzir.com/docs/reference/functions/values.md)
-* [`where`](https://tenzir.com/docs/reference/functions/where.md)
+* [`collect_record`](https://tenzir.com/docs/v7.0.0/reference/functions/collect_record.md)
+* [`keys`](https://tenzir.com/docs/v7.0.0/reference/functions/keys.md)
+* [`values`](https://tenzir.com/docs/v7.0.0/reference/functions/values.md)
+* [`where`](https://tenzir.com/docs/v7.0.0/reference/functions/where.md)
 * [Shape records](../../guides/shape/shape-records.md)

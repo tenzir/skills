@@ -1,7 +1,7 @@
 ---
 title: "from_tcp"
-canonical: https://tenzir.com/docs/reference/operators/from_tcp
-source: https://tenzir.com/docs/reference/operators/from_tcp.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/from_tcp
+source: https://tenzir.com/docs/v7.0.0/reference/operators/from_tcp.md
 section: "Docs"
 ---
 
@@ -87,8 +87,8 @@ from_tcp "example.org:4443", tls={cacert: "ca.pem"} {
 
 ## See Also
 
-* [`to_tcp`](https://tenzir.com/docs/reference/operators/to_tcp.md)
-* [`accept_tcp`](https://tenzir.com/docs/reference/operators/accept_tcp.md)
-* [`serve_tcp`](https://tenzir.com/docs/reference/operators/serve_tcp.md)
-* [`from_unix_socket`](https://tenzir.com/docs/reference/operators/from_unix_socket.md)
-* [TCP](../../integrations/tcp.md)
+* [`to_tcp`](https://tenzir.com/docs/v7.0.0/reference/operators/to_tcp.md)
+* [`accept_tcp`](https://tenzir.com/docs/v7.0.0/reference/operators/accept_tcp.md)
+* [`serve_tcp`](https://tenzir.com/docs/v7.0.0/reference/operators/serve_tcp.md)
+* [`from_unix_socket`](https://tenzir.com/docs/v7.0.0/reference/operators/from_unix_socket.md)
+* [Tcp](https://docs.tenzir.com/integrations/tcp)

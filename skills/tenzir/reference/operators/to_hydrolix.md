@@ -1,7 +1,7 @@
 ---
 title: "to_hydrolix"
-canonical: https://tenzir.com/docs/reference/operators/to_hydrolix
-source: https://tenzir.com/docs/reference/operators/to_hydrolix.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/to_hydrolix
+source: https://tenzir.com/docs/v7.0.0/reference/operators/to_hydrolix.md
 section: "Docs"
 ---
 
@@ -190,7 +190,7 @@ to_hydrolix "https://acme.hydrolix.live",
 
 ## See Also
 
-* [`from_hydrolix`](https://tenzir.com/docs/reference/operators/from_hydrolix.md)
-* [Hydrolix](../../integrations/hydrolix.md)
+* [`from_hydrolix`](https://tenzir.com/docs/v7.0.0/reference/operators/from_hydrolix.md)
+* [Hydrolix](https://docs.tenzir.com/integrations/hydrolix)
 
 Parallelizable: a parallel pipeline may run this operator on several cores at once.

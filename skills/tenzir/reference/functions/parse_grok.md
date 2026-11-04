@@ -1,7 +1,7 @@
 ---
 title: "parse_grok"
-canonical: https://tenzir.com/docs/reference/functions/parse_grok
-source: https://tenzir.com/docs/reference/functions/parse_grok.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/parse_grok
+source: https://tenzir.com/docs/v7.0.0/reference/functions/parse_grok.md
 section: "Docs"
 ---
 
@@ -196,5 +196,5 @@ output.dur = output.dur * 1s
 
 ## See Also
 
-* [`read_grok`](https://tenzir.com/docs/reference/operators/read_grok.md)
+* [`read_grok`](https://tenzir.com/docs/v7.0.0/reference/operators/read_grok.md)
 * [Parse string fields](../../guides/parse/parse-string-fields.md)

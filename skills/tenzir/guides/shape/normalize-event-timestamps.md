@@ -1,8 +1,8 @@
 ---
 title: "Normalize event timestamps"
 description: "Convert source timestamps into consistent time values for filtering, windows, ordering, and output"
-canonical: https://tenzir.com/docs/guides/shape/normalize-event-timestamps
-source: https://tenzir.com/docs/guides/shape/normalize-event-timestamps.md
+canonical: https://tenzir.com/docs/v7.0.0/guides/shape/normalize-event-timestamps
+source: https://tenzir.com/docs/v7.0.0/guides/shape/normalize-event-timestamps.md
 section: "Docs"
 ---
 
@@ -36,7 +36,7 @@ The parsed value represents one absolute point in time. Tenzir displays time val
 
 ## Parse common timestamp strings
 
-Use [`time`](https://tenzir.com/docs/reference/functions/time.md) when the source uses ISO 8601, a Unix timestamp prefixed with `@`, or another supported standard form:
+Use [`time`](https://tenzir.com/docs/v7.0.0/reference/functions/time.md) when the source uses ISO 8601, a Unix timestamp prefixed with `@`, or another supported standard form:
 
 ```tql
 from {
@@ -61,7 +61,7 @@ Use this form when the source format can vary between the supported forms. An un
 
 ## Parse a known custom format
 
-Use [`parse_time`](https://tenzir.com/docs/reference/functions/parse_time.md) when the source has one known layout. An explicit format prevents ambiguous values such as `10/11/2024` from changing meaning between producers:
+Use [`parse_time`](https://tenzir.com/docs/v7.0.0/reference/functions/parse_time.md) when the source has one known layout. An explicit format prevents ambiguous values such as `10/11/2024` from changing meaning between producers:
 
 ```tql
 from {timestamp: "15/01/2024 10:30:45 +0200"}
@@ -100,7 +100,7 @@ Use `reference=now()` for live ingestion. Use a timestamp from the archived batc
 
 ## Convert numeric Unix epochs
 
-A numeric epoch does not carry its unit. Apply the source unit as a duration, then use [`from_epoch`](https://tenzir.com/docs/reference/functions/from_epoch.md):
+A numeric epoch does not carry its unit. Apply the source unit as a duration, then use [`from_epoch`](https://tenzir.com/docs/v7.0.0/reference/functions/from_epoch.md):
 
 ```tql
 from {
@@ -134,7 +134,7 @@ time = parsed_time
 drop parsed_time
 ```
 
-The `where` removes events whose timestamp could not be parsed. Omit it when a null timestamp is acceptable downstream. Operators that require time values, such as [`format_time`](https://tenzir.com/docs/reference/functions/format_time.md) and event-time windows, otherwise need their own null handling.
+The `where` removes events whose timestamp could not be parsed. Omit it when a null timestamp is acceptable downstream. Operators that require time values, such as [`format_time`](https://tenzir.com/docs/v7.0.0/reference/functions/format_time.md) and event-time windows, otherwise need their own null handling.
 
 ## Format timestamps only at an output boundary
 

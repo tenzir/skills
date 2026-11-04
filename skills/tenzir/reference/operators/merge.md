@@ -1,7 +1,7 @@
 ---
 title: "merge"
-canonical: https://tenzir.com/docs/reference/operators/merge
-source: https://tenzir.com/docs/reference/operators/merge.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/merge
+source: https://tenzir.com/docs/v7.0.0/reference/operators/merge.md
 section: "Docs"
 ---
 
@@ -19,7 +19,7 @@ merge { … }
 
 The `merge` operator runs a subpipeline that starts with its own source and merges the events it produces into the main input stream. The main input passes through unchanged, and the subpipeline’s output is interleaved with it.
 
-`merge` is the dual of [`fork`](https://tenzir.com/docs/reference/operators/fork.md): where `fork` attaches an additional *sink* that consumes a copy of the input, `merge` attaches an additional *source* that contributes events to the output.
+`merge` is the dual of [`fork`](https://tenzir.com/docs/v7.0.0/reference/operators/fork.md): where `fork` attaches an additional *sink* that consumes a copy of the input, `merge` attaches an additional *source* that contributes events to the output.
 
 Use `merge` when you want to combine an independent stream of events with the one flowing through your pipeline:
 
@@ -35,7 +35,7 @@ The guide on how to [merge streams within a single pipeline](../../guides/route/
 
 ### `{ … }`
 
-The subpipeline to execute. It must be a source, that is, it must begin with an operator that produces events on its own (such as [`from_file`](https://tenzir.com/docs/reference/operators/from_file.md) or [`subscribe`](https://tenzir.com/docs/reference/operators/subscribe.md)) and it must produce events. The subpipeline must not consume the input, end in a sink, or produce bytes.
+The subpipeline to execute. It must be a source, that is, it must begin with an operator that produces events on its own (such as [`from_file`](https://tenzir.com/docs/v7.0.0/reference/operators/from_file.md) or [`subscribe`](https://tenzir.com/docs/v7.0.0/reference/operators/subscribe.md)) and it must produce events. The subpipeline must not consume the input, end in a sink, or produce bytes.
 
 The order in which events from the main stream and the subpipeline appear in the output is not defined.
 
@@ -60,6 +60,6 @@ merge {
 
 ## See Also
 
-* [`fork`](https://tenzir.com/docs/reference/operators/fork.md)
-* [`fork_merge`](https://tenzir.com/docs/reference/operators/fork_merge.md)
+* [`fork`](https://tenzir.com/docs/v7.0.0/reference/operators/fork.md)
+* [`fork_merge`](https://tenzir.com/docs/v7.0.0/reference/operators/fork_merge.md)
 * [Split and merge streams](../../guides/route/split-and-merge-streams.md)

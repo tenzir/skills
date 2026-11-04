@@ -1,7 +1,7 @@
 ---
 title: "model_merge"
-canonical: https://tenzir.com/docs/reference/functions/model_merge
-source: https://tenzir.com/docs/reference/functions/model_merge.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/model_merge
+source: https://tenzir.com/docs/v7.0.0/reference/functions/model_merge.md
 section: "Docs"
 ---
 
@@ -62,7 +62,7 @@ select merged = model_merge([a, b])
 
 ## See also
 
-* [`histogram`](https://tenzir.com/docs/reference/functions/histogram.md)
-* [`frequency_table`](https://tenzir.com/docs/reference/functions/frequency_table.md)
-* [`tdigest`](https://tenzir.com/docs/reference/functions/tdigest.md)
-* [`hll`](https://tenzir.com/docs/reference/functions/hll.md)
+* [`histogram`](https://tenzir.com/docs/v7.0.0/reference/functions/histogram.md)
+* [`frequency_table`](https://tenzir.com/docs/v7.0.0/reference/functions/frequency_table.md)
+* [`tdigest`](https://tenzir.com/docs/v7.0.0/reference/functions/tdigest.md)
+* [`hll`](https://tenzir.com/docs/v7.0.0/reference/functions/hll.md)

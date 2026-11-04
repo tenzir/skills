@@ -1,7 +1,7 @@
 ---
 title: "parse_kv"
-canonical: https://tenzir.com/docs/reference/functions/parse_kv
-source: https://tenzir.com/docs/reference/functions/parse_kv.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/parse_kv
+source: https://tenzir.com/docs/v7.0.0/reference/functions/parse_kv.md
 section: "Docs"
 ---
 
@@ -211,6 +211,6 @@ this = { ...input.parse_kv() }
 
 ## See Also
 
-* [`print_kv`](https://tenzir.com/docs/reference/functions/print_kv.md)
-* [`read_kv`](https://tenzir.com/docs/reference/operators/read_kv.md)
+* [`print_kv`](https://tenzir.com/docs/v7.0.0/reference/functions/print_kv.md)
+* [`read_kv`](https://tenzir.com/docs/v7.0.0/reference/operators/read_kv.md)
 * [Parse string fields](../../guides/parse/parse-string-fields.md)

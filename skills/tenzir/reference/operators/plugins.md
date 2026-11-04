@@ -1,7 +1,7 @@
 ---
 title: "plugins"
-canonical: https://tenzir.com/docs/reference/operators/plugins
-source: https://tenzir.com/docs/reference/operators/plugins.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/plugins
+source: https://tenzir.com/docs/v7.0.0/reference/operators/plugins.md
 section: "Docs"
 ---
 

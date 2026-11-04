@@ -1,7 +1,7 @@
 ---
 title: "Encrypt sensitive data"
-canonical: https://tenzir.com/docs/guides/protect/encrypt-sensitive-data
-source: https://tenzir.com/docs/guides/protect/encrypt-sensitive-data.md
+canonical: https://tenzir.com/docs/v7.0.0/guides/protect/encrypt-sensitive-data
+source: https://tenzir.com/docs/v7.0.0/guides/protect/encrypt-sensitive-data.md
 section: "Docs"
 ---
 
@@ -15,13 +15,13 @@ Encrypt a field when someone may need the original value again, for example to r
 
 Pick the function that matches what the encrypted data must still allow:
 
-| Requirement                                  | Function                                                                                    |
-| -------------------------------------------- | ------------------------------------------------------------------------------------------- |
-| Recover values later                         | [`encrypt_aes_gcm_siv`](https://tenzir.com/docs/reference/functions/encrypt_aes_gcm_siv.md) |
-| Group, join, or count by the encrypted value | [`encrypt_aes_siv`](https://tenzir.com/docs/reference/functions/encrypt_aes_siv.md)         |
-| Keep the format of the value                 | [`encrypt_ff1`](https://tenzir.com/docs/reference/functions/encrypt_ff1.md)                 |
-| Encrypt without being able to decrypt        | [`encrypt_hpke`](https://tenzir.com/docs/reference/functions/encrypt_hpke.md)               |
-| Exchange data with AES-GCM tools             | [`encrypt_aes_gcm`](https://tenzir.com/docs/reference/functions/encrypt_aes_gcm.md)         |
+| Requirement                                  | Function                                                                                           |
+| -------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| Recover values later                         | [`encrypt_aes_gcm_siv`](https://tenzir.com/docs/v7.0.0/reference/functions/encrypt_aes_gcm_siv.md) |
+| Group, join, or count by the encrypted value | [`encrypt_aes_siv`](https://tenzir.com/docs/v7.0.0/reference/functions/encrypt_aes_siv.md)         |
+| Keep the format of the value                 | [`encrypt_ff1`](https://tenzir.com/docs/v7.0.0/reference/functions/encrypt_ff1.md)                 |
+| Encrypt without being able to decrypt        | [`encrypt_hpke`](https://tenzir.com/docs/v7.0.0/reference/functions/encrypt_hpke.md)               |
+| Exchange data with AES-GCM tools             | [`encrypt_aes_gcm`](https://tenzir.com/docs/v7.0.0/reference/functions/encrypt_aes_gcm.md)         |
 
 Our explanation of [encryption](../../explanations/encryption.md) describes the trade-offs behind these choices in detail.
 
@@ -29,7 +29,7 @@ To protect complete archive files, our guide on [encrypting archived files](../s
 
 ## Manage keys
 
-Encryption is only as strong as the protection of its keys. Generate random keys, keep them in a secret store, and load them into pipelines with the [`secret`](https://tenzir.com/docs/reference/functions/secret.md) function.
+Encryption is only as strong as the protection of its keys. Generate random keys, keep them in a secret store, and load them into pipelines with the [`secret`](https://tenzir.com/docs/v7.0.0/reference/functions/secret.md) function.
 
 ### Create a symmetric key
 
@@ -39,13 +39,13 @@ The AES and FF1 functions use symmetric keys: the same key encrypts and decrypts
 openssl rand -hex 32
 ```
 
-[`encrypt_aes_siv`](https://tenzir.com/docs/reference/functions/encrypt_aes_siv.md) combines two AES keys and therefore needs a 64-byte key:
+[`encrypt_aes_siv`](https://tenzir.com/docs/v7.0.0/reference/functions/encrypt_aes_siv.md) combines two AES keys and therefore needs a 64-byte key:
 
 ```sh
 openssl rand -hex 64
 ```
 
-Store the key in your secret store, for example under the name `pii-key`. Reading it with [`secret`](https://tenzir.com/docs/reference/functions/secret.md) keeps the key out of pipeline definitions. The functions expect raw key bytes, so decode the hexadecimal text when you load it:
+Store the key in your secret store, for example under the name `pii-key`. Reading it with [`secret`](https://tenzir.com/docs/v7.0.0/reference/functions/secret.md) keeps the key out of pipeline definitions. The functions expect raw key bytes, so decode the hexadecimal text when you load it:
 
 ```tql
 let $key = secret("pii-key").decode_hex()
@@ -63,7 +63,7 @@ Use a separate key for each function and data set, as our explanation of [encryp
 
 ### Create a key pair
 
-[`encrypt_hpke`](https://tenzir.com/docs/reference/functions/encrypt_hpke.md) uses a key pair instead. Generate an X25519 private key and derive its public key:
+[`encrypt_hpke`](https://tenzir.com/docs/v7.0.0/reference/functions/encrypt_hpke.md) uses a key pair instead. Generate an X25519 private key and derive its public key:
 
 ```sh
 openssl genpkey -algorithm X25519 -out private.pem
@@ -74,7 +74,7 @@ The public key doesn’t need to stay confidential, but it must not be replaced.
 
 ## Encrypt fields for later recovery
 
-Use [`encrypt_aes_gcm_siv`](https://tenzir.com/docs/reference/functions/encrypt_aes_gcm_siv.md) to encrypt a field so that only key holders can read it:
+Use [`encrypt_aes_gcm_siv`](https://tenzir.com/docs/v7.0.0/reference/functions/encrypt_aes_gcm_siv.md) to encrypt a field so that only key holders can read it:
 
 ```tql
 let $key = secret("pii-key").decode_hex()
@@ -95,7 +95,7 @@ The function returns a `blob` that holds a random nonce, the ciphertext, and an 
 
 ## Decrypt fields
 
-Pass the same key to the matching decryption function. When the encrypted value arrives as Base64, for example after a round trip through JSON, decode it first. The decryption returns a `blob`, which [`string`](https://tenzir.com/docs/reference/functions/string.md) turns back into text:
+Pass the same key to the matching decryption function. When the encrypted value arrives as Base64, for example after a round trip through JSON, decode it first. The decryption returns a `blob`, which [`string`](https://tenzir.com/docs/v7.0.0/reference/functions/string.md) turns back into text:
 
 ```tql
 let $key = secret("pii-key").decode_hex()
@@ -119,7 +119,7 @@ If the key does not match, or if someone modified the ciphertext, the decryption
 
 ## Keep equal values equal
 
-Randomized encryption hides equality, which prevents grouping by the encrypted field. When analysts need to count events per user without seeing the user, use [`encrypt_aes_siv`](https://tenzir.com/docs/reference/functions/encrypt_aes_siv.md). It encrypts deterministically, so the same user always maps to the same ciphertext:
+Randomized encryption hides equality, which prevents grouping by the encrypted field. When analysts need to count events per user without seeing the user, use [`encrypt_aes_siv`](https://tenzir.com/docs/v7.0.0/reference/functions/encrypt_aes_siv.md). It encrypts deterministically, so the same user always maps to the same ciphertext:
 
 ```tql
 let $key = secret("pii-siv-key").decode_hex()
@@ -142,7 +142,7 @@ sort user
 }
 ```
 
-Passing the field name as associated data with `aad="user"` makes the same value encrypt differently in different fields. [`encode_hex`](https://tenzir.com/docs/reference/functions/encode_hex.md) turns the ciphertext into a string that is easy to display and compare.
+Passing the field name as associated data with `aad="user"` makes the same value encrypt differently in different fields. [`encode_hex`](https://tenzir.com/docs/v7.0.0/reference/functions/encode_hex.md) turns the ciphertext into a string that is easy to display and compare.
 
 Deterministic encryption reveals frequencies
 
@@ -150,7 +150,7 @@ Equal ciphertexts reveal how often each value occurs. For fields with few distin
 
 ## Preserve the format of values
 
-Some downstream systems validate the shape of a field, for example a column that accepts only 16-digit card numbers. Use [`encrypt_ff1`](https://tenzir.com/docs/reference/functions/encrypt_ff1.md) to encrypt a value into another value of the same length and alphabet. Characters outside the alphabet, such as dashes and spaces, stay in place:
+Some downstream systems validate the shape of a field, for example a column that accepts only 16-digit card numbers. Use [`encrypt_ff1`](https://tenzir.com/docs/v7.0.0/reference/functions/encrypt_ff1.md) to encrypt a value into another value of the same length and alphabet. Characters outside the alphabet, such as dashes and spaces, stay in place:
 
 ```tql
 let $key = secret("pii-ff1-key").decode_hex()
@@ -168,7 +168,7 @@ phone = phone.encrypt_ff1(key=$key, tweak="phone")
 
 The default alphabet consists of the ten decimal digits. Pass `alphabet` for other formats, for example `alphabet="0123456789abcdef"` for hexadecimal identifiers. The `tweak` works like associated data and makes the same digits encrypt differently in different fields.
 
-Decrypt with [`decrypt_ff1`](https://tenzir.com/docs/reference/functions/decrypt_ff1.md) and the same key, alphabet, and tweak:
+Decrypt with [`decrypt_ff1`](https://tenzir.com/docs/v7.0.0/reference/functions/decrypt_ff1.md) and the same key, alphabet, and tweak:
 
 ```tql
 let $key = secret("pii-ff1-key").decode_hex()
@@ -190,7 +190,7 @@ FF1 needs at least one million possible values, which means at least six digits 
 
 FF1 preserves the length and the alphabet, not checksums. An encrypted card number usually fails the Luhn check, so a system that validates the check digit rejects it. The encrypted card number in the first example, `1424-9180-0633-1645`, fails the check.
 
-To keep a card number valid, encrypt it without its check digit and append the check digit of the result with [`luhn_check_digit`](https://tenzir.com/docs/reference/functions/luhn_check_digit.md). Guard the assignments with [`is_luhn_valid`](https://tenzir.com/docs/reference/functions/is_luhn_valid.md) and a length check so that they apply only to card numbers, which have 12 to 19 digits. Without the length check, a short value that happens to pass the Luhn check, such as `42`, leaves too few digits for FF1 and becomes `null`:
+To keep a card number valid, encrypt it without its check digit and append the check digit of the result with [`luhn_check_digit`](https://tenzir.com/docs/v7.0.0/reference/functions/luhn_check_digit.md). Guard the assignments with [`is_luhn_valid`](https://tenzir.com/docs/v7.0.0/reference/functions/is_luhn_valid.md) and a length check so that they apply only to card numbers, which have 12 to 19 digits. Without the length check, a short value that happens to pass the Luhn check, such as `42`, leaves too few digits for FF1 and becomes `null`:
 
 ```tql
 let $key = secret("pii-ff1-key").decode_hex()
@@ -213,7 +213,7 @@ if card.is_luhn_valid() and card.length_bytes() >= 12 and card.length_bytes() <=
 }
 ```
 
-Decrypt the same way with [`decrypt_ff1`](https://tenzir.com/docs/reference/functions/decrypt_ff1.md):
+Decrypt the same way with [`decrypt_ff1`](https://tenzir.com/docs/v7.0.0/reference/functions/decrypt_ff1.md):
 
 ```tql
 let $key = secret("pii-ff1-key").decode_hex()
@@ -259,13 +259,13 @@ if card.is_luhn_valid() and card.length_bytes() >= 12 and card.length_bytes() <=
 }
 ```
 
-Decrypt with the same slices and [`decrypt_ff1`](https://tenzir.com/docs/reference/functions/decrypt_ff1.md). The clear-text digits reduce what the encryption hides: a 16-digit card number keeps only seven encrypted digits. FF1 needs at least six, so card numbers with fewer than 15 digits become `null` with a warning. If the downstream system checks only six digits, slice at 6 instead. This encrypts two more digits and works for card numbers with at least 13 digits.
+Decrypt with the same slices and [`decrypt_ff1`](https://tenzir.com/docs/v7.0.0/reference/functions/decrypt_ff1.md). The clear-text digits reduce what the encryption hides: a 16-digit card number keeps only seven encrypted digits. FF1 needs at least six, so card numbers with fewer than 15 digits become `null` with a warning. If the downstream system checks only six digits, slice at 6 instead. This encrypts two more digits and works for card numbers with at least 13 digits.
 
 Values that fail the guard stay in clear text, including card numbers without a Luhn check digit, such as some China UnionPay cards. If they must not leave the pipeline, handle them in an `else` branch, for example by masking them as our guide on [masking only valid card numbers](mask-sensitive-data.md#mask-only-valid-card-numbers) shows.
 
 ## Encrypt for a recipient
 
-With symmetric keys, every pipeline that encrypts can also decrypt. When pipelines at the edge should protect data without being able to decrypt it, use [`encrypt_hpke`](https://tenzir.com/docs/reference/functions/encrypt_hpke.md) with the recipient’s public key:
+With symmetric keys, every pipeline that encrypts can also decrypt. When pipelines at the edge should protect data without being able to decrypt it, use [`encrypt_hpke`](https://tenzir.com/docs/v7.0.0/reference/functions/encrypt_hpke.md) with the recipient’s public key:
 
 ```tql
 let $public_key = file_contents("/etc/tenzir/keys/public.pem")
@@ -305,11 +305,11 @@ email = email.decrypt_aes_gcm_siv(key=$key, aad=tenant)
 
 The decryption fails because the event claims a different tenant than the one the value was encrypted for. The associated data is not part of the ciphertext, so the event must carry it in plain text, or the decrypting pipeline must know it otherwise.
 
-When the associated data is `null`, for example because an event lacks the tenant field, the functions return `null` and emit a warning. Use [`else`](https://tenzir.com/docs/reference/expressions.md#fallback-with-else) to fall back to an empty value, as in `aad=tenant? else ""`.
+When the associated data is `null`, for example because an event lacks the tenant field, the functions return `null` and emit a warning. Use [`else`](https://tenzir.com/docs/v7.0.0/reference/expressions.md#fallback-with-else) to fall back to an empty value, as in `aad=tenant? else ""`.
 
 ## Encrypt records
 
-The encryption functions take strings and blobs. To encrypt a record or a list, serialize it with [`print_json`](https://tenzir.com/docs/reference/functions/print_json.md) first, and parse it with [`parse_json`](https://tenzir.com/docs/reference/functions/parse_json.md) after decrypting:
+The encryption functions take strings and blobs. To encrypt a record or a list, serialize it with [`print_json`](https://tenzir.com/docs/v7.0.0/reference/functions/print_json.md) first, and parse it with [`parse_json`](https://tenzir.com/docs/v7.0.0/reference/functions/parse_json.md) after decrypting:
 
 ```tql
 let $key = secret("pii-key").decode_hex()

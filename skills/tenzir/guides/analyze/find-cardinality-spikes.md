@@ -1,8 +1,8 @@
 ---
 title: "Find cardinality spikes"
 description: "Find windows where the number of distinct agent sessions exceeds its expected range."
-canonical: https://tenzir.com/docs/guides/analyze/find-cardinality-spikes
-source: https://tenzir.com/docs/guides/analyze/find-cardinality-spikes.md
+canonical: https://tenzir.com/docs/v7.0.0/guides/analyze/find-cardinality-spikes
+source: https://tenzir.com/docs/v7.0.0/guides/analyze/find-cardinality-spikes.md
 section: "Docs"
 ---
 
@@ -16,7 +16,7 @@ To expose the fan-out, measure session [cardinality](https://en.wikipedia.org/wi
 
 ## Estimate distinct sessions
 
-A session can produce many lifecycle events, so count each `ai_agent.instance_uid` once per window. The [`hll`](https://tenzir.com/docs/reference/functions/hll.md) function builds a [HyperLogLog](https://en.wikipedia.org/wiki/HyperLogLog) estimate without retaining every identifier, and [`hll_cardinality`](https://tenzir.com/docs/reference/functions/hll_cardinality.md) reads that estimate:
+A session can produce many lifecycle events, so count each `ai_agent.instance_uid` once per window. The [`hll`](https://tenzir.com/docs/v7.0.0/reference/functions/hll.md) function builds a [HyperLogLog](https://en.wikipedia.org/wiki/HyperLogLog) estimate without retaining every identifier, and [`hll_cardinality`](https://tenzir.com/docs/v7.0.0/reference/functions/hll_cardinality.md) reads that estimate:
 
 ```tql
 from {
@@ -65,7 +65,7 @@ window size=5min, on=time, tolerance=30s {
 }
 ```
 
-The outer [`window`](https://tenzir.com/docs/reference/operators/window.md) bounds both the observation interval and the model state. Group inside it when you need one estimate per agent runtime, model, tenant, repository, or other workload key.
+The outer [`window`](https://tenzir.com/docs/v7.0.0/reference/operators/window.md) bounds both the observation interval and the model state. Group inside it when you need one estimate per agent runtime, model, tenant, repository, or other workload key.
 
 ## Compare cardinality with a threshold
 
@@ -79,7 +79,7 @@ When expected activity differs by agent or time of day, retain a history of the 
 
 Choose exact or approximate counting
 
-Use [`count_distinct`](https://tenzir.com/docs/reference/functions/count_distinct.md) when the session population is small enough to retain and an exact answer matters. Use HyperLogLog when you need bounded state across many windows or grouping keys.
+Use [`count_distinct`](https://tenzir.com/docs/v7.0.0/reference/functions/count_distinct.md) when the session population is small enough to retain and an exact answer matters. Use HyperLogLog when you need bounded state across many windows or grouping keys.
 
 The `precision` argument controls the register count and estimation error. Its default of `14` allocates 16,384 registers per active estimate. Reduce it when you maintain many simultaneous groups and can tolerate more error. Increase it only when the decision boundary needs the additional accuracy.
 

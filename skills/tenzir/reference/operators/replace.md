@@ -1,7 +1,7 @@
 ---
 title: "replace"
-canonical: https://tenzir.com/docs/reference/operators/replace
-source: https://tenzir.com/docs/reference/operators/replace.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/replace
+source: https://tenzir.com/docs/v7.0.0/reference/operators/replace.md
 section: "Docs"
 ---
 
@@ -96,7 +96,7 @@ replace what=192.168.1.1, with="REDACTED"
 
 ## See Also
 
-* [`replace`](https://tenzir.com/docs/reference/functions/replace.md)
+* [`replace`](https://tenzir.com/docs/v7.0.0/reference/functions/replace.md)
 * [Learn idiomatic TQL](../../tutorials/learn-idiomatic-tql.md)
 
 Parallelizable: a parallel pipeline may run this operator on several cores at once.

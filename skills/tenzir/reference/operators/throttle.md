@@ -1,7 +1,7 @@
 ---
 title: "throttle"
-canonical: https://tenzir.com/docs/reference/operators/throttle
-source: https://tenzir.com/docs/reference/operators/throttle.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/throttle
+source: https://tenzir.com/docs/v7.0.0/reference/operators/throttle.md
 section: "Docs"
 ---
 
@@ -118,5 +118,5 @@ throttle rate=500, drop=true
 
 ## See Also
 
-* [`assert_throughput`](https://tenzir.com/docs/reference/operators/assert_throughput.md)
-* [`batch`](https://tenzir.com/docs/reference/operators/batch.md)
+* [`assert_throughput`](https://tenzir.com/docs/v7.0.0/reference/operators/assert_throughput.md)
+* [`batch`](https://tenzir.com/docs/v7.0.0/reference/operators/batch.md)

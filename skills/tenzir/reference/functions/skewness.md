@@ -1,7 +1,7 @@
 ---
 title: "skewness"
-canonical: https://tenzir.com/docs/reference/functions/skewness
-source: https://tenzir.com/docs/reference/functions/skewness.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/skewness
+source: https://tenzir.com/docs/v7.0.0/reference/functions/skewness.md
 section: "Docs"
 ---
 
@@ -74,9 +74,9 @@ A perfectly regular beacon has zero-dispersion intervals and yields exactly `0.0
 
 ## See Also
 
-* [`deltas`](https://tenzir.com/docs/reference/functions/deltas.md)
-* [`mad`](https://tenzir.com/docs/reference/functions/mad.md)
-* [`median`](https://tenzir.com/docs/reference/functions/median.md)
-* [`quantile`](https://tenzir.com/docs/reference/functions/quantile.md)
-* [`stddev`](https://tenzir.com/docs/reference/functions/stddev.md)
+* [`deltas`](https://tenzir.com/docs/v7.0.0/reference/functions/deltas.md)
+* [`mad`](https://tenzir.com/docs/v7.0.0/reference/functions/mad.md)
+* [`median`](https://tenzir.com/docs/v7.0.0/reference/functions/median.md)
+* [`quantile`](https://tenzir.com/docs/v7.0.0/reference/functions/quantile.md)
+* [`stddev`](https://tenzir.com/docs/v7.0.0/reference/functions/stddev.md)
 * [Aggregate event streams](../../guides/analyze/aggregate-event-streams.md)

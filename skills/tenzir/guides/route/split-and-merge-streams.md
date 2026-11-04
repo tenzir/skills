@@ -1,7 +1,7 @@
 ---
 title: "Split and merge streams"
-canonical: https://tenzir.com/docs/guides/route/split-and-merge-streams
-source: https://tenzir.com/docs/guides/route/split-and-merge-streams.md
+canonical: https://tenzir.com/docs/v7.0.0/guides/route/split-and-merge-streams
+source: https://tenzir.com/docs/v7.0.0/guides/route/split-and-merge-streams.md
 section: "Docs"
 ---
 
@@ -9,13 +9,13 @@ section: "Docs"
 
 > This guide shows you how to connect pipelines using publish and subscribe operators. You’ll learn to split event streams for parallel processing and merge multiple sources into a single pipeline, both across pipelines and within a single one.
 
-This guide shows you how to connect pipelines using [`publish`](https://tenzir.com/docs/reference/operators/publish.md) and [`subscribe`](https://tenzir.com/docs/reference/operators/subscribe.md) operators. You’ll learn to split event streams for parallel processing and merge multiple sources into a single pipeline, both across pipelines and within a single one.
+This guide shows you how to connect pipelines using [`publish`](https://tenzir.com/docs/v7.0.0/reference/operators/publish.md) and [`subscribe`](https://tenzir.com/docs/v7.0.0/reference/operators/subscribe.md) operators. You’ll learn to split event streams for parallel processing and merge multiple sources into a single pipeline, both across pipelines and within a single one.
 
-Tenzir gives you two ways to split and merge streams. Publish/subscribe topics connect *separate* pipelines on the same node, which is what you want when the producers and consumers have independent lifetimes or when you add and remove consumers over time. Topics are node-local, so crossing node boundaries needs an external broker such as Kafka or NATS instead, as the guide on how to [send to destinations](send-to-destinations.md) shows. The [`fork`](https://tenzir.com/docs/reference/operators/fork.md) and [`merge`](https://tenzir.com/docs/reference/operators/merge.md) operators split and merge *inside* a single pipeline, which keeps a self-contained flow in one place: `fork` attaches an extra sink that consumes a copy of the stream, and `merge` attaches an extra source that contributes events into the stream.
+Tenzir gives you two ways to split and merge streams. Publish/subscribe topics connect *separate* pipelines on the same node, which is what you want when the producers and consumers have independent lifetimes or when you add and remove consumers over time. Topics are node-local, so crossing node boundaries needs an external broker such as Kafka or NATS instead, as the guide on how to [send to destinations](send-to-destinations.md) shows. The [`fork`](https://tenzir.com/docs/v7.0.0/reference/operators/fork.md) and [`merge`](https://tenzir.com/docs/v7.0.0/reference/operators/merge.md) operators split and merge *inside* a single pipeline, which keeps a self-contained flow in one place: `fork` attaches an extra sink that consumes a copy of the stream, and `merge` attaches an extra source that contributes events into the stream.
 
 ## How publish/subscribe works
 
-The [`publish`](https://tenzir.com/docs/reference/operators/publish.md) operator sends events to a named channel (topic) on a node. The [`subscribe`](https://tenzir.com/docs/reference/operators/subscribe.md) operator receives events from that channel. Multiple subscribers can receive the same events, and multiple publishers can write to the same topic.
+The [`publish`](https://tenzir.com/docs/v7.0.0/reference/operators/publish.md) operator sends events to a named channel (topic) on a node. The [`subscribe`](https://tenzir.com/docs/v7.0.0/reference/operators/subscribe.md) operator receives events from that channel. Multiple subscribers can receive the same events, and multiple publishers can write to the same topic.
 
 ```tql
 // Publisher pipeline
@@ -130,7 +130,7 @@ subscribe "suricata.alert"
 
 ### Split within a single pipeline
 
-When one pipeline owns both branches, [`fork`](https://tenzir.com/docs/reference/operators/fork.md) sends a copy of every event into a subpipeline while the main stream continues unchanged. This archives all events and keeps only the high-severity ones for the SIEM, without a second pipeline and without a topic in between:
+When one pipeline owns both branches, [`fork`](https://tenzir.com/docs/v7.0.0/reference/operators/fork.md) sends a copy of every event into a subpipeline while the main stream continues unchanged. This archives all events and keeps only the high-severity ones for the SIEM, without a second pipeline and without a topic in between:
 
 ```tql
 from_file "/var/log/*.json", watch=10s
@@ -141,7 +141,7 @@ where severity in ["high", "critical"]
 to_splunk "https://splunk:8088", hec_token=secret("HEC_TOKEN")
 ```
 
-The subpipeline must end in a sink, so its events never rejoin the main stream. Use [`fork_merge`](https://tenzir.com/docs/reference/operators/fork_merge.md) when you want both branches to transform the events and then feed their results back into one stream. To send events into subpipelines per event or per key instead of branching by purpose, the guide on how to [fan out with subpipelines](fan-out-with-subpipelines.md) compares `fork` with [`each`](https://tenzir.com/docs/reference/operators/each.md) and [`group`](https://tenzir.com/docs/reference/operators/group.md).
+The subpipeline must end in a sink, so its events never rejoin the main stream. Use [`fork_merge`](https://tenzir.com/docs/v7.0.0/reference/operators/fork_merge.md) when you want both branches to transform the events and then feed their results back into one stream. To send events into subpipelines per event or per key instead of branching by purpose, the guide on how to [fan out with subpipelines](fan-out-with-subpipelines.md) compares `fork` with [`each`](https://tenzir.com/docs/v7.0.0/reference/operators/each.md) and [`group`](https://tenzir.com/docs/v7.0.0/reference/operators/group.md).
 
 ## Fan-in: merge streams
 
@@ -177,7 +177,7 @@ The subscriber receives events from both Zeek and Suricata in a single stream.
 
 ### Merge within a single pipeline
 
-The dual of `fork` is [`merge`](https://tenzir.com/docs/reference/operators/merge.md), which runs a subpipeline that starts with its own source and interleaves the events it produces into the stream. Reach for it when a single pipeline needs to pull in a second input, such as combining two files that a downstream sink should receive as one stream:
+The dual of `fork` is [`merge`](https://tenzir.com/docs/v7.0.0/reference/operators/merge.md), which runs a subpipeline that starts with its own source and interleaves the events it produces into the stream. Reach for it when a single pipeline needs to pull in a second input, such as combining two files that a downstream sink should receive as one stream:
 
 ```tql
 from_file "/var/log/suricata/eve.json" {
@@ -191,7 +191,7 @@ merge {
 to_splunk "https://splunk:8088", hec_token=secret("HEC_TOKEN")
 ```
 
-Because both sources run concurrently, the order in which their events appear in the output is undefined. Both sources here are bounded, so a downstream [`sort`](https://tenzir.com/docs/reference/operators/sort.md) can restore an order such as by timestamp. Unlike the publish/subscribe variant above, the merged inputs share one pipeline: they start, stop, and fail together, and no topic is involved.
+Because both sources run concurrently, the order in which their events appear in the output is undefined. Both sources here are bounded, so a downstream [`sort`](https://tenzir.com/docs/v7.0.0/reference/operators/sort.md) can restore an order such as by timestamp. Unlike the publish/subscribe variant above, the merged inputs share one pipeline: they start, stop, and fail together, and no topic is involved.
 
 ## Subscribe to multiple topics
 
@@ -237,8 +237,8 @@ Pipelines not visible on the overview page at [app.tenzir.com](https://app.tenzi
 * [Send to destinations](send-to-destinations.md)
 * [Fan out with subpipelines](fan-out-with-subpipelines.md)
 * [Load-balance pipelines](load-balance-pipelines.md)
-* [`publish`](https://tenzir.com/docs/reference/operators/publish.md)
-* [`subscribe`](https://tenzir.com/docs/reference/operators/subscribe.md)
-* [`fork`](https://tenzir.com/docs/reference/operators/fork.md)
-* [`fork_merge`](https://tenzir.com/docs/reference/operators/fork_merge.md)
-* [`merge`](https://tenzir.com/docs/reference/operators/merge.md)
+* [`publish`](https://tenzir.com/docs/v7.0.0/reference/operators/publish.md)
+* [`subscribe`](https://tenzir.com/docs/v7.0.0/reference/operators/subscribe.md)
+* [`fork`](https://tenzir.com/docs/v7.0.0/reference/operators/fork.md)
+* [`fork_merge`](https://tenzir.com/docs/v7.0.0/reference/operators/fork_merge.md)
+* [`merge`](https://tenzir.com/docs/v7.0.0/reference/operators/merge.md)

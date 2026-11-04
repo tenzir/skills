@@ -1,7 +1,7 @@
 ---
 title: "api"
-canonical: https://tenzir.com/docs/reference/operators/api
-source: https://tenzir.com/docs/reference/operators/api.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/api
+source: https://tenzir.com/docs/v7.0.0/reference/operators/api.md
 section: "Docs"
 ---
 
@@ -49,4 +49,4 @@ api "/pipeline/create", {
 
 ## See Also
 
-* [`openapi`](https://tenzir.com/docs/reference/operators/openapi.md)
+* [`openapi`](https://tenzir.com/docs/v7.0.0/reference/operators/openapi.md)

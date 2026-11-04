@@ -1,7 +1,7 @@
 ---
 title: "yara"
-canonical: https://tenzir.com/docs/reference/operators/yara
-source: https://tenzir.com/docs/reference/operators/yara.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/yara
+source: https://tenzir.com/docs/v7.0.0/reference/operators/yara.md
 section: "Docs"
 ---
 
@@ -197,5 +197,5 @@ The operator emits one `tenzir.yara` event for every matched rule:
 
 ## See Also
 
-* [`sigma`](https://tenzir.com/docs/reference/operators/sigma.md)
+* [`sigma`](https://tenzir.com/docs/v7.0.0/reference/operators/sigma.md)
 * [Scan bytes with YARA](../../guides/detect/scan-bytes-with-yara.md)

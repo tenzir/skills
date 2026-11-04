@@ -1,7 +1,7 @@
 ---
 title: "concatenate"
-canonical: https://tenzir.com/docs/reference/functions/concatenate
-source: https://tenzir.com/docs/reference/functions/concatenate.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/concatenate
+source: https://tenzir.com/docs/v7.0.0/reference/functions/concatenate.md
 section: "Docs"
 ---
 
@@ -60,9 +60,9 @@ right = concatenate(xs, [2])
 
 ## See Also
 
-* [`append`](https://tenzir.com/docs/reference/functions/append.md)
-* [`merge`](https://tenzir.com/docs/reference/functions/merge.md)
-* [`prepend`](https://tenzir.com/docs/reference/functions/prepend.md)
-* [`zip`](https://tenzir.com/docs/reference/functions/zip.md)
+* [`append`](https://tenzir.com/docs/v7.0.0/reference/functions/append.md)
+* [`merge`](https://tenzir.com/docs/v7.0.0/reference/functions/merge.md)
+* [`prepend`](https://tenzir.com/docs/v7.0.0/reference/functions/prepend.md)
+* [`zip`](https://tenzir.com/docs/v7.0.0/reference/functions/zip.md)
 * [Shape lists](../../guides/shape/shape-lists.md)
 * [Learn idiomatic TQL](../../tutorials/learn-idiomatic-tql.md)

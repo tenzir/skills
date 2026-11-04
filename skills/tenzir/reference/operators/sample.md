@@ -1,7 +1,7 @@
 ---
 title: "sample"
-canonical: https://tenzir.com/docs/reference/operators/sample
-source: https://tenzir.com/docs/reference/operators/sample.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/sample
+source: https://tenzir.com/docs/v7.0.0/reference/operators/sample.md
 section: "Docs"
 ---
 
@@ -98,7 +98,7 @@ sample 30s, min_events=50, max_rate=500
 
 ### Sample metrics every hour
 
-Sample some `metrics` every hour, limiting the max samples per period to 5,000 samples (`max_samples`) and limiting the overall sample count to 100,000 samples ([`head`](https://tenzir.com/docs/reference/operators/head.md)).
+Sample some `metrics` every hour, limiting the max samples per period to 5,000 samples (`max_samples`) and limiting the overall sample count to 100,000 samples ([`head`](https://tenzir.com/docs/v7.0.0/reference/operators/head.md)).
 
 ```tql
 subscribe "metrics"
@@ -130,5 +130,5 @@ With `log10` mode, even at 100,000 events per period, the sampling rate is only 
 
 ## See Also
 
-* [`deduplicate`](https://tenzir.com/docs/reference/operators/deduplicate.md)
+* [`deduplicate`](https://tenzir.com/docs/v7.0.0/reference/operators/deduplicate.md)
 * [Slice and sample data](../../guides/optimize/slice-and-sample-data.md)

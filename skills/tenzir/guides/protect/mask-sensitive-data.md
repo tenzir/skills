@@ -1,7 +1,7 @@
 ---
 title: "Mask sensitive data"
-canonical: https://tenzir.com/docs/guides/protect/mask-sensitive-data
-source: https://tenzir.com/docs/guides/protect/mask-sensitive-data.md
+canonical: https://tenzir.com/docs/v7.0.0/guides/protect/mask-sensitive-data
+source: https://tenzir.com/docs/v7.0.0/guides/protect/mask-sensitive-data.md
 section: "Docs"
 ---
 
@@ -20,7 +20,7 @@ Pick the technique that matches the downstream use case:
 
 When authorized people must be able to recover the original value, encrypt it instead. Our guide on [encrypting sensitive data](encrypt-sensitive-data.md) covers this case.
 
-The strongest mask is no field at all. When a sensitive field has no downstream use, drop it instead of transforming it with [`drop`](https://tenzir.com/docs/reference/operators/drop.md) or by omitting it from [`select`](https://tenzir.com/docs/reference/operators/select.md):
+The strongest mask is no field at all. When a sensitive field has no downstream use, drop it instead of transforming it with [`drop`](https://tenzir.com/docs/v7.0.0/reference/operators/drop.md) or by omitting it from [`select`](https://tenzir.com/docs/v7.0.0/reference/operators/select.md):
 
 ```tql
 drop password, ssn
@@ -30,7 +30,7 @@ The rest of this guide covers the cases where you do need to keep something.
 
 ## Anonymize IP addresses
 
-Use [`encrypt_cryptopan`](https://tenzir.com/docs/reference/functions/encrypt_cryptopan.md) to replace IP addresses with prefix-preserving pseudonyms. Two addresses in the same subnet produce two anonymized addresses in the same subnet, which keeps flow analysis meaningful while removing the original IPs.
+Use [`encrypt_cryptopan`](https://tenzir.com/docs/v7.0.0/reference/functions/encrypt_cryptopan.md) to replace IP addresses with prefix-preserving pseudonyms. Two addresses in the same subnet produce two anonymized addresses in the same subnet, which keeps flow analysis meaningful while removing the original IPs.
 
 The seed is a secret with 32 bytes. This example assumes that your secret store holds the secret `cryptopan-key` with the hex-encoded value `000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f`:
 
@@ -54,9 +54,9 @@ The two addresses originally in `192.168.1.0/24` still share a prefix (`2.149.25
 
 Crypto-PAn is reversible
 
-Crypto-PAn is a keyed pseudonymization scheme, not a one-way function. Anyone with the seed can recover the original addresses with [`decrypt_cryptopan`](https://tenzir.com/docs/reference/functions/decrypt_cryptopan.md). Treat the seed like a private key: keep it in your secret store, and use [`hash_sha256`](https://tenzir.com/docs/reference/functions/hash_sha256.md) instead if you need an irreversible transformation.
+Crypto-PAn is a keyed pseudonymization scheme, not a one-way function. Anyone with the seed can recover the original addresses with [`decrypt_cryptopan`](https://tenzir.com/docs/v7.0.0/reference/functions/decrypt_cryptopan.md). Treat the seed like a private key: keep it in your secret store, and use [`hash_sha256`](https://tenzir.com/docs/v7.0.0/reference/functions/hash_sha256.md) instead if you need an irreversible transformation.
 
-When an authorized investigator needs to round-trip an event back to its original IPs, pass the same seed to [`decrypt_cryptopan`](https://tenzir.com/docs/reference/functions/decrypt_cryptopan.md):
+When an authorized investigator needs to round-trip an event back to its original IPs, pass the same seed to [`decrypt_cryptopan`](https://tenzir.com/docs/v7.0.0/reference/functions/decrypt_cryptopan.md):
 
 ```tql
 let $seed = secret("cryptopan-key").decode_hex()
@@ -96,12 +96,12 @@ account_id = account_id.hash_sha256()
 }
 ```
 
-[`hash_sha256`](https://tenzir.com/docs/reference/functions/hash_sha256.md) works for any string and produces a 64-character hex digest. Tenzir ships several hash functions so you can pick the right trade-off between speed and collision resistance:
+[`hash_sha256`](https://tenzir.com/docs/v7.0.0/reference/functions/hash_sha256.md) works for any string and produces a 64-character hex digest. Tenzir ships several hash functions so you can pick the right trade-off between speed and collision resistance:
 
-* SHA-2 family: [`hash_sha224`](https://tenzir.com/docs/reference/functions/hash_sha224.md), [`hash_sha256`](https://tenzir.com/docs/reference/functions/hash_sha256.md), [`hash_sha384`](https://tenzir.com/docs/reference/functions/hash_sha384.md), [`hash_sha512`](https://tenzir.com/docs/reference/functions/hash_sha512.md)
-* SHA-3 family: [`hash_sha3_224`](https://tenzir.com/docs/reference/functions/hash_sha3_224.md), [`hash_sha3_256`](https://tenzir.com/docs/reference/functions/hash_sha3_256.md), [`hash_sha3_384`](https://tenzir.com/docs/reference/functions/hash_sha3_384.md), [`hash_sha3_512`](https://tenzir.com/docs/reference/functions/hash_sha3_512.md)
-* Legacy (not cryptographically secure): [`hash_md5`](https://tenzir.com/docs/reference/functions/hash_md5.md), [`hash_sha1`](https://tenzir.com/docs/reference/functions/hash_sha1.md)
-* Fast non-cryptographic: [`hash_xxh3`](https://tenzir.com/docs/reference/functions/hash_xxh3.md) for high-throughput deduplication or sharding
+* SHA-2 family: [`hash_sha224`](https://tenzir.com/docs/v7.0.0/reference/functions/hash_sha224.md), [`hash_sha256`](https://tenzir.com/docs/v7.0.0/reference/functions/hash_sha256.md), [`hash_sha384`](https://tenzir.com/docs/v7.0.0/reference/functions/hash_sha384.md), [`hash_sha512`](https://tenzir.com/docs/v7.0.0/reference/functions/hash_sha512.md)
+* SHA-3 family: [`hash_sha3_224`](https://tenzir.com/docs/v7.0.0/reference/functions/hash_sha3_224.md), [`hash_sha3_256`](https://tenzir.com/docs/v7.0.0/reference/functions/hash_sha3_256.md), [`hash_sha3_384`](https://tenzir.com/docs/v7.0.0/reference/functions/hash_sha3_384.md), [`hash_sha3_512`](https://tenzir.com/docs/v7.0.0/reference/functions/hash_sha3_512.md)
+* Legacy (not cryptographically secure): [`hash_md5`](https://tenzir.com/docs/v7.0.0/reference/functions/hash_md5.md), [`hash_sha1`](https://tenzir.com/docs/v7.0.0/reference/functions/hash_sha1.md)
+* Fast non-cryptographic: [`hash_xxh3`](https://tenzir.com/docs/v7.0.0/reference/functions/hash_xxh3.md) for high-throughput deduplication or sharding
 
 Two properties of hashing to keep in mind
 
@@ -128,7 +128,7 @@ A different seed produces a completely different digest for the same input, so k
 
 ### Authenticate with HMAC
 
-When compliance language asks for HMAC-SHA256 specifically, or when you need the formal guarantees of a keyed message authentication code, use [`hmac`](https://tenzir.com/docs/reference/functions/hmac.md). Its key is a secret, so it never appears in the pipeline definition. This example assumes that your secret store holds the secret `hmac-key` with the value `some-random-string`:
+When compliance language asks for HMAC-SHA256 specifically, or when you need the formal guarantees of a keyed message authentication code, use [`hmac`](https://tenzir.com/docs/v7.0.0/reference/functions/hmac.md). Its key is a secret, so it never appears in the pipeline definition. This example assumes that your secret store holds the secret `hmac-key` with the value `some-random-string`:
 
 ```tql
 from {
@@ -183,7 +183,7 @@ Records without a `password` field pass through unchanged.
 
 ### Redact a structured value from raw data
 
-Normalized events can retain a sensitive value in both a structured field and the original `raw_data`. Use the structured field as the dynamic pattern for [`replace`](https://tenzir.com/docs/reference/functions/replace.md) before you overwrite it:
+Normalized events can retain a sensitive value in both a structured field and the original `raw_data`. Use the structured field as the dynamic pattern for [`replace`](https://tenzir.com/docs/v7.0.0/reference/functions/replace.md) before you overwrite it:
 
 ```tql
 from {
@@ -207,7 +207,7 @@ The order matters because the first assignment uses the original `user.email_add
 
 ## Reveal a prefix and mask the rest
 
-Sometimes you want analysts to recognize a value at a glance without exposing all of it. Combine [`slice`](https://tenzir.com/docs/reference/functions/slice.md) with [`pad_end`](https://tenzir.com/docs/reference/functions/pad_end.md) or [`pad_start`](https://tenzir.com/docs/reference/functions/pad_start.md) to keep either end of the value:
+Sometimes you want analysts to recognize a value at a glance without exposing all of it. Combine [`slice`](https://tenzir.com/docs/v7.0.0/reference/functions/slice.md) with [`pad_end`](https://tenzir.com/docs/v7.0.0/reference/functions/pad_end.md) or [`pad_start`](https://tenzir.com/docs/v7.0.0/reference/functions/pad_start.md) to keep either end of the value:
 
 ```tql
 from {
@@ -231,7 +231,7 @@ For `card_number`, `slice(begin=-4)` takes the last four digits and `pad_start(1
 
 ### Mask only valid card numbers
 
-A field such as a payment reference can hold card numbers next to other identifiers that you want to keep. Use [`is_luhn_valid`](https://tenzir.com/docs/reference/functions/is_luhn_valid.md) to mask only the values that pass the Luhn check of card numbers:
+A field such as a payment reference can hold card numbers next to other identifiers that you want to keep. Use [`is_luhn_valid`](https://tenzir.com/docs/v7.0.0/reference/functions/is_luhn_valid.md) to mask only the values that pass the Luhn check of card numbers:
 
 ```tql
 from {payment_ref: "4111111111111111"},
@@ -277,7 +277,7 @@ The domain stays intact, so you can still group events by provider while the ide
 
 ### Reveal one character of each part
 
-For a display-friendly format, use [`replace_regex`](https://tenzir.com/docs/reference/functions/replace_regex.md) with capture groups to keep the first character of the local part and the first character of the host:
+For a display-friendly format, use [`replace_regex`](https://tenzir.com/docs/v7.0.0/reference/functions/replace_regex.md) with capture groups to keep the first character of the local part and the first character of the host:
 
 ```tql
 from {email: "alice@example.com"},
@@ -296,7 +296,7 @@ The pattern captures the first character of the local part (`\1`), the first cha
 
 ## Coarsen dates and timestamps
 
-For fields like date of birth or login time, you often want to keep the year or month but drop finer granularity. Combine [`format_time`](https://tenzir.com/docs/reference/functions/format_time.md) with the [`time`](https://tenzir.com/docs/reference/functions/time.md) constructor to rebuild a `time` value pinned to the start of a period, which preserves the type for downstream filtering and aggregation:
+For fields like date of birth or login time, you often want to keep the year or month but drop finer granularity. Combine [`format_time`](https://tenzir.com/docs/v7.0.0/reference/functions/format_time.md) with the [`time`](https://tenzir.com/docs/v7.0.0/reference/functions/time.md) constructor to rebuild a `time` value pinned to the start of a period, which preserves the type for downstream filtering and aggregation:
 
 ```tql
 from {
@@ -318,7 +318,7 @@ last_login = last_login.format_time("%Y-%m-01").time()
 
 The pipeline reduces `dob` to year precision and `last_login` to month precision. Adjust the format string to keep the day (`"%Y-%m-%d"`) or to truncate further by hard-coding earlier components.
 
-If you only need the year as a number, for example to compute age cohorts, call [`year`](https://tenzir.com/docs/reference/functions/year.md) directly:
+If you only need the year as a number, for example to compute age cohorts, call [`year`](https://tenzir.com/docs/v7.0.0/reference/functions/year.md) directly:
 
 ```tql
 from {dob: 1985-07-23T00:00:00}
@@ -332,28 +332,28 @@ birth_year = dob.year()
 }
 ```
 
-For a string label such as `"1985"`, use [`format_time`](https://tenzir.com/docs/reference/functions/format_time.md) with `"%Y"`.
+For a string label such as `"1985"`, use [`format_time`](https://tenzir.com/docs/v7.0.0/reference/functions/format_time.md) with `"%Y"`.
 
 Salts of hash functions
 
-The key of [`hmac`](https://tenzir.com/docs/reference/functions/hmac.md), the seeds of [`encrypt_cryptopan`](https://tenzir.com/docs/reference/functions/encrypt_cryptopan.md) and [`decrypt_cryptopan`](https://tenzir.com/docs/reference/functions/decrypt_cryptopan.md), and the keys of the [encryption functions](encrypt-sensitive-data.md) accept secrets, which keeps them out of the pipeline definition. The `seed` arguments of the `hash_*` functions accept only plain strings. Source salts through your deployment’s secret-injection mechanism, such as environment variables populated from a secret store, and bind them with `let`.
+The key of [`hmac`](https://tenzir.com/docs/v7.0.0/reference/functions/hmac.md), the seeds of [`encrypt_cryptopan`](https://tenzir.com/docs/v7.0.0/reference/functions/encrypt_cryptopan.md) and [`decrypt_cryptopan`](https://tenzir.com/docs/v7.0.0/reference/functions/decrypt_cryptopan.md), and the keys of the [encryption functions](encrypt-sensitive-data.md) accept secrets, which keeps them out of the pipeline definition. The `seed` arguments of the `hash_*` functions accept only plain strings. Source salts through your deployment’s secret-injection mechanism, such as environment variables populated from a secret store, and bind them with `let`.
 
 ## See also
 
-* [`drop`](https://tenzir.com/docs/reference/operators/drop.md)
-* [`select`](https://tenzir.com/docs/reference/operators/select.md)
-* [`encrypt_cryptopan`](https://tenzir.com/docs/reference/functions/encrypt_cryptopan.md)
-* [`decrypt_cryptopan`](https://tenzir.com/docs/reference/functions/decrypt_cryptopan.md)
-* [`hash_sha256`](https://tenzir.com/docs/reference/functions/hash_sha256.md)
-* [`hmac`](https://tenzir.com/docs/reference/functions/hmac.md)
-* [`slice`](https://tenzir.com/docs/reference/functions/slice.md)
-* [`pad_end`](https://tenzir.com/docs/reference/functions/pad_end.md)
-* [`pad_start`](https://tenzir.com/docs/reference/functions/pad_start.md)
-* [`replace`](https://tenzir.com/docs/reference/functions/replace.md)
-* [`replace_regex`](https://tenzir.com/docs/reference/functions/replace_regex.md)
-* [`year`](https://tenzir.com/docs/reference/functions/year.md)
-* [`format_time`](https://tenzir.com/docs/reference/functions/format_time.md)
-* [`secret`](https://tenzir.com/docs/reference/functions/secret.md)
+* [`drop`](https://tenzir.com/docs/v7.0.0/reference/operators/drop.md)
+* [`select`](https://tenzir.com/docs/v7.0.0/reference/operators/select.md)
+* [`encrypt_cryptopan`](https://tenzir.com/docs/v7.0.0/reference/functions/encrypt_cryptopan.md)
+* [`decrypt_cryptopan`](https://tenzir.com/docs/v7.0.0/reference/functions/decrypt_cryptopan.md)
+* [`hash_sha256`](https://tenzir.com/docs/v7.0.0/reference/functions/hash_sha256.md)
+* [`hmac`](https://tenzir.com/docs/v7.0.0/reference/functions/hmac.md)
+* [`slice`](https://tenzir.com/docs/v7.0.0/reference/functions/slice.md)
+* [`pad_end`](https://tenzir.com/docs/v7.0.0/reference/functions/pad_end.md)
+* [`pad_start`](https://tenzir.com/docs/v7.0.0/reference/functions/pad_start.md)
+* [`replace`](https://tenzir.com/docs/v7.0.0/reference/functions/replace.md)
+* [`replace_regex`](https://tenzir.com/docs/v7.0.0/reference/functions/replace_regex.md)
+* [`year`](https://tenzir.com/docs/v7.0.0/reference/functions/year.md)
+* [`format_time`](https://tenzir.com/docs/v7.0.0/reference/functions/format_time.md)
+* [`secret`](https://tenzir.com/docs/v7.0.0/reference/functions/secret.md)
 * [Manipulate strings](../shape/manipulate-strings.md)
 * [Transform values](../shape/transform-values.md)
 * [Normalize event timestamps](../shape/normalize-event-timestamps.md)

@@ -1,7 +1,7 @@
 ---
 title: "accept_relp"
-canonical: https://tenzir.com/docs/reference/operators/accept_relp
-source: https://tenzir.com/docs/reference/operators/accept_relp.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/accept_relp
+source: https://tenzir.com/docs/v7.0.0/reference/operators/accept_relp.md
 section: "Docs"
 ---
 
@@ -9,7 +9,7 @@ section: "Docs"
 
 > Receives Syslog messages over the Reliable Event Logging Protocol (RELP).
 
-Receives Syslog messages over the [Reliable Event Logging Protocol (RELP)](../../integrations/relp.md).
+Receives Syslog messages over the [Reliable Event Logging Protocol (RELP)](https://docs.tenzir.com/integrations/relp).
 
 ```tql
 accept_relp endpoint:string, [max_message_size=int, max_connections=int,
@@ -25,7 +25,7 @@ RELP payloads can contain newlines and don’t require a trailing newline. The o
 
 The payload must contain valid UTF-8. Tenzir drops an invalid payload, emits a warning, and acknowledges it so that one malformed message doesn’t block later messages from the sender.
 
-Use [`accept_tcp`](https://tenzir.com/docs/reference/operators/accept_tcp.md) with [`read_syslog`](https://tenzir.com/docs/reference/operators/read_syslog.md) for Syslog over plain TCP, or [`accept_udp`](https://tenzir.com/docs/reference/operators/accept_udp.md) for Syslog datagrams.
+Use [`accept_tcp`](https://tenzir.com/docs/v7.0.0/reference/operators/accept_tcp.md) with [`read_syslog`](https://tenzir.com/docs/v7.0.0/reference/operators/read_syslog.md) for Syslog over plain TCP, or [`accept_udp`](https://tenzir.com/docs/v7.0.0/reference/operators/accept_udp.md) for Syslog datagrams.
 
 ### Acknowledgement behavior
 
@@ -113,7 +113,7 @@ accept_relp "0.0.0.0:2514"
 syslog = data.parse_syslog()
 ```
 
-[`accept_relp`](https://tenzir.com/docs/reference/operators/accept_relp.md) preserves each RELP message boundary. The default [`parse_syslog`](https://tenzir.com/docs/reference/functions/parse_syslog.md) mode accepts ordinary Syslog payloads and payloads that retain an RFC 6587 length prefix. Assigning the result to `syslog` preserves the original payload, peer information, and RELP transaction ID.
+[`accept_relp`](https://tenzir.com/docs/v7.0.0/reference/operators/accept_relp.md) preserves each RELP message boundary. The default [`parse_syslog`](https://tenzir.com/docs/v7.0.0/reference/functions/parse_syslog.md) mode accepts ordinary Syslog payloads and payloads that retain an RFC 6587 length prefix. Assigning the result to `syslog` preserves the original payload, peer information, and RELP transaction ID.
 
 ### Require client certificates
 

@@ -1,7 +1,7 @@
 ---
 title: "parse_xml"
-canonical: https://tenzir.com/docs/reference/functions/parse_xml
-source: https://tenzir.com/docs/reference/functions/parse_xml.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/parse_xml
+source: https://tenzir.com/docs/v7.0.0/reference/functions/parse_xml.md
 section: "Docs"
 ---
 
@@ -371,7 +371,7 @@ output = xml.parse_xml(xpath="/record", key_attr="name")
 
 ## See Also
 
-* [`parse_winlog`](https://tenzir.com/docs/reference/functions/parse_winlog.md)
-* [`parse_json`](https://tenzir.com/docs/reference/functions/parse_json.md)
-* [`parse_yaml`](https://tenzir.com/docs/reference/functions/parse_yaml.md)
-* [Microsoft Windows Event Logs](../../integrations/microsoft/windows-event-logs.md)
+* [`parse_winlog`](https://tenzir.com/docs/v7.0.0/reference/functions/parse_winlog.md)
+* [`parse_json`](https://tenzir.com/docs/v7.0.0/reference/functions/parse_json.md)
+* [`parse_yaml`](https://tenzir.com/docs/v7.0.0/reference/functions/parse_yaml.md)
+* [Windows event logs](https://docs.tenzir.com/integrations/microsoft/windows-event-logs)

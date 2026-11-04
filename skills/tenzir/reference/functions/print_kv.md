@@ -1,7 +1,7 @@
 ---
 title: "print_kv"
-canonical: https://tenzir.com/docs/reference/functions/print_kv
-source: https://tenzir.com/docs/reference/functions/print_kv.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/print_kv
+source: https://tenzir.com/docs/v7.0.0/reference/functions/print_kv.md
 section: "Docs"
 ---
 
@@ -81,6 +81,6 @@ output = input.print_kv()
 
 ## See Also
 
-* [`parse_kv`](https://tenzir.com/docs/reference/functions/parse_kv.md)
-* [`read_kv`](https://tenzir.com/docs/reference/operators/read_kv.md)
-* [`write_kv`](https://tenzir.com/docs/reference/operators/write_kv.md)
+* [`parse_kv`](https://tenzir.com/docs/v7.0.0/reference/functions/parse_kv.md)
+* [`read_kv`](https://tenzir.com/docs/v7.0.0/reference/operators/read_kv.md)
+* [`write_kv`](https://tenzir.com/docs/v7.0.0/reference/operators/write_kv.md)

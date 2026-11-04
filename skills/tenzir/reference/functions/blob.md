@@ -1,7 +1,7 @@
 ---
 title: "blob"
-canonical: https://tenzir.com/docs/reference/functions/blob
-source: https://tenzir.com/docs/reference/functions/blob.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/blob
+source: https://tenzir.com/docs/v7.0.0/reference/functions/blob.md
 section: "Docs"
 ---
 
@@ -36,6 +36,6 @@ Use this when you want to retain serialized data without indexing it as a string
 
 ## See Also
 
-* [`string`](https://tenzir.com/docs/reference/functions/string.md)
-* [`print_ndjson`](https://tenzir.com/docs/reference/functions/print_ndjson.md)
+* [`string`](https://tenzir.com/docs/v7.0.0/reference/functions/string.md)
+* [`print_ndjson`](https://tenzir.com/docs/v7.0.0/reference/functions/print_ndjson.md)
 * [Transform values](../../guides/shape/transform-values.md)

@@ -1,7 +1,7 @@
 ---
 title: "fields"
-canonical: https://tenzir.com/docs/reference/operators/fields
-source: https://tenzir.com/docs/reference/operators/fields.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/fields
+source: https://tenzir.com/docs/v7.0.0/reference/operators/fields.md
 section: "Docs"
 ---
 
@@ -32,5 +32,5 @@ head 5
 
 ## See Also
 
-* [`schemas`](https://tenzir.com/docs/reference/operators/schemas.md)
+* [`schemas`](https://tenzir.com/docs/v7.0.0/reference/operators/schemas.md)
 * [Show available schemas](../../guides/store/show-available-schemas.md)

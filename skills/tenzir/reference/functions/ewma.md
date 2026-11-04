@@ -1,7 +1,7 @@
 ---
 title: "ewma"
-canonical: https://tenzir.com/docs/reference/functions/ewma
-source: https://tenzir.com/docs/reference/functions/ewma.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/ewma
+source: https://tenzir.com/docs/v7.0.0/reference/functions/ewma.md
 section: "Docs"
 ---
 
@@ -61,7 +61,7 @@ Choose exactly one decay parameter:
   .
 * Duration `halflife`: A positive duration used with `times` for time-aware decay.
 
-The companion functions [`ewm_variance`](https://tenzir.com/docs/reference/functions/ewm_variance.md) and [`ewm_stddev`](https://tenzir.com/docs/reference/functions/ewm_stddev.md) compute the matching second moments with the same options.
+The companion functions [`ewm_variance`](https://tenzir.com/docs/v7.0.0/reference/functions/ewm_variance.md) and [`ewm_stddev`](https://tenzir.com/docs/v7.0.0/reference/functions/ewm_stddev.md) compute the matching second moments with the same options.
 
 All numeric decay parameters must be finite. A null list yields null. Empty lists remain empty. Leading null elements remain null. After the first numeric element, a null element repeats the current average so that the result keeps the input element positions. A NaN element counts as null.
 
@@ -151,10 +151,10 @@ select result = xs.ewma(halflife=1d, times=times)
 
 ## See Also
 
-* [`deltas`](https://tenzir.com/docs/reference/functions/deltas.md)
-* [`ewm_stddev`](https://tenzir.com/docs/reference/functions/ewm_stddev.md)
-* [`ewm_variance`](https://tenzir.com/docs/reference/functions/ewm_variance.md)
-* [`mad`](https://tenzir.com/docs/reference/functions/mad.md)
-* [`mean`](https://tenzir.com/docs/reference/functions/mean.md)
-* [`median`](https://tenzir.com/docs/reference/functions/median.md)
+* [`deltas`](https://tenzir.com/docs/v7.0.0/reference/functions/deltas.md)
+* [`ewm_stddev`](https://tenzir.com/docs/v7.0.0/reference/functions/ewm_stddev.md)
+* [`ewm_variance`](https://tenzir.com/docs/v7.0.0/reference/functions/ewm_variance.md)
+* [`mad`](https://tenzir.com/docs/v7.0.0/reference/functions/mad.md)
+* [`mean`](https://tenzir.com/docs/v7.0.0/reference/functions/mean.md)
+* [`median`](https://tenzir.com/docs/v7.0.0/reference/functions/median.md)
 * [Shape lists](../../guides/shape/shape-lists.md)

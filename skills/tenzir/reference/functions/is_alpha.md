@@ -1,7 +1,7 @@
 ---
 title: "is_alpha"
-canonical: https://tenzir.com/docs/reference/functions/is_alpha
-source: https://tenzir.com/docs/reference/functions/is_alpha.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/is_alpha
+source: https://tenzir.com/docs/v7.0.0/reference/functions/is_alpha.md
 section: "Docs"
 ---
 
@@ -33,9 +33,9 @@ from {x: "hello".is_alpha()}
 
 ## See Also
 
-* [`is_alnum`](https://tenzir.com/docs/reference/functions/is_alnum.md)
-* [`is_lower`](https://tenzir.com/docs/reference/functions/is_lower.md)
-* [`is_numeric`](https://tenzir.com/docs/reference/functions/is_numeric.md)
-* [`is_printable`](https://tenzir.com/docs/reference/functions/is_printable.md)
-* [`is_upper`](https://tenzir.com/docs/reference/functions/is_upper.md)
+* [`is_alnum`](https://tenzir.com/docs/v7.0.0/reference/functions/is_alnum.md)
+* [`is_lower`](https://tenzir.com/docs/v7.0.0/reference/functions/is_lower.md)
+* [`is_numeric`](https://tenzir.com/docs/v7.0.0/reference/functions/is_numeric.md)
+* [`is_printable`](https://tenzir.com/docs/v7.0.0/reference/functions/is_printable.md)
+* [`is_upper`](https://tenzir.com/docs/v7.0.0/reference/functions/is_upper.md)
 * [Manipulate strings](../../guides/shape/manipulate-strings.md)

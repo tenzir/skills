@@ -1,7 +1,7 @@
 ---
 title: "distinct"
-canonical: https://tenzir.com/docs/reference/functions/distinct
-source: https://tenzir.com/docs/reference/functions/distinct.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/distinct
+source: https://tenzir.com/docs/v7.0.0/reference/functions/distinct.md
 section: "Docs"
 ---
 
@@ -38,7 +38,7 @@ summarize unique=distinct(x)
 
 ## See Also
 
-* [`collect`](https://tenzir.com/docs/reference/functions/collect.md)
-* [`count_distinct`](https://tenzir.com/docs/reference/functions/count_distinct.md)
-* [`value_counts`](https://tenzir.com/docs/reference/functions/value_counts.md)
+* [`collect`](https://tenzir.com/docs/v7.0.0/reference/functions/collect.md)
+* [`count_distinct`](https://tenzir.com/docs/v7.0.0/reference/functions/count_distinct.md)
+* [`value_counts`](https://tenzir.com/docs/v7.0.0/reference/functions/value_counts.md)
 * [Aggregate event streams](../../guides/analyze/aggregate-event-streams.md)

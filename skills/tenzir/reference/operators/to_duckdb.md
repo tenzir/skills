@@ -1,7 +1,7 @@
 ---
 title: "to_duckdb"
-canonical: https://tenzir.com/docs/reference/operators/to_duckdb
-source: https://tenzir.com/docs/reference/operators/to_duckdb.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/to_duckdb
+source: https://tenzir.com/docs/v7.0.0/reference/operators/to_duckdb.md
 section: "Docs"
 ---
 
@@ -27,7 +27,7 @@ By default, the operator creates the table from the first batch of events it rec
 * Numbers outside the range of their column become `NULL`, and so do strings that are no valid `UUID` or member of an `ENUM`.
 * An event without a field for a column gets the column’s `DEFAULT` value, or `NULL`, regardless of the other events. A field that holds `null` writes `NULL`.
 
-The operator emits a warning the first time each of these happens for a field. To keep all data, filter and reshape heterogeneous streams with [`where`](https://tenzir.com/docs/reference/operators/where.md), [`select`](https://tenzir.com/docs/reference/operators/select.md), or [`ocsf_cast`](https://tenzir.com/docs/reference/operators/ocsf_cast.md) before writing them, or write each event kind to its own table.
+The operator emits a warning the first time each of these happens for a field. To keep all data, filter and reshape heterogeneous streams with [`where`](https://tenzir.com/docs/v7.0.0/reference/operators/where.md), [`select`](https://tenzir.com/docs/v7.0.0/reference/operators/select.md), or [`ocsf_cast`](https://tenzir.com/docs/v7.0.0/reference/operators/ocsf_cast) before writing them, or write each event kind to its own table.
 
 ### `uri: string`
 
@@ -111,21 +111,19 @@ For local databases, a batch is written completely or not at all. DuckDB rejects
 
 Each operator keeps its credentials and TLS settings isolated from other operators. Local-file locking rules do not apply to remote connections.
 
-Quack is a beta protocol. Our [DuckDB integration](../../integrations/duckdb.md#quack) describes the bundled extensions and tested client and server versions.
+Remote connections require a DuckDB 2.0 server; DuckDB 1.x servers are not supported. Our [DuckDB integration](https://docs.tenzir.com/integrations/duckdb#quack) describes the bundled extensions and tested client and server versions.
 
-The tested Quack version cannot attach databases containing sequence-backed column defaults. This prevents `to_duckdb` from connecting, even when writing to another table in that database. Remote reads do not have this limitation.
+Check remote writes before retrying
 
-Remote writes are not atomic
-
-The tested Quack version does not reliably roll back writes. An error or interrupted connection can leave some rows written, even if the operator reports failure. Tenzir does not retry failed writes automatically; rerunning a pipeline can duplicate rows. Do not rely on local batch-atomicity guarantees for remote destinations.
+An interrupted connection can leave the outcome of a write unknown. Tenzir does not retry failed writes automatically. Check the destination before rerunning a pipeline, which can duplicate rows if the server committed the write before the connection failed.
 
 ## Concurrency
 
 Several pipelines in the same node can write to the same database file at the same time, even to the same table: DuckDB’s transactions keep appends from conflicting.
 
-DuckDB enforces one rule for database files: a process opens a file either for reading or for writing. While a `to_duckdb` runs, every [`from_duckdb`](https://tenzir.com/docs/reference/operators/from_duckdb.md) in the same node shares its database and can read the file, but no other process can open the file at all. Stop the writing pipelines before opening the file with the `duckdb` CLI or another tool.
+DuckDB enforces one rule for database files: a process opens a file either for reading or for writing. While a `to_duckdb` runs, every [`from_duckdb`](https://tenzir.com/docs/v7.0.0/reference/operators/from_duckdb.md) in the same node shares its database and can read the file, but no other process can open the file at all. Stop the writing pipelines before opening the file with the `duckdb` CLI or another tool.
 
-Conversely, `to_duckdb` cannot open a file that a [`from_duckdb`](https://tenzir.com/docs/reference/operators/from_duckdb.md) without `live=true` in the same node still reads, because that reader opened it read-only.
+Conversely, `to_duckdb` cannot open a file that a [`from_duckdb`](https://tenzir.com/docs/v7.0.0/reference/operators/from_duckdb.md) without `live=true` in the same node still reads, because that reader opened it read-only.
 
 ## Examples
 
@@ -162,7 +160,7 @@ subscribe "alerts"
 to_duckdb ":memory:alerts", table="alerts", primary=id
 ```
 
-Another pipeline can read the table with [`from_duckdb`](https://tenzir.com/docs/reference/operators/from_duckdb.md) while this writer runs.
+Another pipeline can read the table with [`from_duckdb`](https://tenzir.com/docs/v7.0.0/reference/operators/from_duckdb.md) while this writer runs.
 
 ### Create a table with a primary key
 
@@ -197,6 +195,6 @@ to_duckdb "ocsf.duckdb", table="network_activity", checkpoint_interval=1min
 ## See Also
 
 * [Send to destinations](../../guides/route/send-to-destinations.md)
-* [`from_duckdb`](https://tenzir.com/docs/reference/operators/from_duckdb.md)
-* [`to_clickhouse`](https://tenzir.com/docs/reference/operators/to_clickhouse.md)
-* [DuckDB](../../integrations/duckdb.md)
+* [`from_duckdb`](https://tenzir.com/docs/v7.0.0/reference/operators/from_duckdb.md)
+* [`to_clickhouse`](https://tenzir.com/docs/v7.0.0/reference/operators/to_clickhouse.md)
+* [Duckdb](https://docs.tenzir.com/integrations/duckdb)

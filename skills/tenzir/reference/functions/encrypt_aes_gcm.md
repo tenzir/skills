@@ -1,7 +1,7 @@
 ---
 title: "encrypt_aes_gcm"
-canonical: https://tenzir.com/docs/reference/functions/encrypt_aes_gcm
-source: https://tenzir.com/docs/reference/functions/encrypt_aes_gcm.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/encrypt_aes_gcm
+source: https://tenzir.com/docs/v7.0.0/reference/functions/encrypt_aes_gcm.md
 section: "Docs"
 ---
 
@@ -17,7 +17,7 @@ encrypt_aes_gcm(x:blob|string, key=secret, [aad=blob|string]) -> blob
 
 ## Description
 
-The `encrypt_aes_gcm` function encrypts `x` with AES in Galois/Counter Mode (GCM), as specified in NIST SP 800-38D. AES-GCM is an authenticated encryption mode: [`decrypt_aes_gcm`](https://tenzir.com/docs/reference/functions/decrypt_aes_gcm.md) detects any modification of the ciphertext.
+The `encrypt_aes_gcm` function encrypts `x` with AES in Galois/Counter Mode (GCM), as specified in NIST SP 800-38D. AES-GCM is an authenticated encryption mode: [`decrypt_aes_gcm`](https://tenzir.com/docs/v7.0.0/reference/functions/decrypt_aes_gcm.md) detects any modification of the ciphertext.
 
 The function draws a fresh random 96-bit nonce for every value. Encrypting the same value twice therefore yields different outputs, and the output differs on every run.
 
@@ -29,11 +29,11 @@ nonce (12 bytes) || ciphertext || tag (16 bytes)
 
 The ciphertext has the same length as the input, so the output is 28 bytes longer than the input. The ciphertext and the tag follow NIST SP 800-38D, and the nonce in front makes every value self-contained. Other AES-GCM implementations can decrypt the output after they split off the first 12 bytes as the nonce.
 
-The function returns a `blob`, which JSON output renders as Base64. To turn the result into a string, encode it with [`encode_base64`](https://tenzir.com/docs/reference/functions/encode_base64.md) or [`encode_hex`](https://tenzir.com/docs/reference/functions/encode_hex.md).
+The function returns a `blob`, which JSON output renders as Base64. To turn the result into a string, encode it with [`encode_base64`](https://tenzir.com/docs/v7.0.0/reference/functions/encode_base64.md) or [`encode_hex`](https://tenzir.com/docs/v7.0.0/reference/functions/encode_hex.md).
 
 Limit the number of encryptions per key
 
-NIST limits a key to 232 encryptions with random nonces. Beyond that, the probability that two values share a nonce becomes too high, and a repeated nonce breaks both confidentiality and authenticity. For high-volume pipelines, rotate keys regularly or use [`encrypt_aes_gcm_siv`](https://tenzir.com/docs/reference/functions/encrypt_aes_gcm_siv.md) instead.
+NIST limits a key to 232 encryptions with random nonces. Beyond that, the probability that two values share a nonce becomes too high, and a repeated nonce breaks both confidentiality and authenticity. For high-volume pipelines, rotate keys regularly or use [`encrypt_aes_gcm_siv`](https://tenzir.com/docs/v7.0.0/reference/functions/encrypt_aes_gcm_siv.md) instead.
 
 ### `x: blob|string`
 
@@ -47,7 +47,7 @@ The encryption key as a secret.
 
 The key size selects the AES variant: 16 bytes for AES-128, 24 bytes for AES-192, and 32 bytes for AES-256. A key of any other size is an error when the pipeline starts.
 
-Read the key with [`secret`](https://tenzir.com/docs/reference/functions/secret.md), so that it stays out of the pipeline definition. A constant string or blob also works as an [ad-hoc secret](../../explanations/secrets.md#ad-hoc-secrets), but then the key appears in the pipeline definition. The function uses the bytes of the secret as they are. If your secret store holds the key in hex or Base64 form, decode it with [`decode_hex`](https://tenzir.com/docs/reference/functions/decode_hex.md) or [`decode_base64`](https://tenzir.com/docs/reference/functions/decode_base64.md), for example `key=secret("pii-key").decode_hex()`.
+Read the key with [`secret`](https://tenzir.com/docs/v7.0.0/reference/functions/secret.md), so that it stays out of the pipeline definition. A constant string or blob also works as an [ad-hoc secret](../../explanations/secrets.md#ad-hoc-secrets), but then the key appears in the pipeline definition. The function uses the bytes of the secret as they are. If your secret store holds the key in hex or Base64 form, decode it with [`decode_hex`](https://tenzir.com/docs/v7.0.0/reference/functions/decode_hex.md) or [`decode_base64`](https://tenzir.com/docs/v7.0.0/reference/functions/decode_base64.md), for example `key=secret("pii-key").decode_hex()`.
 
 ### `aad = blob|string (optional)`
 
@@ -55,7 +55,7 @@ Associated data that the function authenticates but does not encrypt. The value 
 
 Decryption only succeeds with the same associated data. Omitting `aad` is the same as passing an empty value.
 
-If `aad` is `null`, for example because an event lacks the field that holds it, the function returns `null` and emits a warning. To fall back to an empty value instead, use [`else`](https://tenzir.com/docs/reference/expressions.md#fallback-with-else), for example `aad=tenant? else ""`.
+If `aad` is `null`, for example because an event lacks the field that holds it, the function returns `null` and emits a warning. To fall back to an empty value instead, use [`else`](https://tenzir.com/docs/v7.0.0/reference/expressions.md#fallback-with-else), for example `aad=tenant? else ""`.
 
 ## Examples
 
@@ -146,10 +146,10 @@ drop email
 
 ## See Also
 
-* [`decrypt_aes_gcm`](https://tenzir.com/docs/reference/functions/decrypt_aes_gcm.md)
-* [`encrypt_aes_gcm_siv`](https://tenzir.com/docs/reference/functions/encrypt_aes_gcm_siv.md)
-* [`encrypt_aes_siv`](https://tenzir.com/docs/reference/functions/encrypt_aes_siv.md)
-* [`encrypt_hpke`](https://tenzir.com/docs/reference/functions/encrypt_hpke.md)
-* [`encrypt_ff1`](https://tenzir.com/docs/reference/functions/encrypt_ff1.md)
+* [`decrypt_aes_gcm`](https://tenzir.com/docs/v7.0.0/reference/functions/decrypt_aes_gcm.md)
+* [`encrypt_aes_gcm_siv`](https://tenzir.com/docs/v7.0.0/reference/functions/encrypt_aes_gcm_siv.md)
+* [`encrypt_aes_siv`](https://tenzir.com/docs/v7.0.0/reference/functions/encrypt_aes_siv.md)
+* [`encrypt_hpke`](https://tenzir.com/docs/v7.0.0/reference/functions/encrypt_hpke.md)
+* [`encrypt_ff1`](https://tenzir.com/docs/v7.0.0/reference/functions/encrypt_ff1.md)
 * [Encrypt sensitive data](../../guides/protect/encrypt-sensitive-data.md)
 * [Encryption](../../explanations/encryption.md)

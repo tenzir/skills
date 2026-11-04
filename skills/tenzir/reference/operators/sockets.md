@@ -1,7 +1,7 @@
 ---
 title: "sockets"
-canonical: https://tenzir.com/docs/reference/operators/sockets
-source: https://tenzir.com/docs/reference/operators/sockets.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/sockets
+source: https://tenzir.com/docs/v7.0.0/reference/operators/sockets.md
 section: "Docs"
 ---
 
@@ -49,5 +49,5 @@ select pid, local_addr, remote_addr
 
 ## See Also
 
-* [`files`](https://tenzir.com/docs/reference/operators/files.md)
-* [`processes`](https://tenzir.com/docs/reference/operators/processes.md)
+* [`files`](https://tenzir.com/docs/v7.0.0/reference/operators/files.md)
+* [`processes`](https://tenzir.com/docs/v7.0.0/reference/operators/processes.md)

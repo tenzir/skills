@@ -1,7 +1,7 @@
 ---
 title: "accept_udp"
-canonical: https://tenzir.com/docs/reference/operators/accept_udp
-source: https://tenzir.com/docs/reference/operators/accept_udp.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/accept_udp
+source: https://tenzir.com/docs/v7.0.0/reference/operators/accept_udp.md
 section: "Docs"
 ---
 
@@ -25,7 +25,7 @@ Listens for UDP datagrams on the specified endpoint and outputs each datagram as
 
 The address to listen on. Must be of the format: `[udp://]host:port`.
 
-Use `0.0.0.0` as the host to accept datagrams on all interfaces. The [`nics`](https://tenzir.com/docs/reference/operators/nics.md) operator lists all available interfaces.
+Use `0.0.0.0` as the host to accept datagrams on all interfaces. The [`nics`](https://tenzir.com/docs/v7.0.0/reference/operators/nics.md) operator lists all available interfaces.
 
 ### `resolve_hostnames = bool (optional)`
 
@@ -91,5 +91,5 @@ select data
 
 ## See Also
 
-* [`to_udp`](https://tenzir.com/docs/reference/operators/to_udp.md)
-* [UDP](../../integrations/udp.md)
+* [`to_udp`](https://tenzir.com/docs/v7.0.0/reference/operators/to_udp.md)
+* [Udp](https://docs.tenzir.com/integrations/udp)

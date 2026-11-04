@@ -1,7 +1,7 @@
 ---
 title: "periodogram"
-canonical: https://tenzir.com/docs/reference/functions/periodogram
-source: https://tenzir.com/docs/reference/functions/periodogram.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/periodogram
+source: https://tenzir.com/docs/v7.0.0/reference/functions/periodogram.md
 section: "Docs"
 ---
 
@@ -23,7 +23,7 @@ $$
 P_k = \frac{1}{n} \left| \sum_{j=0}^{N-1} \tilde{x}_j \, e^{-2\pi i jk/N} \right|^2
 $$
 
-where samples beyond $n$ are zero from padding. The `period` of bin $k$ is $N / k$, expressed in samples: a bare list carries no time semantics, so a period of `4.0` means the signal repeats every four elements. To recover a wall-clock period from timestamps, use [`dominant_period`](https://tenzir.com/docs/reference/functions/dominant_period.md) instead.
+where samples beyond $n$ are zero from padding. The `period` of bin $k$ is $N / k$, expressed in samples: a bare list carries no time semantics, so a period of `4.0` means the signal repeats every four elements. To recover a wall-clock period from timestamps, use [`dominant_period`](https://tenzir.com/docs/v7.0.0/reference/functions/dominant_period.md) instead.
 
 ### `xs: list`
 
@@ -46,5 +46,5 @@ select ys = xs.periodogram().where(r => r.power > 0)
 
 ## See Also
 
-* [`autocorrelation`](https://tenzir.com/docs/reference/functions/autocorrelation.md)
-* [`dominant_period`](https://tenzir.com/docs/reference/functions/dominant_period.md)
+* [`autocorrelation`](https://tenzir.com/docs/v7.0.0/reference/functions/autocorrelation.md)
+* [`dominant_period`](https://tenzir.com/docs/v7.0.0/reference/functions/dominant_period.md)

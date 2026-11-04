@@ -1,8 +1,8 @@
 ---
 title: "Create multi-stage detectors"
 description: "Combine independent detections into higher-confidence verdicts with correlation combinators, cross-stage state, and suppression"
-canonical: https://tenzir.com/docs/guides/detect/create-multi-stage-detectors
-source: https://tenzir.com/docs/guides/detect/create-multi-stage-detectors.md
+canonical: https://tenzir.com/docs/v7.0.0/guides/detect/create-multi-stage-detectors
+source: https://tenzir.com/docs/v7.0.0/guides/detect/create-multi-stage-detectors.md
 section: "Docs"
 ---
 
@@ -16,7 +16,7 @@ The guide follows that flow: separate the stages from their correlation, choose 
 
 ## Separate stages from correlation
 
-Connect stages through topics with [`publish`](https://tenzir.com/docs/reference/operators/publish.md) and [`subscribe`](https://tenzir.com/docs/reference/operators/subscribe.md): a pipeline that publishes to a topic fans its events out to every pipeline subscribed to it, decoupling producers from consumers. This makes each stage an independently deployable, restartable pipeline instead of one monolith:
+Connect stages through topics with [`publish`](https://tenzir.com/docs/v7.0.0/reference/operators/publish.md) and [`subscribe`](https://tenzir.com/docs/v7.0.0/reference/operators/subscribe.md): a pipeline that publishes to a topic fans its events out to every pipeline subscribed to it, decoupling producers from consumers. This makes each stage an independently deployable, restartable pipeline instead of one monolith:
 
 ```tql
 // Stage 1: a rule-based detection over process events.
@@ -51,7 +51,7 @@ A stage can call one packaged operator that both matches and models the result, 
 
 The simplest combinators ask whether several stages fired for the same entity within a time window, together or in a required order. These correspond to Sigma’s `temporal` and `temporal_ordered` correlation types. The examples in this section show how both types translate to TQL. The example data sets are simplified sightings carrying `time`, `host`, and `rule`. In production, these values come from Detection Finding fields: `device.hostname` for the host and `finding_info.analytic.uid` for the rule. The combined-finding example maps those fields into a complete verdict.
 
-These examples use fixed, epoch-aligned time bins. For a sliding “within N minutes of each other” interpretation, use a hopping window instead, as shown in [`window`](https://tenzir.com/docs/reference/operators/window.md#detect-brute-force-logins-with-a-hopping-window). The examples share one event-time clock across hosts and omit `tolerance`. In production, keep [`window`](https://tenzir.com/docs/reference/operators/window.md) on the outside so closing it also expires all high-cardinality correlation groups. Put [`group`](https://tenzir.com/docs/reference/operators/group.md) inside the window when a correlation needs a full keyed subpipeline, and size `tolerance` for ingestion skew. Use an outer group only when each entity must advance its own event-time clock.
+These examples use fixed, epoch-aligned time bins. For a sliding “within N minutes of each other” interpretation, use a hopping window instead, as shown in [`window`](https://tenzir.com/docs/v7.0.0/reference/operators/window.md#detect-brute-force-logins-with-a-hopping-window). The examples share one event-time clock across hosts and omit `tolerance`. In production, keep [`window`](https://tenzir.com/docs/v7.0.0/reference/operators/window.md) on the outside so closing it also expires all high-cardinality correlation groups. Put [`group`](https://tenzir.com/docs/v7.0.0/reference/operators/group.md) inside the window when a correlation needs a full keyed subpipeline, and size `tolerance` for ingestion skew. Use an outer group only when each entity must advance its own event-time clock.
 
 ### Match stages in any order
 
@@ -81,7 +81,7 @@ window size=10min, on=time {
 
 ### Match first occurrences in order
 
-A `temporal_ordered` correlation adds sequence. Compare the first occurrence of each stage: aggregate a per-stage timestamp with [`min`](https://tenzir.com/docs/reference/functions/min.md) over a conditional expression, then require the timestamps to be strictly ordered. This tolerates repeated sightings of a stage, which real detections produce routinely. In this example, `ws-17` triggers `recon` twice before progressing and still matches, while `ws-9` saw all three stages in the wrong order and stays silent:
+A `temporal_ordered` correlation adds sequence. Compare the first occurrence of each stage: aggregate a per-stage timestamp with [`min`](https://tenzir.com/docs/v7.0.0/reference/functions/min.md) over a conditional expression, then require the timestamps to be strictly ordered. This tolerates repeated sightings of a stage, which real detections produce routinely. In this example, `ws-17` triggers `recon` twice before progressing and still matches, while `ws-9` saw all three stages in the wrong order and stays silent:
 
 ```tql
 from {time: 2026-07-01T10:00:00Z, host: "ws-17", rule: "recon"},
@@ -111,7 +111,7 @@ window size=10min, on=time {
 }
 ```
 
-The `!= null` guards drop hosts that never completed all three stages, such as `ws-5`, without producing warnings. Because [`min`](https://tenzir.com/docs/reference/functions/min.md) is order-independent, this shape needs no upfront sort and works the same on unbounded streams.
+The `!= null` guards drop hosts that never completed all three stages, such as `ws-5`, without producing warnings. Because [`min`](https://tenzir.com/docs/v7.0.0/reference/functions/min.md) is order-independent, this shape needs no upfront sort and works the same on unbounded streams.
 
 This checks a **strict progression**, where each stage first appears after the previous stage first appeared. A host where `exploit` fires once before `recon` does not match, even if a valid ordered chain follows.
 
@@ -150,7 +150,7 @@ drop target_sequence
 }
 ```
 
-Here `ws-17` matches despite the early `exploit`, because `recon` at 10:01, `exploit` at 10:02, and `exfil` at 10:03 form the required subsequence. The exact-equality filter removes unrelated rule names before scanning, so names that only contain a stage name cannot satisfy the correlation. [`collect`](https://tenzir.com/docs/reference/functions/collect.md) keeps arrival order (unlike [`distinct`](https://tenzir.com/docs/reference/functions/distinct.md)), so [`sort`](https://tenzir.com/docs/reference/operators/sort.md) establishes event-time order inside each window before the collection. Keeping the sort inside the window bounds its input; a global sort would wait forever on a live stream.
+Here `ws-17` matches despite the early `exploit`, because `recon` at 10:01, `exploit` at 10:02, and `exfil` at 10:03 form the required subsequence. The exact-equality filter removes unrelated rule names before scanning, so names that only contain a stage name cannot satisfy the correlation. [`collect`](https://tenzir.com/docs/v7.0.0/reference/functions/collect.md) keeps arrival order (unlike [`distinct`](https://tenzir.com/docs/v7.0.0/reference/functions/distinct.md)), so [`sort`](https://tenzir.com/docs/v7.0.0/reference/operators/sort.md) establishes event-time order inside each window before the collection. Keeping the sort inside the window bounds its input; a global sort would wait forever on a live stream.
 
 ### Accumulate risk per entity
 
@@ -207,7 +207,7 @@ Create the context once:
 context_create_lookup_table "seen_hosts"
 ```
 
-Then filter findings to first-time hosts. [`context_enrich`](https://tenzir.com/docs/reference/operators/context_enrich.md) adds a field named after the context, which stays `null` for unknown keys, and [`context_update`](https://tenzir.com/docs/reference/operators/context_update.md) remembers the key. Two details make the pipeline correct: `context_update` consumes its input without emitting anything, so it runs on a [`fork`](https://tenzir.com/docs/reference/operators/fork.md) branch while the main stream continues; and because the enrich step runs before the update lands, several findings for the same new host can be in flight together, all still enriched with `null`, so [`deduplicate`](https://tenzir.com/docs/reference/operators/deduplicate.md) closes that gap inside the pipeline. Its `create_timeout` only needs to outlast the context update; keeping it short stops the in-pipeline cache from growing with hostname cardinality:
+Then filter findings to first-time hosts. [`context_enrich`](https://tenzir.com/docs/v7.0.0/reference/operators/context_enrich.md) adds a field named after the context, which stays `null` for unknown keys, and [`context_update`](https://tenzir.com/docs/v7.0.0/reference/operators/context_update.md) remembers the key. Two details make the pipeline correct: `context_update` consumes its input without emitting anything, so it runs on a [`fork`](https://tenzir.com/docs/v7.0.0/reference/operators/fork.md) branch while the main stream continues; and because the enrich step runs before the update lands, several findings for the same new host can be in flight together, all still enriched with `null`, so [`deduplicate`](https://tenzir.com/docs/v7.0.0/reference/operators/deduplicate.md) closes that gap inside the pipeline. Its `create_timeout` only needs to outlast the context update; keeping it short stops the in-pipeline cache from growing with hostname cardinality:
 
 ```tql
 from {time: 2026-07-01T10:00:00Z, host: "ws-17", rule: "print-dump"},
@@ -222,7 +222,7 @@ fork {
 }
 ```
 
-The first run emits one finding per host. Neither host is known yet, and the second `ws-17` sighting arrives before the context update lands, so [`deduplicate`](https://tenzir.com/docs/reference/operators/deduplicate.md) suppresses it:
+The first run emits one finding per host. Neither host is known yet, and the second `ws-17` sighting arrives before the context update lands, so [`deduplicate`](https://tenzir.com/docs/v7.0.0/reference/operators/deduplicate.md) suppresses it:
 
 ```tql
 {
@@ -237,7 +237,7 @@ The first run emits one finding per host. Neither host is known yet, and the sec
 }
 ```
 
-Running the same pipeline again emits nothing: the context remembered both hosts, and the state survives pipeline restarts because it lives in the node, not in the pipeline. The context provides the persistence, the in-pipeline [`deduplicate`](https://tenzir.com/docs/reference/operators/deduplicate.md) the atomicity. Contexts require a Tenzir Node, and the guide on [using lookup tables](../enrich/use-lookup-tables.md) covers the full toolbox, including timestamp-valued entries for “seen recently” logic that expires.
+Running the same pipeline again emits nothing: the context remembered both hosts, and the state survives pipeline restarts because it lives in the node, not in the pipeline. The context provides the persistence, the in-pipeline [`deduplicate`](https://tenzir.com/docs/v7.0.0/reference/operators/deduplicate.md) the atomicity. Contexts require a Tenzir Node, and the guide on [using lookup tables](../enrich/use-lookup-tables.md) covers the full toolbox, including timestamp-valued entries for “seen recently” logic that expires.
 
 ### Suppress repeated verdicts
 
@@ -415,9 +415,9 @@ A multi-stage match is still a Detection Finding. OCSF reserves [Incident Findin
 ## See Also
 
 * [Detections](../../explanations/detections.md)
-* [`distinct`](https://tenzir.com/docs/reference/functions/distinct.md)
-* [`collect`](https://tenzir.com/docs/reference/functions/collect.md)
-* [`min`](https://tenzir.com/docs/reference/functions/min.md)
+* [`distinct`](https://tenzir.com/docs/v7.0.0/reference/functions/distinct.md)
+* [`collect`](https://tenzir.com/docs/v7.0.0/reference/functions/collect.md)
+* [`min`](https://tenzir.com/docs/v7.0.0/reference/functions/min.md)
 * [Match events with TQL](match-events-with-tql.md)
 * [Model detections in OCSF](model-detections-in-ocsf.md)
 * [Detect over time windows](detect-over-time-windows.md)

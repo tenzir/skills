@@ -1,7 +1,7 @@
 ---
 title: "mode"
-canonical: https://tenzir.com/docs/reference/functions/mode
-source: https://tenzir.com/docs/reference/functions/mode.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/mode
+source: https://tenzir.com/docs/v7.0.0/reference/functions/mode.md
 section: "Docs"
 ---
 
@@ -38,6 +38,6 @@ summarize mode_value=mode(x)
 
 ## See Also
 
-* [`median`](https://tenzir.com/docs/reference/functions/median.md)
-* [`value_counts`](https://tenzir.com/docs/reference/functions/value_counts.md)
+* [`median`](https://tenzir.com/docs/v7.0.0/reference/functions/median.md)
+* [`value_counts`](https://tenzir.com/docs/v7.0.0/reference/functions/value_counts.md)
 * [Aggregate event streams](../../guides/analyze/aggregate-event-streams.md)

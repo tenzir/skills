@@ -1,7 +1,7 @@
 ---
 title: "Node"
-canonical: https://tenzir.com/docs/explanations/node
-source: https://tenzir.com/docs/explanations/node.md
+canonical: https://tenzir.com/docs/v7.0.0/explanations/node
+source: https://tenzir.com/docs/v7.0.0/explanations/node.md
 section: "Docs"
 ---
 

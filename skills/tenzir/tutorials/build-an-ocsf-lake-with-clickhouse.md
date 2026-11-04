@@ -1,8 +1,8 @@
 ---
 title: "Build an OCSF lake with ClickHouse"
 description: "Store OCSF events in ClickHouse, from a table that accepts anything to a tuned lake with typed columns, skip indexes, codecs, and per-class retention."
-canonical: https://tenzir.com/docs/tutorials/build-an-ocsf-lake-with-clickhouse
-source: https://tenzir.com/docs/tutorials/build-an-ocsf-lake-with-clickhouse.md
+canonical: https://tenzir.com/docs/v7.0.0/tutorials/build-an-ocsf-lake-with-clickhouse
+source: https://tenzir.com/docs/v7.0.0/tutorials/build-an-ocsf-lake-with-clickhouse.md
 section: "Docs"
 ---
 
@@ -166,9 +166,9 @@ ENGINE = MergeTree
 ORDER BY time;
 ```
 
-The comment `tenzir:catch_all` marks the `event` column as the **catch-all column**. When [`to_clickhouse`](https://tenzir.com/docs/reference/operators/to_clickhouse.md) writes an event, it looks up each field in the table: a field with a column of the same name goes into that column, and every other field goes into the catch-all. Without a catch-all, Tenzir drops fields that have no column, with a warning.
+The comment `tenzir:catch_all` marks the `event` column as the **catch-all column**. When [`to_clickhouse`](https://tenzir.com/docs/v7.0.0/reference/operators/to_clickhouse.md) writes an event, it looks up each field in the table: a field with a column of the same name goes into that column, and every other field goes into the catch-all. Without a catch-all, Tenzir drops fields that have no column, with a warning.
 
-The name `event` works for OCSF, which has no top-level attribute called `event`. Data with such a field, such as Elastic Common Schema events, needs another name. Otherwise a typed column like `event.category` shadows part of the catch-all, and filters on it stay out of ClickHouse. Our integration guide explains how to [name the catch-all column](../integrations/clickhouse.md#name-the-catch-all-column).
+The name `event` works for OCSF, which has no top-level attribute called `event`. Data with such a field, such as Elastic Common Schema events, needs another name. Otherwise a typed column like `event.category` shadows part of the catch-all, and filters on it stay out of ClickHouse. Our integration guide explains how to [name the catch-all column](https://docs.tenzir.com/integrations/clickhouse#name-the-catch-all-column).
 
 The `DateTime64(9, 'UTC')` type keeps the full nanosecond precision of Tenzir timestamps. The `MergeTree` engine stores the rows sorted by the `ORDER BY` key, here `time`, which the next steps make use of.
 
@@ -295,13 +295,13 @@ A column whose name is a field path, such as `src_endpoint.ip`, receives that fi
 
 Whether a field deserves a typed column depends on how queries use it:
 
-|                                | Typed column                                                                                                    | Catch-all path                                                                                               |
-| ------------------------------ | --------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
-| Filtering                      | Can use the sort key and skip indexes                                                                           | Reads the path in every row                                                                                  |
+|                                | Typed column                                                                                                           | Catch-all path                                                                                               |
+| ------------------------------ | ---------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| Filtering                      | Can use the sort key and skip indexes                                                                                  | Reads the path in every row                                                                                  |
 | Pushdown of pipeline filters   | [Most filters](../reference/optimizations/clickhouse.md#filters-that-clickhouse-evaluates) | Only comparisons with strings and numbers, `starts_with`, `ends_with`, substrings, `in` lists, and `!= null` |
-| Sort or partition by the field | Possible                                                                                                        | Not supported for the catch-all                                                                              |
-| Value type                     | Declared once, checked on insert                                                                                | Inferred per value, can differ between rows                                                                  |
-| Cost when mostly empty         | Small, but not zero                                                                                             | None                                                                                                         |
+| Sort or partition by the field | Possible                                                                                                               | Not supported for the catch-all                                                                              |
+| Value type                     | Declared once, checked on insert                                                                                       | Inferred per value, can differ between rows                                                                  |
+| Cost when mostly empty         | Small, but not zero                                                                                                    | None                                                                                                         |
 
 Pushdown
 
@@ -326,7 +326,7 @@ Pick the narrowest type that fits the values:
 * Use `IPv6` for IP addresses. It holds IPv4 addresses as well, in their IPv4-mapped form `::ffff:10.0.0.5`.
 * Use [`LowCardinality`](https://clickhouse.com/docs/reference/data-types/lowcardinality) for strings with a few thousand distinct values at most, such as product names, host names, and user names. ClickHouse then stores each value once in a dictionary and refers to it by number.
 
-The [`to_clickhouse`](https://tenzir.com/docs/reference/operators/to_clickhouse.md) reference lists the [ClickHouse type for each Tenzir type](../reference/operators/to_clickhouse.md#types) and the [narrower types](../reference/operators/to_clickhouse.md#appending-to-existing-columns) it accepts when appending.
+The [`to_clickhouse`](https://tenzir.com/docs/v7.0.0/reference/operators/to_clickhouse.md) reference lists the [ClickHouse type for each Tenzir type](../reference/operators/to_clickhouse.md#types) and the [narrower types](../reference/operators/to_clickhouse.md#appending-to-existing-columns) it accepts when appending.
 
 ### Keep bulky data apart
 
@@ -381,7 +381,7 @@ if status_id? != 99 {
 to_clickhouse table="ocsf.events", mode="append", tls=false
 ```
 
-Dropping captions saves less disk space than you might expect: ZSTD compresses repeated strings so well that the catch-all shrinks only from 4.0 to 3.7 MiB on our sample. The bigger effect is on the uncompressed size, which drops from 180 to 67 MiB. ClickHouse has to process that much data whenever it returns complete events, so the captions cost memory and time on every read. The [`ocsf_derive`](https://tenzir.com/docs/reference/operators/ocsf_derive.md) operator restores them when you read the events back.
+Dropping captions saves less disk space than you might expect: ZSTD compresses repeated strings so well that the catch-all shrinks only from 4.0 to 3.7 MiB on our sample. The bigger effect is on the uncompressed size, which drops from 180 to 67 MiB. ClickHouse has to process that much data whenever it returns complete events, so the captions cost memory and time on every read. The [`ocsf_derive`](https://tenzir.com/docs/v7.0.0/reference/operators/ocsf_derive) operator restores them when you read the events back.
 
 If your events can carry an explicit `null` in a column that is not `Nullable`, such as `time`, replace it before writing, for example with `time = time? else now()`. Tenzir drops such events with a warning.
 
@@ -481,7 +481,7 @@ The original log lines in `raw_data` dominate, as they do in most lakes. The tot
 
 ## Read events back
 
-Read the table with [`from_clickhouse`](https://tenzir.com/docs/reference/operators/from_clickhouse.md). Tenzir rebuilds each event from the typed columns and the catch-all, so you address fields by their OCSF paths no matter where they are stored:
+Read the table with [`from_clickhouse`](https://tenzir.com/docs/v7.0.0/reference/operators/from_clickhouse.md). Tenzir rebuilds each event from the typed columns and the catch-all, so you address fields by their OCSF paths no matter where they are stored:
 
 ```tql
 from_clickhouse table="ocsf.events", tls=false
@@ -517,9 +517,9 @@ head 2
 }
 ```
 
-The [`ocsf_derive`](https://tenzir.com/docs/reference/operators/ocsf_derive.md) operator restored the captions `status` and `severity` from their IDs, and the IP address comes back as an IP, not as the IPv4-mapped IPv6 address that ClickHouse stores.
+The [`ocsf_derive`](https://tenzir.com/docs/v7.0.0/reference/operators/ocsf_derive) operator restored the captions `status` and `severity` from their IDs, and the IP address comes back as an IP, not as the IPv4-mapped IPv6 address that ClickHouse stores.
 
-Rebuilding events has a cost: any field can be split between a column and the catch-all, so ClickHouse returns every column of the matching rows. Filters on typed columns, such as `class_uid`, `status_id`, `time`, and the dotted column `user.name`, run in ClickHouse. Supported filters on fields in the catch-all narrow the rows in ClickHouse and run again in Tenzir. The [`select`](https://tenzir.com/docs/reference/operators/select.md) and everything after it run in Tenzir. Filter on typed columns where you can, because ClickHouse can use the sort key and skip indexes for them. The reference on [ClickHouse optimizations](../reference/optimizations/clickhouse.md#catch-all-tables) lists what reaches ClickHouse, and the [`from_clickhouse`](https://tenzir.com/docs/reference/operators/from_clickhouse.md) reference lists how a [rebuilt event](../reference/operators/from_clickhouse.md#catch-all-tables) can differ from the original one.
+Rebuilding events has a cost: any field can be split between a column and the catch-all, so ClickHouse returns every column of the matching rows. Filters on typed columns, such as `class_uid`, `status_id`, `time`, and the dotted column `user.name`, run in ClickHouse. Supported filters on fields in the catch-all narrow the rows in ClickHouse and run again in Tenzir. The [`select`](https://tenzir.com/docs/v7.0.0/reference/operators/select.md) and everything after it run in Tenzir. Filter on typed columns where you can, because ClickHouse can use the sort key and skip indexes for them. The reference on [ClickHouse optimizations](../reference/optimizations/clickhouse.md#catch-all-tables) lists what reaches ClickHouse, and the [`from_clickhouse`](https://tenzir.com/docs/v7.0.0/reference/operators/from_clickhouse.md) reference lists how a [rebuilt event](../reference/operators/from_clickhouse.md#catch-all-tables) can differ from the original one.
 
 When ClickHouse should do more of the work, such as aggregating or sorting, use SQL mode. It returns the result as it is, without rebuilding events:
 
@@ -642,7 +642,7 @@ The index skips nothing, because every granule of 8192 rows contains events from
 ALTER TABLE ocsf.events DROP INDEX idx_hostname;
 ```
 
-Indexes on typed dotted columns, such as `dst_endpoint.ip`, can also help when you read the table with [`from_clickhouse`](https://tenzir.com/docs/reference/operators/from_clickhouse.md) in table mode. Supported filters on these columns reach ClickHouse, so it can use their skip indexes. As with SQL queries, an index helps only when it can skip enough granules.
+Indexes on typed dotted columns, such as `dst_endpoint.ip`, can also help when you read the table with [`from_clickhouse`](https://tenzir.com/docs/v7.0.0/reference/operators/from_clickhouse.md) in table mode. Supported filters on these columns reach ClickHouse, so it can use their skip indexes. As with SQL queries, an index helps only when it can skip enough granules.
 
 A path inside the catch-all can carry an index on its typed subcolumn, such as `INDEX idx_query event.query.hostname.:String TYPE bloom_filter(0.01)`, but only queries that spell out the same typed subcolumn use it. When you query a field often enough to index it, promote it to a typed column instead.
 
@@ -739,7 +739,7 @@ The storage policy lives in the ClickHouse server configuration, and you assign 
 
 ### One table per class
 
-Instead of one table with per-class retention, you can create one table per class, each with its own columns, sort key, indexes, and TTL. The [`to_clickhouse`](https://tenzir.com/docs/reference/operators/to_clickhouse.md) operator chooses the table per event:
+Instead of one table with per-class retention, you can create one table per class, each with its own columns, sort key, indexes, and TTL. The [`to_clickhouse`](https://tenzir.com/docs/v7.0.0/reference/operators/to_clickhouse.md) operator chooses the table per event:
 
 ```tql
 to_clickhouse table=f"ocsf.class_{class_uid}", mode="append", tls=false
@@ -767,7 +767,7 @@ A single table with class-aware partitions gives you most of the pruning of per-
 
 ## Evolve the table
 
-Your queries change over time. When they start to filter or aggregate on a field in the catch-all, promote it to a typed column of the live table. You change only the table: running [`to_clickhouse`](https://tenzir.com/docs/reference/operators/to_clickhouse.md) pipelines pick up the new column on their own. In this step, you promote the received bytes of Network Activity.
+Your queries change over time. When they start to filter or aggregate on a field in the catch-all, promote it to a typed column of the live table. You change only the table: running [`to_clickhouse`](https://tenzir.com/docs/v7.0.0/reference/operators/to_clickhouse.md) pipelines pick up the new column on their own. In this step, you promote the received bytes of Network Activity.
 
 ### Find candidates
 
@@ -837,7 +837,7 @@ For existing rows, ClickHouse computes the default from the catch-all on every r
 ALTER TABLE ocsf.events MATERIALIZE COLUMN `traffic.bytes_in`;
 ```
 
-This rewrites the affected parts in the background, so on a large table, run it outside of peak hours or limit it to single partitions with `IN PARTITION (4001, 202610)`. The existing rows keep their copy in the catch-all, which takes space until the rows expire. When you read the table with [`from_clickhouse`](https://tenzir.com/docs/reference/operators/from_clickhouse.md), the column wins over the catch-all, so each event contains the field once.
+This rewrites the affected parts in the background, so on a large table, run it outside of peak hours or limit it to single partitions with `IN PARTITION (4001, 202610)`. The existing rows keep their copy in the catch-all, which takes space until the rows expire. When you read the table with [`from_clickhouse`](https://tenzir.com/docs/v7.0.0/reference/operators/from_clickhouse.md), the column wins over the catch-all, so each event contains the field once.
 
 ### Undo a promotion
 
@@ -855,7 +855,7 @@ Tenzir does not copy the values of a dropped column back into the catch-all. Row
 
 ## Tune ingestion
 
-Two options of [`to_clickhouse`](https://tenzir.com/docs/reference/operators/to_clickhouse.md) control how events reach ClickHouse: `max_batch_rows` sets the rows per insert, and `batch_timeout` sets how long a batch may wait. Every insert creates at least one part per partition it touches, so larger batches mean fewer parts and less merge work.
+Two options of [`to_clickhouse`](https://tenzir.com/docs/v7.0.0/reference/operators/to_clickhouse.md) control how events reach ClickHouse: `max_batch_rows` sets the rows per insert, and `batch_timeout` sets how long a batch may wait. Every insert creates at least one part per partition it touches, so larger batches mean fewer parts and less merge work.
 
 Inserts into tables with JSON columns need noticeably more server memory than inserts into typed columns. If ClickHouse reports `MEMORY_LIMIT_EXCEEDED`, reduce the number of concurrent writers or the batch size before adding memory.
 
@@ -938,6 +938,6 @@ rm ocsf-events.json.zst
 
 ## See also
 
-* [ClickHouse](../integrations/clickhouse.md)
+* [Clickhouse](https://docs.tenzir.com/integrations/clickhouse)
 * [Map to OCSF](../guides/normalize/map-to-ocsf.md)
 * [Onboard a data source](onboard-a-data-source.md)

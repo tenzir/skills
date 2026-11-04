@@ -1,7 +1,7 @@
 ---
 title: "from_sentinelone_data_lake"
-canonical: https://tenzir.com/docs/reference/operators/from_sentinelone_data_lake
-source: https://tenzir.com/docs/reference/operators/from_sentinelone_data_lake.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/from_sentinelone_data_lake
+source: https://tenzir.com/docs/v7.0.0/reference/operators/from_sentinelone_data_lake.md
 section: "Docs"
 ---
 
@@ -54,7 +54,7 @@ Use HTTPS for your console. Regional `xdr.*.sentinelone.net` URLs are no longer 
 
 A console service-user API token. The operator sends it with Bearer authentication, not the `ApiToken` prefix used by the management API.
 
-Use the [`secret()`](https://tenzir.com/docs/reference/functions/secret.md) function to reference credentials securely.
+Use the [`secret()`](https://tenzir.com/docs/v7.0.0/reference/functions/secret.md) function to reference credentials securely.
 
 ### `query = string (optional)`
 
@@ -100,9 +100,9 @@ Defaults to `false`. Dotted attribute names still become nested records, and `ti
 
 ## Optimizations
 
-When you omit `query`, the operator uses [`where`](https://tenzir.com/docs/reference/operators/where.md), [`select`](https://tenzir.com/docs/reference/operators/select.md), and [`head`](https://tenzir.com/docs/reference/operators/head.md) to narrow the search window, send safe prefilters, and choose between complete-event LOG retrieval and projected PQ. Every original predicate still runs locally, and `head` counts events after that filtering. A full PQ response or ambiguous projected values can trigger a LOG fallback before any PQ events are emitted. With an explicit `query`, both the query and its time window stay unchanged.
+When you omit `query`, the operator uses [`where`](https://tenzir.com/docs/v7.0.0/reference/operators/where.md), [`select`](https://tenzir.com/docs/v7.0.0/reference/operators/select.md), and [`head`](https://tenzir.com/docs/v7.0.0/reference/operators/head.md) to narrow the search window, send safe prefilters, and choose between complete-event LOG retrieval and projected PQ. Every original predicate still runs locally, and `head` counts events after that filtering. A full PQ response or ambiguous projected values can trigger a LOG fallback before any PQ events are emitted. With an explicit `query`, both the query and its time window stay unchanged.
 
-Without a [`where`](https://tenzir.com/docs/reference/operators/where.md), SentinelOne also computes a directly following [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) that groups by fields and counts events with `count()`, which includes [`top`](https://tenzir.com/docs/reference/operators/top.md) and [`rare`](https://tenzir.com/docs/reference/operators/rare.md). Tenzir checks the result, reads the events without the group key to confirm their group, and summarizes the events itself whenever SentinelOne might group differently.
+Without a [`where`](https://tenzir.com/docs/v7.0.0/reference/operators/where.md), SentinelOne also computes a directly following [`summarize`](https://tenzir.com/docs/v7.0.0/reference/operators/summarize.md) that groups by fields and counts events with `count()`, which includes [`top`](https://tenzir.com/docs/v7.0.0/reference/operators/top.md) and [`rare`](https://tenzir.com/docs/v7.0.0/reference/operators/rare.md). Tenzir checks the result, reads the events without the group key to confirm their group, and summarizes the events itself whenever SentinelOne might group differently.
 
 Our [SentinelOne optimization reference](../optimizations/sentinelone.md) describes which filters translate, how TQL maps to PowerQuery, which fields the operator requests, and how the result cap interacts with pushed filters.
 
@@ -140,5 +140,5 @@ from_sentinelone_data_lake "https://<tenant>.sentinelone.net",
 
 ## See Also
 
-* [`to_sentinelone_data_lake`](https://tenzir.com/docs/reference/operators/to_sentinelone_data_lake.md)
-* [SentinelOne Data Lake](../../integrations/sentinelone-data-lake.md)
+* [`to_sentinelone_data_lake`](https://tenzir.com/docs/v7.0.0/reference/operators/to_sentinelone_data_lake.md)
+* [Sentinelone data lake](https://docs.tenzir.com/integrations/sentinelone-data-lake)

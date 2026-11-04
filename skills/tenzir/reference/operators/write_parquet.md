@@ -1,7 +1,7 @@
 ---
 title: "write_parquet"
-canonical: https://tenzir.com/docs/reference/operators/write_parquet
-source: https://tenzir.com/docs/reference/operators/write_parquet.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/write_parquet
+source: https://tenzir.com/docs/v7.0.0/reference/operators/write_parquet.md
 section: "Docs"
 ---
 
@@ -41,7 +41,7 @@ Supply a raw AES key containing 16, 24, or 32 bytes. The writer does not assume 
 
 This argument takes key material, not a password. Tenzir does not generate or rotate the key for you.
 
-Read the file with [`read_parquet`](https://tenzir.com/docs/reference/operators/read_parquet.md) and the same key. Without this argument, the output is unencrypted. Encryption works with the supported compression types and preserves Parquet’s ability to read selected columns and row groups.
+Read the file with [`read_parquet`](https://tenzir.com/docs/v7.0.0/reference/operators/read_parquet.md) and the same key. Without this argument, the output is unencrypted. Encryption works with the supported compression types and preserves Parquet’s ability to read selected columns and row groups.
 
 ## Examples
 
@@ -69,7 +69,7 @@ to_s3 "s3://security-archive/events.parquet" {
 }
 ```
 
-Keep the same secret to read the file with [`read_parquet`](https://tenzir.com/docs/reference/operators/read_parquet.md). Generating a new key will not let you decrypt files written with the previous key.
+Keep the same secret to read the file with [`read_parquet`](https://tenzir.com/docs/v7.0.0/reference/operators/read_parquet.md). Generating a new key will not let you decrypt files written with the previous key.
 
 For a local file containing raw binary key bytes, pass its contents directly:
 
@@ -82,7 +82,7 @@ Generate such a file with `openssl rand -out /etc/tenzir/parquet.key 32`.
 
 ## See Also
 
-* [`read_bitz`](https://tenzir.com/docs/reference/operators/read_bitz.md)
-* [`read_parquet`](https://tenzir.com/docs/reference/operators/read_parquet.md)
-* [`write_bitz`](https://tenzir.com/docs/reference/operators/write_bitz.md)
-* [`write_feather`](https://tenzir.com/docs/reference/operators/write_feather.md)
+* [`read_bitz`](https://tenzir.com/docs/v7.0.0/reference/operators/read_bitz.md)
+* [`read_parquet`](https://tenzir.com/docs/v7.0.0/reference/operators/read_parquet.md)
+* [`write_bitz`](https://tenzir.com/docs/v7.0.0/reference/operators/write_bitz.md)
+* [`write_feather`](https://tenzir.com/docs/v7.0.0/reference/operators/write_feather.md)

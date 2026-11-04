@@ -1,7 +1,7 @@
 ---
 title: "sort"
-canonical: https://tenzir.com/docs/reference/operators/sort
-source: https://tenzir.com/docs/reference/operators/sort.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/sort
+source: https://tenzir.com/docs/v7.0.0/reference/operators/sort.md
 section: "Docs"
 ---
 
@@ -25,7 +25,7 @@ This operator performs a stable sort (preserves relative ordering when all expre
 
 Potentially High Memory Usage
 
-Without a downstream limit, this operator buffers all data in memory. An eligible downstream [`head`](https://tenzir.com/docs/reference/operators/head.md) bounds the retained events and sort keys. Sorting still reads the complete input before producing output. Out-of-core processing is on our roadmap.
+Without a downstream limit, this operator buffers all data in memory. An eligible downstream [`head`](https://tenzir.com/docs/v7.0.0/reference/operators/head.md) bounds the retained events and sort keys. Sorting still reads the complete input before producing output. Out-of-core processing is on our roadmap.
 
 ### `[-]expr`
 
@@ -41,9 +41,9 @@ where severity == "high"
 head 10
 ```
 
-Sorting still inspects every input event. It never pushes the limit upstream as a prefix limit. A downstream [`select`](https://tenzir.com/docs/reference/operators/select.md) can reduce upstream fields, while preserving dependencies of sort expressions and filters. Sorting by the whole event retains all fields.
+Sorting still inspects every input event. It never pushes the limit upstream as a prefix limit. A downstream [`select`](https://tenzir.com/docs/v7.0.0/reference/operators/select.md) can reduce upstream fields, while preserving dependencies of sort expressions and filters. Sorting by the whole event retains all fields.
 
-The sort stages of [`top`](https://tenzir.com/docs/reference/operators/top.md) and [`rare`](https://tenzir.com/docs/reference/operators/rare.md) use the same optimization. Their aggregation still processes the full input and retains all groups.
+The sort stages of [`top`](https://tenzir.com/docs/v7.0.0/reference/operators/top.md) and [`rare`](https://tenzir.com/docs/v7.0.0/reference/operators/rare.md) use the same optimization. Their aggregation still processes the full input and retains all groups.
 
 Use `--dump-opt-ir` to inspect the retained sort bound and upstream projection.
 
@@ -79,7 +79,7 @@ sort src_ip, -dest_ip
 
 * [Repair out-of-order events](../../guides/shape/repair-out-of-order-events.md)
 * [Replay historical events](../../guides/replay/replay-historical-events.md)
-* [`rare`](https://tenzir.com/docs/reference/operators/rare.md)
-* [`reverse`](https://tenzir.com/docs/reference/operators/reverse.md)
-* [`top`](https://tenzir.com/docs/reference/operators/top.md)
-* [Plot data with charts](../../tutorials/plot-data-with-charts.md)
+* [`rare`](https://tenzir.com/docs/v7.0.0/reference/operators/rare.md)
+* [`reverse`](https://tenzir.com/docs/v7.0.0/reference/operators/reverse.md)
+* [`top`](https://tenzir.com/docs/v7.0.0/reference/operators/top.md)
+* [Plot data with charts](https://docs.tenzir.com/tutorials/plot-data-with-charts)

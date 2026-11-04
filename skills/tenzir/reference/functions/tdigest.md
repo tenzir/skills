@@ -1,7 +1,7 @@
 ---
 title: "tdigest"
-canonical: https://tenzir.com/docs/reference/functions/tdigest
-source: https://tenzir.com/docs/reference/functions/tdigest.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/tdigest
+source: https://tenzir.com/docs/v7.0.0/reference/functions/tdigest.md
 section: "Docs"
 ---
 
@@ -17,7 +17,7 @@ tdigest(xs:list, [compression=uint]) -> record
 
 ## Description
 
-The `tdigest` function approximates a numeric distribution with a [t-digest](https://arxiv.org/abs/1902.04023) and bounded state. Use [`tdigest_quantile`](https://tenzir.com/docs/reference/functions/tdigest_quantile.md) and [`tdigest_cdf`](https://tenzir.com/docs/reference/functions/tdigest_cdf.md) for point queries. Use [`model_distance`](https://tenzir.com/docs/reference/functions/model_distance.md) to compare two models.
+The `tdigest` function approximates a numeric distribution with a [t-digest](https://arxiv.org/abs/1902.04023) and bounded state. Use [`tdigest_quantile`](https://tenzir.com/docs/v7.0.0/reference/functions/tdigest_quantile.md) and [`tdigest_cdf`](https://tenzir.com/docs/v7.0.0/reference/functions/tdigest_cdf.md) for point queries. Use [`model_distance`](https://tenzir.com/docs/v7.0.0/reference/functions/model_distance.md) to compare two models.
 
 ### Definition
 
@@ -80,7 +80,7 @@ select p95 = tdigest_quantile(latency_model, 0.95)
 
 ## See also
 
-* [`tdigest_quantile`](https://tenzir.com/docs/reference/functions/tdigest_quantile.md)
-* [`tdigest_cdf`](https://tenzir.com/docs/reference/functions/tdigest_cdf.md)
-* [`model_distance`](https://tenzir.com/docs/reference/functions/model_distance.md)
-* [`model_merge`](https://tenzir.com/docs/reference/functions/model_merge.md)
+* [`tdigest_quantile`](https://tenzir.com/docs/v7.0.0/reference/functions/tdigest_quantile.md)
+* [`tdigest_cdf`](https://tenzir.com/docs/v7.0.0/reference/functions/tdigest_cdf.md)
+* [`model_distance`](https://tenzir.com/docs/v7.0.0/reference/functions/model_distance.md)
+* [`model_merge`](https://tenzir.com/docs/v7.0.0/reference/functions/model_merge.md)

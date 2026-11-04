@@ -1,7 +1,7 @@
 ---
 title: "to_iceberg"
-canonical: https://tenzir.com/docs/reference/operators/to_iceberg
-source: https://tenzir.com/docs/reference/operators/to_iceberg.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/to_iceberg
+source: https://tenzir.com/docs/v7.0.0/reference/operators/to_iceberg.md
 section: "Docs"
 ---
 
@@ -264,10 +264,10 @@ to_iceberg "lake.events",
 
 ## See Also
 
-* [`ocsf_cast`](https://tenzir.com/docs/reference/operators/ocsf_cast.md)
-* [`to_s3`](https://tenzir.com/docs/reference/operators/to_s3.md)
-* [`to_clickhouse`](https://tenzir.com/docs/reference/operators/to_clickhouse.md)
+* [`ocsf_cast`](https://tenzir.com/docs/v7.0.0/reference/operators/ocsf_cast)
+* [`to_s3`](https://tenzir.com/docs/v7.0.0/reference/operators/to_s3.md)
+* [`to_clickhouse`](https://tenzir.com/docs/v7.0.0/reference/operators/to_clickhouse.md)
 * [Send to destinations](../../guides/route/send-to-destinations.md)
-* [Apache Iceberg](../../integrations/iceberg.md)
-* [AWS Glue](../../integrations/amazon/glue.md)
-* [Cloud Lakehouse](../../integrations/google/cloud-lakehouse.md)
+* [Iceberg](https://docs.tenzir.com/integrations/iceberg)
+* [Glue](https://docs.tenzir.com/integrations/amazon/glue)
+* [Cloud lakehouse](https://docs.tenzir.com/integrations/google/cloud-lakehouse)

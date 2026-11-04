@@ -1,7 +1,7 @@
 ---
 title: "write_chunks"
-canonical: https://tenzir.com/docs/reference/operators/write_chunks
-source: https://tenzir.com/docs/reference/operators/write_chunks.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/write_chunks
+source: https://tenzir.com/docs/v7.0.0/reference/operators/write_chunks.md
 section: "Docs"
 ---
 
@@ -19,9 +19,9 @@ write_chunks [field]
 
 The `write_chunks` operator reads a field from each input event and emits it as a separate byte chunk. The field must be of type `blob`.
 
-Unlike [`write_all`](https://tenzir.com/docs/reference/operators/write_all.md), which buffers all input and produces a single concatenated chunk at the end, `write_chunks` emits one chunk per event as data arrives.
+Unlike [`write_all`](https://tenzir.com/docs/v7.0.0/reference/operators/write_all.md), which buffers all input and produces a single concatenated chunk at the end, `write_chunks` emits one chunk per event as data arrives.
 
-This is the inverse of [`read_chunks`](https://tenzir.com/docs/reference/operators/read_chunks.md).
+This is the inverse of [`read_chunks`](https://tenzir.com/docs/v7.0.0/reference/operators/read_chunks.md).
 
 ### `field = field (optional)`
 
@@ -60,6 +60,6 @@ to_file "output.bin" {
 
 ## See Also
 
-* [`read_chunks`](https://tenzir.com/docs/reference/operators/read_chunks.md)
-* [`write_all`](https://tenzir.com/docs/reference/operators/write_all.md)
-* [`write_lines`](https://tenzir.com/docs/reference/operators/write_lines.md)
+* [`read_chunks`](https://tenzir.com/docs/v7.0.0/reference/operators/read_chunks.md)
+* [`write_all`](https://tenzir.com/docs/v7.0.0/reference/operators/write_all.md)
+* [`write_lines`](https://tenzir.com/docs/v7.0.0/reference/operators/write_lines.md)

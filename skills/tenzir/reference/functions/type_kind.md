@@ -1,7 +1,7 @@
 ---
 title: "type_kind"
-canonical: https://tenzir.com/docs/reference/functions/type_kind
-source: https://tenzir.com/docs/reference/functions/type_kind.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/type_kind
+source: https://tenzir.com/docs/v7.0.0/reference/functions/type_kind.md
 section: "Docs"
 ---
 
@@ -79,5 +79,5 @@ where x.type_kind() == "string"
 
 ## See Also
 
-* [`type_id`](https://tenzir.com/docs/reference/functions/type_id.md)
-* [`type_of`](https://tenzir.com/docs/reference/functions/type_of.md)
+* [`type_id`](https://tenzir.com/docs/v7.0.0/reference/functions/type_id.md)
+* [`type_of`](https://tenzir.com/docs/v7.0.0/reference/functions/type_of.md)

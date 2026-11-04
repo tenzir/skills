@@ -1,8 +1,8 @@
 ---
 title: "Execute Sigma rules"
 description: "Run Sigma v2.1 rules on structured events and emit OCSF Detection Findings with causal match evidence"
-canonical: https://tenzir.com/docs/guides/detect/execute-sigma-rules
-source: https://tenzir.com/docs/guides/detect/execute-sigma-rules.md
+canonical: https://tenzir.com/docs/v7.0.0/guides/detect/execute-sigma-rules
+source: https://tenzir.com/docs/v7.0.0/guides/detect/execute-sigma-rules.md
 section: "Docs"
 ---
 
@@ -10,7 +10,7 @@ section: "Docs"
 
 > Run Sigma v2.1 rules on structured events and emit OCSF Detection Findings with causal match evidence
 
-This guide shows you how to execute [Sigma](https://sigmahq.io/) detection rules with the [`sigma`](https://tenzir.com/docs/reference/operators/sigma.md) operator. Sigma is a bring-your-own-content integration for structured events: you can run rules from the SigmaHQ corpus, a content vendor, or your own detection team inside a TQL pipeline.
+This guide shows you how to execute [Sigma](https://sigmahq.io/) detection rules with the [`sigma`](https://tenzir.com/docs/v7.0.0/reference/operators/sigma.md) operator. Sigma is a bring-your-own-content integration for structured events: you can run rules from the SigmaHQ corpus, a content vendor, or your own detection team inside a TQL pipeline.
 
 Tenzir evaluates Sigma v2.1 detection rules and global filters. Every match becomes an OCSF Detection Finding by default, so Sigma output can share the same routing, storage, and triage path as findings from YARA-X and native TQL.
 
@@ -121,7 +121,7 @@ The standard v2.1 modifiers are supported except `expand`, which requires an ext
 * Comparisons: `lt`, `lte`, `gt`, `gte`, `neq`, `cidr`, and `fieldref`.
 * Structure and time: `exists`, `all`, `minute`, `hour`, `day`, `week`, `month`, and `year`.
 
-Modifier order and value types matter. The operator rejects unknown modifiers, invalid chains, unresolved `expand` placeholders, and custom taxonomies with a diagnostic tied to the affected document. It never drops a modifier silently. The complete compatibility table lives in the [`sigma`](https://tenzir.com/docs/reference/operators/sigma.md) reference.
+Modifier order and value types matter. The operator rejects unknown modifiers, invalid chains, unresolved `expand` placeholders, and custom taxonomies with a diagnostic tied to the affected document. It never drops a modifier silently. The complete compatibility table lives in the [`sigma`](https://tenzir.com/docs/v7.0.0/reference/operators/sigma.md) reference.
 
 Use `windash` when a rule must recognize both Windows argument prefixes:
 
@@ -178,7 +178,7 @@ Sigma v3
 
 An omitted `sigma-version` resolves to major 2. Declaring major 2 explicitly is also accepted. A different major is rejected instead of being interpreted with v2 semantics. Provisional Sigma v3 array selectors such as `[any]`, `[all]`, `[none]`, `[all_or_empty]`, and positional indices are therefore not part of the current operator contract.
 
-Sigma correlation documents are also rejected. Express temporal and aggregate correlations with [`window`](https://tenzir.com/docs/reference/operators/window.md), [`group`](https://tenzir.com/docs/reference/operators/group.md), and [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md), as our guide on [creating multi-stage detectors](create-multi-stage-detectors.md) shows.
+Sigma correlation documents are also rejected. Express temporal and aggregate correlations with [`window`](https://tenzir.com/docs/v7.0.0/reference/operators/window.md), [`group`](https://tenzir.com/docs/v7.0.0/reference/operators/group.md), and [`summarize`](https://tenzir.com/docs/v7.0.0/reference/operators/summarize.md), as our guide on [creating multi-stage detectors](create-multi-stage-detectors.md) shows.
 
 ## Consume the OCSF finding
 
@@ -234,4 +234,4 @@ this = {
 * [Create multi-stage detectors](create-multi-stage-detectors.md)
 * [Add operators](../packages/add-operators.md)
 * [Map to OCSF](../normalize/map-to-ocsf.md)
-* [Microsoft Windows Event Logs](../../integrations/microsoft/windows-event-logs.md)
+* [Windows event logs](https://docs.tenzir.com/integrations/microsoft/windows-event-logs)

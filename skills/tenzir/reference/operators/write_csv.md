@@ -1,7 +1,7 @@
 ---
 title: "write_csv"
-canonical: https://tenzir.com/docs/reference/operators/write_csv
-source: https://tenzir.com/docs/reference/operators/write_csv.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/write_csv
+source: https://tenzir.com/docs/v7.0.0/reference/operators/write_csv.md
 section: "Docs"
 ---
 
@@ -51,11 +51,11 @@ x,y,z
 
 ## See Also
 
-* [`parse_csv`](https://tenzir.com/docs/reference/functions/parse_csv.md)
-* [`print_csv`](https://tenzir.com/docs/reference/functions/print_csv.md)
-* [`read_csv`](https://tenzir.com/docs/reference/operators/read_csv.md)
-* [`write_lines`](https://tenzir.com/docs/reference/operators/write_lines.md)
-* [`write_ssv`](https://tenzir.com/docs/reference/operators/write_ssv.md)
-* [`write_tsv`](https://tenzir.com/docs/reference/operators/write_tsv.md)
-* [`write_xsv`](https://tenzir.com/docs/reference/operators/write_xsv.md)
+* [`parse_csv`](https://tenzir.com/docs/v7.0.0/reference/functions/parse_csv.md)
+* [`print_csv`](https://tenzir.com/docs/v7.0.0/reference/functions/print_csv.md)
+* [`read_csv`](https://tenzir.com/docs/v7.0.0/reference/operators/read_csv.md)
+* [`write_lines`](https://tenzir.com/docs/v7.0.0/reference/operators/write_lines.md)
+* [`write_ssv`](https://tenzir.com/docs/v7.0.0/reference/operators/write_ssv.md)
+* [`write_tsv`](https://tenzir.com/docs/v7.0.0/reference/operators/write_tsv.md)
+* [`write_xsv`](https://tenzir.com/docs/v7.0.0/reference/operators/write_xsv.md)
 * [Convert data formats](../../guides/shape/convert-data-formats.md)

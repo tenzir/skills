@@ -1,7 +1,7 @@
 ---
 title: "Deploy on AWS"
-canonical: https://tenzir.com/docs/guides/platform-setup/deploy-on-aws
-source: https://tenzir.com/docs/guides/platform-setup/deploy-on-aws.md
+canonical: https://tenzir.com/docs/v7.0.0/guides/platform-setup/deploy-on-aws
+source: https://tenzir.com/docs/v7.0.0/guides/platform-setup/deploy-on-aws.md
 section: "Docs"
 ---
 

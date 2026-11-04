@@ -1,7 +1,7 @@
 ---
 title: "to_stdout"
-canonical: https://tenzir.com/docs/reference/operators/to_stdout
-source: https://tenzir.com/docs/reference/operators/to_stdout.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/to_stdout
+source: https://tenzir.com/docs/v7.0.0/reference/operators/to_stdout.md
 section: "Docs"
 ---
 
@@ -56,5 +56,5 @@ to_stdout
 
 ## See Also
 
-* [`from_stdin`](https://tenzir.com/docs/reference/operators/from_stdin.md)
-* [`to_file`](https://tenzir.com/docs/reference/operators/to_file.md)
+* [`from_stdin`](https://tenzir.com/docs/v7.0.0/reference/operators/from_stdin.md)
+* [`to_file`](https://tenzir.com/docs/v7.0.0/reference/operators/to_file.md)

@@ -1,7 +1,7 @@
 ---
 title: "parse_csv"
-canonical: https://tenzir.com/docs/reference/functions/parse_csv
-source: https://tenzir.com/docs/reference/functions/parse_csv.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/parse_csv
+source: https://tenzir.com/docs/v7.0.0/reference/functions/parse_csv.md
 section: "Docs"
 ---
 
@@ -178,7 +178,7 @@ output = input.parse_csv(header=["a","b","c"])
 
 ## See Also
 
-* [`read_csv`](https://tenzir.com/docs/reference/operators/read_csv.md)
-* [`parse_ssv`](https://tenzir.com/docs/reference/functions/parse_ssv.md)
-* [`parse_tsv`](https://tenzir.com/docs/reference/functions/parse_tsv.md)
-* [`parse_xsv`](https://tenzir.com/docs/reference/functions/parse_xsv.md)
+* [`read_csv`](https://tenzir.com/docs/v7.0.0/reference/operators/read_csv.md)
+* [`parse_ssv`](https://tenzir.com/docs/v7.0.0/reference/functions/parse_ssv.md)
+* [`parse_tsv`](https://tenzir.com/docs/v7.0.0/reference/functions/parse_tsv.md)
+* [`parse_xsv`](https://tenzir.com/docs/v7.0.0/reference/functions/parse_xsv.md)

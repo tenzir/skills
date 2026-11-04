@@ -1,7 +1,7 @@
 ---
 title: "is_upper"
-canonical: https://tenzir.com/docs/reference/functions/is_upper
-source: https://tenzir.com/docs/reference/functions/is_upper.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/is_upper
+source: https://tenzir.com/docs/v7.0.0/reference/functions/is_upper.md
 section: "Docs"
 ---
 
@@ -33,7 +33,7 @@ from {x: "HELLO".is_upper()}
 
 ## See Also
 
-* [`is_alpha`](https://tenzir.com/docs/reference/functions/is_alpha.md)
-* [`is_lower`](https://tenzir.com/docs/reference/functions/is_lower.md)
-* [`to_upper`](https://tenzir.com/docs/reference/functions/to_upper.md)
+* [`is_alpha`](https://tenzir.com/docs/v7.0.0/reference/functions/is_alpha.md)
+* [`is_lower`](https://tenzir.com/docs/v7.0.0/reference/functions/is_lower.md)
+* [`to_upper`](https://tenzir.com/docs/v7.0.0/reference/functions/to_upper.md)
 * [Manipulate strings](../../guides/shape/manipulate-strings.md)

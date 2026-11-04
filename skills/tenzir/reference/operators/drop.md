@@ -1,7 +1,7 @@
 ---
 title: "drop"
-canonical: https://tenzir.com/docs/reference/operators/drop
-source: https://tenzir.com/docs/reference/operators/drop.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/drop
+source: https://tenzir.com/docs/v7.0.0/reference/operators/drop.md
 section: "Docs"
 ---
 
@@ -48,8 +48,8 @@ drop role, info.id
 
 ## See Also
 
-* [`select`](https://tenzir.com/docs/reference/operators/select.md)
-* [`where`](https://tenzir.com/docs/reference/operators/where.md)
+* [`select`](https://tenzir.com/docs/v7.0.0/reference/operators/select.md)
+* [`where`](https://tenzir.com/docs/v7.0.0/reference/operators/where.md)
 * [Filter and select data](../../guides/optimize/filter-and-select-data.md)
 * [Learn idiomatic TQL](../../tutorials/learn-idiomatic-tql.md)
 

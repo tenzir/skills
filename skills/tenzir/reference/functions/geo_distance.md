@@ -1,7 +1,7 @@
 ---
 title: "geo_distance"
-canonical: https://tenzir.com/docs/reference/functions/geo_distance
-source: https://tenzir.com/docs/reference/functions/geo_distance.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/geo_distance
+source: https://tenzir.com/docs/v7.0.0/reference/functions/geo_distance.md
 section: "Docs"
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "accept_splunk"
-canonical: https://tenzir.com/docs/reference/operators/accept_splunk
-source: https://tenzir.com/docs/reference/operators/accept_splunk.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/accept_splunk
+source: https://tenzir.com/docs/v7.0.0/reference/operators/accept_splunk.md
 section: "Docs"
 ---
 
@@ -183,4 +183,4 @@ publish "splunk"
 
 ## See also
 
-* [Splunk](../../integrations/splunk.md)
+* [Splunk](https://docs.tenzir.com/integrations/splunk)

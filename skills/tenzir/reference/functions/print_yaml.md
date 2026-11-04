@@ -1,7 +1,7 @@
 ---
 title: "print_yaml"
-canonical: https://tenzir.com/docs/reference/functions/print_yaml
-source: https://tenzir.com/docs/reference/functions/print_yaml.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/print_yaml
+source: https://tenzir.com/docs/v7.0.0/reference/functions/print_yaml.md
 section: "Docs"
 ---
 
@@ -45,5 +45,5 @@ x = x.print_yaml()
 
 ## See Also
 
-* [`parse_yaml`](https://tenzir.com/docs/reference/functions/parse_yaml.md)
-* [`write_yaml`](https://tenzir.com/docs/reference/operators/write_yaml.md)
+* [`parse_yaml`](https://tenzir.com/docs/v7.0.0/reference/functions/parse_yaml.md)
+* [`write_yaml`](https://tenzir.com/docs/v7.0.0/reference/operators/write_yaml.md)

@@ -1,7 +1,7 @@
 ---
 title: "format_time"
-canonical: https://tenzir.com/docs/reference/functions/format_time
-source: https://tenzir.com/docs/reference/functions/format_time.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/format_time
+source: https://tenzir.com/docs/v7.0.0/reference/functions/format_time.md
 section: "Docs"
 ---
 
@@ -84,7 +84,7 @@ x = x.format_time("%d.%m.%Y")
 
 ## See Also
 
-* [`parse_time`](https://tenzir.com/docs/reference/functions/parse_time.md)
-* [`time`](https://tenzir.com/docs/reference/functions/time.md)
+* [`parse_time`](https://tenzir.com/docs/v7.0.0/reference/functions/parse_time.md)
+* [`time`](https://tenzir.com/docs/v7.0.0/reference/functions/time.md)
 * [Normalize event timestamps](../../guides/shape/normalize-event-timestamps.md)
 * [Mask sensitive data](../../guides/protect/mask-sensitive-data.md)

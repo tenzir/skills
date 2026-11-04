@@ -1,7 +1,7 @@
 ---
 title: "Configure reverse proxy"
-canonical: https://tenzir.com/docs/guides/platform-setup/configure-reverse-proxy
-source: https://tenzir.com/docs/guides/platform-setup/configure-reverse-proxy.md
+canonical: https://tenzir.com/docs/v7.0.0/guides/platform-setup/configure-reverse-proxy
+source: https://tenzir.com/docs/v7.0.0/guides/platform-setup/configure-reverse-proxy.md
 section: "Docs"
 ---
 

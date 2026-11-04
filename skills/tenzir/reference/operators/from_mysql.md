@@ -1,7 +1,7 @@
 ---
 title: "from_mysql"
-canonical: https://tenzir.com/docs/reference/operators/from_mysql
-source: https://tenzir.com/docs/reference/operators/from_mysql.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/from_mysql
+source: https://tenzir.com/docs/v7.0.0/reference/operators/from_mysql.md
 section: "Docs"
 ---
 
@@ -131,11 +131,11 @@ The operator maps MySQL types to [Type System](../types.md) as follows:
 | `BLOB` and other binary blob types                  | `blob`      |                                  |
 | All other types                                     | `string`    | The text that MySQL sends        |
 
-All other types include `CHAR`, `VARCHAR`, `TEXT`, `BINARY`, `VARBINARY`, `DATE`, `DATETIME`, `TIMESTAMP`, `TIME`, `JSON`, `ENUM`, and `SET`. Convert them in the pipeline where you need another type, for example with the [`time`](https://tenzir.com/docs/reference/functions/time.md) or [`parse_json`](https://tenzir.com/docs/reference/functions/parse_json.md) functions.
+All other types include `CHAR`, `VARCHAR`, `TEXT`, `BINARY`, `VARBINARY`, `DATE`, `DATETIME`, `TIMESTAMP`, `TIME`, `JSON`, `ENUM`, and `SET`. Convert them in the pipeline where you need another type, for example with the [`time`](https://tenzir.com/docs/v7.0.0/reference/functions/time.md) or [`parse_json`](https://tenzir.com/docs/v7.0.0/reference/functions/parse_json.md) functions.
 
 ## Optimizations
 
-When the operator reads a table, it lets MySQL do the work of the [`where`](https://tenzir.com/docs/reference/operators/where.md), [`select`](https://tenzir.com/docs/reference/operators/select.md), and [`head`](https://tenzir.com/docs/reference/operators/head.md) operators that follow it, so that MySQL returns only the rows and columns that the pipeline needs. For one-shot table reads without `live=true`, MySQL can also compute a directly following [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md). With `live=true`, the summary stays in Tenzir because the input never ends. The page on [MySQL optimizations](../optimizations/mysql.md) describes which filters MySQL evaluates, and the [optimizations overview](../optimizations.md) explains how Tenzir optimizes pipelines in general.
+When the operator reads a table, it lets MySQL do the work of the [`where`](https://tenzir.com/docs/v7.0.0/reference/operators/where.md), [`select`](https://tenzir.com/docs/v7.0.0/reference/operators/select.md), and [`head`](https://tenzir.com/docs/v7.0.0/reference/operators/head.md) operators that follow it, so that MySQL returns only the rows and columns that the pipeline needs. For one-shot table reads without `live=true`, MySQL can also compute a directly following [`summarize`](https://tenzir.com/docs/v7.0.0/reference/operators/summarize.md). With `live=true`, the summary stays in Tenzir because the input never ends. The page on [MySQL optimizations](../optimizations/mysql.md) describes which filters MySQL evaluates, and the [optimizations overview](../optimizations.md) explains how Tenzir optimizes pipelines in general.
 
 ## Examples
 
@@ -235,5 +235,5 @@ from_mysql table="events", live=true, tracking_column="event_id",
 ## See Also
 
 * [Read from data stores](../../guides/collect/read-from-data-stores.md)
-* [`to_clickhouse`](https://tenzir.com/docs/reference/operators/to_clickhouse.md)
-* [MySQL](../../integrations/mysql.md)
+* [`to_clickhouse`](https://tenzir.com/docs/v7.0.0/reference/operators/to_clickhouse.md)
+* [Mysql](https://docs.tenzir.com/integrations/mysql)

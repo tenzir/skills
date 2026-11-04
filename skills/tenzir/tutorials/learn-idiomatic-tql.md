@@ -1,7 +1,7 @@
 ---
 title: "Learn idiomatic TQL"
-canonical: https://tenzir.com/docs/tutorials/learn-idiomatic-tql
-source: https://tenzir.com/docs/tutorials/learn-idiomatic-tql.md
+canonical: https://tenzir.com/docs/v7.0.0/tutorials/learn-idiomatic-tql
+source: https://tenzir.com/docs/v7.0.0/tutorials/learn-idiomatic-tql.md
 section: "Docs"
 ---
 
@@ -200,7 +200,7 @@ Quick rule
 
 ### Extract bulky arguments before subpipelines
 
-Operators that take a subpipeline often also take record or list arguments. When those arguments span multiple lines, the record braces and subpipeline braces can be hard to distinguish. Move bulky configuration values into `let` bindings so the operator call stays compact and the subpipeline remains visually clear. This pattern is common with [`from_http`](https://tenzir.com/docs/reference/operators/from_http.md), where request records can sit directly before a parsing subpipeline such as [`read_json`](https://tenzir.com/docs/reference/operators/read_json.md).
+Operators that take a subpipeline often also take record or list arguments. When those arguments span multiple lines, the record braces and subpipeline braces can be hard to distinguish. Move bulky configuration values into `let` bindings so the operator call stays compact and the subpipeline remains visually clear. This pattern is common with [`from_http`](https://tenzir.com/docs/v7.0.0/reference/operators/from_http.md), where request records can sit directly before a parsing subpipeline such as [`read_json`](https://tenzir.com/docs/v7.0.0/reference/operators/read_json.md).
 
 ❌ Hard to scan:
 
@@ -603,7 +603,7 @@ tags = concatenate(concatenate(base_tags, ["monitored"]), extra_tags)
 
 When a fragment may be missing, use optional access such as `...profile?` or `...custom_tags?`.
 
-Keep [`merge`](https://tenzir.com/docs/reference/functions/merge.md) and [`concatenate`](https://tenzir.com/docs/reference/functions/concatenate.md) in mind when you read existing code or need an explicit two-argument function. For new transformations, prefer spread when you are constructing the resulting record or list.
+Keep [`merge`](https://tenzir.com/docs/v7.0.0/reference/functions/merge.md) and [`concatenate`](https://tenzir.com/docs/v7.0.0/reference/functions/concatenate.md) in mind when you read existing code or need an explicit two-argument function. For new transformations, prefer spread when you are constructing the resulting record or list.
 
 ## Streamline transformations instead of branching
 
@@ -655,7 +655,7 @@ The streamlined version deliberately retains null fields. A user record with a n
 
 ### Let conversions propagate null
 
-A null check before a null-propagating function repeats the function’s work. For example, [`time`](https://tenzir.com/docs/reference/functions/time.md) and [`to_lower`](https://tenzir.com/docs/reference/functions/to_lower.md) accept null input and return null.
+A null check before a null-propagating function repeats the function’s work. For example, [`time`](https://tenzir.com/docs/v7.0.0/reference/functions/time.md) and [`to_lower`](https://tenzir.com/docs/v7.0.0/reference/functions/to_lower.md) accept null input and return null.
 
 ❌ Guarded assignments with explicit null defaults:
 
@@ -707,7 +707,7 @@ if raw.file_path? != null {
 path = raw.file_path? else raw.path? else raw.target_file?
 ```
 
-If every candidate is absent or null, the result is null. Don’t add `else ""` unless an empty string is actually the desired result. The fallback operator does not treat `""`, `0`, or `false` as missing. Normalize source-specific placeholders with [`replace`](https://tenzir.com/docs/reference/operators/replace.md) when the source contract calls for it.
+If every candidate is absent or null, the result is null. Don’t add `else ""` unless an empty string is actually the desired result. The fallback operator does not treat `""`, `0`, or `false` as missing. Normalize source-specific placeholders with [`replace`](https://tenzir.com/docs/v7.0.0/reference/operators/replace.md) when the source contract calls for it.
 
 ### Don’t guard predicates against null
 
@@ -739,7 +739,7 @@ That filter intentionally removes events with missing reasons. It is not a repla
 
 ### Map nullable lists without special cases
 
-The [`map`](https://tenzir.com/docs/reference/functions/map.md) function returns null for a null input list without evaluating its lambda. An empty list stays empty.
+The [`map`](https://tenzir.com/docs/v7.0.0/reference/functions/map.md) function returns null for a null input list without evaluating its lambda. An empty list stays empty.
 
 ❌ Separate paths for absent, empty, and populated lists:
 
@@ -836,7 +836,7 @@ agent_name = move raw.agent.name
 
 The first version can lose data: a null skill ID says nothing about other attributes in `raw.agent`. Preserve those attributes for downstream consumers or under `unmapped`. Empty records and null fields can remain in the pipeline.
 
-If a destination requires null fields to be omitted, use [`drop_null_fields`](https://tenzir.com/docs/reference/operators/drop_null_fields.md) at that boundary rather than individual presence checks throughout the mapping. It removes null fields, not empty records. Don’t add cleanup merely to make an intermediate event look shorter.
+If a destination requires null fields to be omitted, use [`drop_null_fields`](https://tenzir.com/docs/v7.0.0/reference/operators/drop_null_fields.md) at that boundary rather than individual presence checks throughout the mapping. It removes null fields, not empty records. Don’t add cleanup merely to make an intermediate event look shorter.
 
 ### Keep conditions that protect meaning or validity
 
@@ -910,7 +910,7 @@ When normalizing data (e.g., to OCSF format):
 
 ### Use `replace` to normalize placeholder values
 
-When dealing with data that uses placeholder values like `"-"`, `"N/A"`, or empty strings to represent null, use the [`replace`](https://tenzir.com/docs/reference/operators/replace.md) operator to normalize them instead of writing conditional logic.
+When dealing with data that uses placeholder values like `"-"`, `"N/A"`, or empty strings to represent null, use the [`replace`](https://tenzir.com/docs/v7.0.0/reference/operators/replace.md) operator to normalize them instead of writing conditional logic.
 
 ✅ Clear and composable approach:
 
@@ -984,7 +984,7 @@ The selected placeholders become null. Other fields keep their values, including
 
 Operator vs. function
 
-Don’t confuse the [`replace`](https://tenzir.com/docs/reference/operators/replace.md) operator with the [`replace`](https://tenzir.com/docs/reference/functions/replace.md) function:
+Don’t confuse the [`replace`](https://tenzir.com/docs/v7.0.0/reference/operators/replace.md) operator with the [`replace`](https://tenzir.com/docs/v7.0.0/reference/functions/replace.md) function:
 
 * **Operator**: Replaces entire values in the selected fields, or across the event if no fields are specified.
 * **Function**: Replaces substrings within a string (e.g., `"hello".replace("l", "r")` → `"herro"`)
@@ -1094,7 +1094,7 @@ where result > threshold        // Filter after expensive operation
 
 ### Put the stream clock outside keyed aggregations
 
-When you aggregate keys inside event-time windows, put [`window`](https://tenzir.com/docs/reference/operators/window.md) outside [`group`](https://tenzir.com/docs/reference/operators/group.md) if one stream-wide event-time clock should close all buckets. This keeps sparse keys from holding their own windows open until another event for the same key arrives, `idle_timeout` fires, or the input ends.
+When you aggregate keys inside event-time windows, put [`window`](https://tenzir.com/docs/v7.0.0/reference/operators/window.md) outside [`group`](https://tenzir.com/docs/v7.0.0/reference/operators/group.md) if one stream-wide event-time clock should close all buckets. This keeps sparse keys from holding their own windows open until another event for the same key arrives, `idle_timeout` fires, or the input ends.
 
 ✅ Prefer a single window clock for stream-wide detections:
 
@@ -1126,7 +1126,7 @@ group user {
 }
 ```
 
-Use [`group`](https://tenzir.com/docs/reference/operators/group.md) around [`window`](https://tenzir.com/docs/reference/operators/window.md) only when each key needs an independent event-time clock or independent trailing history. For fixed windows that share one stream clock, put [`window`](https://tenzir.com/docs/reference/operators/window.md) outside [`group`](https://tenzir.com/docs/reference/operators/group.md) so state closes more predictably.
+Use [`group`](https://tenzir.com/docs/v7.0.0/reference/operators/group.md) around [`window`](https://tenzir.com/docs/v7.0.0/reference/operators/window.md) only when each key needs an independent event-time clock or independent trailing history. For fixed windows that share one stream clock, put [`window`](https://tenzir.com/docs/v7.0.0/reference/operators/window.md) outside [`group`](https://tenzir.com/docs/v7.0.0/reference/operators/group.md) so state closes more predictably.
 
 ## Composition patterns
 
@@ -1415,7 +1415,7 @@ Performance
 
 ### Treat warnings as errors with `strict`
 
-The [`strict`](https://tenzir.com/docs/reference/operators/strict.md) operator escalates all warnings to errors within its scope, stopping the pipeline when data quality issues occur.
+The [`strict`](https://tenzir.com/docs/v7.0.0/reference/operators/strict.md) operator escalates all warnings to errors within its scope, stopping the pipeline when data quality issues occur.
 
 ✅ Use `strict` for critical data processing:
 

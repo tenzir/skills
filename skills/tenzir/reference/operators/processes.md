@@ -1,7 +1,7 @@
 ---
 title: "processes"
-canonical: https://tenzir.com/docs/reference/operators/processes
-source: https://tenzir.com/docs/reference/operators/processes.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/processes
+source: https://tenzir.com/docs/v7.0.0/reference/operators/processes.md
 section: "Docs"
 ---
 
@@ -66,5 +66,5 @@ head 5
 
 ## See Also
 
-* [`files`](https://tenzir.com/docs/reference/operators/files.md)
-* [`sockets`](https://tenzir.com/docs/reference/operators/sockets.md)
+* [`files`](https://tenzir.com/docs/v7.0.0/reference/operators/files.md)
+* [`sockets`](https://tenzir.com/docs/v7.0.0/reference/operators/sockets.md)

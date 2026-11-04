@@ -1,7 +1,7 @@
 ---
 title: "Configure database"
-canonical: https://tenzir.com/docs/guides/platform-setup/configure-database
-source: https://tenzir.com/docs/guides/platform-setup/configure-database.md
+canonical: https://tenzir.com/docs/v7.0.0/guides/platform-setup/configure-database
+source: https://tenzir.com/docs/v7.0.0/guides/platform-setup/configure-database.md
 section: "Docs"
 ---
 

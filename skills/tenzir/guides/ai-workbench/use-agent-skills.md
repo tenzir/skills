@@ -1,8 +1,8 @@
 ---
 title: "Use agent skills"
 description: "Install Tenzir agent skills for documentation and security schemas"
-canonical: https://tenzir.com/docs/guides/ai-workbench/use-agent-skills
-source: https://tenzir.com/docs/guides/ai-workbench/use-agent-skills.md
+canonical: https://tenzir.com/docs/v7.0.0/guides/ai-workbench/use-agent-skills
+source: https://tenzir.com/docs/v7.0.0/guides/ai-workbench/use-agent-skills.md
 section: "Docs"
 ---
 
@@ -229,7 +229,7 @@ Install the IBM QRadar LEEF skill when you want an agent to generate, parse, or 
 npx skills add tenzir/skills@tenzir-leef
 ```
 
-The `tenzir-leef` skill is generated from the official IBM LEEF Version 2 format guide. It documents the LEEF 1.0 and 2.0 headers, delimiter rules, all 45 predefined event attributes with types and limits, custom event key guidelines, and `devTime`/`devTimeFormat` timestamp patterns. For QRadar-specific delivery examples, see [IBM QRadar](../../integrations/qradar.md).
+The `tenzir-leef` skill is generated from the official IBM LEEF Version 2 format guide. It documents the LEEF 1.0 and 2.0 headers, delimiter rules, all 45 predefined event attributes with types and limits, custom event key guidelines, and `devTime`/`devTimeFormat` timestamp patterns. For QRadar-specific delivery examples, see [Qradar](https://docs.tenzir.com/integrations/qradar).
 
 Tell the agent which context you want:
 

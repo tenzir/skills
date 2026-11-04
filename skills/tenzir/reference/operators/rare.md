@@ -1,7 +1,7 @@
 ---
 title: "rare"
-canonical: https://tenzir.com/docs/reference/operators/rare
-source: https://tenzir.com/docs/reference/operators/rare.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/rare
+source: https://tenzir.com/docs/v7.0.0/reference/operators/rare.md
 section: "Docs"
 ---
 
@@ -19,7 +19,7 @@ rare x:field
 
 Shows the least common values for a given field. For each unique value, a new event containing its count will be produced. In general, `rare x` is equivalent to:
 
-This operator is the dual to [`top`](https://tenzir.com/docs/reference/operators/top.md).
+This operator is the dual to [`top`](https://tenzir.com/docs/v7.0.0/reference/operators/top.md).
 
 ```tql
 summarize x, count=count()
@@ -28,7 +28,7 @@ sort count
 
 Potentially High Memory Usage
 
-Use caution when applying this operator to large inputs. It currently buffers aggregation state in memory. A downstream [`head`](https://tenzir.com/docs/reference/operators/head.md) bounds the final sort’s retained candidates, but does not reduce the number of aggregation groups. Out-of-core processing is on our roadmap.
+Use caution when applying this operator to large inputs. It currently buffers aggregation state in memory. A downstream [`head`](https://tenzir.com/docs/v7.0.0/reference/operators/head.md) bounds the final sort’s retained candidates, but does not reduce the number of aggregation groups. Out-of-core processing is on our roadmap.
 
 ### `x: field`
 
@@ -59,7 +59,7 @@ head 5
 
 ## See Also
 
-* [`sort`](https://tenzir.com/docs/reference/operators/sort.md)
-* [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md)
-* [`top`](https://tenzir.com/docs/reference/operators/top.md)
+* [`sort`](https://tenzir.com/docs/v7.0.0/reference/operators/sort.md)
+* [`summarize`](https://tenzir.com/docs/v7.0.0/reference/operators/summarize.md)
+* [`top`](https://tenzir.com/docs/v7.0.0/reference/operators/top.md)
 * [Aggregate event streams](../../guides/analyze/aggregate-event-streams.md)

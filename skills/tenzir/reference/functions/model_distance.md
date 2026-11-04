@@ -1,7 +1,7 @@
 ---
 title: "model_distance"
-canonical: https://tenzir.com/docs/reference/functions/model_distance
-source: https://tenzir.com/docs/reference/functions/model_distance.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/model_distance
+source: https://tenzir.com/docs/v7.0.0/reference/functions/model_distance.md
 section: "Docs"
 ---
 
@@ -54,6 +54,6 @@ select distance = model_distance(
 
 ## See also
 
-* [`model_divergence`](https://tenzir.com/docs/reference/functions/model_divergence.md)
-* [`tdigest`](https://tenzir.com/docs/reference/functions/tdigest.md)
-* [`tdigest_cdf`](https://tenzir.com/docs/reference/functions/tdigest_cdf.md)
+* [`model_divergence`](https://tenzir.com/docs/v7.0.0/reference/functions/model_divergence.md)
+* [`tdigest`](https://tenzir.com/docs/v7.0.0/reference/functions/tdigest.md)
+* [`tdigest_cdf`](https://tenzir.com/docs/v7.0.0/reference/functions/tdigest_cdf.md)

@@ -1,7 +1,7 @@
 ---
 title: "Configuration"
-canonical: https://tenzir.com/docs/explanations/configuration
-source: https://tenzir.com/docs/explanations/configuration.md
+canonical: https://tenzir.com/docs/v7.0.0/explanations/configuration
+source: https://tenzir.com/docs/v7.0.0/explanations/configuration.md
 section: "Docs"
 ---
 
@@ -130,7 +130,7 @@ For normal `s3://bucket/...` URLs, `from_s3` and `to_s3` select the proxy from t
 
 ## TLS Configuration
 
-Tenzir provides node-level TLS configuration that applies to all operators and connectors using TLS/HTTPS connections. These settings are used by operators that make outbound connections (e.g., [`to_opensearch`](https://tenzir.com/docs/reference/operators/to_opensearch.md) and [`to_splunk`](https://tenzir.com/docs/reference/operators/to_splunk.md)) and those that accept inbound connections (e.g., [`accept_tcp`](https://tenzir.com/docs/reference/operators/accept_tcp.md) and [`serve_tcp`](https://tenzir.com/docs/reference/operators/serve_tcp.md)).
+Tenzir provides node-level TLS configuration that applies to all operators and connectors using TLS/HTTPS connections. These settings are used by operators that make outbound connections (e.g., [`to_opensearch`](https://tenzir.com/docs/v7.0.0/reference/operators/to_opensearch.md) and [`to_splunk`](https://tenzir.com/docs/v7.0.0/reference/operators/to_splunk.md)) and those that accept inbound connections (e.g., [`accept_tcp`](https://tenzir.com/docs/v7.0.0/reference/operators/accept_tcp.md) and [`serve_tcp`](https://tenzir.com/docs/v7.0.0/reference/operators/serve_tcp.md)).
 
 Use Only When Required
 
@@ -172,12 +172,12 @@ The cipher list format follows OpenSSL cipher list syntax. See the [OpenSSL docu
 
 The following operators and connectors automatically respect the node-level TLS configuration:
 
-* [`to_opensearch`](https://tenzir.com/docs/reference/operators/to_opensearch.md): Applies min version and ciphers to HTTPS connections
-* [`to_splunk`](https://tenzir.com/docs/reference/operators/to_splunk.md): Applies min version and ciphers to Splunk HEC connections
-* [`accept_tcp`](https://tenzir.com/docs/reference/operators/accept_tcp.md): Applies min version and ciphers to TLS server mode
-* [`from_tcp`](https://tenzir.com/docs/reference/operators/from_tcp.md): Applies min version and ciphers to TLS client mode
-* [`serve_tcp`](https://tenzir.com/docs/reference/operators/serve_tcp.md): Applies min version and ciphers to TLS server mode
-* [`accept_opensearch`](https://tenzir.com/docs/reference/operators/accept_opensearch.md): Applies min version and ciphers to HTTPS connections
+* [`to_opensearch`](https://tenzir.com/docs/v7.0.0/reference/operators/to_opensearch.md): Applies min version and ciphers to HTTPS connections
+* [`to_splunk`](https://tenzir.com/docs/v7.0.0/reference/operators/to_splunk.md): Applies min version and ciphers to Splunk HEC connections
+* [`accept_tcp`](https://tenzir.com/docs/v7.0.0/reference/operators/accept_tcp.md): Applies min version and ciphers to TLS server mode
+* [`from_tcp`](https://tenzir.com/docs/v7.0.0/reference/operators/from_tcp.md): Applies min version and ciphers to TLS client mode
+* [`serve_tcp`](https://tenzir.com/docs/v7.0.0/reference/operators/serve_tcp.md): Applies min version and ciphers to TLS server mode
+* [`accept_opensearch`](https://tenzir.com/docs/v7.0.0/reference/operators/accept_opensearch.md): Applies min version and ciphers to HTTPS connections
 
 ## Plugins
 
@@ -253,7 +253,7 @@ These options only affect the connection from the node to the Tenzir Platform. I
 
 ### List plugins
 
-You can get the list of available plugins using the [`plugins`](https://tenzir.com/docs/reference/operators/plugins.md) operator:
+You can get the list of available plugins using the [`plugins`](https://tenzir.com/docs/v7.0.0/reference/operators/plugins.md) operator:
 
 ```bash
 tenzir 'plugins'

@@ -1,7 +1,7 @@
 ---
 title: "from_kafka"
-canonical: https://tenzir.com/docs/reference/operators/from_kafka
-source: https://tenzir.com/docs/reference/operators/from_kafka.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/from_kafka
+source: https://tenzir.com/docs/v7.0.0/reference/operators/from_kafka.md
 section: "Docs"
 ---
 
@@ -93,7 +93,7 @@ Schemas are fetched by the identifier in each message, including their named ref
 
 Avro records become events; other top-level Avro values are wrapped in a `value` field. Kafka tombstones produce no event, but count towards `count`. Empty, non-null payloads are decoded according to their schema. Each value must contain exactly one datum; messages with trailing bytes are skipped with a warning. Top-level `bytes` values use the Confluent encoding, with no Avro length prefix.
 
-Values use the type mapping of [`read_avro`](https://tenzir.com/docs/reference/operators/read_avro.md). Recursive schemas and arrays whose item schema does not have a fixed Tenzir type are unsupported. Each datum is limited to 16 MiB in encoded form and in the decoder’s estimated in-memory representation. Registry response bodies for one schema and its references are limited to 16 MiB in total. Cyclic references are unsupported; a lookup supports at most 128 named references and 32 schema levels, including the root schema.
+Values use the type mapping of [`read_avro`](https://tenzir.com/docs/v7.0.0/reference/operators/read_avro.md). Recursive schemas and arrays whose item schema does not have a fixed Tenzir type are unsupported. Each datum is limited to 16 MiB in encoded form and in the decoder’s estimated in-memory representation. Registry response bodies for one schema and its references are limited to 16 MiB in total. Cyclic references are unsupported; a lookup supports at most 128 named references and 32 schema levels, including the root schema.
 
 Malformed schema identifiers and Avro payloads produce warnings that identify the topic, partition, and offset. The operator skips these messages and continues with later messages, including valid messages in the same batch. Skipped messages produce no event but count towards `count`, and their offsets are committed along with the batch. This also applies when a payload does not match its registered schema. Once committed, skipped messages are not replayed with `offset="stored"`.
 
@@ -119,7 +119,7 @@ from_kafka "events",
 
 ### `schema_registry_tls = bool|record (optional)`
 
-TLS settings for registry requests, using the same client TLS options as [`from_http`](https://tenzir.com/docs/reference/operators/from_http.md). HTTPS uses TLS with certificate verification by default. Requires `schema_registry`.
+TLS settings for registry requests, using the same client TLS options as [`from_http`](https://tenzir.com/docs/v7.0.0/reference/operators/from_http.md). HTTPS uses TLS with certificate verification by default. Requires `schema_registry`.
 
 ## Parallelism
 
@@ -135,7 +135,7 @@ The operator falls back to a single instance when an argument ties the run to on
 
 ## Amazon MSK
 
-The operator supports [Amazon MSK](../../integrations/amazon/msk.md) with IAM authentication.
+The operator supports [Amazon MSK](https://docs.tenzir.com/integrations/amazon/msk) with IAM authentication.
 
 ### `aws_iam = record (optional)`
 
@@ -197,7 +197,7 @@ from_kafka "^tenant-.*\\.alerts$", offset="beginning"
 
 ## See Also
 
-* [`to_kafka`](https://tenzir.com/docs/reference/operators/to_kafka.md)
-* [Kafka](../../integrations/kafka.md)
+* [`to_kafka`](https://tenzir.com/docs/v7.0.0/reference/operators/to_kafka.md)
+* [Kafka](https://docs.tenzir.com/integrations/kafka)
 
 Parallelizable: a parallel pipeline may run this operator on several cores at once.

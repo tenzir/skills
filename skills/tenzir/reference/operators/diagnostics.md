@@ -1,7 +1,7 @@
 ---
 title: "diagnostics"
-canonical: https://tenzir.com/docs/reference/operators/diagnostics
-source: https://tenzir.com/docs/reference/operators/diagnostics.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/diagnostics
+source: https://tenzir.com/docs/v7.0.0/reference/operators/diagnostics.md
 section: "Docs"
 ---
 
@@ -90,4 +90,4 @@ where severity == "error"
 
 ## See Also
 
-* [`metrics`](https://tenzir.com/docs/reference/operators/metrics.md)
+* [`metrics`](https://tenzir.com/docs/v7.0.0/reference/operators/metrics.md)

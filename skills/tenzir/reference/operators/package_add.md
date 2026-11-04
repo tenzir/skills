@@ -1,7 +1,7 @@
 ---
 title: "package_add"
-canonical: https://tenzir.com/docs/reference/operators/package_add
-source: https://tenzir.com/docs/reference/operators/package_add.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/package_add
+source: https://tenzir.com/docs/v7.0.0/reference/operators/package_add.md
 section: "Docs"
 ---
 
@@ -44,7 +44,7 @@ package_add "/mnt/config/tenzir/library/zeek",
 
 ## See Also
 
-* [`package_list`](https://tenzir.com/docs/reference/operators/package_list.md)
-* [`package_remove`](https://tenzir.com/docs/reference/operators/package_remove.md)
+* [`package_list`](https://tenzir.com/docs/v7.0.0/reference/operators/package_list.md)
+* [`package_remove`](https://tenzir.com/docs/v7.0.0/reference/operators/package_remove.md)
 * [Install a package](../../guides/packages/install-a-package.md)
 * [Onboard a data source](../../tutorials/onboard-a-data-source.md)

@@ -1,7 +1,7 @@
 ---
 title: "is_title"
-canonical: https://tenzir.com/docs/reference/functions/is_title
-source: https://tenzir.com/docs/reference/functions/is_title.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/is_title
+source: https://tenzir.com/docs/v7.0.0/reference/functions/is_title.md
 section: "Docs"
 ---
 
@@ -33,5 +33,5 @@ from {x: "Hello World".is_title()}
 
 ## See Also
 
-* [`to_title`](https://tenzir.com/docs/reference/functions/to_title.md)
+* [`to_title`](https://tenzir.com/docs/v7.0.0/reference/functions/to_title.md)
 * [Manipulate strings](../../guides/shape/manipulate-strings.md)

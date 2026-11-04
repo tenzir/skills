@@ -1,7 +1,7 @@
 ---
 title: "Convert data formats"
-canonical: https://tenzir.com/docs/guides/shape/convert-data-formats
-source: https://tenzir.com/docs/guides/shape/convert-data-formats.md
+canonical: https://tenzir.com/docs/v7.0.0/guides/shape/convert-data-formats
+source: https://tenzir.com/docs/v7.0.0/guides/shape/convert-data-formats.md
 section: "Docs"
 ---
 
@@ -13,7 +13,7 @@ Data comes in many formats. Converting between formats is essential for integrat
 
 ## Print to JSON
 
-JSON is the most common data exchange format. Use [`print_json`](https://tenzir.com/docs/reference/functions/print_json.md) to convert any data to JSON strings:
+JSON is the most common data exchange format. Use [`print_json`](https://tenzir.com/docs/v7.0.0/reference/functions/print_json.md) to convert any data to JSON strings:
 
 ```tql
 from {
@@ -46,7 +46,7 @@ Print & Write Siblings
 
 Many `print_*` functions have a `write_*` sibling operator that operate on entire events instead of values within events. The `write_*` operators return *bytes* instead of events. As such, you need to pair it with an [output operator that accepts bytes](../../reference/operators.md#outputs).
 
-The [`print_json`](https://tenzir.com/docs/reference/functions/print_json.md) function has [`write_json`](https://tenzir.com/docs/reference/operators/write_json.md) as sibling operator to format the entire event stream as JSON:
+The [`print_json`](https://tenzir.com/docs/v7.0.0/reference/functions/print_json.md) function has [`write_json`](https://tenzir.com/docs/v7.0.0/reference/operators/write_json.md) as sibling operator to format the entire event stream as JSON:
 
 ```plaintext
 from {
@@ -78,7 +78,7 @@ write_json
 
 ### Print newline-delimited JSON
 
-For streaming data, use [`print_ndjson`](https://tenzir.com/docs/reference/functions/print_ndjson.md):
+For streaming data, use [`print_ndjson`](https://tenzir.com/docs/v7.0.0/reference/functions/print_ndjson.md):
 
 ```tql
 from {
@@ -111,7 +111,7 @@ ndjson = events.print_ndjson()
 }
 ```
 
-And with the [`write_ndjson`](https://tenzir.com/docs/reference/operators/write_ndjson.md) dual:
+And with the [`write_ndjson`](https://tenzir.com/docs/v7.0.0/reference/operators/write_ndjson.md) dual:
 
 ```tql
 from {
@@ -130,7 +130,7 @@ write_ndjson
 
 ## Print to CSV
 
-Convert tabular data to CSV with [`print_csv`](https://tenzir.com/docs/reference/functions/print_csv.md):
+Convert tabular data to CSV with [`print_csv`](https://tenzir.com/docs/v7.0.0/reference/functions/print_csv.md):
 
 ```tql
 from {name: "Alice", age: 30, city: "NYC"},
@@ -160,7 +160,7 @@ csv_data = this.print_csv()
 }
 ```
 
-You get an extra header with [`write_csv`](https://tenzir.com/docs/reference/operators/write_csv.md) dual:
+You get an extra header with [`write_csv`](https://tenzir.com/docs/v7.0.0/reference/operators/write_csv.md) dual:
 
 ```tql
 from {name: "Alice", age: 30, city: "NYC"},
@@ -178,7 +178,7 @@ Charlie,35,LA
 
 ## Print to TSV and SSV
 
-For tab-separated and space-separated values, use [`print_tsv`](https://tenzir.com/docs/reference/functions/print_tsv.md) and [`print_ssv`](https://tenzir.com/docs/reference/functions/print_ssv.md):
+For tab-separated and space-separated values, use [`print_tsv`](https://tenzir.com/docs/v7.0.0/reference/functions/print_tsv.md) and [`print_ssv`](https://tenzir.com/docs/v7.0.0/reference/functions/print_ssv.md):
 
 ```tql
 from {
@@ -200,7 +200,7 @@ ssv = record.print_ssv()
 }
 ```
 
-With [`write_tsv`](https://tenzir.com/docs/reference/operators/write_tsv.md):
+With [`write_tsv`](https://tenzir.com/docs/v7.0.0/reference/operators/write_tsv.md):
 
 ```tql
 from {
@@ -214,7 +214,7 @@ record.id record.name record.status
 1 Alice Smith active
 ```
 
-Note the additional double quotes with [`write_ssv`](https://tenzir.com/docs/reference/operators/write_ssv.md) because space is overloaded as field separator.
+Note the additional double quotes with [`write_ssv`](https://tenzir.com/docs/v7.0.0/reference/operators/write_ssv.md) because space is overloaded as field separator.
 
 ```tql
 from {
@@ -230,9 +230,9 @@ record.id record.name record.status
 
 ## Print to custom-separated values
 
-If none of the existing \*SV formats meet your needs, the [`print_xsv`](https://tenzir.com/docs/reference/functions/print_xsv.md) function to customize field separator, list separator, and what to render for absent values:
+If none of the existing \*SV formats meet your needs, the [`print_xsv`](https://tenzir.com/docs/v7.0.0/reference/functions/print_xsv.md) function to customize field separator, list separator, and what to render for absent values:
 
-Use [`print_xsv`](https://tenzir.com/docs/reference/functions/print_xsv.md) for custom separators:
+Use [`print_xsv`](https://tenzir.com/docs/v7.0.0/reference/functions/print_xsv.md) for custom separators:
 
 ```tql
 from {
@@ -243,7 +243,7 @@ pipe_separated = item.print_xsv(field_separator=" ⏸︎ ",
                                 null_value="∅")
 ```
 
-And for the entire event stream via [`write_xsv`](https://tenzir.com/docs/reference/operators/write_xsv.md):
+And for the entire event stream via [`write_xsv`](https://tenzir.com/docs/v7.0.0/reference/operators/write_xsv.md):
 
 ```tql
 {
@@ -268,7 +268,7 @@ A001 ⏸︎ Widget ⏸︎ 9.99 ⏸︎ 42 ⌘ 84 ⏸︎ ∅
 
 ## Print to YAML
 
-Convert data to YAML format with [`print_yaml`](https://tenzir.com/docs/reference/functions/print_yaml.md):
+Convert data to YAML format with [`print_yaml`](https://tenzir.com/docs/v7.0.0/reference/functions/print_yaml.md):
 
 ```tql
 from {
@@ -291,7 +291,7 @@ yaml = config.print_yaml()
 }
 ```
 
-Turn the entire event stream into a YAML document stream via [`write_yaml`](https://tenzir.com/docs/reference/operators/write_yaml.md):
+Turn the entire event stream into a YAML document stream via [`write_yaml`](https://tenzir.com/docs/v7.0.0/reference/operators/write_yaml.md):
 
 ```tql
 from {
@@ -323,7 +323,7 @@ config:
 
 ## Print key-value pairs
 
-Convert records to key-value format with [`print_kv`](https://tenzir.com/docs/reference/functions/print_kv.md):
+Convert records to key-value format with [`print_kv`](https://tenzir.com/docs/v7.0.0/reference/functions/print_kv.md):
 
 ```tql
 from {
@@ -355,7 +355,7 @@ kv_custom = event.print_kv(value_separator=": ", field_separator=" | ")
 
 ### CEF (Common Event Format)
 
-Print security events in CEF format with [`print_cef`](https://tenzir.com/docs/reference/functions/print_cef.md):
+Print security events in CEF format with [`print_cef`](https://tenzir.com/docs/v7.0.0/reference/functions/print_cef.md):
 
 ```tql
 from {
@@ -386,7 +386,7 @@ cef = extension.print_cef(
 
 Turn print functions into write operators
 
-There’s no `write_cef` sibling operator, but you use a combination of [`select`](https://tenzir.com/docs/reference/operators/select.md) and [`write_lines`](https://tenzir.com/docs/reference/operators/write_lines.md). For example:
+There’s no `write_cef` sibling operator, but you use a combination of [`select`](https://tenzir.com/docs/v7.0.0/reference/operators/select.md) and [`write_lines`](https://tenzir.com/docs/v7.0.0/reference/operators/write_lines.md). For example:
 
 ```tql
 from { ... }
@@ -395,11 +395,11 @@ select cef
 write_lines
 ```
 
-You could now add [`to_file`](https://tenzir.com/docs/reference/operators/to_file.md) or use [`write_lines`](https://tenzir.com/docs/reference/operators/write_lines.md) as a printing subpipeline in a destination operator.
+You could now add [`to_file`](https://tenzir.com/docs/v7.0.0/reference/operators/to_file.md) or use [`write_lines`](https://tenzir.com/docs/v7.0.0/reference/operators/write_lines.md) as a printing subpipeline in a destination operator.
 
 ### LEEF (Log Event Extended Format)
 
-Print in IBM QRadar’s LEEF format with [`print_leef`](https://tenzir.com/docs/reference/functions/print_leef.md):
+Print in IBM QRadar’s LEEF format with [`print_leef`](https://tenzir.com/docs/v7.0.0/reference/functions/print_leef.md):
 
 ```tql
 from {

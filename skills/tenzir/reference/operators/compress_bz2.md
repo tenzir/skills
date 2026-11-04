@@ -1,7 +1,7 @@
 ---
 title: "compress_bz2"
-canonical: https://tenzir.com/docs/reference/operators/compress_bz2
-source: https://tenzir.com/docs/reference/operators/compress_bz2.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/compress_bz2
+source: https://tenzir.com/docs/v7.0.0/reference/operators/compress_bz2.md
 section: "Docs"
 ---
 
@@ -50,8 +50,8 @@ to_file "out.bz2" {
 
 ## See Also
 
-* [`compress_brotli`](https://tenzir.com/docs/reference/operators/compress_brotli.md)
-* [`compress_gzip`](https://tenzir.com/docs/reference/operators/compress_gzip.md)
-* [`compress_lz4`](https://tenzir.com/docs/reference/operators/compress_lz4.md)
-* [`compress_zstd`](https://tenzir.com/docs/reference/operators/compress_zstd.md)
-* [`decompress_bz2`](https://tenzir.com/docs/reference/operators/decompress_bz2.md)
+* [`compress_brotli`](https://tenzir.com/docs/v7.0.0/reference/operators/compress_brotli.md)
+* [`compress_gzip`](https://tenzir.com/docs/v7.0.0/reference/operators/compress_gzip.md)
+* [`compress_lz4`](https://tenzir.com/docs/v7.0.0/reference/operators/compress_lz4.md)
+* [`compress_zstd`](https://tenzir.com/docs/v7.0.0/reference/operators/compress_zstd.md)
+* [`decompress_bz2`](https://tenzir.com/docs/v7.0.0/reference/operators/decompress_bz2.md)

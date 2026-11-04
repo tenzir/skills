@@ -1,7 +1,7 @@
 ---
 title: "reorder"
-canonical: https://tenzir.com/docs/reference/operators/reorder
-source: https://tenzir.com/docs/reference/operators/reorder.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/reorder
+source: https://tenzir.com/docs/v7.0.0/reference/operators/reorder.md
 section: "Docs"
 ---
 
@@ -17,9 +17,9 @@ reorder on=expression, tolerance=duration
 
 ## Description
 
-The `reorder` operator buffers events until their order is stable according to an event-time watermark. Use [`sort`](https://tenzir.com/docs/reference/operators/sort.md) instead when finite input requires a complete order without a known bound on timestamp regressions.
+The `reorder` operator buffers events until their order is stable according to an event-time watermark. Use [`sort`](https://tenzir.com/docs/v7.0.0/reference/operators/sort.md) instead when finite input requires a complete order without a known bound on timestamp regressions.
 
-The operator changes event order without changing timestamps or pacing the output. Use [`timeshift`](https://tenzir.com/docs/reference/operators/timeshift.md) to change timestamps and [`delay`](https://tenzir.com/docs/reference/operators/delay.md) to pace events according to their timestamps.
+The operator changes event order without changing timestamps or pacing the output. Use [`timeshift`](https://tenzir.com/docs/v7.0.0/reference/operators/timeshift.md) to change timestamps and [`delay`](https://tenzir.com/docs/v7.0.0/reference/operators/delay.md) to pace events according to their timestamps.
 
 It tracks the largest timestamp observed so far and computes the watermark as:
 
@@ -35,7 +35,7 @@ When finite input ends, `reorder` flushes the remaining buffered events in times
 
 Events with a null or non-timestamp `on` value are dropped with a warning. An event is late when its timestamp precedes the timestamp of an event that the operator has already emitted. Late events are also dropped with a warning.
 
-A `reorder` instance maintains one global watermark. Put it inside [`group`](https://tenzir.com/docs/reference/operators/group.md) when each key needs independent ordering. For equal timestamps, arrival order means the order observed by `reorder`; the operator cannot reconstruct ordering that an upstream operation already discarded.
+A `reorder` instance maintains one global watermark. Put it inside [`group`](https://tenzir.com/docs/v7.0.0/reference/operators/group.md) when each key needs independent ordering. For equal timestamps, arrival order means the order observed by `reorder`; the operator cannot reconstruct ordering that an upstream operation already discarded.
 
 ### `on = expression`
 
@@ -69,7 +69,7 @@ group user.name {
 
 ### Order events before a fixed window
 
-A fixed [`window`](https://tenzir.com/docs/reference/operators/window.md) delays closure by its tolerance, but it forwards events to its subpipeline in arrival order. Place `reorder` before it when the subpipeline requires timestamp order:
+A fixed [`window`](https://tenzir.com/docs/v7.0.0/reference/operators/window.md) delays closure by its tolerance, but it forwards events to its subpipeline in arrival order. Place `reorder` before it when the subpipeline requires timestamp order:
 
 ```tql
 reorder on=time, tolerance=2min

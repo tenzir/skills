@@ -1,7 +1,7 @@
 ---
 title: "frequency_table_count"
-canonical: https://tenzir.com/docs/reference/functions/frequency_table_count
-source: https://tenzir.com/docs/reference/functions/frequency_table_count.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/frequency_table_count
+source: https://tenzir.com/docs/v7.0.0/reference/functions/frequency_table_count.md
 section: "Docs"
 ---
 
@@ -41,6 +41,6 @@ select count = frequency_table_count(model, "login"),
 
 ## See also
 
-* [`frequency_table`](https://tenzir.com/docs/reference/functions/frequency_table.md)
-* [`model_divergence`](https://tenzir.com/docs/reference/functions/model_divergence.md)
-* [`model_merge`](https://tenzir.com/docs/reference/functions/model_merge.md)
+* [`frequency_table`](https://tenzir.com/docs/v7.0.0/reference/functions/frequency_table.md)
+* [`model_divergence`](https://tenzir.com/docs/v7.0.0/reference/functions/model_divergence.md)
+* [`model_merge`](https://tenzir.com/docs/v7.0.0/reference/functions/model_merge.md)

@@ -1,7 +1,7 @@
 ---
 title: "summarize"
-canonical: https://tenzir.com/docs/reference/operators/summarize
-source: https://tenzir.com/docs/reference/operators/summarize.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/summarize
+source: https://tenzir.com/docs/v7.0.0/reference/operators/summarize.md
 section: "Docs"
 ---
 
@@ -85,7 +85,7 @@ The current implementation accepts `summary` at final and duration boundaries, `
 
 A count boundary applies to the entire input of one `summarize` instance, not independently to each grouping key. With `trigger`, only the triggering event’s group is represented in the output. In reset mode, state for the other groups is also cleared at that boundary. Put `summarize` inside an outer `group` subpipeline when each key needs an independent count and checkpoint.
 
-Inside [`window`](https://tenzir.com/docs/reference/operators/window.md), the window lifecycle supplies a finite input boundary. Without parallelism, event output preserves the order in which its `summarize` invocation receives events. Outputs from concurrent [`window`](https://tenzir.com/docs/reference/operators/window.md) subpipelines can still interleave, as described in the [`window`](https://tenzir.com/docs/reference/operators/window.md) reference.
+Inside [`window`](https://tenzir.com/docs/v7.0.0/reference/operators/window.md), the window lifecycle supplies a finite input boundary. Without parallelism, event output preserves the order in which its `summarize` invocation receives events. Outputs from concurrent [`window`](https://tenzir.com/docs/v7.0.0/reference/operators/window.md) subpipelines can still interleave, as described in the [`window`](https://tenzir.com/docs/v7.0.0/reference/operators/window.md) reference.
 
 ### Parallelization
 
@@ -112,19 +112,19 @@ from {host: "a", bytes: 10}, {host: "b", bytes: 20}
 summarize host, bytes=sum(bytes), options={emit: 2, mode: "reset"}
 ```
 
-With final or per-event emission, partitioning keeps each group’s complete state on one instance. Parallelism therefore preserves the groups and the values of order-independent aggregates such as [`count`](https://tenzir.com/docs/reference/functions/count.md) and [`min`](https://tenzir.com/docs/reference/functions/min.md). An upstream parallel stage can reorder a group’s events before they reach `summarize`, which can change order-sensitive aggregates such as [`first`](https://tenzir.com/docs/reference/functions/first.md), [`last`](https://tenzir.com/docs/reference/functions/last.md), and [`collect`](https://tenzir.com/docs/reference/functions/collect.md).
+With final or per-event emission, partitioning keeps each group’s complete state on one instance. Parallelism therefore preserves the groups and the values of order-independent aggregates such as [`count`](https://tenzir.com/docs/v7.0.0/reference/functions/count.md) and [`min`](https://tenzir.com/docs/v7.0.0/reference/functions/min.md). An upstream parallel stage can reorder a group’s events before they reach `summarize`, which can change order-sensitive aggregates such as [`first`](https://tenzir.com/docs/v7.0.0/reference/functions/first.md), [`last`](https://tenzir.com/docs/v7.0.0/reference/functions/last.md), and [`collect`](https://tenzir.com/docs/v7.0.0/reference/functions/collect.md).
 
 With duration-based emission, each replica maintains its own timer. Parallelism can therefore change the number and aggregate values of periodic summaries, especially when aggregates reset after emission. Parallelism can also change the output order.
 
 Parallel instances emit events out of order
 
-Instances work at different speeds, and each one emits the groups it owns as it completes them. With `output: "events"` or `output: "trigger"`, output from the instances can interleave instead of following input order. Use [`sort`](https://tenzir.com/docs/reference/operators/sort.md) on an ordering field, or keep parallelism disabled, when the order carries meaning.
+Instances work at different speeds, and each one emits the groups it owns as it completes them. With `output: "events"` or `output: "trigger"`, output from the instances can interleave instead of following input order. Use [`sort`](https://tenzir.com/docs/v7.0.0/reference/operators/sort.md) on an ordering field, or keep parallelism disabled, when the order carries meaning.
 
 Parallel instances keep independent timers
 
 A duration `emit` measures processing time per instance, and an instance starts its first interval when it receives its first event. Instances therefore neither start at the same moment nor stay aligned with each other. Every group still receives a complete series of summaries, but summaries of groups that live on different instances can cover different time windows, so their values aren’t comparable across groups.
 
-Use [`window`](https://tenzir.com/docs/reference/operators/window.md) when the intervals have to line up. Its fixed windows align to the Unix epoch rather than to the arrival of the first event, so every group shares the same boundaries no matter which instance owns it:
+Use [`window`](https://tenzir.com/docs/v7.0.0/reference/operators/window.md) when the intervals have to line up. Its fixed windows align to the Unix epoch rather than to the arrival of the first event, so every group shares the same boundaries no matter which instance owns it:
 
 ```tql
 window size=1h {
@@ -144,13 +144,13 @@ summarize host, events=count(), bytes=sum(bytes)
 head 10
 ```
 
-The source can read only `host` and `bytes`, without an explicit [`select`](https://tenzir.com/docs/reference/operators/select.md). Unless the source computes the aggregation, as described later, aggregation still runs in Tenzir and consumes the complete input. The [`head`](https://tenzir.com/docs/reference/operators/head.md) limits summary rows, not the events contributing to them.
+The source can read only `host` and `bytes`, without an explicit [`select`](https://tenzir.com/docs/v7.0.0/reference/operators/select.md). Unless the source computes the aggregation, as described later, aggregation still runs in Tenzir and consumes the complete input. The [`head`](https://tenzir.com/docs/v7.0.0/reference/operators/head.md) limits summary rows, not the events contributing to them.
 
-All grouping keys and aggregate inputs remain required, even if a later selection drops their results. An aggregation that reads the whole event or uses dynamic field access prevents narrowing. Trigger output, event output, and periodic summaries retain their optimization barriers. Projection is also withheld while options are unresolved in a runtime-bound subpipeline, such as [`group`](https://tenzir.com/docs/reference/operators/group.md) or [`window`](https://tenzir.com/docs/reference/operators/window.md).
+All grouping keys and aggregate inputs remain required, even if a later selection drops their results. An aggregation that reads the whole event or uses dynamic field access prevents narrowing. Trigger output, event output, and periodic summaries retain their optimization barriers. Projection is also withheld while options are unresolved in a runtime-bound subpipeline, such as [`group`](https://tenzir.com/docs/v7.0.0/reference/operators/group.md) or [`window`](https://tenzir.com/docs/v7.0.0/reference/operators/window.md).
 
-The [`top`](https://tenzir.com/docs/reference/operators/top.md) and [`rare`](https://tenzir.com/docs/reference/operators/rare.md) operators use `summarize` internally and benefit from the same input-field optimization. Our [aggregation input projection reference](../optimizations.md#aggregation-input-projections) explains the generated query and the shared rules across sources.
+The [`top`](https://tenzir.com/docs/v7.0.0/reference/operators/top.md) and [`rare`](https://tenzir.com/docs/v7.0.0/reference/operators/rare.md) operators use `summarize` internally and benefit from the same input-field optimization. Our [aggregation input projection reference](../optimizations.md#aggregation-input-projections) explains the generated query and the shared rules across sources.
 
-The database sources [`from_clickhouse`](https://tenzir.com/docs/reference/operators/from_clickhouse.md), [`from_duckdb`](https://tenzir.com/docs/reference/operators/from_duckdb.md), [`from_microsoft_sql`](https://tenzir.com/docs/reference/operators/from_microsoft_sql.md), and [`from_mysql`](https://tenzir.com/docs/reference/operators/from_mysql.md) compute a final summary that directly follows them in the database, which then returns one row per group. [`from_sentinelone_data_lake`](https://tenzir.com/docs/reference/operators/from_sentinelone_data_lake.md) lets SentinelOne compute such a summary as well. The [optimizations reference](../optimizations.md#aggregations-in-the-source) lists the conditions.
+The database sources [`from_clickhouse`](https://tenzir.com/docs/v7.0.0/reference/operators/from_clickhouse.md), [`from_duckdb`](https://tenzir.com/docs/v7.0.0/reference/operators/from_duckdb.md), [`from_microsoft_sql`](https://tenzir.com/docs/v7.0.0/reference/operators/from_microsoft_sql.md), and [`from_mysql`](https://tenzir.com/docs/v7.0.0/reference/operators/from_mysql.md) compute a final summary that directly follows them in the database, which then returns one row per group. [`from_sentinelone_data_lake`](https://tenzir.com/docs/v7.0.0/reference/operators/from_sentinelone_data_lake.md) lets SentinelOne compute such a summary as well. The [optimizations reference](../optimizations.md#aggregations-in-the-source) lists the conditions.
 
 ## Examples
 
@@ -289,15 +289,15 @@ Sum bytes and emit running totals every minute:
 summarize sum(bytes), options={emit: 1min, mode: "cumulative"}
 ```
 
-Timer emission uses processing time. For fixed or hopping event-time ranges, use [`window`](https://tenzir.com/docs/reference/operators/window.md). `summarize` doesn’t keep a bounded trailing history, so a Splunk `streamstats` query with `window` or `time_window` still requires a windowing strategy.
+Timer emission uses processing time. For fixed or hopping event-time ranges, use [`window`](https://tenzir.com/docs/v7.0.0/reference/operators/window.md). `summarize` doesn’t keep a bounded trailing history, so a Splunk `streamstats` query with `window` or `time_window` still requires a windowing strategy.
 
 ## See Also
 
-* [`group`](https://tenzir.com/docs/reference/operators/group.md)
-* [`rare`](https://tenzir.com/docs/reference/operators/rare.md)
-* [`top`](https://tenzir.com/docs/reference/operators/top.md)
-* [`sum`](https://tenzir.com/docs/reference/functions/sum.md)
-* [`count`](https://tenzir.com/docs/reference/functions/count.md)
+* [`group`](https://tenzir.com/docs/v7.0.0/reference/operators/group.md)
+* [`rare`](https://tenzir.com/docs/v7.0.0/reference/operators/rare.md)
+* [`top`](https://tenzir.com/docs/v7.0.0/reference/operators/top.md)
+* [`sum`](https://tenzir.com/docs/v7.0.0/reference/functions/sum.md)
+* [`count`](https://tenzir.com/docs/v7.0.0/reference/functions/count.md)
 * [Aggregate event streams](../../guides/analyze/aggregate-event-streams.md)
 * [Shape aggregation results](../../guides/analyze/shape-aggregation-results.md)
 * [Window event streams](../../guides/analyze/window-event-streams.md)

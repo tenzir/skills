@@ -1,7 +1,7 @@
 ---
 title: "chart_area"
-canonical: https://tenzir.com/docs/reference/operators/chart_area
-source: https://tenzir.com/docs/reference/operators/chart_area.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/chart_area
+source: https://tenzir.com/docs/v7.0.0/reference/operators/chart_area.md
 section: "Docs"
 ---
 
@@ -33,7 +33,7 @@ Positions on the y-axis for each data point. Multiple data points for the same g
 
 Multiple `y` values and their labels can be specified by using the record syntax: `{name: value, ...}`.
 
-For example, `y = {"Avg. Load": mean(load)}` calculates the [`mean`](https://tenzir.com/docs/reference/functions/mean.md) of the `load` field and labels it as `Avg. Load`.
+For example, `y = {"Avg. Load": mean(load)}` calculates the [`mean`](https://tenzir.com/docs/v7.0.0/reference/functions/mean.md) of the `load` field and labels it as `Avg. Load`.
 
 ### `x_min = any (optional)`
 
@@ -103,7 +103,7 @@ chart_area x=timestamp,
 
 ## See Also
 
-* [`chart_bar`](https://tenzir.com/docs/reference/operators/chart_bar.md)
-* [`chart_line`](https://tenzir.com/docs/reference/operators/chart_line.md)
-* [`chart_pie`](https://tenzir.com/docs/reference/operators/chart_pie.md)
-* [Plot data with charts](../../tutorials/plot-data-with-charts.md)
+* [`chart_bar`](https://tenzir.com/docs/v7.0.0/reference/operators/chart_bar.md)
+* [`chart_line`](https://tenzir.com/docs/v7.0.0/reference/operators/chart_line.md)
+* [`chart_pie`](https://tenzir.com/docs/v7.0.0/reference/operators/chart_pie.md)
+* [Plot data with charts](https://docs.tenzir.com/tutorials/plot-data-with-charts)

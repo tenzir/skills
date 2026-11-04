@@ -1,7 +1,7 @@
 ---
 title: "slice"
-canonical: https://tenzir.com/docs/reference/functions/slice
-source: https://tenzir.com/docs/reference/functions/slice.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/slice
+source: https://tenzir.com/docs/v7.0.0/reference/functions/slice.md
 section: "Docs"
 ---
 
@@ -118,9 +118,9 @@ xs = xs.slice(stride=-1)
 
 ## See Also
 
-* [`sort`](https://tenzir.com/docs/reference/functions/sort.md)
-* [`split`](https://tenzir.com/docs/reference/functions/split.md)
-* [`length_chars`](https://tenzir.com/docs/reference/functions/length_chars.md)
+* [`sort`](https://tenzir.com/docs/v7.0.0/reference/functions/sort.md)
+* [`split`](https://tenzir.com/docs/v7.0.0/reference/functions/split.md)
+* [`length_chars`](https://tenzir.com/docs/v7.0.0/reference/functions/length_chars.md)
 * [Shape lists](../../guides/shape/shape-lists.md)
 * [Manipulate strings](../../guides/shape/manipulate-strings.md)
 * [Mask sensitive data](../../guides/protect/mask-sensitive-data.md)

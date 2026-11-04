@@ -1,7 +1,7 @@
 ---
 title: "Shape aggregation results"
-canonical: https://tenzir.com/docs/guides/analyze/shape-aggregation-results
-source: https://tenzir.com/docs/guides/analyze/shape-aggregation-results.md
+canonical: https://tenzir.com/docs/v7.0.0/guides/analyze/shape-aggregation-results
+source: https://tenzir.com/docs/v7.0.0/guides/analyze/shape-aggregation-results.md
 section: "Docs"
 ---
 
@@ -23,13 +23,13 @@ The same input population therefore produces three different result shapes:
 
 Three aggregation flows show original event records becoming a final summary, one checkpoint event, or a set of enriched events. The output policies map to stats, streamstats checkpoints, and eventstats.
 
-Final and processing-time boundaries use `summary` by default. Count boundaries use `trigger` by default. The current implementation supports `events` only at the final input boundary. See the [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) reference for the complete option matrix.
+Final and processing-time boundaries use `summary` by default. Count boundaries use `trigger` by default. The current implementation supports `events` only at the final input boundary. See the [`summarize`](https://tenzir.com/docs/v7.0.0/reference/operators/summarize.md) reference for the complete option matrix.
 
 ## Add running statistics to events
 
 Choose between incremental aggregation and a bounded trailing window based on whether old events must expire from the result.
 
-Use cumulative event emission from [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) for unbounded running aggregates. It preserves each event and updates compact aggregate state:
+Use cumulative event emission from [`summarize`](https://tenzir.com/docs/v7.0.0/reference/operators/summarize.md) for unbounded running aggregates. It preserves each event and updates compact aggregate state:
 
 ```tql
 from {user: "alice", bytes: 10},
@@ -76,7 +76,7 @@ The output keeps the checkpoint event’s timestamp, source metadata, and other 
 
 The count applies to the entire input of one `summarize` instance, not to each grouping key. With grouping fields, only the triggering event’s group appears in the output, and reset mode clears the other groups at the same boundary. Put `summarize` inside an outer `group` subpipeline when each key needs an independent count and checkpoint.
 
-Use a trailing [`window`](https://tenzir.com/docs/reference/operators/window.md) when only a bounded count or time horizon should contribute. By default, a trailing window runs an arbitrary subpipeline once per input event and exposes that event as `$window.event`:
+Use a trailing [`window`](https://tenzir.com/docs/v7.0.0/reference/operators/window.md) when only a bounded count or time horizon should contribute. By default, a trailing window runs an arbitrary subpipeline once per input event and exposes that event as `$window.event`:
 
 ```tql
 from {user: "alice", ts: 2024-01-01T10:00:00Z, bytes: 10},
@@ -154,13 +154,13 @@ from {src_ip: 192.0.2.1}, {src_ip: 192.0.2.1}, {src_ip: 192.0.2.2}
 summarize src_ip, events=count(), options={emit: 30s, mode: "cumulative"}
 ```
 
-Both forms emit a final partial summary when the input ends. They differ from [`window`](https://tenzir.com/docs/reference/operators/window.md) because arrival time, not an event timestamp, determines the boundary.
+Both forms emit a final partial summary when the input ends. They differ from [`window`](https://tenzir.com/docs/v7.0.0/reference/operators/window.md) because arrival time, not an event timestamp, determines the boundary.
 
 ## Aggregate periodic snapshots
 
-Use [`every`](https://tenzir.com/docs/reference/operators/every.md) when the aggregation is tied to a wall-clock schedule, such as polling an inventory API every 10 minutes and publishing a current count of endpoint states. This pattern works well for dashboards, reports, cache refreshes, and external API polling where each run describes the current snapshot.
+Use [`every`](https://tenzir.com/docs/v7.0.0/reference/operators/every.md) when the aggregation is tied to a wall-clock schedule, such as polling an inventory API every 10 minutes and publishing a current count of endpoint states. This pattern works well for dashboards, reports, cache refreshes, and external API polling where each run describes the current snapshot.
 
-Don’t use [`every`](https://tenzir.com/docs/reference/operators/every.md) for streaming detections where delayed or out-of-order events can change the answer. Use [`window`](https://tenzir.com/docs/reference/operators/window.md) for event-time detections.
+Don’t use [`every`](https://tenzir.com/docs/v7.0.0/reference/operators/every.md) for streaming detections where delayed or out-of-order events can change the answer. Use [`window`](https://tenzir.com/docs/v7.0.0/reference/operators/window.md) for event-time detections.
 
 ```tql
 every 10min {
@@ -174,13 +174,13 @@ head 2
 sort status
 ```
 
-Each run fetches a fresh snapshot, groups endpoints by current status, and adds the run time. The `from` block stands in for an inventory API response; in a long-running pipeline, replace it with [`from_http`](https://tenzir.com/docs/reference/operators/from_http.md), remove [`head`](https://tenzir.com/docs/reference/operators/head.md), and publish the compact summary to a channel or destination.
+Each run fetches a fresh snapshot, groups endpoints by current status, and adds the run time. The `from` block stands in for an inventory API response; in a long-running pipeline, replace it with [`from_http`](https://tenzir.com/docs/v7.0.0/reference/operators/from_http.md), remove [`head`](https://tenzir.com/docs/v7.0.0/reference/operators/head.md), and publish the compact summary to a channel or destination.
 
-The wall-clock schedule is not an event-time window. If the pipeline starts at 09:00, [`every`](https://tenzir.com/docs/reference/operators/every.md) runs the subpipeline for `[09:00, 09:10)`, then restarts it for `[09:10, 09:20)`, and so on. The boundaries depend on when the pipeline starts, not on timestamps in the fetched data.
+The wall-clock schedule is not an event-time window. If the pipeline starts at 09:00, [`every`](https://tenzir.com/docs/v7.0.0/reference/operators/every.md) runs the subpipeline for `[09:00, 09:10)`, then restarts it for `[09:10, 09:20)`, and so on. The boundaries depend on when the pipeline starts, not on timestamps in the fetched data.
 
 ## See also
 
-* [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md)
-* [`every`](https://tenzir.com/docs/reference/operators/every.md)
+* [`summarize`](https://tenzir.com/docs/v7.0.0/reference/operators/summarize.md)
+* [`every`](https://tenzir.com/docs/v7.0.0/reference/operators/every.md)
 * [Aggregate event streams](aggregate-event-streams.md)
 * [Window event streams](window-event-streams.md)

@@ -1,7 +1,7 @@
 ---
 title: "assert_throughput"
-canonical: https://tenzir.com/docs/reference/operators/assert_throughput
-source: https://tenzir.com/docs/reference/operators/assert_throughput.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/assert_throughput
+source: https://tenzir.com/docs/v7.0.0/reference/operators/assert_throughput.md
 section: "Docs"
 ---
 
@@ -56,6 +56,6 @@ assert_throughput 1k, within=1s, max_events=5k
 
 ## See Also
 
-* [`accept_udp`](https://tenzir.com/docs/reference/operators/accept_udp.md)
-* [`assert`](https://tenzir.com/docs/reference/operators/assert.md)
-* [`throttle`](https://tenzir.com/docs/reference/operators/throttle.md)
+* [`accept_udp`](https://tenzir.com/docs/v7.0.0/reference/operators/accept_udp.md)
+* [`assert`](https://tenzir.com/docs/v7.0.0/reference/operators/assert.md)
+* [`throttle`](https://tenzir.com/docs/v7.0.0/reference/operators/throttle.md)

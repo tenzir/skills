@@ -1,7 +1,7 @@
 ---
 title: "from_stdin"
-canonical: https://tenzir.com/docs/reference/operators/from_stdin
-source: https://tenzir.com/docs/reference/operators/from_stdin.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/from_stdin
+source: https://tenzir.com/docs/v7.0.0/reference/operators/from_stdin.md
 section: "Docs"
 ---
 
@@ -69,4 +69,4 @@ from_stdin {
 
 ## See Also
 
-* [`from_file`](https://tenzir.com/docs/reference/operators/from_file.md)
+* [`from_file`](https://tenzir.com/docs/v7.0.0/reference/operators/from_file.md)

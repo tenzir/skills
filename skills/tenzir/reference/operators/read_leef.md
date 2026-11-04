@@ -1,7 +1,7 @@
 ---
 title: "read_leef"
-canonical: https://tenzir.com/docs/reference/operators/read_leef
-source: https://tenzir.com/docs/reference/operators/read_leef.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/read_leef
+source: https://tenzir.com/docs/v7.0.0/reference/operators/read_leef.md
 section: "Docs"
 ---
 
@@ -177,10 +177,10 @@ When you provide a `schema` or `selector`, the last value of a repeated key wins
 
 ## See Also
 
-* [`read_cef`](https://tenzir.com/docs/reference/operators/read_cef.md)
-* [`read_syslog`](https://tenzir.com/docs/reference/operators/read_syslog.md)
-* [`write_syslog`](https://tenzir.com/docs/reference/operators/write_syslog.md)
-* [`parse_leef`](https://tenzir.com/docs/reference/functions/parse_leef.md)
-* [`print_leef`](https://tenzir.com/docs/reference/functions/print_leef.md)
-* [IBM QRadar](../../integrations/qradar.md)
-* [Syslog](../../integrations/syslog.md)
+* [`read_cef`](https://tenzir.com/docs/v7.0.0/reference/operators/read_cef.md)
+* [`read_syslog`](https://tenzir.com/docs/v7.0.0/reference/operators/read_syslog.md)
+* [`write_syslog`](https://tenzir.com/docs/v7.0.0/reference/operators/write_syslog.md)
+* [`parse_leef`](https://tenzir.com/docs/v7.0.0/reference/functions/parse_leef.md)
+* [`print_leef`](https://tenzir.com/docs/v7.0.0/reference/functions/print_leef.md)
+* [Qradar](https://docs.tenzir.com/integrations/qradar)
+* [Syslog](https://docs.tenzir.com/integrations/syslog)

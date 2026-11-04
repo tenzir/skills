@@ -1,7 +1,7 @@
 ---
 title: "to_sentinelone_data_lake"
-canonical: https://tenzir.com/docs/reference/operators/to_sentinelone_data_lake
-source: https://tenzir.com/docs/reference/operators/to_sentinelone_data_lake.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/to_sentinelone_data_lake
+source: https://tenzir.com/docs/v7.0.0/reference/operators/to_sentinelone_data_lake.md
 section: "Docs"
 ---
 
@@ -135,7 +135,7 @@ If you already have structured data in Tenzir, prefer sending structured data, a
 
 ## See Also
 
-* [`from_sentinelone_data_lake`](https://tenzir.com/docs/reference/operators/from_sentinelone_data_lake.md)
-* [SentinelOne Data Lake](../../integrations/sentinelone-data-lake.md)
+* [`from_sentinelone_data_lake`](https://tenzir.com/docs/v7.0.0/reference/operators/from_sentinelone_data_lake.md)
+* [Sentinelone data lake](https://docs.tenzir.com/integrations/sentinelone-data-lake)
 
 Parallelizable: a parallel pipeline may run this operator on several cores at once.

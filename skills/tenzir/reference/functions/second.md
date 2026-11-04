@@ -1,7 +1,7 @@
 ---
 title: "second"
-canonical: https://tenzir.com/docs/reference/functions/second
-source: https://tenzir.com/docs/reference/functions/second.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/second
+source: https://tenzir.com/docs/v7.0.0/reference/functions/second.md
 section: "Docs"
 ---
 
@@ -59,9 +59,9 @@ full_second = ts.second().floor()
 
 ## See Also
 
-* [`year`](https://tenzir.com/docs/reference/functions/year.md)
-* [`month`](https://tenzir.com/docs/reference/functions/month.md)
-* [`day`](https://tenzir.com/docs/reference/functions/day.md)
-* [`hour`](https://tenzir.com/docs/reference/functions/hour.md)
-* [`minute`](https://tenzir.com/docs/reference/functions/minute.md)
+* [`year`](https://tenzir.com/docs/v7.0.0/reference/functions/year.md)
+* [`month`](https://tenzir.com/docs/v7.0.0/reference/functions/month.md)
+* [`day`](https://tenzir.com/docs/v7.0.0/reference/functions/day.md)
+* [`hour`](https://tenzir.com/docs/v7.0.0/reference/functions/hour.md)
+* [`minute`](https://tenzir.com/docs/v7.0.0/reference/functions/minute.md)
 * [Calculate with time](../../guides/shape/calculate-with-time.md)

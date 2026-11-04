@@ -1,7 +1,7 @@
 ---
 title: "write_bitz"
-canonical: https://tenzir.com/docs/reference/operators/write_bitz
-source: https://tenzir.com/docs/reference/operators/write_bitz.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/write_bitz
+source: https://tenzir.com/docs/v7.0.0/reference/operators/write_bitz.md
 section: "Docs"
 ---
 
@@ -23,11 +23,11 @@ Use BITZ when you need high-throughput structured data exchange with minimal ove
 
 Each message starts with a magic number and a 64-bit size prefix.
 
-Use [`write_bitz`](https://tenzir.com/docs/reference/operators/write_bitz.md) when you want to persist events in a compact columnar format and later load them again with [`read_bitz`](https://tenzir.com/docs/reference/operators/read_bitz.md).
+Use [`write_bitz`](https://tenzir.com/docs/v7.0.0/reference/operators/write_bitz.md) when you want to persist events in a compact columnar format and later load them again with [`read_bitz`](https://tenzir.com/docs/v7.0.0/reference/operators/read_bitz.md).
 
 ## See Also
 
-* [`read_bitz`](https://tenzir.com/docs/reference/operators/read_bitz.md)
-* [`write_feather`](https://tenzir.com/docs/reference/operators/write_feather.md)
-* [`write_parquet`](https://tenzir.com/docs/reference/operators/write_parquet.md)
+* [`read_bitz`](https://tenzir.com/docs/v7.0.0/reference/operators/read_bitz.md)
+* [`write_feather`](https://tenzir.com/docs/v7.0.0/reference/operators/write_feather.md)
+* [`write_parquet`](https://tenzir.com/docs/v7.0.0/reference/operators/write_parquet.md)
 * [Parse binary data](../../guides/parse/parse-binary-data.md)

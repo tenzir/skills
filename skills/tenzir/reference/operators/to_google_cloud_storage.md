@@ -1,7 +1,7 @@
 ---
 title: "to_google_cloud_storage"
-canonical: https://tenzir.com/docs/reference/operators/to_google_cloud_storage
-source: https://tenzir.com/docs/reference/operators/to_google_cloud_storage.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/to_google_cloud_storage
+source: https://tenzir.com/docs/v7.0.0/reference/operators/to_google_cloud_storage.md
 section: "Docs"
 ---
 
@@ -103,7 +103,7 @@ to_google_cloud_storage "gs://my-bucket/logs/events_{uuid}.json.gz",
 
 ## See Also
 
-* [`from_google_cloud_storage`](https://tenzir.com/docs/reference/operators/from_google_cloud_storage.md)
-* [`to_google_cloud_storage`](https://tenzir.com/docs/reference/operators/to_google_cloud_storage.md)
-* [`to_file`](https://tenzir.com/docs/reference/operators/to_file.md)
-* [Google Cloud Storage](../../integrations/google/cloud-storage.md)
+* [`from_google_cloud_storage`](https://tenzir.com/docs/v7.0.0/reference/operators/from_google_cloud_storage.md)
+* [`to_google_cloud_storage`](https://tenzir.com/docs/v7.0.0/reference/operators/to_google_cloud_storage.md)
+* [`to_file`](https://tenzir.com/docs/v7.0.0/reference/operators/to_file.md)
+* [Cloud storage](https://docs.tenzir.com/integrations/google/cloud-storage)

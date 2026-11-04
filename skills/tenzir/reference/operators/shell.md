@@ -1,7 +1,7 @@
 ---
 title: "shell"
-canonical: https://tenzir.com/docs/reference/operators/shell
-source: https://tenzir.com/docs/reference/operators/shell.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/shell
+source: https://tenzir.com/docs/v7.0.0/reference/operators/shell.md
 section: "Docs"
 ---
 
@@ -46,4 +46,4 @@ read_json
 
 ## See Also
 
-* [`python`](https://tenzir.com/docs/reference/operators/python.md)
+* [`python`](https://tenzir.com/docs/v7.0.0/reference/operators/python.md)

@@ -1,7 +1,7 @@
 ---
 title: "Glossary"
-canonical: https://tenzir.com/docs/explanations/glossary
-source: https://tenzir.com/docs/explanations/glossary.md
+canonical: https://tenzir.com/docs/v7.0.0/explanations/glossary
+source: https://tenzir.com/docs/v7.0.0/explanations/glossary.md
 section: "Docs"
 ---
 
@@ -33,20 +33,20 @@ When a query runs against [edge storage](glossary.md#edge-storage), the catalog 
 
 A stateful object used for in-band enrichment.
 
-Contexts come in various types, such as a lookup table, Bloom filter, and GeoIP database. Pipelines look values up in them with [`context_enrich`](https://tenzir.com/docs/reference/operators/context_enrich.md), and something has to keep them current.
+Contexts come in various types, such as a lookup table, Bloom filter, and GeoIP database. Pipelines look values up in them with [`context_enrich`](https://tenzir.com/docs/v7.0.0/reference/operators/context_enrich.md), and something has to keep them current.
 
 * Read more about [enrichment](enrichment.md)
 * [Add enrichment contexts](../tutorials/add-enrichment-contexts.md)
 
 ## Destination
 
-A [pipeline](glossary.md#pipeline) that ends in an [output](glossary.md#output) operator and starts with [`subscribe`](https://tenzir.com/docs/reference/operators/subscribe.md).
+A [pipeline](glossary.md#pipeline) that ends in an [output](glossary.md#output) operator and starts with [`subscribe`](https://tenzir.com/docs/v7.0.0/reference/operators/subscribe.md).
 
 * Learn more about [pipelines](pipeline.md)
 
 ## Edge Storage
 
-The storage that ships with a [node](glossary.md#node), written with [`import`](https://tenzir.com/docs/reference/operators/import.md) and queried with [`export`](https://tenzir.com/docs/reference/operators/export.md).
+The storage that ships with a [node](glossary.md#node), written with [`import`](https://tenzir.com/docs/v7.0.0/reference/operators/import.md) and queried with [`export`](https://tenzir.com/docs/v7.0.0/reference/operators/export.md).
 
 Edge storage keeps events in [partitions](glossary.md#partition) of Parquet or Feather and uses a [catalog](glossary.md#catalog) to skip the ones a query cannot match. It suits local buffering and recent-history queries. For long retention, write to object storage or a database instead.
 
@@ -91,7 +91,7 @@ Documentation and prebuilt TQL for working with one third-party product.
 An integration tells you which operators to use for a given vendor, what to configure on their side, and which [package](glossary.md#package) to install if one exists.
 
 * List of [all integrations](https://tenzir.com/integrations)
-* [Does Tenzir have an integration for my system or format?](https://tenzir.com/faqs/does-tenzir-have-an-integration-for-x.md)
+* [Does Tenzir have an integration for my system or format?](https://tenzir.com/faqs/does-tenzir-have-an-integration-for-x)
 
 ## Library
 
@@ -111,7 +111,7 @@ Metrics answer operational questions: what a pipeline ingested, where it stalled
 
 A namespace for the [operators](glossary.md#operator) and [functions](glossary.md#function) of a [package](glossary.md#package), written with `::` as separator, as in `vendor::ocsf::map`.
 
-Modules are exclusive to packages, and the package identifier is always the leading segment. Builtin operators and functions use flat names, such as [`ai_prompt`](https://tenzir.com/docs/reference/operators/ai_prompt.md), so no builtin can shadow a package’s entities.
+Modules are exclusive to packages, and the package identifier is always the leading segment. Builtin operators and functions use flat names, such as [`ai_prompt`](https://tenzir.com/docs/v7.0.0/reference/operators/ai_prompt.md), so no builtin can shadow a package’s entities.
 
 * Read more about [modules](packages.md#modules)
 * [Add operators](../guides/packages/add-operators.md)
@@ -177,7 +177,7 @@ One partition is a [Parquet](https://parquet.apache.org) or [Feather](https://ar
 
 A sequence of [operators](glossary.md#operator) that data flows through, written in [TQL](glossary.md#tql).
 
-A pipeline can run once and return a result, or run continuously until you stop it. Pipelines connect to each other through topics with [`publish`](https://tenzir.com/docs/reference/operators/publish.md) and [`subscribe`](https://tenzir.com/docs/reference/operators/subscribe.md), which is how a deployment ends up as many small pipelines rather than one large one.
+A pipeline can run once and return a result, or run continuously until you stop it. Pipelines connect to each other through topics with [`publish`](https://tenzir.com/docs/v7.0.0/reference/operators/publish.md) and [`subscribe`](https://tenzir.com/docs/v7.0.0/reference/operators/subscribe.md), which is how a deployment ends up as many small pipelines rather than one large one.
 
 * Learn more about [pipelines](pipeline.md)
 * [Run a pipeline](../guides/basic-usage/run-pipelines.md)
@@ -226,7 +226,7 @@ A sink is the dual to a [source](glossary.md#source). It consumes events or byte
 
 ## Source
 
-An [operator](glossary.md#operator) that reads from an external resource, or a [pipeline](glossary.md#pipeline) that starts with an [input](glossary.md#input) operator and ends in [`publish`](https://tenzir.com/docs/reference/operators/publish.md).
+An [operator](glossary.md#operator) that reads from an external resource, or a [pipeline](glossary.md#pipeline) that starts with an [input](glossary.md#input) operator and ends in [`publish`](https://tenzir.com/docs/v7.0.0/reference/operators/publish.md).
 
 The operator sense is the dual to a [sink](glossary.md#sink): it has no input and emits events or bytes into the pipeline. The pipeline sense is the counterpart to a [destination](glossary.md#destination).
 

@@ -1,7 +1,7 @@
 ---
 title: "dominant_period"
-canonical: https://tenzir.com/docs/reference/functions/dominant_period
-source: https://tenzir.com/docs/reference/functions/dominant_period.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/dominant_period
+source: https://tenzir.com/docs/v7.0.0/reference/functions/dominant_period.md
 section: "Docs"
 ---
 
@@ -32,7 +32,7 @@ $$
 c_j = \bigl| \left\{\, i : \left\lfloor (t_i - t_{\min}) / \Delta \right\rfloor = j \,\right\} \bigr|, \qquad j = 0, \dots, B-1
 $$
 
-It then computes the biased sample autocorrelation $r_k$ of the count series (the same estimator as [`autocorrelation`](https://tenzir.com/docs/reference/functions/autocorrelation.md)) and scores every candidate lag by the total correlation in a window of one lag around it:
+It then computes the biased sample autocorrelation $r_k$ of the count series (the same estimator as [`autocorrelation`](https://tenzir.com/docs/v7.0.0/reference/functions/autocorrelation.md)) and scores every candidate lag by the total correlation in a window of one lag around it:
 
 $$
 k^{*} = \operatorname{arg\,max}_{2 \le k \le B/2} \left( r_{k-1} + r_k + r_{k+1} \right)
@@ -111,6 +111,6 @@ select period = beat.period, strength = round(beat.strength * 100) / 100
 
 ## See Also
 
-* [`autocorrelation`](https://tenzir.com/docs/reference/functions/autocorrelation.md)
-* [`periodogram`](https://tenzir.com/docs/reference/functions/periodogram.md)
-* [`collect`](https://tenzir.com/docs/reference/functions/collect.md)
+* [`autocorrelation`](https://tenzir.com/docs/v7.0.0/reference/functions/autocorrelation.md)
+* [`periodogram`](https://tenzir.com/docs/v7.0.0/reference/functions/periodogram.md)
+* [`collect`](https://tenzir.com/docs/v7.0.0/reference/functions/collect.md)

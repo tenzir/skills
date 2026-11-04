@@ -1,7 +1,7 @@
 ---
 title: "capitalize"
-canonical: https://tenzir.com/docs/reference/functions/capitalize
-source: https://tenzir.com/docs/reference/functions/capitalize.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/capitalize
+source: https://tenzir.com/docs/v7.0.0/reference/functions/capitalize.md
 section: "Docs"
 ---
 
@@ -33,7 +33,7 @@ from {x: "hello world".capitalize()}
 
 ## See Also
 
-* [`to_upper`](https://tenzir.com/docs/reference/functions/to_upper.md)
-* [`to_lower`](https://tenzir.com/docs/reference/functions/to_lower.md)
-* [`to_title`](https://tenzir.com/docs/reference/functions/to_title.md)
+* [`to_upper`](https://tenzir.com/docs/v7.0.0/reference/functions/to_upper.md)
+* [`to_lower`](https://tenzir.com/docs/v7.0.0/reference/functions/to_lower.md)
+* [`to_title`](https://tenzir.com/docs/v7.0.0/reference/functions/to_title.md)
 * [Manipulate strings](../../guides/shape/manipulate-strings.md)

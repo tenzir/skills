@@ -1,7 +1,7 @@
 ---
 title: "read_zeek_tsv"
-canonical: https://tenzir.com/docs/reference/operators/read_zeek_tsv
-source: https://tenzir.com/docs/reference/operators/read_zeek_tsv.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/read_zeek_tsv
+source: https://tenzir.com/docs/v7.0.0/reference/operators/read_zeek_tsv.md
 section: "Docs"
 ---
 
@@ -59,8 +59,8 @@ from_file "/tmp/conn.log" {
 
 ## See Also
 
-* [`read_zeek_json`](https://tenzir.com/docs/reference/operators/read_zeek_json.md)
-* [`write_zeek_tsv`](https://tenzir.com/docs/reference/operators/write_zeek_tsv.md)
+* [`read_zeek_json`](https://tenzir.com/docs/v7.0.0/reference/operators/read_zeek_json.md)
+* [`write_zeek_tsv`](https://tenzir.com/docs/v7.0.0/reference/operators/write_zeek_tsv.md)
 * [Import into a node](../../guides/store/import-into-a-node.md)
 * [Onboard a data source](../../tutorials/onboard-a-data-source.md)
-* [Zeek](../../integrations/zeek.md)
+* [Zeek](https://docs.tenzir.com/integrations/zeek)

@@ -1,7 +1,7 @@
 ---
 title: "encrypt_ff1"
-canonical: https://tenzir.com/docs/reference/functions/encrypt_ff1
-source: https://tenzir.com/docs/reference/functions/encrypt_ff1.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/encrypt_ff1
+source: https://tenzir.com/docs/v7.0.0/reference/functions/encrypt_ff1.md
 section: "Docs"
 ---
 
@@ -23,13 +23,13 @@ The function only encrypts the characters of the alphabet. All other characters 
 
 FF1 is deterministic: the same input, key, alphabet, and tweak always produce the same output. Equal values therefore stay equal after encryption.
 
-FF1 preserves the length and the alphabet, but not check digits, so an encrypted card number usually fails the Luhn check. To keep card numbers valid, encrypt them without their check digit and append a new one with [`luhn_check_digit`](https://tenzir.com/docs/reference/functions/luhn_check_digit.md). Guard encryption and decryption with [`is_luhn_valid`](https://tenzir.com/docs/reference/functions/is_luhn_valid.md) and a length check, as the example below shows.
+FF1 preserves the length and the alphabet, but not check digits, so an encrypted card number usually fails the Luhn check. To keep card numbers valid, encrypt them without their check digit and append a new one with [`luhn_check_digit`](https://tenzir.com/docs/v7.0.0/reference/functions/luhn_check_digit.md). Guard encryption and decryption with [`is_luhn_valid`](https://tenzir.com/docs/v7.0.0/reference/functions/is_luhn_valid.md) and a length check, as the example below shows.
 
-Use [`decrypt_ff1`](https://tenzir.com/docs/reference/functions/decrypt_ff1.md) to restore the original value.
+Use [`decrypt_ff1`](https://tenzir.com/docs/v7.0.0/reference/functions/decrypt_ff1.md) to restore the original value.
 
 FF1 does not authenticate
 
-FF1 can’t detect a wrong key or a modified ciphertext. Decrypting with the wrong key or tweak silently returns a wrong value of the right format. Small domains also leak more information than large ones. If you don’t need to preserve the format, use [`encrypt_aes_gcm_siv`](https://tenzir.com/docs/reference/functions/encrypt_aes_gcm_siv.md) or [`encrypt_aes_siv`](https://tenzir.com/docs/reference/functions/encrypt_aes_siv.md) instead.
+FF1 can’t detect a wrong key or a modified ciphertext. Decrypting with the wrong key or tweak silently returns a wrong value of the right format. Small domains also leak more information than large ones. If you don’t need to preserve the format, use [`encrypt_aes_gcm_siv`](https://tenzir.com/docs/v7.0.0/reference/functions/encrypt_aes_gcm_siv.md) or [`encrypt_aes_siv`](https://tenzir.com/docs/v7.0.0/reference/functions/encrypt_aes_siv.md) instead.
 
 ### `x: string`
 
@@ -47,7 +47,7 @@ The encryption key as a secret.
 
 The key size selects the AES variant: 16 bytes for AES-128, 24 bytes for AES-192, and 32 bytes for AES-256. A key of any other size is an error when the pipeline starts.
 
-Read the key with [`secret`](https://tenzir.com/docs/reference/functions/secret.md), so that it stays out of the pipeline definition. A constant string or blob also works as an [ad-hoc secret](../../explanations/secrets.md#ad-hoc-secrets), but then the key appears in the pipeline definition. The function uses the bytes of the secret as they are. If your secret store holds the key in hex or Base64 form, decode it with [`decode_hex`](https://tenzir.com/docs/reference/functions/decode_hex.md) or [`decode_base64`](https://tenzir.com/docs/reference/functions/decode_base64.md), for example `key=secret("pii-key").decode_hex()`.
+Read the key with [`secret`](https://tenzir.com/docs/v7.0.0/reference/functions/secret.md), so that it stays out of the pipeline definition. A constant string or blob also works as an [ad-hoc secret](../../explanations/secrets.md#ad-hoc-secrets), but then the key appears in the pipeline definition. The function uses the bytes of the secret as they are. If your secret store holds the key in hex or Base64 form, decode it with [`decode_hex`](https://tenzir.com/docs/v7.0.0/reference/functions/decode_hex.md) or [`decode_base64`](https://tenzir.com/docs/v7.0.0/reference/functions/decode_base64.md), for example `key=secret("pii-key").decode_hex()`.
 
 ### `alphabet = string (optional)`
 
@@ -59,7 +59,7 @@ Defaults to `"0123456789"`.
 
 A value that varies the output without being secret. The value can differ per event, for example the name of the field, so that equal values in different fields encrypt to different outputs.
 
-Decryption must use the same tweak. If the tweak is `null`, the function returns `null` and emits a warning. To fall back to an empty tweak instead, use [`else`](https://tenzir.com/docs/reference/expressions.md#fallback-with-else), for example `tweak=field? else ""`.
+Decryption must use the same tweak. If the tweak is `null`, the function returns `null` and emits a warning. To fall back to an empty tweak instead, use [`else`](https://tenzir.com/docs/v7.0.0/reference/expressions.md#fallback-with-else), for example `tweak=field? else ""`.
 
 ## Examples
 
@@ -173,12 +173,12 @@ encrypted = encrypt_ff1(pin, key=$key)
 
 ## See Also
 
-* [`decrypt_ff1`](https://tenzir.com/docs/reference/functions/decrypt_ff1.md)
-* [`is_luhn_valid`](https://tenzir.com/docs/reference/functions/is_luhn_valid.md)
-* [`luhn_check_digit`](https://tenzir.com/docs/reference/functions/luhn_check_digit.md)
-* [`encrypt_aes_gcm_siv`](https://tenzir.com/docs/reference/functions/encrypt_aes_gcm_siv.md)
-* [`encrypt_aes_gcm`](https://tenzir.com/docs/reference/functions/encrypt_aes_gcm.md)
-* [`encrypt_aes_siv`](https://tenzir.com/docs/reference/functions/encrypt_aes_siv.md)
-* [`encrypt_hpke`](https://tenzir.com/docs/reference/functions/encrypt_hpke.md)
+* [`decrypt_ff1`](https://tenzir.com/docs/v7.0.0/reference/functions/decrypt_ff1.md)
+* [`is_luhn_valid`](https://tenzir.com/docs/v7.0.0/reference/functions/is_luhn_valid.md)
+* [`luhn_check_digit`](https://tenzir.com/docs/v7.0.0/reference/functions/luhn_check_digit.md)
+* [`encrypt_aes_gcm_siv`](https://tenzir.com/docs/v7.0.0/reference/functions/encrypt_aes_gcm_siv.md)
+* [`encrypt_aes_gcm`](https://tenzir.com/docs/v7.0.0/reference/functions/encrypt_aes_gcm.md)
+* [`encrypt_aes_siv`](https://tenzir.com/docs/v7.0.0/reference/functions/encrypt_aes_siv.md)
+* [`encrypt_hpke`](https://tenzir.com/docs/v7.0.0/reference/functions/encrypt_hpke.md)
 * [Encrypt sensitive data](../../guides/protect/encrypt-sensitive-data.md)
 * [Encryption](../../explanations/encryption.md)

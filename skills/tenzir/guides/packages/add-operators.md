@@ -1,7 +1,7 @@
 ---
 title: "Add operators"
-canonical: https://tenzir.com/docs/guides/packages/add-operators
-source: https://tenzir.com/docs/guides/packages/add-operators.md
+canonical: https://tenzir.com/docs/v7.0.0/guides/packages/add-operators
+source: https://tenzir.com/docs/v7.0.0/guides/packages/add-operators.md
 section: "Docs"
 ---
 

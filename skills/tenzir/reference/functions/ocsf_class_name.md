@@ -1,7 +1,7 @@
 ---
 title: "ocsf_class_name"
-canonical: https://tenzir.com/docs/reference/functions/ocsf_class_name
-source: https://tenzir.com/docs/reference/functions/ocsf_class_name.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/ocsf_class_name
+source: https://tenzir.com/docs/v7.0.0/reference/functions/ocsf_class_name.md
 section: "Docs"
 ---
 
@@ -23,4 +23,4 @@ The `class_uid` for which `class_name` should be returned.
 
 ## See Also
 
-* [`ocsf_class_uid`](https://tenzir.com/docs/reference/functions/ocsf_class_uid.md)
+* [`ocsf_class_uid`](https://tenzir.com/docs/v7.0.0/reference/functions/ocsf_class_uid.md)

@@ -1,7 +1,7 @@
 ---
 title: "Quickstart"
-canonical: https://tenzir.com/docs/guides/quickstart
-source: https://tenzir.com/docs/guides/quickstart.md
+canonical: https://tenzir.com/docs/v7.0.0/guides/quickstart
+source: https://tenzir.com/docs/v7.0.0/guides/quickstart.md
 section: "Docs"
 ---
 
@@ -51,7 +51,7 @@ Tenzir Query Language (TQL)
 
 One major difference to other pipeline tools is that Tenzir comes with a full-fledged streaming execution engine and domain-specific language to process data. TQL is a powerful dataflow language similar to Splunk’s SPL or Microsoft’s KQL, just with a lot more power when it comes to transforming data.
 
-The FAQ entry on [why Tenzir created TQL instead of using SQL](https://tenzir.com/faqs/why-tql-instead-of-sql.md) explains the language design in more detail.
+The FAQ entry on [why Tenzir created TQL instead of using SQL](https://tenzir.com/faqs/why-tql-instead-of-sql) explains the language design in more detail.
 
 ## Explore the demo data
 
@@ -62,7 +62,7 @@ export
 taste
 ```
 
-This pipelines does the following: [`export`](https://tenzir.com/docs/reference/operators/export.md) references all data in the node’s edge storage, and [`taste`](https://tenzir.com/docs/reference/operators/taste.md) samples 10 events of every unique schema. You’ll now see Explorer filling up with events.
+This pipelines does the following: [`export`](https://tenzir.com/docs/v7.0.0/reference/operators/export.md) references all data in the node’s edge storage, and [`taste`](https://tenzir.com/docs/v7.0.0/reference/operators/taste.md) samples 10 events of every unique schema. You’ll now see Explorer filling up with events.
 
 Auto-completion of pipelines
 
@@ -153,11 +153,11 @@ Here we filter on event metadata, starting with `@`. The special `@name` field i
 
 A few notes:
 
-* The [`set`](https://tenzir.com/docs/reference/operators/set.md) operator performs an assignment and creates new fields.
+* The [`set`](https://tenzir.com/docs/v7.0.0/reference/operators/set.md) operator performs an assignment and creates new fields.
 * Because `set` is *the* most frequently used operator, it is “implied” and you just write `x = y` instead of `set x = y`. We generally recommend doing so and write it out only out for didactic reasons.
 * You can use `set` to assign schema names, e.g., `@name = "new-schema-name"`.
-* [`select`](https://tenzir.com/docs/reference/operators/select.md) selects the fields to keep, but also supports an assignment to rename the new field in one shot.
-* As you can see in the `select` operator (Suricata tab) above, TQL expressions have [functions](../reference/functions.md) like [`to_lower`](https://tenzir.com/docs/reference/functions/to_lower.md), which makes working with values a breeze.
+* [`select`](https://tenzir.com/docs/v7.0.0/reference/operators/select.md) selects the fields to keep, but also supports an assignment to rename the new field in one shot.
+* As you can see in the `select` operator (Suricata tab) above, TQL expressions have [functions](../reference/functions.md) like [`to_lower`](https://tenzir.com/docs/v7.0.0/reference/functions/to_lower.md), which makes working with values a breeze.
 
 Now what do you do with this normalized data from these two data sources? It just has a new shape, so what? Read on, we’ll show you next.
 
@@ -165,7 +165,7 @@ Now what do you do with this normalized data from these two data sources? It jus
 
 The above example starts with a specific input operator (`export`) and no output operator (we used the Explorer). This is useful for explorative data analysis, but in practice you’d want these sorts of transformations to run continuously. In fact, what you really want is a streaming pipeline that accepts data, potentially from multiple sources, and exposes its results in a way so that you can route it to multiple destinations.
 
-To this end, nodes have a publish/subscribe feature, allowing you to efficiently connect pipelines using static topics (and very soon dynamic routes). The [`publish`](https://tenzir.com/docs/reference/operators/publish.md) and [`subscribe`](https://tenzir.com/docs/reference/operators/subscribe.md) operators are all you need for this. The typical pipeline pattern for composable pipelines looks like this:
+To this end, nodes have a publish/subscribe feature, allowing you to efficiently connect pipelines using static topics (and very soon dynamic routes). The [`publish`](https://tenzir.com/docs/v7.0.0/reference/operators/publish.md) and [`subscribe`](https://tenzir.com/docs/v7.0.0/reference/operators/subscribe.md) operators are all you need for this. The typical pipeline pattern for composable pipelines looks like this:
 
 ```tql
 subscribe "in"
@@ -213,7 +213,7 @@ When clicking the **Run** button for these pipeline, the events will *not* show 
 
 After you give the pipeline a name (or leave it blank for a dummy name), click **Confirm** to deploy the pipeline. You’ll see it popping up on the **Pipelines** tab:
 
-Now that you’ve deployed one pipeline with two topics as its “interface,” you can direct data to it from other pipelines. For example, you can create a pipeline that accepts logs via [Syslog](../integrations/syslog.md) and forwards them to the transformation pipeline. Then you can write two more pipelines that each take a subset to implement split-routing scenario.
+Now that you’ve deployed one pipeline with two topics as its “interface,” you can direct data to it from other pipelines. For example, you can create a pipeline that accepts logs via [Syslog](https://docs.tenzir.com/integrations/syslog) and forwards them to the transformation pipeline. Then you can write two more pipelines that each take a subset to implement split-routing scenario.
 
 Data fabric as network of pipelines
 
@@ -224,8 +224,8 @@ You’ve probably heard the buzzy term *data fabric* before. With Tenzir, you im
 You’ve just scratched the surface. Here’s where to go next:
 
 1. Explore the [Library](https://app.tenzir.com/library) and browse through packages of pre-built pipelines.
-2. [Visualize pipeline insights and build dashboards](../tutorials/plot-data-with-charts.md)
+2. [Visualize pipeline insights and build dashboards](https://docs.tenzir.com/tutorials/plot-data-with-charts)
 3. [Map events to OCSF](../tutorials/onboard-a-data-source.md#map-to-ocsf)
-4. Send events to your data lake, such as [Amazon Security Lake](../integrations/amazon/security-lake.md)
+4. Send events to your data lake, such as [Amazon Security Lake](https://docs.tenzir.com/integrations/amazon/security-lake)
 
 Curious how it all fits together? Brush up on the [Tenzir architecture](../explanations/deployment.md) to learn more about all moving parts. We’re here to help. Join us at our friendly [Tenzir Discord](https://discord.tenzir.com) if you have any questions.

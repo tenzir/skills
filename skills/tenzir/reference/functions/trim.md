@@ -1,7 +1,7 @@
 ---
 title: "trim"
-canonical: https://tenzir.com/docs/reference/functions/trim
-source: https://tenzir.com/docs/reference/functions/trim.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/trim
+source: https://tenzir.com/docs/v7.0.0/reference/functions/trim.md
 section: "Docs"
 ---
 
@@ -65,6 +65,6 @@ from {x: "--hello--world--".trim("-")}
 
 ## See Also
 
-* [`trim_start`](https://tenzir.com/docs/reference/functions/trim_start.md)
-* [`trim_end`](https://tenzir.com/docs/reference/functions/trim_end.md)
+* [`trim_start`](https://tenzir.com/docs/v7.0.0/reference/functions/trim_start.md)
+* [`trim_end`](https://tenzir.com/docs/v7.0.0/reference/functions/trim_end.md)
 * [Manipulate strings](../../guides/shape/manipulate-strings.md)

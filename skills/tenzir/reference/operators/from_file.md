@@ -1,7 +1,7 @@
 ---
 title: "from_file"
-canonical: https://tenzir.com/docs/reference/operators/from_file
-source: https://tenzir.com/docs/reference/operators/from_file.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/from_file
+source: https://tenzir.com/docs/v7.0.0/reference/operators/from_file.md
 section: "Docs"
 ---
 
@@ -122,10 +122,10 @@ from_file "/logs/*.json", max_age=1h
 
 ## See Also
 
-* [`from_file`](https://tenzir.com/docs/reference/operators/from_file.md)
+* [`from_file`](https://tenzir.com/docs/v7.0.0/reference/operators/from_file.md)
 * [Enrich with asset inventory](../../guides/enrich/enrich-with-asset-inventory.md)
 * [Use lookup tables](../../guides/enrich/use-lookup-tables.md)
 * [Import into a node](../../guides/store/import-into-a-node.md)
-* [File](../../integrations/file.md)
+* [File](https://docs.tenzir.com/integrations/file)
 
 Parallelizable: a parallel pipeline may run this operator on several cores at once.

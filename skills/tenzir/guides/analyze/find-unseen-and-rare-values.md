@@ -1,8 +1,8 @@
 ---
 title: "Find unseen and rare values"
 description: "Find agent operations and token ranges that do not occur in known-good history."
-canonical: https://tenzir.com/docs/guides/analyze/find-unseen-and-rare-values
-source: https://tenzir.com/docs/guides/analyze/find-unseen-and-rare-values.md
+canonical: https://tenzir.com/docs/v7.0.0/guides/analyze/find-unseen-and-rare-values
+source: https://tenzir.com/docs/v7.0.0/guides/analyze/find-unseen-and-rare-values.md
 section: "Docs"
 ---
 
@@ -14,7 +14,7 @@ Your coding agents can call any tool made available to them. After a plugin upda
 
 The examples use [OCSF](https://schema.ocsf.io/) field shapes produced by our Codex and Claude Code packages. The `baseline` list represents known-good history, and `current` represents newly arriving activity. The fixtures keep only the fields that each calculation reads.
 
-Use a [`frequency_table`](https://tenzir.com/docs/reference/functions/frequency_table.md) when exact categorical values matter and a [`histogram`](https://tenzir.com/docs/reference/functions/histogram.md) when neighboring numeric values should count as the same range. A low frequency is evidence, not a verdict. Keep the agent session, authorization decision, and other event context for the eventual decision.
+Use a [`frequency_table`](https://tenzir.com/docs/v7.0.0/reference/functions/frequency_table.md) when exact categorical values matter and a [`histogram`](https://tenzir.com/docs/v7.0.0/reference/functions/histogram.md) when neighboring numeric values should count as the same range. A low frequency is evidence, not a verdict. Keep the agent session, authorization decision, and other event context for the eventual decision.
 
 ## Find rare categorical values
 
@@ -47,7 +47,7 @@ select tool=current.api.operation, seen, frequency
 {tool: "web_search", seen: 0, frequency: 0.0}
 ```
 
-The [`frequency_table_count`](https://tenzir.com/docs/reference/functions/frequency_table_count.md) function returns `0` for an unseen value. Here, `web_search` is novel relative to the baseline tool mix. In the full OCSF event, `ai_agent.instance_uid` identifies the agent session and the [Security Control profile](https://schema.ocsf.io/profiles/security_control) records whether a person or policy allowed the operation.
+The [`frequency_table_count`](https://tenzir.com/docs/v7.0.0/reference/functions/frequency_table_count.md) function returns `0` for an unseen value. Here, `web_search` is novel relative to the baseline tool mix. In the full OCSF event, `ai_agent.instance_uid` identifies the agent session and the [Security Control profile](https://schema.ocsf.io/profiles/security_control) records whether a person or policy allowed the operation.
 
 Use `model.count` as the denominator when null inputs should not affect the frequency. Use `model.input_count` when a null observation belongs to the population that you want to measure.
 
@@ -110,7 +110,7 @@ The output keeps the evidence that a downstream policy needs: the observation, t
 
 Choose histogram boundaries
 
-The [`histogram_bucket`](https://tenzir.com/docs/reference/functions/histogram_bucket.md) function also returns underflow and overflow buckets. Include those tail counts when values outside the represented range are valid observations rather than configuration mistakes.
+The [`histogram_bucket`](https://tenzir.com/docs/v7.0.0/reference/functions/histogram_bucket.md) function also returns underflow and overflow buckets. Include those tail counts when values outside the represented range are valid observations rather than configuration mistakes.
 
 Build the baseline from comparable activity, such as one agent runtime, model, and operation. Choose the bin width from the smallest difference that matters operationally. Bins that are too narrow turn harmless variation into rare buckets. Bins that are too wide hide changes that you care about. Keep the same edges for every baseline and current population that you compare.
 

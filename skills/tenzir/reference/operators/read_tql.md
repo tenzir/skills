@@ -1,7 +1,7 @@
 ---
 title: "read_tql"
-canonical: https://tenzir.com/docs/reference/operators/read_tql
-source: https://tenzir.com/docs/reference/operators/read_tql.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/read_tql
+source: https://tenzir.com/docs/v7.0.0/reference/operators/read_tql.md
 section: "Docs"
 ---
 
@@ -20,7 +20,7 @@ read_tql [schema=string, selector=string, schema_only=bool,
 
 Parses an incoming byte stream of TQL-formatted records into events. Each top-level record expression in the input becomes one event.
 
-The input format matches the output of [`write_tql`](https://tenzir.com/docs/reference/operators/write_tql.md). This makes `read_tql` useful for round-tripping data through TQL notation, reading TQL-formatted files, or processing data piped from other Tenzir pipelines.
+The input format matches the output of [`write_tql`](https://tenzir.com/docs/v7.0.0/reference/operators/write_tql.md). This makes `read_tql` useful for round-tripping data through TQL notation, reading TQL-formatted files, or processing data piped from other Tenzir pipelines.
 
 The parser supports all TQL literal types, including `null`, `bool`, `int64`, `double`, `string`, `duration`, `time`, `ip`, and `subnet`, as well as nested records and lists.
 
@@ -194,6 +194,6 @@ Output
 
 ## See Also
 
-* [`write_tql`](https://tenzir.com/docs/reference/operators/write_tql.md)
-* [`read_json`](https://tenzir.com/docs/reference/operators/read_json.md)
-* [`read_ndjson`](https://tenzir.com/docs/reference/operators/read_ndjson.md)
+* [`write_tql`](https://tenzir.com/docs/v7.0.0/reference/operators/write_tql.md)
+* [`read_json`](https://tenzir.com/docs/v7.0.0/reference/operators/read_json.md)
+* [`read_ndjson`](https://tenzir.com/docs/v7.0.0/reference/operators/read_ndjson.md)

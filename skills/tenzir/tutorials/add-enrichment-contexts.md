@@ -1,7 +1,7 @@
 ---
 title: "Add enrichment contexts"
-canonical: https://tenzir.com/docs/tutorials/add-enrichment-contexts
-source: https://tenzir.com/docs/tutorials/add-enrichment-contexts.md
+canonical: https://tenzir.com/docs/v7.0.0/tutorials/add-enrichment-contexts
+source: https://tenzir.com/docs/v7.0.0/tutorials/add-enrichment-contexts.md
 section: "Docs"
 ---
 

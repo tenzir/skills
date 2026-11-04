@@ -1,7 +1,7 @@
 ---
 title: "Shape records"
-canonical: https://tenzir.com/docs/guides/shape/shape-records
-source: https://tenzir.com/docs/guides/shape/shape-records.md
+canonical: https://tenzir.com/docs/v7.0.0/guides/shape/shape-records
+source: https://tenzir.com/docs/v7.0.0/guides/shape/shape-records.md
 section: "Docs"
 ---
 
@@ -48,7 +48,7 @@ has_email = user.has("email")
 
 ## Get keys and values
 
-Use [`keys`](https://tenzir.com/docs/reference/functions/keys.md) to extract the field names and [`values`](https://tenzir.com/docs/reference/functions/values.md) to extract the field values. Both list the fields in the same order:
+Use [`keys`](https://tenzir.com/docs/v7.0.0/reference/functions/keys.md) to extract the field names and [`values`](https://tenzir.com/docs/v7.0.0/reference/functions/values.md) to extract the field values. Both list the fields in the same order:
 
 ```tql
 from {
@@ -74,7 +74,7 @@ num_fields = config.keys().length()
 
 Each value keeps its type, so one list can mix strings, numbers, `null`, lists, and records. Both functions look only at top-level fields: a dot in a field name stays part of the key, and nested records and lists stay intact.
 
-When you need every name together with its value, use [`entries`](https://tenzir.com/docs/reference/functions/entries.md). It returns a list of records with a `key` and a `value` field, one for each field:
+When you need every name together with its value, use [`entries`](https://tenzir.com/docs/v7.0.0/reference/functions/entries.md). It returns a list of records with a `key` and a `value` field, one for each field:
 
 ```tql
 from {
@@ -98,11 +98,11 @@ entries = config.entries()
 }
 ```
 
-Use `entries` to process the fields of a record with list functions such as [`map`](https://tenzir.com/docs/reference/functions/map.md) and [`where`](https://tenzir.com/docs/reference/functions/where.md), as the following sections show.
+Use `entries` to process the fields of a record with list functions such as [`map`](https://tenzir.com/docs/v7.0.0/reference/functions/map.md) and [`where`](https://tenzir.com/docs/v7.0.0/reference/functions/where.md), as the following sections show.
 
 ## Build records from dynamic field names
 
-When field names arrive as data, use [`collect_record`](https://tenzir.com/docs/reference/functions/collect_record.md) to turn key/value entries into a record. For example, convert an attribute list from an API into named fields without knowing the attribute names in advance.
+When field names arrive as data, use [`collect_record`](https://tenzir.com/docs/v7.0.0/reference/functions/collect_record.md) to turn key/value entries into a record. For example, convert an attribute list from an API into named fields without knowing the attribute names in advance.
 
 ```tql
 from {
@@ -136,7 +136,7 @@ select config=collect_record(attributes)
 
 Each entry must have exactly the fields `key` and `value` to use this form. Two-element lists such as `["port", 22]` work too. Other records contribute their fields directly. If a key occurs more than once, its last value wins, including `null`.
 
-To go the other way, [`entries`](https://tenzir.com/docs/reference/functions/entries.md) turns a record into these entries, so `config.entries().collect_record()` returns `config`. Separate lists work too: `collect_record(config.keys(), config.values())` returns `config` as well.
+To go the other way, [`entries`](https://tenzir.com/docs/v7.0.0/reference/functions/entries.md) turns a record into these entries, so `config.entries().collect_record()` returns `config`. Separate lists work too: `collect_record(config.keys(), config.values())` returns `config` as well.
 
 ## Combine records with spread
 
@@ -192,11 +192,11 @@ user = {
 }
 ```
 
-The [`merge`](https://tenzir.com/docs/reference/functions/merge.md) function returns the same result for two records, including `null` fragments, but prefer spread in transformation code when you construct the resulting record.
+The [`merge`](https://tenzir.com/docs/v7.0.0/reference/functions/merge.md) function returns the same result for two records, including `null` fragments, but prefer spread in transformation code when you construct the resulting record.
 
 ## Transform record values
 
-To apply the same expression to every value of a record, without naming the fields, map over the [`entries`](https://tenzir.com/docs/reference/functions/entries.md) and build the record again with [`collect_record`](https://tenzir.com/docs/reference/functions/collect_record.md). Return a `[key, value]` pair for each entry and keep the key to preserve the field names:
+To apply the same expression to every value of a record, without naming the fields, map over the [`entries`](https://tenzir.com/docs/v7.0.0/reference/functions/entries.md) and build the record again with [`collect_record`](https://tenzir.com/docs/v7.0.0/reference/functions/collect_record.md). Return a `[key, value]` pair for each entry and keep the key to preserve the field names:
 
 ```tql
 from {
@@ -216,11 +216,11 @@ kib = sizes.entries().map(e => [e.key, e.value / 1024]).collect_record()
 }
 ```
 
-The fields keep their order, and this works for any number of fields. To rename the fields instead of changing their values, use [`map_keys`](https://tenzir.com/docs/reference/functions/map_keys.md).
+The fields keep their order, and this works for any number of fields. To rename the fields instead of changing their values, use [`map_keys`](https://tenzir.com/docs/v7.0.0/reference/functions/map_keys.md).
 
 ## Filter record fields
 
-Keep explicit fields by constructing a new record. Use [`select_matching`](https://tenzir.com/docs/reference/functions/select_matching.md) and [`drop_matching`](https://tenzir.com/docs/reference/functions/drop_matching.md) when field names follow a pattern:
+Keep explicit fields by constructing a new record. Use [`select_matching`](https://tenzir.com/docs/v7.0.0/reference/functions/select_matching.md) and [`drop_matching`](https://tenzir.com/docs/v7.0.0/reference/functions/drop_matching.md) when field names follow a pattern:
 
 ```tql
 from {
@@ -277,7 +277,7 @@ safe_user = user.drop_matching("(password|api_key)$")
 
 The matching functions inspect only top-level field names on the record you call them on. They don’t recurse into nested records.
 
-To keep fields based on their value instead of their name, filter the [`entries`](https://tenzir.com/docs/reference/functions/entries.md) and build the record again with [`collect_record`](https://tenzir.com/docs/reference/functions/collect_record.md). The following example drops fields that are `null` or empty strings:
+To keep fields based on their value instead of their name, filter the [`entries`](https://tenzir.com/docs/v7.0.0/reference/functions/entries.md) and build the record again with [`collect_record`](https://tenzir.com/docs/v7.0.0/reference/functions/collect_record.md). The following example drops fields that are `null` or empty strings:
 
 ```tql
 from {
@@ -298,16 +298,16 @@ non_empty = user.entries().where(e => e.value != null and e.value != "").collect
 }
 ```
 
-To remove only the `null` fields, use [`drop_null_fields`](https://tenzir.com/docs/reference/functions/drop_null_fields.md).
+To remove only the `null` fields, use [`drop_null_fields`](https://tenzir.com/docs/v7.0.0/reference/functions/drop_null_fields.md).
 
 ## See Also
 
-* [`drop_matching`](https://tenzir.com/docs/reference/functions/drop_matching.md)
-* [`entries`](https://tenzir.com/docs/reference/functions/entries.md)
-* [`keys`](https://tenzir.com/docs/reference/functions/keys.md)
-* [`merge`](https://tenzir.com/docs/reference/functions/merge.md)
-* [`select_matching`](https://tenzir.com/docs/reference/functions/select_matching.md)
-* [`values`](https://tenzir.com/docs/reference/functions/values.md)
+* [`drop_matching`](https://tenzir.com/docs/v7.0.0/reference/functions/drop_matching.md)
+* [`entries`](https://tenzir.com/docs/v7.0.0/reference/functions/entries.md)
+* [`keys`](https://tenzir.com/docs/v7.0.0/reference/functions/keys.md)
+* [`merge`](https://tenzir.com/docs/v7.0.0/reference/functions/merge.md)
+* [`select_matching`](https://tenzir.com/docs/v7.0.0/reference/functions/select_matching.md)
+* [`values`](https://tenzir.com/docs/v7.0.0/reference/functions/values.md)
 * [Shape lists](shape-lists.md)
 * [Filter and select data](../optimize/filter-and-select-data.md)
 * [Transform values](transform-values.md)

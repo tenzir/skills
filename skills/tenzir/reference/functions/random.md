@@ -1,7 +1,7 @@
 ---
 title: "random"
-canonical: https://tenzir.com/docs/reference/functions/random
-source: https://tenzir.com/docs/reference/functions/random.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/random
+source: https://tenzir.com/docs/v7.0.0/reference/functions/random.md
 section: "Docs"
 ---
 
@@ -33,5 +33,5 @@ from {x: random()}
 
 ## See Also
 
-* [`uuid`](https://tenzir.com/docs/reference/functions/uuid.md)
-* [Plot data with charts](../../tutorials/plot-data-with-charts.md)
+* [`uuid`](https://tenzir.com/docs/v7.0.0/reference/functions/uuid.md)
+* [Plot data with charts](https://docs.tenzir.com/tutorials/plot-data-with-charts)

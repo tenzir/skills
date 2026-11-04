@@ -1,7 +1,7 @@
 ---
 title: "schemas"
-canonical: https://tenzir.com/docs/reference/operators/schemas
-source: https://tenzir.com/docs/reference/operators/schemas.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/schemas
+source: https://tenzir.com/docs/v7.0.0/reference/operators/schemas.md
 section: "Docs"
 ---
 

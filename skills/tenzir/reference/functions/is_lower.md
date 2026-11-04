@@ -1,7 +1,7 @@
 ---
 title: "is_lower"
-canonical: https://tenzir.com/docs/reference/functions/is_lower
-source: https://tenzir.com/docs/reference/functions/is_lower.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/is_lower
+source: https://tenzir.com/docs/v7.0.0/reference/functions/is_lower.md
 section: "Docs"
 ---
 
@@ -33,7 +33,7 @@ from {x: "hello".is_lower()}
 
 ## See Also
 
-* [`is_alpha`](https://tenzir.com/docs/reference/functions/is_alpha.md)
-* [`is_upper`](https://tenzir.com/docs/reference/functions/is_upper.md)
-* [`to_lower`](https://tenzir.com/docs/reference/functions/to_lower.md)
+* [`is_alpha`](https://tenzir.com/docs/v7.0.0/reference/functions/is_alpha.md)
+* [`is_upper`](https://tenzir.com/docs/v7.0.0/reference/functions/is_upper.md)
+* [`to_lower`](https://tenzir.com/docs/v7.0.0/reference/functions/to_lower.md)
 * [Manipulate strings](../../guides/shape/manipulate-strings.md)

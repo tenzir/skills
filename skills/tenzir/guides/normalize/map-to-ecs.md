@@ -1,7 +1,7 @@
 ---
 title: "Map to ECS"
-canonical: https://tenzir.com/docs/guides/normalize/map-to-ecs
-source: https://tenzir.com/docs/guides/normalize/map-to-ecs.md
+canonical: https://tenzir.com/docs/v7.0.0/guides/normalize/map-to-ecs
+source: https://tenzir.com/docs/v7.0.0/guides/normalize/map-to-ecs.md
 section: "Docs"
 ---
 
@@ -66,12 +66,12 @@ to_elasticsearch "https://elasticsearch.example.com:9200",
   index="ecs-events"
 ```
 
-Use [`to_opensearch`](https://tenzir.com/docs/reference/operators/to_opensearch.md) instead when the destination is OpenSearch.
+Use [`to_opensearch`](https://tenzir.com/docs/v7.0.0/reference/operators/to_opensearch.md) instead when the destination is OpenSearch.
 
 ## See Also
 
-* [`to_elasticsearch`](https://tenzir.com/docs/reference/operators/to_elasticsearch.md)
-* [`to_opensearch`](https://tenzir.com/docs/reference/operators/to_opensearch.md)
+* [`to_elasticsearch`](https://tenzir.com/docs/v7.0.0/reference/operators/to_elasticsearch.md)
+* [`to_opensearch`](https://tenzir.com/docs/v7.0.0/reference/operators/to_opensearch.md)
 * [Clean up values](../parse/clean-up-values.md)
 * [Use agent skills](../ai-workbench/use-agent-skills.md#use-the-ecs-skill)
 * [Map to ASIM](map-to-asim.md)
@@ -80,6 +80,6 @@ Use [`to_opensearch`](https://tenzir.com/docs/reference/operators/to_opensearch.
 * [Map to UDM](map-to-udm.md)
 * [Create a package](../packages/create-a-package.md)
 * [Write tests](../testing/write-tests.md)
-* [Elasticsearch](../../integrations/elasticsearch.md)
-* [OpenSearch](../../integrations/opensearch.md)
+* [Elasticsearch](https://docs.tenzir.com/integrations/elasticsearch)
+* [Opensearch](https://docs.tenzir.com/integrations/opensearch)
 * [Onboard a data source](../../tutorials/onboard-a-data-source.md)

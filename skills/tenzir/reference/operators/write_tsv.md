@@ -1,7 +1,7 @@
 ---
 title: "write_tsv"
-canonical: https://tenzir.com/docs/reference/operators/write_tsv
-source: https://tenzir.com/docs/reference/operators/write_tsv.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/write_tsv
+source: https://tenzir.com/docs/v7.0.0/reference/operators/write_tsv.md
 section: "Docs"
 ---
 
@@ -51,7 +51,7 @@ x  y  z
 
 ## See Also
 
-* [`write_csv`](https://tenzir.com/docs/reference/operators/write_csv.md)
-* [`write_lines`](https://tenzir.com/docs/reference/operators/write_lines.md)
-* [`write_ssv`](https://tenzir.com/docs/reference/operators/write_ssv.md)
-* [`write_xsv`](https://tenzir.com/docs/reference/operators/write_xsv.md)
+* [`write_csv`](https://tenzir.com/docs/v7.0.0/reference/operators/write_csv.md)
+* [`write_lines`](https://tenzir.com/docs/v7.0.0/reference/operators/write_lines.md)
+* [`write_ssv`](https://tenzir.com/docs/v7.0.0/reference/operators/write_ssv.md)
+* [`write_xsv`](https://tenzir.com/docs/v7.0.0/reference/operators/write_xsv.md)

@@ -1,7 +1,7 @@
 ---
 title: "sort"
-canonical: https://tenzir.com/docs/reference/functions/sort
-source: https://tenzir.com/docs/reference/functions/sort.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/sort
+source: https://tenzir.com/docs/v7.0.0/reference/functions/sort.md
 section: "Docs"
 ---
 
@@ -87,5 +87,5 @@ xs = xs.sort(cmp=(a, b) => a.v < b.v)
 
 ## See Also
 
-* [`slice`](https://tenzir.com/docs/reference/functions/slice.md)
+* [`slice`](https://tenzir.com/docs/v7.0.0/reference/functions/slice.md)
 * [Shape lists](../../guides/shape/shape-lists.md)

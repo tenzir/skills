@@ -1,7 +1,7 @@
 ---
 title: "accept_zmq"
-canonical: https://tenzir.com/docs/reference/operators/accept_zmq
-source: https://tenzir.com/docs/reference/operators/accept_zmq.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/accept_zmq
+source: https://tenzir.com/docs/v7.0.0/reference/operators/accept_zmq.md
 section: "Docs"
 ---
 
@@ -19,9 +19,9 @@ accept_zmq endpoint:string, [prefix=string, keep_prefix=bool, { … }]
 
 Binds a ZeroMQ `SUB` socket to the specified endpoint and receives messages that match the configured subscription prefix.
 
-Use `accept_zmq` when Tenzir should own the listening endpoint. This matches the naming used by other transport operators such as [`accept_tcp`](https://tenzir.com/docs/reference/operators/accept_tcp.md), even though ZeroMQ itself calls this binding rather than accepting.
+Use `accept_zmq` when Tenzir should own the listening endpoint. This matches the naming used by other transport operators such as [`accept_tcp`](https://tenzir.com/docs/v7.0.0/reference/operators/accept_tcp.md), even though ZeroMQ itself calls this binding rather than accepting.
 
-As with [`from_zmq`](https://tenzir.com/docs/reference/operators/from_zmq.md), the `prefix` option uses ZeroMQ’s raw subscription filtering. When `keep_prefix=false`, the operator strips the matched prefix before handing the remaining bytes to the nested pipeline.
+As with [`from_zmq`](https://tenzir.com/docs/v7.0.0/reference/operators/from_zmq.md), the `prefix` option uses ZeroMQ’s raw subscription filtering. When `keep_prefix=false`, the operator strips the matched prefix before handing the remaining bytes to the nested pipeline.
 
 ### `endpoint: string`
 
@@ -67,8 +67,8 @@ accept_zmq "tcp://0.0.0.0:5555", prefix="suricata/" {
 
 ## See Also
 
-* [`from_zmq`](https://tenzir.com/docs/reference/operators/from_zmq.md)
-* [`to_zmq`](https://tenzir.com/docs/reference/operators/to_zmq.md)
-* [`serve_zmq`](https://tenzir.com/docs/reference/operators/serve_zmq.md)
-* [`from_zmq`](https://tenzir.com/docs/reference/operators/from_zmq.md)
-* [ZeroMQ](../../integrations/zeromq.md)
+* [`from_zmq`](https://tenzir.com/docs/v7.0.0/reference/operators/from_zmq.md)
+* [`to_zmq`](https://tenzir.com/docs/v7.0.0/reference/operators/to_zmq.md)
+* [`serve_zmq`](https://tenzir.com/docs/v7.0.0/reference/operators/serve_zmq.md)
+* [`from_zmq`](https://tenzir.com/docs/v7.0.0/reference/operators/from_zmq.md)
+* [Zeromq](https://docs.tenzir.com/integrations/zeromq)

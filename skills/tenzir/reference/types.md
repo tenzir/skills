@@ -1,7 +1,7 @@
 ---
 title: "Type System"
-canonical: https://tenzir.com/docs/reference/types
-source: https://tenzir.com/docs/reference/types.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/types
+source: https://tenzir.com/docs/v7.0.0/reference/types.md
 section: "Docs"
 ---
 
@@ -56,7 +56,7 @@ Basic types are stateless types with a static structure. The following basic typ
 
 #### Secrets
 
-The `secret` type is a special type created by the [`secret`](https://tenzir.com/docs/reference/functions/secret.md) function. A secret holds the actual secret value, but you can only pass it to operators and functions that accept secrets, and it supports only a limited set of operations, such as concatenation. Assigning a secret to a field stores the string `"***"` instead, because secrets never appear in events.
+The `secret` type is a special type created by the [`secret`](https://tenzir.com/docs/v7.0.0/reference/functions/secret.md) function. A secret holds the actual secret value, but you can only pass it to operators and functions that accept secrets, and it supports only a limited set of operations, such as concatenation. Assigning a secret to a field stores the string `"***"` instead, because secrets never appear in events.
 
 See the [explanation page for secrets](../explanations/secrets.md) for more details.
 

@@ -1,7 +1,7 @@
 ---
 title: "shift_left"
-canonical: https://tenzir.com/docs/reference/functions/shift_left
-source: https://tenzir.com/docs/reference/functions/shift_left.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/shift_left
+source: https://tenzir.com/docs/v7.0.0/reference/functions/shift_left.md
 section: "Docs"
 ---
 
@@ -41,8 +41,8 @@ from {x: shift_left(5, 2)}
 
 ## See Also
 
-* [`bit_and`](https://tenzir.com/docs/reference/functions/bit_and.md)
-* [`bit_not`](https://tenzir.com/docs/reference/functions/bit_not.md)
-* [`bit_or`](https://tenzir.com/docs/reference/functions/bit_or.md)
-* [`bit_xor`](https://tenzir.com/docs/reference/functions/bit_xor.md)
-* [`shift_right`](https://tenzir.com/docs/reference/functions/shift_right.md)
+* [`bit_and`](https://tenzir.com/docs/v7.0.0/reference/functions/bit_and.md)
+* [`bit_not`](https://tenzir.com/docs/v7.0.0/reference/functions/bit_not.md)
+* [`bit_or`](https://tenzir.com/docs/v7.0.0/reference/functions/bit_or.md)
+* [`bit_xor`](https://tenzir.com/docs/v7.0.0/reference/functions/bit_xor.md)
+* [`shift_right`](https://tenzir.com/docs/v7.0.0/reference/functions/shift_right.md)

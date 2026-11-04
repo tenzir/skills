@@ -1,7 +1,7 @@
 ---
 title: "Choose a scenario"
-canonical: https://tenzir.com/docs/guides/platform-setup/choose-a-scenario
-source: https://tenzir.com/docs/guides/platform-setup/choose-a-scenario.md
+canonical: https://tenzir.com/docs/v7.0.0/guides/platform-setup/choose-a-scenario
+source: https://tenzir.com/docs/v7.0.0/guides/platform-setup/choose-a-scenario.md
 section: "Docs"
 ---
 

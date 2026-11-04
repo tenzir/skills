@@ -1,7 +1,7 @@
 ---
 title: "ceil"
-canonical: https://tenzir.com/docs/reference/functions/ceil
-source: https://tenzir.com/docs/reference/functions/ceil.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/ceil
+source: https://tenzir.com/docs/v7.0.0/reference/functions/ceil.md
 section: "Docs"
 ---
 
@@ -61,5 +61,5 @@ from {
 
 ## See Also
 
-* [`floor`](https://tenzir.com/docs/reference/functions/floor.md)
-* [`round`](https://tenzir.com/docs/reference/functions/round.md)
+* [`floor`](https://tenzir.com/docs/v7.0.0/reference/functions/floor.md)
+* [`round`](https://tenzir.com/docs/v7.0.0/reference/functions/round.md)

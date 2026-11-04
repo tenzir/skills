@@ -1,7 +1,7 @@
 ---
 title: "kolmogorov_smirnov"
-canonical: https://tenzir.com/docs/reference/functions/kolmogorov_smirnov
-source: https://tenzir.com/docs/reference/functions/kolmogorov_smirnov.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/kolmogorov_smirnov
+source: https://tenzir.com/docs/v7.0.0/reference/functions/kolmogorov_smirnov.md
 section: "Docs"
 ---
 
@@ -53,6 +53,6 @@ select span_distance=kolmogorov_smirnov(
 
 ## See also
 
-* [`model_distance`](https://tenzir.com/docs/reference/functions/model_distance.md)
-* [`ecdf`](https://tenzir.com/docs/reference/functions/ecdf.md)
-* [`wasserstein`](https://tenzir.com/docs/reference/functions/wasserstein.md)
+* [`model_distance`](https://tenzir.com/docs/v7.0.0/reference/functions/model_distance.md)
+* [`ecdf`](https://tenzir.com/docs/v7.0.0/reference/functions/ecdf.md)
+* [`wasserstein`](https://tenzir.com/docs/v7.0.0/reference/functions/wasserstein.md)

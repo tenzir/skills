@@ -1,7 +1,7 @@
 ---
 title: "parse_yaml"
-canonical: https://tenzir.com/docs/reference/functions/parse_yaml
-source: https://tenzir.com/docs/reference/functions/parse_yaml.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/parse_yaml
+source: https://tenzir.com/docs/v7.0.0/reference/functions/parse_yaml.md
 section: "Docs"
 ---
 
@@ -151,5 +151,5 @@ x = x.parse_yaml()
 
 ## See Also
 
-* [`read_yaml`](https://tenzir.com/docs/reference/operators/read_yaml.md)
-* [`print_yaml`](https://tenzir.com/docs/reference/functions/print_yaml.md)
+* [`read_yaml`](https://tenzir.com/docs/v7.0.0/reference/operators/read_yaml.md)
+* [`print_yaml`](https://tenzir.com/docs/v7.0.0/reference/functions/print_yaml.md)

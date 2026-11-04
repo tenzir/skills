@@ -1,7 +1,7 @@
 ---
 title: "config"
-canonical: https://tenzir.com/docs/reference/functions/config
-source: https://tenzir.com/docs/reference/functions/config.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/config
+source: https://tenzir.com/docs/v7.0.0/reference/functions/config.md
 section: "Docs"
 ---
 
@@ -51,5 +51,5 @@ select flag = $flags.get(country, "unknown")
 
 ## See Also
 
-* [`env`](https://tenzir.com/docs/reference/functions/env.md)
-* [`secret`](https://tenzir.com/docs/reference/functions/secret.md)
+* [`env`](https://tenzir.com/docs/v7.0.0/reference/functions/env.md)
+* [`secret`](https://tenzir.com/docs/v7.0.0/reference/functions/secret.md)

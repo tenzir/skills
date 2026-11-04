@@ -1,8 +1,8 @@
 ---
 title: "Calculate with time"
 description: "Extract calendar fields, build and convert durations, perform time arithmetic, round timestamps, and produce Unix epochs"
-canonical: https://tenzir.com/docs/guides/shape/calculate-with-time
-source: https://tenzir.com/docs/guides/shape/calculate-with-time.md
+canonical: https://tenzir.com/docs/v7.0.0/guides/shape/calculate-with-time
+source: https://tenzir.com/docs/v7.0.0/guides/shape/calculate-with-time.md
 section: "Docs"
 ---
 
@@ -38,7 +38,7 @@ earlier = timestamp - 2h
 
 ## Get the current time
 
-Use [`now`](https://tenzir.com/docs/reference/functions/now.md) to get the current timestamp:
+Use [`now`](https://tenzir.com/docs/v7.0.0/reference/functions/now.md) to get the current timestamp:
 
 ```tql
 from {current_time: now()}
@@ -48,7 +48,7 @@ Call `now()` once and store the result when several calculations in one event mu
 
 ## Format time to strings
 
-Use [`format_time`](https://tenzir.com/docs/reference/functions/format_time.md) when a destination requires a timestamp string with a specific layout:
+Use [`format_time`](https://tenzir.com/docs/v7.0.0/reference/functions/format_time.md) when a destination requires a timestamp string with a specific layout:
 
 ```tql
 from {event_time: 2024-01-15T10:30:45.123456}
@@ -60,7 +60,7 @@ Keep the original `time` value for comparisons, arithmetic, ordering, and window
 
 ## Extract time components
 
-Use [`year`](https://tenzir.com/docs/reference/functions/year.md), [`month`](https://tenzir.com/docs/reference/functions/month.md), [`day`](https://tenzir.com/docs/reference/functions/day.md), [`hour`](https://tenzir.com/docs/reference/functions/hour.md), [`minute`](https://tenzir.com/docs/reference/functions/minute.md), and [`second`](https://tenzir.com/docs/reference/functions/second.md) to extract calendar and clock fields:
+Use [`year`](https://tenzir.com/docs/v7.0.0/reference/functions/year.md), [`month`](https://tenzir.com/docs/v7.0.0/reference/functions/month.md), [`day`](https://tenzir.com/docs/v7.0.0/reference/functions/day.md), [`hour`](https://tenzir.com/docs/v7.0.0/reference/functions/hour.md), [`minute`](https://tenzir.com/docs/v7.0.0/reference/functions/minute.md), and [`second`](https://tenzir.com/docs/v7.0.0/reference/functions/second.md) to extract calendar and clock fields:
 
 ```tql
 from {timestamp: 2024-01-15T10:30:45.123456}
@@ -140,7 +140,7 @@ timeout_seconds = timeout.count_seconds()
 timeout_hours = timeout.count_hours()
 ```
 
-Use [`duration`](https://tenzir.com/docs/reference/functions/duration.md) when a string contains a duration that you need to parse:
+Use [`duration`](https://tenzir.com/docs/v7.0.0/reference/functions/duration.md) when a string contains a duration that you need to parse:
 
 ```tql
 from {timeout: "2.5h"}
@@ -245,7 +245,7 @@ The intervals align to the Unix epoch. Rounding to `1d` therefore uses UTC day b
 
 ## Convert Unix timestamps
 
-Use the normalization guide to parse string or numeric Unix epochs into `time` values. Use [`since_epoch`](https://tenzir.com/docs/reference/functions/since_epoch.md) for the reverse conversion.
+Use the normalization guide to parse string or numeric Unix epochs into `time` values. Use [`since_epoch`](https://tenzir.com/docs/v7.0.0/reference/functions/since_epoch.md) for the reverse conversion.
 
 ### Parse Unix timestamps
 
@@ -253,7 +253,7 @@ Follow [the Unix epoch normalization examples](normalize-event-timestamps.md#con
 
 ### Convert numeric timestamps
 
-Multiply the numeric value by its duration unit, then call [`from_epoch`](https://tenzir.com/docs/reference/functions/from_epoch.md):
+Multiply the numeric value by its duration unit, then call [`from_epoch`](https://tenzir.com/docs/v7.0.0/reference/functions/from_epoch.md):
 
 ```tql
 from {unix_millis: 1705316445123}
@@ -269,7 +269,7 @@ timestamp = from_epoch(unix_millis * 1ms)
 
 ### Convert back to Unix timestamp
 
-Use [`since_epoch`](https://tenzir.com/docs/reference/functions/since_epoch.md) to get the duration since January 1, 1970. Convert that duration to the unit required by the destination:
+Use [`since_epoch`](https://tenzir.com/docs/v7.0.0/reference/functions/since_epoch.md) to get the duration since January 1, 1970. Convert that duration to the unit required by the destination:
 
 ```tql
 from {timestamp: 2024-01-15T11:00:45Z}

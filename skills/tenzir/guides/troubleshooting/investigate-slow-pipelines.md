@@ -1,7 +1,7 @@
 ---
 title: "Investigate slow pipelines"
-canonical: https://tenzir.com/docs/guides/troubleshooting/investigate-slow-pipelines
-source: https://tenzir.com/docs/guides/troubleshooting/investigate-slow-pipelines.md
+canonical: https://tenzir.com/docs/v7.0.0/guides/troubleshooting/investigate-slow-pipelines
+source: https://tenzir.com/docs/v7.0.0/guides/troubleshooting/investigate-slow-pipelines.md
 section: "Docs"
 ---
 
@@ -74,7 +74,7 @@ Once you know whether the pipeline is compute-bound, input-bound, or output-boun
 
 ## See also
 
-* [`metrics`](https://tenzir.com/docs/reference/operators/metrics.md)
+* [`metrics`](https://tenzir.com/docs/v7.0.0/reference/operators/metrics.md)
 * [Learn idiomatic TQL](../../tutorials/learn-idiomatic-tql.md)
 * [Investigate memory growth](investigate-memory-growth.md)
 * [Tune performance](../node-setup/tune-performance.md)

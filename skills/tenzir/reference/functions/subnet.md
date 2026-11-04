@@ -1,7 +1,7 @@
 ---
 title: "subnet"
-canonical: https://tenzir.com/docs/reference/functions/subnet
-source: https://tenzir.com/docs/reference/functions/subnet.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/subnet
+source: https://tenzir.com/docs/v7.0.0/reference/functions/subnet.md
 section: "Docs"
 ---
 
@@ -74,17 +74,17 @@ from {x: subnet("2001:db8::1")}
 
 ## See Also
 
-* [`float`](https://tenzir.com/docs/reference/functions/float.md)
-* [`int`](https://tenzir.com/docs/reference/functions/int.md)
-* [`ip`](https://tenzir.com/docs/reference/functions/ip.md)
-* [`ip_category`](https://tenzir.com/docs/reference/functions/ip_category.md)
-* [`is_global`](https://tenzir.com/docs/reference/functions/is_global.md)
-* [`is_link_local`](https://tenzir.com/docs/reference/functions/is_link_local.md)
-* [`is_loopback`](https://tenzir.com/docs/reference/functions/is_loopback.md)
-* [`is_multicast`](https://tenzir.com/docs/reference/functions/is_multicast.md)
-* [`is_private`](https://tenzir.com/docs/reference/functions/is_private.md)
-* [`is_v4`](https://tenzir.com/docs/reference/functions/is_v4.md)
-* [`is_v6`](https://tenzir.com/docs/reference/functions/is_v6.md)
-* [`string`](https://tenzir.com/docs/reference/functions/string.md)
-* [`time`](https://tenzir.com/docs/reference/functions/time.md)
-* [`uint`](https://tenzir.com/docs/reference/functions/uint.md)
+* [`float`](https://tenzir.com/docs/v7.0.0/reference/functions/float.md)
+* [`int`](https://tenzir.com/docs/v7.0.0/reference/functions/int.md)
+* [`ip`](https://tenzir.com/docs/v7.0.0/reference/functions/ip.md)
+* [`ip_category`](https://tenzir.com/docs/v7.0.0/reference/functions/ip_category.md)
+* [`is_global`](https://tenzir.com/docs/v7.0.0/reference/functions/is_global.md)
+* [`is_link_local`](https://tenzir.com/docs/v7.0.0/reference/functions/is_link_local.md)
+* [`is_loopback`](https://tenzir.com/docs/v7.0.0/reference/functions/is_loopback.md)
+* [`is_multicast`](https://tenzir.com/docs/v7.0.0/reference/functions/is_multicast.md)
+* [`is_private`](https://tenzir.com/docs/v7.0.0/reference/functions/is_private.md)
+* [`is_v4`](https://tenzir.com/docs/v7.0.0/reference/functions/is_v4.md)
+* [`is_v6`](https://tenzir.com/docs/v7.0.0/reference/functions/is_v6.md)
+* [`string`](https://tenzir.com/docs/v7.0.0/reference/functions/string.md)
+* [`time`](https://tenzir.com/docs/v7.0.0/reference/functions/time.md)
+* [`uint`](https://tenzir.com/docs/v7.0.0/reference/functions/uint.md)

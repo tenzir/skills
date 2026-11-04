@@ -1,7 +1,7 @@
 ---
 title: "model_divergence"
-canonical: https://tenzir.com/docs/reference/functions/model_divergence
-source: https://tenzir.com/docs/reference/functions/model_divergence.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/model_divergence
+source: https://tenzir.com/docs/v7.0.0/reference/functions/model_divergence.md
 section: "Docs"
 ---
 
@@ -49,6 +49,6 @@ select drift = model_divergence(
 
 ## See also
 
-* [`model_distance`](https://tenzir.com/docs/reference/functions/model_distance.md)
-* [`histogram`](https://tenzir.com/docs/reference/functions/histogram.md)
-* [`frequency_table`](https://tenzir.com/docs/reference/functions/frequency_table.md)
+* [`model_distance`](https://tenzir.com/docs/v7.0.0/reference/functions/model_distance.md)
+* [`histogram`](https://tenzir.com/docs/v7.0.0/reference/functions/histogram.md)
+* [`frequency_table`](https://tenzir.com/docs/v7.0.0/reference/functions/frequency_table.md)

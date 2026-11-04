@@ -1,7 +1,7 @@
 ---
 title: "Create fixtures"
-canonical: https://tenzir.com/docs/guides/testing/create-fixtures
-source: https://tenzir.com/docs/guides/testing/create-fixtures.md
+canonical: https://tenzir.com/docs/v7.0.0/guides/testing/create-fixtures
+source: https://tenzir.com/docs/v7.0.0/guides/testing/create-fixtures.md
 section: "Docs"
 ---
 
@@ -212,11 +212,11 @@ fixtures:
       port: 9090
 ```
 
-The harness constructs the dataclass from the YAML mapping. Nested dataclasses work too - the harness walks the type annotations recursively. See the [test framework reference](../../reference/test-framework.md#fixture-options) for the full options API.
+The harness constructs the dataclass from the YAML mapping. Nested dataclasses work too - the harness walks the type annotations recursively. See the [test framework reference](https://docs.tenzir.com/reference/test-framework/#fixture-options) for the full options API.
 
 ## Add fixture assertions
 
-The harness supports [assertions](../../reference/test-framework.md#assertions) that run after a test succeeds but before teardown. Fixture assertions are one category: they let a fixture validate what happened during the test by declaring an assertions dataclass and an `assert_test` hook.
+The harness supports [assertions](https://docs.tenzir.com/reference/test-framework#assertions) that run after a test succeeds but before teardown. Fixture assertions are one category: they let a fixture validate what happened during the test by declaring an assertions dataclass and an `assert_test` hook.
 
 ### Declare the assertions dataclass
 
@@ -298,7 +298,7 @@ assertions:
 
 Omitting the `assertions` block skips the hook entirely. You can also retrieve the typed assertions instance inside a fixture with `current_assertions("http")`.
 
-See the [test framework reference](../../reference/test-framework.md#fixture-assertions) for the full assertions API.
+See the [test framework reference](https://docs.tenzir.com/reference/test-framework/#fixture-assertions) for the full assertions API.
 
 ## Control fixtures from Python tests
 

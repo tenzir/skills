@@ -1,7 +1,7 @@
 ---
 title: "where"
-canonical: https://tenzir.com/docs/reference/functions/where
-source: https://tenzir.com/docs/reference/functions/where.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/where
+source: https://tenzir.com/docs/v7.0.0/reference/functions/where.md
 section: "Docs"
 ---
 
@@ -46,5 +46,5 @@ xs = xs.where(x => x > 3)
 
 ## See Also
 
-* [`map`](https://tenzir.com/docs/reference/functions/map.md)
+* [`map`](https://tenzir.com/docs/v7.0.0/reference/functions/map.md)
 * [Shape lists](../../guides/shape/shape-lists.md)

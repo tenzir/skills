@@ -1,7 +1,7 @@
 ---
 title: "Overview"
-canonical: https://tenzir.com/docs/guides/platform-setup
-source: https://tenzir.com/docs/guides/platform-setup.md
+canonical: https://tenzir.com/docs/v7.0.0/guides/platform-setup
+source: https://tenzir.com/docs/v7.0.0/guides/platform-setup.md
 section: "Docs"
 ---
 
@@ -13,7 +13,7 @@ The **Tenzir Platform** acts as a fleet management control plane for Tenzir Node
 
 Sovereign Edition required
 
-This guide shows you how to set up the platform on your own premises with the [Sovereign Edition](https://tenzir.com/pricing.md). We also offer a hosted cloud version of the platform at [app.tenzir.com](https://app.tenzir.com).
+This guide shows you how to set up the platform on your own premises with the [Sovereign Edition](https://tenzir.com/pricing). We also offer a hosted cloud version of the platform at [app.tenzir.com](https://app.tenzir.com).
 
 ## Services
 

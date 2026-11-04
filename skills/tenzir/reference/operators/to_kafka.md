@@ -1,7 +1,7 @@
 ---
 title: "to_kafka"
-canonical: https://tenzir.com/docs/reference/operators/to_kafka
-source: https://tenzir.com/docs/reference/operators/to_kafka.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/to_kafka
+source: https://tenzir.com/docs/v7.0.0/reference/operators/to_kafka.md
 section: "Docs"
 ---
 
@@ -78,7 +78,7 @@ The AWS region used to construct the MSK authentication URL. Required when conne
 
 ## Parallelism
 
-In a [parallel pipeline](../../guides/node-setup/tune-performance.md#parallelism), each instance of `to_kafka` sends through its own producer. Unlike [`from_kafka`](https://tenzir.com/docs/reference/operators/from_kafka.md), the operator scales past the topic’s partition count, because any producer may write to any partition.
+In a [parallel pipeline](../../guides/node-setup/tune-performance.md#parallelism), each instance of `to_kafka` sends through its own producer. Unlike [`from_kafka`](https://tenzir.com/docs/v7.0.0/reference/operators/from_kafka.md), the operator scales past the topic’s partition count, because any producer may write to any partition.
 
 Kafka orders messages only within a partition, and without a `key` the partitioner spreads messages across all of them, so a topic never reflects the pipeline’s event order. Parallelism does change what a single partition sees: instead of a contiguous run of events from one producer, it receives messages interleaved from all of them. Keep parallelism disabled if a consumer of the topic relies on the order within one partition.
 
@@ -126,7 +126,7 @@ to_kafka "metrics", message=this.print_ndjson(), key="server-01"
 
 ## See Also
 
-* [`from_kafka`](https://tenzir.com/docs/reference/operators/from_kafka.md)
-* [Kafka](../../integrations/kafka.md)
+* [`from_kafka`](https://tenzir.com/docs/v7.0.0/reference/operators/from_kafka.md)
+* [Kafka](https://docs.tenzir.com/integrations/kafka)
 
 Parallelizable: a parallel pipeline may run this operator on several cores at once.

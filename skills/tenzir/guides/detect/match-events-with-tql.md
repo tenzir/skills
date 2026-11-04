@@ -1,8 +1,8 @@
 ---
 title: "Match events with TQL"
 description: "Write single-event detections over OCSF events and package their matching and output logic as reusable TQL operators"
-canonical: https://tenzir.com/docs/guides/detect/match-events-with-tql
-source: https://tenzir.com/docs/guides/detect/match-events-with-tql.md
+canonical: https://tenzir.com/docs/v7.0.0/guides/detect/match-events-with-tql
+source: https://tenzir.com/docs/v7.0.0/guides/detect/match-events-with-tql.md
 section: "Docs"
 ---
 
@@ -10,7 +10,7 @@ section: "Docs"
 
 > Write single-event detections over OCSF events and package their matching and output logic as reusable TQL operators
 
-This guide shows you how to write detections directly in TQL. A single-event detection is a predicate: [`where`](https://tenzir.com/docs/reference/operators/where.md) keeps matching events and drops the rest. Writing the predicate natively keeps your events in their canonical shape, with no taxonomy translation and no rule-format limitations between you and the data.
+This guide shows you how to write detections directly in TQL. A single-event detection is a predicate: [`where`](https://tenzir.com/docs/v7.0.0/reference/operators/where.md) keeps matching events and drops the rest. Writing the predicate natively keeps your events in their canonical shape, with no taxonomy translation and no rule-format limitations between you and the data.
 
 Why a query language for detections?
 
@@ -20,7 +20,7 @@ The examples use OCSF events. Every example shows only the fields the detection 
 
 ## Filter by event type and fields
 
-The detection primitive is [`where`](https://tenzir.com/docs/reference/operators/where.md) with a boolean expression. Gate on `class_uid` first so class-specific fields are only touched on events that have them, then compare the fields relevant to the detection:
+The detection primitive is [`where`](https://tenzir.com/docs/v7.0.0/reference/operators/where.md) with a boolean expression. Gate on `class_uid` first so class-specific fields are only touched on events that have them, then compare the fields relevant to the detection:
 
 ```tql
 from {
@@ -66,11 +66,11 @@ where process.name.equals("powershell.exe", ignore_case=true) \
 Two details matter for OCSF data:
 
 * **Match on numeric identifiers.** `class_uid == 1007` and `activity_id == 1` select OCSF Process Activity launch events. The sibling labels (`class_name`, `activity_name`) are display fields; detection logic keys on the stable integers.
-* **Compare strings case-insensitively.** OCSF preserves vendor casing, so Windows process names can arrive as `PowerShell.EXE` or `powershell.exe`. [`equals`](https://tenzir.com/docs/reference/functions/equals.md), [`search`](https://tenzir.com/docs/reference/functions/search.md), [`starts_with`](https://tenzir.com/docs/reference/functions/starts_with.md), and [`ends_with`](https://tenzir.com/docs/reference/functions/ends_with.md) all take `ignore_case=true`.
+* **Compare strings case-insensitively.** OCSF preserves vendor casing, so Windows process names can arrive as `PowerShell.EXE` or `powershell.exe`. [`equals`](https://tenzir.com/docs/v7.0.0/reference/functions/equals.md), [`search`](https://tenzir.com/docs/v7.0.0/reference/functions/search.md), [`starts_with`](https://tenzir.com/docs/v7.0.0/reference/functions/starts_with.md), and [`ends_with`](https://tenzir.com/docs/v7.0.0/reference/functions/ends_with.md) all take `ignore_case=true`.
 
 Handle optional fields
 
-OCSF events may omit fields. Gate on `class_uid` before reading class-specific fields. For optional fields, use `?` and compare the result to `true` so [`where`](https://tenzir.com/docs/reference/operators/where.md) receives a boolean:
+OCSF events may omit fields. Gate on `class_uid` before reading class-specific fields. For optional fields, use `?` and compare the result to `true` so [`where`](https://tenzir.com/docs/v7.0.0/reference/operators/where.md) receives a boolean:
 
 ```tql
 // class_name: "Process Activity"
@@ -83,7 +83,7 @@ Regular expressions, membership tests, and list transformations extend the same 
 
 ### Match strings with regular expressions
 
-Use [`match_regex`](https://tenzir.com/docs/reference/functions/match_regex.md) when substring checks are not precise enough. The `(?i)` prefix makes the pattern case-insensitive:
+Use [`match_regex`](https://tenzir.com/docs/v7.0.0/reference/functions/match_regex.md) when substring checks are not precise enough. The `(?i)` prefix makes the pattern case-insensitive:
 
 ```tql
 from {
@@ -159,7 +159,7 @@ select time, src=src_endpoint.ip, dst=dst_endpoint.ip, port=dst_endpoint.port
 
 ### Match values inside event lists
 
-For fields that are themselves lists, combine [`map`](https://tenzir.com/docs/reference/functions/map.md) with [`any`](https://tenzir.com/docs/reference/functions/any.md). The OCSF `observables` array is the class-agnostic pivot for this: one predicate over `observables` serves every event class that populates it, which is how indicator matching stays independent of the event type. Here, `type_id: 8` marks an observable as a hash:
+For fields that are themselves lists, combine [`map`](https://tenzir.com/docs/v7.0.0/reference/functions/map.md) with [`any`](https://tenzir.com/docs/v7.0.0/reference/functions/any.md). The OCSF `observables` array is the class-agnostic pivot for this: one predicate over `observables` serves every event class that populates it, which is how indicator matching stays independent of the event type. Here, `type_id: 8` marks an observable as a hash:
 
 ```tql
 let $ioc_hashes = [
@@ -270,13 +270,13 @@ Split a detection into smaller operators when that improves reuse or testing, no
 ## See Also
 
 * [Detections](../../explanations/detections.md)
-* [`equals`](https://tenzir.com/docs/reference/functions/equals.md)
-* [`search`](https://tenzir.com/docs/reference/functions/search.md)
-* [`starts_with`](https://tenzir.com/docs/reference/functions/starts_with.md)
-* [`ends_with`](https://tenzir.com/docs/reference/functions/ends_with.md)
-* [`match_regex`](https://tenzir.com/docs/reference/functions/match_regex.md)
-* [`map`](https://tenzir.com/docs/reference/functions/map.md)
-* [`any`](https://tenzir.com/docs/reference/functions/any.md)
+* [`equals`](https://tenzir.com/docs/v7.0.0/reference/functions/equals.md)
+* [`search`](https://tenzir.com/docs/v7.0.0/reference/functions/search.md)
+* [`starts_with`](https://tenzir.com/docs/v7.0.0/reference/functions/starts_with.md)
+* [`ends_with`](https://tenzir.com/docs/v7.0.0/reference/functions/ends_with.md)
+* [`match_regex`](https://tenzir.com/docs/v7.0.0/reference/functions/match_regex.md)
+* [`map`](https://tenzir.com/docs/v7.0.0/reference/functions/map.md)
+* [`any`](https://tenzir.com/docs/v7.0.0/reference/functions/any.md)
 * [Model detections in OCSF](model-detections-in-ocsf.md)
 * [Detect over time windows](detect-over-time-windows.md)
 * [Create multi-stage detectors](create-multi-stage-detectors.md)

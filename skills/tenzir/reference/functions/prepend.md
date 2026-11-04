@@ -1,7 +1,7 @@
 ---
 title: "prepend"
-canonical: https://tenzir.com/docs/reference/functions/prepend
-source: https://tenzir.com/docs/reference/functions/prepend.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/prepend
+source: https://tenzir.com/docs/v7.0.0/reference/functions/prepend.md
 section: "Docs"
 ---
 
@@ -51,8 +51,8 @@ xs = xs.prepend(3)
 
 ## See Also
 
-* [`add`](https://tenzir.com/docs/reference/functions/add.md)
-* [`append`](https://tenzir.com/docs/reference/functions/append.md)
-* [`concatenate`](https://tenzir.com/docs/reference/functions/concatenate.md)
-* [`remove`](https://tenzir.com/docs/reference/functions/remove.md)
+* [`add`](https://tenzir.com/docs/v7.0.0/reference/functions/add.md)
+* [`append`](https://tenzir.com/docs/v7.0.0/reference/functions/append.md)
+* [`concatenate`](https://tenzir.com/docs/v7.0.0/reference/functions/concatenate.md)
+* [`remove`](https://tenzir.com/docs/v7.0.0/reference/functions/remove.md)
 * [Shape lists](../../guides/shape/shape-lists.md)

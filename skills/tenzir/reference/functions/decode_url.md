@@ -1,7 +1,7 @@
 ---
 title: "decode_url"
-canonical: https://tenzir.com/docs/reference/functions/decode_url
-source: https://tenzir.com/docs/reference/functions/decode_url.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/decode_url
+source: https://tenzir.com/docs/v7.0.0/reference/functions/decode_url.md
 section: "Docs"
 ---
 
@@ -41,5 +41,5 @@ decoded = input.decode_url()
 
 ## See Also
 
-* [`encode_url`](https://tenzir.com/docs/reference/functions/encode_url.md)
+* [`encode_url`](https://tenzir.com/docs/v7.0.0/reference/functions/encode_url.md)
 * [Manipulate strings](../../guides/shape/manipulate-strings.md)

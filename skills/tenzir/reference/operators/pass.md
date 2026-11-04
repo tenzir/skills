@@ -1,7 +1,7 @@
 ---
 title: "pass"
-canonical: https://tenzir.com/docs/reference/operators/pass
-source: https://tenzir.com/docs/reference/operators/pass.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/pass
+source: https://tenzir.com/docs/v7.0.0/reference/operators/pass.md
 section: "Docs"
 ---
 

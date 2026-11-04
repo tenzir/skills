@@ -1,7 +1,7 @@
 ---
 title: "Configure dashboards"
-canonical: https://tenzir.com/docs/guides/platform-management/configure-dashboards
-source: https://tenzir.com/docs/guides/platform-management/configure-dashboards.md
+canonical: https://tenzir.com/docs/v7.0.0/guides/platform-management/configure-dashboards
+source: https://tenzir.com/docs/v7.0.0/guides/platform-management/configure-dashboards.md
 section: "Docs"
 ---
 

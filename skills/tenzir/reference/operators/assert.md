@@ -1,7 +1,7 @@
 ---
 title: "assert"
-canonical: https://tenzir.com/docs/reference/operators/assert
-source: https://tenzir.com/docs/reference/operators/assert.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/assert
+source: https://tenzir.com/docs/v7.0.0/reference/operators/assert.md
 section: "Docs"
 ---
 
@@ -56,8 +56,8 @@ assert @name == "ocsf.network_activity"
 
 ## See Also
 
-* [`assert_throughput`](https://tenzir.com/docs/reference/operators/assert_throughput.md)
-* [`where`](https://tenzir.com/docs/reference/operators/where.md)
+* [`assert_throughput`](https://tenzir.com/docs/v7.0.0/reference/operators/assert_throughput.md)
+* [`where`](https://tenzir.com/docs/v7.0.0/reference/operators/where.md)
 * [Learn idiomatic TQL](../../tutorials/learn-idiomatic-tql.md)
 
 Parallelizable: a parallel pipeline may run this operator on several cores at once.

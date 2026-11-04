@@ -1,7 +1,7 @@
 ---
 title: "starts_with"
-canonical: https://tenzir.com/docs/reference/functions/starts_with
-source: https://tenzir.com/docs/reference/functions/starts_with.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/starts_with
+source: https://tenzir.com/docs/v7.0.0/reference/functions/starts_with.md
 section: "Docs"
 ---
 
@@ -51,7 +51,7 @@ from {
 
 ## See Also
 
-* [`ends_with`](https://tenzir.com/docs/reference/functions/ends_with.md)
+* [`ends_with`](https://tenzir.com/docs/v7.0.0/reference/functions/ends_with.md)
 * [Filter and select data](../../guides/optimize/filter-and-select-data.md)
 * [Manipulate strings](../../guides/shape/manipulate-strings.md)
 * [Learn idiomatic TQL](../../tutorials/learn-idiomatic-tql.md)

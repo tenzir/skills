@@ -1,7 +1,7 @@
 ---
 title: "metrics"
-canonical: https://tenzir.com/docs/reference/operators/metrics
-source: https://tenzir.com/docs/reference/operators/metrics.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/metrics
+source: https://tenzir.com/docs/v7.0.0/reference/operators/metrics.md
 section: "Docs"
 ---
 
@@ -55,7 +55,7 @@ Work on persisted diagnostic events (first), even when `live` is given.
 
 Controls the output shape. The default is `"raw"`, which preserves the native `tenzir.metrics.*` schemas listed below.
 
-Set `shape="prometheus"` to transform metrics into canonical records that are compatible with Prometheus-oriented pipelines. You can send this shape directly to [`to_prometheus`](https://tenzir.com/docs/reference/operators/to_prometheus.md).
+Set `shape="prometheus"` to transform metrics into canonical records that are compatible with Prometheus-oriented pipelines. You can send this shape directly to [`to_prometheus`](https://tenzir.com/docs/v7.0.0/reference/operators/to_prometheus.md).
 
 ```tql
 {
@@ -775,8 +775,8 @@ select timestamp, handle, reads, writes, bytes_read, bytes_written
 
 ## See Also
 
-* [`diagnostics`](https://tenzir.com/docs/reference/operators/diagnostics.md)
-* [`to_prometheus`](https://tenzir.com/docs/reference/operators/to_prometheus.md)
+* [`diagnostics`](https://tenzir.com/docs/v7.0.0/reference/operators/diagnostics.md)
+* [`to_prometheus`](https://tenzir.com/docs/v7.0.0/reference/operators/to_prometheus.md)
 * [Collect metrics](../../guides/observability/collect-metrics.md)
-* [Plot data with charts](../../tutorials/plot-data-with-charts.md)
-* [Prometheus](../../integrations/prometheus.md)
+* [Plot data with charts](https://docs.tenzir.com/tutorials/plot-data-with-charts)
+* [Prometheus](https://docs.tenzir.com/integrations/prometheus)

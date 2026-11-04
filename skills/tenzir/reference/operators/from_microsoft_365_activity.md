@@ -1,7 +1,7 @@
 ---
 title: "from_microsoft_365_activity"
-canonical: https://tenzir.com/docs/reference/operators/from_microsoft_365_activity
-source: https://tenzir.com/docs/reference/operators/from_microsoft_365_activity.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/from_microsoft_365_activity
+source: https://tenzir.com/docs/v7.0.0/reference/operators/from_microsoft_365_activity.md
 section: "Docs"
 ---
 
@@ -172,4 +172,4 @@ from_microsoft_365_activity auth={
 
 ## See Also
 
-* [`from_microsoft_graph`](https://tenzir.com/docs/reference/operators/from_microsoft_graph.md)
+* [`from_microsoft_graph`](https://tenzir.com/docs/v7.0.0/reference/operators/from_microsoft_graph.md)

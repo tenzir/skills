@@ -1,8 +1,8 @@
 ---
 title: "Detections"
 description: "Understand how Tenzir matches, correlates, and models security evidence as detection results"
-canonical: https://tenzir.com/docs/explanations/detections
-source: https://tenzir.com/docs/explanations/detections.md
+canonical: https://tenzir.com/docs/v7.0.0/explanations/detections
+source: https://tenzir.com/docs/v7.0.0/explanations/detections.md
 section: "Docs"
 ---
 
@@ -34,11 +34,11 @@ Normalization and enrichment make matching logic easier to reuse. OCSF gives str
 
 Choose the matching language from the evidence and the detection content you already have:
 
-| Evidence and content                         | Matching language                                       | Best fit                                                                         |
-| -------------------------------------------- | ------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| Evidence and content                         | Matching language                                              | Best fit                                                                         |
+| -------------------------------------------- | -------------------------------------------------------------- | -------------------------------------------------------------------------------- |
 | Structured events and native detection logic | [TQL](language.md) | Predicates, transformations, and custom logic over your event schema.            |
-| Structured events and portable rule content  | [Sigma](https://sigmahq.io)                             | Existing Sigma rule sets from public, commercial, or internal sources.           |
-| Files, payloads, and other byte streams      | [YARA-X](https://virustotal.github.io/yara-x/)          | Rules that inspect raw content and emit findings with byte-level match evidence. |
+| Structured events and portable rule content  | [Sigma](https://sigmahq.io)                                    | Existing Sigma rule sets from public, commercial, or internal sources.           |
+| Files, payloads, and other byte streams      | [YARA-X](https://virustotal.github.io/yara-x/)                 | Rules that inspect raw content and emit findings with byte-level match evidence. |
 
 These languages compose rather than compete. TQL provides the surrounding pipeline even when Sigma or YARA performs the match. The guides on [matching events with TQL](../guides/detect/match-events-with-tql.md), [executing Sigma rules](../guides/detect/execute-sigma-rules.md), and [scanning bytes with YARA](../guides/detect/scan-bytes-with-yara.md) show each matching model.
 

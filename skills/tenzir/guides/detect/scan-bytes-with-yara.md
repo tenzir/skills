@@ -1,8 +1,8 @@
 ---
 title: "Scan bytes with YARA"
 description: "Run YARA-X rules on files and finite byte streams and emit OCSF or native matches"
-canonical: https://tenzir.com/docs/guides/detect/scan-bytes-with-yara
-source: https://tenzir.com/docs/guides/detect/scan-bytes-with-yara.md
+canonical: https://tenzir.com/docs/v7.0.0/guides/detect/scan-bytes-with-yara
+source: https://tenzir.com/docs/v7.0.0/guides/detect/scan-bytes-with-yara.md
 section: "Docs"
 ---
 
@@ -10,11 +10,11 @@ section: "Docs"
 
 > Run YARA-X rules on files and finite byte streams and emit OCSF or native matches
 
-This guide shows you how to run [YARA-X](https://virustotal.github.io/yara-x/) rules with the [`yara`](https://tenzir.com/docs/reference/operators/yara.md) operator. YARA covers raw bytes, while Sigma and TQL predicates match structured event fields. By default, each matching YARA rule becomes an OCSF Detection Finding that you can route alongside findings from other detection methods. You can also request a lightweight native result containing the original bytes and matched rule metadata.
+This guide shows you how to run [YARA-X](https://virustotal.github.io/yara-x/) rules with the [`yara`](https://tenzir.com/docs/v7.0.0/reference/operators/yara.md) operator. YARA covers raw bytes, while Sigma and TQL predicates match structured event fields. By default, each matching YARA rule becomes an OCSF Detection Finding that you can route alongside findings from other detection methods. You can also request a lightweight native result containing the original bytes and matched rule metadata.
 
 ## Understand the execution model
 
-The [`yara`](https://tenzir.com/docs/reference/operators/yara.md) operator treats its entire input as one contiguous byte sequence. It buffers everything and scans when the input ends. That has one hard consequence: **the input must be finite**. Scan one file or one carved payload at a time, never an unbounded stream. A timeout, input-size violation, scan failure, or invalid match range produces an error without partial finding output.
+The [`yara`](https://tenzir.com/docs/v7.0.0/reference/operators/yara.md) operator treats its entire input as one contiguous byte sequence. It buffers everything and scans when the input ends. That has one hard consequence: **the input must be finite**. Scan one file or one carved payload at a time, never an unbounded stream. A timeout, input-size violation, scan failure, or invalid match range produces an error without partial finding output.
 
 Specify exactly one rule source:
 
@@ -56,7 +56,7 @@ rule SuspiciousDropper {
 }
 ```
 
-Feed a file into the scan with [`from_file`](https://tenzir.com/docs/reference/operators/from_file.md). The `mmap=true` flag maps a local file into memory when possible, avoiding an extra copy:
+Feed a file into the scan with [`from_file`](https://tenzir.com/docs/v7.0.0/reference/operators/from_file.md). The `mmap=true` flag maps a local file into memory when possible, avoiding an extra copy:
 
 ```tql
 from_file "invoice.pdf.exe", mmap=true {

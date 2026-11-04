@@ -1,7 +1,7 @@
 ---
 title: "duration"
-canonical: https://tenzir.com/docs/reference/functions/duration
-source: https://tenzir.com/docs/reference/functions/duration.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/duration
+source: https://tenzir.com/docs/v7.0.0/reference/functions/duration.md
 section: "Docs"
 ---
 
@@ -34,5 +34,5 @@ dur = duration(str)
 
 ## See Also
 
-* [`time`](https://tenzir.com/docs/reference/functions/time.md)
+* [`time`](https://tenzir.com/docs/v7.0.0/reference/functions/time.md)
 * [Calculate with time](../../guides/shape/calculate-with-time.md)

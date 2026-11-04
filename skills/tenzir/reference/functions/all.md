@@ -1,7 +1,7 @@
 ---
 title: "all"
-canonical: https://tenzir.com/docs/reference/functions/all
-source: https://tenzir.com/docs/reference/functions/all.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/all
+source: https://tenzir.com/docs/v7.0.0/reference/functions/all.md
 section: "Docs"
 ---
 
@@ -38,5 +38,5 @@ summarize result=all(x)
 
 ## See Also
 
-* [`any`](https://tenzir.com/docs/reference/functions/any.md)
+* [`any`](https://tenzir.com/docs/v7.0.0/reference/functions/any.md)
 * [Aggregate event streams](../../guides/analyze/aggregate-event-streams.md)

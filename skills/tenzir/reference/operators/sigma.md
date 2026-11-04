@@ -1,7 +1,7 @@
 ---
 title: "sigma"
-canonical: https://tenzir.com/docs/reference/operators/sigma
-source: https://tenzir.com/docs/reference/operators/sigma.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/sigma
+source: https://tenzir.com/docs/v7.0.0/reference/operators/sigma.md
 section: "Docs"
 ---
 
@@ -211,7 +211,7 @@ sigma path=["/etc/tenzir/sigma/network", "/etc/tenzir/sigma/local.yml"],
 
 ### Apply a Sigma rule to Windows Event Log XML
 
-Use [`parse_winlog`](https://tenzir.com/docs/reference/functions/parse_winlog.md) to parse native Windows Event Log XML before applying rules whose fields match that parsed schema:
+Use [`parse_winlog`](https://tenzir.com/docs/v7.0.0/reference/functions/parse_winlog.md) to parse native Windows Event Log XML before applying rules whose fields match that parsed schema:
 
 ```tql
 from_file "windows-security.xml" {
@@ -223,10 +223,10 @@ sigma path="rules/windows.yml"
 
 ## See Also
 
-* [`where`](https://tenzir.com/docs/reference/operators/where.md)
-* [`window`](https://tenzir.com/docs/reference/operators/window.md)
-* [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md)
-* [`parse_winlog`](https://tenzir.com/docs/reference/functions/parse_winlog.md)
+* [`where`](https://tenzir.com/docs/v7.0.0/reference/operators/where.md)
+* [`window`](https://tenzir.com/docs/v7.0.0/reference/operators/window.md)
+* [`summarize`](https://tenzir.com/docs/v7.0.0/reference/operators/summarize.md)
+* [`parse_winlog`](https://tenzir.com/docs/v7.0.0/reference/functions/parse_winlog.md)
 * [Execute Sigma rules](../../guides/detect/execute-sigma-rules.md)
 * [Model detections in OCSF](../../guides/detect/model-detections-in-ocsf.md)
 * [Expressions](../expressions.md)

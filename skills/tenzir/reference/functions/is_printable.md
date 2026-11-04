@@ -1,7 +1,7 @@
 ---
 title: "is_printable"
-canonical: https://tenzir.com/docs/reference/functions/is_printable
-source: https://tenzir.com/docs/reference/functions/is_printable.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/is_printable
+source: https://tenzir.com/docs/v7.0.0/reference/functions/is_printable.md
 section: "Docs"
 ---
 
@@ -33,6 +33,6 @@ from {x: "hello".is_printable()}
 
 ## See Also
 
-* [`is_alnum`](https://tenzir.com/docs/reference/functions/is_alnum.md)
-* [`is_alpha`](https://tenzir.com/docs/reference/functions/is_alpha.md)
+* [`is_alnum`](https://tenzir.com/docs/v7.0.0/reference/functions/is_alnum.md)
+* [`is_alpha`](https://tenzir.com/docs/v7.0.0/reference/functions/is_alpha.md)
 * [Manipulate strings](../../guides/shape/manipulate-strings.md)

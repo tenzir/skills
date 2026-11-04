@@ -1,7 +1,7 @@
 ---
 title: "mad"
-canonical: https://tenzir.com/docs/reference/functions/mad
-source: https://tenzir.com/docs/reference/functions/mad.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/mad
+source: https://tenzir.com/docs/v7.0.0/reference/functions/mad.md
 section: "Docs"
 ---
 
@@ -64,10 +64,10 @@ select jitter = times.sort().deltas().mad()
 
 ## See Also
 
-* [`deltas`](https://tenzir.com/docs/reference/functions/deltas.md)
-* [`ewm_stddev`](https://tenzir.com/docs/reference/functions/ewm_stddev.md)
-* [`ewma`](https://tenzir.com/docs/reference/functions/ewma.md)
-* [`median`](https://tenzir.com/docs/reference/functions/median.md)
-* [`skewness`](https://tenzir.com/docs/reference/functions/skewness.md)
-* [`stddev`](https://tenzir.com/docs/reference/functions/stddev.md)
+* [`deltas`](https://tenzir.com/docs/v7.0.0/reference/functions/deltas.md)
+* [`ewm_stddev`](https://tenzir.com/docs/v7.0.0/reference/functions/ewm_stddev.md)
+* [`ewma`](https://tenzir.com/docs/v7.0.0/reference/functions/ewma.md)
+* [`median`](https://tenzir.com/docs/v7.0.0/reference/functions/median.md)
+* [`skewness`](https://tenzir.com/docs/v7.0.0/reference/functions/skewness.md)
+* [`stddev`](https://tenzir.com/docs/v7.0.0/reference/functions/stddev.md)
 * [Aggregate event streams](../../guides/analyze/aggregate-event-streams.md)

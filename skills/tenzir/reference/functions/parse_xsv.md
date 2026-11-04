@@ -1,7 +1,7 @@
 ---
 title: "parse_xsv"
-canonical: https://tenzir.com/docs/reference/functions/parse_xsv
-source: https://tenzir.com/docs/reference/functions/parse_xsv.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/parse_xsv
+source: https://tenzir.com/docs/v7.0.0/reference/functions/parse_xsv.md
 section: "Docs"
 ---
 
@@ -25,11 +25,11 @@ The `parse_xsv` function parses a string as [XSV](https://en.wikipedia.org/wiki/
 
 The following table lists existing XSV configurations:
 
-| Format                                                            | Field Separator | List Separator | Null Value |
-| ----------------------------------------------------------------- | --------------- | -------------- | ---------- |
-| [`csv`](https://tenzir.com/docs/reference/functions/parse_csv.md) | `,`             | `;`            | empty      |
-| [`ssv`](https://tenzir.com/docs/reference/functions/parse_ssv.md) | `<space>`       | `,`            | `-`        |
-| [`tsv`](https://tenzir.com/docs/reference/functions/parse_tsv.md) | `\t`            | `,`            | `-`        |
+| Format                                                                   | Field Separator | List Separator | Null Value |
+| ------------------------------------------------------------------------ | --------------- | -------------- | ---------- |
+| [`csv`](https://tenzir.com/docs/v7.0.0/reference/functions/parse_csv.md) | `,`             | `;`            | empty      |
+| [`ssv`](https://tenzir.com/docs/v7.0.0/reference/functions/parse_ssv.md) | `<space>`       | `,`            | `-`        |
+| [`tsv`](https://tenzir.com/docs/v7.0.0/reference/functions/parse_tsv.md) | `\t`            | `,`            | `-`        |
 
 ### `header = list<string>|string`
 
@@ -189,7 +189,7 @@ output = input.parse_xsv(
 
 ## See Also
 
-* [`read_xsv`](https://tenzir.com/docs/reference/operators/read_xsv.md)
-* [`parse_csv`](https://tenzir.com/docs/reference/functions/parse_csv.md)
-* [`parse_ssv`](https://tenzir.com/docs/reference/functions/parse_ssv.md)
-* [`parse_tsv`](https://tenzir.com/docs/reference/functions/parse_tsv.md)
+* [`read_xsv`](https://tenzir.com/docs/v7.0.0/reference/operators/read_xsv.md)
+* [`parse_csv`](https://tenzir.com/docs/v7.0.0/reference/functions/parse_csv.md)
+* [`parse_ssv`](https://tenzir.com/docs/v7.0.0/reference/functions/parse_ssv.md)
+* [`parse_tsv`](https://tenzir.com/docs/v7.0.0/reference/functions/parse_tsv.md)

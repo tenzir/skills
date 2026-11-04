@@ -1,7 +1,7 @@
 ---
 title: "length_bytes"
-canonical: https://tenzir.com/docs/reference/functions/length_bytes
-source: https://tenzir.com/docs/reference/functions/length_bytes.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/length_bytes
+source: https://tenzir.com/docs/v7.0.0/reference/functions/length_bytes.md
 section: "Docs"
 ---
 
@@ -45,6 +45,6 @@ from {x: "👻".length_bytes()}
 
 ## See Also
 
-* [`length`](https://tenzir.com/docs/reference/functions/length.md)
-* [`length_chars`](https://tenzir.com/docs/reference/functions/length_chars.md)
+* [`length`](https://tenzir.com/docs/v7.0.0/reference/functions/length.md)
+* [`length_chars`](https://tenzir.com/docs/v7.0.0/reference/functions/length_chars.md)
 * [Manipulate strings](../../guides/shape/manipulate-strings.md)

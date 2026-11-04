@@ -1,7 +1,7 @@
 ---
 title: "from_microsoft_sql"
-canonical: https://tenzir.com/docs/reference/operators/from_microsoft_sql
-source: https://tenzir.com/docs/reference/operators/from_microsoft_sql.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/from_microsoft_sql
+source: https://tenzir.com/docs/v7.0.0/reference/operators/from_microsoft_sql.md
 section: "Docs"
 ---
 
@@ -144,7 +144,7 @@ The operator maps Microsoft SQL Server types to [Type System](../types.md) as fo
 
 ## Optimizations
 
-When the operator reads a table, it lets SQL Server do the work of the [`where`](https://tenzir.com/docs/reference/operators/where.md), [`select`](https://tenzir.com/docs/reference/operators/select.md), and [`head`](https://tenzir.com/docs/reference/operators/head.md) operators that follow it, so that SQL Server returns only the rows and columns that the pipeline needs. For one-shot table reads without `live=true`, SQL Server can also compute a directly following [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md). With `live=true`, the summary stays in Tenzir because the input never ends. The page on [SQL Server optimizations](../optimizations/microsoft-sql.md) describes which filters SQL Server evaluates, and the [optimizations overview](../optimizations.md) explains how Tenzir optimizes pipelines in general.
+When the operator reads a table, it lets SQL Server do the work of the [`where`](https://tenzir.com/docs/v7.0.0/reference/operators/where.md), [`select`](https://tenzir.com/docs/v7.0.0/reference/operators/select.md), and [`head`](https://tenzir.com/docs/v7.0.0/reference/operators/head.md) operators that follow it, so that SQL Server returns only the rows and columns that the pipeline needs. For one-shot table reads without `live=true`, SQL Server can also compute a directly following [`summarize`](https://tenzir.com/docs/v7.0.0/reference/operators/summarize.md). With `live=true`, the summary stays in Tenzir because the input never ends. The page on [SQL Server optimizations](../optimizations/microsoft-sql.md) describes which filters SQL Server evaluates, and the [optimizations overview](../optimizations.md) explains how Tenzir optimizes pipelines in general.
 
 ## Examples
 
@@ -241,4 +241,4 @@ from_microsoft_sql table="dbo.events",
 
 ## See Also
 
-* [Microsoft SQL Server](../../integrations/microsoft/sql-server.md)
+* [Sql server](https://docs.tenzir.com/integrations/microsoft/sql-server)

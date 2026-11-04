@@ -1,7 +1,7 @@
 ---
 title: "parse_json"
-canonical: https://tenzir.com/docs/reference/functions/parse_json
-source: https://tenzir.com/docs/reference/functions/parse_json.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/parse_json
+source: https://tenzir.com/docs/v7.0.0/reference/functions/parse_json.md
 section: "Docs"
 ---
 
@@ -162,5 +162,5 @@ output = input.parse_json()
 
 ## See Also
 
-* [`read_json`](https://tenzir.com/docs/reference/operators/read_json.md)
+* [`read_json`](https://tenzir.com/docs/v7.0.0/reference/operators/read_json.md)
 * [Parse string fields](../../guides/parse/parse-string-fields.md)

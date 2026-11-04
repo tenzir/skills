@@ -1,7 +1,7 @@
 ---
 title: "ocsf_cast"
-canonical: https://tenzir.com/docs/reference/functions/ocsf_cast
-source: https://tenzir.com/docs/reference/functions/ocsf_cast.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/ocsf_cast
+source: https://tenzir.com/docs/v7.0.0/reference/functions/ocsf_cast.md
 section: "Docs"
 ---
 
@@ -17,9 +17,9 @@ ocsf_cast(x:record, [encode_variants=bool, null_fill=bool, timestamp_to_ms=bool]
 
 ## Description
 
-The `ocsf_cast` function casts the record `x` to the OCSF event class type selected by its `metadata.version`, `metadata.profiles`, `metadata.extensions`, and `class_uid` fields. It applies the same casting rules as the [`ocsf_cast`](https://tenzir.com/docs/reference/operators/ocsf_cast.md) operator: it warns about fields that the schema does not define and removes them, encodes free-form objects such as `unmapped`, and converts values to the types the schema expects.
+The `ocsf_cast` function casts the record `x` to the OCSF event class type selected by its `metadata.version`, `metadata.profiles`, `metadata.extensions`, and `class_uid` fields. It applies the same casting rules as the [`ocsf_cast`](https://tenzir.com/docs/v7.0.0/reference/operators/ocsf_cast) operator: it warns about fields that the schema does not define and removes them, encodes free-form objects such as `unmapped`, and converts values to the types the schema expects.
 
-Use the function when the OCSF event lives in a field rather than at the top level of the event, for example next to `raw_data` in an envelope, or in a list of events that you process with [`map`](https://tenzir.com/docs/reference/functions/map.md). Use the operator when the whole event is the OCSF event.
+Use the function when the OCSF event lives in a field rather than at the top level of the event, for example next to `raw_data` in an envelope, or in a list of events that you process with [`map`](https://tenzir.com/docs/v7.0.0/reference/functions/map.md). Use the operator when the whole event is the OCSF event.
 
 The function differs from the operator in three ways:
 
@@ -181,7 +181,7 @@ The function returns both events unchanged. The first event emits a warning beca
 
 ## See Also
 
-* [`ocsf_cast`](https://tenzir.com/docs/reference/operators/ocsf_cast.md)
-* [`ocsf_derive`](https://tenzir.com/docs/reference/functions/ocsf_derive.md)
-* [`ocsf_trim`](https://tenzir.com/docs/reference/functions/ocsf_trim.md)
+* [`ocsf_cast`](https://tenzir.com/docs/v7.0.0/reference/operators/ocsf_cast)
+* [`ocsf_derive`](https://tenzir.com/docs/v7.0.0/reference/functions/ocsf_derive.md)
+* [`ocsf_trim`](https://tenzir.com/docs/v7.0.0/reference/functions/ocsf_trim.md)
 * [Map to OCSF](../../guides/normalize/map-to-ocsf.md)

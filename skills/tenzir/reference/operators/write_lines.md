@@ -1,7 +1,7 @@
 ---
 title: "write_lines"
-canonical: https://tenzir.com/docs/reference/operators/write_lines
-source: https://tenzir.com/docs/reference/operators/write_lines.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/write_lines
+source: https://tenzir.com/docs/v7.0.0/reference/operators/write_lines.md
 section: "Docs"
 ---
 
@@ -17,7 +17,7 @@ write_lines
 
 Tip
 
-Use [`write_kv`](https://tenzir.com/docs/reference/operators/write_kv.md) operator if you also want to write the *key*s.
+Use [`write_kv`](https://tenzir.com/docs/v7.0.0/reference/operators/write_kv.md) operator if you also want to write the *key*s.
 
 ## Description
 
@@ -42,9 +42,9 @@ write_lines
 
 ## See Also
 
-* [`read_lines`](https://tenzir.com/docs/reference/operators/read_lines.md)
-* [`write_csv`](https://tenzir.com/docs/reference/operators/write_csv.md)
-* [`write_kv`](https://tenzir.com/docs/reference/operators/write_kv.md)
-* [`write_ssv`](https://tenzir.com/docs/reference/operators/write_ssv.md)
-* [`write_tsv`](https://tenzir.com/docs/reference/operators/write_tsv.md)
-* [`write_xsv`](https://tenzir.com/docs/reference/operators/write_xsv.md)
+* [`read_lines`](https://tenzir.com/docs/v7.0.0/reference/operators/read_lines.md)
+* [`write_csv`](https://tenzir.com/docs/v7.0.0/reference/operators/write_csv.md)
+* [`write_kv`](https://tenzir.com/docs/v7.0.0/reference/operators/write_kv.md)
+* [`write_ssv`](https://tenzir.com/docs/v7.0.0/reference/operators/write_ssv.md)
+* [`write_tsv`](https://tenzir.com/docs/v7.0.0/reference/operators/write_tsv.md)
+* [`write_xsv`](https://tenzir.com/docs/v7.0.0/reference/operators/write_xsv.md)

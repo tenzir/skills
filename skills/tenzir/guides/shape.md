@@ -1,8 +1,8 @@
 ---
 title: "Overview"
 description: "Prepare event fields and records for downstream processing."
-canonical: https://tenzir.com/docs/guides/shape
-source: https://tenzir.com/docs/guides/shape.md
+canonical: https://tenzir.com/docs/v7.0.0/guides/shape
+source: https://tenzir.com/docs/v7.0.0/guides/shape.md
 section: "Docs"
 ---
 
@@ -12,4 +12,4 @@ section: "Docs"
 
 Shaping changes the structure and representation of events without changing what they mean. Use it before normalization to prepare source fields, or later to adapt events for a destination.
 
-The shaping guides cover [transforming values](https://docs.tenzir.com/guides/transform-values), [manipulating strings](https://docs.tenzir.com/guides/manipulate-strings), [shaping records](https://docs.tenzir.com/guides/shape-records) and [lists](https://docs.tenzir.com/guides/shape-lists), [reshaping complex data](https://docs.tenzir.com/guides/reshape-complex-data), [converting data formats](https://docs.tenzir.com/guides/convert-data-formats), [normalizing event timestamps](https://docs.tenzir.com/guides/normalize-event-timestamps), [calculating with time](https://docs.tenzir.com/guides/calculate-with-time), and [repairing out-of-order events](https://docs.tenzir.com/guides/repair-out-of-order-events).
+The shaping guides cover [transforming values](shape/transform-values.md), [manipulating strings](shape/manipulate-strings.md), [shaping records](shape/shape-records.md) and [lists](shape/shape-lists.md), [reshaping complex data](shape/reshape-complex-data.md), [converting data formats](shape/convert-data-formats.md), [normalizing event timestamps](shape/normalize-event-timestamps.md), [calculating with time](shape/calculate-with-time.md), and [repairing out-of-order events](shape/repair-out-of-order-events.md).

@@ -1,7 +1,7 @@
 ---
 title: "version"
-canonical: https://tenzir.com/docs/reference/operators/version
-source: https://tenzir.com/docs/reference/operators/version.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/version
+source: https://tenzir.com/docs/v7.0.0/reference/operators/version.md
 section: "Docs"
 ---
 

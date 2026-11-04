@@ -1,7 +1,7 @@
 ---
 title: "set"
-canonical: https://tenzir.com/docs/reference/operators/set
-source: https://tenzir.com/docs/reference/operators/set.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/set
+source: https://tenzir.com/docs/v7.0.0/reference/operators/set.md
 section: "Docs"
 ---
 
@@ -84,7 +84,7 @@ b = move a
 
 * [Statements](../statements.md)
 * [Filter and select data](../../guides/optimize/filter-and-select-data.md)
-* [Plot data with charts](../../tutorials/plot-data-with-charts.md)
+* [Plot data with charts](https://docs.tenzir.com/tutorials/plot-data-with-charts)
 * [Onboard a data source](../../tutorials/onboard-a-data-source.md)
 
 Parallelizable: a parallel pipeline may run this operator on several cores at once.

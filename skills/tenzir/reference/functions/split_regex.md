@@ -1,7 +1,7 @@
 ---
 title: "split_regex"
-canonical: https://tenzir.com/docs/reference/functions/split_regex
-source: https://tenzir.com/docs/reference/functions/split_regex.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/split_regex
+source: https://tenzir.com/docs/v7.0.0/reference/functions/split_regex.md
 section: "Docs"
 ---
 
@@ -63,6 +63,6 @@ from {xs: split_regex("a1b2c3", r"\d", max=1)}
 
 ## See Also
 
-* [`split`](https://tenzir.com/docs/reference/functions/split.md)
-* [`join`](https://tenzir.com/docs/reference/functions/join.md)
+* [`split`](https://tenzir.com/docs/v7.0.0/reference/functions/split.md)
+* [`join`](https://tenzir.com/docs/v7.0.0/reference/functions/join.md)
 * [Manipulate strings](../../guides/shape/manipulate-strings.md)

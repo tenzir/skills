@@ -1,7 +1,7 @@
 ---
 title: "to_google_cloud_logging"
-canonical: https://tenzir.com/docs/reference/operators/to_google_cloud_logging
-source: https://tenzir.com/docs/reference/operators/to_google_cloud_logging.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/to_google_cloud_logging
+source: https://tenzir.com/docs/v7.0.0/reference/operators/to_google_cloud_logging.md
 section: "Docs"
 ---
 
@@ -128,7 +128,7 @@ to_google_cloud_logging log_id="LOG_ID", project="PROJECT_ID"
 
 ## See Also
 
-* [`to_google_secops`](https://tenzir.com/docs/reference/operators/to_google_secops.md)
-* [Google Cloud Logging](../../integrations/google/cloud-logging.md)
+* [`to_google_secops`](https://tenzir.com/docs/v7.0.0/reference/operators/to_google_secops.md)
+* [Cloud logging](https://docs.tenzir.com/integrations/google/cloud-logging)
 
 Parallelizable: a parallel pipeline may run this operator on several cores at once.

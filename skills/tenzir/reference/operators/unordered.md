@@ -1,7 +1,7 @@
 ---
 title: "unordered"
-canonical: https://tenzir.com/docs/reference/operators/unordered
-source: https://tenzir.com/docs/reference/operators/unordered.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/unordered
+source: https://tenzir.com/docs/v7.0.0/reference/operators/unordered.md
 section: "Docs"
 ---
 

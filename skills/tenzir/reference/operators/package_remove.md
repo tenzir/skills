@@ -1,7 +1,7 @@
 ---
 title: "package_remove"
-canonical: https://tenzir.com/docs/reference/operators/package_remove
-source: https://tenzir.com/docs/reference/operators/package_remove.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/package_remove
+source: https://tenzir.com/docs/v7.0.0/reference/operators/package_remove.md
 section: "Docs"
 ---
 
@@ -33,7 +33,7 @@ package_remove "suricata-ocsf"
 
 ## See Also
 
-* [`package_add`](https://tenzir.com/docs/reference/operators/package_add.md)
-* [`package_list`](https://tenzir.com/docs/reference/operators/package_list.md)
+* [`package_add`](https://tenzir.com/docs/v7.0.0/reference/operators/package_add.md)
+* [`package_list`](https://tenzir.com/docs/v7.0.0/reference/operators/package_list.md)
 * [Install a package](../../guides/packages/install-a-package.md)
 * [Onboard a data source](../../tutorials/onboard-a-data-source.md)

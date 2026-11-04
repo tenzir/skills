@@ -1,7 +1,7 @@
 ---
 title: "to_elasticsearch"
-canonical: https://tenzir.com/docs/reference/operators/to_elasticsearch
-source: https://tenzir.com/docs/reference/operators/to_elasticsearch.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/to_elasticsearch
+source: https://tenzir.com/docs/v7.0.0/reference/operators/to_elasticsearch.md
 section: "Docs"
 ---
 
@@ -22,7 +22,7 @@ to_elasticsearch url:string, action=string, [index=string, id=string, doc=record
 
 The `to_elasticsearch` operator sends events to a [Bulk API compatible with Elasticsearch](https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html). The same implementation also works with Bulk API endpoints compatible with OpenSearch.
 
-You can also use [`to_opensearch`](https://tenzir.com/docs/reference/operators/to_opensearch.md) as an alias.
+You can also use [`to_opensearch`](https://tenzir.com/docs/v7.0.0/reference/operators/to_opensearch.md) as an alias.
 
 The operator appends `/_bulk` to the URL if the path doesn’t already end with `/_bulk`. It accumulates multiple events before sending them as a single request. You can control the maximum request size with `max_content_length` and the timeout before sending accumulated events with `buffer_timeout`.
 
@@ -138,11 +138,11 @@ to_elasticsearch "localhost:9200", action="create", index="main"
 
 ## See Also
 
-* [`accept_elasticsearch`](https://tenzir.com/docs/reference/operators/accept_elasticsearch.md)
-* [`to_opensearch`](https://tenzir.com/docs/reference/operators/to_opensearch.md)
+* [`accept_elasticsearch`](https://tenzir.com/docs/v7.0.0/reference/operators/accept_elasticsearch.md)
+* [`to_opensearch`](https://tenzir.com/docs/v7.0.0/reference/operators/to_opensearch.md)
 * [Map to ECS](../../guides/normalize/map-to-ecs.md)
-* [Elasticsearch](../../integrations/elasticsearch.md)
-* [OpenSearch](../../integrations/opensearch.md)
-* [VictoriaLogs](../../integrations/victorialogs.md)
+* [Elasticsearch](https://docs.tenzir.com/integrations/elasticsearch)
+* [Opensearch](https://docs.tenzir.com/integrations/opensearch)
+* [Victorialogs](https://docs.tenzir.com/integrations/victorialogs)
 
 Parallelizable: a parallel pipeline may run this operator on several cores at once.

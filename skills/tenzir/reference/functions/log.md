@@ -1,7 +1,7 @@
 ---
 title: "log"
-canonical: https://tenzir.com/docs/reference/functions/log
-source: https://tenzir.com/docs/reference/functions/log.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/log
+source: https://tenzir.com/docs/v7.0.0/reference/functions/log.md
 section: "Docs"
 ---
 

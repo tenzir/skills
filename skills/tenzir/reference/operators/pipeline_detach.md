@@ -1,7 +1,7 @@
 ---
 title: "pipeline_detach"
-canonical: https://tenzir.com/docs/reference/operators/pipeline_detach
-source: https://tenzir.com/docs/reference/operators/pipeline_detach.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/pipeline_detach
+source: https://tenzir.com/docs/v7.0.0/reference/operators/pipeline_detach.md
 section: "Docs"
 ---
 
@@ -45,5 +45,5 @@ pipeline_detach {
 
 ## See Also
 
-* [`pipeline_list`](https://tenzir.com/docs/reference/operators/pipeline_list.md)
-* [`pipeline_run`](https://tenzir.com/docs/reference/operators/pipeline_run.md)
+* [`pipeline_list`](https://tenzir.com/docs/v7.0.0/reference/operators/pipeline_list.md)
+* [`pipeline_run`](https://tenzir.com/docs/v7.0.0/reference/operators/pipeline_run.md)

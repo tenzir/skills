@@ -1,7 +1,7 @@
 ---
 title: "entropy"
-canonical: https://tenzir.com/docs/reference/functions/entropy
-source: https://tenzir.com/docs/reference/functions/entropy.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/entropy
+source: https://tenzir.com/docs/v7.0.0/reference/functions/entropy.md
 section: "Docs"
 ---
 
@@ -59,6 +59,6 @@ summarize normalized_entropy=entropy(x, normalize=true)
 
 ## See Also
 
-* [`mode`](https://tenzir.com/docs/reference/functions/mode.md)
-* [`value_counts`](https://tenzir.com/docs/reference/functions/value_counts.md)
+* [`mode`](https://tenzir.com/docs/v7.0.0/reference/functions/mode.md)
+* [`value_counts`](https://tenzir.com/docs/v7.0.0/reference/functions/value_counts.md)
 * [Aggregate event streams](../../guides/analyze/aggregate-event-streams.md)

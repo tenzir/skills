@@ -1,7 +1,7 @@
 ---
 title: "from_nats"
-canonical: https://tenzir.com/docs/reference/operators/from_nats
-source: https://tenzir.com/docs/reference/operators/from_nats.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/from_nats
+source: https://tenzir.com/docs/v7.0.0/reference/operators/from_nats.md
 section: "Docs"
 ---
 
@@ -147,6 +147,6 @@ this = string(message).parse_json()
 
 ## See Also
 
-* [`to_nats`](https://tenzir.com/docs/reference/operators/to_nats.md)
+* [`to_nats`](https://tenzir.com/docs/v7.0.0/reference/operators/to_nats.md)
 * [Read from message brokers](../../guides/collect/read-from-message-brokers.md)
-* [NATS](../../integrations/nats.md)
+* [Nats](https://docs.tenzir.com/integrations/nats)

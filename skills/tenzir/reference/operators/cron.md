@@ -1,7 +1,7 @@
 ---
 title: "cron"
-canonical: https://tenzir.com/docs/reference/operators/cron
-source: https://tenzir.com/docs/reference/operators/cron.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/cron
+source: https://tenzir.com/docs/v7.0.0/reference/operators/cron.md
 section: "Docs"
 ---
 
@@ -68,5 +68,5 @@ publish "api"
 
 ## See Also
 
-* [`each`](https://tenzir.com/docs/reference/operators/each.md)
-* [`every`](https://tenzir.com/docs/reference/operators/every.md)
+* [`each`](https://tenzir.com/docs/v7.0.0/reference/operators/each.md)
+* [`every`](https://tenzir.com/docs/v7.0.0/reference/operators/every.md)

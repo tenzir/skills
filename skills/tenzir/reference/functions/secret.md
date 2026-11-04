@@ -1,7 +1,7 @@
 ---
 title: "secret"
-canonical: https://tenzir.com/docs/reference/functions/secret
-source: https://tenzir.com/docs/reference/functions/secret.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/secret
+source: https://tenzir.com/docs/v7.0.0/reference/functions/secret.md
 section: "Docs"
 ---
 
@@ -61,5 +61,5 @@ Tenzir stores the string `"***"` instead of the secret and emits a warning. Pass
 
 ## See Also
 
-* [`config`](https://tenzir.com/docs/reference/functions/config.md)
-* [`env`](https://tenzir.com/docs/reference/functions/env.md)
+* [`config`](https://tenzir.com/docs/v7.0.0/reference/functions/config.md)
+* [`env`](https://tenzir.com/docs/v7.0.0/reference/functions/env.md)

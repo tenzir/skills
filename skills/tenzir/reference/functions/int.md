@@ -1,7 +1,7 @@
 ---
 title: "int"
-canonical: https://tenzir.com/docs/reference/functions/int
-source: https://tenzir.com/docs/reference/functions/int.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/int
+source: https://tenzir.com/docs/v7.0.0/reference/functions/int.md
 section: "Docs"
 ---
 
@@ -65,10 +65,10 @@ from {x: int("0x42", base=16)}
 
 ## See Also
 
-* [`float`](https://tenzir.com/docs/reference/functions/float.md)
-* [`ip`](https://tenzir.com/docs/reference/functions/ip.md)
-* [`string`](https://tenzir.com/docs/reference/functions/string.md)
-* [`subnet`](https://tenzir.com/docs/reference/functions/subnet.md)
-* [`time`](https://tenzir.com/docs/reference/functions/time.md)
-* [`uint`](https://tenzir.com/docs/reference/functions/uint.md)
+* [`float`](https://tenzir.com/docs/v7.0.0/reference/functions/float.md)
+* [`ip`](https://tenzir.com/docs/v7.0.0/reference/functions/ip.md)
+* [`string`](https://tenzir.com/docs/v7.0.0/reference/functions/string.md)
+* [`subnet`](https://tenzir.com/docs/v7.0.0/reference/functions/subnet.md)
+* [`time`](https://tenzir.com/docs/v7.0.0/reference/functions/time.md)
+* [`uint`](https://tenzir.com/docs/v7.0.0/reference/functions/uint.md)
 * [Transform values](../../guides/shape/transform-values.md)

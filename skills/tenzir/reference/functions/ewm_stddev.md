@@ -1,7 +1,7 @@
 ---
 title: "ewm_stddev"
-canonical: https://tenzir.com/docs/reference/functions/ewm_stddev
-source: https://tenzir.com/docs/reference/functions/ewm_stddev.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/ewm_stddev
+source: https://tenzir.com/docs/v7.0.0/reference/functions/ewm_stddev.md
 section: "Docs"
 ---
 
@@ -19,15 +19,15 @@ ewm_stddev(xs:list, [alpha=number, span=number, com=number,
 
 ## Description
 
-The `ewm_stddev` function returns the square root of [`ewm_variance`](https://tenzir.com/docs/reference/functions/ewm_variance.md) for every position in `xs`:
+The `ewm_stddev` function returns the square root of [`ewm_variance`](https://tenzir.com/docs/v7.0.0/reference/functions/ewm_variance.md) for every position in `xs`:
 
 $$
 s_t = \sqrt{f_t \cdot \frac{\sum_{i=0}^{t} w_i \, (x_i - y_t)^2} {\sum_{i=0}^{t} w_i}}
 $$
 
-where $y_t$ is the exponentially weighted mean, $w_i$ are the decaying weights of [`ewma`](https://tenzir.com/docs/reference/functions/ewma.md), and $f_t$ is the debiasing factor that `bias=true` disables. All options behave exactly as in [`ewm_variance`](https://tenzir.com/docs/reference/functions/ewm_variance.md), including the null handling: with the default `bias=false`, the first numeric element yields null, and with `bias=true` it yields `0.0`.
+where $y_t$ is the exponentially weighted mean, $w_i$ are the decaying weights of [`ewma`](https://tenzir.com/docs/v7.0.0/reference/functions/ewma.md), and $f_t$ is the debiasing factor that `bias=true` disables. All options behave exactly as in [`ewm_variance`](https://tenzir.com/docs/v7.0.0/reference/functions/ewm_variance.md), including the null handling: with the default `bias=false`, the first numeric element yields null, and with `bias=true` it yields `0.0`.
 
-Together with [`ewma`](https://tenzir.com/docs/reference/functions/ewma.md), the function turns a smoothed series into a streaming baseline: the deviation of an observation from the exponentially weighted mean, divided by the exponentially weighted standard deviation, is a z-score with built-in recency. Note that mean and standard deviation are not robust statistics: a large anomaly inflates both and can mask subsequent anomalies. When outliers should not contaminate the baseline, prefer robust alternatives built from [`median`](https://tenzir.com/docs/reference/functions/median.md) and [`mad`](https://tenzir.com/docs/reference/functions/mad.md).
+Together with [`ewma`](https://tenzir.com/docs/v7.0.0/reference/functions/ewma.md), the function turns a smoothed series into a streaming baseline: the deviation of an observation from the exponentially weighted mean, divided by the exponentially weighted standard deviation, is a z-score with built-in recency. Note that mean and standard deviation are not robust statistics: a large anomaly inflates both and can mask subsequent anomalies. When outliers should not contaminate the baseline, prefer robust alternatives built from [`median`](https://tenzir.com/docs/v7.0.0/reference/functions/median.md) and [`mad`](https://tenzir.com/docs/v7.0.0/reference/functions/mad.md).
 
 ### `xs: list`
 
@@ -55,7 +55,7 @@ A list of non-null, non-decreasing timestamps with the same length as `xs`. You 
 
 ### `adjust = bool` (optional)
 
-Controls how the function applies weights, as in [`ewma`](https://tenzir.com/docs/reference/functions/ewma.md). The default is `true`.
+Controls how the function applies weights, as in [`ewma`](https://tenzir.com/docs/v7.0.0/reference/functions/ewma.md). The default is `true`.
 
 ### `bias = bool` (optional)
 
@@ -63,7 +63,7 @@ Controls whether the function debiases the weighted variance before taking the s
 
 ### `ignore_nulls = bool` (optional)
 
-Controls whether null positions contribute decay, as in [`ewma`](https://tenzir.com/docs/reference/functions/ewma.md). The default is `false`.
+Controls whether null positions contribute decay, as in [`ewma`](https://tenzir.com/docs/v7.0.0/reference/functions/ewma.md). The default is `false`.
 
 ## Examples
 
@@ -93,7 +93,7 @@ select score
 
 ## See Also
 
-* [`ewm_variance`](https://tenzir.com/docs/reference/functions/ewm_variance.md)
-* [`ewma`](https://tenzir.com/docs/reference/functions/ewma.md)
-* [`mad`](https://tenzir.com/docs/reference/functions/mad.md)
-* [`stddev`](https://tenzir.com/docs/reference/functions/stddev.md)
+* [`ewm_variance`](https://tenzir.com/docs/v7.0.0/reference/functions/ewm_variance.md)
+* [`ewma`](https://tenzir.com/docs/v7.0.0/reference/functions/ewma.md)
+* [`mad`](https://tenzir.com/docs/v7.0.0/reference/functions/mad.md)
+* [`stddev`](https://tenzir.com/docs/v7.0.0/reference/functions/stddev.md)

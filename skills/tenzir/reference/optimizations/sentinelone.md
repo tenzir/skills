@@ -1,7 +1,7 @@
 ---
 title: "SentinelOne"
-canonical: https://tenzir.com/docs/reference/optimizations/sentinelone
-source: https://tenzir.com/docs/reference/optimizations/sentinelone.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/optimizations/sentinelone
+source: https://tenzir.com/docs/v7.0.0/reference/optimizations/sentinelone.md
 section: "Docs"
 ---
 
@@ -9,7 +9,7 @@ section: "Docs"
 
 > When you omit query, fromsentinelonedatalake uses the operators that follow it to narrow the search window, send safe prefilters, and choose how to retrieve events. You express the result you want in TQL; there is no retrieval mode flag or separate schema-discovery step.
 
-When you omit `query`, [`from_sentinelone_data_lake`](https://tenzir.com/docs/reference/operators/from_sentinelone_data_lake.md) uses the operators that follow it to narrow the search window, send safe prefilters, and choose how to retrieve events. You express the result you want in TQL; there is no retrieval mode flag or separate schema-discovery step.
+When you omit `query`, [`from_sentinelone_data_lake`](https://tenzir.com/docs/v7.0.0/reference/operators/from_sentinelone_data_lake.md) uses the operators that follow it to narrow the search window, send safe prefilters, and choose how to retrieve events. You express the result you want in TQL; there is no retrieval mode flag or separate schema-discovery step.
 
 Our [optimizations overview](../optimizations.md) explains how Tenzir optimizes pipelines in general.
 
@@ -18,11 +18,11 @@ Our [optimizations overview](../optimizations.md) explains how Tenzir optimizes 
 * **TQL mode** applies when you omit `query`. The operator chooses between complete-event log search (LOG) and projected PowerQuery (PQ).
 * **PowerQuery mode** applies when you provide `query`. Your query and its time window stay unchanged. Tenzir applies downstream operators to the native result, without switching to LOG or paginating it. Rewriting a native query could move filtering before its result cap and select different rows.
 
-In TQL mode, at least one supported prefilter, inferred time bound, pushable limit, or explicit `start` or `end` must constrain the request. Otherwise the operator reports an error before contacting SentinelOne. For example, a bare source or a local-only `match_regex` filter followed by [`head`](https://tenzir.com/docs/reference/operators/head.md) cannot supply such a constraint. Add a time window for local-only searches.
+In TQL mode, at least one supported prefilter, inferred time bound, pushable limit, or explicit `start` or `end` must constrain the request. Otherwise the operator reports an error before contacting SentinelOne. For example, a bare source or a local-only `match_regex` filter followed by [`head`](https://tenzir.com/docs/v7.0.0/reference/operators/head.md) cannot supply such a constraint. Add a time window for local-only searches.
 
 ## Complete events or selected columns
 
-A filter does not restrict the output schema. Neither do timestamp bounds nor [`head`](https://tenzir.com/docs/reference/operators/head.md). This exploratory pipeline retrieves complete parsed events, including fields that it never names:
+A filter does not restrict the output schema. Neither do timestamp bounds nor [`head`](https://tenzir.com/docs/v7.0.0/reference/operators/head.md). This exploratory pipeline retrieves complete parsed events, including fields that it never names:
 
 ```tql
 from_sentinelone_data_lake "https://<tenant>.sentinelone.net",
@@ -66,7 +66,7 @@ Both retrieval paths preserve the `raw` setting. It disables string inference, n
 
 ## Aggregations
 
-When a [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) follows the operator and no [`where`](https://tenzir.com/docs/reference/operators/where.md) restricts the events, SentinelOne computes the summary in a PowerQuery `group` stage and returns one row per group instead of every event of the time window. This also applies to [`top`](https://tenzir.com/docs/reference/operators/top.md) and [`rare`](https://tenzir.com/docs/reference/operators/rare.md), which count with `summarize`. For example, the pipeline
+When a [`summarize`](https://tenzir.com/docs/v7.0.0/reference/operators/summarize.md) follows the operator and no [`where`](https://tenzir.com/docs/v7.0.0/reference/operators/where.md) restricts the events, SentinelOne computes the summary in a PowerQuery `group` stage and returns one row per group instead of every event of the time window. This also applies to [`top`](https://tenzir.com/docs/v7.0.0/reference/operators/top.md) and [`rare`](https://tenzir.com/docs/v7.0.0/reference/operators/rare.md), which count with `summarize`. For example, the pipeline
 
 ```tql
 from_sentinelone_data_lake "https://<tenant>.sentinelone.net",
@@ -86,14 +86,14 @@ Tenzir then arranges the result columns into the fields of the summary. The last
 * Group keys on fields, except `timestamp`.
 * `count()`.
 
-The summary may also follow [`select`](https://tenzir.com/docs/reference/operators/select.md), [`drop`](https://tenzir.com/docs/reference/operators/drop.md), [`set`](https://tenzir.com/docs/reference/operators/set.md), and assignments that keep or copy the fields that it reads, as [Aggregations in the source](../optimizations.md#aggregations-in-the-source) describes. SentinelOne then reads the original fields, and the result keeps the new names. For example, `select kind=event.type` followed by `summarize kind, n=count()` groups by `event.type` and returns the field `kind`. A computed value for a field that the summary reads, such as `kind = event.type.to_lower()` before `summarize kind`, keeps the summary in Tenzir.
+The summary may also follow [`select`](https://tenzir.com/docs/v7.0.0/reference/operators/select.md), [`drop`](https://tenzir.com/docs/v7.0.0/reference/operators/drop.md), [`set`](https://tenzir.com/docs/v7.0.0/reference/operators/set.md), and assignments that keep or copy the fields that it reads, as [Aggregations in the source](../optimizations.md#aggregations-in-the-source) describes. SentinelOne then reads the original fields, and the result keeps the new names. For example, `select kind=event.type` followed by `summarize kind, n=count()` groups by `event.type` and returns the field `kind`. A computed value for a field that the summary reads, such as `kind = event.type.to_lower()` before `summarize kind`, keeps the summary in Tenzir.
 
 Every other summary runs in Tenzir, which reads the events as described in [aggregation input columns](sentinelone.md#aggregation-input-columns):
 
 * A summary with another function, including `count(x)`, `min`, and `max`. A field that is missing in SentinelOne can be a record in Tenzir, whose fields exist, and the numeric result types of PowerQuery are unverified.
-* A summary after a [`where`](https://tenzir.com/docs/reference/operators/where.md), because [filters are prefilters](sentinelone.md#filters-are-prefilters) that may let extra events through. This includes a [`where`](https://tenzir.com/docs/reference/operators/where.md) on `timestamp`: use `start` and `end` to choose the window instead.
+* A summary after a [`where`](https://tenzir.com/docs/v7.0.0/reference/operators/where.md), because [filters are prefilters](sentinelone.md#filters-are-prefilters) that may let extra events through. This includes a [`where`](https://tenzir.com/docs/v7.0.0/reference/operators/where.md) on `timestamp`: use `start` and `end` to choose the window instead.
 * A summary of an explicit `query`, whose result stays opaque.
-* A summary behind an operator that computes a field that the summary reads or that changes the events, such as [`head`](https://tenzir.com/docs/reference/operators/head.md).
+* A summary behind an operator that computes a field that the summary reads or that changes the events, such as [`head`](https://tenzir.com/docs/v7.0.0/reference/operators/head.md).
 
 PowerQuery groups events without the group key as `null`. For a single group key, Tenzir then reads just these events, with the initial filter `!(event.type = *)` for the example above, and accepts the result only if they add up to the `null` group and Tenzir reads their key as `null` too. Tenzir sees a record instead where an event has fields below the key, such as `endpoint.name` for the key `endpoint`, which PowerQuery has no field for.
 
@@ -105,11 +105,11 @@ Since PowerQuery does not group exactly like Tenzir, Tenzir checks every result 
 * Type inference makes two group keys equal, such as the text `"true"` and the boolean `true`, which PowerQuery groups apart. With `raw=true`, they stay apart in Tenzir as well.
 * SentinelOne rejects the query or reports omitted events.
 
-PowerQuery groups text by its characters, so `Critical` and `CRITICAL` form two groups, as in Tenzir. Without group keys, the summary has one row, also for an empty window. The groups arrive in the order in which SentinelOne returns them. Use [`sort`](https://tenzir.com/docs/reference/operators/sort.md) when you need a particular order. Operators after the summary, such as [`sort`](https://tenzir.com/docs/reference/operators/sort.md) and [`head`](https://tenzir.com/docs/reference/operators/head.md), run in Tenzir.
+PowerQuery groups text by its characters, so `Critical` and `CRITICAL` form two groups, as in Tenzir. Without group keys, the summary has one row, also for an empty window. The groups arrive in the order in which SentinelOne returns them. Use [`sort`](https://tenzir.com/docs/v7.0.0/reference/operators/sort.md) when you need a particular order. Operators after the summary, such as [`sort`](https://tenzir.com/docs/v7.0.0/reference/operators/sort.md) and [`head`](https://tenzir.com/docs/v7.0.0/reference/operators/head.md), run in Tenzir.
 
 ## Aggregation input columns
 
-When Tenzir computes the summary, [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) requests a finite set of input fields without an explicit [`select`](https://tenzir.com/docs/reference/operators/select.md):
+When Tenzir computes the summary, [`summarize`](https://tenzir.com/docs/v7.0.0/reference/operators/summarize.md) requests a finite set of input fields without an explicit [`select`](https://tenzir.com/docs/v7.0.0/reference/operators/select.md):
 
 ```tql
 from_sentinelone_data_lake "https://<tenant>.sentinelone.net",
@@ -127,13 +127,13 @@ The initial PQ request is:
 | filter ((dataSource.name) == ("SentinelOne")) | columns timestamp, dataSource.name, event.type
 ```
 
-The count and grouping run in Tenzir. The query contains no `limit` stage: [`head`](https://tenzir.com/docs/reference/operators/head.md) limits summary rows, not contributing events.
+The count and grouping run in Tenzir. The query contains no `limit` stage: [`head`](https://tenzir.com/docs/v7.0.0/reference/operators/head.md) limits summary rows, not contributing events.
 
-The [result-cap fallback and LOG continuation](sentinelone.md#limits-and-the-result-cap) still retrieve the complete input, even when you request only a few summary rows. Whole-event or dynamic aggregate arguments require complete events instead. Our [shared aggregation projection rules](../optimizations.md#aggregation-input-projections) describe the other dependencies and barriers; [`top`](https://tenzir.com/docs/reference/operators/top.md) and [`rare`](https://tenzir.com/docs/reference/operators/rare.md) inherit these rules. Explicit native `query` requests remain unchanged.
+The [result-cap fallback and LOG continuation](sentinelone.md#limits-and-the-result-cap) still retrieve the complete input, even when you request only a few summary rows. Whole-event or dynamic aggregate arguments require complete events instead. Our [shared aggregation projection rules](../optimizations.md#aggregation-input-projections) describe the other dependencies and barriers; [`top`](https://tenzir.com/docs/v7.0.0/reference/operators/top.md) and [`rare`](https://tenzir.com/docs/v7.0.0/reference/operators/rare.md) inherit these rules. Explicit native `query` requests remain unchanged.
 
 ## Filters are prefilters
 
-Remote predicates must retain every possible TQL match, but may return extra candidates. For example, SentinelOne may coerce the string `"42"` to match the number `42`. Tenzir evaluates every original [`where`](https://tenzir.com/docs/reference/operators/where.md) predicate locally, including the predicates sent remotely.
+Remote predicates must retain every possible TQL match, but may return extra candidates. For example, SentinelOne may coerce the string `"42"` to match the number `42`. Tenzir evaluates every original [`where`](https://tenzir.com/docs/v7.0.0/reference/operators/where.md) predicate locally, including the predicates sent remotely.
 
 A predicate splits at `and`: supported parts run remotely, and the rest run only in Tenzir. An `or` runs remotely only if all its operands translate safely. For example, `where (severity > 3 or msg.match_regex("x")) and source == "fw"` sends `((source) == ("fw"))` as a LOG initial-search filter or a PQ `filter` stage. Unsupported predicates never cause their required fields to disappear.
 
@@ -180,7 +180,7 @@ Inferred bounds round outward to whole milliseconds and never widen explicit `st
 
 ## Limits and the result cap
 
-A [`head`](https://tenzir.com/docs/reference/operators/head.md) counts events **after local filtering**. LOG continues fetching candidate pages until the limit is satisfied or the search is exhausted; a page with no local matches does not end the read.
+A [`head`](https://tenzir.com/docs/v7.0.0/reference/operators/head.md) counts events **after local filtering**. LOG continues fetching candidate pages until the limit is satisfied or the search is exhausted; a page with no local matches does not end the read.
 
 LOG requests at most 1,000 candidates per page. A full page continues by launching a new query with the last match’s cursor in `log.cursor`. Continuation includes the boundary match: the operator verifies and removes that one duplicate. It does not advance by timestamp, so distinct events with identical timestamps are retained. A short page ends the read; `estimatedMatchCount` is not used as an exact count.
 

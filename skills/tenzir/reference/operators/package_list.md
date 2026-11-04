@@ -1,7 +1,7 @@
 ---
 title: "package_list"
-canonical: https://tenzir.com/docs/reference/operators/package_list
-source: https://tenzir.com/docs/reference/operators/package_list.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/package_list
+source: https://tenzir.com/docs/v7.0.0/reference/operators/package_list.md
 section: "Docs"
 ---
 
@@ -97,8 +97,8 @@ package_list
 
 ## See Also
 
-* [`package_add`](https://tenzir.com/docs/reference/operators/package_add.md)
-* [`package_remove`](https://tenzir.com/docs/reference/operators/package_remove.md)
-* [`pipeline_list`](https://tenzir.com/docs/reference/operators/pipeline_list.md)
+* [`package_add`](https://tenzir.com/docs/v7.0.0/reference/operators/package_add.md)
+* [`package_remove`](https://tenzir.com/docs/v7.0.0/reference/operators/package_remove.md)
+* [`pipeline_list`](https://tenzir.com/docs/v7.0.0/reference/operators/pipeline_list.md)
 * [Install a package](../../guides/packages/install-a-package.md)
 * [Onboard a data source](../../tutorials/onboard-a-data-source.md)

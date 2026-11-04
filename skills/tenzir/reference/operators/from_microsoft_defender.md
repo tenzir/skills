@@ -1,7 +1,7 @@
 ---
 title: "from_microsoft_defender"
-canonical: https://tenzir.com/docs/reference/operators/from_microsoft_defender
-source: https://tenzir.com/docs/reference/operators/from_microsoft_defender.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/from_microsoft_defender
+source: https://tenzir.com/docs/v7.0.0/reference/operators/from_microsoft_defender.md
 section: "Docs"
 ---
 
@@ -21,7 +21,7 @@ The `from_microsoft_defender` operator is a finite source that sends a `POST` re
 
 The operator validates the entire response before emitting any rows. Empty results succeed without emitting events. Invalid schemas, incompatible values, service errors, and unexpected envelope fields (including partial-result or continuation metadata) fail the pipeline. Diagnostics omit response bodies and result values. HTTP failures and invalid responses include a request ID when the service provides a safe identifier. Query errors point to `query`, while authorization errors point to `azure_auth` and provide status-specific setup hints.
 
-The operator uses the same Entra client-credentials token provider, TLS settings, and bounded HTTP retry policy as [`from_microsoft_graph`](https://tenzir.com/docs/reference/operators/from_microsoft_graph.md). Transient failures and throttling honor `Retry-After`; exhausted retries fail the pipeline. The operator checks token freshness before each attempt and refreshes it when needed, including after a retry delay. Retries preserve the original query and explicit time range. Permanent client and authorization failures aren’t retried.
+The operator uses the same Entra client-credentials token provider, TLS settings, and bounded HTTP retry policy as [`from_microsoft_graph`](https://tenzir.com/docs/v7.0.0/reference/operators/from_microsoft_graph.md). Transient failures and throttling honor `Retry-After`; exhausted retries fail the pipeline. The operator checks token freshness before each attempt and refreshes it when needed, including after a retry delay. Retries preserve the original query and explicit time range. Permanent client and authorization failures aren’t retried.
 
 There is no pagination, automatic time-window splitting, persistent cursor, or deduplication guarantee. Restarting the pipeline reruns the query. The Microsoft Graph v1.0 [advanced-hunting quotas](https://learn.microsoft.com/en-us/graph/api/resources/security-api-overview?view=graph-rest-1.0#quotas-and-resource-allocation) limit results to 100,000 rows and 50 MB per query. These limits are documented for Microsoft Graph, not inferred from the older Defender hunting API or the interactive portal. The [`huntingQueryResults` response type](https://learn.microsoft.com/en-us/graph/api/resources/security-huntingqueryresults?view=graph-rest-1.0) doesn’t document a truncation indicator. A successful response doesn’t guarantee extraction completeness. Bound queries with appropriate time predicates and projections, and check your tenant’s service quotas and data availability.
 
@@ -76,15 +76,15 @@ When you omit both arguments, the request omits `Timespan`. The Graph service cu
 
 ### `tls = bool | record` (optional)
 
-TLS configuration, with the same behavior as [`from_microsoft_graph`](https://tenzir.com/docs/reference/operators/from_microsoft_graph.md#tls--bool--record-optional). HTTPS and certificate verification are enabled by default.
+TLS configuration, with the same behavior as [`from_microsoft_graph`](https://tenzir.com/docs/v7.0.0/reference/operators/from_microsoft_graph.md#tls--bool--record-optional). HTTPS and certificate verification are enabled by default.
 
 ## Optimizations
 
-The operator appends KQL `where`, `project`, and `take` stages to your query for the [`where`](https://tenzir.com/docs/reference/operators/where.md), [`select`](https://tenzir.com/docs/reference/operators/select.md), and [`head`](https://tenzir.com/docs/reference/operators/head.md) operators that follow it, so that Defender returns fewer rows and columns. The stages apply to the rows that your query returns, and your query text stays as is:
+The operator appends KQL `where`, `project`, and `take` stages to your query for the [`where`](https://tenzir.com/docs/v7.0.0/reference/operators/where.md), [`select`](https://tenzir.com/docs/v7.0.0/reference/operators/select.md), and [`head`](https://tenzir.com/docs/v7.0.0/reference/operators/head.md) operators that follow it, so that Defender returns fewer rows and columns. The stages apply to the rows that your query returns, and your query text stays as is:
 
 * **Filters** become prefilters that keep every row that could match. Tenzir still evaluates every predicate locally, so the result stays the same. Supported predicates include top-level comparisons, string hunts with `starts_with`, `ends_with`, and recursive `search`, and ASCII-literal case-insensitive matching. Equality and list membership after `to_lower()` or `to_upper()`, plus IP equality and subnet membership with `ip()`, also produce prefilters. Conservative guards retain Unicode, structured values, and address spellings that need local evaluation. Use `ip()` to compare a string field with an IP literal; equality doesn’t implicitly parse strings. Timestamp comparisons with `==`, `<`, `<=`, `>`, and `>=` also produce [prefilters](../optimizations/kql.md#timestamp-intervals), with widened bounds to preserve decoding precision. They apply to query-output timestamps, including renamed, computed, or aggregated columns, without changing the request’s `start` and `end` window. Negation, regular expressions, timestamp list membership, nested field references, and unsupported function calls stay local. A `take 100000` stage precedes the prefilters to preserve the documented Microsoft Graph result cap, so that they never reveal rows beyond it.
 * **Projections** keep the fields that the pipeline reads, including those of local predicates. A field that your query doesn’t return becomes `null`.
-* **Limits** become a `take` stage only if no [`where`](https://tenzir.com/docs/reference/operators/where.md) precedes the [`head`](https://tenzir.com/docs/reference/operators/head.md).
+* **Limits** become a `take` stage only if no [`where`](https://tenzir.com/docs/v7.0.0/reference/operators/where.md) precedes the [`head`](https://tenzir.com/docs/v7.0.0/reference/operators/head.md).
 
 The operator never narrows the `start` and `end` window, and sends queries that use `render`, `fork`, `facet`, or a `set` statement, or that end in `;` or `|`, unchanged. The page on [KQL optimizations](../optimizations/kql.md) describes the rules in detail.
 
@@ -122,4 +122,4 @@ Microsoft also describes [advanced hunting with connected Sentinel data](https:/
 
 ## See also
 
-[Microsoft Defender](../../integrations/microsoft/defender.md)
+[Defender](https://docs.tenzir.com/integrations/microsoft/defender)

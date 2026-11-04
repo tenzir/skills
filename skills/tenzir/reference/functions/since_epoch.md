@@ -1,7 +1,7 @@
 ---
 title: "since_epoch"
-canonical: https://tenzir.com/docs/reference/functions/since_epoch
-source: https://tenzir.com/docs/reference/functions/since_epoch.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/since_epoch
+source: https://tenzir.com/docs/v7.0.0/reference/functions/since_epoch.md
 section: "Docs"
 ---
 
@@ -33,6 +33,6 @@ from { x: since_epoch(2021-02-24) }
 
 ## See Also
 
-* [`from_epoch`](https://tenzir.com/docs/reference/functions/from_epoch.md)
-* [`now`](https://tenzir.com/docs/reference/functions/now.md)
+* [`from_epoch`](https://tenzir.com/docs/v7.0.0/reference/functions/from_epoch.md)
+* [`now`](https://tenzir.com/docs/v7.0.0/reference/functions/now.md)
 * [Calculate with time](../../guides/shape/calculate-with-time.md)

@@ -1,7 +1,7 @@
 ---
 title: "Run tests"
-canonical: https://tenzir.com/docs/guides/testing/run-tests
-source: https://tenzir.com/docs/guides/testing/run-tests.md
+canonical: https://tenzir.com/docs/v7.0.0/guides/testing/run-tests
+source: https://tenzir.com/docs/v7.0.0/guides/testing/run-tests.md
 section: "Docs"
 ---
 
@@ -9,7 +9,7 @@ section: "Docs"
 
 > This guide shows you how to run existing integration tests with the tenzir-test framework. You’ll learn how to execute the test suite, control output verbosity, select specific tests, handle flaky scenarios, and run multi-project setups.
 
-This guide shows you how to run existing integration tests with the [`tenzir-test`](https://tenzir.com/docs/reference/test-framework.md) framework. You’ll learn how to execute the test suite, control output verbosity, select specific tests, handle flaky scenarios, and run multi-project setups.
+This guide shows you how to run existing integration tests with the [`tenzir-test`](https://tenzir.com/docs/reference/test-framework) framework. You’ll learn how to execute the test suite, control output verbosity, select specific tests, handle flaky scenarios, and run multi-project setups.
 
 When you’re ready to create your own tests, see the [write tests](write-tests.md) guide.
 
@@ -223,4 +223,4 @@ Upload the report even when the test step fails. For example, after provisioning
 
 Your CI wrapper can use the report to publish test summaries and source-file annotations. The harness does not create those automatically.
 
-If tests run inside a build sandbox that cannot export a report file, use `--report-json -` instead. This emits tagged JSON records alongside the normal log, so the wrapper can retain partial results as tests finish. Treat a missing completion record as an incomplete run, not a success. The [structured report reference](../../reference/test-framework.md#structured-reports) describes the schema, stream protocol, path validation, and diagnostic limits.
+If tests run inside a build sandbox that cannot export a report file, use `--report-json -` instead. This emits tagged JSON records alongside the normal log, so the wrapper can retain partial results as tests finish. Treat a missing completion record as an incomplete run, not a success. The [structured report reference](https://docs.tenzir.com/reference/test-framework#structured-reports) describes the schema, stream protocol, path validation, and diagnostic limits.

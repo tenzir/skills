@@ -1,7 +1,7 @@
 ---
 title: "slice"
-canonical: https://tenzir.com/docs/reference/operators/slice
-source: https://tenzir.com/docs/reference/operators/slice.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/slice
+source: https://tenzir.com/docs/v7.0.0/reference/operators/slice.md
 section: "Docs"
 ---
 
@@ -81,6 +81,6 @@ slice end=-5, stride=-1
 
 ## See Also
 
-* [`head`](https://tenzir.com/docs/reference/operators/head.md)
-* [`tail`](https://tenzir.com/docs/reference/operators/tail.md)
+* [`head`](https://tenzir.com/docs/v7.0.0/reference/operators/head.md)
+* [`tail`](https://tenzir.com/docs/v7.0.0/reference/operators/tail.md)
 * [Slice and sample data](../../guides/optimize/slice-and-sample-data.md)

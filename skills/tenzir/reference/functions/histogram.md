@@ -1,7 +1,7 @@
 ---
 title: "histogram"
-canonical: https://tenzir.com/docs/reference/functions/histogram
-source: https://tenzir.com/docs/reference/functions/histogram.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/histogram
+source: https://tenzir.com/docs/v7.0.0/reference/functions/histogram.md
 section: "Docs"
 ---
 
@@ -17,7 +17,7 @@ histogram(xs:list, bins=uint, width=number, [start=number]) -> record
 
 ## Description
 
-The `histogram` function builds a finite, fixed-width numeric [histogram](https://en.wikipedia.org/wiki/Histogram) over all values in `xs`. The result is an inspectable model record that you can inspect and query with [`histogram_bucket`](https://tenzir.com/docs/reference/functions/histogram_bucket.md), or compare with [`model_divergence`](https://tenzir.com/docs/reference/functions/model_divergence.md).
+The `histogram` function builds a finite, fixed-width numeric [histogram](https://en.wikipedia.org/wiki/Histogram) over all values in `xs`. The result is an inspectable model record that you can inspect and query with [`histogram_bucket`](https://tenzir.com/docs/v7.0.0/reference/functions/histogram_bucket.md), or compare with [`model_divergence`](https://tenzir.com/docs/v7.0.0/reference/functions/model_divergence.md).
 
 The function accepts `int`, `uint`, and `float` values and converts them to `float` before bucketing. Null values increment `null_count`, and NaN and infinities increment `non_finite_count`; neither contributes to `count`, `min`, `max`, or any bucket. Non-null values of other types do not increment `input_count` or any other counter and produce a warning. Durations and timestamps are not supported yet; convert them to numbers first, e.g., `x / 1s`.
 
@@ -144,8 +144,8 @@ select user, bytes, score
 
 ## See Also
 
-* [`histogram_bucket`](https://tenzir.com/docs/reference/functions/histogram_bucket.md)
-* [`model_divergence`](https://tenzir.com/docs/reference/functions/model_divergence.md)
-* [`model_merge`](https://tenzir.com/docs/reference/functions/model_merge.md)
-* [`value_counts`](https://tenzir.com/docs/reference/functions/value_counts.md)
+* [`histogram_bucket`](https://tenzir.com/docs/v7.0.0/reference/functions/histogram_bucket.md)
+* [`model_divergence`](https://tenzir.com/docs/v7.0.0/reference/functions/model_divergence.md)
+* [`model_merge`](https://tenzir.com/docs/v7.0.0/reference/functions/model_merge.md)
+* [`value_counts`](https://tenzir.com/docs/v7.0.0/reference/functions/value_counts.md)
 * [Aggregate event streams](../../guides/analyze/aggregate-event-streams.md)

@@ -1,7 +1,7 @@
 ---
 title: "Inspect a node"
-canonical: https://tenzir.com/docs/guides/observability/inspect-a-node
-source: https://tenzir.com/docs/guides/observability/inspect-a-node.md
+canonical: https://tenzir.com/docs/v7.0.0/guides/observability/inspect-a-node
+source: https://tenzir.com/docs/v7.0.0/guides/observability/inspect-a-node.md
 section: "Docs"
 ---
 
@@ -85,9 +85,9 @@ If you don’t have CLI access yet, two other places show the version:
 
 * **Platform UI**: the node version appears on the node details page at [app.tenzir.com](https://app.tenzir.com).
 
-Once you have the version, check the [changelog](https://tenzir.com/changelog.md) to see what changed between the previous version and the current one. Unexpected behavior after an upgrade often traces back to a breaking change or a behavioral adjustment listed there.
+Once you have the version, check the [changelog](https://tenzir.com/changelog) to see what changed between the previous version and the current one. Unexpected behavior after an upgrade often traces back to a breaking change or a behavioral adjustment listed there.
 
-Configuration changes are the other usual suspect. The [`config`](https://tenzir.com/docs/reference/functions/config.md) function returns the configuration the process actually uses, merged from `tenzir.yaml` files, plugin configuration files, environment variables, and command-line options, so you can check whether a setting really has the value you expect:
+Configuration changes are the other usual suspect. The [`config`](https://tenzir.com/docs/v7.0.0/reference/functions/config.md) function returns the configuration the process actually uses, merged from `tenzir.yaml` files, plugin configuration files, environment variables, and command-line options, so you can check whether a setting really has the value you expect:
 
 ```tql
 from config()
@@ -228,7 +228,7 @@ where severity == "error"
 select timestamp, pipeline_id, pipeline_name, message
 ```
 
-Each diagnostic carries the error `message` along with the `pipeline_id` and `pipeline_name` of the pipeline that triggered it. Use the ID to find the pipeline in the Explorer or correlate it with metrics. On the command line, [`pipeline_list`](https://tenzir.com/docs/reference/operators/pipeline_list.md) resolves the ID to the pipeline’s state and definition:
+Each diagnostic carries the error `message` along with the `pipeline_id` and `pipeline_name` of the pipeline that triggered it. Use the ID to find the pipeline in the Explorer or correlate it with metrics. On the command line, [`pipeline_list`](https://tenzir.com/docs/v7.0.0/reference/operators/pipeline_list.md) resolves the ID to the pipeline’s state and definition:
 
 ```tql
 pipeline_list
@@ -339,7 +339,7 @@ A good reproducer runs without external dependencies, shows the unexpected behav
 
 ## See also
 
-* [`config`](https://tenzir.com/docs/reference/functions/config.md)
+* [`config`](https://tenzir.com/docs/v7.0.0/reference/functions/config.md)
 * [Run pipelines](../basic-usage/run-pipelines.md)
 * [Configure a node](../node-setup/configure-a-node.md)
 * [Tune performance](../node-setup/tune-performance.md)

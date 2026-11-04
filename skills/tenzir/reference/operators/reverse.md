@@ -1,7 +1,7 @@
 ---
 title: "reverse"
-canonical: https://tenzir.com/docs/reference/operators/reverse
-source: https://tenzir.com/docs/reference/operators/reverse.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/reverse
+source: https://tenzir.com/docs/v7.0.0/reference/operators/reverse.md
 section: "Docs"
 ---
 
@@ -17,7 +17,7 @@ reverse
 
 ## Description
 
-`reverse` is a shorthand notation for [`slice stride=-1`](https://tenzir.com/docs/reference/operators/slice.md).
+`reverse` is a shorthand notation for [`slice stride=-1`](https://tenzir.com/docs/v7.0.0/reference/operators/slice.md).
 
 Potentially High Memory Usage
 
@@ -40,5 +40,5 @@ reverse
 
 ## See Also
 
-* [`sort`](https://tenzir.com/docs/reference/operators/sort.md)
+* [`sort`](https://tenzir.com/docs/v7.0.0/reference/operators/sort.md)
 * [Slice and sample data](../../guides/optimize/slice-and-sample-data.md)

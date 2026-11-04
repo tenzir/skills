@@ -1,7 +1,7 @@
 ---
 title: "Create a new pipeline"
-canonical: https://tenzir.com/docs/reference/api/node/pipelines/create-pipeline
-source: https://tenzir.com/docs/reference/api/node/pipelines/create-pipeline.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/api/node/pipelines/create-pipeline
+source: https://tenzir.com/docs/v7.0.0/reference/api/node/pipelines/create-pipeline.md
 section: "Docs"
 ---
 

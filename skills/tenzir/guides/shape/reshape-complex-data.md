@@ -1,7 +1,7 @@
 ---
 title: "Reshape complex data"
-canonical: https://tenzir.com/docs/guides/shape/reshape-complex-data
-source: https://tenzir.com/docs/guides/shape/reshape-complex-data.md
+canonical: https://tenzir.com/docs/v7.0.0/guides/shape/reshape-complex-data
+source: https://tenzir.com/docs/v7.0.0/guides/shape/reshape-complex-data.md
 section: "Docs"
 ---
 
@@ -88,7 +88,7 @@ flattened = {
 
 ## Unflatten data
 
-Reconstruct hierarchical structures from flattened data using [`unflatten`](https://tenzir.com/docs/reference/functions/unflatten.md):
+Reconstruct hierarchical structures from flattened data using [`unflatten`](https://tenzir.com/docs/v7.0.0/reference/functions/unflatten.md):
 
 ### Basic unflattening
 
@@ -232,7 +232,7 @@ long_format = [
 
 ### Convert wide fields to long format without naming them
 
-The previous example lists every metric by hand. When the metrics differ between events, or new ones can appear, use [`entries`](https://tenzir.com/docs/reference/functions/entries.md) to turn each field into a `key` and `value` record. Then use [`where`](https://tenzir.com/docs/reference/functions/where.md) to skip the fields that are not metrics and [`map`](https://tenzir.com/docs/reference/functions/map.md) to build the long format:
+The previous example lists every metric by hand. When the metrics differ between events, or new ones can appear, use [`entries`](https://tenzir.com/docs/v7.0.0/reference/functions/entries.md) to turn each field into a `key` and `value` record. Then use [`where`](https://tenzir.com/docs/v7.0.0/reference/functions/where.md) to skip the fields that are not metrics and [`map`](https://tenzir.com/docs/v7.0.0/reference/functions/map.md) to build the long format:
 
 ```tql
 from {
@@ -278,11 +278,11 @@ long_format = metrics.entries().where(e => e.key != "timestamp").map(e => {
 }
 ```
 
-The metric names come from the field names, so new metrics appear in the output without changing the pipeline. Follow this with [`unroll`](https://tenzir.com/docs/reference/operators/unroll.md) to emit one event per metric, as shown in [Transform to event stream](reshape-complex-data.md#transform-to-event-stream).
+The metric names come from the field names, so new metrics appear in the output without changing the pipeline. Follow this with [`unroll`](https://tenzir.com/docs/v7.0.0/reference/operators/unroll.md) to emit one event per metric, as shown in [Transform to event stream](reshape-complex-data.md#transform-to-event-stream).
 
 ### Convert a metric list to a wide record
 
-Use [`map`](https://tenzir.com/docs/reference/functions/map.md) to turn each metric into a key/value pair, then use [`collect_record`](https://tenzir.com/docs/reference/functions/collect_record.md) to make each metric name a field. This reverses the wide-to-long transformation within one event, without hardcoding the metric names.
+Use [`map`](https://tenzir.com/docs/v7.0.0/reference/functions/map.md) to turn each metric into a key/value pair, then use [`collect_record`](https://tenzir.com/docs/v7.0.0/reference/functions/collect_record.md) to make each metric name a field. This reverses the wide-to-long transformation within one event, without hardcoding the metric names.
 
 ```tql
 from {
@@ -374,7 +374,7 @@ items = [
 }
 ```
 
-When the number of items varies, select the fields by name with [`select_matching`](https://tenzir.com/docs/reference/functions/select_matching.md) and take their values with [`values`](https://tenzir.com/docs/reference/functions/values.md). The items keep their field order, and a response without items produces an empty list:
+When the number of items varies, select the fields by name with [`select_matching`](https://tenzir.com/docs/v7.0.0/reference/functions/select_matching.md) and take their values with [`values`](https://tenzir.com/docs/v7.0.0/reference/functions/values.md). The items keep their field order, and a response without items produces an empty list:
 
 ```tql
 from {
@@ -460,7 +460,7 @@ Combine data split across multiple records.
 
 ### Merge records with spread operator
 
-Prefer record spread over [`merge`](https://tenzir.com/docs/reference/functions/merge.md) when you assemble data from fragments. Spread keeps the resulting record visible and scales naturally beyond two inputs.
+Prefer record spread over [`merge`](https://tenzir.com/docs/v7.0.0/reference/functions/merge.md) when you assemble data from fragments. Spread keeps the resulting record visible and scales naturally beyond two inputs.
 
 ```tql
 from {
@@ -504,7 +504,7 @@ Optional fragments compose the same way: use `...user.profile?` when a fragment 
 
 ### Merge a list of record fragments
 
-When the fragments already form a list, use [`collect_record`](https://tenzir.com/docs/reference/functions/collect_record.md) instead of spreading each element individually. This works even when the number of fragments varies between events.
+When the fragments already form a list, use [`collect_record`](https://tenzir.com/docs/v7.0.0/reference/functions/collect_record.md) instead of spreading each element individually. This works even when the number of fragments varies between events.
 
 ```tql
 from {
@@ -602,7 +602,7 @@ select normalized = events.map(e => {
 
 ### Unroll arrays to individual events
 
-Some data sources aggregate multiple events into a single record. Use [`unroll`](https://tenzir.com/docs/reference/operators/unroll.md) to expand these into individual events:
+Some data sources aggregate multiple events into a single record. Use [`unroll`](https://tenzir.com/docs/v7.0.0/reference/operators/unroll.md) to expand these into individual events:
 
 Expanding aggregated message types
 

@@ -1,7 +1,7 @@
 ---
 title: "print_ssv"
-canonical: https://tenzir.com/docs/reference/functions/print_ssv
-source: https://tenzir.com/docs/reference/functions/print_ssv.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/print_ssv
+source: https://tenzir.com/docs/v7.0.0/reference/functions/print_ssv.md
 section: "Docs"
 ---
 
@@ -55,5 +55,5 @@ output = this.print_ssv()
 
 ## See Also
 
-* [`write_ssv`](https://tenzir.com/docs/reference/operators/write_ssv.md)
-* [`parse_ssv`](https://tenzir.com/docs/reference/functions/parse_ssv.md)
+* [`write_ssv`](https://tenzir.com/docs/v7.0.0/reference/operators/write_ssv.md)
+* [`parse_ssv`](https://tenzir.com/docs/v7.0.0/reference/functions/parse_ssv.md)

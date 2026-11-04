@@ -1,7 +1,7 @@
 ---
 title: "network"
-canonical: https://tenzir.com/docs/reference/functions/network
-source: https://tenzir.com/docs/reference/functions/network.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/network
+source: https://tenzir.com/docs/v7.0.0/reference/functions/network.md
 section: "Docs"
 ---
 

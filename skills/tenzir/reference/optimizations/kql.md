@@ -1,7 +1,7 @@
 ---
 title: "KQL"
-canonical: https://tenzir.com/docs/reference/optimizations/kql
-source: https://tenzir.com/docs/reference/optimizations/kql.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/optimizations/kql
+source: https://tenzir.com/docs/v7.0.0/reference/optimizations/kql.md
 section: "Docs"
 ---
 
@@ -9,16 +9,16 @@ section: "Docs"
 
 > The KQL sources frommicrosoftdefender and fromazureloganalytics use the where, select, and head operators that follow them to append stages to your Kusto Query Language (KQL) query, so that the service returns fewer rows and columns. This page describes how the query changes, which filters reach the service, and what stays in Tenzir. Our optimizations overview explains how Tenzir optimizes pipelines in general.
 
-The KQL sources [`from_microsoft_defender`](https://tenzir.com/docs/reference/operators/from_microsoft_defender.md) and [`from_azure_log_analytics`](https://tenzir.com/docs/reference/operators/from_azure_log_analytics.md) use the [`where`](https://tenzir.com/docs/reference/operators/where.md), [`select`](https://tenzir.com/docs/reference/operators/select.md), and [`head`](https://tenzir.com/docs/reference/operators/head.md) operators that follow them to append stages to your Kusto Query Language (KQL) query, so that the service returns fewer rows and columns. This page describes how the query changes, which filters reach the service, and what stays in Tenzir. Our [optimizations overview](../optimizations.md) explains how Tenzir optimizes pipelines in general.
+The KQL sources [`from_microsoft_defender`](https://tenzir.com/docs/v7.0.0/reference/operators/from_microsoft_defender.md) and [`from_azure_log_analytics`](https://tenzir.com/docs/v7.0.0/reference/operators/from_azure_log_analytics.md) use the [`where`](https://tenzir.com/docs/v7.0.0/reference/operators/where.md), [`select`](https://tenzir.com/docs/v7.0.0/reference/operators/select.md), and [`head`](https://tenzir.com/docs/v7.0.0/reference/operators/head.md) operators that follow them to append stages to your Kusto Query Language (KQL) query, so that the service returns fewer rows and columns. This page describes how the query changes, which filters reach the service, and what stays in Tenzir. Our [optimizations overview](../optimizations.md) explains how Tenzir optimizes pipelines in general.
 
 ## How the query changes
 
 The operator sends your query as you wrote it and appends up to four stages, each on a new line, in this order:
 
 1. For Defender, a `take` stage with its [result cap](kql.md#result-cap), if a `where` stage follows.
-2. A `where` stage with the [prefilters](kql.md#filters-are-prefilters) of the [`where`](https://tenzir.com/docs/reference/operators/where.md) operators that follow the source.
+2. A `where` stage with the [prefilters](kql.md#filters-are-prefilters) of the [`where`](https://tenzir.com/docs/v7.0.0/reference/operators/where.md) operators that follow the source.
 3. A `project` stage with the top-level fields that the pipeline reads.
-4. A `take` stage with the limit of a [`head`](https://tenzir.com/docs/reference/operators/head.md), if no [`where`](https://tenzir.com/docs/reference/operators/where.md) precedes it.
+4. A `take` stage with the limit of a [`head`](https://tenzir.com/docs/v7.0.0/reference/operators/head.md), if no [`where`](https://tenzir.com/docs/v7.0.0/reference/operators/where.md) precedes it.
 
 The stages apply to the rows that your query returns, so they work with any query that produces a single table, including joins and aggregations. For example, the pipeline
 
@@ -95,7 +95,7 @@ where ProcessCommandLine.search("powershell", ignore_case=true)
 select DeviceName, ProcessCommandLine
 ```
 
-The [`search`](https://tenzir.com/docs/reference/functions/search.md) function searches recursively: its input can be a string, a list, or a record. Both substring matching, the default, and exact string matching with `exact=true` can produce prefilters. Case-sensitive search supports UTF-8 string literals; case-insensitive search requires an ASCII string literal. The `exact` and `ignore_case` options must be constant booleans. The deprecated `contains` alias follows the same rules. Searching a top-level field that contains nested data is supported; directly referencing a nested field or searching the whole event with `search(this, ...)` stays local.
+The [`search`](https://tenzir.com/docs/v7.0.0/reference/functions/search.md) function searches recursively: its input can be a string, a list, or a record. Both substring matching, the default, and exact string matching with `exact=true` can produce prefilters. Case-sensitive search supports UTF-8 string literals; case-insensitive search requires an ASCII string literal. The `exact` and `ignore_case` options must be constant booleans. The deprecated `contains` alias follows the same rules. Searching a top-level field that contains nested data is supported; directly referencing a nested field or searching the whole event with `search(this, ...)` stays local.
 
 KQL string matching isn’t a replacement for TQL’s Unicode semantics. Case-insensitive prefilters with ASCII search strings retain every non-ASCII subject for local evaluation. A non-ASCII search string with `ignore_case=true` stays entirely local. Similarly, `to_lower()` and `to_upper()` comparisons require ASCII literals and keep non-ASCII subjects. Membership lists must be nonempty and contain only ASCII strings. These functions use simple case mapping, not the full Unicode case folding of case-insensitive `search`.
 
@@ -105,7 +105,7 @@ These guards can return extra candidates, especially for Unicode or structured d
 
 ### IP address hunts
 
-Use [`ip()`](https://tenzir.com/docs/reference/functions/ip.md) to parse an address stored in a string before comparing it with an IP or subnet literal:
+Use [`ip()`](https://tenzir.com/docs/v7.0.0/reference/functions/ip.md) to parse an address stored in a string before comparing it with an IP or subnet literal:
 
 | Hunt                 | TQL predicate                    |
 | -------------------- | -------------------------------- |
@@ -159,19 +159,19 @@ Prefilters that would make the appended text exceed 16 KiB also stay local.
 
 ## Result cap
 
-The Microsoft Graph v1.0 [advanced-hunting quotas](https://learn.microsoft.com/en-us/graph/api/resources/security-api-overview?view=graph-rest-1.0#quotas-and-resource-allocation) limit Defender query results to 100,000 rows. The [`huntingQueryResults` response type](https://learn.microsoft.com/en-us/graph/api/resources/security-huntingqueryresults?view=graph-rest-1.0) doesn’t document a truncation indicator, so a successful response doesn’t guarantee that you received every matching row. A prefilter after your query would see all rows, so it could return matches that your query alone would never deliver. [`from_microsoft_defender`](https://tenzir.com/docs/reference/operators/from_microsoft_defender.md) therefore appends `take 100000` before the prefilters. On a sorted result, `take` keeps the same first rows as the cap. The cap doesn’t apply to the `project` stage or the `take` stage of a limit, which keep your query’s rows or a prefix of them.
+The Microsoft Graph v1.0 [advanced-hunting quotas](https://learn.microsoft.com/en-us/graph/api/resources/security-api-overview?view=graph-rest-1.0#quotas-and-resource-allocation) limit Defender query results to 100,000 rows. The [`huntingQueryResults` response type](https://learn.microsoft.com/en-us/graph/api/resources/security-huntingqueryresults?view=graph-rest-1.0) doesn’t document a truncation indicator, so a successful response doesn’t guarantee that you received every matching row. A prefilter after your query would see all rows, so it could return matches that your query alone would never deliver. [`from_microsoft_defender`](https://tenzir.com/docs/v7.0.0/reference/operators/from_microsoft_defender.md) therefore appends `take 100000` before the prefilters. On a sorted result, `take` keeps the same first rows as the cap. The cap doesn’t apply to the `project` stage or the `take` stage of a limit, which keep your query’s rows or a prefix of them.
 
-Log Analytics returns at most 500,000 rows and about 100 MiB of data, and reports a result beyond either limit as a partial failure, which [`from_azure_log_analytics`](https://tenzir.com/docs/reference/operators/from_azure_log_analytics.md) rejects with an error. Its prefilters therefore run without a cap: they yield the complete filtered result, or fail as well if the filtered result still exceeds a limit. A cap would instead turn the error into a silently incomplete result.
+Log Analytics returns at most 500,000 rows and about 100 MiB of data, and reports a result beyond either limit as a partial failure, which [`from_azure_log_analytics`](https://tenzir.com/docs/v7.0.0/reference/operators/from_azure_log_analytics.md) rejects with an error. Its prefilters therefore run without a cap: they yield the complete filtered result, or fail as well if the filtered result still exceeds a limit. A cap would instead turn the error into a silently incomplete result.
 
 Size limits, such as the 50 MB limit of Defender, fail the request with an error instead of truncating it. A pushed filter or projection makes the result smaller and may thus avoid such an error, in which case you get the complete result instead.
 
 ## Projections
 
-The `project` stage keeps the top-level fields that [`select`](https://tenzir.com/docs/reference/operators/select.md) and later operators read, plus every field that a predicate reads, since Tenzir evaluates the predicates on the projected rows. A selected nested field, such as `Process.Name`, keeps its top-level field `Process`. When the pipeline reads the whole event, such as with `this`, the operator appends no `project` stage.
+The `project` stage keeps the top-level fields that [`select`](https://tenzir.com/docs/v7.0.0/reference/operators/select.md) and later operators read, plus every field that a predicate reads, since Tenzir evaluates the predicates on the projected rows. A selected nested field, such as `Process.Name`, keeps its top-level field `Process`. When the pipeline reads the whole event, such as with `this`, the operator appends no `project` stage.
 
 ## Limits
 
-A [`head`](https://tenzir.com/docs/reference/operators/head.md) becomes a `take` stage only if no [`where`](https://tenzir.com/docs/reference/operators/where.md) precedes it and its limit is between 1 and 9,223,372,036,854,775,807. Since every predicate runs locally after the query, a `take` would otherwise truncate rows before Tenzir filters them. Tenzir enforces the limit locally in every case.
+A [`head`](https://tenzir.com/docs/v7.0.0/reference/operators/head.md) becomes a `take` stage only if no [`where`](https://tenzir.com/docs/v7.0.0/reference/operators/where.md) precedes it and its limit is between 1 and 9,223,372,036,854,775,807. Since every predicate runs locally after the query, a `take` would otherwise truncate rows before Tenzir filters them. Tenzir enforces the limit locally in every case.
 
 ## Time window
 
@@ -198,4 +198,4 @@ Print the optimized pipeline to see which hints the source received:
 tenzir --dump-opt-ir 'from_microsoft_defender "DeviceEvents", azure_auth={tenant_id: secret("AZURE_TENANT_ID"), client_id: secret("AZURE_CLIENT_ID"), client_secret: secret("AZURE_CLIENT_SECRET")} | where DeviceName == "host-a" | head 10'
 ```
 
-The source shows the predicates as `filter`, the limit as `limit`, and the fields as `projection`, and the [`where`](https://tenzir.com/docs/reference/operators/where.md) that it took over no longer appears. The [compilation output guide](../../guides/troubleshooting/inspect-compilation-output.md) explains the format. The output doesn’t show the appended KQL stages, which follow the rules on this page.
+The source shows the predicates as `filter`, the limit as `limit`, and the fields as `projection`, and the [`where`](https://tenzir.com/docs/v7.0.0/reference/operators/where.md) that it took over no longer appears. The [compilation output guide](../../guides/troubleshooting/inspect-compilation-output.md) explains the format. The output doesn’t show the appended KQL stages, which follow the rules on this page.

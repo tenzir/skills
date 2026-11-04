@@ -1,7 +1,7 @@
 ---
 title: "Run fixtures"
-canonical: https://tenzir.com/docs/guides/testing/run-fixtures
-source: https://tenzir.com/docs/guides/testing/run-fixtures.md
+canonical: https://tenzir.com/docs/v7.0.0/guides/testing/run-fixtures
+source: https://tenzir.com/docs/v7.0.0/guides/testing/run-fixtures.md
 section: "Docs"
 ---
 
@@ -15,7 +15,7 @@ Standalone fixture mode is useful when you want to develop or debug against a se
 
 ## Prerequisites
 
-* Install `tenzir-test` (see the [test framework](../../reference/test-framework.md) reference).
+* Install `tenzir-test` (see the [test framework](https://docs.tenzir.com/reference/test-framework) reference).
 * Have a project with registered fixtures, either built-in ones like `node` or custom ones under `fixtures/`.
 
 ## Start a fixture
@@ -162,9 +162,9 @@ from {
 }
 ```
 
-See the [test framework reference](../../reference/test-framework.md#built-in-docker-compose-fixture) for the full options reference, including all configuration fields, readiness detection behavior, and the complete list of exported environment variables.
+See the [test framework reference](https://docs.tenzir.com/reference/test-framework/#built-in-docker-compose-fixture) for the full options reference, including all configuration fields, readiness detection behavior, and the complete list of exported environment variables.
 
 ## See also
 
 * [Create fixtures](create-fixtures.md)
-* [Test Framework](../../reference/test-framework.md)
+* [Test framework](https://docs.tenzir.com/reference/test-framework)

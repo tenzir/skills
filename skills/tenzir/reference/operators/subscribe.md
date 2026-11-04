@@ -1,7 +1,7 @@
 ---
 title: "subscribe"
-canonical: https://tenzir.com/docs/reference/operators/subscribe
-source: https://tenzir.com/docs/reference/operators/subscribe.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/subscribe
+source: https://tenzir.com/docs/v7.0.0/reference/operators/subscribe.md
 section: "Docs"
 ---
 
@@ -31,7 +31,7 @@ Optional channel names to subscribe to. If unspecified, the operator subscribes 
 
 ## Optimizations
 
-The operator acts on the predicates that the [optimizer](../../explanations/pipeline.md#optimization) pushes toward it. A [`where`](https://tenzir.com/docs/reference/operators/where.md) that follows `subscribe` becomes part of the subscription, and the node drops non-matching events before they enter the pipeline. This keeps back pressure and the per-pipeline queues limited to events the pipeline actually processes.
+The operator acts on the predicates that the [optimizer](../../explanations/pipeline.md#optimization) pushes toward it. A [`where`](https://tenzir.com/docs/v7.0.0/reference/operators/where.md) that follows `subscribe` becomes part of the subscription, and the node drops non-matching events before they enter the pipeline. This keeps back pressure and the per-pipeline queues limited to events the pipeline actually processes.
 
 A predicate translates when it compares a field or the `@name` metadata with a literal, uses `in` with a list or a subnet, or combines such comparisons with `and`, `or`, and `not`. Predicates that call functions run in the operator instead.
 
@@ -53,8 +53,8 @@ subscribe "alerts", "notices", "critical"
 
 ## See Also
 
-* [`export`](https://tenzir.com/docs/reference/operators/export.md)
-* [`publish`](https://tenzir.com/docs/reference/operators/publish.md)
+* [`export`](https://tenzir.com/docs/v7.0.0/reference/operators/export.md)
+* [`publish`](https://tenzir.com/docs/v7.0.0/reference/operators/publish.md)
 * [Quickstart](../../guides/quickstart.md)
 * [Split and merge streams](../../guides/route/split-and-merge-streams.md)
 * [Learn idiomatic TQL](../../tutorials/learn-idiomatic-tql.md)

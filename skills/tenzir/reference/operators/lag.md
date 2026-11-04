@@ -1,7 +1,7 @@
 ---
 title: "lag"
-canonical: https://tenzir.com/docs/reference/operators/lag
-source: https://tenzir.com/docs/reference/operators/lag.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/lag
+source: https://tenzir.com/docs/v7.0.0/reference/operators/lag.md
 section: "Docs"
 ---
 
@@ -19,7 +19,7 @@ lag into=field, [value=any], [offset=uint]
 
 The `lag` operator preserves every input event and assigns a preceding value to `into`. It maintains one history for its input stream and retains at most `offset` values.
 
-The first `offset` events receive `null`. Compose `lag` with [`group`](https://tenzir.com/docs/reference/operators/group.md) when you need an independent history for each key:
+The first `offset` events receive `null`. Compose `lag` with [`group`](https://tenzir.com/docs/v7.0.0/reference/operators/group.md) when you need an independent history for each key:
 
 ```tql
 group user {
@@ -27,9 +27,9 @@ group user {
 }
 ```
 
-Enclosing operators define the lifetime of the history. For example, placing the group and lag inside a fixed [`window`](https://tenzir.com/docs/reference/operators/window.md) resets every history when the window closes. Without such a boundary, grouped lag retains `offset` values and one subpipeline per key until the input ends. For high-cardinality keys, use a window when its boundaries fit the detection semantics.
+Enclosing operators define the lifetime of the history. For example, placing the group and lag inside a fixed [`window`](https://tenzir.com/docs/v7.0.0/reference/operators/window.md) resets every history when the window closes. Without such a boundary, grouped lag retains `offset` values and one subpipeline per key until the input ends. For high-cardinality keys, use a window when its boundaries fit the detection semantics.
 
-The operator follows input order within its pipeline. It doesn’t sort by event time or inspect timestamps. Use [`sort`](https://tenzir.com/docs/reference/operators/sort.md) to order bounded input. For live streams with bounded event-time disorder, put [`reorder`](https://tenzir.com/docs/reference/operators/reorder.md) before `lag`. When using keyed histories, place both operators inside the same group so each key has an independent watermark:
+The operator follows input order within its pipeline. It doesn’t sort by event time or inspect timestamps. Use [`sort`](https://tenzir.com/docs/v7.0.0/reference/operators/sort.md) to order bounded input. For live streams with bounded event-time disorder, put [`reorder`](https://tenzir.com/docs/v7.0.0/reference/operators/reorder.md) before `lag`. When using keyed histories, place both operators inside the same group so each key has an independent watermark:
 
 ```tql
 group user {
@@ -38,7 +38,7 @@ group user {
 }
 ```
 
-A fixed event-time [`window`](https://tenzir.com/docs/reference/operators/window.md) can bound grouped lag state when its boundaries fit the use case, but its `tolerance` only delays window closure. It doesn’t reorder events before `lag`.
+A fixed event-time [`window`](https://tenzir.com/docs/v7.0.0/reference/operators/window.md) can bound grouped lag state when its boundaries fit the use case, but its `tolerance` only delays window closure. It doesn’t reorder events before `lag`.
 
 ### `value = any` (optional)
 
@@ -54,13 +54,13 @@ The operator retains at most this many values.
 
 ### `into = field`
 
-The field that receives the preceding value or `null`. Assignment follows the same field replacement and nested-field behavior as [`set`](https://tenzir.com/docs/reference/operators/set.md).
+The field that receives the preceding value or `null`. Assignment follows the same field replacement and nested-field behavior as [`set`](https://tenzir.com/docs/v7.0.0/reference/operators/set.md).
 
 A `null` result can mean either that no preceding event exists or that the preceding value was itself `null`. Omit `value` to retain the complete event when you need to distinguish these cases: a complete preceding event is only `null` when no predecessor exists.
 
 ### Choose between `lag` and `window`
 
-The [`window`](https://tenzir.com/docs/reference/operators/window.md) operator can also express comparisons with preceding events. A trailing count window can retain the current event and its predecessors, then run a subpipeline that selects the event at the required offset. Each invocation then replays the retained complete events through a new subpipeline.
+The [`window`](https://tenzir.com/docs/v7.0.0/reference/operators/window.md) operator can also express comparisons with preceding events. A trailing count window can retain the current event and its predecessors, then run a subpipeline that selects the event at the required offset. Each invocation then replays the retained complete events through a new subpipeline.
 
 The `lag` operator specializes this positional lookup. It evaluates `value` once per input event, retains only the `offset` evaluated values, and emits each current event once. Use `lag` when you need one value or complete event at a fixed offset. Use a trailing `window` when you need to scan or aggregate a bounded history, reorder event-time input with `tolerance`, or run arbitrary logic over several preceding events. You can also enclose `lag` in a fixed window when the window should reset its state.
 
@@ -68,7 +68,7 @@ The `lag` operator specializes this positional lookup. It evaluates `value` once
 
 ### Attach a preceding value for each user
 
-Use [`group`](https://tenzir.com/docs/reference/operators/group.md) to keep independent location histories. The final sort only restores the original order for this bounded example; grouped subpipelines do not define an order relative to one another.
+Use [`group`](https://tenzir.com/docs/v7.0.0/reference/operators/group.md) to keep independent location histories. The final sort only restores the original order for this bounded example; grouped subpipelines do not define an order relative to one another.
 
 ```tql
 from \
@@ -107,7 +107,7 @@ lag into=previous
 
 ### Combine adjacent values with windows
 
-Use `lag` for the direct predecessor and [`window`](https://tenzir.com/docs/reference/operators/window.md) for bounded aggregates over the enriched stream:
+Use `lag` for the direct predecessor and [`window`](https://tenzir.com/docs/v7.0.0/reference/operators/window.md) for bounded aggregates over the enriched stream:
 
 ```tql
 from {time: 2025-01-01T10:01:00, host: "a", bytes: 15},
@@ -141,4 +141,4 @@ The input deliberately places each host’s events out of timestamp order. The `
 ## See Also
 
 * [Detect over time windows](../../guides/detect/detect-over-time-windows.md)
-* [`reorder`](https://tenzir.com/docs/reference/operators/reorder.md)
+* [`reorder`](https://tenzir.com/docs/v7.0.0/reference/operators/reorder.md)

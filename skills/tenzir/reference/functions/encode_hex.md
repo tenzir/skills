@@ -1,7 +1,7 @@
 ---
 title: "encode_hex"
-canonical: https://tenzir.com/docs/reference/functions/encode_hex
-source: https://tenzir.com/docs/reference/functions/encode_hex.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/encode_hex
+source: https://tenzir.com/docs/v7.0.0/reference/functions/encode_hex.md
 section: "Docs"
 ---
 
@@ -38,5 +38,5 @@ encoded = bytes.encode_hex()
 
 ## See Also
 
-* [`decode_hex`](https://tenzir.com/docs/reference/functions/decode_hex.md)
+* [`decode_hex`](https://tenzir.com/docs/v7.0.0/reference/functions/decode_hex.md)
 * [Manipulate strings](../../guides/shape/manipulate-strings.md)

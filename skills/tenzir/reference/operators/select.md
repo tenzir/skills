@@ -1,7 +1,7 @@
 ---
 title: "select"
-canonical: https://tenzir.com/docs/reference/operators/select
-source: https://tenzir.com/docs/reference/operators/select.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/select
+source: https://tenzir.com/docs/v7.0.0/reference/operators/select.md
 section: "Docs"
 ---
 
@@ -83,7 +83,7 @@ select metrics[key] = value
 
 ## See Also
 
-* [`drop`](https://tenzir.com/docs/reference/operators/drop.md)
-* [`where`](https://tenzir.com/docs/reference/operators/where.md)
+* [`drop`](https://tenzir.com/docs/v7.0.0/reference/operators/drop.md)
+* [`where`](https://tenzir.com/docs/v7.0.0/reference/operators/where.md)
 * [Filter and select data](../../guides/optimize/filter-and-select-data.md)
 * [Learn idiomatic TQL](../../tutorials/learn-idiomatic-tql.md)

@@ -1,7 +1,7 @@
 ---
 title: "from_hydrolix"
-canonical: https://tenzir.com/docs/reference/operators/from_hydrolix
-source: https://tenzir.com/docs/reference/operators/from_hydrolix.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/from_hydrolix
+source: https://tenzir.com/docs/v7.0.0/reference/operators/from_hydrolix.md
 section: "Docs"
 ---
 
@@ -22,7 +22,7 @@ The `from_hydrolix` operator queries a Hydrolix cluster with SQL. Hydrolix store
 
 You can either read a `table` or run an `sql` query.
 
-Hydrolix partitions every table by its primary timestamp. Always restrict queries to a time range on that column, so that Hydrolix reads only the partitions you need. In `table` mode, a [`where`](https://tenzir.com/docs/reference/operators/where.md) after `from_hydrolix` becomes part of the query if it compares the column with a constant. Because `now()` returns a different value on every call, bind the start of the range with `let`, which evaluates it once:
+Hydrolix partitions every table by its primary timestamp. Always restrict queries to a time range on that column, so that Hydrolix reads only the partitions you need. In `table` mode, a [`where`](https://tenzir.com/docs/v7.0.0/reference/operators/where.md) after `from_hydrolix` becomes part of the query if it compares the column with a constant. Because `now()` returns a different value on every call, bind the start of the range with `let`, which evaluates it once:
 
 ```tql
 let $since = now() - 1h
@@ -38,7 +38,7 @@ Production clusters almost always enforce such a time range, with the `hdx_query
 
 ### `url: string`
 
-The URL of the Hydrolix cluster, for example `https://acme.hydrolix.live`. This is the same URL that you pass to [`to_hydrolix`](https://tenzir.com/docs/reference/operators/to_hydrolix.md).
+The URL of the Hydrolix cluster, for example `https://acme.hydrolix.live`. This is the same URL that you pass to [`to_hydrolix`](https://tenzir.com/docs/v7.0.0/reference/operators/to_hydrolix.md).
 
 The operator connects to the host of the URL. The scheme decides whether the connection uses TLS: `https://` enables it and `http://` disables it, whatever the TLS defaults of the node say. Without a scheme, the `tls` argument and the node configuration decide. Other schemes are an error. The operator ignores the port, path, and query of the URL, because the native interface listens on a port of its own.
 
@@ -140,11 +140,11 @@ class_uid = catchall.class_uid.int()
 
 ## Optimizations
 
-When the operator reads a table, it lets Hydrolix do the work of the [`where`](https://tenzir.com/docs/reference/operators/where.md), [`select`](https://tenzir.com/docs/reference/operators/select.md), and [`head`](https://tenzir.com/docs/reference/operators/head.md) operators that follow it, so that Hydrolix returns only the rows and columns that the pipeline needs. A [`where`](https://tenzir.com/docs/reference/operators/where.md) on the primary timestamp also lets Hydrolix skip the partitions outside of the time range. Filters on fields of a map column, such as a catch-all column, and filters that Hydrolix can’t evaluate exactly like Tenzir run in Tenzir, with the same result.
+When the operator reads a table, it lets Hydrolix do the work of the [`where`](https://tenzir.com/docs/v7.0.0/reference/operators/where.md), [`select`](https://tenzir.com/docs/v7.0.0/reference/operators/select.md), and [`head`](https://tenzir.com/docs/v7.0.0/reference/operators/head.md) operators that follow it, so that Hydrolix returns only the rows and columns that the pipeline needs. A [`where`](https://tenzir.com/docs/v7.0.0/reference/operators/where.md) on the primary timestamp also lets Hydrolix skip the partitions outside of the time range. Filters on fields of a map column, such as a catch-all column, and filters that Hydrolix can’t evaluate exactly like Tenzir run in Tenzir, with the same result.
 
-Hydrolix also computes a [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) and returns one row per group instead of every matching row, if all of these hold:
+Hydrolix also computes a [`summarize`](https://tenzir.com/docs/v7.0.0/reference/operators/summarize.md) and returns one row per group instead of every matching row, if all of these hold:
 
-* The summary directly follows the operator, after filters that all went into the query. It may also follow [`select`](https://tenzir.com/docs/reference/operators/select.md), [`drop`](https://tenzir.com/docs/reference/operators/drop.md), and assignments that keep or copy the fields that it reads, but not computed values.
+* The summary directly follows the operator, after filters that all went into the query. It may also follow [`select`](https://tenzir.com/docs/v7.0.0/reference/operators/select.md), [`drop`](https://tenzir.com/docs/v7.0.0/reference/operators/drop.md), and assignments that keep or copy the fields that it reads, but not computed values.
 * It groups by booleans, integers, strings, enums, UUIDs, IP addresses, or times, including fields of nested records, but not fields of map columns.
 * Its aggregations are `count()`, `count(x)`, and `min(x)` and `max(x)` on integers and times.
 
@@ -193,5 +193,5 @@ from_hydrolix "https://acme.hydrolix.live",
 
 ## See Also
 
-* [`to_hydrolix`](https://tenzir.com/docs/reference/operators/to_hydrolix.md)
-* [Hydrolix](../../integrations/hydrolix.md)
+* [`to_hydrolix`](https://tenzir.com/docs/v7.0.0/reference/operators/to_hydrolix.md)
+* [Hydrolix](https://docs.tenzir.com/integrations/hydrolix)

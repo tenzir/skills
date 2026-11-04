@@ -1,8 +1,8 @@
 ---
 title: "Overview"
 description: "Map source-specific events into a shared schema."
-canonical: https://tenzir.com/docs/guides/normalize
-source: https://tenzir.com/docs/guides/normalize.md
+canonical: https://tenzir.com/docs/v7.0.0/guides/normalize
+source: https://tenzir.com/docs/v7.0.0/guides/normalize.md
 section: "Docs"
 ---
 

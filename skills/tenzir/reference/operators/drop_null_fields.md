@@ -1,7 +1,7 @@
 ---
 title: "drop_null_fields"
-canonical: https://tenzir.com/docs/reference/operators/drop_null_fields
-source: https://tenzir.com/docs/reference/operators/drop_null_fields.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/drop_null_fields
+source: https://tenzir.com/docs/v7.0.0/reference/operators/drop_null_fields.md
 section: "Docs"
 ---
 
@@ -164,10 +164,10 @@ In this example:
 
 ## See Also
 
-* [`drop_null_fields`](https://tenzir.com/docs/reference/functions/drop_null_fields.md)
-* [`drop`](https://tenzir.com/docs/reference/operators/drop.md)
-* [`select`](https://tenzir.com/docs/reference/operators/select.md)
-* [`where`](https://tenzir.com/docs/reference/operators/where.md)
+* [`drop_null_fields`](https://tenzir.com/docs/v7.0.0/reference/functions/drop_null_fields.md)
+* [`drop`](https://tenzir.com/docs/v7.0.0/reference/operators/drop.md)
+* [`select`](https://tenzir.com/docs/v7.0.0/reference/operators/select.md)
+* [`where`](https://tenzir.com/docs/v7.0.0/reference/operators/where.md)
 * [Learn idiomatic TQL](../../tutorials/learn-idiomatic-tql.md)
 
 Parallelizable: a parallel pipeline may run this operator on several cores at once.

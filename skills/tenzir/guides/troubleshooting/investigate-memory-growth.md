@@ -1,7 +1,7 @@
 ---
 title: "Investigate memory growth"
-canonical: https://tenzir.com/docs/guides/troubleshooting/investigate-memory-growth
-source: https://tenzir.com/docs/guides/troubleshooting/investigate-memory-growth.md
+canonical: https://tenzir.com/docs/v7.0.0/guides/troubleshooting/investigate-memory-growth
+source: https://tenzir.com/docs/v7.0.0/guides/troubleshooting/investigate-memory-growth.md
 section: "Docs"
 ---
 
@@ -32,7 +32,7 @@ select timestamp, process_bytes=process.current_bytes,
 }
 ```
 
-The shape of the curve narrows down the cause. A steady climb that never comes down points at data accumulating somewhere inside the node. A sawtooth (climb, sharp drop, climb again) means the process is already being killed and restarted; in that case, first confirm the kill as described in [Check for unexpected restarts](../observability/inspect-a-node.md#check-for-unexpected-restarts). To see the shape at a glance, plot the data as described in [Plot data with charts](../../tutorials/plot-data-with-charts.md).
+The shape of the curve narrows down the cause. A steady climb that never comes down points at data accumulating somewhere inside the node. A sawtooth (climb, sharp drop, climb again) means the process is already being killed and restarted; in that case, first confirm the kill as described in [Check for unexpected restarts](../observability/inspect-a-node.md#check-for-unexpected-restarts). To see the shape at a glance, plot the data as described in [Plot data with charts](https://docs.tenzir.com/tutorials/plot-data-with-charts).
 
 ## Find where data piles up
 
@@ -107,13 +107,13 @@ select timestamp, table_slices, chunks
 }
 ```
 
-High `table_slices` numbers mean event data is held in memory: backlogs, buffers, or in-progress aggregations. If both stay low while the process keeps growing, the memory goes elsewhere, and the node can tell you where: it optionally collects per-allocator and per-component allocation statistics in the `tenzir.metrics.memory` schema. See [`metrics`](https://tenzir.com/docs/reference/operators/metrics.md) for the full schema and the environment variables that enable the detailed collection.
+High `table_slices` numbers mean event data is held in memory: backlogs, buffers, or in-progress aggregations. If both stay low while the process keeps growing, the memory goes elsewhere, and the node can tell you where: it optionally collects per-allocator and per-component allocation statistics in the `tenzir.metrics.memory` schema. See [`metrics`](https://tenzir.com/docs/v7.0.0/reference/operators/metrics.md) for the full schema and the environment variables that enable the detailed collection.
 
 If none of this explains the growth, capture the memory trend and the operator profile output and share them with Tenzir support, as described in [Inspect a node](../observability/inspect-a-node.md).
 
 ## See also
 
-* [`metrics`](https://tenzir.com/docs/reference/operators/metrics.md)
+* [`metrics`](https://tenzir.com/docs/v7.0.0/reference/operators/metrics.md)
 * [Inspect a node](../observability/inspect-a-node.md)
 * [Load-balance pipelines](../route/load-balance-pipelines.md)
 * [Size a node](../node-setup/size-a-node.md)

@@ -1,7 +1,7 @@
 ---
 title: "time"
-canonical: https://tenzir.com/docs/reference/functions/time
-source: https://tenzir.com/docs/reference/functions/time.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/time
+source: https://tenzir.com/docs/v7.0.0/reference/functions/time.md
 section: "Docs"
 ---
 
@@ -70,7 +70,7 @@ Prefix a Unix epoch value with `@`:
 | Future offset | `now + 1h`, `in 2d`       |
 | Past offset   | `now - 30min`, `5min ago` |
 
-For timestamps in non-standard formats, use [`parse_time`](https://tenzir.com/docs/reference/functions/parse_time.md) with an explicit format string.
+For timestamps in non-standard formats, use [`parse_time`](https://tenzir.com/docs/v7.0.0/reference/functions/parse_time.md) with an explicit format string.
 
 If the string does not match any supported format, `time` emits a warning and returns `null`.
 
@@ -183,13 +183,13 @@ timestamp = timestamp.time()
 
 ## See Also
 
-* [`format_time`](https://tenzir.com/docs/reference/functions/format_time.md)
-* [`parse_time`](https://tenzir.com/docs/reference/functions/parse_time.md)
-* [`duration`](https://tenzir.com/docs/reference/functions/duration.md)
-* [`float`](https://tenzir.com/docs/reference/functions/float.md)
-* [`int`](https://tenzir.com/docs/reference/functions/int.md)
-* [`ip`](https://tenzir.com/docs/reference/functions/ip.md)
-* [`string`](https://tenzir.com/docs/reference/functions/string.md)
-* [`subnet`](https://tenzir.com/docs/reference/functions/subnet.md)
-* [`uint`](https://tenzir.com/docs/reference/functions/uint.md)
+* [`format_time`](https://tenzir.com/docs/v7.0.0/reference/functions/format_time.md)
+* [`parse_time`](https://tenzir.com/docs/v7.0.0/reference/functions/parse_time.md)
+* [`duration`](https://tenzir.com/docs/v7.0.0/reference/functions/duration.md)
+* [`float`](https://tenzir.com/docs/v7.0.0/reference/functions/float.md)
+* [`int`](https://tenzir.com/docs/v7.0.0/reference/functions/int.md)
+* [`ip`](https://tenzir.com/docs/v7.0.0/reference/functions/ip.md)
+* [`string`](https://tenzir.com/docs/v7.0.0/reference/functions/string.md)
+* [`subnet`](https://tenzir.com/docs/v7.0.0/reference/functions/subnet.md)
+* [`uint`](https://tenzir.com/docs/v7.0.0/reference/functions/uint.md)
 * [Normalize event timestamps](../../guides/shape/normalize-event-timestamps.md)

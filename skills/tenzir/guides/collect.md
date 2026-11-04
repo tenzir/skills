@@ -1,8 +1,8 @@
 ---
 title: "Overview"
 description: "Read events and bytes from files, APIs, brokers, stores, and networks."
-canonical: https://tenzir.com/docs/guides/collect
-source: https://tenzir.com/docs/guides/collect.md
+canonical: https://tenzir.com/docs/v7.0.0/guides/collect
+source: https://tenzir.com/docs/v7.0.0/guides/collect.md
 section: "Docs"
 ---
 
@@ -16,11 +16,11 @@ Collection is the first stage of the data lifecycle, and the only one that talks
 
 TQL provides two types of input operators:
 
-* **`from_*` operators** like [`from_file`](https://tenzir.com/docs/reference/operators/from_file.md) and
+* **`from_*` operators** like [`from_file`](https://tenzir.com/docs/v7.0.0/reference/operators/from_file.md) and
 
-  [`from_http`](https://tenzir.com/docs/reference/operators/from_http.md) read bytes and parse them using a [subpipeline](../reference/programs.md#parsing-subpipelines).
+  [`from_http`](https://tenzir.com/docs/v7.0.0/reference/operators/from_http.md) read bytes and parse them using a [subpipeline](../reference/programs.md#parsing-subpipelines).
 
-* **Direct event operators** like [`from_kafka`](https://tenzir.com/docs/reference/operators/from_kafka.md), [`accept_otlp`](https://tenzir.com/docs/reference/operators/accept_otlp.md), and [`accept_udp`](https://tenzir.com/docs/reference/operators/accept_udp.md) produce structured events directly without an intermediate byte stream.
+* **Direct event operators** like [`from_kafka`](https://tenzir.com/docs/v7.0.0/reference/operators/from_kafka.md), [`accept_otlp`](https://tenzir.com/docs/v7.0.0/reference/operators/accept_otlp.md), and [`accept_udp`](https://tenzir.com/docs/v7.0.0/reference/operators/accept_udp.md) produce structured events directly without an intermediate byte stream.
 
 ## Collection patterns
 
@@ -115,7 +115,7 @@ See the [network data guide](collect/get-data-from-the-network.md) for OTLP/HTTP
 
 ### Fetch data referenced in events
 
-Some sources emit a reference to data instead of the data itself. Use [`each`](https://tenzir.com/docs/reference/operators/each.md) to start one source pipeline for every reference event.
+Some sources emit a reference to data instead of the data itself. Use [`each`](https://tenzir.com/docs/v7.0.0/reference/operators/each.md) to start one source pipeline for every reference event.
 
 For example, assume that each Amazon SQS message contains a JSON object with an `object_url` field:
 
@@ -131,11 +131,11 @@ each {
 
 One subpipeline per reference event
 
-[`each`](https://tenzir.com/docs/reference/operators/each.md) starts a fresh subpipeline for every reference event. The current reference is available as `$this`, so the source operator can use fields from the reference event. The fetched events flow back into one output stream.
+[`each`](https://tenzir.com/docs/v7.0.0/reference/operators/each.md) starts a fresh subpipeline for every reference event. The current reference is available as `$this`, so the source operator can use fields from the reference event. The fetched events flow back into one output stream.
 
 Only accept references from trusted producers. A URL supplied by an untrusted event could direct the Tenzir Node to an internal or sensitive network location.
 
-For an SQS-to-S3 example, see the [CrowdStrike](../integrations/crowdstrike.md) integration, which uses this pattern to collect Falcon Data Replicator events.
+For an SQS-to-S3 example, see the [Crowdstrike](https://docs.tenzir.com/integrations/crowdstrike) integration, which uses this pattern to collect Falcon Data Replicator events.
 
 ## Sending data to destinations
 

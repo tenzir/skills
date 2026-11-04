@@ -1,7 +1,7 @@
 ---
 title: "count_if"
-canonical: https://tenzir.com/docs/reference/functions/count_if
-source: https://tenzir.com/docs/reference/functions/count_if.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/count_if
+source: https://tenzir.com/docs/v7.0.0/reference/functions/count_if.md
 section: "Docs"
 ---
 
@@ -42,5 +42,5 @@ summarize total=x.count_if(x => x > 1)
 
 ## See Also
 
-* [`count`](https://tenzir.com/docs/reference/functions/count.md)
+* [`count`](https://tenzir.com/docs/v7.0.0/reference/functions/count.md)
 * [Aggregate event streams](../../guides/analyze/aggregate-event-streams.md)

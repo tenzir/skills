@@ -1,7 +1,7 @@
 ---
 title: "write_tql"
-canonical: https://tenzir.com/docs/reference/operators/write_tql
-source: https://tenzir.com/docs/reference/operators/write_tql.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/write_tql
+source: https://tenzir.com/docs/v7.0.0/reference/operators/write_tql.md
 section: "Docs"
 ---
 
@@ -103,6 +103,6 @@ write_tql strip_null_fields=true
 
 ## See Also
 
-* [`read_tql`](https://tenzir.com/docs/reference/operators/read_tql.md)
-* [`write_json`](https://tenzir.com/docs/reference/operators/write_json.md)
+* [`read_tql`](https://tenzir.com/docs/v7.0.0/reference/operators/read_tql.md)
+* [`write_json`](https://tenzir.com/docs/v7.0.0/reference/operators/write_json.md)
 * [Onboard a data source](../../tutorials/onboard-a-data-source.md)

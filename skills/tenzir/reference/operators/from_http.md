@@ -1,7 +1,7 @@
 ---
 title: "from_http"
-canonical: https://tenzir.com/docs/reference/operators/from_http
-source: https://tenzir.com/docs/reference/operators/from_http.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/from_http
+source: https://tenzir.com/docs/v7.0.0/reference/operators/from_http.md
 section: "Docs"
 ---
 
@@ -122,7 +122,7 @@ If the lambda returns a record, Tenzir patches the next request. The record supp
 
 Each request record is a patch against the request that produced the current page. Setting `body` does not change the method. Set `method` explicitly if the next request must use a different method. If `body` is a record, the `encode` option also applies to paginated request bodies.
 
-This request-record pagination behavior applies to [`from_http`](https://tenzir.com/docs/reference/operators/from_http.md) only. It does not change [`to_http`](https://tenzir.com/docs/reference/operators/to_http.md), [`accept_http`](https://tenzir.com/docs/reference/operators/accept_http.md), or [`serve_http`](https://tenzir.com/docs/reference/operators/serve_http.md).
+This request-record pagination behavior applies to [`from_http`](https://tenzir.com/docs/v7.0.0/reference/operators/from_http.md) only. It does not change [`to_http`](https://tenzir.com/docs/v7.0.0/reference/operators/to_http.md), [`accept_http`](https://tenzir.com/docs/v7.0.0/reference/operators/accept_http.md), or [`serve_http`](https://tenzir.com/docs/v7.0.0/reference/operators/serve_http.md).
 
 **Link mode**: The string `"link"` to automatically follow pagination links in the HTTP `Link` response header as defined in [RFC 8288](https://datatracker.ietf.org/doc/html/rfc8288). Tenzir follows the `rel=next` relation until the response no longer contains one.
 
@@ -167,7 +167,7 @@ See the [Node TLS Setup guide](../../guides/node-setup/configure-tls.md) for mor
 
 ### Migration from `server=true`
 
-The `server=true` flag is no longer supported. Use [`accept_http`](https://tenzir.com/docs/reference/operators/accept_http.md) to listen for incoming HTTP requests.
+The `server=true` flag is no longer supported. Use [`accept_http`](https://tenzir.com/docs/v7.0.0/reference/operators/accept_http.md) to listen for incoming HTTP requests.
 
 ### `{ … } (optional)`
 
@@ -340,7 +340,7 @@ unroll hits.hits
 this = hits.hits._source
 ```
 
-Keep operators such as [`unroll`](https://tenzir.com/docs/reference/operators/unroll.md) after [`from_http`](https://tenzir.com/docs/reference/operators/from_http.md) for these pagination styles. The pagination lambda receives the parsed page envelope, so the parsing subpipeline must emit one event for the whole response.
+Keep operators such as [`unroll`](https://tenzir.com/docs/v7.0.0/reference/operators/unroll.md) after [`from_http`](https://tenzir.com/docs/v7.0.0/reference/operators/from_http.md) for these pagination styles. The pagination lambda receives the parsed page envelope, so the parsing subpipeline must emit one event for the whole response.
 
 ### Retry Failed Requests
 
@@ -352,14 +352,14 @@ from_http "https://api.example.com/data", max_retry_count=3, retry_delay=2s {
 }
 ```
 
-This retries transient transport failures and HTTP `429` and `5xx` responses up to 3 times. The delay starts at 2 seconds and backs off exponentially. Intermediate retries do not emit pipeline warnings, so retries also work inside [`strict`](https://tenzir.com/docs/reference/operators/strict.md). When retries are exhausted, the request fails unless `error_field` captures the HTTP error response.
+This retries transient transport failures and HTTP `429` and `5xx` responses up to 3 times. The delay starts at 2 seconds and backs off exponentially. Intermediate retries do not emit pipeline warnings, so retries also work inside [`strict`](https://tenzir.com/docs/v7.0.0/reference/operators/strict.md). When retries are exhausted, the request fails unless `error_field` captures the HTTP error response.
 
 ## See Also
 
-* [`accept_http`](https://tenzir.com/docs/reference/operators/accept_http.md)
-* [`to_http`](https://tenzir.com/docs/reference/operators/to_http.md)
-* [`serve_http`](https://tenzir.com/docs/reference/operators/serve_http.md)
+* [`accept_http`](https://tenzir.com/docs/v7.0.0/reference/operators/accept_http.md)
+* [`to_http`](https://tenzir.com/docs/v7.0.0/reference/operators/to_http.md)
+* [`serve_http`](https://tenzir.com/docs/v7.0.0/reference/operators/serve_http.md)
 * [Fetch via HTTP and APIs](../../guides/collect/fetch-via-http-and-apis.md)
 * [Enrich with threat intel](../../guides/enrich/enrich-with-threat-intel.md)
 * [Use lookup tables](../../guides/enrich/use-lookup-tables.md)
-* [HTTP](../../integrations/http.md)
+* [Http](https://docs.tenzir.com/integrations/http)

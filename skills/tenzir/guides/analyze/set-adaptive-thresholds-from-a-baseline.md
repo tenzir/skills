@@ -1,8 +1,8 @@
 ---
 title: "Set adaptive thresholds from a baseline"
 description: "Set duration thresholds from each agent operation's known-good history."
-canonical: https://tenzir.com/docs/guides/analyze/set-adaptive-thresholds-from-a-baseline
-source: https://tenzir.com/docs/guides/analyze/set-adaptive-thresholds-from-a-baseline.md
+canonical: https://tenzir.com/docs/v7.0.0/guides/analyze/set-adaptive-thresholds-from-a-baseline
+source: https://tenzir.com/docs/v7.0.0/guides/analyze/set-adaptive-thresholds-from-a-baseline.md
 section: "Docs"
 ---
 
@@ -16,7 +16,7 @@ Instead, compare a span with known-good history for the same population. The exa
 
 ## Calculate a percentile threshold
 
-The baseline’s upper tail reaches 2,000 ms. You want to distinguish a current one-second span that sits inside that history from a 2,997 ms span beyond it. A [`tdigest`](https://tenzir.com/docs/reference/functions/tdigest.md) retains the duration distribution in bounded space. Use [`tdigest_quantile`](https://tenzir.com/docs/reference/functions/tdigest_quantile.md) to derive the [95th percentile](https://en.wikipedia.org/wiki/Percentile) (p95) boundary and [`tdigest_cdf`](https://tenzir.com/docs/reference/functions/tdigest_cdf.md) to compute each span’s [cumulative distribution function](https://en.wikipedia.org/wiki/Cumulative_distribution_function) (CDF) rank:
+The baseline’s upper tail reaches 2,000 ms. You want to distinguish a current one-second span that sits inside that history from a 2,997 ms span beyond it. A [`tdigest`](https://tenzir.com/docs/v7.0.0/reference/functions/tdigest.md) retains the duration distribution in bounded space. Use [`tdigest_quantile`](https://tenzir.com/docs/v7.0.0/reference/functions/tdigest_quantile.md) to derive the [95th percentile](https://en.wikipedia.org/wiki/Percentile) (p95) boundary and [`tdigest_cdf`](https://tenzir.com/docs/v7.0.0/reference/functions/tdigest_cdf.md) to compute each span’s [cumulative distribution function](https://en.wikipedia.org/wiki/Cumulative_distribution_function) (CDF) rank:
 
 ```tql
 from {
@@ -58,7 +58,7 @@ For a lower-tail anomaly, derive a low quantile such as `0.05`. For a two-sided 
 
 ## Rank a value against a sample
 
-Use [`ecdf`](https://tenzir.com/docs/reference/functions/ecdf.md) when the complete reference sample already fits in one list and you do not need to persist or merge it:
+Use [`ecdf`](https://tenzir.com/docs/v7.0.0/reference/functions/ecdf.md) when the complete reference sample already fits in one list and you do not need to persist or merge it:
 
 ```tql
 from {

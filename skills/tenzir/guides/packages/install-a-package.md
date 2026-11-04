@@ -1,7 +1,7 @@
 ---
 title: "Install a package"
-canonical: https://tenzir.com/docs/guides/packages/install-a-package
-source: https://tenzir.com/docs/guides/packages/install-a-package.md
+canonical: https://tenzir.com/docs/v7.0.0/guides/packages/install-a-package
+source: https://tenzir.com/docs/v7.0.0/guides/packages/install-a-package.md
 section: "Docs"
 ---
 
@@ -26,7 +26,7 @@ The most convenient way to install a package is through the [Tenzir Library](htt
 
 ## Install with the package operator
 
-To install a package interactively in TQL, use the [`package_add`](https://tenzir.com/docs/reference/operators/package_add.md) operator:
+To install a package interactively in TQL, use the [`package_add`](https://tenzir.com/docs/v7.0.0/reference/operators/package_add.md) operator:
 
 ```tql
 package_add "/path/to/pkg"
@@ -55,7 +55,7 @@ package_list
 }
 ```
 
-To uninstall a package interactively, use [`package_remove`](https://tenzir.com/docs/reference/operators/package_remove.md) and pass the package ID.
+To uninstall a package interactively, use [`package_remove`](https://tenzir.com/docs/v7.0.0/reference/operators/package_remove.md) and pass the package ID.
 
 ```tql
 package_remove "your-package"

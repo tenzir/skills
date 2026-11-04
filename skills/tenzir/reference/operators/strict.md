@@ -1,7 +1,7 @@
 ---
 title: "strict"
-canonical: https://tenzir.com/docs/reference/operators/strict
-source: https://tenzir.com/docs/reference/operators/strict.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/strict
+source: https://tenzir.com/docs/v7.0.0/reference/operators/strict.md
 section: "Docs"
 ---
 
@@ -19,7 +19,7 @@ strict { … }
 
 The `strict` operator takes a pipeline as an argument and treats all warnings emitted by the execution of the pipeline as errors. This is useful when you want to stop a pipeline on warnings or unexpected diagnostics.
 
-To suppress runtime warnings instead, use the experimental [`quiet`](https://tenzir.com/docs/reference/quiet/) operator.
+To suppress runtime warnings instead, use the experimental [`quiet`](https://tenzir.com/docs/v7.0.0/reference/operators/quiet.md) operator.
 
 ## Examples
 
@@ -34,5 +34,5 @@ strict {
 
 ## See Also
 
-* [`assert`](https://tenzir.com/docs/reference/operators/assert.md)
+* [`assert`](https://tenzir.com/docs/v7.0.0/reference/operators/assert.md)
 * [Learn idiomatic TQL](../../tutorials/learn-idiomatic-tql.md)

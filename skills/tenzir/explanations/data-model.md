@@ -1,8 +1,8 @@
 ---
 title: "Data model"
 description: "Understand how Tenzir stores events in columnar batches, keeps events of different shapes and types side by side, and selects rows with bitmaps instead of slicing batches apart."
-canonical: https://tenzir.com/docs/explanations/data-model
-source: https://tenzir.com/docs/explanations/data-model.md
+canonical: https://tenzir.com/docs/v7.0.0/explanations/data-model
+source: https://tenzir.com/docs/v7.0.0/explanations/data-model.md
 section: "Docs"
 ---
 
@@ -54,7 +54,7 @@ A column of a record or the elements of a list can hold values of different type
 
 A host column with the values 10.0.0.1, “db01”, 10.0.0.7, and null stored as a union. An index column assigns the rows to alternative 0, 1, 0, and 2. Alternative 0 holds IP addresses with a bitmap that selects rows one and three, alternative 1 holds strings with a bitmap that selects row two, and alternative 2 is null, which consists of a bitmap alone and stores no values.
 
-Every alternative spans all rows of the column and carries a bitmap of the rows it covers. The rows line up one to one, so the union needs no offsets. The index gives fast access to a single row, while the bitmaps let column-wise code take all values of one type at once and combine them with other masks. For example, [`where`](https://tenzir.com/docs/reference/operators/where.md) takes the `bool` alternative of its predicate and warns about the rows that hold any other type.
+Every alternative spans all rows of the column and carries a bitmap of the rows it covers. The rows line up one to one, so the union needs no offsets. The index gives fast access to a single row, while the bitmaps let column-wise code take all values of one type at once and combine them with other masks. For example, [`where`](https://tenzir.com/docs/v7.0.0/reference/operators/where.md) takes the `bool` alternative of its predicate and warns about the rows that hold any other type.
 
 A column with a single type uses its array directly, without a union. Lists use the same representation for their elements, so `[0, "hello", {y: 42}]` stores an integer, a string, and a record in one union array.
 
@@ -68,13 +68,13 @@ The events `{"x": null}` and `{"x": 1}` therefore share a batch: the `x` column 
 
 Every batch carries a top level mask, and operators that select rows change the mask rather than the data. A condition such as `proto == "tcp"` evaluates to a `bool` column, and the data model stores every `bool` column as a bitmap, as the section on [physical representations](data-model.md#logical-types-physical-representations) shows. Evaluating the condition therefore already produces a mask in the right format, with no conversion step and no per-row branching.
 
-A [`where`](https://tenzir.com/docs/reference/operators/where.md) filter combines that bitmap with the incoming mask in a single bitwise AND and passes the unchanged columns downstream. An [`if`](https://tenzir.com/docs/reference/statements.md#if) statement derives two masks from the same bitmap, one for the rows where the condition holds and one for the rows where it does not, and hands the same batch to both branches, each with its own mask.
+A [`where`](https://tenzir.com/docs/v7.0.0/reference/operators/where.md) filter combines that bitmap with the incoming mask in a single bitwise AND and passes the unchanged columns downstream. An [`if`](https://tenzir.com/docs/v7.0.0/reference/statements.md#if) statement derives two masks from the same bitmap, one for the rows where the condition holds and one for the rows where it does not, and hands the same batch to both branches, each with its own mask.
 
 An if statement that tests for circles splits eight events with different shapes into a then and an else branch. On the left, slicing cuts the batch wherever the condition flips, so the two branches receive six small batches in total. On the right, masking hands the same eight-row batch to both branches, each with a bitmap that selects its rows.
 
 Masking turns filtering and branching from a copy into a few bitwise operations. Rows that drop out of the mask stay in memory, but no operator reads them, and their slots may hold arbitrary leftovers. Downstream operators see only the active rows, so the difference is invisible in a pipeline’s results.
 
-Masked rows are removed when events leave the data model, for example when a node imports them into its storage or when [`write_parquet`](https://tenzir.com/docs/reference/operators/write_parquet.md) converts them into Apache Arrow. Until then, a heavily filtered batch keeps its original size in memory - not different from how slicing in Apache Arrow would keep the memory alive as well.
+Masked rows are removed when events leave the data model, for example when a node imports them into its storage or when [`write_parquet`](https://tenzir.com/docs/v7.0.0/reference/operators/write_parquet.md) converts them into Apache Arrow. Until then, a heavily filtered batch keeps its original size in memory - not different from how slicing in Apache Arrow would keep the memory alive as well.
 
 ## Logical types, physical representations
 

@@ -1,7 +1,7 @@
 ---
 title: "fork"
-canonical: https://tenzir.com/docs/reference/operators/fork
-source: https://tenzir.com/docs/reference/operators/fork.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/fork
+source: https://tenzir.com/docs/v7.0.0/reference/operators/fork.md
 section: "Docs"
 ---
 

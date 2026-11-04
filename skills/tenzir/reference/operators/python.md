@@ -1,7 +1,7 @@
 ---
 title: "python"
-canonical: https://tenzir.com/docs/reference/operators/python
-source: https://tenzir.com/docs/reference/operators/python.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/python
+source: https://tenzir.com/docs/v7.0.0/reference/operators/python.md
 section: "Docs"
 ---
 
@@ -101,6 +101,6 @@ python r#"
 
 ## See Also
 
-* [`shell`](https://tenzir.com/docs/reference/operators/shell.md)
+* [`shell`](https://tenzir.com/docs/v7.0.0/reference/operators/shell.md)
 
 Parallelizable: a parallel pipeline may run this operator on several cores at once.

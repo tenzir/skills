@@ -1,7 +1,7 @@
 ---
 title: "flatten"
-canonical: https://tenzir.com/docs/reference/functions/flatten
-source: https://tenzir.com/docs/reference/functions/flatten.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/flatten
+source: https://tenzir.com/docs/v7.0.0/reference/functions/flatten.md
 section: "Docs"
 ---
 
@@ -146,6 +146,6 @@ this = flatten(this)
 
 ## See Also
 
-* [`unflatten`](https://tenzir.com/docs/reference/functions/unflatten.md)
+* [`unflatten`](https://tenzir.com/docs/v7.0.0/reference/functions/unflatten.md)
 * [Shape records](../../guides/shape/shape-records.md)
 * [Reshape complex data](../../guides/shape/reshape-complex-data.md)

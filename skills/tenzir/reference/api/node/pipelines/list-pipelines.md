@@ -1,7 +1,7 @@
 ---
 title: "List pipelines"
-canonical: https://tenzir.com/docs/reference/api/node/pipelines/list-pipelines
-source: https://tenzir.com/docs/reference/api/node/pipelines/list-pipelines.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/api/node/pipelines/list-pipelines
+source: https://tenzir.com/docs/v7.0.0/reference/api/node/pipelines/list-pipelines.md
 section: "Docs"
 ---
 

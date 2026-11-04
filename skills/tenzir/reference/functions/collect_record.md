@@ -1,7 +1,7 @@
 ---
 title: "collect_record"
-canonical: https://tenzir.com/docs/reference/functions/collect_record
-source: https://tenzir.com/docs/reference/functions/collect_record.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/collect_record
+source: https://tenzir.com/docs/v7.0.0/reference/functions/collect_record.md
 section: "Docs"
 ---
 
@@ -30,7 +30,7 @@ The `collect_record` function builds a record from any mixture of these entries:
 
 With two arguments, the function pairs each key in the first list with the value at the same position in the second list. Both lists must have the same length.
 
-Keys are automatically converted to strings using the same representation as [`string`](https://tenzir.com/docs/reference/functions/string.md). For example, `42`, `true`, and `null` become `"42"`, `"true"`, and `"null"`. Strings remain unchanged. Field names are interpreted literally: a key such as `"a.b"` creates one field, not a nested record. Empty strings are valid keys. Values can have any type, including lists, records, and `null`.
+Keys are automatically converted to strings using the same representation as [`string`](https://tenzir.com/docs/v7.0.0/reference/functions/string.md). For example, `42`, `true`, and `null` become `"42"`, `"true"`, and `"null"`. Strings remain unchanged. Field names are interpreted literally: a key such as `"a.b"` creates one field, not a nested record. Empty strings are valid keys. Values can have any type, including lists, records, and `null`.
 
 If keys produce the same string, the last value wins, even when that value is `null`. For example, `42` and `"42"` refer to the same field. Fields retain the order of their first occurrence. Records are merged shallowly: a later nested record replaces the earlier value rather than merging its fields recursively.
 
@@ -200,12 +200,12 @@ select result=collect_record(entries)
 
 ## See Also
 
-* [`collect`](https://tenzir.com/docs/reference/functions/collect.md)
-* [`entries`](https://tenzir.com/docs/reference/functions/entries.md)
-* [`merge`](https://tenzir.com/docs/reference/functions/merge.md)
-* [`string`](https://tenzir.com/docs/reference/functions/string.md)
-* [`values`](https://tenzir.com/docs/reference/functions/values.md)
-* [`zip`](https://tenzir.com/docs/reference/functions/zip.md)
+* [`collect`](https://tenzir.com/docs/v7.0.0/reference/functions/collect.md)
+* [`entries`](https://tenzir.com/docs/v7.0.0/reference/functions/entries.md)
+* [`merge`](https://tenzir.com/docs/v7.0.0/reference/functions/merge.md)
+* [`string`](https://tenzir.com/docs/v7.0.0/reference/functions/string.md)
+* [`values`](https://tenzir.com/docs/v7.0.0/reference/functions/values.md)
+* [`zip`](https://tenzir.com/docs/v7.0.0/reference/functions/zip.md)
 * [Shape records](../../guides/shape/shape-records.md)
 * [Shape lists](../../guides/shape/shape-lists.md)
 * [Reshape complex data](../../guides/shape/reshape-complex-data.md)

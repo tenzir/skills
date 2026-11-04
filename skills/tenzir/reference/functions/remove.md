@@ -1,7 +1,7 @@
 ---
 title: "remove"
-canonical: https://tenzir.com/docs/reference/functions/remove
-source: https://tenzir.com/docs/reference/functions/remove.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/remove
+source: https://tenzir.com/docs/v7.0.0/reference/functions/remove.md
 section: "Docs"
 ---
 
@@ -64,8 +64,8 @@ xs = xs.remove("apple")
 
 ## See Also
 
-* [`add`](https://tenzir.com/docs/reference/functions/add.md)
-* [`append`](https://tenzir.com/docs/reference/functions/append.md)
-* [`distinct`](https://tenzir.com/docs/reference/functions/distinct.md)
-* [`prepend`](https://tenzir.com/docs/reference/functions/prepend.md)
+* [`add`](https://tenzir.com/docs/v7.0.0/reference/functions/add.md)
+* [`append`](https://tenzir.com/docs/v7.0.0/reference/functions/append.md)
+* [`distinct`](https://tenzir.com/docs/v7.0.0/reference/functions/distinct.md)
+* [`prepend`](https://tenzir.com/docs/v7.0.0/reference/functions/prepend.md)
 * [Shape lists](../../guides/shape/shape-lists.md)

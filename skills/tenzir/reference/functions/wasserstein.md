@@ -1,7 +1,7 @@
 ---
 title: "wasserstein"
-canonical: https://tenzir.com/docs/reference/functions/wasserstein
-source: https://tenzir.com/docs/reference/functions/wasserstein.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/wasserstein
+source: https://tenzir.com/docs/v7.0.0/reference/functions/wasserstein.md
 section: "Docs"
 ---
 
@@ -51,6 +51,6 @@ select span_shift_ms=wasserstein(
 
 ## See also
 
-* [`model_distance`](https://tenzir.com/docs/reference/functions/model_distance.md)
-* [`ecdf`](https://tenzir.com/docs/reference/functions/ecdf.md)
-* [`kolmogorov_smirnov`](https://tenzir.com/docs/reference/functions/kolmogorov_smirnov.md)
+* [`model_distance`](https://tenzir.com/docs/v7.0.0/reference/functions/model_distance.md)
+* [`ecdf`](https://tenzir.com/docs/v7.0.0/reference/functions/ecdf.md)
+* [`kolmogorov_smirnov`](https://tenzir.com/docs/v7.0.0/reference/functions/kolmogorov_smirnov.md)

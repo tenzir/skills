@@ -1,7 +1,7 @@
 ---
 title: "Git and GitHub Workflow"
-canonical: https://tenzir.com/docs/guides/contribution/workflow
-source: https://tenzir.com/docs/guides/contribution/workflow.md
+canonical: https://tenzir.com/docs/v7.0.0/guides/contribution/workflow
+source: https://tenzir.com/docs/v7.0.0/guides/contribution/workflow.md
 section: "Docs"
 ---
 

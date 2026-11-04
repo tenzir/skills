@@ -1,7 +1,7 @@
 ---
 title: "Clean up values"
-canonical: https://tenzir.com/docs/guides/parse/clean-up-values
-source: https://tenzir.com/docs/guides/parse/clean-up-values.md
+canonical: https://tenzir.com/docs/v7.0.0/guides/parse/clean-up-values
+source: https://tenzir.com/docs/v7.0.0/guides/parse/clean-up-values.md
 section: "Docs"
 ---
 
@@ -17,7 +17,7 @@ Many data sources use string placeholders instead of actual null values. Common 
 
 ### Normalize across all fields
 
-Use [`replace`](https://tenzir.com/docs/reference/operators/replace.md) to convert placeholders to null across all string fields:
+Use [`replace`](https://tenzir.com/docs/v7.0.0/reference/operators/replace.md) to convert placeholders to null across all string fields:
 
 ```tql
 from {status: "active", error: "None"},

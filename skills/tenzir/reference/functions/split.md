@@ -1,7 +1,7 @@
 ---
 title: "split"
-canonical: https://tenzir.com/docs/reference/functions/split
-source: https://tenzir.com/docs/reference/functions/split.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/split
+source: https://tenzir.com/docs/v7.0.0/reference/functions/split.md
 section: "Docs"
 ---
 
@@ -85,6 +85,6 @@ from {
 
 ## See Also
 
-* [`split_regex`](https://tenzir.com/docs/reference/functions/split_regex.md)
-* [`join`](https://tenzir.com/docs/reference/functions/join.md)
+* [`split_regex`](https://tenzir.com/docs/v7.0.0/reference/functions/split_regex.md)
+* [`join`](https://tenzir.com/docs/v7.0.0/reference/functions/join.md)
 * [Manipulate strings](../../guides/shape/manipulate-strings.md)

@@ -1,7 +1,7 @@
 ---
 title: "ewm_variance"
-canonical: https://tenzir.com/docs/reference/functions/ewm_variance
-source: https://tenzir.com/docs/reference/functions/ewm_variance.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/ewm_variance
+source: https://tenzir.com/docs/v7.0.0/reference/functions/ewm_variance.md
 section: "Docs"
 ---
 
@@ -19,7 +19,7 @@ ewm_variance(xs:list, [alpha=number, span=number, com=number,
 
 ## Description
 
-The `ewm_variance` function returns an exponentially weighted moving variance for every position in `xs`. It accepts lists of integers, unsigned integers, or doubles and always returns a list of doubles with the same length. It uses the same zero-based, pandas-convention weights as [`ewma`](https://tenzir.com/docs/reference/functions/ewma.md): with a decay parameter `alpha`, observation $x_i$ carries weight $w_i = (1 - \alpha)^{t-i}$ at position $t$. With a duration `halflife` $h$ and timestamps $\tau_i$ from `times`, it carries weight $w_i = 2^{-(\tau_t - \tau_i)/h}$. The variance at position $t$ is the weighted second moment around the exponentially weighted mean $y_t$:
+The `ewm_variance` function returns an exponentially weighted moving variance for every position in `xs`. It accepts lists of integers, unsigned integers, or doubles and always returns a list of doubles with the same length. It uses the same zero-based, pandas-convention weights as [`ewma`](https://tenzir.com/docs/v7.0.0/reference/functions/ewma.md): with a decay parameter `alpha`, observation $x_i$ carries weight $w_i = (1 - \alpha)^{t-i}$ at position $t$. With a duration `halflife` $h$ and timestamps $\tau_i$ from `times`, it carries weight $w_i = 2^{-(\tau_t - \tau_i)/h}$. The variance at position $t$ is the weighted second moment around the exponentially weighted mean $y_t$:
 
 $$
 s_t^2 = f_t \cdot \frac{\sum_{i=0}^{t} w_i \, (x_i - y_t)^2} {\sum_{i=0}^{t} w_i}
@@ -33,7 +33,7 @@ $$
 
 With `bias=true`, the factor is $f_t = 1$ and the function returns the plain weighted second moment.
 
-Choose exactly one decay parameter among `alpha`, `span`, `com`, and `halflife`. The decay parameters, `times`, `adjust`, and `ignore_nulls` behave exactly as in [`ewma`](https://tenzir.com/docs/reference/functions/ewma.md).
+Choose exactly one decay parameter among `alpha`, `span`, `com`, and `halflife`. The decay parameters, `times`, `adjust`, and `ignore_nulls` behave exactly as in [`ewma`](https://tenzir.com/docs/v7.0.0/reference/functions/ewma.md).
 
 A null list yields null. Empty lists remain empty. Leading null elements remain null. With the default `bias=false`, the first numeric element also yields null, because the debiasing factor is undefined for a single observation; with `bias=true` it yields `0.0`. After the first numeric element, a null element repeats the current variance so that the result keeps the input element positions. A NaN element counts as null.
 
@@ -63,7 +63,7 @@ A list of non-null, non-decreasing timestamps with the same length as `xs`. You 
 
 ### `adjust = bool` (optional)
 
-Controls how the function applies weights, as in [`ewma`](https://tenzir.com/docs/reference/functions/ewma.md). The default is `true`.
+Controls how the function applies weights, as in [`ewma`](https://tenzir.com/docs/v7.0.0/reference/functions/ewma.md). The default is `true`.
 
 ### `bias = bool` (optional)
 
@@ -71,7 +71,7 @@ Controls whether the function debiases the weighted variance. The default is `fa
 
 ### `ignore_nulls = bool` (optional)
 
-Controls whether null positions contribute decay, as in [`ewma`](https://tenzir.com/docs/reference/functions/ewma.md). The default is `false`.
+Controls whether null positions contribute decay, as in [`ewma`](https://tenzir.com/docs/v7.0.0/reference/functions/ewma.md). The default is `false`.
 
 ## Examples
 
@@ -117,7 +117,7 @@ select result = xs.ewm_variance(halflife=1d, times=times)
 
 ## See Also
 
-* [`ewm_stddev`](https://tenzir.com/docs/reference/functions/ewm_stddev.md)
-* [`ewma`](https://tenzir.com/docs/reference/functions/ewma.md)
-* [`mad`](https://tenzir.com/docs/reference/functions/mad.md)
-* [`variance`](https://tenzir.com/docs/reference/functions/variance.md)
+* [`ewm_stddev`](https://tenzir.com/docs/v7.0.0/reference/functions/ewm_stddev.md)
+* [`ewma`](https://tenzir.com/docs/v7.0.0/reference/functions/ewma.md)
+* [`mad`](https://tenzir.com/docs/v7.0.0/reference/functions/mad.md)
+* [`variance`](https://tenzir.com/docs/v7.0.0/reference/functions/variance.md)

@@ -1,7 +1,7 @@
 ---
 title: "repeat"
-canonical: https://tenzir.com/docs/reference/functions/repeat
-source: https://tenzir.com/docs/reference/functions/repeat.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/repeat
+source: https://tenzir.com/docs/v7.0.0/reference/functions/repeat.md
 section: "Docs"
 ---
 
@@ -51,7 +51,7 @@ from {message: "na".repeat(0)}
 
 ## See Also
 
-* [`pad_end`](https://tenzir.com/docs/reference/functions/pad_end.md)
-* [`pad_start`](https://tenzir.com/docs/reference/functions/pad_start.md)
-* [`replace`](https://tenzir.com/docs/reference/functions/replace.md)
+* [`pad_end`](https://tenzir.com/docs/v7.0.0/reference/functions/pad_end.md)
+* [`pad_start`](https://tenzir.com/docs/v7.0.0/reference/functions/pad_start.md)
+* [`replace`](https://tenzir.com/docs/v7.0.0/reference/functions/replace.md)
 * [Manipulate strings](../../guides/shape/manipulate-strings.md)

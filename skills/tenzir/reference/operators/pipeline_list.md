@@ -1,7 +1,7 @@
 ---
 title: "pipeline_list"
-canonical: https://tenzir.com/docs/reference/operators/pipeline_list
-source: https://tenzir.com/docs/reference/operators/pipeline_list.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/pipeline_list
+source: https://tenzir.com/docs/v7.0.0/reference/operators/pipeline_list.md
 section: "Docs"
 ---
 
@@ -17,7 +17,7 @@ pipeline_list
 
 ## Description
 
-The `pipeline_list` operator returns the list of all managed pipelines. Managed pipelines are pipelines created through the [`/pipeline` API](https://tenzir.com/docs/reference/operators/openapi.md), which includes all pipelines run through the Tenzir Platform.
+The `pipeline_list` operator returns the list of all managed pipelines. Managed pipelines are pipelines created through the [`/pipeline` API](https://tenzir.com/docs/v7.0.0/reference/operators/openapi.md), which includes all pipelines run through the Tenzir Platform.
 
 ## Examples
 
@@ -64,6 +64,6 @@ summarize package, names=collect(name)
 
 ## See Also
 
-* [`package_list`](https://tenzir.com/docs/reference/operators/package_list.md)
-* [`pipeline_detach`](https://tenzir.com/docs/reference/operators/pipeline_detach.md)
-* [`pipeline_run`](https://tenzir.com/docs/reference/operators/pipeline_run.md)
+* [`package_list`](https://tenzir.com/docs/v7.0.0/reference/operators/package_list.md)
+* [`pipeline_detach`](https://tenzir.com/docs/v7.0.0/reference/operators/pipeline_detach.md)
+* [`pipeline_run`](https://tenzir.com/docs/v7.0.0/reference/operators/pipeline_run.md)

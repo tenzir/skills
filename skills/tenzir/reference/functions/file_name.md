@@ -1,7 +1,7 @@
 ---
 title: "file_name"
-canonical: https://tenzir.com/docs/reference/functions/file_name
-source: https://tenzir.com/docs/reference/functions/file_name.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/file_name
+source: https://tenzir.com/docs/v7.0.0/reference/functions/file_name.md
 section: "Docs"
 ---
 
@@ -33,5 +33,5 @@ from {x: file_name("/path/to/log.json")}
 
 ## See Also
 
-* [`parent_dir`](https://tenzir.com/docs/reference/functions/parent_dir.md)
+* [`parent_dir`](https://tenzir.com/docs/v7.0.0/reference/functions/parent_dir.md)
 * [Manipulate strings](../../guides/shape/manipulate-strings.md)

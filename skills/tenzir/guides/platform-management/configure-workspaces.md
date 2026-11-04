@@ -1,7 +1,7 @@
 ---
 title: "Configure workspaces"
-canonical: https://tenzir.com/docs/guides/platform-management/configure-workspaces
-source: https://tenzir.com/docs/guides/platform-management/configure-workspaces.md
+canonical: https://tenzir.com/docs/v7.0.0/guides/platform-management/configure-workspaces
+source: https://tenzir.com/docs/v7.0.0/guides/platform-management/configure-workspaces.md
 section: "Docs"
 ---
 
@@ -22,9 +22,9 @@ The Tenzir Platform CLI allows administrators to create, modify, and delete work
 
 On-premise setup required
 
-This CLI functionality requires an on-premise platform deployment, available with the [Sovereign Edition](https://tenzir.com/pricing.md).
+This CLI functionality requires an on-premise platform deployment, available with the [Sovereign Edition](https://tenzir.com/pricing).
 
-Only local platform administrators can manage workspaces dynamically. The [`TENZIR_PLATFORM_OIDC_ADMIN_RULES` variable](https://tenzir.com/docs/guides/platform-setup/configure-identity-provider.md) defines who’s an administrator in your platform deployment.
+Only local platform administrators can manage workspaces dynamically. The [`TENZIR_PLATFORM_OIDC_ADMIN_RULES` variable](https://tenzir.com/docs/v7.0.0/guides/platform-setup/configure-identity-provider.md) defines who’s an administrator in your platform deployment.
 
 ### Creating and managing workspaces
 
@@ -37,7 +37,7 @@ Choose the owner namespace by deciding who controls access to the workspace:
 
 The `team` namespace is the custom option, and the one most Sovereign Edition deployments want. Its owner ID is a label of your own choosing, such as a customer or department name, which the platform never derives access from. Use it to admit users through [access rules](configure-workspaces.md#understanding-access-control) that match the claims your identity provider issues, instead of modelling those groups as platform organizations.
 
-For a detailed overview, of the available commands, take a look at our [CLI reference documentation](../../reference/platform/command-line-interface.md).
+For a detailed overview, of the available commands, take a look at our [CLI reference documentation](https://docs.tenzir.com/reference/platform/command-line-interface).
 
 Add an access rule before you hand out the workspace
 
@@ -95,11 +95,11 @@ Access rules determine who can enter a workspace. Users gain access to the works
 
 The platform supports various rule types, from allowing everyone to restricting access to specific users or organization members.
 
-For a complete reference of all available authentication rules and their parameters, see the [CLI reference documentation](../../reference/platform/command-line-interface.md#configure-access-rules).
+For a complete reference of all available authentication rules and their parameters, see the [CLI reference documentation](https://docs.tenzir.com/reference/platform/command-line-interface#configure-access-rules).
 
 ## Define static workspaces
 
-You pre-define **static workspaces** declaratively in configuration files. This “as-code” approach differs from the dynamic management approach, which you manage with the [command line interface](../../reference/platform/command-line-interface.md).
+You pre-define **static workspaces** declaratively in configuration files. This “as-code” approach differs from the dynamic management approach, which you manage with the [command line interface](https://docs.tenzir.com/reference/platform/command-line-interface).
 
 Here’s a minimal example of a static workspace configuration:
 
@@ -119,7 +119,7 @@ The `auth-rules` section defines who can access the workspace. The example above
 
 Generating Auth Rules
 
-Use the `print-auth-rule` [CLI](../../reference/platform/command-line-interface.md) command to easily generate auth rules in the correct format:
+Use the `print-auth-rule` [CLI](https://docs.tenzir.com/reference/platform/command-line-interface) command to easily generate auth rules in the correct format:
 
 ```bash
 tenzir-platform tools print-auth-rule allow-all

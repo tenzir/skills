@@ -1,7 +1,7 @@
 ---
 title: "Read from data stores"
-canonical: https://tenzir.com/docs/guides/collect/read-from-data-stores
-source: https://tenzir.com/docs/guides/collect/read-from-data-stores.md
+canonical: https://tenzir.com/docs/v7.0.0/guides/collect/read-from-data-stores
+source: https://tenzir.com/docs/v7.0.0/guides/collect/read-from-data-stores.md
 section: "Docs"
 ---
 
@@ -11,7 +11,7 @@ section: "Docs"
 
 This guide shows you how to read from external data stores with TQL. You’ll learn how to read full tables, push filters into SQL, inspect metadata, and stream new rows.
 
-Today, this guide focuses on [`from_mysql`](https://tenzir.com/docs/reference/operators/from_mysql.md), [`from_clickhouse`](https://tenzir.com/docs/reference/operators/from_clickhouse.md), and [`from_duckdb`](https://tenzir.com/docs/reference/operators/from_duckdb.md). As Tenzir adds more data store integrations, the same patterns will apply.
+Today, this guide focuses on [`from_mysql`](https://tenzir.com/docs/v7.0.0/reference/operators/from_mysql.md), [`from_clickhouse`](https://tenzir.com/docs/v7.0.0/reference/operators/from_clickhouse.md), and [`from_duckdb`](https://tenzir.com/docs/v7.0.0/reference/operators/from_duckdb.md). As Tenzir adds more data store integrations, the same patterns will apply.
 
 ## Read a table
 
@@ -34,7 +34,7 @@ from_clickhouse uri="clickhouse://default:secret@clickhouse.example.com:9000/sec
                 tls=false
 ```
 
-Read a Hydrolix table with [`from_hydrolix`](https://tenzir.com/docs/reference/operators/from_hydrolix.md). Pass the URL of the cluster and a token:
+Read a Hydrolix table with [`from_hydrolix`](https://tenzir.com/docs/v7.0.0/reference/operators/from_hydrolix.md). Pass the URL of the cluster and a token:
 
 ```tql
 let $since = now() - 1h
@@ -69,7 +69,7 @@ select time, host, message
 head 1000
 ```
 
-The reference for [`from_clickhouse`](https://tenzir.com/docs/reference/operators/from_clickhouse.md) lists which predicates translate. Anything that does not, such as a function call, runs in Tenzir with the same result. With MySQL, `table` mode fetches every row and the pipeline filters afterwards.
+The reference for [`from_clickhouse`](https://tenzir.com/docs/v7.0.0/reference/operators/from_clickhouse.md) lists which predicates translate. Anything that does not, such as a function call, runs in Tenzir with the same result. With MySQL, `table` mode fetches every row and the pipeline filters afterwards.
 
 ## Shape results with SQL
 
@@ -182,8 +182,8 @@ This lets you treat database rows like any other event stream in Tenzir.
 * [Read from message brokers](read-from-message-brokers.md)
 * [Filter and select data](../optimize/filter-and-select-data.md)
 * [Send to destinations](../route/send-to-destinations.md)
-* [`from_clickhouse`](https://tenzir.com/docs/reference/operators/from_clickhouse.md)
-* [`from_mysql`](https://tenzir.com/docs/reference/operators/from_mysql.md)
-* [ClickHouse](../../integrations/clickhouse.md)
-* [Hydrolix](../../integrations/hydrolix.md)
-* [MySQL](../../integrations/mysql.md)
+* [`from_clickhouse`](https://tenzir.com/docs/v7.0.0/reference/operators/from_clickhouse.md)
+* [`from_mysql`](https://tenzir.com/docs/v7.0.0/reference/operators/from_mysql.md)
+* [Clickhouse](https://docs.tenzir.com/integrations/clickhouse)
+* [Hydrolix](https://docs.tenzir.com/integrations/hydrolix)
+* [Mysql](https://docs.tenzir.com/integrations/mysql)

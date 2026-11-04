@@ -1,7 +1,7 @@
 ---
 title: "openapi"
-canonical: https://tenzir.com/docs/reference/operators/openapi
-source: https://tenzir.com/docs/reference/operators/openapi.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/openapi
+source: https://tenzir.com/docs/v7.0.0/reference/operators/openapi.md
 section: "Docs"
 ---
 
@@ -30,4 +30,4 @@ write_yaml
 
 ## See Also
 
-* [`api`](https://tenzir.com/docs/reference/operators/api.md)
+* [`api`](https://tenzir.com/docs/v7.0.0/reference/operators/api.md)

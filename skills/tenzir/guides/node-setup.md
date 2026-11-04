@@ -1,7 +1,7 @@
 ---
 title: "Overview"
-canonical: https://tenzir.com/docs/guides/node-setup
-source: https://tenzir.com/docs/guides/node-setup.md
+canonical: https://tenzir.com/docs/v7.0.0/guides/node-setup
+source: https://tenzir.com/docs/v7.0.0/guides/node-setup.md
 section: "Docs"
 ---
 

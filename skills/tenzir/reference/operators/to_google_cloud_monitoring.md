@@ -1,7 +1,7 @@
 ---
 title: "to_google_cloud_monitoring"
-canonical: https://tenzir.com/docs/reference/operators/to_google_cloud_monitoring
-source: https://tenzir.com/docs/reference/operators/to_google_cloud_monitoring.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/to_google_cloud_monitoring
+source: https://tenzir.com/docs/v7.0.0/reference/operators/to_google_cloud_monitoring.md
 section: "Docs"
 ---
 
@@ -25,7 +25,7 @@ to_google_cloud_monitoring [project=string, service_credentials=string,
 
 The `to_google_cloud_monitoring` operator writes metric events as [user-defined metrics](https://cloud.google.com/monitoring/custom-metrics) to [Google Cloud Monitoring](https://cloud.google.com/monitoring) through the Cloud Monitoring API.
 
-The operator accepts the same input shape as [`to_prometheus`](https://tenzir.com/docs/reference/operators/to_prometheus.md), so you can send the output of `metrics shape="prometheus"` without reshaping it:
+The operator accepts the same input shape as [`to_prometheus`](https://tenzir.com/docs/v7.0.0/reference/operators/to_prometheus.md), so you can send the output of `metrics shape="prometheus"` without reshaping it:
 
 ```tql
 {
@@ -62,7 +62,7 @@ Cumulative metrics require a `start_timestamp` before `timestamp`. Keep the star
 
 ### Histograms
 
-Histograms use one event per histogram point in the layout of OpenTelemetry, which [`accept_otlp`](https://tenzir.com/docs/reference/operators/accept_otlp.md) produces:
+Histograms use one event per histogram point in the layout of OpenTelemetry, which [`accept_otlp`](https://tenzir.com/docs/v7.0.0/reference/operators/accept_otlp.md) produces:
 
 ```tql
 {
@@ -286,7 +286,7 @@ to_google_cloud_monitoring project="my-project",
 
 ## See Also
 
-* [`metrics`](https://tenzir.com/docs/reference/operators/metrics.md)
-* [`to_prometheus`](https://tenzir.com/docs/reference/operators/to_prometheus.md)
+* [`metrics`](https://tenzir.com/docs/v7.0.0/reference/operators/metrics.md)
+* [`to_prometheus`](https://tenzir.com/docs/v7.0.0/reference/operators/to_prometheus.md)
 * [Collect metrics](../../guides/observability/collect-metrics.md)
-* [Google Cloud Monitoring](../../integrations/google/cloud-monitoring.md)
+* [Cloud monitoring](https://docs.tenzir.com/integrations/google/cloud-monitoring)

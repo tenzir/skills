@@ -1,7 +1,7 @@
 ---
 title: "zip"
-canonical: https://tenzir.com/docs/reference/functions/zip
-source: https://tenzir.com/docs/reference/functions/zip.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/zip
+source: https://tenzir.com/docs/v7.0.0/reference/functions/zip.md
 section: "Docs"
 ---
 
@@ -41,6 +41,6 @@ select zs = zip(xs, ys)
 
 ## See Also
 
-* [`concatenate`](https://tenzir.com/docs/reference/functions/concatenate.md)
-* [`map`](https://tenzir.com/docs/reference/functions/map.md)
+* [`concatenate`](https://tenzir.com/docs/v7.0.0/reference/functions/concatenate.md)
+* [`map`](https://tenzir.com/docs/v7.0.0/reference/functions/map.md)
 * [Shape lists](../../guides/shape/shape-lists.md)

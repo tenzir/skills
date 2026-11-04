@@ -1,8 +1,8 @@
 ---
 title: "Overview"
 description: "Match security activity and model the resulting findings."
-canonical: https://tenzir.com/docs/guides/detect
-source: https://tenzir.com/docs/guides/detect.md
+canonical: https://tenzir.com/docs/v7.0.0/guides/detect
+source: https://tenzir.com/docs/v7.0.0/guides/detect.md
 section: "Docs"
 ---
 
@@ -12,4 +12,4 @@ section: "Docs"
 
 Detection turns normalized events into findings by matching activity, measuring behavior over time, and correlating independent signals. When you first need to calculate rarity, adaptive thresholds, distribution drift, or cardinality, start with our [analysis guides](analyze.md), then decide whether that evidence should become a security finding.
 
-Start with [matching events in TQL](https://docs.tenzir.com/guides/match-events-with-tql) and [modeling the resulting OCSF findings](https://docs.tenzir.com/guides/model-detections-in-ocsf). Then explore [time-window detection](https://docs.tenzir.com/guides/detect-over-time-windows), [stored-event baselines](https://docs.tenzir.com/guides/baseline-from-stored-events), [periodic-behavior detection](https://docs.tenzir.com/guides/detect-periodic-behavior), [multi-stage detectors](https://docs.tenzir.com/guides/create-multi-stage-detectors), [Sigma](https://docs.tenzir.com/guides/execute-sigma-rules), [Sigma compatibility with OCSF](https://docs.tenzir.com/guides/check-sigma-rule-compatibility-with-ocsf), and [YARA](https://docs.tenzir.com/guides/scan-bytes-with-yara).
+Start with [matching events in TQL](detect/match-events-with-tql.md) and [modeling the resulting OCSF findings](detect/model-detections-in-ocsf.md). Then explore [time-window detection](detect/detect-over-time-windows.md), [stored-event baselines](detect/baseline-from-stored-events.md), [periodic-behavior detection](detect/detect-periodic-behavior.md), [multi-stage detectors](detect/create-multi-stage-detectors.md), [Sigma](detect/execute-sigma-rules.md), [Sigma compatibility with OCSF](detect/check-sigma-rule-compatibility-with-ocsf.md), and [YARA](detect/scan-bytes-with-yara.md).

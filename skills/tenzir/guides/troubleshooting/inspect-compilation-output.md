@@ -1,8 +1,8 @@
 ---
 title: "Inspect the compilation output"
 description: "Inspect a pipeline's tokens, syntax tree, logical operators, and physical plan to diagnose compilation and planning issues."
-canonical: https://tenzir.com/docs/guides/troubleshooting/inspect-compilation-output
-source: https://tenzir.com/docs/guides/troubleshooting/inspect-compilation-output.md
+canonical: https://tenzir.com/docs/v7.0.0/guides/troubleshooting/inspect-compilation-output
+source: https://tenzir.com/docs/v7.0.0/guides/troubleshooting/inspect-compilation-output.md
 section: "Docs"
 ---
 

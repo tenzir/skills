@@ -1,7 +1,7 @@
 ---
 title: "Microsoft SQL Server"
-canonical: https://tenzir.com/docs/reference/optimizations/microsoft-sql
-source: https://tenzir.com/docs/reference/optimizations/microsoft-sql.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/optimizations/microsoft-sql
+source: https://tenzir.com/docs/v7.0.0/reference/optimizations/microsoft-sql.md
 section: "Docs"
 ---
 
@@ -9,7 +9,7 @@ section: "Docs"
 
 > When frommicrosoftsql reads a table, it lets SQL Server filter the rows, pick the columns, stop after enough rows, and compute summaries, so that SQL Server sends only what the pipeline needs instead of the whole table. This page describes when that happens, which filters SQL Server evaluates, and why the others stay in Tenzir. The optimizations overview explains how Tenzir optimizes pipelines in general and compares the databases.
 
-When [`from_microsoft_sql`](https://tenzir.com/docs/reference/operators/from_microsoft_sql.md) reads a table, it lets SQL Server filter the rows, pick the columns, stop after enough rows, and compute summaries, so that SQL Server sends only what the pipeline needs instead of the whole table. This page describes when that happens, which filters SQL Server evaluates, and why the others stay in Tenzir. The [optimizations overview](../optimizations.md) explains how Tenzir optimizes pipelines in general and compares the databases.
+When [`from_microsoft_sql`](https://tenzir.com/docs/v7.0.0/reference/operators/from_microsoft_sql.md) reads a table, it lets SQL Server filter the rows, pick the columns, stop after enough rows, and compute summaries, so that SQL Server sends only what the pipeline needs instead of the whole table. This page describes when that happens, which filters SQL Server evaluates, and why the others stay in Tenzir. The [optimizations overview](../optimizations.md) explains how Tenzir optimizes pipelines in general and compares the databases.
 
 ## When it applies
 
@@ -23,9 +23,9 @@ The operator reads in one of these modes, and only table mode optimizes:
 
 The operator turns the operators that follow it into parts of its `SELECT`:
 
-* [`where`](https://tenzir.com/docs/reference/operators/where.md) becomes a `WHERE` clause, as far as SQL Server evaluates the filter exactly like Tenzir.
-* [`select`](https://tenzir.com/docs/reference/operators/select.md) narrows the selected columns to those that the pipeline reads.
-* [`head`](https://tenzir.com/docs/reference/operators/head.md) becomes a `TOP`, if every filter before it went into the query.
+* [`where`](https://tenzir.com/docs/v7.0.0/reference/operators/where.md) becomes a `WHERE` clause, as far as SQL Server evaluates the filter exactly like Tenzir.
+* [`select`](https://tenzir.com/docs/v7.0.0/reference/operators/select.md) narrows the selected columns to those that the pipeline reads.
+* [`head`](https://tenzir.com/docs/v7.0.0/reference/operators/head.md) becomes a `TOP`, if every filter before it went into the query.
 
 For example, the pipeline
 
@@ -45,11 +45,11 @@ WHERE [severity] >= 3
   AND LEFT(<hex of rule>, LEN('455420')) = '455420'
 ```
 
-Here, `<hex of rule>` stands for the bytes of the `rule` column in hexadecimal, which the [text comparisons](microsoft-sql.md#text-comparisons) section explains. The [`where`](https://tenzir.com/docs/reference/operators/where.md), [`select`](https://tenzir.com/docs/reference/operators/select.md), and [`head`](https://tenzir.com/docs/reference/operators/head.md) operators still run in Tenzir on the rows that SQL Server returns, so the result is the same whether SQL Server evaluated a filter or not. The exception is a pipeline in which SQL Server computes a summary, as [Aggregations](microsoft-sql.md#aggregations) describes.
+Here, `<hex of rule>` stands for the bytes of the `rule` column in hexadecimal, which the [text comparisons](microsoft-sql.md#text-comparisons) section explains. The [`where`](https://tenzir.com/docs/v7.0.0/reference/operators/where.md), [`select`](https://tenzir.com/docs/v7.0.0/reference/operators/select.md), and [`head`](https://tenzir.com/docs/v7.0.0/reference/operators/head.md) operators still run in Tenzir on the rows that SQL Server returns, so the result is the same whether SQL Server evaluated a filter or not. The exception is a pipeline in which SQL Server computes a summary, as [Aggregations](microsoft-sql.md#aggregations) describes.
 
 ## Aggregations
 
-When a [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) follows the operator, after the filters that went into the query, SQL Server computes the summary with `GROUP BY` and returns one row per group instead of every matching row. This also applies to [`top`](https://tenzir.com/docs/reference/operators/top.md) and [`rare`](https://tenzir.com/docs/reference/operators/rare.md), which count with `summarize`. For example, the pipeline
+When a [`summarize`](https://tenzir.com/docs/v7.0.0/reference/operators/summarize.md) follows the operator, after the filters that went into the query, SQL Server computes the summary with `GROUP BY` and returns one row per group instead of every matching row. This also applies to [`top`](https://tenzir.com/docs/v7.0.0/reference/operators/top.md) and [`rare`](https://tenzir.com/docs/v7.0.0/reference/operators/rare.md), which count with `summarize`. For example, the pipeline
 
 ```tql
 from_microsoft_sql table="alerts", host="db.example.com", database="soc"
@@ -67,20 +67,20 @@ WHERE [severity] >= 3
 GROUP BY <hex of rule>
 ```
 
-Tenzir then arranges the result columns into the fields of the summary, such as `last.seen`. SQL Server takes over the [`where`](https://tenzir.com/docs/reference/operators/where.md) before the summary together with the summary itself, and returns only the group keys and the aggregates. In the example, the `severity` column never reaches Tenzir. The [`where`](https://tenzir.com/docs/reference/operators/where.md) after the summary runs in Tenzir. SQL Server computes these parts of a summary:
+Tenzir then arranges the result columns into the fields of the summary, such as `last.seen`. SQL Server takes over the [`where`](https://tenzir.com/docs/v7.0.0/reference/operators/where.md) before the summary together with the summary itself, and returns only the group keys and the aggregates. In the example, the `severity` column never reaches Tenzir. The [`where`](https://tenzir.com/docs/v7.0.0/reference/operators/where.md) after the summary runs in Tenzir. SQL Server computes these parts of a summary:
 
-The summary may also follow [`select`](https://tenzir.com/docs/reference/operators/select.md), [`drop`](https://tenzir.com/docs/reference/operators/drop.md), [`set`](https://tenzir.com/docs/reference/operators/set.md), and assignments that keep or copy the fields that it reads, as [Aggregations in the source](../optimizations.md#aggregations-in-the-source) describes. SQL Server then reads the original columns, and the result keeps the new names. For example, `select ip=src_ip` followed by `summarize ip, n=count()` groups by the `src_ip` column and returns the field `ip`. A computed value for a field that the summary reads, such as `level = severity * 2` before `max(level)`, keeps the summary in Tenzir.
+The summary may also follow [`select`](https://tenzir.com/docs/v7.0.0/reference/operators/select.md), [`drop`](https://tenzir.com/docs/v7.0.0/reference/operators/drop.md), [`set`](https://tenzir.com/docs/v7.0.0/reference/operators/set.md), and assignments that keep or copy the fields that it reads, as [Aggregations in the source](../optimizations.md#aggregations-in-the-source) describes. SQL Server then reads the original columns, and the result keeps the new names. For example, `select ip=src_ip` followed by `summarize ip, n=count()` groups by the `src_ip` column and returns the field `ip`. A computed value for a field that the summary reads, such as `level = severity * 2` before `max(level)`, keeps the summary in Tenzir.
 
 * Group keys on `bit`, integer, temporal, `uniqueidentifier`, and text columns. A text key groups by the hexadecimal spelling of its bytes, as the [text comparisons](microsoft-sql.md#text-comparisons) section describes, so `a`, `A`, and `a `form three groups like in Tenzir. Collations and padding would merge them into one. A `datetimeoffset` key groups by its instant, which Tenzir reads in UTC.
 * `count()`, and `count(x)` on such columns and on floating-point columns, as `COUNT_BIG`, which does not overflow at 2^31 like `COUNT`.
 * `min(x)` and `max(x)` on integer and temporal columns.
 
-Like Tenzir, SQL Server returns one row for an empty table when the summary has no group keys, with `0` for `count()` and `null` for `min` and `max`, and no rows when it has some. The rows arrive in the order in which SQL Server returns the groups. Since a table has no defined row order, this is as valid as the first-seen order in which [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) emits groups. Use [`sort`](https://tenzir.com/docs/reference/operators/sort.md) when you need a particular order.
+Like Tenzir, SQL Server returns one row for an empty table when the summary has no group keys, with `0` for `count()` and `null` for `min` and `max`, and no rows when it has some. The rows arrive in the order in which SQL Server returns the groups. Since a table has no defined row order, this is as valid as the first-seen order in which [`summarize`](https://tenzir.com/docs/v7.0.0/reference/operators/summarize.md) emits groups. Use [`sort`](https://tenzir.com/docs/v7.0.0/reference/operators/sort.md) when you need a particular order.
 
 Everything else runs in Tenzir with the same result. The operator then reads the rows as usual and summarizes them itself, still selecting only the columns that the summary reads:
 
 * A summary with another function, such as `sum`, an option such as `emit`, or a group key or argument that is not a field.
-* A summary after a [`head`](https://tenzir.com/docs/reference/operators/head.md), after a predicate that stays in Tenzir, or behind an operator that computes a field that the summary reads.
+* A summary after a [`head`](https://tenzir.com/docs/v7.0.0/reference/operators/head.md), after a predicate that stays in Tenzir, or behind an operator that computes a field that the summary reads.
 * Group keys and extremes of `float` and `real` columns, since `GROUP BY` considers `-0.0` equal to `0.0`, and extremes of text.
 * Columns that Tenzir reads differently from SQL Server, such as `decimal`, `money`, and `datetime`, and `nchar` and `nvarchar` on servers without UTF-8 collations.
 

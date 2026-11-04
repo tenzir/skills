@@ -1,8 +1,8 @@
 ---
 title: "Configure TLS"
 description: "Set up TLS encryption for operators and platform connections"
-canonical: https://tenzir.com/docs/guides/node-setup/configure-tls
-source: https://tenzir.com/docs/guides/node-setup/configure-tls.md
+canonical: https://tenzir.com/docs/v7.0.0/guides/node-setup/configure-tls
+source: https://tenzir.com/docs/v7.0.0/guides/node-setup/configure-tls.md
 section: "Docs"
 ---
 
@@ -28,12 +28,12 @@ tenzir:
 
 These settings apply automatically to operators that use node-level TLS, including:
 
-* [`accept_relp`](https://tenzir.com/docs/reference/operators/accept_relp.md)
-* [`accept_splunk`](https://tenzir.com/docs/reference/operators/accept_splunk.md)
-* [`from_http`](https://tenzir.com/docs/reference/operators/from_http.md)
-* [`to_opensearch`](https://tenzir.com/docs/reference/operators/to_opensearch.md)
-* [`accept_opensearch`](https://tenzir.com/docs/reference/operators/accept_opensearch.md)
-* [`to_splunk`](https://tenzir.com/docs/reference/operators/to_splunk.md)
+* [`accept_relp`](https://tenzir.com/docs/v7.0.0/reference/operators/accept_relp.md)
+* [`accept_splunk`](https://tenzir.com/docs/v7.0.0/reference/operators/accept_splunk.md)
+* [`from_http`](https://tenzir.com/docs/v7.0.0/reference/operators/from_http.md)
+* [`to_opensearch`](https://tenzir.com/docs/v7.0.0/reference/operators/to_opensearch.md)
+* [`accept_opensearch`](https://tenzir.com/docs/v7.0.0/reference/operators/accept_opensearch.md)
+* [`to_splunk`](https://tenzir.com/docs/v7.0.0/reference/operators/to_splunk.md)
 
 ### Available options
 

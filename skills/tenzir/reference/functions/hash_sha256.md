@@ -1,7 +1,7 @@
 ---
 title: "hash_sha256"
-canonical: https://tenzir.com/docs/reference/functions/hash_sha256
-source: https://tenzir.com/docs/reference/functions/hash_sha256.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/hash_sha256
+source: https://tenzir.com/docs/v7.0.0/reference/functions/hash_sha256.md
 section: "Docs"
 ---
 
@@ -33,16 +33,16 @@ from {x: hash_sha256("foo")}
 
 ## See Also
 
-* [`hash_crc32`](https://tenzir.com/docs/reference/functions/hash_crc32.md)
-* [`hash_md5`](https://tenzir.com/docs/reference/functions/hash_md5.md)
-* [`hash_sha1`](https://tenzir.com/docs/reference/functions/hash_sha1.md)
-* [`hash_sha224`](https://tenzir.com/docs/reference/functions/hash_sha224.md)
-* [`hash_sha384`](https://tenzir.com/docs/reference/functions/hash_sha384.md)
-* [`hash_sha512`](https://tenzir.com/docs/reference/functions/hash_sha512.md)
-* [`hash_sha3_224`](https://tenzir.com/docs/reference/functions/hash_sha3_224.md)
-* [`hash_sha3_256`](https://tenzir.com/docs/reference/functions/hash_sha3_256.md)
-* [`hash_sha3_384`](https://tenzir.com/docs/reference/functions/hash_sha3_384.md)
-* [`hash_sha3_512`](https://tenzir.com/docs/reference/functions/hash_sha3_512.md)
-* [`hash_xxh3`](https://tenzir.com/docs/reference/functions/hash_xxh3.md)
+* [`hash_crc32`](https://tenzir.com/docs/v7.0.0/reference/functions/hash_crc32.md)
+* [`hash_md5`](https://tenzir.com/docs/v7.0.0/reference/functions/hash_md5.md)
+* [`hash_sha1`](https://tenzir.com/docs/v7.0.0/reference/functions/hash_sha1.md)
+* [`hash_sha224`](https://tenzir.com/docs/v7.0.0/reference/functions/hash_sha224.md)
+* [`hash_sha384`](https://tenzir.com/docs/v7.0.0/reference/functions/hash_sha384.md)
+* [`hash_sha512`](https://tenzir.com/docs/v7.0.0/reference/functions/hash_sha512.md)
+* [`hash_sha3_224`](https://tenzir.com/docs/v7.0.0/reference/functions/hash_sha3_224.md)
+* [`hash_sha3_256`](https://tenzir.com/docs/v7.0.0/reference/functions/hash_sha3_256.md)
+* [`hash_sha3_384`](https://tenzir.com/docs/v7.0.0/reference/functions/hash_sha3_384.md)
+* [`hash_sha3_512`](https://tenzir.com/docs/v7.0.0/reference/functions/hash_sha3_512.md)
+* [`hash_xxh3`](https://tenzir.com/docs/v7.0.0/reference/functions/hash_xxh3.md)
 * [Manipulate strings](../../guides/shape/manipulate-strings.md)
 * [Mask sensitive data](../../guides/protect/mask-sensitive-data.md)

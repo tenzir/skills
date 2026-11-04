@@ -1,7 +1,7 @@
 ---
 title: "parallel"
-canonical: https://tenzir.com/docs/reference/operators/parallel
-source: https://tenzir.com/docs/reference/operators/parallel.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/parallel
+source: https://tenzir.com/docs/v7.0.0/reference/operators/parallel.md
 section: "Docs"
 ---
 
@@ -17,9 +17,9 @@ parallel [jobs:int, fuse=string, limit_partitions=int] { … }
 
 ## Description
 
-The [`parallel`](https://tenzir.com/docs/reference/operators/parallel.md) operator marks the operators in its subpipeline to run on multiple cores. It applies the same mechanism as the `// parallelism:` comment, which covers a whole pipeline, to a section of one.
+The [`parallel`](https://tenzir.com/docs/v7.0.0/reference/operators/parallel.md) operator marks the operators in its subpipeline to run on multiple cores. It applies the same mechanism as the `// parallelism:` comment, which covers a whole pipeline, to a section of one.
 
-Tenzir replicates only those operators that can work on any batch they receive, such as [`where`](https://tenzir.com/docs/reference/operators/where.md), assignments, [`drop`](https://tenzir.com/docs/reference/operators/drop.md), and [`ocsf_cast`](https://tenzir.com/docs/reference/operators/ocsf_cast.md). Operators that combine related events, such as [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md), [`group`](https://tenzir.com/docs/reference/operators/group.md), and [`deduplicate`](https://tenzir.com/docs/reference/operators/deduplicate.md), receive a stream partitioned by their own key fields, so every event of a group reaches the instance that owns it. Tenzir leaves the remaining operators, including sources and most sinks, at a single instance. Our explanation of [parallel execution](../../explanations/executor.md#parallel-execution) covers which operators fall into which category.
+Tenzir replicates only those operators that can work on any batch they receive, such as [`where`](https://tenzir.com/docs/v7.0.0/reference/operators/where.md), assignments, [`drop`](https://tenzir.com/docs/v7.0.0/reference/operators/drop.md), and [`ocsf_cast`](https://tenzir.com/docs/v7.0.0/reference/operators/ocsf_cast). Operators that combine related events, such as [`summarize`](https://tenzir.com/docs/v7.0.0/reference/operators/summarize.md), [`group`](https://tenzir.com/docs/v7.0.0/reference/operators/group.md), and [`deduplicate`](https://tenzir.com/docs/v7.0.0/reference/operators/deduplicate.md), receive a stream partitioned by their own key fields, so every event of a group reaches the instance that owns it. Tenzir leaves the remaining operators, including sources and most sinks, at a single instance. Our explanation of [parallel execution](../../explanations/executor.md#parallel-execution) covers which operators fall into which category.
 
 Reach for `parallel` when profiling points at a section of a pipeline rather than at the pipeline as a whole. To parallelize a whole pipeline, prefer the `// parallelism:` comment described in our guide on [tuning performance](../../guides/node-setup/tune-performance.md#parallelism).
 
@@ -45,7 +45,7 @@ Defaults to the surrounding pipeline’s setting, which is `"parallel"` unless a
 
 ### `limit_partitions = int (optional)`
 
-The upper bound on the number of instances for operators whose input must be partitioned by key, such as [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md), [`group`](https://tenzir.com/docs/reference/operators/group.md), and [`deduplicate`](https://tenzir.com/docs/reference/operators/deduplicate.md). Must be greater than zero.
+The upper bound on the number of instances for operators whose input must be partitioned by key, such as [`summarize`](https://tenzir.com/docs/v7.0.0/reference/operators/summarize.md), [`group`](https://tenzir.com/docs/v7.0.0/reference/operators/group.md), and [`deduplicate`](https://tenzir.com/docs/v7.0.0/reference/operators/deduplicate.md). Must be greater than zero.
 
 Defaults to the surrounding pipeline’s setting, which is `4` unless a `// parallelism:` directive says otherwise.
 
@@ -77,7 +77,7 @@ parallel 4 {
 }
 ```
 
-Tenzir routes every event with the same `src_ip`, `dst_ip`, and `dst_port` to the same instance of [`deduplicate`](https://tenzir.com/docs/reference/operators/deduplicate.md). Raise `limit_partitions` to spread those keys over more than the default four instances:
+Tenzir routes every event with the same `src_ip`, `dst_ip`, and `dst_port` to the same instance of [`deduplicate`](https://tenzir.com/docs/v7.0.0/reference/operators/deduplicate.md). Raise `limit_partitions` to spread those keys over more than the default four instances:
 
 ```tql
 subscribe "events"
@@ -113,8 +113,8 @@ to_file "/tmp/tenzir/high-severity.json" { write_ndjson }
 
 ## See Also
 
-* [`each`](https://tenzir.com/docs/reference/operators/each.md)
-* [`group`](https://tenzir.com/docs/reference/operators/group.md)
-* [`load_balance`](https://tenzir.com/docs/reference/operators/load_balance.md)
+* [`each`](https://tenzir.com/docs/v7.0.0/reference/operators/each.md)
+* [`group`](https://tenzir.com/docs/v7.0.0/reference/operators/group.md)
+* [`load_balance`](https://tenzir.com/docs/v7.0.0/reference/operators/load_balance.md)
 * [Tune performance](../../guides/node-setup/tune-performance.md)
 * [Fan out with subpipelines](../../guides/route/fan-out-with-subpipelines.md)

@@ -1,7 +1,7 @@
 ---
 title: "from_amqp"
-canonical: https://tenzir.com/docs/reference/operators/from_amqp
-source: https://tenzir.com/docs/reference/operators/from_amqp.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/from_amqp
+source: https://tenzir.com/docs/v7.0.0/reference/operators/from_amqp.md
 section: "Docs"
 ---
 
@@ -177,8 +177,8 @@ from_amqp "amqp://broker/vhost",
 
 ## See Also
 
-* [`to_amqp`](https://tenzir.com/docs/reference/operators/to_amqp.md)
+* [`to_amqp`](https://tenzir.com/docs/v7.0.0/reference/operators/to_amqp.md)
 * [Read from message brokers](../../guides/collect/read-from-message-brokers.md)
-* [AMQP](../../integrations/amqp.md)
+* [Amqp](https://docs.tenzir.com/integrations/amqp)
 
 Parallelizable: a parallel pipeline may run this operator on several cores at once.

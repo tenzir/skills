@@ -1,7 +1,7 @@
 ---
 title: "Read and watch files"
-canonical: https://tenzir.com/docs/guides/collect/read-and-watch-files
-source: https://tenzir.com/docs/guides/collect/read-and-watch-files.md
+canonical: https://tenzir.com/docs/v7.0.0/guides/collect/read-and-watch-files
+source: https://tenzir.com/docs/v7.0.0/guides/collect/read-and-watch-files.md
 section: "Docs"
 ---
 
@@ -9,15 +9,15 @@ section: "Docs"
 
 > This guide shows you how to read files and monitor directories using the fromfile operator. You’ll learn to read individual files, batch process directories, and set up real-time file monitoring.
 
-This guide shows you how to read files and monitor directories using the [`from_file`](https://tenzir.com/docs/reference/operators/from_file.md) operator. You’ll learn to read individual files, batch process directories, and set up real-time file monitoring.
+This guide shows you how to read files and monitor directories using the [`from_file`](https://tenzir.com/docs/v7.0.0/reference/operators/from_file.md) operator. You’ll learn to read individual files, batch process directories, and set up real-time file monitoring.
 
 ## Basic file reading
 
-The [`from_file`](https://tenzir.com/docs/reference/operators/from_file.md) operator handles various file types and formats. Start with these fundamental patterns for reading individual files.
+The [`from_file`](https://tenzir.com/docs/v7.0.0/reference/operators/from_file.md) operator handles various file types and formats. Start with these fundamental patterns for reading individual files.
 
 ### Single files
 
-To read a single file, specify the path to the [`from_file`](https://tenzir.com/docs/reference/operators/from_file.md) operator:
+To read a single file, specify the path to the [`from_file`](https://tenzir.com/docs/v7.0.0/reference/operators/from_file.md) operator:
 
 ```tql
 from_file "/path/to/file.json"
@@ -47,7 +47,7 @@ from_file "/path/to/file.log" {
 
 The parsing pipeline runs on the file content and must return events.
 
-When file names or extensions don’t identify the format reliably, use [`read_auto`](https://tenzir.com/docs/reference/operators/read_auto.md) to detect the format from the file content:
+When file names or extensions don’t identify the format reliably, use [`read_auto`](https://tenzir.com/docs/v7.0.0/reference/operators/read_auto.md) to detect the format from the file content:
 
 ```tql
 from_file "/dropzone/**" {
@@ -153,7 +153,7 @@ Access files directly from cloud storage providers using their native URLs. The 
 
 ### Amazon S3
 
-Access [Amazon S3](../../integrations/amazon/s3.md) buckets directly using `s3://` URLs:
+Access [S3](https://docs.tenzir.com/integrations/amazon/s3) buckets directly using `s3://` URLs:
 
 ```tql
 from_file "s3://bucket/path/to/file.csv"
@@ -167,7 +167,7 @@ from_file "s3://bucket/data/**/*.parquet"
 
 ### Google Cloud Storage
 
-Access [GCS](../../integrations/google/cloud-storage.md) buckets using `gs://` URLs:
+Access [GCS](https://docs.tenzir.com/integrations/google/cloud-storage) buckets using `gs://` URLs:
 
 ```tql
 from_file "gs://bucket/path/to/file.csv"
@@ -175,7 +175,7 @@ from_file "gs://bucket/path/to/file.csv"
 
 ### Azure Blob Storage
 
-Access [Azure Blob Storage](../../integrations/microsoft/azure-blob-storage.md) using `abfs://` URLs:
+Access [Azure blob storage](https://docs.tenzir.com/integrations/microsoft/azure-blob-storage) using `abfs://` URLs:
 
 ```tql
 from_file "abfs://container/path/to/file.csv"

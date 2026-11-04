@@ -1,7 +1,7 @@
 ---
 title: "serve_zmq"
-canonical: https://tenzir.com/docs/reference/operators/serve_zmq
-source: https://tenzir.com/docs/reference/operators/serve_zmq.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/serve_zmq
+source: https://tenzir.com/docs/v7.0.0/reference/operators/serve_zmq.md
 section: "Docs"
 ---
 
@@ -21,7 +21,7 @@ Binds a ZeroMQ `PUB` socket to the specified endpoint and publishes one message 
 
 The operator serializes each event with the selected `encoding` and optionally prepends a prefix to the serialized bytes before publishing the message. This lets subscribers use ZeroMQ’s native prefix filtering while keeping the event payload available to a `read_*` operator on the receiving side.
 
-Use `serve_zmq` when Tenzir should own the listening endpoint. This mirrors the transport-oriented naming used by operators such as [`serve_tcp`](https://tenzir.com/docs/reference/operators/serve_tcp.md).
+Use `serve_zmq` when Tenzir should own the listening endpoint. This mirrors the transport-oriented naming used by operators such as [`serve_tcp`](https://tenzir.com/docs/v7.0.0/reference/operators/serve_tcp.md).
 
 ### `endpoint: string`
 
@@ -61,8 +61,8 @@ serve_zmq "tcp://0.0.0.0:5555", encoding="json", prefix=f"{kind}/"
 
 ## See Also
 
-* [`to_zmq`](https://tenzir.com/docs/reference/operators/to_zmq.md)
-* [`from_zmq`](https://tenzir.com/docs/reference/operators/from_zmq.md)
-* [`accept_zmq`](https://tenzir.com/docs/reference/operators/accept_zmq.md)
-* [`to_zmq`](https://tenzir.com/docs/reference/operators/to_zmq.md)
-* [ZeroMQ](../../integrations/zeromq.md)
+* [`to_zmq`](https://tenzir.com/docs/v7.0.0/reference/operators/to_zmq.md)
+* [`from_zmq`](https://tenzir.com/docs/v7.0.0/reference/operators/from_zmq.md)
+* [`accept_zmq`](https://tenzir.com/docs/v7.0.0/reference/operators/accept_zmq.md)
+* [`to_zmq`](https://tenzir.com/docs/v7.0.0/reference/operators/to_zmq.md)
+* [Zeromq](https://docs.tenzir.com/integrations/zeromq)

@@ -1,7 +1,7 @@
 ---
 title: "replace_regex"
-canonical: https://tenzir.com/docs/reference/functions/replace_regex
-source: https://tenzir.com/docs/reference/functions/replace_regex.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/replace_regex
+source: https://tenzir.com/docs/v7.0.0/reference/functions/replace_regex.md
 section: "Docs"
 ---
 
@@ -19,7 +19,7 @@ replace_regex(x:string, pattern:string, replacement:string, [max=int]) -> string
 
 The `replace_regex` function returns a new string where substrings in `x` that match `pattern` are replaced with `replacement`, up to `max` times. If `max` is omitted, all matches are replaced.
 
-An empty regular expression matches at every string boundary. For example, `"abc".replace_regex("", "-")` returns `"-a-b-c-"`. In contrast, an empty literal pattern passed to [`replace`](https://tenzir.com/docs/reference/functions/replace.md) leaves the subject unchanged.
+An empty regular expression matches at every string boundary. For example, `"abc".replace_regex("", "-")` returns `"-a-b-c-"`. In contrast, an empty literal pattern passed to [`replace`](https://tenzir.com/docs/v7.0.0/reference/functions/replace.md) leaves the subject unchanged.
 
 ### `x: string`
 
@@ -63,6 +63,6 @@ from {x: replace_regex("hellolo", "l+", "y", max=1)}
 
 ## See Also
 
-* [`replace`](https://tenzir.com/docs/reference/functions/replace.md)
+* [`replace`](https://tenzir.com/docs/v7.0.0/reference/functions/replace.md)
 * [Manipulate strings](../../guides/shape/manipulate-strings.md)
 * [Mask sensitive data](../../guides/protect/mask-sensitive-data.md)

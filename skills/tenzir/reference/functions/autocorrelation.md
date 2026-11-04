@@ -1,7 +1,7 @@
 ---
 title: "autocorrelation"
-canonical: https://tenzir.com/docs/reference/functions/autocorrelation
-source: https://tenzir.com/docs/reference/functions/autocorrelation.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/autocorrelation
+source: https://tenzir.com/docs/v7.0.0/reference/functions/autocorrelation.md
 section: "Docs"
 ---
 
@@ -56,5 +56,5 @@ select ys = xs.autocorrelation(max_lag=2)
 
 ## See Also
 
-* [`periodogram`](https://tenzir.com/docs/reference/functions/periodogram.md)
-* [`dominant_period`](https://tenzir.com/docs/reference/functions/dominant_period.md)
+* [`periodogram`](https://tenzir.com/docs/v7.0.0/reference/functions/periodogram.md)
+* [`dominant_period`](https://tenzir.com/docs/v7.0.0/reference/functions/dominant_period.md)

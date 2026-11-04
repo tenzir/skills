@@ -1,7 +1,7 @@
 ---
 title: "Security Policy"
-canonical: https://tenzir.com/docs/guides/contribution/security
-source: https://tenzir.com/docs/guides/contribution/security.md
+canonical: https://tenzir.com/docs/v7.0.0/guides/contribution/security
+source: https://tenzir.com/docs/v7.0.0/guides/contribution/security.md
 section: "Docs"
 ---
 

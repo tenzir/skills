@@ -1,7 +1,7 @@
 ---
 title: "deduplicate"
-canonical: https://tenzir.com/docs/reference/operators/deduplicate
-source: https://tenzir.com/docs/reference/operators/deduplicate.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/deduplicate
+source: https://tenzir.com/docs/v7.0.0/reference/operators/deduplicate.md
 section: "Docs"
 ---
 
@@ -194,7 +194,7 @@ The first event has a count of `0`. When the next event with `x: 1` is emitted a
 
 ## See Also
 
-* [`sample`](https://tenzir.com/docs/reference/operators/sample.md)
+* [`sample`](https://tenzir.com/docs/v7.0.0/reference/operators/sample.md)
 * [Detect over time windows](../../guides/detect/detect-over-time-windows.md)
 * [Deduplicate events](../../guides/optimize/deduplicate-events.md)
 

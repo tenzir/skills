@@ -1,7 +1,7 @@
 ---
 title: "from_google_cloud_storage"
-canonical: https://tenzir.com/docs/reference/operators/from_google_cloud_storage
-source: https://tenzir.com/docs/reference/operators/from_google_cloud_storage.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/from_google_cloud_storage
+source: https://tenzir.com/docs/v7.0.0/reference/operators/from_google_cloud_storage.md
 section: "Docs"
 ---
 
@@ -132,8 +132,8 @@ from_google_cloud_storage "gs://security-logs/suricata/**.json" {
 
 ## See Also
 
-* [`from_google_cloud_storage`](https://tenzir.com/docs/reference/operators/from_google_cloud_storage.md)
-* [`to_google_cloud_storage`](https://tenzir.com/docs/reference/operators/to_google_cloud_storage.md)
-* [Google Cloud Storage](../../integrations/google/cloud-storage.md)
+* [`from_google_cloud_storage`](https://tenzir.com/docs/v7.0.0/reference/operators/from_google_cloud_storage.md)
+* [`to_google_cloud_storage`](https://tenzir.com/docs/v7.0.0/reference/operators/to_google_cloud_storage.md)
+* [Cloud storage](https://docs.tenzir.com/integrations/google/cloud-storage)
 
 Parallelizable: a parallel pipeline may run this operator on several cores at once.

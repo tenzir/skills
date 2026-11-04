@@ -1,7 +1,7 @@
 ---
 title: "read_pcap"
-canonical: https://tenzir.com/docs/reference/operators/read_pcap
-source: https://tenzir.com/docs/reference/operators/read_pcap.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/read_pcap
+source: https://tenzir.com/docs/v7.0.0/reference/operators/read_pcap.md
 section: "Docs"
 ---
 
@@ -25,7 +25,7 @@ For PCAPNG input, the operator supports multiple interfaces, timestamp resolutio
 
 Emit a `pcap.file_header` event that represents a classic PCAP file header. If present, the parser injects this additional event before the subsequent stream of packets. This option has no effect on PCAPNG input.
 
-Emitting this extra event makes it possible to seed [`write_pcap`](https://tenzir.com/docs/reference/operators/write_pcap.md) with a file header from the input. This allows you to preserve timestamp formatting (microseconds vs. nanoseconds) and byte order in packet headers.
+Emitting this extra event makes it possible to seed [`write_pcap`](https://tenzir.com/docs/v7.0.0/reference/operators/write_pcap.md) with a file header from the input. This allows you to preserve timestamp formatting (microseconds vs. nanoseconds) and byte order in packet headers.
 
 When the parser processes a concatenated stream of PCAP files, `emit_file_headers=true` also re-emits every intermediate file header as a separate event.
 
@@ -91,6 +91,6 @@ from_nic "en1" {
 
 ## See Also
 
-* [`from_nic`](https://tenzir.com/docs/reference/operators/from_nic.md)
-* [`write_pcap`](https://tenzir.com/docs/reference/operators/write_pcap.md)
-* [`decapsulate`](https://tenzir.com/docs/reference/functions/decapsulate.md)
+* [`from_nic`](https://tenzir.com/docs/v7.0.0/reference/operators/from_nic.md)
+* [`write_pcap`](https://tenzir.com/docs/v7.0.0/reference/operators/write_pcap.md)
+* [`decapsulate`](https://tenzir.com/docs/v7.0.0/reference/functions/decapsulate.md)

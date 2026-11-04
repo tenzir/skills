@@ -1,7 +1,7 @@
 ---
 title: "ocsf_derive"
-canonical: https://tenzir.com/docs/reference/functions/ocsf_derive
-source: https://tenzir.com/docs/reference/functions/ocsf_derive.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/ocsf_derive
+source: https://tenzir.com/docs/v7.0.0/reference/functions/ocsf_derive.md
 section: "Docs"
 ---
 
@@ -17,9 +17,9 @@ ocsf_derive(x:record) -> record
 
 ## Description
 
-The `ocsf_derive` function performs bidirectional enum derivation on the OCSF event `x`. It applies the same rules as the [`ocsf_derive`](https://tenzir.com/docs/reference/operators/ocsf_derive.md) operator: it fills a missing enum string such as `activity_name` from its integer sibling `activity_id` and vice versa, recurses into nested records and lists, and warns about inconsistent pairs without modifying them. Existing fields keep their position, and the function appends derived fields to the end of their record.
+The `ocsf_derive` function performs bidirectional enum derivation on the OCSF event `x`. It applies the same rules as the [`ocsf_derive`](https://tenzir.com/docs/v7.0.0/reference/operators/ocsf_derive) operator: it fills a missing enum string such as `activity_name` from its integer sibling `activity_id` and vice versa, recurses into nested records and lists, and warns about inconsistent pairs without modifying them. Existing fields keep their position, and the function appends derived fields to the end of their record.
 
-Use the function when the OCSF event lives in a field rather than at the top level of the event, for example next to `raw_data` in an envelope, or in a list of events that you process with [`map`](https://tenzir.com/docs/reference/functions/map.md). Use the operator when the whole event is the OCSF event.
+Use the function when the OCSF event lives in a field rather than at the top level of the event, for example next to `raw_data` in an envelope, or in a list of events that you process with [`map`](https://tenzir.com/docs/v7.0.0/reference/functions/map.md). Use the operator when the whole event is the OCSF event.
 
 Unlike the operator, which drops events whose OCSF version or class it cannot resolve, the function returns `null` with a warning and keeps the rest of the event. It also returns `null` with a warning when `x` is not a record, and returns `null` without a warning when `x` is `null`.
 
@@ -107,7 +107,7 @@ events = events.map(x => ocsf_derive(x))
 
 ## See Also
 
-* [`ocsf_derive`](https://tenzir.com/docs/reference/operators/ocsf_derive.md)
-* [`ocsf_cast`](https://tenzir.com/docs/reference/functions/ocsf_cast.md)
-* [`ocsf_trim`](https://tenzir.com/docs/reference/functions/ocsf_trim.md)
+* [`ocsf_derive`](https://tenzir.com/docs/v7.0.0/reference/operators/ocsf_derive)
+* [`ocsf_cast`](https://tenzir.com/docs/v7.0.0/reference/functions/ocsf_cast.md)
+* [`ocsf_trim`](https://tenzir.com/docs/v7.0.0/reference/functions/ocsf_trim.md)
 * [Map to OCSF](../../guides/normalize/map-to-ocsf.md)

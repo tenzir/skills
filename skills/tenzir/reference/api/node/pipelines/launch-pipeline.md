@@ -1,7 +1,7 @@
 ---
 title: "Launch a new pipeline"
-canonical: https://tenzir.com/docs/reference/api/node/pipelines/launch-pipeline
-source: https://tenzir.com/docs/reference/api/node/pipelines/launch-pipeline.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/api/node/pipelines/launch-pipeline
+source: https://tenzir.com/docs/v7.0.0/reference/api/node/pipelines/launch-pipeline.md
 section: "Docs"
 ---
 

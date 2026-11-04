@@ -1,7 +1,7 @@
 ---
 title: "from_azure_blob_storage"
-canonical: https://tenzir.com/docs/reference/operators/from_azure_blob_storage
-source: https://tenzir.com/docs/reference/operators/from_azure_blob_storage.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/from_azure_blob_storage
+source: https://tenzir.com/docs/v7.0.0/reference/operators/from_azure_blob_storage.md
 section: "Docs"
 ---
 
@@ -158,10 +158,10 @@ from_azure_blob_storage "abfs://data/**.json" {
 
 ## See Also
 
-* [`from_file`](https://tenzir.com/docs/reference/operators/from_file.md)
-* [`from_azure_blob_storage`](https://tenzir.com/docs/reference/operators/from_azure_blob_storage.md)
-* [`to_azure_blob_storage`](https://tenzir.com/docs/reference/operators/to_azure_blob_storage.md)
+* [`from_file`](https://tenzir.com/docs/v7.0.0/reference/operators/from_file.md)
+* [`from_azure_blob_storage`](https://tenzir.com/docs/v7.0.0/reference/operators/from_azure_blob_storage.md)
+* [`to_azure_blob_storage`](https://tenzir.com/docs/v7.0.0/reference/operators/to_azure_blob_storage.md)
 * [Azure Authentication](../azure-authentication.md)
-* [Azure Blob Storage](../../integrations/microsoft/azure-blob-storage.md)
+* [Azure blob storage](https://docs.tenzir.com/integrations/microsoft/azure-blob-storage)
 
 Parallelizable: a parallel pipeline may run this operator on several cores at once.

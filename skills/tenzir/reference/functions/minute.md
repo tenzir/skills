@@ -1,7 +1,7 @@
 ---
 title: "minute"
-canonical: https://tenzir.com/docs/reference/functions/minute
-source: https://tenzir.com/docs/reference/functions/minute.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/minute
+source: https://tenzir.com/docs/v7.0.0/reference/functions/minute.md
 section: "Docs"
 ---
 
@@ -43,9 +43,9 @@ minute = ts.minute()
 
 ## See Also
 
-* [`year`](https://tenzir.com/docs/reference/functions/year.md)
-* [`month`](https://tenzir.com/docs/reference/functions/month.md)
-* [`day`](https://tenzir.com/docs/reference/functions/day.md)
-* [`hour`](https://tenzir.com/docs/reference/functions/hour.md)
-* [`second`](https://tenzir.com/docs/reference/functions/second.md)
+* [`year`](https://tenzir.com/docs/v7.0.0/reference/functions/year.md)
+* [`month`](https://tenzir.com/docs/v7.0.0/reference/functions/month.md)
+* [`day`](https://tenzir.com/docs/v7.0.0/reference/functions/day.md)
+* [`hour`](https://tenzir.com/docs/v7.0.0/reference/functions/hour.md)
+* [`second`](https://tenzir.com/docs/v7.0.0/reference/functions/second.md)
 * [Calculate with time](../../guides/shape/calculate-with-time.md)

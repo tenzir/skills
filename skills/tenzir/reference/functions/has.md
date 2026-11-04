@@ -1,7 +1,7 @@
 ---
 title: "has"
-canonical: https://tenzir.com/docs/reference/functions/has
-source: https://tenzir.com/docs/reference/functions/has.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/has
+source: https://tenzir.com/docs/v7.0.0/reference/functions/has.md
 section: "Docs"
 ---
 
@@ -45,6 +45,6 @@ this = {
 
 ## See Also
 
-* [`is_empty`](https://tenzir.com/docs/reference/functions/is_empty.md)
-* [`keys`](https://tenzir.com/docs/reference/functions/keys.md)
+* [`is_empty`](https://tenzir.com/docs/v7.0.0/reference/functions/is_empty.md)
+* [`keys`](https://tenzir.com/docs/v7.0.0/reference/functions/keys.md)
 * [Shape records](../../guides/shape/shape-records.md)

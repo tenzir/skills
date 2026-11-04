@@ -1,7 +1,7 @@
 ---
 title: "join"
-canonical: https://tenzir.com/docs/reference/functions/join
-source: https://tenzir.com/docs/reference/functions/join.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/join
+source: https://tenzir.com/docs/v7.0.0/reference/functions/join.md
 section: "Docs"
 ---
 
@@ -43,6 +43,6 @@ from {x: join(["a", "b", "c"], "-")}
 
 ## See Also
 
-* [`split`](https://tenzir.com/docs/reference/functions/split.md)
-* [`split_regex`](https://tenzir.com/docs/reference/functions/split_regex.md)
+* [`split`](https://tenzir.com/docs/v7.0.0/reference/functions/split.md)
+* [`split_regex`](https://tenzir.com/docs/v7.0.0/reference/functions/split_regex.md)
 * [Manipulate strings](../../guides/shape/manipulate-strings.md)

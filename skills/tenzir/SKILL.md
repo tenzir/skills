@@ -1,22 +1,14 @@
 ---
 name: tenzir
 description: >-
-  Answer questions using the Tenzir documentation. Use whenever the user asks
-  about TQL syntax, pipeline operators, functions, data parsing or
-  transformation, normalization, OCSF mapping, enrichment, lookup tables,
-  contexts, packages, nodes, platform setup, deployment, configuration,
-  integrations with tools like Splunk, Kafka, S3, Elasticsearch, or any other
-  Tenzir feature. Also use when the user asks how to collect, route, filter,
-  aggregate, or export security data with Tenzir, or needs help writing or
-  debugging TQL pipelines, even if they don't mention 'Tenzir' explicitly but
-  are clearly working in a Tenzir context. Also use for questions about
-  Tenzir the company or product, release notes and changelog, blog posts,
-  and solution use cases.
+  Answer questions about Tenzir 7 using its documentation, a preview of a
+  release that is not out yet. Use only when the user asks about Tenzir 7 or
+  works with a Tenzir 7 build: TQL syntax, pipeline operators, functions,
+  parsing, normalization, OCSF mapping, enrichment, contexts, packages,
+  deployment, or configuration. Say that the answer describes a preview.
 ---
 
 # Tenzir Documentation Map
-
-> The security data pipeline platform.
 
 ## How to use this skill
 
@@ -156,203 +148,179 @@ You can pre-define dashboards for your static workspaces.
 
 An ephemeral node is ideal for temporary or auto-scaling deployments.
 
-### Collect
-
-#### [Overview](guides/collect.md)
-
-Read events and bytes from files, APIs, brokers, stores, and networks.
-
-##### [Read and watch files](guides/collect/read-and-watch-files.md)
-
-##### [Fetch via HTTP and APIs](guides/collect/fetch-via-http-and-apis.md)
-
-##### [Read from message brokers](guides/collect/read-from-message-brokers.md)
-
-##### [Read from data stores](guides/collect/read-from-data-stores.md)
-
-##### [Get data from the network](guides/collect/get-data-from-the-network.md)
-
-### Parse
-
-#### [Overview](guides/parse.md)
-
-Turn byte streams and text fields into structured events.
-
-##### [Parse delimited text](guides/parse/parse-delimited-text.md)
-
-##### [Parse binary data](guides/parse/parse-binary-data.md)
-
-##### [Parse string fields](guides/parse/parse-string-fields.md)
-
-##### [Clean up values](guides/parse/clean-up-values.md)
-
-### Shape
-
-#### [Overview](guides/shape.md)
-
-Prepare event fields and records for downstream processing.
-
-##### [Transform values](guides/shape/transform-values.md)
-
-##### [Manipulate strings](guides/shape/manipulate-strings.md)
-
-##### [Normalize event timestamps](guides/shape/normalize-event-timestamps.md)
-
-##### [Repair out-of-order events](guides/shape/repair-out-of-order-events.md)
-
-##### [Calculate with time](guides/shape/calculate-with-time.md)
-
-##### [Shape lists](guides/shape/shape-lists.md)
-
-##### [Shape records](guides/shape/shape-records.md)
-
-##### [Reshape complex data](guides/shape/reshape-complex-data.md)
-
-##### [Convert data formats](guides/shape/convert-data-formats.md)
-
-### Normalize
-
-#### [Overview](guides/normalize.md)
-
-Map source-specific events into a shared schema.
-
-##### [Map to ASIM](guides/normalize/map-to-asim.md)
-
-##### [Map to CIM](guides/normalize/map-to-cim.md)
-
-##### [Map to ECS](guides/normalize/map-to-ecs.md)
-
-##### [Map to OCSF](guides/normalize/map-to-ocsf.md)
-
-##### [Map to UDM](guides/normalize/map-to-udm.md)
-
-### Optimize
-
-#### [Overview](guides/optimize.md)
-
-Reduce data volume and processing work in a pipeline.
-
-##### [Filter and select data](guides/optimize/filter-and-select-data.md)
-
-##### [Slice and sample data](guides/optimize/slice-and-sample-data.md)
-
-##### [Deduplicate events](guides/optimize/deduplicate-events.md)
-
-### Protect
-
-#### [Overview](guides/protect.md)
-
-Limit sensitive-data exposure while preserving useful structure.
-
-##### [Mask sensitive data](guides/protect/mask-sensitive-data.md)
-
-##### [Encrypt sensitive data](guides/protect/encrypt-sensitive-data.md)
-
-### Enrich
-
-#### [Overview](guides/enrich.md)
-
-Add context that the original event does not contain.
-
-##### [Use lookup tables](guides/enrich/use-lookup-tables.md)
-
-##### [Enrich with asset inventory](guides/enrich/enrich-with-asset-inventory.md)
-
-##### [Enrich with threat intel](guides/enrich/enrich-with-threat-intel.md)
-
-##### [Enrich events with AI](guides/enrich/enrich-events-with-ai.md)
-
-### Analyze
+### Work with Data
 
 #### [Overview](guides/analyze.md)
 
 Summarize event streams and compare current activity with prior behavior.
 
-##### [Aggregate event streams](guides/analyze/aggregate-event-streams.md)
+#### [Overview](guides/collect.md)
 
-##### [Shape aggregation results](guides/analyze/shape-aggregation-results.md)
-
-##### [Window event streams](guides/analyze/window-event-streams.md)
-
-##### [Calculate aggregate statistics](guides/analyze/calculate-aggregate-statistics.md)
-
-##### [Find unseen and rare values](guides/analyze/find-unseen-and-rare-values.md)
-
-##### [Set adaptive thresholds from a baseline](guides/analyze/set-adaptive-thresholds-from-a-baseline.md)
-
-##### [Identify distribution drift](guides/analyze/identify-distribution-drift.md)
-
-##### [Find cardinality spikes](guides/analyze/find-cardinality-spikes.md)
-
-### Detect
+Read events and bytes from files, APIs, brokers, stores, and networks.
 
 #### [Overview](guides/detect.md)
 
 Match security activity and model the resulting findings.
 
-##### [Match events with TQL](guides/detect/match-events-with-tql.md)
+#### [Overview](guides/enrich.md)
 
-##### [Model detections in OCSF](guides/detect/model-detections-in-ocsf.md)
+Add context that the original event does not contain.
 
-##### [Detect over time windows](guides/detect/detect-over-time-windows.md)
+#### [Overview](guides/normalize.md)
 
-##### [Baseline behavior from stored events](guides/detect/baseline-from-stored-events.md)
+Map source-specific events into a shared schema.
 
-##### [Detect periodic behavior](guides/detect/detect-periodic-behavior.md)
+#### [Overview](guides/optimize.md)
 
-##### [Create multi-stage detectors](guides/detect/create-multi-stage-detectors.md)
+Reduce data volume and processing work in a pipeline.
 
-##### [Execute Sigma rules](guides/detect/execute-sigma-rules.md)
+#### [Overview](guides/parse.md)
 
-##### [Check Sigma rule compatibility with OCSF](guides/detect/check-sigma-rule-compatibility-with-ocsf.md)
+Turn byte streams and text fields into structured events.
 
-##### [Scan bytes with YARA](guides/detect/scan-bytes-with-yara.md)
+#### [Overview](guides/protect.md)
 
-### Store
-
-#### [Overview](guides/store.md)
-
-Persist events for later search, replay, and analysis.
-
-##### [Write partitioned files](guides/store/write-partitioned-files.md)
-
-##### [Import into a node](guides/store/import-into-a-node.md)
-
-##### [Show available schemas](guides/store/show-available-schemas.md)
-
-##### [Transform data at rest](guides/store/transform-data-at-rest.md)
-
-### Search
-
-#### [Overview](guides/search.md)
-
-Query stored events and continue processing the results.
-
-##### [Export from a node](guides/search/export-from-a-node.md)
-
-### Route
-
-#### [Overview](guides/route.md)
-
-Deliver event streams to the systems that need them.
-
-##### [Send to destinations](guides/route/send-to-destinations.md)
-
-##### [Expose data as a server](guides/route/expose-data-as-server.md)
-
-##### [Split and merge streams](guides/route/split-and-merge-streams.md)
-
-##### [Fan out with subpipelines](guides/route/fan-out-with-subpipelines.md)
-
-##### [Load-balance pipelines](guides/route/load-balance-pipelines.md)
-
-### Replay
+Limit sensitive-data exposure while preserving useful structure.
 
 #### [Overview](guides/replay.md)
 
 Run stored events through live pipelines again.
 
+#### [Overview](guides/route.md)
+
+Deliver event streams to the systems that need them.
+
+#### [Overview](guides/search.md)
+
+Query stored events and continue processing the results.
+
+#### [Overview](guides/shape.md)
+
+Prepare event fields and records for downstream processing.
+
+#### [Overview](guides/store.md)
+
+Persist events for later search, replay, and analysis.
+
+##### [Aggregate event streams](guides/analyze/aggregate-event-streams.md)
+
+##### [Export from a node](guides/search/export-from-a-node.md)
+
+##### [Filter and select data](guides/optimize/filter-and-select-data.md)
+
+##### [Map to ASIM](guides/normalize/map-to-asim.md)
+
+##### [Mask sensitive data](guides/protect/mask-sensitive-data.md)
+
+##### [Match events with TQL](guides/detect/match-events-with-tql.md)
+
+##### [Parse delimited text](guides/parse/parse-delimited-text.md)
+
+##### [Read and watch files](guides/collect/read-and-watch-files.md)
+
 ##### [Replay historical events](guides/replay/replay-historical-events.md)
+
+##### [Send to destinations](guides/route/send-to-destinations.md)
+
+##### [Transform values](guides/shape/transform-values.md)
+
+##### [Use lookup tables](guides/enrich/use-lookup-tables.md)
+
+##### [Write partitioned files](guides/store/write-partitioned-files.md)
+
+##### [Encrypt sensitive data](guides/protect/encrypt-sensitive-data.md)
+
+##### [Enrich with asset inventory](guides/enrich/enrich-with-asset-inventory.md)
+
+##### [Expose data as a server](guides/route/expose-data-as-server.md)
+
+##### [Fetch via HTTP and APIs](guides/collect/fetch-via-http-and-apis.md)
+
+##### [Import into a node](guides/store/import-into-a-node.md)
+
+##### [Manipulate strings](guides/shape/manipulate-strings.md)
+
+##### [Map to CIM](guides/normalize/map-to-cim.md)
+
+##### [Model detections in OCSF](guides/detect/model-detections-in-ocsf.md)
+
+##### [Parse binary data](guides/parse/parse-binary-data.md)
+
+##### [Shape aggregation results](guides/analyze/shape-aggregation-results.md)
+
+##### [Slice and sample data](guides/optimize/slice-and-sample-data.md)
+
+##### [Deduplicate events](guides/optimize/deduplicate-events.md)
+
+##### [Detect over time windows](guides/detect/detect-over-time-windows.md)
+
+##### [Enrich with threat intel](guides/enrich/enrich-with-threat-intel.md)
+
+##### [Map to ECS](guides/normalize/map-to-ecs.md)
+
+##### [Normalize event timestamps](guides/shape/normalize-event-timestamps.md)
+
+##### [Parse string fields](guides/parse/parse-string-fields.md)
+
+##### [Read from message brokers](guides/collect/read-from-message-brokers.md)
+
+##### [Show available schemas](guides/store/show-available-schemas.md)
+
+##### [Split and merge streams](guides/route/split-and-merge-streams.md)
+
+##### [Window event streams](guides/analyze/window-event-streams.md)
+
+##### [Baseline behavior from stored events](guides/detect/baseline-from-stored-events.md)
+
+##### [Calculate aggregate statistics](guides/analyze/calculate-aggregate-statistics.md)
+
+##### [Clean up values](guides/parse/clean-up-values.md)
+
+##### [Enrich events with AI](guides/enrich/enrich-events-with-ai.md)
+
+##### [Fan out with subpipelines](guides/route/fan-out-with-subpipelines.md)
+
+##### [Map to OCSF](guides/normalize/map-to-ocsf.md)
+
+##### [Read from data stores](guides/collect/read-from-data-stores.md)
+
+##### [Repair out-of-order events](guides/shape/repair-out-of-order-events.md)
+
+##### [Transform data at rest](guides/store/transform-data-at-rest.md)
+
+##### [Calculate with time](guides/shape/calculate-with-time.md)
+
+##### [Detect periodic behavior](guides/detect/detect-periodic-behavior.md)
+
+##### [Find unseen and rare values](guides/analyze/find-unseen-and-rare-values.md)
+
+##### [Get data from the network](guides/collect/get-data-from-the-network.md)
+
+##### [Load-balance pipelines](guides/route/load-balance-pipelines.md)
+
+##### [Map to UDM](guides/normalize/map-to-udm.md)
+
+##### [Create multi-stage detectors](guides/detect/create-multi-stage-detectors.md)
+
+##### [Set adaptive thresholds from a baseline](guides/analyze/set-adaptive-thresholds-from-a-baseline.md)
+
+##### [Shape lists](guides/shape/shape-lists.md)
+
+##### [Execute Sigma rules](guides/detect/execute-sigma-rules.md)
+
+##### [Identify distribution drift](guides/analyze/identify-distribution-drift.md)
+
+##### [Shape records](guides/shape/shape-records.md)
+
+##### [Check Sigma rule compatibility with OCSF](guides/detect/check-sigma-rule-compatibility-with-ocsf.md)
+
+##### [Find cardinality spikes](guides/analyze/find-cardinality-spikes.md)
+
+##### [Reshape complex data](guides/shape/reshape-complex-data.md)
+
+##### [Convert data formats](guides/shape/convert-data-formats.md)
+
+##### [Scan bytes with YARA](guides/detect/scan-bytes-with-yara.md)
 
 ### Operate
 
@@ -500,10 +468,6 @@ A context is state, not code.
 
 ### Analytics
 
-#### [Plot data with charts](tutorials/plot-data-with-charts.md)
-
-In this tutorial, you will learn how to use pipelines to plot data as charts.
-
 #### [Build an OCSF lake with ClickHouse](tutorials/build-an-ocsf-lake-with-clickhouse.md)
 
 Store OCSF events in ClickHouse, from a table that accepts anything to a tuned lake with typed columns, skip indexes, codecs, and per-class retention.
@@ -610,28 +574,6 @@ Tenzir runs part of a pipeline where the data lives.
 
 The below example configuration ships with every Tenzir package.
 
-#### [Helm chart](reference/node/helm-chart.md)
-
-The Tenzir Helm chart deploys one or more tenzir-node instances on a Kubernetes cluster.
-
-#### [Configuration](reference/platform/configuration.md)
-
-These settings configure the Tenzir Platform.
-
-#### [Command line interface](reference/platform/command-line-interface.md)
-
-The Tenzir Platform command-line interface (CLI) allows you to interact with the Tenzir Platform from the command line to manage organizations, workspaces, and nodes.
-
-### Tools
-
-#### [Test Framework](reference/test-framework.md)
-
-The tenzir-test harness discovers and runs integration tests for pipelines, fixtures, and custom runners.
-
-#### [Ship Framework](reference/ship-framework.md)
-
-tenzir-ship ships as a Python package that requires Python 3.12 or later.
-
 ### Security
 
 #### [AWS Authentication](reference/aws-authentication.md)
@@ -648,113 +590,17 @@ Tenzir’s Azure operators authenticate with Microsoft Entra ID using the Azure 
 
 This reference is generated from the OpenAPI specification.
 
-#### [Overview](reference/api/platform/overview.md)
-
-This reference is generated from the OpenAPI specification.
-
 #### [Check node health](reference/api/node/health/ping-node.md)
 
 post/ping
-
-#### [List Nodes](reference/api/platform/nodes/list-nodes.md)
-
-post/user/list-nodes
-
-#### [Create Node](reference/api/platform/nodes/create-node.md)
-
-post/user/create-node
-
-#### [Rename Node](reference/api/platform/nodes/rename-node.md)
-
-post/user/rename-node
-
-#### [Delete Node](reference/api/platform/nodes/delete-node.md)
-
-post/user/delete-node
-
-#### [Get Node Token](reference/api/platform/nodes/get-node-token.md)
-
-post/user/get-node-token
-
-#### [Generate Client Config](reference/api/platform/nodes/generate-client-config.md)
-
-post/user/generate-client-config
-
-#### [Generate Download Url](reference/api/platform/nodes/generate-download-url.md)
-
-post/user/generate-download-url
-
-#### [Create Demo Node](reference/api/platform/nodes/create-demo-node.md)
-
-post/user/create-demo-node
-
-#### [Retire Demo Node](reference/api/platform/nodes/retire-demo-node.md)
-
-post/user/retire-demo-node
-
-#### [Proxy](reference/api/platform/nodes/proxy.md)
-
-post/user/proxy
-
-#### [Transparent Proxy](reference/api/platform/nodes/node-proxy-get.md)
-
-get/user/node-proxy/{tenantid}/{nodeid}/{httppath}
-
-#### [Transparent Proxy](reference/api/platform/nodes/node-proxy-post.md)
-
-post/user/node-proxy/{tenantid}/{nodeid}/{httppath}
-
-#### [Transparent Proxy](reference/api/platform/nodes/node-proxy-put.md)
-
-put/user/node-proxy/{tenantid}/{nodeid}/{httppath}
-
-#### [Transparent Proxy](reference/api/platform/nodes/node-proxy-delete.md)
-
-delete/user/node-proxy/{tenantid}/{nodeid}/{httppath}
-
-#### [Transparent Proxy](reference/api/platform/nodes/node-proxy-patch.md)
-
-patch/user/node-proxy/{tenantid}/{nodeid}/{httppath}
-
-#### [Transparent Proxy](reference/api/platform/nodes/node-proxy-head.md)
-
-head/user/node-proxy/{tenantid}/{nodeid}/{httppath}
-
-#### [Transparent Proxy](reference/api/platform/nodes/node-proxy-options.md)
-
-options/user/node-proxy/{tenantid}/{nodeid}/{httppath}
-
-#### [Proxy Cached](reference/api/platform/nodes/proxy-cached.md)
-
-post/user/proxy-cached
 
 #### [Read pipeline output](reference/api/node/pipeline-output/read-pipeline-output.md)
 
 post/serve
 
-#### [Store](reference/api/platform/dashboards/store.md)
-
-post/user/dashboard/store
-
-#### [Get](reference/api/platform/dashboards/get.md)
-
-post/user/dashboard/get
-
 #### [Read multiple pipeline outputs](reference/api/node/pipeline-output/read-multiple-pipeline-outputs.md)
 
 post/serve-multi
-
-#### [List](reference/api/platform/dashboards/list.md)
-
-post/user/dashboard/list
-
-#### [Delete](reference/api/platform/dashboards/delete.md)
-
-post/user/dashboard/delete
-
-#### [Add](reference/api/platform/alerts/add.md)
-
-post/user/alert/add
 
 #### [Create a new pipeline](reference/api/node/pipelines/create-pipeline.md)
 
@@ -763,14 +609,6 @@ post/pipeline/create
 #### [Delete an existing pipeline](reference/api/node/pipelines/delete-pipeline.md)
 
 post/pipeline/delete
-
-#### [List](reference/api/platform/alerts/list.md)
-
-post/user/alert/list
-
-#### [Delete](reference/api/platform/alerts/delete.md)
-
-post/user/alert/delete
 
 #### [Launch a new pipeline](reference/api/node/pipelines/launch-pipeline.md)
 
@@ -788,98 +626,6 @@ post/pipeline/reset-ttl
 
 post/pipeline/update
 
-#### [Add External Store](reference/api/platform/secrets/add-external-store.md)
-
-post/user/secrets/add-external-store
-
-#### [Set Default Store](reference/api/platform/secrets/select-store.md)
-
-post/user/secrets/select-store
-
-#### [Delete External Store](reference/api/platform/secrets/delete-external-store.md)
-
-post/user/secrets/delete-external-store
-
-#### [List Stores](reference/api/platform/secrets/list-stores.md)
-
-post/user/secrets/list-stores
-
-#### [Add](reference/api/platform/secrets/add.md)
-
-post/user/secrets/add
-
-#### [Update](reference/api/platform/secrets/update.md)
-
-post/user/secrets/update
-
-#### [Remove](reference/api/platform/secrets/remove.md)
-
-post/user/secrets/remove
-
-#### [List](reference/api/platform/secrets/list.md)
-
-post/user/secrets/list
-
-#### [Delete Tenant](reference/api/platform/tenant/delete-tenant.md)
-
-post/user/delete-tenant
-
-#### [Update Tenant Name](reference/api/platform/tenant/rename-tenant.md)
-
-post/user/rename-tenant
-
-#### [Switch Tenant](reference/api/platform/tenant/switch-tenant.md)
-
-post/user/switch-tenant
-
-#### [Health](reference/api/platform/account/health.md)
-
-get/user/health
-
-#### [Get Login Info](reference/api/platform/account/get-login-info.md)
-
-post/user/get-login-info
-
-#### [Get Webapp Key](reference/api/platform/admin/webapp-key.md)
-
-get/admin/webapp-key
-
-#### [Create Tenant](reference/api/platform/admin/create-tenant.md)
-
-post/admin/create-tenant
-
-#### [Generate User Key](reference/api/platform/admin/generate-user-key.md)
-
-post/admin/generate-user-key
-
-#### [Spawn Node](reference/api/platform/admin/spawn-node.md)
-
-post/admin/spawn-node
-
-#### [List Tenants](reference/api/platform/admin/global-tenant-list.md)
-
-get/admin/global-tenant-list
-
-#### [Delete Tenant](reference/api/platform/admin/force-delete-tenant.md)
-
-post/admin/force-delete-tenant
-
-#### [Check Connectivity](reference/api/platform/admin/check-connectivy.md)
-
-post/admin/check-connectivy
-
-#### [Update Tenant Owner](reference/api/platform/admin/update-tenant.md)
-
-post/admin/update-tenant
-
-#### [Add Auth Function](reference/api/platform/admin/add-auth-function.md)
-
-post/admin/add-auth-function
-
-#### [Delete Auth Function](reference/api/platform/admin/delete-auth-function.md)
-
-post/admin/delete-auth-function
-
 ### Operators
 
 #### [Operators](reference/operators.md)
@@ -895,7 +641,6 @@ Functions appear in expressions and take positional and/or named arguments, prod
 #### Node Index
 
 - [Configuration](reference/node/configuration.md)
-- [Helm chart](reference/node/helm-chart.md)
 
 #### Overview Index
 
@@ -907,335 +652,8 @@ Functions appear in expressions and take positional and/or named arguments, prod
 - [SentinelOne](reference/optimizations/sentinelone.md)
 - [SPL](reference/optimizations/spl.md)
 
-#### Platform Index
-
-- [Command line interface](reference/platform/command-line-interface.md)
-- [Configuration](reference/platform/configuration.md)
-
 ### Indexes
 
 For the complete operator listing by category, read [Operator Index](reference/operators-index.md).
 
 For the complete function listing by category, read [Function Index](reference/functions-index.md).
-
-## Integrations
-
-#### [alphaMountain integration](integrations/alphamountain.md)
-
-Enrich DNS, web, and network telemetry with real-time threat intelligence.
-
-#### [Amazon integration](integrations/amazon.md)
-
-Stream events through MSK, store and replay them in S3, ship them to CloudWatch or Amazon Security Lake in OCSF, and pull messages from SQS, all with first-class IAM integration.
-
-#### [Amazon CloudWatch Logs integration](integrations/amazon/cloudwatch.md)
-
-Centralized logging for AWS resources, applications, and custom logs.
-
-#### [Amazon Kinesis integration](integrations/amazon/kinesis.md)
-
-Ingest and process real-time data streams from Amazon Kinesis.
-
-#### [Amazon MSK integration](integrations/amazon/msk.md)
-
-Publish and subscribe to Amazon's managed Kafka service.
-
-#### [Amazon S3 integration](integrations/amazon/s3.md)
-
-Store, retrieve, and manage data objects in a scalable and durable cloud storage service.
-
-#### [Amazon Security Lake integration](integrations/amazon/security-lake.md)
-
-Send OCSF events to Amazon Security Lake.
-
-#### [Amazon SQS integration](integrations/amazon/sqs.md)
-
-Send, receive, and manage messages between distributed applications.
-
-#### [AMQP integration](integrations/amqp.md)
-
-Send and receive messages between systems using a standardized, protocol-based approach.
-
-#### [Anthropic Claude Code integration](integrations/anthropic.md)
-
-Turn coding agent activity into OCSF security telemetry: commands, files, tools, and who approved them.
-
-#### [Apache Avro integration](integrations/avro.md)
-
-Decode schema-driven Apache Avro binary data from streams, files, and message brokers.
-
-#### [Apache Iceberg integration](integrations/iceberg.md)
-
-An open table format for building lakehouses on object storage, with atomic commits, hidden partitioning, and schema evolution.
-
-#### [ArcSight integration](integrations/arcsight.md)
-
-OpenText ArcSight is a SIEM and log management ecosystem.
-
-#### [AWS Glue integration](integrations/amazon/glue.md)
-
-Write Iceberg tables to the AWS Glue Data Catalog and query them with Athena.
-
-#### [Azure Blob Storage integration](integrations/microsoft/azure-blob-storage.md)
-
-Store, retrieve, and manage unstructured data at scale.
-
-#### [Azure Event Hubs integration](integrations/microsoft/azure-event-hubs.md)
-
-Real-time data streaming platform and event ingestion service.
-
-#### [Azure Log Analytics integration](integrations/microsoft/azure-log-analytics.md)
-
-Query workspace data and send events to Azure Monitor Logs with Tenzir.
-
-#### [Cisco integration](integrations/cisco.md)
-
-Connect the Cisco security portfolio: firewall and IPS events from ASA and Firepower, DNS-layer telemetry from Umbrella, plus Duo, Secure Email, and Secure Endpoint.
-
-#### [ClickHouse integration](integrations/clickhouse.md)
-
-Send structured events to ClickHouse tables.
-
-#### [Cloud Lakehouse integration](integrations/google/cloud-lakehouse.md)
-
-Write Iceberg tables to Google's Lakehouse for Apache Iceberg (formerly BigLake) and query them with BigQuery.
-
-#### [CrowdStrike integration](integrations/crowdstrike.md)
-
-Provides real-time event data including process, file, and network activity.
-
-#### [DuckDB integration](integrations/duckdb.md)
-
-Read from and write to DuckDB database files with an embedded DuckDB engine.
-
-#### [Elasticsearch integration](integrations/elasticsearch.md)
-
-Index, search, and analyze data in a distributed and scalable manner.
-
-#### [File integration](integrations/file.md)
-
-Read from and write to files.
-
-#### [Fluent Bit integration](integrations/fluent-bit.md)
-
-Collect, process, and forward logs and metrics from various sources to many sinks.
-
-#### [FTP integration](integrations/ftp.md)
-
-Transfer files between a client and a server using a reliable, connection-based protocol.
-
-#### [Google integration](integrations/google.md)
-
-Connect Google Cloud, Google SecOps, and Google Workspace: stream through Pub/Sub, store in Cloud Storage, read Cloud Logging, write Cloud Monitoring metrics, and ship UDM events to SecOps.
-
-#### [Google Cloud Logging integration](integrations/google/cloud-logging.md)
-
-Send events to Google's log management solution
-
-#### [Google Cloud Monitoring integration](integrations/google/cloud-monitoring.md)
-
-Send node metrics, gauges, counters, and histograms to Google Cloud Monitoring as user-defined metrics.
-
-#### [Google Cloud Pub/Sub integration](integrations/google/cloud-pubsub.md)
-
-Send, receive, and process messages between decoupled applications and services.
-
-#### [Google Cloud Storage integration](integrations/google/cloud-storage.md)
-
-Store, retrieve, and manage data objects across a scalable, cloud-based environment.
-
-#### [Google SecOps integration](integrations/google/secops.md)
-
-Send events to Google SecOps
-
-#### [Graylog integration](integrations/graylog.md)
-
-Collect, index, and analyze log data for monitoring and troubleshooting.
-
-#### [HTTP integration](integrations/http.md)
-
-Transfer and receive data between clients and servers using a request-response protocol.
-
-#### [Hydrolix integration](integrations/hydrolix.md)
-
-Stream security telemetry into Hydrolix tables and query it back.
-
-#### [IBM QRadar integration](integrations/qradar.md)
-
-Send security events to IBM Security QRadar for SIEM analytics and incident investigation.
-
-#### [isMalicious integration](integrations/ismalicious.md)
-
-Load STIX threat intelligence over TAXII into a local lookup table and enrich OCSF events in the stream.
-
-#### [Kafka integration](integrations/kafka.md)
-
-Publish, subscribe, store, and process streams of records in a distributed messaging system.
-
-#### [Kunai integration](integrations/kunai.md)
-
-Monitors Linux hosts with eBPF and records process, file, and network activity.
-
-#### [Microsoft integration](integrations/microsoft.md)
-
-Connect Azure, Microsoft 365, and Windows: stream through Event Hubs, store in Blob Storage, ingest into Sentinel, and parse the full Windows telemetry surface.
-
-#### [Microsoft 365 / Office 365 integration](integrations/microsoft/365.md)
-
-Collect unified audit logs for activity across Exchange, SharePoint, Microsoft Entra ID, Teams, and other Microsoft 365 services.
-
-#### [Microsoft Defender integration](integrations/microsoft/defender.md)
-
-Detect, prevent, and respond to security threats across endpoints and networks.
-
-#### [Microsoft Graph integration](integrations/microsoft/graph.md)
-
-Microsoft Graph is the unified API for Microsoft 365, Microsoft Entra ID, and other Microsoft cloud services.
-
-#### [Microsoft Sentinel integration](integrations/microsoft/sentinel.md)
-
-Prepare and route security telemetry for Microsoft's cloud-native SIEM.
-
-#### [Microsoft SQL Server integration](integrations/microsoft/sql-server.md)
-
-Provides audit logs for database activity, logins, and errors.
-
-#### [Microsoft Windows Event Collector integration](integrations/microsoft/windows-event-collector.md)
-
-Receives events from a Windows Event Collector through the shipping agent of your choice.
-
-#### [Microsoft Windows Event Forwarding integration](integrations/microsoft/windows-event-forwarding.md)
-
-Acts as the collector for Windows Event Forwarding, without a Windows server or shipping agent.
-
-#### [Microsoft Windows Event Logs integration](integrations/microsoft/windows-event-logs.md)
-
-Collects Security, System, Application, and other critical OS logs.
-
-#### [Microsoft Windows EVTX Files integration](integrations/microsoft/evtx.md)
-
-Parses exported Windows Event Log files in the binary EVTX format for forensic analysis.
-
-#### [MySQL integration](integrations/mysql.md)
-
-Connects to MySQL over the network using the MySQL wire protocol.
-
-#### [nano integration](integrations/nano.md)
-
-Run a lake-native SIEM on ClickHouse for search, detections, cases, and AI-assisted triage.
-
-#### [NATS integration](integrations/nats.md)
-
-NATS is a messaging system for services, edge deployments, and cloud-native applications.
-
-#### [NetFlow integration](integrations/netflow.md)
-
-Collect and process NetFlow v5, NetFlow v9, and IPFIX flow telemetry.
-
-#### [Network Interface Card integration](integrations/nic.md)
-
-Acquire packets from the network and process them with pipelines.
-
-#### [NXLog integration](integrations/nxlog.md)
-
-Ships Windows Event Logs and other telemetry from the NXLog Agent to Tenzir.
-
-#### [OpenAI Codex integration](integrations/openai.md)
-
-Turn coding agent activity into OCSF security telemetry: commands, files, sandbox verdicts, and model traffic.
-
-#### [OpenSearch integration](integrations/opensearch.md)
-
-Search, analyze, and visualize data with a distributed, open-source platform.
-
-#### [OpenTelemetry integration](integrations/opentelemetry.md)
-
-Receive OpenTelemetry logs, metrics, and traces over OTLP/HTTP or OTLP/gRPC.
-
-#### [OpenWEC integration](integrations/openwec.md)
-
-Receives the Windows events that the open-source Windows Event Collector for Linux gathers.
-
-#### [PowerShell Script Block Logging integration](integrations/powershell-script-block-logging.md)
-
-Captures deobfuscated PowerShell commands, critical for detecting fileless malware and living-off-the-land attacks.
-
-#### [Prometheus integration](integrations/prometheus.md)
-
-Send metric events to Prometheus-compatible Remote Write receivers, including Prometheus, Grafana Mimir, Cortex, Thanos Receive, and VictoriaMetrics.
-
-#### [RELP integration](integrations/relp.md)
-
-Receive Syslog messages with application-level acknowledgements, retransmission, and optional TLS.
-
-#### [rsyslog integration](integrations/rsyslog.md)
-
-Forward Syslog to Tenzir with RELP acknowledgements, retries, queues, and optional mutual TLS.
-
-#### [SentinelOne Data Lake integration](integrations/sentinelone-data-lake.md)
-
-Send events to SentinelOne Singularity™ Data Lake
-
-#### [Sigma integration](integrations/sigma.md)
-
-Run stock Sigma detection rules on streaming events, natively on OCSF.
-
-#### [Snowflake integration](integrations/snowflake.md)
-
-Store, analyze, and share structured and semi-structured data with a cloud-based warehouse.
-
-#### [Splunk integration](integrations/splunk.md)
-
-Collect, index, and analyze machine-generated data for monitoring, searching, and troubleshooting.
-
-#### [Suricata integration](integrations/suricata.md)
-
-Detect, log, and analyze network traffic for intrusion detection, prevention, and monitoring.
-
-#### [Syslog integration](integrations/syslog.md)
-
-Send and receive Syslog over UDP, TCP, and RELP.
-
-#### [Sysmon integration](integrations/sysmon.md)
-
-Advanced system monitor that logs detailed host activity for threat hunting.
-
-#### [TCP integration](integrations/tcp.md)
-
-Establish, maintain, and terminate reliable, connection-oriented communication over IP networks.
-
-#### [UDP integration](integrations/udp.md)
-
-Send and receive lightweight, connectionless datagrams over IP networks.
-
-#### [Velociraptor integration](integrations/velociraptor.md)
-
-Collect, monitor, and analyze endpoint data for digital forensics and incident response.
-
-#### [VictoriaLogs integration](integrations/victorialogs.md)
-
-Store logs in a fast, resource-efficient database and search them with LogsQL.
-
-#### [Wazuh integration](integrations/wazuh.md)
-
-Collects security telemetry and runs detections.
-
-#### [Winlogbeat integration](integrations/winlogbeat.md)
-
-Ships Windows Event Logs from Elastic's Winlogbeat agent to Tenzir.
-
-#### [YARA integration](integrations/yara.md)
-
-Scan files and byte streams with YARA-X rules directly in the pipeline.
-
-#### [Zeek integration](integrations/zeek.md)
-
-Inspect, log, and analyze network traffic for security and operational insights.
-
-#### [ZeroMQ integration](integrations/zeromq.md)
-
-Send, receive, and route messages asynchronously over various transport protocols.
-
-#### [Zscaler integration](integrations/zscaler.md)
-
-Logs all web, firewall, and DNS traffic for users and locations.

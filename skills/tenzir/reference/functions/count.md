@@ -1,7 +1,7 @@
 ---
 title: "count"
-canonical: https://tenzir.com/docs/reference/functions/count
-source: https://tenzir.com/docs/reference/functions/count.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/count
+source: https://tenzir.com/docs/v7.0.0/reference/functions/count.md
 section: "Docs"
 ---
 
@@ -38,7 +38,7 @@ summarize total=count(x)
 
 ## See Also
 
-* [`count_distinct`](https://tenzir.com/docs/reference/functions/count_distinct.md)
+* [`count_distinct`](https://tenzir.com/docs/v7.0.0/reference/functions/count_distinct.md)
 * [Aggregate event streams](../../guides/analyze/aggregate-event-streams.md)
-* [Plot data with charts](../../tutorials/plot-data-with-charts.md)
+* [Plot data with charts](https://docs.tenzir.com/tutorials/plot-data-with-charts)
 * [Learn idiomatic TQL](../../tutorials/learn-idiomatic-tql.md)

@@ -1,7 +1,7 @@
 ---
 title: "top"
-canonical: https://tenzir.com/docs/reference/operators/top
-source: https://tenzir.com/docs/reference/operators/top.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/top
+source: https://tenzir.com/docs/v7.0.0/reference/operators/top.md
 section: "Docs"
 ---
 
@@ -24,11 +24,11 @@ summarize x, count=count()
 sort -count
 ```
 
-This operator is the dual to [`rare`](https://tenzir.com/docs/reference/operators/rare.md).
+This operator is the dual to [`rare`](https://tenzir.com/docs/v7.0.0/reference/operators/rare.md).
 
 Potentially High Memory Usage
 
-Use caution when applying this operator to large inputs. It currently buffers aggregation state in memory. A downstream [`head`](https://tenzir.com/docs/reference/operators/head.md) bounds the final sort’s retained candidates, but does not reduce the number of aggregation groups. Out-of-core processing is on our roadmap.
+Use caution when applying this operator to large inputs. It currently buffers aggregation state in memory. A downstream [`head`](https://tenzir.com/docs/v7.0.0/reference/operators/head.md) bounds the final sort’s retained candidates, but does not reduce the number of aggregation groups. Out-of-core processing is on our roadmap.
 
 ### `x: field`
 
@@ -59,8 +59,8 @@ head 5
 
 ## See Also
 
-* [`rare`](https://tenzir.com/docs/reference/operators/rare.md)
-* [`sort`](https://tenzir.com/docs/reference/operators/sort.md)
-* [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md)
+* [`rare`](https://tenzir.com/docs/v7.0.0/reference/operators/rare.md)
+* [`sort`](https://tenzir.com/docs/v7.0.0/reference/operators/sort.md)
+* [`summarize`](https://tenzir.com/docs/v7.0.0/reference/operators/summarize.md)
 * [Aggregate event streams](../../guides/analyze/aggregate-event-streams.md)
-* [Plot data with charts](../../tutorials/plot-data-with-charts.md)
+* [Plot data with charts](https://docs.tenzir.com/tutorials/plot-data-with-charts)

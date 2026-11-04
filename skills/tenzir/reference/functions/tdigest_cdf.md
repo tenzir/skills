@@ -1,7 +1,7 @@
 ---
 title: "tdigest_cdf"
-canonical: https://tenzir.com/docs/reference/functions/tdigest_cdf
-source: https://tenzir.com/docs/reference/functions/tdigest_cdf.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/tdigest_cdf
+source: https://tenzir.com/docs/v7.0.0/reference/functions/tdigest_cdf.md
 section: "Docs"
 ---
 
@@ -45,5 +45,5 @@ select probability = tdigest_cdf(model, 3.0)
 
 ## See also
 
-* [`tdigest`](https://tenzir.com/docs/reference/functions/tdigest.md)
-* [`tdigest_quantile`](https://tenzir.com/docs/reference/functions/tdigest_quantile.md)
+* [`tdigest`](https://tenzir.com/docs/v7.0.0/reference/functions/tdigest.md)
+* [`tdigest_quantile`](https://tenzir.com/docs/v7.0.0/reference/functions/tdigest_quantile.md)

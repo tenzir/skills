@@ -1,7 +1,7 @@
 ---
 title: "Guides"
-canonical: https://tenzir.com/docs/guides
-source: https://tenzir.com/docs/guides.md
+canonical: https://tenzir.com/docs/v7.0.0/guides
+source: https://tenzir.com/docs/v7.0.0/guides.md
 section: "Docs"
 ---
 

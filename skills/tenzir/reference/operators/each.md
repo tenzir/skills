@@ -1,7 +1,7 @@
 ---
 title: "each"
-canonical: https://tenzir.com/docs/reference/operators/each
-source: https://tenzir.com/docs/reference/operators/each.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/each
+source: https://tenzir.com/docs/v7.0.0/reference/operators/each.md
 section: "Docs"
 ---
 
@@ -21,7 +21,7 @@ The `each` operator runs a fresh subpipeline for every incoming event. The recor
 
 The subpipeline takes no input from `each`. It either emits events - which are forwarded as the operator’s output - or ends with a sink, in which case `each` itself becomes a sink. The subpipeline must not produce bytes.
 
-Use `each` for per-event jobs, such as running a lookup, export, or sink whose source depends on the incoming event. For keyed streams that should keep one subpipeline alive per key, use [`group`](https://tenzir.com/docs/reference/operators/group.md) instead.
+Use `each` for per-event jobs, such as running a lookup, export, or sink whose source depends on the incoming event. For keyed streams that should keep one subpipeline alive per key, use [`group`](https://tenzir.com/docs/v7.0.0/reference/operators/group.md) instead.
 
 ### `parallel = int (optional)`
 
@@ -92,12 +92,12 @@ each {
 
 ## See Also
 
-* [`cron`](https://tenzir.com/docs/reference/operators/cron.md)
-* [`every`](https://tenzir.com/docs/reference/operators/every.md)
-* [`fork`](https://tenzir.com/docs/reference/operators/fork.md)
-* [`group`](https://tenzir.com/docs/reference/operators/group.md)
-* [`parallel`](https://tenzir.com/docs/reference/operators/parallel.md)
-* [`to_http`](https://tenzir.com/docs/reference/operators/to_http.md)
+* [`cron`](https://tenzir.com/docs/v7.0.0/reference/operators/cron.md)
+* [`every`](https://tenzir.com/docs/v7.0.0/reference/operators/every.md)
+* [`fork`](https://tenzir.com/docs/v7.0.0/reference/operators/fork.md)
+* [`group`](https://tenzir.com/docs/v7.0.0/reference/operators/group.md)
+* [`parallel`](https://tenzir.com/docs/v7.0.0/reference/operators/parallel.md)
+* [`to_http`](https://tenzir.com/docs/v7.0.0/reference/operators/to_http.md)
 * [Fetch via HTTP and APIs](../../guides/collect/fetch-via-http-and-apis.md)
 * [Fan out with subpipelines](../../guides/route/fan-out-with-subpipelines.md)
 

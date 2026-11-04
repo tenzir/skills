@@ -1,7 +1,7 @@
 ---
 title: "where"
-canonical: https://tenzir.com/docs/reference/operators/where
-source: https://tenzir.com/docs/reference/operators/where.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/where
+source: https://tenzir.com/docs/v7.0.0/reference/operators/where.md
 section: "Docs"
 ---
 
@@ -41,9 +41,9 @@ where src_ip in 10.10.5.0/25 and (orig_bytes > 1Mi or duration > 30min)
 
 ## See Also
 
-* [`assert`](https://tenzir.com/docs/reference/operators/assert.md)
-* [`drop`](https://tenzir.com/docs/reference/operators/drop.md)
-* [`select`](https://tenzir.com/docs/reference/operators/select.md)
+* [`assert`](https://tenzir.com/docs/v7.0.0/reference/operators/assert.md)
+* [`drop`](https://tenzir.com/docs/v7.0.0/reference/operators/drop.md)
+* [`select`](https://tenzir.com/docs/v7.0.0/reference/operators/select.md)
 * [Filter and select data](../../guides/optimize/filter-and-select-data.md)
 * [Learn idiomatic TQL](../../tutorials/learn-idiomatic-tql.md)
 

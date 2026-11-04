@@ -1,7 +1,7 @@
 ---
 title: "is_v6"
-canonical: https://tenzir.com/docs/reference/functions/is_v6
-source: https://tenzir.com/docs/reference/functions/is_v6.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/is_v6
+source: https://tenzir.com/docs/v7.0.0/reference/functions/is_v6.md
 section: "Docs"
 ---
 
@@ -39,11 +39,11 @@ from {
 
 ## See Also
 
-* [`ip_category`](https://tenzir.com/docs/reference/functions/ip_category.md)
-* [`is_global`](https://tenzir.com/docs/reference/functions/is_global.md)
-* [`is_link_local`](https://tenzir.com/docs/reference/functions/is_link_local.md)
-* [`is_loopback`](https://tenzir.com/docs/reference/functions/is_loopback.md)
-* [`is_multicast`](https://tenzir.com/docs/reference/functions/is_multicast.md)
-* [`is_private`](https://tenzir.com/docs/reference/functions/is_private.md)
-* [`is_v4`](https://tenzir.com/docs/reference/functions/is_v4.md)
+* [`ip_category`](https://tenzir.com/docs/v7.0.0/reference/functions/ip_category.md)
+* [`is_global`](https://tenzir.com/docs/v7.0.0/reference/functions/is_global.md)
+* [`is_link_local`](https://tenzir.com/docs/v7.0.0/reference/functions/is_link_local.md)
+* [`is_loopback`](https://tenzir.com/docs/v7.0.0/reference/functions/is_loopback.md)
+* [`is_multicast`](https://tenzir.com/docs/v7.0.0/reference/functions/is_multicast.md)
+* [`is_private`](https://tenzir.com/docs/v7.0.0/reference/functions/is_private.md)
+* [`is_v4`](https://tenzir.com/docs/v7.0.0/reference/functions/is_v4.md)
 * [Onboard a data source](../../tutorials/onboard-a-data-source.md)

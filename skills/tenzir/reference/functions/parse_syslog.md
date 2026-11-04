@@ -1,7 +1,7 @@
 ---
 title: "parse_syslog"
-canonical: https://tenzir.com/docs/reference/functions/parse_syslog
-source: https://tenzir.com/docs/reference/functions/parse_syslog.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/parse_syslog
+source: https://tenzir.com/docs/v7.0.0/reference/functions/parse_syslog.md
 section: "Docs"
 ---
 
@@ -22,7 +22,7 @@ Parses a string as a [Syslog](https://en.wikipedia.org/wiki/Syslog) message.
 
 Tenzir supports reading syslog messages in both the standardized “Syslog Protocol” format ([RFC 5424](https://tools.ietf.org/html/rfc5424)), and the older “BSD syslog Protocol” format ([RFC 3164](https://tools.ietf.org/html/rfc3164)).
 
-The function also accepts Cisco headers, including ASA timestamps and headers with a hostname before the timestamp. A Cisco prefix such as `%ASA-6-302014:` becomes `app_name: "ASA-6-302014"`, and `content` contains the remaining description. The `facility` and `severity` fields come from the syslog PRI value. See [`read_syslog`](https://tenzir.com/docs/reference/operators/read_syslog.md) for input and output examples.
+The function also accepts Cisco headers, including ASA timestamps and headers with a hostname before the timestamp. A Cisco prefix such as `%ASA-6-302014:` becomes `app_name: "ASA-6-302014"`, and `content` contains the remaining description. The `facility` and `severity` fields come from the syslog PRI value. See [`read_syslog`](https://tenzir.com/docs/v7.0.0/reference/operators/read_syslog.md) for input and output examples.
 
 Input without a recognized header produces a warning and null by default.
 
@@ -325,11 +325,11 @@ If the leading brackets don’t contain valid structured data, the parser leaves
 
 ### Parse an RFC 3164 timestamp
 
-RFC 3164/BSD syslog timestamps don’t include a year or timezone, so `parse_syslog` keeps the timestamp as a string. Use [`parse_time`](https://tenzir.com/docs/reference/functions/parse_time.md) with a `reference` timestamp to convert it after parsing the syslog message. See [`parse_time`](https://tenzir.com/docs/reference/functions/parse_time.md) for examples with `now()`, fixed references, and timezone offsets.
+RFC 3164/BSD syslog timestamps don’t include a year or timezone, so `parse_syslog` keeps the timestamp as a string. Use [`parse_time`](https://tenzir.com/docs/v7.0.0/reference/functions/parse_time.md) with a `reference` timestamp to convert it after parsing the syslog message. See [`parse_time`](https://tenzir.com/docs/v7.0.0/reference/functions/parse_time.md) for examples with `now()`, fixed references, and timezone offsets.
 
 ## See Also
 
-* [`parse_time`](https://tenzir.com/docs/reference/functions/parse_time.md)
-* [`read_syslog`](https://tenzir.com/docs/reference/operators/read_syslog.md)
-* [`write_syslog`](https://tenzir.com/docs/reference/operators/write_syslog.md)
-* [Syslog](../../integrations/syslog.md)
+* [`parse_time`](https://tenzir.com/docs/v7.0.0/reference/functions/parse_time.md)
+* [`read_syslog`](https://tenzir.com/docs/v7.0.0/reference/operators/read_syslog.md)
+* [`write_syslog`](https://tenzir.com/docs/v7.0.0/reference/operators/write_syslog.md)
+* [Syslog](https://docs.tenzir.com/integrations/syslog)

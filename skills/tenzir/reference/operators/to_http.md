@@ -1,7 +1,7 @@
 ---
 title: "to_http"
-canonical: https://tenzir.com/docs/reference/operators/to_http
-source: https://tenzir.com/docs/reference/operators/to_http.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/to_http
+source: https://tenzir.com/docs/v7.0.0/reference/operators/to_http.md
 section: "Docs"
 ---
 
@@ -21,7 +21,7 @@ to_http url:string, [method=string, headers=record, buffer_all=bool,
 
 The `to_http` operator collects all input events into a single HTTP request to a webhook or API endpoint. A required printer sub-pipeline turns the events into bytes, which Tenzir streams as the request body. The request body flows from the printer sub-pipeline into the HTTP connection as chunks become available, without buffering the entire body in memory first. By default, the operator sends requests with the `POST` method.
 
-To split events across multiple requests, wrap `to_http` in the [`every`](https://tenzir.com/docs/reference/operators/every.md) operator. For example, `every 1m { to_http ... }` sends one request per minute with the events that arrived during that window.
+To split events across multiple requests, wrap `to_http` in the [`every`](https://tenzir.com/docs/v7.0.0/reference/operators/every.md) operator. For example, `every 1m { to_http ... }` sends one request per minute with the events that arrived during that window.
 
 The operator retries transient connection errors and HTTP `429` and `5xx` responses up to `max_retry_count` times, but only before any body data has been sent. Once the body stream has started, retries are not possible because the data cannot be replayed. Set `buffer_all` to buffer the entire body in memory, which enables retries regardless of how much data has been sent. For retried HTTP responses, a `Retry-After` header overrides the configured delay.
 
@@ -137,7 +137,7 @@ This sends one `POST` request whose body contains both events as NDJSON. Use any
 
 ### Send one request per event
 
-Wrap `to_http` in [`each`](https://tenzir.com/docs/reference/operators/each.md) to send a separate HTTP request for every incoming event:
+Wrap `to_http` in [`each`](https://tenzir.com/docs/v7.0.0/reference/operators/each.md) to send a separate HTTP request for every incoming event:
 
 ```tql
 from {message: "hello", severity: "info"},
@@ -150,11 +150,11 @@ each {
 }
 ```
 
-Each event becomes an independent `POST` request with a JSON body. Use the `parallel` option of [`each`](https://tenzir.com/docs/reference/operators/each.md) to control concurrency.
+Each event becomes an independent `POST` request with a JSON body. Use the `parallel` option of [`each`](https://tenzir.com/docs/v7.0.0/reference/operators/each.md) to control concurrency.
 
 ### Send events in periodic batches
 
-Use [`every`](https://tenzir.com/docs/reference/operators/every.md) to group events into time-based batches, with each batch sent as a separate HTTP request:
+Use [`every`](https://tenzir.com/docs/v7.0.0/reference/operators/every.md) to group events into time-based batches, with each batch sent as a separate HTTP request:
 
 ```tql
 subscribe "stream-of-events"
@@ -208,14 +208,14 @@ to_http "https://s3.example.com/bucket/key", method="put", buffer_all=true {
 }
 ```
 
-The `head 1000` limits the input so that `buffer_all` has a finite body to buffer. Without a bound, `subscribe` streams indefinitely and the buffer grows without limit. Use [`every`](https://tenzir.com/docs/reference/operators/every.md) instead of `head` when you want periodic flushing.
+The `head 1000` limits the input so that `buffer_all` has a finite body to buffer. Without a bound, `subscribe` streams indefinitely and the buffer grows without limit. Use [`every`](https://tenzir.com/docs/v7.0.0/reference/operators/every.md) instead of `head` when you want periodic flushing.
 
 ## See Also
 
-* [`from_http`](https://tenzir.com/docs/reference/operators/from_http.md)
-* [`accept_http`](https://tenzir.com/docs/reference/operators/accept_http.md)
-* [`serve_http`](https://tenzir.com/docs/reference/operators/serve_http.md)
-* [`each`](https://tenzir.com/docs/reference/operators/each.md)
-* [`every`](https://tenzir.com/docs/reference/operators/every.md)
+* [`from_http`](https://tenzir.com/docs/v7.0.0/reference/operators/from_http.md)
+* [`accept_http`](https://tenzir.com/docs/v7.0.0/reference/operators/accept_http.md)
+* [`serve_http`](https://tenzir.com/docs/v7.0.0/reference/operators/serve_http.md)
+* [`each`](https://tenzir.com/docs/v7.0.0/reference/operators/each.md)
+* [`every`](https://tenzir.com/docs/v7.0.0/reference/operators/every.md)
 * [Fetch via HTTP and APIs](../../guides/collect/fetch-via-http-and-apis.md)
-* [HTTP](../../integrations/http.md)
+* [Http](https://docs.tenzir.com/integrations/http)

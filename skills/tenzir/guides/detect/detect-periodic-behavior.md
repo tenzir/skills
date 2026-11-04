@@ -1,8 +1,8 @@
 ---
 title: "Detect periodic behavior"
 description: "Score beaconing cadence with robust statistics, recover periods with autocorrelation, and catch implants that hold one connection open"
-canonical: https://tenzir.com/docs/guides/detect/detect-periodic-behavior
-source: https://tenzir.com/docs/guides/detect/detect-periodic-behavior.md
+canonical: https://tenzir.com/docs/v7.0.0/guides/detect/detect-periodic-behavior
+source: https://tenzir.com/docs/v7.0.0/guides/detect/detect-periodic-behavior.md
 section: "Docs"
 ---
 
@@ -16,7 +16,7 @@ Where the guide on [detecting over time windows](detect-over-time-windows.md) co
 
 ## Choose estimators that survive outliers
 
-Implants miss check-ins, and one long gap creates an outlier in the interval distribution. The mean and standard deviation are sensitive to such values, whereas the median and [median absolute deviation (MAD)](https://en.wikipedia.org/wiki/Median_absolute_deviation) are robust. MAD is the median of the absolute distances from the sample median. Compute inter-arrival intervals with [`deltas`](https://tenzir.com/docs/reference/functions/deltas.md), then compare the four estimators on a steady 60-second cadence with one 10-minute gap:
+Implants miss check-ins, and one long gap creates an outlier in the interval distribution. The mean and standard deviation are sensitive to such values, whereas the median and [median absolute deviation (MAD)](https://en.wikipedia.org/wiki/Median_absolute_deviation) are robust. MAD is the median of the absolute distances from the sample median. Compute inter-arrival intervals with [`deltas`](https://tenzir.com/docs/v7.0.0/reference/functions/deltas.md), then compare the four estimators on a steady 60-second cadence with one 10-minute gap:
 
 ```tql
 from {
@@ -48,9 +48,9 @@ drop times, intervals
 }
 ```
 
-The gap more than doubles the mean and pushes the standard deviation past three minutes, while the median and [`mad`](https://tenzir.com/docs/reference/functions/mad.md) stay at one minute and one second. Prefer median and MAD when missed check-ins can introduce outliers.
+The gap more than doubles the mean and pushes the standard deviation past three minutes, while the median and [`mad`](https://tenzir.com/docs/v7.0.0/reference/functions/mad.md) stay at one minute and one second. Prefer median and MAD when missed check-ins can introduce outliers.
 
-[`deltas`](https://tenzir.com/docs/reference/functions/deltas.md) returns durations for timestamp input, so thresholds read as `10s` or `3min` rather than bare numbers.
+[`deltas`](https://tenzir.com/docs/v7.0.0/reference/functions/deltas.md) returns durations for timestamp input, so thresholds read as `10s` or `3min` rather than bare numbers.
 
 ## Score a beacon candidate
 
@@ -129,7 +129,7 @@ select src_ip, dst_ip, dst_port, samples, interval_median, interval_mad,
 }
 ```
 
-Keep [`sort`](https://tenzir.com/docs/reference/operators/sort.md) inside the window so it buffers one tuple and period rather than an unbounded stream. The MAD bound relative to the median sets the jitter tolerance: at `0.2`, a beacon randomizing its sleep by plus or minus 20 percent still passes.
+Keep [`sort`](https://tenzir.com/docs/v7.0.0/reference/operators/sort.md) inside the window so it buffers one tuple and period rather than an unbounded stream. The MAD bound relative to the median sets the jitter tolerance: at `0.2`, a beacon randomizing its sleep by plus or minus 20 percent still passes.
 
 The fixed window bounds which cadences you can observe and runs one window invocation per aligned interval, in which each qualifying connection tuple can yield a candidate. Eight samples in 30 minutes caps the detectable period near three minutes, so an implant sleeping for an hour needs hourly or daily windows, or a scheduled query over stored events, as the guide on [baselining behavior from stored events](baseline-from-stored-events.md) develops.
 
@@ -137,13 +137,13 @@ Update checks, monitoring agents, and health probes are periodic by design. Filt
 
 ### Filter by symmetry
 
-A dispersion bound limits spread but not asymmetry. [Skewness](https://en.wikipedia.org/wiki/Skewness) measures that asymmetry, so the candidate pipeline computes [`skewness`](https://tenzir.com/docs/reference/functions/skewness.md) for both intervals and flow byte counts and filters on their absolute values.
+A dispersion bound limits spread but not asymmetry. [Skewness](https://en.wikipedia.org/wiki/Skewness) measures that asymmetry, so the candidate pipeline computes [`skewness`](https://tenzir.com/docs/v7.0.0/reference/functions/skewness.md) for both intervals and flow byte counts and filters on their absolute values.
 
 Use `method="bowley"` when long gaps are expected. Default moment skewness uses cubed deviations from the mean, while Bowley skewness uses [quartiles](https://en.wikipedia.org/wiki/Quartile) and is less sensitive to outliers. On this example data, moment skewness is `2.04`, while Bowley skewness is `0.33` and remains inside the `0.6` bound. On small samples, quartiles move in steps, so use skewness as a coarse filter rather than a precise score.
 
 ## Recover the period directly
 
-Interval statistics assume the tuple carries one repeating conversation. When a browser and an implant talk to the same destination, the events interleave and the intervals describe neither. Recover the period from the [frequency domain](https://en.wikipedia.org/wiki/Frequency_domain), which represents a signal by repetition rate rather than event-to-event timing. [`dominant_period`](https://tenzir.com/docs/reference/functions/dominant_period.md) bins timestamps at a chosen resolution, autocorrelates the count series, and returns the strongest lag, the offset between the series and its shifted copy, with a strength between 0 and 1:
+Interval statistics assume the tuple carries one repeating conversation. When a browser and an implant talk to the same destination, the events interleave and the intervals describe neither. Recover the period from the [frequency domain](https://en.wikipedia.org/wiki/Frequency_domain), which represents a signal by repetition rate rather than event-to-event timing. [`dominant_period`](https://tenzir.com/docs/v7.0.0/reference/functions/dominant_period.md) bins timestamps at a chosen resolution, autocorrelates the count series, and returns the strongest lag, the offset between the series and its shifted copy, with a strength between 0 and 1:
 
 ```tql
 from {time: 2024-01-01T10:00:00},
@@ -209,7 +209,7 @@ Size the resolution against the jitter
 
 Too fine a `resolution` smears a jittered beacon across neighboring bins, too coarse a one collapses distinct periods into one. A clean 60-second beacon recovers `1min` at strength above `0.87` for every resolution from `5s` to `30s`. Add plus or minus two seconds of jitter and competing traffic on the same tuple, and only `15s` recovers it, at strength `0.38`. Sweep the resolution against representative traffic, and compare strengths against each other rather than against a fixed number.
 
-For full control, [`autocorrelation`](https://tenzir.com/docs/reference/functions/autocorrelation.md) returns the coefficients themselves, one per lag:
+For full control, [`autocorrelation`](https://tenzir.com/docs/v7.0.0/reference/functions/autocorrelation.md) returns the coefficients themselves, one per lag:
 
 ```tql
 from {
@@ -230,7 +230,7 @@ select r = counts.autocorrelation(max_lag=4)
 }
 ```
 
-Lag 0 is always 1, and a peak at lag `k` means the series repeats every `k` samples, here every 2. A [periodogram](https://en.wikipedia.org/wiki/Periodogram) estimates signal power at each frequency; use [`periodogram`](https://tenzir.com/docs/reference/functions/periodogram.md) when you want that view instead of correlation per lag.
+Lag 0 is always 1, and a peak at lag `k` means the series repeats every `k` samples, here every 2. A [periodogram](https://en.wikipedia.org/wiki/Periodogram) estimates signal power at each frequency; use [`periodogram`](https://tenzir.com/docs/v7.0.0/reference/functions/periodogram.md) when you want that view instead of correlation per lag.
 
 ## Catch implants that never beacon
 
@@ -324,16 +324,16 @@ When you use the `dominant_period` variant, put `beat.period` and `beat.strength
 ## See Also
 
 * [Detections](../../explanations/detections.md)
-* [`window`](https://tenzir.com/docs/reference/operators/window.md)
-* [`group`](https://tenzir.com/docs/reference/operators/group.md)
-* [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md)
-* [`sort`](https://tenzir.com/docs/reference/operators/sort.md)
-* [`deltas`](https://tenzir.com/docs/reference/functions/deltas.md)
-* [`mad`](https://tenzir.com/docs/reference/functions/mad.md)
-* [`skewness`](https://tenzir.com/docs/reference/functions/skewness.md)
-* [`dominant_period`](https://tenzir.com/docs/reference/functions/dominant_period.md)
-* [`autocorrelation`](https://tenzir.com/docs/reference/functions/autocorrelation.md)
-* [`periodogram`](https://tenzir.com/docs/reference/functions/periodogram.md)
+* [`window`](https://tenzir.com/docs/v7.0.0/reference/operators/window.md)
+* [`group`](https://tenzir.com/docs/v7.0.0/reference/operators/group.md)
+* [`summarize`](https://tenzir.com/docs/v7.0.0/reference/operators/summarize.md)
+* [`sort`](https://tenzir.com/docs/v7.0.0/reference/operators/sort.md)
+* [`deltas`](https://tenzir.com/docs/v7.0.0/reference/functions/deltas.md)
+* [`mad`](https://tenzir.com/docs/v7.0.0/reference/functions/mad.md)
+* [`skewness`](https://tenzir.com/docs/v7.0.0/reference/functions/skewness.md)
+* [`dominant_period`](https://tenzir.com/docs/v7.0.0/reference/functions/dominant_period.md)
+* [`autocorrelation`](https://tenzir.com/docs/v7.0.0/reference/functions/autocorrelation.md)
+* [`periodogram`](https://tenzir.com/docs/v7.0.0/reference/functions/periodogram.md)
 * [Detect over time windows](detect-over-time-windows.md)
 * [Model detections in OCSF](model-detections-in-ocsf.md)
 * [Create multi-stage detectors](create-multi-stage-detectors.md)

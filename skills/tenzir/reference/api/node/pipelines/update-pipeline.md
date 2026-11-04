@@ -1,7 +1,7 @@
 ---
 title: "Update pipeline state"
-canonical: https://tenzir.com/docs/reference/api/node/pipelines/update-pipeline
-source: https://tenzir.com/docs/reference/api/node/pipelines/update-pipeline.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/api/node/pipelines/update-pipeline
+source: https://tenzir.com/docs/v7.0.0/reference/api/node/pipelines/update-pipeline.md
 section: "Docs"
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "to_google_cloud_pubsub"
-canonical: https://tenzir.com/docs/reference/operators/to_google_cloud_pubsub
-source: https://tenzir.com/docs/reference/operators/to_google_cloud_pubsub.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/to_google_cloud_pubsub
+source: https://tenzir.com/docs/v7.0.0/reference/operators/to_google_cloud_pubsub.md
 section: "Docs"
 ---
 
@@ -53,7 +53,7 @@ to_google_cloud_pubsub project_id="amazing-project-123456", topic_id="alerts-top
 
 ## See Also
 
-* [`from_google_cloud_pubsub`](https://tenzir.com/docs/reference/operators/from_google_cloud_pubsub.md)
-* [Google Cloud Pub/Sub](../../integrations/google/cloud-pubsub.md)
+* [`from_google_cloud_pubsub`](https://tenzir.com/docs/v7.0.0/reference/operators/from_google_cloud_pubsub.md)
+* [Cloud pubsub](https://docs.tenzir.com/integrations/google/cloud-pubsub)
 
 Parallelizable: a parallel pipeline may run this operator on several cores at once.

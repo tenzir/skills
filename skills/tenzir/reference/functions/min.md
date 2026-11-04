@@ -1,7 +1,7 @@
 ---
 title: "min"
-canonical: https://tenzir.com/docs/reference/functions/min
-source: https://tenzir.com/docs/reference/functions/min.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/min
+source: https://tenzir.com/docs/v7.0.0/reference/functions/min.md
 section: "Docs"
 ---
 
@@ -38,7 +38,7 @@ summarize min_value=min(x)
 
 ## See Also
 
-* [`max`](https://tenzir.com/docs/reference/functions/max.md)
-* [`mean`](https://tenzir.com/docs/reference/functions/mean.md)
-* [`sum`](https://tenzir.com/docs/reference/functions/sum.md)
+* [`max`](https://tenzir.com/docs/v7.0.0/reference/functions/max.md)
+* [`mean`](https://tenzir.com/docs/v7.0.0/reference/functions/mean.md)
+* [`sum`](https://tenzir.com/docs/v7.0.0/reference/functions/sum.md)
 * [Aggregate event streams](../../guides/analyze/aggregate-event-streams.md)

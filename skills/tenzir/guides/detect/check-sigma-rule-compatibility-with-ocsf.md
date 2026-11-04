@@ -1,8 +1,8 @@
 ---
 title: "Check Sigma rule compatibility with OCSF"
 description: "Test a Sigma rule against a normalized event, inspect its field requirements, and distinguish missing evidence from a nonmatch"
-canonical: https://tenzir.com/docs/guides/detect/check-sigma-rule-compatibility-with-ocsf
-source: https://tenzir.com/docs/guides/detect/check-sigma-rule-compatibility-with-ocsf.md
+canonical: https://tenzir.com/docs/v7.0.0/guides/detect/check-sigma-rule-compatibility-with-ocsf
+source: https://tenzir.com/docs/v7.0.0/guides/detect/check-sigma-rule-compatibility-with-ocsf.md
 section: "Docs"
 ---
 
@@ -12,7 +12,7 @@ section: "Docs"
 
 This guide shows you how to check whether your existing Sigma rules can run unchanged on OCSF events. Your pipeline now produces normalized events, but the rules still reference source fields such as `Image` and `CommandLine`. You need to verify both rule support and whether normalization preserved the required evidence.
 
-The [`sigma`](https://tenzir.com/docs/reference/operators/sigma.md) operator translates supported rule predicates to OCSF lookups without changing the rule or event. It cannot recover information lost during normalization. Use the catalog to find your rule’s logsource and field mappings, then follow the worked example to check those fields in an actual normalized event, verify a match, and diagnose missing evidence.
+The [`sigma`](https://tenzir.com/docs/v7.0.0/reference/operators/sigma.md) operator translates supported rule predicates to OCSF lookups without changing the rule or event. It cannot recover information lost during normalization. Use the catalog to find your rule’s logsource and field mappings, then follow the worked example to check those fields in an actual normalized event, verify a match, and diagnose missing evidence.
 
 ## Mapping catalog
 

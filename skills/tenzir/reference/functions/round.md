@@ -1,7 +1,7 @@
 ---
 title: "round"
-canonical: https://tenzir.com/docs/reference/functions/round
-source: https://tenzir.com/docs/reference/functions/round.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/round
+source: https://tenzir.com/docs/v7.0.0/reference/functions/round.md
 section: "Docs"
 ---
 
@@ -61,7 +61,7 @@ from {
 
 ## See Also
 
-* [`ceil`](https://tenzir.com/docs/reference/functions/ceil.md)
-* [`floor`](https://tenzir.com/docs/reference/functions/floor.md)
+* [`ceil`](https://tenzir.com/docs/v7.0.0/reference/functions/ceil.md)
+* [`floor`](https://tenzir.com/docs/v7.0.0/reference/functions/floor.md)
 * [Transform values](../../guides/shape/transform-values.md)
-* [Plot data with charts](../../tutorials/plot-data-with-charts.md)
+* [Plot data with charts](https://docs.tenzir.com/tutorials/plot-data-with-charts)

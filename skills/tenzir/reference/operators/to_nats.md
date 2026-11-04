@@ -1,7 +1,7 @@
 ---
 title: "to_nats"
-canonical: https://tenzir.com/docs/reference/operators/to_nats
-source: https://tenzir.com/docs/reference/operators/to_nats.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/to_nats
+source: https://tenzir.com/docs/v7.0.0/reference/operators/to_nats.md
 section: "Docs"
 ---
 
@@ -120,8 +120,8 @@ to_nats "alerts",
 
 ## See Also
 
-* [`from_nats`](https://tenzir.com/docs/reference/operators/from_nats.md)
+* [`from_nats`](https://tenzir.com/docs/v7.0.0/reference/operators/from_nats.md)
 * [Send to destinations](../../guides/route/send-to-destinations.md)
-* [NATS](../../integrations/nats.md)
+* [Nats](https://docs.tenzir.com/integrations/nats)
 
 Parallelizable: a parallel pipeline may run this operator on several cores at once.

@@ -1,7 +1,7 @@
 ---
 title: "decode_base64"
-canonical: https://tenzir.com/docs/reference/functions/decode_base64
-source: https://tenzir.com/docs/reference/functions/decode_base64.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/decode_base64
+source: https://tenzir.com/docs/v7.0.0/reference/functions/decode_base64.md
 section: "Docs"
 ---
 
@@ -38,5 +38,5 @@ decoded = bytes.decode_base64()
 
 ## See Also
 
-* [`encode_base64`](https://tenzir.com/docs/reference/functions/encode_base64.md)
+* [`encode_base64`](https://tenzir.com/docs/v7.0.0/reference/functions/encode_base64.md)
 * [Manipulate strings](../../guides/shape/manipulate-strings.md)

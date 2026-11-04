@@ -1,7 +1,7 @@
 ---
 title: "Map to CIM"
-canonical: https://tenzir.com/docs/guides/normalize/map-to-cim
-source: https://tenzir.com/docs/guides/normalize/map-to-cim.md
+canonical: https://tenzir.com/docs/v7.0.0/guides/normalize/map-to-cim
+source: https://tenzir.com/docs/v7.0.0/guides/normalize/map-to-cim.md
 section: "Docs"
 ---
 
@@ -48,7 +48,7 @@ These rules are specific to CIM:
 
 ## Send CIM events to Splunk
 
-When you send CIM-shaped events to Splunk HEC, pass Splunk metadata through the dedicated [`to_splunk`](https://tenzir.com/docs/reference/operators/to_splunk.md) options:
+When you send CIM-shaped events to Splunk HEC, pass Splunk metadata through the dedicated [`to_splunk`](https://tenzir.com/docs/v7.0.0/reference/operators/to_splunk.md) options:
 
 ```tql
 splunk::cim::map ocsf, cim
@@ -79,7 +79,7 @@ Use the `index` option when the destination index differs per event.
 
 ## See Also
 
-* [`to_splunk`](https://tenzir.com/docs/reference/operators/to_splunk.md)
+* [`to_splunk`](https://tenzir.com/docs/v7.0.0/reference/operators/to_splunk.md)
 * [Clean up values](../parse/clean-up-values.md)
 * [Use agent skills](../ai-workbench/use-agent-skills.md#use-the-cim-skill)
 * [Map to ASIM](map-to-asim.md)
@@ -88,5 +88,5 @@ Use the `index` option when the destination index differs per event.
 * [Map to UDM](map-to-udm.md)
 * [Create a package](../packages/create-a-package.md)
 * [Write tests](../testing/write-tests.md)
-* [Splunk](../../integrations/splunk.md)
+* [Splunk](https://docs.tenzir.com/integrations/splunk)
 * [Onboard a data source](../../tutorials/onboard-a-data-source.md)

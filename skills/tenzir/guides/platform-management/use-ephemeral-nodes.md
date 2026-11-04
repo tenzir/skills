@@ -1,7 +1,7 @@
 ---
 title: "Use ephemeral nodes"
-canonical: https://tenzir.com/docs/guides/platform-management/use-ephemeral-nodes
-source: https://tenzir.com/docs/guides/platform-management/use-ephemeral-nodes.md
+canonical: https://tenzir.com/docs/v7.0.0/guides/platform-management/use-ephemeral-nodes
+source: https://tenzir.com/docs/v7.0.0/guides/platform-management/use-ephemeral-nodes.md
 section: "Docs"
 ---
 

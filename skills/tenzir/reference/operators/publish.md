@@ -1,7 +1,7 @@
 ---
 title: "publish"
-canonical: https://tenzir.com/docs/reference/operators/publish
-source: https://tenzir.com/docs/reference/operators/publish.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/publish
+source: https://tenzir.com/docs/v7.0.0/reference/operators/publish.md
 section: "Docs"
 ---
 
@@ -17,7 +17,7 @@ publish [topic:string]
 
 ## Description
 
-The `publish` operator publishes events at a node in a channel with the specified topic. All [`subscribe`](https://tenzir.com/docs/reference/operators/subscribe.md) operators on that topic receive the events immediately.
+The `publish` operator publishes events at a node in a channel with the specified topic. All [`subscribe`](https://tenzir.com/docs/v7.0.0/reference/operators/subscribe.md) operators on that topic receive the events immediately.
 
 Note
 
@@ -56,8 +56,8 @@ publish f"suricata.{event_type}"
 
 ## See Also
 
-* [`import`](https://tenzir.com/docs/reference/operators/import.md)
-* [`subscribe`](https://tenzir.com/docs/reference/operators/subscribe.md)
+* [`import`](https://tenzir.com/docs/v7.0.0/reference/operators/import.md)
+* [`subscribe`](https://tenzir.com/docs/v7.0.0/reference/operators/subscribe.md)
 * [Quickstart](../../guides/quickstart.md)
 * [Split and merge streams](../../guides/route/split-and-merge-streams.md)
 * [Onboard a data source](../../tutorials/onboard-a-data-source.md)

@@ -1,7 +1,7 @@
 ---
 title: "parse_leef"
-canonical: https://tenzir.com/docs/reference/functions/parse_leef
-source: https://tenzir.com/docs/reference/functions/parse_leef.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/parse_leef
+source: https://tenzir.com/docs/v7.0.0/reference/functions/parse_leef.md
 section: "Docs"
 ---
 
@@ -154,11 +154,11 @@ output = input.parse_leef()
 
 ## See Also
 
-* [`read_leef`](https://tenzir.com/docs/reference/operators/read_leef.md)
-* [`read_syslog`](https://tenzir.com/docs/reference/operators/read_syslog.md)
-* [`write_syslog`](https://tenzir.com/docs/reference/operators/write_syslog.md)
-* [`parse_cef`](https://tenzir.com/docs/reference/functions/parse_cef.md)
-* [`print_leef`](https://tenzir.com/docs/reference/functions/print_leef.md)
+* [`read_leef`](https://tenzir.com/docs/v7.0.0/reference/operators/read_leef.md)
+* [`read_syslog`](https://tenzir.com/docs/v7.0.0/reference/operators/read_syslog.md)
+* [`write_syslog`](https://tenzir.com/docs/v7.0.0/reference/operators/write_syslog.md)
+* [`parse_cef`](https://tenzir.com/docs/v7.0.0/reference/functions/parse_cef.md)
+* [`print_leef`](https://tenzir.com/docs/v7.0.0/reference/functions/print_leef.md)
 * [Parse string fields](../../guides/parse/parse-string-fields.md)
-* [IBM QRadar](../../integrations/qradar.md)
-* [Syslog](../../integrations/syslog.md)
+* [Qradar](https://docs.tenzir.com/integrations/qradar)
+* [Syslog](https://docs.tenzir.com/integrations/syslog)

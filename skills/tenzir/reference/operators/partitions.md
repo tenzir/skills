@@ -1,7 +1,7 @@
 ---
 title: "partitions"
-canonical: https://tenzir.com/docs/reference/operators/partitions
-source: https://tenzir.com/docs/reference/operators/partitions.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/partitions
+source: https://tenzir.com/docs/v7.0.0/reference/operators/partitions.md
 section: "Docs"
 ---
 

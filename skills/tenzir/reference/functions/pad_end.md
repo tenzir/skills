@@ -1,7 +1,7 @@
 ---
 title: "pad_end"
-canonical: https://tenzir.com/docs/reference/functions/pad_end
-source: https://tenzir.com/docs/reference/functions/pad_end.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/pad_end
+source: https://tenzir.com/docs/v7.0.0/reference/functions/pad_end.md
 section: "Docs"
 ---
 
@@ -67,8 +67,8 @@ from {x: "hello world".pad_end(5)}
 
 ## See Also
 
-* [`pad_start`](https://tenzir.com/docs/reference/functions/pad_start.md)
-* [`trim`](https://tenzir.com/docs/reference/functions/trim.md)
-* [`trim_end`](https://tenzir.com/docs/reference/functions/trim_end.md)
+* [`pad_start`](https://tenzir.com/docs/v7.0.0/reference/functions/pad_start.md)
+* [`trim`](https://tenzir.com/docs/v7.0.0/reference/functions/trim.md)
+* [`trim_end`](https://tenzir.com/docs/v7.0.0/reference/functions/trim_end.md)
 * [Manipulate strings](../../guides/shape/manipulate-strings.md)
 * [Mask sensitive data](../../guides/protect/mask-sensitive-data.md)

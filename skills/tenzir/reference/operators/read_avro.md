@@ -1,7 +1,7 @@
 ---
 title: "read_avro"
-canonical: https://tenzir.com/docs/reference/operators/read_avro
-source: https://tenzir.com/docs/reference/operators/read_avro.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/read_avro
+source: https://tenzir.com/docs/v7.0.0/reference/operators/read_avro.md
 section: "Docs"
 ---
 
@@ -84,7 +84,7 @@ from_file "events.bin" {
 
 ## See Also
 
-* [Apache Avro](../../integrations/avro.md)
-* [`parse_avro`](https://tenzir.com/docs/reference/functions/parse_avro.md)
-* [`print_avro`](https://tenzir.com/docs/reference/functions/print_avro.md)
-* [`from_file`](https://tenzir.com/docs/reference/operators/from_file.md)
+* [Avro](https://docs.tenzir.com/integrations/avro)
+* [`parse_avro`](https://tenzir.com/docs/v7.0.0/reference/functions/parse_avro.md)
+* [`print_avro`](https://tenzir.com/docs/v7.0.0/reference/functions/print_avro.md)
+* [`from_file`](https://tenzir.com/docs/v7.0.0/reference/operators/from_file.md)

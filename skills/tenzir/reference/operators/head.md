@@ -1,7 +1,7 @@
 ---
 title: "head"
-canonical: https://tenzir.com/docs/reference/operators/head
-source: https://tenzir.com/docs/reference/operators/head.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/head
+source: https://tenzir.com/docs/v7.0.0/reference/operators/head.md
 section: "Docs"
 ---
 
@@ -19,7 +19,7 @@ head [n:int]
 
 Forwards the first `n` events and discards the rest.
 
-`head n` is a shorthand notation for [`slice end=n`](https://tenzir.com/docs/reference/operators/slice.md).
+`head n` is a shorthand notation for [`slice end=n`](https://tenzir.com/docs/v7.0.0/reference/operators/slice.md).
 
 ### `n: int (optional)`
 
@@ -43,7 +43,7 @@ head 5
 
 ## See Also
 
-* [`slice`](https://tenzir.com/docs/reference/operators/slice.md)
-* [`tail`](https://tenzir.com/docs/reference/operators/tail.md)
+* [`slice`](https://tenzir.com/docs/v7.0.0/reference/operators/slice.md)
+* [`tail`](https://tenzir.com/docs/v7.0.0/reference/operators/tail.md)
 * [Slice and sample data](../../guides/optimize/slice-and-sample-data.md)
-* [Plot data with charts](../../tutorials/plot-data-with-charts.md)
+* [Plot data with charts](https://docs.tenzir.com/tutorials/plot-data-with-charts)

@@ -1,7 +1,7 @@
 ---
 title: "Add pipelines"
-canonical: https://tenzir.com/docs/guides/packages/add-pipelines
-source: https://tenzir.com/docs/guides/packages/add-pipelines.md
+canonical: https://tenzir.com/docs/v7.0.0/guides/packages/add-pipelines
+source: https://tenzir.com/docs/v7.0.0/guides/packages/add-pipelines.md
 section: "Docs"
 ---
 

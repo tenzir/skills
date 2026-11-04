@@ -1,7 +1,7 @@
 ---
 title: "equals"
-canonical: https://tenzir.com/docs/reference/functions/equals
-source: https://tenzir.com/docs/reference/functions/equals.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/equals
+source: https://tenzir.com/docs/v7.0.0/reference/functions/equals.md
 section: "Docs"
 ---
 
@@ -71,7 +71,7 @@ from {
 
 ## See Also
 
-* [`search`](https://tenzir.com/docs/reference/functions/search.md)
-* [`ends_with`](https://tenzir.com/docs/reference/functions/ends_with.md)
-* [`starts_with`](https://tenzir.com/docs/reference/functions/starts_with.md)
+* [`search`](https://tenzir.com/docs/v7.0.0/reference/functions/search.md)
+* [`ends_with`](https://tenzir.com/docs/v7.0.0/reference/functions/ends_with.md)
+* [`starts_with`](https://tenzir.com/docs/v7.0.0/reference/functions/starts_with.md)
 * [Manipulate strings](../../guides/shape/manipulate-strings.md)

@@ -1,7 +1,7 @@
 ---
 title: "parse_winlog"
-canonical: https://tenzir.com/docs/reference/functions/parse_winlog
-source: https://tenzir.com/docs/reference/functions/parse_winlog.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/parse_winlog
+source: https://tenzir.com/docs/v7.0.0/reference/functions/parse_winlog.md
 section: "Docs"
 ---
 
@@ -352,6 +352,6 @@ where System.EventID in [4624, 4625]
 
 ## See Also
 
-* [`parse_xml`](https://tenzir.com/docs/reference/functions/parse_xml.md)
-* [`parse_syslog`](https://tenzir.com/docs/reference/functions/parse_syslog.md)
-* [Microsoft Windows Event Logs](../../integrations/microsoft/windows-event-logs.md)
+* [`parse_xml`](https://tenzir.com/docs/v7.0.0/reference/functions/parse_xml.md)
+* [`parse_syslog`](https://tenzir.com/docs/v7.0.0/reference/functions/parse_syslog.md)
+* [Windows event logs](https://docs.tenzir.com/integrations/microsoft/windows-event-logs)

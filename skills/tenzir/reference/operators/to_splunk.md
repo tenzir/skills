@@ -1,7 +1,7 @@
 ---
 title: "to_splunk"
-canonical: https://tenzir.com/docs/reference/operators/to_splunk
-source: https://tenzir.com/docs/reference/operators/to_splunk.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/to_splunk
+source: https://tenzir.com/docs/v7.0.0/reference/operators/to_splunk.md
 section: "Docs"
 ---
 
@@ -267,6 +267,6 @@ to_splunk "https://localhost:8088",
 ## See Also
 
 * [Map to CIM](../../guides/normalize/map-to-cim.md)
-* [Splunk](../../integrations/splunk.md)
+* [Splunk](https://docs.tenzir.com/integrations/splunk)
 
 Parallelizable: a parallel pipeline may run this operator on several cores at once.

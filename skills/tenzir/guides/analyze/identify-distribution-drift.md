@@ -1,8 +1,8 @@
 ---
 title: "Identify distribution drift"
 description: "Find changes in coding-agent operation mix and duration distributions."
-canonical: https://tenzir.com/docs/guides/analyze/identify-distribution-drift
-source: https://tenzir.com/docs/guides/analyze/identify-distribution-drift.md
+canonical: https://tenzir.com/docs/v7.0.0/guides/analyze/identify-distribution-drift
+source: https://tenzir.com/docs/v7.0.0/guides/analyze/identify-distribution-drift.md
 section: "Docs"
 ---
 
@@ -16,7 +16,7 @@ Compare complete baseline and current distributions when you need to know whethe
 
 ## Compare baseline and current distributions
 
-The baseline contains three interactions, one model request, and one tool execution. The current population contains one interaction, one slower model request, two tool executions, and one `WebFetch`. Build [`frequency_table`](https://tenzir.com/docs/reference/functions/frequency_table.md) models for the operations and [`tdigest`](https://tenzir.com/docs/reference/functions/tdigest.md) models for the durations.
+The baseline contains three interactions, one model request, and one tool execution. The current population contains one interaction, one slower model request, two tool executions, and one `WebFetch`. Build [`frequency_table`](https://tenzir.com/docs/v7.0.0/reference/functions/frequency_table.md) models for the operations and [`tdigest`](https://tenzir.com/docs/v7.0.0/reference/functions/tdigest.md) models for the durations.
 
 The pipeline uses [Jensen-Shannon divergence](https://en.wikipedia.org/wiki/Jensen%E2%80%93Shannon_divergence) to compare the operation mix. For durations, [Kolmogorov-Smirnov distance](https://en.wikipedia.org/wiki/Kolmogorov%E2%80%93Smirnov_test) measures the largest gap between [cumulative distribution functions](https://en.wikipedia.org/wiki/Cumulative_distribution_function) (CDFs), while the [Wasserstein distance](https://en.wikipedia.org/wiki/Wasserstein_metric) reports the shift in milliseconds:
 
@@ -76,11 +76,11 @@ select lifecycle_drift = model_divergence(
 
 The unchanged event count hid all three results. The values describe different parts of the rollout’s change:
 
-* [`model_divergence`](https://tenzir.com/docs/reference/functions/model_divergence.md) with Jensen-Shannon divergence measures how much probability mass moved between agent operations. It ranges from `0.0` to `ln(2)` because Tenzir uses [natural logarithms](https://en.wikipedia.org/wiki/Natural_logarithm).
-* [`model_distance`](https://tenzir.com/docs/reference/functions/model_distance.md) with Kolmogorov-Smirnov distance measures the largest vertical gap between the approximate CDFs. It ranges from `0.0` to `1.0`.
+* [`model_divergence`](https://tenzir.com/docs/v7.0.0/reference/functions/model_divergence.md) with Jensen-Shannon divergence measures how much probability mass moved between agent operations. It ranges from `0.0` to `ln(2)` because Tenzir uses [natural logarithms](https://en.wikipedia.org/wiki/Natural_logarithm).
+* [`model_distance`](https://tenzir.com/docs/v7.0.0/reference/functions/model_distance.md) with Kolmogorov-Smirnov distance measures the largest vertical gap between the approximate CDFs. It ranges from `0.0` to `1.0`.
 * The Wasserstein distance reports how far the duration distribution moved in its original unit. Here, the span durations moved by 596 ms on average.
 
-The first comparison also supports [`histogram`](https://tenzir.com/docs/reference/functions/histogram.md) models with identical edges. Use histograms when stable domain-specific ranges matter more than the adaptive compression of a t-digest.
+The first comparison also supports [`histogram`](https://tenzir.com/docs/v7.0.0/reference/functions/histogram.md) models with identical edges. Use histograms when stable domain-specific ranges matter more than the adaptive compression of a t-digest.
 
 When complete samples are available
 
@@ -104,9 +104,9 @@ select shape_change = kolmogorov_smirnov(baseline_ms, current_ms),
 }
 ```
 
-The Jensen-Shannon vectors describe `claude_code.interaction`, `claude_code.llm_request`, `claude_code.tool.execution`, and `WebFetch` in that order. The weight vectors passed to [`jensen_shannon`](https://tenzir.com/docs/reference/functions/jensen_shannon.md) must describe the same categories in the same order. A [`frequency_table`](https://tenzir.com/docs/reference/functions/frequency_table.md) avoids that manual alignment by joining the exact values from both models.
+The Jensen-Shannon vectors describe `claude_code.interaction`, `claude_code.llm_request`, `claude_code.tool.execution`, and `WebFetch` in that order. The weight vectors passed to [`jensen_shannon`](https://tenzir.com/docs/v7.0.0/reference/functions/jensen_shannon.md) must describe the same categories in the same order. A [`frequency_table`](https://tenzir.com/docs/v7.0.0/reference/functions/frequency_table.md) avoids that manual alignment by joining the exact values from both models.
 
-The [`kolmogorov_smirnov`](https://tenzir.com/docs/reference/functions/kolmogorov_smirnov.md) and [`wasserstein`](https://tenzir.com/docs/reference/functions/wasserstein.md) functions also accept duration and timestamp samples. Wasserstein distance then returns a duration. Use the model-based variants when you need bounded state, persistence, or merging.
+The [`kolmogorov_smirnov`](https://tenzir.com/docs/v7.0.0/reference/functions/kolmogorov_smirnov.md) and [`wasserstein`](https://tenzir.com/docs/v7.0.0/reference/functions/wasserstein.md) functions also accept duration and timestamp samples. Wasserstein distance then returns a duration. Use the model-based variants when you need bounded state, persistence, or merging.
 
 Choose a drift threshold
 

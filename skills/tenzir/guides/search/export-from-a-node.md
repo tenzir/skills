@@ -1,7 +1,7 @@
 ---
 title: "Export from a node"
-canonical: https://tenzir.com/docs/guides/search/export-from-a-node
-source: https://tenzir.com/docs/guides/search/export-from-a-node.md
+canonical: https://tenzir.com/docs/v7.0.0/guides/search/export-from-a-node
+source: https://tenzir.com/docs/v7.0.0/guides/search/export-from-a-node.md
 section: "Docs"
 ---
 
@@ -9,7 +9,7 @@ section: "Docs"
 
 > Exporting (or querying) data can be done by running a pipeline that begins with the export input operator. When managing a pipeline through the app or the API, all pipeline operators run within the node. When using the CLI, at least the export operator runs within the node.
 
-Exporting (or *querying*) data can be done by [running a pipeline](../basic-usage/run-pipelines.md) that begins with the [`export`](https://tenzir.com/docs/reference/operators/export.md) input operator. When managing a pipeline through the app or the API, all pipeline operators run within the node. When using the CLI, at least the `export` operator runs within the node.
+Exporting (or *querying*) data can be done by [running a pipeline](../basic-usage/run-pipelines.md) that begins with the [`export`](https://tenzir.com/docs/v7.0.0/reference/operators/export.md) input operator. When managing a pipeline through the app or the API, all pipeline operators run within the node. When using the CLI, at least the `export` operator runs within the node.
 
 Export
 
@@ -20,7 +20,7 @@ export
 head
 ```
 
-Think of `export` being the entire data at a node. As this can grow quickly, you may query only subsets of it, e.g., by filtering using [`where`](https://tenzir.com/docs/reference/operators/where.md):
+Think of `export` being the entire data at a node. As this can grow quickly, you may query only subsets of it, e.g., by filtering using [`where`](https://tenzir.com/docs/v7.0.0/reference/operators/where.md):
 
 ```tql
 export

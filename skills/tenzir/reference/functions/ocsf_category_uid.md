@@ -1,7 +1,7 @@
 ---
 title: "ocsf_category_uid"
-canonical: https://tenzir.com/docs/reference/functions/ocsf_category_uid
-source: https://tenzir.com/docs/reference/functions/ocsf_category_uid.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/ocsf_category_uid
+source: https://tenzir.com/docs/v7.0.0/reference/functions/ocsf_category_uid.md
 section: "Docs"
 ---
 
@@ -23,4 +23,4 @@ The `category_name` for which `category_uid` should be returned.
 
 ## See Also
 
-* [`ocsf_category_name`](https://tenzir.com/docs/reference/functions/ocsf_category_name.md)
+* [`ocsf_category_name`](https://tenzir.com/docs/v7.0.0/reference/functions/ocsf_category_name.md)

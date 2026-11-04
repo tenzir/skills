@@ -1,7 +1,7 @@
 ---
 title: "hll"
-canonical: https://tenzir.com/docs/reference/functions/hll
-source: https://tenzir.com/docs/reference/functions/hll.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/hll
+source: https://tenzir.com/docs/v7.0.0/reference/functions/hll.md
 section: "Docs"
 ---
 
@@ -76,6 +76,6 @@ select users = hll_cardinality(model)
 
 ## See also
 
-* [`hll_cardinality`](https://tenzir.com/docs/reference/functions/hll_cardinality.md)
-* [`model_merge`](https://tenzir.com/docs/reference/functions/model_merge.md)
-* [`count_distinct`](https://tenzir.com/docs/reference/functions/count_distinct.md)
+* [`hll_cardinality`](https://tenzir.com/docs/v7.0.0/reference/functions/hll_cardinality.md)
+* [`model_merge`](https://tenzir.com/docs/v7.0.0/reference/functions/model_merge.md)
+* [`count_distinct`](https://tenzir.com/docs/v7.0.0/reference/functions/count_distinct.md)

@@ -1,7 +1,7 @@
 ---
 title: "Platform"
-canonical: https://tenzir.com/docs/explanations/platform
-source: https://tenzir.com/docs/explanations/platform.md
+canonical: https://tenzir.com/docs/v7.0.0/explanations/platform
+source: https://tenzir.com/docs/v7.0.0/explanations/platform.md
 section: "Docs"
 ---
 
@@ -40,7 +40,7 @@ The creator of an organization automatically becomes its first admin.
 
 Organizations
 
-Organizations are not available in the free **Community Edition**. Please see [tenzir.com/pricing](https://tenzir.com/pricing.md) for a detailed feature comparison.
+Organizations are not available in the free **Community Edition**. Please see [tenzir.com/pricing](https://tenzir.com/pricing) for a detailed feature comparison.
 
 ### Workspaces
 
@@ -62,7 +62,7 @@ It’s important to note that a node can only be part of one workspace. There is
 
 ## Deployment Modes
 
-Based on the [Edition](https://tenzir.com/pricing.md) of Tenzir, you have different deployment modes of the platform. The below diagram illustrates the variants.
+Based on the [Edition](https://tenzir.com/pricing) of Tenzir, you have different deployment modes of the platform. The below diagram illustrates the variants.
 
 Deployment Modes
 

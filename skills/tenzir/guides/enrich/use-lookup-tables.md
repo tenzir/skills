@@ -1,8 +1,8 @@
 ---
 title: "Use lookup tables"
 description: "Store reference data in lookup tables and apply it to OCSF events"
-canonical: https://tenzir.com/docs/guides/enrich/use-lookup-tables
-source: https://tenzir.com/docs/guides/enrich/use-lookup-tables.md
+canonical: https://tenzir.com/docs/v7.0.0/guides/enrich/use-lookup-tables
+source: https://tenzir.com/docs/v7.0.0/guides/enrich/use-lookup-tables.md
 section: "Docs"
 ---
 
@@ -12,11 +12,11 @@ section: "Docs"
 
 This guide shows you how to use lookup tables in Tenzir to store reference data and apply it to OCSF events. Use lookup tables when you have data keyed by an event value, such as a user ID, hostname, IP address, subnet, file hash, or cloud resource ID.
 
-A [lookup table](../../explanations/enrichment.md#lookup-table) is a Tenzir context that stores key-value mappings. Pipelines update the table, and other pipelines query it with [`context_enrich`](https://tenzir.com/docs/reference/operators/context_enrich.md). This guide covers the basic lookup table lifecycle first, then shows where lookup results should land in OCSF events. Start with the standard `enrichments` array when the extra data is general context. When the lookup result describes a specific OCSF object, enrich that object instead.
+A [lookup table](../../explanations/enrichment.md#lookup-table) is a Tenzir context that stores key-value mappings. Pipelines update the table, and other pipelines query it with [`context_enrich`](https://tenzir.com/docs/v7.0.0/reference/operators/context_enrich.md). This guide covers the basic lookup table lifecycle first, then shows where lookup results should land in OCSF events. Start with the standard `enrichments` array when the extra data is general context. When the lookup result describes a specific OCSF object, enrich that object instead.
 
 ## Set up lookup tables
 
-Create lookup tables in separate setup pipelines with [`context_create_lookup_table`](https://tenzir.com/docs/reference/operators/context_create_lookup_table.md), or define them as code by adding them to `tenzir.contexts` in `tenzir.yaml`:
+Create lookup tables in separate setup pipelines with [`context_create_lookup_table`](https://tenzir.com/docs/v7.0.0/reference/operators/context_create_lookup_table.md), or define them as code by adding them to `tenzir.contexts` in `tenzir.yaml`:
 
 \<prefix>/etc/tenzir/tenzir.yaml
 
@@ -33,7 +33,7 @@ You can also create lookup tables from the **Contexts** tab in the platform.
 
 ## Add entries
 
-Use [`context_update`](https://tenzir.com/docs/reference/operators/context_update.md) to add or replace lookup-table entries. This example stores user role metadata keyed by the OCSF user UID:
+Use [`context_update`](https://tenzir.com/docs/v7.0.0/reference/operators/context_update.md) to add or replace lookup-table entries. This example stores user role metadata keyed by the OCSF user UID:
 
 ```tql
 from {
@@ -336,26 +336,26 @@ Compound keys keep the lookup deterministic when a single event field isn’t se
 
 ## Manage table entries
 
-Use [`context_inspect`](https://tenzir.com/docs/reference/operators/context_inspect.md) to view entries:
+Use [`context_inspect`](https://tenzir.com/docs/v7.0.0/reference/operators/context_inspect.md) to view entries:
 
 ```tql
 context_inspect "user_roles"
 ```
 
-Use [`context_erase`](https://tenzir.com/docs/reference/operators/context_erase.md) to remove one entry:
+Use [`context_erase`](https://tenzir.com/docs/v7.0.0/reference/operators/context_erase.md) to remove one entry:
 
 ```tql
 from {user_uid: "S-1-5-21-1001"}
 context_erase "user_roles", key=user_uid
 ```
 
-Use [`context_remove`](https://tenzir.com/docs/reference/operators/context_remove.md) to delete the lookup table and its persisted data:
+Use [`context_remove`](https://tenzir.com/docs/v7.0.0/reference/operators/context_remove.md) to delete the lookup table and its persisted data:
 
 ```tql
 context_remove "user_roles"
 ```
 
-Use [`context_save`](https://tenzir.com/docs/reference/operators/context_save.md) and [`context_load`](https://tenzir.com/docs/reference/operators/context_load.md) to export and import a lookup table.
+Use [`context_save`](https://tenzir.com/docs/v7.0.0/reference/operators/context_save.md) and [`context_load`](https://tenzir.com/docs/v7.0.0/reference/operators/context_load.md) to export and import a lookup table.
 
 Export a lookup table to a file:
 
@@ -377,7 +377,7 @@ Loading replaces the entire lookup table state. Save the current table first if 
 
 ## Expire stale entries
 
-Set timeouts on [`context_update`](https://tenzir.com/docs/reference/operators/context_update.md) when the lookup table contains data with a known lifetime, such as active sessions, short-lived indicators, or temporary allowlist entries:
+Set timeouts on [`context_update`](https://tenzir.com/docs/v7.0.0/reference/operators/context_update.md) when the lookup table contains data with a known lifetime, such as active sessions, short-lived indicators, or temporary allowlist entries:
 
 ```tql
 from {

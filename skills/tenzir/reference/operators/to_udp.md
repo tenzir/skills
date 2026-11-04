@@ -1,7 +1,7 @@
 ---
 title: "to_udp"
-canonical: https://tenzir.com/docs/reference/operators/to_udp
-source: https://tenzir.com/docs/reference/operators/to_udp.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/to_udp
+source: https://tenzir.com/docs/v7.0.0/reference/operators/to_udp.md
 section: "Docs"
 ---
 
@@ -56,5 +56,5 @@ to_udp "127.0.0.1:514"
 
 ## See Also
 
-* [`accept_udp`](https://tenzir.com/docs/reference/operators/accept_udp.md)
-* [UDP](../../integrations/udp.md)
+* [`accept_udp`](https://tenzir.com/docs/v7.0.0/reference/operators/accept_udp.md)
+* [Udp](https://docs.tenzir.com/integrations/udp)

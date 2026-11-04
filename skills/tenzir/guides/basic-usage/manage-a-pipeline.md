@@ -1,7 +1,7 @@
 ---
 title: "Manage a pipeline"
-canonical: https://tenzir.com/docs/guides/basic-usage/manage-a-pipeline
-source: https://tenzir.com/docs/guides/basic-usage/manage-a-pipeline.md
+canonical: https://tenzir.com/docs/v7.0.0/guides/basic-usage/manage-a-pipeline
+source: https://tenzir.com/docs/v7.0.0/guides/basic-usage/manage-a-pipeline.md
 section: "Docs"
 ---
 

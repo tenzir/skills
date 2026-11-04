@@ -1,7 +1,7 @@
 ---
 title: "drop_null_fields"
-canonical: https://tenzir.com/docs/reference/functions/drop_null_fields
-source: https://tenzir.com/docs/reference/functions/drop_null_fields.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/drop_null_fields
+source: https://tenzir.com/docs/v7.0.0/reference/functions/drop_null_fields.md
 section: "Docs"
 ---
 
@@ -23,7 +23,7 @@ Unlike `print_ndjson(strip_null_fields=true)`, the function never serializes the
 
 Operator equivalent
 
-The function mirrors the [`drop_null_fields`](https://tenzir.com/docs/reference/operators/drop_null_fields.md) operator, but operates on a record expression rather than the top-level event. Use the function when you need to clean fields inline - for example as the `body=` argument to [`from_http`](https://tenzir.com/docs/reference/operators/from_http.md).
+The function mirrors the [`drop_null_fields`](https://tenzir.com/docs/v7.0.0/reference/operators/drop_null_fields.md) operator, but operates on a record expression rather than the top-level event. Use the function when you need to clean fields inline - for example as the `body=` argument to [`from_http`](https://tenzir.com/docs/v7.0.0/reference/operators/from_http.md).
 
 ### `x: record`
 
@@ -119,7 +119,7 @@ this = drop_null_fields(this)
 
 ## See Also
 
-* [`drop_null_fields`](https://tenzir.com/docs/reference/operators/drop_null_fields.md)
-* [`drop_matching`](https://tenzir.com/docs/reference/functions/drop_matching.md)
-* [`select_matching`](https://tenzir.com/docs/reference/functions/select_matching.md)
-* [`has`](https://tenzir.com/docs/reference/functions/has.md)
+* [`drop_null_fields`](https://tenzir.com/docs/v7.0.0/reference/operators/drop_null_fields.md)
+* [`drop_matching`](https://tenzir.com/docs/v7.0.0/reference/functions/drop_matching.md)
+* [`select_matching`](https://tenzir.com/docs/v7.0.0/reference/functions/select_matching.md)
+* [`has`](https://tenzir.com/docs/v7.0.0/reference/functions/has.md)

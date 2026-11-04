@@ -1,7 +1,7 @@
 ---
 title: "window"
-canonical: https://tenzir.com/docs/reference/operators/window
-source: https://tenzir.com/docs/reference/operators/window.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/window
+source: https://tenzir.com/docs/v7.0.0/reference/operators/window.md
 section: "Docs"
 ---
 
@@ -64,7 +64,7 @@ Trailing and session event-time windows reorder events within `tolerance` before
 
 An event-time session closes when its local watermark passes the last event’s timestamp plus `gap`. A processing-time session closes on a wall-clock timer, so it doesn’t need a later event to detect inactivity. Checkpointing closes an open session, so a pipeline restored from a checkpoint starts sessions fresh.
 
-Fixed windows delay closure but still forward events to their subpipelines in arrival order. Place [`reorder`](https://tenzir.com/docs/reference/operators/reorder.md) before a fixed window when its subpipeline requires timestamp order. A trailing event-time window already performs this reordering, so a preceding `reorder` is usually redundant.
+Fixed windows delay closure but still forward events to their subpipelines in arrival order. Place [`reorder`](https://tenzir.com/docs/v7.0.0/reference/operators/reorder.md) before a fixed window when its subpipeline requires timestamp order. A trailing event-time window already performs this reordering, so a preceding `reorder` is usually redundant.
 
 ### Count offsets
 
@@ -74,7 +74,7 @@ Count windows follow arrival order. They don’t accept `on`, `tolerance`, or `i
 
 ### Keyed windows
 
-`window` has no built-in partition key. For fixed-window aggregations, put [`group`](https://tenzir.com/docs/reference/operators/group.md) inside `window` by default. The stream then has one clock, and closing a window also closes every group subpipeline inside it. This bounds high-cardinality state without waiting for another event from each key.
+`window` has no built-in partition key. For fixed-window aggregations, put [`group`](https://tenzir.com/docs/v7.0.0/reference/operators/group.md) inside `window` by default. The stream then has one clock, and closing a window also closes every group subpipeline inside it. This bounds high-cardinality state without waiting for another event from each key.
 
 Put `group` outside `window` when each key requires independent fixed-window clocks, trailing history, or sessions. A busy key then cannot advance another key’s event-time clock or enter its retained history. Session windows usually use this form because inactivity applies independently to each key:
 
@@ -95,13 +95,13 @@ An outer `group` also gives sparse keys independent lifetimes. A sparse event-ti
 
 A generic trailing window replays every retained event through a new subpipeline for every invocation. Without `every` or `trigger`, its work is approximately the number of input events multiplied by the average retained event count. Large or dense time windows can therefore consume substantial CPU and memory. For event-time windows, the reorder buffer can retain up to `tolerance` worth of events in addition to the trailing `size`. Tenzir warns when a trailing window retains 100,000 events and never drops retained events to enforce a hidden limit.
 
-Use [`lag`](https://tenzir.com/docs/reference/operators/lag.md) instead when you need only one preceding value or complete event at a fixed offset. It evaluates and retains that value incrementally instead of replaying a bounded history through a new subpipeline for every input event.
+Use [`lag`](https://tenzir.com/docs/v7.0.0/reference/operators/lag.md) instead when you need only one preceding value or complete event at a fixed offset. It evaluates and retains that value incrementally instead of replaying a bounded history through a new subpipeline for every input event.
 
 Set `every` to sample retained history at a lower cadence. Set `trigger` when only some events warrant evaluation. The operator always maintains the retained history, but it replays the history only when the cadence is due and the trigger matches.
 
-A [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) without `options` emits one final summary for each replayed window. Its `options.emit` cadence is independent: it starts fresh with each window invocation and can emit multiple prefix summaries while consuming the replayed history. Leave `options.emit` unset when you want one rolling result per outer `window` cadence.
+A [`summarize`](https://tenzir.com/docs/v7.0.0/reference/operators/summarize.md) without `options` emits one final summary for each replayed window. Its `options.emit` cadence is independent: it starts fresh with each window invocation and can emit multiple prefix summaries while consuming the replayed history. Leave `options.emit` unset when you want one rolling result per outer `window` cadence.
 
-For basic unbounded running aggregates, use [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) with cumulative event emission instead. It updates aggregate state incrementally and corresponds to Splunk `streamstats` without `window` or `time_window`:
+For basic unbounded running aggregates, use [`summarize`](https://tenzir.com/docs/v7.0.0/reference/operators/summarize.md) with cumulative event emission instead. It updates aggregate state incrementally and corresponds to Splunk `streamstats` without `window` or `time_window`:
 
 ```tql
 summarize rolling_bytes=sum(bytes), host,
@@ -327,9 +327,9 @@ where failures >= 20
 
 ## See Also
 
-* [`group`](https://tenzir.com/docs/reference/operators/group.md)
-* [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md)
-* [`every`](https://tenzir.com/docs/reference/operators/every.md)
+* [`group`](https://tenzir.com/docs/v7.0.0/reference/operators/group.md)
+* [`summarize`](https://tenzir.com/docs/v7.0.0/reference/operators/summarize.md)
+* [`every`](https://tenzir.com/docs/v7.0.0/reference/operators/every.md)
 * [Window event streams](../../guides/analyze/window-event-streams.md)
 * [Detect over time windows](../../guides/detect/detect-over-time-windows.md)
 * [Repair out-of-order events](../../guides/shape/repair-out-of-order-events.md)

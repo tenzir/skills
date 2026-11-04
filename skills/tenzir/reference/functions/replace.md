@@ -1,7 +1,7 @@
 ---
 title: "replace"
-canonical: https://tenzir.com/docs/reference/functions/replace
-source: https://tenzir.com/docs/reference/functions/replace.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/replace
+source: https://tenzir.com/docs/v7.0.0/reference/functions/replace.md
 section: "Docs"
 ---
 
@@ -108,6 +108,6 @@ from {
 
 ## See Also
 
-* [`replace_regex`](https://tenzir.com/docs/reference/functions/replace_regex.md)
-* [`replace`](https://tenzir.com/docs/reference/operators/replace.md)
+* [`replace_regex`](https://tenzir.com/docs/v7.0.0/reference/functions/replace_regex.md)
+* [`replace`](https://tenzir.com/docs/v7.0.0/reference/operators/replace.md)
 * [Manipulate strings](../../guides/shape/manipulate-strings.md)

@@ -1,7 +1,7 @@
 ---
 title: "write_yaml"
-canonical: https://tenzir.com/docs/reference/operators/write_yaml
-source: https://tenzir.com/docs/reference/operators/write_yaml.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/write_yaml
+source: https://tenzir.com/docs/v7.0.0/reference/operators/write_yaml.md
 section: "Docs"
 ---
 
@@ -34,6 +34,6 @@ to_file "output.yaml" {
 
 ## See Also
 
-* [`parse_yaml`](https://tenzir.com/docs/reference/functions/parse_yaml.md)
-* [`print_yaml`](https://tenzir.com/docs/reference/functions/print_yaml.md)
-* [`read_yaml`](https://tenzir.com/docs/reference/operators/read_yaml.md)
+* [`parse_yaml`](https://tenzir.com/docs/v7.0.0/reference/functions/parse_yaml.md)
+* [`print_yaml`](https://tenzir.com/docs/v7.0.0/reference/functions/print_yaml.md)
+* [`read_yaml`](https://tenzir.com/docs/v7.0.0/reference/operators/read_yaml.md)

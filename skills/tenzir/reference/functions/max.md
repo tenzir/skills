@@ -1,7 +1,7 @@
 ---
 title: "max"
-canonical: https://tenzir.com/docs/reference/functions/max
-source: https://tenzir.com/docs/reference/functions/max.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/max
+source: https://tenzir.com/docs/v7.0.0/reference/functions/max.md
 section: "Docs"
 ---
 
@@ -38,8 +38,8 @@ summarize max_value=max(x)
 
 ## See Also
 
-* [`min`](https://tenzir.com/docs/reference/functions/min.md)
-* [`mean`](https://tenzir.com/docs/reference/functions/mean.md)
-* [`sum`](https://tenzir.com/docs/reference/functions/sum.md)
+* [`min`](https://tenzir.com/docs/v7.0.0/reference/functions/min.md)
+* [`mean`](https://tenzir.com/docs/v7.0.0/reference/functions/mean.md)
+* [`sum`](https://tenzir.com/docs/v7.0.0/reference/functions/sum.md)
 * [Aggregate event streams](../../guides/analyze/aggregate-event-streams.md)
-* [Plot data with charts](../../tutorials/plot-data-with-charts.md)
+* [Plot data with charts](https://docs.tenzir.com/tutorials/plot-data-with-charts)

@@ -1,7 +1,7 @@
 ---
 title: "to_google_secops"
-canonical: https://tenzir.com/docs/reference/operators/to_google_secops
-source: https://tenzir.com/docs/reference/operators/to_google_secops.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/to_google_secops
+source: https://tenzir.com/docs/v7.0.0/reference/operators/to_google_secops.md
 section: "Docs"
 ---
 
@@ -313,8 +313,8 @@ to_google_secops \
 
 ## See Also
 
-* [`to_google_cloud_logging`](https://tenzir.com/docs/reference/operators/to_google_cloud_logging.md)
+* [`to_google_cloud_logging`](https://tenzir.com/docs/v7.0.0/reference/operators/to_google_cloud_logging.md)
 * [Map to UDM](../../guides/normalize/map-to-udm.md)
-* [Google SecOps](../../integrations/google/secops.md)
+* [Secops](https://docs.tenzir.com/integrations/google/secops)
 
 Parallelizable: a parallel pipeline may run this operator on several cores at once.

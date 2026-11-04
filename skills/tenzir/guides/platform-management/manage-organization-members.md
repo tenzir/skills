@@ -1,7 +1,7 @@
 ---
 title: "Manage organization members"
-canonical: https://tenzir.com/docs/guides/platform-management/manage-organization-members
-source: https://tenzir.com/docs/guides/platform-management/manage-organization-members.md
+canonical: https://tenzir.com/docs/v7.0.0/guides/platform-management/manage-organization-members
+source: https://tenzir.com/docs/v7.0.0/guides/platform-management/manage-organization-members.md
 section: "Docs"
 ---
 

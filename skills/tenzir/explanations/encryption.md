@@ -1,7 +1,7 @@
 ---
 title: "Encryption"
-canonical: https://tenzir.com/docs/explanations/encryption
-source: https://tenzir.com/docs/explanations/encryption.md
+canonical: https://tenzir.com/docs/v7.0.0/explanations/encryption
+source: https://tenzir.com/docs/v7.0.0/explanations/encryption.md
 section: "Docs"
 ---
 
@@ -17,40 +17,40 @@ This page explains the encryption functions of TQL, the properties that set them
 
 Encryption is one of several ways to protect a value. They differ in whether you can recover the original, and in what the protected value still reveals:
 
-| Technique                    | Reversible | Equal inputs stay equal | Functions                                                                                                                                                                        |
-| ---------------------------- | ---------- | ----------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Redaction                    | No         | No                      | Assign a constant                                                                                                                                                                |
-| Hashing                      | No         | Yes                     | [`hash_sha256`](https://tenzir.com/docs/reference/functions/hash_sha256.md), [`hmac`](https://tenzir.com/docs/reference/functions/hmac.md)                                       |
-| Randomized encryption        | Yes        | No                      | [`encrypt_aes_gcm_siv`](https://tenzir.com/docs/reference/functions/encrypt_aes_gcm_siv.md), [`encrypt_aes_gcm`](https://tenzir.com/docs/reference/functions/encrypt_aes_gcm.md) |
-| Deterministic encryption     | Yes        | Yes                     | [`encrypt_aes_siv`](https://tenzir.com/docs/reference/functions/encrypt_aes_siv.md)                                                                                              |
-| Format-preserving encryption | Yes        | Yes                     | [`encrypt_ff1`](https://tenzir.com/docs/reference/functions/encrypt_ff1.md), [`encrypt_cryptopan`](https://tenzir.com/docs/reference/functions/encrypt_cryptopan.md)             |
-| Public-key encryption        | Yes        | No                      | [`encrypt_hpke`](https://tenzir.com/docs/reference/functions/encrypt_hpke.md)                                                                                                    |
+| Technique                    | Reversible | Equal inputs stay equal | Functions                                                                                                                                                                                      |
+| ---------------------------- | ---------- | ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Redaction                    | No         | No                      | Assign a constant                                                                                                                                                                              |
+| Hashing                      | No         | Yes                     | [`hash_sha256`](https://tenzir.com/docs/v7.0.0/reference/functions/hash_sha256.md), [`hmac`](https://tenzir.com/docs/v7.0.0/reference/functions/hmac.md)                                       |
+| Randomized encryption        | Yes        | No                      | [`encrypt_aes_gcm_siv`](https://tenzir.com/docs/v7.0.0/reference/functions/encrypt_aes_gcm_siv.md), [`encrypt_aes_gcm`](https://tenzir.com/docs/v7.0.0/reference/functions/encrypt_aes_gcm.md) |
+| Deterministic encryption     | Yes        | Yes                     | [`encrypt_aes_siv`](https://tenzir.com/docs/v7.0.0/reference/functions/encrypt_aes_siv.md)                                                                                                     |
+| Format-preserving encryption | Yes        | Yes                     | [`encrypt_ff1`](https://tenzir.com/docs/v7.0.0/reference/functions/encrypt_ff1.md), [`encrypt_cryptopan`](https://tenzir.com/docs/v7.0.0/reference/functions/encrypt_cryptopan.md)             |
+| Public-key encryption        | Yes        | No                      | [`encrypt_hpke`](https://tenzir.com/docs/v7.0.0/reference/functions/encrypt_hpke.md)                                                                                                           |
 
 Hash a value when nobody ever needs the original. Encrypt it when someone authorized must be able to recover it. Our guide on [masking sensitive data](../guides/protect/mask-sensitive-data.md) covers redaction and hashing.
 
 ## The encryption functions
 
-Every encryption function has a decryption counterpart that mirrors its arguments, with two exceptions: [`decrypt_hpke`](https://tenzir.com/docs/reference/functions/decrypt_hpke.md) takes the private key instead of the public key, and [`decrypt_cryptopan`](https://tenzir.com/docs/reference/functions/decrypt_cryptopan.md) also accepts the address family to decrypt in.
+Every encryption function has a decryption counterpart that mirrors its arguments, with two exceptions: [`decrypt_hpke`](https://tenzir.com/docs/v7.0.0/reference/functions/decrypt_hpke.md) takes the private key instead of the public key, and [`decrypt_cryptopan`](https://tenzir.com/docs/v7.0.0/reference/functions/decrypt_cryptopan.md) also accepts the address family to decrypt in.
 
-| Functions                                                                                   | Algorithm                 | Key                    | Deterministic | Output   | Size increase   |
-| ------------------------------------------------------------------------------------------- | ------------------------- | ---------------------- | ------------- | -------- | --------------- |
-| [`encrypt_aes_gcm_siv`](https://tenzir.com/docs/reference/functions/encrypt_aes_gcm_siv.md) | AES-GCM-SIV (RFC 8452)    | 16 or 32 bytes         | No            | `blob`   | 28 bytes        |
-| [`encrypt_aes_gcm`](https://tenzir.com/docs/reference/functions/encrypt_aes_gcm.md)         | AES-GCM (NIST SP 800-38D) | 16, 24, or 32 bytes    | No            | `blob`   | 28 bytes        |
-| [`encrypt_aes_siv`](https://tenzir.com/docs/reference/functions/encrypt_aes_siv.md)         | AES-SIV (RFC 5297)        | 32, 48, or 64 bytes    | Yes           | `blob`   | 16 bytes        |
-| [`encrypt_ff1`](https://tenzir.com/docs/reference/functions/encrypt_ff1.md)                 | FF1 (NIST SP 800-38G)     | 16, 24, or 32 bytes    | Yes           | `string` | None            |
-| [`encrypt_hpke`](https://tenzir.com/docs/reference/functions/encrypt_hpke.md)               | HPKE (RFC 9180)           | Public and private key | No            | `blob`   | 48 to 149 bytes |
-| [`encrypt_cryptopan`](https://tenzir.com/docs/reference/functions/encrypt_cryptopan.md)     | Crypto-PAn                | 32-byte seed           | Yes           | `ip`     | None            |
+| Functions                                                                                          | Algorithm                 | Key                    | Deterministic | Output   | Size increase   |
+| -------------------------------------------------------------------------------------------------- | ------------------------- | ---------------------- | ------------- | -------- | --------------- |
+| [`encrypt_aes_gcm_siv`](https://tenzir.com/docs/v7.0.0/reference/functions/encrypt_aes_gcm_siv.md) | AES-GCM-SIV (RFC 8452)    | 16 or 32 bytes         | No            | `blob`   | 28 bytes        |
+| [`encrypt_aes_gcm`](https://tenzir.com/docs/v7.0.0/reference/functions/encrypt_aes_gcm.md)         | AES-GCM (NIST SP 800-38D) | 16, 24, or 32 bytes    | No            | `blob`   | 28 bytes        |
+| [`encrypt_aes_siv`](https://tenzir.com/docs/v7.0.0/reference/functions/encrypt_aes_siv.md)         | AES-SIV (RFC 5297)        | 32, 48, or 64 bytes    | Yes           | `blob`   | 16 bytes        |
+| [`encrypt_ff1`](https://tenzir.com/docs/v7.0.0/reference/functions/encrypt_ff1.md)                 | FF1 (NIST SP 800-38G)     | 16, 24, or 32 bytes    | Yes           | `string` | None            |
+| [`encrypt_hpke`](https://tenzir.com/docs/v7.0.0/reference/functions/encrypt_hpke.md)               | HPKE (RFC 9180)           | Public and private key | No            | `blob`   | 48 to 149 bytes |
+| [`encrypt_cryptopan`](https://tenzir.com/docs/v7.0.0/reference/functions/encrypt_cryptopan.md)     | Crypto-PAn                | 32-byte seed           | Yes           | `ip`     | None            |
 
 ## Choose a function
 
 Start from what the encrypted data must still allow:
 
-* **Recover values later**: Use [`encrypt_aes_gcm_siv`](https://tenzir.com/docs/reference/functions/encrypt_aes_gcm_siv.md). It hides everything except the length, detects tampering, and tolerates high volumes. This is the right default.
-* **Group, join, or count by the encrypted value**: Use [`encrypt_aes_siv`](https://tenzir.com/docs/reference/functions/encrypt_aes_siv.md). Equal values produce equal ciphertexts, so [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md), joins, and deduplication keep working without the key.
-* **Keep the format**: Use [`encrypt_ff1`](https://tenzir.com/docs/reference/functions/encrypt_ff1.md) when downstream systems validate the shape of a value, such as a column that only accepts digits of a fixed length. When they also verify the Luhn check digit of card numbers, append a new one with [`luhn_check_digit`](https://tenzir.com/docs/reference/functions/luhn_check_digit.md).
-* **Encrypt without being able to decrypt**: Use [`encrypt_hpke`](https://tenzir.com/docs/reference/functions/encrypt_hpke.md). Edge pipelines hold only a public key, and only the holder of the private key can read the values.
-* **Exchange data with a system that uses AES-GCM**: Use [`encrypt_aes_gcm`](https://tenzir.com/docs/reference/functions/encrypt_aes_gcm.md), whose output layout matches common libraries.
-* **Keep subnet relationships between IP addresses**: Use [`encrypt_cryptopan`](https://tenzir.com/docs/reference/functions/encrypt_cryptopan.md).
+* **Recover values later**: Use [`encrypt_aes_gcm_siv`](https://tenzir.com/docs/v7.0.0/reference/functions/encrypt_aes_gcm_siv.md). It hides everything except the length, detects tampering, and tolerates high volumes. This is the right default.
+* **Group, join, or count by the encrypted value**: Use [`encrypt_aes_siv`](https://tenzir.com/docs/v7.0.0/reference/functions/encrypt_aes_siv.md). Equal values produce equal ciphertexts, so [`summarize`](https://tenzir.com/docs/v7.0.0/reference/operators/summarize.md), joins, and deduplication keep working without the key.
+* **Keep the format**: Use [`encrypt_ff1`](https://tenzir.com/docs/v7.0.0/reference/functions/encrypt_ff1.md) when downstream systems validate the shape of a value, such as a column that only accepts digits of a fixed length. When they also verify the Luhn check digit of card numbers, append a new one with [`luhn_check_digit`](https://tenzir.com/docs/v7.0.0/reference/functions/luhn_check_digit.md).
+* **Encrypt without being able to decrypt**: Use [`encrypt_hpke`](https://tenzir.com/docs/v7.0.0/reference/functions/encrypt_hpke.md). Edge pipelines hold only a public key, and only the holder of the private key can read the values.
+* **Exchange data with a system that uses AES-GCM**: Use [`encrypt_aes_gcm`](https://tenzir.com/docs/v7.0.0/reference/functions/encrypt_aes_gcm.md), whose output layout matches common libraries.
+* **Keep subnet relationships between IP addresses**: Use [`encrypt_cryptopan`](https://tenzir.com/docs/v7.0.0/reference/functions/encrypt_cryptopan.md).
 
 The following sections explain the properties behind these recommendations.
 
@@ -94,14 +94,14 @@ Format-preserving encryption is a compromise. It keeps data usable for systems t
 
 * **Domain size**: NIST requires at least one million possible values. With the decimal alphabet, a value needs at least 6 digits. Tenzir returns `null` with a warning for shorter values.
 * **Length**: The cost of FF1 grows quadratically with the length of a value. Tenzir encrypts at most 4096 characters from the alphabet and returns `null` with a warning for longer values.
-* **Checksums**: FF1 preserves the alphabet and the length, not checksums. An encrypted card number usually fails the Luhn check. To keep it valid, encrypt the number without its check digit and append a new one with [`luhn_check_digit`](https://tenzir.com/docs/reference/functions/luhn_check_digit.md). Decryption then recomputes the check digit, so the round trip restores only numbers that were valid before encryption. FF1 also changes the leading digits that identify the card issuer, unless you keep them in clear text. Our guide on [keeping card numbers valid](../guides/protect/encrypt-sensitive-data.md#keep-card-numbers-valid) covers both.
+* **Checksums**: FF1 preserves the alphabet and the length, not checksums. An encrypted card number usually fails the Luhn check. To keep it valid, encrypt the number without its check digit and append a new one with [`luhn_check_digit`](https://tenzir.com/docs/v7.0.0/reference/functions/luhn_check_digit.md). Decryption then recomputes the check digit, so the round trip restores only numbers that were valid before encryption. FF1 also changes the leading digits that identify the card issuer, unless you keep them in clear text. Our guide on [keeping card numbers valid](../guides/protect/encrypt-sensitive-data.md#keep-card-numbers-valid) covers both.
 * **FF3**: NIST withdrew FF3 and FF3-1 in its 2025 draft revision of SP 800-38G after attacks on their tweak schedule. Tenzir implements only FF1.
 
 ## Public-key encryption with HPKE
 
 With the symmetric functions, everyone who can encrypt can also decrypt. Hybrid Public Key Encryption (HPKE) separates the two capabilities: the public key encrypts, and only the private key decrypts. A collector at the edge can encrypt personal data with a public key, while the private key stays with the few people who may re-identify users.
 
-For every value, [`encrypt_hpke`](https://tenzir.com/docs/reference/functions/encrypt_hpke.md) generates an ephemeral key pair, agrees on a shared secret with the recipient’s public key, derives an AES-256-GCM key from it, and encrypts the value. The output starts with the ephemeral public key, which the recipient needs for the key agreement. The key type selects the HPKE suite:
+For every value, [`encrypt_hpke`](https://tenzir.com/docs/v7.0.0/reference/functions/encrypt_hpke.md) generates an ephemeral key pair, agrees on a shared secret with the recipient’s public key, derives an AES-256-GCM key from it, and encrypts the value. The output starts with the ephemeral public key, which the recipient needs for the key agreement. The key type selects the HPKE suite:
 
 | Key type | KEM                        | KDF         | AEAD        | Ephemeral key size |
 | -------- | -------------------------- | ----------- | ----------- | ------------------ |
@@ -135,15 +135,15 @@ Keep the following practices in mind:
 
 The encrypted values follow their specifications, so other implementations can decrypt what Tenzir encrypts and vice versa:
 
-| Function                                                                                    | Layout                                   | Specification                     |
-| ------------------------------------------------------------------------------------------- | ---------------------------------------- | --------------------------------- |
-| [`encrypt_aes_gcm`](https://tenzir.com/docs/reference/functions/encrypt_aes_gcm.md)         | nonce (12) ‖ ciphertext ‖ tag (16)       | NIST SP 800-38D                   |
-| [`encrypt_aes_gcm_siv`](https://tenzir.com/docs/reference/functions/encrypt_aes_gcm_siv.md) | nonce (12) ‖ ciphertext ‖ tag (16)       | RFC 8452                          |
-| [`encrypt_aes_siv`](https://tenzir.com/docs/reference/functions/encrypt_aes_siv.md)         | synthetic IV (16) ‖ ciphertext           | RFC 5297                          |
-| [`encrypt_hpke`](https://tenzir.com/docs/reference/functions/encrypt_hpke.md)               | encapsulated key ‖ ciphertext ‖ tag (16) | RFC 9180, base mode, empty `info` |
-| [`encrypt_ff1`](https://tenzir.com/docs/reference/functions/encrypt_ff1.md)                 | Same format as the input                 | NIST SP 800-38G                   |
+| Function                                                                                           | Layout                                   | Specification                     |
+| -------------------------------------------------------------------------------------------------- | ---------------------------------------- | --------------------------------- |
+| [`encrypt_aes_gcm`](https://tenzir.com/docs/v7.0.0/reference/functions/encrypt_aes_gcm.md)         | nonce (12) ‖ ciphertext ‖ tag (16)       | NIST SP 800-38D                   |
+| [`encrypt_aes_gcm_siv`](https://tenzir.com/docs/v7.0.0/reference/functions/encrypt_aes_gcm_siv.md) | nonce (12) ‖ ciphertext ‖ tag (16)       | RFC 8452                          |
+| [`encrypt_aes_siv`](https://tenzir.com/docs/v7.0.0/reference/functions/encrypt_aes_siv.md)         | synthetic IV (16) ‖ ciphertext           | RFC 5297                          |
+| [`encrypt_hpke`](https://tenzir.com/docs/v7.0.0/reference/functions/encrypt_hpke.md)               | encapsulated key ‖ ciphertext ‖ tag (16) | RFC 9180, base mode, empty `info` |
+| [`encrypt_ff1`](https://tenzir.com/docs/v7.0.0/reference/functions/encrypt_ff1.md)                 | Same format as the input                 | NIST SP 800-38G                   |
 
-The specifications of AES-GCM and AES-GCM-SIV leave it to the application to transmit the nonce. Tenzir puts it in front of the ciphertext, so that every value is self-contained. AES-SIV authenticates its associated data as a single component, which is empty when you omit `aad`. Encrypted values are blobs, which JSON output renders as Base64. Decode them with [`decode_base64`](https://tenzir.com/docs/reference/functions/decode_base64.md) before decrypting data that arrives as JSON.
+The specifications of AES-GCM and AES-GCM-SIV leave it to the application to transmit the nonce. Tenzir puts it in front of the ciphertext, so that every value is self-contained. AES-SIV authenticates its associated data as a single component, which is empty when you omit `aad`. Encrypted values are blobs, which JSON output renders as Base64. Decode them with [`decode_base64`](https://tenzir.com/docs/v7.0.0/reference/functions/decode_base64.md) before decrypting data that arrives as JSON.
 
 FF1 encrypts strings of numerals, and Tenzir adds a step around it. It maps every character of the alphabet to its position in the alphabet, encrypts the resulting numerals as one string, and puts the characters outside the alphabet back in place. For values that consist only of alphabet characters, the result matches other FF1 implementations with the same key, alphabet, and tweak. For values with other characters, such as the dashes in `4111-1111-1111-1111`, another implementation must remove and reinsert those characters the same way to exchange values with Tenzir.
 

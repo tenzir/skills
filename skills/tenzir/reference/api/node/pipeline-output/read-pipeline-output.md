@@ -1,7 +1,7 @@
 ---
 title: "Read pipeline output"
-canonical: https://tenzir.com/docs/reference/api/node/pipeline-output/read-pipeline-output
-source: https://tenzir.com/docs/reference/api/node/pipeline-output/read-pipeline-output.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/api/node/pipeline-output/read-pipeline-output
+source: https://tenzir.com/docs/v7.0.0/reference/api/node/pipeline-output/read-pipeline-output.md
 section: "Docs"
 ---
 

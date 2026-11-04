@@ -1,7 +1,7 @@
 ---
 title: "length"
-canonical: https://tenzir.com/docs/reference/functions/length
-source: https://tenzir.com/docs/reference/functions/length.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/length
+source: https://tenzir.com/docs/v7.0.0/reference/functions/length.md
 section: "Docs"
 ---
 
@@ -33,7 +33,7 @@ from {n: [1, 2, 3].length()}
 
 ## See Also
 
-* [`is_empty`](https://tenzir.com/docs/reference/functions/is_empty.md)
-* [`length_bytes`](https://tenzir.com/docs/reference/functions/length_bytes.md)
-* [`length_chars`](https://tenzir.com/docs/reference/functions/length_chars.md)
+* [`is_empty`](https://tenzir.com/docs/v7.0.0/reference/functions/is_empty.md)
+* [`length_bytes`](https://tenzir.com/docs/v7.0.0/reference/functions/length_bytes.md)
+* [`length_chars`](https://tenzir.com/docs/v7.0.0/reference/functions/length_chars.md)
 * [Shape lists](../../guides/shape/shape-lists.md)

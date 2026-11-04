@@ -1,7 +1,7 @@
 ---
 title: "ip_category"
-canonical: https://tenzir.com/docs/reference/functions/ip_category
-source: https://tenzir.com/docs/reference/functions/ip_category.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/ip_category
+source: https://tenzir.com/docs/v7.0.0/reference/functions/ip_category.md
 section: "Docs"
 ---
 
@@ -55,10 +55,10 @@ from {
 
 ## See Also
 
-* [`is_global`](https://tenzir.com/docs/reference/functions/is_global.md)
-* [`is_link_local`](https://tenzir.com/docs/reference/functions/is_link_local.md)
-* [`is_loopback`](https://tenzir.com/docs/reference/functions/is_loopback.md)
-* [`is_multicast`](https://tenzir.com/docs/reference/functions/is_multicast.md)
-* [`is_private`](https://tenzir.com/docs/reference/functions/is_private.md)
-* [`is_v4`](https://tenzir.com/docs/reference/functions/is_v4.md)
-* [`is_v6`](https://tenzir.com/docs/reference/functions/is_v6.md)
+* [`is_global`](https://tenzir.com/docs/v7.0.0/reference/functions/is_global.md)
+* [`is_link_local`](https://tenzir.com/docs/v7.0.0/reference/functions/is_link_local.md)
+* [`is_loopback`](https://tenzir.com/docs/v7.0.0/reference/functions/is_loopback.md)
+* [`is_multicast`](https://tenzir.com/docs/v7.0.0/reference/functions/is_multicast.md)
+* [`is_private`](https://tenzir.com/docs/v7.0.0/reference/functions/is_private.md)
+* [`is_v4`](https://tenzir.com/docs/v7.0.0/reference/functions/is_v4.md)
+* [`is_v6`](https://tenzir.com/docs/v7.0.0/reference/functions/is_v6.md)

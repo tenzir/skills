@@ -1,7 +1,7 @@
 ---
 title: "print_csv"
-canonical: https://tenzir.com/docs/reference/functions/print_csv
-source: https://tenzir.com/docs/reference/functions/print_csv.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/print_csv
+source: https://tenzir.com/docs/v7.0.0/reference/functions/print_csv.md
 section: "Docs"
 ---
 
@@ -57,5 +57,5 @@ output = this.print_csv()
 
 ## See Also
 
-* [`write_csv`](https://tenzir.com/docs/reference/operators/write_csv.md)
-* [`parse_csv`](https://tenzir.com/docs/reference/functions/parse_csv.md)
+* [`write_csv`](https://tenzir.com/docs/v7.0.0/reference/operators/write_csv.md)
+* [`parse_csv`](https://tenzir.com/docs/v7.0.0/reference/functions/parse_csv.md)

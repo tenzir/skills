@@ -1,7 +1,7 @@
 ---
 title: "to_tcp"
-canonical: https://tenzir.com/docs/reference/operators/to_tcp
-source: https://tenzir.com/docs/reference/operators/to_tcp.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/to_tcp
+source: https://tenzir.com/docs/v7.0.0/reference/operators/to_tcp.md
 section: "Docs"
 ---
 
@@ -76,9 +76,9 @@ to_tcp "collector.example.com:5044", tls={} { write_json }
 
 ## See Also
 
-* [`from_tcp`](https://tenzir.com/docs/reference/operators/from_tcp.md)
-* [`serve_tcp`](https://tenzir.com/docs/reference/operators/serve_tcp.md)
-* [`accept_tcp`](https://tenzir.com/docs/reference/operators/accept_tcp.md)
-* [`to_unix_socket`](https://tenzir.com/docs/reference/operators/to_unix_socket.md)
-* [`write_delimited`](https://tenzir.com/docs/reference/operators/write_delimited.md)
-* [TCP](../../integrations/tcp.md)
+* [`from_tcp`](https://tenzir.com/docs/v7.0.0/reference/operators/from_tcp.md)
+* [`serve_tcp`](https://tenzir.com/docs/v7.0.0/reference/operators/serve_tcp.md)
+* [`accept_tcp`](https://tenzir.com/docs/v7.0.0/reference/operators/accept_tcp.md)
+* [`to_unix_socket`](https://tenzir.com/docs/v7.0.0/reference/operators/to_unix_socket.md)
+* [`write_delimited`](https://tenzir.com/docs/v7.0.0/reference/operators/write_delimited.md)
+* [Tcp](https://docs.tenzir.com/integrations/tcp)

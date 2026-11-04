@@ -1,7 +1,7 @@
 ---
 title: "Fetch via HTTP and APIs"
-canonical: https://tenzir.com/docs/guides/collect/fetch-via-http-and-apis
-source: https://tenzir.com/docs/guides/collect/fetch-via-http-and-apis.md
+canonical: https://tenzir.com/docs/v7.0.0/guides/collect/fetch-via-http-and-apis
+source: https://tenzir.com/docs/v7.0.0/guides/collect/fetch-via-http-and-apis.md
 section: "Docs"
 ---
 
@@ -9,14 +9,14 @@ section: "Docs"
 
 > This guide shows you how to interact with HTTP APIs using fromhttp and tohttp operators. You’ll learn to make GET requests, send data, handle authentication, and implement pagination for large result sets.
 
-This guide shows you how to interact with HTTP APIs using [`from_http`](https://tenzir.com/docs/reference/operators/from_http.md) and [`to_http`](https://tenzir.com/docs/reference/operators/to_http.md) operators. You’ll learn to make GET requests, send data, handle authentication, and implement pagination for large result sets.
+This guide shows you how to interact with HTTP APIs using [`from_http`](https://tenzir.com/docs/v7.0.0/reference/operators/from_http.md) and [`to_http`](https://tenzir.com/docs/v7.0.0/reference/operators/to_http.md) operators. You’ll learn to make GET requests, send data, handle authentication, and implement pagination for large result sets.
 
 ## Choosing the Right Operator
 
 Tenzir has two HTTP client operators that share the same core client options:
 
-* [`from_http`](https://tenzir.com/docs/reference/operators/from_http.md) is a **input** operator that starts a pipeline with an HTTP request and parses the response into events. It streams response body chunks into the parser sub-pipeline as they arrive. Use it for standalone API calls and paginated API ingestion.
-* [`to_http`](https://tenzir.com/docs/reference/operators/to_http.md) is an **output** operator that sends all events from one invocation as a single HTTP request. It streams the request body from its printer sub-pipeline into the HTTP connection. Use it for webhooks and HTTP-based ingestion APIs, and wrap it in `every` when you want time-based batches.
+* [`from_http`](https://tenzir.com/docs/v7.0.0/reference/operators/from_http.md) is a **input** operator that starts a pipeline with an HTTP request and parses the response into events. It streams response body chunks into the parser sub-pipeline as they arrive. Use it for standalone API calls and paginated API ingestion.
+* [`to_http`](https://tenzir.com/docs/v7.0.0/reference/operators/to_http.md) is an **output** operator that sends all events from one invocation as a single HTTP request. It streams the request body from its printer sub-pipeline into the HTTP connection. Use it for webhooks and HTTP-based ingestion APIs, and wrap it in `every` when you want time-based batches.
 
 Most examples in this guide use `from_http`, because it is the operator for fetching data from APIs.
 
@@ -74,7 +74,7 @@ from_http "https://api.example.com/users", method="post", body=$body {
 }
 ```
 
-Use [`to_http`](https://tenzir.com/docs/reference/operators/to_http.md) when you want to send existing events to an HTTP API:
+Use [`to_http`](https://tenzir.com/docs/v7.0.0/reference/operators/to_http.md) when you want to send existing events to an HTTP API:
 
 ```tql
 from {name: "John", email: "john@example.com"}
@@ -102,7 +102,7 @@ from_http "https://api.example.com/data", headers=$headers {
 }
 ```
 
-Headers help you authenticate with APIs and specify request formats. Use the [`secret`](https://tenzir.com/docs/reference/functions/secret.md) function to retrieve sensitive API tokens, as in the above example.
+Headers help you authenticate with APIs and specify request formats. Use the [`secret`](https://tenzir.com/docs/v7.0.0/reference/functions/secret.md) function to retrieve sensitive API tokens, as in the above example.
 
 ### TLS and Security
 
@@ -187,7 +187,7 @@ Relative URLs in the `Link` header are resolved against the request URL, so both
 
 ### [OData](https://www.oasis-open.org/standard/odata-v4-01-os/) pagination
 
-Some APIs return an OData collection envelope with records in a top-level `value` array and the next page URL in `@odata.nextLink`. Microsoft Graph uses this pagination shape for many collection endpoints. Use `paginate="odata"` with [`from_http`](https://tenzir.com/docs/reference/operators/from_http.md) to unpack the envelope and follow the next link automatically:
+Some APIs return an OData collection envelope with records in a top-level `value` array and the next page URL in `@odata.nextLink`. Microsoft Graph uses this pagination shape for many collection endpoints. Use `paginate="odata"` with [`from_http`](https://tenzir.com/docs/v7.0.0/reference/operators/from_http.md) to unpack the envelope and follow the next link automatically:
 
 ```tql
 from_http "https://graph.microsoft.com/v1.0/users",
@@ -284,7 +284,7 @@ unroll hits.hits
 this = hits.hits._source
 ```
 
-See the [OpenSearch integration](../../integrations/opensearch.md) and the [Wazuh integration](../../integrations/wazuh.md) for more search-backend examples that use the same pagination pattern.
+See the [OpenSearch integration](https://docs.tenzir.com/integrations/opensearch) and the [Wazuh integration](https://docs.tenzir.com/integrations/wazuh) for more search-backend examples that use the same pagination pattern.
 
 ### Rate limiting
 
@@ -321,7 +321,7 @@ This is useful for one-shot pipelines that produce a finite set of events.
 
 ### Send one request per event
 
-Wrap `to_http` in [`each`](https://tenzir.com/docs/reference/operators/each.md) to send a separate HTTP request for every event:
+Wrap `to_http` in [`each`](https://tenzir.com/docs/v7.0.0/reference/operators/each.md) to send a separate HTTP request for every event:
 
 ```tql
 from {message: "event-1"},
@@ -349,7 +349,7 @@ each parallel=4 {
 
 Getting responses back
 
-When sending a single event and either using JSON or form encoding, [`from_http`](https://tenzir.com/docs/reference/operators/from_http.md) can be used. This makes code more concise, but also allows response processing.
+When sending a single event and either using JSON or form encoding, [`from_http`](https://tenzir.com/docs/v7.0.0/reference/operators/from_http.md) can be used. This makes code more concise, but also allows response processing.
 
 ```tql
 subscribe "alerts"
@@ -364,7 +364,7 @@ Per-event delivery is ideal for webhooks that expect one payload per call or whe
 
 ### Send periodic batches
 
-Wrap `to_http` in [`every`](https://tenzir.com/docs/reference/operators/every.md) to accumulate events over a time window and then flush them as one request:
+Wrap `to_http` in [`every`](https://tenzir.com/docs/v7.0.0/reference/operators/every.md) to accumulate events over a time window and then flush them as one request:
 
 ```tql
 subscribe "stream-of-events"
@@ -393,7 +393,7 @@ from_http "https://api.example.com/health" {
 }
 ```
 
-The above example parses the `Date` header from the HTTP response via [`parse_time`](https://tenzir.com/docs/reference/functions/parse_time.md) into a timestamp and then compares it to the current wallclock time using the [`now`](https://tenzir.com/docs/reference/functions/now.md) function.
+The above example parses the `Date` header from the HTTP response via [`parse_time`](https://tenzir.com/docs/v7.0.0/reference/functions/parse_time.md) into a timestamp and then compares it to the current wallclock time using the [`now`](https://tenzir.com/docs/v7.0.0/reference/functions/now.md) function.
 
 ## Error Handling
 

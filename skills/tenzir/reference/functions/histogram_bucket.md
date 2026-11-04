@@ -1,7 +1,7 @@
 ---
 title: "histogram_bucket"
-canonical: https://tenzir.com/docs/reference/functions/histogram_bucket
-source: https://tenzir.com/docs/reference/functions/histogram_bucket.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/histogram_bucket
+source: https://tenzir.com/docs/v7.0.0/reference/functions/histogram_bucket.md
 section: "Docs"
 ---
 
@@ -17,7 +17,7 @@ histogram_bucket(model:record, x:number) -> record
 
 ## Description
 
-The `histogram_bucket` function looks up the bucket of a histogram model that contains the query value `x`. The model comes from the [`histogram`](https://tenzir.com/docs/reference/functions/histogram.md) aggregation function or any typed record with the same shape, such as a model loaded from a lookup table.
+The `histogram_bucket` function looks up the bucket of a histogram model that contains the query value `x`. The model comes from the [`histogram`](https://tenzir.com/docs/v7.0.0/reference/functions/histogram.md) aggregation function or any typed record with the same shape, such as a model loaded from a lookup table.
 
 ### Definition
 
@@ -77,4 +77,4 @@ select bucket = histogram_bucket(m, 3)
 
 ## See Also
 
-* [`histogram`](https://tenzir.com/docs/reference/functions/histogram.md)
+* [`histogram`](https://tenzir.com/docs/v7.0.0/reference/functions/histogram.md)

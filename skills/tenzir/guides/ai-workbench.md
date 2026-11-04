@@ -1,7 +1,7 @@
 ---
 title: "Overview"
-canonical: https://tenzir.com/docs/guides/ai-workbench
-source: https://tenzir.com/docs/guides/ai-workbench.md
+canonical: https://tenzir.com/docs/v7.0.0/guides/ai-workbench
+source: https://tenzir.com/docs/v7.0.0/guides/ai-workbench.md
 section: "Docs"
 ---
 

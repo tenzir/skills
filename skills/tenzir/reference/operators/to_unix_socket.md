@@ -1,7 +1,7 @@
 ---
 title: "to_unix_socket"
-canonical: https://tenzir.com/docs/reference/operators/to_unix_socket
-source: https://tenzir.com/docs/reference/operators/to_unix_socket.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/to_unix_socket
+source: https://tenzir.com/docs/v7.0.0/reference/operators/to_unix_socket.md
 section: "Docs"
 ---
 
@@ -50,8 +50,8 @@ to_unix_socket "/run/collector.sock" { write_json }
 
 ## See Also
 
-* [`from_unix_socket`](https://tenzir.com/docs/reference/operators/from_unix_socket.md)
-* [`accept_unix_socket`](https://tenzir.com/docs/reference/operators/accept_unix_socket.md)
-* [`to_tcp`](https://tenzir.com/docs/reference/operators/to_tcp.md)
-* [`write_delimited`](https://tenzir.com/docs/reference/operators/write_delimited.md)
-* [File](../../integrations/file.md)
+* [`from_unix_socket`](https://tenzir.com/docs/v7.0.0/reference/operators/from_unix_socket.md)
+* [`accept_unix_socket`](https://tenzir.com/docs/v7.0.0/reference/operators/accept_unix_socket.md)
+* [`to_tcp`](https://tenzir.com/docs/v7.0.0/reference/operators/to_tcp.md)
+* [`write_delimited`](https://tenzir.com/docs/v7.0.0/reference/operators/write_delimited.md)
+* [File](https://docs.tenzir.com/integrations/file)

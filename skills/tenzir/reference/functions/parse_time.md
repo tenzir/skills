@@ -1,7 +1,7 @@
 ---
 title: "parse_time"
-canonical: https://tenzir.com/docs/reference/functions/parse_time
-source: https://tenzir.com/docs/reference/functions/parse_time.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/parse_time
+source: https://tenzir.com/docs/v7.0.0/reference/functions/parse_time.md
 section: "Docs"
 ---
 
@@ -157,6 +157,6 @@ timestamp = timestamp.parse_time(
 
 ## See Also
 
-* [`format_time`](https://tenzir.com/docs/reference/functions/format_time.md)
-* [`time`](https://tenzir.com/docs/reference/functions/time.md)
+* [`format_time`](https://tenzir.com/docs/v7.0.0/reference/functions/format_time.md)
+* [`time`](https://tenzir.com/docs/v7.0.0/reference/functions/time.md)
 * [Normalize event timestamps](../../guides/shape/normalize-event-timestamps.md)

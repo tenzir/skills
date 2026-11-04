@@ -1,7 +1,7 @@
 ---
 title: "pow"
-canonical: https://tenzir.com/docs/reference/functions/pow
-source: https://tenzir.com/docs/reference/functions/pow.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/pow
+source: https://tenzir.com/docs/v7.0.0/reference/functions/pow.md
 section: "Docs"
 ---
 

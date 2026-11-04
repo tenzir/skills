@@ -1,8 +1,8 @@
 ---
 title: "Enrich events with AI"
 description: "Add AI-generated summaries and labels to OCSF events in Tenzir pipelines"
-canonical: https://tenzir.com/docs/guides/enrich/enrich-events-with-ai
-source: https://tenzir.com/docs/guides/enrich/enrich-events-with-ai.md
+canonical: https://tenzir.com/docs/v7.0.0/guides/enrich/enrich-events-with-ai
+source: https://tenzir.com/docs/v7.0.0/guides/enrich/enrich-events-with-ai.md
 section: "Docs"
 ---
 
@@ -10,11 +10,11 @@ section: "Docs"
 
 > Add AI-generated summaries and labels to OCSF events in Tenzir pipelines
 
-This guide shows you how to enrich OCSF events with AI-generated summaries, classifications, and annotations by using [`ai_prompt`](https://tenzir.com/docs/reference/operators/ai_prompt.md), and how to triage events cheaply with typed decisions from [`ai_decide`](https://tenzir.com/docs/reference/operators/ai_decide.md).
+This guide shows you how to enrich OCSF events with AI-generated summaries, classifications, and annotations by using [`ai_prompt`](https://tenzir.com/docs/v7.0.0/reference/operators/ai_prompt.md), and how to triage events cheaply with typed decisions from [`ai_decide`](https://tenzir.com/docs/v7.0.0/reference/operators/ai_decide.md).
 
-The [`ai_prompt`](https://tenzir.com/docs/reference/operators/ai_prompt.md) operator sends one request per input event to an OpenAI-compatible Responses API endpoint. Use it when a deterministic rule or lookup table is too rigid, and keep the prompt payload small and explicit. The examples use compact OCSF-style records as `from {...}` starting points so you can focus on the enrichment pattern.
+The [`ai_prompt`](https://tenzir.com/docs/v7.0.0/reference/operators/ai_prompt.md) operator sends one request per input event to an OpenAI-compatible Responses API endpoint. Use it when a deterministic rule or lookup table is too rigid, and keep the prompt payload small and explicit. The examples use compact OCSF-style records as `from {...}` starting points so you can focus on the enrichment pattern.
 
-OCSF events have an `enrichments` field for inline enrichment data associated with an event or finding. The examples write the model result to a temporary field, use [`add`](https://tenzir.com/docs/reference/functions/add.md) to add an OCSF `enrichment` object to `enrichments`, and then remove the temporary field.
+OCSF events have an `enrichments` field for inline enrichment data associated with an event or finding. The examples write the model result to a temporary field, use [`add`](https://tenzir.com/docs/v7.0.0/reference/functions/add.md) to add an OCSF `enrichment` object to `enrichments`, and then remove the temporary field.
 
 ## Summarize a detection finding
 
@@ -148,7 +148,7 @@ Use `concurrency` to control how many requests can run at the same time. Keep th
 
 ## Triage with typed decisions first
 
-A language model is slow and expensive to call for every event. A **decision model** answers typed questions instead: a yes/no probability, one option out of a fixed set, or a score on an ordered scale. The [`ai_decide`](https://tenzir.com/docs/reference/operators/ai_decide.md) operator asks such questions of hosted Jev, Cloudflare’s Clef on Workers AI, the OpenAI Decisions API, or a local Laya server, and you choose the provider with the `endpoint`. Use it as a first tier that filters events, and send only the remaining events to [`ai_prompt`](https://tenzir.com/docs/reference/operators/ai_prompt.md).
+A language model is slow and expensive to call for every event. A **decision model** answers typed questions instead: a yes/no probability, one option out of a fixed set, or a score on an ordered scale. The [`ai_decide`](https://tenzir.com/docs/v7.0.0/reference/operators/ai_decide.md) operator asks such questions of hosted Jev, Cloudflare’s Clef on Workers AI, the OpenAI Decisions API, or a local Laya server, and you choose the provider with the `endpoint`. Use it as a first tier that filters events, and send only the remaining events to [`ai_prompt`](https://tenzir.com/docs/v7.0.0/reference/operators/ai_prompt.md).
 
 This example rates the command of an OCSF `process_activity` event on a three-level scale. Levels start at 0, so a score of at least 1.5 means that the model leans toward the highest level. Only risky commands reach the language model:
 
@@ -303,7 +303,7 @@ If a request fails, Tenzir keeps the input event and writes `null` to the tempor
 where ai.next_step != null
 ```
 
-The [`ai_decide`](https://tenzir.com/docs/reference/operators/ai_decide.md) operator also writes `null` when a request fails, and an answer is `null` when the model refuses the question. For triage, decide whether a failure should hide or surface an event. To fail open and keep events that the model couldn’t assess, test the answer for `null` first:
+The [`ai_decide`](https://tenzir.com/docs/v7.0.0/reference/operators/ai_decide.md) operator also writes `null` when a request fails, and an answer is `null` when the model refuses the question. For triage, decide whether a failure should hide or surface an event. To fail open and keep events that the model couldn’t assess, test the answer for `null` first:
 
 ```tql
 where ai.decide.answer? == null or ai.decide.answer.score >= 1.5

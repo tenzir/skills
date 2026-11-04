@@ -1,7 +1,7 @@
 ---
 title: "read_ndjson"
-canonical: https://tenzir.com/docs/reference/operators/read_ndjson
-source: https://tenzir.com/docs/reference/operators/read_ndjson.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/read_ndjson
+source: https://tenzir.com/docs/v7.0.0/reference/operators/read_ndjson.md
 section: "Docs"
 ---
 
@@ -163,4 +163,4 @@ from_file "versions.json" {
 
 ## See Also
 
-* [`read_json`](https://tenzir.com/docs/reference/operators/read_json.md)
+* [`read_json`](https://tenzir.com/docs/v7.0.0/reference/operators/read_json.md)

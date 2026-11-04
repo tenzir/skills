@@ -1,7 +1,7 @@
 ---
 title: "hash_crc32"
-canonical: https://tenzir.com/docs/reference/functions/hash_crc32
-source: https://tenzir.com/docs/reference/functions/hash_crc32.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/hash_crc32
+source: https://tenzir.com/docs/v7.0.0/reference/functions/hash_crc32.md
 section: "Docs"
 ---
 
@@ -21,7 +21,7 @@ The `hash_crc32` function calculates the CRC-32 checksum of `x` and returns it a
 
 CRC-32 is not cryptographic
 
-CRC-32 detects accidental changes, but anyone can construct an input with a given checksum, and 32 bits produce collisions after tens of thousands of values. Never use CRC-32 to pseudonymize or protect data. Use [`hash_sha256`](https://tenzir.com/docs/reference/functions/hash_sha256.md) instead, or [`hmac`](https://tenzir.com/docs/reference/functions/hmac.md) with a secret key for values that an attacker could guess.
+CRC-32 detects accidental changes, but anyone can construct an input with a given checksum, and 32 bits produce collisions after tens of thousands of values. Never use CRC-32 to pseudonymize or protect data. Use [`hash_sha256`](https://tenzir.com/docs/v7.0.0/reference/functions/hash_sha256.md) instead, or [`hmac`](https://tenzir.com/docs/v7.0.0/reference/functions/hmac.md) with a secret key for values that an attacker could guess.
 
 ### `x: any`
 
@@ -45,16 +45,16 @@ from {x: hash_crc32("123456789")}
 
 ## See Also
 
-* [`hash_md5`](https://tenzir.com/docs/reference/functions/hash_md5.md)
-* [`hash_sha1`](https://tenzir.com/docs/reference/functions/hash_sha1.md)
-* [`hash_sha224`](https://tenzir.com/docs/reference/functions/hash_sha224.md)
-* [`hash_sha256`](https://tenzir.com/docs/reference/functions/hash_sha256.md)
-* [`hash_sha384`](https://tenzir.com/docs/reference/functions/hash_sha384.md)
-* [`hash_sha512`](https://tenzir.com/docs/reference/functions/hash_sha512.md)
-* [`hash_sha3_224`](https://tenzir.com/docs/reference/functions/hash_sha3_224.md)
-* [`hash_sha3_256`](https://tenzir.com/docs/reference/functions/hash_sha3_256.md)
-* [`hash_sha3_384`](https://tenzir.com/docs/reference/functions/hash_sha3_384.md)
-* [`hash_sha3_512`](https://tenzir.com/docs/reference/functions/hash_sha3_512.md)
-* [`hash_xxh3`](https://tenzir.com/docs/reference/functions/hash_xxh3.md)
-* [`hmac`](https://tenzir.com/docs/reference/functions/hmac.md)
+* [`hash_md5`](https://tenzir.com/docs/v7.0.0/reference/functions/hash_md5.md)
+* [`hash_sha1`](https://tenzir.com/docs/v7.0.0/reference/functions/hash_sha1.md)
+* [`hash_sha224`](https://tenzir.com/docs/v7.0.0/reference/functions/hash_sha224.md)
+* [`hash_sha256`](https://tenzir.com/docs/v7.0.0/reference/functions/hash_sha256.md)
+* [`hash_sha384`](https://tenzir.com/docs/v7.0.0/reference/functions/hash_sha384.md)
+* [`hash_sha512`](https://tenzir.com/docs/v7.0.0/reference/functions/hash_sha512.md)
+* [`hash_sha3_224`](https://tenzir.com/docs/v7.0.0/reference/functions/hash_sha3_224.md)
+* [`hash_sha3_256`](https://tenzir.com/docs/v7.0.0/reference/functions/hash_sha3_256.md)
+* [`hash_sha3_384`](https://tenzir.com/docs/v7.0.0/reference/functions/hash_sha3_384.md)
+* [`hash_sha3_512`](https://tenzir.com/docs/v7.0.0/reference/functions/hash_sha3_512.md)
+* [`hash_xxh3`](https://tenzir.com/docs/v7.0.0/reference/functions/hash_xxh3.md)
+* [`hmac`](https://tenzir.com/docs/v7.0.0/reference/functions/hmac.md)
 * [Mask sensitive data](../../guides/protect/mask-sensitive-data.md)

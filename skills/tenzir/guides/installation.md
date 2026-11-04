@@ -1,7 +1,7 @@
 ---
 title: "Overview"
-canonical: https://tenzir.com/docs/guides/installation
-source: https://tenzir.com/docs/guides/installation.md
+canonical: https://tenzir.com/docs/v7.0.0/guides/installation
+source: https://tenzir.com/docs/v7.0.0/guides/installation.md
 section: "Docs"
 ---
 

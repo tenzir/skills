@@ -1,7 +1,7 @@
 ---
 title: "otherwise"
-canonical: https://tenzir.com/docs/reference/functions/otherwise
-source: https://tenzir.com/docs/reference/functions/otherwise.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/otherwise
+source: https://tenzir.com/docs/v7.0.0/reference/functions/otherwise.md
 section: "Docs"
 ---
 

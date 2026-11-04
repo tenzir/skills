@@ -1,7 +1,7 @@
 ---
 title: "to_file"
-canonical: https://tenzir.com/docs/reference/operators/to_file
-source: https://tenzir.com/docs/reference/operators/to_file.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/to_file
+source: https://tenzir.com/docs/v7.0.0/reference/operators/to_file.md
 section: "Docs"
 ---
 
@@ -117,6 +117,6 @@ to_file "/tmp/logs/events_{uuid}.json", timeout=1min {
 
 ## See Also
 
-* [`from_file`](https://tenzir.com/docs/reference/operators/from_file.md)
-* [`to_file`](https://tenzir.com/docs/reference/operators/to_file.md)
-* [File](../../integrations/file.md)
+* [`from_file`](https://tenzir.com/docs/v7.0.0/reference/operators/from_file.md)
+* [`to_file`](https://tenzir.com/docs/v7.0.0/reference/operators/to_file.md)
+* [File](https://docs.tenzir.com/integrations/file)

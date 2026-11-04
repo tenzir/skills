@@ -1,7 +1,7 @@
 ---
 title: "cache"
-canonical: https://tenzir.com/docs/reference/operators/cache
-source: https://tenzir.com/docs/reference/operators/cache.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/cache
+source: https://tenzir.com/docs/v7.0.0/reference/operators/cache.md
 section: "Docs"
 ---
 

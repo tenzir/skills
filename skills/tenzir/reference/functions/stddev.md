@@ -1,7 +1,7 @@
 ---
 title: "stddev"
-canonical: https://tenzir.com/docs/reference/functions/stddev
-source: https://tenzir.com/docs/reference/functions/stddev.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/stddev
+source: https://tenzir.com/docs/v7.0.0/reference/functions/stddev.md
 section: "Docs"
 ---
 
@@ -38,6 +38,6 @@ summarize stddev_value=stddev(x)
 
 ## See Also
 
-* [`variance`](https://tenzir.com/docs/reference/functions/variance.md)
-* [`mean`](https://tenzir.com/docs/reference/functions/mean.md)
+* [`variance`](https://tenzir.com/docs/v7.0.0/reference/functions/variance.md)
+* [`mean`](https://tenzir.com/docs/v7.0.0/reference/functions/mean.md)
 * [Aggregate event streams](../../guides/analyze/aggregate-event-streams.md)

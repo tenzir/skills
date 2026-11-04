@@ -1,7 +1,7 @@
 ---
 title: "to_lower"
-canonical: https://tenzir.com/docs/reference/functions/to_lower
-source: https://tenzir.com/docs/reference/functions/to_lower.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/functions/to_lower
+source: https://tenzir.com/docs/v7.0.0/reference/functions/to_lower.md
 section: "Docs"
 ---
 
@@ -33,8 +33,8 @@ from {x: "HELLO".to_lower()}
 
 ## See Also
 
-* [`capitalize`](https://tenzir.com/docs/reference/functions/capitalize.md)
-* [`is_lower`](https://tenzir.com/docs/reference/functions/is_lower.md)
-* [`to_title`](https://tenzir.com/docs/reference/functions/to_title.md)
-* [`to_upper`](https://tenzir.com/docs/reference/functions/to_upper.md)
+* [`capitalize`](https://tenzir.com/docs/v7.0.0/reference/functions/capitalize.md)
+* [`is_lower`](https://tenzir.com/docs/v7.0.0/reference/functions/is_lower.md)
+* [`to_title`](https://tenzir.com/docs/v7.0.0/reference/functions/to_title.md)
+* [`to_upper`](https://tenzir.com/docs/v7.0.0/reference/functions/to_upper.md)
 * [Manipulate strings](../../guides/shape/manipulate-strings.md)

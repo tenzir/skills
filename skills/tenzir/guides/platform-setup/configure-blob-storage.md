@@ -1,7 +1,7 @@
 ---
 title: "Configure blob storage"
-canonical: https://tenzir.com/docs/guides/platform-setup/configure-blob-storage
-source: https://tenzir.com/docs/guides/platform-setup/configure-blob-storage.md
+canonical: https://tenzir.com/docs/v7.0.0/guides/platform-setup/configure-blob-storage
+source: https://tenzir.com/docs/v7.0.0/guides/platform-setup/configure-blob-storage.md
 section: "Docs"
 ---
 

@@ -1,8 +1,8 @@
 ---
 title: "Detect over time windows"
 description: "Build streaming detections with event-time windows, from failure thresholds to statistical baselines, with duplicate suppression"
-canonical: https://tenzir.com/docs/guides/detect/detect-over-time-windows
-source: https://tenzir.com/docs/guides/detect/detect-over-time-windows.md
+canonical: https://tenzir.com/docs/v7.0.0/guides/detect/detect-over-time-windows
+source: https://tenzir.com/docs/v7.0.0/guides/detect/detect-over-time-windows.md
 section: "Docs"
 ---
 
@@ -10,7 +10,7 @@ section: "Docs"
 
 > Build streaming detections with event-time windows, from failure thresholds to statistical baselines, with duplicate suppression
 
-This guide shows you how to build detections that need more than one event: failure thresholds, traffic spikes, and behavioral baselines. The building blocks are [`window`](https://tenzir.com/docs/reference/operators/window.md) for bounded event-time state and [`group`](https://tenzir.com/docs/reference/operators/group.md) for per-entity isolation, with [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) computing the statistics inside each window.
+This guide shows you how to build detections that need more than one event: failure thresholds, traffic spikes, and behavioral baselines. The building blocks are [`window`](https://tenzir.com/docs/v7.0.0/reference/operators/window.md) for bounded event-time state and [`group`](https://tenzir.com/docs/v7.0.0/reference/operators/group.md) for per-entity isolation, with [`summarize`](https://tenzir.com/docs/v7.0.0/reference/operators/summarize.md) computing the statistics inside each window.
 
 Start with the time semantics, then build a threshold detector over tumbling windows. From there, develop the general pattern for a rolling-baseline detector through duplicate suppression and OCSF finding output, and close with compact network detectors for scanning and exfiltration. The guide on [aggregating event streams](../analyze/aggregate-event-streams.md) covers the general aggregation vocabulary behind these examples.
 
@@ -18,12 +18,12 @@ Start with the time semantics, then build a threshold detector over tumbling win
 
 Streaming detections answer questions about when things happened, not when events arrived. Three mechanisms look similar but behave differently:
 
-* [`window`](https://tenzir.com/docs/reference/operators/window.md) with `on=time` uses **event time**. Fixed windows assign events to aligned intervals and keep them open for `tolerance`, but their subpipelines receive events in arrival order. Trailing windows reorder events within `tolerance` before evaluating event-anchored history. Use event-time windows for detections where a delayed event can change the answer.
-* [`window`](https://tenzir.com/docs/reference/operators/window.md) without `on` assigns events by **processing time** and closes at epoch-aligned wall-clock boundaries. This is useful when arrival time is the intended detection clock.
-* [`every`](https://tenzir.com/docs/reference/operators/every.md) reruns a block on a wall-clock schedule whose boundaries depend on pipeline start time. Use it for snapshots and polling, as shown in the [periodic snapshot pattern](../analyze/shape-aggregation-results.md#aggregate-periodic-snapshots).
-* [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) with `options={emit: 5min, mode: "reset"}` emits aggregate updates on a processing-time cadence, but it doesn’t create event-time evidence intervals.
+* [`window`](https://tenzir.com/docs/v7.0.0/reference/operators/window.md) with `on=time` uses **event time**. Fixed windows assign events to aligned intervals and keep them open for `tolerance`, but their subpipelines receive events in arrival order. Trailing windows reorder events within `tolerance` before evaluating event-anchored history. Use event-time windows for detections where a delayed event can change the answer.
+* [`window`](https://tenzir.com/docs/v7.0.0/reference/operators/window.md) without `on` assigns events by **processing time** and closes at epoch-aligned wall-clock boundaries. This is useful when arrival time is the intended detection clock.
+* [`every`](https://tenzir.com/docs/v7.0.0/reference/operators/every.md) reruns a block on a wall-clock schedule whose boundaries depend on pipeline start time. Use it for snapshots and polling, as shown in the [periodic snapshot pattern](../analyze/shape-aggregation-results.md#aggregate-periodic-snapshots).
+* [`summarize`](https://tenzir.com/docs/v7.0.0/reference/operators/summarize.md) with `options={emit: 5min, mode: "reset"}` emits aggregate updates on a processing-time cadence, but it doesn’t create event-time evidence intervals.
 
-Order-independent fixed-window calculations such as counts and sums need no separate ordering step. Put [`reorder`](https://tenzir.com/docs/reference/operators/reorder.md) before a fixed window when its subpipeline compares consecutive events or collects an activity sequence. Do not add it before a trailing event-time window for the same timestamp and tolerance because that window already performs the reorder. See the guide on [repairing out-of-order events](../shape/repair-out-of-order-events.md) for the complete ordering decision.
+Order-independent fixed-window calculations such as counts and sums need no separate ordering step. Put [`reorder`](https://tenzir.com/docs/v7.0.0/reference/operators/reorder.md) before a fixed window when its subpipeline compares consecutive events or collects an activity sequence. Do not add it before a trailing event-time window for the same timestamp and tolerance because that window already performs the reorder. See the guide on [repairing out-of-order events](../shape/repair-out-of-order-events.md) for the complete ordering decision.
 
 The examples in this guide use aligned tumbling or hopping windows, which run one subpipeline per fixed interval. By default, a trailing window with `trailing=true` instead runs once per input event and can enrich the triggering event through `$window.event`. That maps to bounded Splunk `streamstats`, but generic trailing windows replay their retained history for every invocation. Set `every` to sample that history at a lower count or duration cadence. Set `trigger` to fire only for events that can produce a result, such as a successful login after repeated failures. Add `tolerance` when trailing input can arrive out of order. Tenzir reorders events within the tolerance before evaluating their event-anchored history and warns about later events. Prefer aligned windows for periodic detection decisions unless you specifically need event-anchored results.
 
@@ -67,13 +67,13 @@ select user, src_ip, failures, target_hosts, start, end
 }
 ```
 
-In OCSF Authentication events, `activity_id: 1` means logon and `status_id: 2` means failure. The outer [`window`](https://tenzir.com/docs/reference/operators/window.md) gives the stream one event-time clock. When a window closes, every per-user group inside it closes too, so high-cardinality group state expires without waiting for another event from each key. The `idle_timeout` also closes the current stream-wide window after wall-clock inactivity.
+In OCSF Authentication events, `activity_id: 1` means logon and `status_id: 2` means failure. The outer [`window`](https://tenzir.com/docs/v7.0.0/reference/operators/window.md) gives the stream one event-time clock. When a window closes, every per-user group inside it closes too, so high-cardinality group state expires without waiting for another event from each key. The `idle_timeout` also closes the current stream-wide window after wall-clock inactivity.
 
 Use independent per-key clocks deliberately
 
-Put [`group`](https://tenzir.com/docs/reference/operators/group.md) outside [`window`](https://tenzir.com/docs/reference/operators/window.md) only when each key needs an independent event-time clock. That arrangement protects a sparse key from a busier key advancing the clock, but it also lets sparse groups retain state until their own next event, `idle_timeout`, or the end of the input.
+Put [`group`](https://tenzir.com/docs/v7.0.0/reference/operators/group.md) outside [`window`](https://tenzir.com/docs/v7.0.0/reference/operators/window.md) only when each key needs an independent event-time clock. That arrangement protects a sparse key from a busier key advancing the clock, but it also lets sparse groups retain state until their own next event, `idle_timeout`, or the end of the input.
 
-This example uses tumbling windows because [`window`](https://tenzir.com/docs/reference/operators/window.md) omits `every`. With `size=10min`, the stream-wide intervals are `[10:00, 10:10)`, `[10:10, 10:20)`, and so on. An event exactly at `10:10` belongs to the second window because window ends are exclusive.
+This example uses tumbling windows because [`window`](https://tenzir.com/docs/v7.0.0/reference/operators/window.md) omits `every`. With `size=10min`, the stream-wide intervals are `[10:00, 10:10)`, `[10:10, 10:20)`, and so on. An event exactly at `10:10` belongs to the second window because window ends are exclusive.
 
 When your producers populate stable entity identifiers, group by those instead of display values: `user.uid` survives renames and `device.uid` survives DHCP churn, where `user.name` and hostnames do not.
 
@@ -81,7 +81,7 @@ The same window pattern implements Sigma’s [`event_count` and `value_count` co
 
 ## Detect geographically impossible logins
 
-A trailing window can compare each authentication event with recent logins for the same user. Combine it with [`geo_distance`](https://tenzir.com/docs/reference/functions/geo_distance.md) to flag an account that appears more than 1,000 kilometers away from a prior location within one hour:
+A trailing window can compare each authentication event with recent logins for the same user. Combine it with [`geo_distance`](https://tenzir.com/docs/v7.0.0/reference/functions/geo_distance.md) to flag an account that appears more than 1,000 kilometers away from a prior location within one hour:
 
 ```tql
 from {
@@ -135,11 +135,11 @@ select user=user.name,
 }
 ```
 
-The per-user [`group`](https://tenzir.com/docs/reference/operators/group.md) isolates login histories. For each event, the trailing [`window`](https://tenzir.com/docs/reference/operators/window.md) retains the preceding hour, while `$window.event` provides the current location. The one-minute `tolerance` reorders slightly late login events before evaluating their histories. [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) calculates the greatest distance between the current location and every login in the retained history.
+The per-user [`group`](https://tenzir.com/docs/v7.0.0/reference/operators/group.md) isolates login histories. For each event, the trailing [`window`](https://tenzir.com/docs/v7.0.0/reference/operators/window.md) retains the preceding hour, while `$window.event` provides the current location. The one-minute `tolerance` reorders slightly late login events before evaluating their histories. [`summarize`](https://tenzir.com/docs/v7.0.0/reference/operators/summarize.md) calculates the greatest distance between the current location and every login in the retained history.
 
 ### Compare only consecutive logins
 
-The window checks the current login against every login in the preceding hour. When a detection needs only the immediately preceding login for each user, use [`lag`](https://tenzir.com/docs/reference/operators/lag.md) to attach it directly. For the same input data, replace the `group` and `window` block and the following `select` with:
+The window checks the current login against every login in the preceding hour. When a detection needs only the immediately preceding login for each user, use [`lag`](https://tenzir.com/docs/v7.0.0/reference/operators/lag.md) to attach it directly. For the same input data, replace the `group` and `window` block and the following `select` with:
 
 ```tql
 group user.name {
@@ -173,7 +173,7 @@ group user.name {
 }
 ```
 
-The [`group`](https://tenzir.com/docs/reference/operators/group.md) operator gives each user an independent subpipeline and watermark. Within it, [`reorder`](https://tenzir.com/docs/reference/operators/reorder.md) repairs up to one minute of event-time disorder before `lag` attaches the preceding login. This one-predecessor form updates one retained event per login instead of replaying a one-hour history through a new subpipeline. Keep the trailing-window form when the detection must compare the current event with every event in the lookback period.
+The [`group`](https://tenzir.com/docs/v7.0.0/reference/operators/group.md) operator gives each user an independent subpipeline and watermark. Within it, [`reorder`](https://tenzir.com/docs/v7.0.0/reference/operators/reorder.md) repairs up to one minute of event-time disorder before `lag` attaches the preceding login. This one-predecessor form updates one retained event per login instead of replaying a one-hour history through a new subpipeline. Keep the trailing-window form when the detection must compare the current event with every event in the lookback period.
 
 The `travel_time` predicate enforces the one-hour event-time horizon for matches, but it doesn’t expire group or lag state. This form keeps one subpipeline and one complete preceding event for every user until the input ends. Avoid it on unbounded streams with high-cardinality or attacker-controlled user names unless the source limits that cardinality. You can instead enclose `group` and `lag` in a fixed window to bound their lifetime when resetting each user’s predecessor at window boundaries fits the detection.
 
@@ -185,7 +185,7 @@ A rolling-baseline detector compares recent observations with historical context
 
 ### Calculate a rolling threshold
 
-Compute a baseline with statistical aggregations inside a hopping [`window`](https://tenzir.com/docs/reference/operators/window.md), then compare the candidate observation with that baseline. The detector uses the mean for the center and [standard deviation](https://en.wikipedia.org/wiki/Standard_deviation) for the dispersion, the spread of values around that center. The example is a lightweight TQL adaptation of Splunk’s [SMB Traffic Spike](https://github.com/splunk/security_content/blob/4493a82b24dc7e93a612c229e842751c853b96c8/detections/network/smb_traffic_spike.yml) analytic. It starts with pre-aggregated OCSF SMB Activity buckets to keep the detection readable and interleaves the sources by timestamp to match event-time order. The sample records show only the OCSF fields used by the detection.
+Compute a baseline with statistical aggregations inside a hopping [`window`](https://tenzir.com/docs/v7.0.0/reference/operators/window.md), then compare the candidate observation with that baseline. The detector uses the mean for the center and [standard deviation](https://en.wikipedia.org/wiki/Standard_deviation) for the dispersion, the spread of values around that center. The example is a lightweight TQL adaptation of Splunk’s [SMB Traffic Spike](https://github.com/splunk/security_content/blob/4493a82b24dc7e93a612c229e842751c853b96c8/detections/network/smb_traffic_spike.yml) analytic. It starts with pre-aggregated OCSF SMB Activity buckets to keep the detection readable and interleaves the sources by timestamp to match event-time order. The sample records show only the OCSF fields used by the detection.
 
 ```tql
 from {time: 2024-01-01T00:00:00, src_endpoint: {hostname: "workstation-7"}, traffic: {bytes: 10}},
@@ -236,7 +236,7 @@ sort start
 
 The `workstation-7` bucket with `80` bytes exceeds the mean plus two standard deviations in two 70-minute windows, while the steady file-server traffic stays below its bound. The simplified detector uses the maximum bucket in each window as the candidate spike.
 
-This example uses a fixed hopping window: `size=70min` defines the lookback and `every=10min` moves the window forward every 10 minutes. Around midnight, Tenzir evaluates intervals such as `[00:00, 01:10)`, `[00:10, 01:20)`, and `[00:20, 01:30)`. A 10-minute traffic bucket can participate in multiple open windows, which gives rolling context but also fires repeatedly for the same spike, as the doubled output shows. The suppression step removes those duplicates before finding conversion. The example stays close to the upstream analytic and omits `tolerance`. Production deployments should keep the stream-wide window on the outside so it bounds all keyed state, group sources inside it as this keyed [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) already does, and size a tolerance for ingestion skew.
+This example uses a fixed hopping window: `size=70min` defines the lookback and `every=10min` moves the window forward every 10 minutes. Around midnight, Tenzir evaluates intervals such as `[00:00, 01:10)`, `[00:10, 01:20)`, and `[00:20, 01:30)`. A 10-minute traffic bucket can participate in multiple open windows, which gives rolling context but also fires repeatedly for the same spike, as the doubled output shows. The suppression step removes those duplicates before finding conversion. The example stays close to the upstream analytic and omits `tolerance`. Production deployments should keep the stream-wide window on the outside so it bounds all keyed state, group sources inside it as this keyed [`summarize`](https://tenzir.com/docs/v7.0.0/reference/operators/summarize.md) already does, and size a tolerance for ingestion skew.
 
 In OCSF [Network Activity](https://schema.ocsf.io/classes/network_activity) and [SMB Activity](https://schema.ocsf.io/classes/smb_activity) events, `traffic.bytes` is a per-observation measurement, so summing it across a window is correct. Do not aggregate `cumulative_traffic.bytes` the same way: it carries running totals, and repeatedly summing it counts the same bytes many times over.
 
@@ -285,7 +285,7 @@ This keeps the detector focused on the rolling statistical comparison while the 
 
 ### Suppress overlapping results
 
-Hopping windows trade duplicate results for rolling context: one spike produces a candidate in every open window that contains it. Suppress the repeats with [`deduplicate`](https://tenzir.com/docs/reference/operators/deduplicate.md) keyed on the detection identity. The following pipeline runs on the same SMB example data:
+Hopping windows trade duplicate results for rolling context: one spike produces a candidate in every open window that contains it. Suppress the repeats with [`deduplicate`](https://tenzir.com/docs/v7.0.0/reference/operators/deduplicate.md) keyed on the detection identity. The following pipeline runs on the same SMB example data:
 
 ```tql
 window size=70min, every=10min, on=time {
@@ -318,7 +318,7 @@ The key (`src`) defines what counts as “the same result”, and `create_timeou
 
 Both timeouts count wall-clock time, not event time. On a live stream, suppression usually tracks the detector cadence. Replaying history faster than real time compresses independent spikes into one suppression interval, keeping only the first result per key. Skip suppression when replaying, or accept that behavior.
 
-The `sort start` exists for this bounded example, where all windows flush at end of input in unspecified order. A live stream needs no sort: windows close as event time advances, and [`deduplicate`](https://tenzir.com/docs/reference/operators/deduplicate.md) keeps whichever result for the spike arrives first, which is exactly what you want from suppression.
+The `sort start` exists for this bounded example, where all windows flush at end of input in unspecified order. A live stream needs no sort: windows close as event time advances, and [`deduplicate`](https://tenzir.com/docs/v7.0.0/reference/operators/deduplicate.md) keeps whichever result for the spike arrives first, which is exactly what you want from suppression.
 
 ### Emit a finding with the evidence window
 
@@ -422,7 +422,7 @@ Windowed findings feed naturally into composition: a multi-stage detector can re
 
 ## Detect network behaviors on one stream
 
-The same building blocks cover the classic network detections. These examples read OCSF [Network Activity](https://schema.ocsf.io/classes/network_activity) events, so one normalized stream serves every detector whether a flow exporter, a firewall, or Zeek produced the record. For the evasion and tuning trade-offs behind each, see the blog post on [detecting scans, beacons, and exfiltration](https://tenzir.com/blog/detect-scans-beacons-and-exfiltration-over-streaming-ocsf.md).
+The same building blocks cover the classic network detections. These examples read OCSF [Network Activity](https://schema.ocsf.io/classes/network_activity) events, so one normalized stream serves every detector whether a flow exporter, a firewall, or Zeek produced the record. For the evasion and tuning trade-offs behind each, see the blog post on [detecting scans, beacons, and exfiltration](https://tenzir.com/blog/detect-scans-beacons-and-exfiltration-over-streaming-ocsf).
 
 ### Find scan fan-out
 
@@ -525,15 +525,15 @@ Summing per asset rather than per connection defeats chunked transfers that stay
 ## See Also
 
 * [Detections](../../explanations/detections.md)
-* [`window`](https://tenzir.com/docs/reference/operators/window.md)
-* [`group`](https://tenzir.com/docs/reference/operators/group.md)
-* [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md)
-* [`deduplicate`](https://tenzir.com/docs/reference/operators/deduplicate.md)
-* [`every`](https://tenzir.com/docs/reference/operators/every.md)
-* [`count_distinct`](https://tenzir.com/docs/reference/functions/count_distinct.md)
-* [`count_if`](https://tenzir.com/docs/reference/functions/count_if.md)
-* [`median`](https://tenzir.com/docs/reference/functions/median.md)
-* [`stddev`](https://tenzir.com/docs/reference/functions/stddev.md)
+* [`window`](https://tenzir.com/docs/v7.0.0/reference/operators/window.md)
+* [`group`](https://tenzir.com/docs/v7.0.0/reference/operators/group.md)
+* [`summarize`](https://tenzir.com/docs/v7.0.0/reference/operators/summarize.md)
+* [`deduplicate`](https://tenzir.com/docs/v7.0.0/reference/operators/deduplicate.md)
+* [`every`](https://tenzir.com/docs/v7.0.0/reference/operators/every.md)
+* [`count_distinct`](https://tenzir.com/docs/v7.0.0/reference/functions/count_distinct.md)
+* [`count_if`](https://tenzir.com/docs/v7.0.0/reference/functions/count_if.md)
+* [`median`](https://tenzir.com/docs/v7.0.0/reference/functions/median.md)
+* [`stddev`](https://tenzir.com/docs/v7.0.0/reference/functions/stddev.md)
 * [Window event streams](../analyze/window-event-streams.md)
 * [Baseline behavior from stored events](baseline-from-stored-events.md)
 * [Detect periodic behavior](detect-periodic-behavior.md)

@@ -1,7 +1,7 @@
 ---
 title: "Collect metrics"
-canonical: https://tenzir.com/docs/guides/observability/collect-metrics
-source: https://tenzir.com/docs/guides/observability/collect-metrics.md
+canonical: https://tenzir.com/docs/v7.0.0/guides/observability/collect-metrics
+source: https://tenzir.com/docs/v7.0.0/guides/observability/collect-metrics.md
 section: "Docs"
 ---
 
@@ -11,7 +11,7 @@ section: "Docs"
 
 Tenzir keeps track of metrics about node resource usage, pipeline state, and runtime performance.
 
-Metrics are stored as internal events in the node’s storage engine, allowing you to work with metrics just like regular data. Use the [`metrics`](https://tenzir.com/docs/reference/operators/metrics.md) input operator to access the metrics. The operator documentation lists [all available metrics](../../reference/operators/metrics.md#schemas) in detail.
+Metrics are stored as internal events in the node’s storage engine, allowing you to work with metrics just like regular data. Use the [`metrics`](https://tenzir.com/docs/v7.0.0/reference/operators/metrics.md) input operator to access the metrics. The operator documentation lists [all available metrics](../../reference/operators/metrics.md#schemas) in detail.
 
 The `metrics` operator provides a *copy* of existing metrics. You can use it multiple time to reference the same metrics feed.
 
@@ -54,18 +54,18 @@ The `events` fields count records that passed through the pipeline during the me
 
 ## Send metrics to Prometheus
 
-Use `shape="prometheus"` with [`metrics`](https://tenzir.com/docs/reference/operators/metrics.md) and [`to_prometheus`](https://tenzir.com/docs/reference/operators/to_prometheus.md) to send live metrics to a Prometheus-compatible Remote Write receiver:
+Use `shape="prometheus"` with [`metrics`](https://tenzir.com/docs/v7.0.0/reference/operators/metrics.md) and [`to_prometheus`](https://tenzir.com/docs/v7.0.0/reference/operators/to_prometheus.md) to send live metrics to a Prometheus-compatible Remote Write receiver:
 
 ```tql
 metrics live=true, shape="prometheus"
 to_prometheus "https://prometheus.example/api/v1/write"
 ```
 
-The [Prometheus](../../integrations/prometheus.md) integration page covers endpoint setup, authentication headers, and additional examples.
+The [Prometheus](https://docs.tenzir.com/integrations/prometheus) integration page covers endpoint setup, authentication headers, and additional examples.
 
 ## Send metrics to Google Cloud Monitoring
 
-The same shape works with [`to_google_cloud_monitoring`](https://tenzir.com/docs/reference/operators/to_google_cloud_monitoring.md), which writes the metrics as user-defined metrics to Google Cloud Monitoring:
+The same shape works with [`to_google_cloud_monitoring`](https://tenzir.com/docs/v7.0.0/reference/operators/to_google_cloud_monitoring.md), which writes the metrics as user-defined metrics to Google Cloud Monitoring:
 
 ```tql
 metrics live=true, shape="prometheus"
@@ -73,4 +73,4 @@ to_google_cloud_monitoring project="my-project",
   metric_prefix="custom.googleapis.com/tenzir/"
 ```
 
-On Compute Engine, the operator identifies each node by its instance. Elsewhere, set `resource_type` and `resource_labels` to give every node its own monitored resource. The [Google Cloud Monitoring](../../integrations/google/cloud-monitoring.md) integration page covers permissions, credentials, and additional examples.
+On Compute Engine, the operator identifies each node by its instance. Elsewhere, set `resource_type` and `resource_labels` to give every node its own monitored resource. The [Cloud monitoring](https://docs.tenzir.com/integrations/google/cloud-monitoring) integration page covers permissions, credentials, and additional examples.

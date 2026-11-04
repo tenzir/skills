@@ -1,7 +1,7 @@
 ---
 title: "Publish a package"
-canonical: https://tenzir.com/docs/guides/packages/publish-a-package
-source: https://tenzir.com/docs/guides/packages/publish-a-package.md
+canonical: https://tenzir.com/docs/v7.0.0/guides/packages/publish-a-package
+source: https://tenzir.com/docs/v7.0.0/guides/packages/publish-a-package.md
 section: "Docs"
 ---
 

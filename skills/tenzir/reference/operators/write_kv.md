@@ -1,7 +1,7 @@
 ---
 title: "write_kv"
-canonical: https://tenzir.com/docs/reference/operators/write_kv
-source: https://tenzir.com/docs/reference/operators/write_kv.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/write_kv
+source: https://tenzir.com/docs/v7.0.0/reference/operators/write_kv.md
 section: "Docs"
 ---
 
@@ -79,7 +79,7 @@ x.y.z=0 y.y2=42 a=string
 
 ## See Also
 
-* [`parse_kv`](https://tenzir.com/docs/reference/functions/parse_kv.md)
-* [`print_kv`](https://tenzir.com/docs/reference/functions/print_kv.md)
-* [`read_kv`](https://tenzir.com/docs/reference/operators/read_kv.md)
-* [`write_lines`](https://tenzir.com/docs/reference/operators/write_lines.md)
+* [`parse_kv`](https://tenzir.com/docs/v7.0.0/reference/functions/parse_kv.md)
+* [`print_kv`](https://tenzir.com/docs/v7.0.0/reference/functions/print_kv.md)
+* [`read_kv`](https://tenzir.com/docs/v7.0.0/reference/operators/read_kv.md)
+* [`write_lines`](https://tenzir.com/docs/v7.0.0/reference/operators/write_lines.md)

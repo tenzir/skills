@@ -1,7 +1,7 @@
 ---
 title: "ai_prompt"
-canonical: https://tenzir.com/docs/reference/operators/ai_prompt
-source: https://tenzir.com/docs/reference/operators/ai_prompt.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/ai_prompt
+source: https://tenzir.com/docs/v7.0.0/reference/operators/ai_prompt.md
 section: "Docs"
 ---
 
@@ -28,7 +28,7 @@ The operator uses `http://127.0.0.1:11434/v1` as its default endpoint, which mat
 
 The operator preserves input order, even when `concurrency` is greater than `1`. If a request fails, Tenzir emits a warning, keeps the input event, and writes `null` to the result field for that event.
 
-The operator sends no requests for events that a later [`where`](https://tenzir.com/docs/reference/operators/where.md) drops when the filter doesn’t read the result field, because the filter then runs before the operator. This applies to each condition of a filter that combines conditions with `and`: in `where severity == "high" and ai.prompt.text != null`, only the second condition stays after the operator. A filter moves only if every operator between it and `ai_prompt` lets it pass. For example, a filter after [`head`](https://tenzir.com/docs/reference/operators/head.md) or [`tail`](https://tenzir.com/docs/reference/operators/tail.md) stays where it is. Likewise, a [`head`](https://tenzir.com/docs/reference/operators/head.md) after the operator lets sources that support limits stop reading early, unless a filter stays between them.
+The operator sends no requests for events that a later [`where`](https://tenzir.com/docs/v7.0.0/reference/operators/where.md) drops when the filter doesn’t read the result field, because the filter then runs before the operator. This applies to each condition of a filter that combines conditions with `and`: in `where severity == "high" and ai.prompt.text != null`, only the second condition stays after the operator. A filter moves only if every operator between it and `ai_prompt` lets it pass. For example, a filter after [`head`](https://tenzir.com/docs/v7.0.0/reference/operators/head.md) or [`tail`](https://tenzir.com/docs/v7.0.0/reference/operators/tail.md) stays where it is. Likewise, a [`head`](https://tenzir.com/docs/v7.0.0/reference/operators/head.md) after the operator lets sources that support limits stop reading early, unless a filter stays between them.
 
 The result field is a record with the following structure:
 
@@ -144,7 +144,7 @@ select summary=enrichment.ai.text,
 
 ## See Also
 
-* [`ai_decide`](https://tenzir.com/docs/reference/operators/ai_decide.md)
-* [`from_http`](https://tenzir.com/docs/reference/operators/from_http.md)
-* [`to_http`](https://tenzir.com/docs/reference/operators/to_http.md)
+* [`ai_decide`](https://tenzir.com/docs/v7.0.0/reference/operators/ai_decide.md)
+* [`from_http`](https://tenzir.com/docs/v7.0.0/reference/operators/from_http.md)
+* [`to_http`](https://tenzir.com/docs/v7.0.0/reference/operators/to_http.md)
 * [Enrich events with AI](../../guides/enrich/enrich-events-with-ai.md)

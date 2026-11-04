@@ -1,7 +1,7 @@
 ---
 title: "accept_http"
-canonical: https://tenzir.com/docs/reference/operators/accept_http
-source: https://tenzir.com/docs/reference/operators/accept_http.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/accept_http
+source: https://tenzir.com/docs/v7.0.0/reference/operators/accept_http.md
 section: "Docs"
 ---
 
@@ -163,8 +163,8 @@ accept_http "0.0.0.0:8443" {
 
 ## See Also
 
-* [`from_http`](https://tenzir.com/docs/reference/operators/from_http.md)
-* [`to_http`](https://tenzir.com/docs/reference/operators/to_http.md)
-* [`serve_http`](https://tenzir.com/docs/reference/operators/serve_http.md)
+* [`from_http`](https://tenzir.com/docs/v7.0.0/reference/operators/from_http.md)
+* [`to_http`](https://tenzir.com/docs/v7.0.0/reference/operators/to_http.md)
+* [`serve_http`](https://tenzir.com/docs/v7.0.0/reference/operators/serve_http.md)
 * [Fetch via HTTP and APIs](../../guides/collect/fetch-via-http-and-apis.md)
-* [HTTP](../../integrations/http.md)
+* [Http](https://docs.tenzir.com/integrations/http)

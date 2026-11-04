@@ -1,8 +1,8 @@
 ---
 title: "Overview"
 description: "Diagnose compilation issues, pipeline failures, resource growth, and node connectivity."
-canonical: https://tenzir.com/docs/guides/troubleshooting
-source: https://tenzir.com/docs/guides/troubleshooting.md
+canonical: https://tenzir.com/docs/v7.0.0/guides/troubleshooting
+source: https://tenzir.com/docs/v7.0.0/guides/troubleshooting.md
 section: "Docs"
 ---
 

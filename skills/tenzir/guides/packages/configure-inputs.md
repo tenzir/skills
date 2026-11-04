@@ -1,7 +1,7 @@
 ---
 title: "Configure inputs"
-canonical: https://tenzir.com/docs/guides/packages/configure-inputs
-source: https://tenzir.com/docs/guides/packages/configure-inputs.md
+canonical: https://tenzir.com/docs/v7.0.0/guides/packages/configure-inputs
+source: https://tenzir.com/docs/v7.0.0/guides/packages/configure-inputs.md
 section: "Docs"
 ---
 
@@ -146,7 +146,7 @@ The Library shows input names, descriptions, and default values to guide users.
 
 ### package\_add operator
 
-Use the [`package_add`](https://tenzir.com/docs/reference/operators/package_add.md) operator with an `inputs` record:
+Use the [`package_add`](https://tenzir.com/docs/v7.0.0/reference/operators/package_add.md) operator with an `inputs` record:
 
 ```tql
 package_add "/path/to/package", inputs={

@@ -1,7 +1,7 @@
 ---
 title: "Write partitioned files"
-canonical: https://tenzir.com/docs/guides/store/write-partitioned-files
-source: https://tenzir.com/docs/guides/store/write-partitioned-files.md
+canonical: https://tenzir.com/docs/v7.0.0/guides/store/write-partitioned-files
+source: https://tenzir.com/docs/v7.0.0/guides/store/write-partitioned-files.md
 section: "Docs"
 ---
 
@@ -13,7 +13,7 @@ Partitioned files organize an event stream into separate files or objects based 
 
 ## Partition events
 
-Use [`to_file`](https://tenzir.com/docs/reference/operators/to_file.md) for a local filesystem or [`to_s3`](https://tenzir.com/docs/reference/operators/to_s3.md) for Amazon S3. Place `**` in the output path where the operator should insert Hive-style partition directories, and list the partition fields in `partition_by`:
+Use [`to_file`](https://tenzir.com/docs/v7.0.0/reference/operators/to_file.md) for a local filesystem or [`to_s3`](https://tenzir.com/docs/v7.0.0/reference/operators/to_s3.md) for Amazon S3. Place `**` in the output path where the operator should insert Hive-style partition directories, and list the partition fields in `partition_by`:
 
 ```tql
 from {region: "us", message: "login"},
@@ -68,7 +68,7 @@ Each partition rotates independently. The operator checks `max_size` after it re
 
 ## Encrypt archived files
 
-Encrypt Parquet files before uploading them when the storage provider should not have the decryption key. Configure AWS authentication as described in our [Amazon S3 integration](../../integrations/amazon/s3.md), and use a Tenzir node with access to your secret store for both writing and reading.
+Encrypt Parquet files before uploading them when the storage provider should not have the decryption key. Configure AWS authentication as described in our [Amazon S3 integration](https://docs.tenzir.com/integrations/amazon/s3), and use a Tenzir node with access to your secret store for both writing and reading.
 
 1. Generate 32 random bytes, a 256-bit AES key, in standard base64 format:
 
@@ -78,7 +78,7 @@ Encrypt Parquet files before uploading them when the storage provider should not
 
 2. Store the output as a [Tenzir secret](../../explanations/secrets.md) named `PARQUET_KEY`. Keep the base64 text unchanged, including any trailing `=` padding. The `encryption_key` argument expects raw bytes, so decode this text with `decode_base64` when passing it to an operator.
 
-3. Write each partition with [`write_parquet`](https://tenzir.com/docs/reference/operators/write_parquet.md) and the decoded secret:
+3. Write each partition with [`write_parquet`](https://tenzir.com/docs/v7.0.0/reference/operators/write_parquet.md) and the decoded secret:
 
    ```tql
    from {region: "eu", message: "login"},
@@ -91,7 +91,7 @@ Encrypt Parquet files before uploading them when the storage provider should not
 
    Each file’s columns and footer are encrypted with the same key using `AES_GCM_V1`. Partitioning and rotation work as for unencrypted output.
 
-4. Read the files with an explicit [`read_parquet`](https://tenzir.com/docs/reference/operators/read_parquet.md) subpipeline and the same secret:
+4. Read the files with an explicit [`read_parquet`](https://tenzir.com/docs/v7.0.0/reference/operators/read_parquet.md) subpipeline and the same secret:
 
    ```tql
    from_s3 "s3://my-bucket/encrypted-events/**/events_*.parquet" {
@@ -99,7 +99,7 @@ Encrypt Parquet files before uploading them when the storage provider should not
    }
    ```
 
-   The Tenzir node decrypts the data as it reads. Automatic format detection cannot supply the key, so keep the explicit reader. The `decode_base64` function rejects invalid base64. The reader fails if the key is missing, its decoded length is unsupported, or authentication fails. Our [`read_parquet`](https://tenzir.com/docs/reference/operators/read_parquet.md) reference describes reader behavior and compatibility limits.
+   The Tenzir node decrypts the data as it reads. Automatic format detection cannot supply the key, so keep the explicit reader. The `decode_base64` function rejects invalid base64. The reader fails if the key is missing, its decoded length is unsupported, or authentication fails. Our [`read_parquet`](https://tenzir.com/docs/v7.0.0/reference/operators/read_parquet.md) reference describes reader behavior and compatibility limits.
 
 Keep the original key available for as long as you retain the files. Replacing `PARQUET_KEY` does not re-encrypt existing files; older files still need their original key.
 
@@ -134,7 +134,7 @@ The current composition cannot guarantee both global ordering and a maximum file
 
 Use `partition_by` when each key only needs a separate output path. The destination operator already creates a writer subpipeline for each partition and manages its rotation.
 
-Use [`group`](https://tenzir.com/docs/reference/operators/group.md) when each key needs a complete keyed subpipeline, such as a different destination, independent stateful processing, or additional routing logic. For example, aggregate each tenant independently before writing one summary per tenant:
+Use [`group`](https://tenzir.com/docs/v7.0.0/reference/operators/group.md) when each key needs a complete keyed subpipeline, such as a different destination, independent stateful processing, or additional routing logic. For example, aggregate each tenant independently before writing one summary per tenant:
 
 ```tql
 group tenant {
@@ -150,17 +150,17 @@ Here, each group owns an independent `summarize` instance. If you instead want t
 
 ## Use table-aware destinations
 
-Partitioned Parquet files are not automatically a table. Use [`to_iceberg`](https://tenzir.com/docs/reference/operators/to_iceberg.md) when readers need an Apache Iceberg table with hidden partition transforms, schema evolution, manifests, snapshots, and atomic commits. Its `max_size`, `buffer_size`, and `timeout` parameters control a separate table-aware buffering and commit model.
+Partitioned Parquet files are not automatically a table. Use [`to_iceberg`](https://tenzir.com/docs/v7.0.0/reference/operators/to_iceberg.md) when readers need an Apache Iceberg table with hidden partition transforms, schema evolution, manifests, snapshots, and atomic commits. Its `max_size`, `buffer_size`, and `timeout` parameters control a separate table-aware buffering and commit model.
 
-Use [`to_amazon_security_lake`](https://tenzir.com/docs/reference/operators/to_amazon_security_lake.md) when writing OCSF events to [Amazon Security Lake](../../integrations/amazon/security-lake.md). It supplies the required S3 path, event-day partitioning, Parquet settings, ordering, and AWS role conventions. Because it sorts each file by `time`, its timeout closes files and their final size depends on the data accumulated during that interval.
+Use [`to_amazon_security_lake`](https://tenzir.com/docs/v7.0.0/reference/operators/to_amazon_security_lake.md) when writing OCSF events to [Security lake](https://docs.tenzir.com/integrations/amazon/security-lake). It supplies the required S3 path, event-day partitioning, Parquet settings, ordering, and AWS role conventions. Because it sorts each file by `time`, its timeout closes files and their final size depends on the data accumulated during that interval.
 
 ## See also
 
-* [`to_file`](https://tenzir.com/docs/reference/operators/to_file.md)
-* [`to_s3`](https://tenzir.com/docs/reference/operators/to_s3.md)
-* [`write_parquet`](https://tenzir.com/docs/reference/operators/write_parquet.md)
-* [`group`](https://tenzir.com/docs/reference/operators/group.md)
-* [`to_amazon_security_lake`](https://tenzir.com/docs/reference/operators/to_amazon_security_lake.md)
-* [`to_iceberg`](https://tenzir.com/docs/reference/operators/to_iceberg.md)
-* [Amazon S3](../../integrations/amazon/s3.md)
-* [Apache Iceberg](../../integrations/iceberg.md)
+* [`to_file`](https://tenzir.com/docs/v7.0.0/reference/operators/to_file.md)
+* [`to_s3`](https://tenzir.com/docs/v7.0.0/reference/operators/to_s3.md)
+* [`write_parquet`](https://tenzir.com/docs/v7.0.0/reference/operators/write_parquet.md)
+* [`group`](https://tenzir.com/docs/v7.0.0/reference/operators/group.md)
+* [`to_amazon_security_lake`](https://tenzir.com/docs/v7.0.0/reference/operators/to_amazon_security_lake.md)
+* [`to_iceberg`](https://tenzir.com/docs/v7.0.0/reference/operators/to_iceberg.md)
+* [S3](https://docs.tenzir.com/integrations/amazon/s3)
+* [Iceberg](https://docs.tenzir.com/integrations/iceberg)

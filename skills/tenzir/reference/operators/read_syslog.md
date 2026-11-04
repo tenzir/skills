@@ -1,7 +1,7 @@
 ---
 title: "read_syslog"
-canonical: https://tenzir.com/docs/reference/operators/read_syslog
-source: https://tenzir.com/docs/reference/operators/read_syslog.md
+canonical: https://tenzir.com/docs/v7.0.0/reference/operators/read_syslog
+source: https://tenzir.com/docs/v7.0.0/reference/operators/read_syslog.md
 section: "Docs"
 ---
 
@@ -74,7 +74,7 @@ With this input, the parser will produce the following output, with the schema n
 }
 ```
 
-RFC 3164 timestamps don’t include a year or timezone, so `read_syslog` keeps the timestamp as a string. Use [`parse_time`](https://tenzir.com/docs/reference/functions/parse_time.md) with `reference` to convert it to a timestamp. See [`parse_time`](https://tenzir.com/docs/reference/functions/parse_time.md) for examples with fixed references and timezone offsets.
+RFC 3164 timestamps don’t include a year or timezone, so `read_syslog` keeps the timestamp as a string. Use [`parse_time`](https://tenzir.com/docs/v7.0.0/reference/functions/parse_time.md) with `reference` to convert it to a timestamp. See [`parse_time`](https://tenzir.com/docs/v7.0.0/reference/functions/parse_time.md) for examples with fixed references and timezone offsets.
 
 Pipeline
 
@@ -195,7 +195,7 @@ For input such as `<45>Some message`, the priority must be between 0 and 191, wi
 
 When enabled, this fallback preserves everything after `>`, including leading whitespace and unrecognized or malformed headers. It also accepts an empty body. Each line with a valid PRI prefix starts a new event instead of continuing the previous event. Lines without a recognized header can still continue a previous event.
 
-Automatic format detection with [`read_auto`](https://tenzir.com/docs/reference/operators/read_auto.md) requires a recognizable syslog header; a PRI prefix alone is insufficient. Select `read_syslog` explicitly for streams containing only PRI-prefixed text. Set `accept_pri_only=true` for those streams. Automatic detection leaves this option disabled, including after it selects `read_syslog`.
+Automatic format detection with [`read_auto`](https://tenzir.com/docs/v7.0.0/reference/operators/read_auto.md) requires a recognizable syslog header; a PRI prefix alone is insufficient. Select `read_syslog` explicitly for streams containing only PRI-prefixed text. Set `accept_pri_only=true` for those streams. Automatic detection leaves this option disabled, including after it selects `read_syslog`.
 
 **Enabling this option can hide malformed syslog headers.** For example, an RFC 5424 message missing the space between structured data and its message body can be returned successfully as PRI-prefixed text. Only `facility` and `severity` are extracted; the malformed header and body remain in `content`, and the other header fields are null. No warning identifies this fallback.
 
@@ -480,6 +480,6 @@ from_file "/var/log/auth.log" {
 
 ## See Also
 
-* [`write_syslog`](https://tenzir.com/docs/reference/operators/write_syslog.md)
-* [`parse_syslog`](https://tenzir.com/docs/reference/functions/parse_syslog.md)
-* [Syslog](../../integrations/syslog.md)
+* [`write_syslog`](https://tenzir.com/docs/v7.0.0/reference/operators/write_syslog.md)
+* [`parse_syslog`](https://tenzir.com/docs/v7.0.0/reference/functions/parse_syslog.md)
+* [Syslog](https://docs.tenzir.com/integrations/syslog)
