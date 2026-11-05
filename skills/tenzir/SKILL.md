@@ -156,203 +156,179 @@ You can pre-define dashboards for your static workspaces.
 
 An ephemeral node is ideal for temporary or auto-scaling deployments.
 
-### Collect
-
-#### [Overview](guides/collect.md)
-
-Read events and bytes from files, APIs, brokers, stores, and networks.
-
-##### [Read and watch files](guides/collect/read-and-watch-files.md)
-
-##### [Fetch via HTTP and APIs](guides/collect/fetch-via-http-and-apis.md)
-
-##### [Read from message brokers](guides/collect/read-from-message-brokers.md)
-
-##### [Read from data stores](guides/collect/read-from-data-stores.md)
-
-##### [Get data from the network](guides/collect/get-data-from-the-network.md)
-
-### Parse
-
-#### [Overview](guides/parse.md)
-
-Turn byte streams and text fields into structured events.
-
-##### [Parse delimited text](guides/parse/parse-delimited-text.md)
-
-##### [Parse binary data](guides/parse/parse-binary-data.md)
-
-##### [Parse string fields](guides/parse/parse-string-fields.md)
-
-##### [Clean up values](guides/parse/clean-up-values.md)
-
-### Shape
-
-#### [Overview](guides/shape.md)
-
-Prepare event fields and records for downstream processing.
-
-##### [Transform values](guides/shape/transform-values.md)
-
-##### [Manipulate strings](guides/shape/manipulate-strings.md)
-
-##### [Normalize event timestamps](guides/shape/normalize-event-timestamps.md)
-
-##### [Repair out-of-order events](guides/shape/repair-out-of-order-events.md)
-
-##### [Calculate with time](guides/shape/calculate-with-time.md)
-
-##### [Shape lists](guides/shape/shape-lists.md)
-
-##### [Shape records](guides/shape/shape-records.md)
-
-##### [Reshape complex data](guides/shape/reshape-complex-data.md)
-
-##### [Convert data formats](guides/shape/convert-data-formats.md)
-
-### Normalize
-
-#### [Overview](guides/normalize.md)
-
-Map source-specific events into a shared schema.
-
-##### [Map to ASIM](guides/normalize/map-to-asim.md)
-
-##### [Map to CIM](guides/normalize/map-to-cim.md)
-
-##### [Map to ECS](guides/normalize/map-to-ecs.md)
-
-##### [Map to OCSF](guides/normalize/map-to-ocsf.md)
-
-##### [Map to UDM](guides/normalize/map-to-udm.md)
-
-### Optimize
-
-#### [Overview](guides/optimize.md)
-
-Reduce data volume and processing work in a pipeline.
-
-##### [Filter and select data](guides/optimize/filter-and-select-data.md)
-
-##### [Slice and sample data](guides/optimize/slice-and-sample-data.md)
-
-##### [Deduplicate events](guides/optimize/deduplicate-events.md)
-
-### Protect
-
-#### [Overview](guides/protect.md)
-
-Limit sensitive-data exposure while preserving useful structure.
-
-##### [Mask sensitive data](guides/protect/mask-sensitive-data.md)
-
-##### [Encrypt sensitive data](guides/protect/encrypt-sensitive-data.md)
-
-### Enrich
-
-#### [Overview](guides/enrich.md)
-
-Add context that the original event does not contain.
-
-##### [Use lookup tables](guides/enrich/use-lookup-tables.md)
-
-##### [Enrich with asset inventory](guides/enrich/enrich-with-asset-inventory.md)
-
-##### [Enrich with threat intel](guides/enrich/enrich-with-threat-intel.md)
-
-##### [Enrich events with AI](guides/enrich/enrich-events-with-ai.md)
-
-### Analyze
+### Work with Data
 
 #### [Overview](guides/analyze.md)
 
 Summarize event streams and compare current activity with prior behavior.
 
-##### [Aggregate event streams](guides/analyze/aggregate-event-streams.md)
+#### [Overview](guides/collect.md)
 
-##### [Shape aggregation results](guides/analyze/shape-aggregation-results.md)
-
-##### [Window event streams](guides/analyze/window-event-streams.md)
-
-##### [Calculate aggregate statistics](guides/analyze/calculate-aggregate-statistics.md)
-
-##### [Find unseen and rare values](guides/analyze/find-unseen-and-rare-values.md)
-
-##### [Set adaptive thresholds from a baseline](guides/analyze/set-adaptive-thresholds-from-a-baseline.md)
-
-##### [Identify distribution drift](guides/analyze/identify-distribution-drift.md)
-
-##### [Find cardinality spikes](guides/analyze/find-cardinality-spikes.md)
-
-### Detect
+Read events and bytes from files, APIs, brokers, stores, and networks.
 
 #### [Overview](guides/detect.md)
 
 Match security activity and model the resulting findings.
 
-##### [Match events with TQL](guides/detect/match-events-with-tql.md)
+#### [Overview](guides/enrich.md)
 
-##### [Model detections in OCSF](guides/detect/model-detections-in-ocsf.md)
+Add context that the original event does not contain.
 
-##### [Detect over time windows](guides/detect/detect-over-time-windows.md)
+#### [Overview](guides/normalize.md)
 
-##### [Baseline behavior from stored events](guides/detect/baseline-from-stored-events.md)
+Map source-specific events into a shared schema.
 
-##### [Detect periodic behavior](guides/detect/detect-periodic-behavior.md)
+#### [Overview](guides/optimize.md)
 
-##### [Create multi-stage detectors](guides/detect/create-multi-stage-detectors.md)
+Reduce data volume and processing work in a pipeline.
 
-##### [Execute Sigma rules](guides/detect/execute-sigma-rules.md)
+#### [Overview](guides/parse.md)
 
-##### [Check Sigma rule compatibility with OCSF](guides/detect/check-sigma-rule-compatibility-with-ocsf.md)
+Turn byte streams and text fields into structured events.
 
-##### [Scan bytes with YARA](guides/detect/scan-bytes-with-yara.md)
+#### [Overview](guides/protect.md)
 
-### Store
-
-#### [Overview](guides/store.md)
-
-Persist events for later search, replay, and analysis.
-
-##### [Write partitioned files](guides/store/write-partitioned-files.md)
-
-##### [Import into a node](guides/store/import-into-a-node.md)
-
-##### [Show available schemas](guides/store/show-available-schemas.md)
-
-##### [Transform data at rest](guides/store/transform-data-at-rest.md)
-
-### Search
-
-#### [Overview](guides/search.md)
-
-Query stored events and continue processing the results.
-
-##### [Export from a node](guides/search/export-from-a-node.md)
-
-### Route
-
-#### [Overview](guides/route.md)
-
-Deliver event streams to the systems that need them.
-
-##### [Send to destinations](guides/route/send-to-destinations.md)
-
-##### [Expose data as a server](guides/route/expose-data-as-server.md)
-
-##### [Split and merge streams](guides/route/split-and-merge-streams.md)
-
-##### [Fan out with subpipelines](guides/route/fan-out-with-subpipelines.md)
-
-##### [Load-balance pipelines](guides/route/load-balance-pipelines.md)
-
-### Replay
+Limit sensitive-data exposure while preserving useful structure.
 
 #### [Overview](guides/replay.md)
 
 Run stored events through live pipelines again.
 
+#### [Overview](guides/route.md)
+
+Deliver event streams to the systems that need them.
+
+#### [Overview](guides/search.md)
+
+Query stored events and continue processing the results.
+
+#### [Overview](guides/shape.md)
+
+Prepare event fields and records for downstream processing.
+
+#### [Overview](guides/store.md)
+
+Persist events for later search, replay, and analysis.
+
+##### [Aggregate event streams](guides/analyze/aggregate-event-streams.md)
+
+##### [Export from a node](guides/search/export-from-a-node.md)
+
+##### [Filter and select data](guides/optimize/filter-and-select-data.md)
+
+##### [Map to ASIM](guides/normalize/map-to-asim.md)
+
+##### [Mask sensitive data](guides/protect/mask-sensitive-data.md)
+
+##### [Match events with TQL](guides/detect/match-events-with-tql.md)
+
+##### [Parse delimited text](guides/parse/parse-delimited-text.md)
+
+##### [Read and watch files](guides/collect/read-and-watch-files.md)
+
 ##### [Replay historical events](guides/replay/replay-historical-events.md)
+
+##### [Send to destinations](guides/route/send-to-destinations.md)
+
+##### [Transform values](guides/shape/transform-values.md)
+
+##### [Use lookup tables](guides/enrich/use-lookup-tables.md)
+
+##### [Write partitioned files](guides/store/write-partitioned-files.md)
+
+##### [Encrypt sensitive data](guides/protect/encrypt-sensitive-data.md)
+
+##### [Enrich with asset inventory](guides/enrich/enrich-with-asset-inventory.md)
+
+##### [Expose data as a server](guides/route/expose-data-as-server.md)
+
+##### [Fetch via HTTP and APIs](guides/collect/fetch-via-http-and-apis.md)
+
+##### [Import into a node](guides/store/import-into-a-node.md)
+
+##### [Manipulate strings](guides/shape/manipulate-strings.md)
+
+##### [Map to CIM](guides/normalize/map-to-cim.md)
+
+##### [Model detections in OCSF](guides/detect/model-detections-in-ocsf.md)
+
+##### [Parse binary data](guides/parse/parse-binary-data.md)
+
+##### [Shape aggregation results](guides/analyze/shape-aggregation-results.md)
+
+##### [Slice and sample data](guides/optimize/slice-and-sample-data.md)
+
+##### [Deduplicate events](guides/optimize/deduplicate-events.md)
+
+##### [Detect over time windows](guides/detect/detect-over-time-windows.md)
+
+##### [Enrich with threat intel](guides/enrich/enrich-with-threat-intel.md)
+
+##### [Map to ECS](guides/normalize/map-to-ecs.md)
+
+##### [Normalize event timestamps](guides/shape/normalize-event-timestamps.md)
+
+##### [Parse string fields](guides/parse/parse-string-fields.md)
+
+##### [Read from message brokers](guides/collect/read-from-message-brokers.md)
+
+##### [Show available schemas](guides/store/show-available-schemas.md)
+
+##### [Split and merge streams](guides/route/split-and-merge-streams.md)
+
+##### [Window event streams](guides/analyze/window-event-streams.md)
+
+##### [Baseline behavior from stored events](guides/detect/baseline-from-stored-events.md)
+
+##### [Calculate aggregate statistics](guides/analyze/calculate-aggregate-statistics.md)
+
+##### [Clean up values](guides/parse/clean-up-values.md)
+
+##### [Enrich events with AI](guides/enrich/enrich-events-with-ai.md)
+
+##### [Fan out with subpipelines](guides/route/fan-out-with-subpipelines.md)
+
+##### [Map to OCSF](guides/normalize/map-to-ocsf.md)
+
+##### [Read from data stores](guides/collect/read-from-data-stores.md)
+
+##### [Repair out-of-order events](guides/shape/repair-out-of-order-events.md)
+
+##### [Transform data at rest](guides/store/transform-data-at-rest.md)
+
+##### [Calculate with time](guides/shape/calculate-with-time.md)
+
+##### [Detect periodic behavior](guides/detect/detect-periodic-behavior.md)
+
+##### [Find unseen and rare values](guides/analyze/find-unseen-and-rare-values.md)
+
+##### [Get data from the network](guides/collect/get-data-from-the-network.md)
+
+##### [Load-balance pipelines](guides/route/load-balance-pipelines.md)
+
+##### [Map to UDM](guides/normalize/map-to-udm.md)
+
+##### [Create multi-stage detectors](guides/detect/create-multi-stage-detectors.md)
+
+##### [Set adaptive thresholds from a baseline](guides/analyze/set-adaptive-thresholds-from-a-baseline.md)
+
+##### [Shape lists](guides/shape/shape-lists.md)
+
+##### [Execute Sigma rules](guides/detect/execute-sigma-rules.md)
+
+##### [Identify distribution drift](guides/analyze/identify-distribution-drift.md)
+
+##### [Shape records](guides/shape/shape-records.md)
+
+##### [Check Sigma rule compatibility with OCSF](guides/detect/check-sigma-rule-compatibility-with-ocsf.md)
+
+##### [Find cardinality spikes](guides/analyze/find-cardinality-spikes.md)
+
+##### [Reshape complex data](guides/shape/reshape-complex-data.md)
+
+##### [Convert data formats](guides/shape/convert-data-formats.md)
+
+##### [Scan bytes with YARA](guides/detect/scan-bytes-with-yara.md)
 
 ### Operate
 
@@ -644,11 +620,11 @@ Tenzir’s Azure operators authenticate with Microsoft Entra ID using the Azure 
 
 ### API
 
-#### [Overview](reference/api/node/overview.md)
+#### [Overview](reference/api/platform/overview.md)
 
 This reference is generated from the OpenAPI specification.
 
-#### [Overview](reference/api/platform/overview.md)
+#### [Overview](reference/api/node/overview.md)
 
 This reference is generated from the OpenAPI specification.
 

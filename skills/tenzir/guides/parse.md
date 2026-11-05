@@ -12,4 +12,4 @@ section: "Docs"
 
 Parsing turns bytes and strings into structured events while preserving the source’s field names. Choose a parser based on whether the data arrives as a stream or sits inside an existing event.
 
-Use the guides to [parse delimited text](https://docs.tenzir.com/guides/parse-delimited-text), [parse binary data](https://docs.tenzir.com/guides/parse-binary-data), [parse string fields](https://docs.tenzir.com/guides/parse-string-fields), and [clean up parsed values](https://docs.tenzir.com/guides/clean-up-values).
+Use the guides to [parse delimited text](parse/parse-delimited-text.md), [parse binary data](parse/parse-binary-data.md), [parse string fields](parse/parse-string-fields.md), and [clean up parsed values](parse/clean-up-values.md).

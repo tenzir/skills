@@ -153,4 +153,4 @@ to_s3 "s3://my-bucket/logs/events_{uuid}.json.gz", max_size=10M {
 * [`from_s3`](https://tenzir.com/docs/reference/operators/from_s3.md)
 * [`to_s3`](https://tenzir.com/docs/reference/operators/to_s3.md)
 * [`to_file`](https://tenzir.com/docs/reference/operators/to_file.md)
-* [Amazon S3](../../integrations/amazon/s3.md)
+* [S3](../../integrations/amazon/s3.md)

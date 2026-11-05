@@ -20,14 +20,14 @@ ClickHouse integration
 
 Choose a write pattern based on how you want to manage the destination schema. You can use the read and export patterns with any of these tables.
 
-| Goal                                                           | Pattern                                                                                                                                                                                        |
-| -------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Create tables from normalized OCSF events                      | [One table per OCSF class](clickhouse.md#create-a-table-per-ocsf-class)                                                                                        |
-| Control column types, TTLs, projections, or materialized views | [Append to a table you manage](clickhouse.md#append-to-a-table-you-manage)                                                                                     |
-| Keep common fields typed while accepting additional fields     | [Add a JSON catch-all to a table you manage](clickhouse.md#catch-all-columns)                                                                                  |
+| Goal                                                           | Pattern                                                                                                                                                                                                |
+| -------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Create tables from normalized OCSF events                      | [One table per OCSF class](clickhouse.md#create-a-table-per-ocsf-class)                                                                                                |
+| Control column types, TTLs, projections, or materialized views | [Append to a table you manage](clickhouse.md#append-to-a-table-you-manage)                                                                                             |
+| Keep common fields typed while accepting additional fields     | [Add a JSON catch-all to a table you manage](clickhouse.md#catch-all-columns)                                                                                          |
 | Query retained events or feed detection pipelines              | [Read tables or SQL results](clickhouse.md#read-data-from-clickhouse) with [`from_clickhouse`](https://tenzir.com/docs/reference/operators/from_clickhouse.md) |
-| Check available tables and column types                        | [Inspect tables and schemas](clickhouse.md#inspect-tables-and-schemas)                                                                                         |
-| Archive, migrate, or route stored events elsewhere             | [Export query results](clickhouse.md#export-query-results)                                                                                                     |
+| Check available tables and column types                        | [Inspect tables and schemas](clickhouse.md#inspect-tables-and-schemas)                                                                                                 |
+| Archive, migrate, or route stored events elsewhere             | [Export query results](clickhouse.md#export-query-results)                                                                                                             |
 
 ## Set up ClickHouse
 

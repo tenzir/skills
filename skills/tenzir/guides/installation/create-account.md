@@ -23,7 +23,7 @@ You don’t need an account to run pipelines locally. See [Install Tenzir](../in
 
 4. If you created an account with us, you’ll receive an email with a link to verify your email address. Click the link to complete the registration process.
 
-Congratulations, you now have an account and can can freely use the Tenzir [Community Edition](https://tenzir.com/pricing.md).
+Congratulations, you now have an account and can can freely use the Tenzir [Community Edition](https://tenzir.com/pricing).
 
 ## Delete an Account
 

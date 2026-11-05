@@ -163,4 +163,4 @@ where netflow.record_type == "options"
 
 * [`accept_udp`](https://tenzir.com/docs/reference/operators/accept_udp.md)
 * [`from_file`](https://tenzir.com/docs/reference/operators/from_file.md)
-* [NetFlow](../../integrations/netflow.md)
+* [Netflow](../../integrations/netflow.md)

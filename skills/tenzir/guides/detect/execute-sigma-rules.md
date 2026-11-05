@@ -234,4 +234,4 @@ this = {
 * [Create multi-stage detectors](create-multi-stage-detectors.md)
 * [Add operators](../packages/add-operators.md)
 * [Map to OCSF](../normalize/map-to-ocsf.md)
-* [Microsoft Windows Event Logs](../../integrations/microsoft/windows-event-logs.md)
+* [Windows event logs](../../integrations/microsoft/windows-event-logs.md)

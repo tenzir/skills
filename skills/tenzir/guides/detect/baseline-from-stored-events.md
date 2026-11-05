@@ -26,7 +26,7 @@ The context is the contract between the two pipelines. The learner updates one r
 
 ## Learn the baseline on a schedule
 
-This guide uses ClickHouse as the lake. Our [ClickHouse](../../integrations/clickhouse.md) integration keeps Network Activity queryable as `ocsf.Network_Activity`.
+This guide uses ClickHouse as the lake. Our [Clickhouse](../../integrations/clickhouse.md) integration keeps Network Activity queryable as `ocsf.Network_Activity`.
 
 Run the learner daily. The SQL query reduces a week of Network Activity to one outbound byte sum per asset and 15-minute bucket. TQL then reduces those buckets to one robust baseline per asset:
 
@@ -120,7 +120,7 @@ Once the basic loop works, adapt the key and learning query to the behavior you 
 
 * **Seasonality.** One value per asset averages away daily rhythm. Include an hour band in the key in both pipelines, for example `f"{asset}|{time.hour()}"`.
 * **Poisoning.** The learner absorbs whatever the horizon contains. Exclude periods that produced findings, and treat a baseline that suddenly widens as evidence of its own.
-* **Execution placement.** This guide deliberately keeps the robust reduction in TQL. If bucket transfer dominates the workload, materialize bucket sums or the full baseline in the lake while preserving the lookup context as the detector-facing interface. Our discussion of [where computation and state should live](https://tenzir.com/blog/per-asset-baselines-for-detection-over-streaming-ocsf.md#choose-where-computation-and-state-live) develops that trade-off.
+* **Execution placement.** This guide deliberately keeps the robust reduction in TQL. If bucket transfer dominates the workload, materialize bucket sums or the full baseline in the lake while preserving the lookup context as the detector-facing interface. Our discussion of [where computation and state should live](https://tenzir.com/blog/per-asset-baselines-for-detection-over-streaming-ocsf#choose-where-computation-and-state-live) develops that trade-off.
 
 The guide on [detecting over time windows](detect-over-time-windows.md#compare-observations-with-a-rolling-baseline) covers the alternative where recent history remains inside the stream.
 
@@ -130,6 +130,6 @@ The guide on [detecting over time windows](detect-over-time-windows.md#compare-o
 * [Enrichment](../../explanations/enrichment.md)
 * [`median`](https://tenzir.com/docs/reference/functions/median.md)
 * [`mad`](https://tenzir.com/docs/reference/functions/mad.md)
-* [ClickHouse](../../integrations/clickhouse.md)
+* [Clickhouse](../../integrations/clickhouse.md)
 * [Detect over time windows](detect-over-time-windows.md)
 * [Create multi-stage detectors](create-multi-stage-detectors.md)

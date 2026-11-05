@@ -81,4 +81,4 @@ from_zmq "tcp://collector.example.com:5555", prefix="syslog ", keep_prefix=true 
 * [`to_zmq`](https://tenzir.com/docs/reference/operators/to_zmq.md)
 * [`serve_zmq`](https://tenzir.com/docs/reference/operators/serve_zmq.md)
 * [`from_zmq`](https://tenzir.com/docs/reference/operators/from_zmq.md)
-* [ZeroMQ](../../integrations/zeromq.md)
+* [Zeromq](../../integrations/zeromq.md)

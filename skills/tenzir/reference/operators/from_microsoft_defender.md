@@ -122,4 +122,4 @@ Microsoft also describes [advanced hunting with connected Sentinel data](https:/
 
 ## See also
 
-[Microsoft Defender](../../integrations/microsoft/defender.md)
+[Defender](../../integrations/microsoft/defender.md)

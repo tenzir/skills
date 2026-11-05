@@ -39,7 +39,7 @@ export OTEL_EXPORTER_OTLP_ENDPOINT=http://tenzir.example.com:4317
 export OTEL_EXPORTER_OTLP_PROTOCOL=grpc
 ```
 
-Run separate pipelines when you need both transports. See the [OpenTelemetry](../../integrations/opentelemetry.md) integration for Collector and TLS configuration.
+Run separate pipelines when you need both transports. See the [Opentelemetry](../../integrations/opentelemetry.md) integration for Collector and TLS configuration.
 
 ## Splunk HEC
 
@@ -53,7 +53,7 @@ The operator listens on the standard HEC port `8088` and accepts gzip-compressed
 
 ## TCP sockets
 
-[TCP](../../integrations/tcp.md) provides reliable, ordered byte streams. Use TCP when you need guaranteed delivery and message ordering.
+[Tcp](../../integrations/tcp.md) provides reliable, ordered byte streams. Use TCP when you need guaranteed delivery and message ordering.
 
 ### Listen for connections
 
@@ -123,7 +123,7 @@ With `auto_detect_tls=true`, [`accept_tcp`](https://tenzir.com/docs/reference/op
 
 ## Reliable Syslog
 
-[RELP](../../integrations/relp.md) adds application-level acknowledgements to Syslog transport. Use [`accept_relp`](https://tenzir.com/docs/reference/operators/accept_relp.md) when a sender supports RELP:
+[Relp](../../integrations/relp.md) adds application-level acknowledgements to Syslog transport. Use [`accept_relp`](https://tenzir.com/docs/reference/operators/accept_relp.md) when a sender supports RELP:
 
 ```tql
 accept_relp "0.0.0.0:2514"
@@ -138,7 +138,7 @@ RELP protects messages in flight: the sender waits for Tenzir to acknowledge eac
 
 ## UDP sockets
 
-[UDP](../../integrations/udp.md) is a connectionless protocol ideal for high-volume, loss-tolerant data like syslog messages or metrics.
+[Udp](../../integrations/udp.md) is a connectionless protocol ideal for high-volume, loss-tolerant data like syslog messages or metrics.
 
 ### Receive UDP datagrams
 
@@ -190,11 +190,11 @@ read_netflow
 
 Set `binary=true` so that each datagram retains its binary payload. The parser detects every message’s protocol version and uses the `peer` metadata to keep template state separate between exporters. Start the collector before the exporters send data because NetFlow v9 and IPFIX data records can depend on templates sent in earlier datagrams.
 
-For a complete collector, `nfcapd` forwarding, and archived data, see the [NetFlow](../../integrations/netflow.md) integration.
+For a complete collector, `nfcapd` forwarding, and archived data, see the [Netflow](../../integrations/netflow.md) integration.
 
 ## Packet capture
 
-Capture raw network packets with [Network Interface Card](../../integrations/nic.md) when you need per-packet data for deep packet inspection or network forensics.
+Capture raw network packets with [Nic](../../integrations/nic.md) when you need per-packet data for deep packet inspection or network forensics.
 
 ### List available interfaces
 
@@ -290,9 +290,9 @@ select
 
 ## See also
 
-* [TCP](../../integrations/tcp.md)
-* [UDP](../../integrations/udp.md)
-* [NetFlow](../../integrations/netflow.md)
-* [Network Interface Card](../../integrations/nic.md)
+* [Tcp](../../integrations/tcp.md)
+* [Udp](../../integrations/udp.md)
+* [Netflow](../../integrations/netflow.md)
+* [Nic](../../integrations/nic.md)
 * [Syslog](../../integrations/syslog.md)
 * [Splunk](../../integrations/splunk.md)

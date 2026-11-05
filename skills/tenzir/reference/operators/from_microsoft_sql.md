@@ -241,4 +241,4 @@ from_microsoft_sql table="dbo.events",
 
 ## See Also
 
-* [Microsoft SQL Server](../../integrations/microsoft/sql-server.md)
+* [Sql server](../../integrations/microsoft/sql-server.md)

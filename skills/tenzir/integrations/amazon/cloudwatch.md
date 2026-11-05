@@ -31,8 +31,8 @@ The [`to_amazon_cloudwatch`](https://tenzir.com/docs/reference/operators/to_amaz
 
 For AWS IAM-authenticated CloudWatch API calls, Tenzir needs these CloudWatch permissions:
 
-| Use case                                                                                                                 | Required permissions   |
-| ------------------------------------------------------------------------------------------------------------------------ | ---------------------- |
+| Use case                                                                                                                         | Required permissions   |
+| -------------------------------------------------------------------------------------------------------------------------------- | ---------------------- |
 | Live tail with [`from_amazon_cloudwatch`](https://tenzir.com/docs/reference/operators/from_amazon_cloudwatch.md)         | `logs:StartLiveTail`   |
 | Historical search with [`from_amazon_cloudwatch`](https://tenzir.com/docs/reference/operators/from_amazon_cloudwatch.md) | `logs:FilterLogEvents` |
 | Stream replay with [`from_amazon_cloudwatch`](https://tenzir.com/docs/reference/operators/from_amazon_cloudwatch.md)     | `logs:GetLogEvents`    |

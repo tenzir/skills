@@ -141,4 +141,4 @@ from_sentinelone_data_lake "https://<tenant>.sentinelone.net",
 ## See Also
 
 * [`to_sentinelone_data_lake`](https://tenzir.com/docs/reference/operators/to_sentinelone_data_lake.md)
-* [SentinelOne Data Lake](../../integrations/sentinelone-data-lake.md)
+* [Sentinelone data lake](../../integrations/sentinelone-data-lake.md)

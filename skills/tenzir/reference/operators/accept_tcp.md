@@ -134,4 +134,4 @@ Use this mode when you migrate clients from plaintext TCP to TLS and need to kee
 * [`to_tcp`](https://tenzir.com/docs/reference/operators/to_tcp.md)
 * [`serve_tcp`](https://tenzir.com/docs/reference/operators/serve_tcp.md)
 * [`accept_unix_socket`](https://tenzir.com/docs/reference/operators/accept_unix_socket.md)
-* [TCP](../../integrations/tcp.md)
+* [Tcp](../../integrations/tcp.md)

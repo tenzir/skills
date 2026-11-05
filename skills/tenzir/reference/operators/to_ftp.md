@@ -94,4 +94,4 @@ to_ftp "ftp://user:pass@ftp.example.org/events.ndjson.gz" {
 ## See Also
 
 * [`from_ftp`](https://tenzir.com/docs/reference/operators/from_ftp.md)
-* [FTP](../../integrations/ftp.md)
+* [Ftp](../../integrations/ftp.md)

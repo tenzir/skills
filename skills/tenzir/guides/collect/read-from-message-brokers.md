@@ -41,7 +41,7 @@ The operator fetches the writer schema identified by each message. Configure `sc
 
 When each message contains a bare Avro datum without registry framing, decode the `message` string with [`parse_avro`](https://tenzir.com/docs/reference/functions/parse_avro.md) and the writer schema. Its reference includes a complete example.
 
-Our [Apache Avro](../../integrations/avro.md) integration explains the difference between binary datums and Avro Object Container Files and how to decode each format.
+Our [Avro](../../integrations/avro.md) integration explains the difference between binary datums and Avro Object Container Files and how to decode each format.
 
 ### Control the read offset
 
@@ -176,10 +176,10 @@ See [Collect](../collect.md#fetch-data-referenced-in-events) for the general col
 ## See also
 
 * [Parse string fields](../parse/parse-string-fields.md)
-* [Apache Avro](../../integrations/avro.md)
+* [Avro](../../integrations/avro.md)
 * [Kafka](../../integrations/kafka.md)
-* [NATS](../../integrations/nats.md)
-* [AMQP](../../integrations/amqp.md)
-* [Amazon Kinesis](../../integrations/amazon/kinesis.md)
-* [Amazon SQS](../../integrations/amazon/sqs.md)
-* [Google Cloud Pub/Sub](../../integrations/google/cloud-pubsub.md)
+* [Nats](../../integrations/nats.md)
+* [Amqp](../../integrations/amqp.md)
+* [Kinesis](../../integrations/amazon/kinesis.md)
+* [Sqs](../../integrations/amazon/sqs.md)
+* [Cloud pubsub](../../integrations/google/cloud-pubsub.md)

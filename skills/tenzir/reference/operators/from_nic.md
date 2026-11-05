@@ -89,4 +89,4 @@ to_file "trace.pcap" {
 * [`nics`](https://tenzir.com/docs/reference/operators/nics.md)
 * [`read_pcap`](https://tenzir.com/docs/reference/operators/read_pcap.md)
 * [`write_pcap`](https://tenzir.com/docs/reference/operators/write_pcap.md)
-* [Network Interface Card](../../integrations/nic.md)
+* [Nic](../../integrations/nic.md)

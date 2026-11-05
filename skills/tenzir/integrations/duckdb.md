@@ -14,18 +14,20 @@ This page shows you how to use DuckDB as an embedded analytical store for Tenzir
 
 [DuckDB](https://duckdb.org) is an open-source analytical database that runs inside the application that uses it. Tenzir embeds DuckDB, so there is no server to deploy and no network protocol in between: a pipeline opens a database file directly, and the same file is later available to the `duckdb` CLI, Python, R, or any other DuckDB client for analysis.
 
+Tenzir embeds DuckDB 2.0.0. New database files use the DuckDB 2.0 storage format and require DuckDB 2.0 or later to open. Existing database files keep their earlier storage format and remain readable by earlier DuckDB versions.
+
 ## Choose an integration path
 
 Use the path that matches the role DuckDB plays in your deployment:
 
-| Goal                                               | DuckDB role                                            | Tenzir building blocks                                                                                                                                                                                            |
-| -------------------------------------------------- | ------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Keep a local, queryable copy of telemetry          | Destination database file on the node                  | [`to_duckdb`](https://tenzir.com/docs/reference/operators/to_duckdb.md)                                                                                                                                           |
+| Goal                                               | DuckDB role                                            | Tenzir building blocks                                                                                                                                                                                                                    |
+| -------------------------------------------------- | ------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Keep a local, queryable copy of telemetry          | Destination database file on the node                  | [`to_duckdb`](https://tenzir.com/docs/reference/operators/to_duckdb.md)                                                                                                                                                           |
 | Store OCSF events per class                        | One table per event class                              | [`ocsf_cast`](https://tenzir.com/docs/reference/operators/ocsf_cast.md), [`where`](https://tenzir.com/docs/reference/operators/where.md), [`to_duckdb`](https://tenzir.com/docs/reference/operators/to_duckdb.md) |
-| Query retained telemetry                           | Source table or SQL query result                       | [`from_duckdb`](https://tenzir.com/docs/reference/operators/from_duckdb.md)                                                                                                                                       |
-| Read Parquet, CSV, JSON, or XLSX files through SQL | In-memory query engine over files                      | [`from_duckdb`](https://tenzir.com/docs/reference/operators/from_duckdb.md) with `":memory:"` and `sql=...`                                                                                                       |
-| React to rows other pipelines write                | Shared database file within a node                     | [`from_duckdb`](https://tenzir.com/docs/reference/operators/from_duckdb.md) with `live=true`                                                                                                                      |
-| Inspect available tables and schemas               | `information_schema` and `duckdb_*()` metadata queries | [`from_duckdb`](https://tenzir.com/docs/reference/operators/from_duckdb.md) with `sql=...`                                                                                                                        |
+| Query retained telemetry                           | Source table or SQL query result                       | [`from_duckdb`](https://tenzir.com/docs/reference/operators/from_duckdb.md)                                                                                                                                                       |
+| Read Parquet, CSV, JSON, or XLSX files through SQL | In-memory query engine over files                      | [`from_duckdb`](https://tenzir.com/docs/reference/operators/from_duckdb.md) with `":memory:"` and `sql=...`                                                                                                                       |
+| React to rows other pipelines write                | Shared database file within a node                     | [`from_duckdb`](https://tenzir.com/docs/reference/operators/from_duckdb.md) with `live=true`                                                                                                                                      |
+| Inspect available tables and schemas               | `information_schema` and `duckdb_*()` metadata queries | [`from_duckdb`](https://tenzir.com/docs/reference/operators/from_duckdb.md) with `sql=...`                                                                                                                                        |
 
 ## Write events
 
@@ -205,7 +207,7 @@ from_duckdb "quack:analytics.example.com:443",
   sql="SELECT * FROM read_parquet('/data/alerts.parquet')"
 ```
 
-Quack is a beta protocol. The bundled DuckDB 1.5.5 client was tested against a DuckDB 1.5.5 server with Quack revision `c1548111c1bfd16207e22fd3cb7e4bde1335b9d0`. Compatibility with other versions is not guaranteed.
+Remote connections require a DuckDB 2.0 server. The bundled DuckDB 2.0.0 client was tested against a DuckDB 2.0.0 server with Quack revision `f96420ed46aee9c42064bdb99ddfd1230d6c0086`. Connections to DuckDB 1.x servers are not supported. Tenzir connects as a Quack client and does not expose a Quack server endpoint.
 
 ### Autocomplete
 

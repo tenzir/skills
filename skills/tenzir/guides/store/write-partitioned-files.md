@@ -152,7 +152,7 @@ Here, each group owns an independent `summarize` instance. If you instead want t
 
 Partitioned Parquet files are not automatically a table. Use [`to_iceberg`](https://tenzir.com/docs/reference/operators/to_iceberg.md) when readers need an Apache Iceberg table with hidden partition transforms, schema evolution, manifests, snapshots, and atomic commits. Its `max_size`, `buffer_size`, and `timeout` parameters control a separate table-aware buffering and commit model.
 
-Use [`to_amazon_security_lake`](https://tenzir.com/docs/reference/operators/to_amazon_security_lake.md) when writing OCSF events to [Amazon Security Lake](../../integrations/amazon/security-lake.md). It supplies the required S3 path, event-day partitioning, Parquet settings, ordering, and AWS role conventions. Because it sorts each file by `time`, its timeout closes files and their final size depends on the data accumulated during that interval.
+Use [`to_amazon_security_lake`](https://tenzir.com/docs/reference/operators/to_amazon_security_lake.md) when writing OCSF events to [Security lake](../../integrations/amazon/security-lake.md). It supplies the required S3 path, event-day partitioning, Parquet settings, ordering, and AWS role conventions. Because it sorts each file by `time`, its timeout closes files and their final size depends on the data accumulated during that interval.
 
 ## See also
 
@@ -162,5 +162,5 @@ Use [`to_amazon_security_lake`](https://tenzir.com/docs/reference/operators/to_a
 * [`group`](https://tenzir.com/docs/reference/operators/group.md)
 * [`to_amazon_security_lake`](https://tenzir.com/docs/reference/operators/to_amazon_security_lake.md)
 * [`to_iceberg`](https://tenzir.com/docs/reference/operators/to_iceberg.md)
-* [Amazon S3](../../integrations/amazon/s3.md)
-* [Apache Iceberg](../../integrations/iceberg.md)
+* [S3](../../integrations/amazon/s3.md)
+* [Iceberg](../../integrations/iceberg.md)

@@ -13,7 +13,7 @@ This page explains what data flows between a [Tenzir Node](../node.md) and the [
 
 When a Tenzir Node starts, it opens a single outbound, TLS-encrypted WebSocket connection to the Tenzir Platform. All communication between the two travels over that connection.
 
-For the bigger picture on TLS termination and trust boundaries, see the [FAQ entry on data privacy](https://tenzir.com/faqs/can-tenzir-see-my-data.md).
+For the bigger picture on TLS termination and trust boundaries, see the [FAQ entry on data privacy](https://tenzir.com/faqs/can-tenzir-see-my-data).
 
 ## The connection is a tunnel, not a feed
 
@@ -58,7 +58,7 @@ The Tenzir Platform does **not** receive:
 
 ## Encryption and trust
 
-The WebSocket is TLS-encrypted and terminates at the Tenzir Platform. In the editions where Tenzir hosts the Tenzir Platform, Tenzir is therefore technically able to observe data that traverses it during interactive use. If this is unacceptable, host the Tenzir Platform yourself with the [Sovereign Edition](https://tenzir.com/pricing.md). See [Platform setup](../../guides/platform-setup.md).
+The WebSocket is TLS-encrypted and terminates at the Tenzir Platform. In the editions where Tenzir hosts the Tenzir Platform, Tenzir is therefore technically able to observe data that traverses it during interactive use. If this is unacceptable, host the Tenzir Platform yourself with the [Sovereign Edition](https://tenzir.com/pricing). See [Platform setup](../../guides/platform-setup.md).
 
 ## See Also
 
@@ -66,4 +66,4 @@ The WebSocket is TLS-encrypted and terminates at the Tenzir Platform. In the edi
 * [Platform](../platform.md)
 * [Node](../node.md)
 * [Secrets](../secrets.md)
-* [Frequently asked questions](https://tenzir.com/faqs.md)
+* [Frequently asked questions](https://tenzir.com/faqs)

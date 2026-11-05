@@ -105,7 +105,7 @@ VictoriaLogs has no user management of its own. Its documentation recommends run
 
 Always combine Basic Auth with TLS, since Basic Auth sends the credentials in plain text.
 
-On the Tenzir side, [`to_opensearch`](https://tenzir.com/docs/reference/operators/to_opensearch.md) takes `user`, `passwd`, and `tls`. Store the password as a [secret](../explanations/secrets.md) instead of writing it into the pipeline:
+On the Tenzir side, [`to_opensearch`](https://tenzir.com/docs/reference/operators/to_opensearch.md) takes `user`, `passwd`, and `tls`. Store the password as a [secret](https://docs.tenzir.com/explanations/secrets/) instead of writing it into the pipeline:
 
 ```tql
 subscribe "logs"

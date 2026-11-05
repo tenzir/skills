@@ -91,7 +91,7 @@ Documentation and prebuilt TQL for working with one third-party product.
 An integration tells you which operators to use for a given vendor, what to configure on their side, and which [package](glossary.md#package) to install if one exists.
 
 * List of [all integrations](https://tenzir.com/integrations)
-* [Does Tenzir have an integration for my system or format?](https://tenzir.com/faqs/does-tenzir-have-an-integration-for-x.md)
+* [Does Tenzir have an integration for my system or format?](https://tenzir.com/faqs/does-tenzir-have-an-integration-for-x)
 
 ## Library
 

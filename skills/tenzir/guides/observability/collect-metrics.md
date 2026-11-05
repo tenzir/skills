@@ -73,4 +73,4 @@ to_google_cloud_monitoring project="my-project",
   metric_prefix="custom.googleapis.com/tenzir/"
 ```
 
-On Compute Engine, the operator identifies each node by its instance. Elsewhere, set `resource_type` and `resource_labels` to give every node its own monitored resource. The [Google Cloud Monitoring](../../integrations/google/cloud-monitoring.md) integration page covers permissions, credentials, and additional examples.
+On Compute Engine, the operator identifies each node by its instance. Elsewhere, set `resource_type` and `resource_labels` to give every node its own monitored resource. The [Cloud monitoring](../../integrations/google/cloud-monitoring.md) integration page covers permissions, credentials, and additional examples.

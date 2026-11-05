@@ -101,4 +101,4 @@ to_fluent_bit "slack", options={webhook: $slack_hook}
 ## See Also
 
 * [`from_fluent_bit`](https://tenzir.com/docs/reference/operators/from_fluent_bit.md)
-* [Fluent Bit](../../integrations/fluent-bit.md)
+* [Fluent bit](../../integrations/fluent-bit.md)

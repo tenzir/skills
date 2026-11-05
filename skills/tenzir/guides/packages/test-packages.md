@@ -286,7 +286,7 @@ Ensure the test suite has `fixtures: [node]` in `test.yaml`. The node fixture au
 
 ### Non-deterministic output
 
-Tests must produce deterministic output. When only the order varies, add `pre-compare: sort` to the frontmatter rather than a `sort` operator, which would leave test scaffolding in the pipeline. See [pre-compare transforms](../../reference/test-framework.md#pre-compare-transforms).
+Tests must produce deterministic output. When only the order varies, add `pre-compare: sort` to the frontmatter rather than a `sort` operator, which would leave test scaffolding in the pipeline. See [pre-compare transforms](https://docs.tenzir.com/reference/test-framework/#pre-compare-transforms).
 
 Avoid timestamps and random values in output. For time-based tests, use fixed input data rather than `now()`.
 
@@ -299,5 +299,5 @@ Run `uvx tenzir-test --update` to regenerate baselines after intentional changes
 * [Create a package](create-a-package.md)
 * [Add operators](add-operators.md)
 * [Add contexts](add-contexts.md)
-* [Test Framework](../../reference/test-framework.md)
+* [Test framework](../../reference/test-framework.md)
 * [Onboard a data source](../../tutorials/onboard-a-data-source.md)

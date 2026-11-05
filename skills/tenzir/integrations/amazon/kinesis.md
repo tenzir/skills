@@ -63,8 +63,8 @@ When `endpoint` is omitted, Tenzir checks `AWS_ENDPOINT_URL_KINESIS` first, then
 
 Tenzir needs these Kinesis permissions:
 
-| Operator                                                                                    | Required permissions                                                   |
-| ------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| Operator                                                                                            | Required permissions                                                   |
+| --------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
 | [`from_amazon_kinesis`](https://tenzir.com/docs/reference/operators/from_amazon_kinesis.md) | `kinesis:ListShards`, `kinesis:GetShardIterator`, `kinesis:GetRecords` |
 | [`to_amazon_kinesis`](https://tenzir.com/docs/reference/operators/to_amazon_kinesis.md)     | `kinesis:PutRecords`                                                   |
 

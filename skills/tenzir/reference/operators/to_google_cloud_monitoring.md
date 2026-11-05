@@ -289,4 +289,4 @@ to_google_cloud_monitoring project="my-project",
 * [`metrics`](https://tenzir.com/docs/reference/operators/metrics.md)
 * [`to_prometheus`](https://tenzir.com/docs/reference/operators/to_prometheus.md)
 * [Collect metrics](../../guides/observability/collect-metrics.md)
-* [Google Cloud Monitoring](../../integrations/google/cloud-monitoring.md)
+* [Cloud monitoring](../../integrations/google/cloud-monitoring.md)

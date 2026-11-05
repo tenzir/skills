@@ -85,7 +85,7 @@ If you don’t have CLI access yet, two other places show the version:
 
 * **Platform UI**: the node version appears on the node details page at [app.tenzir.com](https://app.tenzir.com).
 
-Once you have the version, check the [changelog](https://tenzir.com/changelog.md) to see what changed between the previous version and the current one. Unexpected behavior after an upgrade often traces back to a breaking change or a behavioral adjustment listed there.
+Once you have the version, check the [changelog](https://tenzir.com/changelog) to see what changed between the previous version and the current one. Unexpected behavior after an upgrade often traces back to a breaking change or a behavioral adjustment listed there.
 
 Configuration changes are the other usual suspect. The [`config`](https://tenzir.com/docs/reference/functions/config.md) function returns the configuration the process actually uses, merged from `tenzir.yaml` files, plugin configuration files, environment variables, and command-line options, so you can check whether a setting really has the value you expect:
 

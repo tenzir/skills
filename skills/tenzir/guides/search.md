@@ -12,4 +12,4 @@ section: "Docs"
 
 Search reads events that a node or another data store already holds. Push selective work into the storage system, then continue processing the results in TQL.
 
-The guide on [exporting from a node](https://docs.tenzir.com/guides/export-from-a-node) covers schema and time-range selection, field projection, and query pipelines.
+The guide on [exporting from a node](search/export-from-a-node.md) covers schema and time-range selection, field projection, and query pipelines.

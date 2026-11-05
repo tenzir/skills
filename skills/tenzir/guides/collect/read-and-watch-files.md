@@ -153,7 +153,7 @@ Access files directly from cloud storage providers using their native URLs. The 
 
 ### Amazon S3
 
-Access [Amazon S3](../../integrations/amazon/s3.md) buckets directly using `s3://` URLs:
+Access [S3](../../integrations/amazon/s3.md) buckets directly using `s3://` URLs:
 
 ```tql
 from_file "s3://bucket/path/to/file.csv"
@@ -175,7 +175,7 @@ from_file "gs://bucket/path/to/file.csv"
 
 ### Azure Blob Storage
 
-Access [Azure Blob Storage](../../integrations/microsoft/azure-blob-storage.md) using `abfs://` URLs:
+Access [Azure blob storage](../../integrations/microsoft/azure-blob-storage.md) using `abfs://` URLs:
 
 ```tql
 from_file "abfs://container/path/to/file.csv"

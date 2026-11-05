@@ -49,7 +49,7 @@ Supported values:
 * `search`: Search historical events in one log group with `FilterLogEvents`. Use this mode for investigations, bounded backfills, and exports across one or more streams in the group.
 * `replay`: Replay one known log stream with `GetLogEvents`. This mode requires exactly one `stream`.
 
-Defaults to `live`. For detailed mode selection guidance, see [Amazon CloudWatch Logs](../../integrations/amazon/cloudwatch.md).
+Defaults to `live`. For detailed mode selection guidance, see [Cloudwatch](../../integrations/amazon/cloudwatch.md).
 
 ### `stream = string|list<string> (optional)`
 
@@ -172,4 +172,4 @@ from_amazon_cloudwatch "/aws/lambda/api",
 ## See Also
 
 * [`to_amazon_cloudwatch`](https://tenzir.com/docs/reference/operators/to_amazon_cloudwatch.md)
-* [Amazon CloudWatch Logs](../../integrations/amazon/cloudwatch.md)
+* [Cloudwatch](../../integrations/amazon/cloudwatch.md)

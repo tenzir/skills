@@ -9,7 +9,7 @@ section: "Docs"
 
 > This guide shows you how to manage changelog entries and publish releases with tenzir-ship. You’ll learn the complete workflow from adding your first entry to publishing a release on GitHub.
 
-This guide shows you how to manage changelog entries and publish releases with [`tenzir-ship`](https://tenzir.com/docs/reference/ship-framework.md). You’ll learn the complete workflow from adding your first entry to publishing a release on GitHub.
+This guide shows you how to manage changelog entries and publish releases with [`tenzir-ship`](https://tenzir.com/docs/reference/ship-framework). You’ll learn the complete workflow from adding your first entry to publishing a release on GitHub.
 
 ## Prerequisites
 
@@ -417,7 +417,7 @@ jobs:
     secrets: inherit
 ```
 
-Replace `<pinned-ref>` with a released tag or full commit SHA, for example `v1.6.1`. Add the advanced inputs from the [Ship Framework](../../reference/ship-framework.md) only when your repository needs them.
+Replace `<pinned-ref>` with a released tag or full commit SHA, for example `v1.6.1`. Add the advanced inputs from the [Ship framework](../../reference/ship-framework.md) only when your repository needs them.
 
 That `release.yaml` wrapper mirrors the CLI options. Use `rc: true` to create or continue a release-candidate series:
 
@@ -568,7 +568,7 @@ jobs:
       gpg_private_key: ${{ secrets.TENZIR_BOT_GPG_SIGNING_KEY }}
 ```
 
-The validation job fails fast with clear error messages before the release job attempts to mint a token or import a GPG key. See the [Ship Framework](../../reference/ship-framework.md) for the full list of auth and signing inputs.
+The validation job fails fast with clear error messages before the release job attempts to mint a token or import a GPG key. See the [Ship framework](../../reference/ship-framework.md) for the full list of auth and signing inputs.
 
 Terminology
 
@@ -754,5 +754,5 @@ uvx tenzir-ship show v0.1.0 --release --json
 
 ## See also
 
-* [Ship Framework](../../reference/ship-framework.md)
+* [Ship framework](../../reference/ship-framework.md)
 * [Onboard a data source](../../tutorials/onboard-a-data-source.md)

@@ -362,4 +362,4 @@ This retries transient transport failures and HTTP `429` and `5xx` responses up 
 * [Fetch via HTTP and APIs](../../guides/collect/fetch-via-http-and-apis.md)
 * [Enrich with threat intel](../../guides/enrich/enrich-with-threat-intel.md)
 * [Use lookup tables](../../guides/enrich/use-lookup-tables.md)
-* [HTTP](../../integrations/http.md)
+* [Http](../../integrations/http.md)

@@ -12,4 +12,4 @@ section: "Docs"
 
 Storage keeps events beyond the lifetime of a running pipeline. Tenzir can write partitioned files to object storage, import events into a node, or write them to an external database such as ClickHouse.
 
-Learn how to [write partitioned files](https://docs.tenzir.com/guides/write-partitioned-files), [import into a node](https://docs.tenzir.com/guides/import-into-a-node), [inspect stored schemas](https://docs.tenzir.com/guides/show-available-schemas), and [transform data at rest](https://docs.tenzir.com/guides/transform-data-at-rest). To store OCSF events in ClickHouse, follow our tutorial on [building an OCSF lake with ClickHouse](../tutorials/build-an-ocsf-lake-with-clickhouse.md).
+Learn how to [write partitioned files](store/write-partitioned-files.md), [import into a node](store/import-into-a-node.md), [inspect stored schemas](store/show-available-schemas.md), and [transform data at rest](store/transform-data-at-rest.md). To store OCSF events in ClickHouse, follow our tutorial on [building an OCSF lake with ClickHouse](../tutorials/build-an-ocsf-lake-with-clickhouse.md).

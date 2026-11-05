@@ -121,7 +121,7 @@ When the operator reads a table, it lets DuckDB do the work of the [`where`](htt
 
 Each operator keeps its credentials and TLS settings isolated from other operators. Local-file locking rules do not apply to remote connections.
 
-Quack is a beta protocol. Our [DuckDB integration](../../integrations/duckdb.md#quack) describes the tested client and server versions.
+Remote connections require a DuckDB 2.0 server; DuckDB 1.x servers are not supported. Our [DuckDB integration](../../integrations/duckdb.md#quack) describes the tested client and server versions.
 
 ## Concurrency
 
@@ -237,4 +237,4 @@ from_duckdb "events.duckdb", table="alerts", live=true, tracking_column="seq"
 * [`to_duckdb`](https://tenzir.com/docs/reference/operators/to_duckdb.md)
 * [`from_clickhouse`](https://tenzir.com/docs/reference/operators/from_clickhouse.md)
 * [`from_mysql`](https://tenzir.com/docs/reference/operators/from_mysql.md)
-* [DuckDB](../../integrations/duckdb.md)
+* [Duckdb](../../integrations/duckdb.md)

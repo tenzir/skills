@@ -102,4 +102,4 @@ accept_elasticsearch "0.0.0.0:8443",
 * [`to_elasticsearch`](https://tenzir.com/docs/reference/operators/to_elasticsearch.md)
 * [`accept_opensearch`](https://tenzir.com/docs/reference/operators/accept_opensearch.md)
 * [Elasticsearch](../../integrations/elasticsearch.md)
-* [OpenSearch](../../integrations/opensearch.md)
+* [Opensearch](../../integrations/opensearch.md)

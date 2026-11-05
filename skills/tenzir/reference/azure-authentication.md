@@ -165,4 +165,4 @@ Grant the application query access to the target workspace, for example with the
 ## See Also
 
 * [AWS Authentication](aws-authentication.md)
-* [Azure Blob Storage](../integrations/microsoft/azure-blob-storage.md)
+* [Azure blob storage](../integrations/microsoft/azure-blob-storage.md)

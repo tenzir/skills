@@ -182,5 +182,5 @@ When you provide a `schema` or `selector`, the last value of a repeated key wins
 * [`write_syslog`](https://tenzir.com/docs/reference/operators/write_syslog.md)
 * [`parse_leef`](https://tenzir.com/docs/reference/functions/parse_leef.md)
 * [`print_leef`](https://tenzir.com/docs/reference/functions/print_leef.md)
-* [IBM QRadar](../../integrations/qradar.md)
+* [Qradar](../../integrations/qradar.md)
 * [Syslog](../../integrations/syslog.md)

@@ -85,6 +85,6 @@ to_azure_log_analytics tenant_id="00a00a00-0a00-0a00-00aa-000aa0a0a000",
 ## See Also
 
 * [Map to ASIM](../../guides/normalize/map-to-asim.md)
-* [Azure Log Analytics](../../integrations/microsoft/azure-log-analytics.md)
+* [Azure log analytics](../../integrations/microsoft/azure-log-analytics.md)
 
 Parallelizable: a parallel pipeline may run this operator on several cores at once.

@@ -65,4 +65,4 @@ serve_zmq "tcp://0.0.0.0:5555", encoding="json", prefix=f"{kind}/"
 * [`from_zmq`](https://tenzir.com/docs/reference/operators/from_zmq.md)
 * [`accept_zmq`](https://tenzir.com/docs/reference/operators/accept_zmq.md)
 * [`to_zmq`](https://tenzir.com/docs/reference/operators/to_zmq.md)
-* [ZeroMQ](../../integrations/zeromq.md)
+* [Zeromq](../../integrations/zeromq.md)

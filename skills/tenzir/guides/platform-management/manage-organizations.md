@@ -13,7 +13,7 @@ This guide shows you how to create, configure, and delete organizations in the T
 
 Availability
 
-As a feature preview, organizations are currently available to all users. In the future, they will require the **Professional Edition** or higher. See [tenzir.com/pricing](https://tenzir.com/pricing.md) for details.
+As a feature preview, organizations are currently available to all users. In the future, they will require the **Professional Edition** or higher. See [tenzir.com/pricing](https://tenzir.com/pricing) for details.
 
 ## Create an organization
 

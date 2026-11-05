@@ -81,5 +81,5 @@ Use [`to_opensearch`](https://tenzir.com/docs/reference/operators/to_opensearch.
 * [Create a package](../packages/create-a-package.md)
 * [Write tests](../testing/write-tests.md)
 * [Elasticsearch](../../integrations/elasticsearch.md)
-* [OpenSearch](../../integrations/opensearch.md)
+* [Opensearch](../../integrations/opensearch.md)
 * [Onboard a data source](../../tutorials/onboard-a-data-source.md)

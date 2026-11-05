@@ -41,7 +41,7 @@ Put the target schema first in mapping namespaces, and let the vendor that owns 
 
 A product with several event types needs a dispatcher that routes each recognized event type to an operator under `ocsf/events/` and falls back to the OCSF Base Event. Our tutorial on [creating the mapper](../../tutorials/onboard-a-data-source.md#create-the-mapper) shows that hierarchy together with the normalizer that wraps it, and our guide on [testing packages](../packages/test-packages.md) covers the tests and baselines that go with it.
 
-How much of that hierarchy a package needs depends on its source. The [`amazon` package](https://tenzir.com/packages/amazon/operators/vpc_flow/ocsf/map.tql) owns the parsing and ships a normalizer, because VPC Flow Logs have no built-in reader. A source that Tenzir reads natively, such as Zeek through [`read_zeek_tsv`](https://tenzir.com/docs/reference/operators/read_zeek_tsv.md) or [`read_zeek_json`](https://tenzir.com/docs/reference/operators/read_zeek_json.md), needs neither: its package starts at the mapper and dispatches on the log type.
+How much of that hierarchy a package needs depends on its source. The [`amazon` package](https://tenzir.com/docs/packages/amazon/operators/vpc_flow/ocsf/map.tql) owns the parsing and ships a normalizer, because VPC Flow Logs have no built-in reader. A source that Tenzir reads natively, such as Zeek through [`read_zeek_tsv`](https://tenzir.com/docs/reference/operators/read_zeek_tsv.md) or [`read_zeek_json`](https://tenzir.com/docs/reference/operators/read_zeek_json.md), needs neither: its package starts at the mapper and dispatches on the log type.
 
 ## Use native OCSF operators
 

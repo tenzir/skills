@@ -105,5 +105,5 @@ write_syslog
 * [`read_syslog`](https://tenzir.com/docs/reference/operators/read_syslog.md)
 * [`write_syslog`](https://tenzir.com/docs/reference/operators/write_syslog.md)
 * [`parse_leef`](https://tenzir.com/docs/reference/functions/parse_leef.md)
-* [IBM QRadar](../../integrations/qradar.md)
+* [Qradar](../../integrations/qradar.md)
 * [Syslog](../../integrations/syslog.md)

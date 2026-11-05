@@ -69,8 +69,8 @@ from_amazon_sqs "my-queue", aws_iam={
 
 Tenzir needs these SQS permissions:
 
-| Operator                                                                            | Required permissions                                         |
-| ----------------------------------------------------------------------------------- | ------------------------------------------------------------ |
+| Operator                                                                                    | Required permissions                                         |
+| ------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
 | [`from_amazon_sqs`](https://tenzir.com/docs/reference/operators/from_amazon_sqs.md) | `sqs:GetQueueUrl`, `sqs:ReceiveMessage`, `sqs:DeleteMessage` |
 | [`to_amazon_sqs`](https://tenzir.com/docs/reference/operators/to_amazon_sqs.md)     | `sqs:GetQueueUrl`, `sqs:SendMessage`                         |
 

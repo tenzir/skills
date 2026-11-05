@@ -65,4 +65,4 @@ to_zmq "tcp://collector.example.com:5555", encoding="ndjson", prefix=f"{source}/
 * [`from_zmq`](https://tenzir.com/docs/reference/operators/from_zmq.md)
 * [`accept_zmq`](https://tenzir.com/docs/reference/operators/accept_zmq.md)
 * [`to_zmq`](https://tenzir.com/docs/reference/operators/to_zmq.md)
-* [ZeroMQ](../../integrations/zeromq.md)
+* [Zeromq](../../integrations/zeromq.md)

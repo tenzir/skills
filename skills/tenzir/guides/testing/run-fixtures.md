@@ -162,9 +162,9 @@ from {
 }
 ```
 
-See the [test framework reference](../../reference/test-framework.md#built-in-docker-compose-fixture) for the full options reference, including all configuration fields, readiness detection behavior, and the complete list of exported environment variables.
+See the [test framework reference](https://docs.tenzir.com/reference/test-framework/#built-in-docker-compose-fixture) for the full options reference, including all configuration fields, readiness detection behavior, and the complete list of exported environment variables.
 
 ## See also
 
 * [Create fixtures](create-fixtures.md)
-* [Test Framework](../../reference/test-framework.md)
+* [Test framework](../../reference/test-framework.md)

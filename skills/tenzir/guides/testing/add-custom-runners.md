@@ -174,4 +174,4 @@ When you invoke the harness with multiple projects in the same command, pass `--
 * Extend the runner to emit `*.diff` artifacts when the hexdumps diverge.
 * Add stdin support by calling `run_mod.get_stdin_content(env)` and passing the result to `run_subprocess(stdin_data=...)`. See the shell runner implementation for reference.
 * Branch on `run.get_harness_mode()` or `run.is_passthrough_enabled()` when you need bespoke behaviour for passthrough runs, but prefer to rely on `run.run_subprocess()` for most cases so output handling stays consistent.
-* Review the [test framework reference](../../reference/test-framework.md) to explore additional runner hooks and helpers.
+* Review the [test framework reference](https://docs.tenzir.com/reference/test-framework/) to explore additional runner hooks and helpers.

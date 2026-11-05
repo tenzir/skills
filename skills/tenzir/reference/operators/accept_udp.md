@@ -92,4 +92,4 @@ select data
 ## See Also
 
 * [`to_udp`](https://tenzir.com/docs/reference/operators/to_udp.md)
-* [UDP](../../integrations/udp.md)
+* [Udp](../../integrations/udp.md)

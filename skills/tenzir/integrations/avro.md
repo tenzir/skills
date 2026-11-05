@@ -16,8 +16,8 @@ Object Container Files embed their writer schema, which [`read_avro`](https://te
 
 ## Choose a decoding path
 
-| Input shape                                               | Tenzir interface                                                                                 |
-| --------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| Input shape                                               | Tenzir interface                                                                                         |
+| --------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
 | Kafka values with Confluent-compatible schema identifiers | [`from_kafka`](https://tenzir.com/docs/reference/operators/from_kafka.md) with `schema_registry` |
 | An Avro Object Container File                             | [`read_avro`](https://tenzir.com/docs/reference/operators/read_avro.md) without `schema`         |
 | A byte stream containing consecutive Avro datums          | [`read_avro`](https://tenzir.com/docs/reference/operators/read_avro.md)                          |
@@ -25,7 +25,7 @@ Object Container Files embed their writer schema, which [`read_avro`](https://te
 
 Use [`parse_avro`](https://tenzir.com/docs/reference/functions/parse_avro.md) for bare datums in message-oriented sources, where each source event preserves one message boundary. Use [`read_avro`](https://tenzir.com/docs/reference/operators/read_avro.md) for a stream or file whose chunk boundaries may split a datum or contain several datums.
 
-Our [message broker guide](../guides/collect/read-from-message-brokers.md#decode-avro-messages) shows how to ingest Kafka messages with a schema registry. The [`from_kafka`](https://tenzir.com/docs/reference/operators/from_kafka.md) reference covers registry authentication, TLS, and error handling.
+Our [message broker guide](https://docs.tenzir.com/guides/collect/read-from-message-brokers/#decode-avro-messages) shows how to ingest Kafka messages with a schema registry. The [`from_kafka`](https://tenzir.com/docs/reference/operators/from_kafka.md) reference covers registry authentication, TLS, and error handling.
 
 The [`read_avro`](https://tenzir.com/docs/reference/operators/read_avro.md) reference provides file examples, type mappings, and supported codecs. For individual bare datums, the [`parse_avro`](https://tenzir.com/docs/reference/functions/parse_avro.md) reference includes an example using Kafka’s `message` field.
 

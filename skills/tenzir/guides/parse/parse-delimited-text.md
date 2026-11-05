@@ -135,7 +135,7 @@ from_file "windows_events.xml" {
 this = data.parse_winlog()
 ```
 
-See [Microsoft Windows Event Logs](../../integrations/microsoft/windows-event-logs.md) for a complete example.
+See [Windows event logs](../../integrations/microsoft/windows-event-logs.md) for a complete example.
 
 ## Line-based structured formats
 
@@ -278,4 +278,4 @@ from_file "syslog.txt" {
 * [Parse binary data](parse-binary-data.md)
 * [Parse string fields](parse-string-fields.md)
 * [Read and watch files](../collect/read-and-watch-files.md)
-* [Microsoft Windows Event Logs](../../integrations/microsoft/windows-event-logs.md)
+* [Windows event logs](../../integrations/microsoft/windows-event-logs.md)

@@ -61,7 +61,7 @@ from_file "flows.ipfix" {
 
 Specify [`read_netflow`](https://tenzir.com/docs/reference/operators/read_netflow.md) explicitly. It detects the protocol version of every message and retains NetFlow v9 and IPFIX templates across messages.
 
-The input must contain raw wire-format messages. [`read_netflow`](https://tenzir.com/docs/reference/operators/read_netflow.md) does not parse PCAP headers or the nfdump container used by `nfcapd.*` files. For live collection and ways to process nfdump files, see the [NetFlow](../../integrations/netflow.md) integration.
+The input must contain raw wire-format messages. [`read_netflow`](https://tenzir.com/docs/reference/operators/read_netflow.md) does not parse PCAP headers or the nfdump container used by `nfcapd.*` files. For live collection and ways to process nfdump files, see the [Netflow](../../integrations/netflow.md) integration.
 
 ## PCAP and PCAPNG
 

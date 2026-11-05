@@ -21,9 +21,9 @@ accept_wef [endpoint:string], subscriptions=list<record>, [kerberos=record,
 
 Acts as a Windows Event Collector (WEC) for source-initiated subscriptions. Windows hosts connect to the operator, retrieve the configured subscriptions, and then forward heartbeats and batches of events. The operator emits one event per Windows event with the event XML in `data`. Use [`parse_winlog`](https://tenzir.com/docs/reference/functions/parse_winlog.md) to parse it.
 
-For direct collection, the operator takes the place of a Windows Event Collector server and its shipping agent. The Windows hosts need no agent, only a Group Policy setting that points them to the operator. Our [Microsoft Windows Event Forwarding](../../integrations/microsoft/windows-event-forwarding.md) integration describes the setup.
+For direct collection, the operator takes the place of a Windows Event Collector server and its shipping agent. The Windows hosts need no agent, only a Group Policy setting that points them to the operator. Our [Windows event forwarding](../../integrations/microsoft/windows-event-forwarding.md) integration describes the setup.
 
-Tenzir can also receive events from an existing WEC through the shipping agent of your choice. That architecture uses the input appropriate for the agent, rather than this operator. Our [Microsoft Windows Event Collector](../../integrations/microsoft/windows-event-collector.md) integration describes it.
+Tenzir can also receive events from an existing WEC through the shipping agent of your choice. That architecture uses the input appropriate for the agent, rather than this operator. Our [Windows event collector](../../integrations/microsoft/windows-event-collector.md) integration describes it.
 
 Clients authenticate with Kerberos or with client certificates. Kerberos suits hosts in an Active Directory domain: it authenticates the computer account of a host, such as `WIN10$@EXAMPLE.ORG`, and encrypts every message, so hosts connect over HTTP. Client certificates suit hosts outside of a domain: they connect over HTTPS, and the subject common name of a certificate is the client’s identity. A pipeline accepts one of the two. Windows also sends the name it believes it has, which the operator records as `wef.machine_id` but never uses for authorization.
 
@@ -219,6 +219,6 @@ publish "windows"
 ## See Also
 
 * [`parse_winlog`](https://tenzir.com/docs/reference/functions/parse_winlog.md)
-* [Microsoft Windows Event Forwarding](../../integrations/microsoft/windows-event-forwarding.md)
-* [Microsoft Windows Event Collector](../../integrations/microsoft/windows-event-collector.md)
-* [Microsoft Windows Event Logs](../../integrations/microsoft/windows-event-logs.md)
+* [Windows event forwarding](../../integrations/microsoft/windows-event-forwarding.md)
+* [Windows event collector](../../integrations/microsoft/windows-event-collector.md)
+* [Windows event logs](../../integrations/microsoft/windows-event-logs.md)

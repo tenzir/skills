@@ -184,6 +184,6 @@ This lets you treat database rows like any other event stream in Tenzir.
 * [Send to destinations](../route/send-to-destinations.md)
 * [`from_clickhouse`](https://tenzir.com/docs/reference/operators/from_clickhouse.md)
 * [`from_mysql`](https://tenzir.com/docs/reference/operators/from_mysql.md)
-* [ClickHouse](../../integrations/clickhouse.md)
+* [Clickhouse](../../integrations/clickhouse.md)
 * [Hydrolix](../../integrations/hydrolix.md)
-* [MySQL](../../integrations/mysql.md)
+* [Mysql](../../integrations/mysql.md)

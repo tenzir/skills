@@ -12,4 +12,4 @@ section: "Docs"
 
 Replay reads stored events back into a pipeline with controlled ordering, timestamps, and pacing. Use it to test changed detections, backfill corrected mappings, or reproduce an incident.
 
-The guide on [replaying historical events](https://docs.tenzir.com/guides/replay-historical-events) covers large archives, timestamp handling, pacing, and side-effect isolation.
+The guide on [replaying historical events](replay/replay-historical-events.md) covers large archives, timestamp handling, pacing, and side-effect isolation.

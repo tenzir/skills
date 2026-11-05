@@ -25,7 +25,7 @@ The `quiet` operator executes its nested pipeline and suppresses the warnings it
 
 The operator suppresses all runtime warnings in its scope; selecting individual warnings is not supported.
 
-When you combine it with [`strict`](https://tenzir.com/docs/reference/strict/), the innermost operator handles warnings first. A `quiet` block inside `strict` suppresses warnings before they can become errors. A `strict` block inside `quiet` converts warnings to errors, which `quiet` forwards.
+When you combine it with [`strict`](https://tenzir.com/docs/reference/operators/strict.md), the innermost operator handles warnings first. A `quiet` block inside `strict` suppresses warnings before they can become errors. A `strict` block inside `quiet` converts warnings to errors, which `quiet` forwards.
 
 ## Examples
 

@@ -938,6 +938,6 @@ rm ocsf-events.json.zst
 
 ## See also
 
-* [ClickHouse](../integrations/clickhouse.md)
+* [Clickhouse](../integrations/clickhouse.md)
 * [Map to OCSF](../guides/normalize/map-to-ocsf.md)
 * [Onboard a data source](onboard-a-data-source.md)

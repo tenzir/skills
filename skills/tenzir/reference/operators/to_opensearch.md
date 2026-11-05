@@ -141,8 +141,8 @@ to_opensearch "localhost:9200", action="create", index="main"
 * [`accept_opensearch`](https://tenzir.com/docs/reference/operators/accept_opensearch.md)
 * [`to_elasticsearch`](https://tenzir.com/docs/reference/operators/to_elasticsearch.md)
 * [Map to ECS](../../guides/normalize/map-to-ecs.md)
-* [OpenSearch](../../integrations/opensearch.md)
+* [Opensearch](../../integrations/opensearch.md)
 * [Elasticsearch](../../integrations/elasticsearch.md)
-* [VictoriaLogs](../../integrations/victorialogs.md)
+* [Victorialogs](../../integrations/victorialogs.md)
 
 Parallelizable: a parallel pipeline may run this operator on several cores at once.

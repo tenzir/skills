@@ -347,7 +347,7 @@ That is a complete OCSF Network Activity event. The `unmapped` record is empty b
 
 ### Map each event class
 
-Amazon’s mapper delegates the mapping itself to [`amazon::vpc_flow::ocsf::events::network_activity`](https://tenzir.com/packages/amazon/operators/vpc_flow/ocsf/events/network_activity.tql), which receives the same two fields and fills in the class. One event type needs one leaf.
+Amazon’s mapper delegates the mapping itself to [`amazon::vpc_flow::ocsf::events::network_activity`](https://tenzir.com/docs/packages/amazon/operators/vpc_flow/ocsf/events/network_activity.tql), which receives the same two fields and fills in the class. One event type needs one leaf.
 
 A product that emits several keeps the same shape and dispatches. Leaving Amazon aside for a moment, here is that mapper for a `vendor` package with three event types:
 

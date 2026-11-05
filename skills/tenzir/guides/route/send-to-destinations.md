@@ -53,7 +53,7 @@ to_amazon_kinesis "security-events"
 
 ### Data stores
 
-Send events to data stores like [ClickHouse](../../integrations/clickhouse.md), [DuckDB](../../integrations/duckdb.md), [Hydrolix](../../integrations/hydrolix.md), [Apache Iceberg](../../integrations/iceberg.md), and [Snowflake](../../integrations/snowflake.md).
+Send events to data stores like [Clickhouse](../../integrations/clickhouse.md), [Duckdb](../../integrations/duckdb.md), [Hydrolix](../../integrations/hydrolix.md), [Iceberg](../../integrations/iceberg.md), and [Snowflake](../../integrations/snowflake.md).
 
 Send structured events to ClickHouse with [`to_clickhouse`](https://tenzir.com/docs/reference/operators/to_clickhouse.md):
 
@@ -167,7 +167,7 @@ to_file "archive.parquet" {
 
 Our guide on [Write partitioned files](../store/write-partitioned-files.md) explains how to partition files and rotate them by size or time, including how buffering operators such as `sort` affect rotation.
 
-Serialize events with [`write_ndjson`](https://tenzir.com/docs/reference/operators/write_ndjson.md) and write them to [Amazon S3](../../integrations/amazon/s3.md) with [`to_s3`](https://tenzir.com/docs/reference/operators/to_s3.md):
+Serialize events with [`write_ndjson`](https://tenzir.com/docs/reference/operators/write_ndjson.md) and write them to [S3](../../integrations/amazon/s3.md) with [`to_s3`](https://tenzir.com/docs/reference/operators/to_s3.md):
 
 ```tql
 from {time: 2026-01-01T00:00:00Z, message: "authentication failed"}
@@ -189,7 +189,7 @@ to_http "https://example.com/ingest" {
 }
 ```
 
-Send newline-delimited JSON over [TCP](../../integrations/tcp.md) with [`to_tcp`](https://tenzir.com/docs/reference/operators/to_tcp.md):
+Send newline-delimited JSON over [Tcp](../../integrations/tcp.md) with [`to_tcp`](https://tenzir.com/docs/reference/operators/to_tcp.md):
 
 ```tql
 from {time: 2026-01-01T00:00:00Z, message: "authentication failed"}

@@ -18,8 +18,8 @@ Tenzir receives OTLP/HTTP and OTLP/gRPC directly with [`accept_otlp`](https://te
 
 Use the receiver that provides the transport your exporters require:
 
-| Requirement                                | Tenzir integration                                                                                       |
-| ------------------------------------------ | -------------------------------------------------------------------------------------------------------- |
+| Requirement                                | Tenzir integration                                                                                               |
+| ------------------------------------------ | ---------------------------------------------------------------------------------------------------------------- |
 | OTLP/HTTP over HTTP/1.1                    | Native [`accept_otlp`](https://tenzir.com/docs/reference/operators/accept_otlp.md) receiver on port 4318 |
 | OTLP/HTTP over HTTP/2 with TLS             | Native [`accept_otlp`](https://tenzir.com/docs/reference/operators/accept_otlp.md) receiver on port 4318 |
 | OTLP/gRPC over HTTP/2, with or without TLS | Native [`accept_otlp`](https://tenzir.com/docs/reference/operators/accept_otlp.md) receiver on port 4317 |

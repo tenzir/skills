@@ -172,4 +172,4 @@ TENZIR_TEST_DISABLE_HOOKS=1 uvx tenzir-test
 
 * Use `shutdown` to emit final telemetry or clean up resources created during `startup`.
 * Use `test_start` and `test_finish` to record per-test timing or status in an external system.
-* Review the [test framework reference](../../reference/test-framework.md) for the full event list and CLI options.
+* Review the [test framework reference](https://docs.tenzir.com/reference/test-framework/) for the full event list and CLI options.

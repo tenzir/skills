@@ -76,7 +76,7 @@ This approach is particularly useful when setting up multiple custom sources acr
 
 ### Tenzir Setup
 
-To run Tenzir pipelines that send data to Security Lake, you’ll need a Tenzir node running on AWS. See our guide on [how to deploy a node on AWS](../../guides/node-setup/deploy-a-node.md#aws) for detailed instructions.
+To run Tenzir pipelines that send data to Security Lake, you’ll need a Tenzir node running on AWS. See our guide on [how to deploy a node on AWS](https://docs.tenzir.com/guides/node-setup/deploy-a-node/#aws) for detailed instructions.
 
 See [AWS Authentication](../../reference/aws-authentication.md) for the available AWS authentication mechanisms. Tenzir supports multiple authentication methods including IAM roles, access keys, and credential profiles.
 

@@ -285,5 +285,5 @@ This creates the following table:
 * [`from_clickhouse`](https://tenzir.com/docs/reference/operators/from_clickhouse.md)
 * [`ocsf_cast`](https://tenzir.com/docs/reference/operators/ocsf_cast.md)
 * [Send to destinations](../../guides/route/send-to-destinations.md)
-* [ClickHouse](../../integrations/clickhouse.md)
-* [nano](../../integrations/nano.md)
+* [Clickhouse](../../integrations/clickhouse.md)
+* [Nano](../../integrations/nano.md)

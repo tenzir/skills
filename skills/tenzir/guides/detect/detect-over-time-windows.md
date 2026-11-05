@@ -422,7 +422,7 @@ Windowed findings feed naturally into composition: a multi-stage detector can re
 
 ## Detect network behaviors on one stream
 
-The same building blocks cover the classic network detections. These examples read OCSF [Network Activity](https://schema.ocsf.io/classes/network_activity) events, so one normalized stream serves every detector whether a flow exporter, a firewall, or Zeek produced the record. For the evasion and tuning trade-offs behind each, see the blog post on [detecting scans, beacons, and exfiltration](https://tenzir.com/blog/detect-scans-beacons-and-exfiltration-over-streaming-ocsf.md).
+The same building blocks cover the classic network detections. These examples read OCSF [Network Activity](https://schema.ocsf.io/classes/network_activity) events, so one normalized stream serves every detector whether a flow exporter, a firewall, or Zeek produced the record. For the evasion and tuning trade-offs behind each, see the blog post on [detecting scans, beacons, and exfiltration](https://tenzir.com/blog/detect-scans-beacons-and-exfiltration-over-streaming-ocsf).
 
 ### Find scan fan-out
 
