@@ -1793,7 +1793,7 @@ desc:
   description: The description that pertains to the object or event. See specific usage.
   used_by:
     classes: [incident_finding]
-    objects: [advisory, analytic, application, assessment, check, cis_benchmark, cis_benchmark_result, cis_control, compliance, cve, database, databucket, device, enrichment, file, finding, finding_info, firewall_rule, firewall_rule_evaluation, graph, group, job, location, node, osint, policy, related_event, remediation, rule, table, unmanned_system_operating_area, vulnerability, web_resource]
+    objects: [advisory, analytic, application, assessment, check, cis_benchmark, cis_benchmark_result, cis_control, compliance, cve, database, databucket, device, enrichment, file, finding, finding_info, firewall_rule, firewall_rule_evaluation, graph, group, job, location, node, osint, policy, related_event, remediation, rule, table, trait, unmanned_system_operating_area, vulnerability, web_resource]
 desc_fingerprint:
   caption: Description Fingerprint
   type: object_t

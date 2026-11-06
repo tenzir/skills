@@ -26,6 +26,11 @@ attributes:
     type: string_t
     requirement: optional
     description: The high-level grouping or classification this trait belongs to.
+  desc:
+    caption: Description
+    type: string_t
+    requirement: optional
+    description: A human-readable explanation of the trait, such as what characteristic it represents and how it was observed.
   type:
     caption: Type
     type: string_t
