@@ -55,11 +55,11 @@ to_amazon_kinesis "security-events"
 
 Send events to data stores like [Clickhouse](https://docs.tenzir.com/integrations/clickhouse), [Duckdb](https://docs.tenzir.com/integrations/duckdb), [Hydrolix](https://docs.tenzir.com/integrations/hydrolix), [Iceberg](https://docs.tenzir.com/integrations/iceberg), and [Snowflake](https://docs.tenzir.com/integrations/snowflake).
 
-Send structured events to ClickHouse with [`to_clickhouse`](https://tenzir.com/docs/v7.0.0/reference/operators/to_clickhouse.md):
+Send structured events to an existing ClickHouse table with [`to_clickhouse`](https://tenzir.com/docs/v7.0.0/reference/operators/to_clickhouse.md):
 
 ```tql
 from {time: 2026-01-01T00:00:00Z, severity: "high", message: "scan detected"}
-to_clickhouse table="alerts", primary=time, mode="create_append", tls=false
+to_clickhouse table="alerts", tls=false
 ```
 
 Write events into a local DuckDB database file with [`to_duckdb`](https://tenzir.com/docs/v7.0.0/reference/operators/to_duckdb.md), which embeds DuckDB and needs no server:

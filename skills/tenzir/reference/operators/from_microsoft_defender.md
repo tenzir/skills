@@ -12,7 +12,8 @@ section: "Docs"
 Runs a Microsoft Defender advanced hunting query and reads its results.
 
 ```tql
-from_microsoft_defender query:string, azure_auth=record, [start=time, end=time, tls=bool|record]
+from_microsoft_defender query:string, azure_auth=record, [start=time, end=time, tls=bool|record,
+                        pushdown=bool]
 ```
 
 ## Description
@@ -78,15 +79,19 @@ When you omit both arguments, the request omits `Timespan`. The Graph service cu
 
 TLS configuration, with the same behavior as [`from_microsoft_graph`](https://tenzir.com/docs/v7.0.0/reference/operators/from_microsoft_graph.md#tls--bool--record-optional). HTTPS and certificate verification are enabled by default.
 
+### `pushdown = bool` (optional)
+
+Whether Defender takes over the operators that follow the operator. With `pushdown=false`, they stay in the pipeline and run with TQL semantics, and the operator sends your query exactly as written. See [Optimizations](from_microsoft_defender.md#optimizations).
+
+Defaults to `true`.
+
 ## Optimizations
 
-The operator appends KQL `where`, `project`, and `take` stages to your query for the [`where`](https://tenzir.com/docs/v7.0.0/reference/operators/where.md), [`select`](https://tenzir.com/docs/v7.0.0/reference/operators/select.md), and [`head`](https://tenzir.com/docs/v7.0.0/reference/operators/head.md) operators that follow it, so that Defender returns fewer rows and columns. The stages apply to the rows that your query returns, and your query text stays as is:
+The operator hands Defender the operators that follow it, as far as KQL can spell them, by appending stages to your query: [`where`](https://tenzir.com/docs/v7.0.0/reference/operators/where.md), [`select`](https://tenzir.com/docs/v7.0.0/reference/operators/select.md), [`drop`](https://tenzir.com/docs/v7.0.0/reference/operators/drop.md), [`summarize`](https://tenzir.com/docs/v7.0.0/reference/operators/summarize.md) with `count()`, `count(x)`, `min`, `max`, and `sum`, including [`top`](https://tenzir.com/docs/v7.0.0/reference/operators/top.md) and [`rare`](https://tenzir.com/docs/v7.0.0/reference/operators/rare.md), [`sort`](https://tenzir.com/docs/v7.0.0/reference/operators/sort.md), and [`head`](https://tenzir.com/docs/v7.0.0/reference/operators/head.md). Those operators leave the pipeline and run with KQL’s semantics, which can differ from TQL. For example, a field that your query doesn’t return fails the query, and strings are never `null`. The stages apply to the table that your query returns, and your query text stays as is. Without a [`select`](https://tenzir.com/docs/v7.0.0/reference/operators/select.md) or [`summarize`](https://tenzir.com/docs/v7.0.0/reference/operators/summarize.md), a final `project` keeps the fields that the pipeline reads, and a field that your query doesn’t return becomes `null`. Use `pushdown=false` to keep every operator in the pipeline.
 
-* **Filters** become prefilters that keep every row that could match. Tenzir still evaluates every predicate locally, so the result stays the same. Supported predicates include top-level comparisons, string hunts with `starts_with`, `ends_with`, and recursive `search`, and ASCII-literal case-insensitive matching. Equality and list membership after `to_lower()` or `to_upper()`, plus IP equality and subnet membership with `ip()`, also produce prefilters. Conservative guards retain Unicode, structured values, and address spellings that need local evaluation. Use `ip()` to compare a string field with an IP literal; equality doesn’t implicitly parse strings. Timestamp comparisons with `==`, `<`, `<=`, `>`, and `>=` also produce [prefilters](../optimizations/kql.md#timestamp-intervals), with widened bounds to preserve decoding precision. They apply to query-output timestamps, including renamed, computed, or aggregated columns, without changing the request’s `start` and `end` window. Negation, regular expressions, timestamp list membership, nested field references, and unsupported function calls stay local. A `take 100000` stage precedes the prefilters to preserve the documented Microsoft Graph result cap, so that they never reveal rows beyond it.
-* **Projections** keep the fields that the pipeline reads, including those of local predicates. A field that your query doesn’t return becomes `null`.
-* **Limits** become a `take` stage only if no [`where`](https://tenzir.com/docs/v7.0.0/reference/operators/where.md) precedes the [`head`](https://tenzir.com/docs/v7.0.0/reference/operators/head.md).
+Defender returns at most 100,000 rows of a query without reporting a truncation, so the operator warns when a result has exactly that many rows, unless a [`head`](https://tenzir.com/docs/v7.0.0/reference/operators/head.md) that Defender took over explains it.
 
-The operator never narrows the `start` and `end` window, and sends queries that use `render`, `fork`, `facet`, or a `set` statement, or that end in `;` or `|`, unchanged. The page on [KQL optimizations](../optimizations/kql.md) describes the rules in detail.
+The operator never narrows the `start` and `end` window, and sends queries that use `render`, `fork`, `facet`, or a `set` statement, that have several tabular statements, or that end in `;` or `|`, unchanged. The page on [KQL optimizations](../optimizations/kql.md) describes which operators the service takes over and where KQL’s semantics differ.
 
 ## Examples
 

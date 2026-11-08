@@ -57,7 +57,6 @@ When a [`summarize`](https://tenzir.com/docs/v7.0.0/reference/operators/summariz
 from_clickhouse table="logs.events"
 where code >= 400
 summarize meta.source, events=count(), last.seen=max(ts)
-where events >= 10
 ```
 
 sends a query equivalent to
@@ -73,7 +72,7 @@ Tenzir then arranges the result columns into the fields of the summary, such as 
 
 The summary may also follow [`select`](https://tenzir.com/docs/v7.0.0/reference/operators/select.md), [`drop`](https://tenzir.com/docs/v7.0.0/reference/operators/drop.md), [`set`](https://tenzir.com/docs/v7.0.0/reference/operators/set.md), and assignments that keep or copy the fields that it reads, as [Aggregations in the source](../optimizations.md#aggregations-in-the-source) describes. ClickHouse then reads the original columns, and the result keeps the new names. For example, `select source=meta.source` followed by `summarize source, n=count()` groups by `meta.source` and returns the field `source`. A computed value for a field that the summary reads, such as `level = severity * 2` before `max(level)`, keeps the summary in Tenzir.
 
-ClickHouse takes over the [`where`](https://tenzir.com/docs/v7.0.0/reference/operators/where.md) before the summary together with the summary itself, and returns only the group keys and the aggregates. In the example, the `code` column never reaches Tenzir. The [`where`](https://tenzir.com/docs/v7.0.0/reference/operators/where.md) after the summary runs in Tenzir. ClickHouse computes these parts of a summary:
+ClickHouse takes over the [`where`](https://tenzir.com/docs/v7.0.0/reference/operators/where.md) before the summary together with the summary itself, and returns only the group keys and the aggregates. In the example, the `code` column never reaches Tenzir. ClickHouse computes these parts of a summary:
 
 * Group keys on `Bool`, integer, `String`, `FixedString`, `Enum`, `UUID`, `IPv4`, `IPv6`, and temporal columns, including `Nullable` and `LowCardinality` ones and elements of named tuples.
 * `count()`, and `count(x)` on such columns and on floating-point columns, counted as `Int64`, which Tenzir reads as `int` like the result of `count`.
@@ -89,7 +88,33 @@ Everything else runs in Tenzir with the same result. The operator then reads the
 * Columns without an exact counterpart in Tenzir, such as `Decimal` columns, and generated columns.
 * Tables with a catch-all column, where the operator also reads every column, as [Catch-all tables](clickhouse.md#catch-all-tables) describes.
 
-When ClickHouse computes a summary, Tenzir does not see the individual rows, so it does not warn about values that it reads as `null`, such as a `Date32` past the year 2262.
+When ClickHouse computes a summary, Tenzir does not see the individual rows, so it does not warn about values that it reads as `null`, such as a `Date32` past the year 2262. If the limits of the session, such as `max_result_rows` with `result_overflow_mode='break'`, would truncate the aggregated query, the query fails instead of returning a partial result.
+
+### Filters, sorts, and limits after a summary
+
+When ClickHouse computes the summary, it also takes over the [`where`](https://tenzir.com/docs/v7.0.0/reference/operators/where.md), [`sort`](https://tenzir.com/docs/v7.0.0/reference/operators/sort.md), and [`head`](https://tenzir.com/docs/v7.0.0/reference/operators/head.md) operators that directly follow it, so that it returns only the groups that the pipeline keeps. The filter applies to the groups after grouping, and the limit counts groups. For example, ClickHouse runs all steps of
+
+```tql
+from_clickhouse table="logs.events"
+where severity >= 3
+summarize src_ip, events=count()
+where events >= 10
+sort -events, src_ip
+head 20
+```
+
+and returns at most 20 groups. A [`top`](https://tenzir.com/docs/v7.0.0/reference/operators/top.md) or [`rare`](https://tenzir.com/docs/v7.0.0/reference/operators/rare.md) followed by [`head`](https://tenzir.com/docs/v7.0.0/reference/operators/head.md) runs in ClickHouse the same way.
+
+These operators leave the pipeline, and ClickHouse runs them with its own semantics:
+
+* Text compares and sorts under the collation of its column.
+* ClickHouse sorts `null` last. The position of `null` can differ from TQL.
+* Groups that tie in a sort arrive in the order in which ClickHouse returns them.
+
+Some steps still run in Tenzir, together with everything after them:
+
+* A [`where`](https://tenzir.com/docs/v7.0.0/reference/operators/where.md) with function calls, or with constants other than numbers, strings, booleans, and `null`, such as times and IP addresses. Tenzir splits a [`where`](https://tenzir.com/docs/v7.0.0/reference/operators/where.md) at `and`, so it can still send the supported conjuncts to ClickHouse.
+* A [`sort`](https://tenzir.com/docs/v7.0.0/reference/operators/sort.md) by fields that the summary does not produce.
 
 ## Catch-all tables
 

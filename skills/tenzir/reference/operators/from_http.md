@@ -128,6 +128,8 @@ This request-record pagination behavior applies to [`from_http`](https://tenzir.
 
 **[OData](https://www.oasis-open.org/standard/odata-v4-01-os/) mode**: The string `"odata"` to follow OData collection responses such as Microsoft Graph. The response body must be a JSON object with a top-level `value` array. Tenzir emits each object from `value`, follows a top-level string `@odata.nextLink` as an opaque URL, and sends follow-up requests as `GET` requests with the same headers.
 
+When pagination leads to another host over HTTPS, Tenzir uses the same `tls` options to verify that host’s certificate unless `skip_peer_verification` is enabled in the effective TLS configuration. HTTP requests don’t use TLS and provide no certificate verification. Tenzir doesn’t send the client certificate from `tls.certfile` to another host.
+
 ### `paginate_delay = duration (optional)`
 
 The duration to wait between consecutive pagination requests.

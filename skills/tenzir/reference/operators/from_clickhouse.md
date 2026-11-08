@@ -213,6 +213,19 @@ summarize source, alerts=count(), last=max(time)
 
 ClickHouse filters and groups the rows and returns one row per source.
 
+### Keep the top groups on the server
+
+```tql
+from_clickhouse table="events", host="clickhouse.example.com", tls=false
+where severity >= 3
+summarize src_ip, events=count()
+where events >= 10
+sort -events, src_ip
+head 20
+```
+
+ClickHouse also takes over the `where`, `sort`, and `head` after the summary, runs them with its own semantics, and returns at most 20 groups. If the limits of the session, such as `max_result_rows` with `result_overflow_mode='break'`, would truncate an aggregated query, the query fails instead of returning a partial result.
+
 ### Read events from a catch-all table
 
 ```tql

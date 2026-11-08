@@ -75,7 +75,19 @@ time = timestamp.parse_time("%d/%m/%Y %H:%M:%S %z")
 }
 ```
 
-Include `%z` when the input carries a UTC offset. If the sender uses local time without an offset, append the known offset before parsing rather than silently assuming that every sender uses UTC.
+Include `%z` when the input carries a UTC offset. If the sender uses local time without an offset, pass its time zone with `timezone` rather than silently assuming that every sender uses UTC. Unlike a fixed offset, a time zone such as `Europe/Berlin` stays correct across daylight saving switches:
+
+```tql
+from {timestamp: "15/07/2024 10:30:45"}
+time = timestamp.parse_time("%d/%m/%Y %H:%M:%S", timezone="Europe/Berlin")
+```
+
+```tql
+{
+  timestamp: "15/07/2024 10:30:45",
+  time: 2024-07-15T08:30:45Z,
+}
+```
 
 ## Complete timestamps that omit the year
 

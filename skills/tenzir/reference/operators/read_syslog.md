@@ -74,7 +74,7 @@ With this input, the parser will produce the following output, with the schema n
 }
 ```
 
-RFC 3164 timestamps don’t include a year or timezone, so `read_syslog` keeps the timestamp as a string. Use [`parse_time`](https://tenzir.com/docs/v7.0.0/reference/functions/parse_time.md) with `reference` to convert it to a timestamp. See [`parse_time`](https://tenzir.com/docs/v7.0.0/reference/functions/parse_time.md) for examples with fixed references and timezone offsets.
+RFC 3164 timestamps don’t include a year or time zone, so `read_syslog` keeps the timestamp as a string. Use [`parse_time`](https://tenzir.com/docs/v7.0.0/reference/functions/parse_time.md) with `reference` to convert it to a timestamp, and with `timezone` to interpret it in the sender’s time zone. See [`parse_time`](https://tenzir.com/docs/v7.0.0/reference/functions/parse_time.md) for examples with fixed references and per-event time zones.
 
 Pipeline
 
@@ -83,6 +83,25 @@ from_file "syslog.txt" {
   read_syslog
 }
 timestamp = timestamp.parse_time("%b %e %H:%M:%S", reference=now())
+```
+
+If you know the time zone of each sender, look it up per event, for example from a record that maps hostnames to time zones. Daylight saving time is taken into account. The lookup yields null and a warning for an unknown hostname, in which case `parse_time` interprets the timestamp as UTC:
+
+Pipeline
+
+```tql
+let $zones = {
+  mymachine: "Europe/Berlin",
+  othermachine: "America/New_York",
+}
+from_file "syslog.txt" {
+  read_syslog
+}
+timestamp = timestamp.parse_time(
+  "%b %e %H:%M:%S",
+  reference=now(),
+  timezone=$zones[hostname],
+)
 ```
 
 Some RFC 3164 emitters prepend structured-data blocks to the message content using syntax similar to RFC 5424. When the parser detects valid structured data at the start of the content field, it extracts the key-value pairs into a `structured_data` field and stores the remaining text in `content`. These events use the schema name `syslog.rfc3164.structured`:

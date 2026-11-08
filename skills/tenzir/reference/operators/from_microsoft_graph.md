@@ -91,6 +91,8 @@ The Microsoft Graph API version to use for the initial request. Supported values
 
 TLS options for Microsoft Graph requests. Use a record to configure options such as `cacert` when a local proxy or custom trust store intercepts HTTPS traffic.
 
+The options also apply to token requests to the OAuth authority, except for `certfile` and `keyfile`: only Microsoft Graph receives the client certificate.
+
 ## Optimizations
 
 The operator applies the [`where`](https://tenzir.com/docs/v7.0.0/reference/operators/where.md), [`select`](https://tenzir.com/docs/v7.0.0/reference/operators/select.md), and [`head`](https://tenzir.com/docs/v7.0.0/reference/operators/head.md) operators that follow it to each page as it arrives:

@@ -14,12 +14,13 @@ Queries SentinelOne Singularity Data Lake with TQL.
 ```tql
 from_sentinelone_data_lake url:string, token=string,
                            [query=string, start=time, end=time,
-                            account_ids=list<string>, tenant=bool, timeout=duration, raw=bool]
+                            account_ids=list<string>, tenant=bool, timeout=duration, raw=bool,
+                            pushdown=bool]
 ```
 
 ## Description
 
-The `from_sentinelone_data_lake` operator builds a remote query from your TQL filters, timestamp bounds, and limits. You don’t need to write PowerQuery or pass `query`, `start`, or `end`:
+The `from_sentinelone_data_lake` operator hands SentinelOne the operators that follow it, such as [`where`](https://tenzir.com/docs/v7.0.0/reference/operators/where.md), [`select`](https://tenzir.com/docs/v7.0.0/reference/operators/select.md), [`summarize`](https://tenzir.com/docs/v7.0.0/reference/operators/summarize.md), [`sort`](https://tenzir.com/docs/v7.0.0/reference/operators/sort.md), and [`head`](https://tenzir.com/docs/v7.0.0/reference/operators/head.md), which then run in SentinelOne with SentinelOne’s semantics. You don’t need to write PowerQuery or pass `query`, `start`, or `end`:
 
 ```tql
 let $end = now()
@@ -30,11 +31,11 @@ where severity > 3 and message.starts_with("alert")
 head 100
 ```
 
-Bind relative times with `let` so the optimizer receives fixed timestamps. The operator checks the assembled query when it starts. Without an explicit `query`, at least one supported filter, inferred time bound, pushable limit, or explicit `start` or `end` must constrain the request. Otherwise it reports an error before contacting SentinelOne. For example, a bare source or an unsupported regex filter followed by `head` cannot supply the necessary query. Supported constraints can still run remotely when other predicates stay local.
+Bind relative times with `let` so the optimizer receives fixed timestamps. Without `query`, `start`, and `end`, SentinelOne must take over a [`where`](https://tenzir.com/docs/v7.0.0/reference/operators/where.md), [`head`](https://tenzir.com/docs/v7.0.0/reference/operators/head.md), or [`summarize`](https://tenzir.com/docs/v7.0.0/reference/operators/summarize.md). Otherwise the operator reports an error before contacting SentinelOne. For example, a bare source or a `match_regex` filter, which stays in Tenzir, cannot supply the query.
 
-Exploratory pipelines retrieve complete parsed events, including fields that neither the filter nor the rest of the pipeline names. A restrictive `select` can instead use projected PowerQuery to transfer fewer fields. The operator chooses automatically; you do not need a retrieval flag. Whole-event inspection, dynamic field access, and whole-record selections use complete-event retrieval when a finite PQ column list cannot represent them safely.
+Pipelines with only [`where`](https://tenzir.com/docs/v7.0.0/reference/operators/where.md) and [`head`](https://tenzir.com/docs/v7.0.0/reference/operators/head.md) retrieve complete parsed events, including fields that the pipeline never names. A [`select`](https://tenzir.com/docs/v7.0.0/reference/operators/select.md) or [`summarize`](https://tenzir.com/docs/v7.0.0/reference/operators/summarize.md) makes SentinelOne return only the columns or groups that the pipeline keeps. The operator chooses automatically; you do not need a retrieval flag.
 
-You can provide `query` as an escape hatch for native PowerQuery. The operator uses SentinelOne’s Long Running Query (LRQ) API on your tenant’s console host: it launches queries at `/sdl/v2/api/queries`, polls once per second, and reads completed results. Generated reads can use LOG search with cursor continuation or projected PQ. Explicit native queries always remain PQ. Each completed server-side query is deleted before its events are emitted, including when a downstream operator stops after the first event.
+You can provide `query` to write the PowerQuery yourself. The operator uses SentinelOne’s Long Running Query (LRQ) API on your tenant’s console host: it launches queries at `/sdl/v2/api/queries`, polls once per second, and reads completed results. Reads of whole events use LOG search with cursor continuation, and all other reads use PowerQuery (PQ). Each completed server-side query is deleted before its events are emitted, including when a downstream operator stops after the first event.
 
 When you omit `query`, timestamp predicates supply missing time bounds. For a request that satisfies the constraint requirement, any remaining missing bound defaults: `end` to the current time and `start` to 24 hours before `end`. The default time window does not itself satisfy that requirement: a bare source still errors before contacting SentinelOne. The operator sends both time bounds explicitly and requests low query priority.
 
@@ -58,7 +59,7 @@ Use the [`secret()`](https://tenzir.com/docs/v7.0.0/reference/functions/secret.m
 
 ### `query = string (optional)`
 
-A native PowerQuery to use instead of constructing the query entirely from TQL. It must not be empty when provided. The operator sends this query and its time window unchanged. Downstream TQL filters and limits run locally so they cannot change the rows selected by SentinelOne’s result cap. Omit this argument for TQL-only queries.
+A native PowerQuery to use instead of constructing the query entirely from TQL. It must not be empty when provided. The operator keeps its time window and appends the operators that SentinelOne takes over as further stages, which apply to the query’s result. Without such operators, it sends the query unchanged. Omit this argument for TQL-only queries.
 
 For native queries, refer to the [SentinelOne PowerQuery documentation](https://support.sentinelone.com/hc/en-us/articles/360004195934).
 
@@ -88,7 +89,7 @@ Defaults to `true`, which suits console and service-user API tokens. Set it to `
 
 ### `timeout = duration (optional)`
 
-The total time budget for launching and polling queries, including all pages, retrieval fallbacks, and retry delays. Must be greater than zero. Defaults to `3min`.
+The total time budget for launching and polling queries, including all pages and retry delays. Must be greater than zero. Defaults to `3min`.
 
 When the budget expires, the operator attempts to delete the active server-side query and reports an error. Earlier pages may already have been emitted; that run is incomplete. Cleanup can take additional time. Increase this value for longer reads, for example `timeout=5min`, or narrow the search. Neither successful polls nor new pages reset the budget.
 
@@ -96,21 +97,25 @@ When the budget expires, the operator attempts to delete the active server-side 
 
 Whether to skip parsing strings as typed data.
 
-Defaults to `false`. Dotted attribute names still become nested records, and `timestamp` metadata remains a time value.
+Defaults to `false`. Dotted attribute names still become nested records, `timestamp` metadata remains a time value, and counts remain integers.
+
+### `pushdown = bool (optional)`
+
+Whether SentinelOne takes over the operators that follow the operator. With `pushdown=false`, they stay in the pipeline and run with TQL semantics. See [Optimizations](from_sentinelone_data_lake.md#optimizations).
+
+Defaults to `true`.
 
 ## Optimizations
 
-When you omit `query`, the operator uses [`where`](https://tenzir.com/docs/v7.0.0/reference/operators/where.md), [`select`](https://tenzir.com/docs/v7.0.0/reference/operators/select.md), and [`head`](https://tenzir.com/docs/v7.0.0/reference/operators/head.md) to narrow the search window, send safe prefilters, and choose between complete-event LOG retrieval and projected PQ. Every original predicate still runs locally, and `head` counts events after that filtering. A full PQ response or ambiguous projected values can trigger a LOG fallback before any PQ events are emitted. With an explicit `query`, both the query and its time window stay unchanged.
+The operator hands SentinelOne the operators that follow it, as far as PowerQuery can spell them: [`where`](https://tenzir.com/docs/v7.0.0/reference/operators/where.md), [`select`](https://tenzir.com/docs/v7.0.0/reference/operators/select.md), [`summarize`](https://tenzir.com/docs/v7.0.0/reference/operators/summarize.md) with `count()` and `count(x)`, including [`top`](https://tenzir.com/docs/v7.0.0/reference/operators/top.md) and [`rare`](https://tenzir.com/docs/v7.0.0/reference/operators/rare.md), [`sort`](https://tenzir.com/docs/v7.0.0/reference/operators/sort.md) after a [`select`](https://tenzir.com/docs/v7.0.0/reference/operators/select.md) or [`summarize`](https://tenzir.com/docs/v7.0.0/reference/operators/summarize.md), and [`head`](https://tenzir.com/docs/v7.0.0/reference/operators/head.md). Those operators leave the pipeline and run with SentinelOne’s semantics, which can differ from TQL. For example, `x != "a"` also matches events without `x`. Comparisons of `timestamp` also narrow the time window of the request. Use `pushdown=false` to keep every operator in the pipeline.
 
-Without a [`where`](https://tenzir.com/docs/v7.0.0/reference/operators/where.md), SentinelOne also computes a directly following [`summarize`](https://tenzir.com/docs/v7.0.0/reference/operators/summarize.md) that groups by fields and counts events with `count()`, which includes [`top`](https://tenzir.com/docs/v7.0.0/reference/operators/top.md) and [`rare`](https://tenzir.com/docs/v7.0.0/reference/operators/rare.md). Tenzir checks the result, reads the events without the group key to confirm their group, and summarizes the events itself whenever SentinelOne might group differently.
-
-Our [SentinelOne optimization reference](../optimizations/sentinelone.md) describes which filters translate, how TQL maps to PowerQuery, which fields the operator requests, and how the result cap interacts with pushed filters.
+Our [SentinelOne optimization reference](../optimizations/sentinelone.md) describes which operators SentinelOne takes over, how they spell in PowerQuery, how the operator reads the results, and where SentinelOne’s semantics differ.
 
 ## Limitations
 
-* Explicit PowerQuery requests retain the default 1,000-row cap for queries without `limit` or `group`. Add `| limit N` to the native query to request a larger result. Generated TQL reads instead use [LOG continuation when needed](../optimizations/sentinelone.md#limits-and-the-result-cap).
-* Output order is not guaranteed. LOG pages are separate queries, not a snapshot of a changing data lake.
-* Generated reads retry explicitly incomplete PQ results through LOG and fail if LOG reports omissions. Unreported API-side omissions cannot be detected. Explicit native queries do not currently report those omission indicators.
+* A `query` without operators that SentinelOne takes over keeps the default cap of 1,000 rows for queries without `limit` or `group`, which the operator reports as a warning. Add `| limit N` to the query to request more. Other PowerQuery reads end in `| limit 1600000` and warn when they reach it.
+* Output order is not guaranteed without a [`sort`](https://tenzir.com/docs/v7.0.0/reference/operators/sort.md). LOG pages are separate queries, not a snapshot of a changing data lake.
+* Results that SentinelOne reports as partial or with omitted events arrive with a warning. Unreported API-side omissions cannot be detected.
 * SentinelOne expires queries 30 seconds after the last poll and kills queries after five minutes. An expired or killed query fails with HTTP `404`; the operator does not relaunch it automatically.
 * Graceful shutdown deletes an active query. Forced cancellation during polling relies on the server’s 30-second expiry. Checkpointing is not supported.
 
