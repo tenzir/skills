@@ -48,7 +48,7 @@ Sink arguments:
 
 * `table` is `nanosiem.ocsf_logs_raw`, nano’s ingest entry point.
 * `user` and `password` are nano’s INSERT-only [ingest credential](https://nano.rs/docs/ocsf/integrations/direct-ocsf/) (`nanosiem_ingest`).
-* `mode="append"` writes into the existing table. The `json=` option is for table creation only and errors in `append` mode.
+* `mode="append"` writes into the existing table. The `json=` option is for table creation only, so the operator ignores it in `append` mode and emits a warning.
 * TLS is on by default; use port `9440` for a remote cluster. For local testing against a plaintext deployment colocated with nano, add `tls=false`.
 
 Where the OCSF stream comes from is up to you. When the input is raw logs rather than OCSF, [map it to OCSF](../guides/normalize/map-to-ocsf.md) 1.8.0 first; nano’s [direct OCSF ingestion guide](https://nano.rs/docs/ocsf/integrations/direct-ocsf/) has per-source mappings.

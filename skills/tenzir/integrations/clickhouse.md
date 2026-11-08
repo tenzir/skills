@@ -12,7 +12,7 @@ section: "Integrations"
 
 [ClickHouse](https://clickhouse.com/clickhouse) stores and queries structured security telemetry. Use Tenzir to collect, parse, and normalize events before writing them with [`to_clickhouse`](https://tenzir.com/docs/reference/operators/to_clickhouse.md). Read stored events back with [`from_clickhouse`](https://tenzir.com/docs/reference/operators/from_clickhouse.md) for investigations, backfills, or export to another system.
 
-You can let Tenzir create a table for each OCSF class, append to a schema you manage, or combine selected typed columns with a JSON catch-all. The choice determines how the table handles fields that vary between events.
+You can append to a schema you manage, combine selected typed columns with a JSON catch-all, or let Tenzir create a table for each OCSF class with a deprecated create mode. The choice determines how the table handles fields that vary between events.
 
 ClickHouse integration
 
@@ -22,9 +22,9 @@ Choose a write pattern based on how you want to manage the destination schema. Y
 
 | Goal                                                           | Pattern                                                                                                                                                                                                |
 | -------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Create tables from normalized OCSF events                      | [One table per OCSF class](clickhouse.md#create-a-table-per-ocsf-class)                                                                                                |
 | Control column types, TTLs, projections, or materialized views | [Append to a table you manage](clickhouse.md#append-to-a-table-you-manage)                                                                                             |
 | Keep common fields typed while accepting additional fields     | [Add a JSON catch-all to a table you manage](clickhouse.md#catch-all-columns)                                                                                          |
+| Create tables from normalized OCSF events (deprecated)         | [One table per OCSF class](clickhouse.md#create-a-table-per-ocsf-class)                                                                                                |
 | Query retained events or feed detection pipelines              | [Read tables or SQL results](clickhouse.md#read-data-from-clickhouse) with [`from_clickhouse`](https://tenzir.com/docs/reference/operators/from_clickhouse.md) |
 | Check available tables and column types                        | [Inspect tables and schemas](clickhouse.md#inspect-tables-and-schemas)                                                                                                 |
 | Archive, migrate, or route stored events elsewhere             | [Export query results](clickhouse.md#export-query-results)                                                                                                             |
@@ -71,7 +71,7 @@ from_clickhouse table="security.events",
                 tls=false
 ```
 
-Use the same connection arguments with [`to_clickhouse`](https://tenzir.com/docs/reference/operators/to_clickhouse.md). If a URI selects a database and `table` is unqualified, Tenzir uses that database. In create modes, [`to_clickhouse`](https://tenzir.com/docs/reference/operators/to_clickhouse.md) also creates the selected database if it doesn’t exist.
+Use the same connection arguments with [`to_clickhouse`](https://tenzir.com/docs/reference/operators/to_clickhouse.md). If a URI selects a database and `table` is unqualified, Tenzir uses that database. In the deprecated create modes, [`to_clickhouse`](https://tenzir.com/docs/reference/operators/to_clickhouse.md) also creates the selected database if it doesn’t exist.
 
 The write and read examples that follow assume a local server without TLS, so they use `tls=false`. For ClickHouse Cloud, use your service endpoint and credentials, and keep TLS enabled.
 
@@ -81,13 +81,17 @@ The following patterns differ in who defines the schema and where additional fie
 
 ### Create a table per OCSF class
 
+Deprecated
+
+This pattern relies on the deprecated `mode="create_append"`. By default, [`to_clickhouse`](https://tenzir.com/docs/reference/operators/to_clickhouse.md) appends to existing tables only. Prefer to [append to a table you manage](clickhouse.md#append-to-a-table-you-manage).
+
 Let Tenzir create tables when each OCSF class should have its own schema. The [`ocsf_cast`](https://tenzir.com/docs/reference/operators/ocsf_cast.md) operator casts events to their OCSF class before [`to_clickhouse`](https://tenzir.com/docs/reference/operators/to_clickhouse.md) creates the table.
 
 ```tql
 from_file "ocsf_network_activity.json"
 ocsf_cast
 to_clickhouse table=f"ocsf.{class_name.replace(" ","_")}",
-              primary=time, json=unmapped,
+              mode="create_append", primary=time, json=unmapped,
               tls=false
 ```
 
