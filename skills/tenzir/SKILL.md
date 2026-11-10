@@ -980,6 +980,10 @@ Write Iceberg tables to Google's Lakehouse for Apache Iceberg (formerly BigLake)
 
 Provides real-time event data including process, file, and network activity.
 
+#### [D4 Project integration](integrations/d4.md)
+
+D4 is an open-source sensor network for distributed network monitoring by CIRCL.
+
 #### [DuckDB integration](integrations/duckdb.md)
 
 Read from and write to DuckDB database files with an embedded DuckDB engine.
@@ -1139,6 +1143,10 @@ Captures deobfuscated PowerShell commands, critical for detecting fileless malwa
 #### [Prometheus integration](integrations/prometheus.md)
 
 Send metric events to Prometheus-compatible Remote Write receivers, including Prometheus, Grafana Mimir, Cortex, Thanos Receive, and VictoriaMetrics.
+
+#### [Redis integration](integrations/redis.md)
+
+Redis is an in-memory data store that applications use as a cache, message broker, and work queue.
 
 #### [RELP integration](integrations/relp.md)
 

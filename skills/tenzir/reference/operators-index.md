@@ -294,7 +294,9 @@
 
 - [accept_otlp](operators/accept_otlp.md): Receives OpenTelemetry logs, metrics, and traces over OTLP/HTTP or OTLP/gRPC.
 - [from_duckdb](operators/from_duckdb.md): Reads events from a DuckDB database.
+- [from_redis](operators/from_redis.md): Pops items from Redis lists or receives messages from Redis pub/sub channels.
 - [read_chunks](operators/read_chunks.md): Parses binary data into events with a single `data` field, in a streaming fasion.
 - [to_duckdb](operators/to_duckdb.md): Writes events to a DuckDB table.
 - [to_iceberg](operators/to_iceberg.md): Writes events to an Apache Iceberg table through a REST catalog.
+- [to_redis](operators/to_redis.md): Writes events to Redis lists, channels, strings, sets, sorted sets, or hashes.
 - [write_chunks](operators/write_chunks.md): Converts each input event into a separate byte chunk.
