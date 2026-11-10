@@ -7,9 +7,9 @@ section: "Docs"
 
 # Read from message brokers
 
-> This guide shows you how to receive events from message brokers using TQL. You’ll learn to subscribe to topics and queues from Apache Kafka (including Amazon MSK), Amazon Kinesis Data Streams, NATS JetStream, AMQP-based brokers (like RabbitMQ), Amazon SQS, and Google Cloud Pub/Sub.
+> This guide shows you how to receive events from message brokers using TQL. You’ll learn to subscribe to topics and queues from Apache Kafka (including Amazon MSK), Amazon Kinesis Data Streams, NATS JetStream, AMQP-based brokers (like RabbitMQ), Redis, Amazon SQS, and Google Cloud Pub/Sub.
 
-This guide shows you how to receive events from message brokers using TQL. You’ll learn to subscribe to topics and queues from Apache Kafka (including Amazon MSK), Amazon Kinesis Data Streams, NATS JetStream, AMQP-based brokers (like RabbitMQ), Amazon SQS, and Google Cloud Pub/Sub.
+This guide shows you how to receive events from message brokers using TQL. You’ll learn to subscribe to topics and queues from Apache Kafka (including Amazon MSK), Amazon Kinesis Data Streams, NATS JetStream, AMQP-based brokers (like RabbitMQ), Redis, Amazon SQS, and Google Cloud Pub/Sub.
 
 ## Apache Kafka
 
@@ -128,6 +128,28 @@ this = string(message).parse_json()
 
 The URL structure is `amqp://user:password@host:port/vhost`. Configure additional options like `exchange`, `routing_key`, and `queue` in the operator parameters. The operator emits each AMQP payload in the `message` field.
 
+## Redis
+
+[Redis](https://docs.tenzir.com/integrations/redis) serves lists as work queues and offers pub/sub channels. Use `from_redis` to consume both.
+
+### Consume a list
+
+```tql
+from_redis "events"
+this = string(message).parse_json()
+```
+
+The operator pops items from the right end of the list, which yields them in FIFO order when producers push to the left end. Popping removes an item from the list, so each item goes to only one consumer.
+
+### Subscribe to channels
+
+Set `command="subscribe"` for channels or `command="psubscribe"` for channel patterns, and use `metadata_field` to keep the channel:
+
+```tql
+from_redis "alerts.*", command="psubscribe", metadata_field=redis
+this = {...string(message).parse_json(), channel: redis.channel}
+```
+
 ## Amazon SQS
 
 [Amazon SQS](https://docs.tenzir.com/integrations/amazon/sqs) is a managed message queue. Use `from_amazon_sqs` to receive events from SQS queues.
@@ -180,6 +202,7 @@ See [Collect](../collect.md#fetch-data-referenced-in-events) for the general col
 * [Kafka](https://docs.tenzir.com/integrations/kafka)
 * [Nats](https://docs.tenzir.com/integrations/nats)
 * [Amqp](https://docs.tenzir.com/integrations/amqp)
+* [Redis](https://docs.tenzir.com/integrations/redis)
 * [Kinesis](https://docs.tenzir.com/integrations/amazon/kinesis)
 * [Sqs](https://docs.tenzir.com/integrations/amazon/sqs)
 * [Cloud pubsub](https://docs.tenzir.com/integrations/google/cloud-pubsub)

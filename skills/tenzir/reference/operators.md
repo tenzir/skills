@@ -825,6 +825,14 @@ Captures packets from a network interface and outputs events.
 from_nic "eth0"
 ```
 
+### [from\_redis](operators/from_redis.md)
+
+Pops items from Redis lists or receives messages from Redis pub/sub channels.
+
+```tql
+from_redis "queue"
+```
+
 ### [from\_s3](operators/from_s3.md)
 
 Reads one or multiple files from Amazon S3.
@@ -1325,6 +1333,14 @@ Sends metric events to a Prometheus Remote Write receiver.
 
 ```tql
 to_prometheus "https://prometheus.example/api/v1/write"
+```
+
+### [to\_redis](operators/to_redis.md)
+
+Writes events to Redis lists, channels, strings, sets, sorted sets, or hashes.
+
+```tql
+to_redis "queue"
 ```
 
 ### [to\_s3](operators/to_s3.md)

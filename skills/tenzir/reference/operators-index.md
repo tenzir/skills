@@ -131,6 +131,7 @@
 - [from_mysql](operators/from_mysql.md): Reads events from a MySQL database.
 - [from_nats](operators/from_nats.md): Consumes messages from a NATS JetStream subject.
 - [from_nic](operators/from_nic.md): Captures packets from a network interface and outputs events.
+- [from_redis](operators/from_redis.md): Pops items from Redis lists or receives messages from Redis pub/sub channels.
 - [from_s3](operators/from_s3.md): Reads one or multiple files from Amazon S3.
 - [from_sentinelone_data_lake](operators/from_sentinelone_data_lake.md): Queries SentinelOne Singularity Data Lake with TQL.
 - [from_splunk](operators/from_splunk.md): Runs a Splunk search and returns its results as events.
@@ -207,6 +208,7 @@
 - [to_nats](operators/to_nats.md): Publishes messages to a NATS JetStream subject.
 - [to_opensearch](operators/to_opensearch.md): Sends events to a Bulk API compatible with OpenSearch.
 - [to_prometheus](operators/to_prometheus.md): Sends metric events to a Prometheus Remote Write receiver.
+- [to_redis](operators/to_redis.md): Writes events to Redis lists, channels, strings, sets, sorted sets, or hashes.
 - [to_s3](operators/to_s3.md): Writes events to one or multiple objects in Amazon S3.
 - [to_sentinelone_data_lake](operators/to_sentinelone_data_lake.md): Sends security events to SentinelOne Singularity Data Lake via REST API.
 - [to_snowflake](operators/to_snowflake.md): Sends events to a Snowflake database.

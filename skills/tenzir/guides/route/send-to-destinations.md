@@ -17,7 +17,7 @@ TQL provides `to_*` operators for sending events to various destinations. Messag
 
 ### Message brokers
 
-Send events to message brokers like [Kafka](https://docs.tenzir.com/integrations/kafka), [Amazon Kinesis Data Streams](https://docs.tenzir.com/integrations/amazon/kinesis), and [NATS](https://docs.tenzir.com/integrations/nats).
+Send events to message brokers like [Kafka](https://docs.tenzir.com/integrations/kafka), [Amazon Kinesis Data Streams](https://docs.tenzir.com/integrations/amazon/kinesis), [NATS](https://docs.tenzir.com/integrations/nats), and [Redis](https://docs.tenzir.com/integrations/redis).
 
 Send to Kafka with [`to_kafka`](https://tenzir.com/docs/v7.0.0/reference/operators/to_kafka.md) and automatic JSON formatting:
 
@@ -43,6 +43,15 @@ to_nats "alerts"
 ```
 
 The NATS server must have a JetStream stream that captures the destination subject.
+
+Push to a Redis list with [`to_redis`](https://tenzir.com/docs/v7.0.0/reference/operators/to_redis.md), which another pipeline consumes in order with [`from_redis`](https://tenzir.com/docs/v7.0.0/reference/operators/from_redis.md):
+
+```tql
+from {severity: "high", message: "credential access detected"}
+to_redis "alerts"
+```
+
+Set `command="publish"` to publish to a Redis pub/sub channel instead.
 
 Send to Kinesis with [`to_amazon_kinesis`](https://tenzir.com/docs/v7.0.0/reference/operators/to_amazon_kinesis.md) and the default NDJSON serialization:
 
