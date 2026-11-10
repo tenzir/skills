@@ -7472,6 +7472,21 @@ win/service_type_id:
   description: The normalized identifier of the service type.
   used_by:
     objects: [win/win_service]
+win/token_elevation_type:
+  caption: Token Elevation Type
+  type: string_t
+  extension: win
+  description: The User Account Control elevation type of the access token that the process runs with, normalized to the caption of the `token_elevation_type_id` value. In the case of 'Other', it is defined by the event source.
+  used_by:
+    objects: [process]
+win/token_elevation_type_id:
+  caption: Token Elevation Type ID
+  type: integer_t
+  extension: win
+  sibling: token_elevation_type
+  description: The normalized identifier of the User Account Control elevation type of the access token that the process runs with. The values match the Windows `TOKEN_ELEVATION_TYPE` enumeration.
+  used_by:
+    objects: [process]
 win/win_resource:
   caption: Windows Resource
   type: object_t

@@ -13,3 +13,35 @@ attributes:
     array: true
     requirement: optional
     description: The Windows services that this process is hosting.
+  token_elevation_type:
+    caption: Token Elevation Type
+    type: string_t
+    requirement: optional
+    description: The User Account Control elevation type of the access token that the process runs with, normalized to the caption of the `token_elevation_type_id` value. In the case of 'Other', it is defined by the event source.
+  token_elevation_type_id:
+    caption: Token Elevation Type ID
+    type: integer_t
+    requirement: optional
+    sibling: token_elevation_type
+    description: The normalized identifier of the User Account Control elevation type of the access token that the process runs with. The values match the Windows `TOKEN_ELEVATION_TYPE` enumeration.
+    enum:
+      0:
+        caption: Unknown
+        description: The token elevation type is unknown.
+      1:
+        caption: None
+        description: The token does not have a linked token. This is the case, for example, when User Account Control is disabled, or for the built-in Administrator account, service accounts, and the local system account. Corresponds to `TokenElevationTypeDefault`.
+      2:
+        caption: Full
+        description: The token is an elevated token with no privileges removed or groups disabled, for example when a program is started with Run as administrator or is configured to always require administrative privilege. Corresponds to `TokenElevationTypeFull`.
+      3:
+        caption: Limited
+        description: The token is a limited token with administrative privileges removed and administrative groups disabled. Corresponds to `TokenElevationTypeLimited`.
+      99:
+        caption: Other
+        description: The token elevation type is not mapped. See the `token_elevation_type` attribute, which contains an event source specific value.
+    references:
+    - description: TOKEN_ELEVATION_TYPE enumeration
+      url: https://learn.microsoft.com/en-us/windows/win32/api/winnt/ne-winnt-token_elevation_type
+    - description: Security event 4688, A new process has been created (Token Elevation Type field)
+      url: https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/auditing/event-4688
