@@ -1,5 +1,6 @@
 name: startup_item
 caption: Startup Item
+extends: object
 description: The startup item object describes an application component that has associated startup criteria and configurations.
 profiles: [container, data_classification]
 constraints:

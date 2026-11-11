@@ -93,6 +93,7 @@ objects:
   path: v1.10.0-dev/objects/aircraft.yaml
 - name: analysis_target
   caption: Analysis Target
+  extends: object
   group: Discovery
   summary: The analysis target defines the scope of monitored activities, specifying what entity, system or process is analyzed for activity patterns.
   path: v1.10.0-dev/objects/analysis_target.yaml
@@ -110,6 +111,7 @@ objects:
   path: v1.10.0-dev/objects/anomaly.yaml
 - name: anomaly_analysis
   caption: Anomaly Analysis
+  extends: object
   group: Findings & Compliance
   summary: Describes the analysis of activity patterns and anomalies of target entities to identify potential security threats, performance issues, or other deviations from established baselines.
   path: v1.10.0-dev/objects/anomaly_analysis.yaml
@@ -906,6 +908,7 @@ objects:
   path: v1.10.0-dev/objects/programmatic_credential.yaml
 - name: query_evidence
   caption: Query Evidence
+  extends: object
   group: Metadata & Context
   summary: The specific resulting evidence information that was queried or discovered.
   path: v1.10.0-dev/objects/query_evidence.yaml
@@ -1049,6 +1052,7 @@ objects:
   path: v1.10.0-dev/objects/sso.yaml
 - name: startup_item
   caption: Startup Item
+  extends: object
   group: Process & Module
   summary: The startup item object describes an application component that has associated startup criteria and configurations.
   path: v1.10.0-dev/objects/startup_item.yaml

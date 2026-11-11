@@ -1,5 +1,6 @@
 name: query_evidence
 caption: Query Evidence
+extends: object
 description: The specific resulting evidence information that was queried or discovered. When mapping raw telemetry data users should select the appropriate child object that best matches the evidence type as defined by query_type_id.
 profiles: [container, data_classification]
 constraints:

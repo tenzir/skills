@@ -6,7 +6,7 @@ extends: _entity
 description: A collection of evidence artifacts associated to the activity/activities that triggered a security detection.
 profiles: [cloud, container, data_classification]
 constraints:
-  at_least_one: [actor, api, connection_info, data, database, databucket, device, dst_endpoint, email, file, process, query, resources, src_endpoint, url, user, job, script]
+  at_least_one: [actor, ai_agent, api, connection_info, data, database, databucket, device, dst_endpoint, email, file, process, query, resources, src_endpoint, url, user, job, script]
 patched_by: [win]
 referenced_by:
   classes:

@@ -1,5 +1,6 @@
 name: analysis_target
 caption: Analysis Target
+extends: object
 description: The analysis target defines the scope of monitored activities, specifying what entity, system or process is analyzed for activity patterns.
 referenced_by:
   objects:

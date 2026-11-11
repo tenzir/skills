@@ -4,7 +4,7 @@ extension: win
 patches: evidences
 description: Extends the evidences object to add Windows specific fields
 constraints:
-  at_least_one: [actor, api, connection_info, data, database, databucket, device, dst_endpoint, email, file, process, query, src_endpoint, url, user, job, script, reg_key, reg_value, win_service]
+  at_least_one: [actor, ai_agent, api, connection_info, data, database, databucket, device, dst_endpoint, email, file, process, query, src_endpoint, url, user, job, script, reg_key, reg_value, win_service]
 attributes:
   reg_key:
     caption: Registry Key
