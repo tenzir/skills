@@ -7,195 +7,102 @@ section: "Docs"
 
 # ClickHouse
 
-> When fromclickhouse reads a table, it lets ClickHouse filter the rows, pick the columns, stop after enough rows, and compute summaries, so that ClickHouse reads and sends only what the pipeline needs instead of the whole table. This page describes when that happens, which filters ClickHouse evaluates, and why the others stay in Tenzir. The optimizations overview explains how Tenzir optimizes pipelines in general and compares the databases.
+> When fromclickhouse reads a table, it hands ClickHouse the operators that follow it, so that ClickHouse sends only what the pipeline keeps instead of the whole table. Those operators leave the pipeline and run in ClickHouse, with ClickHouse’s semantics. This page describes which operators ClickHouse takes over, how its results can differ from Tenzir’s, and how to keep operators in Tenzir. The optimizations overview explains how Tenzir optimizes pipelines in general.
 
-When [`from_clickhouse`](https://tenzir.com/docs/v7.0.0/reference/operators/from_clickhouse.md) reads a table, it lets ClickHouse filter the rows, pick the columns, stop after enough rows, and compute summaries, so that ClickHouse reads and sends only what the pipeline needs instead of the whole table. This page describes when that happens, which filters ClickHouse evaluates, and why the others stay in Tenzir. The [optimizations overview](../optimizations.md) explains how Tenzir optimizes pipelines in general and compares the databases.
+When [`from_clickhouse`](https://tenzir.com/docs/v7.0.0/reference/operators/from_clickhouse.md) reads a table, it hands ClickHouse the operators that follow it, so that ClickHouse sends only what the pipeline keeps instead of the whole table. Those operators leave the pipeline and run in ClickHouse, with ClickHouse’s semantics. This page describes which operators ClickHouse takes over, how its results can differ from Tenzir’s, and how to keep operators in Tenzir. The [optimizations overview](../optimizations.md) explains how Tenzir optimizes pipelines in general.
 
 ## When it applies
 
-The operator reads in one of these modes, and only table mode optimizes:
+The operator reads in one of these modes:
 
-* **Table mode** reads a table that you name with `table`, as in `from_clickhouse table="logs.events"`. The operator writes the query itself and adds the work of the operators that follow it. The rest of this page describes this mode.
-* **SQL mode** sends the query that you write with `sql` exactly as written, and Tenzir applies the rest of the pipeline to its result. To have ClickHouse filter, write the filter into your query.
+* **Table mode** reads a table that you name with `table`, as in `from_clickhouse table="logs.events"`. The operator writes the query itself and adds the operators that follow it. The rest of this page describes this mode.
+* **SQL mode** sends the query that you write with `sql` exactly as written, and the rest of the pipeline runs in Tenzir. To have ClickHouse filter, write the filter into your query.
 
-## How the query changes
+With `pushdown=false`, every operator stays in Tenzir and runs with TQL semantics. The operator still reads only the columns that the pipeline uses.
 
-The operator turns the operators that follow it into parts of its `SELECT`:
+[`from_hydrolix`](https://tenzir.com/docs/v7.0.0/reference/operators/from_hydrolix.md) keeps its previous optimizations for now: it sends filters that Tenzir evaluates again, and limits, and computes summaries in Hydrolix only when no operator follows them.
 
-* [`where`](https://tenzir.com/docs/v7.0.0/reference/operators/where.md) becomes a `WHERE` clause, as far as ClickHouse evaluates the filter exactly like Tenzir.
-* [`select`](https://tenzir.com/docs/v7.0.0/reference/operators/select.md) narrows the selected columns to the fields that the pipeline reads, down to the elements of named tuples.
-* [`head`](https://tenzir.com/docs/v7.0.0/reference/operators/head.md) becomes a `LIMIT`, if every filter before it went into the query.
+## Operators that ClickHouse takes over
 
-For example, the pipeline
+The operator takes over the longest run of operators directly after it that ClickHouse can spell:
+
+* [`where`](https://tenzir.com/docs/v7.0.0/reference/operators/where.md), as the [filters](clickhouse.md#filters) section describes.
+* [`select`](https://tenzir.com/docs/v7.0.0/reference/operators/select.md) of fields, including renames and elements of named tuples, such as `select ip=src_ip, meta.level`.
+* [`drop`](https://tenzir.com/docs/v7.0.0/reference/operators/drop.md) of top-level fields, which becomes `* EXCEPT (…)`.
+* [`summarize`](https://tenzir.com/docs/v7.0.0/reference/operators/summarize.md) with group keys on fields and `count()`, `count(x)`, `min(x)`, and `max(x)` of fields. The summary may follow [`select`](https://tenzir.com/docs/v7.0.0/reference/operators/select.md), [`drop`](https://tenzir.com/docs/v7.0.0/reference/operators/drop.md), and assignments that copy fields, as [Aggregations in the source](../optimizations.md#aggregations-in-the-source) describes. `sum` and `mean` stay in Tenzir, since ClickHouse may return `NaN` or infinity for them.
+* [`sort`](https://tenzir.com/docs/v7.0.0/reference/operators/sort.md) by fields.
+* [`head`](https://tenzir.com/docs/v7.0.0/reference/operators/head.md), and [`top`](https://tenzir.com/docs/v7.0.0/reference/operators/top.md) or [`rare`](https://tenzir.com/docs/v7.0.0/reference/operators/rare.md) followed by [`head`](https://tenzir.com/docs/v7.0.0/reference/operators/head.md).
+
+The first operator that ClickHouse cannot spell ends the run. That operator and everything after it run in Tenzir. Tenzir splits a [`where`](https://tenzir.com/docs/v7.0.0/reference/operators/where.md) at `and`, so ClickHouse can still take over the conjuncts that it spells. For example, the pipeline
 
 ```tql
 from_clickhouse table="logs.events"
-where ts > 2024-01-01 and src_ip in 10.0.0.0/8 and code in [401, 403]
-select id, message, meta.level
-head 100
+where x > 0
+summarize Y, n=count()
+where n >= 2
+sort -n
+head 3
 ```
 
-sends a query equivalent to
+sends this query:
 
 ```sql
-SELECT id, message, CAST(tuple(meta.level), 'Tuple(level Int64)') AS meta,
-       ts, src_ip, code
-FROM logs.events
-WHERE ts > toDateTime('2024-01-01 00:00:00', 'UTC')
-  AND src_ip BETWEEN toIPv4('10.0.0.0') AND toIPv4('10.255.255.255')
-  AND code IN (401, 403)
-LIMIT 100
+SELECT * FROM (
+  SELECT `Y` AS `__tenzir_column_0`, toInt64(count()) AS `__tenzir_column_1`
+  FROM logs.events WHERE (`x` > 0) GROUP BY `Y`
+) AS `__tenzir_level_2`
+WHERE (`__tenzir_column_1` >= 2)
+ORDER BY `__tenzir_column_1` DESC LIMIT 3
 ```
 
-The [`where`](https://tenzir.com/docs/v7.0.0/reference/operators/where.md), [`select`](https://tenzir.com/docs/v7.0.0/reference/operators/select.md), and [`head`](https://tenzir.com/docs/v7.0.0/reference/operators/head.md) operators still run in Tenzir on the rows that ClickHouse returns, so the result is the same whether ClickHouse evaluated a filter or not. The exception is a pipeline in which ClickHouse computes a summary, as [Aggregations](clickhouse.md#aggregations) describes.
+The operator nests derived tables where SQL’s clause order requires it, and keeps the order of a [`sort`](https://tenzir.com/docs/v7.0.0/reference/operators/sort.md) across them. Tenzir arranges the result columns into the fields of the pipeline, such as `Y` and `n`. A table read asks ClickHouse to fail rather than return a partial result when it hits one of its limits, such as a `max_result_rows` setting of your user’s profile. When the pipeline stops, the operator also stops a query that ClickHouse is still running, such as a sort or a summary that has not returned its first rows yet.
 
-## Aggregations
+## Filters
 
-When a [`summarize`](https://tenzir.com/docs/v7.0.0/reference/operators/summarize.md) follows the operator, after the filters that went into the query, ClickHouse computes the summary with `GROUP BY` and returns one row per group instead of every matching row. This also applies to [`top`](https://tenzir.com/docs/v7.0.0/reference/operators/top.md) and [`rare`](https://tenzir.com/docs/v7.0.0/reference/operators/rare.md), which count with `summarize`. For example, the pipeline
+ClickHouse takes over a [`where`](https://tenzir.com/docs/v7.0.0/reference/operators/where.md) whose predicate consists of:
 
-```tql
-from_clickhouse table="logs.events"
-where code >= 400
-summarize meta.source, events=count(), last.seen=max(ts)
-```
+* Fields, including elements of named tuples, such as `meta.level`, which becomes `tupleElement(meta, 'level')`, and columns with a dot in their name, such as `this["a.b"]`.
+* Literals: numbers, strings, booleans, `null`, times, which become `fromUnixTimestamp64Nano(…, 'UTC')`, and IP addresses, which become `toIPv4(…)` or `toIPv6(…)`.
+* Comparisons, `in` with a list of literals, arithmetic, and the boolean operators `and`, `or`, and `not`.
+* The functions `starts_with`, `ends_with`, `length_bytes`, `length_chars`, `to_lower`, `to_upper`, `trim`, `abs`, and `match_regex`, without named arguments such as `ignore_case`.
 
-sends a query equivalent to
+Durations, subnets, non-finite numbers, other functions, and optional fields such as `x?` stay in Tenzir.
 
-```sql
-SELECT meta.source, toInt64(count()), maxOrNull(ts)
-FROM logs.events
-WHERE code >= 400
-GROUP BY meta.source
-```
+## Binding fields
 
-Tenzir then arranges the result columns into the fields of the summary, such as `meta.source` and `last.seen`.
-
-The summary may also follow [`select`](https://tenzir.com/docs/v7.0.0/reference/operators/select.md), [`drop`](https://tenzir.com/docs/v7.0.0/reference/operators/drop.md), [`set`](https://tenzir.com/docs/v7.0.0/reference/operators/set.md), and assignments that keep or copy the fields that it reads, as [Aggregations in the source](../optimizations.md#aggregations-in-the-source) describes. ClickHouse then reads the original columns, and the result keeps the new names. For example, `select source=meta.source` followed by `summarize source, n=count()` groups by `meta.source` and returns the field `source`. A computed value for a field that the summary reads, such as `level = severity * 2` before `max(level)`, keeps the summary in Tenzir.
-
-ClickHouse takes over the [`where`](https://tenzir.com/docs/v7.0.0/reference/operators/where.md) before the summary together with the summary itself, and returns only the group keys and the aggregates. In the example, the `code` column never reaches Tenzir. ClickHouse computes these parts of a summary:
-
-* Group keys on `Bool`, integer, `String`, `FixedString`, `Enum`, `UUID`, `IPv4`, `IPv6`, and temporal columns, including `Nullable` and `LowCardinality` ones and elements of named tuples.
-* `count()`, and `count(x)` on such columns and on floating-point columns, counted as `Int64`, which Tenzir reads as `int` like the result of `count`.
-* `min(x)` and `max(x)` on integer and temporal columns, as `minOrNull` and `maxOrNull`, so that a summary without group keys over no rows yields `null` like Tenzir instead of the type’s default value.
-
-Values that Tenzir cannot represent, such as a `Date32` past the year 2262, group, count, and compare as `null`, as they do in Tenzir. Like Tenzir, ClickHouse returns one row for an empty table when the summary has no group keys, and no rows when it has some. The rows arrive in the order in which ClickHouse returns the groups. Since a table has no defined row order, this is as valid as the first-seen order in which [`summarize`](https://tenzir.com/docs/v7.0.0/reference/operators/summarize.md) emits groups. Use [`sort`](https://tenzir.com/docs/v7.0.0/reference/operators/sort.md) when you need a particular order.
-
-Everything else runs in Tenzir with the same result. The operator then reads the rows as usual and summarizes them itself, still selecting only the columns that the summary reads:
-
-* A summary with another function, such as `sum`, an option such as `emit`, or a group key or argument that is not a field.
-* A summary after a [`head`](https://tenzir.com/docs/v7.0.0/reference/operators/head.md), after a predicate that stays in Tenzir, or behind an operator that computes a field that the summary reads.
-* Group keys and extremes of floating-point columns, since `GROUP BY` considers `NaN` equal to itself and `-0.0` equal to `0.0`, and Tenzir’s result for `NaN` depends on the order of the rows.
-* Columns without an exact counterpart in Tenzir, such as `Decimal` columns, and generated columns.
-* Tables with a catch-all column, where the operator also reads every column, as [Catch-all tables](clickhouse.md#catch-all-tables) describes.
-
-When ClickHouse computes a summary, Tenzir does not see the individual rows, so it does not warn about values that it reads as `null`, such as a `Date32` past the year 2262. If the limits of the session, such as `max_result_rows` with `result_overflow_mode='break'`, would truncate the aggregated query, the query fails instead of returning a partial result.
-
-### Filters, sorts, and limits after a summary
-
-When ClickHouse computes the summary, it also takes over the [`where`](https://tenzir.com/docs/v7.0.0/reference/operators/where.md), [`sort`](https://tenzir.com/docs/v7.0.0/reference/operators/sort.md), and [`head`](https://tenzir.com/docs/v7.0.0/reference/operators/head.md) operators that directly follow it, so that it returns only the groups that the pipeline keeps. The filter applies to the groups after grouping, and the limit counts groups. For example, ClickHouse runs all steps of
-
-```tql
-from_clickhouse table="logs.events"
-where severity >= 3
-summarize src_ip, events=count()
-where events >= 10
-sort -events, src_ip
-head 20
-```
-
-and returns at most 20 groups. A [`top`](https://tenzir.com/docs/v7.0.0/reference/operators/top.md) or [`rare`](https://tenzir.com/docs/v7.0.0/reference/operators/rare.md) followed by [`head`](https://tenzir.com/docs/v7.0.0/reference/operators/head.md) runs in ClickHouse the same way.
-
-These operators leave the pipeline, and ClickHouse runs them with its own semantics:
-
-* Text compares and sorts under the collation of its column.
-* ClickHouse sorts `null` last. The position of `null` can differ from TQL.
-* Groups that tie in a sort arrive in the order in which ClickHouse returns them.
-
-Some steps still run in Tenzir, together with everything after them:
-
-* A [`where`](https://tenzir.com/docs/v7.0.0/reference/operators/where.md) with function calls, or with constants other than numbers, strings, booleans, and `null`, such as times and IP addresses. Tenzir splits a [`where`](https://tenzir.com/docs/v7.0.0/reference/operators/where.md) at `and`, so it can still send the supported conjuncts to ClickHouse.
-* A [`sort`](https://tenzir.com/docs/v7.0.0/reference/operators/sort.md) by fields that the summary does not produce.
+The operator decides which operators to take over from the pipeline alone. When the pipeline runs, it reads the table’s columns and binds every field that those operators use to a column: a top-level column, an element of a named tuple, a column with a dot in its name, or a path below a `JSON` column. If a field cannot be bound, the read fails before ClickHouse runs a query, with the reason and a hint to use `pushdown=false`. This happens for a path below a column that is not a named tuple or `JSON`, for a tuple element that does not exist, for a generated `ALIAS`, `MATERIALIZED`, or `EPHEMERAL` column, which `SELECT *` may leave out, and for a [`sort`](https://tenzir.com/docs/v7.0.0/reference/operators/sort.md) by a path below a `JSON` column whose order a later operator needs, such as in `sort j.k | head 10 | sort id`. A top-level field that the table lacks fails the query in ClickHouse.
 
 ## Catch-all tables
 
-A table with a [catch-all column](https://docs.tenzir.com/integrations/clickhouse#catch-all-columns) returns reconstructed events: the fields of the catch-all move to the top level, and dotted columns become nested fields. A filter on a field of such an event reaches ClickHouse through the column that holds the field:
+A table with a [catch-all column](https://docs.tenzir.com/integrations/clickhouse#catch-all-columns) returns reconstructed events, in which the fields of the catch-all move to the top level and dotted columns become nested fields. ClickHouse takes over [`where`](https://tenzir.com/docs/v7.0.0/reference/operators/where.md), [`sort`](https://tenzir.com/docs/v7.0.0/reference/operators/sort.md), and [`head`](https://tenzir.com/docs/v7.0.0/reference/operators/head.md) on such a table, binding each field to the single column that holds it: a typed column, or a path of the catch-all or another `JSON` column.
 
-* A supported filter on a typed column goes into the query like a filter on any other table. This applies to columns without dots in their name and to scalar columns with a dotted name, such as `src_endpoint.port`.
-* A filter on a field stored in the catch-all, such as `metadata.product.name`, can go into the query as a **prefilter**. ClickHouse reads only that path of the catch-all, not the whole JSON value. It compares the stored text of the value, so it may let extra rows through, such as the string `"7"` for `n > 4`. The filter stays in the pipeline and runs on the reconstructed events, so the result does not change.
+The read fails before it runs a query, with a hint to use `pushdown=false`, if:
 
-For example, if `src_endpoint.port` is a `UInt16` column and the catch-all column `event` holds `metadata`, the pipeline
+* ClickHouse takes over a [`select`](https://tenzir.com/docs/v7.0.0/reference/operators/select.md), [`drop`](https://tenzir.com/docs/v7.0.0/reference/operators/drop.md), or [`summarize`](https://tenzir.com/docs/v7.0.0/reference/operators/summarize.md), which need the reconstructed events.
+* A field has no single origin, such as a record that a dotted column merges into, or a field that overlaps a generated column.
+* A column shadows the field, such as a column `event.category` next to the catch-all `event` for the field `category`, since ClickHouse resolves the path to that column. Our integration guide explains how to [name the catch-all column](https://docs.tenzir.com/integrations/clickhouse#name-the-catch-all-column) to avoid this.
+* A field holds a whole `JSON` value, such as the catch-all column itself.
 
-```tql
-from_clickhouse table="security.events"
-where src_endpoint.port == 443 and metadata.product.name == "Demo"
+Use `pushdown=false` to compute these operators in Tenzir on the reconstructed events.
+
+## ClickHouse semantics
+
+The operators that ClickHouse takes over run as ClickHouse runs them, which can differ from TQL:
+
+* ClickHouse is statically typed. Comparing an `Int64` column with a string, or a string column with an IP address, fails the query. A comparison with a path of a `JSON` column works only while every row holds the same type there, and fails otherwise. A path that holds an object matches no comparison with a value, but counts as present in `!= null`. An empty object counts as missing.
+* Comparisons with `NULL` yield `NULL`, so `name != "alpha"` does not keep rows where `name` is `NULL`.
+* `to_lower` and `to_upper` become `lowerUTF8` and `upperUTF8`, and `match_regex` becomes `match`, which uses ClickHouse’s RE2.
+* `summarize` keeps a group for `null` keys. `min` and `max` become `minOrNull` and `maxOrNull`, which yield `null` without values.
+* A time compares in UTC at nanosecond precision. A `Date32` column holds no dates before 1900.
+* ClickHouse sorts `NULL` last in ascending order and returns rows that tie in a sort in any order.
+* A query that ClickHouse rejects fails the pipeline with a hint to use `pushdown=false`.
+
+## Verify an optimization
+
+To see the operators that ClickHouse takes over, print the optimized pipeline:
+
+```sh
+tenzir --dump-opt-ir 'from_clickhouse table="logs.events" | where severity >= 3 | head 10'
 ```
 
-sends a query with this filter:
-
-```sql
-WHERE `src_endpoint.port` = 443
-  AND toString(`event`.`metadata`.`product`.`name`) = 'Demo'
-```
-
-These predicates on fields of the catch-all become prefilters:
-
-* Comparisons (`==`, `<`, `<=`, `>`, `>=`) with string and number literals, and equality with booleans.
-* The functions `starts_with` and `ends_with`.
-* Substring search with `"needle" in field`, unless the needle contains a quote, a backslash, or a control character.
-* Membership tests with `in` and a list of such literals, which may mix types.
-* Existence tests with `field != null`.
-
-Other predicates on these fields run only in Tenzir, including negated predicates, `!=` with a non-null literal, `== null`, arithmetic, regular expressions, and comparisons with `ip` or `time` values. A field whose value may come from more than one column also stays in Tenzir. This includes a record that a dotted column merges into, such as `src_endpoint` next to a `src_endpoint.port` column, and a field that overlaps a generated `ALIAS`, `MATERIALIZED`, or `EPHEMERAL` column. When an explicit column overrides a catch-all value at the same path, the filter uses the explicit column.
-
-A column can also shadow paths of the catch-all. ClickHouse resolves a path such as `event.category` to a column of that name if one exists, instead of to the `category` path of the catch-all `event`. Tenzir therefore keeps filters on the shadowed field and the fields below it in the pipeline, for example `category == "x"` and `category.name == "x"`. It warns and names the shadowing column. The result stays correct, but ClickHouse sends more rows. Our integration guide explains how to [name the catch-all column](https://docs.tenzir.com/integrations/clickhouse#name-the-catch-all-column) to avoid this.
-
-Fields in other `JSON` columns of a catch-all table support the same prefilters if the column uses plain `JSON` or only the `max_dynamic_paths` and `max_dynamic_types` settings. If its declaration contains any typed path or `SKIP` clause, filters on all fields of that column stay in Tenzir. The marked catch-all column accepts the same settings, while typed paths or `SKIP` clauses on it are rejected. Tables without a catch-all keep their existing behavior.
-
-A [`select`](https://tenzir.com/docs/v7.0.0/reference/operators/select.md) does not narrow the columns, because a field can be split between a column and the catch-all, so the query reads every column. For the same reason, a [`summarize`](https://tenzir.com/docs/v7.0.0/reference/operators/summarize.md) always runs in Tenzir on the reconstructed events. A [`head`](https://tenzir.com/docs/v7.0.0/reference/operators/head.md) becomes a `LIMIT` only if every filter went into the query as an exact filter, not as a prefilter. To see the filter that ClickHouse received, look up the query in ClickHouse’s `system.query_log` table.
-
-Adding a column while a catch-all query with pushed filters starts can cause the query to fail. Retry it to use the updated schema, as the [operator reference](../operators/from_clickhouse.md#catch-all-tables) describes.
-
-## Filters that ClickHouse evaluates
-
-The operator puts a filter into the query only if ClickHouse evaluates it exactly like Tenzir. These filters qualify:
-
-* Comparisons of a column with a literal of matching kind: numbers against integer and floating-point columns, strings against `String` columns, `time` values against `Date`, `Date32`, `DateTime`, and `DateTime64` columns, and `ip` values against `IPv4` and `IPv6` columns. Booleans, enum names, UUIDs, and `FixedString` values compare for equality only.
-* Null checks with `== null` and `!= null`.
-* `in` with a list of such literals, and `ip in subnet`.
-* Comparisons between two columns of the same kind. Temporal columns must share their exact type, such as two `DateTime64(3)` columns.
-* The string functions `starts_with`, `ends_with`, and `length_bytes`, and substring search with `"needle" in haystack`. With `ignore_case=true`, `starts_with` and `ends_with` translate approximately, as explained in [Case-insensitive matching](clickhouse.md#case-insensitive-matching), and so does `match_regex`, as explained in [Regular expressions](clickhouse.md#regular-expressions).
-* Arithmetic that cannot overflow: `+`, `-`, and `*` on integer columns of at most 32 bits with a literal whose magnitude is below 2^31, and any `+`, `-`, `*`, or `/` that yields a floating-point number, except division by zero.
-* Expressions that consist of literals only, such as `1024 * 1024` or `2024-01-01 + 1d`, which are computed ahead of time.
-* `and`, `or`, and `not`.
-* Bare boolean columns.
-
-Literals are rendered in the column’s own ClickHouse type, so the comparison never depends on the session time zone and never converts the column. A `time` literal that falls between two values of a coarser column, such as `2024-01-01T12:00:00` against a `Date` column, resolves to the neighboring value for orderings and to `false` for equality. Values that Tenzir cannot represent, such as a `Date32` past the year 2262, compare as `null` in both places.
-
-Nested fields address elements of named tuples, so `meta.level > 2` translates when `meta` is a `Tuple(source String, level Int64)` column, and selecting `meta.level` transfers only that element. A tuple with an element of an [unsupported type](../operators/from_clickhouse.md#types) is absent from the result as a whole, so its elements are neither compared in SQL nor narrowed by a projection. Pushed predicates produce the same rows as TQL, including for `null` values, so `not (x == 1)` keeps rows where `x` is `null` either way.
-
-## Case-insensitive matching
-
-A predicate such as `msg.starts_with("error", ignore_case=true)` goes into the query as `startsWith(lowerUTF8(msg), lowerUTF8('error'))`. This is a deliberate exception to the rule that pushdown never changes results, made so that a common filter reaches the database. ClickHouse lowercases one character at a time, which agrees with TQL for ASCII and most other text. TQL applies full Unicode case folding instead, which differs for a few characters: it folds `ß` to `ss`, so `"Straße".starts_with("strass", ignore_case=true)` is `true` in TQL but matches no row in ClickHouse.
-
-## Regular expressions
-
-A predicate such as `msg.match_regex("^ERROR [0-9]+")` goes into the query as `match(msg, '(?-s)^ERROR [0-9]+')`. Both TQL and ClickHouse use the RE2 library. ClickHouse lets `.` match a newline, and the `(?-s)` prefix turns that off again, so that the pattern matches the same text as in TQL. Like case-insensitive matching, this is a deliberate exception to the rule that pushdown never changes results: ClickHouse bundles its own release of RE2, which may disagree with TQL’s on rarely used syntax, and its behavior is undefined for `String` values that are not valid UTF-8. A pattern that contains a NUL byte runs in Tenzir.
-
-## IP addresses in string columns
-
-Many ClickHouse tables store IP addresses as `String`. In TQL, a string never equals an `ip` value, so a predicate such as `src == 1.1.1.1` against such a column would match no rows. This is another deliberate exception to the rule that pushdown never changes results: in table mode, the operator resolves such a predicate by the column’s type. An `ip` literal that is compared for equality with a `String` column, or listed in an `in` test against one, becomes its canonical text. The predicate `src == 1.1.1.1` then reads `src == "1.1.1.1"` and is pushed as `src = '1.1.1.1'`, which also lets ClickHouse use an index on the column. The canonical text is the dotted form for IPv4 and the lowercase compressed form for IPv6, so `2001:DB8::1` in TQL matches the text `2001:db8::1` but not `2001:0db8::1`.
-
-Membership in a subnet has no textual form. The operator rewrites `src in 10.0.0.0/8` to `src.ip() in 10.0.0.0/8`, which parses the column in Tenzir, and pushes a *prefilter* that lets ClickHouse drop rows it can rule out with its own parser while keeping every row it cannot parse:
-
-```sql
-WHERE (toIPv6OrNull(src) IS NULL
-       OR toIPv6OrNull(src) BETWEEN toIPv6('10.0.0.0') AND toIPv6('10.255.255.255'))
-```
-
-The rewritten predicate stays in the pipeline and decides the result, so the outcome only depends on the two parsers agreeing on the strings that both of them accept. Writing `src.ip() == 1.1.1.1` or `src.ip() in [...]` yourself gets the same prefilter. Ordering comparisons such as `src < 1.1.1.1` are not adapted, since the textual order of addresses is not their numeric order, and `src.ip() != 1.1.1.1` gets no prefilter, because it is `true` for strings that Tenzir cannot parse.
-
-This adaptation applies to the predicates that the optimizer hands to the operator in table mode. In SQL mode, and for a `where` that the optimizer cannot move to the operator, TQL’s own semantics apply and you need to write `src == "1.1.1.1"` or `src.ip() in 10.0.0.0/8` explicitly.
-
-## Filters that stay in Tenzir
-
-Everything else runs in Tenzir, with the same result. This includes other functions, ordering comparisons on `Enum`, `UUID`, and `FixedString` columns, arithmetic on 64-bit integer columns or between two columns, `Decimal` and 128-bit integer columns, and comparisons against `duration` values.
+The operator lists the operators that it took over as `plan`, and the reason why it took over no more as `declined`. ClickHouse’s `system.query_log` table shows the query that the operator sent.
