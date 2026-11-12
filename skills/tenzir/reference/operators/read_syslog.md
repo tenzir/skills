@@ -12,7 +12,7 @@ section: "Docs"
 Parses an incoming Syslog stream into events.
 
 ```tql
-read_syslog [accept_pri_only=bool, octet_counting=bool, raw_message=field, merge=bool, raw=bool, schema=string, selector=string, schema_only=bool, unflatten_separator=string]
+read_syslog [accept_pri_only=bool, raw_message=field, merge=bool, raw=bool, schema=string, selector=string, schema_only=bool, unflatten_separator=string]
 ```
 
 ## Description
@@ -220,24 +220,36 @@ Automatic format detection with [`read_auto`](https://tenzir.com/docs/v7.0.0/ref
 
 With the option disabled, unrecognized input keeps the existing behavior: an unmatched line can continue the preceding message, or becomes an unknown record if there is no preceding recognized message.
 
-### `octet_counting = bool (optional)`
+### Framing
 
-Controls handling of length-prefixed syslog messages as defined in [RFC 6587](https://datatracker.ietf.org/doc/html/rfc6587#section-3.4.1). Some syslog implementations prepend the message length in bytes, followed by a space:
+The reader automatically detects [RFC 6587 non-transparent framing](https://datatracker.ietf.org/doc/html/rfc6587#section-3.4.2) or [octet counting](https://datatracker.ietf.org/doc/html/rfc6587#section-3.4.1) from the initial bytes of each input stream.
 
-```plaintext
-<length> <syslog-message>
+For non-transparent framing, the supported delimiters are LF (`\n`), CRLF (`\r\n`), and CR (`\r`). NUL (`\0`) and other custom trailers are not supported as delimiters. At end of input, the reader processes any trailing bytes as a final line.
+
+The reader selects octet counting when a positive decimal length is followed by one ASCII space and a complete syslog priority header, such as `<165>`. For example, the message after the length prefix contains 50 bytes:
+
+```text
+50 <165>1 2026-11-09T12:00:00Z host app 123 - - hello
 ```
 
-For example, where `65` is the byte count of the syslog message that follows:
+The length `50` has no brackets. The angle brackets around the priority value `165` are literal characters and belong to the counted message.
 
-```plaintext
-65 <165>1 2023-10-11T22:14:15.003Z host app 1234 ID01 - Test message
-```
+The length prefix can contain up to 10 digits and must not start with zero. The priority must contain 1–3 digits with a value from 0 through 191 and no leading zeros except for `<0>`. Detection waits for more input while this signature is incomplete. If the signature does not match, or input ends before it is complete, the reader uses non-transparent framing and preserves all buffered bytes. Legacy timestamps such as `2 18:` and `2026 Apr` therefore continue to use non-transparent framing.
 
-The parameter supports two modes:
+Counted messages can contain embedded newlines and do not require a trailing newline. Use `octet_counting=true` for counted streams whose first message has no PRI header. This explicit setting preserves the existing permissive parsing behavior and emits a deprecation warning.
 
-* **`octet_counting=false` (default)**: Split the stream at newlines and don’t interpret a leading length prefix.
-* **`octet_counting=true`**: Frame the stream using the declared message lengths. A missing or invalid length prefix stops the parser with an error.
+The selected framing stays fixed for the lifetime of the stream. When used inside [`accept_tcp`](https://tenzir.com/docs/v7.0.0/reference/operators/accept_tcp.md), detection runs independently for each connection. After selecting octet counting, malformed lengths remain errors; the reader does not switch to non-transparent framing.
+
+### `octet_counting = bool (deprecated)`
+
+Explicit values remain supported for compatibility. The reader emits a deprecation warning when it starts:
+
+* `octet_counting=false`: Split the stream at LF, CRLF, or CR delimiters and don’t interpret a leading length prefix.
+* `octet_counting=true`: Frame the stream using the declared message lengths. A missing or invalid length prefix stops the parser with an error.
+
+Omit the parameter to enable automatic detection without a deprecation warning.
+
+This deprecation applies only to `read_syslog`. The [`parse_syslog`](https://tenzir.com/docs/v7.0.0/reference/functions/parse_syslog.md) function retains its `octet_counting` options for parsing individual strings.
 
 ### `raw_message = field (optional)`
 
@@ -385,19 +397,19 @@ from_file "/var/log/auth.log" {
 }
 ```
 
-### Parse octet-counted syslog over TCP
+### Receive mixed syslog framing over TCP
 
-When receiving Syslog over TCP from systems that use RFC 6587 octet counting, enable length-based framing explicitly:
+Use one listener for clients that send octet-counted messages and clients that use non-transparent framing with LF, CRLF, or CR delimiters:
 
 Pipeline
 
 ```tql
 accept_tcp "0.0.0.0:514" {
-  read_syslog octet_counting=true
+  read_syslog
 }
 ```
 
-Omit the option for newline-delimited Syslog streams.
+Each connection detects its own framing, so both types of client can send messages concurrently.
 
 ### Parse Check Point structured data variants
 

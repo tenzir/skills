@@ -72,7 +72,7 @@ unmapped = this
 class_uid = 4001
 time = move unmapped.start
 src_endpoint = {ip: move unmapped.srcaddr, port: move unmapped.srcport}
-ocsf_derive
+this = ocsf_derive(this)
 ```
 
 Two habits make normalization safe. Whatever has no target field stays in `unmapped`, so nothing disappears silently, and the original payload stays in `raw_data`, so an analyst can always compare the mapped event against what the source sent. Our explanation of [normalization](../explanations/normalization.md) covers why this stage belongs at ingest, and the guide on [mapping to OCSF](../guides/normalize/map-to-ocsf.md) walks through one target schema.

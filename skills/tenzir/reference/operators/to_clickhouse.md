@@ -247,11 +247,11 @@ This writes to the existing table `security.alerts`.
 
 ### Send OCSF data to ClickHouse
 
-Use [`ocsf_cast`](https://tenzir.com/docs/v7.0.0/reference/operators/ocsf_cast) to cast events to their OCSF class. Free-form fields and differences in OCSF classes, versions, profiles, or extensions can still produce different schemas.
+Use [`ocsf_cast`](https://tenzir.com/docs/v7.0.0/reference/functions/ocsf_cast.md) to cast events to their OCSF class. Free-form fields and differences in OCSF classes, versions, profiles, or extensions can still produce different schemas.
 
 ```tql
 subscribe "ocsf"
-ocsf_cast
+this = ocsf_cast(this)
 to_clickhouse table=f"ocsf.{class_name.replace(" ","_")}"
 ```
 
@@ -294,7 +294,7 @@ This creates the following table:
 ## See Also
 
 * [`from_clickhouse`](https://tenzir.com/docs/v7.0.0/reference/operators/from_clickhouse.md)
-* [`ocsf_cast`](https://tenzir.com/docs/v7.0.0/reference/operators/ocsf_cast)
+* [`ocsf_cast`](https://tenzir.com/docs/v7.0.0/reference/functions/ocsf_cast.md)
 * [Send to destinations](../../guides/route/send-to-destinations.md)
 * [Clickhouse](https://docs.tenzir.com/integrations/clickhouse)
 * [Nano](https://docs.tenzir.com/integrations/nano)

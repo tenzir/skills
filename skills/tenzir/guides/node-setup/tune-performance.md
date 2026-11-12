@@ -48,7 +48,7 @@ Configure parallelism for an individual pipeline with a `// parallelism:` direct
 ```tql
 // parallelism: 8
 from_file "/var/log/events/*.json", watch=10s
-ocsf_cast
+this = ocsf_cast(this)
 where severity_id >= 4
 to_file "/tmp/tenzir/high-severity.json" { write_ndjson }
 ```
@@ -79,7 +79,7 @@ When only one section of a pipeline is the bottleneck, wrap it in [`parallel`](h
 ```tql
 from_file "/var/log/events/*.json", watch=10s
 parallel 4 {
-  ocsf_cast
+  this = ocsf_cast(this)
   where severity_id >= 4
 }
 to_file "/tmp/tenzir/high-severity.json" { write_ndjson }
@@ -91,7 +91,7 @@ Parallel instances work at different speeds, so a parallel pipeline can emit eve
 
 ### Planner
 
-Not every operator can run on multiple cores. Filters like [`where`](https://tenzir.com/docs/v7.0.0/reference/operators/where.md), assignments like `bytes = orig_bytes + resp_bytes`, shapers like [`drop`](https://tenzir.com/docs/v7.0.0/reference/operators/drop.md), and mappers like [`ocsf_cast`](https://tenzir.com/docs/v7.0.0/reference/operators/ocsf_cast) can, because they treat each event on its own. The planner leaves the remaining operators at a single instance.
+Not every operator can run on multiple cores. Filters like [`where`](https://tenzir.com/docs/v7.0.0/reference/operators/where.md), assignments like `bytes = orig_bytes + resp_bytes`, shapers like [`drop`](https://tenzir.com/docs/v7.0.0/reference/operators/drop.md), and assignments using [`ocsf_cast`](https://tenzir.com/docs/v7.0.0/reference/functions/ocsf_cast.md) can, because they treat each event on its own. The planner leaves the remaining operators at a single instance.
 
 These operators run on multiple cores:
 
@@ -175,7 +175,7 @@ Setting `fuse=all` goes the other direction and fuses every channel in the pipel
 
 ```tql
 parallel 4, fuse="none" {
-  ocsf_cast
+  this = ocsf_cast(this)
   where severity_id >= 4
 }
 ```

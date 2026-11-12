@@ -381,7 +381,7 @@ if status_id? != 99 {
 to_clickhouse table="ocsf.events", mode="append", tls=false
 ```
 
-Dropping captions saves less disk space than you might expect: ZSTD compresses repeated strings so well that the catch-all shrinks only from 4.0 to 3.7 MiB on our sample. The bigger effect is on the uncompressed size, which drops from 180 to 67 MiB. ClickHouse has to process that much data whenever it returns complete events, so the captions cost memory and time on every read. The [`ocsf_derive`](https://tenzir.com/docs/v7.0.0/reference/operators/ocsf_derive) operator restores them when you read the events back.
+Dropping captions saves less disk space than you might expect: ZSTD compresses repeated strings so well that the catch-all shrinks only from 4.0 to 3.7 MiB on our sample. The bigger effect is on the uncompressed size, which drops from 180 to 67 MiB. ClickHouse has to process that much data whenever it returns complete events, so the captions cost memory and time on every read. The [`ocsf_derive`](https://tenzir.com/docs/v7.0.0/reference/functions/ocsf_derive.md) function restores them when you read the events back.
 
 If your events can carry an explicit `null` in a column that is not `Nullable`, such as `time`, replace it before writing, for example with `time = time? else now()`. Tenzir drops such events with a warning.
 
@@ -487,7 +487,7 @@ Read the table with [`from_clickhouse`](https://tenzir.com/docs/v7.0.0/reference
 from_clickhouse table="ocsf.events", tls=false
 where class_uid == 3002 and status_id == 2 and time > now() - 7d
 where user.name == "administrator"
-ocsf_derive
+this = ocsf_derive(this)
 select time, device.hostname, src_endpoint.ip, status, severity
 head 2
 ```
@@ -517,7 +517,7 @@ head 2
 }
 ```
 
-The [`ocsf_derive`](https://tenzir.com/docs/v7.0.0/reference/operators/ocsf_derive) operator restored the captions `status` and `severity` from their IDs, and the IP address comes back as an IP, not as the IPv4-mapped IPv6 address that ClickHouse stores.
+The [`ocsf_derive`](https://tenzir.com/docs/v7.0.0/reference/functions/ocsf_derive.md) function restored the captions `status` and `severity` from their IDs, and the IP address comes back as an IP, not as the IPv4-mapped IPv6 address that ClickHouse stores.
 
 Rebuilding events has a cost: any field can be split between a column and the catch-all, so ClickHouse returns every column of the matching rows. Filters on typed columns, such as `class_uid`, `status_id`, `time`, and the dotted column `user.name`, and on fields in the catch-all run in ClickHouse, with ClickHouse’s semantics. ClickHouse cannot compute a [`select`](https://tenzir.com/docs/v7.0.0/reference/operators/select.md) or [`summarize`](https://tenzir.com/docs/v7.0.0/reference/operators/summarize.md) on the rebuilt events, so the pipeline fails with a hint to add `pushdown=false` to [`from_clickhouse`](https://tenzir.com/docs/v7.0.0/reference/operators/from_clickhouse.md), which runs them in Tenzir. Filter on typed columns where you can, because ClickHouse can use the sort key and skip indexes for them. The reference on [ClickHouse optimizations](../reference/optimizations/clickhouse.md#catch-all-tables) lists what reaches ClickHouse, and the [`from_clickhouse`](https://tenzir.com/docs/v7.0.0/reference/operators/from_clickhouse.md) reference lists how a [rebuilt event](../reference/operators/from_clickhouse.md#catch-all-tables) can differ from the original one.
 

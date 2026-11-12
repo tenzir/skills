@@ -159,6 +159,7 @@
 - [ocsf_category_uid](functions/ocsf_category_uid.md): Returns the `category_uid` for a given `category_name`.
 - [ocsf_class_name](functions/ocsf_class_name.md): Returns the `class_name` for a given `class_uid`.
 - [ocsf_class_uid](functions/ocsf_class_uid.md): Returns the `class_uid` for a given `class_name`.
+- [ocsf_compact](functions/ocsf_compact.md): Removes enum strings from an OCSF event record that [`ocsf_derive`](https://tenzir.com/docs/v7.0.0/reference/functions/ocsf_derive.md) can rebuild.
 - [ocsf_derive](functions/ocsf_derive.md): Assigns enum strings of an OCSF event record from their integer counterparts and vice versa.
 - [ocsf_trim](functions/ocsf_trim.md): Drops fields from an OCSF event record to reduce its size.
 - [ocsf_type_name](functions/ocsf_type_name.md): Returns the `type_name` for a given `type_uid`.
@@ -214,6 +215,7 @@
 - [config](functions/config.md): Reads Tenzir’s configuration file.
 - [env](functions/env.md): Reads an environment variable.
 - [secret](functions/secret.md): Use the value of a secret.
+- [version](functions/version.md): Returns the version of the Tenzir node.
 
 ## Subnet
 

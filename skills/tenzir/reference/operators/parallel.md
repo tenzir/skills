@@ -19,7 +19,7 @@ parallel [jobs:int, fuse=string, limit_partitions=int] { … }
 
 The [`parallel`](https://tenzir.com/docs/v7.0.0/reference/operators/parallel.md) operator marks the operators in its subpipeline to run on multiple cores. It applies the same mechanism as the `// parallelism:` comment, which covers a whole pipeline, to a section of one.
 
-Tenzir replicates only those operators that can work on any batch they receive, such as [`where`](https://tenzir.com/docs/v7.0.0/reference/operators/where.md), assignments, [`drop`](https://tenzir.com/docs/v7.0.0/reference/operators/drop.md), and [`ocsf_cast`](https://tenzir.com/docs/v7.0.0/reference/operators/ocsf_cast). Operators that combine related events, such as [`summarize`](https://tenzir.com/docs/v7.0.0/reference/operators/summarize.md), [`group`](https://tenzir.com/docs/v7.0.0/reference/operators/group.md), and [`deduplicate`](https://tenzir.com/docs/v7.0.0/reference/operators/deduplicate.md), receive a stream partitioned by their own key fields, so every event of a group reaches the instance that owns it. Tenzir leaves the remaining operators, including sources and most sinks, at a single instance. Our explanation of [parallel execution](../../explanations/executor.md#parallel-execution) covers which operators fall into which category.
+Tenzir replicates only those operators that can work on any batch they receive, such as [`where`](https://tenzir.com/docs/v7.0.0/reference/operators/where.md), [`drop`](https://tenzir.com/docs/v7.0.0/reference/operators/drop.md), and assignments, including those that call [`ocsf_cast`](https://tenzir.com/docs/v7.0.0/reference/functions/ocsf_cast.md). Operators that combine related events, such as [`summarize`](https://tenzir.com/docs/v7.0.0/reference/operators/summarize.md), [`group`](https://tenzir.com/docs/v7.0.0/reference/operators/group.md), and [`deduplicate`](https://tenzir.com/docs/v7.0.0/reference/operators/deduplicate.md), receive a stream partitioned by their own key fields, so every event of a group reaches the instance that owns it. Tenzir leaves the remaining operators, including sources and most sinks, at a single instance. Our explanation of [parallel execution](../../explanations/executor.md#parallel-execution) covers which operators fall into which category.
 
 Reach for `parallel` when profiling points at a section of a pipeline rather than at the pipeline as a whole. To parallelize a whole pipeline, prefer the `// parallelism:` comment described in our guide on [tuning performance](../../guides/node-setup/tune-performance.md#parallelism).
 
@@ -93,7 +93,7 @@ A block of CPU-bound operators can gain throughput by giving every channel insid
 ```tql
 subscribe "events"
 parallel 4, fuse="none" {
-  ocsf_cast
+  this = ocsf_cast(this)
   where severity_id >= 4
 }
 ```
@@ -105,7 +105,7 @@ Cast to OCSF on eight cores while the surrounding operators stay on one:
 ```tql
 from_file "/var/log/events/*.json", watch=10s
 parallel {
-  ocsf_cast
+  this = ocsf_cast(this)
   where severity_id >= 4
 }
 to_file "/tmp/tenzir/high-severity.json" { write_ndjson }

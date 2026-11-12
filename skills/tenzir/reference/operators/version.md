@@ -95,3 +95,7 @@ drop dependencies
   },
 }
 ```
+
+## See Also
+
+* [`version`](https://tenzir.com/docs/v7.0.0/reference/functions/version.md)

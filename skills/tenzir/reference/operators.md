@@ -1101,9 +1101,11 @@ version
 
 ## OCSF
 
+The OCSF operators are deprecated. Use the [`ocsf_cast`](https://tenzir.com/docs/v7.0.0/reference/functions/ocsf_cast.md), [`ocsf_derive`](https://tenzir.com/docs/v7.0.0/reference/functions/ocsf_derive.md), and [`ocsf_trim`](https://tenzir.com/docs/v7.0.0/reference/functions/ocsf_trim.md) functions instead, assigning their result to `this` to transform a top-level event.
+
 ### [ocsf\_cast](https://docs.tenzir.com/reference/operators/ocsf_cast)
 
-Casts incoming events to their OCSF type.
+Deprecated. Use the `ocsf_cast` function instead.
 
 ```tql
 ocsf_cast
@@ -1111,7 +1113,7 @@ ocsf_cast
 
 ### [ocsf\_derive](https://docs.tenzir.com/reference/operators/ocsf_derive)
 
-Automatically assigns enum strings from their integer counterparts and vice versa.
+Deprecated. Use the `ocsf_derive` function instead.
 
 ```tql
 ocsf_derive
@@ -1119,7 +1121,7 @@ ocsf_derive
 
 ### [ocsf\_trim](https://docs.tenzir.com/reference/operators/ocsf_trim)
 
-Drops fields from OCSF events to reduce their size.
+Deprecated. Use the `ocsf_trim` function instead.
 
 ```tql
 ocsf_trim

@@ -19,7 +19,7 @@ ocsf_cast(x:record, [encode_variants=bool, null_fill=bool, timestamp_to_ms=bool]
 
 The `ocsf_cast` function casts the record `x` to the OCSF event class type selected by its `metadata.version`, `metadata.profiles`, `metadata.extensions`, and `class_uid` fields. It applies the same casting rules as the [`ocsf_cast`](https://tenzir.com/docs/v7.0.0/reference/operators/ocsf_cast) operator: it warns about fields that the schema does not define and removes them, encodes free-form objects such as `unmapped`, and converts values to the types the schema expects.
 
-Use the function when the OCSF event lives in a field rather than at the top level of the event, for example next to `raw_data` in an envelope, or in a list of events that you process with [`map`](https://tenzir.com/docs/v7.0.0/reference/functions/map.md). Use the operator when the whole event is the OCSF event.
+Use the function for both top-level and nested OCSF events. To transform the whole event, write `this = ocsf_cast(this)`. For an OCSF event in a field, write `ocsf = ocsf_cast(ocsf)`, or use [`map`](https://tenzir.com/docs/v7.0.0/reference/functions/map.md) to transform a list of events. The [`ocsf_cast`](https://tenzir.com/docs/v7.0.0/reference/operators/ocsf_cast) operator is deprecated.
 
 The function differs from the operator in three ways:
 
@@ -53,6 +53,18 @@ Defaults to `false`.
 
 ## Examples
 
+### Transform a top-level event
+
+Replace an existing `ocsf_cast` operator call with an assignment:
+
+```tql
+this = ocsf_cast(this)
+```
+
+Keep any existing options as named arguments, for example `this = ocsf_cast(this, null_fill=true, encode_variants=true)`. Unlike the operator, the function leaves `@name` unchanged. If downstream routing depends on a name such as `ocsf.authentication`, assign that name explicitly for the corresponding event class.
+
+The function returns `null` when it cannot resolve the event’s OCSF version or class. To preserve the original event for routing, assign the result to a separate field and check it before replacing `this`.
+
 ### Cast an OCSF event next to its raw data
 
 ```tql
@@ -60,7 +72,7 @@ from {
   raw_data: "…",
   ocsf: {
     class_uid: 4001,
-    metadata: {version: "1.5.0"},
+    metadata: {version: "1.9.0"},
     activity_id: 1,
     time: 2026-01-01,
     unmapped: {nested: [1, "two", null]},
@@ -75,7 +87,7 @@ ocsf = ocsf_cast(ocsf, encode_variants=true, timestamp_to_ms=true)
   ocsf: {
     class_uid: 4001,
     metadata: {
-      version: "1.5.0",
+      version: "1.9.0",
     },
     activity_id: 1,
     time: 1767225600000,
@@ -89,8 +101,8 @@ ocsf = ocsf_cast(ocsf, encode_variants=true, timestamp_to_ms=true)
 ```tql
 from {
   events: [
-    {class_uid: 4001, metadata: {version: "1.5.0"}, src_endpoint: {ip: 192.0.2.1}},
-    {class_uid: 1001, metadata: {version: "1.5.0"}, activity_id: "bad"},
+    {class_uid: 4001, metadata: {version: "1.9.0"}, src_endpoint: {ip: 192.0.2.1}},
+    {class_uid: 1001, metadata: {version: "1.9.0"}, activity_id: "bad"},
   ],
 }
 events = events.map(x => ocsf_cast(x))
@@ -102,7 +114,7 @@ events = events.map(x => ocsf_cast(x))
     {
       class_uid: 4001,
       metadata: {
-        version: "1.5.0",
+        version: "1.9.0",
       },
       src_endpoint: {
         ip: 192.0.2.1,
@@ -111,7 +123,7 @@ events = events.map(x => ocsf_cast(x))
     {
       class_uid: 1001,
       metadata: {
-        version: "1.5.0",
+        version: "1.9.0",
       },
       activity_id: null,
     },
@@ -124,7 +136,7 @@ The second event emits a warning because `activity_id` must be an integer. Both 
 ### Keep events that fail to cast
 
 ```tql
-from {ocsf: {class_uid: 1001, metadata: {version: "1.5.0"}, activity_id: 1}},
+from {ocsf: {class_uid: 1001, metadata: {version: "1.9.0"}, activity_id: 1}},
      {ocsf: {class_uid: 1001}}
 validated = ocsf_cast(ocsf)
 ```
@@ -134,14 +146,14 @@ validated = ocsf_cast(ocsf)
   ocsf: {
     class_uid: 1001,
     metadata: {
-      version: "1.5.0",
+      version: "1.9.0",
     },
     activity_id: 1,
   },
   validated: {
     class_uid: 1001,
     metadata: {
-      version: "1.5.0",
+      version: "1.9.0",
     },
     activity_id: 1,
   },

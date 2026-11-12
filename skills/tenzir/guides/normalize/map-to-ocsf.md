@@ -7,9 +7,9 @@ section: "Docs"
 
 # Map to OCSF
 
-> This guide covers the decisions behind an OCSF mapping: choosing the event class, keeping the mapping minimal, handling unmapped fields, and finalizing the output with Tenzir’s native OCSF operators.
+> This guide covers the decisions behind an OCSF mapping: choosing the event class, keeping the mapping minimal, handling unmapped fields, and finalizing the output with Tenzir’s native OCSF functions.
 
-This guide covers the decisions behind an OCSF mapping: choosing the event class, keeping the mapping minimal, handling unmapped fields, and finalizing the output with Tenzir’s native OCSF operators.
+This guide covers the decisions behind an OCSF mapping: choosing the event class, keeping the mapping minimal, handling unmapped fields, and finalizing the output with Tenzir’s native OCSF functions.
 
 Want the full walkthrough?
 
@@ -28,8 +28,8 @@ Mappings live in packages as operators. The tutorial linked above walks through 
 ### Key principles
 
 * **Keep unmapped residue**: Source fields without an OCSF target still need review or an intentional decision to preserve source-specific data.
-* **Produce minimal OCSF**: Map required identifiers, required attributes, and source-specific semantics. Don’t hand-write derived sibling fields such as `activity_name`, `category_name`, or `severity`; let [`ocsf_derive`](https://tenzir.com/docs/v7.0.0/reference/operators/ocsf_derive) expand the minimal event before validation.
-* **Finalize the result**: After the mapper returns the OCSF event, set `type_uid` and use Tenzir’s native OCSF operators to derive enum siblings and validate the event against its schema.
+* **Produce minimal OCSF**: Map required identifiers, required attributes, and source-specific semantics. Don’t hand-write derived sibling fields such as `activity_name`, `category_name`, or `severity`; let [`ocsf_derive`](https://tenzir.com/docs/v7.0.0/reference/functions/ocsf_derive.md) expand the minimal event before validation.
+* **Finalize the result**: After the mapper returns the OCSF event, use Tenzir’s native OCSF functions to derive enum siblings and computable identifiers, and validate the event against its schema.
 
 Think in graphs
 
@@ -43,30 +43,55 @@ A product with several event types needs a dispatcher that routes each recognize
 
 How much of that hierarchy a package needs depends on its source. The [`amazon` package](https://tenzir.com/docs/v7.0.0/packages/amazon/operators/vpc_flow/ocsf/map.tql) owns the parsing and ships a normalizer, because VPC Flow Logs have no built-in reader. A source that Tenzir reads natively, such as Zeek through [`read_zeek_tsv`](https://tenzir.com/docs/v7.0.0/reference/operators/read_zeek_tsv.md) or [`read_zeek_json`](https://tenzir.com/docs/v7.0.0/reference/operators/read_zeek_json.md), needs neither: its package starts at the mapper and dispatches on the log type.
 
-## Use native OCSF operators
+## Use native OCSF functions
 
-Tenzir ships three operators for completing, validating, and reducing OCSF events:
+Tenzir ships functions for completing, validating, and reducing OCSF events:
 
-* [`ocsf_derive`](https://tenzir.com/docs/v7.0.0/reference/operators/ocsf_derive) derives integer and string enum siblings in either direction and warns about inconsistent pairs.
-* [`ocsf_cast`](https://tenzir.com/docs/v7.0.0/reference/operators/ocsf_cast) casts an event to the OCSF type selected by its version, class, profiles, and extensions. It warns about fields outside that schema and removes them.
-* [`ocsf_trim`](https://tenzir.com/docs/v7.0.0/reference/operators/ocsf_trim) removes fields according to their OCSF requirement levels when you need to reduce event size.
+* [`ocsf_derive`](https://tenzir.com/docs/v7.0.0/reference/functions/ocsf_derive.md) derives integer and string enum siblings in either direction and warns about inconsistent pairs.
+* [`ocsf_cast`](https://tenzir.com/docs/v7.0.0/reference/functions/ocsf_cast.md) casts an event to the OCSF type selected by its version, class, profiles, and extensions. It warns about fields outside that schema and removes them, and warns about missing required fields and violated constraints.
+* [`ocsf_trim`](https://tenzir.com/docs/v7.0.0/reference/functions/ocsf_trim.md) removes fields according to their OCSF requirement levels when you need to reduce event size.
+* [`ocsf_compact`](https://tenzir.com/docs/v7.0.0/reference/functions/ocsf_compact.md) removes enum strings that [`ocsf_derive`](https://tenzir.com/docs/v7.0.0/reference/functions/ocsf_derive.md) can rebuild when you need to reduce event size without losing information.
 
-Use derivation and casting at the boundary after your mapping operator returns, in that order: set `type_uid`, run [`ocsf_derive`](https://tenzir.com/docs/v7.0.0/reference/operators/ocsf_derive), then [`ocsf_cast`](https://tenzir.com/docs/v7.0.0/reference/operators/ocsf_cast). Set `type_uid` explicitly because [`ocsf_derive`](https://tenzir.com/docs/v7.0.0/reference/operators/ocsf_derive) does not currently compute it. The operator fills enum siblings such as `activity_name`, `category_name`, and `severity` from their numeric identifiers. It also works in the other direction when a mapping starts with a string sibling.
+Use derivation and casting at the boundary after your mapping operator returns, in that order: run [`ocsf_derive`](https://tenzir.com/docs/v7.0.0/reference/functions/ocsf_derive.md), then [`ocsf_cast`](https://tenzir.com/docs/v7.0.0/reference/functions/ocsf_cast.md). The [`ocsf_derive`](https://tenzir.com/docs/v7.0.0/reference/functions/ocsf_derive.md) function computes `category_uid` and `type_uid` from `class_uid` and `activity_id`, so a mapping does not need to set them. It fills enum siblings such as `activity_name`, `category_name`, and `severity` from their numeric identifiers, and also works in the other direction when a mapping starts with a string sibling.
 
-The [`ocsf_cast`](https://tenzir.com/docs/v7.0.0/reference/operators/ocsf_cast) operator is the primary schema validation gate. Your mapping is complete when it no longer emits warnings. Use options such as `null_fill=true`, `encode_variants=true`, or `timestamp_to_ms=true` only when a downstream system requires those output shapes or physical representations.
+The [`ocsf_cast`](https://tenzir.com/docs/v7.0.0/reference/functions/ocsf_cast.md) function is the primary schema validation gate. Your mapping is complete when it no longer emits warnings. Use options such as `null_fill=true`, `encode_variants=true`, or `timestamp_to_ms=true` only when a downstream system requires those output shapes or physical representations.
 
-After validation, optionally run [`ocsf_trim`](https://tenzir.com/docs/v7.0.0/reference/operators/ocsf_trim) to minimize events for storage or transport. Its options let you keep or drop fields that OCSF marks as optional or recommended.
+To finalize a top-level OCSF event, assign each function result to `this`:
+
+```tql
+this = ocsf_derive(this)
+this = ocsf_cast(this)
+```
+
+After validation, optionally compact events for storage or transport. The [`ocsf_compact`](https://tenzir.com/docs/v7.0.0/reference/functions/ocsf_compact.md) function removes enum strings such as `activity_name` or `severity` that [`ocsf_derive`](https://tenzir.com/docs/v7.0.0/reference/functions/ocsf_derive.md) can rebuild from their integer siblings. It keeps every string that carries information, such as the data source specific value of an `Other` enum. Run [`ocsf_derive`](https://tenzir.com/docs/v7.0.0/reference/functions/ocsf_derive.md) when reading the events to restore the strings:
+
+```tql
+// Before writing
+this = ocsf_compact(this)
+
+
+// After reading
+this = ocsf_derive(this)
+```
+
+To also remove fields that OCSF marks as optional or recommended, write `this = ocsf_trim(this)`. Unlike [`ocsf_compact`](https://tenzir.com/docs/v7.0.0/reference/functions/ocsf_compact.md), it discards their values.
 
 ### Finalize events in a field
 
-Each operator has a function counterpart with the same name and options: [`ocsf_derive`](https://tenzir.com/docs/v7.0.0/reference/functions/ocsf_derive.md), [`ocsf_cast`](https://tenzir.com/docs/v7.0.0/reference/functions/ocsf_cast.md), and [`ocsf_trim`](https://tenzir.com/docs/v7.0.0/reference/functions/ocsf_trim.md). The functions take the OCSF event as an argument, so they finalize an event that a mapper wrote into a field without hoisting it to the top level first. The envelope around it, such as `raw_data`, stays where it is:
+Pass the field to the same functions when a mapper writes an OCSF event into an envelope. The surrounding fields, such as `raw_data`, stay where they are:
 
 ```tql
 vendor::ocsf::map input, ocsf
 ocsf = ocsf_cast(ocsf_derive(ocsf))
 ```
 
-The functions also handle failures differently. Where the operators drop an event whose OCSF version or class they cannot resolve, the functions return `null` with a warning and keep the rest of the event. Assign the result to a new field to route such events into a quarantine instead of losing them:
+### Migrate existing operator calls
+
+The `ocsf_derive`, `ocsf_cast`, and `ocsf_trim` operators are deprecated and emit warnings. Replace each call with an assignment to `this` using the function of the same name. Pass existing options as named function arguments, for example `this = ocsf_cast(this, null_fill=true)`.
+
+The functions return `null` with a warning when they cannot resolve the OCSF version or class, while the operators drop those events. The `ocsf_cast` function also validates required fields and constraints, and leaves `@name` unchanged. Set the name explicitly if downstream pipelines depend on it.
+
+Assign the result to a new field to preserve an unresolved event for inspection or routing. For example, when the OCSF event lives in `ocsf`:
 
 ```tql
 validated = ocsf_cast(ocsf)

@@ -27,7 +27,7 @@ By default, the operator creates the table from the first batch of events it rec
 * Numbers outside the range of their column become `NULL`, and so do strings that are no valid `UUID` or member of an `ENUM`.
 * An event without a field for a column gets the column’s `DEFAULT` value, or `NULL`, regardless of the other events. A field that holds `null` writes `NULL`.
 
-The operator emits a warning the first time each of these happens for a field. To keep all data, filter and reshape heterogeneous streams with [`where`](https://tenzir.com/docs/v7.0.0/reference/operators/where.md), [`select`](https://tenzir.com/docs/v7.0.0/reference/operators/select.md), or [`ocsf_cast`](https://tenzir.com/docs/v7.0.0/reference/operators/ocsf_cast) before writing them, or write each event kind to its own table.
+The operator emits a warning the first time each of these happens for a field. To keep all data, filter and reshape heterogeneous streams with [`where`](https://tenzir.com/docs/v7.0.0/reference/operators/where.md), [`select`](https://tenzir.com/docs/v7.0.0/reference/operators/select.md), or [`ocsf_cast`](https://tenzir.com/docs/v7.0.0/reference/functions/ocsf_cast.md) before writing them, or write each event kind to its own table.
 
 ### `uri: string`
 
@@ -187,7 +187,7 @@ to_duckdb "events.duckdb", table="staging.alerts"
 
 ```tql
 subscribe "ocsf"
-ocsf_cast
+this = ocsf_cast(this)
 where class_uid == 4001
 to_duckdb "ocsf.duckdb", table="network_activity", checkpoint_interval=1min
 ```
