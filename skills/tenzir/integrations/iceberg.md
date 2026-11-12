@@ -18,11 +18,11 @@ Tenzir connects to an Iceberg REST catalog and handles the full write path: it c
 
 ### Build an OCSF lakehouse
 
-Map events to [OCSF](https://schema.ocsf.io) upstream and let [`to_iceberg`](https://tenzir.com/docs/reference/operators/to_iceberg.md) create and maintain a single wide table:
+Map events to [OCSF](https://schema.ocsf.io) upstream, cast them with [`ocsf_cast`](https://tenzir.com/docs/reference/functions/ocsf_cast.md), and let [`to_iceberg`](https://tenzir.com/docs/reference/operators/to_iceberg.md) create and maintain a single wide table:
 
 ```tql
 subscribe "ocsf"
-ocsf_cast
+this = ocsf_cast(this)
 to_iceberg "security.ocsf",
   catalog="https://catalog.example.com",
   partition_by=[class_uid, day(time)]
@@ -55,7 +55,6 @@ Existing tables keep their own partition spec and schema governance; Tenzir appe
 ## See Also
 
 * [`to_iceberg`](https://tenzir.com/docs/reference/operators/to_iceberg.md)
-* [`ocsf_cast`](https://tenzir.com/docs/reference/operators/ocsf_cast.md)
 * [AWS Glue](amazon/glue.md)
 * [Cloud Lakehouse](google/cloud-lakehouse.md)
 * [Send to destinations](../guides/route/send-to-destinations.md)

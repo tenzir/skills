@@ -130,6 +130,6 @@ accept_tcp "10.0.0.1:1514" {
   read_json unflatten_separator="."
 }
 microsoft::windows::ocsf::normalize
-ocsf_derive
+this = ocsf_derive(this)
 publish "ocsf"
 ```

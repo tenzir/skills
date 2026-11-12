@@ -23,7 +23,7 @@ Use the path that matches the role DuckDB plays in your deployment:
 | Goal                                               | DuckDB role                                            | Tenzir building blocks                                                                                                                                                                                                                    |
 | -------------------------------------------------- | ------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Keep a local, queryable copy of telemetry          | Destination database file on the node                  | [`to_duckdb`](https://tenzir.com/docs/reference/operators/to_duckdb.md)                                                                                                                                                           |
-| Store OCSF events per class                        | One table per event class                              | [`ocsf_cast`](https://tenzir.com/docs/reference/operators/ocsf_cast.md), [`where`](https://tenzir.com/docs/reference/operators/where.md), [`to_duckdb`](https://tenzir.com/docs/reference/operators/to_duckdb.md) |
+| Store OCSF events per class                        | One table per event class                              | [`ocsf_cast`](https://tenzir.com/docs/reference/functions/ocsf_cast.md), [`where`](https://tenzir.com/docs/reference/operators/where.md), [`to_duckdb`](https://tenzir.com/docs/reference/operators/to_duckdb.md) |
 | Query retained telemetry                           | Source table or SQL query result                       | [`from_duckdb`](https://tenzir.com/docs/reference/operators/from_duckdb.md)                                                                                                                                                       |
 | Read Parquet, CSV, JSON, or XLSX files through SQL | In-memory query engine over files                      | [`from_duckdb`](https://tenzir.com/docs/reference/operators/from_duckdb.md) with `":memory:"` and `sql=...`                                                                                                                       |
 | React to rows other pipelines write                | Shared database file within a node                     | [`from_duckdb`](https://tenzir.com/docs/reference/operators/from_duckdb.md) with `live=true`                                                                                                                                      |
@@ -42,7 +42,7 @@ A DuckDB table has a fixed set of typed columns. Fields without a column are dro
 
 ```tql
 subscribe "ocsf"
-ocsf_cast
+this = ocsf_cast(this)
 where class_uid == 4001
 to_duckdb "/var/lib/tenzir/ocsf.duckdb", table="network_activity"
 ```

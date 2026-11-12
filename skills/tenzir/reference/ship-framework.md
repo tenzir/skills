@@ -283,7 +283,7 @@ tenzir-ship add [options]
 | `--component <label>`  | Component label (repeatable)                 |
 | `--web`                | Open prefilled GitHub file creation URL      |
 
-The command prompts for any information you do not pass explicitly. The first invocation can scaffold the project automatically, creating a `changelog/` subdirectory with `config.yaml` and `unreleased/`. When you provide an explicit `--root` flag, the CLI uses that directory directly instead of creating a subdirectory. Prefer `tenzir-ship init` when you want to set up the changelog workspace without creating an entry. The CLI names entry files using the slugified title (e.g., `my-feature.md`).
+The command prompts for any information you do not pass explicitly. The first invocation can scaffold the project automatically, creating a `changelog/` subdirectory with `config.yaml` and `unreleased/`. When you provide an explicit `--root` flag, the CLI uses that directory directly instead of creating a subdirectory. Prefer `tenzir-ship init` when you want to set up the changelog workspace without creating an entry. The CLI names entry files using the slugified title, cut to 80 characters (e.g., `my-feature.md`).
 
 The generated ID must be unique in the current `unreleased/` directory. It may reuse an ID from an older release because each release has its own entry namespace. The command rejects only a filename that already exists in the current unreleased namespace.
 
@@ -556,7 +556,7 @@ tenzir-ship validate [options]
 | `--lenient`     | Demote missing PR metadata issues to warnings, not errors. |
 | `--all-entries` | Apply entry metadata policies to released entries too.     |
 
-The validator reports missing metadata, release manifests whose referenced entry files are absent from that release’s own `entries/` directory, duplicate entry IDs within one manifest, and configuration drift across repositories. The same ID may appear in different releases. Validation also rejects unreleased entries that carry `prs` metadata when the configuration sets `omit_pr: true`, or `authors` metadata when it sets `omit_author: true`. When modules are configured, validation runs against the parent project and all discovered modules. Issues from modules are prefixed with the module ID.
+The validator reports missing metadata, release manifests whose referenced entry files are absent from that release’s own `entries/` directory, duplicate entry IDs within one manifest, and configuration drift across repositories. The same ID may appear in different releases. Validation also rejects unreleased entry filenames that are not lowercase kebab-case, such as `my-feature-.md` or `My-Feature.md`, and it rejects unreleased entries that carry `prs` metadata when the configuration sets `omit_pr: true`, or `authors` metadata when it sets `omit_author: true`. When modules are configured, validation runs against the parent project and all discovered modules. Issues from modules are prefixed with the module ID.
 
 The `require_pr: true` setting makes plain validation fail for unreleased entries without `prs` metadata. The `require_author: true` setting similarly requires a non-empty `authors` list. Use `validate --lenient` in pre-push hooks when a pull request number might not exist yet. Lenient mode demotes only missing PR metadata issues. All other validation errors still fail.
 

@@ -91,7 +91,7 @@ from_fluent_bit "forward", options={
   listen: 10.0.0.1,
 }
 microsoft::windows::ocsf::normalize
-ocsf_derive
+this = ocsf_derive(this)
 publish "ocsf"
 ```
 

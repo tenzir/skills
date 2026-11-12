@@ -289,7 +289,7 @@ shell "evtx_dump --threads 1 --format xml --dont-show-record-number --no-indent 
 read_delimited "</Event>\n", include_separator=true
 data = data.replace_regex("[\\x00-\\x08\\x0B\\x0C\\x0E-\\x1F]", "")
 microsoft::windows::ocsf::normalize data
-ocsf_derive
+this = ocsf_derive(this)
 summarize class_name, events=count()
 sort -events
 head 4

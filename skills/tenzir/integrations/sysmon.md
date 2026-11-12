@@ -103,6 +103,6 @@ accept_wef "0.0.0.0:5985",
   kerberos={keytab: "/etc/tenzir/wef.keytab"},
   subscriptions=[{id: "sysmon", query: $sysmon}]
 microsoft::windows::ocsf::normalize data
-ocsf_derive
+this = ocsf_derive(this)
 publish "ocsf"
 ```

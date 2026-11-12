@@ -321,3 +321,5 @@
 
 - [contains](functions/contains.md): The `contains` function is a deprecated alias for [`search`](https://tenzir.com/docs/reference/functions/search.md). It still works, but emits a deprecation warning. Replace `contains(input, target)` with `search(input, target)`, or `input.contains(target)` with `input.search(target)`. The `exact` and `ignore_case` options are unchanged.
 - [geo_distance](functions/geo_distance.md): Computes the surface distance between two geographic coordinates.
+- [ocsf_compact](functions/ocsf_compact.md): Removes enum strings from an OCSF event record that [`ocsf_derive`](https://tenzir.com/docs/v6.22.0/reference/functions/ocsf_derive.md) can rebuild.
+- [version](functions/version.md): Returns the version of the Tenzir node.

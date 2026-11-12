@@ -48,7 +48,7 @@ from_file "/var/log/kunai/events.log", watch=10s {
   read_ndjson
 }
 kunai::ocsf::normalize
-ocsf_derive
+this = ocsf_derive(this)
 drop_null_fields
 ```
 

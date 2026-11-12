@@ -85,17 +85,17 @@ Deprecated
 
 This pattern relies on the deprecated `mode="create_append"`. By default, [`to_clickhouse`](https://tenzir.com/docs/reference/operators/to_clickhouse.md) appends to existing tables only. Prefer to [append to a table you manage](clickhouse.md#append-to-a-table-you-manage).
 
-Let Tenzir create tables when each OCSF class should have its own schema. The [`ocsf_cast`](https://tenzir.com/docs/reference/operators/ocsf_cast.md) operator casts events to their OCSF class before [`to_clickhouse`](https://tenzir.com/docs/reference/operators/to_clickhouse.md) creates the table.
+Let Tenzir create tables when each OCSF class should have its own schema. The [`ocsf_cast`](https://tenzir.com/docs/reference/functions/ocsf_cast.md) function casts events to their OCSF class before [`to_clickhouse`](https://tenzir.com/docs/reference/operators/to_clickhouse.md) creates the table.
 
 ```tql
 from_file "ocsf_network_activity.json"
-ocsf_cast
+this = ocsf_cast(this)
 to_clickhouse table=f"ocsf.{class_name.replace(" ","_")}",
               mode="create_append", primary=time, json=unmapped,
               tls=false
 ```
 
-When creating a table, the [`to_clickhouse`](https://tenzir.com/docs/reference/operators/to_clickhouse.md) operator uses the first event to determine the schema. Fields not mapped to JSON must have known types and must not be empty records. [`ocsf_cast`](https://tenzir.com/docs/reference/operators/ocsf_cast.md) helps because it casts the fields of an event to their OCSF types before the table is created.
+When creating a table, the [`to_clickhouse`](https://tenzir.com/docs/reference/operators/to_clickhouse.md) operator uses the first event to determine the schema. Fields not mapped to JSON must have known types and must not be empty records. [`ocsf_cast`](https://tenzir.com/docs/reference/functions/ocsf_cast.md) helps because it casts the fields of an event to their OCSF types before the table is created.
 
 Leave out `null_fill=true` here. The nulls that it adds carry no type, so Tenzir cannot infer columns for them and table creation fails. If you want `null_fill=true`, [append to a table you manage](clickhouse.md#append-to-a-table-you-manage) instead.
 

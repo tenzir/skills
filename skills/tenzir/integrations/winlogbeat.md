@@ -79,6 +79,6 @@ accept_opensearch "10.0.0.1:9200", tls={
   keyfile: "private.key",
 }
 microsoft::windows::ocsf::normalize
-ocsf_derive
+this = ocsf_derive(this)
 publish "ocsf"
 ```

@@ -332,6 +332,10 @@ Persist events for later search, replay, and analysis.
 
 ### Operate
 
+#### [Deploy configuration to deployments](guides/deploy-configuration-to-deployments.md)
+
+Choose a tracked branch, deploy a configuration revision, and verify that a deployment accepted it.
+
 #### [Overview](guides/observability.md)
 
 Inspect node, pipeline, and host behavior.

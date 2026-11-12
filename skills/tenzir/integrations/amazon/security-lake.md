@@ -91,7 +91,7 @@ let $account_id = ...
 
 subscribe $in
 where @name == "ocsf.http_activity"
-ocsf_cast
+this = ocsf_cast(this)
 to_amazon_security_lake $url, region=$region, account_id=$account_id, timeout=10m
 ```
 
