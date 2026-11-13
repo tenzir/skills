@@ -16,7 +16,7 @@ from_microsoft_sql [table=string], [sql=string], [query=string],
                    [show=string], [live=bool],
                    [tracking_column=string], [host=string], [port=int],
                    [user=string], [password=secret],
-                   [database=string], [tls=bool|record]
+                   [database=string], [tls=bool|record], [pushdown=bool]
 ```
 
 ## Description
@@ -122,6 +122,12 @@ Azure SQL Database requires TLS. Use the Azure SQL server host name, usually in 
 
 The operator currently supports SQL authentication. Microsoft Entra authentication, managed identities, Windows authentication, and Kerberos are not supported.
 
+### `pushdown = bool (optional)`
+
+Whether SQL Server takes over the operators that follow the operator in table mode. With `pushdown=false`, they stay in the pipeline and run with TQL semantics, and the operator still reads only the columns that the pipeline uses. See [Optimizations](from_microsoft_sql.md#optimizations).
+
+Defaults to `true`.
+
 ## Types
 
 The operator maps Microsoft SQL Server types to [Type System](../types.md) as follows:
@@ -144,7 +150,9 @@ The operator maps Microsoft SQL Server types to [Type System](../types.md) as fo
 
 ## Optimizations
 
-When the operator reads a table, it lets SQL Server do the work of the [`where`](https://tenzir.com/docs/reference/operators/where.md), [`select`](https://tenzir.com/docs/reference/operators/select.md), and [`head`](https://tenzir.com/docs/reference/operators/head.md) operators that follow it, so that SQL Server returns only the rows and columns that the pipeline needs. For one-shot table reads without `live=true`, SQL Server can also compute a directly following [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md). With `live=true`, the summary stays in Tenzir because the input never ends. The page on [SQL Server optimizations](../optimizations/microsoft-sql.md) describes which filters SQL Server evaluates, and the [optimizations overview](../optimizations.md) explains how Tenzir optimizes pipelines in general.
+When the operator reads a table, it hands SQL Server the [`where`](https://tenzir.com/docs/reference/operators/where.md), [`select`](https://tenzir.com/docs/reference/operators/select.md), [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md), [`sort`](https://tenzir.com/docs/reference/operators/sort.md), and [`head`](https://tenzir.com/docs/reference/operators/head.md) operators that follow it, as far as T-SQL can spell them, so that SQL Server returns only what the pipeline keeps and can use its indexes. Those operators leave the pipeline and run with SQL Server’s semantics, which can differ from TQL: for example, text compares under the collation of its column, which often ignores case, and `name != "alpha"` does not keep rows where `name` is `NULL`. A live read hands SQL Server its filters only. Use `pushdown=false` to keep every operator in the pipeline.
+
+The page on [SQL Server optimizations](../optimizations/microsoft-sql.md) describes which operators SQL Server takes over and how its semantics differ, and the [optimizations overview](../optimizations.md) explains how Tenzir optimizes pipelines in general.
 
 ## Examples
 
@@ -155,6 +163,15 @@ from_microsoft_sql table="dbo.users",
                    host="sql.example.com",
                    database="app",
                    tls=true
+```
+
+### Keep operators in Tenzir
+
+With `pushdown=false`, the `where` runs in Tenzir with TQL semantics and compares text by its bytes:
+
+```tql
+from_microsoft_sql table="dbo.logins", host="db.example.com", database="audit", pushdown=false
+where user == "admin"
 ```
 
 ### Execute a custom SQL query

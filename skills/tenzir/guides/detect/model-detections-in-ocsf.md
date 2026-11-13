@@ -14,7 +14,7 @@ This guide shows you how to model detection results in [OCSF](https://schema.ocs
 
 Schema enforcement is optional
 
-The examples construct their intended OCSF records directly. Add [`ocsf_derive`](https://tenzir.com/docs/reference/operators/ocsf_derive.md) for enum sibling expansion or [`ocsf_cast`](https://tenzir.com/docs/reference/operators/ocsf_cast.md) for schema enforcement at a pipeline boundary when you need either behavior. They are not part of the detection semantics.
+The examples construct their intended OCSF records directly. Add [`ocsf_derive`](https://tenzir.com/docs/reference/functions/ocsf_derive.md) for enum sibling expansion or [`ocsf_cast`](https://tenzir.com/docs/reference/functions/ocsf_cast.md) for schema enforcement at a pipeline boundary when you need either behavior. They are not part of the detection semantics.
 
 ## Choose the OCSF representation
 
@@ -345,7 +345,7 @@ type_uid = class_uid * 100 + activity_id
 }
 ```
 
-The example sets the required OCSF identifiers explicitly. The guide on [mapping to OCSF](../normalize/map-to-ocsf.md#use-native-ocsf-operators) explains optional derivation, schema enforcement, validation, and field trimming.
+The example sets the required OCSF identifiers explicitly. The guide on [mapping to OCSF](../normalize/map-to-ocsf.md#use-native-ocsf-functions) explains optional derivation, schema enforcement, validation, and field trimming.
 
 ## Manage the finding lifecycle
 

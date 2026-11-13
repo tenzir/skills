@@ -1,7 +1,7 @@
 ---
 title: "version"
-canonical: https://tenzir.com/docs/v6.22.0/reference/functions/version
-source: https://tenzir.com/docs/v6.22.0/reference/functions/version.md
+canonical: https://tenzir.com/docs/reference/functions/version
+source: https://tenzir.com/docs/reference/functions/version.md
 section: "Docs"
 ---
 
@@ -76,4 +76,4 @@ tenzir_version = version().version
 
 ## See Also
 
-* [`config`](https://tenzir.com/docs/v6.22.0/reference/functions/config.md)
+* [`config`](https://tenzir.com/docs/reference/functions/config.md)

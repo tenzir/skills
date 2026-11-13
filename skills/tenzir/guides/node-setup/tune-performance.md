@@ -48,7 +48,7 @@ Configure parallelism for an individual pipeline with a `// parallelism:` direct
 ```tql
 // parallelism: 8
 from_file "/var/log/events/*.json", watch=10s
-ocsf_cast
+this = ocsf_cast(this)
 where severity_id >= 4
 to_file "/tmp/tenzir/high-severity.json" { write_ndjson }
 ```
@@ -79,7 +79,7 @@ When only one section of a pipeline is the bottleneck, wrap it in [`parallel`](h
 ```tql
 from_file "/var/log/events/*.json", watch=10s
 parallel 4 {
-  ocsf_cast
+  this = ocsf_cast(this)
   where severity_id >= 4
 }
 to_file "/tmp/tenzir/high-severity.json" { write_ndjson }
@@ -91,7 +91,7 @@ Parallel instances work at different speeds, so a parallel pipeline can emit eve
 
 ### Planner
 
-Not every operator can run on multiple cores. Filters like [`where`](https://tenzir.com/docs/reference/operators/where.md), assignments like `bytes = orig_bytes + resp_bytes`, shapers like [`drop`](https://tenzir.com/docs/reference/operators/drop.md), and mappers like [`ocsf_cast`](https://tenzir.com/docs/reference/operators/ocsf_cast.md) can, because they treat each event on its own. The planner leaves the remaining operators at a single instance.
+Not every operator can run on multiple cores. Filters like [`where`](https://tenzir.com/docs/reference/operators/where.md), assignments like `bytes = orig_bytes + resp_bytes`, shapers like [`drop`](https://tenzir.com/docs/reference/operators/drop.md), and assignments using [`ocsf_cast`](https://tenzir.com/docs/reference/functions/ocsf_cast.md) can, because they treat each event on its own. The planner leaves the remaining operators at a single instance.
 
 These operators run on multiple cores:
 
@@ -178,7 +178,7 @@ Setting `fuse=all` goes the other direction and fuses every channel in the pipel
 
 ```tql
 parallel 4, fuse="none" {
-  ocsf_cast
+  this = ocsf_cast(this)
   where severity_id >= 4
 }
 ```
@@ -262,13 +262,37 @@ tenzir:
   # The given number controls how much resources to spend on it. Set to 0 to
   # disable. Defaults to 1.
   automatic-rebuild: 1
+
+
+  # Minimum fraction of partitions that an automatic rebuild of a closed time
+  # bucket must eliminate. Defaults to 0.6.
+  rebuild-merge-margin: 0.6
+
+
+  # IANA time zone used to align rebuild time buckets. Defaults to the system
+  # time zone.
+  rebuild-timezone: Europe/Berlin
+
+
+  # Total decoded-memory budget shared by concurrent rebuilds, in bytes. By
+  # default, the node estimates the budget from available memory. Set to 0 to
+  # disable the limit.
+  rebuild-memory-budget: 1073741824
 ```
+
+Automatic rebuilds group undersized partitions of the same schema by their maximum import time. Recent partitions use four-hour buckets aligned in the configured time zone. The current bucket is rebuilt only when the estimated output eliminates at least five partitions. Closed buckets must eliminate at least one partition and are rebuilt when the estimated fraction eliminated reaches `tenzir.rebuild-merge-margin`. For example, the default margin of `0.6` requires the rebuild to eliminate at least 60% of the input partitions.
+
+Once an entire local day is more than 24 hours old, automatic rebuilds use that day as a single bucket. This keeps old data within its original local day and allows its partitions to be consolidated without mixing them with newly imported data.
 
 This is how you run it manually:
 
 ```bash
 tenzir-ctl rebuild start [--all] [--undersized] [--parallel=<number>] [--max-partitions=<number>] [--detached] [<expression>]
 ```
+
+Run `tenzir-ctl rebuild show` to inspect the current run. Its `batches` list shows each active batch’s schema, elapsed duration, input partition IDs, and combined input store size in bytes.
+
+If no batch for a schema completes for one minute, the node logs a warning with the active transform state. It then logs the first phase transition for those transforms, which shows whether work resumes in the catalog, store, or filesystem path.
 
 A rebuild is not only useful when upgrading outdated partitions, but also when changing parameters of up-to-date partitions. (Internally, Tenzir versions the partition state via FlatBuffers. An outdated partition is one whose version number is not the newest.)
 
@@ -278,7 +302,7 @@ The `--all` flag causes Tenzir to rebuild all partitions.
 
 The `--parallel` option is a performance tuning knob. The parallelism level controls how many sets of partitions to rebuild in parallel. This value defaults to 1 to limit the CPU and memory requirements of the rebuilding process, which grow linearly with the selected parallelism level.
 
-Rebuilds limit how much partition data they load into memory at once. When available memory is low, Tenzir processes fewer partitions in a batch and leaves the remaining partitions for a later rebuild step instead of loading the full selected input set up front.
+Rebuilds limit how much partition data they load into memory at once. When available memory is low, Tenzir processes fewer partitions in a batch and leaves the remaining partitions for a later rebuild step instead of loading the full selected input set up front. Set `tenzir.rebuild-memory-budget` to an integer number of bytes to configure this limit explicitly, or to `0` to disable the memory budget.
 
 The `--max-partitions` option allows for setting an upper bound to the number of partitions to rebuild.
 

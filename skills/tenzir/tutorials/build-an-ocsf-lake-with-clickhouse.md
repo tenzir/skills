@@ -295,13 +295,13 @@ A column whose name is a field path, such as `src_endpoint.ip`, receives that fi
 
 Whether a field deserves a typed column depends on how queries use it:
 
-|                                | Typed column                                                                                                    | Catch-all path                                                                                               |
-| ------------------------------ | --------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
-| Filtering                      | Can use the sort key and skip indexes                                                                           | Reads the path in every row                                                                                  |
-| Pushdown of pipeline filters   | [Most filters](../reference/optimizations/clickhouse.md#filters-that-clickhouse-evaluates) | Only comparisons with strings and numbers, `starts_with`, `ends_with`, substrings, `in` lists, and `!= null` |
-| Sort or partition by the field | Possible                                                                                                        | Not supported for the catch-all                                                                              |
-| Value type                     | Declared once, checked on insert                                                                                | Inferred per value, can differ between rows                                                                  |
-| Cost when mostly empty         | Small, but not zero                                                                                             | None                                                                                                         |
+|                                    | Typed column                                                                                                                                            | Catch-all path                                                                                                                                                         |
+| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Filtering                          | Can use the sort key and skip indexes                                                                                                                   | Reads the path in every row                                                                                                                                            |
+| Operators that ClickHouse computes | [Filters, selections, summaries, sorts, and limits](../reference/optimizations/clickhouse.md#operators-that-clickhouse-takes-over) | [Filters, sorts, and limits](../reference/optimizations/clickhouse.md#catch-all-tables); comparisons fail if the path’s type differs between rows |
+| Sort or partition by the field     | Possible                                                                                                                                                | Not supported for the catch-all                                                                                                                                        |
+| Value type                         | Declared once, checked on insert                                                                                                                        | Inferred per value, can differ between rows                                                                                                                            |
+| Cost when mostly empty             | Small, but not zero                                                                                                                                     | None                                                                                                                                                                   |
 
 Pushdown
 
@@ -311,7 +311,7 @@ To decide where a field goes, ask three questions:
 
 1. Is the field part of the sort key or partition key?
 2. Do queries often filter, group, or aggregate on it?
-3. Do you sometimes filter it in a way the catch-all [cannot push down](../reference/optimizations/clickhouse.md#catch-all-tables), such as a subnet match or `status != "Success"`?
+3. Do you select or summarize it, or compare it with values whose type differs between rows? On the catch-all, ClickHouse [cannot compute these](../reference/optimizations/clickhouse.md#catch-all-tables) for you.
 
 If you answer any question with yes, give the field a typed column. Otherwise, leave it in the catch-all. You can [add a column later](build-an-ocsf-lake-with-clickhouse.md#evolve-the-table) at any time.
 
@@ -349,13 +349,27 @@ ClickHouse compresses every column, by default with LZ4, and a codec selects a d
 
 The sort key in `ORDER BY` sets the physical order of the rows. ClickHouse keeps a sparse primary index with one entry per **granule** of 8192 rows, so a filter on the leading columns of the sort key skips every granule that cannot match. With `ORDER BY (class_uid, time)`, a query for one class reads a contiguous range of rows, and a time range narrows that range further.
 
-Most detection and hunting queries select an event class, so `class_uid` comes first. If your queries mostly ask for the latest events across all classes, `ORDER BY (toStartOfHour(time), class_uid, time)` suits them better. Do not start the key with the raw `time` column: timestamps with nanosecond precision are almost never equal, so ClickHouse would never use the columns after it.
+Most detection and hunting queries select an event class, so `class_uid` comes first. Do not start the key with the raw `time` column: timestamps with nanosecond precision are almost never equal, so ClickHouse would never use the columns after it. Pick the sort key by what most queries filter on:
+
+| Most queries filter on           | Sort key                                 |
+| -------------------------------- | ---------------------------------------- |
+| One class and a time range       | `(class_uid, time)`                      |
+| One class and a host             | `(class_uid, device.hostname, time)`     |
+| The latest events of all classes | `(toStartOfHour(time), class_uid, time)` |
+
+Sort by host
+
+A host column before `time` keeps each host’s events together, which compresses better and narrows host queries, but makes time ranges within a class less precise. ClickHouse rejects `Nullable` sort key columns by default, so declare the host as `LowCardinality(String) DEFAULT ''`.
 
 ### Choose the partition key
 
 A partition is a separate set of files for all rows with the same value of the `PARTITION BY` expression. Queries skip partitions that cannot match, and ClickHouse can drop a whole partition without touching the rest. That makes the partition key the foundation of retention.
 
 With `PARTITION BY (class_uid, toYYYYMM(time))`, every partition holds one class for one month. You can then expire each class on its own schedule, as the retention step shows. Keep the number of partitions in the hundreds: with about 80 OCSF classes and twelve months, you stay below a thousand. Every insert creates at least one part per partition it touches, so too many partitions lead to many small parts and slow down inserts and merges.
+
+High event rates
+
+With `class_uid` in the partition key, every batch of mixed events splits into many small parts. At high event rates, partition by retention period and time instead, as the [retention step](build-an-ocsf-lake-with-clickhouse.md#why-whole-parts) shows, and shorten the time unit to days once a single day holds hundreds of millions of events.
 
 Unlike columns, the sort key and the partition key cannot change later without rebuilding the table, so decide on both before you load data.
 
@@ -381,7 +395,7 @@ if status_id? != 99 {
 to_clickhouse table="ocsf.events", mode="append", tls=false
 ```
 
-Dropping captions saves less disk space than you might expect: ZSTD compresses repeated strings so well that the catch-all shrinks only from 4.0 to 3.7 MiB on our sample. The bigger effect is on the uncompressed size, which drops from 180 to 67 MiB. ClickHouse has to process that much data whenever it returns complete events, so the captions cost memory and time on every read. The [`ocsf_derive`](https://tenzir.com/docs/reference/operators/ocsf_derive.md) operator restores them when you read the events back.
+Dropping captions saves less disk space than you might expect: ZSTD compresses repeated strings so well that the catch-all shrinks only from 4.0 to 3.7 MiB on our sample. The bigger effect is on the uncompressed size, which drops from 180 to 67 MiB. ClickHouse has to process that much data whenever it returns complete events, so the captions cost memory and time on every read. The [`ocsf_derive`](https://tenzir.com/docs/reference/functions/ocsf_derive.md) function restores them when you read the events back.
 
 If your events can carry an explicit `null` in a column that is not `Nullable`, such as `time`, replace it before writing, for example with `time = time? else now()`. Tenzir drops such events with a warning.
 
@@ -487,7 +501,7 @@ Read the table with [`from_clickhouse`](https://tenzir.com/docs/reference/operat
 from_clickhouse table="ocsf.events", tls=false
 where class_uid == 3002 and status_id == 2 and time > now() - 7d
 where user.name == "administrator"
-ocsf_derive
+this = ocsf_derive(this)
 select time, device.hostname, src_endpoint.ip, status, severity
 head 2
 ```
@@ -517,9 +531,9 @@ head 2
 }
 ```
 
-The [`ocsf_derive`](https://tenzir.com/docs/reference/operators/ocsf_derive.md) operator restored the captions `status` and `severity` from their IDs, and the IP address comes back as an IP, not as the IPv4-mapped IPv6 address that ClickHouse stores.
+The [`ocsf_derive`](https://tenzir.com/docs/reference/functions/ocsf_derive.md) function restored the captions `status` and `severity` from their IDs, and the IP address comes back as an IP, not as the IPv4-mapped IPv6 address that ClickHouse stores.
 
-Rebuilding events has a cost: any field can be split between a column and the catch-all, so ClickHouse returns every column of the matching rows. Filters on typed columns, such as `class_uid`, `status_id`, `time`, and the dotted column `user.name`, run in ClickHouse. Supported filters on fields in the catch-all narrow the rows in ClickHouse and run again in Tenzir. The [`select`](https://tenzir.com/docs/reference/operators/select.md) and everything after it run in Tenzir. Filter on typed columns where you can, because ClickHouse can use the sort key and skip indexes for them. The reference on [ClickHouse optimizations](../reference/optimizations/clickhouse.md#catch-all-tables) lists what reaches ClickHouse, and the [`from_clickhouse`](https://tenzir.com/docs/reference/operators/from_clickhouse.md) reference lists how a [rebuilt event](../reference/operators/from_clickhouse.md#catch-all-tables) can differ from the original one.
+Rebuilding events has a cost: any field can be split between a column and the catch-all, so ClickHouse returns every column of the matching rows. Filters on typed columns, such as `class_uid`, `status_id`, `time`, and the dotted column `user.name`, and on fields in the catch-all run in ClickHouse, with ClickHouse’s semantics. ClickHouse cannot compute a [`select`](https://tenzir.com/docs/reference/operators/select.md) or [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) on the rebuilt events, so the pipeline fails with a hint to add `pushdown=false` to [`from_clickhouse`](https://tenzir.com/docs/reference/operators/from_clickhouse.md), which runs them in Tenzir. Filter on typed columns where you can, because ClickHouse can use the sort key and skip indexes for them. The reference on [ClickHouse optimizations](../reference/optimizations/clickhouse.md#catch-all-tables) lists what reaches ClickHouse, and the [`from_clickhouse`](https://tenzir.com/docs/reference/operators/from_clickhouse.md) reference lists how a [rebuilt event](../reference/operators/from_clickhouse.md#catch-all-tables) can differ from the original one.
 
 When ClickHouse should do more of the work, such as aggregating or sorting, use SQL mode. It returns the result as it is, without rebuilding events:
 
@@ -567,12 +581,12 @@ WHERE `dst_endpoint.ip` = toIPv6('203.0.113.66');
 
 Pick the index type that matches the query:
 
-| Query                       | Index type     | Typical columns                             |
-| --------------------------- | -------------- | ------------------------------------------- |
-| Ranges on numbers or time   | `minmax`       | Counters, secondary timestamps              |
-| Equality and `IN`           | `bloom_filter` | IP addresses, user names, event codes       |
-| Whole words with `hasToken` | `tokenbf_v1`   | `raw_data`, `message`                       |
-| Substrings with `LIKE`      | `ngrambf_v1`   | Short text fields, at a higher storage cost |
+| Query                       | Index type                                           | Typical columns                             |
+| --------------------------- | ---------------------------------------------------- | ------------------------------------------- |
+| Ranges on numbers or time   | `minmax`                                             | Counters, secondary timestamps              |
+| Equality and `IN`           | `bloom_filter`                                       | IP addresses, user names, event codes       |
+| Whole words with `hasToken` | `tokenbf_v1`, or `text` on ClickHouse 26.2 and later | `raw_data`, `message`                       |
+| Substrings with `LIKE`      | `ngrambf_v1`                                         | Short text fields, at a higher storage cost |
 
 Add a Bloom filter on the destination IP and a token index on the raw log lines, and build both for the data already stored:
 
@@ -621,7 +635,29 @@ On our sample, the indexes cut the work of both queries to a sliver:
 | Destination IP      | 1,000,003               | 8,195                | 613 KiB    |
 | Token in `raw_data` | 1,000,003               | 3                    | 3.2 MiB    |
 
-The planted events still sit in small parts of their own, which flatters these numbers. Once ClickHouse merges them into larger parts, expect to read about one granule of 8192 rows per match, which is still a tiny fraction of the table. An index only helps when the value it looks for is rare. Try an index on the host name:
+The planted events still sit in small parts of their own, which flatters these numbers. Once ClickHouse merges them into larger parts, expect to read about one granule of 8192 rows per match, which is still a tiny fraction of the table.
+
+### Use a text index for log lines
+
+A token Bloom filter only says that a granule *might* contain a token, and varied log lines produce many false positives. On ClickHouse 26.2 or later, a [text index](https://clickhouse.com/docs/engines/table-engines/mergetree-family/invertedindexes) keeps an exact list of the rows per token instead. Replace the token Bloom filter with it:
+
+```sql
+ALTER TABLE ocsf.events DROP INDEX idx_raw_data;
+ALTER TABLE ocsf.events
+  ADD INDEX idx_raw_data raw_data TYPE text(tokenizer = splitByNonAlpha);
+ALTER TABLE ocsf.events MATERIALIZE INDEX idx_raw_data
+  SETTINGS mutations_sync = 1;
+```
+
+Both `hasToken` and `hasAnyTokens` use it. The index stores every distinct token, so it takes noticeably more space than the Bloom filter.
+
+Substrings scan every row
+
+No index helps a fragment inside a token, such as `raw_data LIKE '%admin%'` for the user `administrator`. Search for whole tokens where you can, as in `hasToken(raw_data, 'administrator')`.
+
+### Choose what to index
+
+An index only helps when the value it looks for is rare. Try an index on the host name:
 
 ```sql
 ALTER TABLE ocsf.events
@@ -914,7 +950,8 @@ CREATE TABLE ocsf.events (
 
 
   INDEX idx_dst_ip `dst_endpoint.ip` TYPE bloom_filter(0.01) GRANULARITY 1,
-  INDEX idx_raw_data raw_data TYPE tokenbf_v1(32768, 3, 0) GRANULARITY 1
+  -- ClickHouse 26.2 or later; use tokenbf_v1(32768, 3, 0) on older versions
+  INDEX idx_raw_data raw_data TYPE text(tokenizer = splitByNonAlpha)
 )
 ENGINE = MergeTree
 PARTITION BY (class_uid, toYYYYMM(time))

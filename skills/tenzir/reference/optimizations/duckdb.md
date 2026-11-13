@@ -7,124 +7,76 @@ section: "Docs"
 
 # DuckDB
 
-> When fromduckdb reads a table, it lets DuckDB filter the rows, pick the columns, stop after enough rows, and compute summaries, so that DuckDB reads and returns only what the pipeline needs instead of the whole table. This page describes when that happens, which filters DuckDB evaluates, and why the others stay in Tenzir. The optimizations overview explains how Tenzir optimizes pipelines in general and compares the databases.
+> When fromduckdb reads a table, it hands DuckDB the operators that follow it, so that DuckDB returns only what the pipeline keeps instead of the whole table. Those operators leave the pipeline and run in DuckDB, with DuckDB’s semantics. This page describes which operators DuckDB takes over, how its results can differ from Tenzir’s, and how to keep operators in Tenzir. The optimizations overview explains how Tenzir optimizes pipelines in general.
 
-When [`from_duckdb`](https://tenzir.com/docs/reference/operators/from_duckdb.md) reads a table, it lets DuckDB filter the rows, pick the columns, stop after enough rows, and compute summaries, so that DuckDB reads and returns only what the pipeline needs instead of the whole table. This page describes when that happens, which filters DuckDB evaluates, and why the others stay in Tenzir. The [optimizations overview](../optimizations.md) explains how Tenzir optimizes pipelines in general and compares the databases.
+When [`from_duckdb`](https://tenzir.com/docs/reference/operators/from_duckdb.md) reads a table, it hands DuckDB the operators that follow it, so that DuckDB returns only what the pipeline keeps instead of the whole table. Those operators leave the pipeline and run in DuckDB, with DuckDB’s semantics. This page describes which operators DuckDB takes over, how its results can differ from Tenzir’s, and how to keep operators in Tenzir. The [optimizations overview](../optimizations.md) explains how Tenzir optimizes pipelines in general.
 
 ## When it applies
 
-The operator reads in one of these modes, and only table mode optimizes:
+The operator reads in one of these modes:
 
-* **Table mode** reads a table that you name with `table`, as in `from_duckdb "events.duckdb", table="alerts"`. The operator writes the query itself and adds the work of the operators that follow it. The rest of this page describes this mode.
-* **SQL mode** sends the query that you write with `sql` exactly as written, and Tenzir applies the rest of the pipeline to its result. To have DuckDB filter, write the filter into your query.
-* **Live mode**, with `live=true`, polls a table for new rows. Every poll carries the filters and the columns of table mode, but neither the limit, since the limit counts rows across polls, nor a summary, since the input of a live read never ends.
+* **Table mode** reads a table that you name with `table`, as in `from_duckdb "events.duckdb", table="alerts"`. The operator writes the query itself and adds the operators that follow it. The rest of this page describes this mode.
+* **SQL mode** sends the query that you write with `sql` exactly as written, and the rest of the pipeline runs in Tenzir. To have DuckDB filter, write the filter into your query.
+* **Live mode**, with `live=true`, polls a table for new rows. Every poll carries the [`where`](https://tenzir.com/docs/reference/operators/where.md) operators that directly follow the operator. All other operators stay in Tenzir, since a [`head`](https://tenzir.com/docs/reference/operators/head.md) counts events across polls and a live read never ends.
 
-## How the query changes
+With `pushdown=false`, every operator stays in Tenzir and runs with TQL semantics. The operator still reads only the columns that the pipeline uses.
 
-The operator turns the operators that follow it into parts of its `SELECT`:
+## Operators that DuckDB takes over
 
-* [`where`](https://tenzir.com/docs/reference/operators/where.md) becomes a `WHERE` clause, as far as DuckDB evaluates the filter exactly like Tenzir.
-* [`select`](https://tenzir.com/docs/reference/operators/select.md) narrows the selected columns to the top-level columns that the pipeline reads.
-* [`head`](https://tenzir.com/docs/reference/operators/head.md) becomes a `LIMIT`, if every filter before it went into the query.
+The operator takes over the longest run of operators directly after it that DuckDB can spell:
 
-For example, the pipeline
+* [`where`](https://tenzir.com/docs/reference/operators/where.md), as the [filters](duckdb.md#filters) section describes.
+* [`select`](https://tenzir.com/docs/reference/operators/select.md) of fields, including renames and fields of `STRUCT` columns, such as `select ip=src_ip, host=meta.host`.
+* [`drop`](https://tenzir.com/docs/reference/operators/drop.md) of top-level fields.
+* [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) with group keys on fields and `count()`, `count(x)`, `min(x)`, and `max(x)` of fields. The summary may follow [`select`](https://tenzir.com/docs/reference/operators/select.md), [`drop`](https://tenzir.com/docs/reference/operators/drop.md), and assignments that copy fields, as [Aggregations in the source](../optimizations.md#aggregations-in-the-source) describes.
+* [`sort`](https://tenzir.com/docs/reference/operators/sort.md) by fields.
+* [`head`](https://tenzir.com/docs/reference/operators/head.md), and [`top`](https://tenzir.com/docs/reference/operators/top.md) or [`rare`](https://tenzir.com/docs/reference/operators/rare.md) followed by [`head`](https://tenzir.com/docs/reference/operators/head.md).
 
-```tql
-from_duckdb "events.duckdb", table="alerts"
-where severity >= 3 and rule.starts_with("ET ")
-select id, message
-head 100
-```
-
-sends a query equivalent to
-
-```sql
-SELECT "id", "message", "severity", "rule"
-FROM "alerts"
-WHERE "severity" >= 3 AND starts_with("rule", 'ET ')
-LIMIT 100
-```
-
-The [`where`](https://tenzir.com/docs/reference/operators/where.md), [`select`](https://tenzir.com/docs/reference/operators/select.md), and [`head`](https://tenzir.com/docs/reference/operators/head.md) operators still run in Tenzir on the rows that DuckDB returns, so the result is the same whether DuckDB evaluated a filter or not. The exception is a pipeline in which DuckDB computes a summary, as [Aggregations](duckdb.md#aggregations) describes.
-
-## Aggregations
-
-When a [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) follows the operator, after the filters that went into the query, DuckDB computes the summary with `GROUP BY` and returns one row per group instead of every matching row. This also applies to [`top`](https://tenzir.com/docs/reference/operators/top.md) and [`rare`](https://tenzir.com/docs/reference/operators/rare.md), which count with `summarize`. For example, the pipeline
+The first operator that DuckDB cannot spell ends the run. That operator and everything after it run in Tenzir. Tenzir splits a [`where`](https://tenzir.com/docs/reference/operators/where.md) at `and`, so DuckDB can still take over the conjuncts that it spells. For example, DuckDB runs every step of
 
 ```tql
 from_duckdb "events.duckdb", table="alerts"
 where severity >= 3
-summarize src_ip, events=count(), last.seen=max(ts)
+summarize src_ip, events=count()
 where events >= 10
+sort -events
+head 20
 ```
 
-sends a query equivalent to
+and returns at most 20 groups. The operator nests derived tables where SQL’s clause order requires it, and keeps the order of a [`sort`](https://tenzir.com/docs/reference/operators/sort.md) across them.
 
-```sql
-SELECT "src_ip", count_star(), max("ts")
-FROM "alerts"
-WHERE "severity" >= 3
-GROUP BY "src_ip"
+## Filters
+
+DuckDB takes over a [`where`](https://tenzir.com/docs/reference/operators/where.md) whose predicate consists of:
+
+* Fields, including fields of `STRUCT` columns, which DuckDB reads with `struct_extract`.
+* Literals: numbers, strings, booleans, `null`, times, durations of whole microseconds, and IP addresses.
+* Comparisons, `in` with a list of literals, arithmetic with `+`, `-`, `*`, and `/`, and the boolean operators `and`, `or`, and `not`.
+* The functions `starts_with`, `ends_with`, `length_bytes`, `length_chars`, `to_lower`, `to_upper`, `trim`, `abs`, and `match_regex`, without named arguments such as `ignore_case`.
+
+Other functions, subnets, other kinds of literals, strings with NUL bytes, arithmetic with a time literal such as `ts - 2024-01-01`, and optional fields such as `x?` stay in Tenzir.
+
+## DuckDB semantics
+
+The operators that DuckDB takes over run as DuckDB runs them, which can differ from TQL:
+
+* Comparisons with `null` yield `null`, so `name != "alpha"` does not keep rows where `name` is `null`.
+* Text compares and sorts under the collation of its column, such as `COLLATE NOCASE`.
+* DuckDB sorts `null` last, and returns groups that tie in a sort in any order.
+* DuckDB computes arithmetic in the types of its operands, and considers `NaN` equal to itself and greater than every other number.
+* A time becomes a string in UTC, such as `'2024-01-01 00:00:00.000000000+00'`, which DuckDB casts to the type of the column. A comparison therefore never depends on the session time zone, but a `DATE` or `TIMESTAMP_S` column compares with the time truncated to its precision.
+* An IP address becomes its text, such as `'10.0.0.1'`, which compares as text against a `VARCHAR` column.
+* `match_regex` uses DuckDB’s `regexp_matches`.
+* A [`select`](https://tenzir.com/docs/reference/operators/select.md) of a column that the table lacks fails the query, where Tenzir would warn and fill in `null`.
+
+When DuckDB computes a summary or a [`select`](https://tenzir.com/docs/reference/operators/select.md), Tenzir does not see the individual rows, so it does not warn about values that it reads as `null`, such as a field of a `NULL` struct.
+
+## Verify an optimization
+
+To see the operators that DuckDB takes over, print the optimized pipeline:
+
+```sh
+tenzir --dump-opt-ir 'from_duckdb "events.duckdb", table="alerts" | where severity >= 3 | head 10'
 ```
 
-Tenzir then arranges the result columns into the fields of the summary, such as `last.seen`.
-
-The summary may also follow [`select`](https://tenzir.com/docs/reference/operators/select.md), [`drop`](https://tenzir.com/docs/reference/operators/drop.md), [`set`](https://tenzir.com/docs/reference/operators/set.md), and assignments that keep or copy the fields that it reads, as [Aggregations in the source](../optimizations.md#aggregations-in-the-source) describes. DuckDB then reads the original columns, and the result keeps the new names. For example, `select ip=src_ip` followed by `summarize ip, n=count()` groups by the `src_ip` column and returns the field `ip`. A computed value for a field that the summary reads, such as `level = severity * 2` before `max(level)`, keeps the summary in Tenzir.
-
-DuckDB takes over the [`where`](https://tenzir.com/docs/reference/operators/where.md) before the summary together with the summary itself, and returns only the group keys and the aggregates. In the example, the `severity` column never reaches Tenzir. The [`where`](https://tenzir.com/docs/reference/operators/where.md) after the summary runs in Tenzir. DuckDB computes these parts of a summary:
-
-* Group keys on boolean, integer, `VARCHAR`, and temporal columns, and on fields of `STRUCT` columns of these types. A collated `VARCHAR` groups with the binary collation, which tells text apart by its bytes like TQL.
-* `count()`, and `count(x)` on such columns and on floating-point columns.
-* `min(x)` and `max(x)` on integer and temporal columns.
-
-Values that Tenzir cannot represent, such as `infinity` or a `DATE` past the year 2262, group, count, and compare as `null`, as they do in Tenzir. Like Tenzir, DuckDB returns one row for an empty table when the summary has no group keys, and no rows when it has some. The rows arrive in the order in which DuckDB returns the groups. Since a table has no defined row order, this is as valid as the first-seen order in which [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) emits groups, but it can differ from the order of a read without a summary, which in practice follows the order in which the rows were inserted. Use [`sort`](https://tenzir.com/docs/reference/operators/sort.md) when you need a particular order.
-
-Everything else runs in Tenzir with the same result. The operator then reads the rows as usual and summarizes them itself:
-
-* A summary with another function, such as `sum`, an option such as `emit`, or a group key or argument that is not a field. The operator then still selects only the columns that the summary reads.
-* A summary after a [`head`](https://tenzir.com/docs/reference/operators/head.md), after a predicate that stays in Tenzir, or behind an operator that computes a field that the summary reads.
-* Group keys and extremes of floating-point columns, since `GROUP BY` considers `NaN` equal to itself and `-0.0` equal to `0.0`, and Tenzir’s result for `NaN` depends on the order of the rows.
-* Columns that arrive as strings, such as `DECIMAL` and `UUID` columns.
-
-When DuckDB computes a summary, Tenzir does not see the individual rows, so it does not warn about values that it reads as `null`, such as a field of a `NULL` struct or an `infinity` timestamp.
-
-## Filters that DuckDB evaluates
-
-The operator puts a filter into the query only if DuckDB evaluates it exactly like Tenzir. These filters qualify:
-
-* Comparisons of a column with a literal of matching kind: numbers against integer, `FLOAT`, and `DOUBLE` columns, strings against `VARCHAR` columns, and `time` values against `DATE`, `TIMESTAMP`, `TIMESTAMP_S`, `TIMESTAMP_MS`, `TIMESTAMP_NS`, and `TIMESTAMP WITH TIME ZONE` columns. Booleans compare for equality only.
-* Null checks with `== null` and `!= null`.
-* Membership tests with `in` and a list of such literals.
-* Comparisons between two columns of the same kind. Temporal columns must share their exact type.
-* Fields of `STRUCT` columns, such as `meta.level`, with the same rules as columns.
-* The string functions `starts_with`, `ends_with`, and `length_bytes`, and substring search with `"needle" in haystack`. With `ignore_case=true`, `starts_with` and `ends_with` translate approximately, and so does `match_regex`, as [Approximate matching](duckdb.md#approximate-matching) explains.
-* Arithmetic that cannot overflow: `+`, `-`, and `*` on integer columns of at most 32 bits with a literal whose magnitude is below 2^31, and any `+`, `-`, `*`, or `/` that yields a floating-point number, except division by zero.
-* Expressions that consist of literals only, such as `2024-01-01 + 1d`, which are computed ahead of time.
-* The boolean operators `and`, `or`, and `not`.
-* Bare boolean columns.
-
-Where DuckDB’s own semantics differ from TQL, the query spells out TQL’s:
-
-* DuckDB considers `NaN` equal to itself and greater than every other number. A comparison of a floating-point value carries a guard that makes `NaN` compare as in TQL: `x > 1.5` becomes `x > 1.5e0 AND NOT isnan(x)`. Numbers are spelled as `DOUBLE` literals, so that DuckDB widens a `FLOAT` column to `DOUBLE` like TQL does, instead of comparing in single precision.
-* DuckDB computes arithmetic in the types of its operands, so that it can overflow or lose precision where TQL does not. The query widens the column first: `n + 1 > 5` becomes `CAST(n AS BIGINT) + 1 > 5`, and `n * 0.5 > 5` computes in `DOUBLE`.
-* DuckDB reads `meta.level` as the column `level` of a table `meta` if there is one. A field therefore goes into the query as `struct_extract(meta, 'level')`.
-* A `VARCHAR` column with a collation, such as `COLLATE NOCASE`, compares text without regard to case, and so does every `VARCHAR` column when the database sets a `default_collation`. Such a column goes into the query with the binary collation, which compares bytes like TQL: `name == "a"` becomes `name COLLATE "binary" = 'a'`. DuckDB still skips row groups by their minimum and maximum values for such a comparison.
-
-Literals take the column’s own type, so a comparison never depends on the session time zone. Values that Tenzir cannot represent, such as `infinity` or a `DATE` past the year 2262, compare as `null` in both places. An `ip` literal that is compared for equality with a `VARCHAR` column, or listed in an `in` test against one, becomes its canonical text, as with the [`from_clickhouse`](https://tenzir.com/docs/reference/operators/from_clickhouse.md) operator. The predicate `src == 1.1.1.1` then matches rows whose `src` reads `1.1.1.1`.
-
-## Approximate matching
-
-Two kinds of predicates translate approximately. This is a deliberate exception to identical results, made so that common filters reach the database.
-
-A predicate such as `msg.starts_with("error", ignore_case=true)` goes into the query as `starts_with(lower(msg), lower('error'))`. DuckDB lowercases one character at a time, which agrees with TQL for ASCII and most other text. TQL applies full Unicode case folding instead, which differs for a few characters: it folds `ß` to `ss`, so `"Straße".starts_with("strass", ignore_case=true)` is `true` in TQL but matches no row in DuckDB.
-
-A predicate such as `msg.match_regex("^ERROR [0-9]+")` goes into the query as `regexp_matches(msg, '^ERROR [0-9]+')`. Both TQL and DuckDB use the RE2 library with the same options: the pattern matches anywhere in the string, `.` does not match a newline, and `^` and `$` match only at the start and end of the string. DuckDB bundles its own release of RE2, which may disagree with TQL’s on rarely used syntax.
-
-## Filters that stay in Tenzir
-
-Everything else runs in Tenzir, with the same result. This includes:
-
-* Columns that arrive as strings, such as `DECIMAL`, `UUID`, `ENUM`, and `UNION` columns (see [Types](../operators/from_duckdb.md#types)), and `BLOB`, `INTERVAL`, `LIST`, `ARRAY`, and `MAP` columns, including the values nested in them.
-* Arithmetic on 64-bit integer columns or between two columns.
-* Subnet membership tests on `VARCHAR` columns, such as `src in 10.0.0.0/8`.
-* Strings that contain NUL bytes, and all other functions.
+The operator lists the operators that it took over as `plan`, and the reason why it took over no more as `declined`.

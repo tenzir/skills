@@ -15,7 +15,7 @@ Reads events from a MySQL database.
 from_mysql [uri=string], [table=string], [sql=string], [show=string],
            [live=bool], [tracking_column=string],
            [host=string], [port=int], [user=string], [password=string],
-           [database=string], [tls=bool|record]
+           [database=string], [tls=bool|record], [pushdown=bool]
 ```
 
 ## Description
@@ -118,6 +118,12 @@ Use `tls=true` to enable TLS with default settings and certificate verification,
 }
 ```
 
+### `pushdown = bool (optional)`
+
+Whether MySQL takes over the operators that follow the operator in table mode. With `pushdown=false`, they stay in the pipeline and run with TQL semantics, and the operator still reads only the columns that the pipeline uses. See [Optimizations](from_mysql.md#optimizations).
+
+Defaults to `true`.
+
 ## Types
 
 The operator maps MySQL types to [Type System](../types.md) as follows:
@@ -133,9 +139,13 @@ The operator maps MySQL types to [Type System](../types.md) as follows:
 
 All other types include `CHAR`, `VARCHAR`, `TEXT`, `BINARY`, `VARBINARY`, `DATE`, `DATETIME`, `TIMESTAMP`, `TIME`, `JSON`, `ENUM`, and `SET`. Convert them in the pipeline where you need another type, for example with the [`time`](https://tenzir.com/docs/reference/functions/time.md) or [`parse_json`](https://tenzir.com/docs/reference/functions/parse_json.md) functions.
 
+In table mode, the operator sets the session’s time zone to UTC, so `TIMESTAMP` columns arrive in UTC.
+
 ## Optimizations
 
-When the operator reads a table, it lets MySQL do the work of the [`where`](https://tenzir.com/docs/reference/operators/where.md), [`select`](https://tenzir.com/docs/reference/operators/select.md), and [`head`](https://tenzir.com/docs/reference/operators/head.md) operators that follow it, so that MySQL returns only the rows and columns that the pipeline needs. For one-shot table reads without `live=true`, MySQL can also compute a directly following [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md). With `live=true`, the summary stays in Tenzir because the input never ends. The page on [MySQL optimizations](../optimizations/mysql.md) describes which filters MySQL evaluates, and the [optimizations overview](../optimizations.md) explains how Tenzir optimizes pipelines in general.
+When the operator reads a table, it hands MySQL the [`where`](https://tenzir.com/docs/reference/operators/where.md), [`select`](https://tenzir.com/docs/reference/operators/select.md), [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md), [`sort`](https://tenzir.com/docs/reference/operators/sort.md), and [`head`](https://tenzir.com/docs/reference/operators/head.md) operators that follow it, as far as MySQL can spell them, so that MySQL returns only what the pipeline keeps and can use its indexes. Those operators leave the pipeline and run with MySQL’s semantics, which can differ from TQL: for example, text compares under the collation of its column, which often ignores case, and `name != "alpha"` does not keep rows where `name` is `NULL`. A live read hands MySQL its filters only. Use `pushdown=false` to keep every operator in the pipeline.
+
+The page on [MySQL optimizations](../optimizations/mysql.md) describes which operators MySQL takes over and how its semantics differ, and the [optimizations overview](../optimizations.md) explains how Tenzir optimizes pipelines in general.
 
 ## Examples
 
@@ -147,13 +157,22 @@ from_mysql table="users", host="db.example.com", database="mydb"
 
 ### Filter rows in MySQL
 
-The `where`, `select`, and `head` operators go into the query, so MySQL returns only the ten matching rows with two columns:
+MySQL takes over the `where`, `select`, and `head` operators, so it returns only the ten matching rows with two columns:
 
 ```tql
 from_mysql table="logins", host="db.example.com", database="audit"
 where user == "admin" and result != "success"
 select user, source
 head 10
+```
+
+### Keep operators in Tenzir
+
+With `pushdown=false`, the `where` runs in Tenzir with TQL semantics and compares text by its bytes:
+
+```tql
+from_mysql table="logins", host="db.example.com", database="audit", pushdown=false
+where user == "admin"
 ```
 
 ### Use a connection URI

@@ -11,6 +11,16 @@ section: "Docs"
 
 Drops fields from OCSF events to reduce their size.
 
+Deprecated
+
+The `ocsf_trim` operator is deprecated and emits a warning. Use the [`ocsf_trim`](https://tenzir.com/docs/reference/functions/ocsf_trim.md) function for both top-level and nested OCSF events. To transform the whole event, assign the function result to `this`:
+
+```tql
+this = ocsf_trim(this)
+```
+
+Pass the operator’s options as named function arguments, for example `this = ocsf_trim(this, drop_optional=true)`. The function returns `null` with a warning when it cannot resolve the OCSF version or class, while the operator drops those events. Assign the result to a separate field before replacing `this` if you need to inspect or route the original event.
+
 ```tql
 ocsf_trim [drop_optional=bool, drop_recommended=bool]
 ```
@@ -18,10 +28,6 @@ ocsf_trim [drop_optional=bool, drop_recommended=bool]
 ## Description
 
 The `ocsf_trim` operator uses intelligent analysis to determine which fields to remove from OCSF events, optimizing data size while preserving essential information.
-
-Transform a field with the function
-
-When the OCSF event lives in a field, such as `ocsf` next to `raw_data`, or in a list of events, consider the [`ocsf_trim`](https://tenzir.com/docs/reference/functions/ocsf_trim.md) function instead, as in `ocsf = ocsf_trim(ocsf)`. It leaves the rest of the event untouched and returns `null` for an event it cannot resolve rather than dropping the whole event.
 
 ### `drop_optional = bool`
 
@@ -40,7 +46,7 @@ from {
   class_uid: 3002,
   class_name: "Authentication",  // will be removed
   metadata: {
-    version: "1.5.0",
+    version: "1.9.0",
   },
   user: {
     name: "alice",
@@ -58,7 +64,7 @@ ocsf_trim
 {
   class_uid: 3002,
   metadata: {
-    version: "1.5.0",
+    version: "1.9.0",
   },
   user: {
     name: "alice",
@@ -76,7 +82,7 @@ ocsf_trim
 from {
   class_uid: 1001,
   class_name: "File System Activity",
-  metadata: {version: "1.5.0"},
+  metadata: {version: "1.9.0"},
   file: {
     name: "document.txt",
     path: "/home/user/document.txt",
@@ -92,7 +98,7 @@ ocsf_trim drop_optional=true, drop_recommended=false
 {
   class_uid: 1001,
   metadata: {
-    version: "1.5.0",
+    version: "1.9.0",
   },
   file: {
     name: "document.txt",
@@ -108,7 +114,7 @@ ocsf_trim drop_optional=true, drop_recommended=false
 from {
   class_uid: 4001,
   class_name: "Network Activity",
-  metadata: {version: "1.5.0"},
+  metadata: {version: "1.9.0"},
   src_endpoint: {
     ip: "192.168.1.100",
     port: 443,
@@ -124,7 +130,7 @@ ocsf_trim drop_optional=true, drop_recommended=true
 {
   class_uid: 4001,
   metadata: {
-    version: "1.5.0",
+    version: "1.9.0",
   },
   severity_id: 5,
 }
@@ -133,6 +139,7 @@ ocsf_trim drop_optional=true, drop_recommended=true
 ## See Also
 
 * [`ocsf_trim`](https://tenzir.com/docs/reference/functions/ocsf_trim.md)
+* [`ocsf_compact`](https://tenzir.com/docs/reference/functions/ocsf_compact.md)
 * [`ocsf_cast`](https://tenzir.com/docs/reference/operators/ocsf_cast.md)
 * [`ocsf_derive`](https://tenzir.com/docs/reference/operators/ocsf_derive.md)
 * [Onboard a data source](../../tutorials/onboard-a-data-source.md)

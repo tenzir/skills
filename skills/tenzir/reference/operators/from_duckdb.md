@@ -13,7 +13,8 @@ Reads events from a DuckDB database.
 
 ```tql
 from_duckdb uri:string, [token=secret], [tls=bool|record],
-            [table=string], [sql=string], [live=bool], [tracking_column=string]
+            [table=string], [sql=string], [live=bool], [tracking_column=string],
+            [pushdown=bool]
 ```
 
 ## Description
@@ -87,6 +88,12 @@ The column name is case-insensitive, like all identifiers in DuckDB.
 
 Requires `live=true`.
 
+### `pushdown = bool (optional)`
+
+Whether DuckDB takes over the operators that follow the operator in table mode. With `pushdown=false`, they stay in the pipeline and run with TQL semantics, and the operator still reads only the columns that the pipeline uses. See [Optimizations](from_duckdb.md#optimizations).
+
+Defaults to `true`.
+
 ## Types
 
 The operator maps DuckDB types to [Type System](../types.md) as follows:
@@ -115,7 +122,9 @@ A `time` covers the years 1678 to 2261 with nanosecond precision. Timestamps and
 
 ## Optimizations
 
-When the operator reads a table, it lets DuckDB do the work of the [`where`](https://tenzir.com/docs/reference/operators/where.md), [`select`](https://tenzir.com/docs/reference/operators/select.md), [`head`](https://tenzir.com/docs/reference/operators/head.md), and [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) operators that follow it, so that DuckDB returns only the rows, columns, and summaries that the pipeline needs. The page on [DuckDB optimizations](../optimizations/duckdb.md) describes which filters DuckDB evaluates, and the [optimizations overview](../optimizations.md) explains how Tenzir optimizes pipelines in general.
+When the operator reads a table, it hands DuckDB the [`where`](https://tenzir.com/docs/reference/operators/where.md), [`select`](https://tenzir.com/docs/reference/operators/select.md), [`drop`](https://tenzir.com/docs/reference/operators/drop.md), [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md), [`sort`](https://tenzir.com/docs/reference/operators/sort.md), and [`head`](https://tenzir.com/docs/reference/operators/head.md) operators that follow it, as far as DuckDB can spell them, so that DuckDB returns only what the pipeline keeps. Those operators leave the pipeline and run with DuckDB’s semantics, which can differ from TQL: for example, `name != "alpha"` does not keep rows where `name` is `null`, and text compares under the collation of its column. A live read hands DuckDB its filters only. Use `pushdown=false` to keep every operator in the pipeline.
+
+The page on [DuckDB optimizations](../optimizations/duckdb.md) describes which operators DuckDB takes over and how its semantics differ, and the [optimizations overview](../optimizations.md) explains how Tenzir optimizes pipelines in general.
 
 ## Remote databases
 
@@ -192,7 +201,7 @@ from_duckdb "events.duckdb",
 
 ### Read only the columns a pipeline uses
 
-The `select` reaches the query, so DuckDB decodes only `id` and `message`:
+DuckDB takes over the `select`, so it decodes only `id` and `message`:
 
 ```tql
 from_duckdb "events.duckdb", table="alerts"
@@ -201,7 +210,7 @@ select id, message
 
 ### Filter rows in DuckDB
 
-The `where` and `head` reach the query, so DuckDB returns at most 10 matching rows:
+DuckDB takes over the `where` and the `head`, so it returns at most 10 matching rows:
 
 ```tql
 from_duckdb "events.duckdb", table="alerts"
@@ -211,12 +220,33 @@ head 10
 
 ### Summarize rows in DuckDB
 
-The `where` and the `summarize` reach the query, so DuckDB returns one row per source address:
+DuckDB takes over the `where` and the `summarize`, so it returns one row per source address:
 
 ```tql
 from_duckdb "events.duckdb", table="alerts"
 where severity >= 3
 summarize src_ip, alerts=count(), first=min(ts)
+```
+
+### Keep the top groups from DuckDB
+
+DuckDB also takes over the `where`, `sort`, and `head` after the `summarize`, so it returns only the 20 largest groups, with its own sorting rules:
+
+```tql
+from_duckdb "events.duckdb", table="alerts"
+summarize src_ip, alerts=count()
+where alerts >= 10
+sort -alerts, src_ip
+head 20
+```
+
+### Keep operators in Tenzir
+
+With `pushdown=false`, the `where` runs in Tenzir with TQL semantics and keeps rows where `name` is `null`:
+
+```tql
+from_duckdb "events.duckdb", table="alerts", pushdown=false
+where name != "alpha"
 ```
 
 ### Stream new rows from a table

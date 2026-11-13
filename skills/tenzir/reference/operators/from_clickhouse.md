@@ -14,7 +14,7 @@ Fetches data from a ClickHouse server.
 ```tql
 from_clickhouse [table=string, sql=string,
                  uri=string, host=string, port=int, user=string, password=string,
-                 tls=bool|record]
+                 tls=bool|record, pushdown=bool]
 ```
 
 ## Description
@@ -116,6 +116,12 @@ Any value not specified in the record will either be picked up from the configur
 
 See the [Node TLS Setup guide](../../guides/node-setup/configure-tls.md) for more details.
 
+### `pushdown = bool (optional)`
+
+Whether ClickHouse takes over the operators that follow the operator in table mode. With `pushdown=false`, they stay in the pipeline and run with TQL semantics. See [Optimizations](from_clickhouse.md#optimizations).
+
+Defaults to `true`.
+
 ## Catch-all tables
 
 When you read a table with a [catch-all column](../../integrations/clickhouse.md#catch-all-columns) in `table` mode, the operator reverses how [`to_clickhouse`](https://tenzir.com/docs/reference/operators/to_clickhouse.md) split each event across the columns:
@@ -172,9 +178,9 @@ The operator drops columns of other unsupported types, such as geo types, with a
 
 ## Optimizations
 
-When the operator reads a table, it lets ClickHouse do the work of the [`where`](https://tenzir.com/docs/reference/operators/where.md), [`select`](https://tenzir.com/docs/reference/operators/select.md), [`head`](https://tenzir.com/docs/reference/operators/head.md), and [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) operators that follow it, so that ClickHouse returns only the rows, columns, and summaries that the pipeline needs. The page on [ClickHouse optimizations](../optimizations/clickhouse.md) describes which filters ClickHouse evaluates, and the [optimizations overview](../optimizations.md) explains how Tenzir optimizes pipelines in general.
+When the operator reads a table, it hands ClickHouse the operators that follow it, as far as ClickHouse can spell them: [`where`](https://tenzir.com/docs/reference/operators/where.md), [`select`](https://tenzir.com/docs/reference/operators/select.md), [`drop`](https://tenzir.com/docs/reference/operators/drop.md), [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) with `count`, `min`, and `max`, including [`top`](https://tenzir.com/docs/reference/operators/top.md) and [`rare`](https://tenzir.com/docs/reference/operators/rare.md), [`sort`](https://tenzir.com/docs/reference/operators/sort.md), and [`head`](https://tenzir.com/docs/reference/operators/head.md). Those operators leave the pipeline and run with ClickHouse’s semantics, which can differ from TQL. For example, ClickHouse fails a comparison of an `Int64` column with a string. When the pipeline runs, the operator binds every field that ClickHouse uses to a column of the table, and fails before running a query if it cannot. Use `pushdown=false` to keep every operator in the pipeline. The page on [ClickHouse optimizations](../optimizations/clickhouse.md) describes which operators ClickHouse takes over and how its semantics differ, and the [optimizations overview](../optimizations.md) explains how Tenzir optimizes pipelines in general.
 
-In a [catch-all table](from_clickhouse.md#catch-all-tables), supported filters on scalar columns go into the query, including columns with dotted names such as `src_endpoint.port`. Many filters on fields in the catch-all go into the query as prefilters that narrow the rows, and the filter still runs in Tenzir. The query reads every column. The [ClickHouse optimizations](../optimizations/clickhouse.md#catch-all-tables) page lists which filters qualify.
+In a [catch-all table](from_clickhouse.md#catch-all-tables), ClickHouse computes filters, sorts, and limits on columns and on fields in the catch-all, such as `src_endpoint.port` or `metadata.product.name`. A [`select`](https://tenzir.com/docs/reference/operators/select.md), [`drop`](https://tenzir.com/docs/reference/operators/drop.md), or [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) needs the rebuilt events, so the pipeline fails with a hint to use `pushdown=false`, which runs them in Tenzir. The [ClickHouse optimizations](../optimizations/clickhouse.md#catch-all-tables) page lists the details.
 
 ## Examples
 
@@ -201,7 +207,7 @@ select time, message
 head 50
 ```
 
-ClickHouse evaluates the filter, returns only `time`, `message`, `severity`, and `source`, and stops after 50 matching rows.
+ClickHouse evaluates the filter, returns only `time` and `message`, and stops after 50 matching rows.
 
 ### Summarize on the server
 
@@ -212,6 +218,19 @@ summarize source, alerts=count(), last=max(time)
 ```
 
 ClickHouse filters and groups the rows and returns one row per source.
+
+### Keep the top groups on the server
+
+```tql
+from_clickhouse table="events", host="clickhouse.example.com", tls=false
+where severity >= 3
+summarize src_ip, events=count()
+where events >= 10
+sort -events, src_ip
+head 20
+```
+
+ClickHouse also takes over the `where`, `sort`, and `head` after the summary, runs them with its own semantics, and returns at most 20 groups. If the limits of the session, such as `max_result_rows` with `result_overflow_mode='break'`, would truncate an aggregated query, the query fails instead of returning a partial result.
 
 ### Read events from a catch-all table
 

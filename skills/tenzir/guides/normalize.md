@@ -22,7 +22,7 @@ Pick the schema your analytics platform reads. The guides are listed alphabetica
 
 [Map to ECS](normalize/map-to-ecs.md) maps to Elastic Common Schema: set `@timestamp` and `ecs.version`, choose the `event.*` categorization, map the source, destination, network, and observer fieldsets, and keep source-specific details in a custom namespace.
 
-[Map to OCSF](normalize/map-to-ocsf.md) maps to OCSF, our default target: identify the event class, map by attribute group, handle unmapped fields, and validate with `ocsf_cast`.
+[Map to OCSF](normalize/map-to-ocsf.md) maps to OCSF, our default target: identify the event class, map by attribute group, handle unmapped fields, and validate with the [`ocsf_cast`](https://tenzir.com/docs/reference/functions/ocsf_cast.md) function.
 
 [Map to UDM](normalize/map-to-udm.md) maps to Google SecOps UDM: choose the event type, populate metadata and participant nouns, convert values to UDM enums, and keep the residue in `additional`.
 

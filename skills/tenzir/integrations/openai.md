@@ -25,7 +25,7 @@ trace_exporter = { otlp-grpc = { endpoint = "http://tenzir-node:4317" } }
 metrics_exporter = { otlp-grpc = { endpoint = "http://tenzir-node:4317" } }
 ```
 
-Check that exported records include the workstation’s hostname. Missing host identity limits correlation with other endpoint events.
+Check that exported resource attributes include `host.name` for the workstation’s hostname or `host.id` for its stable host identifier. The normalizer maps these to `device.hostname` and `device.uid`. File System Activity requires this host identity; a tool-call or session ID does not identify the host. Without host identity, the normalizer emits a warning telling you to add `host.name` or `host.id`. The record retains its File or Process Activity class. OCSF validation reports the missing required device until you supply the real host context.
 
 ## Receive and normalize
 

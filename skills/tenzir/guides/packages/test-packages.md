@@ -137,7 +137,7 @@ tests/parse.input
 
 ### Pin the output schema
 
-Validate the schema your operator promises, so the baseline shows what consumers see. For OCSF, [`ocsf_cast`](https://tenzir.com/docs/reference/operators/ocsf_cast.md) validates and [`drop_null_fields`](https://tenzir.com/docs/reference/operators/drop_null_fields.md) keeps the baseline short:
+Validate the schema your operator promises, so the baseline shows what consumers see. For OCSF, [`ocsf_cast`](https://tenzir.com/docs/reference/functions/ocsf_cast.md) validates and [`drop_null_fields`](https://tenzir.com/docs/reference/operators/drop_null_fields.md) keeps the baseline short:
 
 tests/ocsf/auth.tql
 
@@ -146,11 +146,11 @@ from_file f"{env("TENZIR_INPUTS")}/auth.ndjson" {
   read_ndjson
 }
 vendor::ocsf::normalize
-ocsf_cast
+this = ocsf_cast(this)
 drop_null_fields
 ```
 
-Leave out what each caller decides, such as [`ocsf_derive`](https://tenzir.com/docs/reference/operators/ocsf_derive.md), and replace non-deterministic values such as [`now`](https://tenzir.com/docs/reference/functions/now.md). For a full package walkthrough, see [Onboard a data source](../../tutorials/onboard-a-data-source.md).
+Leave out what each caller decides, such as [`ocsf_derive`](https://tenzir.com/docs/reference/functions/ocsf_derive.md), and replace non-deterministic values such as [`now`](https://tenzir.com/docs/reference/functions/now.md). For a full package walkthrough, see [Onboard a data source](../../tutorials/onboard-a-data-source.md).
 
 ### Test with different arguments
 

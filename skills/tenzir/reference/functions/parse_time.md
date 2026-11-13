@@ -12,7 +12,7 @@ section: "Docs"
 Parses a time from a string that follows a specific format.
 
 ```tql
-parse_time(input: string, format: string, [reference=time]) -> time
+parse_time(input: string, format: string, [reference=time, timezone=string]) -> time
 ```
 
 ## Description
@@ -79,6 +79,19 @@ Other incomplete date formats, including dates built from week numbers such as `
 
 If `reference` is null and a date field is missing, `parse_time` returns null and emits a warning. If `format` includes a complete date, `parse_time` emits a warning that it ignored `reference`. If `format` doesn’t include a year and you don’t set `reference`, `parse_time` uses 1970 and emits a deprecation warning because this will become an error in a future release.
 
+### `timezone = string (optional)`
+
+The IANA time zone of the parsed wall-clock time, such as `"Europe/Zurich"`, `"America/New_York"`, or `"UTC"`. The function interprets the parsed time in this zone, taking daylight saving time into account, and returns the corresponding UTC time. Without `timezone`, the parsed time is UTC.
+
+The argument accepts any expression, so the time zone can differ from event to event. When `reference` fills in a missing date, `parse_time` picks the date that places the result in the given time zone closest to the reference time.
+
+Daylight saving transitions make some local times ambiguous or nonexistent:
+
+* A local time that occurs twice when clocks fall back resolves to the earlier of the two instants. For example, `2025-10-26 02:30:00` in `Europe/Zurich` becomes `2025-10-26T00:30:00Z`.
+* A local time that clocks skip when they spring forward shifts forward by the length of the gap. For example, `2025-03-30 02:30:00` in `Europe/Zurich` becomes `2025-03-30T01:30:00Z`, which is 03:30 local time.
+
+If `format` contains `%z` or `%s`, the input determines the instant. In that case, `parse_time` ignores `timezone` and emits a warning. A `%Z` zone name is consumed but not interpreted, because abbreviations such as `EST` are ambiguous. Use `timezone` to set the zone instead. An unknown time zone name or a value that isn’t a string yields null and a warning. A null `timezone` behaves as if you didn’t set it.
+
 ## Examples
 
 ### Parse a timestamp
@@ -121,20 +134,45 @@ timestamp = timestamp.parse_time(
 {timestamp: 2025-12-31T23:59:59Z}
 ```
 
-BSD syslog timestamps also don’t include a timezone. If you know the sender’s timezone, add the UTC offset to the string and parse it with `%z`:
+BSD syslog timestamps also don’t include a time zone. If you know the sender’s time zone, pass it with `timezone` so that daylight saving time is handled for you:
 
 ```tql
 from {
-  bsd_time: "May  5 18:16:21",
+  bsd_time: "Jul  4 12:00:00",
 }
-timestamp = (bsd_time + " +0400").parse_time(
-  "%b %e %H:%M:%S %z",
-  reference=2026-05-05T00:00:00Z,
+timestamp = bsd_time.parse_time(
+  "%b %e %H:%M:%S",
+  reference=2026-06-01T00:00:00Z,
+  timezone="Europe/Zurich",
 )
 ```
 
 ```tql
-{timestamp: 2026-05-05T14:16:21Z}
+{
+  bsd_time: "Jul  4 12:00:00",
+  timestamp: 2026-07-04T10:00:00Z,
+}
+```
+
+### Resolve the time zone per event
+
+The `timezone` argument is an expression, so every event can carry its own time zone. This helps when one listener receives logs from senders in different time zones, for example with the zone looked up from an asset inventory by hostname:
+
+```tql
+from {timestamp: "Nov  6 09:13:01", tz: "Europe/Zurich"},
+  {timestamp: "Nov  6 09:13:01", tz: "America/Los_Angeles"},
+  {timestamp: "Nov  6 09:13:01", tz: null}
+time = timestamp.parse_time(
+  "%b %e %H:%M:%S",
+  reference=2026-12-01T00:00:00Z,
+  timezone=tz,
+)
+```
+
+```tql
+{timestamp: "Nov  6 09:13:01", tz: "Europe/Zurich", time: 2026-11-06T08:13:01Z}
+{timestamp: "Nov  6 09:13:01", tz: "America/Los_Angeles", time: 2026-11-06T17:13:01Z}
+{timestamp: "Nov  6 09:13:01", tz: null, time: 2026-11-06T09:13:01Z}
 ```
 
 ### Parse a time without a date

@@ -1,7 +1,7 @@
 ---
 title: "from_redis"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/from_redis
-source: https://tenzir.com/docs/v6.22.0/reference/operators/from_redis.md
+canonical: https://tenzir.com/docs/reference/operators/from_redis
+source: https://tenzir.com/docs/reference/operators/from_redis.md
 section: "Docs"
 ---
 
@@ -22,7 +22,7 @@ The `from_redis` operator reads from a Redis server. It produces one event per l
 
 By default, the operator pops items from the right end of one or more lists. Producers that push to the left end then form a queue that the operator consumes in FIFO order. The operator waits on the server with a blocking pop instead of polling.
 
-Popping an item removes it from the list. When the pipeline stops gracefully, the operator lets a pop in flight finish and emits its items, which takes up to a second with a responsive server. When the pipeline is cancelled, such as by a second interrupt, the operator stops at once. It then pushes the items that it popped but did not emit back to the end of the list that they came from, so that the next consumer receives them in their original order. If that fails for 10 seconds, the node logs an error with the number of items. Items that downstream operators drop, such as [`head`](https://tenzir.com/docs/v6.22.0/reference/operators/head.md) after its limit, count as emitted. Use `count` instead of [`head`](https://tenzir.com/docs/v6.22.0/reference/operators/head.md) to pop an exact number of items.
+Popping an item removes it from the list. When the pipeline stops gracefully, the operator lets a pop in flight finish and emits its items, which takes up to a second with a responsive server. When the pipeline is cancelled, such as by a second interrupt, the operator stops at once. It then pushes the items that it popped but did not emit back to the end of the list that they came from, so that the next consumer receives them in their original order. If that fails for 10 seconds, the node logs an error with the number of items. Items that downstream operators drop, such as [`head`](https://tenzir.com/docs/reference/operators/head.md) after its limit, count as emitted. Use `count` instead of [`head`](https://tenzir.com/docs/reference/operators/head.md) to pop an exact number of items.
 
 A cancelled pipeline also hands back the items of the pop in flight, as long as the server answers it within 1.5 seconds. Otherwise, the node logs an error.
 
@@ -142,7 +142,7 @@ this = string(message).parse_json()
 
 ### Consume a D4 analyzer queue
 
-A D4 server keeps the queues of its analyzers in database 2. For sensor data of type 1, the queue holds the file names of gzip-compressed pcap files. Read the files and decode their packets with [`each`](https://tenzir.com/docs/v6.22.0/reference/operators/each.md):
+A D4 server keeps the queues of its analyzers in database 2. For sensor data of type 1, the queue holds the file names of gzip-compressed pcap files. Read the files and decode their packets with [`each`](https://tenzir.com/docs/reference/operators/each.md):
 
 ```tql
 from_redis "analyzer:1:2b5c0f6a-9d3c-4b8e-8f1d-7a1b2c3d4e5f",
@@ -158,7 +158,7 @@ this = decapsulate(this)
 
 ## See Also
 
-* [`to_redis`](https://tenzir.com/docs/v6.22.0/reference/operators/to_redis.md)
+* [`to_redis`](https://tenzir.com/docs/reference/operators/to_redis.md)
 * [Read from message brokers](../../guides/collect/read-from-message-brokers.md)
 * [Redis](../../integrations/redis.md)
-* [D4 Project](../../integrations/d4.md)
+* [D4](../../integrations/d4.md)

@@ -1019,6 +1019,14 @@ Returns the `class_uid` for a given `class_name`.
 ocsf_class_uid("DNS Activity")
 ```
 
+### [ocsf\_compact](functions/ocsf_compact.md)
+
+Removes enum strings from an OCSF event record that `ocsf_derive` can rebuild.
+
+```tql
+ocsf_compact(this)
+```
+
 ### [ocsf\_derive](functions/ocsf_derive.md)
 
 Assigns enum strings of an OCSF event record from their integer counterparts and vice versa.
@@ -1369,6 +1377,14 @@ Use the value of a secret.
 
 ```tql
 secret("KEY")
+```
+
+### [version](functions/version.md)
+
+Returns the version of the Tenzir node.
+
+```tql
+version()
 ```
 
 ## Subnet

@@ -1,7 +1,7 @@
 ---
 title: "to_redis"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/to_redis
-source: https://tenzir.com/docs/v6.22.0/reference/operators/to_redis.md
+canonical: https://tenzir.com/docs/reference/operators/to_redis
+source: https://tenzir.com/docs/reference/operators/to_redis.md
 section: "Docs"
 ---
 
@@ -21,7 +21,7 @@ to_redis key:string, [command=string, message=blob|string, field=string,
 
 The `to_redis` operator runs one Redis command per event, which writes the `message` of the event to the `key` of the event.
 
-By default, the operator pushes to the left end of a list. Together with the default of [`from_redis`](https://tenzir.com/docs/v6.22.0/reference/operators/from_redis.md), which pops from the right end, the list forms a queue that preserves the order of events.
+By default, the operator pushes to the left end of a list. Together with the default of [`from_redis`](https://tenzir.com/docs/reference/operators/from_redis.md), which pops from the right end, the list forms a queue that preserves the order of events.
 
 The operator sends the commands of a batch of events in one round trip. When Redis rejects commands, such as when a key holds a value of a different type, the operator emits a warning and continues. When the connection drops, the operator emits a warning, reconnects with exponential backoff, and sends the commands again that Redis did not confirm. Redis may then apply a command twice.
 
@@ -158,7 +158,7 @@ to_redis "user:" + user, command="hset", field=attribute, message=value
 
 ## See Also
 
-* [`from_redis`](https://tenzir.com/docs/v6.22.0/reference/operators/from_redis.md)
+* [`from_redis`](https://tenzir.com/docs/reference/operators/from_redis.md)
 * [Send to destinations](../../guides/route/send-to-destinations.md)
 * [Redis](../../integrations/redis.md)
-* [D4 Project](../../integrations/d4.md)
+* [D4](../../integrations/d4.md)

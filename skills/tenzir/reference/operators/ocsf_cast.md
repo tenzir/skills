@@ -11,6 +11,18 @@ section: "Docs"
 
 Casts incoming events to their OCSF type.
 
+Deprecated
+
+The `ocsf_cast` operator is deprecated and emits a warning. Use the [`ocsf_cast`](https://tenzir.com/docs/reference/functions/ocsf_cast.md) function for both top-level and nested OCSF events. To transform the whole event, assign the function result to `this`:
+
+```tql
+this = ocsf_cast(this)
+```
+
+Pass the operator’s options as named function arguments, for example `this = ocsf_cast(this, null_fill=true)`. The function returns `null` with a warning when it cannot resolve the OCSF version or class, while the operator drops those events. Assign the result to a separate field before replacing `this` if you need to inspect or route the original event.
+
+The function also warns about missing required fields and violated OCSF constraints. It does not assign `@name`; set it explicitly if downstream pipelines use the event name.
+
 ```tql
 ocsf_cast [encode_variants=bool, null_fill=bool, timestamp_to_ms=bool]
 ```
@@ -29,10 +41,6 @@ The operator performs these steps:
 OCSF defines logical types like `timestamp_t` and `subnet_t` that map to physical base types - here `Long` and `String`. Encodings without native support for a logical type should use the base type for maximum compatibility. Tenzir has native types for many OCSF logical types (for example, `time` for `timestamp_t`), but you may still need the physical base type when working with downstream tools. The operator provides control knobs like `timestamp_to_ms` to convert values to their base type representation. This option converts timestamp values to milliseconds (a number type) even though Tenzir natively supports timestamps.
 
 Fields that are part of recursive object relationships exhibit one level of recursion. For example, you can work with `process.parent_process`, but the nested object `process.parent_process.parent_process` does not exist.
-
-Transform a field with the function
-
-When the OCSF event lives in a field, such as `ocsf` next to `raw_data`, or in a list of events, consider the [`ocsf_cast`](https://tenzir.com/docs/reference/functions/ocsf_cast.md) function instead, as in `ocsf = ocsf_cast(ocsf)`. It leaves the rest of the event untouched and returns `null` for an event it cannot resolve rather than dropping the whole event.
 
 ### `encode_variants = bool`
 
@@ -61,7 +69,7 @@ from {
   class_uid: 4001,
   class_name: "Network Activity",
   metadata: {
-    version: "1.5.0",
+    version: "1.9.0",
   },
   unmapped: {
     foo: 1,
@@ -69,7 +77,7 @@ from {
   },
   // … some more fields
 }
-ocsf_cast null_fill=true encode_variants=true
+ocsf_cast null_fill=true, encode_variants=true
 ```
 
 ```tql
@@ -77,7 +85,7 @@ ocsf_cast null_fill=true encode_variants=true
   class_uid: 4001,
   class_name: "Network Activity",
   metadata: {
-    version: "1.5.0",
+    version: "1.9.0",
     // … all other metadata fields set to `null`
   },
   unmapped: "{\"foo\": 1, \"bar\": 2}",
@@ -89,7 +97,7 @@ ocsf_cast null_fill=true encode_variants=true
 
 ```tql
 subscribe "ocsf"
-where class_name == "Network Activity" and metadata.version == "1.5.0"
+where class_name == "Network Activity" and metadata.version == "1.9.0"
 ocsf_cast null_fill=true
 to_clickhouse table="network_activity", mode="append"
 ```

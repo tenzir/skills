@@ -123,6 +123,8 @@ The Microsoft 365 cloud. Defaults to `commercial`.
 
 TLS options for Activity API requests. Use a record to configure options such as `cacert` when a local proxy or custom trust store intercepts HTTPS traffic.
 
+The options also apply to token requests to the OAuth authority, except for `certfile` and `keyfile`: only the Activity API receives the client certificate.
+
 ## Examples
 
 ### Collect a bounded interval

@@ -31,7 +31,7 @@ Add these settings under `env` in `~/.claude/settings.json`. Replace `tenzir-nod
 }
 ```
 
-Set `host.name` to the workstation’s actual hostname so events can identify the machine.
+Set `host.name` to the workstation’s actual hostname so events can identify the machine. You can also report a stable host identifier as `host.id`. The normalizer maps these resource attributes to `device.hostname` and `device.uid`. File System Activity requires this host identity; a tool-call or session ID does not identify the host. Without host identity, the normalizer emits a warning telling you to add `host.name` or `host.id`. The record retains its File or Process Activity class. OCSF validation reports the missing required device until you supply the real host context.
 
 ## Receive and normalize
 

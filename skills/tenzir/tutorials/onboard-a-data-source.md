@@ -406,7 +406,7 @@ Whatever every class shares belongs around the dispatch. The product identity an
 
 The wildcard arm comes last, where it catches both an unrecognized event type and the `null` that a classifier yields for an unknown layout. Each event then pays for exactly one classification, the arm that runs owns it, and a dispatcher that falls back to `@name` reads the name its input arrived with. A mapper with a single class guards `null` first instead, as `amazon::vpc_flow::ocsf::map` does, which keeps the remaining statements free of the exceptional case.
 
-The Base Event carries no `time`, and [`ocsf_cast`](https://tenzir.com/docs/reference/operators/ocsf_cast.md) accepts it that way. A payload nobody parsed has no timestamp to report, so the mapper reports none, which keeps baselines deterministic and saves a [`now`](https://tenzir.com/docs/reference/functions/now.md) call per event.
+The fallback Base Event carries no `time` when the payload could not be parsed. The [`ocsf_cast`](https://tenzir.com/docs/reference/functions/ocsf_cast.md) function returns that event but warns about the missing required field. Preserve a source timestamp when one is available, and account for this warning in tests of the fallback path.
 
 Each arm calls an internal operator that maps one event type. It takes the same two fields as the mapper, named after the shapes they hold, so every line of the body says which vocabulary it reads and which it writes:
 
@@ -503,19 +503,18 @@ openssh::ocsf::normalize
 
 A pipeline that already holds a structured event, whether from a JSON reader or from a package parser it called itself, continues with the mapper instead, in the staged form from [creating the mapper](onboard-a-data-source.md#create-the-mapper).
 
-After normalizing or mapping, callers run the shared OCSF helpers. The package produces minimal OCSF, [`ocsf_derive`](https://tenzir.com/docs/reference/operators/ocsf_derive.md) adds derived sibling fields, and [`ocsf_cast`](https://tenzir.com/docs/reference/operators/ocsf_cast.md) validates the final shape:
+The package produces minimal OCSF, and its tests validate it with [`ocsf_cast`](https://tenzir.com/docs/reference/functions/ocsf_cast.md). A caller that delivers the events to consumers expecting the full set of enum fields adds them with [`ocsf_derive`](https://tenzir.com/docs/reference/functions/ocsf_derive.md):
 
 ```tql
 amazon::vpc_flow::ocsf::normalize message
-ocsf_derive
-ocsf_cast
+this = ocsf_derive(this)
 ```
 
-A caller that writes the result into an envelope uses the function forms of the same helpers, [`ocsf_derive`](https://tenzir.com/docs/reference/functions/ocsf_derive.md) and [`ocsf_cast`](https://tenzir.com/docs/reference/functions/ocsf_cast.md), which work on a field and leave the rest of the envelope in place:
+A caller that writes the result into an envelope passes the field to the same function, leaving the rest of the envelope in place:
 
 ```tql
 amazon::vpc_flow::ocsf::normalize message, into=ocsf
-ocsf = ocsf_cast(ocsf_derive(ocsf))
+ocsf = ocsf_derive(ocsf)
 ```
 
 ## Fit it into the data lifecycle

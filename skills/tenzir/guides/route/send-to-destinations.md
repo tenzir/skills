@@ -17,7 +17,7 @@ TQL provides `to_*` operators for sending events to various destinations. Messag
 
 ### Message brokers
 
-Send events to message brokers like [Kafka](../../integrations/kafka.md), [Amazon Kinesis Data Streams](../../integrations/amazon/kinesis.md), and [NATS](../../integrations/nats.md).
+Send events to message brokers like [Kafka](../../integrations/kafka.md), [Amazon Kinesis Data Streams](../../integrations/amazon/kinesis.md), [NATS](../../integrations/nats.md), and [Redis](../../integrations/redis.md).
 
 Send to Kafka with [`to_kafka`](https://tenzir.com/docs/reference/operators/to_kafka.md) and automatic JSON formatting:
 
@@ -44,6 +44,15 @@ to_nats "alerts"
 
 The NATS server must have a JetStream stream that captures the destination subject.
 
+Push to a Redis list with [`to_redis`](https://tenzir.com/docs/reference/operators/to_redis.md), which another pipeline consumes in order with [`from_redis`](https://tenzir.com/docs/reference/operators/from_redis.md):
+
+```tql
+from {severity: "high", message: "credential access detected"}
+to_redis "alerts"
+```
+
+Set `command="publish"` to publish to a Redis pub/sub channel instead.
+
 Send to Kinesis with [`to_amazon_kinesis`](https://tenzir.com/docs/reference/operators/to_amazon_kinesis.md) and the default NDJSON serialization:
 
 ```tql
@@ -55,11 +64,11 @@ to_amazon_kinesis "security-events"
 
 Send events to data stores like [Clickhouse](../../integrations/clickhouse.md), [Duckdb](../../integrations/duckdb.md), [Hydrolix](../../integrations/hydrolix.md), [Iceberg](../../integrations/iceberg.md), and [Snowflake](../../integrations/snowflake.md).
 
-Send structured events to ClickHouse with [`to_clickhouse`](https://tenzir.com/docs/reference/operators/to_clickhouse.md):
+Send structured events to an existing ClickHouse table with [`to_clickhouse`](https://tenzir.com/docs/reference/operators/to_clickhouse.md):
 
 ```tql
 from {time: 2026-01-01T00:00:00Z, severity: "high", message: "scan detected"}
-to_clickhouse table="alerts", primary=time, mode="create_append", tls=false
+to_clickhouse table="alerts", tls=false
 ```
 
 Write events into a local DuckDB database file with [`to_duckdb`](https://tenzir.com/docs/reference/operators/to_duckdb.md), which embeds DuckDB and needs no server:
