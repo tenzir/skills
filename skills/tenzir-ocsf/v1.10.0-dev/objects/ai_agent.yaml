@@ -118,3 +118,8 @@ attributes:
     requirement: optional
     description: The agent framework, normalized to the caption of the `type_id` value.
   uid_numeric: {caption: Numeric Unique ID, type: long_t, requirement: optional, from: _entity}
+  uuid:
+    caption: AI Agent UUID
+    type: uuid_t
+    requirement: optional
+    description: The universally unique identifier for the agent. Unlike `uid`, which is only guaranteed to be unique within the agent's authoritative source, `uuid` is unique across sources, enabling correlation of the same agent across tenants, organizations, identity providers, or registries that do not share an authoritative source for `uid`. The value may be assigned by the agent's authoritative source or by a downstream system, and should remain stable for the lifetime of the agent.

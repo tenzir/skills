@@ -7,7 +7,7 @@ observable: 20
 description: The Device object represents an addressable computer system or host, which is typically connected to a computer network and participates in the transmission or processing of data within the computer network.
 profiles: [container, datetime]
 constraints:
-  at_least_one: [ip, uid, name, hostname, instance_uid, interface_uid, interface_name]
+  at_least_one: [ip, mac, uid, name, hostname, instance_uid, interface_uid, interface_name]
 references:
 - description: D3FEND™ Ontology d3f:Host.
   url: https://d3fend.mitre.org/dao/artifact/d3f:Host/
@@ -205,6 +205,7 @@ attributes:
     requirement: recommended
     observable: 2
     description: The device IP address, in either IPv4 or IPv6 format.
+  mac: {caption: MAC Address, type: mac_t, requirement: recommended, observable: 3, from: endpoint}
   name:
     caption: Name
     type: string_t
@@ -395,7 +396,6 @@ attributes:
     requirement: optional
     observable: 26
     description: The geographical location of the device.
-  mac: {caption: MAC Address, type: mac_t, requirement: optional, observable: 3, from: endpoint}
   mac_vendor: {caption: MAC Vendor, type: string_t, requirement: optional, from: endpoint}
   meid:
     caption: MEID

@@ -7,7 +7,7 @@ observable: 20
 description: The Network Endpoint object describes characteristics of a network endpoint. These can be a source or destination of a network connection.
 profiles: [container]
 constraints:
-  at_least_one: [ip, uid, name, hostname, svc_name, instance_uid, interface_uid, interface_name, domain]
+  at_least_one: [ip, mac, uid, name, hostname, svc_name, instance_uid, interface_uid, interface_name, domain]
 references:
 - description: D3FEND™ Ontology d3f:ComputerNetworkNode.
   url: https://d3fend.mitre.org/dao/artifact/d3f:ComputerNetworkNode/
@@ -60,6 +60,7 @@ attributes:
   interface_name: {caption: Network Interface Name, type: string_t, requirement: recommended, from: endpoint}
   interface_uid: {caption: Network Interface ID, type: string_t, requirement: recommended, from: endpoint}
   ip: {caption: IP Address, type: ip_t, requirement: recommended, observable: 2, from: endpoint}
+  mac: {caption: MAC Address, type: mac_t, requirement: recommended, observable: 3, from: endpoint}
   name: {caption: Name, type: string_t, requirement: recommended, from: endpoint}
   namespace_pid: {caption: Namespace PID, type: integer_t, requirement: recommended, group: context, profile: container, from: endpoint}
   owner: {caption: Owner, type: object_t, object: user, requirement: recommended, observable: 21, from: endpoint}
@@ -202,7 +203,6 @@ attributes:
     requirement: optional
     description: The organization name of the Internet Service Provider (ISP). This represents the parent organization or company that owns/operates the ISP. For example, Comcast Corporation would be the ISP org for Xfinity internet service. This attribute helps identify the ultimate provider when ISPs operate under different brand names.
   location: {caption: Geo Location, type: object_t, object: location, requirement: optional, observable: 26, from: endpoint}
-  mac: {caption: MAC Address, type: mac_t, requirement: optional, observable: 3, from: endpoint}
   mac_vendor: {caption: MAC Vendor, type: string_t, requirement: optional, from: endpoint}
   network_scope:
     caption: Network Scope

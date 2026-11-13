@@ -7,7 +7,7 @@ observable: 20
 description: The Endpoint object describes a physical or virtual device that connects to and exchanges information with a computer network. Some examples of endpoints are mobile devices, desktop computers, virtual machines, embedded devices, and servers. Internet-of-Things devices—like cameras, lighting, refrigerators, security systems, smart speakers, and thermostats—are also endpoints.
 profiles: [container]
 constraints:
-  at_least_one: [ip, uid, name, hostname, instance_uid, interface_uid, interface_name]
+  at_least_one: [ip, mac, uid, name, hostname, instance_uid, interface_uid, interface_name]
 references:
 - description: D3FEND™ Ontology d3f:Host.
   url: https://d3fend.mitre.org/dao/artifact/d3f:ComputerNetworkNode/
@@ -48,6 +48,12 @@ attributes:
     requirement: recommended
     observable: 2
     description: The IP address of the endpoint, in either IPv4 or IPv6 format.
+  mac:
+    caption: MAC Address
+    type: mac_t
+    requirement: recommended
+    observable: 3
+    description: The Media Access Control (MAC) address of the endpoint.
   name:
     caption: Name
     type: string_t
@@ -185,12 +191,6 @@ attributes:
     requirement: optional
     observable: 26
     description: The geographical location of the endpoint.
-  mac:
-    caption: MAC Address
-    type: mac_t
-    requirement: optional
-    observable: 3
-    description: The Media Access Control (MAC) address of the endpoint.
   mac_vendor:
     caption: MAC Vendor
     type: string_t

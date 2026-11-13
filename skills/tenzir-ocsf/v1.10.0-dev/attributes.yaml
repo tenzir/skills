@@ -4819,6 +4819,19 @@ pre_value:
   description: The value before. See specific usage.
   used_by:
     objects: [parameter]
+preauth_type:
+  caption: Pre-Authentication Type
+  type: string_t
+  description: The method the client used to pre-authenticate to the authentication service before a ticket was issued, normalized to the caption of the `preauth_type_id` value. In the case of 'Other', it is defined by the event source.
+  used_by:
+    objects: [authentication_token]
+preauth_type_id:
+  caption: Pre-Authentication Type ID
+  type: integer_t
+  sibling: preauth_type
+  description: The normalized identifier of the method the client used to pre-authenticate to the authentication service before a ticket was issued. For Kerberos, this is the pre-authentication data (PA-DATA) type of the initial authentication request.
+  used_by:
+    objects: [authentication_token]
 precision:
   caption: Precision
   type: integer_t
@@ -7116,7 +7129,7 @@ uuid:
   type: uuid_t
   description: The universally unique identifier. See specific usage.
   used_by:
-    objects: [device_hw_info, rpc_interface, session, unmanned_aerial_system]
+    objects: [ai_agent, device_hw_info, rpc_interface, session, unmanned_aerial_system]
 value:
   caption: Value
   type: string_t
