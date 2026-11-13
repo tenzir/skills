@@ -22,11 +22,11 @@ to_iceberg table:string, catalog=string,
 
 ## Description
 
-The `to_iceberg` operator appends events to an [Apache Iceberg](https://iceberg.apache.org) table. It talks to an Iceberg REST catalog for table metadata and writes Zstandard-compressed Parquet data files with field IDs and per-column metrics directly to the table’s object store. Data files carry only the columns for which the written events hold data; readers restore omitted columns as null through Iceberg’s field-ID projection, so table columns your events never use cost neither storage nor write time. Each rotation commits one snapshot; commits verify that they landed and retry on top of concurrent updates.
+The `to_iceberg` operator appends events to an [Apache Iceberg](https://iceberg.apache.org) table. It talks to an Iceberg REST catalog for table metadata and writes Zstandard-compressed Parquet data files with field IDs and per-column metrics directly to the table’s object store. Every data file carries the table schema used to open it. Missing columns are written as typed nulls, including nested structs. Batches with different sets of populated fields can share a file without causing an early rotation. Closed files become visible when a snapshot commits. Commits verify that they landed and retry on top of concurrent updates.
 
 Experimental
 
-This operator is experimental. A crash can lose events that have not yet been committed. With the default settings, this can affect up to 15 minutes of data.
+This operator is experimental. Without a replayable source and checkpoint recovery, a crash can lose events that have not yet been committed. The rotation timeout is not a strict bound on that exposure window. See [Commits and visibility](to_iceberg.md#commits-and-visibility).
 
 ### `table: string`
 
@@ -137,19 +137,19 @@ Requires Google authentication.
 
 ### `max_size = int (optional)`
 
-The size in bytes at which a data file rotates and its snapshot commits.
+The size in bytes at which a data file rotates.
 
-Defaults to `512Mi`, matching Iceberg’s default write target.
+Defaults to `512Mi`, matching Iceberg’s default write target. This is a target rather than a strict maximum: rotation checks bytes already flushed by the Parquet writer, so the last row group and footer can make the final file larger.
 
 ### `buffer_size = int (optional)`
 
-The total in-memory budget in bytes across all partition buffers. When the budget is exceeded, the largest buffer closes into a data file early. The budget, not the partition count, bounds memory: with many partitions buffering, file sizes degrade gracefully instead of thrashing open writers.
+The budget in bytes across buffered Arrow batches in all partitions. When the budget is exceeded, the largest buffer closes into a data file early. The budget excludes temporary projection arrays, Parquet encoder state, and the rest of the pipeline; it does not cap process memory. With many partitions buffering, the writer closes buffers early, which can produce small files.
 
 Defaults to `1Gi`.
 
 ### `timeout = duration (optional)`
 
-The maximum time a data file stays open before it rotates and its snapshot commits, bounding the freshness lag of the table.
+The interval after which the operator requests file rotation. Rotation and commits also depend on I/O, retries, buffer eviction, and checkpointing, so this is not a strict visibility deadline. See [Commits and visibility](to_iceberg.md#commits-and-visibility).
 
 Defaults to `15min`.
 
@@ -174,19 +174,31 @@ With `mode="create_append"` (the default) or `mode="create"`, the operator deriv
 
 Fields with no Iceberg representation are dropped from the table schema with a warning: fields whose values are all null (they carry no type to derive) and legacy `map` fields. A record whose fields are all dropped is dropped as a whole. Individual values that cannot convert, such as a `uint64` above the `long` range, become null without affecting neighboring rows.
 
-When the schema has a top-level `time` field of timestamp type, following the OCSF event convention, created tables register `time` as their sort order, and column metrics default to settings that keep manifests small while retaining time-range pruning.
+When the schema has a top-level `time` field of timestamp type, following the OCSF event convention, created tables register `time` as their sort order. This does not sort incoming events. The current writer does not honor `write.metadata.metrics.*` table properties, so manifests can contain column bounds even when you configure counts-only metrics.
 
 ## Schema evolution
 
 The operator evolves the table schema continuously. Fields the table does not have yet, at any nesting depth, are added through a metadata-only schema update *before* any data file carries them, so heterogeneous streams converge into one wide table without name mappings or manual `ALTER TABLE` steps. Existing columns too narrow for incoming values widen in place where the Iceberg spec allows it (`int` to `long`, `float` to `double`). Individual values that still cannot convert land as null without affecting neighboring rows. Concurrent writers reconcile by reloading the table and re-diffing their schema against it.
 
+Adding a nullable field keeps the files that are still buffered: the operator fills the new field with nulls in batches it already holds, including fields inside structs and lists, so a stream that keeps gaining fields still produces full-size files. This works until a partition has buffered 64 MiB or `max_size`, whichever is smaller; after that, the open file has a fixed schema, and any schema change closes it. Type changes, removed or renamed fields, fields with defaults, and partition changes always close the affected files.
+
+A running pipeline keeps the table schema and partition spec it loaded. When you remove or rename a column or change the partitioning from outside Tenzir, such as through Spark or Trino, restart the pipeline afterwards.
+
+## Write mixed OCSF events
+
+To write into a table with a predefined schema, use `mode="append"`, project events onto the table’s columns, and serialize the remaining fields into a string column such as `other`. The name `other` has no special meaning to the operator.
+
+Partition by day unless your queries need more. Adding `class_uid` reduces what class-specific queries read, but every active partition then needs enough events to fill a file before `timeout`, so rare classes produce small files.
+
 ## Commits and visibility
 
-Events become visible to readers when the operator commits a snapshot, not when they enter the pipeline. A snapshot commits whenever a data file rotates, either when the file reaches `max_size` or when `timeout` expires. With the defaults, events appear in the table within 15 minutes. Lower `timeout` for a fresher table, but expect smaller data files, more snapshots, and more metadata in exchange.
+Events become visible to readers when the operator commits a snapshot, not when they enter the pipeline. Without checkpointing, size- and timeout-driven rotations trigger a snapshot commit. Files closed by buffer eviction can wait another `timeout` interval before a grouped commit. An event buffered for almost one interval before eviction can therefore wait nearly two intervals, plus I/O and retries. Lower `timeout` for a fresher table, but expect smaller data files, more snapshots, and more metadata in exchange.
+
+After a pipeline starts checkpointing, rotations stage files for the next checkpoint. The operator commits those files after the checkpoint becomes durable, so checkpoint progress also controls visibility.
 
 When the input ends or you stop the pipeline gracefully, the operator closes all open files and commits the remaining events. A finite pipeline therefore shows its complete output as soon as it finishes. A graceful stop does not discard buffered events.
 
-A hard crash does not get that chance: events that were not yet committed are currently lost. `timeout` bounds this exposure window the same way it bounds freshness, and shrinking it carries the same cost in files and metadata. A future release will close this window when pipelines gain checkpointing.
+A hard crash does not drain buffered events. Recovering uncommitted input requires a replayable source and checkpoint recovery; a pipeline without those guarantees can lose events that it accepted before the crash.
 
 ## Examples
 

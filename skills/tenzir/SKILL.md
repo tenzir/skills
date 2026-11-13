@@ -645,8 +645,10 @@ Functions appear in expressions and take positional and/or named arguments, prod
 #### Overview Index
 
 - [ClickHouse](reference/optimizations/clickhouse.md)
+- [CloudWatch Logs](reference/optimizations/cloudwatch.md)
 - [DuckDB](reference/optimizations/duckdb.md)
 - [KQL](reference/optimizations/kql.md)
+- [Microsoft Graph](reference/optimizations/microsoft-graph.md)
 - [Microsoft SQL Server](reference/optimizations/microsoft-sql.md)
 - [MySQL](reference/optimizations/mysql.md)
 - [SentinelOne](reference/optimizations/sentinelone.md)

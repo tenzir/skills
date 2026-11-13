@@ -13,7 +13,7 @@ Enriches events with data from a context.
 
 ```tql
 context_enrich name:string, key=any,
-               [into=field, mode=string, format=string]
+               [into=field, mode=string, format=string, await_context=bool]
 ```
 
 ## Description
@@ -51,6 +51,19 @@ The style of the enriched value:
 * `ocsf`: formats the enrichment as an [OCSF Enrichment](https://schema.ocsf.io/1.4.0-dev/objects/enrichment?extensions=) object with fields `created_time`, `data`, `name`, `provider`, and `value`.
 
 Defaults to `plain`.
+
+### `await_context = bool (optional)`
+
+Waits for a context to be created and populated before enriching events. A new context becomes ready when its `context_update` operator finishes processing its input. Contexts populated at creation and persisted contexts are ready immediately.
+
+This option requires `--nova=true`. It defaults to `false`.
+
+For example, use it when a separate pipeline creates and populates a context at startup:
+
+```tql
+from {x: 1}
+context_enrich "ctx", key=x, await_context=true
+```
 
 ## Parallelism
 

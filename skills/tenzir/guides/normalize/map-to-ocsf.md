@@ -28,8 +28,8 @@ Mappings live in packages as operators. The tutorial linked above walks through 
 ### Key principles
 
 * **Keep unmapped residue**: Source fields without an OCSF target still need review or an intentional decision to preserve source-specific data.
-* **Produce minimal OCSF**: Map required identifiers, required attributes, and source-specific semantics. Don’t hand-write derived sibling fields such as `activity_name`, `category_name`, or `severity`; let [`ocsf_derive`](https://tenzir.com/docs/v7.0.0/reference/functions/ocsf_derive.md) expand the minimal event before validation.
-* **Finalize the result**: After the mapper returns the OCSF event, use Tenzir’s native OCSF functions to derive enum siblings and computable identifiers, and validate the event against its schema.
+* **Produce minimal OCSF**: Map required identifiers, required attributes, and source-specific semantics. Don’t hand-write derived sibling fields such as `activity_name`, `category_name`, or `severity`; [`ocsf_derive`](https://tenzir.com/docs/v7.0.0/reference/functions/ocsf_derive.md) adds them where a consumer needs them.
+* **Validate in tests**: Check the mapper’s output against its schema with [`ocsf_cast`](https://tenzir.com/docs/v7.0.0/reference/functions/ocsf_cast.md) in the package tests. Pipelines that run the mapper don’t need to repeat it.
 
 Think in graphs
 
@@ -52,18 +52,17 @@ Tenzir ships functions for completing, validating, and reducing OCSF events:
 * [`ocsf_trim`](https://tenzir.com/docs/v7.0.0/reference/functions/ocsf_trim.md) removes fields according to their OCSF requirement levels when you need to reduce event size.
 * [`ocsf_compact`](https://tenzir.com/docs/v7.0.0/reference/functions/ocsf_compact.md) removes enum strings that [`ocsf_derive`](https://tenzir.com/docs/v7.0.0/reference/functions/ocsf_derive.md) can rebuild when you need to reduce event size without losing information.
 
-Use derivation and casting at the boundary after your mapping operator returns, in that order: run [`ocsf_derive`](https://tenzir.com/docs/v7.0.0/reference/functions/ocsf_derive.md), then [`ocsf_cast`](https://tenzir.com/docs/v7.0.0/reference/functions/ocsf_cast.md). The [`ocsf_derive`](https://tenzir.com/docs/v7.0.0/reference/functions/ocsf_derive.md) function computes `category_uid` and `type_uid` from `class_uid` and `activity_id`, so a mapping does not need to set them. It fills enum siblings such as `activity_name`, `category_name`, and `severity` from their numeric identifiers, and also works in the other direction when a mapping starts with a string sibling.
+A mapper returns minimal OCSF. Which of these functions run afterwards is a decision of each pipeline, not part of the mapping.
 
-The [`ocsf_cast`](https://tenzir.com/docs/v7.0.0/reference/functions/ocsf_cast.md) function is the primary schema validation gate. Your mapping is complete when it no longer emits warnings. Use options such as `null_fill=true`, `encode_variants=true`, or `timestamp_to_ms=true` only when a downstream system requires those output shapes or physical representations.
+The [`ocsf_cast`](https://tenzir.com/docs/v7.0.0/reference/functions/ocsf_cast.md) function is the schema validation gate. Call it in the package tests, as our guide on [testing packages](../packages/test-packages.md#pin-the-output-schema) shows: your mapping is complete when the tests no longer emit warnings. In a pipeline, cast only when a downstream system needs the exact schema types, and use options such as `null_fill=true`, `encode_variants=true`, or `timestamp_to_ms=true` only when it requires those output shapes or physical representations.
 
-To finalize a top-level OCSF event, assign each function result to `this`:
+The [`ocsf_derive`](https://tenzir.com/docs/v7.0.0/reference/functions/ocsf_derive.md) function expands an event for consumers that expect the full set of enum fields. It computes `category_uid` and `type_uid` from `class_uid` and `activity_id`, and fills enum siblings such as `activity_name`, `category_name`, and `severity` from their numeric identifiers. It also works in the other direction when a mapping starts with a string sibling. Call it where you deliver events to such consumers:
 
 ```tql
 this = ocsf_derive(this)
-this = ocsf_cast(this)
 ```
 
-After validation, optionally compact events for storage or transport. The [`ocsf_compact`](https://tenzir.com/docs/v7.0.0/reference/functions/ocsf_compact.md) function removes enum strings such as `activity_name` or `severity` that [`ocsf_derive`](https://tenzir.com/docs/v7.0.0/reference/functions/ocsf_derive.md) can rebuild from their integer siblings. It keeps every string that carries information, such as the data source specific value of an `Other` enum. Run [`ocsf_derive`](https://tenzir.com/docs/v7.0.0/reference/functions/ocsf_derive.md) when reading the events to restore the strings:
+To reduce event size for storage or transport, compact the events. The [`ocsf_compact`](https://tenzir.com/docs/v7.0.0/reference/functions/ocsf_compact.md) function removes enum strings such as `activity_name` or `severity` that [`ocsf_derive`](https://tenzir.com/docs/v7.0.0/reference/functions/ocsf_derive.md) can rebuild from their integer siblings. It keeps every string that carries information, such as the data source specific value of an `Other` enum. Run [`ocsf_derive`](https://tenzir.com/docs/v7.0.0/reference/functions/ocsf_derive.md) when reading the events to restore the strings:
 
 ```tql
 // Before writing
@@ -82,7 +81,7 @@ Pass the field to the same functions when a mapper writes an OCSF event into an 
 
 ```tql
 vendor::ocsf::map input, ocsf
-ocsf = ocsf_cast(ocsf_derive(ocsf))
+ocsf = ocsf_derive(ocsf)
 ```
 
 ### Migrate existing operator calls
@@ -102,6 +101,12 @@ if validated == null {
   publish "ocsf"
 }
 ```
+
+### Preserve incomplete observations
+
+Map an optional object only when the source identifies it: a process name alone does not identify a process, and a port alone does not identify an endpoint. Keep such values in `unmapped` under their original keys instead of inventing identifiers to satisfy validation.
+
+A missing required field does not change a known event’s class. A file rename without host context stays File System Activity, and [`ocsf_cast`](https://tenzir.com/docs/v7.0.0/reference/functions/ocsf_cast.md) warns about the missing `device` but keeps the event, so you can enrich it later.
 
 ## Look up identifiers and names
 

@@ -115,6 +115,10 @@ profiles:
 
 If profiles are defined, the operator defaults to the first profile.
 
+## Optimizations
+
+The operators that follow `from_velociraptor` always run in Tenzir. A VQL query may have effects, such as collecting artifacts, that a filter or a limit in the query would change. `max_rows` only sizes the batches of the response.
+
 ## Examples
 
 ### Show all processes

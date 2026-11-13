@@ -15,7 +15,7 @@ Reads events from Amazon CloudWatch.
 from_amazon_cloudwatch group:string|list<string>, [mode=string,
   stream=string|list<string>, stream_prefix=string, filter=string,
   start=time, end=time, count=int, from_start=bool, unmask=bool,
-  aws_region=string, aws_iam=record]
+  aws_region=string, aws_iam=record, pushdown=bool]
 ```
 
 ## Description
@@ -119,6 +119,18 @@ Configures explicit AWS credentials or IAM role assumption. If not specified, th
 ```
 
 See [AWS Authentication](../aws-authentication.md) for a description of every field, the default credential chain, web identity configuration, and local authentication with the AWS CLI.
+
+### `pushdown = bool (optional)`
+
+Whether CloudWatch Logs takes over the operators that follow the operator. With `pushdown=false`, they stay in the pipeline and run with TQL semantics. See [Optimizations](from_amazon_cloudwatch.md#optimizations).
+
+Defaults to `true`.
+
+## Optimizations
+
+The operator hands CloudWatch Logs the operators that follow it, as far as its request parameters can express them, and those operators then run with CloudWatch’s semantics: phrases in `message` become a filter pattern, comparisons of `timestamp` narrow the time range, comparisons of `log_stream` select streams, and a [`head`](https://tenzir.com/docs/v7.0.0/reference/operators/head.md) limits the request. Filter patterns match words and phrases case-sensitively, not arbitrary substrings. Use `pushdown=false` to keep every operator in the pipeline.
+
+Our [CloudWatch Logs optimization reference](../optimizations/cloudwatch.md) describes which operators CloudWatch takes over in each mode and how they spell.
 
 ## Examples
 

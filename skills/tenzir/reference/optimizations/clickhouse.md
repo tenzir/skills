@@ -20,7 +20,7 @@ The operator reads in one of these modes:
 
 With `pushdown=false`, every operator stays in Tenzir and runs with TQL semantics. The operator still reads only the columns that the pipeline uses.
 
-[`from_hydrolix`](https://tenzir.com/docs/v7.0.0/reference/operators/from_hydrolix.md) keeps its previous optimizations for now: it sends filters that Tenzir evaluates again, and limits, and computes summaries in Hydrolix only when no operator follows them.
+[`from_hydrolix`](https://tenzir.com/docs/v7.0.0/reference/operators/from_hydrolix.md) follows the same rules on Hydrolix’s ClickHouse engine. Its [reference](../operators/from_hydrolix.md#optimizations) describes what is specific to Hydrolix, such as the time range on the primary timestamp.
 
 ## Operators that ClickHouse takes over
 
@@ -70,7 +70,7 @@ Durations, subnets, non-finite numbers, other functions, and optional fields suc
 
 ## Binding fields
 
-The operator decides which operators to take over from the pipeline alone. When the pipeline runs, it reads the table’s columns and binds every field that those operators use to a column: a top-level column, an element of a named tuple, a column with a dot in its name, or a path below a `JSON` column. If a field cannot be bound, the read fails before ClickHouse runs a query, with the reason and a hint to use `pushdown=false`. This happens for a path below a column that is not a named tuple or `JSON`, for a tuple element that does not exist, for a generated `ALIAS`, `MATERIALIZED`, or `EPHEMERAL` column, which `SELECT *` may leave out, and for a [`sort`](https://tenzir.com/docs/v7.0.0/reference/operators/sort.md) by a path below a `JSON` column whose order a later operator needs, such as in `sort j.k | head 10 | sort id`. A top-level field that the table lacks fails the query in ClickHouse.
+The operator decides which operators to take over from the pipeline alone. When the pipeline runs, it reads the table’s columns and binds every field that those operators use to a column: a top-level column, an element of a named tuple, a column with a dot in its name, a key of a `Map` column with string keys, such as `labels['env']` for `labels.env`, or a path below a `JSON` column. A missing map key yields the default of the map’s value type, such as `""` or `0`, and `null` only for `Nullable` values. If a field cannot be bound, the read fails before ClickHouse runs a query, with the reason and a hint to use `pushdown=false`. This happens for a path below a column that is not a named tuple, a `Map` with string keys, or `JSON`, for a tuple element that does not exist, for a generated `ALIAS`, `MATERIALIZED`, or `EPHEMERAL` column, which `SELECT *` may leave out, and for a [`sort`](https://tenzir.com/docs/v7.0.0/reference/operators/sort.md) by a path below a `JSON` column whose order a later operator needs, such as in `sort j.k | head 10 | sort id`. A top-level field that the table lacks fails the query in ClickHouse.
 
 ## Catch-all tables
 

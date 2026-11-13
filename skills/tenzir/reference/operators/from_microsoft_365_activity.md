@@ -15,7 +15,7 @@ Reads unified audit records from the Microsoft 365 Management Activity API.
 from_microsoft_365_activity auth=record, content_types=list<string>,
   [start_time=time, end_time=time, poll_interval=duration,
    start_missing_subscriptions=bool, publisher_identifier=string,
-   cloud=string, tls=bool|record]
+   cloud=string, tls=bool|record, pushdown=bool]
 ```
 
 ## Description
@@ -124,6 +124,21 @@ The Microsoft 365 cloud. Defaults to `commercial`.
 TLS options for Activity API requests. Use a record to configure options such as `cacert` when a local proxy or custom trust store intercepts HTTPS traffic.
 
 The options also apply to token requests to the OAuth authority, except for `certfile` and `keyfile`: only the Activity API receives the client certificate.
+
+### `pushdown = bool (optional)`
+
+Whether the Activity API takes over the operators that follow the operator. With `pushdown=false`, they stay in the pipeline and run with TQL semantics. See [Optimizations](from_microsoft_365_activity.md#optimizations).
+
+Defaults to `true`.
+
+## Optimizations
+
+The Activity API lists content blobs and returns each blob whole, so the operator can skip blobs, but not single records:
+
+* A [`where`](https://tenzir.com/docs/v7.0.0/reference/operators/where.md) on the metadata that the operator adds to every event, in `microsoft_365_activity`, runs on the list of blobs before the operator downloads them, and skips the blobs whose events would not match. This applies to comparisons, `in` with a list, `and`, `or`, and `not`, and string functions such as `starts_with` and `to_lower`, but not to functions whose result may differ per event, such as `random()`. A comparison of `content_type` also narrows the content types that the operator lists, and a comparison of `content_created` with a time narrows the time range of a bounded read.
+* A [`head`](https://tenzir.com/docs/v7.0.0/reference/operators/head.md) stops a bounded read once it has enough events, without downloading further blobs.
+
+Filters on the fields of the records, such as `Workload` or `CreationTime`, and all other operators stay in Tenzir.
 
 ## Examples
 

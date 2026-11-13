@@ -503,19 +503,18 @@ openssh::ocsf::normalize
 
 A pipeline that already holds a structured event, whether from a JSON reader or from a package parser it called itself, continues with the mapper instead, in the staged form from [creating the mapper](onboard-a-data-source.md#create-the-mapper).
 
-After normalizing or mapping, callers run the shared OCSF helpers. The package produces minimal OCSF, [`ocsf_derive`](https://tenzir.com/docs/v7.0.0/reference/functions/ocsf_derive.md) adds derived sibling fields, and [`ocsf_cast`](https://tenzir.com/docs/v7.0.0/reference/functions/ocsf_cast.md) validates the final shape:
+The package produces minimal OCSF, and its tests validate it with [`ocsf_cast`](https://tenzir.com/docs/v7.0.0/reference/functions/ocsf_cast.md). A caller that delivers the events to consumers expecting the full set of enum fields adds them with [`ocsf_derive`](https://tenzir.com/docs/v7.0.0/reference/functions/ocsf_derive.md):
 
 ```tql
 amazon::vpc_flow::ocsf::normalize message
 this = ocsf_derive(this)
-this = ocsf_cast(this)
 ```
 
-A caller that writes the result into an envelope passes the field to the same functions, leaving the rest of the envelope in place:
+A caller that writes the result into an envelope passes the field to the same function, leaving the rest of the envelope in place:
 
 ```tql
 amazon::vpc_flow::ocsf::normalize message, into=ocsf
-ocsf = ocsf_cast(ocsf_derive(ocsf))
+ocsf = ocsf_derive(ocsf)
 ```
 
 ## Fit it into the data lifecycle

@@ -12,7 +12,7 @@ section: "Docs"
 Reads events from a Microsoft Graph collection.
 
 ```tql
-from_microsoft_graph resource:string, auth=record, [delta=bool, poll_interval=duration, version=string, odata=record, tls=bool|record]
+from_microsoft_graph resource:string, auth=record, [delta=bool, poll_interval=duration, version=string, odata=record, tls=bool|record, pushdown=bool]
 ```
 
 ## Description
@@ -93,32 +93,17 @@ TLS options for Microsoft Graph requests. Use a record to configure options such
 
 The options also apply to token requests to the OAuth authority, except for `certfile` and `keyfile`: only Microsoft Graph receives the client certificate.
 
+### `pushdown = bool (optional)`
+
+Whether Microsoft Graph takes over the operators that follow the operator. With `pushdown=false`, they stay in the pipeline and run with TQL semantics. See [Optimizations](from_microsoft_graph.md#optimizations).
+
+Defaults to `true`.
+
 ## Optimizations
 
-The operator applies the [`where`](https://tenzir.com/docs/v7.0.0/reference/operators/where.md), [`select`](https://tenzir.com/docs/v7.0.0/reference/operators/select.md), and [`head`](https://tenzir.com/docs/v7.0.0/reference/operators/head.md) operators that follow it to each page as it arrives:
+The operator hands Microsoft Graph the operators that follow it as OData query parameters, and those operators then run with Graph’s semantics: a [`where`](https://tenzir.com/docs/v7.0.0/reference/operators/where.md) becomes a `$filter` for the resources and properties for which Graph documents `$filter` support, a [`select`](https://tenzir.com/docs/v7.0.0/reference/operators/select.md) becomes a `$select`, and a [`head`](https://tenzir.com/docs/v7.0.0/reference/operators/head.md) stops paging. Graph compares many directory strings without regard to case, so `displayName == "alice"` also matches `Alice`. Use `pushdown=false` to keep every operator in the pipeline.
 
-* **Filters** run in Tenzir with exact TQL semantics and never become a `$filter`, because Microsoft Graph doesn’t document its comparison, `null`, and literal semantics precisely enough to guarantee the same matches.
-* **Limits** count the events that pass all filters. Once the [`head`](https://tenzir.com/docs/v7.0.0/reference/operators/head.md) has enough events, the operator stops following `@odata.nextLink` and stops polling for delta changes. A limit of zero sends no request at all.
-
-When the operator lists `users` in the `v1.0` API without `delta=true`, it also asks Microsoft Graph for less data:
-
-* **Limits** set the page size with `$top`, up to the maximum of 999, but only if no [`where`](https://tenzir.com/docs/v7.0.0/reference/operators/where.md) precedes the [`head`](https://tenzir.com/docs/v7.0.0/reference/operators/head.md). When your `odata` options select or filter on `signInActivity`, Microsoft Graph returns at most 500 users per page, and the operator follows `@odata.nextLink` for the rest.
-* **Projections** become a `$select` if all fields that the pipeline reads, including those of the filters, belong to the [default properties](https://learn.microsoft.com/graph/api/user-list?view=graph-rest-1.0) that Microsoft Graph returns for users: `businessPhones`, `displayName`, `givenName`, `id`, `jobTitle`, `mail`, `mobilePhone`, `officeLocation`, `preferredLanguage`, `surname`, and `userPrincipalName`.
-
-For example, this pipeline requests a single page of ten users with only three properties each:
-
-```tql
-from_microsoft_graph "users",
-  auth={
-    tenant_id: secret("ms-graph-tenant-id"),
-    client_id: secret("ms-graph-client-id"),
-    client_secret: secret("ms-graph-client-secret"),
-  }
-select id, displayName, mail
-head 10
-```
-
-The `select` and `top` fields of `odata` take precedence over the translated `$select` and `$top`. Other resources, the `beta` API, and delta queries send the request unchanged.
+Our [Microsoft Graph optimization reference](../optimizations/microsoft-graph.md) lists the resources and properties, how operators spell in OData, and what stays in Tenzir.
 
 ## Examples
 
