@@ -133,6 +133,17 @@ attributes:
       url: https://www.rfc-editor.org/rfc/rfc6113
     - description: IANA Kerberos Parameters, Pre-authentication and Typed Data registry
       url: https://www.iana.org/assignments/kerberos-parameters/kerberos-parameters.xhtml
+  session_key_encryption_details:
+    caption: Session Key Encryption Details
+    type: object_t
+    object: encryption_details
+    requirement: optional
+    description: The encryption details of the session key that is issued with the authentication token. For a Kerberos ticket, this is the encryption type of the ticket session key, which can differ from the encryption type of the ticket itself in `encryption_details`.
+    references:
+    - description: RFC 4120, The Kerberos Network Authentication Service (V5), Section 5.4.2 (session key in the KDC reply)
+      url: https://www.rfc-editor.org/rfc/rfc4120
+    - description: Security event 4769, A Kerberos service ticket was requested (Session Encryption Type field)
+      url: https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/auditing/event-4769
   tenant_uid: {caption: Tenant UID, type: string_t, requirement: optional, from: token}
   uid: {caption: Unique ID, type: string_t, requirement: optional, from: token}
   zone: {caption: Network Zone, type: string_t, requirement: optional, from: token}

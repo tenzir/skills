@@ -4,7 +4,7 @@ extends: object
 description: Details about the encryption methodology utilized.
 referenced_by:
   objects:
-    authentication_token: [encryption_details]
+    authentication_token: [encryption_details, session_key_encryption_details]
     databucket: [encryption_details]
     file: [encryption_details]
 attributes:

@@ -3251,6 +3251,12 @@ is_group_provisioning_enabled:
   description: Indicates whether group provisioning is automated (e.g., for a SCIM resource). See specific usage.
   used_by:
     objects: [scim]
+is_hidden:
+  caption: Hidden
+  type: boolean_t
+  description: Indicates that the object is hidden. See specific usage.
+  used_by:
+    objects: [file]
 is_hotp:
   caption: HMAC-based One-time Password (HOTP)
   type: boolean_t
@@ -3324,6 +3330,12 @@ is_personal:
   description: The event occurred on a personal device.
   used_by:
     objects: [device]
+is_privileged:
+  caption: Privileged
+  type: boolean_t
+  description: Indicates if the entity has elevated privileges. See specific usage.
+  used_by:
+    objects: [container]
 is_public:
   caption: Public
   type: boolean_t
@@ -6028,6 +6040,13 @@ session:
   used_by:
     classes: [authentication, authorize_session, session_query, tunnel_activity]
     objects: [actor, iam_role, network_connection_info, process, query_evidence]
+session_key_encryption_details:
+  caption: Session Key Encryption Details
+  type: object_t
+  object: encryption_details
+  description: The encryption details of the session key, when these are reported separately from the content or ticket encryption. See specific usage.
+  used_by:
+    objects: [authentication_token]
 severity:
   caption: Severity
   type: string_t
