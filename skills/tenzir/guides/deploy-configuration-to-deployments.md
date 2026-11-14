@@ -48,12 +48,14 @@ With MCP, use `read_deployment_tracker` or `change_deployment_tracker`. Both tak
 With Auto deploy on, commits to the tracked branch deploy automatically. You can still deploy manually, for example to retry a failed attempt.
 
 1. Check the selected deployment and its tracked branch.
-2. In the deployment’s Configuration card, click Deploy latest.
+2. In the deployment’s Configuration card, click Deploy.
 3. Wait for the message “The deployment accepted the configuration.”
 
-The topbar also offers Deploy, with a count when the platform knows how many commits are pending, such as Deploy 3. This deploys the latest commit on the selected deployment’s tracked branch, not uncommitted edits or necessarily the branch open in your editor. It does not deploy each pending commit in sequence.
+When Auto deploy is off, the topbar also offers Deploy once the tracked branch has commits that the deployment does not run yet. It shows a count when the platform knows how many, such as Deploy 3. This deploys the latest commit on the selected deployment’s tracked branch, not uncommitted edits or necessarily the branch open in your editor. It does not deploy each pending commit in sequence.
 
-Deploying the latest commit does not turn automatic deployment off. An “Automatic deployment · pending” indicator means that the latest commit has not yet been confirmed as deployed.
+When Auto deploy is on, the topbar leaves deploying to the deployment and shows a notification instead. “Deployed” means that the deployment accepted the latest commit. “Not deployed” means that it refused the latest commit and names the reason. Until the next commit, the topbar keeps a Not deployed link to the deployment’s page.
+
+Deploying the latest commit manually does not turn automatic deployment off.
 
 ## Deploy a revision from history
 

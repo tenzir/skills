@@ -316,7 +316,7 @@ tenzir-ship release create [version] [options]
 
 The `--title` value is stored in the release manifest and used by release views and exports. GitHub release pages include the project and version in addition to this title when you publish the release.
 
-When creating a release, the command also updates version fields in detected package manifest files (`package.json`, `pyproject.toml`, `project.toml`, `Cargo.toml`). See the [version bumping configuration](ship-framework.md#version-bumping) for details.
+When creating a release, the command also updates version fields in detected package manifest files (`package.json`, `pyproject.toml`, `project.toml`, `Cargo.toml`, `package.yaml`). See the [version bumping configuration](ship-framework.md#version-bumping) for details.
 
 For stable releases, the default and preferred workflow is to omit both the manual bump flags and an explicit `version`. `tenzir-ship` auto-bumps from the unreleased entry types. Use `--patch`, `--minor`, or `--major` only when the automatic detection is not the right fit. Pass an explicit stable `version` only as a rare exact override, for example to re-cut a failed tagged release or to match an externally dictated version.
 
@@ -334,7 +334,7 @@ If an outstanding release candidate exists, the same version-less stable command
 
 The command renders `notes.md`, updates `manifest.yaml`, and writes entry snapshots into `entries/`. Stable releases consume matching entry files from `unreleased/`. Release candidates created with `--rc` copy the current unreleased queue without consuming it, so you can iterate on `-rc.N` releases before promoting one to stable. It performs a dry run by default. When the release already exists, the CLI refreshes metadata and synchronizes the selected entries. If no changelog entries are available, the command still succeeds when you provide `--intro` or `--intro-file`, creating an intro-only release. This is useful for re-publishing after yanking a package or retrying a failed publish workflow. Without either entries or intro text, the command fails with an error.
 
-By default, `release create` also updates common package-manager version files to the created release version (without the optional `v` prefix). In `auto` mode, the CLI discovers `package.json`, `pyproject.toml`, `project.toml`, and `Cargo.toml` in the changelog root and, when running from `changelog/`, in the parent directory. Configure this behavior under `release.version_bump_mode` and `release.version_files`.
+By default, `release create` also updates common package-manager version files to the created release version (without the optional `v` prefix). In `auto` mode, the CLI discovers `package.json`, `pyproject.toml`, `project.toml`, `Cargo.toml`, and `package.yaml` in the changelog root and, when running from `changelog/`, in the parent directory. Configure this behavior under `release.version_bump_mode` and `release.version_files`.
 
 #### Release candidates
 
@@ -782,7 +782,7 @@ The `release` block supports:
 
 ### Version bumping
 
-During `release create`, tenzir-ship can automatically update version fields in package manifest files. By default (`version_bump_mode: auto`), it searches the project root for `package.json`, `pyproject.toml`, `project.toml`, and `Cargo.toml` files and updates their version fields to match the release version.
+During `release create`, tenzir-ship can automatically update version fields in package manifest files. By default (`version_bump_mode: auto`), it searches the project root for `package.json`, `pyproject.toml`, `project.toml`, `Cargo.toml`, and `package.yaml` files and updates their version fields to match the release version.
 
 #### Auto-detection behavior
 
@@ -792,6 +792,7 @@ In auto mode, files without a static version field are skipped gracefully:
 * **Cargo.toml**: Updates `[package].version`. Falls back to `[workspace.package].version` for workspace root manifests. Skips files where neither section has a version field.
 * **package.json**: Updates the top-level `version` field. Skips files without one. When a sibling `package-lock.json` exists, updates the lockfile’s root package version metadata to match.
 * **project.toml**: Same behavior as `pyproject.toml`.
+* **package.yaml**: Updates the top-level `version` field and leaves comments, key order, block scalars, and nested `version` keys untouched. Always writes the version as a quoted string, such as `version: "1.2.3"`, because YAML reads unquoted values like `1.2` as numbers. In package mode, where the project reads its metadata from `package.yaml` next to `changelog/`, the release adds a missing `version` key after `name`. Other `package.yaml` files without a `version` field are skipped.
 
 #### Explicit version files
 
@@ -1054,7 +1055,7 @@ When `modules` is configured, `tenzir-ship validate` checks:
 * **Component mismatch** – When `components` is configured, ensure every entry either omits `component` or uses an allowed label.
 * **Configuration not found** – Ensure `config.yaml` exists in the changelog root or `package.yaml` sits next to the `changelog/` directory. Run `tenzir-ship init` to scaffold the workspace, or let `tenzir-ship add` bootstrap it while creating the first entry.
 * **Version bump fails** – Bump flags resolve from the latest stable release on disk. Create an initial stable release with an explicit version before using `--patch/--minor/--major`. If a release candidate is already outstanding, continue that series with `--rc` or promote it with `release create`.
-* **Version file update fails** – In `release.version_bump_mode: auto`, the CLI must parse every detected/configured version file. Use supported files (`package.json`, `pyproject.toml`, `project.toml`, `Cargo.toml`) or set `release.version_bump_mode: off` and handle updates in your workflow script. When `package.json` has a sibling `package-lock.json`, tenzir-ship also parses the lockfile to keep root package version metadata in sync. When `pyproject.toml` has a sibling `uv.lock`, tenzir-ship requires `uv` on `PATH` and runs `uv lock` after updating the manifest.
+* **Version file update fails** – In `release.version_bump_mode: auto`, the CLI must parse every detected/configured version file. Use supported files (`package.json`, `pyproject.toml`, `project.toml`, `Cargo.toml`, `package.yaml`) or set `release.version_bump_mode: off` and handle updates in your workflow script. When `package.json` has a sibling `package-lock.json`, tenzir-ship also parses the lockfile to keep root package version metadata in sync. When `pyproject.toml` has a sibling `uv.lock`, tenzir-ship requires `uv` on `PATH` and runs `uv lock` after updating the manifest.
 
 ## Further reading
 
