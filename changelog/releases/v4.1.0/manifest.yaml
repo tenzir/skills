@@ -1,0 +1,8 @@
+created: 2026-11-15
+intro: >-
+  The tenzir skill now copies the agent map and pages that tenzir.com publishes with
+  every documentation release. Agents that use the skill locally therefore read the
+  same documentation as agents connected to the Tenzir Platform via MCP.
+source:
+  mode: sync-stable-queue
+  previous_stable: v4.0.0
