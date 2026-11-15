@@ -27,7 +27,7 @@ not be edited by hand here:
 - `skills/tenzir-ocsf/`
 - `skills/tenzir-udm/`
 
-The `tenzir-7` branch regenerates `skills/tenzir/` from the Tenzir 7
+The `tenzir-7` branch copies `skills/tenzir/` from the Tenzir 7 preview
 documentation; the nightly sync on `main` starts its sync. Keep it close to
 `main` by merging `main` into it, and delete it once Tenzir 7 is the latest
 release.
