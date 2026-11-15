@@ -8,7 +8,7 @@ Skills for coding agents in the Tenzir ecosystem, built on the
 ### 🛡️ Tenzir Users
 
 - `tenzir`: Tenzir documentation of the latest release — TQL, operators,
-  functions, integrations, deployment — plus entry points to the changelog,
+  functions, deployment — plus entry points to integrations, the changelog,
   blog, and product pages
 
 ### 🧬 Schemas

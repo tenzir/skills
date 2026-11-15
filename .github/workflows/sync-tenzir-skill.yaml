@@ -12,10 +12,10 @@ on:
         required: false
         default: "https://tenzir.com"
         type: string
-      llms_path:
-        description: "Index to build from: /llms.txt for the latest release, /docs/v<version>/llms.txt for one release"
+      release:
+        description: "Docs release whose agent map to copy, such as 7.0.0, or latest"
         required: false
-        default: "/llms.txt"
+        default: "latest"
         type: string
 
 permissions:
@@ -28,7 +28,7 @@ concurrency:
 jobs:
   # Scheduled runs only fire on the default branch. Branches that carry the
   # skill for an unreleased version, such as tenzir-7, set their own
-  # llms_path default; start their sync from here so they stay fresh too.
+  # release default; start their sync from here so they stay fresh too.
   sync-branches:
     name: Start syncs on version branches
     if: github.event_name == 'schedule'
@@ -50,7 +50,7 @@ jobs:
           done
 
   sync:
-    name: Rebuild tenzir
+    name: Copy tenzir
     runs-on: ubuntu-latest
 
     steps:
@@ -70,60 +70,17 @@ jobs:
       - name: Install uv
         uses: astral-sh/setup-uv@v7
 
-      - name: Download docs pages
+      - name: Copy tenzir skill
+        id: copy
         shell: bash
         env:
           BASE_URL: ${{ inputs.base_url || 'https://tenzir.com' }}
-          LLMS_PATH: ${{ inputs.llms_path || '/llms.txt' }}
+          RELEASE: ${{ inputs.release || 'latest' }}
         run: |
           set -euo pipefail
-
-          base="${BASE_URL%/}"
-          mkdir -p /tmp/tenzir-skill
-          curl -fsSL --retry 3 --retry-all-errors -o /tmp/llms.txt "$base$LLMS_PATH"
-
-          # llms.txt is the manifest: every documentation page appears as a
-          # markdown link. The generator navigates a docs-map heading tree,
-          # so convert first. Docs pages live under /docs/ on the website, or
-          # under /docs/v<version>/ for a single release, but at the tree root
-          # for the skill generator; integration pages keep their
-          # integrations/ prefix. Skip the changelog and pages outside the
-          # docs tree.
-          uv run scripts/llms-txt-to-docs-map.py /tmp/llms.txt /tmp/docs-map.md
-
-          grep -oE "$base/[A-Za-z0-9./_-]+\.md" /tmp/docs-map.md \
-            | sort -u > /tmp/urls.txt
-
-          download() {
-            local url="$1" path
-            path="${url#"$base"/}"
-            case "$path" in
-              docs/*)
-                path="${path#docs/}"
-                if [[ $path =~ ^v[0-9]+\.[0-9]+\.[0-9]+/ ]]; then
-                  path="${path#*/}"
-                fi
-                ;;
-              integrations/*) ;;
-              *) return 0 ;;
-            esac
-            mkdir -p "/tmp/tenzir-skill/$(dirname "$path")"
-            curl -fsSL --retry 3 --retry-all-errors \
-              -o "/tmp/tenzir-skill/$path" "$url"
-          }
-          export -f download
-          export base
-
-          xargs -P 8 -n 1 -I {} bash -c 'download "$@"' _ {} < /tmp/urls.txt
-          echo "Downloaded $(find /tmp/tenzir-skill -name '*.md' | wc -l) pages"
-
-      - name: Rebuild tenzir skill
-        shell: bash
-        run: |
-          set -euo pipefail
-          uv run scripts/generate-tenzir-skill.py \
-            --input-dir /tmp/tenzir-skill \
-            --docs-map /tmp/docs-map.md \
+          uv run scripts/copy-tenzir-skill.py \
+            --base-url "$BASE_URL" \
+            --release "$RELEASE" \
             --output-dir skills/tenzir
 
       - name: Validate skills
@@ -139,7 +96,7 @@ jobs:
       - name: Commit changes
         uses: planetscale/ghcommit-action@v0.2.0
         with:
-          commit_message: "Sync tenzir skill from ${{ inputs.base_url || 'https://tenzir.com' }}${{ inputs.llms_path || '/llms.txt' }}"
+          commit_message: "Sync tenzir skill from ${{ steps.copy.outputs.source }}"
           repo: ${{ github.repository }}
           branch: ${{ github.ref_name }}
           empty: false
