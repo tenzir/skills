@@ -144,7 +144,7 @@ accept_otlp "0.0.0.0:4318", include_metadata=["x-tenant-id"]
 
 The receiver excludes HTTP headers and gRPC metadata by default because they can contain credentials. Put it behind an authenticating proxy when you need bearer-token or OIDC authentication.
 
-See [Configure TLS](../guides/node-setup/configure-tls.md) for the complete TLS configuration.
+The [`tls` option of `accept_otlp`](https://tenzir.com/docs/reference/operators/accept_otlp/#tls--record-optional) lists the complete TLS configuration.
 
 ## See Also
 

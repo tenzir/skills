@@ -25,7 +25,7 @@ The alphaMountain package maps API and feed responses to OCSF [OSINT Inventory I
 
 ## Prerequisites
 
-To use this integration, you need alphaMountain API access and the alphaMountain package from the [Tenzir Library](https://app.tenzir.com/library). Store the license as a Tenzir secret before running production pipelines.
+To use this integration, you need alphaMountain API access and our [alphaMountain package](https://tenzir.com/product/library/alphamountain.md). Store the license as a Tenzir secret before running production pipelines.
 
 ## Map threat intelligence to OCSF
 

@@ -20,6 +20,8 @@ uv add tenzir-test
 uvx tenzir-test --help
 ```
 
+The harness requires Tenzir 7 and runs pipelines with `tenzir run`. To test against Tenzir 6, pin an earlier release with `uvx 'tenzir-test<3'`.
+
 ## Core concepts
 
 * **Project root** – Directory passed to `--root`; typically contains `fixtures/`, `inputs/`, `runners/`, and `tests/`.
@@ -99,6 +101,7 @@ my-package/
   * Set `TENZIR_PACKAGE_ROOT` to the absolute package directory.
   * Resolve `TENZIR_INPUTS` to the nearest `inputs/` directory within the owning package boundary, falling back to `<package>/tests/inputs/`. Explicit directory `test.yaml` or test frontmatter overrides take precedence.
   * Include `--package-dirs=<package>` in `tenzir` runner invocations and Python `Executor` commands.
+  * Set `TENZIR_WORKSPACE` to choose the workspace that Tenzir runs the test’s pipelines in, as described in [Workspaces](test-framework.md#workspaces).
 
 * Without a manifest the harness stays in **project mode**, recursively discovers tests under `tests/`, and applies global fixtures, runners, and inputs.
 
@@ -110,9 +113,50 @@ The built-in `python` and `tenzir` runners use the same package-directory resolu
 2. The effective directory-level `package-dirs` setting from `test.yaml`.
 3. The CLI `--package-dirs` entries.
 
-The harness expands library directories into their packages, normalizes paths, and removes duplicates while preserving the first occurrence. A nonempty result replaces ambient `TENZIR_PACKAGE_DIRS` with the comma-separated list. With no computed entries, the harness leaves the ambient value unchanged and adds no package flag to the Python fixture context. The `shell` runner and `DiffRunner` do not automatically compute this package list.
+The harness expands library directories into their packages, normalizes paths, and removes duplicates while preserving the first occurrence. A nonempty result replaces ambient `TENZIR_PACKAGE_DIRS` with the comma-separated list. With no computed entries, the harness leaves the ambient value unchanged and adds no package flag to the Python fixture context. The `shell` runner and `DiffRunner` do not automatically compute this package list, and they do not set `TENZIR_WORKSPACE` either.
 
 For Python tests, package preparation happens before fixture activation, so fixture factories can read the prepared values from `FixtureContext.env`. Factory-returned environment mappings overlay the child Python environment afterward and can override these values. These returned mappings are not progressively propagated to later fixture factories.
+
+### Workspaces
+
+The `tenzir run` command looks for a workspace from its working directory, which is the nearest directory at or above it with a `package.yaml`. In a workspace, Tenzir loads only the packages that the workspace uses and ignores `--package-dirs`. Because the harness runs tests from the project root, a package at the root would otherwise hide every other package directory. The built-in `tenzir` and `python` runners therefore set `TENZIR_WORKSPACE` for the tests they prepare packages for:
+
+* A test runs in its package’s workspace when the package has a `package.lock`. Tenzir then loads the package and its locked dependencies from the package cache.
+* A test of a package under the `packages/` directory of a workspace, or of the workspace itself, runs in that workspace.
+* Every other test with package directories runs in no workspace (`TENZIR_WORKSPACE=none`), so that Tenzir loads the package directories.
+* A `TENZIR_WORKSPACE` in the environment takes precedence, and the harness leaves it unchanged.
+
+A package with a lock runs in its own workspace, which loads no package directories. For its tests, the harness ignores the `package-dirs` entries from `test.yaml` and the CLI `--package-dirs` entries, and prints a warning that names them. Packages of the same workspace do not count as ignored, because the workspace loads them anyway. List every package that the tests use under `dependencies` in the `package.yaml` and lock them instead:
+
+package.yaml
+
+```yaml
+id: acme
+name: Acme
+dependencies:
+  stix: ^0.0.1
+```
+
+A package that lists `dependencies` without a `package.lock` runs in no workspace, so its dependencies load from package directories. This suits a repository that holds several packages, where a package’s tests use the sibling packages in their current state. Name the siblings in `package-dirs`:
+
+acme/tests/test.yaml
+
+```yaml
+package-dirs:
+  - ../../stix
+```
+
+### Locked dependencies
+
+Tenzir loads locked packages only from its package cache in `$XDG_CACHE_HOME/tenzir/packages`, which defaults to `~/.cache/tenzir/packages`. Before it runs the tests of a project, the harness checks the `package.lock` of every workspace that the selected tests run in. When the cache lacks a locked package, the harness runs this command in that workspace:
+
+```sh
+tenzir package fetch --locked
+```
+
+The fetch clones the repositories that the locked packages come from, so it needs `git` and network access, but no sign-in. With `--locked`, it never changes `package.lock`. When the lock no longer matches `package.yaml`, the fetch fails; run `tenzir package lock` and commit the updated lock. To keep CI runs from fetching the same packages again, cache `~/.cache/tenzir/packages` keyed on the `package.lock` files.
+
+The harness derives the fetch command from the command it runs tests with, by dropping `run`. The fetch needs a Tenzir installation that includes the platform commands. If the test command names no `tenzir` executable, or the fetch fails, the harness prints a warning with the command to run by hand. The affected tests then fail with Tenzir’s diagnostic about the missing package.
 
 ## CLI reference
 
@@ -129,7 +173,7 @@ Useful options:
 * `--jobs N`: Control concurrency (`4 * CPU cores` by default).
 * `--coverage` and `--coverage-source-dir`: Enable LLVM coverage.
 * `--keep`: Preserve per-test scratch directories instead of deleting them (same as setting `TENZIR_KEEP_TMP_DIRS=1`).
-* `--package-dirs <path>`: Extra package directories for Tenzir binaries. Repeatable and accepts comma-separated lists. Entries follow the owning package and effective directory YAML entries in the [package-directory resolution order](test-framework.md#package-directories).
+* `--package-dirs <path>`: Extra package directories for Tenzir binaries. Repeatable and accepts comma-separated lists. Entries follow the owning package and effective directory YAML entries in the [package-directory resolution order](test-framework.md#package-directories). Tests of a package with a lock ignore them, as described in [Workspaces](test-framework.md#workspaces).
 * `--debug`: Emit framework-level diagnostics (fixture lifecycle, discovery notes, comparison targets, etc.) and automatically enable verbose output so you see all test results (pass/skip/fail) instead of only failures. The same mode is available via `TENZIR_TEST_DEBUG=1`.
 * `--summary`: Print the tabular breakdown and failure tree after each project.
 * `--report-json FILE`: Write a versioned JSON report. Use `-` to emit tagged JSON records in stdout for CI wrappers and sandboxed builds. Reports also work with `--no-hooks` and `--no-diff`, but not with standalone `--fixture` mode.
@@ -262,23 +306,23 @@ timeout: 45
 The mapping form adds a `mode` field:
 
 ```yaml
-# tests/pubsub/test.yaml  -  parallel execution
+# tests/http/test.yaml  -  parallel execution
 suite:
-  name: parallel-pubsub
+  name: parallel-http
   mode: parallel
-fixtures: [node]
+fixtures: [http]
 timeout: 30
 ```
 
 Adding `min_jobs` ensures the suite only starts when enough workers are available:
 
 ```yaml
-# tests/pubsub/test.yaml  -  parallel with minimum worker requirement
+# tests/http/test.yaml  -  parallel with minimum worker requirement
 suite:
-  name: parallel-pubsub
+  name: parallel-http
   mode: parallel
   min_jobs: 2
-fixtures: [node]
+fixtures: [http]
 timeout: 30
 ```
 
@@ -463,7 +507,7 @@ If a matched test belongs to a suite (configured via `test.yaml`), all tests in 
 Use `--fixture-name` to select tests that request a fixture directly:
 
 ```sh
-uvx tenzir-test --fixture-name node
+uvx tenzir-test --fixture-name mysql
 uvx tenzir-test --fixture-name docker-compose
 ```
 
@@ -481,9 +525,9 @@ Fixture tags are cumulative. The built-in `docker-compose` fixture has both the 
 Repeat fixture selectors to match any selected fixture name or tag:
 
 ```sh
-uvx tenzir-test --fixture-name node --fixture-name sink
-uvx tenzir-test --fixture-tag container --fixture-tag node
-uvx tenzir-test --fixture-name node --fixture-tag container
+uvx tenzir-test --fixture-name mysql --fixture-name sink
+uvx tenzir-test --fixture-tag container --fixture-tag database
+uvx tenzir-test --fixture-name mysql --fixture-tag container
 ```
 
 Combine fixture selectors with positional paths or `--match` patterns to narrow the selection:
@@ -543,7 +587,6 @@ To regenerate baselines while targeting a specific binary and project root:
 
 ```sh
 TENZIR_BINARY=/opt/tenzir/bin/tenzir \
-TENZIR_NODE_BINARY=/opt/tenzir/bin/tenzir-node \
 uvx tenzir-test --root tests --update
 ```
 
@@ -582,7 +625,9 @@ Selection flow:
 
 ### Python runner
 
-The built-in `python` runner passes the prepared package environment to the Python subprocess. Its fixture context carries only the resolved package flag in `config_args`, not `--config` arguments from adjacent `tenzir.yaml` files. This does not introduce general Tenzir configuration inheritance for Python tests.
+The built-in `python` runner passes the prepared package environment to the Python subprocess. Its fixture context carries only the resolved package flag in `config_args`, not `--config` arguments from adjacent `tenzir.yaml` files. This does not introduce general Tenzir configuration inheritance for Python tests. The subprocess also inherits the `TENZIR_WORKSPACE` that the harness chose for the test, so Tenzir commands it runs use the same [workspace](test-framework.md#workspaces).
+
+The subprocess registers the same project fixtures as the harness: those of the root project and, for a test in a satellite, the satellite’s own. The harness passes their project directories in `TENZIR_TEST_FIXTURE_ROOTS`. A test can therefore call `acquire_fixture("name")` for any of them without importing anything. An explicit `import fixtures` still works and returns the fixtures of the test’s own project, which the subprocess has imported under that name already.
 
 Use [`Executor`](https://tenzir.com/docs/reference/test-framework.md#executor) to capture the prepared package directories and pass them as a CLI argument to Tenzir commands. Other Python subprocesses inherit `TENZIR_PACKAGE_DIRS` by default, so Tenzir commands can also load these packages through the environment. The harness does not add CLI arguments to arbitrary Python subprocess calls.
 
@@ -642,7 +687,7 @@ The directory-only key `package-dirs` (also accepted as `package_dirs`) lists ex
 package-dirs: [../../shared-packages]
 ```
 
-Relative entries resolve against the directory containing the declaring `test.yaml`, including when inherited by descendants. A child `test.yaml` replaces the inherited list rather than extending it. Set `package-dirs: []` to clear inherited YAML entries; this does not remove the automatic owning package or CLI entries.
+Relative entries resolve against the directory containing the declaring `test.yaml`, including when inherited by descendants. A child `test.yaml` replaces the inherited list rather than extending it. Set `package-dirs: []` to clear inherited YAML entries; this does not remove the automatic owning package or CLI entries. Tests of a package with a lock ignore these entries; lock the packages as dependencies instead, as described in [Workspaces](test-framework.md#workspaces).
 
 ### Runtime warning suppression
 
@@ -729,41 +774,39 @@ Capability probes are runner-aware. Each runner implements its own `check_requir
 ### Tenzir configuration files
 
 * The harness inspects the directory that owns each test. If it finds `tenzir.yaml`, it appends `--config=<path>` to every invocation of the bundled `tenzir`/`tql`/`diff` runners. The path also seeds `TENZIR_CONFIG` unless you set that variable yourself. Custom runners that call the Tenzir binary should either use `run.get_test_env_and_config_args(test)` or honour the exported environment variables explicitly.
-* The built-in `node` fixture anchors configuration discovery and the working directory to the test’s path, or the first member’s path for a suite. Relative paths inside `tenzir-node.yaml` resolve from that directory. See the [built-in node fixture](test-framework.md#built-in-node-fixture) for precedence rules.
-* This lets you keep one config for CLI-driven scenarios while passing a different config to the embedded node, for example to tweak endpoints or data directories independently.
 
 ## Fixtures
 
 ### Declaring fixtures
 
-* List fixture names in frontmatter (`fixtures: [node, http]`). Entries can be bare strings or single-key mappings with structured options:
+* List fixture names in frontmatter (`fixtures: [mysql, http]`). Entries can be bare strings or single-key mappings with structured options:
 
   ```yaml
   # Bare names (backward compatible)
-  fixtures: [node, http]
+  fixtures: [mysql, http]
 
 
   # With structured options
   fixtures:
-    - node:
+    - mysql:
         tls: true
-        port: 8443
+        port: 3306
     - http
 
 
   # Mixed form
   fixtures:
-    - node:
+    - mysql:
         tls: true
     - http
   ```
 
-  Importing the project `fixtures` package is enough to register custom fixtures thanks to the side effects in `fixtures/__init__.py`.
+  The harness registers custom fixtures by importing the project’s `fixtures` package or `fixtures.py`, whose decorators run as a side effect. A satellite sees the fixtures of the root project and its own. The process of a [Python test](test-framework.md#python-runner) registers the same fixtures, so tests don’t need to import them.
 
 * The harness encodes requests in `TENZIR_TEST_FIXTURES` and exposes helper APIs in `tenzir_test.fixtures`:
 
-  * `fixtures()` – Read-only view of active fixtures. Attribute access is supported, e.g. `fixtures().node` returns `True` if the fixture was requested and raises `AttributeError` otherwise.
-  * `acquire_fixture("name")` – Manual controller for the named fixture. Use it as a context manager for automatic `start()`/`stop()` or call those methods explicitly to interleave lifecycle steps and optional hooks (for example `kill()` or `restart()`).
+  * `fixtures()` – Read-only view of active fixtures. Attribute access is supported, e.g. `fixtures().mysql` returns `True` if the fixture was requested and raises `AttributeError` otherwise.
+  * `acquire_fixture("name")` – Manual controller for the named fixture, built in or defined by the project. Use it as a context manager for automatic `start()`/`stop()` or call those methods explicitly to interleave lifecycle steps and optional hooks (for example `kill()` or `restart()`).
   * `require("name")` – Assert that a fixture was requested.
   * `Executor()` – Convenience wrapper that runs Tenzir commands with resolved binaries and timeout budget.
 
@@ -780,39 +823,16 @@ assert result.returncode == 0
 
 ### Executor
 
-The `Executor(env=...)` helper selects `env or os.environ` as its configuration source, so an empty mapping falls back to `os.environ`. It captures `TENZIR_PACKAGE_DIRS` at construction, along with the client binary, endpoint, and timeout.
+The `Executor(env=...)` helper selects `env or os.environ` as its configuration source, so an empty mapping falls back to `os.environ`. At construction, it captures these values from the source:
+
+* The command from `TENZIR_PYTHON_FIXTURE_BINARY`, falling back to `TENZIR_BINARY`. The Python runner sets both for its tests.
+* The time budget from `TENZIR_PYTHON_FIXTURE_TIMEOUT`.
+* An optional endpoint from `TENZIR_PYTHON_FIXTURE_ENDPOINT`. When it is set, each command also gets `--endpoint=<value>`. A project fixture can yield it, so that `Executor.from_env(controller.env)` uses the fixture’s endpoint.
+* The package directories from `TENZIR_PACKAGE_DIRS`.
 
 If the captured package value is nonempty, each command appends `--package-dirs=<captured value>` after the binary command prefix. The value is passed unchanged, without further path expansion or deduplication. This flag takes precedence over earlier package flags in the prefix. Later mutations to the selected source mapping or ambient environment do not change it.
 
 An empty or absent captured value generates no package flag. It does not suppress `TENZIR_PACKAGE_DIRS` inherited through the subprocess’s actual environment. The selected mapping is not forwarded wholesale as the subprocess environment; the subprocess inherits the environment at execution time.
-
-### Built-in node fixture
-
-* Request the fixture with `fixtures: [node]`; the harness will start `tenzir-node` with the binaries discovered for the current test.
-
-* Configuration precedence:
-
-  1. `TENZIR_NODE_CONFIG` in the environment.
-  2. A `tenzir-node.yaml` next to the test file, or the first member for a suite (exported automatically).
-  3. The Tenzir defaults (no config file).
-
-* The node process uses the test’s directory, or the first member’s directory for a suite, as its working directory. Relative paths in `tenzir-node.yaml` (for example `state/` or `schemas/`) resolve from there.
-
-* A suite’s shared node is configured once at suite startup, anchored to the first member’s path but using the suite-directory package configuration. Member-specific settings do not reconfigure an already-running node.
-
-* Each controller reuses its state and cache directories across `start()`/`stop()` cycles. By default, they and the node process logs live under the per-test scratch directory (`TENZIR_TMP_DIR/tenzir-node-*`). The harness removes the scratch directory after the run unless you pass `--keep`. Starting a fresh controller (for example in another test run) yields a brand-new workspace.
-
-* The fixture reuses other inherited arguments (for example `--package-dirs=…`) but replaces any existing `--config=` flag so the node process always honours the chosen configuration file.
-
-* Tests can read `TENZIR_NODE_CLIENT_ENDPOINT`, `TENZIR_NODE_CLIENT_BINARY`, `TENZIR_NODE_CLIENT_TIMEOUT`, `TENZIR_NODE_STATE_DIRECTORY`, and `TENZIR_NODE_CACHE_DIRECTORY` from the environment to connect to the spawned node and inspect its working tree.
-
-* `TENZIR_NODE_STDOUT_LOG` and `TENZIR_NODE_STDERR_LOG` point to the complete process logs. For example, `tail "$TENZIR_NODE_STDERR_LOG"` shows the latest node diagnostics. Pass `--keep` to retain both logs after the run.
-
-* Pipelines launched by the bundled Tenzir runners automatically receive `--endpoint=<value>` when this fixture is active, so they talk to the transient node without additional wiring.
-
-* CLI and node configuration are independent: configure the CLI with `tenzir.yaml` and drop a `tenzir-node.yaml` (or set `TENZIR_NODE_CONFIG`) only when the node needs custom settings.
-
-* The fixture drains node output while it waits for the client endpoint, so large startup diagnostics cannot block the process. When `tenzir-node` fails to start, the fixture reports the exit code and stderr output. When an active node exits unexpectedly, it reports the exit code and recent stderr output.
 
 ### Built-in docker-compose fixture
 
@@ -933,6 +953,8 @@ def http():
 ```
 
 `@fixture` also accepts regular callables returning dictionaries, context managers, or `FixtureHandle` instances for advanced scenarios.
+
+Registering a name that another fixture already holds fails, unless you pass `replace=True`. Registering the same definition again, as a second import of its module does, replaces the earlier registration without an error.
 
 The [fixture guide](../guides/testing/create-fixtures.md) demonstrates an HTTP echo server that exposes `HTTP_FIXTURE_URL` and tears down cleanly.
 
@@ -1057,7 +1079,9 @@ The [fixture guide](../guides/testing/create-fixtures.md#add-fixture-assertions)
 `tenzir-test` recognises the following environment variables:
 
 * `TENZIR_TEST_ROOT` – Default test root when `--root` is omitted.
-* `TENZIR_BINARY` / `TENZIR_NODE_BINARY` – Override binary auto-detection. Supports multi-part commands like `TENZIR_BINARY="uvx tenzir"` or `TENZIR_NODE_BINARY="docker exec container tenzir-node"`.
+* `TENZIR_BINARY` – Override binary auto-detection. Supports multi-part commands like `TENZIR_BINARY="uvx tenzir"`. The harness adds `run` to a command that ends with the `tenzir` executable, as described in [Binary resolution](test-framework.md#binary-resolution).
+* `TENZIR_WORKSPACE` – The workspace that Tenzir runs pipelines in, or `none` for none. The built-in `tenzir` and [Python runner](test-framework.md#python-runner) set it for tests with package directories, as described in [Workspaces](test-framework.md#workspaces). A value in the environment takes precedence.
+* `XDG_CACHE_HOME` – Locates the package cache in `$XDG_CACHE_HOME/tenzir/packages`, where Tenzir reads [locked dependencies](test-framework.md#locked-dependencies) from.
 * `TENZIR_INPUTS` – Preferred data directory. Defaults to the nearest `inputs/` directory walking up from the test, falling back to the project-level inputs folder. Reflects any `inputs:` override from `test.yaml` or frontmatter.
 * `TENZIR_PACKAGE_DIRS` – Comma-separated package directories. The built-in `tenzir` and [Python runner](test-framework.md#python-runner) prepare this value for tests and fixtures as described in [Package directories](test-framework.md#package-directories). [`Executor`](https://tenzir.com/docs/reference/test-framework.md#executor) captures it when constructed.
 * `TENZIR_INPUT` – Path to the inline input file when a `.input` file exists next to the test. Not set otherwise.
@@ -1069,17 +1093,19 @@ The [fixture guide](../guides/testing/create-fixtures.md#add-fixture-assertions)
 
 ### Binary resolution
 
-The harness automatically detects `tenzir` and `tenzir-node` binaries using this precedence:
+The harness automatically detects the `tenzir` binary using this precedence:
 
-1. `TENZIR_BINARY` / `TENZIR_NODE_BINARY` environment variable (highest priority)
+1. `TENZIR_BINARY` environment variable (highest priority)
 2. Local installation found via `PATH` lookup (`shutil.which`)
-3. Fallback to `uvx tenzir` / `uvx --from tenzir tenzir-node` when `uv` is installed
+3. Fallback to `uvx tenzir` when `uv` is installed
 
 Most users can run `tenzir-test` without any configuration. When `uv` is installed, the harness automatically uses `uvx` to fetch and run Tenzir on demand.
 
-Environment variables support multi-part commands, allowing invocations like `TENZIR_BINARY="uvx tenzir"` or `TENZIR_BINARY="docker exec node tenzir"`. The harness splits these values into argument lists using shell tokenization rules.
+Environment variables support multi-part commands, allowing invocations like `TENZIR_BINARY="uvx tenzir"` or `TENZIR_BINARY="docker exec box tenzir"`. The harness splits these values into argument lists using shell tokenization rules.
 
-Fixtures often publish additional variables (for example `TENZIR_NODE_CLIENT_*`, `TENZIR_NODE_STATE_DIRECTORY`, `TENZIR_NODE_CACHE_DIRECTORY`, `TENZIR_NODE_STDOUT_LOG`, `TENZIR_NODE_STDERR_LOG`, `HTTP_FIXTURE_URL`).
+The harness runs pipelines with `tenzir run`, because a bare `tenzir` runs platform commands rather than pipelines. When the resolved command ends with the `tenzir` executable, the harness appends `run`. This applies to a `tenzir` on `PATH`, to the `uvx` fallback, and to a `TENZIR_BINARY` such as `uvx tenzir`, `uvx --prerelease allow tenzir`, `uvx tenzir==<version>`, or `/opt/tenzir/bin/tenzir`. Commands that already end with `run`, or that name another executable such as a wrapper script, stay as they are.
+
+Fixtures often publish additional variables, for example `HTTP_FIXTURE_URL`.
 
 During execution the harness also adds transient variables such as `TENZIR_TMP_DIR` so tests and fixtures can create temporary artifacts without polluting the repository. Combine it with `--keep` (or `TENZIR_KEEP_TMP_DIRS=1`) when you need to inspect the generated files after a run.
 
@@ -1141,7 +1167,9 @@ Two kinds of output have no first-column braces, so `sort` shuffles their lines 
 
 ## Troubleshooting
 
-* **Missing binaries** – The harness auto-detects binaries on `PATH` and falls back to `uvx tenzir` when `uv` is installed. If neither is available, set the `TENZIR_BINARY` and `TENZIR_NODE_BINARY` environment variables to point at your installation.
+* **Missing binaries** – The harness auto-detects binaries on `PATH` and falls back to `uvx tenzir` when `uv` is installed. If neither is available, set `TENZIR_BINARY` to point at your Tenzir 7 installation.
+* **Packages missing from the cache** – When a test fails because a package is not in the package cache, run `tenzir package fetch --locked` in the package directory and check the warning that the harness printed before the tests. See [Locked dependencies](test-framework.md#locked-dependencies).
+* **Ignored package directories** – The tests of a package with a lock ignore `package-dirs` and `--package-dirs`. Lock the packages that its tests use as dependencies instead. See [Workspaces](test-framework.md#workspaces).
 * **Unexpected exits** – Set `error: true` in frontmatter when a non-zero exit is expected.
 * **Skipped tests** – Use `skip: reason` to document temporary skips; baseline files can stay empty. For fixture-dependent suites, put `skip: {on: fixture-unavailable}` in `test.yaml`. For fixtures selected by one test, use the same mapping in frontmatter. For capability-dependent suites, combine `requires` with `skip: {on: capability-unavailable}`.
 * **Noisy output** – Use `--jobs 1` to serialize worker logs, and enable `--debug` (or set `TENZIR_TEST_DEBUG=1`) when you need to trace comparisons and fixture activity. Note that `--debug` automatically enables verbose output.

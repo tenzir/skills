@@ -119,7 +119,7 @@ action(
 )
 ```
 
-The value of `tls.permittedPeer` must match an identity in the Tenzir server certificate. For certificate generation and trust-store guidance, see our [Configure TLS](../guides/node-setup/configure-tls.md) guide.
+The value of `tls.permittedPeer` must match an identity in the Tenzir server certificate. The [`tls` option of `accept_relp`](https://tenzir.com/docs/reference/operators/accept_relp/#tls--record-optional) lists the TLS fields on the Tenzir side.
 
 ## Understand retries and duplicates
 

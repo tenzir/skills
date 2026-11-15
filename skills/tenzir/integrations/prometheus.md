@@ -12,7 +12,7 @@ section: "Integrations"
 
 [Prometheus](https://prometheus.io/) is an open-source monitoring system and time-series database. Tenzir can send metric events to Prometheus-compatible Remote Write receivers, including Prometheus, Grafana Mimir, Cortex, Thanos Receive, and VictoriaMetrics.
 
-Use [`metrics`](https://tenzir.com/docs/reference/operators/metrics.md) with `shape="prometheus"` and [`to_prometheus`](https://tenzir.com/docs/reference/operators/to_prometheus.md) to send Tenzir node metrics to a Prometheus Remote Write endpoint. This integration doesn’t expose a scrape endpoint for the Prometheus pull model.
+Use [`to_prometheus`](https://tenzir.com/docs/reference/operators/to_prometheus.md) to send metric events from a pipeline to a Prometheus Remote Write endpoint. This integration doesn’t expose a scrape endpoint for the Prometheus pull model.
 
 ## Prerequisites
 
@@ -39,13 +39,20 @@ from {
 to_prometheus "https://prometheus.example/api/v1/write"
 ```
 
-### Export Tenzir node metrics
+### Map an existing schema
 
-Convert live Tenzir node metrics to Prometheus samples:
+Name the fields that hold the metric, its value, and its labels when your events use a schema of their own:
 
 ```tql
-metrics live=true, shape="prometheus"
-to_prometheus "https://prometheus.example/api/v1/write"
+from {
+  metric_name: "cpu_usage",
+  usage: 0.82,
+  host: "sensor-a",
+}
+to_prometheus "https://prometheus.example/api/v1/write",
+  name=metric_name,
+  value=usage,
+  labels={host: host}
 ```
 
 ### Add authentication headers
@@ -53,13 +60,12 @@ to_prometheus "https://prometheus.example/api/v1/write"
 Pass additional HTTP headers when your receiver requires authentication. Header values are resolved as secrets.
 
 ```tql
-metrics live=true, shape="prometheus"
+subscribe "metrics"
 to_prometheus "prometheus-remote-write-url",
   headers={Authorization: "prometheus-remote-write-token"}
 ```
 
 ## See Also
 
-* [`metrics`](https://tenzir.com/docs/reference/operators/metrics.md)
 * [`to_prometheus`](https://tenzir.com/docs/reference/operators/to_prometheus.md)
-* [Collect metrics](../guides/observability/collect-metrics.md)
+* [Google Cloud Monitoring](google/cloud-monitoring.md)

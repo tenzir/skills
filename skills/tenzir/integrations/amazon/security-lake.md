@@ -76,7 +76,7 @@ This approach is particularly useful when setting up multiple custom sources acr
 
 ### Tenzir Setup
 
-To run Tenzir pipelines that send data to Security Lake, you’ll need a Tenzir node running on AWS. See our guide on [how to deploy a node on AWS](https://docs.tenzir.com/guides/node-setup/deploy-a-node/#aws) for detailed instructions.
+To run Tenzir pipelines that send data to Security Lake, you’ll need a Tenzir node running on AWS.
 
 See [AWS Authentication](../../reference/aws-authentication.md) for the available AWS authentication mechanisms. Tenzir supports multiple authentication methods including IAM roles, access keys, and credential profiles.
 
@@ -97,7 +97,7 @@ to_amazon_security_lake $url, region=$region, account_id=$account_id, timeout=10
 
 Available package
 
-Use the [`amazon-security-lake`](https://github.com/tenzir/library/tree/main/amazon-security-lake) package from the Tenzir Library, which includes pre-built pipelines for common event classes.
+Our [Amazon Web Services package](https://tenzir.com/product/library/amazon.md) provides the `amazon::security_lake::send` operator and examples that send OCSF events to Security Lake.
 
 ## Examples
 

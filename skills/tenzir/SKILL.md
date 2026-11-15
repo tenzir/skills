@@ -1020,7 +1020,7 @@ Send events to Google's log management solution
 
 #### [Google Cloud Monitoring integration](integrations/google/cloud-monitoring.md)
 
-Send node metrics, gauges, counters, and histograms to Google Cloud Monitoring as user-defined metrics.
+Send metric events, such as gauges, counters, and histograms, to Google Cloud Monitoring as user-defined metrics.
 
 #### [Google Cloud Pub/Sub integration](integrations/google/cloud-pubsub.md)
 

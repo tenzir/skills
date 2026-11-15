@@ -32,7 +32,7 @@ The `velociraptor` acts as client and establishes a connection to a Velociraptor
    velociraptor-binary -c server.yaml config api_client --name tenzir client.yaml
    ```
 
-   Copy the generated `client.yaml` to your Tenzir [plugin configuration](../reference/node/configuration.md) directory as `velociraptor.yaml` so that the operator can find it:
+   Copy the generated `client.yaml` to your Tenzir plugin configuration directory as `velociraptor.yaml` so that the operator can find it:
 
    ```bash
    cp client.yaml /etc/tenzir/plugin/velociraptor.yaml

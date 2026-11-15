@@ -72,7 +72,7 @@ accept_relp "0.0.0.0:2514", tls={
 syslog = data.parse_syslog()
 ```
 
-For certificate generation, trust stores, and additional TLS options, see our [Configure TLS](../guides/node-setup/configure-tls.md) guide.
+The [`tls` option of `accept_relp`](https://tenzir.com/docs/reference/operators/accept_relp/#tls--record-optional) lists the additional TLS fields, such as `min_version` and `ciphers`.
 
 ## Accept plaintext and TLS clients
 

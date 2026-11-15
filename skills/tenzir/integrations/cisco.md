@@ -12,4 +12,4 @@ section: "Integrations"
 
 Tenzir connects the Cisco security portfolio: collect firewall, intrusion, and connection events from ASA and Firepower, DNS-layer security telemetry from Umbrella, authentication activity from Duo, and detections from Secure Email and Secure Endpoint — all normalized to OCSF in the same pipeline language.
 
-The [Cisco package](https://app.tenzir.com/library) provides ready-made parsing and OCSF mappings for Cisco network and activity telemetry.
+Our [Cisco package](https://tenzir.com/product/library/cisco.md) provides ready-made parsing and OCSF mappings for Cisco network and activity telemetry.

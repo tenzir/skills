@@ -28,4 +28,3 @@ All AWS operators share the same authentication mechanisms. See [AWS Authenticat
 ## See Also
 
 * [AWS Authentication](../reference/aws-authentication.md)
-* [Deploy a node](../guides/node-setup/deploy-a-node.md)

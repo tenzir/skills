@@ -29,7 +29,7 @@ To use this integration, you need:
 
 * An isMalicious Pro or Enterprise plan, which includes TAXII access. You can [create your isMalicious account](https://ismalicious.com/auth/register).
 * An isMalicious API key and secret. Store the Base64 encoding of `apiKey:apiSecret` as the [secret](../explanations/secrets.md) `ISMALICIOUS_API_CREDENTIAL`.
-* The `ismalicious`, `stix`, and `tenzir` packages from the [Tenzir Library](https://app.tenzir.com/library).
+* The [`ismalicious`](https://github.com/tenzir/library/tree/main/ismalicious), [`stix`](https://tenzir.com/product/library/stix.md), and [`tenzir`](https://github.com/tenzir/library/tree/main/tenzir) packages from our [package library](https://tenzir.com/product/library.md).
 
 ## Load the feeds into a lookup table
 
