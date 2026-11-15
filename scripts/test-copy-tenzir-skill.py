@@ -6,13 +6,16 @@
 
 The site serves a preview at /docs/v7.0.0/ whose pages link their versioned
 addresses, and a latest release whose map answers at /docs/v6.0.0/ while its
-pages redirect to /docs/ and link the unversioned addresses.
+pages redirect to /docs/ and link the unversioned addresses. Small releases
+from 7.1.0 on each exercise one failure.
 """
 
 from __future__ import annotations
 
+import contextlib
 import http.server
 import importlib.util
+import io
 import tempfile
 import threading
 import unittest
@@ -24,6 +27,8 @@ spec = importlib.util.spec_from_file_location(
 assert spec and spec.loader
 copy = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(copy)
+# Retries of server errors need no backoff here.
+copy.time.sleep = lambda seconds: None
 
 SKILL_MAP = """---
 name: tenzir
@@ -48,6 +53,7 @@ OPERATORS = """# Operators
 - [Older]({site}/docs/v5.0.0/guides.md)
 - [Gone]({root}reference/operators/gone.md)
 - [Spec]({root}_downloads/node.yaml)
+- [Escape]({root}/tmp/outside.md)
 
 [ref]: {root}guides.md
 
@@ -64,18 +70,24 @@ WHERE = "# where\n\nSee [Operators]({root}reference/operators.md#top).\n"
 GUIDES = "# Guides\n\nSee [where](reference/operators/where.md).\n"
 
 
+MINI_MAP = "---\nname: tenzir\n---\n\n- [Guides](guides.md)\n"
+
+
 def corpus(root: str, site: str) -> dict[str, str]:
     pages = {
         "reference/operators.md": OPERATORS,
         "reference/operators/where.md": WHERE,
         "guides.md": GUIDES,
+        # Served, so that only the copy keeps it out of the skill.
+        "/tmp/outside.md": "# Outside\n",
     }
     return {path: text.format(root=root, site=site) for path, text in pages.items()}
 
 
 class Site(http.server.ThreadingHTTPServer):
     request_queue_size = 64
-    pages: dict[str, str]
+    # A body, an HTTP status, or a redirect target as `("Location", url)`.
+    pages: dict[str, str | int | tuple[str, str]]
 
 
 class Handler(http.server.BaseHTTPRequestHandler):
@@ -91,9 +103,14 @@ class Handler(http.server.BaseHTTPRequestHandler):
             self.send_header("Location", "/docs/" + self.path[len(prefix) :])
             self.end_headers()
             return
-        body = self.server.pages.get(self.path)
-        if body is None:
-            self.send_error(404)
+        body = self.server.pages.get(self.path, 404)
+        if isinstance(body, int):
+            self.send_error(body)
+            return
+        if isinstance(body, tuple):
+            self.send_response(307)
+            self.send_header(*body)
+            self.end_headers()
             return
         self.send_response(200)
         self.end_headers()
@@ -113,6 +130,30 @@ class CopyTest(unittest.TestCase):
             )
             for path, text in corpus(cls.site + page_root, cls.site).items():
                 pages[page_root + path] = text
+        other_origin = f"http://localhost:{cls.server.server_port}"
+
+        def mini(version: str, guides: str, **extra: str | int | tuple[str, str]):
+            root = f"/docs/v{version}/"
+            pages[root + "SKILL.md"] = MINI_MAP
+            pages[root + "guides.md"] = guides.format(root=cls.site + root)
+            pages.update({root + path: value for path, value in extra.items()})
+
+        # A transitive page fails with a server error.
+        mini("7.1.0", "[Flaky]({root}flaky.md)\n", **{"flaky.md": 503})
+        # Transitive pages redirect to another release and another origin.
+        mini(
+            "7.2.0",
+            "[Version]({root}version.md) [Origin]({root}origin.md)\n",
+            **{
+                "version.md": ("Location", "/docs/v5.0.0/guides.md"),
+                "origin.md": ("Location", f"{other_origin}/docs/v7.2.0/x.md"),
+            },
+        )
+        pages["/docs/v5.0.0/guides.md"] = "# Foreign\n"
+        pages["/docs/v7.2.0/x.md"] = "# Foreign\n"
+        # A page the map links redirects to another release.
+        pages["/docs/v7.3.0/SKILL.md"] = MINI_MAP
+        pages["/docs/v7.3.0/guides.md"] = ("Location", "/docs/v5.0.0/guides.md")
         cls.server.pages = pages
         threading.Thread(target=cls.server.serve_forever, daemon=True).start()
 
@@ -120,12 +161,22 @@ class CopyTest(unittest.TestCase):
     def tearDownClass(cls) -> None:
         cls.server.shutdown()
 
+    def crawl(self, release: str) -> tuple[dict[str, bytes], list[str], str]:
+        """The copied files, the release roots, and the warnings."""
+        roots = copy.release_roots(self.site, release)
+        stderr = io.StringIO()
+        with contextlib.redirect_stderr(stderr):
+            files = copy.crawl(roots)
+        return files, roots, stderr.getvalue()
+
     def copy(self, release: str) -> dict[str, str]:
-        root = copy.release_root(self.site, release)
-        files, roots = copy.crawl(root)
+        files, roots, _ = self.crawl(release)
         with tempfile.TemporaryDirectory() as directory:
             output = Path(directory) / "tenzir"
             copy.write(copy.localize(files, roots), output)
+            self.assertEqual(
+                sorted(file.name for file in Path(directory).iterdir()), ["tenzir"]
+            )
             return {
                 str(file.relative_to(output)): file.read_text()
                 for file in output.rglob("*")
@@ -184,7 +235,46 @@ class CopyTest(unittest.TestCase):
 
     def test_fails_without_an_agent_map(self) -> None:
         with self.assertRaisesRegex(copy.CopyError, r"no agent map .* \(HTTP 404\)"):
-            copy.crawl(f"{self.site}/docs/v1.0.0/")
+            copy.crawl([f"{self.site}/docs/v1.0.0/"])
+
+    def test_keeps_paths_below_the_output_directory(self) -> None:
+        roots = [f"{self.site}/docs/v7.0.0/"]
+        page = roots[0] + "guides.md"
+        self.assertIsNone(
+            copy.release_path("/docs/v7.0.0//tmp/outside.md", page, roots)
+        )
+        files, _, _ = self.crawl("7.0.0")
+        self.assertNotIn("/tmp/outside.md", files)
+        with tempfile.TemporaryDirectory() as directory:
+            output = Path(directory) / "tenzir"
+            for path in ["/tmp/outside.md", "../outside.md", "a/../../outside.md"]:
+                with self.assertRaisesRegex(copy.CopyError, "outside"):
+                    copy.write({path: b"# Outside\n"}, output)
+            self.assertEqual(list(Path(directory).iterdir()), [])
+
+    def test_fails_on_server_errors_and_warns_on_missing_pages(self) -> None:
+        with self.assertRaisesRegex(copy.CopyError, r"flaky\.md: HTTP 503"):
+            self.crawl("7.1.0")
+        files, _, warnings = self.crawl("7.0.0")
+        self.assertNotIn("reference/operators/gone.md", files)
+        self.assertIn("broken link to", warnings)
+        self.assertIn("gone.md (HTTP 404)", warnings)
+
+    def test_rejects_redirects_outside_the_release(self) -> None:
+        files, _, warnings = self.crawl("7.2.0")
+        self.assertEqual(sorted(files), ["SKILL.md", "guides.md"])
+        self.assertIn("version.md, which redirects to", warnings)
+        self.assertIn("origin.md, which redirects to http://localhost:", warnings)
+        with self.assertRaisesRegex(copy.CopyError, "outside the release"):
+            self.crawl("7.3.0")
+        # Only the latest release answers at the unversioned /docs/.
+        self.assertEqual(
+            copy.release_roots(self.site, "latest"),
+            [f"{self.site}/docs/v6.0.0/", f"{self.site}/docs/"],
+        )
+        self.assertEqual(
+            copy.release_roots(self.site, "7.0.0"), [f"{self.site}/docs/v7.0.0/"]
+        )
 
 
 if __name__ == "__main__":

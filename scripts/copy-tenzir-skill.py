@@ -12,9 +12,11 @@ links from page to page, and mirrors them below the output directory.
 
 The twins link each other with absolute URLs, such as
 ``https://tenzir.com/docs/v7.0.0/reference/operators/where.md``, so the copy
-follows absolute links into the release as well. The latest release serves
-its twins at ``/docs/`` and redirects there from its versioned address; the
-copy learns that address from the redirect and follows links to it, too.
+follows absolute links into the release as well. The latest release, as
+``/docs/versions.json`` names it, serves its twins at ``/docs/`` and
+redirects there from its versioned address, so for it the copy accepts that
+address, too. It rejects every other redirect, so no page of another release
+or site enters the skill.
 
 The copy rewrites links to the pages it copied into paths relative to the
 linking file, keeping their anchors, so the skill navigates offline. It leaves
@@ -73,16 +75,20 @@ def fetch(url: str) -> tuple[str, bytes]:
     raise AssertionError("unreachable")
 
 
-def release_root(base_url: str, release: str) -> str:
-    """The address of a release's docs, resolving `latest` on the website."""
+def release_roots(base_url: str, release: str) -> list[str]:
+    """The addresses of a release's docs: its versioned root and, for the
+    latest release, the unversioned `/docs/` where its pages answer."""
     base = base_url.rstrip("/")
-    if release == "latest":
-        url = f"{base}/docs/versions.json"
-        try:
-            release = json.loads(fetch(url)[1])["latest"]
-        except (OSError, KeyError, ValueError) as error:
-            raise CopyError(f"cannot read the latest release from {url}: {error}")
-    return f"{base}/docs/v{release.removeprefix('v')}/"
+    url = f"{base}/docs/versions.json"
+    try:
+        latest = json.loads(fetch(url)[1])["latest"]
+    except (OSError, KeyError, TypeError, ValueError) as error:
+        raise CopyError(f"cannot read the latest release from {url}: {error}")
+    version = latest if release == "latest" else release.removeprefix("v")
+    if not re.fullmatch(r"\d+\.\d+\.\d+(?:-[\w.]+)?", version):
+        raise CopyError(f"not a release version: {version!r}")
+    root = f"{base}/docs/v{version}/"
+    return [root, f"{base}/docs/"] if version == latest else [root]
 
 
 def map_links(markdown: str, href_map: Callable[[str], str]) -> str:
@@ -144,19 +150,27 @@ def release_path(href: str, page_url: str, roots: list[str]) -> str | None:
         if not url.startswith(root):
             continue
         path = url[len(root) :]
-        parts = path.split("/")
-        if path == SKILL_MAP or OTHER_CORPUS.match(path) or ".." in parts:
+        if path == SKILL_MAP or OTHER_CORPUS.match(path) or not safe_path(path):
             return None
         return path
     return None
 
 
-def crawl(root: str, jobs: int = 8) -> tuple[dict[str, bytes], list[str]]:
-    """The agent map of a release and every twin it reaches, by path, and
-    the addresses of the release."""
+def safe_path(path: str) -> bool:
+    """Whether a path stays below the directory it is relative to."""
+    parts = path.split("/")
+    return not any(
+        part in ("", ".", "..") or "\\" in part or "\0" in part or ":" in part
+        for part in parts
+    )
+
+
+def crawl(roots: list[str], jobs: int = 8) -> dict[str, bytes]:
+    """The agent map of a release and every twin it reaches, by path."""
+    root = roots[0]
     map_url = root + SKILL_MAP
     try:
-        _, skill_map = fetch(map_url)
+        final, skill_map = fetch(map_url)
     except urllib.error.HTTPError as error:
         raise CopyError(
             f"no agent map at {map_url} (HTTP {error.code}); the website "
@@ -164,11 +178,12 @@ def crawl(root: str, jobs: int = 8) -> tuple[dict[str, bytes], list[str]]:
         )
     except OSError as error:
         raise CopyError(f"cannot download {map_url}: {error}")
+    if final != map_url:
+        raise CopyError(f"{map_url} redirects to {final}, outside the release")
     text = skill_map.decode()
     if not re.match(r"---\r?\nname: tenzir\r?\n", text):
         raise CopyError(f"{map_url} is not the tenzir skill: no `name: tenzir`")
 
-    roots = [root]
     files = {SKILL_MAP: skill_map}
     # The map's links must resolve; the archive build checks that they do.
     required = {
@@ -176,34 +191,36 @@ def crawl(root: str, jobs: int = 8) -> tuple[dict[str, bytes], list[str]]:
     }
     if not required:
         raise CopyError(f"{map_url} links no Markdown twins")
-    missing: list[str] = []
+    skipped: list[str] = []
     pending = sorted(required)
     seen = set(pending)
 
-    def get(path: str) -> tuple[str, str | None, bytes | None]:
+    def get(path: str) -> tuple[str, bytes | None]:
+        url = root + path
         try:
-            final, body = fetch(root + path)
-            return path, final, body
+            final, body = fetch(url)
         except urllib.error.HTTPError as error:
-            if path in required:
-                raise CopyError(f"{root + path} is missing (HTTP {error.code})")
-            return path, None, None
+            # Only a page that does not exist is a broken link; any other
+            # error would publish an incomplete copy.
+            if error.code not in (404, 410) or path in required:
+                raise CopyError(f"cannot download {url}: HTTP {error.code}")
+            skipped.append(f"a broken link to {url} (HTTP {error.code})")
+            return path, None
         except OSError as error:
-            raise CopyError(f"cannot download {root + path}: {error}")
+            raise CopyError(f"cannot download {url}: {error}")
+        if final not in (candidate + path for candidate in roots):
+            if path in required:
+                raise CopyError(f"{url} redirects to {final}, outside the release")
+            skipped.append(f"{url}, which redirects to {final} outside the release")
+            return path, None
+        return path, body
 
     with ThreadPoolExecutor(max_workers=jobs) as pool:
         while pending:
             batch, pending = pending, []
-            for path, final, body in pool.map(get, batch):
-                if body is None:
-                    missing.append(path)
-                    continue
-                files[path] = body
-                # A redirect reveals another address of the release.
-                if final and final != root + path and final.endswith("/" + path):
-                    alias = final[: -len(path)]
-                    if alias not in roots:
-                        roots.append(alias)
+            for path, body in pool.map(get, batch):
+                if body is not None:
+                    files[path] = body
             for path in batch:
                 if path not in files:
                     continue
@@ -212,9 +229,9 @@ def crawl(root: str, jobs: int = 8) -> tuple[dict[str, bytes], list[str]]:
                     if target and target not in seen:
                         seen.add(target)
                         pending.append(target)
-    for path in sorted(missing):
-        print(f"warning: skipped a broken link to {root + path}", file=sys.stderr)
-    return files, roots
+    for reason in sorted(skipped):
+        print(f"warning: skipped {reason}", file=sys.stderr)
+    return files
 
 
 def localize(files: dict[str, bytes], roots: list[str]) -> dict[str, bytes]:
@@ -245,7 +262,9 @@ def write(files: dict[str, bytes], output_dir: Path) -> None:
     staging = Path(tempfile.mkdtemp(dir=output_dir.parent, prefix=".copy-"))
     try:
         for path, body in files.items():
-            target = staging / path
+            target = (staging / path).resolve()
+            if not safe_path(path) or not target.is_relative_to(staging.resolve()):
+                raise CopyError(f"refusing to write {path!r} outside {output_dir}")
             target.parent.mkdir(parents=True, exist_ok=True)
             target.write_bytes(body)
         if output_dir.exists():
@@ -273,16 +292,16 @@ def main() -> int:
     )
     args = parser.parse_args()
     try:
-        root = release_root(args.base_url, args.release)
-        files, roots = crawl(root)
-        files = localize(files, roots)
+        roots = release_roots(args.base_url, args.release)
+        root = roots[0]
+        files = localize(crawl(roots), roots)
+        if args.dry_run:
+            print("\n".join(sorted(files)))
+        else:
+            write(files, args.output_dir)
     except CopyError as error:
         print(f"error: {error}", file=sys.stderr)
         return 1
-    if args.dry_run:
-        print("\n".join(sorted(files)))
-    else:
-        write(files, args.output_dir)
     verb = "Would copy" if args.dry_run else "Copied"
     print(f"{verb} {len(files)} files from {root}{SKILL_MAP}", file=sys.stderr)
     if output := os.environ.get("GITHUB_OUTPUT"):
