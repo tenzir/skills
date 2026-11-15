@@ -228,7 +228,7 @@ exact_subnet = search(subnet, 10.0.0.0/8, exact=true)
 
 ## See Also
 
-* [`equals`](https://tenzir.com/docs/reference/functions/equals.md)
-* [`has`](https://tenzir.com/docs/reference/functions/has.md)
-* [`match_regex`](https://tenzir.com/docs/reference/functions/match_regex.md)
+* [`equals`](equals.md)
+* [`has`](has.md)
+* [`match_regex`](match_regex.md)
 * [Manipulate strings](../../guides/shape/manipulate-strings.md)

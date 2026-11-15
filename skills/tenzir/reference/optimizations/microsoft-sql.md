@@ -9,7 +9,7 @@ section: "Docs"
 
 > When frommicrosoftsql reads a table, it hands SQL Server the operators that follow it, so that SQL Server sends only what the pipeline keeps instead of the whole table. Those operators leave the pipeline and run in SQL Server, with its semantics. This page describes which operators SQL Server takes over, how its results can differ from Tenzir’s, and how to keep operators in Tenzir. The optimizations overview explains how Tenzir optimizes pipelines in general.
 
-When [`from_microsoft_sql`](https://tenzir.com/docs/reference/operators/from_microsoft_sql.md) reads a table, it hands SQL Server the operators that follow it, so that SQL Server sends only what the pipeline keeps instead of the whole table. Those operators leave the pipeline and run in SQL Server, with its semantics. This page describes which operators SQL Server takes over, how its results can differ from Tenzir’s, and how to keep operators in Tenzir. The [optimizations overview](../optimizations.md) explains how Tenzir optimizes pipelines in general.
+When [`from_microsoft_sql`](../operators/from_microsoft_sql.md) reads a table, it hands SQL Server the operators that follow it, so that SQL Server sends only what the pipeline keeps instead of the whole table. Those operators leave the pipeline and run in SQL Server, with its semantics. This page describes which operators SQL Server takes over, how its results can differ from Tenzir’s, and how to keep operators in Tenzir. The [optimizations overview](../optimizations.md) explains how Tenzir optimizes pipelines in general.
 
 ## When it applies
 
@@ -17,7 +17,7 @@ The operator reads in one of these modes:
 
 * **Table mode** reads a table that you name with `table`, as in `from_microsoft_sql table="dbo.alerts"`. The operator writes the query itself and adds the operators that follow it. The rest of this page describes this mode.
 * **SQL mode** sends the query that you write with `sql` or `query` exactly as written, and the rest of the pipeline runs in Tenzir. So does **show mode** with `show`. To have SQL Server filter, write the filter into your query.
-* **Live mode**, with `live=true`, polls a table for new rows. Every poll carries the [`where`](https://tenzir.com/docs/reference/operators/where.md) operators that directly follow the operator. All other operators stay in Tenzir, since a [`head`](https://tenzir.com/docs/reference/operators/head.md) counts events across polls and a live read never ends.
+* **Live mode**, with `live=true`, polls a table for new rows. Every poll carries the [`where`](../operators/where.md) operators that directly follow the operator. All other operators stay in Tenzir, since a [`head`](../operators/head.md) counts events across polls and a live read never ends.
 
 With `pushdown=false`, every operator stays in Tenzir and runs with TQL semantics. The operator still reads only the columns that the pipeline uses.
 
@@ -25,14 +25,14 @@ With `pushdown=false`, every operator stays in Tenzir and runs with TQL semantic
 
 The operator takes over the longest run of operators directly after it that T-SQL can spell:
 
-* [`where`](https://tenzir.com/docs/reference/operators/where.md), as the [filters](microsoft-sql.md#filters) section describes.
-* [`select`](https://tenzir.com/docs/reference/operators/select.md) of top-level fields, including renames, such as `select ip=src_ip, ts`.
-* [`drop`](https://tenzir.com/docs/reference/operators/drop.md) after a [`select`](https://tenzir.com/docs/reference/operators/select.md) or a [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) that SQL Server took over, which names the fields that remain. T-SQL has no way to select every column but some, so a [`drop`](https://tenzir.com/docs/reference/operators/drop.md) of table columns stays in Tenzir.
-* [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) with group keys on fields and `count()`, `count(x)`, `min(x)`, and `max(x)` of fields. Counts are `bigint`. The summary may follow [`select`](https://tenzir.com/docs/reference/operators/select.md), [`drop`](https://tenzir.com/docs/reference/operators/drop.md), and assignments that copy fields, as [Aggregations in the source](../optimizations.md#aggregations-in-the-source) describes.
-* [`sort`](https://tenzir.com/docs/reference/operators/sort.md) by fields.
-* [`head`](https://tenzir.com/docs/reference/operators/head.md) as `TOP`, and [`top`](https://tenzir.com/docs/reference/operators/top.md) or [`rare`](https://tenzir.com/docs/reference/operators/rare.md) followed by [`head`](https://tenzir.com/docs/reference/operators/head.md).
+* [`where`](../operators/where.md), as the [filters](microsoft-sql.md#filters) section describes.
+* [`select`](../operators/select.md) of top-level fields, including renames, such as `select ip=src_ip, ts`.
+* [`drop`](../operators/drop.md) after a [`select`](../operators/select.md) or a [`summarize`](../operators/summarize.md) that SQL Server took over, which names the fields that remain. T-SQL has no way to select every column but some, so a [`drop`](../operators/drop.md) of table columns stays in Tenzir.
+* [`summarize`](../operators/summarize.md) with group keys on fields and `count()`, `count(x)`, `min(x)`, and `max(x)` of fields. Counts are `bigint`. The summary may follow [`select`](../operators/select.md), [`drop`](../operators/drop.md), and assignments that copy fields, as [Aggregations in the source](../optimizations.md#aggregations-in-the-source) describes.
+* [`sort`](../operators/sort.md) by fields.
+* [`head`](../operators/head.md) as `TOP`, and [`top`](../operators/top.md) or [`rare`](../operators/rare.md) followed by [`head`](../operators/head.md).
 
-The first operator that SQL Server cannot spell ends the run. That operator and everything after it run in Tenzir. Tenzir splits a [`where`](https://tenzir.com/docs/reference/operators/where.md) at `and`, so SQL Server can still take over the conjuncts that it spells. For example, SQL Server runs every step of
+The first operator that SQL Server cannot spell ends the run. That operator and everything after it run in Tenzir. Tenzir splits a [`where`](../operators/where.md) at `and`, so SQL Server can still take over the conjuncts that it spells. For example, SQL Server runs every step of
 
 ```tql
 from_microsoft_sql table="dbo.alerts", host="db.example.com", database="soc"
@@ -43,11 +43,11 @@ sort -events
 head 20
 ```
 
-and returns at most 20 groups. The operator nests derived tables where SQL’s clause order requires it, and keeps the order of a [`sort`](https://tenzir.com/docs/reference/operators/sort.md) across them where a `TOP` decides which rows a derived table keeps.
+and returns at most 20 groups. The operator nests derived tables where SQL’s clause order requires it, and keeps the order of a [`sort`](../operators/sort.md) across them where a `TOP` decides which rows a derived table keeps.
 
 ## Filters
 
-SQL Server takes over a [`where`](https://tenzir.com/docs/reference/operators/where.md) whose predicate consists of:
+SQL Server takes over a [`where`](../operators/where.md) whose predicate consists of:
 
 * Top-level fields.
 * Literals: numbers, strings, booleans, `null`, times with at most 100 nanosecond precision, and IP addresses.

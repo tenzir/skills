@@ -105,9 +105,9 @@ The command produces `tests/high-severity.txt` with the captured stdout.
 
 Review the reference file, adjust the pipeline if needed, and rerun `--update` until you are satisfied with the results. Commit the `.tql` test and `.txt` baseline together so future runs can compare against known-good output. At this point you can [run the test suite](run-tests.md) without `--update` to verify that the actual output matches the baseline.
 
-If the pipeline emits the right events in a varying order, as `summarize` does for its groups, add `pre-compare: sort` to the frontmatter instead of ending the pipeline with a `sort` operator. See [pre-compare transforms](https://docs.tenzir.com/reference/test-framework/#pre-compare-transforms).
+If the pipeline emits the right events in a varying order, as `summarize` does for its groups, add `pre-compare: sort` to the frontmatter instead of ending the pipeline with a `sort` operator. See [pre-compare transforms](https://tenzir.com/docs/reference/test-framework/#pre-compare-transforms).
 
-If runtime warnings are irrelevant to what a test checks, add `quiet: true` to its frontmatter to exclude them from the baseline. Leave this setting disabled when the warning diagnostics themselves are part of the expected output. Errors and compilation diagnostics remain visible. You can also set this key in `test.yaml` for a directory and override it with `quiet: false` in individual tests. Read about [runtime warning suppression](https://docs.tenzir.com/reference/test-framework/#runtime-warning-suppression) for the full behavior.
+If runtime warnings are irrelevant to what a test checks, add `quiet: true` to its frontmatter to exclude them from the baseline. Leave this setting disabled when the warning diagnostics themselves are part of the expected output. Errors and compilation diagnostics remain visible. You can also set this key in `test.yaml` for a directory and override it with `quiet: false` in individual tests. Read about [runtime warning suppression](https://tenzir.com/docs/reference/test-framework/#runtime-warning-suppression) for the full behavior.
 
 ## Step 6: Provide stdin input
 
@@ -339,7 +339,7 @@ skip:
     - capability-unavailable
 ```
 
-See the [capability requirements](../../reference/test-framework.md#capability-requirements) reference for details on how runners implement the probes.
+See the [capability requirements](https://tenzir.com/docs/reference/test-framework#capability-requirements) reference for details on how runners implement the probes.
 
 ## Next steps
 
@@ -350,4 +350,4 @@ You now have a project that owns its inputs, tests, fixtures, and baselines. Fro
 * Build Python fixtures that publish or verify data through the helper APIs in `tenzir_test.fixtures`.
 * Explore coverage collection by passing `--coverage` to the harness.
 
-Refer back to the [test framework reference](https://docs.tenzir.com/reference/test-framework/) whenever you need deeper details about runners, fixtures, or configuration knobs.
+Refer back to the [test framework reference](https://tenzir.com/docs/reference/test-framework/) whenever you need deeper details about runners, fixtures, or configuration knobs.

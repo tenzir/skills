@@ -33,8 +33,8 @@ import
 
 ## See Also
 
-* [`compress_bz2`](https://tenzir.com/docs/reference/operators/compress_bz2.md)
-* [`decompress_brotli`](https://tenzir.com/docs/reference/operators/decompress_brotli.md)
-* [`decompress_gzip`](https://tenzir.com/docs/reference/operators/decompress_gzip.md)
-* [`decompress_lz4`](https://tenzir.com/docs/reference/operators/decompress_lz4.md)
-* [`decompress_zstd`](https://tenzir.com/docs/reference/operators/decompress_zstd.md)
+* [`compress_bz2`](compress_bz2.md)
+* [`decompress_brotli`](decompress_brotli.md)
+* [`decompress_gzip`](decompress_gzip.md)
+* [`decompress_lz4`](decompress_lz4.md)
+* [`decompress_zstd`](decompress_zstd.md)

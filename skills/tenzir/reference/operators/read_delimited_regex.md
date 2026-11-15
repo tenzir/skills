@@ -92,9 +92,9 @@ from_file "protocol.dat" {
 
 ## See Also
 
-* [`read_all`](https://tenzir.com/docs/reference/operators/read_all.md)
-* [`read_delimited`](https://tenzir.com/docs/reference/operators/read_delimited.md)
-* [`read_lines`](https://tenzir.com/docs/reference/operators/read_lines.md)
-* [`read_ssv`](https://tenzir.com/docs/reference/operators/read_ssv.md)
-* [`read_tsv`](https://tenzir.com/docs/reference/operators/read_tsv.md)
-* [`read_xsv`](https://tenzir.com/docs/reference/operators/read_xsv.md)
+* [`read_all`](read_all.md)
+* [`read_delimited`](read_delimited.md)
+* [`read_lines`](read_lines.md)
+* [`read_ssv`](read_ssv.md)
+* [`read_tsv`](read_tsv.md)
+* [`read_xsv`](read_xsv.md)

@@ -76,4 +76,4 @@ tenzir_version = version().version
 
 ## See Also
 
-* [`config`](https://tenzir.com/docs/reference/functions/config.md)
+* [`config`](config.md)

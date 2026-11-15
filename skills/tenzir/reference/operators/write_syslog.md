@@ -89,6 +89,6 @@ write_syslog
 
 ## See Also
 
-* [`read_syslog`](https://tenzir.com/docs/reference/operators/read_syslog.md)
-* [`parse_syslog`](https://tenzir.com/docs/reference/functions/parse_syslog.md)
-* [Syslog](../../integrations/syslog.md)
+* [`read_syslog`](read_syslog.md)
+* [`parse_syslog`](../functions/parse_syslog.md)
+* [Syslog](https://tenzir.com/integrations/syslog)

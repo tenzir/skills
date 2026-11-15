@@ -107,13 +107,13 @@ select timestamp, table_slices, chunks
 }
 ```
 
-High `table_slices` numbers mean event data is held in memory: backlogs, buffers, or in-progress aggregations. If both stay low while the process keeps growing, the memory goes elsewhere, and the node can tell you where: it optionally collects per-allocator and per-component allocation statistics in the `tenzir.metrics.memory` schema. See [`metrics`](https://tenzir.com/docs/reference/operators/metrics.md) for the full schema and the environment variables that enable the detailed collection.
+High `table_slices` numbers mean event data is held in memory: backlogs, buffers, or in-progress aggregations. If both stay low while the process keeps growing, the memory goes elsewhere, and the node can tell you where: it optionally collects per-allocator and per-component allocation statistics in the `tenzir.metrics.memory` schema. See [`metrics`](../../reference/operators/metrics.md) for the full schema and the environment variables that enable the detailed collection.
 
 If none of this explains the growth, capture the memory trend and the operator profile output and share them with Tenzir support, as described in [Inspect a node](../observability/inspect-a-node.md).
 
 ## See also
 
-* [`metrics`](https://tenzir.com/docs/reference/operators/metrics.md)
+* [`metrics`](../../reference/operators/metrics.md)
 * [Inspect a node](../observability/inspect-a-node.md)
 * [Load-balance pipelines](../route/load-balance-pipelines.md)
 * [Size a node](../node-setup/size-a-node.md)

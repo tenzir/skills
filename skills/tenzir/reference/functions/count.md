@@ -38,7 +38,7 @@ summarize total=count(x)
 
 ## See Also
 
-* [`count_distinct`](https://tenzir.com/docs/reference/functions/count_distinct.md)
+* [`count_distinct`](count_distinct.md)
 * [Aggregate event streams](../../guides/analyze/aggregate-event-streams.md)
 * [Plot data with charts](../../tutorials/plot-data-with-charts.md)
 * [Learn idiomatic TQL](../../tutorials/learn-idiomatic-tql.md)

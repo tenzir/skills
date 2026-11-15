@@ -151,5 +151,5 @@ x = x.parse_yaml()
 
 ## See Also
 
-* [`read_yaml`](https://tenzir.com/docs/reference/operators/read_yaml.md)
-* [`print_yaml`](https://tenzir.com/docs/reference/functions/print_yaml.md)
+* [`read_yaml`](../operators/read_yaml.md)
+* [`print_yaml`](print_yaml.md)

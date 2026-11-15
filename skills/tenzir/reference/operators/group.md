@@ -21,7 +21,7 @@ The `group` operator evaluates `over` for every incoming event and creates one s
 
 The subpipeline receives grouped events as input. It either emits events - which are forwarded as the operator’s output - or ends with a sink, in which case `group` itself becomes a sink. The subpipeline must not produce bytes.
 
-Use `group` when you need a full keyed subpipeline, such as a per-tenant sink or a per-session stateful transformation. For grouped aggregations only, use [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) instead.
+Use `group` when you need a full keyed subpipeline, such as a per-tenant sink or a per-session stateful transformation. For grouped aggregations only, use [`summarize`](summarize.md) instead.
 
 ### `over: expr`
 
@@ -80,11 +80,11 @@ group tenant {
 
 ## See Also
 
-* [`each`](https://tenzir.com/docs/reference/operators/each.md)
-* [`fork`](https://tenzir.com/docs/reference/operators/fork.md)
-* [`load_balance`](https://tenzir.com/docs/reference/operators/load_balance.md)
-* [`parallel`](https://tenzir.com/docs/reference/operators/parallel.md)
-* [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md)
+* [`each`](each.md)
+* [`fork`](fork.md)
+* [`load_balance`](load_balance.md)
+* [`parallel`](parallel.md)
+* [`summarize`](summarize.md)
 * [Fan out with subpipelines](../../guides/route/fan-out-with-subpipelines.md)
 * [Learn idiomatic TQL](../../tutorials/learn-idiomatic-tql.md)
 

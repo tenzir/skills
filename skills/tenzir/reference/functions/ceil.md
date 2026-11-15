@@ -61,5 +61,5 @@ from {
 
 ## See Also
 
-* [`floor`](https://tenzir.com/docs/reference/functions/floor.md)
-* [`round`](https://tenzir.com/docs/reference/functions/round.md)
+* [`floor`](floor.md)
+* [`round`](round.md)

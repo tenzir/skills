@@ -98,4 +98,4 @@ drop dependencies
 
 ## See Also
 
-* [`version`](https://tenzir.com/docs/reference/functions/version.md)
+* [`version`](../functions/version.md)

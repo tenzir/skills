@@ -38,5 +38,5 @@ summarize first_value=first(x)
 
 ## See Also
 
-* [`last`](https://tenzir.com/docs/reference/functions/last.md)
+* [`last`](last.md)
 * [Aggregate event streams](../../guides/analyze/aggregate-event-streams.md)

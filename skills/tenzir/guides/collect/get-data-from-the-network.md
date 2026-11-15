@@ -13,7 +13,7 @@ This guide shows you how to receive data directly from network sources using TQL
 
 ## OpenTelemetry over OTLP
 
-Use [`accept_otlp`](https://tenzir.com/docs/reference/operators/accept_otlp.md) to receive OpenTelemetry logs, metrics, and traces over OTLP/HTTP or OTLP/gRPC.
+Use [`accept_otlp`](../../reference/operators/accept_otlp.md) to receive OpenTelemetry logs, metrics, and traces over OTLP/HTTP or OTLP/gRPC.
 
 Listen on the standard OTLP/HTTP port:
 
@@ -39,25 +39,25 @@ export OTEL_EXPORTER_OTLP_ENDPOINT=http://tenzir.example.com:4317
 export OTEL_EXPORTER_OTLP_PROTOCOL=grpc
 ```
 
-Run separate pipelines when you need both transports. See the [Opentelemetry](../../integrations/opentelemetry.md) integration for Collector and TLS configuration.
+Run separate pipelines when you need both transports. See the [Opentelemetry](https://tenzir.com/integrations/opentelemetry) integration for Collector and TLS configuration.
 
 ## Splunk HEC
 
-Use [`accept_splunk`](https://tenzir.com/docs/reference/operators/accept_splunk.md) to receive event and raw requests from clients that send data through the Splunk HTTP Event Collector (HEC) protocol:
+Use [`accept_splunk`](../../reference/operators/accept_splunk.md) to receive event and raw requests from clients that send data through the Splunk HTTP Event Collector (HEC) protocol:
 
 ```tql
 accept_splunk hec_token=secret("splunk-hec-token")
 ```
 
-The operator listens on the standard HEC port `8088` and accepts gzip-compressed requests. Configure each exporter with the same token and disable indexer acknowledgements. See the [`endpoint` argument](https://tenzir.com/docs/reference/operators/accept_splunk.md#endpoint-string-optional) for custom ports, the [`tls` argument](https://tenzir.com/docs/reference/operators/accept_splunk.md#tls--record-optional) for TLS, and the [output schemas](../../reference/operators/accept_splunk.md#output).
+The operator listens on the standard HEC port `8088` and accepts gzip-compressed requests. Configure each exporter with the same token and disable indexer acknowledgements. See the [`endpoint` argument](../../reference/operators/accept_splunk.md#endpoint-string-optional) for custom ports, the [`tls` argument](../../reference/operators/accept_splunk.md#tls--record-optional) for TLS, and the [output schemas](../../reference/operators/accept_splunk.md#output).
 
 ## TCP sockets
 
-[Tcp](../../integrations/tcp.md) provides reliable, ordered byte streams. Use TCP when you need guaranteed delivery and message ordering.
+[Tcp](https://tenzir.com/integrations/tcp) provides reliable, ordered byte streams. Use TCP when you need guaranteed delivery and message ordering.
 
 ### Listen for connections
 
-Use [`accept_tcp`](https://tenzir.com/docs/reference/operators/accept_tcp.md) to start a TCP server that accepts incoming connections:
+Use [`accept_tcp`](../../reference/operators/accept_tcp.md) to start a TCP server that accepts incoming connections:
 
 ```tql
 accept_tcp "0.0.0.0:9000" {
@@ -69,7 +69,7 @@ This listens on all interfaces (`0.0.0.0`) on port 9000. Specify a parsing pipel
 
 ### Accept multiple input formats
 
-Use [`read_auto`](https://tenzir.com/docs/reference/operators/read_auto.md) when a TCP endpoint receives data from producers that don’t all use the same format:
+Use [`read_auto`](../../reference/operators/read_auto.md) when a TCP endpoint receives data from producers that don’t all use the same format:
 
 ```tql
 accept_tcp "0.0.0.0:9000" {
@@ -77,11 +77,11 @@ accept_tcp "0.0.0.0:9000" {
 }
 ```
 
-The detector runs once per connection, so one client can send NDJSON while another sends CSV, Syslog, or another supported format. This pattern is useful for rapid prototyping, shared intake endpoints, and package pipelines where you want to normalize different producer formats after parsing. If most clients send long-lived plain-text streams, use [`read_lines`](https://tenzir.com/docs/reference/operators/read_lines.md) directly instead of waiting for [`read_auto`](https://tenzir.com/docs/reference/operators/read_auto.md) to finish probing.
+The detector runs once per connection, so one client can send NDJSON while another sends CSV, Syslog, or another supported format. This pattern is useful for rapid prototyping, shared intake endpoints, and package pipelines where you want to normalize different producer formats after parsing. If most clients send long-lived plain-text streams, use [`read_lines`](../../reference/operators/read_lines.md) directly instead of waiting for [`read_auto`](../../reference/operators/read_auto.md) to finish probing.
 
 ### Connect to a remote server
 
-Use [`from_tcp`](https://tenzir.com/docs/reference/operators/from_tcp.md) to connect to an existing server:
+Use [`from_tcp`](../../reference/operators/from_tcp.md) to connect to an existing server:
 
 ```tql
 from_tcp "192.168.1.100:9000" {
@@ -119,18 +119,18 @@ accept_tcp "0.0.0.0:514",
 }
 ```
 
-With `auto_detect_tls=true`, [`accept_tcp`](https://tenzir.com/docs/reference/operators/accept_tcp.md) accepts both plaintext clients and clients that start with a TLS ClientHello on the same endpoint.
+With `auto_detect_tls=true`, [`accept_tcp`](../../reference/operators/accept_tcp.md) accepts both plaintext clients and clients that start with a TLS ClientHello on the same endpoint.
 
 ## Reliable Syslog
 
-[Relp](../../integrations/relp.md) adds application-level acknowledgements to Syslog transport. Use [`accept_relp`](https://tenzir.com/docs/reference/operators/accept_relp.md) when a sender supports RELP:
+[Relp](https://tenzir.com/integrations/relp) adds application-level acknowledgements to Syslog transport. Use [`accept_relp`](../../reference/operators/accept_relp.md) when a sender supports RELP:
 
 ```tql
 accept_relp "0.0.0.0:2514"
 syslog = data.parse_syslog()
 ```
 
-[`accept_relp`](https://tenzir.com/docs/reference/operators/accept_relp.md) preserves each RELP message boundary. The default [`parse_syslog`](https://tenzir.com/docs/reference/functions/parse_syslog.md) mode accepts ordinary Syslog payloads and payloads that retain an RFC 6587 length prefix.
+[`accept_relp`](../../reference/operators/accept_relp.md) preserves each RELP message boundary. The default [`parse_syslog`](../../reference/functions/parse_syslog.md) mode accepts ordinary Syslog payloads and payloads that retain an RFC 6587 length prefix.
 
 Each RELP `syslog` command becomes one event. The `data` field preserves the complete Syslog payload, including embedded newlines, while `peer` identifies the client and `relp.transaction_id` identifies the RELP transaction.
 
@@ -138,11 +138,11 @@ RELP protects messages in flight: the sender waits for Tenzir to acknowledge eac
 
 ## UDP sockets
 
-[Udp](../../integrations/udp.md) is a connectionless protocol ideal for high-volume, loss-tolerant data like syslog messages or metrics.
+[Udp](https://tenzir.com/integrations/udp) is a connectionless protocol ideal for high-volume, loss-tolerant data like syslog messages or metrics.
 
 ### Receive UDP datagrams
 
-Use [`accept_udp`](https://tenzir.com/docs/reference/operators/accept_udp.md) to receive UDP messages as structured events:
+Use [`accept_udp`](../../reference/operators/accept_udp.md) to receive UDP messages as structured events:
 
 ```tql
 accept_udp "0.0.0.0:514"
@@ -181,7 +181,7 @@ Routers, switches, firewalls, and software exporters can summarize network conve
 
 ### Receive NetFlow and IPFIX
 
-Use [`read_netflow`](https://tenzir.com/docs/reference/operators/read_netflow.md) after [`accept_udp`](https://tenzir.com/docs/reference/operators/accept_udp.md) to decode flow datagrams:
+Use [`read_netflow`](../../reference/operators/read_netflow.md) after [`accept_udp`](../../reference/operators/accept_udp.md) to decode flow datagrams:
 
 ```tql
 accept_udp "0.0.0.0:2055", binary=true
@@ -190,11 +190,11 @@ read_netflow
 
 Set `binary=true` so that each datagram retains its binary payload. The parser detects every message’s protocol version and uses the `peer` metadata to keep template state separate between exporters. Start the collector before the exporters send data because NetFlow v9 and IPFIX data records can depend on templates sent in earlier datagrams.
 
-For a complete collector, `nfcapd` forwarding, and archived data, see the [Netflow](../../integrations/netflow.md) integration.
+For a complete collector, `nfcapd` forwarding, and archived data, see the [Netflow](https://tenzir.com/integrations/netflow) integration.
 
 ## Packet capture
 
-Capture raw network packets with [Nic](../../integrations/nic.md) when you need per-packet data for deep packet inspection or network forensics.
+Capture raw network packets with [Nic](https://tenzir.com/integrations/nic) when you need per-packet data for deep packet inspection or network forensics.
 
 ### List available interfaces
 
@@ -235,7 +235,7 @@ Each packet becomes an event with metadata and the raw packet data:
 
 ### Decapsulate packets
 
-Extract protocol headers from captured packets using the [`decapsulate`](https://tenzir.com/docs/reference/functions/decapsulate.md) function:
+Extract protocol headers from captured packets using the [`decapsulate`](../../reference/functions/decapsulate.md) function:
 
 ```tql
 from_nic "eth0" {
@@ -290,9 +290,9 @@ select
 
 ## See also
 
-* [Tcp](../../integrations/tcp.md)
-* [Udp](../../integrations/udp.md)
-* [Netflow](../../integrations/netflow.md)
-* [Nic](../../integrations/nic.md)
-* [Syslog](../../integrations/syslog.md)
-* [Splunk](../../integrations/splunk.md)
+* [Tcp](https://tenzir.com/integrations/tcp)
+* [Udp](https://tenzir.com/integrations/udp)
+* [Netflow](https://tenzir.com/integrations/netflow)
+* [Nic](https://tenzir.com/integrations/nic)
+* [Syslog](https://tenzir.com/integrations/syslog)
+* [Splunk](https://tenzir.com/integrations/splunk)

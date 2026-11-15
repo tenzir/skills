@@ -45,5 +45,5 @@ pipeline_detach {
 
 ## See Also
 
-* [`pipeline_list`](https://tenzir.com/docs/reference/operators/pipeline_list.md)
-* [`pipeline_run`](https://tenzir.com/docs/reference/operators/pipeline_run.md)
+* [`pipeline_list`](pipeline_list.md)
+* [`pipeline_run`](pipeline_run.md)

@@ -79,8 +79,8 @@ select identifiers = this.select_matching("_id$")
 
 ## See Also
 
-* [`select`](https://tenzir.com/docs/reference/operators/select.md)
-* [`drop_matching`](https://tenzir.com/docs/reference/functions/drop_matching.md)
-* [`match_regex`](https://tenzir.com/docs/reference/functions/match_regex.md)
+* [`select`](../operators/select.md)
+* [`drop_matching`](drop_matching.md)
+* [`match_regex`](match_regex.md)
 * [Shape records](../../guides/shape/shape-records.md)
 * [Filter and select data](../../guides/optimize/filter-and-select-data.md)

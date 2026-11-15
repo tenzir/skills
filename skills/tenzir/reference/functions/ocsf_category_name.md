@@ -23,4 +23,4 @@ The `category_uid` for which `category_name` should be returned.
 
 ## See Also
 
-* [`ocsf_category_uid`](https://tenzir.com/docs/reference/functions/ocsf_category_uid.md)
+* [`ocsf_category_uid`](ocsf_category_uid.md)

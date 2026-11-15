@@ -9,7 +9,7 @@ section: "Docs"
 
 > The Splunk source fromsplunk hands Splunk the operators that follow it by appending stages in the Splunk Search Processing Language (SPL) to the search that it sends, so that Splunk returns only what the pipeline keeps. Those operators leave the pipeline and run in Splunk, with Splunk’s semantics. This page describes which operators Splunk takes over, how its results can differ from Tenzir’s, and how to keep operators in Tenzir. Our optimizations overview explains how Tenzir optimizes pipelines in general.
 
-The Splunk source [`from_splunk`](https://tenzir.com/docs/reference/operators/from_splunk.md) hands Splunk the operators that follow it by appending stages in the Splunk Search Processing Language (SPL) to the search that it sends, so that Splunk returns only what the pipeline keeps. Those operators leave the pipeline and run in Splunk, with Splunk’s semantics. This page describes which operators Splunk takes over, how its results can differ from Tenzir’s, and how to keep operators in Tenzir. Our [optimizations overview](../optimizations.md) explains how Tenzir optimizes pipelines in general.
+The Splunk source [`from_splunk`](../operators/from_splunk.md) hands Splunk the operators that follow it by appending stages in the Splunk Search Processing Language (SPL) to the search that it sends, so that Splunk returns only what the pipeline keeps. Those operators leave the pipeline and run in Splunk, with Splunk’s semantics. This page describes which operators Splunk takes over, how its results can differ from Tenzir’s, and how to keep operators in Tenzir. Our [optimizations overview](../optimizations.md) explains how Tenzir optimizes pipelines in general.
 
 ## When it applies
 
@@ -24,14 +24,14 @@ The operator takes over no operator if your search does not end where stages may
 
 The operator takes over the longest run of operators directly after it that SPL can spell:
 
-* [`where`](https://tenzir.com/docs/reference/operators/where.md), as the [filters](spl.md#filters) section describes.
-* [`select`](https://tenzir.com/docs/reference/operators/select.md) of top-level fields, including renames, which becomes `fields`.
-* [`drop`](https://tenzir.com/docs/reference/operators/drop.md) of top-level fields, which becomes `fields -`.
-* [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) with group keys on fields and `count()`, `count(x)`, `min(x)`, and `max(x)` of fields, which becomes `stats … by`. The summary may follow [`select`](https://tenzir.com/docs/reference/operators/select.md), [`drop`](https://tenzir.com/docs/reference/operators/drop.md), and assignments that copy fields, as [Aggregations in the source](../optimizations.md#aggregations-in-the-source) describes.
-* [`sort`](https://tenzir.com/docs/reference/operators/sort.md) by fields, which becomes `sort` with an explicit count: the count of the [`head`](https://tenzir.com/docs/reference/operators/head.md) after it, or `0` for all results, since `sort` keeps only 10,000 results by default.
-* [`head`](https://tenzir.com/docs/reference/operators/head.md), which becomes `head`, and [`top`](https://tenzir.com/docs/reference/operators/top.md) or [`rare`](https://tenzir.com/docs/reference/operators/rare.md) followed by [`head`](https://tenzir.com/docs/reference/operators/head.md). A search with a command that has side effects, such as `outputlookup` or `collect`, or with a macro, which may hide one, keeps the limit in Tenzir.
+* [`where`](../operators/where.md), as the [filters](spl.md#filters) section describes.
+* [`select`](../operators/select.md) of top-level fields, including renames, which becomes `fields`.
+* [`drop`](../operators/drop.md) of top-level fields, which becomes `fields -`.
+* [`summarize`](../operators/summarize.md) with group keys on fields and `count()`, `count(x)`, `min(x)`, and `max(x)` of fields, which becomes `stats … by`. The summary may follow [`select`](../operators/select.md), [`drop`](../operators/drop.md), and assignments that copy fields, as [Aggregations in the source](../optimizations.md#aggregations-in-the-source) describes.
+* [`sort`](../operators/sort.md) by fields, which becomes `sort` with an explicit count: the count of the [`head`](../operators/head.md) after it, or `0` for all results, since `sort` keeps only 10,000 results by default.
+* [`head`](../operators/head.md), which becomes `head`, and [`top`](../operators/top.md) or [`rare`](../operators/rare.md) followed by [`head`](../operators/head.md). A search with a command that has side effects, such as `outputlookup` or `collect`, or with a macro, which may hide one, keeps the limit in Tenzir.
 
-The first operator that SPL cannot spell ends the run. That operator and everything after it run in Tenzir. Tenzir splits a [`where`](https://tenzir.com/docs/reference/operators/where.md) at `and`, so Splunk can still take over the conjuncts that it spells. For example, the pipeline
+The first operator that SPL cannot spell ends the run. That operator and everything after it run in Tenzir. Tenzir splits a [`where`](../operators/where.md) at `and`, so Splunk can still take over the conjuncts that it spells. For example, the pipeline
 
 ```tql
 from_splunk "https://splunk.example.com:8089",

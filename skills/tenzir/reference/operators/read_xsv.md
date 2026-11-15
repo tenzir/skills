@@ -25,9 +25,9 @@ The following table lists existing XSV configurations:
 
 | Format                                                           | Field Separator | List Separator | Null Value |
 | ---------------------------------------------------------------- | --------------- | -------------- | ---------- |
-| [`csv`](https://tenzir.com/docs/reference/operators/read_csv.md) | `,`             | `;`            | empty      |
-| [`ssv`](https://tenzir.com/docs/reference/operators/read_ssv.md) | `<space>`       | `,`            | `-`        |
-| [`tsv`](https://tenzir.com/docs/reference/operators/read_tsv.md) | `\t`            | `,`            | `-`        |
+| [`csv`](read_csv.md) | `,`             | `;`            | empty      |
+| [`ssv`](read_ssv.md) | `<space>`       | `,`            | `-`        |
+| [`tsv`](read_tsv.md) | `\t`            | `,`            | `-`        |
 
 ### `field_separator = string`
 
@@ -172,7 +172,7 @@ When you provide a `schema` or `selector`, the last value of a repeated key wins
 
 ## See Also
 
-* [`read_csv`](https://tenzir.com/docs/reference/operators/read_csv.md)
-* [`read_ssv`](https://tenzir.com/docs/reference/operators/read_ssv.md)
-* [`read_tsv`](https://tenzir.com/docs/reference/operators/read_tsv.md)
-* [`parse_xsv`](https://tenzir.com/docs/reference/functions/parse_xsv.md)
+* [`read_csv`](read_csv.md)
+* [`read_ssv`](read_ssv.md)
+* [`read_tsv`](read_tsv.md)
+* [`parse_xsv`](../functions/parse_xsv.md)

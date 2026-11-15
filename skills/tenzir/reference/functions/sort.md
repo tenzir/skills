@@ -87,5 +87,5 @@ xs = xs.sort(cmp=(a, b) => a.v < b.v)
 
 ## See Also
 
-* [`slice`](https://tenzir.com/docs/reference/functions/slice.md)
+* [`slice`](slice.md)
 * [Shape lists](../../guides/shape/shape-lists.md)

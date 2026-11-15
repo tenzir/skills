@@ -9,7 +9,7 @@ section: "Docs"
 
 > The KQL sources frommicrosoftdefender and fromazureloganalytics hand the service the operators that follow them by appending stages in the Kusto Query Language (KQL) to your query, so that the service returns only what the pipeline keeps. Those operators leave the pipeline and run in the service, with KQL’s semantics. This page describes which operators the service takes over, how its results can differ from Tenzir’s, and how to keep operators in Tenzir. Our optimizations overview explains how Tenzir optimizes pipelines in general.
 
-The KQL sources [`from_microsoft_defender`](https://tenzir.com/docs/reference/operators/from_microsoft_defender.md) and [`from_azure_log_analytics`](https://tenzir.com/docs/reference/operators/from_azure_log_analytics.md) hand the service the operators that follow them by appending stages in the Kusto Query Language (KQL) to your query, so that the service returns only what the pipeline keeps. Those operators leave the pipeline and run in the service, with KQL’s semantics. This page describes which operators the service takes over, how its results can differ from Tenzir’s, and how to keep operators in Tenzir. Our [optimizations overview](../optimizations.md) explains how Tenzir optimizes pipelines in general.
+The KQL sources [`from_microsoft_defender`](../operators/from_microsoft_defender.md) and [`from_azure_log_analytics`](../operators/from_azure_log_analytics.md) hand the service the operators that follow them by appending stages in the Kusto Query Language (KQL) to your query, so that the service returns only what the pipeline keeps. Those operators leave the pipeline and run in the service, with KQL’s semantics. This page describes which operators the service takes over, how its results can differ from Tenzir’s, and how to keep operators in Tenzir. Our [optimizations overview](../optimizations.md) explains how Tenzir optimizes pipelines in general.
 
 ## When it applies
 
@@ -27,14 +27,14 @@ Words in string literals and comments don’t count, so `where Action == "render
 
 The operator takes over the longest run of operators directly after it that KQL can spell:
 
-* [`where`](https://tenzir.com/docs/reference/operators/where.md), as the [filters](kql.md#filters) section describes.
-* [`select`](https://tenzir.com/docs/reference/operators/select.md) of top-level fields, including renames, which becomes `project`.
-* [`drop`](https://tenzir.com/docs/reference/operators/drop.md) of top-level fields, which becomes `project-away`.
-* [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) with group keys on fields and `count()`, `count(x)`, `min(x)`, `max(x)`, and `sum(x)` of fields, which becomes `summarize … by`. This includes [`top`](https://tenzir.com/docs/reference/operators/top.md) and [`rare`](https://tenzir.com/docs/reference/operators/rare.md). The summary may follow [`select`](https://tenzir.com/docs/reference/operators/select.md), [`drop`](https://tenzir.com/docs/reference/operators/drop.md), and assignments that copy fields, as [Aggregations in the source](../optimizations.md#aggregations-in-the-source) describes.
-* [`sort`](https://tenzir.com/docs/reference/operators/sort.md) by fields, which becomes `sort by` with an explicit direction.
-* [`head`](https://tenzir.com/docs/reference/operators/head.md), which becomes `take`.
+* [`where`](../operators/where.md), as the [filters](kql.md#filters) section describes.
+* [`select`](../operators/select.md) of top-level fields, including renames, which becomes `project`.
+* [`drop`](../operators/drop.md) of top-level fields, which becomes `project-away`.
+* [`summarize`](../operators/summarize.md) with group keys on fields and `count()`, `count(x)`, `min(x)`, `max(x)`, and `sum(x)` of fields, which becomes `summarize … by`. This includes [`top`](../operators/top.md) and [`rare`](../operators/rare.md). The summary may follow [`select`](../operators/select.md), [`drop`](../operators/drop.md), and assignments that copy fields, as [Aggregations in the source](../optimizations.md#aggregations-in-the-source) describes.
+* [`sort`](../operators/sort.md) by fields, which becomes `sort by` with an explicit direction.
+* [`head`](../operators/head.md), which becomes `take`.
 
-The first operator that KQL cannot spell ends the run, and so does an operator that would make the appended stages longer than 16 KiB, since both services limit the size of a query. That operator and everything after it run in Tenzir. Tenzir splits a [`where`](https://tenzir.com/docs/reference/operators/where.md) at `and`, so the service can still take over the conjuncts that it spells. For example, the pipeline
+The first operator that KQL cannot spell ends the run, and so does an operator that would make the appended stages longer than 16 KiB, since both services limit the size of a query. That operator and everything after it run in Tenzir. Tenzir splits a [`where`](../operators/where.md) at `and`, so the service can still take over the conjuncts that it spells. For example, the pipeline
 
 ```tql
 from_microsoft_defender "DeviceNetworkEvents",
@@ -93,9 +93,9 @@ Summaries with `mean` or other functions stay in Tenzir.
 
 ## Result cap
 
-Defender returns at most 100,000 rows of a query without reporting a truncation, so [`from_microsoft_defender`](https://tenzir.com/docs/reference/operators/from_microsoft_defender.md) warns when a result has exactly that many rows, unless a [`head`](https://tenzir.com/docs/reference/operators/head.md) that the service took over explains it. Narrow the query or its time range to get the complete result.
+Defender returns at most 100,000 rows of a query without reporting a truncation, so [`from_microsoft_defender`](../operators/from_microsoft_defender.md) warns when a result has exactly that many rows, unless a [`head`](../operators/head.md) that the service took over explains it. Narrow the query or its time range to get the complete result.
 
-Log Analytics returns at most 500,000 rows and about 100 MiB of data, and reports a result beyond either limit as a partial failure, which [`from_azure_log_analytics`](https://tenzir.com/docs/reference/operators/from_azure_log_analytics.md) rejects with an error. Operators that the service takes over make the result smaller and may thus avoid such an error.
+Log Analytics returns at most 500,000 rows and about 100 MiB of data, and reports a result beyond either limit as a partial failure, which [`from_azure_log_analytics`](../operators/from_azure_log_analytics.md) rejects with an error. Operators that the service takes over make the result smaller and may thus avoid such an error.
 
 ## Time window
 

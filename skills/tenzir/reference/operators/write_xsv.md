@@ -23,9 +23,9 @@ The following table lists existing XSV configurations:
 
 | Format                                                            | Field Separator | List Separator | Null Value |
 | ----------------------------------------------------------------- | --------------- | -------------- | ---------- |
-| [`csv`](https://tenzir.com/docs/reference/operators/write_csv.md) | `,`             | `;`            | empty      |
-| [`ssv`](https://tenzir.com/docs/reference/operators/write_ssv.md) | `<space>`       | `,`            | `-`        |
-| [`tsv`](https://tenzir.com/docs/reference/operators/write_tsv.md) | `\t`            | `,`            | `-`        |
+| [`csv`](write_csv.md) | `,`             | `;`            | empty      |
+| [`ssv`](write_ssv.md) | `<space>`       | `,`            | `-`        |
+| [`tsv`](write_tsv.md) | `\t`            | `,`            | `-`        |
 
 Note that nested records have dot-separated field names.
 
@@ -59,8 +59,8 @@ x/y/z
 
 ## See Also
 
-* [`print_xsv`](https://tenzir.com/docs/reference/functions/print_xsv.md)
-* [`write_csv`](https://tenzir.com/docs/reference/operators/write_csv.md)
-* [`write_lines`](https://tenzir.com/docs/reference/operators/write_lines.md)
-* [`write_ssv`](https://tenzir.com/docs/reference/operators/write_ssv.md)
-* [`write_tsv`](https://tenzir.com/docs/reference/operators/write_tsv.md)
+* [`print_xsv`](../functions/print_xsv.md)
+* [`write_csv`](write_csv.md)
+* [`write_lines`](write_lines.md)
+* [`write_ssv`](write_ssv.md)
+* [`write_tsv`](write_tsv.md)

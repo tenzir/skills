@@ -164,10 +164,10 @@ In this example:
 
 ## See Also
 
-* [`drop_null_fields`](https://tenzir.com/docs/reference/functions/drop_null_fields.md)
-* [`drop`](https://tenzir.com/docs/reference/operators/drop.md)
-* [`select`](https://tenzir.com/docs/reference/operators/select.md)
-* [`where`](https://tenzir.com/docs/reference/operators/where.md)
+* [`drop_null_fields`](../functions/drop_null_fields.md)
+* [`drop`](drop.md)
+* [`select`](select.md)
+* [`where`](where.md)
 * [Learn idiomatic TQL](../../tutorials/learn-idiomatic-tql.md)
 
 Parallelizable: a parallel pipeline may run this operator on several cores at once.

@@ -121,8 +121,8 @@ to_amazon_sqs "my-queue", aws_iam={
 
 ## See Also
 
-* [`from_amazon_sqs`](https://tenzir.com/docs/reference/operators/from_amazon_sqs.md)
+* [`from_amazon_sqs`](from_amazon_sqs.md)
 * [Send to destinations](../../guides/route/send-to-destinations.md)
-* [Sqs](../../integrations/amazon/sqs.md)
+* [Sqs](https://tenzir.com/integrations/amazon/sqs)
 
 Parallelizable: a parallel pipeline may run this operator on several cores at once.

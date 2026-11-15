@@ -38,6 +38,6 @@ summarize unique=count_distinct(x)
 
 ## See Also
 
-* [`count`](https://tenzir.com/docs/reference/functions/count.md)
-* [`distinct`](https://tenzir.com/docs/reference/functions/distinct.md)
+* [`count`](count.md)
+* [`distinct`](distinct.md)
 * [Aggregate event streams](../../guides/analyze/aggregate-event-streams.md)

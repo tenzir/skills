@@ -194,7 +194,7 @@ The first event has a count of `0`. When the next event with `x: 1` is emitted a
 
 ## See Also
 
-* [`sample`](https://tenzir.com/docs/reference/operators/sample.md)
+* [`sample`](sample.md)
 * [Detect over time windows](../../guides/detect/detect-over-time-windows.md)
 * [Deduplicate events](../../guides/optimize/deduplicate-events.md)
 

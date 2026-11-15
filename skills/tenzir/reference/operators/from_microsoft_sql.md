@@ -150,7 +150,7 @@ The operator maps Microsoft SQL Server types to [Type System](../types.md) as fo
 
 ## Optimizations
 
-When the operator reads a table, it hands SQL Server the [`where`](https://tenzir.com/docs/reference/operators/where.md), [`select`](https://tenzir.com/docs/reference/operators/select.md), [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md), [`sort`](https://tenzir.com/docs/reference/operators/sort.md), and [`head`](https://tenzir.com/docs/reference/operators/head.md) operators that follow it, as far as T-SQL can spell them, so that SQL Server returns only what the pipeline keeps and can use its indexes. Those operators leave the pipeline and run with SQL Server’s semantics, which can differ from TQL: for example, text compares under the collation of its column, which often ignores case, and `name != "alpha"` does not keep rows where `name` is `NULL`. A live read hands SQL Server its filters only. Use `pushdown=false` to keep every operator in the pipeline.
+When the operator reads a table, it hands SQL Server the [`where`](where.md), [`select`](select.md), [`summarize`](summarize.md), [`sort`](sort.md), and [`head`](head.md) operators that follow it, as far as T-SQL can spell them, so that SQL Server returns only what the pipeline keeps and can use its indexes. Those operators leave the pipeline and run with SQL Server’s semantics, which can differ from TQL: for example, text compares under the collation of its column, which often ignores case, and `name != "alpha"` does not keep rows where `name` is `NULL`. A live read hands SQL Server its filters only. Use `pushdown=false` to keep every operator in the pipeline.
 
 The page on [SQL Server optimizations](../optimizations/microsoft-sql.md) describes which operators SQL Server takes over and how its semantics differ, and the [optimizations overview](../optimizations.md) explains how Tenzir optimizes pipelines in general.
 
@@ -258,4 +258,4 @@ from_microsoft_sql table="dbo.events",
 
 ## See Also
 
-* [Sql server](../../integrations/microsoft/sql-server.md)
+* [Sql server](https://tenzir.com/integrations/microsoft/sql-server)

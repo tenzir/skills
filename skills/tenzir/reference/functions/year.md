@@ -43,10 +43,10 @@ year = ts.year()
 
 ## See Also
 
-* [`month`](https://tenzir.com/docs/reference/functions/month.md)
-* [`day`](https://tenzir.com/docs/reference/functions/day.md)
-* [`hour`](https://tenzir.com/docs/reference/functions/hour.md)
-* [`minute`](https://tenzir.com/docs/reference/functions/minute.md)
-* [`second`](https://tenzir.com/docs/reference/functions/second.md)
+* [`month`](month.md)
+* [`day`](day.md)
+* [`hour`](hour.md)
+* [`minute`](minute.md)
+* [`second`](second.md)
 * [Calculate with time](../../guides/shape/calculate-with-time.md)
 * [Mask sensitive data](../../guides/protect/mask-sensitive-data.md)

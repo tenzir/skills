@@ -51,7 +51,7 @@ x  y  z
 
 ## See Also
 
-* [`write_csv`](https://tenzir.com/docs/reference/operators/write_csv.md)
-* [`write_lines`](https://tenzir.com/docs/reference/operators/write_lines.md)
-* [`write_ssv`](https://tenzir.com/docs/reference/operators/write_ssv.md)
-* [`write_xsv`](https://tenzir.com/docs/reference/operators/write_xsv.md)
+* [`write_csv`](write_csv.md)
+* [`write_lines`](write_lines.md)
+* [`write_ssv`](write_ssv.md)
+* [`write_xsv`](write_xsv.md)

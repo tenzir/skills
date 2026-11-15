@@ -166,8 +166,8 @@ to_amazon_kinesis "security-events",
 
 ## See Also
 
-* [`from_amazon_kinesis`](https://tenzir.com/docs/reference/operators/from_amazon_kinesis.md)
+* [`from_amazon_kinesis`](from_amazon_kinesis.md)
 * [Send to destinations](../../guides/route/send-to-destinations.md)
-* [Kinesis](../../integrations/amazon/kinesis.md)
+* [Kinesis](https://tenzir.com/integrations/amazon/kinesis)
 
 Parallelizable: a parallel pipeline may run this operator on several cores at once.

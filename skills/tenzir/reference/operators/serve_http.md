@@ -21,7 +21,7 @@ The `serve_http` operator starts an HTTP server and broadcasts the bytes from a 
 
 Clients connect with a `GET` request and receive a continuous HTTP response body. Each client only receives bytes produced after it connects. The operator does not buffer output for future clients.
 
-Use the nested pipeline to choose the wire format. For example, [`write_ndjson`](https://tenzir.com/docs/reference/operators/write_ndjson.md) emits `application/x-ndjson`, and [`write_lines`](https://tenzir.com/docs/reference/operators/write_lines.md) emits `text/plain`. If the nested pipeline does not set a content type, `serve_http` falls back to `application/octet-stream`.
+Use the nested pipeline to choose the wire format. For example, [`write_ndjson`](write_ndjson.md) emits `application/x-ndjson`, and [`write_lines`](write_lines.md) emits `text/plain`. If the nested pipeline does not set a content type, `serve_http` falls back to `application/octet-stream`.
 
 Slow clients may be disconnected when they cannot keep up with the producer. When the input pipeline finishes, the server closes all active responses and stops accepting new connections.
 
@@ -103,8 +103,8 @@ serve_http "0.0.0.0:8443",
 
 ## See Also
 
-* [`accept_http`](https://tenzir.com/docs/reference/operators/accept_http.md)
-* [`serve_tcp`](https://tenzir.com/docs/reference/operators/serve_tcp.md)
-* [`to_http`](https://tenzir.com/docs/reference/operators/to_http.md)
+* [`accept_http`](accept_http.md)
+* [`serve_tcp`](serve_tcp.md)
+* [`to_http`](to_http.md)
 * [Expose data as a server](../../guides/route/expose-data-as-server.md)
-* [Http](../../integrations/http.md)
+* [Http](https://tenzir.com/integrations/http)

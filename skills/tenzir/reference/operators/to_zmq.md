@@ -19,7 +19,7 @@ to_zmq endpoint:string, encoding=string, [prefix=string, monitor=bool]
 
 Connects to the specified ZeroMQ endpoint as a `PUB` socket and publishes one message per input event.
 
-The operator serializes each event with the selected `encoding` and optionally prepends a prefix to the serialized bytes before publishing the message. This prefix is intended for PUB/SUB-style routing and matches the `prefix` option of [`from_zmq`](https://tenzir.com/docs/reference/operators/from_zmq.md) and [`accept_zmq`](https://tenzir.com/docs/reference/operators/accept_zmq.md).
+The operator serializes each event with the selected `encoding` and optionally prepends a prefix to the serialized bytes before publishing the message. This prefix is intended for PUB/SUB-style routing and matches the `prefix` option of [`from_zmq`](from_zmq.md) and [`accept_zmq`](accept_zmq.md).
 
 If the connection fails, the operator retries with exponential backoff.
 
@@ -61,8 +61,8 @@ to_zmq "tcp://collector.example.com:5555", encoding="ndjson", prefix=f"{source}/
 
 ## See Also
 
-* [`serve_zmq`](https://tenzir.com/docs/reference/operators/serve_zmq.md)
-* [`from_zmq`](https://tenzir.com/docs/reference/operators/from_zmq.md)
-* [`accept_zmq`](https://tenzir.com/docs/reference/operators/accept_zmq.md)
-* [`to_zmq`](https://tenzir.com/docs/reference/operators/to_zmq.md)
-* [Zeromq](../../integrations/zeromq.md)
+* [`serve_zmq`](serve_zmq.md)
+* [`from_zmq`](from_zmq.md)
+* [`accept_zmq`](accept_zmq.md)
+* [`to_zmq`](to_zmq.md)
+* [Zeromq](https://tenzir.com/integrations/zeromq)

@@ -79,5 +79,5 @@ where x.type_kind() == "string"
 
 ## See Also
 
-* [`type_id`](https://tenzir.com/docs/reference/functions/type_id.md)
-* [`type_of`](https://tenzir.com/docs/reference/functions/type_of.md)
+* [`type_id`](type_id.md)
+* [`type_of`](type_of.md)

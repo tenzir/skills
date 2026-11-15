@@ -33,8 +33,8 @@ from {x: "HELLO".to_lower()}
 
 ## See Also
 
-* [`capitalize`](https://tenzir.com/docs/reference/functions/capitalize.md)
-* [`is_lower`](https://tenzir.com/docs/reference/functions/is_lower.md)
-* [`to_title`](https://tenzir.com/docs/reference/functions/to_title.md)
-* [`to_upper`](https://tenzir.com/docs/reference/functions/to_upper.md)
+* [`capitalize`](capitalize.md)
+* [`is_lower`](is_lower.md)
+* [`to_title`](to_title.md)
+* [`to_upper`](to_upper.md)
 * [Manipulate strings](../../guides/shape/manipulate-strings.md)

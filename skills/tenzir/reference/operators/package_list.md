@@ -97,8 +97,8 @@ package_list
 
 ## See Also
 
-* [`package_add`](https://tenzir.com/docs/reference/operators/package_add.md)
-* [`package_remove`](https://tenzir.com/docs/reference/operators/package_remove.md)
-* [`pipeline_list`](https://tenzir.com/docs/reference/operators/pipeline_list.md)
+* [`package_add`](package_add.md)
+* [`package_remove`](package_remove.md)
+* [`pipeline_list`](pipeline_list.md)
 * [Install a package](../../guides/packages/install-a-package.md)
 * [Onboard a data source](../../tutorials/onboard-a-data-source.md)

@@ -81,8 +81,8 @@ select moved = this.select_matching($pattern),
 
 ## See Also
 
-* [`drop`](https://tenzir.com/docs/reference/operators/drop.md)
-* [`select_matching`](https://tenzir.com/docs/reference/functions/select_matching.md)
-* [`match_regex`](https://tenzir.com/docs/reference/functions/match_regex.md)
+* [`drop`](../operators/drop.md)
+* [`select_matching`](select_matching.md)
+* [`match_regex`](match_regex.md)
 * [Shape records](../../guides/shape/shape-records.md)
 * [Filter and select data](../../guides/optimize/filter-and-select-data.md)

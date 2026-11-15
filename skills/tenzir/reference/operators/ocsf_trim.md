@@ -13,7 +13,7 @@ Drops fields from OCSF events to reduce their size.
 
 Deprecated
 
-The `ocsf_trim` operator is deprecated and emits a warning. Use the [`ocsf_trim`](https://tenzir.com/docs/reference/functions/ocsf_trim.md) function for both top-level and nested OCSF events. To transform the whole event, assign the function result to `this`:
+The `ocsf_trim` operator is deprecated and emits a warning. Use the [`ocsf_trim`](../functions/ocsf_trim.md) function for both top-level and nested OCSF events. To transform the whole event, assign the function result to `this`:
 
 ```tql
 this = ocsf_trim(this)
@@ -138,10 +138,10 @@ ocsf_trim drop_optional=true, drop_recommended=true
 
 ## See Also
 
-* [`ocsf_trim`](https://tenzir.com/docs/reference/functions/ocsf_trim.md)
-* [`ocsf_compact`](https://tenzir.com/docs/reference/functions/ocsf_compact.md)
-* [`ocsf_cast`](https://tenzir.com/docs/reference/operators/ocsf_cast.md)
-* [`ocsf_derive`](https://tenzir.com/docs/reference/operators/ocsf_derive.md)
+* [`ocsf_trim`](../functions/ocsf_trim.md)
+* [`ocsf_compact`](../functions/ocsf_compact.md)
+* [`ocsf_cast`](ocsf_cast.md)
+* [`ocsf_derive`](ocsf_derive.md)
 * [Onboard a data source](../../tutorials/onboard-a-data-source.md)
 
 Parallelizable: a parallel pipeline may run this operator on several cores at once.

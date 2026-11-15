@@ -56,5 +56,5 @@ select ys = xs.autocorrelation(max_lag=2)
 
 ## See Also
 
-* [`periodogram`](https://tenzir.com/docs/reference/functions/periodogram.md)
-* [`dominant_period`](https://tenzir.com/docs/reference/functions/dominant_period.md)
+* [`periodogram`](periodogram.md)
+* [`dominant_period`](dominant_period.md)

@@ -17,9 +17,9 @@ ocsf_derive(x:record) -> record
 
 ## Description
 
-The `ocsf_derive` function performs bidirectional enum derivation on the OCSF event `x`. It applies the same rules as the [`ocsf_derive`](https://tenzir.com/docs/reference/operators/ocsf_derive.md) operator: it fills a missing enum string such as `activity_name` from its integer sibling `activity_id` and vice versa, recurses into nested records and lists, and warns about inconsistent pairs without modifying them. It also computes missing `category_uid` and `type_uid` fields from `class_uid` and `activity_id`. Existing fields keep their position, and the function appends derived fields to the end of their record.
+The `ocsf_derive` function performs bidirectional enum derivation on the OCSF event `x`. It applies the same rules as the [`ocsf_derive`](../operators/ocsf_derive.md) operator: it fills a missing enum string such as `activity_name` from its integer sibling `activity_id` and vice versa, recurses into nested records and lists, and warns about inconsistent pairs without modifying them. It also computes missing `category_uid` and `type_uid` fields from `class_uid` and `activity_id`. Existing fields keep their position, and the function appends derived fields to the end of their record.
 
-Use the function for both top-level and nested OCSF events. To transform the whole event, write `this = ocsf_derive(this)`. For an OCSF event in a field, write `ocsf = ocsf_derive(ocsf)`, or use [`map`](https://tenzir.com/docs/reference/functions/map.md) to transform a list of events. The [`ocsf_derive`](https://tenzir.com/docs/reference/operators/ocsf_derive.md) operator is deprecated.
+Use the function for both top-level and nested OCSF events. To transform the whole event, write `this = ocsf_derive(this)`. For an OCSF event in a field, write `ocsf = ocsf_derive(ocsf)`, or use [`map`](map.md) to transform a list of events. The [`ocsf_derive`](../operators/ocsf_derive.md) operator is deprecated.
 
 Unlike the operator, which drops events whose OCSF version or class it cannot resolve, the function returns `null` with a warning and keeps the rest of the event. It also returns `null` with a warning when `x` is not a record, and returns `null` without a warning when `x` is `null`.
 
@@ -127,8 +127,8 @@ events = events.map(x => ocsf_derive(x))
 
 ## See Also
 
-* [`ocsf_derive`](https://tenzir.com/docs/reference/operators/ocsf_derive.md)
-* [`ocsf_cast`](https://tenzir.com/docs/reference/functions/ocsf_cast.md)
-* [`ocsf_compact`](https://tenzir.com/docs/reference/functions/ocsf_compact.md)
-* [`ocsf_trim`](https://tenzir.com/docs/reference/functions/ocsf_trim.md)
+* [`ocsf_derive`](../operators/ocsf_derive.md)
+* [`ocsf_cast`](ocsf_cast.md)
+* [`ocsf_compact`](ocsf_compact.md)
+* [`ocsf_trim`](ocsf_trim.md)
 * [Map to OCSF](../../guides/normalize/map-to-ocsf.md)

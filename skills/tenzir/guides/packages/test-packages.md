@@ -137,7 +137,7 @@ tests/parse.input
 
 ### Pin the output schema
 
-Validate the schema your operator promises, so the baseline shows what consumers see. For OCSF, [`ocsf_cast`](https://tenzir.com/docs/reference/functions/ocsf_cast.md) validates and [`drop_null_fields`](https://tenzir.com/docs/reference/operators/drop_null_fields.md) keeps the baseline short:
+Validate the schema your operator promises, so the baseline shows what consumers see. For OCSF, [`ocsf_cast`](../../reference/functions/ocsf_cast.md) validates and [`drop_null_fields`](../../reference/operators/drop_null_fields.md) keeps the baseline short:
 
 tests/ocsf/auth.tql
 
@@ -150,7 +150,7 @@ this = ocsf_cast(this)
 drop_null_fields
 ```
 
-Leave out what each caller decides, such as [`ocsf_derive`](https://tenzir.com/docs/reference/functions/ocsf_derive.md), and replace non-deterministic values such as [`now`](https://tenzir.com/docs/reference/functions/now.md). For a full package walkthrough, see [Onboard a data source](../../tutorials/onboard-a-data-source.md).
+Leave out what each caller decides, such as [`ocsf_derive`](../../reference/functions/ocsf_derive.md), and replace non-deterministic values such as [`now`](../../reference/functions/now.md). For a full package walkthrough, see [Onboard a data source](../../tutorials/onboard-a-data-source.md).
 
 ### Test with different arguments
 
@@ -286,7 +286,7 @@ Ensure the test suite has `fixtures: [node]` in `test.yaml`. The node fixture au
 
 ### Non-deterministic output
 
-Tests must produce deterministic output. When only the order varies, add `pre-compare: sort` to the frontmatter rather than a `sort` operator, which would leave test scaffolding in the pipeline. See [pre-compare transforms](https://docs.tenzir.com/reference/test-framework/#pre-compare-transforms).
+Tests must produce deterministic output. When only the order varies, add `pre-compare: sort` to the frontmatter rather than a `sort` operator, which would leave test scaffolding in the pipeline. See [pre-compare transforms](https://tenzir.com/docs/reference/test-framework/#pre-compare-transforms).
 
 Avoid timestamps and random values in output. For time-based tests, use fixed input data rather than `now()`.
 
@@ -299,5 +299,5 @@ Run `uvx tenzir-test --update` to regenerate baselines after intentional changes
 * [Create a package](create-a-package.md)
 * [Add operators](add-operators.md)
 * [Add contexts](add-contexts.md)
-* [Test framework](../../reference/test-framework.md)
+* [Test framework](https://tenzir.com/docs/reference/test-framework)
 * [Onboard a data source](../../tutorials/onboard-a-data-source.md)

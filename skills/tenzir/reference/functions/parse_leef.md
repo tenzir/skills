@@ -154,11 +154,11 @@ output = input.parse_leef()
 
 ## See Also
 
-* [`read_leef`](https://tenzir.com/docs/reference/operators/read_leef.md)
-* [`read_syslog`](https://tenzir.com/docs/reference/operators/read_syslog.md)
-* [`write_syslog`](https://tenzir.com/docs/reference/operators/write_syslog.md)
-* [`parse_cef`](https://tenzir.com/docs/reference/functions/parse_cef.md)
-* [`print_leef`](https://tenzir.com/docs/reference/functions/print_leef.md)
+* [`read_leef`](../operators/read_leef.md)
+* [`read_syslog`](../operators/read_syslog.md)
+* [`write_syslog`](../operators/write_syslog.md)
+* [`parse_cef`](parse_cef.md)
+* [`print_leef`](print_leef.md)
 * [Parse string fields](../../guides/parse/parse-string-fields.md)
-* [Qradar](../../integrations/qradar.md)
-* [Syslog](../../integrations/syslog.md)
+* [Qradar](https://tenzir.com/integrations/qradar)
+* [Syslog](https://tenzir.com/integrations/syslog)

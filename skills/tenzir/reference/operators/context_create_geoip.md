@@ -19,7 +19,7 @@ context_create_geoip name:string, [db_path=string]
 
 The `context_create_geoip` operator constructs a new context of type [GeoIP](../../explanations/enrichment.md#geoip-database).
 
-You must either provide a database with the `db_path` argument or use [`context_load`](https://tenzir.com/docs/reference/operators/context_load.md) to populate the context after creation.
+You must either provide a database with the `db_path` argument or use [`context_load`](context_load.md) to populate the context after creation.
 
 You can also create a GeoIP context as code by adding it to `tenzir.contexts` in your `tenzir.yaml`:
 
@@ -63,14 +63,14 @@ context_load "ctx"
 
 ## See Also
 
-* [`context_create_bloom_filter`](https://tenzir.com/docs/reference/operators/context_create_bloom_filter.md)
-* [`context_create_lookup_table`](https://tenzir.com/docs/reference/operators/context_create_lookup_table.md)
-* [`context_enrich`](https://tenzir.com/docs/reference/operators/context_enrich.md)
-* [`context_erase`](https://tenzir.com/docs/reference/operators/context_erase.md)
-* [`context_inspect`](https://tenzir.com/docs/reference/operators/context_inspect.md)
-* [`context_list`](https://tenzir.com/docs/reference/operators/context_list.md)
-* [`context_load`](https://tenzir.com/docs/reference/operators/context_load.md)
-* [`context_remove`](https://tenzir.com/docs/reference/operators/context_remove.md)
-* [`context_reset`](https://tenzir.com/docs/reference/operators/context_reset.md)
-* [`context_save`](https://tenzir.com/docs/reference/operators/context_save.md)
-* [`context_update`](https://tenzir.com/docs/reference/operators/context_update.md)
+* [`context_create_bloom_filter`](context_create_bloom_filter.md)
+* [`context_create_lookup_table`](context_create_lookup_table.md)
+* [`context_enrich`](context_enrich.md)
+* [`context_erase`](context_erase.md)
+* [`context_inspect`](context_inspect.md)
+* [`context_list`](context_list.md)
+* [`context_load`](context_load.md)
+* [`context_remove`](context_remove.md)
+* [`context_reset`](context_reset.md)
+* [`context_save`](context_save.md)
+* [`context_update`](context_update.md)

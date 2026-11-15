@@ -28,8 +28,8 @@ Mappings live in packages as operators. The tutorial linked above walks through 
 ### Key principles
 
 * **Keep unmapped residue**: Source fields without an OCSF target still need review or an intentional decision to preserve source-specific data.
-* **Produce minimal OCSF**: Map required identifiers, required attributes, and source-specific semantics. Don’t hand-write derived sibling fields such as `activity_name`, `category_name`, or `severity`; [`ocsf_derive`](https://tenzir.com/docs/reference/functions/ocsf_derive.md) adds them where a consumer needs them.
-* **Validate in tests**: Check the mapper’s output against its schema with [`ocsf_cast`](https://tenzir.com/docs/reference/functions/ocsf_cast.md) in the package tests. Pipelines that run the mapper don’t need to repeat it.
+* **Produce minimal OCSF**: Map required identifiers, required attributes, and source-specific semantics. Don’t hand-write derived sibling fields such as `activity_name`, `category_name`, or `severity`; [`ocsf_derive`](../../reference/functions/ocsf_derive.md) adds them where a consumer needs them.
+* **Validate in tests**: Check the mapper’s output against its schema with [`ocsf_cast`](../../reference/functions/ocsf_cast.md) in the package tests. Pipelines that run the mapper don’t need to repeat it.
 
 Think in graphs
 
@@ -41,28 +41,28 @@ Put the target schema first in mapping namespaces, and let the vendor that owns 
 
 A product with several event types needs a dispatcher that routes each recognized event type to an operator under `ocsf/events/` and falls back to the OCSF Base Event. Our tutorial on [creating the mapper](../../tutorials/onboard-a-data-source.md#create-the-mapper) shows that hierarchy together with the normalizer that wraps it, and our guide on [testing packages](../packages/test-packages.md) covers the tests and baselines that go with it.
 
-How much of that hierarchy a package needs depends on its source. The [`amazon` package](https://tenzir.com/docs/packages/amazon/operators/vpc_flow/ocsf/map.tql) owns the parsing and ships a normalizer, because VPC Flow Logs have no built-in reader. A source that Tenzir reads natively, such as Zeek through [`read_zeek_tsv`](https://tenzir.com/docs/reference/operators/read_zeek_tsv.md) or [`read_zeek_json`](https://tenzir.com/docs/reference/operators/read_zeek_json.md), needs neither: its package starts at the mapper and dispatches on the log type.
+How much of that hierarchy a package needs depends on its source. The [`amazon` package](https://tenzir.com/docs/packages/amazon/operators/vpc_flow/ocsf/map.tql) owns the parsing and ships a normalizer, because VPC Flow Logs have no built-in reader. A source that Tenzir reads natively, such as Zeek through [`read_zeek_tsv`](../../reference/operators/read_zeek_tsv.md) or [`read_zeek_json`](../../reference/operators/read_zeek_json.md), needs neither: its package starts at the mapper and dispatches on the log type.
 
 ## Use native OCSF functions
 
 Tenzir ships functions for completing, validating, and reducing OCSF events:
 
-* [`ocsf_derive`](https://tenzir.com/docs/reference/functions/ocsf_derive.md) derives integer and string enum siblings in either direction and warns about inconsistent pairs.
-* [`ocsf_cast`](https://tenzir.com/docs/reference/functions/ocsf_cast.md) casts an event to the OCSF type selected by its version, class, profiles, and extensions. It warns about fields outside that schema and removes them, and warns about missing required fields and violated constraints.
-* [`ocsf_trim`](https://tenzir.com/docs/reference/functions/ocsf_trim.md) removes fields according to their OCSF requirement levels when you need to reduce event size.
-* [`ocsf_compact`](https://tenzir.com/docs/reference/functions/ocsf_compact.md) removes enum strings that [`ocsf_derive`](https://tenzir.com/docs/reference/functions/ocsf_derive.md) can rebuild when you need to reduce event size without losing information.
+* [`ocsf_derive`](../../reference/functions/ocsf_derive.md) derives integer and string enum siblings in either direction and warns about inconsistent pairs.
+* [`ocsf_cast`](../../reference/functions/ocsf_cast.md) casts an event to the OCSF type selected by its version, class, profiles, and extensions. It warns about fields outside that schema and removes them, and warns about missing required fields and violated constraints.
+* [`ocsf_trim`](../../reference/functions/ocsf_trim.md) removes fields according to their OCSF requirement levels when you need to reduce event size.
+* [`ocsf_compact`](../../reference/functions/ocsf_compact.md) removes enum strings that [`ocsf_derive`](../../reference/functions/ocsf_derive.md) can rebuild when you need to reduce event size without losing information.
 
 A mapper returns minimal OCSF. Which of these functions run afterwards is a decision of each pipeline, not part of the mapping.
 
-The [`ocsf_cast`](https://tenzir.com/docs/reference/functions/ocsf_cast.md) function is the schema validation gate. Call it in the package tests, as our guide on [testing packages](../packages/test-packages.md#pin-the-output-schema) shows: your mapping is complete when the tests no longer emit warnings. In a pipeline, cast only when a downstream system needs the exact schema types, and use options such as `null_fill=true`, `encode_variants=true`, or `timestamp_to_ms=true` only when it requires those output shapes or physical representations.
+The [`ocsf_cast`](../../reference/functions/ocsf_cast.md) function is the schema validation gate. Call it in the package tests, as our guide on [testing packages](../packages/test-packages.md#pin-the-output-schema) shows: your mapping is complete when the tests no longer emit warnings. In a pipeline, cast only when a downstream system needs the exact schema types, and use options such as `null_fill=true`, `encode_variants=true`, or `timestamp_to_ms=true` only when it requires those output shapes or physical representations.
 
-The [`ocsf_derive`](https://tenzir.com/docs/reference/functions/ocsf_derive.md) function expands an event for consumers that expect the full set of enum fields. It computes `category_uid` and `type_uid` from `class_uid` and `activity_id`, and fills enum siblings such as `activity_name`, `category_name`, and `severity` from their numeric identifiers. It also works in the other direction when a mapping starts with a string sibling. Call it where you deliver events to such consumers:
+The [`ocsf_derive`](../../reference/functions/ocsf_derive.md) function expands an event for consumers that expect the full set of enum fields. It computes `category_uid` and `type_uid` from `class_uid` and `activity_id`, and fills enum siblings such as `activity_name`, `category_name`, and `severity` from their numeric identifiers. It also works in the other direction when a mapping starts with a string sibling. Call it where you deliver events to such consumers:
 
 ```tql
 this = ocsf_derive(this)
 ```
 
-To reduce event size for storage or transport, compact the events. The [`ocsf_compact`](https://tenzir.com/docs/reference/functions/ocsf_compact.md) function removes enum strings such as `activity_name` or `severity` that [`ocsf_derive`](https://tenzir.com/docs/reference/functions/ocsf_derive.md) can rebuild from their integer siblings. It keeps every string that carries information, such as the data source specific value of an `Other` enum. Run [`ocsf_derive`](https://tenzir.com/docs/reference/functions/ocsf_derive.md) when reading the events to restore the strings:
+To reduce event size for storage or transport, compact the events. The [`ocsf_compact`](../../reference/functions/ocsf_compact.md) function removes enum strings such as `activity_name` or `severity` that [`ocsf_derive`](../../reference/functions/ocsf_derive.md) can rebuild from their integer siblings. It keeps every string that carries information, such as the data source specific value of an `Other` enum. Run [`ocsf_derive`](../../reference/functions/ocsf_derive.md) when reading the events to restore the strings:
 
 ```tql
 // Before writing
@@ -73,7 +73,7 @@ this = ocsf_compact(this)
 this = ocsf_derive(this)
 ```
 
-To also remove fields that OCSF marks as optional or recommended, write `this = ocsf_trim(this)`. Unlike [`ocsf_compact`](https://tenzir.com/docs/reference/functions/ocsf_compact.md), it discards their values.
+To also remove fields that OCSF marks as optional or recommended, write `this = ocsf_trim(this)`. Unlike [`ocsf_compact`](../../reference/functions/ocsf_compact.md), it discards their values.
 
 ### Finalize events in a field
 
@@ -106,15 +106,15 @@ if validated == null {
 
 Map an optional object only when the source identifies it: a process name alone does not identify a process, and a port alone does not identify an endpoint. Keep such values in `unmapped` under their original keys instead of inventing identifiers to satisfy validation.
 
-A missing required field does not change a known event’s class. A file rename without host context stays File System Activity, and [`ocsf_cast`](https://tenzir.com/docs/reference/functions/ocsf_cast.md) warns about the missing `device` but keeps the event, so you can enrich it later.
+A missing required field does not change a known event’s class. A file rename without host context stays File System Activity, and [`ocsf_cast`](../../reference/functions/ocsf_cast.md) warns about the missing `device` but keeps the event, so you can enrich it later.
 
 ## Look up identifiers and names
 
 Six functions translate between OCSF identifiers and their names, so a mapping never hard-codes a number it can compute:
 
-* [`ocsf_class_uid`](https://tenzir.com/docs/reference/functions/ocsf_class_uid.md) and [`ocsf_class_name`](https://tenzir.com/docs/reference/functions/ocsf_class_name.md) convert between a class name and its `class_uid`, as in `ocsf_class_uid("DNS Activity")` and `ocsf_class_name(4003)`.
-* [`ocsf_category_uid`](https://tenzir.com/docs/reference/functions/ocsf_category_uid.md) and [`ocsf_category_name`](https://tenzir.com/docs/reference/functions/ocsf_category_name.md) do the same for categories, as in `ocsf_category_uid("Findings")`.
-* [`ocsf_type_uid`](https://tenzir.com/docs/reference/functions/ocsf_type_uid.md) and [`ocsf_type_name`](https://tenzir.com/docs/reference/functions/ocsf_type_name.md) cover the combination of class and activity, as in `ocsf_type_uid("SSH Activity: Fail")` and `ocsf_type_name(400704)`.
+* [`ocsf_class_uid`](../../reference/functions/ocsf_class_uid.md) and [`ocsf_class_name`](../../reference/functions/ocsf_class_name.md) convert between a class name and its `class_uid`, as in `ocsf_class_uid("DNS Activity")` and `ocsf_class_name(4003)`.
+* [`ocsf_category_uid`](../../reference/functions/ocsf_category_uid.md) and [`ocsf_category_name`](../../reference/functions/ocsf_category_name.md) do the same for categories, as in `ocsf_category_uid("Findings")`.
+* [`ocsf_type_uid`](../../reference/functions/ocsf_type_uid.md) and [`ocsf_type_name`](../../reference/functions/ocsf_type_name.md) cover the combination of class and activity, as in `ocsf_type_uid("SSH Activity: Fail")` and `ocsf_type_name(400704)`.
 
 Use them where a source carries the name rather than the number, which is common for data that arrives from another OCSF producer:
 

@@ -51,6 +51,6 @@ select span_shift_ms=wasserstein(
 
 ## See also
 
-* [`model_distance`](https://tenzir.com/docs/reference/functions/model_distance.md)
-* [`ecdf`](https://tenzir.com/docs/reference/functions/ecdf.md)
-* [`kolmogorov_smirnov`](https://tenzir.com/docs/reference/functions/kolmogorov_smirnov.md)
+* [`model_distance`](model_distance.md)
+* [`ecdf`](ecdf.md)
+* [`kolmogorov_smirnov`](kolmogorov_smirnov.md)

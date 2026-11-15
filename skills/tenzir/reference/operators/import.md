@@ -19,7 +19,7 @@ import
 
 The `import` operator persists events in a Tenzir node.
 
-This operator is the dual to [`export`](https://tenzir.com/docs/reference/operators/export.md).
+This operator is the dual to [`export`](export.md).
 
 ## Examples
 
@@ -34,6 +34,6 @@ import
 
 ## See Also
 
-* [`export`](https://tenzir.com/docs/reference/operators/export.md)
-* [`publish`](https://tenzir.com/docs/reference/operators/publish.md)
+* [`export`](export.md)
+* [`publish`](publish.md)
 * [Import into a node](../../guides/store/import-into-a-node.md)

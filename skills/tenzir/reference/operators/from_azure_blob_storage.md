@@ -158,10 +158,10 @@ from_azure_blob_storage "abfs://data/**.json" {
 
 ## See Also
 
-* [`from_file`](https://tenzir.com/docs/reference/operators/from_file.md)
-* [`from_azure_blob_storage`](https://tenzir.com/docs/reference/operators/from_azure_blob_storage.md)
-* [`to_azure_blob_storage`](https://tenzir.com/docs/reference/operators/to_azure_blob_storage.md)
+* [`from_file`](from_file.md)
+* [`from_azure_blob_storage`](from_azure_blob_storage.md)
+* [`to_azure_blob_storage`](to_azure_blob_storage.md)
 * [Azure Authentication](../azure-authentication.md)
-* [Azure blob storage](../../integrations/microsoft/azure-blob-storage.md)
+* [Azure blob storage](https://tenzir.com/integrations/microsoft/azure-blob-storage)
 
 Parallelizable: a parallel pipeline may run this operator on several cores at once.

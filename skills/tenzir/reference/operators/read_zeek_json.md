@@ -97,6 +97,6 @@ read_zeek_json
 
 ## See Also
 
-* [`read_zeek_tsv`](https://tenzir.com/docs/reference/operators/read_zeek_tsv.md)
-* [`write_zeek_tsv`](https://tenzir.com/docs/reference/operators/write_zeek_tsv.md)
-* [Zeek](../../integrations/zeek.md)
+* [`read_zeek_tsv`](read_zeek_tsv.md)
+* [`write_zeek_tsv`](write_zeek_tsv.md)
+* [Zeek](https://tenzir.com/integrations/zeek)

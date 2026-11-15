@@ -9,7 +9,7 @@ section: "Docs"
 
 > Use window when an aggregation needs time or event-count boundaries. Tumbling and hopping windows create one subpipeline per aligned range. By default, trailing windows create one subpipeline per event. Set every or trigger to restrict which events fire one. Session windows keep one subpipeline open while consecutive events remain within an inactivity gap. Inside any form, use summarize to compute counts, distinct values, and statistics.
 
-Use [`window`](https://tenzir.com/docs/reference/operators/window.md) when an aggregation needs time or event-count boundaries. Tumbling and hopping windows create one subpipeline per aligned range. By default, trailing windows create one subpipeline per event. Set `every` or `trigger` to restrict which events fire one. Session windows keep one subpipeline open while consecutive events remain within an inactivity gap. Inside any form, use [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) to compute counts, distinct values, and statistics.
+Use [`window`](../../reference/operators/window.md) when an aggregation needs time or event-count boundaries. Tumbling and hopping windows create one subpipeline per aligned range. By default, trailing windows create one subpipeline per event. Set `every` or `trigger` to restrict which events fire one. Session windows keep one subpipeline open while consecutive events remain within an inactivity gap. Inside any form, use [`summarize`](../../reference/operators/summarize.md) to compute counts, distinct values, and statistics.
 
 The model covers eight `size`-based combinations plus inactivity-defined sessions. The left column shows duration windows, while the right column shows event-count windows. Blue marks fixed windows, green marks trailing windows, and purple marks sessions. Highlighted events show the reduced firing cadence of sampled trailing windows.
 
@@ -17,9 +17,9 @@ Nine timeline diagrams compare tumbling, hopping, trailing per-event, sampled tr
 
 For duration windows, specify `on` to assign events by event time and accept out-of-order data with `tolerance`. Fixed windows delay closure by the tolerance but pass events to their subpipelines in arrival order. Trailing and session windows reorder events within that tolerance before evaluating event order. Omit `on` for processing-time windows that close on their wall-clock boundary. Use an integer `size` for windows that close after a number of events rather than an amount of time.
 
-Put [`reorder`](https://tenzir.com/docs/reference/operators/reorder.md) before a fixed window only when its subpipeline needs timestamp order, for example to collect an activity sequence. The guide on [repairing out-of-order events](../shape/repair-out-of-order-events.md) explains when to use `reorder`, a complete `sort`, or window tolerance alone.
+Put [`reorder`](../../reference/operators/reorder.md) before a fixed window only when its subpipeline needs timestamp order, for example to collect an activity sequence. The guide on [repairing out-of-order events](../shape/repair-out-of-order-events.md) explains when to use `reorder`, a complete `sort`, or window tolerance alone.
 
-Use `gap` to select a session when inactivity defines the population. An event-time session continues while the distance between consecutive events stays within `gap`, so its total duration can exceed the gap. An optional `size` caps its total duration or event count. A processing-time session closes at the wall-clock gap deadline. Compose an outer [`group`](https://tenzir.com/docs/reference/operators/group.md) with the session window when each key needs its own session:
+Use `gap` to select a session when inactivity defines the population. An event-time session continues while the distance between consecutive events stays within `gap`, so its total duration can exceed the gap. An optional `size` caps its total duration or event count. A processing-time session closes at the wall-clock gap deadline. Compose an outer [`group`](../../reference/operators/group.md) with the session window when each key needs its own session:
 
 ```tql
 group host {
@@ -30,7 +30,7 @@ group host {
 }
 ```
 
-Put [`group`](https://tenzir.com/docs/reference/operators/group.md) outside [`window`](https://tenzir.com/docs/reference/operators/window.md) only when each key needs its own event-time clock, trailing history, or session. For aligned fixed detections, an outer `window` with groups inside usually bounds high-cardinality state more predictably.
+Put [`group`](../../reference/operators/group.md) outside [`window`](../../reference/operators/window.md) only when each key needs its own event-time clock, trailing history, or session. For aligned fixed detections, an outer `window` with groups inside usually bounds high-cardinality state more predictably.
 
 For complete streaming detections built on these mechanics, such as brute-force login thresholds and statistical traffic-spike baselines with alert suppression, follow the guide on [detecting over time windows](../detect/detect-over-time-windows.md).
 
@@ -40,7 +40,7 @@ Session windows model bursts whose boundaries come from inactivity rather than a
 
 ### Build per-key event-time sessions
 
-Put [`group`](https://tenzir.com/docs/reference/operators/group.md) outside [`window`](https://tenzir.com/docs/reference/operators/window.md) so each key gets an independent session and event-time clock. This example emits destinations with at least five events in one activity burst:
+Put [`group`](../../reference/operators/group.md) outside [`window`](../../reference/operators/window.md) so each key gets an independent session and event-time clock. This example emits destinations with at least five events in one activity burst:
 
 ```tql
 group dest {
@@ -93,7 +93,7 @@ The event that reaches an integer `size` belongs to the closing session. A sessi
 
 ### Migrate from Splunk `transaction`
 
-The inactivity subset of Splunk’s [`transaction` command](https://help.splunk.com/en/splunk-enterprise/spl-search-reference/9.4/search-commands/transaction) maps approximately to an outer [`group`](https://tenzir.com/docs/reference/operators/group.md) and a session [`window`](https://tenzir.com/docs/reference/operators/window.md). For example, this SPL search groups each destination until a five-minute pause:
+The inactivity subset of Splunk’s [`transaction` command](https://help.splunk.com/en/splunk-enterprise/spl-search-reference/9.4/search-commands/transaction) maps approximately to an outer [`group`](../../reference/operators/group.md) and a session [`window`](../../reference/operators/window.md). For example, this SPL search groups each destination until a five-minute pause:
 
 ```spl
 …
@@ -141,11 +141,11 @@ Caps anchor at opposite ends of the input. Splunk processes events from newest t
 
 The maximum-duration boundary also differs. Splunk requires a transaction’s span to stay strictly below `maxspan`. A TQL event-time session includes the event that reaches its duration `size` and then closes. Treat capped translations as approximate unless the cap never determines a boundary.
 
-Unlike `transaction`, a session window doesn’t merge raw events or union all fields automatically. Its subpipeline determines the result. Use [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) for compact statistics and the [`collect`](https://tenzir.com/docs/reference/functions/collect.md) function only for evidence that you need downstream.
+Unlike `transaction`, a session window doesn’t merge raw events or union all fields automatically. Its subpipeline determines the result. Use [`summarize`](../../reference/operators/summarize.md) for compact statistics and the [`collect`](../../reference/functions/collect.md) function only for evidence that you need downstream.
 
 ## Compare TQL with KQL, SPL, and Cribl Stream
 
-The following sections compare aggregation and windowing capabilities across TQL, Microsoft KQL, Splunk SPL, and Cribl Stream. They cover Tenzir’s [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md), [`every`](https://tenzir.com/docs/reference/operators/every.md), [`group`](https://tenzir.com/docs/reference/operators/group.md), and [`window`](https://tenzir.com/docs/reference/operators/window.md) operators. Cribl Stream entries refer to pipeline Functions, especially [Aggregations](https://docs.cribl.io/stream/aggregations-function/), not Cribl Search.
+The following sections compare aggregation and windowing capabilities across TQL, Microsoft KQL, Splunk SPL, and Cribl Stream. They cover Tenzir’s [`summarize`](../../reference/operators/summarize.md), [`every`](../../reference/operators/every.md), [`group`](../../reference/operators/group.md), and [`window`](../../reference/operators/window.md) operators. Cribl Stream entries refer to pipeline Functions, especially [Aggregations](https://docs.cribl.io/stream/aggregations-function/), not Cribl Search.
 
 ### Complete-input aggregation
 
@@ -153,7 +153,7 @@ Complete-input aggregation waits for the full input and then emits final aggrega
 
 | System       | Support | Notes                                                                                                  |
 | ------------ | ------- | ------------------------------------------------------------------------------------------------------ |
-| TQL          | ✅       | [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) consumes the input by default. |
+| TQL          | ✅       | [`summarize`](../../reference/operators/summarize.md) consumes the input by default. |
 | KQL          | ✅       | Use `summarize`.                                                                                       |
 | SPL          | ✅       | Use `stats`.                                                                                           |
 | Cribl Stream | ⚠️      | Aggregations are time-windowed.                                                                        |
@@ -164,7 +164,7 @@ Grouped aggregation computes separate aggregate results for each key, such as on
 
 | System       | Support | Notes                                                                                             |
 | ------------ | ------- | ------------------------------------------------------------------------------------------------- |
-| TQL          | ✅       | Use [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) with grouping fields. |
+| TQL          | ✅       | Use [`summarize`](../../reference/operators/summarize.md) with grouping fields. |
 | KQL          | ✅       | Use `summarize ... by key`.                                                                       |
 | SPL          | ✅       | Use `stats ... BY key`.                                                                           |
 | Cribl Stream | ⚠️      | Use time-windowed `Group by fields`.                                                              |
@@ -175,7 +175,7 @@ Periodic processing-time aggregation emits results on a wall-clock or processing
 
 | System       | Support | Notes                                                                                                                                                                                                                                                                 |
 | ------------ | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| TQL          | ✅       | Use [`window`](https://tenzir.com/docs/reference/operators/window.md) without `on`, [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) `options={emit: 30s, mode: "reset"}`, or [`every`](https://tenzir.com/docs/reference/operators/every.md). |
+| TQL          | ✅       | Use [`window`](../../reference/operators/window.md) without `on`, [`summarize`](../../reference/operators/summarize.md) `options={emit: 30s, mode: "reset"}`, or [`every`](../../reference/operators/every.md). |
 | KQL          | ⚠️      | Use scheduled or continuous query patterns.                                                                                                                                                                                                                           |
 | SPL          | ⚠️      | Use real-time or scheduled searches.                                                                                                                                                                                                                                  |
 | Cribl Stream | ⚠️      | Use Scheduled Collectors; Aggregations use event-time buckets.                                                                                                                                                                                                        |
@@ -186,7 +186,7 @@ Periodic running stats emit accumulated values repeatedly instead of waiting for
 
 | System       | Support | Notes                                                                                                                  |
 | ------------ | ------- | ---------------------------------------------------------------------------------------------------------------------- |
-| TQL          | ✅       | Use [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) `options={emit: 30s, mode: "cumulative"}`. |
+| TQL          | ✅       | Use [`summarize`](../../reference/operators/summarize.md) `options={emit: 30s, mode: "cumulative"}`. |
 | KQL          | ⚠️      | Use scheduled or continuous query patterns.                                                                            |
 | SPL          | ⚠️      | Use `streamstats` or scheduled searches.                                                                               |
 | Cribl Stream | ⚠️      | Enable `Cumulative aggregations` in Aggregations.                                                                      |
@@ -197,7 +197,7 @@ Wall-clock subpipeline batches rerun a block of work on a fixed schedule. This i
 
 | System       | Support | Notes                                                                                            |
 | ------------ | ------- | ------------------------------------------------------------------------------------------------ |
-| TQL          | ✅       | Use [`every`](https://tenzir.com/docs/reference/operators/every.md) to rerun an arbitrary block. |
+| TQL          | ✅       | Use [`every`](../../reference/operators/every.md) to rerun an arbitrary block. |
 | KQL          | ❌       | No direct query-language block equivalent.                                                       |
 | SPL          | ❌       | No direct query-language block equivalent.                                                       |
 | Cribl Stream | ⚠️      | Scheduled Collectors schedule collection work.                                                   |
@@ -208,7 +208,7 @@ Tumbling event-time windows split events into adjacent, non-overlapping time ran
 
 | System       | Support | Notes                                                                                   |
 | ------------ | ------- | --------------------------------------------------------------------------------------- |
-| TQL          | ✅       | Use [`window`](https://tenzir.com/docs/reference/operators/window.md) `size=1h, on=ts`. |
+| TQL          | ✅       | Use [`window`](../../reference/operators/window.md) `size=1h, on=ts`. |
 | KQL          | ✅       | Use `summarize ... by bin(ts, 1h)`.                                                     |
 | SPL          | ✅       | Use `timechart span=1h` or `bin _time`.                                                 |
 | Cribl Stream | ✅       | Use Aggregations `Time window`.                                                         |
@@ -219,7 +219,7 @@ Hopping event-time windows use a window size that is larger than the step betwee
 
 | System       | Support | Notes                                                                                             |
 | ------------ | ------- | ------------------------------------------------------------------------------------------------- |
-| TQL          | ✅       | Use [`window`](https://tenzir.com/docs/reference/operators/window.md) `size=1h, every=5m, on=ts`. |
+| TQL          | ✅       | Use [`window`](../../reference/operators/window.md) `size=1h, every=5m, on=ts`. |
 | KQL          | ⚠️      | Use manual expansion or plugins for specific metrics.                                             |
 | SPL          | ⚠️      | Use manual expansion or bucketing.                                                                |
 | Cribl Stream | ❌       | No hopping window option.                                                                         |
@@ -230,7 +230,7 @@ Fixed count windows close after a bounded number of arriving events rather than 
 
 | System       | Support | Notes                                                                                                     |
 | ------------ | ------- | --------------------------------------------------------------------------------------------------------- |
-| TQL          | ✅       | Use [`window`](https://tenzir.com/docs/reference/operators/window.md) `size=100` or `size=100, every=10`. |
+| TQL          | ✅       | Use [`window`](../../reference/operators/window.md) `size=100` or `size=100, every=10`. |
 | KQL          | ⚠️      | Use row numbering and manual bucketing.                                                                   |
 | SPL          | ⚠️      | Use `streamstats window=...` for per-event results.                                                       |
 | Cribl Stream | ⚠️      | Batch controls exist without a general count-window block.                                                |
@@ -241,12 +241,12 @@ Per-input-event statistics update a calculation for each arriving event. This is
 
 | System       | Support | Notes                                                                                                                                                                                                                                                           |
 | ------------ | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| TQL          | ✅       | Use cumulative event emission from [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) for unbounded state or `trailing=true` with a duration or count [`window`](https://tenzir.com/docs/reference/operators/window.md) for bounded state. |
+| TQL          | ✅       | Use cumulative event emission from [`summarize`](../../reference/operators/summarize.md) for unbounded state or `trailing=true` with a duration or count [`window`](../../reference/operators/window.md) for bounded state. |
 | KQL          | ⚠️      | Use manual expansion or row-window functions.                                                                                                                                                                                                                   |
 | SPL          | ✅       | Use `streamstats`; `window` and `time_window` add bounded history.                                                                                                                                                                                              |
 | Cribl Stream | ❌       | Aggregations emit window events.                                                                                                                                                                                                                                |
 
-For unbounded running aggregates, TQL’s cumulative event emission from [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) avoids replaying a trailing history. This is the direct counterpart to `streamstats` without either bound.
+For unbounded running aggregates, TQL’s cumulative event emission from [`summarize`](../../reference/operators/summarize.md) avoids replaying a trailing history. This is the direct counterpart to `streamstats` without either bound.
 
 ### Per-key event-time windows
 
@@ -254,7 +254,7 @@ Per-key event-time windows keep separate windowed results for each entity. Event
 
 | System       | Support | Notes                                                                                                                                           |
 | ------------ | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
-| TQL          | ✅       | Compose [`group`](https://tenzir.com/docs/reference/operators/group.md) with [`window`](https://tenzir.com/docs/reference/operators/window.md). |
+| TQL          | ✅       | Compose [`group`](../../reference/operators/group.md) with [`window`](../../reference/operators/window.md). |
 | KQL          | ✅       | Use `summarize ... by key, bin(ts, ...)`.                                                                                                       |
 | SPL          | ✅       | Use `BY key` or split-by.                                                                                                                       |
 | Cribl Stream | ✅       | Use `Group by fields` with `Time window`.                                                                                                       |
@@ -265,7 +265,7 @@ Streaming late-event tolerance lets a pipeline accept delayed data without holdi
 
 | System       | Support | Notes                                                                                  |
 | ------------ | ------- | -------------------------------------------------------------------------------------- |
-| TQL          | ✅       | Use [`window`](https://tenzir.com/docs/reference/operators/window.md) `tolerance=...`. |
+| TQL          | ✅       | Use [`window`](../../reference/operators/window.md) `tolerance=...`. |
 | KQL          | ❌       | Mostly batch or query-time semantics.                                                  |
 | SPL          | ⚠️      | Depends on search order.                                                               |
 | Cribl Stream | ✅       | Use Aggregations `Lag tolerance`.                                                      |
@@ -276,7 +276,7 @@ Independent per-key clocks let each group advance event time based only on its o
 
 | System       | Support | Notes                                                                                                                                                  |
 | ------------ | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| TQL          | ✅       | Put [`window`](https://tenzir.com/docs/reference/operators/window.md) inside an outer [`group`](https://tenzir.com/docs/reference/operators/group.md). |
+| TQL          | ✅       | Put [`window`](../../reference/operators/window.md) inside an outer [`group`](../../reference/operators/group.md). |
 | KQL          | ❌       | No streaming clock per key in ad hoc KQL.                                                                                                              |
 | SPL          | ⚠️      | Requires search-order dependent workarounds.                                                                                                           |
 | Cribl Stream | ⚠️      | Grouped buckets exist, but no documented per-key clock.                                                                                                |
@@ -287,7 +287,7 @@ An arbitrary per-key subpipeline can do more than compute a fixed aggregate list
 
 | System       | Support | Notes                                                                              |
 | ------------ | ------- | ---------------------------------------------------------------------------------- |
-| TQL          | ✅       | Use [`group`](https://tenzir.com/docs/reference/operators/group.md) `key { ... }`. |
+| TQL          | ✅       | Use [`group`](../../reference/operators/group.md) `key { ... }`. |
 | KQL          | ❌       | No direct equivalent.                                                              |
 | SPL          | ❌       | No direct equivalent.                                                              |
 | Cribl Stream | ❌       | No grouped Function block.                                                         |
@@ -298,7 +298,7 @@ An arbitrary per-window subpipeline runs custom logic inside each time range, co
 
 | System       | Support | Notes                                                                            |
 | ------------ | ------- | -------------------------------------------------------------------------------- |
-| TQL          | ✅       | Use [`window`](https://tenzir.com/docs/reference/operators/window.md) `{ ... }`. |
+| TQL          | ✅       | Use [`window`](../../reference/operators/window.md) `{ ... }`. |
 | KQL          | ❌       | No direct equivalent.                                                            |
 | SPL          | ❌       | No direct equivalent.                                                            |
 | Cribl Stream | ❌       | Aggregations only emit configured outputs.                                       |
@@ -309,7 +309,7 @@ A sink per key or window sends results from inside the grouped or windowed scope
 
 | System       | Support | Notes                                                                                                                                                          |
 | ------------ | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| TQL          | ✅       | [`group`](https://tenzir.com/docs/reference/operators/group.md) and [`window`](https://tenzir.com/docs/reference/operators/window.md) blocks can end in sinks. |
+| TQL          | ✅       | [`group`](../../reference/operators/group.md) and [`window`](../../reference/operators/window.md) blocks can end in sinks. |
 | KQL          | ❌       | No direct query-language equivalent.                                                                                                                           |
 | SPL          | ❌       | No direct query-language equivalent.                                                                                                                           |
 | Cribl Stream | ⚠️      | Route emitted aggregate events downstream.                                                                                                                     |
@@ -331,7 +331,7 @@ Session windows group events by gaps in activity rather than fixed boundaries. T
 
 | System       | Support | Notes                                                                                                                                                                                      |
 | ------------ | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| TQL          | ✅       | Use [`window`](https://tenzir.com/docs/reference/operators/window.md) `gap=5min` and compose it with [`group`](https://tenzir.com/docs/reference/operators/group.md) for per-key sessions. |
+| TQL          | ✅       | Use [`window`](../../reference/operators/window.md) `gap=5min` and compose it with [`group`](../../reference/operators/group.md) for per-key sessions. |
 | KQL          | ✅       | Use `row_window_session()`.                                                                                                                                                                |
 | SPL          | ✅       | Use `transaction maxpause` and `maxspan`.                                                                                                                                                  |
 | Cribl Stream | ❌       | Not native.                                                                                                                                                                                |
@@ -342,7 +342,7 @@ Custom alignment or calendar windows anchor boundaries to a chosen origin or cal
 
 | System       | Support | Notes                                                                                                                                       |
 | ------------ | ------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| TQL          | ⚠️      | Fixed [`window`](https://tenzir.com/docs/reference/operators/window.md) buckets are epoch-anchored; no custom origin or calendar alignment. |
+| TQL          | ⚠️      | Fixed [`window`](../../reference/operators/window.md) buckets are epoch-anchored; no custom origin or calendar alignment. |
 | KQL          | ✅       | Use `bin_at()`.                                                                                                                             |
 | SPL          | ✅       | Use `aligntime` and calendar spans.                                                                                                         |
 | Cribl Stream | ⚠️      | Fixed `Time window` buckets; no documented custom origin or calendar alignment.                                                             |
@@ -353,8 +353,8 @@ Cribl Stream’s Aggregations Function runs independently per Worker Process, so
 
 ## See also
 
-* [`window`](https://tenzir.com/docs/reference/operators/window.md)
-* [`group`](https://tenzir.com/docs/reference/operators/group.md)
+* [`window`](../../reference/operators/window.md)
+* [`group`](../../reference/operators/group.md)
 * [Repair out-of-order events](../shape/repair-out-of-order-events.md)
 * [Aggregate event streams](aggregate-event-streams.md)
 * [Shape aggregation results](shape-aggregation-results.md)

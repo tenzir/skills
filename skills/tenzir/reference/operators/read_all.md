@@ -53,7 +53,7 @@ from_file "data.bin" {
 
 ## See Also
 
-* [`read_chunks`](https://tenzir.com/docs/reference/operators/read_chunks.md)
-* [`read_delimited`](https://tenzir.com/docs/reference/operators/read_delimited.md)
-* [`read_delimited_regex`](https://tenzir.com/docs/reference/operators/read_delimited_regex.md)
-* [`read_lines`](https://tenzir.com/docs/reference/operators/read_lines.md)
+* [`read_chunks`](read_chunks.md)
+* [`read_delimited`](read_delimited.md)
+* [`read_delimited_regex`](read_delimited_regex.md)
+* [`read_lines`](read_lines.md)

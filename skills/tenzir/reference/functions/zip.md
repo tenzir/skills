@@ -41,6 +41,6 @@ select zs = zip(xs, ys)
 
 ## See Also
 
-* [`concatenate`](https://tenzir.com/docs/reference/functions/concatenate.md)
-* [`map`](https://tenzir.com/docs/reference/functions/map.md)
+* [`concatenate`](concatenate.md)
+* [`map`](map.md)
 * [Shape lists](../../guides/shape/shape-lists.md)

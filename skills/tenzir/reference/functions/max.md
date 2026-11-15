@@ -38,8 +38,8 @@ summarize max_value=max(x)
 
 ## See Also
 
-* [`min`](https://tenzir.com/docs/reference/functions/min.md)
-* [`mean`](https://tenzir.com/docs/reference/functions/mean.md)
-* [`sum`](https://tenzir.com/docs/reference/functions/sum.md)
+* [`min`](min.md)
+* [`mean`](mean.md)
+* [`sum`](sum.md)
 * [Aggregate event streams](../../guides/analyze/aggregate-event-streams.md)
 * [Plot data with charts](../../tutorials/plot-data-with-charts.md)

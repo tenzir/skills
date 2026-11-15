@@ -101,6 +101,6 @@ python r#"
 
 ## See Also
 
-* [`shell`](https://tenzir.com/docs/reference/operators/shell.md)
+* [`shell`](shell.md)
 
 Parallelizable: a parallel pipeline may run this operator on several cores at once.

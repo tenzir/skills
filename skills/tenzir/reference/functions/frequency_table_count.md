@@ -41,6 +41,6 @@ select count = frequency_table_count(model, "login"),
 
 ## See also
 
-* [`frequency_table`](https://tenzir.com/docs/reference/functions/frequency_table.md)
-* [`model_divergence`](https://tenzir.com/docs/reference/functions/model_divergence.md)
-* [`model_merge`](https://tenzir.com/docs/reference/functions/model_merge.md)
+* [`frequency_table`](frequency_table.md)
+* [`model_divergence`](model_divergence.md)
+* [`model_merge`](model_merge.md)

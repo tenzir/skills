@@ -193,4 +193,4 @@ read_grok $pattern
 
 ## See Also
 
-* [`parse_grok`](https://tenzir.com/docs/reference/functions/parse_grok.md)
+* [`parse_grok`](../functions/parse_grok.md)

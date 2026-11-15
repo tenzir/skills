@@ -61,7 +61,7 @@ from {
 
 ## See Also
 
-* [`ceil`](https://tenzir.com/docs/reference/functions/ceil.md)
-* [`floor`](https://tenzir.com/docs/reference/functions/floor.md)
+* [`ceil`](ceil.md)
+* [`floor`](floor.md)
 * [Transform values](../../guides/shape/transform-values.md)
 * [Plot data with charts](../../tutorials/plot-data-with-charts.md)

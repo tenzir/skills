@@ -19,10 +19,10 @@ Charts
 
 Tenzir supports four types of charts, each with a dedicated operator:
 
-1. **Pie**: [`chart_pie`](https://tenzir.com/docs/reference/operators/chart_pie.md)
-2. **Bar**: [`chart_bar`](https://tenzir.com/docs/reference/operators/chart_bar.md)
-3. **Line**: [`chart_line`](https://tenzir.com/docs/reference/operators/chart_line.md)
-4. **Area**: [`chart_area`](https://tenzir.com/docs/reference/operators/chart_area.md)
+1. **Pie**: [`chart_pie`](../reference/operators/chart_pie.md)
+2. **Bar**: [`chart_bar`](../reference/operators/chart_bar.md)
+3. **Line**: [`chart_line`](../reference/operators/chart_line.md)
+4. **Area**: [`chart_area`](../reference/operators/chart_area.md)
 
 ## How to plot data
 
@@ -53,9 +53,15 @@ To make a chart permanent:
 
 1. Click the **Dashboard** button.
 
+   ![Add Chart to Dashboard](https://tenzir.com/docs-assets/roots/6.22.0-r1/_astro/add-chart-to-dashboard-1.CKWKUeyV_Z1IMBeM.webp)
+
 2. Enter a title for the chart, then click **Add to Dashboard**.
 
+   ![Add Chart Title](https://tenzir.com/docs-assets/roots/6.22.0-r1/_astro/add-chart-to-dashboard-2.CH4qklWh_1pHHfn.webp)
+
 3. View the chart in your dashboard.
+
+   ![Chart in Dashboard](https://tenzir.com/docs-assets/roots/6.22.0-r1/_astro/add-chart-to-dashboard-3.CbiY8Gpy_Z1x99lr.webp)
 
 Congratulations! Your chart is now saved and will automatically reload when you open the dashboard.
 
@@ -65,6 +71,8 @@ Download a chart in the Explorer as follows:
 
 1. Click the download button in the top-right corner.
 
+   ![Download Chart](https://tenzir.com/docs-assets/roots/6.22.0-r1/_astro/download-chart-explorer.BaT4xIUq_ZI8UAj.webp)
+
 2. Choose **PNG** or **SVG** to save the chart as an image.
 
 You can also download a chart on a dashboard:
@@ -72,6 +80,8 @@ You can also download a chart on a dashboard:
 1. Click the three-dot menu in the top-right corner of the chart.
 
 2. Click **Download**
+
+   ![Download Chart](https://tenzir.com/docs-assets/roots/6.22.0-r1/_astro/download-chart-dashboard.CDK7X36c_hmqPn.webp)
 
 3. Choose **PNG** or **SVG** to save the chart as an image.
 
@@ -101,7 +111,7 @@ A good use case for bar charts is visualization of counters of categorical value
    {outcome: "heads", n: 11}
    ```
 
-2. **Plot the data**: Add the [`chart_bar`](https://tenzir.com/docs/reference/operators/chart_bar.md) operator to visualize the counts.
+2. **Plot the data**: Add the [`chart_bar`](../reference/operators/chart_bar.md) operator to visualize the counts.
 
    Map the outcome and count fields to the x-axis and y-axis:
 
@@ -111,7 +121,9 @@ A good use case for bar charts is visualization of counters of categorical value
    chart_bar x=outcome, y=n
    ```
 
-   Bar charts with categorical labels preserve the input order of the labels. Use [`sort`](https://tenzir.com/docs/reference/operators/sort.md) before [`chart_bar`](https://tenzir.com/docs/reference/operators/chart_bar.md) when you want to order categorical bars by a metric instead of first-seen order.
+   ![Bar chart](https://tenzir.com/docs-assets/roots/6.22.0-r1/_astro/chart-bar.DEYyg_Q2_Z27bs2E.webp)
+
+   Bar charts with categorical labels preserve the input order of the labels. Use [`sort`](../reference/operators/sort.md) before [`chart_bar`](../reference/operators/chart_bar.md) when you want to order categorical bars by a metric instead of first-seen order.
 
 ##### Group and stack bars
 
@@ -131,6 +143,8 @@ from (
 chart_bar x=outcome, y=n, group=time
 ```
 
+![Grouped bar chart](https://tenzir.com/docs-assets/roots/6.22.0-r1/_astro/chart-bar-grouped.CFNoOv9R_Zsx7Sx.webp)
+
 To **stack** the grouped bars, add `position="stacked"`:
 
 ```tql
@@ -144,6 +158,8 @@ from (
 )
 chart_bar x=outcome, y=n, group=time, position="stacked"
 ```
+
+![Stacked bar chart](https://tenzir.com/docs-assets/roots/6.22.0-r1/_astro/chart-bar-stacked.D14MtCVs_1Fp9CW.webp)
 
 #### Scale the y-axis logarithmically
 
@@ -162,6 +178,8 @@ from (
 chart_bar x=outcome, y=n
 ```
 
+![Unscaled bar chart](https://tenzir.com/docs-assets/roots/6.22.0-r1/_astro/chart-bar-nolog.Bbkxdwf4_1wErcU.webp)
+
 The large value (`E`) dominates the chart, hiding the smaller categories.
 
 Enable log scaling via `y_log=true` to reveal them:
@@ -177,6 +195,8 @@ from (
 chart_bar x=outcome, y=n, y_log=true
 ```
 
+![Log-scaled bar chart](https://tenzir.com/docs-assets/roots/6.22.0-r1/_astro/chart-bar-log.DkLhynLc_ZktxQO.webp)
+
 Now, you can clearly see all the values!
 
 Interpreting Log-Scaled Plots
@@ -185,7 +205,7 @@ Log scaling removes linearity. Comparing bar heights no longer reflects a simple
 
 ### Plot compositions as pie chart
 
-Pie charts are well-understood and frequently occur in management dashboards. Let’s plot some synthetic data with the [`chart_pie`](https://tenzir.com/docs/reference/operators/chart_pie.md) operator:
+Pie charts are well-understood and frequently occur in management dashboards. Let’s plot some synthetic data with the [`chart_pie`](../reference/operators/chart_pie.md) operator:
 
 ```tql
 from (
@@ -198,6 +218,8 @@ from (
 chart_pie label=category, value=percentage
 ```
 
+![Pie chart](https://tenzir.com/docs-assets/roots/6.22.0-r1/_astro/chart-pie.DZN_Mgb1_ZPD94o.webp)
+
 To provide a consistent user experience across all chart types, `chart_pie` treats `label` and `x` as interchangeable, as well as `value` and `y`. This mapping makes intuitive sense when you consider a pie chart as a bar chart rendered in a radial coordinate system.
 
 Bar Charts > Pie Charts
@@ -208,7 +230,7 @@ Bar Charts > Pie Charts
 
 Line charts come in handy when visualizing data trends over a continuous scale, such as time series data.
 
-1. **Shape your data**: For our line chart demo, we’ll use some internal node metrics provided by the [`metrics`](https://tenzir.com/docs/reference/operators/metrics.md) operator. Let’s look at the RAM usage of the node:
+1. **Shape your data**: For our line chart demo, we’ll use some internal node metrics provided by the [`metrics`](../reference/operators/metrics.md) operator. Let’s look at the RAM usage of the node:
 
    ```tql
    metrics "process"
@@ -222,13 +244,15 @@ Line charts come in handy when visualizing data trends over a continuous scale, 
    {timestamp: 2025-04-27T18:16:19.694Z, current_memory_usage: 2385154048, peak_memory_usage: 4021136}
    ```
 
-2. **Plot the data**: Add the [`chart_line`](https://tenzir.com/docs/reference/operators/chart_line.md) operator to visualize the time series. We are going to plot the memory usage within the last day:
+2. **Plot the data**: Add the [`chart_line`](../reference/operators/chart_line.md) operator to visualize the time series. We are going to plot the memory usage within the last day:
 
    ```tql
    metrics "process"
    where timestamp > now() - 1d
    chart_line x=timestamp, y=current_memory_usage
    ```
+
+   ![Line chart](https://tenzir.com/docs-assets/roots/6.22.0-r1/_astro/chart-line.BGCcmM4p_Z1dU2JL.webp)
 
 3. **Aggregate to reduce the resolution**: Plotting metrics with a 1-second granularity over the course of a full day can make a line chart very noisy. In fact, we have a total of 86,400 samples in our plot. This can make a line chart quickly illegible. Let’s reduce the noise by aggregating the samples into 15-min buckets:
 
@@ -239,6 +263,8 @@ Line charts come in handy when visualizing data trends over a continuous scale, 
    summarize timestamp, mem=mean(current_memory_usage)
    chart_line x=timestamp, y=mem
    ```
+
+   ![Line chart with summarize](https://tenzir.com/docs-assets/roots/6.22.0-r1/_astro/chart-line-summarize.C-kldtdX_Zvkoa9.webp)
 
    This looks a lot smoother! **Pro tip**: you can even further [optimize the above pipeline](plot-data-with-charts.md#optimize-plotting-with-inline-expressions) by using additional operator arguments.
 
@@ -255,6 +281,8 @@ chart_line (
   resolution=15min
 )
 ```
+
+![Line chart with multiple series](https://tenzir.com/docs-assets/roots/6.22.0-r1/_astro/chart-line-multiple.Dp7WqfNy_1ENF3I.webp)
 
 Because `current_memory_usage` comes in gigabytes and `peak_memory_usage` in megabytes, we cannot compare them directly. Hence we normalized the peak usage to gigabytes to make them comparable in a single plot.
 
@@ -275,7 +303,7 @@ chart_line (
 
 Area charts are fantastic for visualizing quantities that accumulate over a continuous variable, such as time or value ranges. They are similar to line charts but emphasize the volume underneath the line.
 
-In the above section about line charts, you can exchange every call to [`chart_line`](https://tenzir.com/docs/reference/operators/chart_line.md) with [`chart_area`](https://tenzir.com/docs/reference/operators/chart_area.md) and will get a working plot.
+In the above section about line charts, you can exchange every call to [`chart_line`](../reference/operators/chart_line.md) with [`chart_area`](../reference/operators/chart_area.md) and will get a working plot.
 
 ```tql
 from (
@@ -287,6 +315,8 @@ from (
 )
 chart_area x=time, y={a: a, b: b}
 ```
+
+![Area chart](https://tenzir.com/docs-assets/roots/6.22.0-r1/_astro/chart-area.qpx_UOJY_1pvxh8.webp)
 
 The area under the curve gives you a strong visual impression of the total event volume over time.
 
@@ -307,6 +337,8 @@ from (
 chart_area x=time, y={a: a, b: b}, position="stacked"
 ```
 
+![Stacked area chart](https://tenzir.com/docs-assets/roots/6.22.0-r1/_astro/chart-area-stacked.D1LdGZR3_shlC3.webp)
+
 Notice the difference in the y-axis interpretation:
 
 * Without stacking, the areas *overlap* each other.
@@ -326,6 +358,8 @@ summarize timestamp, mem=mean(current_memory_usage)  // aggregation
 chart_line x=timestamp, y=mem
 ```
 
+![Line chart with summarize](https://tenzir.com/docs-assets/roots/6.22.0-r1/_astro/chart-line-summarize.C-kldtdX_Zvkoa9.webp)
+
 You can push the filtering, rounding, and aggregation into the chart operator:
 
 ```tql
@@ -337,6 +371,8 @@ chart_line (
   x_min=now() - 1d,             // filtering
 )
 ```
+
+![Line chart with resolution](https://tenzir.com/docs-assets/roots/6.22.0-r1/_astro/chart-line-resolution.CA1-QTst_Z1x2W4i.webp)
 
 Note how this make the pipeline more succinct by removing the extra `where`, `set`, and `summarize` operators.
 

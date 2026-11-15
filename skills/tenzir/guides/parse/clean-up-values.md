@@ -17,7 +17,7 @@ Many data sources use string placeholders instead of actual null values. Common 
 
 ### Normalize across all fields
 
-Use [`replace`](https://tenzir.com/docs/reference/operators/replace.md) to convert placeholders to null across all string fields:
+Use [`replace`](../../reference/operators/replace.md) to convert placeholders to null across all string fields:
 
 ```tql
 from {status: "active", error: "None"},

@@ -48,7 +48,7 @@ from {x: from_epoch(50y + 12w + 20m)}
 
 ## See Also
 
-* [`now`](https://tenzir.com/docs/reference/functions/now.md)
-* [`since_epoch`](https://tenzir.com/docs/reference/functions/since_epoch.md)
+* [`now`](now.md)
+* [`since_epoch`](since_epoch.md)
 * [Normalize event timestamps](../../guides/shape/normalize-event-timestamps.md)
 * [Learn idiomatic TQL](../../tutorials/learn-idiomatic-tql.md)

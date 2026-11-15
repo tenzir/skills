@@ -45,6 +45,6 @@ select span_rank=ecdf([17, 100, 373, 1000], 373),
 
 ## See also
 
-* [`tdigest_cdf`](https://tenzir.com/docs/reference/functions/tdigest_cdf.md)
-* [`kolmogorov_smirnov`](https://tenzir.com/docs/reference/functions/kolmogorov_smirnov.md)
-* [`wasserstein`](https://tenzir.com/docs/reference/functions/wasserstein.md)
+* [`tdigest_cdf`](tdigest_cdf.md)
+* [`kolmogorov_smirnov`](kolmogorov_smirnov.md)
+* [`wasserstein`](wasserstein.md)

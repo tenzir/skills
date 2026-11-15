@@ -12,7 +12,7 @@ section: "Docs"
 
 This guide shows you how to check whether your existing Sigma rules can run unchanged on OCSF events. Your pipeline now produces normalized events, but the rules still reference source fields such as `Image` and `CommandLine`. You need to verify both rule support and whether normalization preserved the required evidence.
 
-The [`sigma`](https://tenzir.com/docs/reference/operators/sigma.md) operator translates supported rule predicates to OCSF lookups without changing the rule or event. It cannot recover information lost during normalization. Use the catalog to find your rule’s logsource and field mappings, then follow the worked example to check those fields in an actual normalized event, verify a match, and diagnose missing evidence.
+The [`sigma`](../../reference/operators/sigma.md) operator translates supported rule predicates to OCSF lookups without changing the rule or event. It cannot recover information lost during normalization. Use the catalog to find your rule’s logsource and field mappings, then follow the worked example to check those fields in an actual normalized event, verify a match, and diagnose missing evidence.
 
 ## Mapping catalog
 

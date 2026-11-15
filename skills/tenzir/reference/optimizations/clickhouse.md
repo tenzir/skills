@@ -9,7 +9,7 @@ section: "Docs"
 
 > When fromclickhouse reads a table, it hands ClickHouse the operators that follow it, so that ClickHouse sends only what the pipeline keeps instead of the whole table. Those operators leave the pipeline and run in ClickHouse, with ClickHouse’s semantics. This page describes which operators ClickHouse takes over, how its results can differ from Tenzir’s, and how to keep operators in Tenzir. The optimizations overview explains how Tenzir optimizes pipelines in general.
 
-When [`from_clickhouse`](https://tenzir.com/docs/reference/operators/from_clickhouse.md) reads a table, it hands ClickHouse the operators that follow it, so that ClickHouse sends only what the pipeline keeps instead of the whole table. Those operators leave the pipeline and run in ClickHouse, with ClickHouse’s semantics. This page describes which operators ClickHouse takes over, how its results can differ from Tenzir’s, and how to keep operators in Tenzir. The [optimizations overview](../optimizations.md) explains how Tenzir optimizes pipelines in general.
+When [`from_clickhouse`](../operators/from_clickhouse.md) reads a table, it hands ClickHouse the operators that follow it, so that ClickHouse sends only what the pipeline keeps instead of the whole table. Those operators leave the pipeline and run in ClickHouse, with ClickHouse’s semantics. This page describes which operators ClickHouse takes over, how its results can differ from Tenzir’s, and how to keep operators in Tenzir. The [optimizations overview](../optimizations.md) explains how Tenzir optimizes pipelines in general.
 
 ## When it applies
 
@@ -20,20 +20,20 @@ The operator reads in one of these modes:
 
 With `pushdown=false`, every operator stays in Tenzir and runs with TQL semantics. The operator still reads only the columns that the pipeline uses.
 
-[`from_hydrolix`](https://tenzir.com/docs/reference/operators/from_hydrolix.md) keeps its previous optimizations for now: it sends filters that Tenzir evaluates again, and limits, and computes summaries in Hydrolix only when no operator follows them.
+[`from_hydrolix`](../operators/from_hydrolix.md) keeps its previous optimizations for now: it sends filters that Tenzir evaluates again, and limits, and computes summaries in Hydrolix only when no operator follows them.
 
 ## Operators that ClickHouse takes over
 
 The operator takes over the longest run of operators directly after it that ClickHouse can spell:
 
-* [`where`](https://tenzir.com/docs/reference/operators/where.md), as the [filters](clickhouse.md#filters) section describes.
-* [`select`](https://tenzir.com/docs/reference/operators/select.md) of fields, including renames and elements of named tuples, such as `select ip=src_ip, meta.level`.
-* [`drop`](https://tenzir.com/docs/reference/operators/drop.md) of top-level fields, which becomes `* EXCEPT (…)`.
-* [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) with group keys on fields and `count()`, `count(x)`, `min(x)`, and `max(x)` of fields. The summary may follow [`select`](https://tenzir.com/docs/reference/operators/select.md), [`drop`](https://tenzir.com/docs/reference/operators/drop.md), and assignments that copy fields, as [Aggregations in the source](../optimizations.md#aggregations-in-the-source) describes. `sum` and `mean` stay in Tenzir, since ClickHouse may return `NaN` or infinity for them.
-* [`sort`](https://tenzir.com/docs/reference/operators/sort.md) by fields.
-* [`head`](https://tenzir.com/docs/reference/operators/head.md), and [`top`](https://tenzir.com/docs/reference/operators/top.md) or [`rare`](https://tenzir.com/docs/reference/operators/rare.md) followed by [`head`](https://tenzir.com/docs/reference/operators/head.md).
+* [`where`](../operators/where.md), as the [filters](clickhouse.md#filters) section describes.
+* [`select`](../operators/select.md) of fields, including renames and elements of named tuples, such as `select ip=src_ip, meta.level`.
+* [`drop`](../operators/drop.md) of top-level fields, which becomes `* EXCEPT (…)`.
+* [`summarize`](../operators/summarize.md) with group keys on fields and `count()`, `count(x)`, `min(x)`, and `max(x)` of fields. The summary may follow [`select`](../operators/select.md), [`drop`](../operators/drop.md), and assignments that copy fields, as [Aggregations in the source](../optimizations.md#aggregations-in-the-source) describes. `sum` and `mean` stay in Tenzir, since ClickHouse may return `NaN` or infinity for them.
+* [`sort`](../operators/sort.md) by fields.
+* [`head`](../operators/head.md), and [`top`](../operators/top.md) or [`rare`](../operators/rare.md) followed by [`head`](../operators/head.md).
 
-The first operator that ClickHouse cannot spell ends the run. That operator and everything after it run in Tenzir. Tenzir splits a [`where`](https://tenzir.com/docs/reference/operators/where.md) at `and`, so ClickHouse can still take over the conjuncts that it spells. For example, the pipeline
+The first operator that ClickHouse cannot spell ends the run. That operator and everything after it run in Tenzir. Tenzir splits a [`where`](../operators/where.md) at `and`, so ClickHouse can still take over the conjuncts that it spells. For example, the pipeline
 
 ```tql
 from_clickhouse table="logs.events"
@@ -55,11 +55,11 @@ WHERE (`__tenzir_column_1` >= 2)
 ORDER BY `__tenzir_column_1` DESC LIMIT 3
 ```
 
-The operator nests derived tables where SQL’s clause order requires it, and keeps the order of a [`sort`](https://tenzir.com/docs/reference/operators/sort.md) across them. Tenzir arranges the result columns into the fields of the pipeline, such as `Y` and `n`. A table read asks ClickHouse to fail rather than return a partial result when it hits one of its limits, such as a `max_result_rows` setting of your user’s profile. When the pipeline stops, the operator also stops a query that ClickHouse is still running, such as a sort or a summary that has not returned its first rows yet.
+The operator nests derived tables where SQL’s clause order requires it, and keeps the order of a [`sort`](../operators/sort.md) across them. Tenzir arranges the result columns into the fields of the pipeline, such as `Y` and `n`. A table read asks ClickHouse to fail rather than return a partial result when it hits one of its limits, such as a `max_result_rows` setting of your user’s profile. When the pipeline stops, the operator also stops a query that ClickHouse is still running, such as a sort or a summary that has not returned its first rows yet.
 
 ## Filters
 
-ClickHouse takes over a [`where`](https://tenzir.com/docs/reference/operators/where.md) whose predicate consists of:
+ClickHouse takes over a [`where`](../operators/where.md) whose predicate consists of:
 
 * Fields, including elements of named tuples, such as `meta.level`, which becomes `tupleElement(meta, 'level')`, and columns with a dot in their name, such as `this["a.b"]`.
 * Literals: numbers, strings, booleans, `null`, times, which become `fromUnixTimestamp64Nano(…, 'UTC')`, and IP addresses, which become `toIPv4(…)` or `toIPv6(…)`.
@@ -70,17 +70,17 @@ Durations, subnets, non-finite numbers, other functions, and optional fields suc
 
 ## Binding fields
 
-The operator decides which operators to take over from the pipeline alone. When the pipeline runs, it reads the table’s columns and binds every field that those operators use to a column: a top-level column, an element of a named tuple, a column with a dot in its name, or a path below a `JSON` column. If a field cannot be bound, the read fails before ClickHouse runs a query, with the reason and a hint to use `pushdown=false`. This happens for a path below a column that is not a named tuple or `JSON`, for a tuple element that does not exist, for a generated `ALIAS`, `MATERIALIZED`, or `EPHEMERAL` column, which `SELECT *` may leave out, and for a [`sort`](https://tenzir.com/docs/reference/operators/sort.md) by a path below a `JSON` column whose order a later operator needs, such as in `sort j.k | head 10 | sort id`. A top-level field that the table lacks fails the query in ClickHouse.
+The operator decides which operators to take over from the pipeline alone. When the pipeline runs, it reads the table’s columns and binds every field that those operators use to a column: a top-level column, an element of a named tuple, a column with a dot in its name, or a path below a `JSON` column. If a field cannot be bound, the read fails before ClickHouse runs a query, with the reason and a hint to use `pushdown=false`. This happens for a path below a column that is not a named tuple or `JSON`, for a tuple element that does not exist, for a generated `ALIAS`, `MATERIALIZED`, or `EPHEMERAL` column, which `SELECT *` may leave out, and for a [`sort`](../operators/sort.md) by a path below a `JSON` column whose order a later operator needs, such as in `sort j.k | head 10 | sort id`. A top-level field that the table lacks fails the query in ClickHouse.
 
 ## Catch-all tables
 
-A table with a [catch-all column](../../integrations/clickhouse.md#catch-all-columns) returns reconstructed events, in which the fields of the catch-all move to the top level and dotted columns become nested fields. ClickHouse takes over [`where`](https://tenzir.com/docs/reference/operators/where.md), [`sort`](https://tenzir.com/docs/reference/operators/sort.md), and [`head`](https://tenzir.com/docs/reference/operators/head.md) on such a table, binding each field to the single column that holds it: a typed column, or a path of the catch-all or another `JSON` column.
+A table with a [catch-all column](https://tenzir.com/integrations/clickhouse#catch-all-columns) returns reconstructed events, in which the fields of the catch-all move to the top level and dotted columns become nested fields. ClickHouse takes over [`where`](../operators/where.md), [`sort`](../operators/sort.md), and [`head`](../operators/head.md) on such a table, binding each field to the single column that holds it: a typed column, or a path of the catch-all or another `JSON` column.
 
 The read fails before it runs a query, with a hint to use `pushdown=false`, if:
 
-* ClickHouse takes over a [`select`](https://tenzir.com/docs/reference/operators/select.md), [`drop`](https://tenzir.com/docs/reference/operators/drop.md), or [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md), which need the reconstructed events.
+* ClickHouse takes over a [`select`](../operators/select.md), [`drop`](../operators/drop.md), or [`summarize`](../operators/summarize.md), which need the reconstructed events.
 * A field has no single origin, such as a record that a dotted column merges into, or a field that overlaps a generated column.
-* A column shadows the field, such as a column `event.category` next to the catch-all `event` for the field `category`, since ClickHouse resolves the path to that column. Our integration guide explains how to [name the catch-all column](../../integrations/clickhouse.md#name-the-catch-all-column) to avoid this.
+* A column shadows the field, such as a column `event.category` next to the catch-all `event` for the field `category`, since ClickHouse resolves the path to that column. Our integration guide explains how to [name the catch-all column](https://tenzir.com/integrations/clickhouse#name-the-catch-all-column) to avoid this.
 * A field holds a whole `JSON` value, such as the catch-all column itself.
 
 Use `pushdown=false` to compute these operators in Tenzir on the reconstructed events.

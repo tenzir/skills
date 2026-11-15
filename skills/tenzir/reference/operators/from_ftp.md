@@ -56,13 +56,13 @@ See the [Node TLS Setup guide](../../guides/node-setup/configure-tls.md) for mor
 
 A required parsing subpipeline.
 
-The subpipeline receives the downloaded body as bytes and must return events. For example, use [`read_ndjson`](https://tenzir.com/docs/reference/operators/read_ndjson.md) to parse newline-delimited JSON.
+The subpipeline receives the downloaded body as bytes and must return events. For example, use [`read_ndjson`](read_ndjson.md) to parse newline-delimited JSON.
 
 ## Examples
 
 ### Download NDJSON from an FTP server
 
-Use [`read_ndjson`](https://tenzir.com/docs/reference/operators/read_ndjson.md) when the remote file already contains newline-delimited JSON.
+Use [`read_ndjson`](read_ndjson.md) when the remote file already contains newline-delimited JSON.
 
 ```tql
 from_ftp "ftp://user:pass@ftp.example.org/events.ndjson" {
@@ -83,5 +83,5 @@ from_ftp "ftp://user:pass@ftp.example.org/events.json.gz" {
 
 ## See Also
 
-* [`to_ftp`](https://tenzir.com/docs/reference/operators/to_ftp.md)
-* [Ftp](../../integrations/ftp.md)
+* [`to_ftp`](to_ftp.md)
+* [Ftp](https://tenzir.com/integrations/ftp)

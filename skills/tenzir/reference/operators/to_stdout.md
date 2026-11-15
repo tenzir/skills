@@ -56,5 +56,5 @@ to_stdout
 
 ## See Also
 
-* [`from_stdin`](https://tenzir.com/docs/reference/operators/from_stdin.md)
-* [`to_file`](https://tenzir.com/docs/reference/operators/to_file.md)
+* [`from_stdin`](from_stdin.md)
+* [`to_file`](to_file.md)

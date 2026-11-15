@@ -69,4 +69,4 @@ from_stdin {
 
 ## See Also
 
-* [`from_file`](https://tenzir.com/docs/reference/operators/from_file.md)
+* [`from_file`](from_file.md)

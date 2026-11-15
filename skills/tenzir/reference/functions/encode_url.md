@@ -41,5 +41,5 @@ encoded = input.encode_url()
 
 ## See Also
 
-* [`decode_url`](https://tenzir.com/docs/reference/functions/decode_url.md)
+* [`decode_url`](decode_url.md)
 * [Manipulate strings](../../guides/shape/manipulate-strings.md)

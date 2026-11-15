@@ -174,4 +174,4 @@ from_microsoft_365_activity auth={
 
 ## See Also
 
-* [`from_microsoft_graph`](https://tenzir.com/docs/reference/operators/from_microsoft_graph.md)
+* [`from_microsoft_graph`](from_microsoft_graph.md)

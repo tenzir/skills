@@ -44,7 +44,7 @@ package_add "/mnt/config/tenzir/library/zeek",
 
 ## See Also
 
-* [`package_list`](https://tenzir.com/docs/reference/operators/package_list.md)
-* [`package_remove`](https://tenzir.com/docs/reference/operators/package_remove.md)
+* [`package_list`](package_list.md)
+* [`package_remove`](package_remove.md)
 * [Install a package](../../guides/packages/install-a-package.md)
 * [Onboard a data source](../../tutorials/onboard-a-data-source.md)

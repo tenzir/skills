@@ -87,6 +87,6 @@ x = x.print_json(strip_null_fields=true)
 
 ## See Also
 
-* [`write_json`](https://tenzir.com/docs/reference/operators/write_json.md)
-* [`parse_json`](https://tenzir.com/docs/reference/functions/parse_json.md)
-* [`print_ndjson`](https://tenzir.com/docs/reference/functions/print_ndjson.md)
+* [`write_json`](../operators/write_json.md)
+* [`parse_json`](parse_json.md)
+* [`print_ndjson`](print_ndjson.md)

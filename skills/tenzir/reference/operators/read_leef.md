@@ -177,10 +177,10 @@ When you provide a `schema` or `selector`, the last value of a repeated key wins
 
 ## See Also
 
-* [`read_cef`](https://tenzir.com/docs/reference/operators/read_cef.md)
-* [`read_syslog`](https://tenzir.com/docs/reference/operators/read_syslog.md)
-* [`write_syslog`](https://tenzir.com/docs/reference/operators/write_syslog.md)
-* [`parse_leef`](https://tenzir.com/docs/reference/functions/parse_leef.md)
-* [`print_leef`](https://tenzir.com/docs/reference/functions/print_leef.md)
-* [Qradar](../../integrations/qradar.md)
-* [Syslog](../../integrations/syslog.md)
+* [`read_cef`](read_cef.md)
+* [`read_syslog`](read_syslog.md)
+* [`write_syslog`](write_syslog.md)
+* [`parse_leef`](../functions/parse_leef.md)
+* [`print_leef`](../functions/print_leef.md)
+* [Qradar](https://tenzir.com/integrations/qradar)
+* [Syslog](https://tenzir.com/integrations/syslog)

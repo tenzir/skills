@@ -23,4 +23,4 @@ The `type_uid` for which `type_name` should be returned.
 
 ## See Also
 
-* [`ocsf_type_uid`](https://tenzir.com/docs/reference/functions/ocsf_type_uid.md)
+* [`ocsf_type_uid`](ocsf_type_uid.md)

@@ -268,7 +268,7 @@ Write dates and timestamps using the [ISO 8601 standard](https://en.wikipedia.or
 * With timezone offset: `2024-10-03T14:30:00+02:00`
 * With fractional seconds: `2024-10-03T14:30:00.123+02:00`
 
-Time literals cannot contain spaces. To convert timestamps in other formats, such as `"2024-10-03 14:30:00 GMT"`, parse a string with [`time`](https://tenzir.com/docs/reference/functions/time.md) or [`parse_time`](https://tenzir.com/docs/reference/functions/parse_time.md).
+Time literals cannot contain spaces. To convert timestamps in other formats, such as `"2024-10-03 14:30:00 GMT"`, parse a string with [`time`](functions/time.md) or [`parse_time`](functions/parse_time.md).
 
 Time points represent specific moments and support arithmetic with durations:
 
@@ -345,7 +345,7 @@ from {
 
 [Secrets](../explanations/secrets.md) protect sensitive values like authentication tokens and passwords. A value of type `secret` holds the actual secret value, which Tenzir resolves once before the first event arrives.
 
-Create secrets using the [`secret`](https://tenzir.com/docs/reference/functions/secret.md) function or pass string literals directly to operators that accept secrets:
+Create secrets using the [`secret`](functions/secret.md) function or pass string literals directly to operators that accept secrets:
 
 ```tql
 // Using managed secret
@@ -914,7 +914,7 @@ Expressions like `1 - 2 * 3 + 4` follow these precedence and associativity rules
 
 ## Conditional Expressions
 
-Use conditional expressions when one value depends on a predicate. If you need to route events through different statements based on literal values, use the [`match` statement](https://tenzir.com/docs/reference/statements.md#match).
+Use conditional expressions when one value depends on a predicate. If you need to route events through different statements based on literal values, use the [`match` statement](statements.md#match).
 
 ### Python-style Conditionals
 
@@ -1129,7 +1129,7 @@ If the pipeline expression is the last argument, omit the preceding comma. Brace
 
 ### Let Substitution
 
-Reference previously defined [`let`](https://tenzir.com/docs/reference/statements.md#let) bindings using `$`-prefixed names:
+Reference previously defined [`let`](statements.md#let) bindings using `$`-prefixed names:
 
 ```tql
 let $pi = 3.14159

@@ -56,7 +56,7 @@ The nested notes point straight at the cause:
 
 ## Check the endpoint and token
 
-A node connects using a platform token, optionally with an explicit control endpoint. Confirm the node uses the values you expect with [`config`](https://tenzir.com/docs/reference/functions/config.md):
+A node connects using a platform token, optionally with an explicit control endpoint. Confirm the node uses the values you expect with [`config`](../../reference/functions/config.md):
 
 ```tql
 from config()
@@ -69,8 +69,8 @@ If the endpoint and token are correct and the network allows the outbound WebSoc
 
 ## See also
 
-* [`metrics`](https://tenzir.com/docs/reference/operators/metrics.md)
-* [`config`](https://tenzir.com/docs/reference/functions/config.md)
+* [`metrics`](../../reference/operators/metrics.md)
+* [`config`](../../reference/functions/config.md)
 * [Configure a node](../node-setup/configure-a-node.md)
 * [Configure TLS](../node-setup/configure-tls.md)
 * [Inspect a node](../observability/inspect-a-node.md)

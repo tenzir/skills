@@ -137,13 +137,13 @@ The operator maps MySQL types to [Type System](../types.md) as follows:
 | `BLOB` and other binary blob types                  | `blob`      |                                  |
 | All other types                                     | `string`    | The text that MySQL sends        |
 
-All other types include `CHAR`, `VARCHAR`, `TEXT`, `BINARY`, `VARBINARY`, `DATE`, `DATETIME`, `TIMESTAMP`, `TIME`, `JSON`, `ENUM`, and `SET`. Convert them in the pipeline where you need another type, for example with the [`time`](https://tenzir.com/docs/reference/functions/time.md) or [`parse_json`](https://tenzir.com/docs/reference/functions/parse_json.md) functions.
+All other types include `CHAR`, `VARCHAR`, `TEXT`, `BINARY`, `VARBINARY`, `DATE`, `DATETIME`, `TIMESTAMP`, `TIME`, `JSON`, `ENUM`, and `SET`. Convert them in the pipeline where you need another type, for example with the [`time`](../functions/time.md) or [`parse_json`](../functions/parse_json.md) functions.
 
 In table mode, the operator sets the session’s time zone to UTC, so `TIMESTAMP` columns arrive in UTC.
 
 ## Optimizations
 
-When the operator reads a table, it hands MySQL the [`where`](https://tenzir.com/docs/reference/operators/where.md), [`select`](https://tenzir.com/docs/reference/operators/select.md), [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md), [`sort`](https://tenzir.com/docs/reference/operators/sort.md), and [`head`](https://tenzir.com/docs/reference/operators/head.md) operators that follow it, as far as MySQL can spell them, so that MySQL returns only what the pipeline keeps and can use its indexes. Those operators leave the pipeline and run with MySQL’s semantics, which can differ from TQL: for example, text compares under the collation of its column, which often ignores case, and `name != "alpha"` does not keep rows where `name` is `NULL`. A live read hands MySQL its filters only. Use `pushdown=false` to keep every operator in the pipeline.
+When the operator reads a table, it hands MySQL the [`where`](where.md), [`select`](select.md), [`summarize`](summarize.md), [`sort`](sort.md), and [`head`](head.md) operators that follow it, as far as MySQL can spell them, so that MySQL returns only what the pipeline keeps and can use its indexes. Those operators leave the pipeline and run with MySQL’s semantics, which can differ from TQL: for example, text compares under the collation of its column, which often ignores case, and `name != "alpha"` does not keep rows where `name` is `NULL`. A live read hands MySQL its filters only. Use `pushdown=false` to keep every operator in the pipeline.
 
 The page on [MySQL optimizations](../optimizations/mysql.md) describes which operators MySQL takes over and how its semantics differ, and the [optimizations overview](../optimizations.md) explains how Tenzir optimizes pipelines in general.
 
@@ -254,5 +254,5 @@ from_mysql table="events", live=true, tracking_column="event_id",
 ## See Also
 
 * [Read from data stores](../../guides/collect/read-from-data-stores.md)
-* [`to_clickhouse`](https://tenzir.com/docs/reference/operators/to_clickhouse.md)
-* [Mysql](../../integrations/mysql.md)
+* [`to_clickhouse`](to_clickhouse.md)
+* [Mysql](https://tenzir.com/integrations/mysql)

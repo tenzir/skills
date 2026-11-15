@@ -61,5 +61,5 @@ select users = hll_cardinality(model)
 
 ## See also
 
-* [`hll`](https://tenzir.com/docs/reference/functions/hll.md)
-* [`model_merge`](https://tenzir.com/docs/reference/functions/model_merge.md)
+* [`hll`](hll.md)
+* [`model_merge`](model_merge.md)

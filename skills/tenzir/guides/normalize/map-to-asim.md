@@ -48,7 +48,7 @@ These rules are specific to ASIM:
 
 ## See Also
 
-* [`to_azure_log_analytics`](https://tenzir.com/docs/reference/operators/to_azure_log_analytics.md)
+* [`to_azure_log_analytics`](../../reference/operators/to_azure_log_analytics.md)
 * [Clean up values](../parse/clean-up-values.md)
 * [Use agent skills](../ai-workbench/use-agent-skills.md#use-the-asim-skill)
 * [Map to CIM](map-to-cim.md)
@@ -57,5 +57,5 @@ These rules are specific to ASIM:
 * [Map to UDM](map-to-udm.md)
 * [Create a package](../packages/create-a-package.md)
 * [Write tests](../testing/write-tests.md)
-* [Sentinel](../../integrations/microsoft/sentinel.md)
+* [Sentinel](https://tenzir.com/integrations/microsoft/sentinel)
 * [Onboard a data source](../../tutorials/onboard-a-data-source.md)

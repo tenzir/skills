@@ -63,6 +63,6 @@ contains_null = this.contains_null()
 
 ## See Also
 
-* [`search`](https://tenzir.com/docs/reference/functions/search.md)
-* [`has`](https://tenzir.com/docs/reference/functions/has.md)
-* [`is_empty`](https://tenzir.com/docs/reference/functions/is_empty.md)
+* [`search`](search.md)
+* [`has`](has.md)
+* [`is_empty`](is_empty.md)

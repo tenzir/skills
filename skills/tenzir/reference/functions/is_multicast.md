@@ -45,10 +45,10 @@ from {
 
 ## See Also
 
-* [`ip_category`](https://tenzir.com/docs/reference/functions/ip_category.md)
-* [`is_global`](https://tenzir.com/docs/reference/functions/is_global.md)
-* [`is_link_local`](https://tenzir.com/docs/reference/functions/is_link_local.md)
-* [`is_loopback`](https://tenzir.com/docs/reference/functions/is_loopback.md)
-* [`is_private`](https://tenzir.com/docs/reference/functions/is_private.md)
-* [`is_v4`](https://tenzir.com/docs/reference/functions/is_v4.md)
-* [`is_v6`](https://tenzir.com/docs/reference/functions/is_v6.md)
+* [`ip_category`](ip_category.md)
+* [`is_global`](is_global.md)
+* [`is_link_local`](is_link_local.md)
+* [`is_loopback`](is_loopback.md)
+* [`is_private`](is_private.md)
+* [`is_v4`](is_v4.md)
+* [`is_v6`](is_v6.md)

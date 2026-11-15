@@ -131,4 +131,4 @@ from_velociraptor subscribe="Windows"
 
 ## See Also
 
-* [Velociraptor](../../integrations/velociraptor.md)
+* [Velociraptor](https://tenzir.com/integrations/velociraptor)

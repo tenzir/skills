@@ -108,6 +108,6 @@ from {
 
 ## See Also
 
-* [`replace_regex`](https://tenzir.com/docs/reference/functions/replace_regex.md)
-* [`replace`](https://tenzir.com/docs/reference/operators/replace.md)
+* [`replace_regex`](replace_regex.md)
+* [`replace`](../operators/replace.md)
 * [Manipulate strings](../../guides/shape/manipulate-strings.md)

@@ -21,7 +21,7 @@ The `unflatten` function creates nested records out of fields whose names includ
 
 Note
 
-`unflatten` uses a heuristic to determine the unflattened schema. Thus, the schema of a record that has been flattened using [`flatten`](https://tenzir.com/docs/reference/functions/flatten.md) and unflattened afterwards may not be identical to the schema of the unmodified record.
+`unflatten` uses a heuristic to determine the unflattened schema. Thus, the schema of a record that has been flattened using [`flatten`](flatten.md) and unflattened afterwards may not be identical to the schema of the unmodified record.
 
 ### `x: record`
 
@@ -80,6 +80,6 @@ this = unflatten(this)
 
 ## See Also
 
-* [`flatten`](https://tenzir.com/docs/reference/functions/flatten.md)
+* [`flatten`](flatten.md)
 * [Shape records](../../guides/shape/shape-records.md)
 * [Reshape complex data](../../guides/shape/reshape-complex-data.md)

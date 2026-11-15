@@ -45,5 +45,5 @@ x = x.print_yaml()
 
 ## See Also
 
-* [`parse_yaml`](https://tenzir.com/docs/reference/functions/parse_yaml.md)
-* [`write_yaml`](https://tenzir.com/docs/reference/operators/write_yaml.md)
+* [`parse_yaml`](parse_yaml.md)
+* [`write_yaml`](../operators/write_yaml.md)

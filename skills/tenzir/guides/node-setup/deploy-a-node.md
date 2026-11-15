@@ -176,7 +176,11 @@ Before deploying with either method, you need to subscribe to the Tenzir Node pr
 
 1. Go to [AWS Marketplace](https://console.aws.amazon.com/marketplace/) and subscribe to the free [Tenzir Node](https://console.aws.amazon.com/marketplace/search/listing/prodview-gsofc3z6f3vsu) product.
 
+   ![AWS Marketplace Tenzir Node](https://tenzir.com/docs-assets/roots/6.22.0-r1/_astro/01-aws-marketplace.BV34EsMs_1BhABC.webp)
+
 2. Accept the terms to subscribe to the offering.
+
+   ![AWS Marketplace Tenzir Node](https://tenzir.com/docs-assets/roots/6.22.0-r1/_astro/02-subscribe.BuWO6X8P_Z10F8Rn.webp)
 
 ### Choose your deployment method
 
@@ -190,6 +194,8 @@ Before deploying with either method, you need to subscribe to the Tenzir Node pr
 
   1. **Review the pre-filled template**: The CloudFormation console will open with our single-node container template already loaded:
 
+     ![CloudFormation Create Stack](https://tenzir.com/docs-assets/roots/6.22.0-r1/_astro/01-create-stack.GmdJ5tXH_1VXYyr.webp)
+
   2. **Configure your stack**:
 
      * **Stack name**: Choose a unique name for your stack (e.g., `tenzir-node-prod`)
@@ -197,9 +203,15 @@ Before deploying with either method, you need to subscribe to the Tenzir Node pr
 
      Double-check that the container image URL points to the Tenzir Node version you want to deploy.
 
+     ![Stack Parameters](https://tenzir.com/docs-assets/roots/6.22.0-r1/_astro/02-stack-parameters.B4Oua0h9_ZxFm40.webp)
+
   3. **Accept the default stack options**: For most deployments, the defaults work perfectly:
 
+     ![Stack Options](https://tenzir.com/docs-assets/roots/6.22.0-r1/_astro/03-stack-options.5n7bQip1_14IK2p.webp)
+
   4. **Review and acknowledge**: Confirm your configuration and check the acknowledgment box:
+
+     ![Review Stack](https://tenzir.com/docs-assets/roots/6.22.0-r1/_astro/04-review-stack.DSPyQTC8_1m5FCn.webp)
 
   5. **Deploy your node**: Click *Submit* to start the deployment. Monitor progress in the *Events* tab.
 
@@ -299,12 +311,18 @@ Before deploying with either method, you need to subscribe to the Tenzir Node pr
 
   1. Navigate to [Amazon Elastic Container Service (ECS)](https://console.aws.amazon.com/ecs).
 
+     ![Amazon Elastic Container Service (ECS)](https://tenzir.com/docs-assets/roots/6.22.0-r1/_astro/01-ecs.D-9AB8KO_ZqGoWw.webp)
+
   2. Create a new cluster. Choose between **EC2** or **Fargate** based on your needs:
 
      * **EC2 clusters** give you full control over the underlying instances. They’re ideal for long-running workloads with consistent resource requirements.
      * **Fargate clusters** provide serverless container execution where you pay only for the resources you use. They’re cost-effective for workloads with variable demand.
 
+     ![Create a Cluster](https://tenzir.com/docs-assets/roots/6.22.0-r1/_astro/02-create-cluster.DWOcGwyQ_1oxAoB.webp)
+
   3. Create a task definition to specify how the Tenzir node container should run.
+
+     ![Create a Cluster](https://tenzir.com/docs-assets/roots/6.22.0-r1/_astro/03-create-task-definition.Ds8CzEXJ_Z107mnc.webp)
 
      In the *Containers* section, enter the repository URL from your AWS Marketplace subscription:
 
@@ -316,7 +334,11 @@ Before deploying with either method, you need to subscribe to the Tenzir Node pr
 
   4. Return to your cluster, navigate to the *Tasks* tab, and click *Run new task*. Select the task definition you just created.
 
+     ![Create a Cluster](https://tenzir.com/docs-assets/roots/6.22.0-r1/_astro/04-run-task.BaW9wNbx_1oc9XD.webp)
+
      In the *Container overrides* section, add the `TENZIR_TOKEN` environment variable with the token value corresponding to your node.
+
+     ![Container Overrides](https://tenzir.com/docs-assets/roots/6.22.0-r1/_astro/05-container-overrides.DgPIqnAZ_Z1Lu6iN.webp)
 
      Click *Create* to launch your node.
 
@@ -348,13 +370,19 @@ In the *Basics* tab, perform the following action:
 2. For *Image source*, select *Other registry*.
 3. For *Image*, enter `tenzir/tenzir-node`.
 
+![Basics](https://tenzir.com/docs-assets/roots/6.22.0-r1/_astro/basics.bOCDyyP__Z1UW2qx.webp)
+
 #### Networking
 
 In the *Networking* tab, configure the ports you plan to use for pipelines that receive incoming connections.
 
+![Networking](https://tenzir.com/docs-assets/roots/6.22.0-r1/_astro/networking.DpOSLd0n_Z1D0O3F.webp)
+
 #### Advanced
 
 In the *Advanced* tab, enter the `TENZIR_TOKEN` environment variable from your Docker Compose file.
+
+![Advanced](https://tenzir.com/docs-assets/roots/6.22.0-r1/_astro/advanced.afPiy2h8_Z1wqce8.webp)
 
 #### Create
 
@@ -362,7 +390,7 @@ Once you’ve completed the configuration, click the *Create* button. Your node 
 
 ## Kubernetes
 
-Deploy one or more `tenzir-node` instances on a Kubernetes cluster with the [Tenzir Helm chart](../../reference/node/helm-chart.md). The chart deploys nodes only
+Deploy one or more `tenzir-node` instances on a Kubernetes cluster with the [Tenzir Helm chart](https://tenzir.com/docs/reference/node/helm-chart). The chart deploys nodes only
 
 * it does not deploy the Tenzir Platform. Each node connects out to a Platform you have already provisioned, either cloud-hosted at `app.tenzir.com` or self-hosted through the Sovereign Edition. Each entry in the chart’s `nodes` list renders as its own `StatefulSet` with a persistent volume and a Kubernetes `Service`.
 
@@ -428,7 +456,7 @@ helm upgrade tenzir-node oci://ghcr.io/tenzir/charts/tenzir-node \
   -f values.yaml
 ```
 
-The chart only restarts nodes whose configuration changed. See [Helm chart](../../reference/node/helm-chart.md#change-the-node-configuration) for how the chart’s checksum annotation decides.
+The chart only restarts nodes whose configuration changed. See [Helm chart](https://tenzir.com/docs/reference/node/helm-chart#change-the-node-configuration) for how the chart’s checksum annotation decides.
 
 ### Stop a node
 
@@ -446,7 +474,7 @@ kubectl delete namespace tenzir
 
 ### Verify the chart signature
 
-The chart is signed with [Cosign](https://docs.sigstore.dev/cosign/overview/) keyless via the GitHub Actions OIDC token, the same scheme used for the [`tenzir` container image](https://tenzir.com/docs/guides/node-setup/deploy-a-node.md#verify-container-image-signatures). Verify a specific version with:
+The chart is signed with [Cosign](https://docs.sigstore.dev/cosign/overview/) keyless via the GitHub Actions OIDC token, the same scheme used for the [`tenzir` container image](deploy-a-node.md#verify-container-image-signatures). Verify a specific version with:
 
 ```bash
 cosign verify \
@@ -489,7 +517,7 @@ This example playbook shows how to run a Tenzir service on the machine `example_
 
 #### `tenzir_config_dir` (required)
 
-A path to directory containing a [`tenzir.yaml`](https://tenzir.com/docs/reference/node/configuration.md) relative to the playbook.
+A path to directory containing a [`tenzir.yaml`](../../reference/node/configuration.md) relative to the playbook.
 
 #### `tenzir_read_write_paths`
 

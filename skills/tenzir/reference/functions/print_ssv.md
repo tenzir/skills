@@ -55,5 +55,5 @@ output = this.print_ssv()
 
 ## See Also
 
-* [`write_ssv`](https://tenzir.com/docs/reference/operators/write_ssv.md)
-* [`parse_ssv`](https://tenzir.com/docs/reference/functions/parse_ssv.md)
+* [`write_ssv`](../operators/write_ssv.md)
+* [`parse_ssv`](parse_ssv.md)

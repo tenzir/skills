@@ -49,4 +49,4 @@ api "/pipeline/create", {
 
 ## See Also
 
-* [`openapi`](https://tenzir.com/docs/reference/operators/openapi.md)
+* [`openapi`](openapi.md)

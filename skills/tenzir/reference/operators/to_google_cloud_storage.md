@@ -103,7 +103,7 @@ to_google_cloud_storage "gs://my-bucket/logs/events_{uuid}.json.gz",
 
 ## See Also
 
-* [`from_google_cloud_storage`](https://tenzir.com/docs/reference/operators/from_google_cloud_storage.md)
-* [`to_google_cloud_storage`](https://tenzir.com/docs/reference/operators/to_google_cloud_storage.md)
-* [`to_file`](https://tenzir.com/docs/reference/operators/to_file.md)
-* [Cloud storage](../../integrations/google/cloud-storage.md)
+* [`from_google_cloud_storage`](from_google_cloud_storage.md)
+* [`to_google_cloud_storage`](to_google_cloud_storage.md)
+* [`to_file`](to_file.md)
+* [Cloud storage](https://tenzir.com/integrations/google/cloud-storage)

@@ -28,12 +28,12 @@ tenzir:
 
 These settings apply automatically to operators that use node-level TLS, including:
 
-* [`accept_relp`](https://tenzir.com/docs/reference/operators/accept_relp.md)
-* [`accept_splunk`](https://tenzir.com/docs/reference/operators/accept_splunk.md)
-* [`from_http`](https://tenzir.com/docs/reference/operators/from_http.md)
-* [`to_opensearch`](https://tenzir.com/docs/reference/operators/to_opensearch.md)
-* [`accept_opensearch`](https://tenzir.com/docs/reference/operators/accept_opensearch.md)
-* [`to_splunk`](https://tenzir.com/docs/reference/operators/to_splunk.md)
+* [`accept_relp`](../../reference/operators/accept_relp.md)
+* [`accept_splunk`](../../reference/operators/accept_splunk.md)
+* [`from_http`](../../reference/operators/from_http.md)
+* [`to_opensearch`](../../reference/operators/to_opensearch.md)
+* [`accept_opensearch`](../../reference/operators/accept_opensearch.md)
+* [`to_splunk`](../../reference/operators/to_splunk.md)
 
 ### Available options
 

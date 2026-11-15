@@ -23,9 +23,9 @@ The following table lists existing XSV configurations:
 
 | Format                                                            | Field Separator | List Separator | Null Value |
 | ----------------------------------------------------------------- | --------------- | -------------- | ---------- |
-| [`csv`](https://tenzir.com/docs/reference/functions/print_csv.md) | `,`             | `;`            | empty      |
-| [`ssv`](https://tenzir.com/docs/reference/functions/print_ssv.md) | `<space>`       | `,`            | `-`        |
-| [`tsv`](https://tenzir.com/docs/reference/functions/print_tsv.md) | `\t`            | `,`            | `-`        |
+| [`csv`](print_csv.md) | `,`             | `;`            | empty      |
+| [`ssv`](print_ssv.md) | `<space>`       | `,`            | `-`        |
+| [`tsv`](print_tsv.md) | `\t`            | `,`            | `-`        |
 
 ### `field_separator = str`
 
@@ -64,5 +64,5 @@ output = this.print_xsv(
 
 ## See Also
 
-* [`parse_xsv`](https://tenzir.com/docs/reference/functions/parse_xsv.md)
-* [`write_xsv`](https://tenzir.com/docs/reference/operators/write_xsv.md)
+* [`parse_xsv`](parse_xsv.md)
+* [`write_xsv`](../operators/write_xsv.md)

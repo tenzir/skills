@@ -53,6 +53,6 @@ select span_distance=kolmogorov_smirnov(
 
 ## See also
 
-* [`model_distance`](https://tenzir.com/docs/reference/functions/model_distance.md)
-* [`ecdf`](https://tenzir.com/docs/reference/functions/ecdf.md)
-* [`wasserstein`](https://tenzir.com/docs/reference/functions/wasserstein.md)
+* [`model_distance`](model_distance.md)
+* [`ecdf`](ecdf.md)
+* [`wasserstein`](wasserstein.md)

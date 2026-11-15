@@ -21,7 +21,7 @@ from_duckdb uri:string, [token=secret], [tls=bool|record],
 
 The `from_duckdb` operator reads data from a [DuckDB](https://duckdb.org) database. Use a local file, an in-memory database, or a remote DuckDB server over Quack. Local databases run embedded inside Tenzir.
 
-Our [DuckDB integration](../../integrations/duckdb.md#extensions) describes the bundled extensions available to local queries.
+Our [DuckDB integration](https://tenzir.com/integrations/duckdb#extensions) describes the bundled extensions available to local queries.
 
 The operator supports two query modes:
 
@@ -74,7 +74,7 @@ Enables continuous polling for new rows. The operator first emits every row in t
 
 Live mode assumes that rows commit in tracking order. A row that commits after a row with a larger tracking value was already emitted is skipped, for example when two writers pick keys concurrently and the larger one commits first.
 
-For local databases, live mode opens the database for writing so that it can share the database with [`to_duckdb`](https://tenzir.com/docs/reference/operators/to_duckdb.md) operators in the same node and see what they append. For Quack databases, it polls the server. See [Concurrency](from_duckdb.md#concurrency) for the local-file restrictions.
+For local databases, live mode opens the database for writing so that it can share the database with [`to_duckdb`](to_duckdb.md) operators in the same node and see what they append. For Quack databases, it polls the server. See [Concurrency](from_duckdb.md#concurrency) for the local-file restrictions.
 
 Requires `table`. Defaults to `false`.
 
@@ -122,7 +122,7 @@ A `time` covers the years 1678 to 2261 with nanosecond precision. Timestamps and
 
 ## Optimizations
 
-When the operator reads a table, it hands DuckDB the [`where`](https://tenzir.com/docs/reference/operators/where.md), [`select`](https://tenzir.com/docs/reference/operators/select.md), [`drop`](https://tenzir.com/docs/reference/operators/drop.md), [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md), [`sort`](https://tenzir.com/docs/reference/operators/sort.md), and [`head`](https://tenzir.com/docs/reference/operators/head.md) operators that follow it, as far as DuckDB can spell them, so that DuckDB returns only what the pipeline keeps. Those operators leave the pipeline and run with DuckDB’s semantics, which can differ from TQL: for example, `name != "alpha"` does not keep rows where `name` is `null`, and text compares under the collation of its column. A live read hands DuckDB its filters only. Use `pushdown=false` to keep every operator in the pipeline.
+When the operator reads a table, it hands DuckDB the [`where`](where.md), [`select`](select.md), [`drop`](drop.md), [`summarize`](summarize.md), [`sort`](sort.md), and [`head`](head.md) operators that follow it, as far as DuckDB can spell them, so that DuckDB returns only what the pipeline keeps. Those operators leave the pipeline and run with DuckDB’s semantics, which can differ from TQL: for example, `name != "alpha"` does not keep rows where `name` is `null`, and text compares under the collation of its column. A live read hands DuckDB its filters only. Use `pushdown=false` to keep every operator in the pipeline.
 
 The page on [DuckDB optimizations](../optimizations/duckdb.md) describes which operators DuckDB takes over and how its semantics differ, and the [optimizations overview](../optimizations.md) explains how Tenzir optimizes pipelines in general.
 
@@ -130,14 +130,14 @@ The page on [DuckDB optimizations](../optimizations/duckdb.md) describes which o
 
 Each operator keeps its credentials and TLS settings isolated from other operators. Local-file locking rules do not apply to remote connections.
 
-Remote connections require a DuckDB 2.0 server; DuckDB 1.x servers are not supported. Our [DuckDB integration](../../integrations/duckdb.md#quack) describes the tested client and server versions.
+Remote connections require a DuckDB 2.0 server; DuckDB 1.x servers are not supported. Our [DuckDB integration](https://tenzir.com/integrations/duckdb#quack) describes the tested client and server versions.
 
 ## Concurrency
 
 DuckDB enforces one rule for database files: a process opens a file either for reading or for writing. Within a Tenzir node, this has two consequences:
 
-* `from_duckdb` without `live` opens the file read-only, unless another pipeline already has it open for writing, in which case it shares that database and still only reads. While it reads, a [`to_duckdb`](https://tenzir.com/docs/reference/operators/to_duckdb.md) or a live `from_duckdb` on the same file cannot start.
-* `from_duckdb` with `live=true` opens the file for writing. It shares the database with every [`to_duckdb`](https://tenzir.com/docs/reference/operators/to_duckdb.md) and every other reader of the same file and sees what the writers append.
+* `from_duckdb` without `live` opens the file read-only, unless another pipeline already has it open for writing, in which case it shares that database and still only reads. While it reads, a [`to_duckdb`](to_duckdb.md) or a live `from_duckdb` on the same file cannot start.
+* `from_duckdb` with `live=true` opens the file for writing. It shares the database with every [`to_duckdb`](to_duckdb.md) and every other reader of the same file and sees what the writers append.
 
 Across processes, a file that any process has open for writing cannot be opened by another process at all. Read-only processes can share a file.
 
@@ -264,7 +264,7 @@ from_duckdb "events.duckdb", table="alerts", live=true, tracking_column="seq"
 ## See Also
 
 * [Read from data stores](../../guides/collect/read-from-data-stores.md)
-* [`to_duckdb`](https://tenzir.com/docs/reference/operators/to_duckdb.md)
-* [`from_clickhouse`](https://tenzir.com/docs/reference/operators/from_clickhouse.md)
-* [`from_mysql`](https://tenzir.com/docs/reference/operators/from_mysql.md)
-* [Duckdb](../../integrations/duckdb.md)
+* [`to_duckdb`](to_duckdb.md)
+* [`from_clickhouse`](from_clickhouse.md)
+* [`from_mysql`](from_mysql.md)
+* [Duckdb](https://tenzir.com/integrations/duckdb)

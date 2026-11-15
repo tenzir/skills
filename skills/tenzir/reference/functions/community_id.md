@@ -51,6 +51,6 @@ from {x: community_id(src_ip=1.2.3.4, dst_ip=43.3.132.3, proto="udp")}
 
 ## See Also
 
-* [`decrypt_cryptopan`](https://tenzir.com/docs/reference/functions/decrypt_cryptopan.md)
-* [`encrypt_cryptopan`](https://tenzir.com/docs/reference/functions/encrypt_cryptopan.md)
+* [`decrypt_cryptopan`](decrypt_cryptopan.md)
+* [`encrypt_cryptopan`](encrypt_cryptopan.md)
 * [Manipulate strings](../../guides/shape/manipulate-strings.md)

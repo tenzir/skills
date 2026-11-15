@@ -9,7 +9,7 @@ section: "Docs"
 
 > Tenzir’s AWS operators authenticate with AWS using the AWS SDK’s default credential chain, an OIDC web identity token, or static credentials. This page describes the shared awsiam option used by froms3, tos3, fromamazonsqs, toamazonsqs, fromamazoncloudwatch, toamazoncloudwatch, fromkafka, tokafka, and toiceberg. For toiceberg against an AWS-managed catalog, one resolved provider signs both the catalog requests and the S3 data-file operations.
 
-Tenzir’s AWS operators authenticate with AWS using the AWS SDK’s default credential chain, an OIDC web identity token, or static credentials. This page describes the shared `aws_iam` option used by [`from_s3`](https://tenzir.com/docs/reference/operators/from_s3.md), [`to_s3`](https://tenzir.com/docs/reference/operators/to_s3.md), [`from_amazon_sqs`](https://tenzir.com/docs/reference/operators/from_amazon_sqs.md), [`to_amazon_sqs`](https://tenzir.com/docs/reference/operators/to_amazon_sqs.md), [`from_amazon_cloudwatch`](https://tenzir.com/docs/reference/operators/from_amazon_cloudwatch.md), [`to_amazon_cloudwatch`](https://tenzir.com/docs/reference/operators/to_amazon_cloudwatch.md), [`from_kafka`](https://tenzir.com/docs/reference/operators/from_kafka.md), [`to_kafka`](https://tenzir.com/docs/reference/operators/to_kafka.md), and [`to_iceberg`](https://tenzir.com/docs/reference/operators/to_iceberg.md). For [`to_iceberg`](https://tenzir.com/docs/reference/operators/to_iceberg.md) against an AWS-managed catalog, one resolved provider signs both the catalog requests and the S3 data-file operations.
+Tenzir’s AWS operators authenticate with AWS using the AWS SDK’s default credential chain, an OIDC web identity token, or static credentials. This page describes the shared `aws_iam` option used by [`from_s3`](operators/from_s3.md), [`to_s3`](operators/to_s3.md), [`from_amazon_sqs`](operators/from_amazon_sqs.md), [`to_amazon_sqs`](operators/to_amazon_sqs.md), [`from_amazon_cloudwatch`](operators/from_amazon_cloudwatch.md), [`to_amazon_cloudwatch`](operators/to_amazon_cloudwatch.md), [`from_kafka`](operators/from_kafka.md), [`to_kafka`](operators/to_kafka.md), and [`to_iceberg`](operators/to_iceberg.md). For [`to_iceberg`](operators/to_iceberg.md) against an AWS-managed catalog, one resolved provider signs both the catalog requests and the S3 data-file operations.
 
 ## Local usage with the AWS CLI
 
@@ -88,7 +88,7 @@ Exactly one of the following token sources must be specified in `web_identity`:
 
 * **`token`**: Direct token value, useful for testing or when the token comes from another source.
 
-Both `headers` and `query_params` take `string` or [`secret`](https://tenzir.com/docs/reference/functions/secret.md) values.
+Both `headers` and `query_params` take `string` or [`secret`](functions/secret.md) values.
 
 The GitHub Actions token endpoint URL in `ACTIONS_ID_TOKEN_REQUEST_URL` already includes an `api-version` parameter. Use `query_params` to append the audience while preserving that parameter:
 
@@ -134,7 +134,7 @@ The AWS SDK reruns the `credential_process` before the temporary credentials exp
 
 ## Static credentials
 
-Pass an access key and secret directly. The `access_key_id` and `secret_access_key` options must be specified together. Wrap secrets with [`secret`](https://tenzir.com/docs/reference/functions/secret.md) to keep them out of pipeline definitions:
+Pass an access key and secret directly. The `access_key_id` and `secret_access_key` options must be specified together. Wrap secrets with [`secret`](functions/secret.md) to keep them out of pipeline definitions:
 
 ```tql
 from_s3 "s3://my-bucket/data.json", aws_iam={
@@ -158,20 +158,20 @@ The role’s trust policy must allow your active principal (for example an EC2 i
 
 ## See Also
 
-* [`from_amazon_cloudwatch`](https://tenzir.com/docs/reference/operators/from_amazon_cloudwatch.md)
-* [`from_kafka`](https://tenzir.com/docs/reference/operators/from_kafka.md)
-* [`from_s3`](https://tenzir.com/docs/reference/operators/from_s3.md)
-* [`from_amazon_sqs`](https://tenzir.com/docs/reference/operators/from_amazon_sqs.md)
-* [`to_amazon_cloudwatch`](https://tenzir.com/docs/reference/operators/to_amazon_cloudwatch.md)
-* [`to_amazon_security_lake`](https://tenzir.com/docs/reference/operators/to_amazon_security_lake.md)
-* [`to_iceberg`](https://tenzir.com/docs/reference/operators/to_iceberg.md)
-* [`to_kafka`](https://tenzir.com/docs/reference/operators/to_kafka.md)
-* [`to_s3`](https://tenzir.com/docs/reference/operators/to_s3.md)
-* [`to_amazon_sqs`](https://tenzir.com/docs/reference/operators/to_amazon_sqs.md)
+* [`from_amazon_cloudwatch`](operators/from_amazon_cloudwatch.md)
+* [`from_kafka`](operators/from_kafka.md)
+* [`from_s3`](operators/from_s3.md)
+* [`from_amazon_sqs`](operators/from_amazon_sqs.md)
+* [`to_amazon_cloudwatch`](operators/to_amazon_cloudwatch.md)
+* [`to_amazon_security_lake`](operators/to_amazon_security_lake.md)
+* [`to_iceberg`](operators/to_iceberg.md)
+* [`to_kafka`](operators/to_kafka.md)
+* [`to_s3`](operators/to_s3.md)
+* [`to_amazon_sqs`](operators/to_amazon_sqs.md)
 * [Azure Authentication](azure-authentication.md)
-* [Cloudwatch](../integrations/amazon/cloudwatch.md)
-* [Glue](../integrations/amazon/glue.md)
-* [Msk](../integrations/amazon/msk.md)
-* [S3](../integrations/amazon/s3.md)
-* [Security lake](../integrations/amazon/security-lake.md)
-* [Sqs](../integrations/amazon/sqs.md)
+* [Cloudwatch](https://tenzir.com/integrations/amazon/cloudwatch)
+* [Glue](https://tenzir.com/integrations/amazon/glue)
+* [Msk](https://tenzir.com/integrations/amazon/msk)
+* [S3](https://tenzir.com/integrations/amazon/s3)
+* [Security lake](https://tenzir.com/integrations/amazon/security-lake)
+* [Sqs](https://tenzir.com/integrations/amazon/sqs)

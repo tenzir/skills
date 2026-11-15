@@ -146,6 +146,6 @@ this = flatten(this)
 
 ## See Also
 
-* [`unflatten`](https://tenzir.com/docs/reference/functions/unflatten.md)
+* [`unflatten`](unflatten.md)
 * [Shape records](../../guides/shape/shape-records.md)
 * [Reshape complex data](../../guides/shape/reshape-complex-data.md)

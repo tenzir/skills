@@ -51,7 +51,7 @@ valid = card.is_luhn_valid()
 
 ### Check formatted card numbers
 
-Remove spaces and dashes with [`replace_regex`](https://tenzir.com/docs/reference/functions/replace_regex.md) before the check:
+Remove spaces and dashes with [`replace_regex`](replace_regex.md) before the check:
 
 ```tql
 from {card: "4111-1111-1111-1111"}
@@ -94,8 +94,8 @@ if payment_ref.is_luhn_valid() {
 
 ## See Also
 
-* [`luhn_check_digit`](https://tenzir.com/docs/reference/functions/luhn_check_digit.md)
-* [`is_numeric`](https://tenzir.com/docs/reference/functions/is_numeric.md)
-* [`encrypt_ff1`](https://tenzir.com/docs/reference/functions/encrypt_ff1.md)
+* [`luhn_check_digit`](luhn_check_digit.md)
+* [`is_numeric`](is_numeric.md)
+* [`encrypt_ff1`](encrypt_ff1.md)
 * [Mask sensitive data](../../guides/protect/mask-sensitive-data.md)
 * [Encrypt sensitive data](../../guides/protect/encrypt-sensitive-data.md)

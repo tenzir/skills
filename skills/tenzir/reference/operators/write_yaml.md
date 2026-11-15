@@ -34,6 +34,6 @@ to_file "output.yaml" {
 
 ## See Also
 
-* [`parse_yaml`](https://tenzir.com/docs/reference/functions/parse_yaml.md)
-* [`print_yaml`](https://tenzir.com/docs/reference/functions/print_yaml.md)
-* [`read_yaml`](https://tenzir.com/docs/reference/operators/read_yaml.md)
+* [`parse_yaml`](../functions/parse_yaml.md)
+* [`print_yaml`](../functions/print_yaml.md)
+* [`read_yaml`](read_yaml.md)

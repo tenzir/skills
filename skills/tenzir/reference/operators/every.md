@@ -25,7 +25,7 @@ The sub-pipeline either emits events - which are forwarded as the operator’s o
 
 Source sub-pipelines must terminate on their own
 
-`every` stops inputs to a sub-pipeline but cannot stop operators that produce data indefinitely on their own. Source operators like [`subscribe`](https://tenzir.com/docs/reference/operators/subscribe.md) inside an `every` block will prevent the next iteration from starting.
+`every` stops inputs to a sub-pipeline but cannot stop operators that produce data indefinitely on their own. Source operators like [`subscribe`](subscribe.md) inside an `every` block will prevent the next iteration from starting.
 
 ## Examples
 
@@ -57,7 +57,7 @@ every 30s {
 }
 ```
 
-Events flow into the sub-pipeline continuously. Every 30 seconds, `every` stops the input, causing [`to_http`](https://tenzir.com/docs/reference/operators/to_http.md) to finish the request and wait for the response. Then a new sub-pipeline starts.
+Events flow into the sub-pipeline continuously. Every 30 seconds, `every` stops the input, causing [`to_http`](to_http.md) to finish the request and wait for the response. Then a new sub-pipeline starts.
 
 ### Aggregate metrics periodically with `summarize`
 
@@ -68,7 +68,7 @@ every 5min {
 }
 ```
 
-When the interval elapses, `every` stops the input, which causes [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) to emit its result. Then the sub-pipeline restarts for the next interval.
+When the interval elapses, `every` stops the input, which causes [`summarize`](summarize.md) to emit its result. Then the sub-pipeline restarts for the next interval.
 
 ### Fetch the results from an API every 10 minutes
 
@@ -96,10 +96,10 @@ every 1h {
 
 ## See Also
 
-* [`cron`](https://tenzir.com/docs/reference/operators/cron.md)
-* [`each`](https://tenzir.com/docs/reference/operators/each.md)
-* [`to_http`](https://tenzir.com/docs/reference/operators/to_http.md)
-* [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md)
+* [`cron`](cron.md)
+* [`each`](each.md)
+* [`to_http`](to_http.md)
+* [`summarize`](summarize.md)
 * [Shape aggregation results](../../guides/analyze/shape-aggregation-results.md)
 * [Fetch via HTTP and APIs](../../guides/collect/fetch-via-http-and-apis.md)
 * [Window event streams](../../guides/analyze/window-event-streams.md)

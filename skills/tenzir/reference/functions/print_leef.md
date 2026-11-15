@@ -101,9 +101,9 @@ write_syslog
 
 ## See Also
 
-* [`read_leef`](https://tenzir.com/docs/reference/operators/read_leef.md)
-* [`read_syslog`](https://tenzir.com/docs/reference/operators/read_syslog.md)
-* [`write_syslog`](https://tenzir.com/docs/reference/operators/write_syslog.md)
-* [`parse_leef`](https://tenzir.com/docs/reference/functions/parse_leef.md)
-* [Qradar](../../integrations/qradar.md)
-* [Syslog](../../integrations/syslog.md)
+* [`read_leef`](../operators/read_leef.md)
+* [`read_syslog`](../operators/read_syslog.md)
+* [`write_syslog`](../operators/write_syslog.md)
+* [`parse_leef`](parse_leef.md)
+* [Qradar](https://tenzir.com/integrations/qradar)
+* [Syslog](https://tenzir.com/integrations/syslog)

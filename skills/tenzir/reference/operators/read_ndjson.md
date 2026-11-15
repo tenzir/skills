@@ -163,4 +163,4 @@ from_file "versions.json" {
 
 ## See Also
 
-* [`read_json`](https://tenzir.com/docs/reference/operators/read_json.md)
+* [`read_json`](read_json.md)

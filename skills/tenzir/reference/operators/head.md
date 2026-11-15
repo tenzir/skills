@@ -19,7 +19,7 @@ head [n:int]
 
 Forwards the first `n` events and discards the rest.
 
-`head n` is a shorthand notation for [`slice end=n`](https://tenzir.com/docs/reference/operators/slice.md).
+`head n` is a shorthand notation for [`slice end=n`](slice.md).
 
 ### `n: int (optional)`
 
@@ -43,7 +43,7 @@ head 5
 
 ## See Also
 
-* [`slice`](https://tenzir.com/docs/reference/operators/slice.md)
-* [`tail`](https://tenzir.com/docs/reference/operators/tail.md)
+* [`slice`](slice.md)
+* [`tail`](tail.md)
 * [Slice and sample data](../../guides/optimize/slice-and-sample-data.md)
 * [Plot data with charts](../../tutorials/plot-data-with-charts.md)

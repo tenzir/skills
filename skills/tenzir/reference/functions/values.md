@@ -21,11 +21,11 @@ This operation is called `Object.values` in JavaScript, `dict.values` in Python,
 
 ## Description
 
-The `values` function returns a list with the value of every top-level field of the record `x`, in field order. It complements [`keys`](https://tenzir.com/docs/reference/functions/keys.md), which returns the field names in the same order.
+The `values` function returns a list with the value of every top-level field of the record `x`, in field order. It complements [`keys`](keys.md), which returns the field names in the same order.
 
 Each value keeps its original type, and one list can hold values of different types, including `null`, lists, and records. Only top-level fields contribute values: nested records and lists stay intact and are not flattened.
 
-Use [`entries`](https://tenzir.com/docs/reference/functions/entries.md) instead when you need the field names together with their values, and use [`collect_record`](https://tenzir.com/docs/reference/functions/collect_record.md) to turn keys and values back into a record.
+Use [`entries`](entries.md) instead when you need the field names together with their values, and use [`collect_record`](collect_record.md) to turn keys and values back into a record.
 
 ### `x: record`
 
@@ -135,7 +135,7 @@ select has_high="high" in levels.values(),
 
 ### Decode keys and values again
 
-[`keys`](https://tenzir.com/docs/reference/functions/keys.md) and `values` list the fields in the same order. Pass both to [`collect_record`](https://tenzir.com/docs/reference/functions/collect_record.md) to rebuild the original record:
+[`keys`](keys.md) and `values` list the fields in the same order. Pass both to [`collect_record`](collect_record.md) to rebuild the original record:
 
 ```tql
 from {
@@ -160,7 +160,7 @@ select user=collect_record(user.keys(), user.values())
 
 ## See Also
 
-* [`collect_record`](https://tenzir.com/docs/reference/functions/collect_record.md)
-* [`entries`](https://tenzir.com/docs/reference/functions/entries.md)
-* [`keys`](https://tenzir.com/docs/reference/functions/keys.md)
+* [`collect_record`](collect_record.md)
+* [`entries`](entries.md)
+* [`keys`](keys.md)
 * [Shape records](../../guides/shape/shape-records.md)

@@ -36,6 +36,6 @@ Use this when you want to retain serialized data without indexing it as a string
 
 ## See Also
 
-* [`string`](https://tenzir.com/docs/reference/functions/string.md)
-* [`print_ndjson`](https://tenzir.com/docs/reference/functions/print_ndjson.md)
+* [`string`](string.md)
+* [`print_ndjson`](print_ndjson.md)
 * [Transform values](../../guides/shape/transform-values.md)

@@ -19,7 +19,7 @@ from_clickhouse [table=string, sql=string,
 
 ## Description
 
-The [`from_clickhouse`](https://tenzir.com/docs/reference/operators/from_clickhouse.md) operator issues a query to a ClickHouse server. You can either provide a `table` to read or an `sql` query.
+The [`from_clickhouse`](from_clickhouse.md) operator issues a query to a ClickHouse server. You can either provide a `table` to read or an `sql` query.
 
 ### `uri = string (optional)`
 
@@ -43,7 +43,7 @@ You can qualify the table as `<database>.<table>`. If you omit the database, Cli
 
 Use this mode when you want to read a table and preserve named tuple fields from the table schema. Tenzir pushes filters, field selections, and limits from the rest of the pipeline into the query it sends; see [Optimizations](from_clickhouse.md#optimizations).
 
-If the table has a [catch-all column](from_clickhouse.md#catch-all-tables), the operator returns the events that [`to_clickhouse`](https://tenzir.com/docs/reference/operators/to_clickhouse.md) wrote instead of the raw columns.
+If the table has a [catch-all column](from_clickhouse.md#catch-all-tables), the operator returns the events that [`to_clickhouse`](to_clickhouse.md) wrote instead of the raw columns.
 
 Note
 
@@ -124,13 +124,13 @@ Defaults to `true`.
 
 ## Catch-all tables
 
-When you read a table with a [catch-all column](../../integrations/clickhouse.md#catch-all-columns) in `table` mode, the operator reverses how [`to_clickhouse`](https://tenzir.com/docs/reference/operators/to_clickhouse.md) split each event across the columns:
+When you read a table with a [catch-all column](https://tenzir.com/integrations/clickhouse#catch-all-columns) in `table` mode, the operator reverses how [`to_clickhouse`](to_clickhouse.md) split each event across the columns:
 
 * The fields of the catch-all column move back to the top level of the event, and the catch-all column itself disappears.
 * A column with a dotted name, such as `src_endpoint.ip`, becomes the nested field at that path and merges with the other fields of `src_endpoint`.
 * Other `JSON` columns become records again.
 
-If a column and the catch-all hold a value at the same path, the column wins. Tenzir infers the types of JSON values like [`parse_json`](https://tenzir.com/docs/reference/functions/parse_json.md) does, so IP addresses, subnets, timestamps, and durations come back with their types. Literal dotted keys such as `"a.b"` stay apart from nested fields such as `a.b`.
+If a column and the catch-all hold a value at the same path, the column wins. Tenzir infers the types of JSON values like [`parse_json`](../functions/parse_json.md) does, so IP addresses, subnets, timestamps, and durations come back with their types. Literal dotted keys such as `"a.b"` stay apart from nested fields such as `a.b`.
 
 Some differences from the original events remain:
 
@@ -170,7 +170,7 @@ Tenzir maps ClickHouse types to Tenzir types as follows:
 
 Date and timestamp values outside Tenzir’s nanosecond timestamp range become null with a warning.
 
-JSON in [tables with a catch-all](../../integrations/clickhouse.md#preserve-dotted-json-keys) is written with `json_type_escape_dots_in_keys=1`. The `table` form enables this setting for such tables to restore literal dotted keys. With `sql`, add `SETTINGS json_type_escape_dots_in_keys=1` to your query. Otherwise, ClickHouse returns escaped keys such as `"a%2Eb"`.
+JSON in [tables with a catch-all](https://tenzir.com/integrations/clickhouse#preserve-dotted-json-keys) is written with `json_type_escape_dots_in_keys=1`. The `table` form enables this setting for such tables to restore literal dotted keys. With `sql`, add `SETTINGS json_type_escape_dots_in_keys=1` to your query. Otherwise, ClickHouse returns escaped keys such as `"a%2Eb"`.
 
 A `Map(K, V)` becomes a record with one field per key, named by the key’s text, such as `200` for a `UInt16` key. The values convert like a column of type `V`. Rows can have different keys, an empty map becomes an empty record, and if a key repeats, the last value wins. Filters on map fields aren’t pushed down to ClickHouse, and since rows may lack a key, use `?` to access map fields, as in `where attributes.status? == "ok"`.
 
@@ -178,9 +178,9 @@ The operator drops columns of other unsupported types, such as geo types, with a
 
 ## Optimizations
 
-When the operator reads a table, it hands ClickHouse the operators that follow it, as far as ClickHouse can spell them: [`where`](https://tenzir.com/docs/reference/operators/where.md), [`select`](https://tenzir.com/docs/reference/operators/select.md), [`drop`](https://tenzir.com/docs/reference/operators/drop.md), [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) with `count`, `min`, and `max`, including [`top`](https://tenzir.com/docs/reference/operators/top.md) and [`rare`](https://tenzir.com/docs/reference/operators/rare.md), [`sort`](https://tenzir.com/docs/reference/operators/sort.md), and [`head`](https://tenzir.com/docs/reference/operators/head.md). Those operators leave the pipeline and run with ClickHouse’s semantics, which can differ from TQL. For example, ClickHouse fails a comparison of an `Int64` column with a string. When the pipeline runs, the operator binds every field that ClickHouse uses to a column of the table, and fails before running a query if it cannot. Use `pushdown=false` to keep every operator in the pipeline. The page on [ClickHouse optimizations](../optimizations/clickhouse.md) describes which operators ClickHouse takes over and how its semantics differ, and the [optimizations overview](../optimizations.md) explains how Tenzir optimizes pipelines in general.
+When the operator reads a table, it hands ClickHouse the operators that follow it, as far as ClickHouse can spell them: [`where`](where.md), [`select`](select.md), [`drop`](drop.md), [`summarize`](summarize.md) with `count`, `min`, and `max`, including [`top`](top.md) and [`rare`](rare.md), [`sort`](sort.md), and [`head`](head.md). Those operators leave the pipeline and run with ClickHouse’s semantics, which can differ from TQL. For example, ClickHouse fails a comparison of an `Int64` column with a string. When the pipeline runs, the operator binds every field that ClickHouse uses to a column of the table, and fails before running a query if it cannot. Use `pushdown=false` to keep every operator in the pipeline. The page on [ClickHouse optimizations](../optimizations/clickhouse.md) describes which operators ClickHouse takes over and how its semantics differ, and the [optimizations overview](../optimizations.md) explains how Tenzir optimizes pipelines in general.
 
-In a [catch-all table](from_clickhouse.md#catch-all-tables), ClickHouse computes filters, sorts, and limits on columns and on fields in the catch-all, such as `src_endpoint.port` or `metadata.product.name`. A [`select`](https://tenzir.com/docs/reference/operators/select.md), [`drop`](https://tenzir.com/docs/reference/operators/drop.md), or [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) needs the rebuilt events, so the pipeline fails with a hint to use `pushdown=false`, which runs them in Tenzir. The [ClickHouse optimizations](../optimizations/clickhouse.md#catch-all-tables) page lists the details.
+In a [catch-all table](from_clickhouse.md#catch-all-tables), ClickHouse computes filters, sorts, and limits on columns and on fields in the catch-all, such as `src_endpoint.port` or `metadata.product.name`. A [`select`](select.md), [`drop`](drop.md), or [`summarize`](summarize.md) needs the rebuilt events, so the pipeline fails with a hint to use `pushdown=false`, which runs them in Tenzir. The [ClickHouse optimizations](../optimizations/clickhouse.md#catch-all-tables) page lists the details.
 
 ## Examples
 
@@ -262,7 +262,7 @@ from_clickhouse sql="DESCRIBE TABLE events", tls=false
 
 ## See Also
 
-* [`to_clickhouse`](https://tenzir.com/docs/reference/operators/to_clickhouse.md)
+* [`to_clickhouse`](to_clickhouse.md)
 * [Read from data stores](../../guides/collect/read-from-data-stores.md)
-* [Clickhouse](../../integrations/clickhouse.md)
-* [Nano](../../integrations/nano.md)
+* [Clickhouse](https://tenzir.com/integrations/clickhouse)
+* [Nano](https://tenzir.com/integrations/nano)

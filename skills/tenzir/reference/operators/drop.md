@@ -48,8 +48,8 @@ drop role, info.id
 
 ## See Also
 
-* [`select`](https://tenzir.com/docs/reference/operators/select.md)
-* [`where`](https://tenzir.com/docs/reference/operators/where.md)
+* [`select`](select.md)
+* [`where`](where.md)
 * [Filter and select data](../../guides/optimize/filter-and-select-data.md)
 * [Learn idiomatic TQL](../../tutorials/learn-idiomatic-tql.md)
 

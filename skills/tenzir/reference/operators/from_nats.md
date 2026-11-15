@@ -147,6 +147,6 @@ this = string(message).parse_json()
 
 ## See Also
 
-* [`to_nats`](https://tenzir.com/docs/reference/operators/to_nats.md)
+* [`to_nats`](to_nats.md)
 * [Read from message brokers](../../guides/collect/read-from-message-brokers.md)
-* [Nats](../../integrations/nats.md)
+* [Nats](https://tenzir.com/integrations/nats)

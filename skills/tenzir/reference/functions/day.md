@@ -43,9 +43,9 @@ day = ts.day()
 
 ## See Also
 
-* [`year`](https://tenzir.com/docs/reference/functions/year.md)
-* [`month`](https://tenzir.com/docs/reference/functions/month.md)
-* [`hour`](https://tenzir.com/docs/reference/functions/hour.md)
-* [`minute`](https://tenzir.com/docs/reference/functions/minute.md)
-* [`second`](https://tenzir.com/docs/reference/functions/second.md)
+* [`year`](year.md)
+* [`month`](month.md)
+* [`hour`](hour.md)
+* [`minute`](minute.md)
+* [`second`](second.md)
 * [Calculate with time](../../guides/shape/calculate-with-time.md)

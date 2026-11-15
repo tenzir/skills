@@ -33,5 +33,5 @@ from {x: parent_dir("/path/to/log.json")}
 
 ## See Also
 
-* [`file_name`](https://tenzir.com/docs/reference/functions/file_name.md)
+* [`file_name`](file_name.md)
 * [Manipulate strings](../../guides/shape/manipulate-strings.md)

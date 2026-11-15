@@ -38,4 +38,4 @@ decoded = bytes.decode_base58()
 
 ## See Also
 
-* [`encode_base58`](https://tenzir.com/docs/reference/functions/encode_base58.md)
+* [`encode_base58`](encode_base58.md)

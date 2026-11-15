@@ -17,7 +17,7 @@ reverse
 
 ## Description
 
-`reverse` is a shorthand notation for [`slice stride=-1`](https://tenzir.com/docs/reference/operators/slice.md).
+`reverse` is a shorthand notation for [`slice stride=-1`](slice.md).
 
 Potentially High Memory Usage
 
@@ -40,5 +40,5 @@ reverse
 
 ## See Also
 
-* [`sort`](https://tenzir.com/docs/reference/operators/sort.md)
+* [`sort`](sort.md)
 * [Slice and sample data](../../guides/optimize/slice-and-sample-data.md)

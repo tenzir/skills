@@ -38,6 +38,6 @@ summarize variance_value=variance(x)
 
 ## See Also
 
-* [`stddev`](https://tenzir.com/docs/reference/functions/stddev.md)
-* [`mean`](https://tenzir.com/docs/reference/functions/mean.md)
+* [`stddev`](stddev.md)
+* [`mean`](mean.md)
 * [Aggregate event streams](../../guides/analyze/aggregate-event-streams.md)

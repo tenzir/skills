@@ -60,9 +60,9 @@ right = concatenate(xs, [2])
 
 ## See Also
 
-* [`append`](https://tenzir.com/docs/reference/functions/append.md)
-* [`merge`](https://tenzir.com/docs/reference/functions/merge.md)
-* [`prepend`](https://tenzir.com/docs/reference/functions/prepend.md)
-* [`zip`](https://tenzir.com/docs/reference/functions/zip.md)
+* [`append`](append.md)
+* [`merge`](merge.md)
+* [`prepend`](prepend.md)
+* [`zip`](zip.md)
 * [Shape lists](../../guides/shape/shape-lists.md)
 * [Learn idiomatic TQL](../../tutorials/learn-idiomatic-tql.md)

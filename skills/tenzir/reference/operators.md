@@ -1101,7 +1101,7 @@ version
 
 ## OCSF
 
-The OCSF operators are deprecated. Use the [`ocsf_cast`](https://tenzir.com/docs/reference/functions/ocsf_cast.md), [`ocsf_derive`](https://tenzir.com/docs/reference/functions/ocsf_derive.md), and [`ocsf_trim`](https://tenzir.com/docs/reference/functions/ocsf_trim.md) functions instead, assigning their result to `this` to transform a top-level event.
+The OCSF operators are deprecated. Use the [`ocsf_cast`](functions/ocsf_cast.md), [`ocsf_derive`](functions/ocsf_derive.md), and [`ocsf_trim`](functions/ocsf_trim.md) functions instead, assigning their result to `this` to transform a top-level event.
 
 ### [ocsf\_cast](operators/ocsf_cast.md)
 

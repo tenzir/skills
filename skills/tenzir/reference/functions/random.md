@@ -33,5 +33,5 @@ from {x: random()}
 
 ## See Also
 
-* [`uuid`](https://tenzir.com/docs/reference/functions/uuid.md)
+* [`uuid`](uuid.md)
 * [Plot data with charts](../../tutorials/plot-data-with-charts.md)

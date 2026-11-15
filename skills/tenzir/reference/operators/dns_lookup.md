@@ -154,6 +154,6 @@ dns_lookup destination, result=dest_ips
 
 ## See Also
 
-* [`set`](https://tenzir.com/docs/reference/operators/set.md)
+* [`set`](set.md)
 
 Parallelizable: a parallel pipeline may run this operator on several cores at once.

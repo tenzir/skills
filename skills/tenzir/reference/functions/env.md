@@ -33,5 +33,5 @@ from {x: env("PATH")}
 
 ## See Also
 
-* [`config`](https://tenzir.com/docs/reference/functions/config.md)
-* [`secret`](https://tenzir.com/docs/reference/functions/secret.md)
+* [`config`](config.md)
+* [`secret`](secret.md)

@@ -82,8 +82,8 @@ select result = merge(x, y)
 
 ## See Also
 
-* [`collect_record`](https://tenzir.com/docs/reference/functions/collect_record.md)
-* [`concatenate`](https://tenzir.com/docs/reference/functions/concatenate.md)
+* [`collect_record`](collect_record.md)
+* [`concatenate`](concatenate.md)
 * [Reshape complex data](../../guides/shape/reshape-complex-data.md)
 * [Shape records](../../guides/shape/shape-records.md)
 * [Learn idiomatic TQL](../../tutorials/learn-idiomatic-tql.md)

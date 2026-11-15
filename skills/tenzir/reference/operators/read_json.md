@@ -11,7 +11,7 @@ section: "Docs"
 
 Tip
 
-If you are receiving newline-delimited JSON (NDJSON), use [`read_ndjson`](https://tenzir.com/docs/reference/operators/read_ndjson.md) instead.
+If you are receiving newline-delimited JSON (NDJSON), use [`read_ndjson`](read_ndjson.md) instead.
 
 Parses an incoming JSON stream into events.
 
@@ -287,7 +287,7 @@ Example Output
 
 ## See Also
 
-* [`parse_json`](https://tenzir.com/docs/reference/functions/parse_json.md)
-* [`read_ndjson`](https://tenzir.com/docs/reference/operators/read_ndjson.md)
-* [`write_json`](https://tenzir.com/docs/reference/operators/write_json.md)
+* [`parse_json`](../functions/parse_json.md)
+* [`read_ndjson`](read_ndjson.md)
+* [`write_json`](write_json.md)
 * [Convert data formats](../../guides/shape/convert-data-formats.md)

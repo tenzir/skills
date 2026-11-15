@@ -17,9 +17,9 @@ ocsf_cast(x:record, [encode_variants=bool, null_fill=bool, timestamp_to_ms=bool]
 
 ## Description
 
-The `ocsf_cast` function casts the record `x` to the OCSF event class type selected by its `metadata.version`, `metadata.profiles`, `metadata.extensions`, and `class_uid` fields. It applies the same casting rules as the [`ocsf_cast`](https://tenzir.com/docs/reference/operators/ocsf_cast.md) operator: it warns about fields that the schema does not define and removes them, encodes free-form objects such as `unmapped`, and converts values to the types the schema expects.
+The `ocsf_cast` function casts the record `x` to the OCSF event class type selected by its `metadata.version`, `metadata.profiles`, `metadata.extensions`, and `class_uid` fields. It applies the same casting rules as the [`ocsf_cast`](../operators/ocsf_cast.md) operator: it warns about fields that the schema does not define and removes them, encodes free-form objects such as `unmapped`, and converts values to the types the schema expects.
 
-Use the function for both top-level and nested OCSF events. To transform the whole event, write `this = ocsf_cast(this)`. For an OCSF event in a field, write `ocsf = ocsf_cast(ocsf)`, or use [`map`](https://tenzir.com/docs/reference/functions/map.md) to transform a list of events. The [`ocsf_cast`](https://tenzir.com/docs/reference/operators/ocsf_cast.md) operator is deprecated.
+Use the function for both top-level and nested OCSF events. To transform the whole event, write `this = ocsf_cast(this)`. For an OCSF event in a field, write `ocsf = ocsf_cast(ocsf)`, or use [`map`](map.md) to transform a list of events. The [`ocsf_cast`](../operators/ocsf_cast.md) operator is deprecated.
 
 The function differs from the operator in three ways:
 
@@ -193,7 +193,7 @@ The function returns both events unchanged. The first event emits a warning beca
 
 ## See Also
 
-* [`ocsf_cast`](https://tenzir.com/docs/reference/operators/ocsf_cast.md)
-* [`ocsf_derive`](https://tenzir.com/docs/reference/functions/ocsf_derive.md)
-* [`ocsf_trim`](https://tenzir.com/docs/reference/functions/ocsf_trim.md)
+* [`ocsf_cast`](../operators/ocsf_cast.md)
+* [`ocsf_derive`](ocsf_derive.md)
+* [`ocsf_trim`](ocsf_trim.md)
 * [Map to OCSF](../../guides/normalize/map-to-ocsf.md)

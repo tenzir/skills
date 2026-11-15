@@ -54,8 +54,8 @@ to_file "out.brotli" {
 
 ## See Also
 
-* [`compress_bz2`](https://tenzir.com/docs/reference/operators/compress_bz2.md)
-* [`compress_gzip`](https://tenzir.com/docs/reference/operators/compress_gzip.md)
-* [`compress_lz4`](https://tenzir.com/docs/reference/operators/compress_lz4.md)
-* [`compress_zstd`](https://tenzir.com/docs/reference/operators/compress_zstd.md)
-* [`decompress_brotli`](https://tenzir.com/docs/reference/operators/decompress_brotli.md)
+* [`compress_bz2`](compress_bz2.md)
+* [`compress_gzip`](compress_gzip.md)
+* [`compress_lz4`](compress_lz4.md)
+* [`compress_zstd`](compress_zstd.md)
+* [`decompress_brotli`](decompress_brotli.md)

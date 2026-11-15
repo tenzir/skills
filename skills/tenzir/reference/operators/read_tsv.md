@@ -186,7 +186,7 @@ read_tsv
 
 ## See Also
 
-* [`read_csv`](https://tenzir.com/docs/reference/operators/read_csv.md)
-* [`read_ssv`](https://tenzir.com/docs/reference/operators/read_ssv.md)
-* [`read_xsv`](https://tenzir.com/docs/reference/operators/read_xsv.md)
-* [`parse_tsv`](https://tenzir.com/docs/reference/functions/parse_tsv.md)
+* [`read_csv`](read_csv.md)
+* [`read_ssv`](read_ssv.md)
+* [`read_xsv`](read_xsv.md)
+* [`parse_tsv`](../functions/parse_tsv.md)

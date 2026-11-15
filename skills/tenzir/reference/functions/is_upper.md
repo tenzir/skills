@@ -33,7 +33,7 @@ from {x: "HELLO".is_upper()}
 
 ## See Also
 
-* [`is_alpha`](https://tenzir.com/docs/reference/functions/is_alpha.md)
-* [`is_lower`](https://tenzir.com/docs/reference/functions/is_lower.md)
-* [`to_upper`](https://tenzir.com/docs/reference/functions/to_upper.md)
+* [`is_alpha`](is_alpha.md)
+* [`is_lower`](is_lower.md)
+* [`to_upper`](to_upper.md)
 * [Manipulate strings](../../guides/shape/manipulate-strings.md)

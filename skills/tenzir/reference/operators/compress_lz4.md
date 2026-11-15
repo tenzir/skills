@@ -50,8 +50,8 @@ to_file "out.lz4" {
 
 ## See Also
 
-* [`compress_brotli`](https://tenzir.com/docs/reference/operators/compress_brotli.md)
-* [`compress_bz2`](https://tenzir.com/docs/reference/operators/compress_bz2.md)
-* [`compress_gzip`](https://tenzir.com/docs/reference/operators/compress_gzip.md)
-* [`compress_zstd`](https://tenzir.com/docs/reference/operators/compress_zstd.md)
-* [`decompress_lz4`](https://tenzir.com/docs/reference/operators/decompress_lz4.md)
+* [`compress_brotli`](compress_brotli.md)
+* [`compress_bz2`](compress_bz2.md)
+* [`compress_gzip`](compress_gzip.md)
+* [`compress_zstd`](compress_zstd.md)
+* [`decompress_lz4`](decompress_lz4.md)

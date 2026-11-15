@@ -19,7 +19,7 @@ from_nic iface:string, [snaplen=int, filter=string] { … }
 
 The `from_nic` operator captures packets with libpcap and forwards them as events.
 
-If you omit the optional pipeline, `from_nic` uses [`read_pcap`](https://tenzir.com/docs/reference/operators/read_pcap.md) by default. Provide a pipeline when you want to change how the captured PCAP byte stream is parsed. The pipeline must accept bytes and return events.
+If you omit the optional pipeline, `from_nic` uses [`read_pcap`](read_pcap.md) by default. Provide a pipeline when you want to change how the captured PCAP byte stream is parsed. The pipeline must accept bytes and return events.
 
 Use `filter` to apply a Berkeley Packet Filter (BPF) expression before Tenzir parses packets. This lets libpcap drop unwanted traffic early.
 
@@ -86,7 +86,7 @@ to_file "trace.pcap" {
 
 ## See Also
 
-* [`nics`](https://tenzir.com/docs/reference/operators/nics.md)
-* [`read_pcap`](https://tenzir.com/docs/reference/operators/read_pcap.md)
-* [`write_pcap`](https://tenzir.com/docs/reference/operators/write_pcap.md)
-* [Nic](../../integrations/nic.md)
+* [`nics`](nics.md)
+* [`read_pcap`](read_pcap.md)
+* [`write_pcap`](write_pcap.md)
+* [Nic](https://tenzir.com/integrations/nic)

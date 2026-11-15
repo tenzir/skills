@@ -32,5 +32,5 @@ head 5
 
 ## See Also
 
-* [`schemas`](https://tenzir.com/docs/reference/operators/schemas.md)
+* [`schemas`](schemas.md)
 * [Show available schemas](../../guides/store/show-available-schemas.md)

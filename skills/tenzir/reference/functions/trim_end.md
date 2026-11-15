@@ -65,6 +65,6 @@ from {x: "hello/-/".trim_end("/-")}
 
 ## See Also
 
-* [`trim`](https://tenzir.com/docs/reference/functions/trim.md)
-* [`trim_start`](https://tenzir.com/docs/reference/functions/trim_start.md)
+* [`trim`](trim.md)
+* [`trim_start`](trim_start.md)
 * [Manipulate strings](../../guides/shape/manipulate-strings.md)

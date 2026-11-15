@@ -61,5 +61,5 @@ Tenzir stores the string `"***"` instead of the secret and emits a warning. Pass
 
 ## See Also
 
-* [`config`](https://tenzir.com/docs/reference/functions/config.md)
-* [`env`](https://tenzir.com/docs/reference/functions/env.md)
+* [`config`](config.md)
+* [`env`](env.md)

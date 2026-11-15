@@ -25,7 +25,7 @@ Listens for UDP datagrams on the specified endpoint and outputs each datagram as
 
 The address to listen on. Must be of the format: `[udp://]host:port`.
 
-Use `0.0.0.0` as the host to accept datagrams on all interfaces. The [`nics`](https://tenzir.com/docs/reference/operators/nics.md) operator lists all available interfaces.
+Use `0.0.0.0` as the host to accept datagrams on all interfaces. The [`nics`](nics.md) operator lists all available interfaces.
 
 ### `resolve_hostnames = bool (optional)`
 
@@ -91,5 +91,5 @@ select data
 
 ## See Also
 
-* [`to_udp`](https://tenzir.com/docs/reference/operators/to_udp.md)
-* [Udp](../../integrations/udp.md)
+* [`to_udp`](to_udp.md)
+* [Udp](https://tenzir.com/integrations/udp)

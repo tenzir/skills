@@ -38,8 +38,8 @@ summarize median_value=median(x)
 
 ## See Also
 
-* [`ewma`](https://tenzir.com/docs/reference/functions/ewma.md)
-* [`mean`](https://tenzir.com/docs/reference/functions/mean.md)
-* [`mode`](https://tenzir.com/docs/reference/functions/mode.md)
-* [`quantile`](https://tenzir.com/docs/reference/functions/quantile.md)
+* [`ewma`](ewma.md)
+* [`mean`](mean.md)
+* [`mode`](mode.md)
+* [`quantile`](quantile.md)
 * [Aggregate event streams](../../guides/analyze/aggregate-event-streams.md)

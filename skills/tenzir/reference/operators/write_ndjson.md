@@ -92,10 +92,10 @@ write_ndjson strip_null_fields=true
 
 ## See Also
 
-* [`parse_json`](https://tenzir.com/docs/reference/functions/parse_json.md)
-* [`print_json`](https://tenzir.com/docs/reference/functions/print_json.md)
-* [`print_ndjson`](https://tenzir.com/docs/reference/functions/print_ndjson.md)
-* [`read_json`](https://tenzir.com/docs/reference/operators/read_json.md)
-* [`read_ndjson`](https://tenzir.com/docs/reference/operators/read_ndjson.md)
-* [`write_json`](https://tenzir.com/docs/reference/operators/write_json.md)
+* [`parse_json`](../functions/parse_json.md)
+* [`print_json`](../functions/print_json.md)
+* [`print_ndjson`](../functions/print_ndjson.md)
+* [`read_json`](read_json.md)
+* [`read_ndjson`](read_ndjson.md)
+* [`write_json`](write_json.md)
 * [Convert data formats](../../guides/shape/convert-data-formats.md)

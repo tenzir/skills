@@ -65,10 +65,10 @@ from {x: int("0x42", base=16)}
 
 ## See Also
 
-* [`float`](https://tenzir.com/docs/reference/functions/float.md)
-* [`ip`](https://tenzir.com/docs/reference/functions/ip.md)
-* [`string`](https://tenzir.com/docs/reference/functions/string.md)
-* [`subnet`](https://tenzir.com/docs/reference/functions/subnet.md)
-* [`time`](https://tenzir.com/docs/reference/functions/time.md)
-* [`uint`](https://tenzir.com/docs/reference/functions/uint.md)
+* [`float`](float.md)
+* [`ip`](ip.md)
+* [`string`](string.md)
+* [`subnet`](subnet.md)
+* [`time`](time.md)
+* [`uint`](uint.md)
 * [Transform values](../../guides/shape/transform-values.md)

@@ -9,7 +9,7 @@ section: "Docs"
 
 > When frommysql reads a table, it hands MySQL the operators that follow it, so that MySQL sends only what the pipeline keeps instead of the whole table. Those operators leave the pipeline and run in MySQL, with MySQL’s semantics. This page describes which operators MySQL takes over, how its results can differ from Tenzir’s, and how to keep operators in Tenzir. The optimizations overview explains how Tenzir optimizes pipelines in general.
 
-When [`from_mysql`](https://tenzir.com/docs/reference/operators/from_mysql.md) reads a table, it hands MySQL the operators that follow it, so that MySQL sends only what the pipeline keeps instead of the whole table. Those operators leave the pipeline and run in MySQL, with MySQL’s semantics. This page describes which operators MySQL takes over, how its results can differ from Tenzir’s, and how to keep operators in Tenzir. The [optimizations overview](../optimizations.md) explains how Tenzir optimizes pipelines in general.
+When [`from_mysql`](../operators/from_mysql.md) reads a table, it hands MySQL the operators that follow it, so that MySQL sends only what the pipeline keeps instead of the whole table. Those operators leave the pipeline and run in MySQL, with MySQL’s semantics. This page describes which operators MySQL takes over, how its results can differ from Tenzir’s, and how to keep operators in Tenzir. The [optimizations overview](../optimizations.md) explains how Tenzir optimizes pipelines in general.
 
 ## When it applies
 
@@ -17,7 +17,7 @@ The operator reads in one of these modes:
 
 * **Table mode** reads a table that you name with `table`, as in `from_mysql table="alerts"`. The operator writes the query itself and adds the operators that follow it. The rest of this page describes this mode.
 * **SQL mode** sends the query that you write with `sql` exactly as written, and the rest of the pipeline runs in Tenzir. So does **show mode** with `show`. To have MySQL filter, write the filter into your query.
-* **Live mode**, with `live=true`, polls a table for new rows. Every poll carries the [`where`](https://tenzir.com/docs/reference/operators/where.md) operators that directly follow the operator. All other operators stay in Tenzir, since a [`head`](https://tenzir.com/docs/reference/operators/head.md) counts events across polls and a live read never ends.
+* **Live mode**, with `live=true`, polls a table for new rows. Every poll carries the [`where`](../operators/where.md) operators that directly follow the operator. All other operators stay in Tenzir, since a [`head`](../operators/head.md) counts events across polls and a live read never ends.
 
 With `pushdown=false`, every operator stays in Tenzir and runs with TQL semantics. The operator still reads only the columns that the pipeline uses.
 
@@ -25,14 +25,14 @@ With `pushdown=false`, every operator stays in Tenzir and runs with TQL semantic
 
 The operator takes over the longest run of operators directly after it that MySQL can spell:
 
-* [`where`](https://tenzir.com/docs/reference/operators/where.md), as the [filters](mysql.md#filters) section describes.
-* [`select`](https://tenzir.com/docs/reference/operators/select.md) of top-level fields, including renames, such as `select ip=src_ip, ts`.
-* [`drop`](https://tenzir.com/docs/reference/operators/drop.md) after a [`select`](https://tenzir.com/docs/reference/operators/select.md) or a [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) that MySQL took over, which names the fields that remain. MySQL has no way to select every column but some, so a [`drop`](https://tenzir.com/docs/reference/operators/drop.md) of table columns stays in Tenzir.
-* [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) with group keys on fields and `count()`, `count(x)`, `min(x)`, and `max(x)` of fields. The summary may follow [`select`](https://tenzir.com/docs/reference/operators/select.md), [`drop`](https://tenzir.com/docs/reference/operators/drop.md), and assignments that copy fields, as [Aggregations in the source](../optimizations.md#aggregations-in-the-source) describes.
-* [`sort`](https://tenzir.com/docs/reference/operators/sort.md) by fields.
-* [`head`](https://tenzir.com/docs/reference/operators/head.md), and [`top`](https://tenzir.com/docs/reference/operators/top.md) or [`rare`](https://tenzir.com/docs/reference/operators/rare.md) followed by [`head`](https://tenzir.com/docs/reference/operators/head.md).
+* [`where`](../operators/where.md), as the [filters](mysql.md#filters) section describes.
+* [`select`](../operators/select.md) of top-level fields, including renames, such as `select ip=src_ip, ts`.
+* [`drop`](../operators/drop.md) after a [`select`](../operators/select.md) or a [`summarize`](../operators/summarize.md) that MySQL took over, which names the fields that remain. MySQL has no way to select every column but some, so a [`drop`](../operators/drop.md) of table columns stays in Tenzir.
+* [`summarize`](../operators/summarize.md) with group keys on fields and `count()`, `count(x)`, `min(x)`, and `max(x)` of fields. The summary may follow [`select`](../operators/select.md), [`drop`](../operators/drop.md), and assignments that copy fields, as [Aggregations in the source](../optimizations.md#aggregations-in-the-source) describes.
+* [`sort`](../operators/sort.md) by fields.
+* [`head`](../operators/head.md), and [`top`](../operators/top.md) or [`rare`](../operators/rare.md) followed by [`head`](../operators/head.md).
 
-The first operator that MySQL cannot spell ends the run. That operator and everything after it run in Tenzir. Tenzir splits a [`where`](https://tenzir.com/docs/reference/operators/where.md) at `and`, so MySQL can still take over the conjuncts that it spells. For example, MySQL runs every step of
+The first operator that MySQL cannot spell ends the run. That operator and everything after it run in Tenzir. Tenzir splits a [`where`](../operators/where.md) at `and`, so MySQL can still take over the conjuncts that it spells. For example, MySQL runs every step of
 
 ```tql
 from_mysql table="alerts", host="db.example.com", database="soc"
@@ -43,11 +43,11 @@ sort -events
 head 20
 ```
 
-and returns at most 20 groups. The operator nests derived tables where SQL’s clause order requires it, and keeps the order of a [`sort`](https://tenzir.com/docs/reference/operators/sort.md) across them.
+and returns at most 20 groups. The operator nests derived tables where SQL’s clause order requires it, and keeps the order of a [`sort`](../operators/sort.md) across them.
 
 ## Filters
 
-MySQL takes over a [`where`](https://tenzir.com/docs/reference/operators/where.md) whose predicate consists of:
+MySQL takes over a [`where`](../operators/where.md) whose predicate consists of:
 
 * Top-level fields.
 * Literals: numbers, strings, booleans, `null`, times with at most microsecond precision, and IP addresses.
@@ -68,7 +68,7 @@ The operators that MySQL takes over run as MySQL runs them, which can differ fro
 * A time becomes a string in UTC, such as `'2024-01-01 00:00:00.000000'`, which MySQL reads as the type of the column. A table read sets the session’s time zone to UTC, so `TIMESTAMP` columns compare in UTC and also arrive in UTC.
 * An IP address becomes its text, such as `'10.0.0.1'`, which compares as text.
 * `match_regex` uses MySQL’s `REGEXP_LIKE`, which matches with ICU rather than RE2.
-* A [`select`](https://tenzir.com/docs/reference/operators/select.md) of a column that the table lacks fails the query, where Tenzir would warn and fill in `null`.
+* A [`select`](../operators/select.md) of a column that the table lacks fails the query, where Tenzir would warn and fill in `null`.
 
 ## Verify an optimization
 

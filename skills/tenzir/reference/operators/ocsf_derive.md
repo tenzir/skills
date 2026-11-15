@@ -13,7 +13,7 @@ Automatically assigns enum strings from their integer counterparts and vice vers
 
 Deprecated
 
-The `ocsf_derive` operator is deprecated and emits a warning. Use the [`ocsf_derive`](https://tenzir.com/docs/reference/functions/ocsf_derive.md) function for both top-level and nested OCSF events. To transform the whole event, assign the function result to `this`:
+The `ocsf_derive` operator is deprecated and emits a warning. Use the [`ocsf_derive`](../functions/ocsf_derive.md) function for both top-level and nested OCSF events. To transform the whole event, assign the function result to `this`:
 
 ```tql
 this = ocsf_derive(this)
@@ -136,10 +136,10 @@ warning: found inconsistency between `activity_id` and `activity_name`
 
 ## See Also
 
-* [`ocsf_derive`](https://tenzir.com/docs/reference/functions/ocsf_derive.md)
-* [`ocsf_compact`](https://tenzir.com/docs/reference/functions/ocsf_compact.md)
-* [`ocsf_cast`](https://tenzir.com/docs/reference/operators/ocsf_cast.md)
-* [`ocsf_trim`](https://tenzir.com/docs/reference/operators/ocsf_trim.md)
+* [`ocsf_derive`](../functions/ocsf_derive.md)
+* [`ocsf_compact`](../functions/ocsf_compact.md)
+* [`ocsf_cast`](ocsf_cast.md)
+* [`ocsf_trim`](ocsf_trim.md)
 * [Map to OCSF](../../guides/normalize/map-to-ocsf.md)
 * [Onboard a data source](../../tutorials/onboard-a-data-source.md)
 

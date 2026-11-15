@@ -40,5 +40,5 @@ select median = tdigest_quantile(model, 0.5),
 
 ## See also
 
-* [`tdigest`](https://tenzir.com/docs/reference/functions/tdigest.md)
-* [`tdigest_cdf`](https://tenzir.com/docs/reference/functions/tdigest_cdf.md)
+* [`tdigest`](tdigest.md)
+* [`tdigest_cdf`](tdigest_cdf.md)

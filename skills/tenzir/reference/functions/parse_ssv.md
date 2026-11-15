@@ -178,7 +178,7 @@ output = input.parse_ssv(header=["a","b","c"])
 
 ## See Also
 
-* [`read_ssv`](https://tenzir.com/docs/reference/operators/read_ssv.md)
-* [`parse_csv`](https://tenzir.com/docs/reference/functions/parse_csv.md)
-* [`parse_tsv`](https://tenzir.com/docs/reference/functions/parse_tsv.md)
-* [`parse_xsv`](https://tenzir.com/docs/reference/functions/parse_xsv.md)
+* [`read_ssv`](../operators/read_ssv.md)
+* [`parse_csv`](parse_csv.md)
+* [`parse_tsv`](parse_tsv.md)
+* [`parse_xsv`](parse_xsv.md)

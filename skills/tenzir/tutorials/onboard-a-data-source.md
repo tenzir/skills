@@ -406,7 +406,7 @@ Whatever every class shares belongs around the dispatch. The product identity an
 
 The wildcard arm comes last, where it catches both an unrecognized event type and the `null` that a classifier yields for an unknown layout. Each event then pays for exactly one classification, the arm that runs owns it, and a dispatcher that falls back to `@name` reads the name its input arrived with. A mapper with a single class guards `null` first instead, as `amazon::vpc_flow::ocsf::map` does, which keeps the remaining statements free of the exceptional case.
 
-The fallback Base Event carries no `time` when the payload could not be parsed. The [`ocsf_cast`](https://tenzir.com/docs/reference/functions/ocsf_cast.md) function returns that event but warns about the missing required field. Preserve a source timestamp when one is available, and account for this warning in tests of the fallback path.
+The fallback Base Event carries no `time` when the payload could not be parsed. The [`ocsf_cast`](../reference/functions/ocsf_cast.md) function returns that event but warns about the missing required field. Preserve a source timestamp when one is available, and account for this warning in tests of the fallback path.
 
 Each arm calls an internal operator that maps one event type. It takes the same two fields as the mapper, named after the shapes they hold, so every line of the body says which vocabulary it reads and which it writes:
 
@@ -503,7 +503,7 @@ openssh::ocsf::normalize
 
 A pipeline that already holds a structured event, whether from a JSON reader or from a package parser it called itself, continues with the mapper instead, in the staged form from [creating the mapper](onboard-a-data-source.md#create-the-mapper).
 
-The package produces minimal OCSF, and its tests validate it with [`ocsf_cast`](https://tenzir.com/docs/reference/functions/ocsf_cast.md). A caller that delivers the events to consumers expecting the full set of enum fields adds them with [`ocsf_derive`](https://tenzir.com/docs/reference/functions/ocsf_derive.md):
+The package produces minimal OCSF, and its tests validate it with [`ocsf_cast`](../reference/functions/ocsf_cast.md). A caller that delivers the events to consumers expecting the full set of enum fields adds them with [`ocsf_derive`](../reference/functions/ocsf_derive.md):
 
 ```tql
 amazon::vpc_flow::ocsf::normalize message
@@ -529,7 +529,7 @@ Onboarding a source covers three steps of the [data lifecycle](learn-the-data-li
 
 The `amazon::vpc_flow::ocsf::normalize` operator is our opinion about how to combine the last two: classify the layout, map the result, and keep the line as `raw_data`. A caller who wants a different opinion calls the parser and the mapper directly.
 
-Every source package in our [library](https://github.com/tenzir/library) exposes those same three operators, which is what lets a user learn one package and predict the rest. A package whose product Tenzir reads natively skips the parse layer, so `zeek` starts at the mapper because [`read_zeek_tsv`](https://tenzir.com/docs/reference/operators/read_zeek_tsv.md) already produces events.
+Every source package in our [library](https://github.com/tenzir/library) exposes those same three operators, which is what lets a user learn one package and predict the rest. A package whose product Tenzir reads natively skips the parse layer, so `zeek` starts at the mapper because [`read_zeek_tsv`](../reference/operators/read_zeek_tsv.md) already produces events.
 
 ## Assemble the package
 
@@ -691,7 +691,7 @@ package_list
 where id == "amazon"
 ```
 
-Run both examples to check the transformation without AWS access, then point your own collection pipeline at the normalizer. Our guides on [maintaining a changelog](../guides/packages/maintain-a-changelog.md) and [installing a package](../guides/packages/install-a-package.md) cover releases, the Library, and the remaining install paths, including [`package_add`](https://tenzir.com/docs/reference/operators/package_add.md) for trying something out interactively.
+Run both examples to check the transformation without AWS access, then point your own collection pipeline at the normalizer. Our guides on [maintaining a changelog](../guides/packages/maintain-a-changelog.md) and [installing a package](../guides/packages/install-a-package.md) cover releases, the Library, and the remaining install paths, including [`package_add`](../reference/operators/package_add.md) for trying something out interactively.
 
 ## Next
 

@@ -101,6 +101,6 @@ result = this.print_ndjson(strip_null_fields=true)
 
 ## See Also
 
-* [`write_ndjson`](https://tenzir.com/docs/reference/operators/write_ndjson.md)
-* [`parse_json`](https://tenzir.com/docs/reference/functions/parse_json.md)
-* [`print_json`](https://tenzir.com/docs/reference/functions/print_json.md)
+* [`write_ndjson`](../operators/write_ndjson.md)
+* [`parse_json`](parse_json.md)
+* [`print_json`](print_json.md)

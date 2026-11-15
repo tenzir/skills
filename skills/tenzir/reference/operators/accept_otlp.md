@@ -268,4 +268,4 @@ Configure OpenTelemetry SDKs or the OpenTelemetry Collector to use `http/protobu
 ## See also
 
 * [Get data from the network](../../guides/collect/get-data-from-the-network.md)
-* [Http](../../integrations/http.md)
+* [Http](https://tenzir.com/integrations/http)

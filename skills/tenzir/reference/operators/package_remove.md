@@ -33,7 +33,7 @@ package_remove "suricata-ocsf"
 
 ## See Also
 
-* [`package_add`](https://tenzir.com/docs/reference/operators/package_add.md)
-* [`package_list`](https://tenzir.com/docs/reference/operators/package_list.md)
+* [`package_add`](package_add.md)
+* [`package_list`](package_list.md)
 * [Install a package](../../guides/packages/install-a-package.md)
 * [Onboard a data source](../../tutorials/onboard-a-data-source.md)

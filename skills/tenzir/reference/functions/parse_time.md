@@ -195,6 +195,6 @@ timestamp = timestamp.parse_time(
 
 ## See Also
 
-* [`format_time`](https://tenzir.com/docs/reference/functions/format_time.md)
-* [`time`](https://tenzir.com/docs/reference/functions/time.md)
+* [`format_time`](format_time.md)
+* [`time`](time.md)
 * [Normalize event timestamps](../../guides/shape/normalize-event-timestamps.md)

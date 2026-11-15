@@ -13,7 +13,7 @@ Casts incoming events to their OCSF type.
 
 Deprecated
 
-The `ocsf_cast` operator is deprecated and emits a warning. Use the [`ocsf_cast`](https://tenzir.com/docs/reference/functions/ocsf_cast.md) function for both top-level and nested OCSF events. To transform the whole event, assign the function result to `this`:
+The `ocsf_cast` operator is deprecated and emits a warning. Use the [`ocsf_cast`](../functions/ocsf_cast.md) function for both top-level and nested OCSF events. To transform the whole event, assign the function result to `this`:
 
 ```tql
 this = ocsf_cast(this)
@@ -102,13 +102,13 @@ ocsf_cast null_fill=true
 to_clickhouse table="network_activity", mode="append"
 ```
 
-Create the `network_activity` table in ClickHouse first. The nulls that `null_fill=true` adds carry no type, so [`to_clickhouse`](https://tenzir.com/docs/reference/operators/to_clickhouse.md) cannot infer columns for them when it creates a table.
+Create the `network_activity` table in ClickHouse first. The nulls that `null_fill=true` adds carry no type, so [`to_clickhouse`](to_clickhouse.md) cannot infer columns for them when it creates a table.
 
 ## See Also
 
-* [`ocsf_cast`](https://tenzir.com/docs/reference/functions/ocsf_cast.md)
-* [`ocsf_derive`](https://tenzir.com/docs/reference/operators/ocsf_derive.md)
-* [`ocsf_trim`](https://tenzir.com/docs/reference/operators/ocsf_trim.md)
+* [`ocsf_cast`](../functions/ocsf_cast.md)
+* [`ocsf_derive`](ocsf_derive.md)
+* [`ocsf_trim`](ocsf_trim.md)
 * [Map to OCSF](../../guides/normalize/map-to-ocsf.md)
 
 Parallelizable: a parallel pipeline may run this operator on several cores at once.

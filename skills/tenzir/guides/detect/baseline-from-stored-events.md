@@ -26,7 +26,7 @@ The context is the contract between the two pipelines. The learner updates one r
 
 ## Learn the baseline on a schedule
 
-This guide uses ClickHouse as the lake. Our [Clickhouse](../../integrations/clickhouse.md) integration keeps Network Activity queryable as `ocsf.Network_Activity`.
+This guide uses ClickHouse as the lake. Our [Clickhouse](https://tenzir.com/integrations/clickhouse) integration keeps Network Activity queryable as `ocsf.Network_Activity`.
 
 Run the learner daily. The SQL query reduces a week of Network Activity to one outbound byte sum per asset and 15-minute bucket. TQL then reduces those buckets to one robust baseline per asset:
 
@@ -52,7 +52,7 @@ every 1d {
 }
 ```
 
-The bucket size must match the detector window so that both pipelines measure the same quantity. [`median`](https://tenzir.com/docs/reference/functions/median.md) supplies the typical value, and [`mad`](https://tenzir.com/docs/reference/functions/mad.md) supplies a robust scale that resists outliers in the learning window. The `samples` guard keeps assets with insufficient history out of the context until enough windows have closed.
+The bucket size must match the detector window so that both pipelines measure the same quantity. [`median`](../../reference/functions/median.md) supplies the typical value, and [`mad`](../../reference/functions/mad.md) supplies a robust scale that resists outliers in the learning window. The `samples` guard keeps assets with insufficient history out of the context until enough windows have closed.
 
 Because the learner queries retained events, its first run can use the full learning horizon for every asset already present in the lake. Those assets do not need to warm up inside the live stream.
 
@@ -128,8 +128,8 @@ The guide on [detecting over time windows](detect-over-time-windows.md#compare-o
 
 * [Detections](../../explanations/detections.md)
 * [Enrichment](../../explanations/enrichment.md)
-* [`median`](https://tenzir.com/docs/reference/functions/median.md)
-* [`mad`](https://tenzir.com/docs/reference/functions/mad.md)
-* [Clickhouse](../../integrations/clickhouse.md)
+* [`median`](../../reference/functions/median.md)
+* [`mad`](../../reference/functions/mad.md)
+* [Clickhouse](https://tenzir.com/integrations/clickhouse)
 * [Detect over time windows](detect-over-time-windows.md)
 * [Create multi-stage detectors](create-multi-stage-detectors.md)

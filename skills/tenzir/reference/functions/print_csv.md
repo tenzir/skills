@@ -57,5 +57,5 @@ output = this.print_csv()
 
 ## See Also
 
-* [`write_csv`](https://tenzir.com/docs/reference/operators/write_csv.md)
-* [`parse_csv`](https://tenzir.com/docs/reference/functions/parse_csv.md)
+* [`write_csv`](../operators/write_csv.md)
+* [`parse_csv`](parse_csv.md)

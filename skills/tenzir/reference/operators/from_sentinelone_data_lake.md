@@ -20,7 +20,7 @@ from_sentinelone_data_lake url:string, token=string,
 
 ## Description
 
-The `from_sentinelone_data_lake` operator hands SentinelOne the operators that follow it, such as [`where`](https://tenzir.com/docs/reference/operators/where.md), [`select`](https://tenzir.com/docs/reference/operators/select.md), [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md), [`sort`](https://tenzir.com/docs/reference/operators/sort.md), and [`head`](https://tenzir.com/docs/reference/operators/head.md), which then run in SentinelOne with SentinelOne’s semantics. You don’t need to write PowerQuery or pass `query`, `start`, or `end`:
+The `from_sentinelone_data_lake` operator hands SentinelOne the operators that follow it, such as [`where`](where.md), [`select`](select.md), [`summarize`](summarize.md), [`sort`](sort.md), and [`head`](head.md), which then run in SentinelOne with SentinelOne’s semantics. You don’t need to write PowerQuery or pass `query`, `start`, or `end`:
 
 ```tql
 let $end = now()
@@ -31,9 +31,9 @@ where severity > 3 and message.starts_with("alert")
 head 100
 ```
 
-Bind relative times with `let` so the optimizer receives fixed timestamps. Without `query`, `start`, and `end`, SentinelOne must take over a [`where`](https://tenzir.com/docs/reference/operators/where.md), [`head`](https://tenzir.com/docs/reference/operators/head.md), or [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md). Otherwise the operator reports an error before contacting SentinelOne. For example, a bare source or a `match_regex` filter, which stays in Tenzir, cannot supply the query.
+Bind relative times with `let` so the optimizer receives fixed timestamps. Without `query`, `start`, and `end`, SentinelOne must take over a [`where`](where.md), [`head`](head.md), or [`summarize`](summarize.md). Otherwise the operator reports an error before contacting SentinelOne. For example, a bare source or a `match_regex` filter, which stays in Tenzir, cannot supply the query.
 
-Pipelines with only [`where`](https://tenzir.com/docs/reference/operators/where.md) and [`head`](https://tenzir.com/docs/reference/operators/head.md) retrieve complete parsed events, including fields that the pipeline never names. A [`select`](https://tenzir.com/docs/reference/operators/select.md) or [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) makes SentinelOne return only the columns or groups that the pipeline keeps. The operator chooses automatically; you do not need a retrieval flag.
+Pipelines with only [`where`](where.md) and [`head`](head.md) retrieve complete parsed events, including fields that the pipeline never names. A [`select`](select.md) or [`summarize`](summarize.md) makes SentinelOne return only the columns or groups that the pipeline keeps. The operator chooses automatically; you do not need a retrieval flag.
 
 You can provide `query` to write the PowerQuery yourself. The operator uses SentinelOne’s Long Running Query (LRQ) API on your tenant’s console host: it launches queries at `/sdl/v2/api/queries`, polls once per second, and reads completed results. Reads of whole events use LOG search with cursor continuation, and all other reads use PowerQuery (PQ). Each completed server-side query is deleted before its events are emitted, including when a downstream operator stops after the first event.
 
@@ -55,7 +55,7 @@ Use HTTPS for your console. Regional `xdr.*.sentinelone.net` URLs are no longer 
 
 A console service-user API token. The operator sends it with Bearer authentication, not the `ApiToken` prefix used by the management API.
 
-Use the [`secret()`](https://tenzir.com/docs/reference/functions/secret.md) function to reference credentials securely.
+Use the [`secret()`](../functions/secret.md) function to reference credentials securely.
 
 ### `query = string (optional)`
 
@@ -107,14 +107,14 @@ Defaults to `true`.
 
 ## Optimizations
 
-The operator hands SentinelOne the operators that follow it, as far as PowerQuery can spell them: [`where`](https://tenzir.com/docs/reference/operators/where.md), [`select`](https://tenzir.com/docs/reference/operators/select.md), [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) with `count()` and `count(x)`, including [`top`](https://tenzir.com/docs/reference/operators/top.md) and [`rare`](https://tenzir.com/docs/reference/operators/rare.md), [`sort`](https://tenzir.com/docs/reference/operators/sort.md) after a [`select`](https://tenzir.com/docs/reference/operators/select.md) or [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md), and [`head`](https://tenzir.com/docs/reference/operators/head.md). Those operators leave the pipeline and run with SentinelOne’s semantics, which can differ from TQL. For example, `x != "a"` also matches events without `x`. Comparisons of `timestamp` also narrow the time window of the request. Use `pushdown=false` to keep every operator in the pipeline.
+The operator hands SentinelOne the operators that follow it, as far as PowerQuery can spell them: [`where`](where.md), [`select`](select.md), [`summarize`](summarize.md) with `count()` and `count(x)`, including [`top`](top.md) and [`rare`](rare.md), [`sort`](sort.md) after a [`select`](select.md) or [`summarize`](summarize.md), and [`head`](head.md). Those operators leave the pipeline and run with SentinelOne’s semantics, which can differ from TQL. For example, `x != "a"` also matches events without `x`. Comparisons of `timestamp` also narrow the time window of the request. Use `pushdown=false` to keep every operator in the pipeline.
 
 Our [SentinelOne optimization reference](../optimizations/sentinelone.md) describes which operators SentinelOne takes over, how they spell in PowerQuery, how the operator reads the results, and where SentinelOne’s semantics differ.
 
 ## Limitations
 
 * A `query` without operators that SentinelOne takes over keeps the default cap of 1,000 rows for queries without `limit` or `group`, which the operator reports as a warning. Add `| limit N` to the query to request more. Other PowerQuery reads end in `| limit 1600000` and warn when they reach it.
-* Output order is not guaranteed without a [`sort`](https://tenzir.com/docs/reference/operators/sort.md). LOG pages are separate queries, not a snapshot of a changing data lake.
+* Output order is not guaranteed without a [`sort`](sort.md). LOG pages are separate queries, not a snapshot of a changing data lake.
 * Results that SentinelOne reports as partial or with omitted events arrive with a warning. Unreported API-side omissions cannot be detected.
 * SentinelOne expires queries 30 seconds after the last poll and kills queries after five minutes. An expired or killed query fails with HTTP `404`; the operator does not relaunch it automatically.
 * Graceful shutdown deletes an active query. Forced cancellation during polling relies on the server’s 30-second expiry. Checkpointing is not supported.
@@ -145,5 +145,5 @@ from_sentinelone_data_lake "https://<tenant>.sentinelone.net",
 
 ## See Also
 
-* [`to_sentinelone_data_lake`](https://tenzir.com/docs/reference/operators/to_sentinelone_data_lake.md)
-* [Sentinelone data lake](../../integrations/sentinelone-data-lake.md)
+* [`to_sentinelone_data_lake`](to_sentinelone_data_lake.md)
+* [Sentinelone data lake](https://tenzir.com/integrations/sentinelone-data-lake)

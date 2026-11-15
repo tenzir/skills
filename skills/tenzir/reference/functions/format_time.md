@@ -84,7 +84,7 @@ x = x.format_time("%d.%m.%Y")
 
 ## See Also
 
-* [`parse_time`](https://tenzir.com/docs/reference/functions/parse_time.md)
-* [`time`](https://tenzir.com/docs/reference/functions/time.md)
+* [`parse_time`](parse_time.md)
+* [`time`](time.md)
 * [Normalize event timestamps](../../guides/shape/normalize-event-timestamps.md)
 * [Mask sensitive data](../../guides/protect/mask-sensitive-data.md)

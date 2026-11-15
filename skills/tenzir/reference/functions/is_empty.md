@@ -97,5 +97,5 @@ from {
 
 ## See Also
 
-* [`has`](https://tenzir.com/docs/reference/functions/has.md)
-* [`length`](https://tenzir.com/docs/reference/functions/length.md)
+* [`has`](has.md)
+* [`length`](length.md)

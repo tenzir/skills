@@ -13,6 +13,8 @@ Provisioning a node means creating one in the [platform](../../explanations/plat
 
 When you start out with a new Tenzir account, you have an empty workspace without any nodes:
 
+![Landing page](https://tenzir.com/docs-assets/roots/6.22.0-r1/_astro/new-account.Qul5lKOD_1Y3t2e.webp)
+
 You have two options: either provision a self-hosted node or play with a cloud-hosted demo with a lifetime of 2 hours.
 
 ## Cloud-hosted Demo Node

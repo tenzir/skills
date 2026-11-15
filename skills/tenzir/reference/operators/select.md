@@ -83,7 +83,7 @@ select metrics[key] = value
 
 ## See Also
 
-* [`drop`](https://tenzir.com/docs/reference/operators/drop.md)
-* [`where`](https://tenzir.com/docs/reference/operators/where.md)
+* [`drop`](drop.md)
+* [`where`](where.md)
 * [Filter and select data](../../guides/optimize/filter-and-select-data.md)
 * [Learn idiomatic TQL](../../tutorials/learn-idiomatic-tql.md)

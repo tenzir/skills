@@ -47,7 +47,7 @@ from_file "s3://bucket/logs/2026-01/*.parquet" { read_parquet }
 where timestamp >= 2026-01-15T00:00:00Z
 ```
 
-The [`from_kafka`](https://tenzir.com/docs/reference/operators/from_kafka.md) source instead produces a `message` string by default. For JSON messages, parse the payload and convert its timestamp string before applying the same filter:
+The [`from_kafka`](../reference/operators/from_kafka.md) source instead produces a `message` string by default. For JSON messages, parse the payload and convert its timestamp string before applying the same filter:
 
 ```tql
 from_kafka "logs"
@@ -56,7 +56,7 @@ timestamp = timestamp.time()
 where timestamp >= 2026-01-15T00:00:00Z
 ```
 
-A finite source ends when it exhausts its input; a live source can wait for future events. Streaming input does not make every operation incremental. For example, [`sort`](https://tenzir.com/docs/reference/operators/sort.md) buffers its input and needs it to end before it can emit a globally sorted result.
+A finite source ends when it exhausts its input; a live source can wait for future events. Streaming input does not make every operation incremental. For example, [`sort`](../reference/operators/sort.md) buffers its input and needs it to end before it can emit a globally sorted result.
 
 ### Multi-schema philosophy
 

@@ -51,6 +51,6 @@ from {
 
 ## See Also
 
-* [`starts_with`](https://tenzir.com/docs/reference/functions/starts_with.md)
+* [`starts_with`](starts_with.md)
 * [Filter and select data](../../guides/optimize/filter-and-select-data.md)
 * [Manipulate strings](../../guides/shape/manipulate-strings.md)

@@ -22,7 +22,7 @@ The `from_microsoft_defender` operator is a finite source that sends a `POST` re
 
 The operator validates the entire response before emitting any rows. Empty results succeed without emitting events. Invalid schemas, incompatible values, service errors, and unexpected envelope fields (including partial-result or continuation metadata) fail the pipeline. Diagnostics omit response bodies and result values. HTTP failures and invalid responses include a request ID when the service provides a safe identifier. Query errors point to `query`, while authorization errors point to `azure_auth` and provide status-specific setup hints.
 
-The operator uses the same Entra client-credentials token provider, TLS settings, and bounded HTTP retry policy as [`from_microsoft_graph`](https://tenzir.com/docs/reference/operators/from_microsoft_graph.md). Transient failures and throttling honor `Retry-After`; exhausted retries fail the pipeline. The operator checks token freshness before each attempt and refreshes it when needed, including after a retry delay. Retries preserve the original query and explicit time range. Permanent client and authorization failures aren’t retried.
+The operator uses the same Entra client-credentials token provider, TLS settings, and bounded HTTP retry policy as [`from_microsoft_graph`](from_microsoft_graph.md). Transient failures and throttling honor `Retry-After`; exhausted retries fail the pipeline. The operator checks token freshness before each attempt and refreshes it when needed, including after a retry delay. Retries preserve the original query and explicit time range. Permanent client and authorization failures aren’t retried.
 
 There is no pagination, automatic time-window splitting, persistent cursor, or deduplication guarantee. Restarting the pipeline reruns the query. The Microsoft Graph v1.0 [advanced-hunting quotas](https://learn.microsoft.com/en-us/graph/api/resources/security-api-overview?view=graph-rest-1.0#quotas-and-resource-allocation) limit results to 100,000 rows and 50 MB per query. These limits are documented for Microsoft Graph, not inferred from the older Defender hunting API or the interactive portal. The [`huntingQueryResults` response type](https://learn.microsoft.com/en-us/graph/api/resources/security-huntingqueryresults?view=graph-rest-1.0) doesn’t document a truncation indicator. A successful response doesn’t guarantee extraction completeness. Bound queries with appropriate time predicates and projections, and check your tenant’s service quotas and data availability.
 
@@ -77,7 +77,7 @@ When you omit both arguments, the request omits `Timespan`. The Graph service cu
 
 ### `tls = bool | record` (optional)
 
-TLS configuration, with the same behavior as [`from_microsoft_graph`](https://tenzir.com/docs/reference/operators/from_microsoft_graph.md#tls--bool--record-optional). HTTPS and certificate verification are enabled by default.
+TLS configuration, with the same behavior as [`from_microsoft_graph`](from_microsoft_graph.md#tls--bool--record-optional). HTTPS and certificate verification are enabled by default.
 
 ### `pushdown = bool` (optional)
 
@@ -87,9 +87,9 @@ Defaults to `true`.
 
 ## Optimizations
 
-The operator hands Defender the operators that follow it, as far as KQL can spell them, by appending stages to your query: [`where`](https://tenzir.com/docs/reference/operators/where.md), [`select`](https://tenzir.com/docs/reference/operators/select.md), [`drop`](https://tenzir.com/docs/reference/operators/drop.md), [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md) with `count()`, `count(x)`, `min`, `max`, and `sum`, including [`top`](https://tenzir.com/docs/reference/operators/top.md) and [`rare`](https://tenzir.com/docs/reference/operators/rare.md), [`sort`](https://tenzir.com/docs/reference/operators/sort.md), and [`head`](https://tenzir.com/docs/reference/operators/head.md). Those operators leave the pipeline and run with KQL’s semantics, which can differ from TQL. For example, a field that your query doesn’t return fails the query, and strings are never `null`. The stages apply to the table that your query returns, and your query text stays as is. Without a [`select`](https://tenzir.com/docs/reference/operators/select.md) or [`summarize`](https://tenzir.com/docs/reference/operators/summarize.md), a final `project` keeps the fields that the pipeline reads, and a field that your query doesn’t return becomes `null`. Use `pushdown=false` to keep every operator in the pipeline.
+The operator hands Defender the operators that follow it, as far as KQL can spell them, by appending stages to your query: [`where`](where.md), [`select`](select.md), [`drop`](drop.md), [`summarize`](summarize.md) with `count()`, `count(x)`, `min`, `max`, and `sum`, including [`top`](top.md) and [`rare`](rare.md), [`sort`](sort.md), and [`head`](head.md). Those operators leave the pipeline and run with KQL’s semantics, which can differ from TQL. For example, a field that your query doesn’t return fails the query, and strings are never `null`. The stages apply to the table that your query returns, and your query text stays as is. Without a [`select`](select.md) or [`summarize`](summarize.md), a final `project` keeps the fields that the pipeline reads, and a field that your query doesn’t return becomes `null`. Use `pushdown=false` to keep every operator in the pipeline.
 
-Defender returns at most 100,000 rows of a query without reporting a truncation, so the operator warns when a result has exactly that many rows, unless a [`head`](https://tenzir.com/docs/reference/operators/head.md) that Defender took over explains it.
+Defender returns at most 100,000 rows of a query without reporting a truncation, so the operator warns when a result has exactly that many rows, unless a [`head`](head.md) that Defender took over explains it.
 
 The operator never narrows the `start` and `end` window, and sends queries that use `render`, `fork`, `facet`, or a `set` statement, that have several tabular statements, or that end in `;` or `|`, unchanged. The page on [KQL optimizations](../optimizations/kql.md) describes which operators the service takes over and where KQL’s semantics differ.
 
@@ -127,4 +127,4 @@ Microsoft also describes [advanced hunting with connected Sentinel data](https:/
 
 ## See also
 
-[Defender](../../integrations/microsoft/defender.md)
+[Defender](https://tenzir.com/integrations/microsoft/defender)

@@ -35,7 +35,7 @@ from_fluent_bit "plugin", options={key1: value1, key2: value2, …}
 
 Output to Fluent Bit
 
-You can output events to Fluent Bit using the [`to_fluent_bit`](https://tenzir.com/docs/reference/operators/to_fluent_bit.md) operator.
+You can output events to Fluent Bit using the [`to_fluent_bit`](to_fluent_bit.md) operator.
 
 ### `plugin: string`
 
@@ -222,4 +222,4 @@ The input emits the MQTT topic and stores the JSON message under `payload`.
 
 ## See also
 
-* [Fluent bit](../../integrations/fluent-bit.md)
+* [Fluent bit](https://tenzir.com/integrations/fluent-bit)

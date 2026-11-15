@@ -76,9 +76,9 @@ to_tcp "collector.example.com:5044", tls={} { write_json }
 
 ## See Also
 
-* [`from_tcp`](https://tenzir.com/docs/reference/operators/from_tcp.md)
-* [`serve_tcp`](https://tenzir.com/docs/reference/operators/serve_tcp.md)
-* [`accept_tcp`](https://tenzir.com/docs/reference/operators/accept_tcp.md)
-* [`to_unix_socket`](https://tenzir.com/docs/reference/operators/to_unix_socket.md)
-* [`write_delimited`](https://tenzir.com/docs/reference/operators/write_delimited.md)
-* [Tcp](../../integrations/tcp.md)
+* [`from_tcp`](from_tcp.md)
+* [`serve_tcp`](serve_tcp.md)
+* [`accept_tcp`](accept_tcp.md)
+* [`to_unix_socket`](to_unix_socket.md)
+* [`write_delimited`](write_delimited.md)
+* [Tcp](https://tenzir.com/integrations/tcp)

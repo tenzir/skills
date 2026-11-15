@@ -154,8 +154,8 @@ y = x.parse_cef()
 
 ## See Also
 
-* [`print_cef`](https://tenzir.com/docs/reference/functions/print_cef.md)
-* [`read_cef`](https://tenzir.com/docs/reference/operators/read_cef.md)
-* [`read_syslog`](https://tenzir.com/docs/reference/operators/read_syslog.md)
+* [`print_cef`](print_cef.md)
+* [`read_cef`](../operators/read_cef.md)
+* [`read_syslog`](../operators/read_syslog.md)
 * [Parse string fields](../../guides/parse/parse-string-fields.md)
-* [Syslog](../../integrations/syslog.md)
+* [Syslog](https://tenzir.com/integrations/syslog)

@@ -56,6 +56,6 @@ assert_throughput 1k, within=1s, max_events=5k
 
 ## See Also
 
-* [`accept_udp`](https://tenzir.com/docs/reference/operators/accept_udp.md)
-* [`assert`](https://tenzir.com/docs/reference/operators/assert.md)
-* [`throttle`](https://tenzir.com/docs/reference/operators/throttle.md)
+* [`accept_udp`](accept_udp.md)
+* [`assert`](assert.md)
+* [`throttle`](throttle.md)

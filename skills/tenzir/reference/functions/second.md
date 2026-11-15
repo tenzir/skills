@@ -59,9 +59,9 @@ full_second = ts.second().floor()
 
 ## See Also
 
-* [`year`](https://tenzir.com/docs/reference/functions/year.md)
-* [`month`](https://tenzir.com/docs/reference/functions/month.md)
-* [`day`](https://tenzir.com/docs/reference/functions/day.md)
-* [`hour`](https://tenzir.com/docs/reference/functions/hour.md)
-* [`minute`](https://tenzir.com/docs/reference/functions/minute.md)
+* [`year`](year.md)
+* [`month`](month.md)
+* [`day`](day.md)
+* [`hour`](hour.md)
+* [`minute`](minute.md)
 * [Calculate with time](../../guides/shape/calculate-with-time.md)

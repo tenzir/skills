@@ -33,6 +33,6 @@ from { x: since_epoch(2021-02-24) }
 
 ## See Also
 
-* [`from_epoch`](https://tenzir.com/docs/reference/functions/from_epoch.md)
-* [`now`](https://tenzir.com/docs/reference/functions/now.md)
+* [`from_epoch`](from_epoch.md)
+* [`now`](now.md)
 * [Calculate with time](../../guides/shape/calculate-with-time.md)

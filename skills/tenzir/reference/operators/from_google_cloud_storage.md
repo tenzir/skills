@@ -132,8 +132,8 @@ from_google_cloud_storage "gs://security-logs/suricata/**.json" {
 
 ## See Also
 
-* [`from_google_cloud_storage`](https://tenzir.com/docs/reference/operators/from_google_cloud_storage.md)
-* [`to_google_cloud_storage`](https://tenzir.com/docs/reference/operators/to_google_cloud_storage.md)
-* [Cloud storage](../../integrations/google/cloud-storage.md)
+* [`from_google_cloud_storage`](from_google_cloud_storage.md)
+* [`to_google_cloud_storage`](to_google_cloud_storage.md)
+* [Cloud storage](https://tenzir.com/integrations/google/cloud-storage)
 
 Parallelizable: a parallel pipeline may run this operator on several cores at once.

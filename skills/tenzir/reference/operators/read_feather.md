@@ -32,5 +32,5 @@ publish "log"
 
 ## See Also
 
-* [`read_parquet`](https://tenzir.com/docs/reference/operators/read_parquet.md)
-* [`write_feather`](https://tenzir.com/docs/reference/operators/write_feather.md)
+* [`read_parquet`](read_parquet.md)
+* [`write_feather`](write_feather.md)

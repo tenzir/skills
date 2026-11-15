@@ -45,5 +45,5 @@ select probability = tdigest_cdf(model, 3.0)
 
 ## See also
 
-* [`tdigest`](https://tenzir.com/docs/reference/functions/tdigest.md)
-* [`tdigest_quantile`](https://tenzir.com/docs/reference/functions/tdigest_quantile.md)
+* [`tdigest`](tdigest.md)
+* [`tdigest_quantile`](tdigest_quantile.md)

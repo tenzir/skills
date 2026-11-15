@@ -37,8 +37,8 @@ from {x: bit_not(5)}
 
 ## See Also
 
-* [`bit_and`](https://tenzir.com/docs/reference/functions/bit_and.md)
-* [`bit_or`](https://tenzir.com/docs/reference/functions/bit_or.md)
-* [`bit_xor`](https://tenzir.com/docs/reference/functions/bit_xor.md)
-* [`shift_left`](https://tenzir.com/docs/reference/functions/shift_left.md)
-* [`shift_right`](https://tenzir.com/docs/reference/functions/shift_right.md)
+* [`bit_and`](bit_and.md)
+* [`bit_or`](bit_or.md)
+* [`bit_xor`](bit_xor.md)
+* [`shift_left`](shift_left.md)
+* [`shift_right`](shift_right.md)

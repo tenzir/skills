@@ -58,7 +58,7 @@ request = request.map_keys(key => key.to_lower())
 
 ## See Also
 
-* [`drop_matching`](https://tenzir.com/docs/reference/functions/drop_matching.md)
-* [`keys`](https://tenzir.com/docs/reference/functions/keys.md)
-* [`select_matching`](https://tenzir.com/docs/reference/functions/select_matching.md)
+* [`drop_matching`](drop_matching.md)
+* [`keys`](keys.md)
+* [`select_matching`](select_matching.md)
 * [Shape records](../../guides/shape/shape-records.md)

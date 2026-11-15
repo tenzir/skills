@@ -74,7 +74,7 @@ With this input, the parser will produce the following output, with the schema n
 }
 ```
 
-RFC 3164 timestamps don’t include a year or time zone, so `read_syslog` keeps the timestamp as a string. Use [`parse_time`](https://tenzir.com/docs/reference/functions/parse_time.md) with `reference` to convert it to a timestamp, and with `timezone` to interpret it in the sender’s time zone. See [`parse_time`](https://tenzir.com/docs/reference/functions/parse_time.md) for examples with fixed references and per-event time zones.
+RFC 3164 timestamps don’t include a year or time zone, so `read_syslog` keeps the timestamp as a string. Use [`parse_time`](../functions/parse_time.md) with `reference` to convert it to a timestamp, and with `timezone` to interpret it in the sender’s time zone. See [`parse_time`](../functions/parse_time.md) for examples with fixed references and per-event time zones.
 
 Pipeline
 
@@ -214,7 +214,7 @@ For input such as `<45>Some message`, the priority must be between 0 and 191, wi
 
 When enabled, this fallback preserves everything after `>`, including leading whitespace and unrecognized or malformed headers. It also accepts an empty body. Each line with a valid PRI prefix starts a new event instead of continuing the previous event. Lines without a recognized header can still continue a previous event.
 
-Automatic format detection with [`read_auto`](https://tenzir.com/docs/reference/operators/read_auto.md) requires a recognizable syslog header; a PRI prefix alone is insufficient. Select `read_syslog` explicitly for streams containing only PRI-prefixed text. Set `accept_pri_only=true` for those streams. Automatic detection leaves this option disabled, including after it selects `read_syslog`.
+Automatic format detection with [`read_auto`](read_auto.md) requires a recognizable syslog header; a PRI prefix alone is insufficient. Select `read_syslog` explicitly for streams containing only PRI-prefixed text. Set `accept_pri_only=true` for those streams. Automatic detection leaves this option disabled, including after it selects `read_syslog`.
 
 **Enabling this option can hide malformed syslog headers.** For example, an RFC 5424 message missing the space between structured data and its message body can be returned successfully as PRI-prefixed text. Only `facility` and `severity` are extracted; the malformed header and body remain in `content`, and the other header fields are null. No warning identifies this fallback.
 
@@ -238,7 +238,7 @@ The length prefix can contain up to 10 digits and must not start with zero. The 
 
 Counted messages can contain embedded newlines and do not require a trailing newline. Use `octet_counting=true` for counted streams whose first message has no PRI header. This explicit setting preserves the existing permissive parsing behavior and emits a deprecation warning.
 
-The selected framing stays fixed for the lifetime of the stream. When used inside [`accept_tcp`](https://tenzir.com/docs/reference/operators/accept_tcp.md), detection runs independently for each connection. After selecting octet counting, malformed lengths remain errors; the reader does not switch to non-transparent framing.
+The selected framing stays fixed for the lifetime of the stream. When used inside [`accept_tcp`](accept_tcp.md), detection runs independently for each connection. After selecting octet counting, malformed lengths remain errors; the reader does not switch to non-transparent framing.
 
 ### `octet_counting = bool (deprecated)`
 
@@ -249,7 +249,7 @@ Explicit values remain supported for compatibility. The reader emits a deprecati
 
 Omit the parameter to enable automatic detection without a deprecation warning.
 
-This deprecation applies only to `read_syslog`. The [`parse_syslog`](https://tenzir.com/docs/reference/functions/parse_syslog.md) function retains its `octet_counting` options for parsing individual strings.
+This deprecation applies only to `read_syslog`. The [`parse_syslog`](../functions/parse_syslog.md) function retains its `octet_counting` options for parsing individual strings.
 
 ### `raw_message = field (optional)`
 
@@ -511,6 +511,6 @@ from_file "/var/log/auth.log" {
 
 ## See Also
 
-* [`write_syslog`](https://tenzir.com/docs/reference/operators/write_syslog.md)
-* [`parse_syslog`](https://tenzir.com/docs/reference/functions/parse_syslog.md)
-* [Syslog](../../integrations/syslog.md)
+* [`write_syslog`](write_syslog.md)
+* [`parse_syslog`](../functions/parse_syslog.md)
+* [Syslog](https://tenzir.com/integrations/syslog)

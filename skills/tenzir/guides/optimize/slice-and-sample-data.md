@@ -15,17 +15,17 @@ When working with data streams, you often need to control which events flow thro
 
 The operators in this guide work on entire event streams:
 
-* [`head`](https://tenzir.com/docs/reference/operators/head.md) and [`tail`](https://tenzir.com/docs/reference/operators/tail.md) - Get events from the beginning or end
-* [`slice`](https://tenzir.com/docs/reference/operators/slice.md) - Extract a specific range of events
-* [`taste`](https://tenzir.com/docs/reference/operators/taste.md) - Sample events by schema
-* [`reverse`](https://tenzir.com/docs/reference/operators/reverse.md) - Invert the order of events
-* [`sample`](https://tenzir.com/docs/reference/operators/sample.md) - Randomly sample events
+* [`head`](../../reference/operators/head.md) and [`tail`](../../reference/operators/tail.md) - Get events from the beginning or end
+* [`slice`](../../reference/operators/slice.md) - Extract a specific range of events
+* [`taste`](../../reference/operators/taste.md) - Sample events by schema
+* [`reverse`](../../reference/operators/reverse.md) - Invert the order of events
+* [`sample`](../../reference/operators/sample.md) - Randomly sample events
 
 These operators maintain state between events, unlike functions that work on individual values.
 
 ## Get events from the beginning
 
-Use the [`head`](https://tenzir.com/docs/reference/operators/head.md) operator to get the first N events from a stream.
+Use the [`head`](../../reference/operators/head.md) operator to get the first N events from a stream.
 
 ### Basic usage
 
@@ -48,7 +48,7 @@ head 3
 
 ### Default behavior
 
-Without an argument, [`head`](https://tenzir.com/docs/reference/operators/head.md) returns all events:
+Without an argument, [`head`](../../reference/operators/head.md) returns all events:
 
 ```tql
 from {id: 1, value: "first"},
@@ -65,7 +65,7 @@ head
 
 ## Get events from the end
 
-Use the [`tail`](https://tenzir.com/docs/reference/operators/tail.md) operator to get the last N events.
+Use the [`tail`](../../reference/operators/tail.md) operator to get the last N events.
 
 ### Basic usage
 
@@ -86,11 +86,11 @@ tail 2
 
 Performance consideration
 
-The [`tail`](https://tenzir.com/docs/reference/operators/tail.md) operator must consume all input before producing output, making it memory-intensive for large streams. Use [`head`](https://tenzir.com/docs/reference/operators/head.md) when possible for better performance.
+The [`tail`](../../reference/operators/tail.md) operator must consume all input before producing output, making it memory-intensive for large streams. Use [`head`](../../reference/operators/head.md) when possible for better performance.
 
 ## Slice event streams
 
-The [`slice`](https://tenzir.com/docs/reference/operators/slice.md) operator provides fine-grained control over which events to extract.
+The [`slice`](../../reference/operators/slice.md) operator provides fine-grained control over which events to extract.
 
 ### Extract a range
 
@@ -140,7 +140,7 @@ slice begin=2, end=10, stride=3
 
 ## Sample events by schema
 
-The [`taste`](https://tenzir.com/docs/reference/operators/taste.md) operator samples events based on their structure, giving you examples of different data shapes in your stream.
+The [`taste`](../../reference/operators/taste.md) operator samples events based on their structure, giving you examples of different data shapes in your stream.
 
 ### Get schema examples
 
@@ -186,7 +186,7 @@ taste 2
 
 ## Reverse event order
 
-Use the [`reverse`](https://tenzir.com/docs/reference/operators/reverse.md) operator to invert the order of events in a stream:
+Use the [`reverse`](../../reference/operators/reverse.md) operator to invert the order of events in a stream:
 
 ```tql
 from {seq: 1, msg: "first"},
@@ -203,11 +203,11 @@ reverse
 
 Memory usage
 
-Like [`tail`](https://tenzir.com/docs/reference/operators/tail.md), the [`reverse`](https://tenzir.com/docs/reference/operators/reverse.md) operator must buffer all input before producing output. Use with caution on large streams.
+Like [`tail`](../../reference/operators/tail.md), the [`reverse`](../../reference/operators/reverse.md) operator must buffer all input before producing output. Use with caution on large streams.
 
 ## Time-based sampling
 
-Use the [`sample`](https://tenzir.com/docs/reference/operators/sample.md) operator to sample events based on time intervals:
+Use the [`sample`](../../reference/operators/sample.md) operator to sample events based on time intervals:
 
 ### Sample by duration
 
@@ -255,10 +255,10 @@ head 2
 
 ## Best practices
 
-1. **Prefer `head` over `tail`**: [`head`](https://tenzir.com/docs/reference/operators/head.md) stops processing once it has enough events, while [`tail`](https://tenzir.com/docs/reference/operators/tail.md) must process everything.
-2. **Use `taste` for exploration**: When working with unfamiliar data, [`taste`](https://tenzir.com/docs/reference/operators/taste.md) quickly shows you the different schemas present.
-3. **Be mindful of memory**: Operators like [`tail`](https://tenzir.com/docs/reference/operators/tail.md) and [`reverse`](https://tenzir.com/docs/reference/operators/reverse.md) buffer all input, which can consume significant memory for large streams.
-4. **Combine with filters**: Use [`where`](https://tenzir.com/docs/reference/operators/where.md) before slicing operators to reduce the amount of data processed.
+1. **Prefer `head` over `tail`**: [`head`](../../reference/operators/head.md) stops processing once it has enough events, while [`tail`](../../reference/operators/tail.md) must process everything.
+2. **Use `taste` for exploration**: When working with unfamiliar data, [`taste`](../../reference/operators/taste.md) quickly shows you the different schemas present.
+3. **Be mindful of memory**: Operators like [`tail`](../../reference/operators/tail.md) and [`reverse`](../../reference/operators/reverse.md) buffer all input, which can consume significant memory for large streams.
+4. **Combine with filters**: Use [`where`](../../reference/operators/where.md) before slicing operators to reduce the amount of data processed.
 
 ## See also
 

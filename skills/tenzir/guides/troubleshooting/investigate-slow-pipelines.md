@@ -74,7 +74,7 @@ Once you know whether the pipeline is compute-bound, input-bound, or output-boun
 
 ## See also
 
-* [`metrics`](https://tenzir.com/docs/reference/operators/metrics.md)
+* [`metrics`](../../reference/operators/metrics.md)
 * [Learn idiomatic TQL](../../tutorials/learn-idiomatic-tql.md)
 * [Investigate memory growth](investigate-memory-growth.md)
 * [Tune performance](../node-setup/tune-performance.md)

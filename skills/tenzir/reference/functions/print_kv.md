@@ -81,6 +81,6 @@ output = input.print_kv()
 
 ## See Also
 
-* [`parse_kv`](https://tenzir.com/docs/reference/functions/parse_kv.md)
-* [`read_kv`](https://tenzir.com/docs/reference/operators/read_kv.md)
-* [`write_kv`](https://tenzir.com/docs/reference/operators/write_kv.md)
+* [`parse_kv`](parse_kv.md)
+* [`read_kv`](../operators/read_kv.md)
+* [`write_kv`](../operators/write_kv.md)

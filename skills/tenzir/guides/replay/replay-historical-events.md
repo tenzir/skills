@@ -49,13 +49,13 @@ The replay timestamp must have the `time` type. Follow the guide on [normalizing
 
 ## Establish event-time order
 
-Use [`sort`](https://tenzir.com/docs/reference/operators/sort.md) for a finite archive with arbitrary disorder:
+Use [`sort`](../../reference/operators/sort.md) for a finite archive with arbitrary disorder:
 
 ```tql
 sort time
 ```
 
-Use [`reorder`](https://tenzir.com/docs/reference/operators/reorder.md) when the input is large and its timestamp skew has a known bound:
+Use [`reorder`](../../reference/operators/reorder.md) when the input is large and its timestamp skew has a known bound:
 
 ```tql
 reorder on=time, tolerance=2min
@@ -85,7 +85,7 @@ Choose a field that fits the target schema. For OCSF, source-specific replay met
 
 ## Move the replay to the current timeline
 
-Use [`timeshift`](https://tenzir.com/docs/reference/operators/timeshift.md) when consumers expect event timestamps near the current time:
+Use [`timeshift`](../../reference/operators/timeshift.md) when consumers expect event timestamps near the current time:
 
 ```tql
 original_time = time
@@ -98,7 +98,7 @@ Do not shift timestamps when testing logic that depends on the original calendar
 
 ## Pace the replay
 
-Without [`delay`](https://tenzir.com/docs/reference/operators/delay.md), the pipeline runs as fast as its source and operators permit. This is appropriate for batch validation, backfills, and tests whose logic uses event time exclusively.
+Without [`delay`](../../reference/operators/delay.md), the pipeline runs as fast as its source and operators permit. This is appropriate for batch validation, backfills, and tests whose logic uses event time exclusively.
 
 Add `delay` when the system under test should observe the original event cadence:
 
@@ -174,7 +174,7 @@ Event-time windows follow the event timestamps after any `timeshift`. Wall-clock
 * `now()` calls.
 * Window `idle_timeout`.
 * Context expiration.
-* [`deduplicate`](https://tenzir.com/docs/reference/operators/deduplicate.md) timeouts.
+* [`deduplicate`](../../reference/operators/deduplicate.md) timeouts.
 
 A fast replay can compress incidents that were hours apart into one wall-clock suppression interval. Disable such suppression for the replay, adjust its timeout, or accept the compressed behavior as part of the test.
 

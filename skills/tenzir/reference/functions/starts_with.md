@@ -51,7 +51,7 @@ from {
 
 ## See Also
 
-* [`ends_with`](https://tenzir.com/docs/reference/functions/ends_with.md)
+* [`ends_with`](ends_with.md)
 * [Filter and select data](../../guides/optimize/filter-and-select-data.md)
 * [Manipulate strings](../../guides/shape/manipulate-strings.md)
 * [Learn idiomatic TQL](../../tutorials/learn-idiomatic-tql.md)

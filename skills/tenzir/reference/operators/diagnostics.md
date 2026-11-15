@@ -90,4 +90,4 @@ where severity == "error"
 
 ## See Also
 
-* [`metrics`](https://tenzir.com/docs/reference/operators/metrics.md)
+* [`metrics`](metrics.md)

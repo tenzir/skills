@@ -61,5 +61,5 @@ from {
 
 ## See Also
 
-* [`ceil`](https://tenzir.com/docs/reference/functions/ceil.md)
-* [`round`](https://tenzir.com/docs/reference/functions/round.md)
+* [`ceil`](ceil.md)
+* [`round`](round.md)

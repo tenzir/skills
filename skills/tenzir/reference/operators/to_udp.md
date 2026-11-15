@@ -56,5 +56,5 @@ to_udp "127.0.0.1:514"
 
 ## See Also
 
-* [`accept_udp`](https://tenzir.com/docs/reference/operators/accept_udp.md)
-* [Udp](../../integrations/udp.md)
+* [`accept_udp`](accept_udp.md)
+* [Udp](https://tenzir.com/integrations/udp)

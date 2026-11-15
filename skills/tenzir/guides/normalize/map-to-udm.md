@@ -13,7 +13,7 @@ This guide shows you how to map events to Google SecOps Unified Data Model (UDM)
 
 Send structured UDM records
 
-Tenzir’s [`to_google_secops`](https://tenzir.com/docs/reference/operators/to_google_secops.md) operator can send structured UDM records to Google SecOps. Use `mode="udm_event"` for UDM event rows, or `mode="udm_entity"` for UDM entity rows.
+Tenzir’s [`to_google_secops`](../../reference/operators/to_google_secops.md) operator can send structured UDM records to Google SecOps. Use `mode="udm_event"` for UDM event rows, or `mode="udm_entity"` for UDM entity rows.
 
 The TQL examples in this guide build API-facing UDM records, so they use lowerCamelCase ingestion object field names such as `metadata.eventType` and `network.ipProtocol`.
 
@@ -47,7 +47,7 @@ These rules are specific to UDM:
 
 ## See Also
 
-* [`to_google_secops`](https://tenzir.com/docs/reference/operators/to_google_secops.md)
+* [`to_google_secops`](../../reference/operators/to_google_secops.md)
 * [Clean up values](../parse/clean-up-values.md)
 * [Use agent skills](../ai-workbench/use-agent-skills.md#use-the-udm-skill)
 * [Map to ASIM](map-to-asim.md)

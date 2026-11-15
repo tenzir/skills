@@ -244,5 +244,5 @@ read_kv
 
 ## See Also
 
-* [`write_kv`](https://tenzir.com/docs/reference/operators/write_kv.md)
-* [`parse_kv`](https://tenzir.com/docs/reference/functions/parse_kv.md)
+* [`write_kv`](write_kv.md)
+* [`parse_kv`](../functions/parse_kv.md)

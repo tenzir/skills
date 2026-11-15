@@ -62,7 +62,7 @@ select merged = model_merge([a, b])
 
 ## See also
 
-* [`histogram`](https://tenzir.com/docs/reference/functions/histogram.md)
-* [`frequency_table`](https://tenzir.com/docs/reference/functions/frequency_table.md)
-* [`tdigest`](https://tenzir.com/docs/reference/functions/tdigest.md)
-* [`hll`](https://tenzir.com/docs/reference/functions/hll.md)
+* [`histogram`](histogram.md)
+* [`frequency_table`](frequency_table.md)
+* [`tdigest`](tdigest.md)
+* [`hll`](hll.md)

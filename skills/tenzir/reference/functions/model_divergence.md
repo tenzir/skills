@@ -49,6 +49,6 @@ select drift = model_divergence(
 
 ## See also
 
-* [`model_distance`](https://tenzir.com/docs/reference/functions/model_distance.md)
-* [`histogram`](https://tenzir.com/docs/reference/functions/histogram.md)
-* [`frequency_table`](https://tenzir.com/docs/reference/functions/frequency_table.md)
+* [`model_distance`](model_distance.md)
+* [`histogram`](histogram.md)
+* [`frequency_table`](frequency_table.md)

@@ -184,7 +184,7 @@ to_amazon_cloudwatch "/tenzir/events",
 
 ## See Also
 
-* [`from_amazon_cloudwatch`](https://tenzir.com/docs/reference/operators/from_amazon_cloudwatch.md)
-* [Cloudwatch](../../integrations/amazon/cloudwatch.md)
+* [`from_amazon_cloudwatch`](from_amazon_cloudwatch.md)
+* [Cloudwatch](https://tenzir.com/integrations/amazon/cloudwatch)
 
 Parallelizable: a parallel pipeline may run this operator on several cores at once.

@@ -53,8 +53,8 @@ select intervals = times.sort().deltas()
 
 ## See Also
 
-* [`mad`](https://tenzir.com/docs/reference/functions/mad.md)
-* [`skewness`](https://tenzir.com/docs/reference/functions/skewness.md)
-* [`sort`](https://tenzir.com/docs/reference/functions/sort.md)
-* [`zip`](https://tenzir.com/docs/reference/functions/zip.md)
+* [`mad`](mad.md)
+* [`skewness`](skewness.md)
+* [`sort`](sort.md)
+* [`zip`](zip.md)
 * [Shape lists](../../guides/shape/shape-lists.md)

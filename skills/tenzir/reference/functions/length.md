@@ -33,7 +33,7 @@ from {n: [1, 2, 3].length()}
 
 ## See Also
 
-* [`is_empty`](https://tenzir.com/docs/reference/functions/is_empty.md)
-* [`length_bytes`](https://tenzir.com/docs/reference/functions/length_bytes.md)
-* [`length_chars`](https://tenzir.com/docs/reference/functions/length_chars.md)
+* [`is_empty`](is_empty.md)
+* [`length_bytes`](length_bytes.md)
+* [`length_chars`](length_chars.md)
 * [Shape lists](../../guides/shape/shape-lists.md)

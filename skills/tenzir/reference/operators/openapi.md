@@ -30,4 +30,4 @@ write_yaml
 
 ## See Also
 
-* [`api`](https://tenzir.com/docs/reference/operators/api.md)
+* [`api`](api.md)

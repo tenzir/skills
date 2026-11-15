@@ -41,4 +41,4 @@ encoded = input.encode_base58()
 
 ## See Also
 
-* [`decode_base58`](https://tenzir.com/docs/reference/functions/decode_base58.md)
+* [`decode_base58`](decode_base58.md)

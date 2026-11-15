@@ -33,5 +33,5 @@ from {x: "Hello World".is_title()}
 
 ## See Also
 
-* [`to_title`](https://tenzir.com/docs/reference/functions/to_title.md)
+* [`to_title`](to_title.md)
 * [Manipulate strings](../../guides/shape/manipulate-strings.md)
