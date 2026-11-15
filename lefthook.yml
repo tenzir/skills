@@ -5,3 +5,5 @@ pre-push:
       run: scripts/validate-skills --marketplace
     validate-changelog:
       run: uvx tenzir-ship --root changelog validate --lenient
+    test-copy-tenzir-skill:
+      run: uv run scripts/test-copy-tenzir-skill.py
