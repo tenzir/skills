@@ -213,10 +213,10 @@ attributes:
     requirement: optional
     group: context
     description: Describes the recommended remediation steps to address identified issue(s).
-  risk_details: {caption: Risk Details, type: string_t, requirement: optional, group: context, profile: security_control, from: base_event}
-  risk_level: {caption: Risk Level, type: string_t, requirement: optional, group: context, profile: security_control, from: base_event}
-  risk_level_id: {caption: Risk Level ID, type: integer_t, requirement: optional, group: context, profile: security_control, sibling: risk_level, enum: {0: Info, 1: Low, 2: Medium, 3: High, 4: Critical, 99: Other}, from: base_event}
-  risk_score: {caption: Risk Score, type: integer_t, requirement: optional, group: context, profile: security_control, from: base_event}
+  risk_details: {caption: Risk Details, type: string_t, requirement: optional, group: context, from: finding}
+  risk_level: {caption: Risk Level, type: string_t, requirement: optional, group: context, from: finding}
+  risk_level_id: {caption: Risk Level ID, type: integer_t, requirement: optional, group: context, sibling: risk_level, enum: {0: Info, 1: Low, 2: Medium, 3: High, 4: Critical, 99: Other}, from: finding}
+  risk_score: {caption: Risk Score, type: integer_t, requirement: optional, group: context, from: finding}
   severity: {caption: Severity, type: string_t, requirement: optional, group: classification, from: base_event}
   start_time: {caption: Start Time, type: timestamp_t, requirement: optional, group: occurrence, from: finding}
   start_time_dt:

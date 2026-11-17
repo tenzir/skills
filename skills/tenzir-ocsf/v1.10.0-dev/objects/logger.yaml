@@ -32,7 +32,7 @@ attributes:
     caption: Logged Time
     type: timestamp_t
     requirement: recommended
-    description: The time when this logger received and logged the event. For the last logger in the pipeline, this value should match `metadata.logged_time`.
+    description: The time when this logger received and logged the event (assuming no internal processing delay). If processing occurred, provide a distinct `received_time` value. For the final logger in the pipeline, this should match `metadata.logged_time`.
   name:
     caption: Name
     type: string_t
@@ -176,7 +176,18 @@ attributes:
     type: datetime_t
     requirement: optional
     profile: datetime
-    description: The time when this logger received and logged the event. For the last logger in the pipeline, this value should match `metadata.logged_time`.
+    description: The time when this logger received and logged the event (assuming no internal processing delay). If processing occurred, provide a distinct `received_time` value. For the final logger in the pipeline, this should match `metadata.logged_time`.
+  received_time:
+    caption: Received Time
+    type: timestamp_t
+    requirement: optional
+    description: The time when this logger first received the event. This matches `logged_time` if received and logged simultaneously. If the logger uses a multi-stage processing pipeline, this records the time the event entered the first stage.
+  received_time_dt:
+    caption: Received Time
+    type: datetime_t
+    requirement: optional
+    profile: datetime
+    description: The time when this logger first received the event. This matches `logged_time` if received and logged simultaneously. If the logger uses a multi-stage processing pipeline, this records the time the event entered the first stage.
   transmit_time_dt:
     caption: Transmission Time
     type: datetime_t

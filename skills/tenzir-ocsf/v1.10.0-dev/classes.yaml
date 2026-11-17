@@ -673,8 +673,8 @@ classes:
   uid: 6003
   category: application
   extends: application
-  summary: API events describe general CRUD (Create, Read, Update, Delete) API activities, e.g.
-  activities: {1: Create, 2: Read, 3: Update, 4: Delete}
+  summary: 'API events describe general API activities: create, read, update, delete and list.'
+  activities: {1: Create, 2: Read, 3: Update, 4: Delete, 5: List}
   path: v1.10.0-dev/classes/api_activity.yaml
 - name: application_error
   caption: Application Error

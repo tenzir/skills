@@ -817,6 +817,13 @@ cache_ttl:
   description: The declared freshness window of a cacheable result, in milliseconds.
   used_by:
     objects: [ai_capability]
+call_stack:
+  caption: Call Stack
+  type: string_t
+  array: true
+  description: 'The call stack of the thread identified by `ptid`, captured at the time of the activity, as an ordered list of frames starting with the most recent call. Each frame is a return address written as the module path, followed by `!` and the symbol name when the symbol is known, then `+` and the offset. Numbers are decimal unless they end with `h`, which marks them as hexadecimal. For example: `C:\Windows\System32\ntdll.dll+9d4c4h`, `C:\Windows\System32\ntdll.dll!NtOpenProcess+14h` or `/usr/lib/x86_64-linux-gnu/libc.so.6!malloc+141`. A frame that is not backed by a loaded module is written as the address alone, for example `00000216A4C10F2Bh`.'
+  used_by:
+    objects: [process]
 campaign:
   caption: Campaign
   type: object_t
@@ -3227,6 +3234,12 @@ is_disabled:
   description: Indicates if the entity is disabled. See specific usage.
   used_by:
     objects: [account]
+is_elevated:
+  caption: Elevated
+  type: boolean_t
+  description: Indicates that the object has elevated privileges. See specific usage.
+  used_by:
+    objects: [session]
 is_encrypted:
   caption: Encrypted
   type: boolean_t
@@ -5313,6 +5326,18 @@ read_count:
   description: The read count. See specific usage.
   used_by:
     objects: [service_privilege_analysis]
+received_time:
+  caption: Received Time
+  type: timestamp_t
+  description: The time when an event was received. See specific usage.
+  used_by:
+    objects: [logger, metadata]
+received_time_dt:
+  caption: Received Time
+  type: datetime_t
+  description: The time when an event was received. See specific usage.
+  used_by:
+    objects: [logger, metadata]
 record_index_in_array:
   caption: Record Index in Array
   type: integer_t
@@ -6614,6 +6639,19 @@ terminated_time_dt:
   description: The time when the entity was terminated. See specific usage.
   used_by:
     objects: [process]
+terminating_signal:
+  caption: Terminating Signal
+  type: string_t
+  description: The name of the signal that terminated the process, or that was sent to terminate it, normalized to the caption of the `terminating_signal_id` value. In the case of 'Other', it is defined by the event source.
+  used_by:
+    classes: [process_activity]
+terminating_signal_id:
+  caption: Terminating Signal ID
+  type: integer_t
+  sibling: terminating_signal
+  description: The normalized identifier of the signal that terminated the process, or that was sent to terminate it. Signals are defined by POSIX and are used on Unix-like operating systems. The values follow the Linux signal numbers on x86 and ARM processors. Signal numbers differ between processor architectures and operating systems, so on other platforms the signal is mapped by its name. Only the POSIX signals whose default action is to terminate the process are listed; any other signal maps to 'Other'.
+  used_by:
+    classes: [process_activity]
 threat_actor:
   caption: Threat Actor
   type: object_t

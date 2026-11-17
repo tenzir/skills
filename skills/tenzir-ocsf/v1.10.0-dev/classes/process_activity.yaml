@@ -177,9 +177,15 @@ attributes:
         caption: Load Library
       3:
         caption: Queue APC
+      4:
+        caption: Ptrace
+        description: The actor injected code using the process trace system call, for example by attaching to the target process and writing to its memory or registers with `PTRACE_POKETEXT`, `PTRACE_POKEDATA` or `PTRACE_SETREGS`.
       99:
         caption: Other
         description: The injection type is not mapped. See the `injection_type` attribute, which contains a data source specific value.
+    references:
+    - description: ptrace(2), process trace system call
+      url: https://man7.org/linux/man-pages/man2/ptrace.2.html
   is_alert: {caption: Alert, type: boolean_t, requirement: recommended, group: primary, profile: security_control, from: base_event}
   launch_type:
     caption: Launch Type
@@ -234,6 +240,88 @@ attributes:
   status_code: {caption: Status Code, type: string_t, requirement: recommended, group: primary, from: base_event}
   status_detail: {caption: Status Detail, type: string_t, requirement: recommended, group: primary, from: base_event}
   status_id: {caption: Status ID, type: integer_t, requirement: recommended, group: primary, sibling: status, enum: {0: Unknown, 1: Success, 2: Failure, 99: Other}, from: base_event}
+  terminating_signal:
+    caption: Terminating Signal
+    type: string_t
+    requirement: recommended
+    group: primary
+    description: The name of the signal that terminated the process, or that was sent to terminate it, normalized to the caption of the `terminating_signal_id` value. In the case of 'Other', it is defined by the event source.
+  terminating_signal_id:
+    caption: Terminating Signal ID
+    type: integer_t
+    requirement: recommended
+    group: primary
+    sibling: terminating_signal
+    description: The normalized identifier of the signal that terminated the process, or that was sent to terminate it. Signals are defined by POSIX and are used on Unix-like operating systems. The values follow the Linux signal numbers on x86 and ARM processors. Signal numbers differ between processor architectures and operating systems, so on other platforms the signal is mapped by its name. Only the POSIX signals whose default action is to terminate the process are listed; any other signal maps to 'Other'.
+    enum:
+      0:
+        caption: Unknown
+        description: The signal is unknown.
+      1:
+        caption: SIGHUP
+        description: Hangup. The controlling terminal was closed or its controlling process ended.
+      2:
+        caption: SIGINT
+        description: Terminal interrupt signal, for example Ctrl+C.
+      3:
+        caption: SIGQUIT
+        description: Terminal quit signal. The process ends with a core dump.
+      4:
+        caption: SIGILL
+        description: Illegal instruction. The process ends with a core dump.
+      5:
+        caption: SIGTRAP
+        description: Trace or breakpoint trap. The process ends with a core dump.
+      6:
+        caption: SIGABRT
+        description: Process abort signal, for example from `abort()`. The process ends with a core dump.
+      7:
+        caption: SIGBUS
+        description: Access to an undefined portion of a memory object. The process ends with a core dump.
+      8:
+        caption: SIGFPE
+        description: Erroneous arithmetic operation. The process ends with a core dump.
+      9:
+        caption: SIGKILL
+        description: Kill signal. It cannot be caught or ignored.
+      10:
+        caption: SIGUSR1
+        description: User-defined signal 1.
+      11:
+        caption: SIGSEGV
+        description: Invalid memory reference. The process ends with a core dump.
+      12:
+        caption: SIGUSR2
+        description: User-defined signal 2.
+      13:
+        caption: SIGPIPE
+        description: Write on a pipe with no one to read it.
+      14:
+        caption: SIGALRM
+        description: Alarm clock.
+      15:
+        caption: SIGTERM
+        description: Termination signal. This is the default signal sent to ask a process to end.
+      24:
+        caption: SIGXCPU
+        description: CPU time limit exceeded. The process ends with a core dump.
+      25:
+        caption: SIGXFSZ
+        description: File size limit exceeded. The process ends with a core dump.
+      26:
+        caption: SIGVTALRM
+        description: Virtual timer expired.
+      31:
+        caption: SIGSYS
+        description: Bad system call. The process ends with a core dump.
+      99:
+        caption: Other
+        description: The signal is not mapped. See the `terminating_signal` attribute, which contains an event source specific value, for example a real-time signal.
+    references:
+    - description: signal(7), overview of signals and signal numbers by architecture
+      url: https://man7.org/linux/man-pages/man7/signal.7.html
+    - description: POSIX signal.h, standard signals and their default actions
+      url: https://pubs.opengroup.org/onlinepubs/9799919799/basedefs/signal.h.html
   timezone_offset: {caption: Timezone Offset, type: integer_t, requirement: recommended, group: occurrence, from: base_event}
   action: {caption: Action, type: string_t, requirement: optional, group: primary, profile: security_control, from: base_event}
   activity_name: {caption: Activity, type: string_t, requirement: optional, group: classification, from: base_event}

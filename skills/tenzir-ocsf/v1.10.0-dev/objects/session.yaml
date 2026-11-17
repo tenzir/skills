@@ -72,6 +72,14 @@ attributes:
     requirement: optional
     profile: datetime
     description: The session expiration time.
+  is_elevated:
+    caption: Elevated
+    type: boolean_t
+    requirement: optional
+    description: Indicates whether the session runs with elevated privileges, for example a logon session that holds full administrative rights instead of a filtered set of rights.
+    references:
+    - description: Security event 4624, An account was successfully logged on (Elevated Token field)
+      url: https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/auditing/event-4624
   is_mfa:
     caption: Multi Factor Authentication
     type: boolean_t

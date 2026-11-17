@@ -29,8 +29,8 @@ attributes:
         caption: Unknown
         description: The token elevation type is unknown.
       1:
-        caption: None
-        description: The token does not have a linked token. This is the case, for example, when User Account Control is disabled, or for the built-in Administrator account, service accounts, and the local system account. Corresponds to `TokenElevationTypeDefault`.
+        caption: Default
+        description: The default elevation type, meaning that the token does not have a linked token, so there is no split between a limited and a full token. This is the case, for example, when User Account Control is disabled, or for the built-in Administrator account, service accounts, and the local system account. Corresponds to `TokenElevationTypeDefault`.
       2:
         caption: Full
         description: The token is an elevated token with no privileges removed or groups disabled, for example when a program is started with Run as administrator or is configured to always require administrative privilege. Corresponds to `TokenElevationTypeFull`.

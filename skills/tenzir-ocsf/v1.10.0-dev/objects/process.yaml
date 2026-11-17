@@ -94,6 +94,12 @@ attributes:
     references:
     - description: Guidance on Representing Process Parentage
       url: https://github.com/ocsf/ocsf-docs/blob/main/articles/representing-process-parentage.md
+  call_stack:
+    caption: Call Stack
+    type: string_t
+    array: true
+    requirement: optional
+    description: 'The call stack of the thread identified by `ptid`, captured at the time of the activity, as an ordered list of frames starting with the most recent call. Each frame is a return address written as the module path, followed by `!` and the symbol name when the symbol is known, then `+` and the offset. Numbers are decimal unless they end with `h`, which marks them as hexadecimal. For example: `C:\Windows\System32\ntdll.dll+9d4c4h`, `C:\Windows\System32\ntdll.dll!NtOpenProcess+14h` or `/usr/lib/x86_64-linux-gnu/libc.so.6!malloc+141`. A frame that is not backed by a loaded module is written as the address alone, for example `00000216A4C10F2Bh`.'
   created_time_dt: {caption: Created Time, type: datetime_t, requirement: optional, profile: datetime, from: process_entity}
   environment_variables:
     caption: Environment Variables

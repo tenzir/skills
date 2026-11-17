@@ -358,6 +358,17 @@ attributes:
     array: true
     requirement: optional
     description: The list of profiles used to create the event. Profiles should be referenced by their `name` attribute for core profiles, or `extension/name` for profiles from extensions.
+  received_time:
+    caption: Received Time
+    type: timestamp_t
+    requirement: optional
+    description: The time when the event was first received in the event pipeline, i.e. by the first logger. In a single-hop pipeline where the event is received and logged simultaneously, this matches logged_time. If loggers is populated, this value should match loggers[0].received_time, or loggers[0].logged_time when the first logger does not record a separate received_time; per-hop received times are recorded in loggers[].received_time.
+  received_time_dt:
+    caption: Received Time
+    type: datetime_t
+    requirement: optional
+    profile: datetime
+    description: The time when the event was first received in the event pipeline, i.e. by the first logger. In a single-hop pipeline where the event is received and logged simultaneously, this matches logged_time. If loggers is populated, this value should match loggers[0].received_time, or loggers[0].logged_time when the first logger does not record a separate received_time; per-hop received times are recorded in loggers[].received_time.
   sequence:
     caption: Sequence Number
     type: integer_t
@@ -380,7 +391,7 @@ attributes:
     type: object_t
     object: timespan
     requirement: optional
-    description: The amount of time an event spent in a queue awaiting processing. In this case, the value is the difference between `processed_time` and `logged_time`. This duration is inclusive of all queues between the originator of the event and the intended long-term storage destination of the event.
+    description: The amount of time an event spent in a queue awaiting processing. In this case, the value is `logged_time` minus `processed_time`. This duration is inclusive of all queues between the originator of the event and the intended long-term storage destination of the event.
   transformation_info_list:
     caption: Transformation Info
     type: object_t

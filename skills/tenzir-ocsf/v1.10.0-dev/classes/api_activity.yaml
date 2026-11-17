@@ -6,7 +6,7 @@ uid: 6003
 category: application
 category_uid: 6
 extends: application
-description: API events describe general CRUD (Create, Read, Update, Delete) API activities, e.g. (AWS Cloudtrail)
+description: 'API events describe general API activities: create, read, update, delete and list.'
 profiles: [ai_operation, cloud, container, data_classification, datetime, host, osint, record_integrity, security_control, trace]
 attributes:
   activity_id:
@@ -32,6 +32,9 @@ attributes:
       4:
         caption: Delete
         description: The API call in the event pertains to a 'delete' activity.
+      5:
+        caption: List
+        description: The API call in the event pertains to a 'list' activity, which returns a collection of resources rather than one resource.
       99:
         caption: Other
         description: The event activity is not mapped. See the `activity_name` attribute, which contains a data source specific value.
@@ -71,7 +74,7 @@ attributes:
     enum:
       6003:
         caption: API Activity
-        description: API events describe general CRUD (Create, Read, Update, Delete) API activities, e.g. (AWS Cloudtrail)
+        description: 'API events describe general API activities: create, read, update, delete and list.'
   cloud: {caption: Cloud, type: object_t, object: cloud, requirement: required, group: primary, profile: cloud, from: base_event}
   metadata: {caption: Metadata, type: object_t, object: metadata, requirement: required, group: context, from: base_event}
   osint: {caption: OSINT, type: object_t, object: osint, array: true, requirement: required, group: primary, profile: osint, from: base_event}

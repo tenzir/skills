@@ -344,45 +344,10 @@ attributes:
   raw_data: {caption: Raw Data, type: string_t, requirement: optional, group: context, from: base_event}
   raw_data_hash: {caption: Raw Data Hash, type: object_t, object: fingerprint, requirement: optional, group: context, observable: 30, from: base_event}
   raw_data_size: {caption: Raw Data Size, type: long_t, requirement: optional, group: context, from: base_event}
-  risk_details:
-    caption: Risk Details
-    type: string_t
-    requirement: optional
-    group: context
-    description: Describes the risk associated with the finding.
-  risk_level:
-    caption: Risk Level
-    type: string_t
-    requirement: optional
-    group: context
-    description: The risk level, normalized to the caption of the risk_level_id value.
-  risk_level_id:
-    caption: Risk Level ID
-    type: integer_t
-    requirement: optional
-    group: context
-    sibling: risk_level
-    description: The normalized risk level id.
-    enum:
-      0:
-        caption: Info
-      1:
-        caption: Low
-      2:
-        caption: Medium
-      3:
-        caption: High
-      4:
-        caption: Critical
-      99:
-        caption: Other
-        description: The risk level is not mapped. See the `risk_level` attribute, which contains a data source specific value.
-  risk_score:
-    caption: Risk Score
-    type: integer_t
-    requirement: optional
-    group: context
-    description: The risk score as reported by the event source.
+  risk_details: {caption: Risk Details, type: string_t, requirement: optional, group: context, from: finding}
+  risk_level: {caption: Risk Level, type: string_t, requirement: optional, group: context, from: finding}
+  risk_level_id: {caption: Risk Level ID, type: integer_t, requirement: optional, group: context, sibling: risk_level, enum: {0: Info, 1: Low, 2: Medium, 3: High, 4: Critical, 99: Other}, from: finding}
+  risk_score: {caption: Risk Score, type: integer_t, requirement: optional, group: context, from: finding}
   severity: {caption: Severity, type: string_t, requirement: optional, group: classification, from: base_event}
   start_time: {caption: Start Time, type: timestamp_t, requirement: optional, group: occurrence, from: finding}
   start_time_dt:
