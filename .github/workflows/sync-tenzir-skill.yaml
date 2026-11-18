@@ -12,11 +12,6 @@ on:
         required: false
         default: "https://tenzir.com"
         type: string
-      release:
-        description: "Docs release whose agent map to copy, such as 7.0.0, or latest"
-        required: false
-        default: "latest"
-        type: string
 
 permissions:
   contents: write
@@ -26,29 +21,6 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  # Scheduled runs only fire on the default branch. Branches that carry the
-  # skill for an unreleased version, such as tenzir-7, set their own
-  # release default; start their sync from here so they stay fresh too.
-  sync-branches:
-    name: Start syncs on version branches
-    if: github.event_name == 'schedule'
-    runs-on: ubuntu-latest
-    permissions:
-      actions: write
-    env:
-      GH_TOKEN: ${{ github.token }}
-      BRANCHES: tenzir-7
-    steps:
-      - name: Dispatch existing branches
-        shell: bash
-        run: |
-          set -euo pipefail
-          for branch in $BRANCHES; do
-            if gh api "repos/${{ github.repository }}/branches/$branch" --silent 2>/dev/null; then
-              gh workflow run sync-tenzir-skill.yaml --repo "${{ github.repository }}" --ref "$branch"
-            fi
-          done
-
   sync:
     name: Copy tenzir
     runs-on: ubuntu-latest
@@ -75,12 +47,10 @@ jobs:
         shell: bash
         env:
           BASE_URL: ${{ inputs.base_url || 'https://tenzir.com' }}
-          RELEASE: ${{ inputs.release || 'latest' }}
         run: |
           set -euo pipefail
           uv run scripts/copy-tenzir-skill.py \
             --base-url "$BASE_URL" \
-            --release "$RELEASE" \
             --output-dir skills/tenzir
 
       - name: Validate skills

@@ -4,29 +4,26 @@
 # ///
 """Copy the tenzir skill from the agent map that tenzir.com publishes.
 
-Every docs release on the website carries an agent map at
-``/docs/v<version>/SKILL.md``: the skill's frontmatter and a condensed map of
-the release, whose relative links lead to the release's Markdown twins. This
-script downloads the map and every twin of the release it reaches, following
-links from page to page, and mirrors them below the output directory.
+The default documentation at ``/docs/`` carries an agent map at
+``/docs/SKILL.md``: the skill's frontmatter and a condensed map of the docs,
+whose relative links lead to their Markdown twins. This script downloads the
+map and every twin it reaches, following links from page to page, and mirrors
+them below the output directory.
 
 The twins link each other with absolute URLs, such as
-``https://tenzir.com/docs/v7.0.0/reference/operators/where.md``, so the copy
-follows absolute links into the release as well. The latest release, as
-``/docs/versions.json`` names it, serves its twins at ``/docs/`` and
-redirects there from its versioned address, so for it the copy accepts that
-address, too. It rejects every other redirect, so no page of another release
-or site enters the skill.
+``https://tenzir.com/docs/reference/operators/where.md``, so the copy follows
+absolute links below ``/docs/`` as well, except into the versioned docs of
+other releases. It rejects redirects, so no page of another release or site
+enters the skill.
 
 The copy rewrites links to the pages it copied into paths relative to the
 linking file, keeping their anchors, so the skill navigates offline. It leaves
-links in code and links outside the release as they are.
+links in code and links outside the docs as they are.
 """
 
 from __future__ import annotations
 
 import argparse
-import json
 import os
 import posixpath
 import re
@@ -73,22 +70,6 @@ def fetch(url: str) -> tuple[str, bytes]:
                 raise
         time.sleep(2**attempt)
     raise AssertionError("unreachable")
-
-
-def release_roots(base_url: str, release: str) -> list[str]:
-    """The addresses of a release's docs: its versioned root and, for the
-    latest release, the unversioned `/docs/` where its pages answer."""
-    base = base_url.rstrip("/")
-    url = f"{base}/docs/versions.json"
-    try:
-        latest = json.loads(fetch(url)[1])["latest"]
-    except (OSError, KeyError, TypeError, ValueError) as error:
-        raise CopyError(f"cannot read the latest release from {url}: {error}")
-    version = latest if release == "latest" else release.removeprefix("v")
-    if not re.fullmatch(r"\d+\.\d+\.\d+(?:-[\w.]+)?", version):
-        raise CopyError(f"not a release version: {version!r}")
-    root = f"{base}/docs/v{version}/"
-    return [root, f"{base}/docs/"] if version == latest else [root]
 
 
 def map_links(markdown: str, href_map: Callable[[str], str]) -> str:
@@ -141,19 +122,15 @@ def links(markdown: str) -> list[str]:
     return found
 
 
-def release_path(href: str, page_url: str, roots: list[str]) -> str | None:
-    """The path of a link below a release root, if it leads to a twin."""
+def docs_path(href: str, page_url: str, root: str) -> str | None:
+    """The path of a link below the docs root, if it leads to a twin."""
     url = urldefrag(urljoin(page_url, href)).url.split("?")[0]
-    if not url.endswith(".md"):
+    if not url.endswith(".md") or not url.startswith(root):
         return None
-    for root in sorted(roots, key=len, reverse=True):
-        if not url.startswith(root):
-            continue
-        path = url[len(root) :]
-        if path == SKILL_MAP or OTHER_CORPUS.match(path) or not safe_path(path):
-            return None
-        return path
-    return None
+    path = url[len(root) :]
+    if path == SKILL_MAP or OTHER_CORPUS.match(path) or not safe_path(path):
+        return None
+    return path
 
 
 def safe_path(path: str) -> bool:
@@ -165,21 +142,17 @@ def safe_path(path: str) -> bool:
     )
 
 
-def crawl(roots: list[str], jobs: int = 8) -> dict[str, bytes]:
-    """The agent map of a release and every twin it reaches, by path."""
-    root = roots[0]
+def crawl(root: str, jobs: int = 8) -> dict[str, bytes]:
+    """The agent map below a docs root and every twin it reaches, by path."""
     map_url = root + SKILL_MAP
     try:
         final, skill_map = fetch(map_url)
     except urllib.error.HTTPError as error:
-        raise CopyError(
-            f"no agent map at {map_url} (HTTP {error.code}); the website "
-            "publishes one per release since tenzir/content#610"
-        )
+        raise CopyError(f"no agent map at {map_url} (HTTP {error.code})")
     except OSError as error:
         raise CopyError(f"cannot download {map_url}: {error}")
     if final != map_url:
-        raise CopyError(f"{map_url} redirects to {final}, outside the release")
+        raise CopyError(f"{map_url} redirects to {final}, outside the docs")
     text = skill_map.decode()
     if not re.match(r"---\r?\nname: tenzir\r?\n", text):
         raise CopyError(f"{map_url} is not the tenzir skill: no `name: tenzir`")
@@ -187,7 +160,7 @@ def crawl(roots: list[str], jobs: int = 8) -> dict[str, bytes]:
     files = {SKILL_MAP: skill_map}
     # The map's links must resolve; the archive build checks that they do.
     required = {
-        path for href in links(text) if (path := release_path(href, map_url, roots))
+        path for href in links(text) if (path := docs_path(href, map_url, root))
     }
     if not required:
         raise CopyError(f"{map_url} links no Markdown twins")
@@ -208,10 +181,10 @@ def crawl(roots: list[str], jobs: int = 8) -> dict[str, bytes]:
             return path, None
         except OSError as error:
             raise CopyError(f"cannot download {url}: {error}")
-        if final not in (candidate + path for candidate in roots):
+        if final != url:
             if path in required:
-                raise CopyError(f"{url} redirects to {final}, outside the release")
-            skipped.append(f"{url}, which redirects to {final} outside the release")
+                raise CopyError(f"{url} redirects to {final}, outside the docs")
+            skipped.append(f"{url}, which redirects to {final} outside the docs")
             return path, None
         return path, body
 
@@ -225,7 +198,7 @@ def crawl(roots: list[str], jobs: int = 8) -> dict[str, bytes]:
                 if path not in files:
                     continue
                 for href in links(files[path].decode()):
-                    target = release_path(href, root + path, roots)
+                    target = docs_path(href, root + path, root)
                     if target and target not in seen:
                         seen.add(target)
                         pending.append(target)
@@ -234,21 +207,21 @@ def crawl(roots: list[str], jobs: int = 8) -> dict[str, bytes]:
     return files
 
 
-def localize(files: dict[str, bytes], roots: list[str]) -> dict[str, bytes]:
+def localize(files: dict[str, bytes], root: str) -> dict[str, bytes]:
     """The files with absolute links to copied pages made relative."""
     return {
         path: map_links(
-            body.decode(), lambda href, path=path: local_href(href, path, files, roots)
+            body.decode(), lambda href, path=path: local_href(href, path, files, root)
         ).encode()
         for path, body in files.items()
     }
 
 
-def local_href(href: str, path: str, files: dict[str, bytes], roots: list[str]) -> str:
+def local_href(href: str, path: str, files: dict[str, bytes], root: str) -> str:
     """A link of a copied page, relative to it if it leads to a copied page."""
     if not re.match(r"^(?:[a-z][a-z\d+.-]*:|/)", href, re.IGNORECASE):
         return href
-    target = release_path(href, roots[0] + path, roots)
+    target = docs_path(href, root + path, root)
     if target is None or target not in files:
         return href
     relative = posixpath.relpath(target, posixpath.dirname(path) or ".")
@@ -280,11 +253,6 @@ def main() -> int:
         "--base-url", default="https://tenzir.com", help="website to copy from"
     )
     parser.add_argument(
-        "--release",
-        default="latest",
-        help="release to copy, such as 7.0.0, or `latest` (default)",
-    )
-    parser.add_argument(
         "--output-dir", type=Path, default=Path("skills/tenzir"), help="skill directory"
     )
     parser.add_argument(
@@ -292,9 +260,8 @@ def main() -> int:
     )
     args = parser.parse_args()
     try:
-        roots = release_roots(args.base_url, args.release)
-        root = roots[0]
-        files = localize(crawl(roots), roots)
+        root = args.base_url.rstrip("/") + "/docs/"
+        files = localize(crawl(root), root)
         if args.dry_run:
             print("\n".join(sorted(files)))
         else:
