@@ -1,7 +1,7 @@
 ---
 title: "Statements"
-canonical: https://tenzir.com/docs/v6.22.0/reference/statements
-source: https://tenzir.com/docs/v6.22.0/reference/statements.md
+canonical: https://tenzir.com/docs/reference/statements
+source: https://tenzir.com/docs/reference/statements.md
 section: "Docs"
 ---
 

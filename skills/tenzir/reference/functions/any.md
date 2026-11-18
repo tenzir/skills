@@ -1,7 +1,7 @@
 ---
 title: "any"
-canonical: https://tenzir.com/docs/v6.22.0/reference/functions/any
-source: https://tenzir.com/docs/v6.22.0/reference/functions/any.md
+canonical: https://tenzir.com/docs/reference/functions/any
+source: https://tenzir.com/docs/reference/functions/any.md
 section: "Docs"
 ---
 

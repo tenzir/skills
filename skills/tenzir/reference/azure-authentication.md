@@ -1,7 +1,7 @@
 ---
 title: "Azure Authentication"
-canonical: https://tenzir.com/docs/v6.22.0/reference/azure-authentication
-source: https://tenzir.com/docs/v6.22.0/reference/azure-authentication.md
+canonical: https://tenzir.com/docs/reference/azure-authentication
+source: https://tenzir.com/docs/reference/azure-authentication.md
 section: "Docs"
 ---
 
@@ -165,4 +165,4 @@ Grant the application query access to the target workspace, for example with the
 ## See Also
 
 * [AWS Authentication](aws-authentication.md)
-* [Azure blob storage](https://tenzir.com/integrations/microsoft/azure-blob-storage)
+* [Azure blob storage](https://tenzir.com/product/integrations/microsoft/azure-blob-storage)

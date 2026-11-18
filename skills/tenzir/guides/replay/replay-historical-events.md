@@ -1,8 +1,8 @@
 ---
 title: "Replay historical events"
 description: "Run stored events through live pipelines with controlled timestamps, pacing, and side effects"
-canonical: https://tenzir.com/docs/v6.22.0/guides/replay/replay-historical-events
-source: https://tenzir.com/docs/v6.22.0/guides/replay/replay-historical-events.md
+canonical: https://tenzir.com/docs/guides/replay/replay-historical-events
+source: https://tenzir.com/docs/guides/replay/replay-historical-events.md
 section: "Docs"
 ---
 

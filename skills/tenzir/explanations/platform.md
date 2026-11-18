@@ -1,74 +1,61 @@
 ---
 title: "Platform"
-canonical: https://tenzir.com/docs/v6.22.0/explanations/platform
-source: https://tenzir.com/docs/v6.22.0/explanations/platform.md
+description: "Understand how the platform organizes organizations, workspaces, and deployments, how deployments connect to it, and which data it sees."
+canonical: https://tenzir.com/docs/explanations/platform
+source: https://tenzir.com/docs/explanations/platform.md
 section: "Docs"
 ---
 
 # Platform
 
-> The platform provides fleet management for nodes. With an API and web interface, the platform offers user and workspace administration, authentication via external identity providers (IdP), and dashboards consisting of pipeline-powered charts.
+> Understand how the platform organizes organizations, workspaces, and deployments, how deployments connect to it, and which data it sees.
 
-The **platform** provides *fleet management* for [nodes](node.md). With an API and web interface, the platform offers user and workspace administration, authentication via external identity providers (IdP), and dashboards consisting of pipeline-powered charts.
+The **platform** is where you manage Tenzir. It stores the [configuration](configuration.md) of every workspace, delivers it to your [deployments](deployment.md), and shows what they do. Your events never pass through it: they flow from your sources through a deployment straight to your destinations.
 
-There exist three primary entities in the platform:
+The platform deploys configurations to the deployments in the data plane, which report metrics and status back. In the platform, an organization has members, roles, and billing, and holds workspaces with their configuration, deployments, secrets, ingest endpoints, access rules, and library. You and your agent reach the platform through the app, MCP, the CLI, and the API.
 
-1. **Users**: Authenticated by an Identity Provider (IdP)
-2. **Organizations**: Manage billing/license, members, and workspaces
-3. **Workspaces**: A logical grouping of nodes, secrets, and dashboards.
+You reach the platform through four interfaces:
 
-The diagram below illustrates their relationship.
+* The **app** in your browser, at [platform.tenzir.com](https://platform.tenzir.com).
+* The **CLI**, the `tenzir` command on your machine, for working with a configuration as files and for shell scripts.
+* The **API** for your own scripts, CI jobs, and services.
+* The **MCP server** for your AI agent.
 
-Platform Components
+All four offer the same operations under the same permissions. Our guide on [connecting to Tenzir](../guides/connect-to-tenzir.md) sets up each of them.
 
-### Users
+## Organizations
 
-A **user** is an individual account authenticated by an external Identity Provider (IdP). Users can own personal workspaces directly or join an organization to collaborate with others.
+An **organization** is the top level. It owns the workspaces and deployments, the subscription and its billing, and the list of its **members**, who join by invitation or through your company’s identity provider.
 
-### Organizations
+Each member has one or more roles. The built-in **Owner** role may do everything, the built-in **Member** role may work with the workspaces, and custom roles grant exactly the actions you choose. An API key acts for the member who created it and can narrow, but never widen, what that member may do. Our [IAM reference](../reference/iam.md) lists every role and action.
 
-An **organization** groups users under a shared entity for team collaboration. Organizations manage billing, licenses, members, and workspaces. A user inside an organization is called a **member**.
+## Workspaces
 
-Each user can belong to at most one organization. This single-organization constraint simplifies access control and ensures a clear ownership model.
+A **workspace** groups deployments that share a purpose, such as production and staging for one team. It holds a configuration repository, the deployments that run it, and secrets. Secrets can also belong to the whole organization or to a single deployment, as our explanation of [secret owners](secrets.md#owners-and-readers) describes.
 
-Organizations have two roles:
+## Deployments
 
-* **Admin**: Full control over the organization, including managing members, invitations, workspaces, and organization settings.
-* **Member**: Can view organization details and access organization-owned workspaces, but cannot make administrative changes.
+Every [deployment](deployment.md) belongs to exactly one workspace. Tenzir hosts it for you, in a size and region you pick, or you run it yourself in your own network. The platform shows each deployment’s pipelines with their state, throughput, and diagnostics, and which commit of the configuration it runs.
 
-The creator of an organization automatically becomes its first admin.
+## How deployments connect
 
-Organizations
+A deployment always opens the connection, so it needs no inbound port and no public address. It dials the platform’s gateway over a WebSocket and authenticates with its **deployment key**, which the platform issues and `tenzir up` keeps for you. This works behind firewalls and NAT, as long as the deployment reaches the platform over HTTPS.
 
-Organizations are not available in the free **Community Edition**. Please see [tenzir.com/pricing](https://tenzir.com/pricing) for a detailed feature comparison.
+The platform sends its requests back through this connection. Each request carries a short-lived token that the platform signs for this deployment and this request, so a deployment acts only on requests from its own platform.
 
-### Workspaces
+The platform sees what it needs to manage your deployments, and little else:
 
-A **workspace** is a logical grouping of nodes, secrets, and dashboards. Workspaces can be owned by a user (personal workspaces) or by an organization (shared workspaces). When an organization owns a workspace, all organization members automatically gain access to it.
+* **Configurations** flow to the deployment, along with requests to start and stop pipelines.
+* **Secrets** flow to the deployment when a pipeline asks for one, encrypted for that request.
+* **Telemetry** flows to the platform: how many events and bytes each pipeline reads and writes, when a pipeline starts, finishes, or fails, and the diagnostics that pipelines report.
+* **Events of ad-hoc pipelines** flow to the platform, which holds only the most recent ones, so that the Explorer and `tenzir run -r` can show them.
 
-For details on managing these entities, see the platform management guides:
+When the connection drops, the deployment keeps running its pipelines and reconnects, as our explanation of [deployments without the platform](deployment.md#when-the-platform-is-unreachable) describes.
 
-* [Manage organizations](../guides/platform-management/manage-organizations.md)
-* [Manage organization members](../guides/platform-management/manage-organization-members.md)
-* [Manage organization workspaces](../guides/platform-management/manage-organization-workspaces.md)
+## See also
 
-## Data Model
-
-The following diagram visualizes the platform’s data model (highlighted) and how the entities relate to each other with respect to their multiplicities.
-
-Platform Data Model
-
-It’s important to note that a node can only be part of one workspace. There is no support for “multi-homing” as it would create non-trivial questions about how to reconcile secrets and permissions from multiple workspaces.
-
-## Deployment Modes
-
-Based on the [Edition](https://tenzir.com/pricing) of Tenzir, you have different deployment modes of the platform. The below diagram illustrates the variants.
-
-Deployment Modes
-
-* **Community Edition**: geared towards single-user deployments, the Community Edition only associates a personal workspace with every user.
-* **Professional Edition**: geared towards small-business deployments, the Professional Edition features organizations for allowing multiple users to collaborate.
-* **Enterprise Edition**: geared towards large enterprise deployments, the Enterprise Edition supports multiple additional enterprise features like external secrets management, RBAC, and audit logs.
-* **Sovereign Edition**: geared towards on-prem deployments, the Sovereign Edition allows full control over all aspects of the Tenzir Platform, including multiple platform instances, multiple organizations within each platform, and integration with existing on-prem infrastructure.
-
-The Sovereign Edition is best suited for service providers that need strict data segregation, either by deploying one platform instance per customer or by instantiating one organization per customer. Dedicated platforms per customer provide physical data separation at the cost of higher management overhead, whereas an organization-based multi tenancy approach is a logical separation method with shared underlying resources, yet easier to manage.
+* [Configuration](configuration.md)
+* [Deployment](deployment.md)
+* [Quickstart](../guides/quickstart.md)
+* [Control access](../guides/control-access.md)
+* [IAM](../reference/iam.md)

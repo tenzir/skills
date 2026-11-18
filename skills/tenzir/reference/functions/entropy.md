@@ -1,7 +1,7 @@
 ---
 title: "entropy"
-canonical: https://tenzir.com/docs/v6.22.0/reference/functions/entropy
-source: https://tenzir.com/docs/v6.22.0/reference/functions/entropy.md
+canonical: https://tenzir.com/docs/reference/functions/entropy
+source: https://tenzir.com/docs/reference/functions/entropy.md
 section: "Docs"
 ---
 

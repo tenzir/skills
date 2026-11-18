@@ -1,7 +1,7 @@
 ---
 title: "fork_merge"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/fork_merge
-source: https://tenzir.com/docs/v6.22.0/reference/operators/fork_merge.md
+canonical: https://tenzir.com/docs/reference/operators/fork_merge
+source: https://tenzir.com/docs/reference/operators/fork_merge.md
 section: "Docs"
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "sockets"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/sockets
-source: https://tenzir.com/docs/v6.22.0/reference/operators/sockets.md
+canonical: https://tenzir.com/docs/reference/operators/sockets
+source: https://tenzir.com/docs/reference/operators/sockets.md
 section: "Docs"
 ---
 

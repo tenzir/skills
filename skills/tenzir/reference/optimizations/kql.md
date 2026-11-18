@@ -1,7 +1,7 @@
 ---
 title: "KQL"
-canonical: https://tenzir.com/docs/v6.22.0/reference/optimizations/kql
-source: https://tenzir.com/docs/v6.22.0/reference/optimizations/kql.md
+canonical: https://tenzir.com/docs/reference/optimizations/kql
+source: https://tenzir.com/docs/reference/optimizations/kql.md
 section: "Docs"
 ---
 
@@ -21,7 +21,7 @@ The operator sends your query and appends the operators that follow as further s
 * Queries with several tabular statements separated by `;`, since the service returns a table for each of them. Statements with `let`, `declare`, or `alias` before the final one are fine.
 * Queries that end in `;` or `|`, that contain only whitespace and comments, or that the operator can’t tokenize, such as one with an unterminated string.
 
-Words in string literals and comments don’t count, so `where Action == "render"` still receives stages. The operator also takes over nothing with `pushdown=false`, which keeps every operator in Tenzir with TQL semantics and sends your query exactly as written.
+Words in string literals and comments don’t count, so `where Action == "render"` still receives stages. The operator also takes over nothing with `pushdown=false`, which keeps every operator in Tenzir with TQL semantics. The operator then still appends the `project` of the fields that the pipeline reads, as [below](kql.md#operators-that-the-service-takes-over) describes, but no other stage.
 
 ## Operators that the service takes over
 
@@ -30,7 +30,7 @@ The operator takes over the longest run of operators directly after it that KQL 
 * [`where`](../operators/where.md), as the [filters](kql.md#filters) section describes.
 * [`select`](../operators/select.md) of top-level fields, including renames, which becomes `project`.
 * [`drop`](../operators/drop.md) of top-level fields, which becomes `project-away`.
-* [`summarize`](../operators/summarize.md) with group keys on fields and `count()`, `count(x)`, `min(x)`, `max(x)`, and `sum(x)` of fields, which becomes `summarize … by`. This includes [`top`](../operators/top.md) and [`rare`](../operators/rare.md). The summary may follow [`select`](../operators/select.md), [`drop`](../operators/drop.md), and assignments that copy fields, as [Aggregations in the source](../optimizations.md#aggregations-in-the-source) describes.
+* [`summarize`](../operators/summarize.md) with group keys and the functions that the [summaries](kql.md#summaries) section lists, which becomes `summarize … by`. This includes [`top`](../operators/top.md) and [`rare`](../operators/rare.md). The summary may follow [`select`](../operators/select.md), [`drop`](../operators/drop.md), and assignments, as [Aggregations in the source](../optimizations.md#aggregations-in-the-source) describes.
 * [`sort`](../operators/sort.md) by fields, which becomes `sort by` with an explicit direction.
 * [`head`](../operators/head.md), which becomes `take`.
 
@@ -59,7 +59,39 @@ DeviceNetworkEvents
 | take 2
 ```
 
-Tenzir arranges the result columns into the fields of the pipeline, such as `events`. Without an operator that enumerates the fields, the query ends with a `project` of the top-level fields that the pipeline reads, each as `column_ifexists(…)`, which keeps the type of a column that your query returns and yields `null` for one that it doesn’t. Tenzir leaves out a projection that would exceed the 16 KiB.
+Tenzir arranges the result columns into the fields of the pipeline, such as `events`. Without an operator that enumerates the fields, the query ends with a `project` of the top-level fields that the pipeline reads, each as `column_ifexists(…)`, which keeps the type of a column that your query returns and yields `null` for one that it doesn’t. With `pushdown=false`, the query ends in this `project` too, for the fields that the operators in Tenzir read:
+
+```text
+| project ['Id'] = column_ifexists('Id', dynamic(null)), ['DeviceName'] = column_ifexists('DeviceName', dynamic(null))
+```
+
+Tenzir leaves out a projection that would exceed the 16 KiB.
+
+## Summaries
+
+The service computes these aggregation functions of a [`summarize`](../operators/summarize.md):
+
+| TQL                   | KQL                                     |
+| --------------------- | --------------------------------------- |
+| `count()`             | `count()`                               |
+| `count(x)`            | `countif(isnotempty(x))`                |
+| `min(x)`, `max(x)`    | `min(x)`, `max(x)`                      |
+| `sum(x)`              | `sum(x)`                                |
+| `count_if(x, v => p)` | `countif(p)`, which skips `null` values |
+
+`count_distinct` and `mean` stay in Tenzir, since KQL’s `avg` yields `NaN` for no values and the exact distinct count has no verified spelling.
+
+Group keys and aggregate arguments can be computed values, such as values that a [`set`](../operators/set.md) before the summary assigns. The service computes them with `extend` before `summarize`:
+
+```tql
+from_microsoft_defender "DeviceEvents", azure_auth={…}
+kind = ActionType.to_upper()
+summarize kind, events=count()
+```
+
+An assignment that the summary reads may call a function that KQL spells, and the service computes it with KQL’s semantics. An assignment that the summary doesn’t read, including one that a later assignment shadows, must be infallible. See [Computed keys and arguments](../optimizations.md#computed-keys-and-arguments).
+
+A `floor` of a time stays in Tenzir.
 
 ## Filters
 
@@ -87,9 +119,7 @@ The operators that the service takes over run as KQL runs them, which can differ
 * Integer division truncates, and arithmetic follows KQL’s types.
 * `summarize` keeps a group for `null` keys. `sort` puts `null` first in ascending and last in descending order, and compares strings by their characters.
 * A name that a `let` statement of your query binds shadows a column of the same name in an appended stage.
-* A query that the service rejects fails the pipeline with a hint to use `pushdown=false`.
-
-Summaries with `mean` or other functions stay in Tenzir.
+* A query that the service rejects fails the pipeline with the error of the service, a note that it computed the stages that the operator took over with its own semantics, and a hint to use `pushdown=false`. The note and the hint appear only if the operator took over stages.
 
 ## Result cap
 
@@ -109,4 +139,4 @@ To see the operators that the service takes over, print the optimized pipeline:
 tenzir --dump-opt-ir 'from_microsoft_defender "DeviceEvents", azure_auth={tenant_id: secret("AZURE_TENANT_ID"), client_id: secret("AZURE_CLIENT_ID"), client_secret: secret("AZURE_CLIENT_SECRET")} | where DeviceName == "host-a" | head 10'
 ```
 
-The operator lists the operators that it took over as `plan`, and the reason why it took over no more as `declined`. The [compilation output guide](../../guides/troubleshooting/inspect-compilation-output.md) explains the format.
+The operator lists the operators that it took over as `plan`, and the reason why it took over no more as `declined`.

@@ -1,7 +1,7 @@
 ---
 title: "from_sentinelone_data_lake"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/from_sentinelone_data_lake
-source: https://tenzir.com/docs/v6.22.0/reference/operators/from_sentinelone_data_lake.md
+canonical: https://tenzir.com/docs/reference/operators/from_sentinelone_data_lake
+source: https://tenzir.com/docs/reference/operators/from_sentinelone_data_lake.md
 section: "Docs"
 ---
 
@@ -146,4 +146,4 @@ from_sentinelone_data_lake "https://<tenant>.sentinelone.net",
 ## See Also
 
 * [`to_sentinelone_data_lake`](to_sentinelone_data_lake.md)
-* [Sentinelone data lake](https://tenzir.com/integrations/sentinelone-data-lake)
+* [Sentinelone data lake](https://tenzir.com/product/integrations/sentinelone-data-lake)

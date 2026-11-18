@@ -1,7 +1,7 @@
 ---
 title: "from_hydrolix"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/from_hydrolix
-source: https://tenzir.com/docs/v6.22.0/reference/operators/from_hydrolix.md
+canonical: https://tenzir.com/docs/reference/operators/from_hydrolix
+source: https://tenzir.com/docs/reference/operators/from_hydrolix.md
 section: "Docs"
 ---
 
@@ -13,7 +13,7 @@ Reads events from a [Hydrolix](https://hydrolix.io) table or SQL query.
 
 ```tql
 from_hydrolix url:string, token=string, [table=string, sql=string, port=int,
-              tls=bool|record]
+              tls=bool|record, pushdown=bool]
 ```
 
 ## Description
@@ -56,7 +56,7 @@ Diagnostics don’t show the token, even if Hydrolix repeats it in an error.
 
 The table to read from, in the form `project.table`.
 
-Use this mode to read a table as structured events. Tenzir pushes filters, field selections, limits, and aggregations from the rest of the pipeline into the query; see [Optimizations](from_hydrolix.md#optimizations).
+Use this mode to read a table as structured events. Hydrolix takes over the operators that follow, such as [`where`](where.md), [`select`](select.md), [`summarize`](summarize.md), [`sort`](sort.md), and [`head`](head.md); see [Optimizations](from_hydrolix.md#optimizations).
 
 Use exactly one of `table` or `sql`.
 
@@ -64,7 +64,7 @@ Use exactly one of `table` or `sql`.
 
 A SQL query to execute.
 
-Use this mode when you need SQL features that `table` mode doesn’t express, such as sorting, joins, or [Hydrolix query options](https://docs.hydrolix.io/latest/exploring-data/query-interfaces/query-options-1/query-options-reference/) in a `SETTINGS` clause. Tenzir sends the query as is and doesn’t rewrite it, so include the time range on the primary timestamp yourself.
+Use this mode when you need SQL features that `table` mode doesn’t express, such as joins or [Hydrolix query options](https://docs.hydrolix.io/latest/exploring-data/query-interfaces/query-options-1/query-options-reference/) in a `SETTINGS` clause. Tenzir sends the query as is and doesn’t rewrite it, so include the time range on the primary timestamp yourself.
 
 Use exactly one of `table` or `sql`.
 
@@ -95,7 +95,11 @@ The `client_ca` and `require_client_cert` options are only valid for operators t
 
 Any value not specified in the record will either be picked up from the configuration or if not configured will not be used by the operator.
 
-See the [Node TLS Setup guide](../../guides/node-setup/configure-tls.md) for more details.
+### `pushdown = bool (optional)`
+
+Whether Hydrolix takes over the operators that follow the operator in `table` mode. With `pushdown=false`, they stay in the pipeline and run with TQL semantics. No filter then reaches the query, so on a cluster that requires a time range, use `sql` with a query that sets one instead. See [Optimizations](from_hydrolix.md#optimizations).
+
+Defaults to `true`.
 
 ## Types
 
@@ -140,15 +144,11 @@ class_uid = catchall.class_uid.int()
 
 ## Optimizations
 
-When the operator reads a table, it lets Hydrolix do the work of the [`where`](where.md), [`select`](select.md), and [`head`](head.md) operators that follow it, so that Hydrolix returns only the rows and columns that the pipeline needs. A [`where`](where.md) on the primary timestamp also lets Hydrolix skip the partitions outside of the time range. Filters on fields of a map column, such as a catch-all column, and filters that Hydrolix can’t evaluate exactly like Tenzir run in Tenzir, with the same result.
+When the operator reads a table, it hands Hydrolix the operators that follow it, as far as Hydrolix’s ClickHouse engine can spell them: [`where`](where.md), [`select`](select.md), [`drop`](drop.md), [`summarize`](summarize.md) with `count`, `min`, and `max`, including [`top`](top.md) and [`rare`](rare.md), [`sort`](sort.md), and [`head`](head.md), also after a [`summarize`](summarize.md). Those operators leave the pipeline and run with Hydrolix’s semantics, which can differ from TQL. For example, a comparison with `NULL` yields `NULL`, so `s != "a"` does not keep rows where `s` is `null`, and a division by zero yields `null`. A query that Hydrolix rejects fails the pipeline with a hint to use `pushdown=false`. The [ClickHouse optimizations](../optimizations/clickhouse.md) page describes the rules, which `from_hydrolix` shares with [`from_clickhouse`](from_clickhouse.md).
 
-Hydrolix also computes a [`summarize`](summarize.md) and returns one row per group instead of every matching row, if all of these hold:
+Hydrolix reads only the partitions within the time range that a query sets on the table’s primary timestamp, and a cluster may reject a query without one. Put a [`where`](where.md) on the primary timestamp directly after the operator, with a constant bound such as a `let` that evaluates `now()` once. Tenzir moves such a filter ahead of [`select`](select.md), [`drop`](drop.md), and [`sort`](sort.md), so that it constrains the table itself. After a [`head`](head.md) or a [`summarize`](summarize.md), the filter reads their result and no longer restricts the time range.
 
-* The summary directly follows the operator, after filters that all went into the query. It may also follow [`select`](select.md), [`drop`](drop.md), and assignments that keep or copy the fields that it reads, but not computed values.
-* It groups by booleans, integers, strings, enums, UUIDs, IP addresses, or times, including fields of nested records, but not fields of map columns.
-* Its aggregations are `count()`, `count(x)`, and `min(x)` and `max(x)` on integers and times.
-
-Otherwise, the summary runs in Tenzir with the same result, and Hydrolix still returns only the columns that the summary reads. The section on [aggregations in the source](../optimizations.md#aggregations-in-the-source) of the optimizations overview describes the general rules.
+Fields of a `Map` column, such as the `catchall` map of Hydrolix’s default transform, read as `catchall['key']`. A missing key yields the default of the map’s value type: `null` for `Nullable` values, as in the `catchall` map, and `""` or `0` otherwise. Hydrolix may reject a query that reads a field below a `JSON` column in a subquery, for example for a [`select`](select.md) or the operators after a [`head`](head.md). Use `pushdown=false` then, or write the query yourself with `sql`, including the `SETTINGS` that your cluster needs.
 
 ## Examples
 
@@ -194,4 +194,4 @@ from_hydrolix "https://acme.hydrolix.live",
 ## See Also
 
 * [`to_hydrolix`](to_hydrolix.md)
-* [Hydrolix](https://tenzir.com/integrations/hydrolix)
+* [Hydrolix](https://tenzir.com/product/integrations/hydrolix)

@@ -1,8 +1,8 @@
 ---
 title: "Overview"
 description: "Map source-specific events into a shared schema."
-canonical: https://tenzir.com/docs/v6.22.0/guides/normalize
-source: https://tenzir.com/docs/v6.22.0/guides/normalize.md
+canonical: https://tenzir.com/docs/guides/normalize
+source: https://tenzir.com/docs/guides/normalize.md
 section: "Docs"
 ---
 
@@ -33,6 +33,6 @@ A mapping that lives in a package gets a test, a version, and one place to fix a
 ## See also
 
 * [Parse string fields](parse/parse-string-fields.md)
-* [Create a package](packages/create-a-package.md)
-* [Write tests](testing/write-tests.md)
+* [Create a package](https://tenzir.com/docs/guides/packages/create-a-package)
+* [Write tests](https://tenzir.com/docs/guides/testing/write-tests)
 * [Normalization](../explanations/normalization.md)

@@ -1,7 +1,7 @@
 ---
 title: "Explanations"
-canonical: https://tenzir.com/docs/v6.22.0/explanations
-source: https://tenzir.com/docs/v6.22.0/explanations.md
+canonical: https://tenzir.com/docs/explanations
+source: https://tenzir.com/docs/explanations.md
 section: "Docs"
 ---
 

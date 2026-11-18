@@ -1,7 +1,7 @@
 ---
 title: "to_unix_socket"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/to_unix_socket
-source: https://tenzir.com/docs/v6.22.0/reference/operators/to_unix_socket.md
+canonical: https://tenzir.com/docs/reference/operators/to_unix_socket
+source: https://tenzir.com/docs/reference/operators/to_unix_socket.md
 section: "Docs"
 ---
 
@@ -54,4 +54,4 @@ to_unix_socket "/run/collector.sock" { write_json }
 * [`accept_unix_socket`](accept_unix_socket.md)
 * [`to_tcp`](to_tcp.md)
 * [`write_delimited`](write_delimited.md)
-* [File](https://tenzir.com/integrations/file)
+* [File](https://tenzir.com/product/integrations/file)

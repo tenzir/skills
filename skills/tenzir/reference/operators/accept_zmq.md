@@ -1,7 +1,7 @@
 ---
 title: "accept_zmq"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/accept_zmq
-source: https://tenzir.com/docs/v6.22.0/reference/operators/accept_zmq.md
+canonical: https://tenzir.com/docs/reference/operators/accept_zmq
+source: https://tenzir.com/docs/reference/operators/accept_zmq.md
 section: "Docs"
 ---
 
@@ -71,4 +71,4 @@ accept_zmq "tcp://0.0.0.0:5555", prefix="suricata/" {
 * [`to_zmq`](to_zmq.md)
 * [`serve_zmq`](serve_zmq.md)
 * [`from_zmq`](from_zmq.md)
-* [Zeromq](https://tenzir.com/integrations/zeromq)
+* [Zeromq](https://tenzir.com/product/integrations/zeromq)

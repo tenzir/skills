@@ -1,7 +1,7 @@
 ---
 title: "timeshift"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/timeshift
-source: https://tenzir.com/docs/v6.22.0/reference/operators/timeshift.md
+canonical: https://tenzir.com/docs/reference/operators/timeshift
+source: https://tenzir.com/docs/reference/operators/timeshift.md
 section: "Docs"
 ---
 

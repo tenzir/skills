@@ -1,7 +1,7 @@
 ---
 title: "read_zeek_json"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/read_zeek_json
-source: https://tenzir.com/docs/v6.22.0/reference/operators/read_zeek_json.md
+canonical: https://tenzir.com/docs/reference/operators/read_zeek_json
+source: https://tenzir.com/docs/reference/operators/read_zeek_json.md
 section: "Docs"
 ---
 
@@ -99,4 +99,4 @@ read_zeek_json
 
 * [`read_zeek_tsv`](read_zeek_tsv.md)
 * [`write_zeek_tsv`](write_zeek_tsv.md)
-* [Zeek](https://tenzir.com/integrations/zeek)
+* [Zeek](https://tenzir.com/product/integrations/zeek)

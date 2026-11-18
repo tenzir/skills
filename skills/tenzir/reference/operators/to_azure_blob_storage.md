@@ -1,7 +1,7 @@
 ---
 title: "to_azure_blob_storage"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/to_azure_blob_storage
-source: https://tenzir.com/docs/v6.22.0/reference/operators/to_azure_blob_storage.md
+canonical: https://tenzir.com/docs/reference/operators/to_azure_blob_storage
+source: https://tenzir.com/docs/reference/operators/to_azure_blob_storage.md
 section: "Docs"
 ---
 
@@ -141,4 +141,4 @@ to_azure_blob_storage "abfs://my-container/logs/events_{uuid}.json",
 * [`to_azure_blob_storage`](to_azure_blob_storage.md)
 * [`to_file`](to_file.md)
 * [Azure Authentication](../azure-authentication.md)
-* [Azure blob storage](https://tenzir.com/integrations/microsoft/azure-blob-storage)
+* [Azure blob storage](https://tenzir.com/product/integrations/microsoft/azure-blob-storage)

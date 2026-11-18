@@ -1,7 +1,7 @@
 ---
 title: "accept_elasticsearch"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/accept_elasticsearch
-source: https://tenzir.com/docs/v6.22.0/reference/operators/accept_elasticsearch.md
+canonical: https://tenzir.com/docs/reference/operators/accept_elasticsearch
+source: https://tenzir.com/docs/reference/operators/accept_elasticsearch.md
 section: "Docs"
 ---
 
@@ -71,8 +71,6 @@ The `client_ca` and `require_client_cert` options are only valid for operators t
 
 Any value not specified in the record will either be picked up from the configuration or if not configured will not be used by the operator.
 
-See the [Node TLS Setup guide](../../guides/node-setup/configure-tls.md) for more details.
-
 ## Examples
 
 ### Listen on port 8080
@@ -101,5 +99,5 @@ accept_elasticsearch "0.0.0.0:8443",
 
 * [`to_elasticsearch`](to_elasticsearch.md)
 * [`accept_opensearch`](accept_opensearch.md)
-* [Elasticsearch](https://tenzir.com/integrations/elasticsearch)
-* [Opensearch](https://tenzir.com/integrations/opensearch)
+* [Elasticsearch](https://tenzir.com/product/integrations/elasticsearch)
+* [Opensearch](https://tenzir.com/product/integrations/opensearch)

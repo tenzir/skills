@@ -1,7 +1,7 @@
 ---
 title: "each"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/each
-source: https://tenzir.com/docs/v6.22.0/reference/operators/each.md
+canonical: https://tenzir.com/docs/reference/operators/each
+source: https://tenzir.com/docs/reference/operators/each.md
 section: "Docs"
 ---
 
@@ -37,7 +37,7 @@ Inside the subpipeline, `$this` refers to the record of the current input event.
 
 ## Parallelism
 
-In a [parallel pipeline](../../guides/node-setup/tune-performance.md#parallelism), each instance of `each` owns and runs its own child subpipelines. The `parallel` argument limits each instance separately. At a pipeline degree of `N`, up to `N * parallel` child subpipelines can therefore run at once.
+In a [parallel pipeline](../../explanations/executor.md#parallel-execution), each instance of `each` owns and runs its own child subpipelines. The `parallel` argument limits each instance separately. At a pipeline degree of `N`, up to `N * parallel` child subpipelines can therefore run at once.
 
 For example, `// parallelism: 4` together with `each parallel=10` permits up to 40 concurrent child subpipelines. Keep this combined limit in mind when a child subpipeline connects to a service with concurrency or rate limits.
 

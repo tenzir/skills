@@ -1,7 +1,7 @@
 ---
 title: "Enrichment"
-canonical: https://tenzir.com/docs/v6.22.0/explanations/enrichment
-source: https://tenzir.com/docs/v6.22.0/explanations/enrichment.md
+canonical: https://tenzir.com/docs/explanations/enrichment
+source: https://tenzir.com/docs/explanations/enrichment.md
 section: "Docs"
 ---
 
@@ -19,6 +19,8 @@ The update and enrich operations can occur concurrently. This allows for creatin
 
 Reusing pipelines as mechanism for context updates (as opposed to other systems that, say, offer a separate interface to only load static CSV files) has the benefit that we can leverage the full power of TQL. In other words, we can reuse *all* existing connectors, formats, periodic scheduling, and more.
 
+Pipelines fill a context, but they don’t create it. A deployment declares its contexts in its configuration, one file per context in the `contexts/` folder, so deploying a configuration creates, reconfigures, and removes contexts. Our explanation of [what a deployment runs](deployment.md#what-a-deployment-runs) describes what a deploy keeps, and the reference for [context files](../reference/contexts.md) lists the settings of each type.
+
 ## Enrichment Modes
 
 In general, we distinguish three different contextualization modes:
@@ -27,7 +29,7 @@ Contextualization Modes
 
 1. **In-band**. The context data is co-located with the pipeline that enriches the dataflow. For high-velocity pipelines with thousands of events per second, this is of often the only way to enrich.
 2. **Out-of-band**. The context data is outside of the to-be-contextualized dataflow. The most common example of this kind are REST APIs. Enrichment then means performing one API call per event, waiting for the result, and then merging it into the event to continue processing. For public APIs, latencies are in the tens to hundreds of milliseconds, making this mode suitable for low-velocity.
-3. **Hybrid**. An excerpt of the context sits inline and the bulk of it remotely. When both performance matters and state is not possible to ship to the contextualization point itself, then a hybrid approach can be a viable middle ground. [Google Safe Browsing](https://security.googleblog.com/2022/08/how-hash-based-safe-browsing-works-in.html) is an example of this kind, where the Chrome browser keeps a subset of context state that represents threat actor URLs in the form of partial hashes, and when a users visits a URL where a partial match occurs, Chrome performs a candidate check using an API call. More than 99% of checked URLs never make it to the remote API, making this approach scalable. Note that the extra layer of hashing also protects the privacy of the entity performing the context lookup.
+3. **Hybrid**. An excerpt of the context sits inline and the bulk of it remotely. When both performance matters and state is not possible to ship to the contextualization point itself, then a hybrid approach can be a viable middle ground. [Google Safe Browsing](https://security.googleblog.com/2022/08/how-hash-based-safe-browsing-works-in.html) is an example of this kind, where the Chrome browser keeps a subset of context state that represents threat actor URLs in the form of partial hashes, and when a users visits a URL where a partial match occurs, Chrome performs a candidate check using an API call. More than 99% of checked URLs never make it to the remote API, making this approach scalable. Note that the extra layer of hashing also protects the privacy of the entity performing the check.
 
 To date, Tenzir only supports in-band enrichment, but out-of-band and hybrid modes are already planned.
 
@@ -37,25 +39,23 @@ Tenzir features several context types:
 
 * **Lookup table**: a hash table that associates arbitrary information with a given enrichment key.
 * **GeoIP database**: a special-purpose table for attaching geographic information to IP addresses.
-* **Bloom filter**: a compact representation of a sets that allows for membership tests only, with the space efficiency coming at the cost a false positives during lookup.
+* **Bloom filter**: a compact representation of a sets that allows for membership tests only, with the space efficiency coming at the cost a false positives during enrichment.
 
 Context types
-
-If these built-in types do not suffice for your needs, you can also write your own C++ context plugin.
 
 ### Lookup Table
 
 Tenzir’s lookup table context is a hash table that can have both keys and values of different types. For example, you can have IP addresses, subnets, and numbers as table keys all in the same table, and every value can have a different type.
 
-There are three particularly powerful features of lookup tables that we describe next.
+There are two particularly powerful features of lookup tables that we describe next.
 
 #### 1. Longest-Prefix Subnet Match for Subnet Keys
 
-When table keys are of type `subnet`, you can probe the lookup table with values of type `ip` in addition. For example, if you have a key `10.0.0.0/8` you can perform a lookup with `10.0.0.1`, `10.1.1.1`, etc. The lookup table will always return the value associated with `10.0.0.0/8`.
+When table keys are of type `subnet`, you can enrich with keys of type `ip` in addition. For example, if you have a key `10.0.0.0/8` you can enrich events whose key is `10.0.0.1`, `10.1.1.1`, etc. The enrichment always adds the value associated with `10.0.0.0/8`.
 
 Subnet Keys
 
-When a table contains subnet keys with overlapping ranges, such as `10.0.0.0/22` and `10.0.0.0/24`, a lookup returns the entry with the *longest-prefix match* of the key. For example, probing the table with `10.0.0.1` returns the value associated with the `/24` subnet, because it is a longer match (24 > 22).
+When a table contains subnet keys with overlapping ranges, such as `10.0.0.0/22` and `10.0.0.0/24`, enrichment uses the entry with the *longest-prefix match* of the key. For example, enriching with `10.0.0.1` adds the value associated with the `/24` subnet, because it is a longer match (24 > 22).
 
 Modeling CMDB & Asset Inventory
 
@@ -63,7 +63,7 @@ Subnet key matching comes in handy when you are building lookup tables that repr
 
 #### 2. Per-Key Create/Write/Read Expiration
 
-Every table entry has three optional expiration timeouts that evict the entry. These timeout are compounding, so it suffices if *one* of them fires to trigger eviction.
+A lookup table can give its entries three expiration timeouts, which its context file sets as `create-timeout`, `write-timeout`, and `read-timeout`. They apply to every entry of the table and are compounding, so it suffices if *one* of them fires to trigger eviction. An expired entry holds nothing anymore, as if it was never stored.
 
 Expiration
 
@@ -73,32 +73,22 @@ The three timeout types are:
 2. **Write timeout**: Whenever an update modifies a table entry by writing a new value for a given key with `context_update`, this timeout resets.
 3. **Read timeout**: Whenever an entry is accessed, which happens during `context_enrich`, this timeout resets.
 
-All three timers start at table entry creation, i.e., creating an entry is the “0th” write and read.
+All three timers start at table entry creation, i.e., creating an entry is the “0th” write and read. Changing a timeout in the context file applies to the entries the table holds already, except that an entry that expired stays expired.
 
 Modeling Threat Intelligence Decay
 
 Per-key timeouts come in handy when you want to associate lifetimes with observables or indicators of compromise. Many indicators have a short half-life and most are obsolete a couple of weeks. To avoid accumulating “garbage” that produces false positives, use a combination of timeouts to automatically remove stale entries. Many threat feeds and threat intelligence platforms provide this information already to generate more actionable enrichments.
 
-#### 3. Aggregation Functions as Values
-
-Lookup tables offer more than just entries with static values. You can also aggregate into values with [aggregation functions](../reference/functions.md#aggregation). In this case an update of a table entry does not write the new value directly, but rather hands that value to the configured aggregation function, which in turn updates the table value.
-
-For example, the `min` aggregation function computes the minimum over its values. Consider a sequence of context updates with values `3`, `4`, `2`, `3`, `1` for the updated key. Then the value after each update would be `3`, `3`, `2`, `2`, `1`. The example below uses `min` and `max` to implement a first-seen and last-seen timestamps - a common pattern during entity tracking.
-
-Aggregation
-
-Passive Inventorization
-
-Aggregating into table values instead of just overwriting the value has a plethora of use cases. A popular example involves computing first/last/times-seen statistics to build passive DNS tables. But also extracting IP-to-MAC, host-to-username, or any other mappings available in telemetry provide valuable context for entity-based reasoning. Our [Suricon 2024 talk](https://docs.google.com/presentation/d/1SnWQMBN7HQ4ASckUgy_kfQyWzHSnrN9zl-m4ptMVolQ/present) has more examples.
-
 ### Bloom Filter
 
-[Bloom filters](https://en.wikipedia.org/wiki/Bloom_filter) are a space-efficient representation of a set. In case you have a massive number of elements but only need to check for set membership. However, the compact spatial representation comes at a cost of a false probability during lookup. You can think of it as a [lookup table](enrichment.md#lookup-table) without values - just keys, but where looking up a key may say “yes” even though the key doesn’t actually exist. The probability of this happening is fortunately configurable.
+[Bloom filters](https://en.wikipedia.org/wiki/Bloom_filter) are a space-efficient representation of a set. In case you have a massive number of elements but only need to check for set membership. However, the compact spatial representation comes at a cost of a false probability during enrichment. You can think of it as a [lookup table](enrichment.md#lookup-table) without values - just keys, but where enriching with a key may say “yes” even though the key doesn’t actually exist. The probability of this happening is fortunately configurable.
 
 A Bloom filter has two tuning knobs:
 
-1. **Capacity**: the maximum number of items in the filter.
-2. **False-positive probability**: the chance of reporting an item not in the filter.
+1. **Capacity**: the maximum number of items in the filter, set as `capacity` in its context file.
+2. **False-positive probability**: the chance of reporting an item not in the filter, set as `fp-probability`.
+
+A filter cannot be resized, because what it holds only means something at its size. Changing either setting therefore replaces the filter with an empty one on the next deploy. A filter also holds its keys forever, since it takes no timeouts.
 
 These two parameters dictate the space usage. A filter holding $n$ items with false-positive probability $p$ needs
 
@@ -108,7 +98,7 @@ $$
 
 which comes to 9.6 bits per item at $p = 0.01$ and 14.4 bits at $p = 0.001$. That cost per item is independent of how large the items are, which is where the savings come from. Consult Thomas Hurst’s [Bloom Filter Calculator](https://hur.st/bloomfilter/) for finding the optimal configuration for your use case.
 
-Tenzir’s Bloom filter implementation is a C++ rebuild of DCSO’s [bloom](https://github.com/DCSO/bloom) library. It is binary-compatible and uses the exact same method for FNV1 hashing and parameter calculation, making it a drop-in replacement for `bloom` users.
+Tenzir’s Bloom filter implementation is a C++ rebuild of DCSO’s [bloom](https://github.com/DCSO/bloom) library. It is binary-compatible and uses the exact same method for FNV1 hashing and parameter calculation, making it a drop-in replacement for `bloom` users. For the same reason, keys compare by their text form rather than by value, so `1` and `1.0` are different keys.
 
 Large Observable Sets
 
@@ -120,7 +110,9 @@ A Bloom filter at $p = 0.01$ spends 9.6 bits per digest instead of 256, so the s
 
 The GeoIP context provides geo-spatial information about a given IP address. Conceptually, it is a lookup table with IP addresses as keys that maps to country codes/names, region codes/names, cities, zip codes, and geographic coordinates.
 
-Since a naive table representation would explode in memory, [MaxMind](https://www.maxmind.com/) came up with a custom binary [MMDB format](https://maxmind.github.io/MaxMind-DB/) along with a [corresponding library](https://github.com/maxmind/libmaxminddb) to perform IP lookups. This format is the de-facto standard for geo-spatial IP address enrichment today. Tenzir supports it natively.
+Since a naive table representation would explode in memory, [MaxMind](https://www.maxmind.com/) came up with a custom binary [MMDB format](https://maxmind.github.io/MaxMind-DB/) along with a [corresponding library](https://github.com/maxmind/libmaxminddb) to query it by IP address. This format is the de-facto standard for geo-spatial IP address enrichment today. Tenzir supports it natively.
+
+Unlike the other types, a GeoIP context takes no updates from pipelines. Its context file names a `url` to load the database from, and the context loads it right after the deploy and checks the source again as often as its `reload-interval` says. Enrichment waits for the first load to finish.
 
 Detecting Anomalous Logins
 

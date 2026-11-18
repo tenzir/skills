@@ -1,7 +1,7 @@
 ---
 title: "parse_yaml"
-canonical: https://tenzir.com/docs/v6.22.0/reference/functions/parse_yaml
-source: https://tenzir.com/docs/v6.22.0/reference/functions/parse_yaml.md
+canonical: https://tenzir.com/docs/reference/functions/parse_yaml
+source: https://tenzir.com/docs/reference/functions/parse_yaml.md
 section: "Docs"
 ---
 

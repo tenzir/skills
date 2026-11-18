@@ -1,7 +1,7 @@
 ---
 title: "from_ftp"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/from_ftp
-source: https://tenzir.com/docs/v6.22.0/reference/operators/from_ftp.md
+canonical: https://tenzir.com/docs/reference/operators/from_ftp
+source: https://tenzir.com/docs/reference/operators/from_ftp.md
 section: "Docs"
 ---
 
@@ -50,8 +50,6 @@ The `client_ca` and `require_client_cert` options are only valid for operators t
 
 Any value not specified in the record will either be picked up from the configuration or if not configured will not be used by the operator.
 
-See the [Node TLS Setup guide](../../guides/node-setup/configure-tls.md) for more details.
-
 ### `{ … }`
 
 A required parsing subpipeline.
@@ -84,4 +82,4 @@ from_ftp "ftp://user:pass@ftp.example.org/events.json.gz" {
 ## See Also
 
 * [`to_ftp`](to_ftp.md)
-* [Ftp](https://tenzir.com/integrations/ftp)
+* [Ftp](https://tenzir.com/product/integrations/ftp)

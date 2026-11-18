@@ -1,7 +1,7 @@
 ---
 title: "starts_with"
-canonical: https://tenzir.com/docs/v6.22.0/reference/functions/starts_with
-source: https://tenzir.com/docs/v6.22.0/reference/functions/starts_with.md
+canonical: https://tenzir.com/docs/reference/functions/starts_with
+source: https://tenzir.com/docs/reference/functions/starts_with.md
 section: "Docs"
 ---
 

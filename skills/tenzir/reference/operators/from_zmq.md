@@ -1,7 +1,7 @@
 ---
 title: "from_zmq"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/from_zmq
-source: https://tenzir.com/docs/v6.22.0/reference/operators/from_zmq.md
+canonical: https://tenzir.com/docs/reference/operators/from_zmq
+source: https://tenzir.com/docs/reference/operators/from_zmq.md
 section: "Docs"
 ---
 
@@ -81,4 +81,4 @@ from_zmq "tcp://collector.example.com:5555", prefix="syslog ", keep_prefix=true 
 * [`to_zmq`](to_zmq.md)
 * [`serve_zmq`](serve_zmq.md)
 * [`from_zmq`](from_zmq.md)
-* [Zeromq](https://tenzir.com/integrations/zeromq)
+* [Zeromq](https://tenzir.com/product/integrations/zeromq)

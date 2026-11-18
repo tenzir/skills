@@ -1,7 +1,7 @@
 ---
 title: "where"
-canonical: https://tenzir.com/docs/v6.22.0/reference/functions/where
-source: https://tenzir.com/docs/v6.22.0/reference/functions/where.md
+canonical: https://tenzir.com/docs/reference/functions/where
+source: https://tenzir.com/docs/reference/functions/where.md
 section: "Docs"
 ---
 

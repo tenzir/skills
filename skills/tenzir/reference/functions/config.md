@@ -1,7 +1,7 @@
 ---
 title: "config"
-canonical: https://tenzir.com/docs/v6.22.0/reference/functions/config
-source: https://tenzir.com/docs/v6.22.0/reference/functions/config.md
+canonical: https://tenzir.com/docs/reference/functions/config
+source: https://tenzir.com/docs/reference/functions/config.md
 section: "Docs"
 ---
 

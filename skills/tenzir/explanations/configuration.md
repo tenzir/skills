@@ -1,273 +1,83 @@
 ---
 title: "Configuration"
-canonical: https://tenzir.com/docs/v6.22.0/explanations/configuration
-source: https://tenzir.com/docs/v6.22.0/explanations/configuration.md
+description: "Understand how a workspace keeps its pipelines, contexts, and packages in a Git repository, and what a deploy guarantees when a commit reaches a deployment."
+canonical: https://tenzir.com/docs/explanations/configuration
+source: https://tenzir.com/docs/explanations/configuration.md
 section: "Docs"
 ---
 
 # Configuration
 
-> This page explains how to configure the Tenzir CLI and Node. Configuration flows through four layers, sorted by precedence:
+> Understand how a workspace keeps its pipelines, contexts, and packages in a Git repository, and what a deploy guarantees when a commit reaches a deployment.
 
-This page explains how to configure the Tenzir CLI and Node. Configuration flows through four layers, sorted by precedence:
+A **configuration** is the set of files that a [deployment](deployment.md) runs: its pipelines, its contexts, and the packages those pipelines use. Each workspace keeps its configuration in a Git repository on the [platform](platform.md), so every change is a commit, and a deploy brings a commit to a deployment.
 
-1. Command-line arguments
-2. Environment variables
-3. Configuration files
-4. Compile-time defaults
+## What a configuration contains
 
-The options are sorted by precedence, i.e., command-line arguments override environment variables, which override configuration file settings. Compile-time defaults can only be changed by rebuilding Tenzir from source.
+A configuration is a folder of plain files:
 
-Let’s discuss the first three options in more detail.
+* pipelines/
 
-## Command Line Arguments
+  * onboard-suricata.tql
 
-The command line arguments of the executables have the following synopsis:
+  * routing/
 
-```plaintext
-tenzir [opts] <pipeline>
-tenzir-node [opts]
-```
+    * to-splunk.tql
 
-We have both long `--long=X` and short `-s X` options. Boolean options do not require explicit specification of a value, and it suffices to write `--long` and `-s` to set an option to true.
+* contexts/
 
-## Environment Variables
+  * threat-indicators.yaml
 
-You can use environment variables as an alternative method to passing command line options. This comes in handy when working with non-interactive deployments where the command line is hard-coded, such as in Docker containers.
+* packages/
 
-An environment variable has the form `KEY=VALUE`, and we describe the format of `KEY` and `VALUE` below. Tenzir processes only environment variables that have the form `TENZIR_{KEY}=VALUE`. For example, `TENZIR_ENDPOINT=1.2.3.4` translates to the command line option `--endpoint=1.2.3.4` and YAML configuration `tenzir.endpoint: 1.2.3.4`.
+  * acme/ a package written in this repository
 
-### Keys
+    * …
 
-There exists a one-to-one mapping from configuration file keys to environment variable names. Here are two examples:
+* package.yaml
 
-* `tenzir.demand.max-batches` - configuration file key
-* `TENZIR_DEMAND__MAX_BATCHES` - environment variable
+* package.lock
 
-A hierarchical key of the form `tenzir.x.y.z` maps to the environment variable `TENZIR_X__Y__Z`. More generally, the `KEY` in `TENZIR_{KEY}=VALUE` adheres to the following rules:
+- **Pipelines** live in `pipelines/`, one `.tql` file per pipeline, in subfolders if you like. The path of the file identifies the pipeline. An optional [frontmatter](../reference/directory-layout.md#pipelines) sets the name the platform shows and whether the pipeline starts at all.
+- **Contexts** live in `contexts/`, one YAML file per context, as the [contexts reference](../reference/contexts.md) describes.
+- **Packages** provide operators and constants that the pipelines call. The repository’s `package.yaml` lists the packages it depends on, and `package.lock` pins the exact version of each. A package you write yourself lives under `packages/`. Our explanation of [packages in a configuration](packages.md#packages-in-a-configuration) covers how the two files work together.
 
-1. Double underscores map to the `.` separator of YAML dictionaries.
+Our reference on the [directory layout](../reference/directory-layout.md) lists every file a configuration may contain.
 
-2. Single underscores `_` map to a `-` in the corresponding configuration file key. This is unambiguous because Tenzir does not have any options that include a literal underscore.
+## Every change is a commit
 
-From the perspective of the command line, setting the `--foo` option via `tenzir --foo` or `tenzir-node --foo` maps onto the environment variable `TENZIR_FOO` and the configuration file key `tenzir.foo`. Here are two examples with identical behavior:
+Because the configuration is a Git repository, its history is the history of everything your deployments run. You see who changed what and when, compare commits, and review a change before it reaches production. Every way to change a configuration ends in a commit:
 
-```sh
-TENZIR_ENDPOINT=0.0.0.0:42000 tenzir-node
-tenzir-node --endpoint=0.0.0.0:42000
-```
+* In the app, the configuration editor keeps a personal **draft** for each branch. It saves as you type and changes nothing until you commit it.
+* On your machine, `tenzir config clone` clones the repository, and `tenzir config apply` commits your changes and pushes them back. Any Git client works as well.
+* An AI agent [connected via MCP](../guides/connect-to-tenzir.md) writes drafts for you to review and commit.
 
-CAF and Plugin Settings
+## Branches and deployments
 
-To provide [CAF](https://github.com/actor-framework/actor-framework) and plugin settings, which have the form `caf.x.y.z` and `plugins.name.x.y.z` in the configuration file, the environment variable must have the form `TENZIR_CAF__X__Y__Z` and `TENZIR_PLUGINS__NAME__X__Y__Z` respectively.
+Each deployment **tracks** one branch of the repository, `main` by default. With **auto deploy** on, every new commit on that branch deploys right away, and a deployment that reconnects while behind its branch gets the latest commit as well. With auto deploy off, the deployment keeps what it runs until you deploy a commit by hand.
 
-The configuration file is an exception in this regard: `tenzir.caf.` and `tenzir.plugins.` are invalid key prefixes. Instead, CAF and plugin configuration file keys have the prefixes `caf.` and `plugins.`, i.e., they are hoisted into the global scope.
+Several deployments can track the same branch, or different ones, for example `staging` for a test deployment and `main` for production. A workspace can **protect** branches by name pattern, so that only members with the right permission can commit or push to them.
 
-### Values
+## What a deploy guarantees
 
-While all environment variables are strings on the shell, Tenzir parses them into a typed value internally. In general, parsing values from the environment follows the same syntactical rules as command line parsing.
+A deploy brings one commit to one deployment. The platform bundles the commit’s files with the packages that its lock pins, and the deployment checks the result before it changes anything. This makes every deploy safe in four ways:
 
-In particular, this applies to lists. For example, `TENZIR_PLUGINS="foo,bar"` is equivalent to `--plugins=foo,bar`.
+In the platform, a commit on a tracked branch starts a deploy: the platform checks the files and the lock and builds an archive with the locked packages and a manifest. It deploys that configuration to the deployment, which validates it and keeps the previous configuration if it is not valid. Otherwise the deployment stores the archive and applies it by starting, restarting, and stopping pipelines.
 
-Tenzir ignores environment variables with an empty value because the type cannot be inferred. For example, `TENZIR_PLUGINS=` will not be considered.
+* **All or nothing.** A configuration with any problem, such as a malformed context or a lock that doesn’t fit `package.yaml`, is refused as a whole, and the deployment keeps running the previous one unchanged. The one exception is a pipeline that doesn’t compile: the deploy goes through, and only that pipeline fails with the error.
+* **Never backward.** Every deploy gets a higher **generation** number, and a deployment takes only a configuration newer than the one it runs. A delayed or repeated delivery therefore cannot roll it back.
+* **Only what changed restarts.** The deployment compares what each pipeline compiles to, including the package operators it calls and the secrets it buffers, with the running one. New pipelines start, removed ones stop, and changed ones restart. A change that compiles to the same pipeline, such as a new comment, restarts nothing. A pipeline that finished or that you stopped takes its new definition when it next starts.
+* **No events lost between pipelines.** New subscribers attach before old pipelines stop, and old pipelines stop from upstream to downstream, so the events that a stopping [`publish`](../reference/operators/publish.md) still sends reach their [`subscribe`](../reference/operators/subscribe.md).
 
-## Configuration files
+Acceptance means that the deployment runs the new configuration, not that every pipeline in it is healthy. The pipeline list shows each pipeline’s state and error.
 
-Tenzir’s configuration file is in YAML format. On startup, Tenzir attempts to read configuration files from the following places, in order:
+A rollback is a deploy like any other. Deploy an older commit, and it gets a new generation, so the deployment takes it while the branch stays as it is. To undo a change on the branch itself, revert the commit, and auto deploy delivers the revert. Our guide on [changing configurations](../guides/change-configurations.md#revert-a-change) shows both.
 
-1. `/opt/tenzir/etc/tenzir/tenzir.yaml` for system-wide configuration, where `/opt/tenzir` is the default install prefix and `/etc/tenzir` is the default sysconfdir.
+## See also
 
-2. `~/.config/tenzir/tenzir.yaml` for user-specific configuration. Tenzir respects the XDG base directory specification and its environment variables.
-
-3. A path to a configuration file passed via `--config=/path/to/tenzir.yaml`.
-
-If there exist configuration files in multiple locations, options from all configuration files are merged in order, with the latter files receiving a higher precedence than former ones. For lists, merging means concatenating the list elements.
-
-Example configuration
-
-Check out the [example configuration](../reference/node/configuration.md) for a fully documented `tenzir.yaml` that shows all available settings.
-
-### Plugin Configuration Files
-
-In addition to `tenzir/tenzir.yaml`, Tenzir loads `tenzir/plugin/<plugin>.yaml` for plugin-specific configuration for a given plugin named `<plugin>`. The same rules apply as for the regular configuration file directory lookup.
-
-### Bare Mode
-
-Sometimes, users may wish to run Tenzir without side effects, e.g., when wrapping Tenzir in their own scripts. Run with `--bare-mode` to disable looking at all system- and user-specified configuration paths.
-
-## Outbound Proxy Configuration
-
-Tenzir can route outbound HTTP, HTTPS, and gRPC traffic through an HTTP proxy. Configure `tenzir.http-proxy` for `http://` targets and `tenzir.https-proxy` for `https://` and gRPC targets:
-
-\<configdir>/tenzir/tenzir.yaml
-
-```yaml
-tenzir:
-  http-proxy: http://proxy.example.com:3128
-  https-proxy: http://user:password@proxy.example.com:3128
-  no-proxy: .internal,10.0.0.0/8
-```
-
-Proxy URLs must include an explicit port. They may use `http://` or `https://`; for gRPC-backed clients, use an `http://` proxy URL because gRPC Core rejects `https://` proxy URLs.
-
-If your deployment sets gRPC-specific environment variables such as `grpc_proxy` or `no_grpc_proxy`, gRPC Core may prefer those over the standard proxy environment variables that Tenzir mirrors from its configuration.
-
-If the Tenzir settings are unset, Tenzir falls back to the corresponding environment variables:
-
-* `tenzir.http-proxy`: `TENZIR_HTTP_PROXY`, `HTTP_PROXY`, then `http_proxy`
-* `tenzir.https-proxy`: `TENZIR_HTTPS_PROXY`, `HTTPS_PROXY`, then `https_proxy`
-* `tenzir.no-proxy`: `TENZIR_NO_PROXY`, `NO_PROXY`, then `no_proxy`
-
-Only the generic proxy variables have lowercase aliases; the `TENZIR_*` variables are uppercase-only.
-
-Empty proxy environment variables are ignored, except that an explicitly empty `tenzir.no-proxy` or `TENZIR_NO_PROXY` disables fallback to the generic `NO_PROXY` and `no_proxy` environment variables.
-
-The `tenzir.no-proxy` setting accepts comma-separated entries with the same matching behavior as libcurl’s `NO_PROXY`: host and domain entries match on label boundaries, `*` matches every host, and CIDR entries match IP literals. Loopback destinations such as `localhost`, `127.0.0.1`, and `::1` always bypass the proxy.
-
-At startup, Tenzir also mirrors the resolved proxy settings into the standard proxy environment variables, so outbound integrations follow the same configuration.
-
-For normal `s3://bucket/...` URLs, `from_s3` and `to_s3` select the proxy from the S3 request scheme rather than matching `no-proxy` against the URI host, because that host is the bucket name and not the actual service endpoint. When `endpoint_override` is set, Tenzir can apply `no-proxy` to the override host. Google Cloud Storage and Azure Blob Storage apply `no-proxy` to the real service endpoint host.
-
-## TLS Configuration
-
-Tenzir provides node-level TLS configuration that applies to all operators and connectors using TLS/HTTPS connections. These settings are used by operators that make outbound connections (e.g., [`to_opensearch`](../reference/operators/to_opensearch.md) and [`to_splunk`](../reference/operators/to_splunk.md)) and those that accept inbound connections (e.g., [`accept_tcp`](../reference/operators/accept_tcp.md) and [`serve_tcp`](../reference/operators/serve_tcp.md)).
-
-Use Only When Required
-
-We do not recommend manually configuring TLS settings unless required for specific compliance or security policies. The default TLS configuration uses OpenSSL’s secure defaults, which are regularly updated and work with most services. Only override these settings if you have specific requirements.
-
-### Minimum TLS Version
-
-You can configure the minimum TLS protocol version to use for all TLS connections:
-
-\<configdir>/tenzir/tenzir.yaml
-
-```yaml
-tenzir:
-  tls:
-    min-version: "1.2"
-```
-
-Valid values are `"1.0"`, `"1.1"`, `"1.2"`, and `"1.3"`. We recommend using `"1.2"` or higher for security.
-
-TLS 1.0 and 1.1 Deprecated
-
-TLS versions 1.0 and 1.1 are considered deprecated and insecure. Most modern services no longer support them. Use TLS 1.2 or 1.3 whenever possible.
-
-### Cipher Suites
-
-You can specify which cipher suites to use for TLS connections:
-
-\<configdir>/tenzir/tenzir.yaml
-
-```yaml
-tenzir:
-  tls:
-    ciphers: "ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384"
-```
-
-The cipher list format follows OpenSSL cipher list syntax. See the [OpenSSL documentation](https://www.openssl.org/docs/man1.1.1/man1/ciphers.html) for details on how to construct cipher lists.
-
-### Operators Supporting TLS Configuration
-
-The following operators and connectors automatically respect the node-level TLS configuration:
-
-* [`to_opensearch`](../reference/operators/to_opensearch.md): Applies min version and ciphers to HTTPS connections
-* [`to_splunk`](../reference/operators/to_splunk.md): Applies min version and ciphers to Splunk HEC connections
-* [`accept_tcp`](../reference/operators/accept_tcp.md): Applies min version and ciphers to TLS server mode
-* [`from_tcp`](../reference/operators/from_tcp.md): Applies min version and ciphers to TLS client mode
-* [`serve_tcp`](../reference/operators/serve_tcp.md): Applies min version and ciphers to TLS server mode
-* [`accept_opensearch`](../reference/operators/accept_opensearch.md): Applies min version and ciphers to HTTPS connections
-
-## Plugins
-
-Tenzir’s plugin architecture allows for flexible replacement and enhancement of functionality at various pre-defined customization points. There exist **dynamic plugins** that ship as shared libraries and **static plugins** that are compiled into libtenzir.
-
-### Install plugins
-
-Dynamic plugins are just shared libraries and can be placed at a location of your choice. We recommend putting them into a single directory and add the path to the `tenzir.plugin-dirs` configuration option..
-
-Static plugins do not require installation since they are compiled into Tenzir.
-
-### Load plugins
-
-The configuration key `tenzir.plugins` specifies the list of plugins that should load at startup. The `all` plugin name is reserved. When `all` is specified Tenzir loads all available plugins in the configured plugin directories. If no `tenzir.plugins` key is specified, Tenzir will load `all` plugins by default. To load no plugins at all, specify a `tenzir.plugins` configuration key with no plugin values, e.g. the configuration file entry `plugins: []` or launch parameter `--plugins=`.
-
-Since dynamic plugins are shared libraries, they must be loaded first into the running Tenzir process. At startup, Tenzir looks for the `tenzir.plugins` inside the `tenzir.plugin-dirs` directories configured in `tenzir.yaml`. For example:
-
-\<configdir>/tenzir/tenzir.yaml
-
-```yaml
-tenzir:
-  plugin-dirs:
-    - .
-    - /opt/foo/lib
-  plugins:
-    - acme
-    - /opt/bar/lib/libtenzir-plugin-acme.so
-```
-
-Before executing plugin code, Tenzir loads the specified plugins via `dlopen(3)` and attempts to initialize them as plugins. Part of the initialization is passing configuration options to the plugin. To this end, Tenzir looks for a YAML dictionary under `plugins.<name>` in the `tenzir.yaml` file. For example:
-
-\<configdir>/tenzir/tenzir.yaml
-
-```yaml
-plugins:
-  acme:
-    option: 42
-```
-
-Alternatively, you can specify a `plugin/<plugin>.yaml` file. The example configurations above and below are equivalent. This makes plugin deployments easier, as plugins can be installed and uninstalled alongside their respective configuration.
-
-\<configdir>/tenzir/plugin/acme.yaml
-
-```yaml
-option: 42
-```
-
-After initialization with the configuration options, the plugin is fully operational and Tenzir will call its functions at the plugin-specific customization points.
-
-### Platform TLS Configuration
-
-When connecting a node to the Tenzir Platform, you can configure TLS settings specifically for this connection. These settings take precedence over the node-level `tenzir.tls.*` settings, but fall back to them if not specified.
-
-Use Only When Required
-
-We do not recommend manually configuring TLS settings unless required for specific compliance or security policies. The default TLS configuration is secure and compatible with the Tenzir Platform.
-
-You can configure these settings in `<configdir>/tenzir/plugin/platform.yaml`:
-
-\<configdir>/tenzir/plugin/platform.yaml
-
-```yaml
-# Minimum TLS protocol version for platform connections
-# Valid values: "1.0", "1.1", "1.2", "1.3"
-tls-min-version: "1.2"
-
-
-# OpenSSL cipher list for platform connections
-tls-ciphers: "ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256"
-```
-
-These options only affect the connection from the node to the Tenzir Platform. If not specified, the settings fall back to the node-level `tenzir.tls.min-version` and `tenzir.tls.ciphers` settings.
-
-### List plugins
-
-You can get the list of available plugins using the [`plugins`](../reference/operators/plugins.md) operator:
-
-```bash
-tenzir 'plugins'
-```
-
-### Block plugins
-
-As part of your Tenzir deployment, you can selectively disable plugins by name. For example, if you do not want the `shell` operator and the `kafka` connector to be available, set this in your configuration:
-
-\<configdir>/tenzir/tenzir.yaml
-
-```yaml
-tenzir:
-  disable-plugins:
-    - shell
-    - kafka
-```
+* [Deployment](deployment.md)
+* [Packages](packages.md)
+* [Quickstart](../guides/quickstart.md)
+* [Change configurations](../guides/change-configurations.md)
+* [Declare contexts](../guides/enrich/declare-contexts.md)
+* [Directory Layout](../reference/directory-layout.md)

@@ -1,7 +1,7 @@
 ---
 title: "is_printable"
-canonical: https://tenzir.com/docs/v6.22.0/reference/functions/is_printable
-source: https://tenzir.com/docs/v6.22.0/reference/functions/is_printable.md
+canonical: https://tenzir.com/docs/reference/functions/is_printable
+source: https://tenzir.com/docs/reference/functions/is_printable.md
 section: "Docs"
 ---
 

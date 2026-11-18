@@ -1,7 +1,7 @@
 ---
 title: "append"
-canonical: https://tenzir.com/docs/v6.22.0/reference/functions/append
-source: https://tenzir.com/docs/v6.22.0/reference/functions/append.md
+canonical: https://tenzir.com/docs/reference/functions/append
+source: https://tenzir.com/docs/reference/functions/append.md
 section: "Docs"
 ---
 

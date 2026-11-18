@@ -1,7 +1,7 @@
 ---
 title: "from_tcp"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/from_tcp
-source: https://tenzir.com/docs/v6.22.0/reference/operators/from_tcp.md
+canonical: https://tenzir.com/docs/reference/operators/from_tcp
+source: https://tenzir.com/docs/reference/operators/from_tcp.md
 section: "Docs"
 ---
 
@@ -46,8 +46,6 @@ The `client_ca` and `require_client_cert` options are only valid for operators t
 
 Any value not specified in the record will either be picked up from the configuration or if not configured will not be used by the operator.
 
-See the [Node TLS Setup guide](../../guides/node-setup/configure-tls.md) for more details.
-
 ### `{ … } (optional)`
 
 The pipeline to run for the TCP connection. Use this to parse the incoming byte stream into events, for instance `{ read_json }`.
@@ -91,4 +89,4 @@ from_tcp "example.org:4443", tls={cacert: "ca.pem"} {
 * [`accept_tcp`](accept_tcp.md)
 * [`serve_tcp`](serve_tcp.md)
 * [`from_unix_socket`](from_unix_socket.md)
-* [Tcp](https://tenzir.com/integrations/tcp)
+* [Tcp](https://tenzir.com/product/integrations/tcp)

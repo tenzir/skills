@@ -1,7 +1,7 @@
 ---
 title: "decode_url"
-canonical: https://tenzir.com/docs/v6.22.0/reference/functions/decode_url
-source: https://tenzir.com/docs/v6.22.0/reference/functions/decode_url.md
+canonical: https://tenzir.com/docs/reference/functions/decode_url
+source: https://tenzir.com/docs/reference/functions/decode_url.md
 section: "Docs"
 ---
 

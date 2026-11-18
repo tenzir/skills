@@ -1,8 +1,8 @@
 ---
 title: "Enrich with threat intel"
 description: "Add threat intelligence to OCSF enrichments, observables, and OSINT fields"
-canonical: https://tenzir.com/docs/v6.22.0/guides/enrich/enrich-with-threat-intel
-source: https://tenzir.com/docs/v6.22.0/guides/enrich/enrich-with-threat-intel.md
+canonical: https://tenzir.com/docs/guides/enrich/enrich-with-threat-intel
+source: https://tenzir.com/docs/guides/enrich/enrich-with-threat-intel.md
 section: "Docs"
 ---
 
@@ -38,7 +38,7 @@ Create separate lookup tables in setup pipelines for the OCSF objects you plan t
 
 Separate tables let each value match a specific OCSF target. They also let you refresh high-churn reputation data more frequently than slower-moving malware or campaign metadata.
 
-Populate these tables from feed ingestion pipelines, package pipelines, or internal intelligence exports. Keep each table value close to the OCSF object it will produce, then use the enrichment pipeline only to look up and place the value.
+Populate these tables from feed ingestion pipelines, package pipelines, or internal intelligence exports. Keep each table value close to the OCSF object it will produce, then use the enrichment pipeline only to attach the value.
 
 ## Enrich into `enrichments`
 
@@ -110,7 +110,7 @@ context_enrich "domain_indicator_enrichments",
 }
 ```
 
-This is the safest default when you don’t yet know where the feed belongs in the OCSF event. The result stays attached to the event, with the lookup result in `data` and the context name in `provider`, but it remains a generic enrichment object because Tenzir does not infer an enrichment `type`.
+This is the safest default when you don’t yet know where the feed belongs in the OCSF event. The result stays attached to the event, with the enrichment result in `data` and the context name in `provider`, but it remains a generic enrichment object because Tenzir does not infer an enrichment `type`.
 
 ## Enrich observables with reputation
 

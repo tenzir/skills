@@ -1,7 +1,7 @@
 ---
 title: "Overview"
-canonical: https://tenzir.com/docs/v6.22.0/reference/optimizations
-source: https://tenzir.com/docs/v6.22.0/reference/optimizations.md
+canonical: https://tenzir.com/docs/reference/optimizations
+source: https://tenzir.com/docs/reference/optimizations.md
 section: "Docs"
 ---
 
@@ -37,16 +37,18 @@ Before a pipeline runs, Tenzir’s [optimizer](../explanations/pipeline.md#optim
 * **Limits**: the number of events that [`head`](operators/head.md) keeps.
 * **Aggregations**: the groups and aggregation functions of a final [`summarize`](operators/summarize.md) that directly follows the operator. Unlike the other hints, the optimizer offers an aggregation only after the walk, once it knows which filters and limits the operator took over.
 
-An operator that understands a hint acts on it, for example by turning a filter into a `WHERE` clause. The [`where`](operators/where.md), [`select`](operators/select.md), and [`head`](operators/head.md) operators stay in the pipeline and run on what the operator produces, so an operator that acts on a hint only partially, or not at all, still produces the same result. The exception is a source that [computes an aggregation](optimizations.md#aggregations-in-the-source), which takes over the [`summarize`](operators/summarize.md) and the filters before it, and which can also take over the [`where`](operators/where.md), [`sort`](operators/sort.md), and [`head`](operators/head.md) that follow the summary and then runs them with the database’s semantics.
+An operator that understands a hint acts on it, for example by turning a filter into a `WHERE` clause. The [`where`](operators/where.md), [`select`](operators/select.md), and [`head`](operators/head.md) operators stay in the pipeline and run on what the operator produces, so an operator that acts on a hint only partially, or not at all, still produces the same result. The exception is a source that [computes an aggregation](optimizations.md#aggregations-in-the-source), which takes over the
+
+[`summarize`](operators/summarize.md) and the filters before it, and which can also take over the [`where`](operators/where.md), [`sort`](operators/sort.md), and [`head`](operators/head.md) that follow the summary and then runs them with the database’s semantics.
 
 ## Results stay the same
 
-An optimization never changes the result of a pipeline, with a few deliberate exceptions that let common filters reach a database or Splunk:
+An optimization never changes the result of a pipeline, with a few deliberate exceptions that let common filters reach a database, Splunk, or an API:
 
 * **Case-insensitive matching.** `starts_with` and `ends_with` with `ignore_case=true` use the database’s lowercase mapping. It agrees with TQL’s case folding for ASCII and most other text, but TQL folds `ß` to `ss`, so `"Straße".starts_with("strass", ignore_case=true)` is `true` in TQL and matches no row in the database.
 * **Regular expressions.** `match_regex` uses the database’s release of RE2, which may disagree with TQL’s on rarely used syntax and on text that is not valid UTF-8.
 * **IP addresses in string columns.** In TQL, a string never equals an `ip` value, so the comparison is `false`. When a database source compares a text column with an address, as in `src == 1.1.1.1`, it compares the canonical text of the address, `1.1.1.1`, instead, so that the common way of storing addresses as text works.
-* **Remote sources.** [`from_clickhouse`](operators/from_clickhouse.md), [`from_duckdb`](operators/from_duckdb.md), [`from_mysql`](operators/from_mysql.md), [`from_microsoft_sql`](operators/from_microsoft_sql.md), [`from_splunk`](operators/from_splunk.md), [`from_sentinelone_data_lake`](operators/from_sentinelone_data_lake.md), [`from_microsoft_defender`](operators/from_microsoft_defender.md), and [`from_azure_log_analytics`](operators/from_azure_log_analytics.md) hand the database the operators that follow them, which then run with the database’s semantics instead of TQL’s, unless you set `pushdown=false`. Our [ClickHouse](optimizations/clickhouse.md), [DuckDB](optimizations/duckdb.md), [MySQL](optimizations/mysql.md), [SQL Server](optimizations/microsoft-sql.md), [SPL](optimizations/spl.md), [SentinelOne](optimizations/sentinelone.md), and [KQL](optimizations/kql.md) pages describe the differences.
+* **Remote sources.** [`from_clickhouse`](operators/from_clickhouse.md), [`from_duckdb`](operators/from_duckdb.md), [`from_hydrolix`](operators/from_hydrolix.md), [`from_mysql`](operators/from_mysql.md), [`from_microsoft_sql`](operators/from_microsoft_sql.md), [`from_splunk`](operators/from_splunk.md), [`from_sentinelone_data_lake`](operators/from_sentinelone_data_lake.md), [`from_microsoft_defender`](operators/from_microsoft_defender.md), [`from_azure_log_analytics`](operators/from_azure_log_analytics.md), [`from_microsoft_graph`](operators/from_microsoft_graph.md), and [`from_amazon_cloudwatch`](operators/from_amazon_cloudwatch.md) hand the database or API the operators that follow them, which then run with its semantics instead of TQL’s, unless you set `pushdown=false`, which still reads only the columns that the pipeline uses. For example, Microsoft Graph compares many strings without regard to case, and CloudWatch filter patterns match words rather than substrings. Our [ClickHouse](optimizations/clickhouse.md), [DuckDB](optimizations/duckdb.md), [MySQL](optimizations/mysql.md), [SQL Server](optimizations/microsoft-sql.md), [SPL](optimizations/spl.md), [SentinelOne](optimizations/sentinelone.md), [KQL](optimizations/kql.md), [CloudWatch Logs](optimizations/cloudwatch.md), and [Microsoft Graph](optimizations/microsoft-graph.md) pages describe the differences.
 
 The [database pages](optimizations.md#filters-by-database) state which databases use these exceptions. Everything else the database cannot evaluate exactly like TQL runs in Tenzir, including when it would merely differ for `null` values, `NaN`, or text that differs only in case, accents, or trailing spaces.
 
@@ -54,21 +56,24 @@ The [database pages](optimizations.md#filters-by-database) state which databases
 
 These operators act on hints:
 
-| Operator                                                                                                          | Filters                      | Projections                | Limits                 | Aggregations          |
-| ----------------------------------------------------------------------------------------------------------------- | ---------------------------- | -------------------------- | ---------------------- | --------------------- |
-| [`from_azure_log_analytics`](operators/from_azure_log_analytics.md)     | Taken over                   | Top-level columns          | Taken over             | Taken over            |
-| [`from_clickhouse`](operators/from_clickhouse.md)                       | Taken over                   | Including tuple fields     | Taken over             | Taken over            |
-| [`from_duckdb`](operators/from_duckdb.md)                               | Taken over                   | Top-level columns          | Taken over             | Taken over            |
-| [`from_microsoft_defender`](operators/from_microsoft_defender.md)       | Taken over                   | Top-level columns          | Taken over             | Taken over            |
-| [`from_microsoft_graph`](operators/from_microsoft_graph.md)             | While paging                 | Default `users` properties | Stops paging           | No                    |
-| [`from_microsoft_sql`](operators/from_microsoft_sql.md)                 | Taken over                   | Top-level columns          | Taken over             | Taken over            |
-| [`from_mysql`](operators/from_mysql.md)                                 | Taken over                   | Top-level columns          | Taken over             | Taken over            |
-| [`from_sentinelone_data_lake`](operators/from_sentinelone_data_lake.md) | Taken over                   | Including nested fields    | Taken over             | Taken over            |
-| [`from_splunk`](operators/from_splunk.md)                               | Taken over                   | Top-level fields           | Taken over             | Taken over            |
-| [`read_parquet`](operators/read_parquet.md)                             | While decoding, by row group | Including record fields    | Stops decoding         | No                    |
-| [`subscribe`](operators/subscribe.md)                                   | At the node                  | No                         | No                     | No                    |
-| [`sort`](operators/sort.md)                                             | Moved before the sort        | Passed on                  | Keeps the top `N`      | No                    |
-| [`summarize`](operators/summarize.md) (final summary)                   | Kept after aggregation       | Group and aggregate inputs | Kept after aggregation | Offered to the source |
+| Operator                                                                                                    | Filters                      | Projections                | Limits                 | Aggregations          |
+| ----------------------------------------------------------------------------------------------------------- | ---------------------------- | -------------------------- | ---------------------- | --------------------- |
+| [`from_amazon_cloudwatch`](operators/from_amazon_cloudwatch.md)           | Patterns, times, streams     | No                         | Taken over             | No                    |
+| [`from_azure_log_analytics`](operators/from_azure_log_analytics.md)       | Taken over                   | Top-level columns          | Taken over             | Taken over            |
+| [`from_clickhouse`](operators/from_clickhouse.md)                         | Taken over                   | Including tuple fields     | Taken over             | Taken over            |
+| [`from_duckdb`](operators/from_duckdb.md)                                 | Taken over                   | Top-level columns          | Taken over             | Taken over            |
+| [`from_hydrolix`](operators/from_hydrolix.md)                             | Taken over                   | Including tuple fields     | Taken over             | Taken over            |
+| [`from_microsoft_defender`](operators/from_microsoft_defender.md)         | Taken over                   | Top-level columns          | Taken over             | Taken over            |
+| [`from_microsoft_365_activity`](operators/from_microsoft_365_activity.md) | Skip blobs by metadata       | No                         | Stops downloading      | No                    |
+| [`from_microsoft_graph`](operators/from_microsoft_graph.md)               | `$filter` where documented   | Top-level properties       | Stops paging           | No                    |
+| [`from_microsoft_sql`](operators/from_microsoft_sql.md)                   | Taken over                   | Top-level columns          | Taken over             | Taken over            |
+| [`from_mysql`](operators/from_mysql.md)                                   | Taken over                   | Top-level columns          | Taken over             | Taken over            |
+| [`from_sentinelone_data_lake`](operators/from_sentinelone_data_lake.md)   | Taken over                   | Including nested fields    | Taken over             | Taken over            |
+| [`from_splunk`](operators/from_splunk.md)                                 | Taken over                   | Top-level fields           | Taken over             | Taken over            |
+| [`read_parquet`](operators/read_parquet.md)                               | While decoding, by row group | Including record fields    | Stops decoding         | No                    |
+| [`subscribe`](operators/subscribe.md)                                     | Before queuing               | Applied on arrival         | With one topic         | No                    |
+| [`sort`](operators/sort.md)                                               | Moved before the sort        | Passed on                  | Keeps the top `N`      | No                    |
+| [`summarize`](operators/summarize.md) (final summary)                     | Kept after aggregation       | Group and aggregate inputs | Kept after aggregation | Offered to the source |
 
 The reference page of each operator describes the details.
 
@@ -100,13 +105,17 @@ These rules preserve the aggregation’s inputs and behavior:
 * Options must be resolved before `summarize` supplies a projection. Inside runtime-bound subpipelines, such as [`group`](operators/group.md) and [`window`](operators/window.md), an unresolved `summarize` does not narrow the enclosing source.
 * Input ordering requirements remain intact for order-sensitive aggregates. Trigger output, event output, and periodic summaries retain their barriers.
 
-The [`top`](operators/top.md) and [`rare`](operators/rare.md) operators compile into `summarize` and [`sort`](operators/sort.md), so they benefit from the same input projection. A following [`head`](operators/head.md) still limits groups, not raw input events. Source-specific column rules and fields required by earlier operators still apply.
+The [`top`](operators/top.md) and [`rare`](operators/rare.md) operators compile into `summarize` and
+
+[`sort`](operators/sort.md), so they benefit from the same input projection. A following [`head`](operators/head.md) still limits groups, not raw input events. Source-specific column rules and fields required by earlier operators still apply.
 
 ## Aggregations in the source
 
-A source that reads from a database can compute a final summary itself, so that the database returns one row per group instead of every matching row. This happens only if the source reads a table once, in [table mode](optimizations.md#database-sources) and without `live=true`, if [`summarize`](operators/summarize.md) follows the source, after every filter before it went into the query, and if the summary groups by fields and aggregates fields with functions that the database computes exactly like Tenzir. A query that you write with `sql` is sent as written, and a live read never ends, so the summary of either runs in Tenzir. The `summarize` and the filters before it then disappear from the pipeline, the database returns only the group and aggregate fields, and the operators after the summary run on it as usual.
+A source that reads from a database can compute a final summary itself, so that the database returns one row per group instead of every matching row. This happens only if the source reads a table once, in [table mode](optimizations.md#database-sources) and without `live=true`, if [`summarize`](operators/summarize.md) follows the source, after every filter before it went into the query, and if the summary groups by and aggregates fields or computed values with functions that the database computes exactly like Tenzir. A query that you write with `sql` is sent as written, and a live read never ends, so the summary of either runs in Tenzir. The `summarize` and the filters before it then disappear from the pipeline, the database returns only the group and aggregate fields, and the operators after the summary run on it as usual.
 
-A source that computes the summary also takes over the [`where`](operators/where.md), [`sort`](operators/sort.md), and [`head`](operators/head.md) that directly follow it, so that the database returns only the groups that the pipeline keeps:
+A source that computes the summary also takes over the [`where`](operators/where.md),
+
+[`sort`](operators/sort.md), and [`head`](operators/head.md) that directly follow it, so that the database returns only the groups that the pipeline keeps:
 
 ```tql
 from_clickhouse table="events", host="clickhouse.example.com", tls=false
@@ -144,28 +153,88 @@ where severity >= 3
 summarize ip, alerts=count(), last=max(ts)
 ```
 
-by grouping on the `src_ip` column. Every right-hand side of a [`select`](operators/select.md) or [`set`](operators/set.md) reads the original event, so `select a=b, b=a` swaps the fields, and the summary reads them swapped. Assignments to fields that the summary does not read do not matter, unless they call a function, which could fail the pipeline. A computed value for a field that the summary reads, such as `ip = src_ip.string()`, an assignment of anything but a record literal to `this`, and every other operator, including [`head`](operators/head.md) and a [`where`](operators/where.md) that stays in Tenzir, keep the summary in Tenzir.
+by grouping on the `src_ip` column. Every right-hand side of a [`select`](operators/select.md) or [`set`](operators/set.md) reads the original event, so `select a=b, b=a` swaps the fields, and the summary reads them swapped. An assignment of anything but a record literal to `this`, and every other operator, including [`head`](operators/head.md) and a [`where`](operators/where.md) that stays in Tenzir, keep the summary in Tenzir. A summary can also read [computed values](optimizations.md#computed-keys-and-arguments).
 
-If [`from_hydrolix`](operators/from_hydrolix.md) finds out only when it runs that it cannot compute the summary, for example because a column has a type that the database aggregates differently, it reads the rows and runs the operators between the source and the summary and the original `summarize` on them. The result is the same either way, except that Tenzir does not warn about values of rows that it never sees.
+### Aggregation functions
 
-[`from_clickhouse`](operators/from_clickhouse.md), [`from_duckdb`](operators/from_duckdb.md), [`from_microsoft_sql`](operators/from_microsoft_sql.md), and [`from_mysql`](operators/from_mysql.md) compute summaries with group keys, `count`, `min`, and `max`, and the steps after them, which the database runs with its own semantics. They decide from the pipeline alone and never fall back: a summary that the database takes over runs in the database. The pages on [ClickHouse](optimizations/clickhouse.md#operators-that-clickhouse-takes-over), [DuckDB](optimizations/duckdb.md#operators-that-duckdb-takes-over), [MySQL](optimizations/mysql.md#operators-that-mysql-takes-over), and [SQL Server](optimizations/microsoft-sql.md#operators-that-sql-server-takes-over) list the details.
+Each source computes the functions that its target computes exactly like TQL, and then the steps after the summary, with the semantics of the target. It decides from the pipeline alone and never falls back: a summary that the source takes over runs in the source. Other functions keep the summary in Tenzir, and the other sources still aggregate in Tenzir.
 
-[`from_sentinelone_data_lake`](operators/from_sentinelone_data_lake.md) computes summaries with group keys, `count()`, and `count(x)` in SentinelOne with `group`, and the operators after them, with SentinelOne’s semantics. It decides from the pipeline alone and never falls back. Our [SentinelOne page](optimizations/sentinelone.md#operators-that-sentinelone-takes-over) lists the details.
+| Source                                                                                                                                                                                                     | `count()` | `count(x)` | `min`, `max` | `count_if` | `count_distinct` | `sum` | `mean` |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------- | ---------- | ------------ | ---------- | ---------------- | ----- | ------ |
+| [`from_clickhouse`](operators/from_clickhouse.md), [`from_hydrolix`](operators/from_hydrolix.md)                                       | Yes       | Yes        | Yes          | Yes        | Yes              | Yes   | Yes    |
+| [`from_duckdb`](operators/from_duckdb.md), [`from_mysql`](operators/from_mysql.md)                                                     | Yes       | Yes        | Yes          | Yes        | Yes              | Local | Yes    |
+| [`from_microsoft_sql`](operators/from_microsoft_sql.md)                                                                                                                  | Yes       | Yes        | Yes          | Yes        | Yes              | Yes   | Yes    |
+| [`from_splunk`](operators/from_splunk.md)                                                                                                                                | Yes       | Yes        | Yes          | Yes        | Yes              | Yes   | Yes    |
+| [`from_microsoft_defender`](operators/from_microsoft_defender.md), [`from_azure_log_analytics`](operators/from_azure_log_analytics.md) | Yes       | Yes        | Yes          | Yes        | Local            | Yes   | Local  |
+| [`from_sentinelone_data_lake`](operators/from_sentinelone_data_lake.md)                                                                                                  | Yes       | Yes        | Local        | Local      | Approximate      | Local | Local  |
 
-[`from_splunk`](operators/from_splunk.md) computes summaries with group keys, `count()`, `count(field)`, `min`, and `max` in Splunk with `stats`, and the operators after them, with Splunk’s semantics. It decides from the pipeline alone and never falls back. Our [SPL page](optimizations/spl.md#operators-that-splunk-takes-over) lists the details.
+*Local* means that the summary stays in Tenzir. A source that computes `count_distinct` *approximately*, as SentinelOne does with `estimate_distinct` because PowerQuery has no exact distinct count, may return a different count than TQL. DuckDB and MySQL keep `sum` local because it yields wider result types than TQL’s, and KQL keeps `mean` and `count_distinct` local.
 
-[`from_microsoft_defender`](operators/from_microsoft_defender.md) and [`from_azure_log_analytics`](operators/from_azure_log_analytics.md) compute summaries with group keys, `count()`, `count(x)`, `min`, `max`, and `sum` with KQL’s `summarize`, and the operators after them, with KQL’s semantics. They decide from the pipeline alone and never fall back. Our [KQL page](optimizations/kql.md#operators-that-the-service-takes-over) lists the details.
+In every source that computes it, `count_if` counts only the events whose input is not `null`, as TQL does. The pages of [ClickHouse](optimizations/clickhouse.md#summaries), [DuckDB](optimizations/duckdb.md#summaries), [MySQL](optimizations/mysql.md#summaries), [SQL Server](optimizations/microsoft-sql.md#summaries), [SPL](optimizations/spl.md#summaries), [SentinelOne](optimizations/sentinelone.md#operators-that-sentinelone-takes-over), and [KQL](optimizations/kql.md#summaries) list how each source spells the functions.
 
-The other sources still aggregate in Tenzir. [`from_hydrolix`](operators/from_hydrolix.md) keeps the [`where`](operators/where.md), [`sort`](operators/sort.md), and [`head`](operators/head.md) after a summary in Tenzir.
+### Computed keys and arguments
+
+A summary can group by or aggregate computed values, such as values that a [`set`](operators/set.md) before it assigns. The SQL sources, [`from_splunk`](operators/from_splunk.md), and the KQL sources compute them in the target, with its semantics, before the aggregation:
+
+| Source                                                                                                                                                                                                                                                                                                                                                                                                                  | Computes with                       |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------- |
+| [`from_clickhouse`](operators/from_clickhouse.md), [`from_duckdb`](operators/from_duckdb.md), [`from_hydrolix`](operators/from_hydrolix.md), [`from_microsoft_sql`](operators/from_microsoft_sql.md), [`from_mysql`](operators/from_mysql.md) | The expression inside the aggregate |
+| [`from_splunk`](operators/from_splunk.md)                                                                                                                                                                                                                                                                                                                                             | `eval`                              |
+| [`from_microsoft_defender`](operators/from_microsoft_defender.md), [`from_azure_log_analytics`](operators/from_azure_log_analytics.md)                                                                                                                                                                                                              | `extend`                            |
+| [`from_sentinelone_data_lake`](operators/from_sentinelone_data_lake.md)                                                                                                                                                                                                                                                                                                               | Declines                            |
+
+For example, Splunk computes the key of
+
+```tql
+from_splunk "https://splunk:8089", index="main", earliest="-1h", latest="now"
+kind = action.to_upper()
+summarize kind, events=count()
+```
+
+with `| eval tenzir_column_0=upper('action')` before its `stats`, and DuckDB computes `worst` in
+
+```tql
+from_duckdb "events.duckdb", table="events"
+level = severity * 2
+summarize src_ip, worst=max(level)
+```
+
+as `MAX(("severity" * 2))`.
+
+An assignment that the summary reads may be fallible, such as a function call, since the target computes it with its own semantics. An assignment that the summary doesn’t read, including one that a later assignment shadows, must be infallible, since the target skips it and so would hide a failure that the pipeline would report. Otherwise, the operators stay in the pipeline. A value that the target cannot spell, such as a call of a function that the [filters](optimizations.md#filters-by-database) don’t list, also keeps the summary in Tenzir.
+
+### Time buckets
+
+A `floor` of a time to a duration, such as the groups of a summary, runs in the database in these sources:
+
+| Source                                                                                                                                                               | `floor(time, width)`                        |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------- |
+| [`from_duckdb`](operators/from_duckdb.md)                                                                                          | Yes                                         |
+| [`from_microsoft_sql`](operators/from_microsoft_sql.md)                                                                            | Yes, as `DATE_BUCKET`, with SQL Server 2022 |
+| [`from_clickhouse`](operators/from_clickhouse.md), [`from_hydrolix`](operators/from_hydrolix.md) | Yes                                         |
+| [`from_mysql`](operators/from_mysql.md)                                                                                            | No, since times arrive as text              |
+| KQL, PowerQuery, and Splunk sources                                                                                                                                  | No                                          |
+
+```tql
+from_clickhouse table="events", host="localhost"
+hour = floor(time, 1h)
+summarize hour, events=count()
+```
+
+The buckets count from the epoch, as in TQL, also before 1970. Widths that are multiples of a week or a month stay in the pipeline, since TQL aligns them to the calendar, and so do widths below a second in SQL Server. SQL Server computes the bucket with `DATE_BUCKET(second, 3600, …, CAST('1970-01-01' AS datetime2(7)))`, which SQL Server earlier than 2022 rejects. With such a server, use `pushdown=false`.
 
 ## Database sources
 
-The database sources [`from_clickhouse`](operators/from_clickhouse.md), [`from_duckdb`](operators/from_duckdb.md), [`from_microsoft_sql`](operators/from_microsoft_sql.md), and [`from_mysql`](operators/from_mysql.md) read in one of two modes, and only one of them optimizes:
+The database sources [`from_clickhouse`](operators/from_clickhouse.md), [`from_duckdb`](operators/from_duckdb.md),
+
+[`from_microsoft_sql`](operators/from_microsoft_sql.md), and [`from_mysql`](operators/from_mysql.md) read in one of two modes, and only one of them optimizes:
 
 * In **table mode**, you name a table, as in `from_mysql table="alerts"`. The operator writes the query itself, so it can add the work of the operators that follow it.
 * In **SQL mode**, you write the query, as in `from_mysql sql="SELECT …"`. The operator sends it exactly as written, and Tenzir applies the rest of the pipeline to its result. To have the database filter, write the filter into your query.
 
-In table mode, the operator hands the database the operators that follow it, as our [ClickHouse](optimizations/clickhouse.md), [DuckDB](optimizations/duckdb.md), [MySQL](optimizations/mysql.md), and [SQL Server](optimizations/microsoft-sql.md) pages describe. [`from_hydrolix`](operators/from_hydrolix.md) still sends filters that Tenzir evaluates again, and a limit only if every filter before it went into the query.
+In table mode, the operator hands the database the operators that follow it, as our [ClickHouse](optimizations/clickhouse.md), [DuckDB](optimizations/duckdb.md), [MySQL](optimizations/mysql.md), and [SQL Server](optimizations/microsoft-sql.md) pages describe.
+
+[`from_hydrolix`](operators/from_hydrolix.md) follows the rules of [`from_clickhouse`](operators/from_clickhouse.md).
 
 ## SentinelOne
 
@@ -182,7 +251,8 @@ Our [SentinelOne optimization reference](optimizations/sentinelone.md) lists the
 
 [`from_microsoft_defender`](operators/from_microsoft_defender.md) and [`from_azure_log_analytics`](operators/from_azure_log_analytics.md) run a KQL query that you write, and hand the service the operators that follow by appending KQL stages to it, which apply to the table that your query returns and run with KQL’s semantics. Your query text stays as is:
 
-* **Filters** become `where` stages, **projections** `project` and `project-away`, and **summaries, sorts, and limits** `summarize`, `sort`, and `take`.
+* **Filters** become `where` stages, **projections** `project` and `project-away`, and **summaries, sorts, and limits** `summarize`, `sort`, and `take`. A summary of computed values starts with an `extend`.
+* **Projections with `pushdown=false`:** the operator appends the `project` also then, so that the service returns only the fields that the pipeline reads, while every operator stays in Tenzir.
 * **Missing columns and types:** the operator knows neither the columns nor the types of your query’s output before it runs, so a stage that names a column that your query doesn’t return, or that KQL rejects for its type, fails the query with the service’s error.
 * **The time window** never narrows, since a time field in your query’s output need not refer to the time that `start` and `end` select.
 
@@ -194,14 +264,74 @@ Our [KQL optimization reference](optimizations/kql.md) lists the operators that 
 
 * **Filters** become `where` stages. With `index`, the filters right after the operator extend the base `search` command where it can spell them, which matches strings without regard to case and lets Splunk use its indexes.
 * **Projections** become a `fields` stage. Without one, the operator appends `fields *`, since Splunk otherwise returns only the fields that the search references.
-* **Summaries, sorts, and limits** become `stats`, `sort`, and `head`.
+* **Summaries, sorts, and limits** become `stats`, `sort`, and `head`. A summary of computed values starts with an `eval`.
 * **The time window** narrows with `index` from comparisons of `_time`, when `earliest` and `latest` are absolute.
 
 Our [SPL optimization reference](optimizations/spl.md) lists the operators that Splunk takes over and how its semantics differ.
 
+## API sources
+
+[`from_microsoft_graph`](operators/from_microsoft_graph.md), [`from_amazon_cloudwatch`](operators/from_amazon_cloudwatch.md), and [`from_microsoft_365_activity`](operators/from_microsoft_365_activity.md) hand their APIs the operators that follow, as far as the request parameters can express them:
+
+* **Microsoft Graph** turns a [`where`](operators/where.md) into a `$filter` only where it documents `$filter` support, since it may silently ignore a query parameter that it does not support. A [`select`](operators/select.md) becomes a `$select`, and a [`head`](operators/head.md) stops paging. Our [Microsoft Graph page](optimizations/microsoft-graph.md) lists the details.
+* **CloudWatch Logs** turns phrases in `message` into filter patterns, and times and stream names into its request window and streams. Our [CloudWatch Logs page](optimizations/cloudwatch.md) lists the details.
+* **The Activity API** returns whole blobs, so filters on their metadata skip downloads and keep TQL semantics, and comparisons of `content_created` narrow the time range of a bounded read, as the [operator reference](operators/from_microsoft_365_activity.md#optimizations) describes.
+
+[`from_velociraptor`](operators/from_velociraptor.md) takes over nothing, since a VQL query may have effects that a filter or a limit would change.
+
 ## Filters by database
 
 Each database takes over the filters that it can spell, and runs them with its own semantics. The pages on [ClickHouse](optimizations/clickhouse.md#filters), [DuckDB](optimizations/duckdb.md#filters), [MySQL](optimizations/mysql.md#filters), and [SQL Server](optimizations/microsoft-sql.md#filters) list them.
+
+## Time windows
+
+[`from_splunk`](operators/from_splunk.md) with `index`, [`from_sentinelone_data_lake`](operators/from_sentinelone_data_lake.md) without `query`, [`from_amazon_cloudwatch`](operators/from_amazon_cloudwatch.md), and [`from_microsoft_365_activity`](operators/from_microsoft_365_activity.md) narrow the time range of their request to the comparisons of a time in the filters after them. They share one reading of these filters:
+
+| Filter                                         | Window                                                                                     |
+| ---------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| `>=`, `<=`, and `==` with a time               | Includes the time                                                                          |
+| `>` and `<` with a time                        | Excludes the time, so the window moves by 1 ns                                             |
+| A strict comparison beyond the range of a time | Empty window, so the read completes without a request, unless a summary still yields a row |
+| `and` of comparisons                           | The intersection of their windows                                                          |
+| `or` of comparisons                            | The range that encloses their windows                                                      |
+
+Each source then rounds the window to the units of its request. A strict bound now excludes its time, so `from_splunk` requests `latest_time=1735689720`, and not `1735689721`, for `where _time < 2025-01-01T00:02:00Z`. [`from_microsoft_365_activity`](operators/from_microsoft_365_activity.md) also narrows the listing to the range that encloses an `or`, such as for `where microsoft_365_activity.content_created >= 2024-01-02 or microsoft_365_activity.content_created == 2024-01-01`, and narrows the side of an `==` that it can represent. The comparisons always stay in the pipeline or the request, so the window never changes the result.
+
+## Diagnostics
+
+A source tells you when its target did not compute the operators that it took over like Tenzir would:
+
+| Situation                                              | Diagnostic                                                                                                                                                                      |
+| ------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| The target rejects the request                         | The target’s error, with the note `<target> computes the stages that the operator took over with its own semantics` and the hint ``use `pushdown=false` to run them in Tenzir`` |
+| The source cannot plan the operators for what it reads | The error `<target> cannot compute the stages that the operator took over`, with the reason as note and the same hint                                                           |
+
+The first case adds the note and the hint only if the source took over operators. A source that took over none, such as with `pushdown=false`, shows the error of the target alone. For example, DuckDB rejects the filter of
+
+```tql
+from_duckdb "events.duckdb", table="keyed"
+where n == "many"
+```
+
+since it cannot cast the string to the type of the column:
+
+```text
+error: Conversion Error: Could not convert string 'many' to INT32
+
+
+LINE 1: SELECT * FROM "keyed" WHERE ("n" = 'many')
+                                           ^^^^^^^
+  = note: DuckDB computes the stages that the operator took over with its own semantics
+  = hint: use `pushdown=false` to run them in Tenzir
+```
+
+The second case arises for sources that learn about the target when the pipeline runs, such as the columns of a ClickHouse table:
+
+```text
+error: ClickHouse cannot compute the stages that the operator took over
+  = note: cannot bind `al`: `al` is an `ALIAS` column, which `SELECT *` includes only depending on the session's settings
+  = hint: use `pushdown=false` to run them in Tenzir
+```
 
 ## Verify an optimization
 
@@ -211,4 +341,6 @@ To see which hints an operator received, print the optimized pipeline:
 tenzir --dump-opt-ir 'from_mysql table="logins" | where user == "admin" | head 10'
 ```
 
-The operator shows the accepted predicates as `filter`, the limit as `limit`, the projection as `projection`, and a summary that it computes as `aggregation`, and the [`where`](operators/where.md) or [`summarize`](operators/summarize.md) that it took over no longer appears. [`from_duckdb`](operators/from_duckdb.md), [`from_mysql`](operators/from_mysql.md), [`from_microsoft_sql`](operators/from_microsoft_sql.md), and [`from_splunk`](operators/from_splunk.md) list the operators that they took over as `plan`, and the reason why they took over no more as `declined`. The [compilation output guide](../guides/troubleshooting/inspect-compilation-output.md) explains the format. To see the query that a database source sends, look it up in the database’s own query log.
+The operator shows the accepted predicates as `filter`, the limit as `limit`, the projection as `projection`, and a summary that it computes as `aggregation`, and the [`where`](operators/where.md) or [`summarize`](operators/summarize.md) that it took over no longer appears. [`from_duckdb`](operators/from_duckdb.md), [`from_mysql`](operators/from_mysql.md),
+
+[`from_microsoft_sql`](operators/from_microsoft_sql.md), and [`from_splunk`](operators/from_splunk.md) list the operators that they took over as `plan`, and the reason why they took over no more as `declined`. To see the query that a database source sends, look it up in the database’s own query log.

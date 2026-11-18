@@ -1,7 +1,7 @@
 ---
 title: "Convert data formats"
-canonical: https://tenzir.com/docs/v6.22.0/guides/shape/convert-data-formats
-source: https://tenzir.com/docs/v6.22.0/guides/shape/convert-data-formats.md
+canonical: https://tenzir.com/docs/guides/shape/convert-data-formats
+source: https://tenzir.com/docs/guides/shape/convert-data-formats.md
 section: "Docs"
 ---
 

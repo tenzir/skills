@@ -1,7 +1,7 @@
 ---
 title: "taste"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/taste
-source: https://tenzir.com/docs/v6.22.0/reference/operators/taste.md
+canonical: https://tenzir.com/docs/reference/operators/taste
+source: https://tenzir.com/docs/reference/operators/taste.md
 section: "Docs"
 ---
 
@@ -45,6 +45,4 @@ taste 1
 
 ## See Also
 
-* [`export`](export.md)
 * [`head`](head.md)
-* [Quickstart](../../guides/quickstart.md)

@@ -1,7 +1,7 @@
 ---
 title: "from_azure_blob_storage"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/from_azure_blob_storage
-source: https://tenzir.com/docs/v6.22.0/reference/operators/from_azure_blob_storage.md
+canonical: https://tenzir.com/docs/reference/operators/from_azure_blob_storage
+source: https://tenzir.com/docs/reference/operators/from_azure_blob_storage.md
 section: "Docs"
 ---
 
@@ -101,7 +101,7 @@ from_file "/data/*.json" {
 
 ### Parallelism
 
-When you enable [parallelism](../../guides/node-setup/tune-performance.md#parallelism), each file is read by exactly one operator instance. The number of files read at the same time is therefore at most the degree of parallelism, and never more than the number of matched files. Events from different files interleave in the output.
+When you enable [parallelism](../../explanations/executor.md#parallel-execution), each file is read by exactly one operator instance. The number of files read at the same time is therefore at most the degree of parallelism, and never more than the number of matched files. Events from different files interleave in the output.
 
 ## Examples
 
@@ -162,6 +162,6 @@ from_azure_blob_storage "abfs://data/**.json" {
 * [`from_azure_blob_storage`](from_azure_blob_storage.md)
 * [`to_azure_blob_storage`](to_azure_blob_storage.md)
 * [Azure Authentication](../azure-authentication.md)
-* [Azure blob storage](https://tenzir.com/integrations/microsoft/azure-blob-storage)
+* [Azure blob storage](https://tenzir.com/product/integrations/microsoft/azure-blob-storage)
 
 Parallelizable: a parallel pipeline may run this operator on several cores at once.

@@ -1,8 +1,8 @@
 ---
 title: "Find unseen and rare values"
 description: "Find agent operations and token ranges that do not occur in known-good history."
-canonical: https://tenzir.com/docs/v6.22.0/guides/analyze/find-unseen-and-rare-values
-source: https://tenzir.com/docs/v6.22.0/guides/analyze/find-unseen-and-rare-values.md
+canonical: https://tenzir.com/docs/guides/analyze/find-unseen-and-rare-values
+source: https://tenzir.com/docs/guides/analyze/find-unseen-and-rare-values.md
 section: "Docs"
 ---
 

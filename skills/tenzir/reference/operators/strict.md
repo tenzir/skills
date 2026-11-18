@@ -1,7 +1,7 @@
 ---
 title: "strict"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/strict
-source: https://tenzir.com/docs/v6.22.0/reference/operators/strict.md
+canonical: https://tenzir.com/docs/reference/operators/strict
+source: https://tenzir.com/docs/reference/operators/strict.md
 section: "Docs"
 ---
 

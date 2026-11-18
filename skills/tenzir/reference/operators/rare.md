@@ -1,7 +1,7 @@
 ---
 title: "rare"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/rare
-source: https://tenzir.com/docs/v6.22.0/reference/operators/rare.md
+canonical: https://tenzir.com/docs/reference/operators/rare
+source: https://tenzir.com/docs/reference/operators/rare.md
 section: "Docs"
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "count_years"
-canonical: https://tenzir.com/docs/v6.22.0/reference/functions/count_years
-source: https://tenzir.com/docs/v6.22.0/reference/functions/count_years.md
+canonical: https://tenzir.com/docs/reference/functions/count_years
+source: https://tenzir.com/docs/reference/functions/count_years.md
 section: "Docs"
 ---
 

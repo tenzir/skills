@@ -1,7 +1,7 @@
 ---
 title: "to_amazon_sqs"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/to_amazon_sqs
-source: https://tenzir.com/docs/v6.22.0/reference/operators/to_amazon_sqs.md
+canonical: https://tenzir.com/docs/reference/operators/to_amazon_sqs
+source: https://tenzir.com/docs/reference/operators/to_amazon_sqs.md
 section: "Docs"
 ---
 
@@ -65,7 +65,7 @@ See [AWS Authentication](../aws-authentication.md) for a description of every fi
 
 ## Parallelism
 
-In a [parallel pipeline](../../guides/node-setup/tune-performance.md#parallelism), each instance of `to_amazon_sqs` sends messages through its own SQS client. Standard queues give no ordering guarantee across messages, so replicating the operator weakens no guarantee that a single instance provided.
+In a [parallel pipeline](../../explanations/executor.md#parallel-execution), each instance of `to_amazon_sqs` sends messages through its own SQS client. Standard queues give no ordering guarantee across messages, so replicating the operator weakens no guarantee that a single instance provided.
 
 ## Examples
 
@@ -123,6 +123,6 @@ to_amazon_sqs "my-queue", aws_iam={
 
 * [`from_amazon_sqs`](from_amazon_sqs.md)
 * [Send to destinations](../../guides/route/send-to-destinations.md)
-* [Sqs](https://tenzir.com/integrations/amazon/sqs)
+* [Sqs](https://tenzir.com/product/integrations/amazon/sqs)
 
 Parallelizable: a parallel pipeline may run this operator on several cores at once.

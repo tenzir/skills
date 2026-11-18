@@ -1,7 +1,7 @@
 ---
 title: "deduplicate"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/deduplicate
-source: https://tenzir.com/docs/v6.22.0/reference/operators/deduplicate.md
+canonical: https://tenzir.com/docs/reference/operators/deduplicate
+source: https://tenzir.com/docs/reference/operators/deduplicate.md
 section: "Docs"
 ---
 
@@ -62,7 +62,7 @@ When specified, adds a field to each output event containing the number of event
 
 ### Parallelism
 
-When you enable [parallelism](../../guides/node-setup/tune-performance.md#parallelism), Tenzir can run `deduplicate` on several cores at once. It partitions the input by `keys`, or by the entire event when you omit them, which caps the number of instances at `limit_partitions`, four by default.
+When you enable [parallelism](../../explanations/executor.md#parallel-execution), Tenzir can run `deduplicate` on several cores at once. It partitions the input by `keys`, or by the entire event when you omit them, which caps the number of instances at `limit_partitions`, four by default.
 
 Setting `distance` keeps `deduplicate` on a single instance, because the distance counts events in arrival order.
 

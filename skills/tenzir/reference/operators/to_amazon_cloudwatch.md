@@ -1,7 +1,7 @@
 ---
 title: "to_amazon_cloudwatch"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/to_amazon_cloudwatch
-source: https://tenzir.com/docs/v6.22.0/reference/operators/to_amazon_cloudwatch.md
+canonical: https://tenzir.com/docs/reference/operators/to_amazon_cloudwatch
+source: https://tenzir.com/docs/reference/operators/to_amazon_cloudwatch.md
 section: "Docs"
 ---
 
@@ -135,7 +135,7 @@ For HTTP ingestion methods, the operator skips individual events larger than 256
 
 ## Parallelism
 
-In a [parallel pipeline](../../guides/node-setup/tune-performance.md#parallelism), each instance of `to_amazon_cloudwatch` sends log events through its own CloudWatch client. Concurrent writers to the same log stream are safe, but events from different instances may interleave out of the pipeline’s event order. CloudWatch sorts log events by timestamp, but when multiple events have the same timestamp, concurrent requests can affect their retrieval order.
+In a [parallel pipeline](../../explanations/executor.md#parallel-execution), each instance of `to_amazon_cloudwatch` sends log events through its own CloudWatch client. Concurrent writers to the same log stream are safe, but events from different instances may interleave out of the pipeline’s event order. CloudWatch sorts log events by timestamp, but when multiple events have the same timestamp, concurrent requests can affect their retrieval order.
 
 ## Examples
 
@@ -185,6 +185,6 @@ to_amazon_cloudwatch "/tenzir/events",
 ## See Also
 
 * [`from_amazon_cloudwatch`](from_amazon_cloudwatch.md)
-* [Cloudwatch](https://tenzir.com/integrations/amazon/cloudwatch)
+* [Cloudwatch](https://tenzir.com/product/integrations/amazon/cloudwatch)
 
 Parallelizable: a parallel pipeline may run this operator on several cores at once.

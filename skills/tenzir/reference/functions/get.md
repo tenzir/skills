@@ -1,7 +1,7 @@
 ---
 title: "get"
-canonical: https://tenzir.com/docs/v6.22.0/reference/functions/get
-source: https://tenzir.com/docs/v6.22.0/reference/functions/get.md
+canonical: https://tenzir.com/docs/reference/functions/get
+source: https://tenzir.com/docs/reference/functions/get.md
 section: "Docs"
 ---
 

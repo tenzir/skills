@@ -1,7 +1,7 @@
 ---
 title: "blob"
-canonical: https://tenzir.com/docs/v6.22.0/reference/functions/blob
-source: https://tenzir.com/docs/v6.22.0/reference/functions/blob.md
+canonical: https://tenzir.com/docs/reference/functions/blob
+source: https://tenzir.com/docs/reference/functions/blob.md
 section: "Docs"
 ---
 

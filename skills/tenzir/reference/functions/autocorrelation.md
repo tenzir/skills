@@ -1,7 +1,7 @@
 ---
 title: "autocorrelation"
-canonical: https://tenzir.com/docs/v6.22.0/reference/functions/autocorrelation
-source: https://tenzir.com/docs/v6.22.0/reference/functions/autocorrelation.md
+canonical: https://tenzir.com/docs/reference/functions/autocorrelation
+source: https://tenzir.com/docs/reference/functions/autocorrelation.md
 section: "Docs"
 ---
 

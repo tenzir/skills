@@ -1,7 +1,7 @@
 ---
 title: "accept_otlp"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/accept_otlp
-source: https://tenzir.com/docs/v6.22.0/reference/operators/accept_otlp.md
+canonical: https://tenzir.com/docs/reference/operators/accept_otlp
+source: https://tenzir.com/docs/reference/operators/accept_otlp.md
 section: "Docs"
 ---
 
@@ -147,8 +147,6 @@ The `client_ca` and `require_client_cert` options are only valid for operators t
 
 Any value not specified in the record will either be picked up from the configuration or if not configured will not be used by the operator.
 
-See the [Node TLS Setup guide](../../guides/node-setup/configure-tls.md) for more details.
-
 OTLP/gRPC supports server certificates and mTLS. It rejects `tls.min_version`, `tls.ciphers`, and password-protected private keys because the supported gRPC API can’t configure them per listener.
 
 ## HTTP protocol
@@ -268,4 +266,4 @@ Configure OpenTelemetry SDKs or the OpenTelemetry Collector to use `http/protobu
 ## See also
 
 * [Get data from the network](../../guides/collect/get-data-from-the-network.md)
-* [Http](https://tenzir.com/integrations/http)
+* [Http](https://tenzir.com/product/integrations/http)

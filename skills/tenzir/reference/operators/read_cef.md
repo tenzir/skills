@@ -1,7 +1,7 @@
 ---
 title: "read_cef"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/read_cef
-source: https://tenzir.com/docs/v6.22.0/reference/operators/read_cef.md
+canonical: https://tenzir.com/docs/reference/operators/read_cef
+source: https://tenzir.com/docs/reference/operators/read_cef.md
 section: "Docs"
 ---
 
@@ -168,4 +168,4 @@ When you provide a `schema` or `selector`, the last value of a repeated key wins
 * [`read_leef`](read_leef.md)
 * [`parse_cef`](../functions/parse_cef.md)
 * [`print_cef`](../functions/print_cef.md)
-* [Syslog](https://tenzir.com/integrations/syslog)
+* [Syslog](https://tenzir.com/product/integrations/syslog)

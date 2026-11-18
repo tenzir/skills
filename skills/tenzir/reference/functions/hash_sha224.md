@@ -1,7 +1,7 @@
 ---
 title: "hash_sha224"
-canonical: https://tenzir.com/docs/v6.22.0/reference/functions/hash_sha224
-source: https://tenzir.com/docs/v6.22.0/reference/functions/hash_sha224.md
+canonical: https://tenzir.com/docs/reference/functions/hash_sha224
+source: https://tenzir.com/docs/reference/functions/hash_sha224.md
 section: "Docs"
 ---
 

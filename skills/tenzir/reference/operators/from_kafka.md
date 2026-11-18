@@ -1,7 +1,7 @@
 ---
 title: "from_kafka"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/from_kafka
-source: https://tenzir.com/docs/v6.22.0/reference/operators/from_kafka.md
+canonical: https://tenzir.com/docs/reference/operators/from_kafka
+source: https://tenzir.com/docs/reference/operators/from_kafka.md
 section: "Docs"
 ---
 
@@ -123,7 +123,7 @@ TLS settings for registry requests, using the same client TLS options as [`from_
 
 ## Parallelism
 
-In a [parallel pipeline](../../guides/node-setup/tune-performance.md#parallelism), every instance of `from_kafka` joins the same consumer group. The broker splits the subscribed partitions among the instances, so only one instance reads a given partition at a time. Delivery stays at-least-once: a partition that moves between instances can replay messages that no instance committed yet.
+In a [parallel pipeline](../../explanations/executor.md#parallel-execution), every instance of `from_kafka` joins the same consumer group. The broker splits the subscribed partitions among the instances, so only one instance reads a given partition at a time. Delivery stays at-least-once: a partition that moves between instances can replay messages that no instance committed yet.
 
 The topic’s partition count therefore caps how far the operator scales. Kafka assigns a partition to exactly one member of a group, so instances beyond the partition count receive an empty assignment and finish immediately. Reading a single-partition topic runs on one core no matter which degree you ask for. To read a topic with more parallelism, raise its partition count.
 
@@ -135,7 +135,7 @@ The operator falls back to a single instance when an argument ties the run to on
 
 ## Amazon MSK
 
-The operator supports [Amazon MSK](https://tenzir.com/integrations/amazon/msk) with IAM authentication.
+The operator supports [Amazon MSK](https://tenzir.com/product/integrations/amazon/msk) with IAM authentication.
 
 ### `aws_iam = record (optional)`
 
@@ -198,6 +198,6 @@ from_kafka "^tenant-.*\\.alerts$", offset="beginning"
 ## See Also
 
 * [`to_kafka`](to_kafka.md)
-* [Kafka](https://tenzir.com/integrations/kafka)
+* [Kafka](https://tenzir.com/product/integrations/kafka)
 
 Parallelizable: a parallel pipeline may run this operator on several cores at once.

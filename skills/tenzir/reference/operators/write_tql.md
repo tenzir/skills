@@ -1,7 +1,7 @@
 ---
 title: "write_tql"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/write_tql
-source: https://tenzir.com/docs/v6.22.0/reference/operators/write_tql.md
+canonical: https://tenzir.com/docs/reference/operators/write_tql
+source: https://tenzir.com/docs/reference/operators/write_tql.md
 section: "Docs"
 ---
 

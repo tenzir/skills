@@ -1,7 +1,7 @@
 ---
 title: "accept_splunk"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/accept_splunk
-source: https://tenzir.com/docs/v6.22.0/reference/operators/accept_splunk.md
+canonical: https://tenzir.com/docs/reference/operators/accept_splunk
+source: https://tenzir.com/docs/reference/operators/accept_splunk.md
 section: "Docs"
 ---
 
@@ -104,8 +104,6 @@ The `client_ca` and `require_client_cert` options are only valid for operators t
 
 Any value not specified in the record will either be picked up from the configuration or if not configured will not be used by the operator.
 
-See the [Node TLS Setup guide](../../guides/node-setup/configure-tls.md) for more details.
-
 ## Output
 
 Event requests emit one `splunk.hec.event` event for each HEC envelope. The `time` field accepts a numeric epoch or an epoch in a string. The operator preserves the envelope, including unknown top-level metadata, and adds the client address and optional HEC channel under `receiver`:
@@ -183,4 +181,4 @@ publish "splunk"
 
 ## See also
 
-* [Splunk](https://tenzir.com/integrations/splunk)
+* [Splunk](https://tenzir.com/product/integrations/splunk)

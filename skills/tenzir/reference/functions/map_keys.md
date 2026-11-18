@@ -1,7 +1,7 @@
 ---
 title: "map_keys"
-canonical: https://tenzir.com/docs/v6.22.0/reference/functions/map_keys
-source: https://tenzir.com/docs/v6.22.0/reference/functions/map_keys.md
+canonical: https://tenzir.com/docs/reference/functions/map_keys
+source: https://tenzir.com/docs/reference/functions/map_keys.md
 section: "Docs"
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "ocsf_compact"
-canonical: https://tenzir.com/docs/v6.22.0/reference/functions/ocsf_compact
-source: https://tenzir.com/docs/v6.22.0/reference/functions/ocsf_compact.md
+canonical: https://tenzir.com/docs/reference/functions/ocsf_compact
+source: https://tenzir.com/docs/reference/functions/ocsf_compact.md
 section: "Docs"
 ---
 
@@ -177,5 +177,4 @@ this = ocsf_derive(this)
 
 * [`ocsf_derive`](ocsf_derive.md)
 * [`ocsf_cast`](ocsf_cast.md)
-* [`ocsf_derive`](../operators/ocsf_derive.md)
 * [Map to OCSF](../../guides/normalize/map-to-ocsf.md)

@@ -1,7 +1,7 @@
 ---
 title: "internal_memory_size"
-canonical: https://tenzir.com/docs/v6.22.0/reference/functions/internal_memory_size
-source: https://tenzir.com/docs/v6.22.0/reference/functions/internal_memory_size.md
+canonical: https://tenzir.com/docs/reference/functions/internal_memory_size
+source: https://tenzir.com/docs/reference/functions/internal_memory_size.md
 section: "Docs"
 ---
 

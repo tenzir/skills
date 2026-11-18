@@ -1,7 +1,7 @@
 ---
 title: "mean"
-canonical: https://tenzir.com/docs/v6.22.0/reference/functions/mean
-source: https://tenzir.com/docs/v6.22.0/reference/functions/mean.md
+canonical: https://tenzir.com/docs/reference/functions/mean
+source: https://tenzir.com/docs/reference/functions/mean.md
 section: "Docs"
 ---
 
@@ -46,5 +46,4 @@ summarize avg=mean(x)
 * [`sum`](sum.md)
 * [`variance`](variance.md)
 * [Aggregate event streams](../../guides/analyze/aggregate-event-streams.md)
-* [Plot data with charts](../../tutorials/plot-data-with-charts.md)
 * [Learn idiomatic TQL](../../tutorials/learn-idiomatic-tql.md)

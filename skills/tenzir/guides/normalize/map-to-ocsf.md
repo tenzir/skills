@@ -1,7 +1,7 @@
 ---
 title: "Map to OCSF"
-canonical: https://tenzir.com/docs/v6.22.0/guides/normalize/map-to-ocsf
-source: https://tenzir.com/docs/v6.22.0/guides/normalize/map-to-ocsf.md
+canonical: https://tenzir.com/docs/guides/normalize/map-to-ocsf
+source: https://tenzir.com/docs/guides/normalize/map-to-ocsf.md
 section: "Docs"
 ---
 
@@ -17,13 +17,13 @@ Want the full walkthrough?
 
 ## Use the OCSF skill
 
-Install the `tenzir-ocsf` skill when you want an agent to help with OCSF schema decisions. See [Use agent skills](../ai-workbench/use-agent-skills.md#use-the-ocsf-skill) for installation and usage examples.
+Install the `tenzir-ocsf` skill when you want an agent to help with OCSF schema decisions. See [Use agent skills](https://tenzir.com/docs/guides/ai-workbench/use-agent-skills#use-the-ocsf-skill) for installation and usage examples.
 
 Ask the agent to choose the OCSF version, event class, and profiles before it maps attributes. OCSF mappings should produce the required classification and occurrence attributes first, then add primary, context, and profile-specific attributes.
 
 ## Write the OCSF mapping
 
-Mappings live in packages as operators. The tutorial linked above walks through one from a structured source event to a tested operator, and our guide on [adding operators](../packages/add-operators.md) covers arguments and operator hierarchies. The rest of this guide covers the decisions that are specific to OCSF.
+Mappings live in packages as operators. The tutorial linked above walks through one from a structured source event to a tested operator, and our guide on [adding operators](../manage-packages.md) covers arguments and operator hierarchies. The rest of this guide covers the decisions that are specific to OCSF.
 
 ### Key principles
 
@@ -39,9 +39,9 @@ OCSF mapping is a bipartite graph transformation: source fields form one vertex 
 
 Put the target schema first in mapping namespaces, and let the vendor that owns a schema host the mappers into it. Source-to-OCSF packages use `paloalto::ngfw::ocsf::map`, while the mappers out of OCSF live with their target: `splunk::cim::ocsf::map` for Splunk CIM and `microsoft::asim::ocsf::map` for Microsoft Sentinel ASIM.
 
-A product with several event types needs a dispatcher that routes each recognized event type to an operator under `ocsf/events/` and falls back to the OCSF Base Event. Our tutorial on [creating the mapper](../../tutorials/onboard-a-data-source.md#create-the-mapper) shows that hierarchy together with the normalizer that wraps it, and our guide on [testing packages](../packages/test-packages.md) covers the tests and baselines that go with it.
+A product with several event types needs a dispatcher that routes each recognized event type to an operator under `ocsf/events/` and falls back to the OCSF Base Event. Our tutorial on [creating the mapper](../../tutorials/onboard-a-data-source.md#create-the-mapper) shows that hierarchy together with the normalizer that wraps it, and our guide on [testing packages](../write-tests.md) covers the tests and baselines that go with it.
 
-How much of that hierarchy a package needs depends on its source. The [`amazon` package](https://tenzir.com/docs/v6.22.0/packages/amazon/operators/vpc_flow/ocsf/map.tql) owns the parsing and ships a normalizer, because VPC Flow Logs have no built-in reader. A source that Tenzir reads natively, such as Zeek through [`read_zeek_tsv`](../../reference/operators/read_zeek_tsv.md) or [`read_zeek_json`](../../reference/operators/read_zeek_json.md), needs neither: its package starts at the mapper and dispatches on the log type.
+How much of that hierarchy a package needs depends on its source. The [`amazon` package](https://tenzir.com/docs/packages/amazon/operators/vpc_flow/ocsf/map.tql) owns the parsing and ships a normalizer, because VPC Flow Logs have no built-in reader. A source that Tenzir reads natively, such as Zeek through [`read_zeek_tsv`](../../reference/operators/read_zeek_tsv.md) or [`read_zeek_json`](../../reference/operators/read_zeek_json.md), needs neither: its package starts at the mapper and dispatches on the log type.
 
 ## Use native OCSF functions
 
@@ -54,7 +54,7 @@ Tenzir ships functions for completing, validating, and reducing OCSF events:
 
 A mapper returns minimal OCSF. Which of these functions run afterwards is a decision of each pipeline, not part of the mapping.
 
-The [`ocsf_cast`](../../reference/functions/ocsf_cast.md) function is the schema validation gate. Call it in the package tests, as our guide on [testing packages](../packages/test-packages.md#pin-the-output-schema) shows: your mapping is complete when the tests no longer emit warnings. In a pipeline, cast only when a downstream system needs the exact schema types, and use options such as `null_fill=true`, `encode_variants=true`, or `timestamp_to_ms=true` only when it requires those output shapes or physical representations.
+The [`ocsf_cast`](../../reference/functions/ocsf_cast.md) function is the schema validation gate. Call it in the package tests, as our guide on [testing packages](../write-tests.md#pin-the-output-schema) shows: your mapping is complete when the tests no longer emit warnings. In a pipeline, cast only when a downstream system needs the exact schema types, and use options such as `null_fill=true`, `encode_variants=true`, or `timestamp_to_ms=true` only when it requires those output shapes or physical representations.
 
 The [`ocsf_derive`](../../reference/functions/ocsf_derive.md) function expands an event for consumers that expect the full set of enum fields. It computes `category_uid` and `type_uid` from `class_uid` and `activity_id`, and fills enum siblings such as `activity_name`, `category_name`, and `severity` from their numeric identifiers. It also works in the other direction when a mapping starts with a string sibling. Call it where you deliver events to such consumers:
 
@@ -129,7 +129,7 @@ They also make a mapping readable in the other direction. Writing `where class_u
 
 * [Model detections in OCSF](../detect/model-detections-in-ocsf.md)
 * [Clean up values](../parse/clean-up-values.md)
-* [Use agent skills](../ai-workbench/use-agent-skills.md#use-the-ocsf-skill)
+* [Use agent skills](https://tenzir.com/docs/guides/ai-workbench/use-agent-skills#use-the-ocsf-skill)
 * [Map to ASIM](map-to-asim.md)
 * [Map to CIM](map-to-cim.md)
 * [Map to ECS](map-to-ecs.md)

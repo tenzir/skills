@@ -1,7 +1,7 @@
 ---
 title: "from_microsoft_defender"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/from_microsoft_defender
-source: https://tenzir.com/docs/v6.22.0/reference/operators/from_microsoft_defender.md
+canonical: https://tenzir.com/docs/reference/operators/from_microsoft_defender
+source: https://tenzir.com/docs/reference/operators/from_microsoft_defender.md
 section: "Docs"
 ---
 
@@ -81,13 +81,13 @@ TLS configuration, with the same behavior as [`from_microsoft_graph`](from_micro
 
 ### `pushdown = bool` (optional)
 
-Whether Defender takes over the operators that follow the operator. With `pushdown=false`, they stay in the pipeline and run with TQL semantics, and the operator sends your query exactly as written. See [Optimizations](from_microsoft_defender.md#optimizations).
+Whether Defender takes over the operators that follow the operator. With `pushdown=false`, they stay in the pipeline and run with TQL semantics, and the operator only appends a `project` of the fields that they read to your query. See [Optimizations](from_microsoft_defender.md#optimizations).
 
 Defaults to `true`.
 
 ## Optimizations
 
-The operator hands Defender the operators that follow it, as far as KQL can spell them, by appending stages to your query: [`where`](where.md), [`select`](select.md), [`drop`](drop.md), [`summarize`](summarize.md) with `count()`, `count(x)`, `min`, `max`, and `sum`, including [`top`](top.md) and [`rare`](rare.md), [`sort`](sort.md), and [`head`](head.md). Those operators leave the pipeline and run with KQL’s semantics, which can differ from TQL. For example, a field that your query doesn’t return fails the query, and strings are never `null`. The stages apply to the table that your query returns, and your query text stays as is. Without a [`select`](select.md) or [`summarize`](summarize.md), a final `project` keeps the fields that the pipeline reads, and a field that your query doesn’t return becomes `null`. Use `pushdown=false` to keep every operator in the pipeline.
+The operator hands Defender the operators that follow it, as far as KQL can spell them, by appending stages to your query: [`where`](where.md), [`select`](select.md), [`drop`](drop.md), [`summarize`](summarize.md) with `count()`, `count(x)`, `min`, `max`, and `sum`, including [`top`](top.md) and [`rare`](rare.md), [`sort`](sort.md), and [`head`](head.md). Those operators leave the pipeline and run with KQL’s semantics, which can differ from TQL. For example, a field that your query doesn’t return fails the query, and strings are never `null`. The stages apply to the table that your query returns, and your query text stays as is. Without a [`select`](select.md) or [`summarize`](summarize.md), a final `project` keeps the fields that the pipeline reads, and a field that your query doesn’t return becomes `null`, also with `pushdown=false`. Use `pushdown=false` to keep every operator in the pipeline.
 
 Defender returns at most 100,000 rows of a query without reporting a truncation, so the operator warns when a result has exactly that many rows, unless a [`head`](head.md) that Defender took over explains it.
 
@@ -127,4 +127,4 @@ Microsoft also describes [advanced hunting with connected Sentinel data](https:/
 
 ## See also
 
-[Defender](https://tenzir.com/integrations/microsoft/defender)
+[Defender](https://tenzir.com/product/integrations/microsoft/defender)

@@ -1,7 +1,7 @@
 ---
 title: "decapsulate"
-canonical: https://tenzir.com/docs/v6.22.0/reference/functions/decapsulate
-source: https://tenzir.com/docs/v6.22.0/reference/functions/decapsulate.md
+canonical: https://tenzir.com/docs/reference/functions/decapsulate
+source: https://tenzir.com/docs/reference/functions/decapsulate.md
 section: "Docs"
 ---
 

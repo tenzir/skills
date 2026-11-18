@@ -1,7 +1,7 @@
 ---
 title: "AWS Authentication"
-canonical: https://tenzir.com/docs/v6.22.0/reference/aws-authentication
-source: https://tenzir.com/docs/v6.22.0/reference/aws-authentication.md
+canonical: https://tenzir.com/docs/reference/aws-authentication
+source: https://tenzir.com/docs/reference/aws-authentication.md
 section: "Docs"
 ---
 
@@ -169,9 +169,9 @@ The role’s trust policy must allow your active principal (for example an EC2 i
 * [`to_s3`](operators/to_s3.md)
 * [`to_amazon_sqs`](operators/to_amazon_sqs.md)
 * [Azure Authentication](azure-authentication.md)
-* [Cloudwatch](https://tenzir.com/integrations/amazon/cloudwatch)
-* [Glue](https://tenzir.com/integrations/amazon/glue)
-* [Msk](https://tenzir.com/integrations/amazon/msk)
-* [S3](https://tenzir.com/integrations/amazon/s3)
-* [Security lake](https://tenzir.com/integrations/amazon/security-lake)
-* [Sqs](https://tenzir.com/integrations/amazon/sqs)
+* [Cloudwatch](https://tenzir.com/product/integrations/amazon/cloudwatch)
+* [Glue](https://tenzir.com/product/integrations/amazon/glue)
+* [Msk](https://tenzir.com/product/integrations/amazon/msk)
+* [S3](https://tenzir.com/product/integrations/amazon/s3)
+* [Security lake](https://tenzir.com/product/integrations/amazon/security-lake)
+* [Sqs](https://tenzir.com/product/integrations/amazon/sqs)

@@ -1,7 +1,7 @@
 ---
 title: "read_parquet"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/read_parquet
-source: https://tenzir.com/docs/v6.22.0/reference/operators/read_parquet.md
+canonical: https://tenzir.com/docs/reference/operators/read_parquet
+source: https://tenzir.com/docs/reference/operators/read_parquet.md
 section: "Docs"
 ---
 
@@ -12,7 +12,7 @@ section: "Docs"
 Reads events from a Parquet byte stream.
 
 ```tql
-read_parquet [encryption_key=secret]
+read_parquet [encryption_key=secret, decimal_format=string]
 ```
 
 ## Description
@@ -34,6 +34,15 @@ When you supply this argument, the reader rejects plaintext files and reports an
 Encrypted files written by DuckDB 1.5.6 are incompatible with this reader. DuckDB can read encrypted files written by Tenzir.
 
 Decryption works with both buffered byte streams and seekable files, including S3 range reads, projection, filtering, and limits.
+
+### `decimal_format = string (optional)`
+
+Controls how Arrow `Decimal128` values are read:
+
+* `"string"` preserves the decimal values as strings without losing precision.
+* `"float"` converts them to floating-point numbers, which can lose precision. Decimal values in maps are unsupported in this mode.
+
+Defaults to `"string"`. The setting also applies to decimal values nested in records and lists.
 
 ## Optimizations
 
@@ -68,6 +77,14 @@ Read a Parquet file:
 ```tql
 from_file "/tmp/data.prq" {
   read_parquet
+}
+```
+
+Read decimal values as floating-point numbers when precision loss is acceptable:
+
+```tql
+from_file "/tmp/data.parquet" {
+  read_parquet decimal_format="float"
 }
 ```
 

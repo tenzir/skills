@@ -1,7 +1,7 @@
 ---
 title: "unflatten"
-canonical: https://tenzir.com/docs/v6.22.0/reference/functions/unflatten
-source: https://tenzir.com/docs/v6.22.0/reference/functions/unflatten.md
+canonical: https://tenzir.com/docs/reference/functions/unflatten
+source: https://tenzir.com/docs/reference/functions/unflatten.md
 section: "Docs"
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "Parse string fields"
-canonical: https://tenzir.com/docs/v6.22.0/guides/parse/parse-string-fields
-source: https://tenzir.com/docs/v6.22.0/guides/parse/parse-string-fields.md
+canonical: https://tenzir.com/docs/guides/parse/parse-string-fields
+source: https://tenzir.com/docs/guides/parse/parse-string-fields.md
 section: "Docs"
 ---
 

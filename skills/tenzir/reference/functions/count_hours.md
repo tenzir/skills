@@ -1,7 +1,7 @@
 ---
 title: "count_hours"
-canonical: https://tenzir.com/docs/v6.22.0/reference/functions/count_hours
-source: https://tenzir.com/docs/v6.22.0/reference/functions/count_hours.md
+canonical: https://tenzir.com/docs/reference/functions/count_hours
+source: https://tenzir.com/docs/reference/functions/count_hours.md
 section: "Docs"
 ---
 

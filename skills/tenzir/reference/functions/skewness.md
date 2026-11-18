@@ -1,7 +1,7 @@
 ---
 title: "skewness"
-canonical: https://tenzir.com/docs/v6.22.0/reference/functions/skewness
-source: https://tenzir.com/docs/v6.22.0/reference/functions/skewness.md
+canonical: https://tenzir.com/docs/reference/functions/skewness
+source: https://tenzir.com/docs/reference/functions/skewness.md
 section: "Docs"
 ---
 

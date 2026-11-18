@@ -1,7 +1,7 @@
 ---
 title: "from_mysql"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/from_mysql
-source: https://tenzir.com/docs/v6.22.0/reference/operators/from_mysql.md
+canonical: https://tenzir.com/docs/reference/operators/from_mysql
+source: https://tenzir.com/docs/reference/operators/from_mysql.md
 section: "Docs"
 ---
 
@@ -255,4 +255,4 @@ from_mysql table="events", live=true, tracking_column="event_id",
 
 * [Read from data stores](../../guides/collect/read-from-data-stores.md)
 * [`to_clickhouse`](to_clickhouse.md)
-* [Mysql](https://tenzir.com/integrations/mysql)
+* [Mysql](https://tenzir.com/product/integrations/mysql)

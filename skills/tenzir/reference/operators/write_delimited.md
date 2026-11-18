@@ -1,7 +1,7 @@
 ---
 title: "write_delimited"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/write_delimited
-source: https://tenzir.com/docs/v6.22.0/reference/operators/write_delimited.md
+canonical: https://tenzir.com/docs/reference/operators/write_delimited
+source: https://tenzir.com/docs/reference/operators/write_delimited.md
 section: "Docs"
 ---
 
@@ -89,4 +89,4 @@ ab
 * [`write_all`](write_all.md)
 * [`write_lines`](write_lines.md)
 * [`print_ndjson`](../functions/print_ndjson.md)
-* [Graylog](https://tenzir.com/integrations/graylog)
+* [Graylog](https://tenzir.com/product/integrations/graylog)

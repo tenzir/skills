@@ -1,8 +1,8 @@
 ---
 title: "Overview"
 description: "Limit sensitive-data exposure while preserving useful structure."
-canonical: https://tenzir.com/docs/v6.22.0/guides/protect
-source: https://tenzir.com/docs/v6.22.0/guides/protect.md
+canonical: https://tenzir.com/docs/guides/protect
+source: https://tenzir.com/docs/guides/protect.md
 section: "Docs"
 ---
 

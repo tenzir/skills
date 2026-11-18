@@ -1,7 +1,7 @@
 ---
 title: "top"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/top
-source: https://tenzir.com/docs/v6.22.0/reference/operators/top.md
+canonical: https://tenzir.com/docs/reference/operators/top
+source: https://tenzir.com/docs/reference/operators/top.md
 section: "Docs"
 ---
 
@@ -63,4 +63,3 @@ head 5
 * [`sort`](sort.md)
 * [`summarize`](summarize.md)
 * [Aggregate event streams](../../guides/analyze/aggregate-event-streams.md)
-* [Plot data with charts](../../tutorials/plot-data-with-charts.md)

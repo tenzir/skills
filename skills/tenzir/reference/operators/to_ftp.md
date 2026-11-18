@@ -1,7 +1,7 @@
 ---
 title: "to_ftp"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/to_ftp
-source: https://tenzir.com/docs/v6.22.0/reference/operators/to_ftp.md
+canonical: https://tenzir.com/docs/reference/operators/to_ftp
+source: https://tenzir.com/docs/reference/operators/to_ftp.md
 section: "Docs"
 ---
 
@@ -52,8 +52,6 @@ The `client_ca` and `require_client_cert` options are only valid for operators t
 
 Any value not specified in the record will either be picked up from the configuration or if not configured will not be used by the operator.
 
-See the [Node TLS Setup guide](../../guides/node-setup/configure-tls.md) for more details.
-
 ### `{ … }`
 
 A required printing subpipeline.
@@ -94,4 +92,4 @@ to_ftp "ftp://user:pass@ftp.example.org/events.ndjson.gz" {
 ## See Also
 
 * [`from_ftp`](from_ftp.md)
-* [Ftp](https://tenzir.com/integrations/ftp)
+* [Ftp](https://tenzir.com/product/integrations/ftp)

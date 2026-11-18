@@ -1,7 +1,7 @@
 ---
 title: "yara"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/yara
-source: https://tenzir.com/docs/v6.22.0/reference/operators/yara.md
+canonical: https://tenzir.com/docs/reference/operators/yara
+source: https://tenzir.com/docs/reference/operators/yara.md
 section: "Docs"
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "bit_not"
-canonical: https://tenzir.com/docs/v6.22.0/reference/functions/bit_not
-source: https://tenzir.com/docs/v6.22.0/reference/functions/bit_not.md
+canonical: https://tenzir.com/docs/reference/functions/bit_not
+source: https://tenzir.com/docs/reference/functions/bit_not.md
 section: "Docs"
 ---
 

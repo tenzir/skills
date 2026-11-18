@@ -1,7 +1,7 @@
 ---
 title: "model_divergence"
-canonical: https://tenzir.com/docs/v6.22.0/reference/functions/model_divergence
-source: https://tenzir.com/docs/v6.22.0/reference/functions/model_divergence.md
+canonical: https://tenzir.com/docs/reference/functions/model_divergence
+source: https://tenzir.com/docs/reference/functions/model_divergence.md
 section: "Docs"
 ---
 

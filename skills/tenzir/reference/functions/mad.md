@@ -1,7 +1,7 @@
 ---
 title: "mad"
-canonical: https://tenzir.com/docs/v6.22.0/reference/functions/mad
-source: https://tenzir.com/docs/v6.22.0/reference/functions/mad.md
+canonical: https://tenzir.com/docs/reference/functions/mad
+source: https://tenzir.com/docs/reference/functions/mad.md
 section: "Docs"
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "deltas"
-canonical: https://tenzir.com/docs/v6.22.0/reference/functions/deltas
-source: https://tenzir.com/docs/v6.22.0/reference/functions/deltas.md
+canonical: https://tenzir.com/docs/reference/functions/deltas
+source: https://tenzir.com/docs/reference/functions/deltas.md
 section: "Docs"
 ---
 

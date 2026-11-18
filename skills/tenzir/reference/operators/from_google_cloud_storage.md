@@ -1,7 +1,7 @@
 ---
 title: "from_google_cloud_storage"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/from_google_cloud_storage
-source: https://tenzir.com/docs/v6.22.0/reference/operators/from_google_cloud_storage.md
+canonical: https://tenzir.com/docs/reference/operators/from_google_cloud_storage
+source: https://tenzir.com/docs/reference/operators/from_google_cloud_storage.md
 section: "Docs"
 ---
 
@@ -89,7 +89,7 @@ from_file "/data/*.json" {
 
 ### Parallelism
 
-When you enable [parallelism](../../guides/node-setup/tune-performance.md#parallelism), each file is read by exactly one operator instance. The number of files read at the same time is therefore at most the degree of parallelism, and never more than the number of matched files. Events from different files interleave in the output.
+When you enable [parallelism](../../explanations/executor.md#parallel-execution), each file is read by exactly one operator instance. The number of files read at the same time is therefore at most the degree of parallelism, and never more than the number of matched files. Events from different files interleave in the output.
 
 ## Examples
 
@@ -134,6 +134,6 @@ from_google_cloud_storage "gs://security-logs/suricata/**.json" {
 
 * [`from_google_cloud_storage`](from_google_cloud_storage.md)
 * [`to_google_cloud_storage`](to_google_cloud_storage.md)
-* [Cloud storage](https://tenzir.com/integrations/google/cloud-storage)
+* [Cloud storage](https://tenzir.com/product/integrations/google/cloud-storage)
 
 Parallelizable: a parallel pipeline may run this operator on several cores at once.

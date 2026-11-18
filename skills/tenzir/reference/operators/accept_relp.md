@@ -1,7 +1,7 @@
 ---
 title: "accept_relp"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/accept_relp
-source: https://tenzir.com/docs/v6.22.0/reference/operators/accept_relp.md
+canonical: https://tenzir.com/docs/reference/operators/accept_relp
+source: https://tenzir.com/docs/reference/operators/accept_relp.md
 section: "Docs"
 ---
 
@@ -9,7 +9,7 @@ section: "Docs"
 
 > Receives Syslog messages over the Reliable Event Logging Protocol (RELP).
 
-Receives Syslog messages over the [Reliable Event Logging Protocol (RELP)](https://tenzir.com/integrations/relp).
+Receives Syslog messages over the [Reliable Event Logging Protocol (RELP)](https://tenzir.com/product/integrations/relp).
 
 ```tql
 accept_relp endpoint:string, [max_message_size=int, max_connections=int,
@@ -76,8 +76,6 @@ The `client_ca` and `require_client_cert` options are only valid for operators t
 
 Any value not specified in the record will either be picked up from the configuration or if not configured will not be used by the operator.
 
-See the [Node TLS Setup guide](../../guides/node-setup/configure-tls.md) for more details.
-
 ### `auto_detect_tls = bool (optional)`
 
 Accept plaintext and TLS RELP clients on the same endpoint. Connections that start with a TLS ClientHello use the configured TLS settings. Other connections continue as plaintext.
@@ -126,4 +124,4 @@ accept_relp "0.0.0.0:2514", tls={
 }
 ```
 
-For more TLS configuration options, see our [Configure TLS](../../guides/node-setup/configure-tls.md) guide.
+The [`tls` option](accept_relp.md#tls--record-optional) lists the other TLS fields, such as `min_version` and `ciphers`.

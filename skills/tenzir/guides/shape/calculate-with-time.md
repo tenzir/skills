@@ -1,8 +1,8 @@
 ---
 title: "Calculate with time"
 description: "Extract calendar fields, build and convert durations, perform time arithmetic, round timestamps, and produce Unix epochs"
-canonical: https://tenzir.com/docs/v6.22.0/guides/shape/calculate-with-time
-source: https://tenzir.com/docs/v6.22.0/guides/shape/calculate-with-time.md
+canonical: https://tenzir.com/docs/guides/shape/calculate-with-time
+source: https://tenzir.com/docs/guides/shape/calculate-with-time.md
 section: "Docs"
 ---
 

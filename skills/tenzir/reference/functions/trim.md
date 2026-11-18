@@ -1,7 +1,7 @@
 ---
 title: "trim"
-canonical: https://tenzir.com/docs/v6.22.0/reference/functions/trim
-source: https://tenzir.com/docs/v6.22.0/reference/functions/trim.md
+canonical: https://tenzir.com/docs/reference/functions/trim
+source: https://tenzir.com/docs/reference/functions/trim.md
 section: "Docs"
 ---
 

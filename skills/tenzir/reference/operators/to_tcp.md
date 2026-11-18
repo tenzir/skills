@@ -1,7 +1,7 @@
 ---
 title: "to_tcp"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/to_tcp
-source: https://tenzir.com/docs/v6.22.0/reference/operators/to_tcp.md
+canonical: https://tenzir.com/docs/reference/operators/to_tcp
+source: https://tenzir.com/docs/reference/operators/to_tcp.md
 section: "Docs"
 ---
 
@@ -46,8 +46,6 @@ The `client_ca` and `require_client_cert` options are only valid for operators t
 
 Any value not specified in the record will either be picked up from the configuration or if not configured will not be used by the operator.
 
-See the [Node TLS Setup guide](../../guides/node-setup/configure-tls.md) for more details.
-
 ### `max_retry_count = int (optional)`
 
 Maximum number of reconnect attempts after a failed connection. After this many consecutive failures, the operator emits an error and stops.
@@ -81,4 +79,4 @@ to_tcp "collector.example.com:5044", tls={} { write_json }
 * [`accept_tcp`](accept_tcp.md)
 * [`to_unix_socket`](to_unix_socket.md)
 * [`write_delimited`](write_delimited.md)
-* [Tcp](https://tenzir.com/integrations/tcp)
+* [Tcp](https://tenzir.com/product/integrations/tcp)

@@ -1,7 +1,7 @@
 ---
 title: "read_tql"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/read_tql
-source: https://tenzir.com/docs/v6.22.0/reference/operators/read_tql.md
+canonical: https://tenzir.com/docs/reference/operators/read_tql
+source: https://tenzir.com/docs/reference/operators/read_tql.md
 section: "Docs"
 ---
 

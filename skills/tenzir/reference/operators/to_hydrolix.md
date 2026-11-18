@@ -1,7 +1,7 @@
 ---
 title: "to_hydrolix"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/to_hydrolix
-source: https://tenzir.com/docs/v6.22.0/reference/operators/to_hydrolix.md
+canonical: https://tenzir.com/docs/reference/operators/to_hydrolix
+source: https://tenzir.com/docs/reference/operators/to_hydrolix.md
 section: "Docs"
 ---
 
@@ -146,11 +146,9 @@ The `client_ca` and `require_client_cert` options are only valid for operators t
 
 Any value not specified in the record will either be picked up from the configuration or if not configured will not be used by the operator.
 
-See the [Node TLS Setup guide](../../guides/node-setup/configure-tls.md) for more details.
-
 ## Parallelism
 
-In a [parallel pipeline](../../guides/node-setup/tune-performance.md#parallelism), each instance of `to_hydrolix` batches its own events and sends them over its own connections. Because `parallel` bounds the requests in flight within one instance, the pipeline-wide bound is `parallel` times the number of instances.
+In a [parallel pipeline](../../explanations/executor.md#parallel-execution), each instance of `to_hydrolix` batches its own events and sends them over its own connections. Because `parallel` bounds the requests in flight within one instance, the pipeline-wide bound is `parallel` times the number of instances.
 
 Hydrolix ingests every request on its own and gives no ordering guarantee across requests.
 
@@ -191,6 +189,6 @@ to_hydrolix "https://acme.hydrolix.live",
 ## See Also
 
 * [`from_hydrolix`](from_hydrolix.md)
-* [Hydrolix](https://tenzir.com/integrations/hydrolix)
+* [Hydrolix](https://tenzir.com/product/integrations/hydrolix)
 
 Parallelizable: a parallel pipeline may run this operator on several cores at once.

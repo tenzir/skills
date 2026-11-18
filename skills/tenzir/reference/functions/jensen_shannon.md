@@ -1,7 +1,7 @@
 ---
 title: "jensen_shannon"
-canonical: https://tenzir.com/docs/v6.22.0/reference/functions/jensen_shannon
-source: https://tenzir.com/docs/v6.22.0/reference/functions/jensen_shannon.md
+canonical: https://tenzir.com/docs/reference/functions/jensen_shannon
+source: https://tenzir.com/docs/reference/functions/jensen_shannon.md
 section: "Docs"
 ---
 

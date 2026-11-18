@@ -1,7 +1,7 @@
 ---
 title: "from_s3"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/from_s3
-source: https://tenzir.com/docs/v6.22.0/reference/operators/from_s3.md
+canonical: https://tenzir.com/docs/reference/operators/from_s3
+source: https://tenzir.com/docs/reference/operators/from_s3.md
 section: "Docs"
 ---
 
@@ -117,7 +117,7 @@ from_file "/data/*.json" {
 
 ### Parallelism
 
-When you enable [parallelism](../../guides/node-setup/tune-performance.md#parallelism), each file is read by exactly one operator instance. The number of files read at the same time is therefore at most the degree of parallelism, and never more than the number of matched files. Events from different files interleave in the output.
+When you enable [parallelism](../../explanations/executor.md#parallel-execution), each file is read by exactly one operator instance. The number of files read at the same time is therefore at most the degree of parallelism, and never more than the number of matched files. Events from different files interleave in the output.
 
 ## Examples
 
@@ -179,6 +179,6 @@ from_s3 "s3://public-bucket/zeek/**.log", anonymous=true {
 * [`from_file`](from_file.md)
 * [`from_s3`](from_s3.md)
 * [`to_s3`](to_s3.md)
-* [S3](https://tenzir.com/integrations/amazon/s3)
+* [S3](https://tenzir.com/product/integrations/amazon/s3)
 
 Parallelizable: a parallel pipeline may run this operator on several cores at once.

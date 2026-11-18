@@ -1,7 +1,7 @@
 ---
 title: "is_lower"
-canonical: https://tenzir.com/docs/v6.22.0/reference/functions/is_lower
-source: https://tenzir.com/docs/v6.22.0/reference/functions/is_lower.md
+canonical: https://tenzir.com/docs/reference/functions/is_lower
+source: https://tenzir.com/docs/reference/functions/is_lower.md
 section: "Docs"
 ---
 

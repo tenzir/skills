@@ -1,7 +1,7 @@
 ---
 title: "from_nats"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/from_nats
-source: https://tenzir.com/docs/v6.22.0/reference/operators/from_nats.md
+canonical: https://tenzir.com/docs/reference/operators/from_nats
+source: https://tenzir.com/docs/reference/operators/from_nats.md
 section: "Docs"
 ---
 
@@ -95,8 +95,6 @@ The `client_ca` and `require_client_cert` options are only valid for operators t
 
 Any value not specified in the record will either be picked up from the configuration or if not configured will not be used by the operator.
 
-See the [Node TLS Setup guide](../../guides/node-setup/configure-tls.md) for more details.
-
 NATS uses the standard Tenzir `tls` record. The nats.c library doesn’t expose a minimum TLS version setting, so `tls.min_version` is accepted for record compatibility but ignored with a warning.
 
 ### `_batch_size = int (optional)`
@@ -149,4 +147,4 @@ this = string(message).parse_json()
 
 * [`to_nats`](to_nats.md)
 * [Read from message brokers](../../guides/collect/read-from-message-brokers.md)
-* [Nats](https://tenzir.com/integrations/nats)
+* [Nats](https://tenzir.com/product/integrations/nats)

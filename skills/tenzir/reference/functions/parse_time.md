@@ -1,7 +1,7 @@
 ---
 title: "parse_time"
-canonical: https://tenzir.com/docs/v6.22.0/reference/functions/parse_time
-source: https://tenzir.com/docs/v6.22.0/reference/functions/parse_time.md
+canonical: https://tenzir.com/docs/reference/functions/parse_time
+source: https://tenzir.com/docs/reference/functions/parse_time.md
 section: "Docs"
 ---
 

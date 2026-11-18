@@ -1,7 +1,7 @@
 ---
 title: "equals"
-canonical: https://tenzir.com/docs/v6.22.0/reference/functions/equals
-source: https://tenzir.com/docs/v6.22.0/reference/functions/equals.md
+canonical: https://tenzir.com/docs/reference/functions/equals
+source: https://tenzir.com/docs/reference/functions/equals.md
 section: "Docs"
 ---
 

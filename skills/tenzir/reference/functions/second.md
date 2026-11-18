@@ -1,7 +1,7 @@
 ---
 title: "second"
-canonical: https://tenzir.com/docs/v6.22.0/reference/functions/second
-source: https://tenzir.com/docs/v6.22.0/reference/functions/second.md
+canonical: https://tenzir.com/docs/reference/functions/second
+source: https://tenzir.com/docs/reference/functions/second.md
 section: "Docs"
 ---
 

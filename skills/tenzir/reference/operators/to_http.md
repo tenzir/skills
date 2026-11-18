@@ -1,7 +1,7 @@
 ---
 title: "to_http"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/to_http
-source: https://tenzir.com/docs/v6.22.0/reference/operators/to_http.md
+canonical: https://tenzir.com/docs/reference/operators/to_http
+source: https://tenzir.com/docs/reference/operators/to_http.md
 section: "Docs"
 ---
 
@@ -117,8 +117,6 @@ The `client_ca` and `require_client_cert` options are only valid for operators t
 
 Any value not specified in the record will either be picked up from the configuration or if not configured will not be used by the operator.
 
-See the [Node TLS Setup guide](../../guides/node-setup/configure-tls.md) for more details.
-
 ## Examples
 
 ### Send all events in a single request
@@ -218,4 +216,4 @@ The `head 1000` limits the input so that `buffer_all` has a finite body to buffe
 * [`each`](each.md)
 * [`every`](every.md)
 * [Fetch via HTTP and APIs](../../guides/collect/fetch-via-http-and-apis.md)
-* [Http](https://tenzir.com/integrations/http)
+* [Http](https://tenzir.com/product/integrations/http)

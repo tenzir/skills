@@ -1,7 +1,7 @@
 ---
 title: "add"
-canonical: https://tenzir.com/docs/v6.22.0/reference/functions/add
-source: https://tenzir.com/docs/v6.22.0/reference/functions/add.md
+canonical: https://tenzir.com/docs/reference/functions/add
+source: https://tenzir.com/docs/reference/functions/add.md
 section: "Docs"
 ---
 

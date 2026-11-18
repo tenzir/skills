@@ -1,7 +1,7 @@
 ---
 title: "max"
-canonical: https://tenzir.com/docs/v6.22.0/reference/functions/max
-source: https://tenzir.com/docs/v6.22.0/reference/functions/max.md
+canonical: https://tenzir.com/docs/reference/functions/max
+source: https://tenzir.com/docs/reference/functions/max.md
 section: "Docs"
 ---
 
@@ -42,4 +42,3 @@ summarize max_value=max(x)
 * [`mean`](mean.md)
 * [`sum`](sum.md)
 * [Aggregate event streams](../../guides/analyze/aggregate-event-streams.md)
-* [Plot data with charts](../../tutorials/plot-data-with-charts.md)

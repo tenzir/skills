@@ -1,7 +1,7 @@
 ---
 title: "print_avro"
-canonical: https://tenzir.com/docs/v6.22.0/reference/functions/print_avro
-source: https://tenzir.com/docs/v6.22.0/reference/functions/print_avro.md
+canonical: https://tenzir.com/docs/reference/functions/print_avro
+source: https://tenzir.com/docs/reference/functions/print_avro.md
 section: "Docs"
 ---
 
@@ -107,6 +107,6 @@ The consumer must know the matching writer schema because `print_avro` does not 
 
 ## See Also
 
-* [Avro](https://tenzir.com/integrations/avro)
+* [Avro](https://tenzir.com/product/integrations/avro)
 * [`parse_avro`](parse_avro.md)
 * [`to_kafka`](../operators/to_kafka.md)

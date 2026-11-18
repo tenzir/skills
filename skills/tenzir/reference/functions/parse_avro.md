@@ -1,7 +1,7 @@
 ---
 title: "parse_avro"
-canonical: https://tenzir.com/docs/v6.22.0/reference/functions/parse_avro
-source: https://tenzir.com/docs/v6.22.0/reference/functions/parse_avro.md
+canonical: https://tenzir.com/docs/reference/functions/parse_avro
+source: https://tenzir.com/docs/reference/functions/parse_avro.md
 section: "Docs"
 ---
 
@@ -71,7 +71,7 @@ this = message.parse_avro(schema={
 
 ## See Also
 
-* [Avro](https://tenzir.com/integrations/avro)
+* [Avro](https://tenzir.com/product/integrations/avro)
 * [`print_avro`](print_avro.md)
 * [`read_avro`](../operators/read_avro.md)
 * [`decode_hex`](decode_hex.md)

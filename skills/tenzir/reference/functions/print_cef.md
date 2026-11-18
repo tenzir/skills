@@ -1,7 +1,7 @@
 ---
 title: "print_cef"
-canonical: https://tenzir.com/docs/v6.22.0/reference/functions/print_cef
-source: https://tenzir.com/docs/v6.22.0/reference/functions/print_cef.md
+canonical: https://tenzir.com/docs/reference/functions/print_cef
+source: https://tenzir.com/docs/reference/functions/print_cef.md
 section: "Docs"
 ---
 
@@ -116,4 +116,4 @@ write_syslog
 * [`read_cef`](../operators/read_cef.md)
 * [`read_syslog`](../operators/read_syslog.md)
 * [`write_syslog`](../operators/write_syslog.md)
-* [Syslog](https://tenzir.com/integrations/syslog)
+* [Syslog](https://tenzir.com/product/integrations/syslog)

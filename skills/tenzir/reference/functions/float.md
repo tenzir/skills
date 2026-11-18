@@ -1,7 +1,7 @@
 ---
 title: "float"
-canonical: https://tenzir.com/docs/v6.22.0/reference/functions/float
-source: https://tenzir.com/docs/v6.22.0/reference/functions/float.md
+canonical: https://tenzir.com/docs/reference/functions/float
+source: https://tenzir.com/docs/reference/functions/float.md
 section: "Docs"
 ---
 

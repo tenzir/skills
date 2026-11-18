@@ -1,7 +1,7 @@
 ---
 title: "write_yaml"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/write_yaml
-source: https://tenzir.com/docs/v6.22.0/reference/operators/write_yaml.md
+canonical: https://tenzir.com/docs/reference/operators/write_yaml
+source: https://tenzir.com/docs/reference/operators/write_yaml.md
 section: "Docs"
 ---
 

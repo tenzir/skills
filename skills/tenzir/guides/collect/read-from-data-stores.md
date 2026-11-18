@@ -1,7 +1,7 @@
 ---
 title: "Read from data stores"
-canonical: https://tenzir.com/docs/v6.22.0/guides/collect/read-from-data-stores
-source: https://tenzir.com/docs/v6.22.0/guides/collect/read-from-data-stores.md
+canonical: https://tenzir.com/docs/guides/collect/read-from-data-stores
+source: https://tenzir.com/docs/guides/collect/read-from-data-stores.md
 section: "Docs"
 ---
 
@@ -184,6 +184,6 @@ This lets you treat database rows like any other event stream in Tenzir.
 * [Send to destinations](../route/send-to-destinations.md)
 * [`from_clickhouse`](../../reference/operators/from_clickhouse.md)
 * [`from_mysql`](../../reference/operators/from_mysql.md)
-* [Clickhouse](https://tenzir.com/integrations/clickhouse)
-* [Hydrolix](https://tenzir.com/integrations/hydrolix)
-* [Mysql](https://tenzir.com/integrations/mysql)
+* [Clickhouse](https://tenzir.com/product/integrations/clickhouse)
+* [Hydrolix](https://tenzir.com/product/integrations/hydrolix)
+* [Mysql](https://tenzir.com/product/integrations/mysql)

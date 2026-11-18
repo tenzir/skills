@@ -1,7 +1,7 @@
 ---
 title: "drop_matching"
-canonical: https://tenzir.com/docs/v6.22.0/reference/functions/drop_matching
-source: https://tenzir.com/docs/v6.22.0/reference/functions/drop_matching.md
+canonical: https://tenzir.com/docs/reference/functions/drop_matching
+source: https://tenzir.com/docs/reference/functions/drop_matching.md
 section: "Docs"
 ---
 

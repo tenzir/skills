@@ -1,7 +1,7 @@
 ---
 title: "to_elasticsearch"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/to_elasticsearch
-source: https://tenzir.com/docs/v6.22.0/reference/operators/to_elasticsearch.md
+canonical: https://tenzir.com/docs/reference/operators/to_elasticsearch
+source: https://tenzir.com/docs/reference/operators/to_elasticsearch.md
 section: "Docs"
 ---
 
@@ -89,8 +89,6 @@ The `client_ca` and `require_client_cert` options are only valid for operators t
 
 Any value not specified in the record will either be picked up from the configuration or if not configured will not be used by the operator.
 
-See the [Node TLS Setup guide](../../guides/node-setup/configure-tls.md) for more details.
-
 ### `include_nulls = bool (optional)`
 
 Include fields with null values in the transmitted event data. By default, the operator drops all null values to save space.
@@ -123,7 +121,7 @@ Defaults to `true`.
 
 ## Parallelism
 
-In a [parallel pipeline](../../guides/node-setup/tune-performance.md#parallelism), each instance of `to_elasticsearch` accumulates its own events and sends them over its own connection. Because `parallel` bounds the requests in flight within one instance, the pipeline-wide bound is `parallel` times the number of instances.
+In a [parallel pipeline](../../explanations/executor.md#parallel-execution), each instance of `to_elasticsearch` accumulates its own events and sends them over its own connection. Because `parallel` bounds the requests in flight within one instance, the pipeline-wide bound is `parallel` times the number of instances.
 
 The Bulk API applies every request on its own and gives no ordering guarantee across requests. Documents that repeatedly update the same `id` may therefore end up in a different final state than the pipeline order suggests, both with `parallel` greater than `1` and with parallelism enabled.
 
@@ -141,8 +139,8 @@ to_elasticsearch "localhost:9200", action="create", index="main"
 * [`accept_elasticsearch`](accept_elasticsearch.md)
 * [`to_opensearch`](to_opensearch.md)
 * [Map to ECS](../../guides/normalize/map-to-ecs.md)
-* [Elasticsearch](https://tenzir.com/integrations/elasticsearch)
-* [Opensearch](https://tenzir.com/integrations/opensearch)
-* [Victorialogs](https://tenzir.com/integrations/victorialogs)
+* [Elasticsearch](https://tenzir.com/product/integrations/elasticsearch)
+* [Opensearch](https://tenzir.com/product/integrations/opensearch)
+* [Victorialogs](https://tenzir.com/product/integrations/victorialogs)
 
 Parallelizable: a parallel pipeline may run this operator on several cores at once.

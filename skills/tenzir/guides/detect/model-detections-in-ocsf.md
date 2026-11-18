@@ -1,8 +1,8 @@
 ---
 title: "Model detections in OCSF"
 description: "Choose an OCSF representation for alertable activity, create Detection Findings, and model their lifecycle"
-canonical: https://tenzir.com/docs/v6.22.0/guides/detect/model-detections-in-ocsf
-source: https://tenzir.com/docs/v6.22.0/guides/detect/model-detections-in-ocsf.md
+canonical: https://tenzir.com/docs/guides/detect/model-detections-in-ocsf
+source: https://tenzir.com/docs/guides/detect/model-detections-in-ocsf.md
 section: "Docs"
 ---
 

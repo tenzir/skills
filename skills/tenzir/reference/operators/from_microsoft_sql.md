@@ -1,7 +1,7 @@
 ---
 title: "from_microsoft_sql"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/from_microsoft_sql
-source: https://tenzir.com/docs/v6.22.0/reference/operators/from_microsoft_sql.md
+canonical: https://tenzir.com/docs/reference/operators/from_microsoft_sql
+source: https://tenzir.com/docs/reference/operators/from_microsoft_sql.md
 section: "Docs"
 ---
 
@@ -258,4 +258,4 @@ from_microsoft_sql table="dbo.events",
 
 ## See Also
 
-* [Sql server](https://tenzir.com/integrations/microsoft/sql-server)
+* [Sql server](https://tenzir.com/product/integrations/microsoft/sql-server)

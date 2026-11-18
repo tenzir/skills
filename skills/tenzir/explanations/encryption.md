@@ -1,7 +1,7 @@
 ---
 title: "Encryption"
-canonical: https://tenzir.com/docs/v6.22.0/explanations/encryption
-source: https://tenzir.com/docs/v6.22.0/explanations/encryption.md
+canonical: https://tenzir.com/docs/explanations/encryption
+source: https://tenzir.com/docs/explanations/encryption.md
 section: "Docs"
 ---
 
@@ -17,14 +17,14 @@ This page explains the encryption functions of TQL, the properties that set them
 
 Encryption is one of several ways to protect a value. They differ in whether you can recover the original, and in what the protected value still reveals:
 
-| Technique                    | Reversible | Equal inputs stay equal | Functions                                                                                                                                                                                        |
-| ---------------------------- | ---------- | ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Redaction                    | No         | No                      | Assign a constant                                                                                                                                                                                |
+| Technique                    | Reversible | Equal inputs stay equal | Functions                                                                                                                                                                        |
+| ---------------------------- | ---------- | ----------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Redaction                    | No         | No                      | Assign a constant                                                                                                                                                                |
 | Hashing                      | No         | Yes                     | [`hash_sha256`](../reference/functions/hash_sha256.md), [`hmac`](../reference/functions/hmac.md)                                       |
 | Randomized encryption        | Yes        | No                      | [`encrypt_aes_gcm_siv`](../reference/functions/encrypt_aes_gcm_siv.md), [`encrypt_aes_gcm`](../reference/functions/encrypt_aes_gcm.md) |
-| Deterministic encryption     | Yes        | Yes                     | [`encrypt_aes_siv`](../reference/functions/encrypt_aes_siv.md)                                                                                                      |
+| Deterministic encryption     | Yes        | Yes                     | [`encrypt_aes_siv`](../reference/functions/encrypt_aes_siv.md)                                                                                              |
 | Format-preserving encryption | Yes        | Yes                     | [`encrypt_ff1`](../reference/functions/encrypt_ff1.md), [`encrypt_cryptopan`](../reference/functions/encrypt_cryptopan.md)             |
-| Public-key encryption        | Yes        | No                      | [`encrypt_hpke`](../reference/functions/encrypt_hpke.md)                                                                                                            |
+| Public-key encryption        | Yes        | No                      | [`encrypt_hpke`](../reference/functions/encrypt_hpke.md)                                                                                                    |
 
 Hash a value when nobody ever needs the original. Encrypt it when someone authorized must be able to recover it. Our guide on [masking sensitive data](../guides/protect/mask-sensitive-data.md) covers redaction and hashing.
 
@@ -32,8 +32,8 @@ Hash a value when nobody ever needs the original. Encrypt it when someone author
 
 Every encryption function has a decryption counterpart that mirrors its arguments, with two exceptions: [`decrypt_hpke`](../reference/functions/decrypt_hpke.md) takes the private key instead of the public key, and [`decrypt_cryptopan`](../reference/functions/decrypt_cryptopan.md) also accepts the address family to decrypt in.
 
-| Functions                                                                                           | Algorithm                 | Key                    | Deterministic | Output   | Size increase   |
-| --------------------------------------------------------------------------------------------------- | ------------------------- | ---------------------- | ------------- | -------- | --------------- |
+| Functions                                                                                   | Algorithm                 | Key                    | Deterministic | Output   | Size increase   |
+| ------------------------------------------------------------------------------------------- | ------------------------- | ---------------------- | ------------- | -------- | --------------- |
 | [`encrypt_aes_gcm_siv`](../reference/functions/encrypt_aes_gcm_siv.md) | AES-GCM-SIV (RFC 8452)    | 16 or 32 bytes         | No            | `blob`   | 28 bytes        |
 | [`encrypt_aes_gcm`](../reference/functions/encrypt_aes_gcm.md)         | AES-GCM (NIST SP 800-38D) | 16, 24, or 32 bytes    | No            | `blob`   | 28 bytes        |
 | [`encrypt_aes_siv`](../reference/functions/encrypt_aes_siv.md)         | AES-SIV (RFC 5297)        | 32, 48, or 64 bytes    | Yes           | `blob`   | 16 bytes        |
@@ -135,8 +135,8 @@ Keep the following practices in mind:
 
 The encrypted values follow their specifications, so other implementations can decrypt what Tenzir encrypts and vice versa:
 
-| Function                                                                                            | Layout                                   | Specification                     |
-| --------------------------------------------------------------------------------------------------- | ---------------------------------------- | --------------------------------- |
+| Function                                                                                    | Layout                                   | Specification                     |
+| ------------------------------------------------------------------------------------------- | ---------------------------------------- | --------------------------------- |
 | [`encrypt_aes_gcm`](../reference/functions/encrypt_aes_gcm.md)         | nonce (12) ‖ ciphertext ‖ tag (16)       | NIST SP 800-38D                   |
 | [`encrypt_aes_gcm_siv`](../reference/functions/encrypt_aes_gcm_siv.md) | nonce (12) ‖ ciphertext ‖ tag (16)       | RFC 8452                          |
 | [`encrypt_aes_siv`](../reference/functions/encrypt_aes_siv.md)         | synthetic IV (16) ‖ ciphertext           | RFC 5297                          |

@@ -1,7 +1,7 @@
 ---
 title: "context_enrich"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/context_enrich
-source: https://tenzir.com/docs/v6.22.0/reference/operators/context_enrich.md
+canonical: https://tenzir.com/docs/reference/operators/context_enrich
+source: https://tenzir.com/docs/reference/operators/context_enrich.md
 section: "Docs"
 ---
 
@@ -18,7 +18,13 @@ context_enrich name:string, key=any,
 
 ## Description
 
-The `context_enrich` operator enriches events with data from a context.
+The `context_enrich` operator enriches every event with what a context holds for the event’s key. The deployment’s configuration declares the context, as the reference for [context files](../contexts.md) describes.
+
+What the enrichment adds depends on the type of context:
+
+* A lookup table adds the value stored under the key, or `null`. A subnet key in the table also matches the IP addresses and subnets it contains.
+* A Bloom filter adds `true` for a key it may hold, and `null` otherwise.
+* A GeoIP context adds a record of what its database holds for an IP address, or `null`. The first enrichment waits until the database has loaded.
 
 ### `name: string`
 
@@ -26,7 +32,7 @@ The name of the context to enrich with.
 
 ### `key = any`
 
-The field to use for the context lookup.
+The field that holds the enrichment key.
 
 ### `into = field (optional)`
 
@@ -67,16 +73,18 @@ context_enrich "ctx", key=x, await_context=true
 
 ## Parallelism
 
-In a [parallel pipeline](../../guides/node-setup/tune-performance.md#parallelism), multiple instances of `context_enrich` issue lookups concurrently. Every lookup is an atomic read from the shared context. Context updates can take effect between lookups, as they can with a single instance.
+In a [parallel pipeline](../../explanations/executor.md#parallel-execution), multiple instances of `context_enrich` enrich concurrently. Every enrichment is an atomic read from the shared context. Context updates can take effect between enrichments, as they can with a single instance.
 
 ## Examples
 
 ### Enrich with a lookup table
 
-Create a lookup table:
+Declare a lookup table in the configuration:
 
-```tql
-context_create_lookup_table "ctx"
+contexts/ctx.yaml
+
+```yaml
+type: lookup-table
 ```
 
 Add data to the lookup table:
@@ -145,17 +153,9 @@ context_enrich "ctx", key=x, into=enrichments, mode="append"
 
 ## See Also
 
-* [`context_create_bloom_filter`](context_create_bloom_filter.md)
-* [`context_create_geoip`](context_create_geoip.md)
-* [`context_create_lookup_table`](context_create_lookup_table.md)
-* [`context_erase`](context_erase.md)
-* [`context_inspect`](context_inspect.md)
-* [`context_list`](context_list.md)
-* [`context_load`](context_load.md)
-* [`context_remove`](context_remove.md)
-* [`context_reset`](context_reset.md)
-* [`context_save`](context_save.md)
 * [`context_update`](context_update.md)
+* [Contexts](../contexts.md)
+* [Declare contexts](../../guides/enrich/declare-contexts.md)
 * [Use lookup tables](../../guides/enrich/use-lookup-tables.md)
 * [Enrich with threat intel](../../guides/enrich/enrich-with-threat-intel.md)
 * [Enrich with asset inventory](../../guides/enrich/enrich-with-asset-inventory.md)

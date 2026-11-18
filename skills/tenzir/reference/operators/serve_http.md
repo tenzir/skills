@@ -1,7 +1,7 @@
 ---
 title: "serve_http"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/serve_http
-source: https://tenzir.com/docs/v6.22.0/reference/operators/serve_http.md
+canonical: https://tenzir.com/docs/reference/operators/serve_http
+source: https://tenzir.com/docs/reference/operators/serve_http.md
 section: "Docs"
 ---
 
@@ -56,8 +56,6 @@ The `client_ca` and `require_client_cert` options are only valid for operators t
 
 Any value not specified in the record will either be picked up from the configuration or if not configured will not be used by the operator.
 
-See the [Node TLS Setup guide](../../guides/node-setup/configure-tls.md) for more details.
-
 ### `{ … }`
 
 The nested pipeline that serializes input events into bytes. It must produce bytes as output, for example `{ write_ndjson }`, `{ write_json }`, or `{ write_lines }`.
@@ -107,4 +105,4 @@ serve_http "0.0.0.0:8443",
 * [`serve_tcp`](serve_tcp.md)
 * [`to_http`](to_http.md)
 * [Expose data as a server](../../guides/route/expose-data-as-server.md)
-* [Http](https://tenzir.com/integrations/http)
+* [Http](https://tenzir.com/product/integrations/http)

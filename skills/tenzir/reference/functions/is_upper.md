@@ -1,7 +1,7 @@
 ---
 title: "is_upper"
-canonical: https://tenzir.com/docs/v6.22.0/reference/functions/is_upper
-source: https://tenzir.com/docs/v6.22.0/reference/functions/is_upper.md
+canonical: https://tenzir.com/docs/reference/functions/is_upper
+source: https://tenzir.com/docs/reference/functions/is_upper.md
 section: "Docs"
 ---
 

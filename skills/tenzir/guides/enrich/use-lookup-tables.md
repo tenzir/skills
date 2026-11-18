@@ -1,8 +1,8 @@
 ---
 title: "Use lookup tables"
 description: "Store reference data in lookup tables and apply it to OCSF events"
-canonical: https://tenzir.com/docs/v6.22.0/guides/enrich/use-lookup-tables
-source: https://tenzir.com/docs/v6.22.0/guides/enrich/use-lookup-tables.md
+canonical: https://tenzir.com/docs/guides/enrich/use-lookup-tables
+source: https://tenzir.com/docs/guides/enrich/use-lookup-tables.md
 section: "Docs"
 ---
 
@@ -12,24 +12,22 @@ section: "Docs"
 
 This guide shows you how to use lookup tables in Tenzir to store reference data and apply it to OCSF events. Use lookup tables when you have data keyed by an event value, such as a user ID, hostname, IP address, subnet, file hash, or cloud resource ID.
 
-A [lookup table](../../explanations/enrichment.md#lookup-table) is a Tenzir context that stores key-value mappings. Pipelines update the table, and other pipelines query it with [`context_enrich`](../../reference/operators/context_enrich.md). This guide covers the basic lookup table lifecycle first, then shows where lookup results should land in OCSF events. Start with the standard `enrichments` array when the extra data is general context. When the lookup result describes a specific OCSF object, enrich that object instead.
+A [lookup table](../../explanations/enrichment.md#lookup-table) is a Tenzir context that stores key-value mappings. Pipelines update the table, and other pipelines query it with [`context_enrich`](../../reference/operators/context_enrich.md). This guide covers the basic lookup table lifecycle first, then shows where enrichment results should land in OCSF events. Start with the standard `enrichments` array when the extra data is general context. When the enrichment result describes a specific OCSF object, enrich that object instead.
 
 ## Set up lookup tables
 
-Create lookup tables in separate setup pipelines with [`context_create_lookup_table`](../../reference/operators/context_create_lookup_table.md), or define them as code by adding them to `tenzir.contexts` in `tenzir.yaml`:
+Declare each lookup table as a file in the `contexts/` folder of your deployment’s configuration:
 
-\<prefix>/etc/tenzir/tenzir.yaml
+contexts/user\_roles.yaml
 
 ```yaml
-tenzir:
-  contexts:
-    user-roles:
-      type: lookup-table
+type: lookup-table
+persist-interval: 5min
 ```
 
-This approach is useful when you want the same contexts to exist across deployments.
+The file name becomes the table name, and the `persist-interval` keeps the table’s entries across restarts. Deploying the configuration creates the empty table. You can also select **Add context** in the platform, which writes the file for you. Our guide on [declaring contexts](declare-contexts.md) covers the lifecycle in detail.
 
-You can also create lookup tables from the **Contexts** tab in the platform.
+Each example below uses its own table, such as `users` or `network_segments`. Declare a file for each table you use.
 
 ## Add entries
 
@@ -53,11 +51,11 @@ The value can be any structured TQL value. Prefer values that are already close 
 
 ## Apply lookup tables to OCSF events
 
-OCSF gives you several places to put lookup results. Choose the destination based on what the lookup-table value describes.
+OCSF gives you several places to put enrichment results. Choose the destination based on what the lookup-table value describes.
 
 ### Enrich into `enrichments`
 
-The most general OCSF enrichment target is the base event’s `enrichments` array. Use it when the lookup result adds useful context but doesn’t belong to a more specific OCSF object.
+The most general OCSF enrichment target is the base event’s `enrichments` array. Use it when the enrichment result adds useful context but doesn’t belong to a more specific OCSF object.
 
 The following pipeline enriches an OCSF Authentication event with user role context:
 
@@ -120,11 +118,11 @@ context_enrich "user_roles",
 }
 ```
 
-The `format="ocsf"` option wraps the lookup result as an OCSF `enrichment` object with the lookup result in `data` and the context name in `provider`. It does not infer an enrichment `type`. The `mode="append"` option appends the result to the existing `enrichments` list instead of overwriting it.
+The `format="ocsf"` option wraps the enrichment result as an OCSF `enrichment` object with the enrichment result in `data` and the context name in `provider`. It does not infer an enrichment `type`. The `mode="append"` option appends the result to the existing `enrichments` list instead of overwriting it.
 
 ### Choose semantic OCSF fields
 
-Use `enrichments` as the baseline, not as the only destination. If the lookup result describes an OCSF object, write the result into that object’s semantic fields. This keeps the event easier to query and lets downstream tools use the standard schema.
+Use `enrichments` as the baseline, not as the only destination. If the enrichment result describes an OCSF object, write the result into that object’s semantic fields. This keeps the event easier to query and lets downstream tools use the standard schema.
 
 For example, user inventory belongs in `user`. Create the lookup table in a separate setup pipeline before you populate it:
 
@@ -141,7 +139,7 @@ from {
 context_update "users", key=uid
 ```
 
-Enrich an Authentication event by looking up the source user ID from `unmapped` and writing the result directly into the OCSF `user` object:
+Enrich an Authentication event with the source user ID from `unmapped` and writing the result directly into the OCSF `user` object:
 
 ```tql
 from {
@@ -200,7 +198,7 @@ This pattern is the foundation for the OCSF-specific enrichment guides:
 
 ### Use subnet keys
 
-Lookup tables support longest-prefix matching when the stored keys are `subnet` values and the lookup key is an `ip` value. This is useful for asset inventory, network ownership, and routing context.
+Lookup tables support longest-prefix matching when the stored keys are `subnet` values and the enrichment key is an `ip` value. This is useful for asset inventory, network ownership, and routing context.
 
 Populate a pre-created subnet table:
 
@@ -215,7 +213,7 @@ context_update "network_segments", key=subnet, value={
 }
 ```
 
-Probe the table with endpoint IP addresses from `unmapped` and write the matched values directly into the OCSF endpoint objects:
+Enrich with endpoint IP addresses from `unmapped` and write the matched values directly into the OCSF endpoint objects:
 
 ```tql
 from {
@@ -273,7 +271,7 @@ The IP address `10.0.0.15` matches `10.0.0.0/24` instead of `10.0.0.0/22` becaus
 
 ## Use compound keys
 
-Use record values as keys when a lookup depends on more than one field. This example populates a pre-created access policy table keyed by a source zone and destination zone:
+Use record values as keys when an enrichment depends on more than one field. This example populates a pre-created access policy table keyed by a source zone and destination zone:
 
 ```tql
 from {
@@ -332,52 +330,21 @@ context_enrich "access_policies",
 }
 ```
 
-Compound keys keep the lookup deterministic when a single event field isn’t selective enough.
-
-## Manage table entries
-
-Use [`context_inspect`](../../reference/operators/context_inspect.md) to view entries:
-
-```tql
-context_inspect "user_roles"
-```
-
-Use [`context_erase`](../../reference/operators/context_erase.md) to remove one entry:
-
-```tql
-from {user_uid: "S-1-5-21-1001"}
-context_erase "user_roles", key=user_uid
-```
-
-Use [`context_remove`](../../reference/operators/context_remove.md) to delete the lookup table and its persisted data:
-
-```tql
-context_remove "user_roles"
-```
-
-Use [`context_save`](../../reference/operators/context_save.md) and [`context_load`](../../reference/operators/context_load.md) to export and import a lookup table.
-
-Export a lookup table to a file:
-
-```tql
-context_save "user_roles"
-to_file "user_roles.bin"
-```
-
-Import a lookup table from a file:
-
-```tql
-from_file "user_roles.bin"
-context_load "user_roles"
-```
-
-Caution
-
-Loading replaces the entire lookup table state. Save the current table first if you need a rollback point.
+Compound keys keep the enrichment deterministic when a single event field isn’t selective enough.
 
 ## Expire stale entries
 
-Set timeouts on [`context_update`](../../reference/operators/context_update.md) when the lookup table contains data with a known lifetime, such as active sessions, short-lived indicators, or temporary allowlist entries:
+Set timeouts in the table’s context file when it contains data with a known lifetime, such as active sessions, short-lived indicators, or temporary allowlist entries:
+
+contexts/active\_indicators.yaml
+
+```yaml
+type: lookup-table
+create-timeout: 7d
+write-timeout: 24h
+```
+
+Then update the table as usual:
 
 ```tql
 from {
@@ -391,15 +358,14 @@ context_update "active_indicators",
     confidence: confidence,
     source: source,
     updated_time: now(),
-  },
-  create_timeout=7d,
-  write_timeout=24h
+  }
 ```
 
-`create_timeout` removes an entry after a fixed lifetime. `write_timeout` removes an entry if it isn’t refreshed. `read_timeout` removes an entry if it isn’t used by a lookup.
+The `create-timeout` setting removes an entry after a fixed lifetime, the `write-timeout` setting removes it if it isn’t refreshed, and the `read-timeout` setting removes it if no enrichment uses it. The timeouts apply to every entry of the table, and a changed timeout also applies to the entries the table holds already.
 
 ## See Also
 
+* [Declare contexts](declare-contexts.md)
 * [Enrich with asset inventory](enrich-with-asset-inventory.md)
 * [Enrich with threat intel](enrich-with-threat-intel.md)
 * [Enrich events with AI](enrich-events-with-ai.md)

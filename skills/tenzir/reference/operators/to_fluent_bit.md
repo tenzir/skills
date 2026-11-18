@@ -1,7 +1,7 @@
 ---
 title: "to_fluent_bit"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/to_fluent_bit
-source: https://tenzir.com/docs/v6.22.0/reference/operators/to_fluent_bit.md
+canonical: https://tenzir.com/docs/reference/operators/to_fluent_bit
+source: https://tenzir.com/docs/reference/operators/to_fluent_bit.md
 section: "Docs"
 ---
 
@@ -77,8 +77,6 @@ The `client_ca` and `require_client_cert` options are only valid for operators t
 
 Any value not specified in the record will either be picked up from the configuration or if not configured will not be used by the operator.
 
-See the [Node TLS Setup guide](../../guides/node-setup/configure-tls.md) for more details.
-
 ## Direct operator usage
 
 Use `to_fluent_bit` directly to send events to Fluent Bit:
@@ -101,4 +99,4 @@ to_fluent_bit "slack", options={webhook: $slack_hook}
 ## See Also
 
 * [`from_fluent_bit`](from_fluent_bit.md)
-* [Fluent bit](https://tenzir.com/integrations/fluent-bit)
+* [Fluent bit](https://tenzir.com/product/integrations/fluent-bit)

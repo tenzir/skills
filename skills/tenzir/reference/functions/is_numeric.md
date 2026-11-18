@@ -1,7 +1,7 @@
 ---
 title: "is_numeric"
-canonical: https://tenzir.com/docs/v6.22.0/reference/functions/is_numeric
-source: https://tenzir.com/docs/v6.22.0/reference/functions/is_numeric.md
+canonical: https://tenzir.com/docs/reference/functions/is_numeric
+source: https://tenzir.com/docs/reference/functions/is_numeric.md
 section: "Docs"
 ---
 

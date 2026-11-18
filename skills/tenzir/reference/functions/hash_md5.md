@@ -1,7 +1,7 @@
 ---
 title: "hash_md5"
-canonical: https://tenzir.com/docs/v6.22.0/reference/functions/hash_md5
-source: https://tenzir.com/docs/v6.22.0/reference/functions/hash_md5.md
+canonical: https://tenzir.com/docs/reference/functions/hash_md5
+source: https://tenzir.com/docs/reference/functions/hash_md5.md
 section: "Docs"
 ---
 

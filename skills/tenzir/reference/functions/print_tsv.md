@@ -1,7 +1,7 @@
 ---
 title: "print_tsv"
-canonical: https://tenzir.com/docs/v6.22.0/reference/functions/print_tsv
-source: https://tenzir.com/docs/v6.22.0/reference/functions/print_tsv.md
+canonical: https://tenzir.com/docs/reference/functions/print_tsv
+source: https://tenzir.com/docs/reference/functions/print_tsv.md
 section: "Docs"
 ---
 

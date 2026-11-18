@@ -1,7 +1,7 @@
 ---
 title: "python"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/python
-source: https://tenzir.com/docs/v6.22.0/reference/operators/python.md
+canonical: https://tenzir.com/docs/reference/operators/python
+source: https://tenzir.com/docs/reference/operators/python.md
 section: "Docs"
 ---
 
@@ -48,7 +48,7 @@ The string is passed verbatim to `pip install`. To add multiple dependencies, se
 
 ## Parallelism
 
-In a [parallel pipeline](../../guides/node-setup/tune-performance.md#parallelism), each instance of `python` runs its own Python subprocess. Events can therefore reach separate interpreter sessions and finish in a different order.
+In a [parallel pipeline](../../explanations/executor.md#parallel-execution), each instance of `python` runs its own Python subprocess. Events can therefore reach separate interpreter sessions and finish in a different order.
 
 Every subprocess maintains independent interpreter and module state. External side effects from the instances can overlap and interleave. Use a pipeline degree of one when your Python program requires one continuous interpreter session or ordered side effects.
 

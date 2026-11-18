@@ -1,7 +1,7 @@
 ---
 title: "model_merge"
-canonical: https://tenzir.com/docs/v6.22.0/reference/functions/model_merge
-source: https://tenzir.com/docs/v6.22.0/reference/functions/model_merge.md
+canonical: https://tenzir.com/docs/reference/functions/model_merge
+source: https://tenzir.com/docs/reference/functions/model_merge.md
 section: "Docs"
 ---
 

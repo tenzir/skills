@@ -1,7 +1,7 @@
 ---
 title: "is_link_local"
-canonical: https://tenzir.com/docs/v6.22.0/reference/functions/is_link_local
-source: https://tenzir.com/docs/v6.22.0/reference/functions/is_link_local.md
+canonical: https://tenzir.com/docs/reference/functions/is_link_local
+source: https://tenzir.com/docs/reference/functions/is_link_local.md
 section: "Docs"
 ---
 

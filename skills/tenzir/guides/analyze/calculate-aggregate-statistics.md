@@ -1,7 +1,7 @@
 ---
 title: "Calculate aggregate statistics"
-canonical: https://tenzir.com/docs/v6.22.0/guides/analyze/calculate-aggregate-statistics
-source: https://tenzir.com/docs/v6.22.0/guides/analyze/calculate-aggregate-statistics.md
+canonical: https://tenzir.com/docs/guides/analyze/calculate-aggregate-statistics
+source: https://tenzir.com/docs/guides/analyze/calculate-aggregate-statistics.md
 section: "Docs"
 ---
 

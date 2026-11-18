@@ -1,7 +1,7 @@
 ---
 title: "to_title"
-canonical: https://tenzir.com/docs/v6.22.0/reference/functions/to_title
-source: https://tenzir.com/docs/v6.22.0/reference/functions/to_title.md
+canonical: https://tenzir.com/docs/reference/functions/to_title
+source: https://tenzir.com/docs/reference/functions/to_title.md
 section: "Docs"
 ---
 

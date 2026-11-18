@@ -1,7 +1,7 @@
 ---
 title: "to_google_cloud_logging"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/to_google_cloud_logging
-source: https://tenzir.com/docs/v6.22.0/reference/operators/to_google_cloud_logging.md
+canonical: https://tenzir.com/docs/reference/operators/to_google_cloud_logging
+source: https://tenzir.com/docs/reference/operators/to_google_cloud_logging.md
 section: "Docs"
 ---
 
@@ -97,7 +97,7 @@ Defaults to `10`. Must be at least `1`.
 
 ## Parallelism
 
-In a [parallel pipeline](../../guides/node-setup/tune-performance.md#parallelism), each instance of `to_google_cloud_logging` batches, authenticates, and sends independently with its own client and credentials. Because `parallel` bounds the requests in flight within one instance, the pipeline-wide bound is `parallel` times the number of instances.
+In a [parallel pipeline](../../explanations/executor.md#parallel-execution), each instance of `to_google_cloud_logging` batches, authenticates, and sends independently with its own client and credentials. Because `parallel` bounds the requests in flight within one instance, the pipeline-wide bound is `parallel` times the number of instances.
 
 The API ingests every request on its own and gives no ordering guarantee across requests. Keep the effective concurrency in mind when tuning `parallel` against your project’s [Cloud Logging write quota](https://cloud.google.com/logging/quotas).
 
@@ -129,6 +129,6 @@ to_google_cloud_logging log_id="LOG_ID", project="PROJECT_ID"
 ## See Also
 
 * [`to_google_secops`](to_google_secops.md)
-* [Cloud logging](https://tenzir.com/integrations/google/cloud-logging)
+* [Cloud logging](https://tenzir.com/product/integrations/google/cloud-logging)
 
 Parallelizable: a parallel pipeline may run this operator on several cores at once.

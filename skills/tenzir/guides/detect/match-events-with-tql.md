@@ -1,8 +1,8 @@
 ---
 title: "Match events with TQL"
 description: "Write single-event detections over OCSF events and package their matching and output logic as reusable TQL operators"
-canonical: https://tenzir.com/docs/v6.22.0/guides/detect/match-events-with-tql
-source: https://tenzir.com/docs/v6.22.0/guides/detect/match-events-with-tql.md
+canonical: https://tenzir.com/docs/guides/detect/match-events-with-tql
+source: https://tenzir.com/docs/guides/detect/match-events-with-tql.md
 section: "Docs"
 ---
 
@@ -265,7 +265,7 @@ windows_threats::detections::print_sensitive_dump
 publish "detections"
 ```
 
-Split a detection into smaller operators when that improves reuse or testing, not because every operator must stop at the predicate. Windowing, correlation, and suppression can live in the detection or compose as separate stages. The guides on [detecting over time windows](detect-over-time-windows.md) and [creating multi-stage detectors](create-multi-stage-detectors.md) show those patterns. Our guide on [adding operators to a package](../packages/add-operators.md) explains how to turn this pattern into a reusable, parameterized user-defined operator with tests.
+Split a detection into smaller operators when that improves reuse or testing, not because every operator must stop at the predicate. Windowing, correlation, and suppression can live in the detection or compose as separate stages. The guides on [detecting over time windows](detect-over-time-windows.md) and [creating multi-stage detectors](create-multi-stage-detectors.md) show those patterns. Our guide on [adding operators to a package](../manage-packages.md#add-operators) explains how to turn this pattern into a reusable, parameterized user-defined operator with tests.
 
 ## See Also
 
@@ -281,6 +281,5 @@ Split a detection into smaller operators when that improves reuse or testing, no
 * [Detect over time windows](detect-over-time-windows.md)
 * [Create multi-stage detectors](create-multi-stage-detectors.md)
 * [Map to OCSF](../normalize/map-to-ocsf.md)
-* [Add operators](../packages/add-operators.md)
-* [Add pipelines](../packages/add-pipelines.md)
-* [Write tests](../testing/write-tests.md)
+* [Manage packages](../manage-packages.md#add-operators)
+* [Write tests](../write-tests.md#write-a-test)

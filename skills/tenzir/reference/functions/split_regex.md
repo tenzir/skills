@@ -1,7 +1,7 @@
 ---
 title: "split_regex"
-canonical: https://tenzir.com/docs/v6.22.0/reference/functions/split_regex
-source: https://tenzir.com/docs/v6.22.0/reference/functions/split_regex.md
+canonical: https://tenzir.com/docs/reference/functions/split_regex
+source: https://tenzir.com/docs/reference/functions/split_regex.md
 section: "Docs"
 ---
 

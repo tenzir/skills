@@ -1,7 +1,7 @@
 ---
 title: "from_file"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/from_file
-source: https://tenzir.com/docs/v6.22.0/reference/operators/from_file.md
+canonical: https://tenzir.com/docs/reference/operators/from_file
+source: https://tenzir.com/docs/reference/operators/from_file.md
 section: "Docs"
 ---
 
@@ -82,7 +82,7 @@ The pipeline uses the same format and compression inference logic as other file 
 
 ### Parallelism
 
-When you enable [parallelism](../../guides/node-setup/tune-performance.md#parallelism), each file is read by exactly one operator instance. The number of files read at the same time is therefore at most the degree of parallelism, and never more than the number of matched files. Events from different files interleave in the output.
+When you enable [parallelism](../../explanations/executor.md#parallel-execution), each file is read by exactly one operator instance. The number of files read at the same time is therefore at most the degree of parallelism, and never more than the number of matched files. Events from different files interleave in the output.
 
 ## Examples
 
@@ -125,7 +125,6 @@ from_file "/logs/*.json", max_age=1h
 * [`from_file`](from_file.md)
 * [Enrich with asset inventory](../../guides/enrich/enrich-with-asset-inventory.md)
 * [Use lookup tables](../../guides/enrich/use-lookup-tables.md)
-* [Import into a node](../../guides/store/import-into-a-node.md)
-* [File](https://tenzir.com/integrations/file)
+* [File](https://tenzir.com/product/integrations/file)
 
 Parallelizable: a parallel pipeline may run this operator on several cores at once.

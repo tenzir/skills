@@ -1,7 +1,7 @@
 ---
 title: "parse_leef"
-canonical: https://tenzir.com/docs/v6.22.0/reference/functions/parse_leef
-source: https://tenzir.com/docs/v6.22.0/reference/functions/parse_leef.md
+canonical: https://tenzir.com/docs/reference/functions/parse_leef
+source: https://tenzir.com/docs/reference/functions/parse_leef.md
 section: "Docs"
 ---
 
@@ -160,5 +160,5 @@ output = input.parse_leef()
 * [`parse_cef`](parse_cef.md)
 * [`print_leef`](print_leef.md)
 * [Parse string fields](../../guides/parse/parse-string-fields.md)
-* [Qradar](https://tenzir.com/integrations/qradar)
-* [Syslog](https://tenzir.com/integrations/syslog)
+* [Qradar](https://tenzir.com/product/integrations/qradar)
+* [Syslog](https://tenzir.com/product/integrations/syslog)

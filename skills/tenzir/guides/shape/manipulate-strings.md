@@ -1,7 +1,7 @@
 ---
 title: "Manipulate strings"
-canonical: https://tenzir.com/docs/v6.22.0/guides/shape/manipulate-strings
-source: https://tenzir.com/docs/v6.22.0/guides/shape/manipulate-strings.md
+canonical: https://tenzir.com/docs/guides/shape/manipulate-strings
+source: https://tenzir.com/docs/guides/shape/manipulate-strings.md
 section: "Docs"
 ---
 

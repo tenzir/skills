@@ -1,8 +1,8 @@
 ---
 title: "Normalize event timestamps"
 description: "Convert source timestamps into consistent time values for filtering, windows, ordering, and output"
-canonical: https://tenzir.com/docs/v6.22.0/guides/shape/normalize-event-timestamps
-source: https://tenzir.com/docs/v6.22.0/guides/shape/normalize-event-timestamps.md
+canonical: https://tenzir.com/docs/guides/shape/normalize-event-timestamps
+source: https://tenzir.com/docs/guides/shape/normalize-event-timestamps.md
 section: "Docs"
 ---
 

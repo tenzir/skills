@@ -1,8 +1,8 @@
 ---
 title: "Find cardinality spikes"
 description: "Find windows where the number of distinct agent sessions exceeds its expected range."
-canonical: https://tenzir.com/docs/v6.22.0/guides/analyze/find-cardinality-spikes
-source: https://tenzir.com/docs/v6.22.0/guides/analyze/find-cardinality-spikes.md
+canonical: https://tenzir.com/docs/guides/analyze/find-cardinality-spikes
+source: https://tenzir.com/docs/guides/analyze/find-cardinality-spikes.md
 section: "Docs"
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "Expose data as a server"
-canonical: https://tenzir.com/docs/v6.22.0/guides/route/expose-data-as-server
-source: https://tenzir.com/docs/v6.22.0/guides/route/expose-data-as-server.md
+canonical: https://tenzir.com/docs/guides/route/expose-data-as-server
+source: https://tenzir.com/docs/guides/route/expose-data-as-server.md
 section: "Docs"
 ---
 

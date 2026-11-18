@@ -1,7 +1,7 @@
 ---
 title: "is_loopback"
-canonical: https://tenzir.com/docs/v6.22.0/reference/functions/is_loopback
-source: https://tenzir.com/docs/v6.22.0/reference/functions/is_loopback.md
+canonical: https://tenzir.com/docs/reference/functions/is_loopback
+source: https://tenzir.com/docs/reference/functions/is_loopback.md
 section: "Docs"
 ---
 

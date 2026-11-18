@@ -1,7 +1,7 @@
 ---
 title: "is_empty"
-canonical: https://tenzir.com/docs/v6.22.0/reference/functions/is_empty
-source: https://tenzir.com/docs/v6.22.0/reference/functions/is_empty.md
+canonical: https://tenzir.com/docs/reference/functions/is_empty
+source: https://tenzir.com/docs/reference/functions/is_empty.md
 section: "Docs"
 ---
 

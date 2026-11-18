@@ -1,8 +1,8 @@
 ---
 title: "Overview"
 description: "Prepare event fields and records for downstream processing."
-canonical: https://tenzir.com/docs/v6.22.0/guides/shape
-source: https://tenzir.com/docs/v6.22.0/guides/shape.md
+canonical: https://tenzir.com/docs/guides/shape
+source: https://tenzir.com/docs/guides/shape.md
 section: "Docs"
 ---
 

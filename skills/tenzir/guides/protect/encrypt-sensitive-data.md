@@ -1,7 +1,7 @@
 ---
 title: "Encrypt sensitive data"
-canonical: https://tenzir.com/docs/v6.22.0/guides/protect/encrypt-sensitive-data
-source: https://tenzir.com/docs/v6.22.0/guides/protect/encrypt-sensitive-data.md
+canonical: https://tenzir.com/docs/guides/protect/encrypt-sensitive-data
+source: https://tenzir.com/docs/guides/protect/encrypt-sensitive-data.md
 section: "Docs"
 ---
 
@@ -15,8 +15,8 @@ Encrypt a field when someone may need the original value again, for example to r
 
 Pick the function that matches what the encrypted data must still allow:
 
-| Requirement                                  | Function                                                                                            |
-| -------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| Requirement                                  | Function                                                                                    |
+| -------------------------------------------- | ------------------------------------------------------------------------------------------- |
 | Recover values later                         | [`encrypt_aes_gcm_siv`](../../reference/functions/encrypt_aes_gcm_siv.md) |
 | Group, join, or count by the encrypted value | [`encrypt_aes_siv`](../../reference/functions/encrypt_aes_siv.md)         |
 | Keep the format of the value                 | [`encrypt_ff1`](../../reference/functions/encrypt_ff1.md)                 |

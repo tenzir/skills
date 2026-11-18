@@ -1,7 +1,7 @@
 ---
 title: "variance"
-canonical: https://tenzir.com/docs/v6.22.0/reference/functions/variance
-source: https://tenzir.com/docs/v6.22.0/reference/functions/variance.md
+canonical: https://tenzir.com/docs/reference/functions/variance
+source: https://tenzir.com/docs/reference/functions/variance.md
 section: "Docs"
 ---
 

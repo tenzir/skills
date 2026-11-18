@@ -1,8 +1,8 @@
 ---
 title: "Detections"
 description: "Understand how Tenzir matches, correlates, and models security evidence as detection results"
-canonical: https://tenzir.com/docs/v6.22.0/explanations/detections
-source: https://tenzir.com/docs/v6.22.0/explanations/detections.md
+canonical: https://tenzir.com/docs/explanations/detections
+source: https://tenzir.com/docs/explanations/detections.md
 section: "Docs"
 ---
 
@@ -34,11 +34,11 @@ Normalization and enrichment make matching logic easier to reuse. OCSF gives str
 
 Choose the matching language from the evidence and the detection content you already have:
 
-| Evidence and content                         | Matching language                                               | Best fit                                                                         |
-| -------------------------------------------- | --------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| Evidence and content                         | Matching language                                       | Best fit                                                                         |
+| -------------------------------------------- | ------------------------------------------------------- | -------------------------------------------------------------------------------- |
 | Structured events and native detection logic | [TQL](language.md) | Predicates, transformations, and custom logic over your event schema.            |
-| Structured events and portable rule content  | [Sigma](https://sigmahq.io)                                     | Existing Sigma rule sets from public, commercial, or internal sources.           |
-| Files, payloads, and other byte streams      | [YARA-X](https://virustotal.github.io/yara-x/)                  | Rules that inspect raw content and emit findings with byte-level match evidence. |
+| Structured events and portable rule content  | [Sigma](https://sigmahq.io)                             | Existing Sigma rule sets from public, commercial, or internal sources.           |
+| Files, payloads, and other byte streams      | [YARA-X](https://virustotal.github.io/yara-x/)          | Rules that inspect raw content and emit findings with byte-level match evidence. |
 
 These languages compose rather than compete. TQL provides the surrounding pipeline even when Sigma or YARA performs the match. The guides on [matching events with TQL](../guides/detect/match-events-with-tql.md), [executing Sigma rules](../guides/detect/execute-sigma-rules.md), and [scanning bytes with YARA](../guides/detect/scan-bytes-with-yara.md) show each matching model.
 
@@ -89,7 +89,7 @@ Package matching and result modeling together when they form one reusable detect
 
 Topics decouple producers from consumers. A stage can publish every finding without knowing which combinators consume it, while each combinator owns its correlation and suppression policy. This keeps stage evidence available for counting, sequencing, and future compositions.
 
-Treat detections as versioned content: give analytics stable identities, test them against representative example data and historical events, and package related operators, pipelines, contexts, and tests together. Our guide on [adding operators to a package](../guides/packages/add-operators.md) explains how to expose reusable detection logic as a user-defined operator. Our [`tenzir` package](https://github.com/tenzir/library/tree/main/tenzir) applies this model and ships streaming network detectors under the `tenzir::detect::network` namespace.
+Treat detections as versioned content: give analytics stable identities, test them against representative example data and historical events, and package related operators, pipelines, contexts, and tests together. Our guide on [adding operators to a package](../guides/manage-packages.md) explains how to expose reusable detection logic as a user-defined operator. Our [`tenzir` package](https://github.com/tenzir/library/tree/main/tenzir) applies this model and ships streaming network detectors under the `tenzir::detect::network` namespace.
 
 ## See also
 
@@ -102,4 +102,4 @@ Treat detections as versioned content: give analytics stable identities, test th
 * [Create multi-stage detectors](../guides/detect/create-multi-stage-detectors.md)
 * [Execute Sigma rules](../guides/detect/execute-sigma-rules.md)
 * [Scan bytes with YARA](../guides/detect/scan-bytes-with-yara.md)
-* [Add operators](../guides/packages/add-operators.md)
+* [Add operators](https://tenzir.com/docs/guides/packages/add-operators)

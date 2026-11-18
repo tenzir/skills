@@ -1,7 +1,7 @@
 ---
 title: "ai_decide"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/ai_decide
-source: https://tenzir.com/docs/v6.22.0/reference/operators/ai_decide.md
+canonical: https://tenzir.com/docs/reference/operators/ai_decide
+source: https://tenzir.com/docs/reference/operators/ai_decide.md
 section: "Docs"
 ---
 

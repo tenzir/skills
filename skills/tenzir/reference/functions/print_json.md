@@ -1,7 +1,7 @@
 ---
 title: "print_json"
-canonical: https://tenzir.com/docs/v6.22.0/reference/functions/print_json
-source: https://tenzir.com/docs/v6.22.0/reference/functions/print_json.md
+canonical: https://tenzir.com/docs/reference/functions/print_json
+source: https://tenzir.com/docs/reference/functions/print_json.md
 section: "Docs"
 ---
 

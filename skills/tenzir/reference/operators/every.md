@@ -1,7 +1,7 @@
 ---
 title: "every"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/every
-source: https://tenzir.com/docs/v6.22.0/reference/operators/every.md
+canonical: https://tenzir.com/docs/reference/operators/every
+source: https://tenzir.com/docs/reference/operators/every.md
 section: "Docs"
 ---
 

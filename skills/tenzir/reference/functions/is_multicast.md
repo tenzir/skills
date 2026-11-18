@@ -1,7 +1,7 @@
 ---
 title: "is_multicast"
-canonical: https://tenzir.com/docs/v6.22.0/reference/functions/is_multicast
-source: https://tenzir.com/docs/v6.22.0/reference/functions/is_multicast.md
+canonical: https://tenzir.com/docs/reference/functions/is_multicast
+source: https://tenzir.com/docs/reference/functions/is_multicast.md
 section: "Docs"
 ---
 

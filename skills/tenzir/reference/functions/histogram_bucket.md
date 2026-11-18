@@ -1,7 +1,7 @@
 ---
 title: "histogram_bucket"
-canonical: https://tenzir.com/docs/v6.22.0/reference/functions/histogram_bucket
-source: https://tenzir.com/docs/v6.22.0/reference/functions/histogram_bucket.md
+canonical: https://tenzir.com/docs/reference/functions/histogram_bucket
+source: https://tenzir.com/docs/reference/functions/histogram_bucket.md
 section: "Docs"
 ---
 

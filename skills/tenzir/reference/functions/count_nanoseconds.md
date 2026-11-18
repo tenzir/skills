@@ -1,7 +1,7 @@
 ---
 title: "count_nanoseconds"
-canonical: https://tenzir.com/docs/v6.22.0/reference/functions/count_nanoseconds
-source: https://tenzir.com/docs/v6.22.0/reference/functions/count_nanoseconds.md
+canonical: https://tenzir.com/docs/reference/functions/count_nanoseconds
+source: https://tenzir.com/docs/reference/functions/count_nanoseconds.md
 section: "Docs"
 ---
 

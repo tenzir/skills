@@ -1,8 +1,8 @@
 ---
 title: "Create multi-stage detectors"
 description: "Combine independent detections into higher-confidence verdicts with correlation combinators, cross-stage state, and suppression"
-canonical: https://tenzir.com/docs/v6.22.0/guides/detect/create-multi-stage-detectors
-source: https://tenzir.com/docs/v6.22.0/guides/detect/create-multi-stage-detectors.md
+canonical: https://tenzir.com/docs/guides/detect/create-multi-stage-detectors
+source: https://tenzir.com/docs/guides/detect/create-multi-stage-detectors.md
 section: "Docs"
 ---
 
@@ -199,12 +199,15 @@ A combinator sometimes needs memory independent of one correlation window: persi
 
 ### Remember facts with a context
 
-Lookup-table contexts provide state that outlives any window and is shared across all pipelines of a node. Use them for questions such as “is this the first time we see this host?”, “is this rule rare in our fleet?”, or “did this entity trip a different stage recently?”
+Lookup-table contexts provide state that outlives any window and is shared across all pipelines of a deployment. Use them for questions such as “is this the first time we see this host?”, “is this rule rare in our fleet?”, or “did this entity trip a different stage recently?”
 
-Create the context once:
+Declare the context in your deployment’s configuration. The `persist-interval` keeps what it remembers across restarts:
 
-```tql
-context_create_lookup_table "seen_hosts"
+contexts/seen\_hosts.yaml
+
+```yaml
+type: lookup-table
+persist-interval: 5min
 ```
 
 Then filter findings to first-time hosts. [`context_enrich`](../../reference/operators/context_enrich.md) adds a field named after the context, which stays `null` for unknown keys, and [`context_update`](../../reference/operators/context_update.md) remembers the key. Two details make the pipeline correct: `context_update` consumes its input without emitting anything, so it runs on a [`fork`](../../reference/operators/fork.md) branch while the main stream continues; and because the enrich step runs before the update lands, several findings for the same new host can be in flight together, all still enriched with `null`, so [`deduplicate`](../../reference/operators/deduplicate.md) closes that gap inside the pipeline. Its `create_timeout` only needs to outlast the context update; keeping it short stops the in-pipeline cache from growing with hostname cardinality:
@@ -237,7 +240,7 @@ The first run emits one finding per host. Neither host is known yet, and the sec
 }
 ```
 
-Running the same pipeline again emits nothing: the context remembered both hosts, and the state survives pipeline restarts because it lives in the node, not in the pipeline. The context provides the persistence, the in-pipeline [`deduplicate`](../../reference/operators/deduplicate.md) the atomicity. Contexts require a Tenzir Node, and the guide on [using lookup tables](../enrich/use-lookup-tables.md) covers the full toolbox, including timestamp-valued entries for “seen recently” logic that expires.
+Running the same pipeline again emits nothing: the context remembered both hosts, and the state survives pipeline restarts because it lives in the deployment, not in the pipeline. The context provides the persistence, the in-pipeline [`deduplicate`](../../reference/operators/deduplicate.md) the atomicity. The guide on [using lookup tables](../enrich/use-lookup-tables.md) covers the full toolbox, including timestamp-valued entries for “seen recently” logic that expires.
 
 ### Suppress repeated verdicts
 

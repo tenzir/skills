@@ -1,7 +1,7 @@
 ---
 title: "read_chunks"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/read_chunks
-source: https://tenzir.com/docs/v6.22.0/reference/operators/read_chunks.md
+canonical: https://tenzir.com/docs/reference/operators/read_chunks
+source: https://tenzir.com/docs/reference/operators/read_chunks.md
 section: "Docs"
 ---
 

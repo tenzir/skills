@@ -1,8 +1,8 @@
 ---
 title: "Baseline behavior from stored events"
 description: "Learn per-entity baselines from stored events on a schedule, publish them as lookup tables, and judge live streams with robust scores"
-canonical: https://tenzir.com/docs/v6.22.0/guides/detect/baseline-from-stored-events
-source: https://tenzir.com/docs/v6.22.0/guides/detect/baseline-from-stored-events.md
+canonical: https://tenzir.com/docs/guides/detect/baseline-from-stored-events
+source: https://tenzir.com/docs/guides/detect/baseline-from-stored-events.md
 section: "Docs"
 ---
 
@@ -14,19 +14,22 @@ This guide shows you how to learn what is normal for each entity from events tha
 
 The solution uses one opinionated execution boundary: ClickHouse reduces raw events to the same 15-minute buckets that the detector observes, while TQL computes median and MAD, owns the daily schedule, and publishes the result. This keeps the statistical policy in the pipeline without moving raw events out of the lake.
 
-## Create the baseline context
+## Declare the baseline context
 
-Create the lookup-table context once before starting the learner or detector:
+Declare the lookup-table context in your deployment’s configuration, next to the learner and detector pipelines. The `persist-interval` keeps the baseline across restarts, so the detector doesn’t wait a day for the next learner run:
 
-```tql
-context_create_lookup_table "egress-baseline"
+contexts/egress-baseline.yaml
+
+```yaml
+type: lookup-table
+persist-interval: 1h
 ```
 
 The context is the contract between the two pipelines. The learner updates one record per asset, and the detector reads that record without restarting when it changes.
 
 ## Learn the baseline on a schedule
 
-This guide uses ClickHouse as the lake. Our [Clickhouse](https://tenzir.com/integrations/clickhouse) integration keeps Network Activity queryable as `ocsf.Network_Activity`.
+This guide uses ClickHouse as the lake. Our [Clickhouse](https://tenzir.com/product/integrations/clickhouse) integration keeps Network Activity queryable as `ocsf.Network_Activity`.
 
 Run the learner daily. The SQL query reduces a week of Network Activity to one outbound byte sum per asset and 15-minute bucket. TQL then reduces those buckets to one robust baseline per asset:
 
@@ -120,7 +123,7 @@ Once the basic loop works, adapt the key and learning query to the behavior you 
 
 * **Seasonality.** One value per asset averages away daily rhythm. Include an hour band in the key in both pipelines, for example `f"{asset}|{time.hour()}"`.
 * **Poisoning.** The learner absorbs whatever the horizon contains. Exclude periods that produced findings, and treat a baseline that suddenly widens as evidence of its own.
-* **Execution placement.** This guide deliberately keeps the robust reduction in TQL. If bucket transfer dominates the workload, materialize bucket sums or the full baseline in the lake while preserving the lookup context as the detector-facing interface. Our discussion of [where computation and state should live](https://tenzir.com/blog/per-asset-baselines-for-detection-over-streaming-ocsf#choose-where-computation-and-state-live) develops that trade-off.
+* **Execution placement.** This guide deliberately keeps the robust reduction in TQL. If bucket transfer dominates the workload, materialize bucket sums or the full baseline in the lake while preserving the enrichment context as the detector-facing interface. Our discussion of [where computation and state should live](https://tenzir.com/blog/per-asset-baselines-for-detection-over-streaming-ocsf#choose-where-computation-and-state-live) develops that trade-off.
 
 The guide on [detecting over time windows](detect-over-time-windows.md#compare-observations-with-a-rolling-baseline) covers the alternative where recent history remains inside the stream.
 
@@ -130,6 +133,6 @@ The guide on [detecting over time windows](detect-over-time-windows.md#compare-o
 * [Enrichment](../../explanations/enrichment.md)
 * [`median`](../../reference/functions/median.md)
 * [`mad`](../../reference/functions/mad.md)
-* [Clickhouse](https://tenzir.com/integrations/clickhouse)
+* [Clickhouse](https://tenzir.com/product/integrations/clickhouse)
 * [Detect over time windows](detect-over-time-windows.md)
 * [Create multi-stage detectors](create-multi-stage-detectors.md)

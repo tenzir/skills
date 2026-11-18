@@ -1,7 +1,7 @@
 ---
 title: "Pipeline"
-canonical: https://tenzir.com/docs/v6.22.0/explanations/pipeline
-source: https://tenzir.com/docs/v6.22.0/explanations/pipeline.md
+canonical: https://tenzir.com/docs/explanations/pipeline
+source: https://tenzir.com/docs/explanations/pipeline.md
 section: "Docs"
 ---
 
@@ -22,6 +22,40 @@ You write pipelines in the [Tenzir Query Language (TQL)](language.md), a languag
 Learn TQL
 
 Head over to our [language documentation](language.md) for an in-depth explanation of how TQL works. We’re continuing here with high-level architectural aspects of the pipeline execution model.
+
+## Where Pipelines Run
+
+A pipeline runs in one of three places, and the place decides how it starts, where its events go, and how long it lives. The three places build on each other: you try an idea on your machine or ad hoc, and once the events look right, you add the pipeline to the configuration and deploy it, as our [quickstart](../guides/quickstart.md) does.
+
+### On Your Machine
+
+Try TQL on local files and test packages, with no deployment and no account.
+
+* **Starts with** `tenzir run`, in its own, local process.
+* **Events go to** standard output.
+* **Packages** are those that `tenzir package fetch` downloaded.
+* **Runs until** it ends or you stop it.
+
+### Ad Hoc on a Deployment
+
+Look at data on a deployment once. The events are the result, so an ad-hoc pipeline starts with an input and has no output of its own.
+
+* **Starts with** the Explorer in the app, `tenzir run -r`, an agent via MCP, or the API.
+* **Events go to** you, streamed through the platform.
+* **Packages** are those of the deployment’s configuration.
+* **Runs until** it ends, you stop it, nobody reads its events for a minute, or the deployment restarts, since the deployment never stores it.
+* **Limits** are 100,000 events per pipeline and four ad-hoc pipelines per deployment at a time.
+
+### Deployed
+
+Move data in production. The pipeline is a file in the `pipelines/` folder of the [configuration](configuration.md), so every change to it is a commit that can be reviewed.
+
+* **Starts with** a deploy of the configuration.
+* **Events go to** the pipeline’s own outputs.
+* **Packages** are those of the deployment’s configuration.
+* **Runs until** a configuration removes it or you stop it, across restarts.
+
+Our explanation of [deployments](deployment.md#what-a-deployment-runs) covers what else a deployment runs.
 
 ## Typed Operators
 

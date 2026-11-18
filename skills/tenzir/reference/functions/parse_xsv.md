@@ -1,7 +1,7 @@
 ---
 title: "parse_xsv"
-canonical: https://tenzir.com/docs/v6.22.0/reference/functions/parse_xsv
-source: https://tenzir.com/docs/v6.22.0/reference/functions/parse_xsv.md
+canonical: https://tenzir.com/docs/reference/functions/parse_xsv
+source: https://tenzir.com/docs/reference/functions/parse_xsv.md
 section: "Docs"
 ---
 
@@ -25,8 +25,8 @@ The `parse_xsv` function parses a string as [XSV](https://en.wikipedia.org/wiki/
 
 The following table lists existing XSV configurations:
 
-| Format                                                                    | Field Separator | List Separator | Null Value |
-| ------------------------------------------------------------------------- | --------------- | -------------- | ---------- |
+| Format                                                            | Field Separator | List Separator | Null Value |
+| ----------------------------------------------------------------- | --------------- | -------------- | ---------- |
 | [`csv`](parse_csv.md) | `,`             | `;`            | empty      |
 | [`ssv`](parse_ssv.md) | `<space>`       | `,`            | `-`        |
 | [`tsv`](parse_tsv.md) | `\t`            | `,`            | `-`        |

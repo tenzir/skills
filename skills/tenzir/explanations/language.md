@@ -1,8 +1,8 @@
 ---
 title: "Language"
 description: "Understand TQL's dataflow model, streaming and batch semantics, and support for events with different schemas."
-canonical: https://tenzir.com/docs/v6.22.0/explanations/language
-source: https://tenzir.com/docs/v6.22.0/explanations/language.md
+canonical: https://tenzir.com/docs/explanations/language
+source: https://tenzir.com/docs/explanations/language.md
 section: "Docs"
 ---
 
@@ -29,7 +29,7 @@ Its pipeline composition is familiar if you’ve used Unix pipes, Splunk SPL, or
 The pipeline model supports several ways to develop and maintain that work:
 
 * Build a pipeline incrementally, adding a transformation after checking its input.
-* Inspect intermediate results by removing or commenting out downstream operators, as our guide on [debugging field values](../guides/troubleshooting/debug-field-values.md#inspect-the-pipeline-step-by-step) demonstrates.
+* Inspect intermediate results by removing or commenting out downstream operators.
 * Reuse transformations in user-defined operators and packages instead of repeating them across pipelines.
 
 SQL remains useful for querying tables. TQL focuses on composing dataflows that can collect bytes, parse events, enrich records, and deliver results in one program. This is a difference in focus, not a requirement to give up the SQL systems that produce or consume your data.

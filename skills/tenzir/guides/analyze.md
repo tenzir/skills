@@ -1,8 +1,8 @@
 ---
 title: "Overview"
 description: "Summarize event streams and compare current activity with prior behavior."
-canonical: https://tenzir.com/docs/v6.22.0/guides/analyze
-source: https://tenzir.com/docs/v6.22.0/guides/analyze.md
+canonical: https://tenzir.com/docs/guides/analyze
+source: https://tenzir.com/docs/guides/analyze.md
 section: "Docs"
 ---
 

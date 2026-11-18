@@ -1,7 +1,7 @@
 ---
 title: "to_azure_log_analytics"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/to_azure_log_analytics
-source: https://tenzir.com/docs/v6.22.0/reference/operators/to_azure_log_analytics.md
+canonical: https://tenzir.com/docs/reference/operators/to_azure_log_analytics
+source: https://tenzir.com/docs/reference/operators/to_azure_log_analytics.md
 section: "Docs"
 ---
 
@@ -63,7 +63,7 @@ Defaults to `8`. Must be at least `1`.
 
 ## Parallelism
 
-In a [parallel pipeline](../../guides/node-setup/tune-performance.md#parallelism), each instance of `to_azure_log_analytics` accumulates its own batches and sends them with its own access token and connection. Because `parallel` bounds the requests in flight within one instance, the pipeline-wide bound is `parallel` times the number of instances.
+In a [parallel pipeline](../../explanations/executor.md#parallel-execution), each instance of `to_azure_log_analytics` accumulates its own batches and sends them with its own access token and connection. Because `parallel` bounds the requests in flight within one instance, the pipeline-wide bound is `parallel` times the number of instances.
 
 The Logs Ingestion API accepts every request on its own and gives no ordering guarantee across requests, so the table never reflects a strict pipeline order once more than one request is in flight.
 
@@ -85,6 +85,6 @@ to_azure_log_analytics tenant_id="00a00a00-0a00-0a00-00aa-000aa0a0a000",
 ## See Also
 
 * [Map to ASIM](../../guides/normalize/map-to-asim.md)
-* [Azure log analytics](https://tenzir.com/integrations/microsoft/azure-log-analytics)
+* [Azure log analytics](https://tenzir.com/product/integrations/microsoft/azure-log-analytics)
 
 Parallelizable: a parallel pipeline may run this operator on several cores at once.

@@ -1,7 +1,7 @@
 ---
 title: "read_feather"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/read_feather
-source: https://tenzir.com/docs/v6.22.0/reference/operators/read_feather.md
+canonical: https://tenzir.com/docs/reference/operators/read_feather
+source: https://tenzir.com/docs/reference/operators/read_feather.md
 section: "Docs"
 ---
 

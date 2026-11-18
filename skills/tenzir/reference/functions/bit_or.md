@@ -1,7 +1,7 @@
 ---
 title: "bit_or"
-canonical: https://tenzir.com/docs/v6.22.0/reference/functions/bit_or
-source: https://tenzir.com/docs/v6.22.0/reference/functions/bit_or.md
+canonical: https://tenzir.com/docs/reference/functions/bit_or
+source: https://tenzir.com/docs/reference/functions/bit_or.md
 section: "Docs"
 ---
 

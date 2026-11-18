@@ -1,7 +1,7 @@
 ---
 title: "collect"
-canonical: https://tenzir.com/docs/v6.22.0/reference/functions/collect
-source: https://tenzir.com/docs/v6.22.0/reference/functions/collect.md
+canonical: https://tenzir.com/docs/reference/functions/collect
+source: https://tenzir.com/docs/reference/functions/collect.md
 section: "Docs"
 ---
 

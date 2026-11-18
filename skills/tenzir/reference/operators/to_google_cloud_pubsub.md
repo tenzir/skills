@@ -1,7 +1,7 @@
 ---
 title: "to_google_cloud_pubsub"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/to_google_cloud_pubsub
-source: https://tenzir.com/docs/v6.22.0/reference/operators/to_google_cloud_pubsub.md
+canonical: https://tenzir.com/docs/reference/operators/to_google_cloud_pubsub
+source: https://tenzir.com/docs/reference/operators/to_google_cloud_pubsub.md
 section: "Docs"
 ---
 
@@ -37,7 +37,7 @@ A string to publish as the message.
 
 ## Parallelism
 
-In a [parallel pipeline](../../guides/node-setup/tune-performance.md#parallelism), each instance of `to_google_cloud_pubsub` publishes through its own connection. The operator sets no ordering keys, so Pub/Sub delivers messages without an ordering guarantee either way, and replicating the operator changes nothing for subscribers.
+In a [parallel pipeline](../../explanations/executor.md#parallel-execution), each instance of `to_google_cloud_pubsub` publishes through its own connection. The operator sets no ordering keys, so Pub/Sub delivers messages without an ordering guarantee either way, and replicating the operator changes nothing for subscribers.
 
 ## Examples
 
@@ -54,6 +54,6 @@ to_google_cloud_pubsub project_id="amazing-project-123456", topic_id="alerts-top
 ## See Also
 
 * [`from_google_cloud_pubsub`](from_google_cloud_pubsub.md)
-* [Cloud pubsub](https://tenzir.com/integrations/google/cloud-pubsub)
+* [Cloud pubsub](https://tenzir.com/product/integrations/google/cloud-pubsub)
 
 Parallelizable: a parallel pipeline may run this operator on several cores at once.

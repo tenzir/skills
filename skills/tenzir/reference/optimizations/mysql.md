@@ -1,7 +1,7 @@
 ---
 title: "MySQL"
-canonical: https://tenzir.com/docs/v6.22.0/reference/optimizations/mysql
-source: https://tenzir.com/docs/v6.22.0/reference/optimizations/mysql.md
+canonical: https://tenzir.com/docs/reference/optimizations/mysql
+source: https://tenzir.com/docs/reference/optimizations/mysql.md
 section: "Docs"
 ---
 
@@ -28,7 +28,7 @@ The operator takes over the longest run of operators directly after it that MySQ
 * [`where`](../operators/where.md), as the [filters](mysql.md#filters) section describes.
 * [`select`](../operators/select.md) of top-level fields, including renames, such as `select ip=src_ip, ts`.
 * [`drop`](../operators/drop.md) after a [`select`](../operators/select.md) or a [`summarize`](../operators/summarize.md) that MySQL took over, which names the fields that remain. MySQL has no way to select every column but some, so a [`drop`](../operators/drop.md) of table columns stays in Tenzir.
-* [`summarize`](../operators/summarize.md) with group keys on fields and `count()`, `count(x)`, `min(x)`, and `max(x)` of fields. The summary may follow [`select`](../operators/select.md), [`drop`](../operators/drop.md), and assignments that copy fields, as [Aggregations in the source](../optimizations.md#aggregations-in-the-source) describes.
+* [`summarize`](../operators/summarize.md) with group keys and the functions that the [summaries](mysql.md#summaries) section lists. The summary may follow [`select`](../operators/select.md), [`drop`](../operators/drop.md), and assignments, as [Aggregations in the source](../optimizations.md#aggregations-in-the-source) describes.
 * [`sort`](../operators/sort.md) by fields.
 * [`head`](../operators/head.md), and [`top`](../operators/top.md) or [`rare`](../operators/rare.md) followed by [`head`](../operators/head.md).
 
@@ -44,6 +44,32 @@ head 20
 ```
 
 and returns at most 20 groups. The operator nests derived tables where SQL’s clause order requires it, and keeps the order of a [`sort`](../operators/sort.md) across them.
+
+## Summaries
+
+MySQL computes these aggregation functions of a [`summarize`](../operators/summarize.md):
+
+| TQL                   | MySQL                                                      |
+| --------------------- | ---------------------------------------------------------- |
+| `count()`             | `COUNT(*)`                                                 |
+| `count(x)`            | `COUNT(x)`                                                 |
+| `min(x)`, `max(x)`    | `MIN(x)`, `MAX(x)`                                         |
+| `count_if(x, v => p)` | `COUNT(CASE WHEN p THEN x END)`, which skips `NULL` values |
+| `count_distinct(x)`   | `COUNT(DISTINCT x)`                                        |
+| `mean(x)`             | `AVG(x)`                                                   |
+
+`sum` stays in Tenzir, since MySQL returns a `DECIMAL` for it.
+
+Group keys and aggregate arguments can be computed values, such as `level` in
+
+```tql
+level = severity * 2
+summarize src_ip, worst=max(level)
+```
+
+MySQL computes an assignment that the summary reads with its own semantics, even if it calls a function that MySQL spells. An assignment that the summary doesn’t read, including one that a later assignment shadows, must be infallible. See [Computed keys and arguments](../optimizations.md#computed-keys-and-arguments).
+
+A `floor` of a time to a duration stays in Tenzir, since MySQL returns times as text.
 
 ## Filters
 
@@ -69,6 +95,7 @@ The operators that MySQL takes over run as MySQL runs them, which can differ fro
 * An IP address becomes its text, such as `'10.0.0.1'`, which compares as text.
 * `match_regex` uses MySQL’s `REGEXP_LIKE`, which matches with ICU rather than RE2.
 * A [`select`](../operators/select.md) of a column that the table lacks fails the query, where Tenzir would warn and fill in `null`.
+* A query that MySQL rejects fails the pipeline with the error of MySQL, a note that MySQL computed the stages that the operator took over with its own semantics, and a hint to use `pushdown=false`. The note and the hint appear only if the operator took over stages.
 
 ## Verify an optimization
 

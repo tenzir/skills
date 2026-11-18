@@ -1,7 +1,7 @@
 ---
 title: "mode"
-canonical: https://tenzir.com/docs/v6.22.0/reference/functions/mode
-source: https://tenzir.com/docs/v6.22.0/reference/functions/mode.md
+canonical: https://tenzir.com/docs/reference/functions/mode
+source: https://tenzir.com/docs/reference/functions/mode.md
 section: "Docs"
 ---
 

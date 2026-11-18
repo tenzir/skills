@@ -1,7 +1,7 @@
 ---
 title: "lag"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/lag
-source: https://tenzir.com/docs/v6.22.0/reference/operators/lag.md
+canonical: https://tenzir.com/docs/reference/operators/lag
+source: https://tenzir.com/docs/reference/operators/lag.md
 section: "Docs"
 ---
 

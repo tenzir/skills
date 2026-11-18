@@ -1,7 +1,7 @@
 ---
 title: "Type System"
-canonical: https://tenzir.com/docs/v6.22.0/reference/types
-source: https://tenzir.com/docs/v6.22.0/reference/types.md
+canonical: https://tenzir.com/docs/reference/types
+source: https://tenzir.com/docs/reference/types.md
 section: "Docs"
 ---
 

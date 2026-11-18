@@ -1,7 +1,7 @@
 ---
 title: "ocsf_derive"
-canonical: https://tenzir.com/docs/v6.22.0/reference/functions/ocsf_derive
-source: https://tenzir.com/docs/v6.22.0/reference/functions/ocsf_derive.md
+canonical: https://tenzir.com/docs/reference/functions/ocsf_derive
+source: https://tenzir.com/docs/reference/functions/ocsf_derive.md
 section: "Docs"
 ---
 
@@ -17,11 +17,11 @@ ocsf_derive(x:record) -> record
 
 ## Description
 
-The `ocsf_derive` function performs bidirectional enum derivation on the OCSF event `x`. It applies the same rules as the [`ocsf_derive`](../operators/ocsf_derive.md) operator: it fills a missing enum string such as `activity_name` from its integer sibling `activity_id` and vice versa, recurses into nested records and lists, and warns about inconsistent pairs without modifying them. It also computes missing `category_uid` and `type_uid` fields from `class_uid` and `activity_id`. Existing fields keep their position, and the function appends derived fields to the end of their record.
+The `ocsf_derive` function performs bidirectional enum derivation on the OCSF event `x`. It fills a missing enum string such as `activity_name` from its integer sibling `activity_id` and vice versa, recurses into nested records and lists, and warns about inconsistent pairs without modifying them. It also computes missing `category_uid` and `type_uid` fields from `class_uid` and `activity_id`. Existing fields keep their position, and the function appends derived fields to the end of their record.
 
-Use the function for both top-level and nested OCSF events. To transform the whole event, write `this = ocsf_derive(this)`. For an OCSF event in a field, write `ocsf = ocsf_derive(ocsf)`, or use [`map`](map.md) to transform a list of events. The [`ocsf_derive`](../operators/ocsf_derive.md) operator is deprecated.
+Use the function for both top-level and nested OCSF events. To transform the whole event, write `this = ocsf_derive(this)`. For an OCSF event in a field, write `ocsf = ocsf_derive(ocsf)`, or use [`map`](map.md) to transform a list of events.
 
-Unlike the operator, which drops events whose OCSF version or class it cannot resolve, the function returns `null` with a warning and keeps the rest of the event. It also returns `null` with a warning when `x` is not a record, and returns `null` without a warning when `x` is `null`.
+When the function cannot resolve the OCSF version or class of `x`, it returns `null` with a warning and keeps the rest of the event. It also returns `null` with a warning when `x` is not a record, and returns `null` without a warning when `x` is `null`.
 
 ### `x: record`
 
@@ -31,7 +31,7 @@ The OCSF event to complete.
 
 ### Transform a top-level event
 
-Replace an existing `ocsf_derive` operator call with an assignment:
+Tenzir 7 removes the `ocsf_derive` operator. Replace a call of it in a pipeline from Tenzir 6 with an assignment:
 
 ```tql
 this = ocsf_derive(this)
@@ -127,7 +127,6 @@ events = events.map(x => ocsf_derive(x))
 
 ## See Also
 
-* [`ocsf_derive`](../operators/ocsf_derive.md)
 * [`ocsf_cast`](ocsf_cast.md)
 * [`ocsf_compact`](ocsf_compact.md)
 * [`ocsf_trim`](ocsf_trim.md)

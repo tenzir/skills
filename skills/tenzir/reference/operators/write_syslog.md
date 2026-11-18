@@ -1,7 +1,7 @@
 ---
 title: "write_syslog"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/write_syslog
-source: https://tenzir.com/docs/v6.22.0/reference/operators/write_syslog.md
+canonical: https://tenzir.com/docs/reference/operators/write_syslog
+source: https://tenzir.com/docs/reference/operators/write_syslog.md
 section: "Docs"
 ---
 
@@ -91,4 +91,4 @@ write_syslog
 
 * [`read_syslog`](read_syslog.md)
 * [`parse_syslog`](../functions/parse_syslog.md)
-* [Syslog](https://tenzir.com/integrations/syslog)
+* [Syslog](https://tenzir.com/product/integrations/syslog)

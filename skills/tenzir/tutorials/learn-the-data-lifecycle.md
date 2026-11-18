@@ -1,7 +1,7 @@
 ---
 title: "Learn the data lifecycle"
-canonical: https://tenzir.com/docs/v6.22.0/tutorials/learn-the-data-lifecycle
-source: https://tenzir.com/docs/v6.22.0/tutorials/learn-the-data-lifecycle.md
+canonical: https://tenzir.com/docs/tutorials/learn-the-data-lifecycle
+source: https://tenzir.com/docs/tutorials/learn-the-data-lifecycle.md
 section: "Docs"
 ---
 
@@ -111,7 +111,7 @@ Enrichment adds what the event does not carry: geography, asset ownership, threa
 context_enrich "geo-open", key=dst_endpoint.ip, into=dst_endpoint.geo
 ```
 
-The lookup lives in a context that updates on its own schedule, so enrichment stays one operator call. See [lookup tables](../guides/enrich/use-lookup-tables.md), [threat intelligence](../guides/enrich/enrich-with-threat-intel.md), [asset inventory](../guides/enrich/enrich-with-asset-inventory.md), and [models](../guides/enrich/enrich-events-with-ai.md), or build a context in [Add enrichment contexts](add-enrichment-contexts.md).
+The reference data lives in a context that updates on its own schedule, so enrichment stays one operator call. See [lookup tables](../guides/enrich/use-lookup-tables.md), [threat intelligence](../guides/enrich/enrich-with-threat-intel.md), [asset inventory](../guides/enrich/enrich-with-asset-inventory.md), and [models](../guides/enrich/enrich-events-with-ai.md), or build a context in [Add enrichment contexts](add-enrichment-contexts.md).
 
 ### Analyze
 
@@ -128,7 +128,7 @@ window size=15min, on=time {
 }
 ```
 
-Analysis powers charts, dashboards, and baselines. It can also expose [rare values](../guides/analyze/find-unseen-and-rare-values.md), [set adaptive thresholds](../guides/analyze/set-adaptive-thresholds-from-a-baseline.md), [identify distribution drift](../guides/analyze/identify-distribution-drift.md), or [find a cardinality change](../guides/analyze/find-cardinality-spikes.md). None of these results decides by itself that the activity is malicious. See [aggregating event streams](../guides/analyze/aggregate-event-streams.md), [windowing event streams](../guides/analyze/window-event-streams.md), and [Plot data with charts](plot-data-with-charts.md).
+Analysis powers charts, dashboards, and baselines. It can also expose [rare values](../guides/analyze/find-unseen-and-rare-values.md), [set adaptive thresholds](../guides/analyze/set-adaptive-thresholds-from-a-baseline.md), [identify distribution drift](../guides/analyze/identify-distribution-drift.md), or [find a cardinality change](../guides/analyze/find-cardinality-spikes.md). None of these results decides by itself that the activity is malicious. See [aggregating event streams](../guides/analyze/aggregate-event-streams.md) and [windowing event streams](../guides/analyze/window-event-streams.md).
 
 ### Detect
 
@@ -157,7 +157,7 @@ to_s3 "s3://security-lake/ocsf/network/**/data_{uuid}.parquet",
 }
 ```
 
-Columnar files with compression and partitioning keep both cost and query time down. See [writing partitioned files](../guides/store/write-partitioned-files.md) and [importing into storage](../guides/store/import-into-a-node.md).
+Columnar files with compression and partitioning keep both cost and query time down. See [writing partitioned files](../guides/store/write-partitioned-files.md) and [building an OCSF lake with ClickHouse](build-an-ocsf-lake-with-clickhouse.md).
 
 ### Search
 
@@ -170,7 +170,7 @@ from_clickhouse uri="clickhouse://clickhouse:9000/security", sql=r#"
 "#
 ```
 
-Push filtering, sorting, and projection into the system that holds the data, then continue in TQL. See [querying storage](../guides/search/export-from-a-node.md) and [reading from data stores](../guides/collect/read-from-data-stores.md).
+Push filtering, sorting, and projection into the system that holds the data, then continue in TQL. See [reading from data stores](../guides/collect/read-from-data-stores.md) and the [optimizations](../reference/optimizations.md) that push work into them.
 
 ### Route
 

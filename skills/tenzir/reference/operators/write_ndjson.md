@@ -1,7 +1,7 @@
 ---
 title: "write_ndjson"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/write_ndjson
-source: https://tenzir.com/docs/v6.22.0/reference/operators/write_ndjson.md
+canonical: https://tenzir.com/docs/reference/operators/write_ndjson
+source: https://tenzir.com/docs/reference/operators/write_ndjson.md
 section: "Docs"
 ---
 

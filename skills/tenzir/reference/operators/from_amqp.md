@@ -1,7 +1,7 @@
 ---
 title: "from_amqp"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/from_amqp
-source: https://tenzir.com/docs/v6.22.0/reference/operators/from_amqp.md
+canonical: https://tenzir.com/docs/reference/operators/from_amqp
+source: https://tenzir.com/docs/reference/operators/from_amqp.md
 section: "Docs"
 ---
 
@@ -125,7 +125,7 @@ Defaults to `false`.
 
 ## Parallelism
 
-In a [parallel pipeline](../../guides/node-setup/tune-performance.md#parallelism), `from_amqp` can attach several consumers to the same classic or quorum queue. The broker can distribute messages among these consumers.
+In a [parallel pipeline](../../explanations/executor.md#parallel-execution), `from_amqp` can attach several consumers to the same classic or quorum queue. The broker can distribute messages among these consumers.
 
 The operator runs multiple instances only when all of these conditions hold:
 
@@ -179,6 +179,6 @@ from_amqp "amqp://broker/vhost",
 
 * [`to_amqp`](to_amqp.md)
 * [Read from message brokers](../../guides/collect/read-from-message-brokers.md)
-* [Amqp](https://tenzir.com/integrations/amqp)
+* [Amqp](https://tenzir.com/product/integrations/amqp)
 
 Parallelizable: a parallel pipeline may run this operator on several cores at once.

@@ -1,7 +1,7 @@
 ---
 title: "value_counts"
-canonical: https://tenzir.com/docs/v6.22.0/reference/functions/value_counts
-source: https://tenzir.com/docs/v6.22.0/reference/functions/value_counts.md
+canonical: https://tenzir.com/docs/reference/functions/value_counts
+source: https://tenzir.com/docs/reference/functions/value_counts.md
 section: "Docs"
 ---
 

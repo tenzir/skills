@@ -1,7 +1,7 @@
 ---
 title: "Expressions"
-canonical: https://tenzir.com/docs/v6.22.0/reference/expressions
-source: https://tenzir.com/docs/v6.22.0/reference/expressions.md
+canonical: https://tenzir.com/docs/reference/expressions
+source: https://tenzir.com/docs/reference/expressions.md
 section: "Docs"
 ---
 

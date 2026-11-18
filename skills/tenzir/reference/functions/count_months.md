@@ -1,7 +1,7 @@
 ---
 title: "count_months"
-canonical: https://tenzir.com/docs/v6.22.0/reference/functions/count_months
-source: https://tenzir.com/docs/v6.22.0/reference/functions/count_months.md
+canonical: https://tenzir.com/docs/reference/functions/count_months
+source: https://tenzir.com/docs/reference/functions/count_months.md
 section: "Docs"
 ---
 

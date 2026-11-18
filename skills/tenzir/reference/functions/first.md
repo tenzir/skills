@@ -1,7 +1,7 @@
 ---
 title: "first"
-canonical: https://tenzir.com/docs/v6.22.0/reference/functions/first
-source: https://tenzir.com/docs/v6.22.0/reference/functions/first.md
+canonical: https://tenzir.com/docs/reference/functions/first
+source: https://tenzir.com/docs/reference/functions/first.md
 section: "Docs"
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "repeat"
-canonical: https://tenzir.com/docs/v6.22.0/reference/functions/repeat
-source: https://tenzir.com/docs/v6.22.0/reference/functions/repeat.md
+canonical: https://tenzir.com/docs/reference/functions/repeat
+source: https://tenzir.com/docs/reference/functions/repeat.md
 section: "Docs"
 ---
 

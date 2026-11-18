@@ -1,7 +1,7 @@
 ---
 title: "context_update"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/context_update
-source: https://tenzir.com/docs/v6.22.0/reference/operators/context_update.md
+canonical: https://tenzir.com/docs/reference/operators/context_update
+source: https://tenzir.com/docs/reference/operators/context_update.md
 section: "Docs"
 ---
 
@@ -12,18 +12,26 @@ section: "Docs"
 Updates a context with new data.
 
 ```tql
-context_update name:string, key=any,
-               [value=any, create_timeout=duration,
-                write_timeout=duration, read_timeout=duration]
+context_update name:string, key=any, [value=any]
 ```
 
 ## Description
 
-The `context_update` operator adds new data to a specified context.
+The `context_update` operator stores data from every event in a context. It consumes its input and emits nothing. The deployment’s configuration declares the context, as the reference for [context files](../contexts.md) describes.
 
-Use the `key` argument to specify the field in the input that should be associated with the context. The [`context_enrich`](context_enrich.md) operator uses this key to access the context. For contexts that support assigning a value with a given key, you can provide an expression to customize what’s being associated with the given key.
+Use the `key` argument to specify the field in the input that should be associated with the context. The [`context_enrich`](context_enrich.md) operator uses this key to access the context.
 
-The three arguments `create_timeout`, `write_timeout`, and `read_timeout` only work with lookup tables and set the respective timeouts per table entry.
+What an update does depends on the type of context:
+
+* A lookup table stores `value` under the key, replacing what the key held before.
+* A Bloom filter adds the key. It holds keys only, so passing `value` is an error.
+* A GeoIP context takes no updates, because it holds only what it loads from its source. Updating it is an error.
+
+A context never stores secrets: the operator censors any secret in the key or value and warns about it.
+
+Expiring entries
+
+How long an entry of a lookup table lives is a setting of the table, not of the update. Set `create-timeout`, `write-timeout`, or `read-timeout` in the table’s [context file](../contexts.md#lookup-table).
 
 ### `name: string`
 
@@ -35,30 +43,20 @@ The field that represents the enrichment key in the data.
 
 ### `value = any (optional)`
 
-The field that represents the enrichment value to associate with `key`.
+The field that represents the enrichment value to associate with `key`. Only lookup tables take a value.
 
-Defaults to `this`.
-
-### `create_timeout = duration (optional)`
-
-Expires a context entry after a given duration since entry creation.
-
-### `write_timeout = duration (optional)`
-
-Expires a context entry after a given duration since the last update time. Every Every call to `context_update` resets the timeout for the respective key.
-
-### `read_timeout = duration (optional)`
-
-Expires a context entry after a given duration since the last access time. Every call to `context_enrich` resets the timeout for the respective key.
+Defaults to `this`, so a lookup table stores the whole event.
 
 ## Examples
 
 ### Populate a lookup table with data
 
-Create a lookup table:
+Declare a lookup table in the configuration:
 
-```tql
-context_create_lookup_table "ctx"
+contexts/ctx.yaml
+
+```yaml
+type: lookup-table
 ```
 
 Add data to the lookup table via `context_update`:
@@ -69,18 +67,23 @@ from {x:1, y:"a"},
 context_update "ctx", key=x, value=y
 ```
 
-Retrieve the lookup table contents:
+Enrich with the table in another pipeline:
 
 ```tql
-context_inspect "ctx"
+from {x:2}
+context_enrich "ctx", key=x
 ```
 
 ```tql
-{key: 2, value: "b"}
-{key: 1, value: "a"}
+{
+  x: 2,
+  ctx: "b",
+}
 ```
 
-### Use a custom value as lookup table
+### Store a computed value
+
+The value can be any expression:
 
 ```tql
 from {x:1},
@@ -88,24 +91,50 @@ from {x:1},
 context_update "ctx", key=x, value=x*x
 ```
 
+Enriching with the key `2` now adds `4`.
+
+### Expire entries that stop showing up
+
+Give the table a write timeout in its context file:
+
+contexts/active-indicators.yaml
+
+```yaml
+type: lookup-table
+write-timeout: 7d
+```
+
+Every update of a key resets its timeout, so an indicator that the feed stops reporting expires a week after its last update:
+
 ```tql
-{key: 2, value: 4}
-{key: 1, value: 1}
+from {indicator: "malicious.example", source: "ThreatFeed"}
+context_update "active-indicators", key=indicator, value={source: source}
+```
+
+### Add keys to a Bloom filter
+
+Declare a Bloom filter in the configuration:
+
+contexts/seen-hashes.yaml
+
+```yaml
+type: bloom-filter
+capacity: 1000000
+fp-probability: 0.01
+```
+
+Add keys without a value:
+
+```tql
+from {sha256: "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}
+context_update "seen-hashes", key=sha256
 ```
 
 ## See Also
 
-* [`context_create_bloom_filter`](context_create_bloom_filter.md)
-* [`context_create_geoip`](context_create_geoip.md)
-* [`context_create_lookup_table`](context_create_lookup_table.md)
 * [`context_enrich`](context_enrich.md)
-* [`context_erase`](context_erase.md)
-* [`context_inspect`](context_inspect.md)
-* [`context_list`](context_list.md)
-* [`context_load`](context_load.md)
-* [`context_remove`](context_remove.md)
-* [`context_reset`](context_reset.md)
-* [`context_save`](context_save.md)
+* [Contexts](../contexts.md)
+* [Declare contexts](../../guides/enrich/declare-contexts.md)
 * [Use lookup tables](../../guides/enrich/use-lookup-tables.md)
 * [Enrich with threat intel](../../guides/enrich/enrich-with-threat-intel.md)
 * [Enrich with asset inventory](../../guides/enrich/enrich-with-asset-inventory.md)

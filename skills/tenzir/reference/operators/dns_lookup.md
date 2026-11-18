@@ -1,7 +1,7 @@
 ---
 title: "dns_lookup"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/dns_lookup
-source: https://tenzir.com/docs/v6.22.0/reference/operators/dns_lookup.md
+canonical: https://tenzir.com/docs/reference/operators/dns_lookup
+source: https://tenzir.com/docs/reference/operators/dns_lookup.md
 section: "Docs"
 ---
 
@@ -66,7 +66,7 @@ If an individual lookup fails or times out, the result field will be `null`. If 
 
 ## Parallelism
 
-In a [parallel pipeline](../../guides/node-setup/tune-performance.md#parallelism), each instance of `dns_lookup` resolves its input independently and maintains its own DNS cache. Separate instances can therefore request the same name more than once. The operator doesn’t impose a lookup concurrency limit.
+In a [parallel pipeline](../../explanations/executor.md#parallel-execution), each instance of `dns_lookup` resolves its input independently and maintains its own DNS cache. Separate instances can therefore request the same name more than once. The operator doesn’t impose a lookup concurrency limit.
 
 ## Examples
 

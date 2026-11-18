@@ -1,7 +1,7 @@
 ---
 title: "serve_zmq"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/serve_zmq
-source: https://tenzir.com/docs/v6.22.0/reference/operators/serve_zmq.md
+canonical: https://tenzir.com/docs/reference/operators/serve_zmq
+source: https://tenzir.com/docs/reference/operators/serve_zmq.md
 section: "Docs"
 ---
 
@@ -65,4 +65,4 @@ serve_zmq "tcp://0.0.0.0:5555", encoding="json", prefix=f"{kind}/"
 * [`from_zmq`](from_zmq.md)
 * [`accept_zmq`](accept_zmq.md)
 * [`to_zmq`](to_zmq.md)
-* [Zeromq](https://tenzir.com/integrations/zeromq)
+* [Zeromq](https://tenzir.com/product/integrations/zeromq)

@@ -1,7 +1,7 @@
 ---
 title: "to_snowflake"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/to_snowflake
-source: https://tenzir.com/docs/v6.22.0/reference/operators/to_snowflake.md
+canonical: https://tenzir.com/docs/reference/operators/to_snowflake
+source: https://tenzir.com/docs/reference/operators/to_snowflake.md
 section: "Docs"
 ---
 
@@ -86,4 +86,4 @@ to_snowflake \
 ## See Also
 
 * [Send to destinations](../../guides/route/send-to-destinations.md)
-* [Snowflake](https://tenzir.com/integrations/snowflake)
+* [Snowflake](https://tenzir.com/product/integrations/snowflake)

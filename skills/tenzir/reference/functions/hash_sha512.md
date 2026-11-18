@@ -1,7 +1,7 @@
 ---
 title: "hash_sha512"
-canonical: https://tenzir.com/docs/v6.22.0/reference/functions/hash_sha512
-source: https://tenzir.com/docs/v6.22.0/reference/functions/hash_sha512.md
+canonical: https://tenzir.com/docs/reference/functions/hash_sha512
+source: https://tenzir.com/docs/reference/functions/hash_sha512.md
 section: "Docs"
 ---
 

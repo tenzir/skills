@@ -1,7 +1,7 @@
 ---
 title: "to_iceberg"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/to_iceberg
-source: https://tenzir.com/docs/v6.22.0/reference/operators/to_iceberg.md
+canonical: https://tenzir.com/docs/reference/operators/to_iceberg
+source: https://tenzir.com/docs/reference/operators/to_iceberg.md
 section: "Docs"
 ---
 
@@ -280,6 +280,6 @@ to_iceberg "lake.events",
 * [`to_s3`](to_s3.md)
 * [`to_clickhouse`](to_clickhouse.md)
 * [Send to destinations](../../guides/route/send-to-destinations.md)
-* [Iceberg](https://tenzir.com/integrations/iceberg)
-* [Glue](https://tenzir.com/integrations/amazon/glue)
-* [Cloud lakehouse](https://tenzir.com/integrations/google/cloud-lakehouse)
+* [Iceberg](https://tenzir.com/product/integrations/iceberg)
+* [Glue](https://tenzir.com/product/integrations/amazon/glue)
+* [Cloud lakehouse](https://tenzir.com/product/integrations/google/cloud-lakehouse)

@@ -1,7 +1,7 @@
 ---
 title: "encrypt_aes_gcm_siv"
-canonical: https://tenzir.com/docs/v6.22.0/reference/functions/encrypt_aes_gcm_siv
-source: https://tenzir.com/docs/v6.22.0/reference/functions/encrypt_aes_gcm_siv.md
+canonical: https://tenzir.com/docs/reference/functions/encrypt_aes_gcm_siv
+source: https://tenzir.com/docs/reference/functions/encrypt_aes_gcm_siv.md
 section: "Docs"
 ---
 

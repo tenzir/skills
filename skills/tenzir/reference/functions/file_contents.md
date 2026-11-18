@@ -1,7 +1,7 @@
 ---
 title: "file_contents"
-canonical: https://tenzir.com/docs/v6.22.0/reference/functions/file_contents
-source: https://tenzir.com/docs/v6.22.0/reference/functions/file_contents.md
+canonical: https://tenzir.com/docs/reference/functions/file_contents
+source: https://tenzir.com/docs/reference/functions/file_contents.md
 section: "Docs"
 ---
 

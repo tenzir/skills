@@ -1,7 +1,7 @@
 ---
 title: "sort"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/sort
-source: https://tenzir.com/docs/v6.22.0/reference/operators/sort.md
+canonical: https://tenzir.com/docs/reference/operators/sort
+source: https://tenzir.com/docs/reference/operators/sort.md
 section: "Docs"
 ---
 
@@ -82,4 +82,3 @@ sort src_ip, -dest_ip
 * [`rare`](rare.md)
 * [`reverse`](reverse.md)
 * [`top`](top.md)
-* [Plot data with charts](../../tutorials/plot-data-with-charts.md)

@@ -1,7 +1,7 @@
 ---
 title: "values"
-canonical: https://tenzir.com/docs/v6.22.0/reference/functions/values
-source: https://tenzir.com/docs/v6.22.0/reference/functions/values.md
+canonical: https://tenzir.com/docs/reference/functions/values
+source: https://tenzir.com/docs/reference/functions/values.md
 section: "Docs"
 ---
 

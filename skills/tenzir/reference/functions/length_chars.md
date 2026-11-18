@@ -1,7 +1,7 @@
 ---
 title: "length_chars"
-canonical: https://tenzir.com/docs/v6.22.0/reference/functions/length_chars
-source: https://tenzir.com/docs/v6.22.0/reference/functions/length_chars.md
+canonical: https://tenzir.com/docs/reference/functions/length_chars
+source: https://tenzir.com/docs/reference/functions/length_chars.md
 section: "Docs"
 ---
 

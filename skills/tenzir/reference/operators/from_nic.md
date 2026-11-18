@@ -1,7 +1,7 @@
 ---
 title: "from_nic"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/from_nic
-source: https://tenzir.com/docs/v6.22.0/reference/operators/from_nic.md
+canonical: https://tenzir.com/docs/reference/operators/from_nic
+source: https://tenzir.com/docs/reference/operators/from_nic.md
 section: "Docs"
 ---
 
@@ -89,4 +89,4 @@ to_file "trace.pcap" {
 * [`nics`](nics.md)
 * [`read_pcap`](read_pcap.md)
 * [`write_pcap`](write_pcap.md)
-* [Nic](https://tenzir.com/integrations/nic)
+* [Nic](https://tenzir.com/product/integrations/nic)

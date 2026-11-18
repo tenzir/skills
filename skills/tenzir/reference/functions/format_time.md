@@ -1,7 +1,7 @@
 ---
 title: "format_time"
-canonical: https://tenzir.com/docs/v6.22.0/reference/functions/format_time
-source: https://tenzir.com/docs/v6.22.0/reference/functions/format_time.md
+canonical: https://tenzir.com/docs/reference/functions/format_time
+source: https://tenzir.com/docs/reference/functions/format_time.md
 section: "Docs"
 ---
 

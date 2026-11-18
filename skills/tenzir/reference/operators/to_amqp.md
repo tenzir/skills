@@ -1,7 +1,7 @@
 ---
 title: "to_amqp"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/to_amqp
-source: https://tenzir.com/docs/v6.22.0/reference/operators/to_amqp.md
+canonical: https://tenzir.com/docs/reference/operators/to_amqp
+source: https://tenzir.com/docs/reference/operators/to_amqp.md
 section: "Docs"
 ---
 
@@ -92,7 +92,7 @@ Defaults to `false`.
 
 ## Parallelism
 
-In a [parallel pipeline](../../guides/node-setup/tune-performance.md#parallelism), each instance of `to_amqp` opens its own connection and channel.
+In a [parallel pipeline](../../explanations/executor.md#parallel-execution), each instance of `to_amqp` opens its own connection and channel.
 
 The `routing_key` routes messages to queues but does not pin them to an instance: two events with the same routing key may be published by different instances and therefore arrive in their queue out of the pipeline’s event order. Keep parallelism disabled if a consumer relies on the order within one queue.
 
@@ -127,6 +127,6 @@ to_amqp "amqp://broker/vhost", message=payload, options={
 
 * [`from_amqp`](from_amqp.md)
 * [Send to destinations](../../guides/route/send-to-destinations.md)
-* [Amqp](https://tenzir.com/integrations/amqp)
+* [Amqp](https://tenzir.com/product/integrations/amqp)
 
 Parallelizable: a parallel pipeline may run this operator on several cores at once.

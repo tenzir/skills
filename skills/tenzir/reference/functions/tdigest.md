@@ -1,7 +1,7 @@
 ---
 title: "tdigest"
-canonical: https://tenzir.com/docs/v6.22.0/reference/functions/tdigest
-source: https://tenzir.com/docs/v6.22.0/reference/functions/tdigest.md
+canonical: https://tenzir.com/docs/reference/functions/tdigest
+source: https://tenzir.com/docs/reference/functions/tdigest.md
 section: "Docs"
 ---
 

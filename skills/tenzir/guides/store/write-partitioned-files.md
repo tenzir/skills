@@ -1,7 +1,7 @@
 ---
 title: "Write partitioned files"
-canonical: https://tenzir.com/docs/v6.22.0/guides/store/write-partitioned-files
-source: https://tenzir.com/docs/v6.22.0/guides/store/write-partitioned-files.md
+canonical: https://tenzir.com/docs/guides/store/write-partitioned-files
+source: https://tenzir.com/docs/guides/store/write-partitioned-files.md
 section: "Docs"
 ---
 
@@ -68,7 +68,7 @@ Each partition rotates independently. The operator checks `max_size` after it re
 
 ## Encrypt archived files
 
-Encrypt Parquet files before uploading them when the storage provider should not have the decryption key. Configure AWS authentication as described in our [Amazon S3 integration](https://tenzir.com/integrations/amazon/s3), and use a Tenzir node with access to your secret store for both writing and reading.
+Encrypt Parquet files before uploading them when the storage provider should not have the decryption key. Configure AWS authentication as described in our [Amazon S3 integration](https://tenzir.com/product/integrations/amazon/s3), and use a Tenzir node with access to your secret store for both writing and reading.
 
 1. Generate 32 random bytes, a 256-bit AES key, in standard base64 format:
 
@@ -152,7 +152,7 @@ Here, each group owns an independent `summarize` instance. If you instead want t
 
 Partitioned Parquet files are not automatically a table. Use [`to_iceberg`](../../reference/operators/to_iceberg.md) when readers need an Apache Iceberg table with hidden partition transforms, schema evolution, manifests, snapshots, and atomic commits. Its `max_size`, `buffer_size`, and `timeout` parameters control a separate table-aware buffering and commit model.
 
-Use [`to_amazon_security_lake`](../../reference/operators/to_amazon_security_lake.md) when writing OCSF events to [Security lake](https://tenzir.com/integrations/amazon/security-lake). It supplies the required S3 path, event-day partitioning, Parquet settings, ordering, and AWS role conventions. Because it sorts each file by `time`, its timeout closes files and their final size depends on the data accumulated during that interval.
+Use [`to_amazon_security_lake`](../../reference/operators/to_amazon_security_lake.md) when writing OCSF events to [Security lake](https://tenzir.com/product/integrations/amazon/security-lake). It supplies the required S3 path, event-day partitioning, Parquet settings, ordering, and AWS role conventions. Because it sorts each file by `time`, its timeout closes files and their final size depends on the data accumulated during that interval.
 
 ## See also
 
@@ -162,5 +162,5 @@ Use [`to_amazon_security_lake`](../../reference/operators/to_amazon_security_lak
 * [`group`](../../reference/operators/group.md)
 * [`to_amazon_security_lake`](../../reference/operators/to_amazon_security_lake.md)
 * [`to_iceberg`](../../reference/operators/to_iceberg.md)
-* [S3](https://tenzir.com/integrations/amazon/s3)
-* [Iceberg](https://tenzir.com/integrations/iceberg)
+* [S3](https://tenzir.com/product/integrations/amazon/s3)
+* [Iceberg](https://tenzir.com/product/integrations/iceberg)

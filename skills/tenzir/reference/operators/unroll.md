@@ -1,7 +1,7 @@
 ---
 title: "unroll"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/unroll
-source: https://tenzir.com/docs/v6.22.0/reference/operators/unroll.md
+canonical: https://tenzir.com/docs/reference/operators/unroll
+source: https://tenzir.com/docs/reference/operators/unroll.md
 section: "Docs"
 ---
 

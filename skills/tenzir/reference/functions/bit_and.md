@@ -1,7 +1,7 @@
 ---
 title: "bit_and"
-canonical: https://tenzir.com/docs/v6.22.0/reference/functions/bit_and
-source: https://tenzir.com/docs/v6.22.0/reference/functions/bit_and.md
+canonical: https://tenzir.com/docs/reference/functions/bit_and
+source: https://tenzir.com/docs/reference/functions/bit_and.md
 section: "Docs"
 ---
 

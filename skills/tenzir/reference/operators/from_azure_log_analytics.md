@@ -1,7 +1,7 @@
 ---
 title: "from_azure_log_analytics"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/from_azure_log_analytics
-source: https://tenzir.com/docs/v6.22.0/reference/operators/from_azure_log_analytics.md
+canonical: https://tenzir.com/docs/reference/operators/from_azure_log_analytics
+source: https://tenzir.com/docs/reference/operators/from_azure_log_analytics.md
 section: "Docs"
 ---
 
@@ -27,13 +27,21 @@ Each result table produces separate event batches with the schema name `azure_lo
 
 ### Errors and limits
 
-The operator validates the entire response before emitting any rows. Empty results, including `204 No Content`, succeed without events. Invalid JSON, invalid column descriptions, incompatible values, and service errors fail the pipeline. An HTTP `200` response containing `PartialError` also fails: partial results aren’t emitted. Diagnostics omit response bodies, credentials, and result values, and include a safe service request ID when available.
+The operator validates the entire response before emitting any rows. Empty results, including `204 No Content`, succeed without events. Invalid JSON, invalid column descriptions, incompatible values, and service errors fail the pipeline. An HTTP `200` response containing a `PartialError` other than a truncation, such as an overflow or a query that exceeds its memory budget, also fails, because the rows may be wrong and not just short. Diagnostics omit response bodies, credentials, and result values, and include a safe service request ID when available.
 
 The operator retries throttling and transient HTTP failures with a bounded retry budget and honors `Retry-After`. It checks token freshness before every attempt, including after a retry delay. Permanent query and authorization errors aren’t retried. Retries reuse the original query and explicit time range, but relative KQL expressions such as `ago()` are evaluated by Azure on each attempt.
 
-Azure [documents query API limits](https://learn.microsoft.com/en-us/azure/azure-monitor/fundamentals/service-limits#query-api) of 500,000 rows and approximately 100 MiB of returned data. The operator also bounds response buffering to 128 MiB, accepts at most 64 result tables and 1,024 columns per table, and applies a decoded-value budget of 2,097,152 nodes across scalar and nested values. Deeply nested dynamic values are rejected. A response that exceeds a local limit fails rather than emitting a prefix.
+The operator also bounds response buffering to 128 MiB, accepts at most 64 result tables and 1,024 columns per table, and applies a decoded-value budget of 2,097,152 nodes across scalar and nested values. Deeply nested dynamic values are rejected. A response that exceeds a local limit fails rather than emitting a prefix.
 
 There is no pagination, automatic time-window splitting, live polling, or durable cursor. Restarting the pipeline, including restoration from an executor snapshot, reruns the query and can replay events. A successful query isn’t a guarantee of complete historical extraction: availability depends on retention, table access, ingestion delay, and the query itself. Bound large queries with time predicates and projections. Splitting arbitrary KQL queries can change the meaning of aggregations, joins, and global limits.
+
+### Result limits
+
+Azure [documents query API limits](https://learn.microsoft.com/en-us/azure/azure-monitor/fundamentals/service-limits#query-api) of 500,000 rows and 64 MiB of data per query by default. When a result exceeds either limit, Log Analytics truncates it and reports a partial error. The operator then emits the rows that it received and warns that the result is incomplete. To get the complete result, narrow the query or its time range, return fewer columns, or limit or aggregate rows in the query, for example with `take` or `summarize`.
+
+Other partial errors still fail the pipeline, and so do responses larger than 128 MiB.
+
+Operators that Log Analytics takes over run before it applies these limits, so a [`head`](head.md), [`where`](where.md), [`select`](select.md), or [`summarize`](summarize.md) shrinks the result before truncation, whereas with `pushdown=false` they only see the truncated rows. See [Optimizations](from_azure_log_analytics.md#optimizations).
 
 ### Result types
 
@@ -98,13 +106,13 @@ The options also apply to token requests to the OAuth authority, except for `cer
 
 ### `pushdown = bool` (optional)
 
-Whether Log Analytics takes over the operators that follow the operator. With `pushdown=false`, they stay in the pipeline and run with TQL semantics, and the operator sends your query exactly as written. See [Optimizations](from_azure_log_analytics.md#optimizations).
+Whether Log Analytics takes over the operators that follow the operator. With `pushdown=false`, they stay in the pipeline and run with TQL semantics, and the operator only appends a `project` of the fields that they read to your query. See [Optimizations](from_azure_log_analytics.md#optimizations).
 
 Defaults to `true`.
 
 ## Optimizations
 
-The operator hands Log Analytics the operators that follow it, as far as KQL can spell them, by appending stages to your query: [`where`](where.md), [`select`](select.md), [`drop`](drop.md), [`summarize`](summarize.md) with `count()`, `count(x)`, `min`, `max`, and `sum`, including [`top`](top.md) and [`rare`](rare.md), [`sort`](sort.md), and [`head`](head.md). Those operators leave the pipeline and run with KQL’s semantics, which can differ from TQL. For example, a field that your query doesn’t return fails the query, and strings are never `null`. The stages apply to the table that your query returns, and your query text stays as is. Without a [`select`](select.md) or [`summarize`](summarize.md), a final `project` keeps the fields that the pipeline reads, and a field that your query doesn’t return becomes `null`. Use `pushdown=false` to keep every operator in the pipeline.
+The operator hands Log Analytics the operators that follow it, as far as KQL can spell them, by appending stages to your query: [`where`](where.md), [`select`](select.md), [`drop`](drop.md), [`summarize`](summarize.md) with `count()`, `count(x)`, `min`, `max`, and `sum`, including [`top`](top.md) and [`rare`](rare.md), [`sort`](sort.md), and [`head`](head.md). Those operators leave the pipeline and run with KQL’s semantics, which can differ from TQL. For example, a field that your query doesn’t return fails the query, and strings are never `null`. The stages apply to the table that your query returns, and your query text stays as is. Without a [`select`](select.md) or [`summarize`](summarize.md), a final `project` keeps the fields that the pipeline reads, and a field that your query doesn’t return becomes `null`, also with `pushdown=false`. Use `pushdown=false` to keep every operator in the pipeline.
 
 The operator never narrows the `start` and `end` window, and sends queries that use `render`, `fork`, `facet`, or a `set` statement, that have several tabular statements, or that end in `;` or `|`, unchanged. The page on [KQL optimizations](../optimizations/kql.md) describes which operators the service takes over and where KQL’s semantics differ.
 
@@ -141,5 +149,5 @@ from_azure_log_analytics "MyLogs_CL | summarize Count=count() by Computer",
 
 ## See also
 
-* [Azure log analytics](https://tenzir.com/integrations/microsoft/azure-log-analytics)
+* [Azure log analytics](https://tenzir.com/product/integrations/microsoft/azure-log-analytics)
 * [Azure Authentication](../azure-authentication.md)

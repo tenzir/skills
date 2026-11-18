@@ -1,7 +1,7 @@
 ---
 title: "flatten"
-canonical: https://tenzir.com/docs/v6.22.0/reference/functions/flatten
-source: https://tenzir.com/docs/v6.22.0/reference/functions/flatten.md
+canonical: https://tenzir.com/docs/reference/functions/flatten
+source: https://tenzir.com/docs/reference/functions/flatten.md
 section: "Docs"
 ---
 

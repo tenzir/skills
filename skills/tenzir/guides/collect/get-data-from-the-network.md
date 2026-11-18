@@ -1,7 +1,7 @@
 ---
 title: "Get data from the network"
-canonical: https://tenzir.com/docs/v6.22.0/guides/collect/get-data-from-the-network
-source: https://tenzir.com/docs/v6.22.0/guides/collect/get-data-from-the-network.md
+canonical: https://tenzir.com/docs/guides/collect/get-data-from-the-network
+source: https://tenzir.com/docs/guides/collect/get-data-from-the-network.md
 section: "Docs"
 ---
 
@@ -39,7 +39,7 @@ export OTEL_EXPORTER_OTLP_ENDPOINT=http://tenzir.example.com:4317
 export OTEL_EXPORTER_OTLP_PROTOCOL=grpc
 ```
 
-Run separate pipelines when you need both transports. See the [Opentelemetry](https://tenzir.com/integrations/opentelemetry) integration for Collector and TLS configuration.
+Run separate pipelines when you need both transports. See the [Opentelemetry](https://tenzir.com/product/integrations/opentelemetry) integration for Collector and TLS configuration.
 
 ## Splunk HEC
 
@@ -53,7 +53,7 @@ The operator listens on the standard HEC port `8088` and accepts gzip-compressed
 
 ## TCP sockets
 
-[Tcp](https://tenzir.com/integrations/tcp) provides reliable, ordered byte streams. Use TCP when you need guaranteed delivery and message ordering.
+[Tcp](https://tenzir.com/product/integrations/tcp) provides reliable, ordered byte streams. Use TCP when you need guaranteed delivery and message ordering.
 
 ### Listen for connections
 
@@ -105,7 +105,7 @@ For testing, generate certificates with trustme:
 uv run --with trustme python -m trustme
 ```
 
-For production TLS configuration, including mutual TLS and cipher settings, see [Configure TLS](../node-setup/configure-tls.md).
+For production TLS, including mutual TLS and cipher settings, the [`tls` option of `accept_tcp`](../../reference/operators/accept_tcp.md#tls--record-optional) lists every field.
 
 ### Accept plaintext and TLS on one port
 
@@ -123,7 +123,7 @@ With `auto_detect_tls=true`, [`accept_tcp`](../../reference/operators/accept_tcp
 
 ## Reliable Syslog
 
-[Relp](https://tenzir.com/integrations/relp) adds application-level acknowledgements to Syslog transport. Use [`accept_relp`](../../reference/operators/accept_relp.md) when a sender supports RELP:
+[Relp](https://tenzir.com/product/integrations/relp) adds application-level acknowledgements to Syslog transport. Use [`accept_relp`](../../reference/operators/accept_relp.md) when a sender supports RELP:
 
 ```tql
 accept_relp "0.0.0.0:2514"
@@ -138,7 +138,7 @@ RELP protects messages in flight: the sender waits for Tenzir to acknowledge eac
 
 ## UDP sockets
 
-[Udp](https://tenzir.com/integrations/udp) is a connectionless protocol ideal for high-volume, loss-tolerant data like syslog messages or metrics.
+[Udp](https://tenzir.com/product/integrations/udp) is a connectionless protocol ideal for high-volume, loss-tolerant data like syslog messages or metrics.
 
 ### Receive UDP datagrams
 
@@ -190,11 +190,11 @@ read_netflow
 
 Set `binary=true` so that each datagram retains its binary payload. The parser detects every message’s protocol version and uses the `peer` metadata to keep template state separate between exporters. Start the collector before the exporters send data because NetFlow v9 and IPFIX data records can depend on templates sent in earlier datagrams.
 
-For a complete collector, `nfcapd` forwarding, and archived data, see the [Netflow](https://tenzir.com/integrations/netflow) integration.
+For a complete collector, `nfcapd` forwarding, and archived data, see the [Netflow](https://tenzir.com/product/integrations/netflow) integration.
 
 ## Packet capture
 
-Capture raw network packets with [Nic](https://tenzir.com/integrations/nic) when you need per-packet data for deep packet inspection or network forensics.
+Capture raw network packets with [Nic](https://tenzir.com/product/integrations/nic) when you need per-packet data for deep packet inspection or network forensics.
 
 ### List available interfaces
 
@@ -290,9 +290,9 @@ select
 
 ## See also
 
-* [Tcp](https://tenzir.com/integrations/tcp)
-* [Udp](https://tenzir.com/integrations/udp)
-* [Netflow](https://tenzir.com/integrations/netflow)
-* [Nic](https://tenzir.com/integrations/nic)
-* [Syslog](https://tenzir.com/integrations/syslog)
-* [Splunk](https://tenzir.com/integrations/splunk)
+* [Tcp](https://tenzir.com/product/integrations/tcp)
+* [Udp](https://tenzir.com/product/integrations/udp)
+* [Netflow](https://tenzir.com/product/integrations/netflow)
+* [Nic](https://tenzir.com/product/integrations/nic)
+* [Syslog](https://tenzir.com/product/integrations/syslog)
+* [Splunk](https://tenzir.com/product/integrations/splunk)

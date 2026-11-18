@@ -1,7 +1,7 @@
 ---
 title: "SPL"
-canonical: https://tenzir.com/docs/v6.22.0/reference/optimizations/spl
-source: https://tenzir.com/docs/v6.22.0/reference/optimizations/spl.md
+canonical: https://tenzir.com/docs/reference/optimizations/spl
+source: https://tenzir.com/docs/reference/optimizations/spl.md
 section: "Docs"
 ---
 
@@ -13,10 +13,11 @@ The Splunk source [`from_splunk`](../operators/from_splunk.md) hands Splunk the 
 
 ## When it applies
 
-The operator searches in one of two ways:
+The operator searches in one of three ways:
 
 * **With `index`**, Tenzir writes the search for the events of the indexes, such as `search index="main"`, and appends the operators that follow.
 * **With `search`**, the operator runs your search, prepending the `search` command where Splunk Web does, and appends the operators that follow, each on a new line. The appended stages apply to the results of your search, so they also work after transforming commands such as `stats`.
+* **With `spl2`**, the operator runs your SPL2 search and appends the operators that follow, as [SPL2](spl.md#spl2) describes.
 
 The operator takes over no operator if your search does not end where stages may follow, such as a search that ends in `|` or has an unterminated string, comment, or subsearch, or if it may format its values with `fieldformat` or a macro. It also takes over nothing with `options`, which may change how Splunk runs the search, and with `pushdown=false`, which keeps every operator in Tenzir with TQL semantics. The search then still returns only the fields that the pipeline uses.
 
@@ -27,7 +28,7 @@ The operator takes over the longest run of operators directly after it that SPL 
 * [`where`](../operators/where.md), as the [filters](spl.md#filters) section describes.
 * [`select`](../operators/select.md) of top-level fields, including renames, which becomes `fields`.
 * [`drop`](../operators/drop.md) of top-level fields, which becomes `fields -`.
-* [`summarize`](../operators/summarize.md) with group keys on fields and `count()`, `count(x)`, `min(x)`, and `max(x)` of fields, which becomes `stats … by`. The summary may follow [`select`](../operators/select.md), [`drop`](../operators/drop.md), and assignments that copy fields, as [Aggregations in the source](../optimizations.md#aggregations-in-the-source) describes.
+* [`summarize`](../operators/summarize.md) with group keys and the functions that the [summaries](spl.md#summaries) section lists, which becomes `stats … by`. The summary may follow [`select`](../operators/select.md), [`drop`](../operators/drop.md), and assignments, as [Aggregations in the source](../optimizations.md#aggregations-in-the-source) describes.
 * [`sort`](../operators/sort.md) by fields, which becomes `sort` with an explicit count: the count of the [`head`](../operators/head.md) after it, or `0` for all results, since `sort` keeps only 10,000 results by default.
 * [`head`](../operators/head.md), which becomes `head`, and [`top`](../operators/top.md) or [`rare`](../operators/rare.md) followed by [`head`](../operators/head.md). A search with a command that has side effects, such as `outputlookup` or `collect`, or with a macro, which may hide one, keeps the limit in Tenzir.
 
@@ -59,9 +60,37 @@ search index="main" source="auth"
 | appendpipe [stats count as tenzir_groups_0]
 ```
 
-Tenzir arranges the result fields into the fields of the pipeline, such as `events`. A search with a summary ends with an `appendpipe` that adds a row counting the results. Splunk returns no results and no error when an expression in a search with `stats` fails, so the operator fails the pipeline when that row is missing, with a hint to use `pushdown=false`.
+Tenzir arranges the result fields into the fields of the pipeline, such as `events`. A search with a summary ends with an `appendpipe` that adds a row counting the results. Splunk returns no results and no error when an expression in a search with `stats` fails, so the operator fails the pipeline when that row is missing. The error reads `Splunk search ended without its last result`, with a note that Splunk computed the stages that the operator took over with its own semantics, and a hint to use `pushdown=false`.
 
 Without an operator that enumerates the fields, the search ends with a `fields` stage that keeps the fields that the pipeline reads, or with `fields *`, since Splunk’s export endpoint otherwise returns only the fields that the search references.
+
+## Summaries
+
+Splunk computes these aggregation functions of a [`summarize`](../operators/summarize.md):
+
+| TQL                   | SPL                                                  |
+| --------------------- | ---------------------------------------------------- |
+| `count()`             | `count`                                              |
+| `count(x)`            | `count(x)`                                           |
+| `min(x)`, `max(x)`    | `min(x)`, `max(x)`                                   |
+| `count_if(x, v => p)` | `count(eval(p))`, which skips events without a value |
+| `count_distinct(x)`   | `dc(x)`, which counts exactly, unlike `estdc`        |
+| `sum(x)`              | `sum(x)`                                             |
+| `mean(x)`             | `avg(x)`                                             |
+
+Splunk returns every value as a string, so the operator reads counts as integers and sums and means as numbers.
+
+Group keys and aggregate arguments can be computed values, such as values that a [`set`](../operators/set.md) before the summary assigns. Splunk computes them with `eval` before `stats`:
+
+```tql
+from_splunk "https://splunk:8089", index="main", earliest="-1h", latest="now"
+kind = action.to_upper()
+summarize kind, events=count()
+```
+
+The search computes the key with `| eval tenzir_column_0=upper('action')`. An assignment that the summary reads may call a function that SPL spells, and Splunk computes it with its own semantics. An assignment that the summary doesn’t read, including one that a later assignment shadows, must be infallible. See [Computed keys and arguments](../optimizations.md#computed-keys-and-arguments).
+
+A `floor` of a time stays in Tenzir.
 
 ## Filters
 
@@ -92,7 +121,41 @@ The operators that Splunk takes over run as Splunk runs them, which can differ f
 
 ## Time window
 
-With `index`, comparisons of `_time` in the filters before any summary, limit, or sort also narrow `earliest` and `latest`, rounded outward to whole seconds, when both are absolute. A relative bound, such as `-15m`, resolves on the server, so the operator keeps both bounds as they are. It also keeps them when the narrowed bounds would cross, since Splunk rejects crossing bounds. The comparisons stay in the search in every case. With `search`, the bounds never narrow, since a `_time` field in your search’s results may stem from an aggregation or a computation.
+With `index`, comparisons of `_time` in the filters before any summary, limit, or sort also narrow `earliest` and `latest`, rounded outward to whole seconds, when both are absolute. A strict bound excludes its time, so `where _time < 2025-01-01T00:02:00Z` requests `latest_time=1735689720`. A relative bound, such as `-15m`, resolves on the server, so the operator keeps both bounds as they are. It also keeps them when the narrowed bounds would cross, since Splunk rejects crossing bounds. The comparisons stay in the search in every case. With `search`, the bounds never narrow, since a `_time` field in your search’s results may stem from an aggregation or a computation.
+
+## SPL2
+
+The `spl2` argument of [`from_splunk`](../operators/from_splunk.md) runs an SPL2 search. The operator takes over the same operators as for `search`, appended to your search as SPL2 stages, and [Splunk semantics](spl.md#splunk-semantics) apply too. SPL2 spells a few things differently:
+
+* Fields in commands are single-quoted, as in `'user'`.
+* `null` is a literal, and `stats` counts with `count()` and `count(if(p, 1, null))`.
+* There is no `fields *`. The operator asks Splunk to extract all fields instead, and appends a `fields` stage only to keep the fields that the pipeline reads.
+* Comments are `//` and `/* */`, raw strings start with `@"`, and a `;` ends the search so that no stage may follow.
+
+The operator never treats an SPL2 search as plain, because a search may redefine `_time`. Comparisons of `_time` and the operators after them stay in Tenzir, and the bounds `earliest` and `latest` never narrow. The pipeline
+
+```tql
+from_splunk "https://splunk.example.com:8089",
+  spl2=r#"from main where sourcetype == "linux_secure""#,
+  earliest="-1h",
+  latest="now",
+  headers={Authorization: secret("splunk-rest-authorization")}
+where user != "root"
+summarize user, attempts=count()
+sort -attempts
+head 20
+```
+
+dispatches this search:
+
+```text
+from main where sourcetype == "linux_secure"
+| where ('user' != "root")
+| stats count() as tenzir_column_0 by 'user'
+| sort 20 -'tenzir_column_0'
+| head 20
+| appendpipe [stats count() as tenzir_groups_0]
+```
 
 ## Verify an optimization
 

@@ -1,7 +1,7 @@
 ---
 title: "to_prometheus"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/to_prometheus
-source: https://tenzir.com/docs/v6.22.0/reference/operators/to_prometheus.md
+canonical: https://tenzir.com/docs/reference/operators/to_prometheus
+source: https://tenzir.com/docs/reference/operators/to_prometheus.md
 section: "Docs"
 ---
 
@@ -47,8 +47,6 @@ The default input shape is:
 ```
 
 You can use expression options such as `name=metric_name` or `labels={tenant: tenant_id}` to send existing schemas without reshaping them first.
-
-The [`metrics`](metrics.md) operator can produce the default input shape with `shape="prometheus"`.
 
 The operator writes the metric-name expression as the reserved Prometheus `__name__` label. The expression defaults to the `metric` field. Providing `labels.__name__` is invalid. Samples with the same label set are batched into one time series per request, and samples in each time series are sorted by timestamp before serialization.
 
@@ -192,8 +190,6 @@ The `client_ca` and `require_client_cert` options are only valid for operators t
 
 Any value not specified in the record will either be picked up from the configuration or if not configured will not be used by the operator.
 
-See the [Node TLS Setup guide](../../guides/node-setup/configure-tls.md) for more details.
-
 ### `flush_interval = duration (optional)`
 
 Maximum amount of time to buffer samples before sending a request.
@@ -269,7 +265,6 @@ The operator currently supports scalar samples only. It does not support native 
 
 ## See Also
 
-* [`metrics`](metrics.md)
+* [`to_google_cloud_monitoring`](to_google_cloud_monitoring.md)
 * [`to_http`](to_http.md)
-* [Collect metrics](../../guides/observability/collect-metrics.md)
-* [Prometheus](https://tenzir.com/integrations/prometheus)
+* [Prometheus](https://tenzir.com/product/integrations/prometheus)

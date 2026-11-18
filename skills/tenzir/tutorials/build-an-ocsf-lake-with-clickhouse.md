@@ -1,8 +1,8 @@
 ---
 title: "Build an OCSF lake with ClickHouse"
 description: "Store OCSF events in ClickHouse, from a table that accepts anything to a tuned lake with typed columns, skip indexes, codecs, and per-class retention."
-canonical: https://tenzir.com/docs/v6.22.0/tutorials/build-an-ocsf-lake-with-clickhouse
-source: https://tenzir.com/docs/v6.22.0/tutorials/build-an-ocsf-lake-with-clickhouse.md
+canonical: https://tenzir.com/docs/tutorials/build-an-ocsf-lake-with-clickhouse
+source: https://tenzir.com/docs/tutorials/build-an-ocsf-lake-with-clickhouse.md
 section: "Docs"
 ---
 
@@ -16,7 +16,7 @@ Along the way, you learn how ClickHouse stores semi-structured data and how Tenz
 
 An OCSF Network Activity event inside Tenzir on the left, the ClickHouse table ocsf.events on the right. When the to\_clickhouse operator writes the event, the fields time, class\_uid, device.hostname, and src\_endpoint.ip go to typed columns with the same names. The fields traffic.bytes\_in and metadata.version have no column of their own and land in the catch-all column event, a JSON column with the Tenzir catch-all comment, which keeps their nesting: bytes\_in sits inside traffic and version inside metadata. The unmapped object goes as a whole into the unmapped JSON column.
 
-To follow along, you need [Docker](https://docs.docker.com/get-started/get-docker/) and a [Tenzir installation](../guides/installation.md) on the same machine. Run the TQL pipelines with the `tenzir` command-line tool, for example by saving a pipeline as `pipeline.tql` and running `tenzir -f pipeline.tql`.
+To follow along, you need [Docker](https://docs.docker.com/get-started/get-docker/) and the `tenzir` command-line tool on the same machine. Run the TQL pipelines [on the command line](../reference/cli.md#tenzir-run), for example by saving a pipeline as `pipeline.tql` and running `tenzir run -f pipeline.tql`.
 
 ## Start ClickHouse
 
@@ -46,7 +46,7 @@ SELECT version();
 
 ## Generate sample events
 
-A lake only shows its trade-offs with data in it. Our sample generator creates one million OCSF events, spread over the last 120 days, and writes them to the compressed file `ocsf-events.json.zst`. Save the pipeline as `generate.tql` and run it with `tenzir -f generate.tql`; it takes less than a minute.
+A lake only shows its trade-offs with data in it. Our sample generator creates one million OCSF events, spread over the last 120 days, and writes them to the compressed file `ocsf-events.json.zst`. Save the pipeline as `generate.tql` and run it with `tenzir run -f generate.tql`; it takes less than a minute.
 
 Sample generator
 
@@ -168,7 +168,7 @@ ORDER BY time;
 
 The comment `tenzir:catch_all` marks the `event` column as the **catch-all column**. When [`to_clickhouse`](../reference/operators/to_clickhouse.md) writes an event, it looks up each field in the table: a field with a column of the same name goes into that column, and every other field goes into the catch-all. Without a catch-all, Tenzir drops fields that have no column, with a warning.
 
-The name `event` works for OCSF, which has no top-level attribute called `event`. Data with such a field, such as Elastic Common Schema events, needs another name. Otherwise a typed column like `event.category` shadows part of the catch-all, and filters on it stay out of ClickHouse. Our integration guide explains how to [name the catch-all column](https://tenzir.com/integrations/clickhouse#name-the-catch-all-column).
+The name `event` works for OCSF, which has no top-level attribute called `event`. Data with such a field, such as Elastic Common Schema events, needs another name. Otherwise a typed column like `event.category` shadows part of the catch-all, and filters on it stay out of ClickHouse. Our integration guide explains how to [name the catch-all column](https://tenzir.com/product/integrations/clickhouse#name-the-catch-all-column).
 
 The `DateTime64(9, 'UTC')` type keeps the full nanosecond precision of Tenzir timestamps. The `MergeTree` engine stores the rows sorted by the `ORDER BY` key, here `time`, which the next steps make use of.
 
@@ -295,13 +295,13 @@ A column whose name is a field path, such as `src_endpoint.ip`, receives that fi
 
 Whether a field deserves a typed column depends on how queries use it:
 
-|                                    | Typed column                                                                                                                                                    | Catch-all path                                                                                                                                                                 |
-| ---------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Filtering                          | Can use the sort key and skip indexes                                                                                                                           | Reads the path in every row                                                                                                                                                    |
+|                                    | Typed column                                                                                                                                            | Catch-all path                                                                                                                                                         |
+| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Filtering                          | Can use the sort key and skip indexes                                                                                                                   | Reads the path in every row                                                                                                                                            |
 | Operators that ClickHouse computes | [Filters, selections, summaries, sorts, and limits](../reference/optimizations/clickhouse.md#operators-that-clickhouse-takes-over) | [Filters, sorts, and limits](../reference/optimizations/clickhouse.md#catch-all-tables); comparisons fail if the path’s type differs between rows |
-| Sort or partition by the field     | Possible                                                                                                                                                        | Not supported for the catch-all                                                                                                                                                |
-| Value type                         | Declared once, checked on insert                                                                                                                                | Inferred per value, can differ between rows                                                                                                                                    |
-| Cost when mostly empty             | Small, but not zero                                                                                                                                             | None                                                                                                                                                                           |
+| Sort or partition by the field     | Possible                                                                                                                                                | Not supported for the catch-all                                                                                                                                        |
+| Value type                         | Declared once, checked on insert                                                                                                                        | Inferred per value, can differ between rows                                                                                                                            |
+| Cost when mostly empty             | Small, but not zero                                                                                                                                     | None                                                                                                                                                                   |
 
 Pushdown
 
@@ -975,6 +975,6 @@ rm ocsf-events.json.zst
 
 ## See also
 
-* [Clickhouse](https://tenzir.com/integrations/clickhouse)
+* [Clickhouse](https://tenzir.com/product/integrations/clickhouse)
 * [Map to OCSF](../guides/normalize/map-to-ocsf.md)
 * [Onboard a data source](onboard-a-data-source.md)

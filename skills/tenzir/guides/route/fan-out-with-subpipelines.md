@@ -1,7 +1,7 @@
 ---
 title: "Fan out with subpipelines"
-canonical: https://tenzir.com/docs/v6.22.0/guides/route/fan-out-with-subpipelines
-source: https://tenzir.com/docs/v6.22.0/guides/route/fan-out-with-subpipelines.md
+canonical: https://tenzir.com/docs/guides/route/fan-out-with-subpipelines
+source: https://tenzir.com/docs/guides/route/fan-out-with-subpipelines.md
 section: "Docs"
 ---
 
@@ -15,8 +15,8 @@ This guide shows you how to fan out an event stream into subpipelines with [`eac
 
 Tenzir has several operators that send events into subpipelines. Choose the operator based on how many subpipelines you need and how events should flow into them:
 
-| Operator                                                                              | Subpipelines                          | Event flow                                                         | Use case                                                      |
-| ------------------------------------------------------------------------------------- | ------------------------------------- | ------------------------------------------------------------------ | ------------------------------------------------------------- |
+| Operator                                                                      | Subpipelines                          | Event flow                                                         | Use case                                                      |
+| ----------------------------------------------------------------------------- | ------------------------------------- | ------------------------------------------------------------------ | ------------------------------------------------------------- |
 | [`fork`](../../reference/operators/fork.md)                 | One fixed side branch                 | Every event goes to the main pipeline and the side branch          | Archive or publish a copy while continuing processing         |
 | [`merge`](../../reference/operators/merge.md)               | One fixed side source                 | The side branch produces events that join the main stream          | Pull a second input into the pipeline                         |
 | [`load_balance`](../../reference/operators/load_balance.md) | One branch per configured target      | Each event goes to one target                                      | Distribute load across equivalent sinks                       |

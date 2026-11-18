@@ -1,7 +1,7 @@
 ---
 title: "read_syslog"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/read_syslog
-source: https://tenzir.com/docs/v6.22.0/reference/operators/read_syslog.md
+canonical: https://tenzir.com/docs/reference/operators/read_syslog
+source: https://tenzir.com/docs/reference/operators/read_syslog.md
 section: "Docs"
 ---
 
@@ -513,4 +513,4 @@ from_file "/var/log/auth.log" {
 
 * [`write_syslog`](write_syslog.md)
 * [`parse_syslog`](../functions/parse_syslog.md)
-* [Syslog](https://tenzir.com/integrations/syslog)
+* [Syslog](https://tenzir.com/product/integrations/syslog)

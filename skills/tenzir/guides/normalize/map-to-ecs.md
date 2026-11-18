@@ -1,7 +1,7 @@
 ---
 title: "Map to ECS"
-canonical: https://tenzir.com/docs/v6.22.0/guides/normalize/map-to-ecs
-source: https://tenzir.com/docs/v6.22.0/guides/normalize/map-to-ecs.md
+canonical: https://tenzir.com/docs/guides/normalize/map-to-ecs
+source: https://tenzir.com/docs/guides/normalize/map-to-ecs.md
 section: "Docs"
 ---
 
@@ -15,7 +15,7 @@ The TQL examples in this guide use nested records that serialize to ECS field pa
 
 ## Use the ECS skill
 
-Install the `tenzir-ecs` skill when you want an agent to help with ECS schema decisions. See [Use agent skills](../ai-workbench/use-agent-skills.md#use-the-ecs-skill) for installation and usage examples.
+Install the `tenzir-ecs` skill when you want an agent to help with ECS schema decisions. See [Use agent skills](https://tenzir.com/docs/guides/ai-workbench/use-agent-skills#use-the-ecs-skill) for installation and usage examples.
 
 Ask the agent to choose `event.kind`, `event.category`, and `event.type` values before it maps fieldsets. ECS treats `event.category` and `event.type` as lists, and values such as `allowed` or `denied` belong in `event.type` or `event.action`, not automatically in `event.outcome`.
 
@@ -73,13 +73,13 @@ Use [`to_opensearch`](../../reference/operators/to_opensearch.md) instead when t
 * [`to_elasticsearch`](../../reference/operators/to_elasticsearch.md)
 * [`to_opensearch`](../../reference/operators/to_opensearch.md)
 * [Clean up values](../parse/clean-up-values.md)
-* [Use agent skills](../ai-workbench/use-agent-skills.md#use-the-ecs-skill)
+* [Use agent skills](https://tenzir.com/docs/guides/ai-workbench/use-agent-skills#use-the-ecs-skill)
 * [Map to ASIM](map-to-asim.md)
 * [Map to CIM](map-to-cim.md)
 * [Map to OCSF](map-to-ocsf.md)
 * [Map to UDM](map-to-udm.md)
-* [Create a package](../packages/create-a-package.md)
-* [Write tests](../testing/write-tests.md)
-* [Elasticsearch](https://tenzir.com/integrations/elasticsearch)
-* [Opensearch](https://tenzir.com/integrations/opensearch)
+* [Create a package](https://tenzir.com/docs/guides/packages/create-a-package)
+* [Write tests](https://tenzir.com/docs/guides/testing/write-tests)
+* [Elasticsearch](https://tenzir.com/product/integrations/elasticsearch)
+* [Opensearch](https://tenzir.com/product/integrations/opensearch)
 * [Onboard a data source](../../tutorials/onboard-a-data-source.md)

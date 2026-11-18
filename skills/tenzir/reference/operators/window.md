@@ -1,7 +1,7 @@
 ---
 title: "window"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/window
-source: https://tenzir.com/docs/v6.22.0/reference/operators/window.md
+canonical: https://tenzir.com/docs/reference/operators/window
+source: https://tenzir.com/docs/reference/operators/window.md
 section: "Docs"
 ---
 

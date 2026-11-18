@@ -1,7 +1,7 @@
 ---
 title: "select"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/select
-source: https://tenzir.com/docs/v6.22.0/reference/operators/select.md
+canonical: https://tenzir.com/docs/reference/operators/select
+source: https://tenzir.com/docs/reference/operators/select.md
 section: "Docs"
 ---
 

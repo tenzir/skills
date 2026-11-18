@@ -1,7 +1,7 @@
 ---
 title: "to_redis"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/to_redis
-source: https://tenzir.com/docs/v6.22.0/reference/operators/to_redis.md
+canonical: https://tenzir.com/docs/reference/operators/to_redis
+source: https://tenzir.com/docs/reference/operators/to_redis.md
 section: "Docs"
 ---
 
@@ -109,8 +109,6 @@ The `client_ca` and `require_client_cert` options are only valid for operators t
 
 Any value not specified in the record will either be picked up from the configuration or if not configured will not be used by the operator.
 
-See the [Node TLS Setup guide](../../guides/node-setup/configure-tls.md) for more details.
-
 Without `tls`, the scheme of the URL decides whether the operator uses TLS.
 
 ## Limitations
@@ -160,5 +158,5 @@ to_redis "user:" + user, command="hset", field=attribute, message=value
 
 * [`from_redis`](from_redis.md)
 * [Send to destinations](../../guides/route/send-to-destinations.md)
-* [Redis](https://tenzir.com/integrations/redis)
-* [D4](https://tenzir.com/integrations/d4)
+* [Redis](https://tenzir.com/product/integrations/redis)
+* [D4](https://tenzir.com/product/integrations/d4)

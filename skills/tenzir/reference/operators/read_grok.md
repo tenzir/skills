@@ -1,7 +1,7 @@
 ---
 title: "read_grok"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/read_grok
-source: https://tenzir.com/docs/v6.22.0/reference/operators/read_grok.md
+canonical: https://tenzir.com/docs/reference/operators/read_grok
+source: https://tenzir.com/docs/reference/operators/read_grok.md
 section: "Docs"
 ---
 

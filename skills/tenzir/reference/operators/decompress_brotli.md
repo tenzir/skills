@@ -1,7 +1,7 @@
 ---
 title: "decompress_brotli"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/decompress_brotli
-source: https://tenzir.com/docs/v6.22.0/reference/operators/decompress_brotli.md
+canonical: https://tenzir.com/docs/reference/operators/decompress_brotli
+source: https://tenzir.com/docs/reference/operators/decompress_brotli.md
 section: "Docs"
 ---
 

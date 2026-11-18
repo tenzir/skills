@@ -1,7 +1,7 @@
 ---
 title: "accept_http"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/accept_http
-source: https://tenzir.com/docs/v6.22.0/reference/operators/accept_http.md
+canonical: https://tenzir.com/docs/reference/operators/accept_http
+source: https://tenzir.com/docs/reference/operators/accept_http.md
 section: "Docs"
 ---
 
@@ -76,8 +76,6 @@ TLS configuration. Provide an empty record (`tls={}`) to enable TLS with default
 The `client_ca` and `require_client_cert` options are only valid for operators that accept incoming client connections.
 
 Any value not specified in the record will either be picked up from the configuration or if not configured will not be used by the operator.
-
-See the [Node TLS Setup guide](../../guides/node-setup/configure-tls.md) for more details.
 
 ### `{ … }`
 
@@ -167,4 +165,4 @@ accept_http "0.0.0.0:8443" {
 * [`to_http`](to_http.md)
 * [`serve_http`](serve_http.md)
 * [Fetch via HTTP and APIs](../../guides/collect/fetch-via-http-and-apis.md)
-* [Http](https://tenzir.com/integrations/http)
+* [Http](https://tenzir.com/product/integrations/http)

@@ -1,8 +1,8 @@
 ---
 title: "Set adaptive thresholds from a baseline"
 description: "Set duration thresholds from each agent operation's known-good history."
-canonical: https://tenzir.com/docs/v6.22.0/guides/analyze/set-adaptive-thresholds-from-a-baseline
-source: https://tenzir.com/docs/v6.22.0/guides/analyze/set-adaptive-thresholds-from-a-baseline.md
+canonical: https://tenzir.com/docs/guides/analyze/set-adaptive-thresholds-from-a-baseline
+source: https://tenzir.com/docs/guides/analyze/set-adaptive-thresholds-from-a-baseline.md
 section: "Docs"
 ---
 

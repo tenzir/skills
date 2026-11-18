@@ -1,7 +1,7 @@
 ---
 title: "from_google_cloud_pubsub"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/from_google_cloud_pubsub
-source: https://tenzir.com/docs/v6.22.0/reference/operators/from_google_cloud_pubsub.md
+canonical: https://tenzir.com/docs/reference/operators/from_google_cloud_pubsub
+source: https://tenzir.com/docs/reference/operators/from_google_cloud_pubsub.md
 section: "Docs"
 ---
 
@@ -47,7 +47,7 @@ When set, delivery metadata is attached at the given field path. Each event then
 
 ## Parallelism
 
-In a [parallel pipeline](../../guides/node-setup/tune-performance.md#parallelism), each instance of `from_google_cloud_pubsub` creates a subscriber for the same subscription. Pub/Sub distributes messages among the subscribers, which lets the pipeline pull messages concurrently.
+In a [parallel pipeline](../../explanations/executor.md#parallel-execution), each instance of `from_google_cloud_pubsub` creates a subscriber for the same subscription. Pub/Sub distributes messages among the subscribers, which lets the pipeline pull messages concurrently.
 
 Every subscriber requests an acknowledgement after placing a message in its local queue, before the pipeline processes the corresponding event. A message can therefore be lost if the pipeline stops before processing it. Pub/Sub can still redeliver a message when the acknowledgement doesn’t succeed.
 
@@ -80,6 +80,6 @@ from_google_cloud_pubsub project_id="amazing-project-123456", subscription_id="m
 ## See Also
 
 * [`to_google_cloud_pubsub`](to_google_cloud_pubsub.md)
-* [Cloud pubsub](https://tenzir.com/integrations/google/cloud-pubsub)
+* [Cloud pubsub](https://tenzir.com/product/integrations/google/cloud-pubsub)
 
 Parallelizable: a parallel pipeline may run this operator on several cores at once.

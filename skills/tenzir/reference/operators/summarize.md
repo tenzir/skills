@@ -1,7 +1,7 @@
 ---
 title: "summarize"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/summarize
-source: https://tenzir.com/docs/v6.22.0/reference/operators/summarize.md
+canonical: https://tenzir.com/docs/reference/operators/summarize
+source: https://tenzir.com/docs/reference/operators/summarize.md
 section: "Docs"
 ---
 
@@ -89,7 +89,7 @@ Inside [`window`](window.md), the window lifecycle supplies a finite input bound
 
 ### Parallelization
 
-When you enable [parallelism](../../guides/node-setup/tune-performance.md#parallelism), Tenzir can run `summarize` on several cores at once. It partitions the input by the `group` fields so that every event of a group reaches the same instance, which keeps each group’s aggregation state in one place. Because partitioning splits batches, Tenzir runs at most `limit_partitions` instances, four by default.
+When you enable [parallelism](../../explanations/executor.md#parallel-execution), Tenzir can run `summarize` on several cores at once. It partitions the input by the `group` fields so that every event of a group reaches the same instance, which keeps each group’s aggregation state in one place. Because partitioning splits batches, Tenzir runs at most `limit_partitions` instances, four by default.
 
 Two configurations keep `summarize` on a single instance:
 

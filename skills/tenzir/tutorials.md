@@ -1,7 +1,7 @@
 ---
 title: "Tutorials"
-canonical: https://tenzir.com/docs/v6.22.0/tutorials
-source: https://tenzir.com/docs/v6.22.0/tutorials.md
+canonical: https://tenzir.com/docs/tutorials
+source: https://tenzir.com/docs/tutorials.md
 section: "Docs"
 ---
 

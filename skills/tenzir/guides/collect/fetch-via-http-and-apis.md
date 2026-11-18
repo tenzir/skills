@@ -1,7 +1,7 @@
 ---
 title: "Fetch via HTTP and APIs"
-canonical: https://tenzir.com/docs/v6.22.0/guides/collect/fetch-via-http-and-apis
-source: https://tenzir.com/docs/v6.22.0/guides/collect/fetch-via-http-and-apis.md
+canonical: https://tenzir.com/docs/guides/collect/fetch-via-http-and-apis
+source: https://tenzir.com/docs/guides/collect/fetch-via-http-and-apis.md
 section: "Docs"
 ---
 
@@ -284,7 +284,7 @@ unroll hits.hits
 this = hits.hits._source
 ```
 
-See the [OpenSearch integration](https://tenzir.com/integrations/opensearch) and the [Wazuh integration](https://tenzir.com/integrations/wazuh) for more search-backend examples that use the same pagination pattern.
+See the [OpenSearch integration](https://tenzir.com/product/integrations/opensearch) and the [Wazuh integration](https://tenzir.com/product/integrations/wazuh) for more search-backend examples that use the same pagination pattern.
 
 ### Rate limiting
 

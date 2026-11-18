@@ -1,7 +1,7 @@
 ---
 title: "DuckDB"
-canonical: https://tenzir.com/docs/v6.22.0/reference/optimizations/duckdb
-source: https://tenzir.com/docs/v6.22.0/reference/optimizations/duckdb.md
+canonical: https://tenzir.com/docs/reference/optimizations/duckdb
+source: https://tenzir.com/docs/reference/optimizations/duckdb.md
 section: "Docs"
 ---
 
@@ -28,7 +28,7 @@ The operator takes over the longest run of operators directly after it that Duck
 * [`where`](../operators/where.md), as the [filters](duckdb.md#filters) section describes.
 * [`select`](../operators/select.md) of fields, including renames and fields of `STRUCT` columns, such as `select ip=src_ip, host=meta.host`.
 * [`drop`](../operators/drop.md) of top-level fields.
-* [`summarize`](../operators/summarize.md) with group keys on fields and `count()`, `count(x)`, `min(x)`, and `max(x)` of fields. The summary may follow [`select`](../operators/select.md), [`drop`](../operators/drop.md), and assignments that copy fields, as [Aggregations in the source](../optimizations.md#aggregations-in-the-source) describes.
+* [`summarize`](../operators/summarize.md) with group keys and the functions that the [summaries](duckdb.md#summaries) section lists. The summary may follow [`select`](../operators/select.md), [`drop`](../operators/drop.md), and assignments, as [Aggregations in the source](../optimizations.md#aggregations-in-the-source) describes.
 * [`sort`](../operators/sort.md) by fields.
 * [`head`](../operators/head.md), and [`top`](../operators/top.md) or [`rare`](../operators/rare.md) followed by [`head`](../operators/head.md).
 
@@ -44,6 +44,32 @@ head 20
 ```
 
 and returns at most 20 groups. The operator nests derived tables where SQL’s clause order requires it, and keeps the order of a [`sort`](../operators/sort.md) across them.
+
+## Summaries
+
+DuckDB computes these aggregation functions of a [`summarize`](../operators/summarize.md):
+
+| TQL                   | DuckDB                                                     |
+| --------------------- | ---------------------------------------------------------- |
+| `count()`             | `COUNT(*)`                                                 |
+| `count(x)`            | `COUNT(x)`                                                 |
+| `min(x)`, `max(x)`    | `MIN(x)`, `MAX(x)`                                         |
+| `count_if(x, v => p)` | `COUNT(CASE WHEN p THEN x END)`, which skips `null` values |
+| `count_distinct(x)`   | `COUNT(DISTINCT x)`                                        |
+| `mean(x)`             | `AVG(x)`                                                   |
+
+`sum` stays in Tenzir, since DuckDB widens its result type to a `HUGEINT`.
+
+Group keys and aggregate arguments can be computed values, such as `level` in
+
+```tql
+level = severity * 2
+summarize src_ip, worst=max(level)
+```
+
+DuckDB computes an assignment that the summary reads with its own semantics, even if it calls a function that DuckDB spells. An assignment that the summary doesn’t read, including one that a later assignment shadows, must be infallible. See [Computed keys and arguments](../optimizations.md#computed-keys-and-arguments).
+
+A `floor` of a time to a duration, such as in `hour = floor(ts, 1h)` before a `summarize hour, events=count()`, runs in DuckDB as flooring division of the time in nanoseconds. The buckets count from the epoch, as in TQL, also before 1970. Widths that are multiples of a week or a month stay in Tenzir, since TQL aligns them to the calendar.
 
 ## Filters
 
@@ -68,6 +94,7 @@ The operators that DuckDB takes over run as DuckDB runs them, which can differ f
 * An IP address becomes its text, such as `'10.0.0.1'`, which compares as text against a `VARCHAR` column.
 * `match_regex` uses DuckDB’s `regexp_matches`.
 * A [`select`](../operators/select.md) of a column that the table lacks fails the query, where Tenzir would warn and fill in `null`.
+* A query that DuckDB rejects fails the pipeline with the error of DuckDB, a note that DuckDB computed the stages that the operator took over with its own semantics, and a hint to use `pushdown=false`. The note and the hint appear only if the operator took over stages.
 
 When DuckDB computes a summary or a [`select`](../operators/select.md), Tenzir does not see the individual rows, so it does not warn about values that it reads as `null`, such as a field of a `NULL` struct.
 

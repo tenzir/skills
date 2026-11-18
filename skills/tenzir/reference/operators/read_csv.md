@@ -1,7 +1,7 @@
 ---
 title: "read_csv"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/read_csv
-source: https://tenzir.com/docs/v6.22.0/reference/operators/read_csv.md
+canonical: https://tenzir.com/docs/reference/operators/read_csv
+source: https://tenzir.com/docs/reference/operators/read_csv.md
 section: "Docs"
 ---
 

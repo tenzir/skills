@@ -1,7 +1,7 @@
 ---
 title: "read_gelf"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/read_gelf
-source: https://tenzir.com/docs/v6.22.0/reference/operators/read_gelf.md
+canonical: https://tenzir.com/docs/reference/operators/read_gelf
+source: https://tenzir.com/docs/reference/operators/read_gelf.md
 section: "Docs"
 ---
 
@@ -138,4 +138,4 @@ accept_tcp "0.0.0.0:54321" {
 
 ## See Also
 
-* [Graylog](https://tenzir.com/integrations/graylog)
+* [Graylog](https://tenzir.com/product/integrations/graylog)

@@ -1,7 +1,7 @@
 ---
 name: tenzir
 description: >-
-  Answer questions using the documentation of Tenzir 6.22.0. Use whenever the
+  Answer questions using the documentation of Tenzir 7.0.0. Use whenever the
   user asks about TQL syntax, pipeline operators, functions, data parsing or
   transformation, normalization, OCSF mapping, enrichment, lookup tables,
   contexts, packages, nodes, platform setup, deployment, configuration,
@@ -18,8 +18,9 @@ description: >-
 
 > The security data pipeline platform.
 
-This map covers the documentation of Tenzir 6.22.0.
-Every link below is relative to <https://tenzir.com/docs/v6.22.0/> and leads to the Markdown version of a page, which you can read on its own.
+This map covers the documentation of Tenzir 7.0.0, the newest version, which is in preview.
+If the user works with an older version, read that version's index at <https://tenzir.com/docs/v<version>/llms.txt> instead; <https://tenzir.com/docs/versions.json> lists the published versions.
+Every link below is relative to <https://tenzir.com/docs/> and leads to the Markdown version of a page, which you can read on its own.
 
 ## How to use this skill
 
@@ -58,7 +59,7 @@ memory:
 → Read [where](reference/operators/where.md), explain the syntax, show the doc's TQL examples.
 
 **Integration question** — *"How do I send data to Splunk?"*
-→ Read <https://tenzir.com/integrations/splunk.md> and [to_splunk](reference/operators/to_splunk.md), provide the pipeline example from the page.
+→ Read <https://tenzir.com/product/integrations/splunk.md> and [to_splunk](reference/operators/to_splunk.md), provide the pipeline example from the page.
 
 **Task question** — *"How do I parse syslog?"*
 → Read [Parse delimited text](guides/parse/parse-delimited-text.md) and
@@ -73,93 +74,41 @@ Guides are practical step-by-step explanation to help you achieve a specific goa
 
 #### [Quickstart](guides/quickstart.md)
 
-Drowning in logs, alerts, and rigid tools?
+See live security events flow through Tenzir within minutes, from your AI agent, the app, or a terminal.
 
-#### [Overview](guides/installation.md)
+#### [Install Tenzir](guides/installation.md)
 
-This guide shows you how to install the Tenzir CLI to run pipelines locally or deploy a persistent node.
+Install the tenzir command on macOS or Linux with Homebrew, a Debian or RPM package, a static tarball, Docker, or uv, and run your first pipeline.
 
-##### [Create account](guides/installation/create-account.md)
+#### [Connect to Tenzir](guides/connect-to-tenzir.md)
 
-#### [Run pipelines](guides/basic-usage/run-pipelines.md)
+Connect your AI agent via MCP, sign in with the tenzir command, or create an API key for your scripts.
 
-You can run a pipeline via the platform, on the command line using the tenzir binary, or as code via the configuration file.
+#### [Set up your agent](guides/set-up-your-agent.md)
 
-#### [Manage a pipeline](guides/basic-usage/manage-a-pipeline.md)
+Give an AI agent what it needs to operate your deployments, write and test pipelines on your machine, and map events to security schemas.
 
-This guide shows you how to control pipeline lifecycles through the app or API.
+### Operate
 
-### Setup
+#### [Add a deployment](guides/add-a-deployment.md)
 
-#### [Overview](guides/ai-workbench.md)
+Add a deployment that runs your pipelines, hosted by Tenzir or on your own machine or server, keep it running and up to date, find out why it doesn't connect, and delete it when you no longer need it.
 
-Build your own AI Workbench by bringing an AI agent and configuring it with Tenzir’s agent skills.
+#### [Change configurations](guides/change-configurations.md)
 
-##### [Use agent skills](guides/ai-workbench/use-agent-skills.md)
+Change what your deployments run, review the change, take it to a deployment automatically or by hand, try it on a staging branch, and roll it back when it goes wrong.
 
-#### [Overview](guides/node-setup.md)
+#### [Manage packages](guides/manage-packages.md)
 
-The Tenzir Node is the vehicle to run pipelines.
+Install, update, and override the packages your configuration uses, and create, release, and share packages of your own.
 
-##### [Provision a node](guides/node-setup/provision-a-node.md)
+#### [Write tests](guides/write-tests.md)
 
-##### [Size a node](guides/node-setup/size-a-node.md)
+Write and run tests for your pipelines and packages, with fixtures, custom runners, and project hooks when tests need more than TQL.
 
-##### [Deploy a node](guides/node-setup/deploy-a-node.md)
+#### [Control access](guides/control-access.md)
 
-##### [Configure a node](guides/node-setup/configure-a-node.md)
-
-##### [Configure TLS](guides/node-setup/configure-tls.md)
-
-##### [Start the API](guides/node-setup/start-the-api.md)
-
-##### [Tune performance](guides/node-setup/tune-performance.md)
-
-#### [Overview](guides/platform-setup.md)
-
-The Tenzir Platform acts as a fleet management control plane for Tenzir Nodes.
-
-##### [Deploy on AWS](guides/platform-setup/deploy-on-aws.md)
-
-##### [Choose a scenario](guides/platform-setup/choose-a-scenario.md)
-
-##### [Configure reverse proxy](guides/platform-setup/configure-reverse-proxy.md)
-
-##### [Configure internal services](guides/platform-setup/configure-internal-services.md)
-
-##### [Configure identity provider](guides/platform-setup/configure-identity-provider.md)
-
-##### [Configure database](guides/platform-setup/configure-database.md)
-
-##### [Configure blob storage](guides/platform-setup/configure-blob-storage.md)
-
-##### [Configure secret store](guides/platform-setup/configure-secret-store.md)
-
-##### [Run the platform](guides/platform-setup/run-the-platform.md)
-
-#### [Manage organizations](guides/platform-management/manage-organizations.md)
-
-This guide shows you how to create, configure, and delete organizations in the Tenzir Platform.
-
-#### [Manage organization members](guides/platform-management/manage-organization-members.md)
-
-This guide shows you how to invite people to your organization, manage existing members, and understand the role-based permission model.
-
-#### [Manage organization workspaces](guides/platform-management/manage-organization-workspaces.md)
-
-This guide shows you how to create, view, and delete workspaces that belong to an organization.
-
-#### [Configure workspaces](guides/platform-management/configure-workspaces.md)
-
-Workspaces in the platform logically group nodes, secrets, and dashboards.
-
-#### [Configure dashboards](guides/platform-management/configure-dashboards.md)
-
-You can pre-define dashboards for your static workspaces.
-
-#### [Use ephemeral nodes](guides/platform-management/use-ephemeral-nodes.md)
-
-An ephemeral node is ideal for temporary or auto-scaling deployments.
+Invite members and give them the roles they need, limit what scripts and AI agents may do, protect production branches, and remove access you no longer trust.
 
 ### Work with Data
 
@@ -197,6 +146,8 @@ Read events and bytes from files, APIs, brokers, stores, and networks.
 
 ##### [Get data from the network](guides/collect/get-data-from-the-network.md)
 
+##### [Receive events with ingest endpoints](guides/collect/receive-events-with-ingest-endpoints.md)
+
 #### [Overview](guides/detect.md)
 
 Match security activity and model the resulting findings.
@@ -222,6 +173,8 @@ Match security activity and model the resulting findings.
 #### [Overview](guides/enrich.md)
 
 Add context that the original event does not contain.
+
+##### [Declare contexts](guides/enrich/declare-contexts.md)
 
 ##### [Use lookup tables](guides/enrich/use-lookup-tables.md)
 
@@ -299,8 +252,6 @@ Deliver event streams to the systems that need them.
 
 Query stored events and continue processing the results.
 
-##### [Export from a node](guides/search/export-from-a-node.md)
-
 #### [Overview](guides/shape.md)
 
 Prepare event fields and records for downstream processing.
@@ -328,104 +279,6 @@ Prepare event fields and records for downstream processing.
 Persist events for later search, replay, and analysis.
 
 ##### [Write partitioned files](guides/store/write-partitioned-files.md)
-
-##### [Import into a node](guides/store/import-into-a-node.md)
-
-##### [Show available schemas](guides/store/show-available-schemas.md)
-
-##### [Transform data at rest](guides/store/transform-data-at-rest.md)
-
-### Operate
-
-#### [Overview](guides/observability.md)
-
-Inspect node, pipeline, and host behavior.
-
-##### [Inspect a node](guides/observability/inspect-a-node.md)
-
-##### [Collect metrics](guides/observability/collect-metrics.md)
-
-#### [Overview](guides/troubleshooting.md)
-
-Diagnose compilation issues, pipeline failures, resource growth, and node connectivity.
-
-##### [Debug field values](guides/troubleshooting/debug-field-values.md)
-
-##### [Inspect the compilation output](guides/troubleshooting/inspect-compilation-output.md)
-
-##### [Investigate slow pipelines](guides/troubleshooting/investigate-slow-pipelines.md)
-
-##### [Investigate memory growth](guides/troubleshooting/investigate-memory-growth.md)
-
-##### [Investigate storage growth](guides/troubleshooting/investigate-storage-growth.md)
-
-##### [Reconnect an offline node](guides/troubleshooting/reconnect-an-offline-node.md)
-
-### Build
-
-#### [Install a package](guides/packages/install-a-package.md)
-
-Write your own package
-
-#### [Create a package](guides/packages/create-a-package.md)
-
-This guide shows you how to create a package from scratch.
-
-#### [Test packages](guides/packages/test-packages.md)
-
-This guide shows you how to add tests to your package.
-
-#### [Add operators](guides/packages/add-operators.md)
-
-This guide shows you how to create user-defined operators (UDOs) for your package.
-
-#### [Add pipelines](guides/packages/add-pipelines.md)
-
-This guide shows you how to add deployable pipelines to your package.
-
-#### [Add contexts](guides/packages/add-contexts.md)
-
-This guide shows you how to add enrichment contexts to your package.
-
-#### [Add constants](guides/packages/add-constants.md)
-
-This guide shows you how to define package-wide constants in a constants.tql file and reference them as pkg::$name from the package’s own operators and pipelines, as well as from any pipeline that uses the package.
-
-#### [Configure inputs](guides/packages/configure-inputs.md)
-
-This guide shows you how to make packages configurable with inputs.
-
-#### [Maintain a changelog](guides/packages/maintain-a-changelog.md)
-
-This guide shows you how to manage changelog entries and publish releases with tenzir-ship.
-
-#### [Publish a package](guides/packages/publish-a-package.md)
-
-This guide shows you how to publish your package.
-
-#### [Run tests](guides/testing/run-tests.md)
-
-This guide shows you how to run existing integration tests with the tenzir-test framework.
-
-#### [Write tests](guides/testing/write-tests.md)
-
-This guide shows you how to create integration tests with the tenzir-test framework.
-
-#### [Run fixtures](guides/testing/run-fixtures.md)
-
-This guide shows you how to start fixtures in standalone mode without running tests.
-
-#### [Create fixtures](guides/testing/create-fixtures.md)
-
-This guide shows you how to create a fixture, wire it into the test harness, and use it from a test.
-
-#### [Add custom runners](guides/testing/add-custom-runners.md)
-
-Runners tell tenzir-test how to execute a discovered file.
-
-#### [Configure project hooks](guides/testing/configure-project-hooks.md)
-
-This guide shows you how to configure tenzir-test project hooks for setup and cleanup tasks that belong next to your tests.
 
 ### Contribute
 
@@ -481,10 +334,6 @@ A context is state, not code.
 
 ### Analytics
 
-#### [Plot data with charts](tutorials/plot-data-with-charts.md)
-
-In this tutorial, you will learn how to use pipelines to plot data as charts.
-
 #### [Build an OCSF lake with ClickHouse](tutorials/build-an-ocsf-lake-with-clickhouse.md)
 
 Store OCSF events in ClickHouse, from a table that accepts anything to a tuned lake with typed columns, skip indexes, codecs, and per-class retention.
@@ -495,21 +344,21 @@ Explanations are big-picture explanations of higher-level Tenzir concepts.
 
 ### Architecture
 
+#### [Platform](explanations/platform.md)
+
+Understand how the platform organizes organizations, workspaces, and deployments, how deployments connect to it, and which data it sees.
+
+#### [Configuration](explanations/configuration.md)
+
+Understand how a workspace keeps its pipelines, contexts, and packages in a Git repository, and what a deploy guarantees when a commit reaches a deployment.
+
 #### [Deployment](explanations/deployment.md)
 
-This page explains Tenzir’s deployment architecture, which separates data processing from management through a layered design.
+Understand what a deployment runs, which states its pipelines go through, how it survives restarts, and how it keeps working when the platform is unreachable.
 
 #### [Pipeline](explanations/pipeline.md)
 
 A Tenzir pipeline is a chain of operators that represents a dataflow.
-
-#### [Node](explanations/node.md)
-
-A node is a running process that manages and executes pipelines.
-
-#### [Platform](explanations/platform.md)
-
-The platform provides fleet management for nodes.
 
 #### [Language](explanations/language.md)
 
@@ -524,10 +373,6 @@ Understand how Tenzir compiles TQL into an execution plan and runs operators wit
 Understand how Tenzir stores events in columnar batches, keeps events of different shapes and types side by side, and selects rows with bitmaps instead of slicing batches apart.
 
 ### Concepts
-
-#### [Configuration](explanations/configuration.md)
-
-This page explains how to configure the Tenzir CLI and Node.
 
 #### [Secrets](explanations/secrets.md)
 
@@ -547,11 +392,15 @@ Understand how Tenzir matches, correlates, and models security evidence as detec
 
 #### [Packages](explanations/packages.md)
 
-This page explains how packages bundle pipelines, operators, contexts, and examples into a deployable unit.
+Understand what a package contains, how a configuration and its packages depend on each other by version, how releases work, and what our library offers.
 
 #### [Encryption](explanations/encryption.md)
 
 Encryption turns a value into ciphertext that only the holders of a key can turn back into the original.
+
+#### [Ingest endpoints](explanations/ingest-endpoints.md)
+
+Understand how ingest endpoints accept events over HTTPS, buffer them on the platform, and hand them to the pipelines of your deployments.
 
 ### Help
 
@@ -585,11 +434,27 @@ TQL programs compose statements into complete data processing workflows that can
 
 Tenzir runs part of a pipeline where the data lives.
 
-### Components
+### Configuration
 
-#### [Configuration](reference/node/configuration.md)
+#### [Directory Layout](reference/directory-layout.md)
 
-The below example configuration ships with every Tenzir package.
+A configuration and a package are both folders of plain files in fixed places.
+
+#### [Contexts](reference/contexts.md)
+
+A deployment declares its contexts in its configuration, one YAML file per context.
+
+#### [Manifest](reference/manifest.md)
+
+Every package and every configuration has a package.yaml at its root, its manifest.
+
+#### [Dependencies](reference/dependencies.md)
+
+The dependencies key of a manifest lists the packages that a configuration or a package uses, by id.
+
+#### [Package lock file](reference/lock.md)
+
+The package.lock file pins every package that a configuration uses to one version, one commit, and a hash of its files, including the packages that these use in turn.
 
 ### Security
 
@@ -601,47 +466,23 @@ Tenzir’s AWS operators authenticate with AWS using the AWS SDK’s default cre
 
 Tenzir’s Azure operators authenticate with Microsoft Entra ID using the Azure SDK’s default credential chain, a shared account key, an application client secret, or workload identity federation.
 
-### API
+#### [IAM](reference/iam.md)
 
-#### [Overview](reference/api/node/overview.md)
+The platform decides every request with role-based access control: a member’s roles grant actions on resources, an API key’s policy narrows its member’s actions, and an agent connected via MCP acts with its user’s actions.
 
-This reference is generated from the OpenAPI specification.
+### Interfaces
 
-#### [Check node health](reference/api/node/health/ping-node.md)
+#### [API](reference/api.md)
 
-post/ping
+The platform’s REST API offers everything that the app, the CLI, and the MCP server do, under the same permissions, for your own scripts and tools.
 
-#### [Read pipeline output](reference/api/node/pipeline-output/read-pipeline-output.md)
+#### [MCP](reference/mcp.md)
 
-post/serve
+The platform’s MCP server lets an AI agent do what you do in the app, with your permissions: run pipelines, read diagnostics, change the configuration, and manage deployments.
 
-#### [Read multiple pipeline outputs](reference/api/node/pipeline-output/read-multiple-pipeline-outputs.md)
+#### [CLI](reference/cli.md)
 
-post/serve-multi
-
-#### [Create a new pipeline](reference/api/node/pipelines/create-pipeline.md)
-
-post/pipeline/create
-
-#### [Delete an existing pipeline](reference/api/node/pipelines/delete-pipeline.md)
-
-post/pipeline/delete
-
-#### [Launch a new pipeline](reference/api/node/pipelines/launch-pipeline.md)
-
-post/pipeline/launch
-
-#### [List pipelines](reference/api/node/pipelines/list-pipelines.md)
-
-post/pipeline/list
-
-#### [Reset the TTL of an existing pipeline](reference/api/node/pipelines/reset-pipeline-ttl.md)
-
-post/pipeline/reset-ttl
-
-#### [Update pipeline state](reference/api/node/pipelines/update-pipeline.md)
-
-post/pipeline/update
+The tenzir command runs pipelines on your machine and on your deployments, runs a deployment on your machine, and does everything the platform offers from a terminal.
 
 ### Operators
 
@@ -661,15 +502,13 @@ For the complete operator listing by category, read [Operator Index](reference/o
 
 For the complete function listing by category, read [Function Index](reference/functions.md).
 
-#### Node Index
-
-- [Configuration](reference/node/configuration.md)
-
 #### Overview Index
 
 - [ClickHouse](reference/optimizations/clickhouse.md)
+- [CloudWatch Logs](reference/optimizations/cloudwatch.md)
 - [DuckDB](reference/optimizations/duckdb.md)
 - [KQL](reference/optimizations/kql.md)
+- [Microsoft Graph](reference/optimizations/microsoft-graph.md)
 - [Microsoft SQL Server](reference/optimizations/microsoft-sql.md)
 - [MySQL](reference/optimizations/mysql.md)
 - [SentinelOne](reference/optimizations/sentinelone.md)

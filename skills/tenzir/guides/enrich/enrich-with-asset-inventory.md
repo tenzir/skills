@@ -1,8 +1,8 @@
 ---
 title: "Enrich with asset inventory"
 description: "Add asset inventory context to OCSF endpoint and user fields"
-canonical: https://tenzir.com/docs/v6.22.0/guides/enrich/enrich-with-asset-inventory
-source: https://tenzir.com/docs/v6.22.0/guides/enrich/enrich-with-asset-inventory.md
+canonical: https://tenzir.com/docs/guides/enrich/enrich-with-asset-inventory
+source: https://tenzir.com/docs/guides/enrich/enrich-with-asset-inventory.md
 section: "Docs"
 ---
 
@@ -302,7 +302,7 @@ from {
 context_update "users", key=name
 ```
 
-Enrich the actor user by keeping the source username in `unmapped` and writing the lookup result directly to `actor.user`:
+Enrich the actor user by keeping the source username in `unmapped` and writing the enrichment result directly to `actor.user`:
 
 ```tql
 from {

@@ -1,7 +1,7 @@
 ---
 title: "parse_cef"
-canonical: https://tenzir.com/docs/v6.22.0/reference/functions/parse_cef
-source: https://tenzir.com/docs/v6.22.0/reference/functions/parse_cef.md
+canonical: https://tenzir.com/docs/reference/functions/parse_cef
+source: https://tenzir.com/docs/reference/functions/parse_cef.md
 section: "Docs"
 ---
 
@@ -158,4 +158,4 @@ y = x.parse_cef()
 * [`read_cef`](../operators/read_cef.md)
 * [`read_syslog`](../operators/read_syslog.md)
 * [Parse string fields](../../guides/parse/parse-string-fields.md)
-* [Syslog](https://tenzir.com/integrations/syslog)
+* [Syslog](https://tenzir.com/product/integrations/syslog)

@@ -1,7 +1,7 @@
 ---
 title: "read_suricata"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/read_suricata
-source: https://tenzir.com/docs/v6.22.0/reference/operators/read_suricata.md
+canonical: https://tenzir.com/docs/reference/operators/read_suricata
+source: https://tenzir.com/docs/reference/operators/read_suricata.md
 section: "Docs"
 ---
 
@@ -77,4 +77,4 @@ Suricata’s `unix-command` socket is separate from EVE output. It is a control 
 
 * [`read_json`](read_json.md)
 * [`accept_unix_socket`](accept_unix_socket.md)
-* [Suricata](https://tenzir.com/integrations/suricata)
+* [Suricata](https://tenzir.com/product/integrations/suricata)

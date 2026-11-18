@@ -1,7 +1,7 @@
 ---
 title: "compress_zstd"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/compress_zstd
-source: https://tenzir.com/docs/v6.22.0/reference/operators/compress_zstd.md
+canonical: https://tenzir.com/docs/reference/operators/compress_zstd
+source: https://tenzir.com/docs/reference/operators/compress_zstd.md
 section: "Docs"
 ---
 

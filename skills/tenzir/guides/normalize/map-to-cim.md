@@ -1,7 +1,7 @@
 ---
 title: "Map to CIM"
-canonical: https://tenzir.com/docs/v6.22.0/guides/normalize/map-to-cim
-source: https://tenzir.com/docs/v6.22.0/guides/normalize/map-to-cim.md
+canonical: https://tenzir.com/docs/guides/normalize/map-to-cim
+source: https://tenzir.com/docs/guides/normalize/map-to-cim.md
 section: "Docs"
 ---
 
@@ -15,7 +15,7 @@ CIM is organized around data models and datasets rather than a single event reco
 
 ## Use the CIM skill
 
-Install the `tenzir-cim` skill when you want an agent to help with CIM schema decisions. See [Use agent skills](../ai-workbench/use-agent-skills.md#use-the-cim-skill) for installation and usage examples.
+Install the `tenzir-cim` skill when you want an agent to help with CIM schema decisions. See [Use agent skills](https://tenzir.com/docs/guides/ai-workbench/use-agent-skills#use-the-cim-skill) for installation and usage examples.
 
 Ask the agent to choose the data model and dataset before it maps fields. The skill can inspect tags, constraints, recommended fields, calculated fields, and lookup-backed values for the selected dataset.
 
@@ -81,12 +81,12 @@ Use the `index` option when the destination index differs per event.
 
 * [`to_splunk`](../../reference/operators/to_splunk.md)
 * [Clean up values](../parse/clean-up-values.md)
-* [Use agent skills](../ai-workbench/use-agent-skills.md#use-the-cim-skill)
+* [Use agent skills](https://tenzir.com/docs/guides/ai-workbench/use-agent-skills#use-the-cim-skill)
 * [Map to ASIM](map-to-asim.md)
 * [Map to ECS](map-to-ecs.md)
 * [Map to OCSF](map-to-ocsf.md)
 * [Map to UDM](map-to-udm.md)
-* [Create a package](../packages/create-a-package.md)
-* [Write tests](../testing/write-tests.md)
-* [Splunk](https://tenzir.com/integrations/splunk)
+* [Create a package](https://tenzir.com/docs/guides/packages/create-a-package)
+* [Write tests](https://tenzir.com/docs/guides/testing/write-tests)
+* [Splunk](https://tenzir.com/product/integrations/splunk)
 * [Onboard a data source](../../tutorials/onboard-a-data-source.md)

@@ -1,7 +1,7 @@
 ---
 title: "exp"
-canonical: https://tenzir.com/docs/v6.22.0/reference/functions/exp
-source: https://tenzir.com/docs/v6.22.0/reference/functions/exp.md
+canonical: https://tenzir.com/docs/reference/functions/exp
+source: https://tenzir.com/docs/reference/functions/exp.md
 section: "Docs"
 ---
 

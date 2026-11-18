@@ -1,7 +1,7 @@
 ---
 title: "from_splunk"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/from_splunk
-source: https://tenzir.com/docs/v6.22.0/reference/operators/from_splunk.md
+canonical: https://tenzir.com/docs/reference/operators/from_splunk
+source: https://tenzir.com/docs/reference/operators/from_splunk.md
 section: "Docs"
 ---
 
@@ -12,7 +12,8 @@ section: "Docs"
 Runs a Splunk search and returns its results as events.
 
 ```tql
-from_splunk url:string, [search=string], [index=string|list<string>],
+from_splunk url:string, [search=string], [spl2=string],
+            [index=string|list<string>],
             earliest=string|time, latest=string|time, headers=record,
             [options=record, tls=record, timeout=duration,
             connection_timeout=duration, max_retry_count=int,
@@ -23,9 +24,11 @@ from_splunk url:string, [search=string], [index=string|list<string>],
 
 The `from_splunk` operator sends a search request to a Splunk Search Head and returns every search result as a Tenzir event. Tenzir initiates the connection to Splunk. Splunk doesn’t need outbound network access to Tenzir.
 
-Pass exactly one of `index` and `search`. With `index`, Tenzir writes the search for the events of one or more indexes, and you filter the events in TQL. With `search`, Tenzir runs your Splunk Search Processing Language (SPL) search. In both cases, the operator hands Splunk the operators that follow it, such as [`where`](where.md), [`summarize`](summarize.md), and [`head`](head.md), which then run in Splunk with Splunk’s semantics, as [Optimizations](from_splunk.md#optimizations) describes.
+Pass exactly one of `index`, `search`, and `spl2`. With `index`, Tenzir writes the search for the events of one or more indexes, and you filter the events in TQL. With `search`, Tenzir runs your Splunk Search Processing Language (SPL) search. With `spl2`, Tenzir runs your SPL2 search. In all cases, the operator hands Splunk the operators that follow it, such as [`where`](where.md), [`summarize`](summarize.md), and [`head`](head.md), which then run in Splunk with Splunk’s semantics, as [Optimizations](from_splunk.md#optimizations) describes.
 
-For each search, the operator sends a form-encoded `POST` request to the Splunk management API endpoint `/services/search/v2/jobs/export`. It requests final JSON results and streams them into the pipeline without buffering the complete response. The export endpoint returns one streamed HTTP response, so the operator doesn’t issue pagination requests.
+For an SPL search or an index, the operator sends a form-encoded `POST` request to the Splunk management API endpoint `/services/search/v2/jobs/export`. It requests final JSON results and streams them into the pipeline without buffering the complete response. The export endpoint returns one streamed HTTP response, so the operator doesn’t issue pagination requests.
+
+An SPL2 search runs as a search job instead. The operator dispatches the search and the operators that Splunk takes over as the statement `$main` of an SPL2 module, polls the job until it’s done, and then exports its results. It forwards the warnings and errors of the job as diagnostics.
 
 Splunk `ERROR` and `FATAL` response messages fail the pipeline. The diagnostic includes Splunk’s message and the search as Tenzir sent it, including the stages that Tenzir appended. Splunk `WARN` messages produce Tenzir warnings without discarding valid search results.
 
@@ -33,7 +36,7 @@ Splunk `ERROR` and `FATAL` response messages fail the pipeline. The diagnostic i
 
 The operator preserves the fields inside each Splunk `result` record and assigns the schema name `tenzir.splunk` to the resulting events. It removes Splunk’s `preview`, `offset`, and `lastrow` export-envelope fields.
 
-Splunk’s export endpoint returns only the fields that a search references, plus default fields such as `_raw`, `_time`, `host`, `source`, `sourcetype`, `index`, `splunk_server`, and `linecount`. To return every extracted field, the operator appends `| fields *` to the search. When an operator that follows, such as [`select`](select.md), names the fields that the pipeline needs, the operator appends a `fields` stage with these fields instead.
+Splunk’s export endpoint returns only the fields that a search references, plus default fields such as `_raw`, `_time`, `host`, `source`, `sourcetype`, `index`, `splunk_server`, and `linecount`. To return every extracted field, the operator appends `| fields *` to the search. An SPL2 search needs no such stage, since the operator asks Splunk to extract all fields. When an operator that follows, such as [`select`](select.md), names the fields that the pipeline needs, the operator appends a `fields` stage with these fields instead.
 
 The appended `fields *` doesn’t bring back fields that an earlier `fields - <field>` command in your search removed. After a transforming command such as `stats` or `table`, it has no effect. Splunk result fields such as `_raw`, `_bkt`, and `_indextime` are available unless the search removes them.
 
@@ -65,7 +68,7 @@ For Splunk Cloud Platform, use `https://<deployment-name>.splunkcloud.com:8089`.
 
 ### `search = string`
 
-The SPL search to run. Use exactly one of `search` and `index`.
+The SPL search to run. Use exactly one of `search`, `spl2`, and `index`.
 
 The Splunk account must have permission to run the search and read every index that the search accesses.
 
@@ -95,9 +98,17 @@ from_splunk "https://splunk-search-head.example.com:8089",
   }
 ```
 
+### `spl2 = string`
+
+The SPL2 search to run. Use exactly one of `search`, `spl2`, and `index`.
+
+Write the search as you would write the statement `$main` of an SPL2 module, such as `from main where sourcetype == "linux_secure"`. The operator appends stages to your search for the operators that follow it, as [Optimizations](from_splunk.md#optimizations) describes. Unlike with `search`, the `options` argument doesn’t apply to `spl2`.
+
+SPL2 searches require Splunk Enterprise 10.2 or Splunk Cloud Platform 10.2.2510 or later. Use a [raw string](../expressions.md#string) when the search contains quotes, as for `search`.
+
 ### `index = string|list<string>`
 
-The Splunk indexes to read. Use exactly one of `search` and `index`.
+The Splunk indexes to read. Use exactly one of `search`, `spl2`, and `index`.
 
 Tenzir writes the search for you. A single index, such as `index="main"`, becomes the search `search index="main"`. A list, such as `index=["main", "web_*"]`, becomes `search index IN ("main", "web_*")`. Index names can contain the `*` wildcard. Tenzir adds the filters of the [`where`](where.md) operators that follow to this search, so you can filter the events in TQL instead of SPL.
 
@@ -141,7 +152,7 @@ A Splunk HTTP Event Collector (HEC) token authenticates ingestion requests. It d
 
 ### `options = record (optional)`
 
-Additional form parameters for Splunk’s [`search/v2/jobs/export` endpoint](https://help.splunk.com/en/splunk-cloud-platform/leverage-rest-apis/rest-api-reference/10.3.2512/search-endpoints/search-endpoint-descriptions#search-v2-jobs-export). Use a flat record. Tenzir form-encodes each field and includes it in the search request.
+Additional form parameters for Splunk’s [`search/v2/jobs/export` endpoint](https://help.splunk.com/en/splunk-cloud-platform/leverage-rest-apis/rest-api-reference/10.3.2512/search-endpoints/search-endpoint-descriptions#search-v2-jobs-export). Use a flat record. Tenzir form-encodes each field and includes it in the search request. The argument doesn’t apply to `spl2`.
 
 Common parameters include:
 
@@ -217,8 +228,6 @@ TLS configuration. Provide an empty record (`tls={}`) to enable TLS with default
 The `client_ca` and `require_client_cert` options are only valid for operators that accept incoming client connections.
 
 Any value not specified in the record will either be picked up from the configuration or if not configured will not be used by the operator.
-
-See the [Node TLS Setup guide](../../guides/node-setup/configure-tls.md) for more details.
 
 To trust a private certificate authority, set `tls.cacert` to its CA bundle:
 
@@ -298,6 +307,37 @@ search index=main source="tenzir-docs-auth" | stats count by user
 | fields *
 ```
 
+### Run an SPL2 search
+
+Use `spl2` to run SPL2 against the same events:
+
+```tql
+from_splunk "https://splunk-search-head.example.com:8089",
+  spl2=r#"from main where sourcetype == "linux_secure""#,
+  earliest="-1h",
+  latest="now",
+  headers={
+    Authorization: secret("splunk-rest-authorization"),
+  }
+where user != "root"
+summarize user, attempts=count()
+sort -attempts
+head 20
+```
+
+Splunk takes over the operators that follow the search. The operator dispatches this SPL2 search as the statement `$main` of a module:
+
+```text
+from main where sourcetype == "linux_secure"
+| where ('user' != "root")
+| stats count() as tenzir_column_0 by 'user'
+| sort 20 -'tenzir_column_0'
+| head 20
+| appendpipe [stats count() as tenzir_groups_0]
+```
+
+The [SPL optimizations](../optimizations/spl.md#spl2) page describes the differences from SPL.
+
 ### Use Tenzir times as search boundaries
 
 Pass `time` values directly when another part of the pipeline computes the search window. Tenzir serializes them as UTC strings for Splunk:
@@ -343,13 +383,15 @@ The `now` parameter gives every relative boundary in one invocation the same anc
 
 ## Limitations
 
-The operator runs one finite export request per invocation. It rejects real-time bounds and search parameters before sending the request. It doesn’t create search jobs, poll search IDs, manage saved searches, schedule requests, persist checkpoints, or deduplicate results. Scheduling and stateful processing belong in the surrounding pipeline.
+The operator runs one finite search per invocation. It rejects real-time bounds and search parameters before sending the request. It doesn’t manage saved searches, schedule requests, persist checkpoints, or deduplicate results. Scheduling and stateful processing belong in the surrounding pipeline.
 
 When the pipeline ends early, for example because a [`head`](head.md) has enough events, the operator closes the export request, which may end the Splunk search before its side effects complete. Don’t follow a search with commands such as `outputlookup` or `collect` by [`head`](head.md) if the side effects must complete.
+
+When the pipeline ends while an SPL2 search job is still running, the operator doesn’t cancel the job. Splunk removes it when the job expires.
 
 ## See also
 
 * [`every`](every.md)
 * [`from_http`](from_http.md)
 * [`to_splunk`](to_splunk.md)
-* [Splunk](https://tenzir.com/integrations/splunk)
+* [Splunk](https://tenzir.com/product/integrations/splunk)

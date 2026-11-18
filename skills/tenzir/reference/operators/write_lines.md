@@ -1,7 +1,7 @@
 ---
 title: "write_lines"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/write_lines
-source: https://tenzir.com/docs/v6.22.0/reference/operators/write_lines.md
+canonical: https://tenzir.com/docs/reference/operators/write_lines
+source: https://tenzir.com/docs/reference/operators/write_lines.md
 section: "Docs"
 ---
 

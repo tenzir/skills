@@ -1,8 +1,8 @@
 ---
 title: "Executor"
 description: "Understand how Tenzir compiles TQL into an execution plan and runs operators with fused handoffs, channels, subpipelines, and parallel jobs."
-canonical: https://tenzir.com/docs/v6.22.0/explanations/executor
-source: https://tenzir.com/docs/v6.22.0/explanations/executor.md
+canonical: https://tenzir.com/docs/explanations/executor
+source: https://tenzir.com/docs/explanations/executor.md
 section: "Docs"
 ---
 
@@ -26,7 +26,7 @@ A pipeline passes through these representations before it runs:
 | Plan     | A directed acyclic graph (DAG)                 | The planner assigns operator degrees, adds branches and exchanges, and chooses the channels between operators.         |
 | Spawn    | Operator instances, fused groups, and channels | The executor creates the planned operator instances and starts moving bytes, events, and control signals through them. |
 
-The separation matters when you debug a pipeline. The source describes your intent, the optimized IR describes the logical work that remains, and the plan describes the physical graph that runs. Our guide on [inspecting the compilation output](../guides/troubleshooting/inspect-compilation-output.md) shows how to print each representation.
+The separation matters when you debug a pipeline. The source describes your intent, the optimized IR describes the logical work that remains, and the plan describes the physical graph that runs. The `tenzir` command prints each representation of a pipeline with `--dump-ir`, `--dump-opt-ir`, and `--dump-ir-plan`.
 
 ### Parsing and compilation
 
@@ -72,8 +72,6 @@ By default, Tenzir fuses adjacent operators in a lane into a single group, even 
 
 Two versions of the same five-operator chain side by side: on the left every pair of operators is separated by a channel, on the right the middle three operators sit inside one group box that keeps only the channels leading into and out of it
 
-Our performance guide explains [operator fusion and its trade-offs](../guides/node-setup/tune-performance.md#fusing).
-
 ## Parallel execution
 
 Pipeline parallelism changes the degree of eligible planned operators. The planner replicates operators that can process independent work and leaves sequential operators at degree one.
@@ -88,7 +86,7 @@ A parallel file source can assign files to jobs with a stable hash of each file 
 
 Kafka uses broker-managed assignment instead. Every [`from_kafka`](../reference/operators/from_kafka.md#parallelism) instance joins the same consumer group, and the broker assigns and rebalances partitions among those instances. A partition can move between jobs and replay messages whose offsets have not yet been committed, so delivery remains at-least-once.
 
-Parallel jobs do not preserve one global event order. A gather receives output as jobs make progress, and a keyed shuffle intentionally separates the stream. If order affects the result, keep the relevant part sequential or restore order explicitly. Our guide on [tuning performance](../guides/node-setup/tune-performance.md#parallelism) explains how to enable parallelism and choose its degree.
+Parallel jobs do not preserve one global event order. A gather receives output as jobs make progress, and a keyed shuffle intentionally separates the stream. If order affects the result, keep the relevant part sequential or restore order explicitly.
 
 ## Subpipelines
 
@@ -110,12 +108,9 @@ Dynamic subpipelines make this coordination recursive. An owner must send the ba
 
 Current limitation
 
-Persistent pipeline recovery from checkpoints is not generally available. The executor and several operators contain checkpointing infrastructure, but a node does not currently save and restore complete execution graphs after a process restart. Pausing a managed pipeline retains its in-memory state; stopping it or restarting the process resets that state.
+Persistent pipeline recovery from checkpoints is not generally available. The executor and several operators contain checkpointing infrastructure, but a deployment does not currently save and restore complete execution graphs after a restart. Stopping a pipeline or restarting the deployment resets its in-memory state.
 
 ## See also
 
 * [Pipeline](pipeline.md)
-* [Node](node.md)
-* [Tune performance](../guides/node-setup/tune-performance.md)
-* [Inspect the compilation output](../guides/troubleshooting/inspect-compilation-output.md)
-* [Investigate slow pipelines](../guides/troubleshooting/investigate-slow-pipelines.md)
+* [Deployment](deployment.md)

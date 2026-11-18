@@ -1,7 +1,7 @@
 ---
 title: "to_google_cloud_monitoring"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/to_google_cloud_monitoring
-source: https://tenzir.com/docs/v6.22.0/reference/operators/to_google_cloud_monitoring.md
+canonical: https://tenzir.com/docs/reference/operators/to_google_cloud_monitoring
+source: https://tenzir.com/docs/reference/operators/to_google_cloud_monitoring.md
 section: "Docs"
 ---
 
@@ -25,7 +25,7 @@ to_google_cloud_monitoring [project=string, service_credentials=string,
 
 The `to_google_cloud_monitoring` operator writes metric events as [user-defined metrics](https://cloud.google.com/monitoring/custom-metrics) to [Google Cloud Monitoring](https://cloud.google.com/monitoring) through the Cloud Monitoring API.
 
-The operator accepts the same input shape as [`to_prometheus`](to_prometheus.md), so you can send the output of `metrics shape="prometheus"` without reshaping it:
+The operator accepts the same input shape as [`to_prometheus`](to_prometheus.md), so the same events work for both:
 
 ```tql
 {
@@ -244,10 +244,15 @@ Defaults to `5`.
 
 ## Examples
 
-### Send node metrics
+### Send a metric
 
 ```tql
-metrics live=true, shape="prometheus"
+from {
+  metric: "http_requests_total",
+  value: 42,
+  timestamp: now(),
+  labels: {method: "GET"},
+}
 to_google_cloud_monitoring project="my-project",
   metric_prefix="custom.googleapis.com/tenzir/"
 ```
@@ -255,7 +260,7 @@ to_google_cloud_monitoring project="my-project",
 ### Send metrics from outside of Google Cloud
 
 ```tql
-metrics live=true, shape="prometheus"
+subscribe "metrics"
 to_google_cloud_monitoring project="my-project",
   service_credentials=secret("gcp-monitoring-credentials"),
   resource_type="generic_node",
@@ -286,7 +291,5 @@ to_google_cloud_monitoring project="my-project",
 
 ## See Also
 
-* [`metrics`](metrics.md)
 * [`to_prometheus`](to_prometheus.md)
-* [Collect metrics](../../guides/observability/collect-metrics.md)
-* [Cloud monitoring](https://tenzir.com/integrations/google/cloud-monitoring)
+* [Cloud monitoring](https://tenzir.com/product/integrations/google/cloud-monitoring)

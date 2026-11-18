@@ -1,7 +1,7 @@
 ---
 title: "minutes"
-canonical: https://tenzir.com/docs/v6.22.0/reference/functions/minutes
-source: https://tenzir.com/docs/v6.22.0/reference/functions/minutes.md
+canonical: https://tenzir.com/docs/reference/functions/minutes
+source: https://tenzir.com/docs/reference/functions/minutes.md
 section: "Docs"
 ---
 

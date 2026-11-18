@@ -1,7 +1,7 @@
 ---
 title: "from_http"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/from_http
-source: https://tenzir.com/docs/v6.22.0/reference/operators/from_http.md
+canonical: https://tenzir.com/docs/reference/operators/from_http
+source: https://tenzir.com/docs/reference/operators/from_http.md
 section: "Docs"
 ---
 
@@ -164,8 +164,6 @@ TLS configuration. Provide an empty record (`tls={}`) to enable TLS with default
 The `client_ca` and `require_client_cert` options are only valid for operators that accept incoming client connections.
 
 Any value not specified in the record will either be picked up from the configuration or if not configured will not be used by the operator.
-
-See the [Node TLS Setup guide](../../guides/node-setup/configure-tls.md) for more details.
 
 ### Migration from `server=true`
 
@@ -364,4 +362,4 @@ This retries transient transport failures and HTTP `429` and `5xx` responses up 
 * [Fetch via HTTP and APIs](../../guides/collect/fetch-via-http-and-apis.md)
 * [Enrich with threat intel](../../guides/enrich/enrich-with-threat-intel.md)
 * [Use lookup tables](../../guides/enrich/use-lookup-tables.md)
-* [Http](https://tenzir.com/integrations/http)
+* [Http](https://tenzir.com/product/integrations/http)

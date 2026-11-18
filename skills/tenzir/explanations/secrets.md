@@ -1,7 +1,7 @@
 ---
 title: "Secrets"
-canonical: https://tenzir.com/docs/v6.22.0/explanations/secrets
-source: https://tenzir.com/docs/v6.22.0/explanations/secrets.md
+canonical: https://tenzir.com/docs/explanations/secrets
+source: https://tenzir.com/docs/explanations/secrets.md
 section: "Docs"
 ---
 
@@ -95,7 +95,7 @@ You can concatenate secrets with other secrets or strings using the `+` operator
 
 #### Encoding & Decoding
 
-In general, Tenzir does not assume that a secret is valid UTF-8, although most operators make that constraint. Conversely, some secret stores may require your secrets to be UTF-8, while some operators expect a binary or otherwise encoded secret.
+In general, Tenzir does not assume that a secret is valid UTF-8, although most operators make that constraint. Conversely, the platform stores secrets as text, while some operators expect a binary or otherwise encoded secret.
 
 To bridge this gap, you can use Tenzir’s [encoding](../reference/functions.md#encoding) and [decoding](../reference/functions.md#decoding) functions:
 
@@ -123,66 +123,33 @@ Since secrets cannot be stored in events, they never reach the [`python`](../ref
 
 **Ad-hoc secrets** are secrets implicitly created from a `string` within [TQL](language.md). This happens when you provide a `string` to an operator or function that expects a `secret`. Operators and functions also accept a constant `blob`, which suits binary keys, such as `key=decode_hex("000102030405060708090a0b0c0d0e0f")`.
 
-Plain string values are useful when developing pipelines and you don’t want to add the secret to the configuration or a secret store. This approach also works well for arguments that you don’t consider sensitive, avoiding the need to create a managed secret.
+Plain string values are useful when developing pipelines and you don’t want to create a managed secret. This approach also works well for arguments that you don’t consider sensitive.
 
-However, secrets created from plain values do not enjoy the same security as managed secrets. Their value appears directly in the TQL pipeline definition, as well as in the compiled and executed representation. As such, the Tenzir Node may persist the value.
+However, secrets created from plain values do not enjoy the same security as managed secrets. Their value appears directly in the TQL pipeline definition, as well as in the compiled and executed representation. A configured pipeline keeps the value in the configuration repository and its history, and the deployment stores it with the pipeline.
 
 ## Managed Secrets
 
-Managed secrets are identified by their name and can come from the following sources, in descending precedence:
+**Managed secrets** live in the [platform](platform.md), which stores them encrypted. Each one has a name and belongs to an organization, a workspace, or a deployment. Manage them on the Secrets page of the app or through the platform API, and access a managed secret’s value with the [`secret`](../reference/functions/secret.md) function.
 
-1. The environment of the Tenzir Node
-2. The configuration of the Tenzir Node
-3. The Tenzir Platform secret store for the workspace the Tenzir Node belongs to
+The configuration repository holds no secrets, so pipelines and packages refer to managed secrets only by name.
 
-<!--?xml version="1.0" standalone="no"?-->Resolution
+### Owners and Readers
 
-Access a managed secret’s value with the [`secret`](../reference/functions/secret.md) function.
+The owner of a secret decides which deployments may read it:
 
-The Tenzir Node looks up a secret’s actual value when it prepares the expression that uses it. It first checks the config, with environment variables taking precedence over configuration file entries. If the secret is not found there, the node requests it from the Tenzir Platform.
+* An **organization** secret is readable by every workspace and deployment of the organization, or only by the workspaces and deployments you pick.
+* A **workspace** secret is readable by every deployment in the workspace, or only by the deployments you pick.
+* A **deployment** secret is readable only by that deployment.
 
-If the value is transferred over any network connection, it is additionally encrypted using [ECIES](https://en.wikipedia.org/wiki/Integrated_Encryption_Scheme) with a one-time, per-secret key. The value remains encrypted throughout the transfer until it reaches the Tenzir Node.
+When several secrets that a deployment may read share a name, the closest owner wins: the deployment’s own secret, then its workspace’s, then its organization’s. This lets you set a value for the whole organization and override it for one workspace or deployment. The roles of the organization decide who may list and change the secrets of each owner.
 
-A `tenzir` client process can use managed secrets only if it can connect to a Tenzir Node.
+### Resolution
 
-### Configuration Secrets
+A deployment looks up a secret’s actual value when it prepares the expression that uses it, by asking the platform over its connection. The platform answers with the secret that wins for this deployment. The value is encrypted using [ECIES](https://en.wikipedia.org/wiki/Integrated_Encryption_Scheme) with a one-time, per-secret key, and it remains encrypted throughout the transfer until it reaches the deployment.
 
-You can specify secrets in the `tenzir.yaml` config file, under the path `tenzir.secrets`:
+The deployment caches a resolved value for 15 minutes after its first use. A changed value therefore reaches a pipeline that starts once the cache has dropped the old one, while a running pipeline keeps the value it resolved.
 
-tenzir.yaml
-
-```yaml
-tenzir:
-  secrets:
-    # Add your secrets here.
-    geheim: 1528F9F3-FAFA-45B4-BC3C-B755D0E0D9C2
-```
-
-Since you can set Tenzir’s configuration options as environment variables, you can define secrets in the environment as well. The above secret could be defined via the environment variable `TENZIR_SECRETS__GEHEIM`. An environment variable takes precedence over an equivalent key in the configuration file.
-
-See the [configuration reference](../reference/node/configuration.md) for more details.
-
-Tenzir hides the `tenzir.secrets` section from the [`config`](../reference/functions/config.md) function.
-
-### Platform Secrets
-
-The Tenzir Platform stores a separate set of secrets for every workspace. All Tenzir Nodes connected to that workspace can access these secrets.
-
-See the [platform secret store configuration guide](../guides/platform-setup/configure-secret-store.md#configuring-the-platform-secret-store).
-
-#### External Secret Stores
-
-You can configure the Tenzir Platform to provide access to secrets stored in an external secret store instead of using its own store. This access is read-only.
-
-See the [external secret store configuration guide](../guides/platform-setup/configure-secret-store.md#configuring-external-secret-stores).
-
-## Legacy Model
-
-You can use the configuration option `tenzir.legacy-secret-model` to change the behavior of the `secret` function so that it returns a `string` instead of a `secret`.
-
-When you use the legacy model, you can only use secrets from the Tenzir Node’s configuration. You cannot use secrets from the Tenzir Platform’s secret store.
-
-Enabling this option is not recommended. It exists as a transition mechanism and will be deprecated and removed in a future version.
+Because the values come from the platform, a pipeline that starts while the platform is unreachable cannot resolve its managed secrets. A deployment that **buffers secrets** avoids this: the platform seals every secret the deployment may read into the configuration it delivers, with a key that only the deployment holds, so its pipelines start without the platform. Turn it on with `tenzir deployment resilience enable`. A pipeline that uses a buffered secret restarts when the secret’s value changes.
 
 ## Security Design
 
@@ -218,3 +185,8 @@ For example, an S3 URI may contain multiple keys that should be kept as separate
 ```tql
 let $url = f"s3://{secret("access-key")}:{secret("secret-key")}@bucket/path/to/file"
 ```
+
+## See also
+
+* [Platform](platform.md)
+* [Deployment](deployment.md)

@@ -1,7 +1,7 @@
 ---
 title: "day"
-canonical: https://tenzir.com/docs/v6.22.0/reference/functions/day
-source: https://tenzir.com/docs/v6.22.0/reference/functions/day.md
+canonical: https://tenzir.com/docs/reference/functions/day
+source: https://tenzir.com/docs/reference/functions/day.md
 section: "Docs"
 ---
 

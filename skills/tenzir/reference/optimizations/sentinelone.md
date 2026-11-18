@@ -1,7 +1,7 @@
 ---
 title: "SentinelOne"
-canonical: https://tenzir.com/docs/v6.22.0/reference/optimizations/sentinelone
-source: https://tenzir.com/docs/v6.22.0/reference/optimizations/sentinelone.md
+canonical: https://tenzir.com/docs/reference/optimizations/sentinelone
+source: https://tenzir.com/docs/reference/optimizations/sentinelone.md
 section: "Docs"
 ---
 
@@ -26,7 +26,7 @@ The operator takes over the longest run of operators directly after it that Powe
 
 * [`where`](../operators/where.md), as the [filters](sentinelone.md#filters) section describes.
 * [`select`](../operators/select.md) of fields, including renames and nested fields, which becomes `columns`.
-* [`summarize`](../operators/summarize.md) with group keys on fields and `count()` and `count(x)` of fields, which becomes `group … by`. This includes [`top`](../operators/top.md) and [`rare`](../operators/rare.md). The summary may follow [`select`](../operators/select.md) and assignments that copy fields, as [Aggregations in the source](../optimizations.md#aggregations-in-the-source) describes.
+* [`summarize`](../operators/summarize.md) with group keys on fields and `count()`, `count(x)`, and `count_distinct(x)` of fields, which becomes `group … by`. This includes [`top`](../operators/top.md) and [`rare`](../operators/rare.md). The summary may follow [`select`](../operators/select.md) and assignments that copy fields, as [Aggregations in the source](../optimizations.md#aggregations-in-the-source) describes.
 * [`sort`](../operators/sort.md) by fields after a [`select`](../operators/select.md) or [`summarize`](../operators/summarize.md), which becomes `sort`. PowerQuery returns only `timestamp` and `message` of whole events, so a [`sort`](../operators/sort.md) of whole events stays in Tenzir.
 * [`head`](../operators/head.md), which becomes `limit`, with at most 1,600,000 rows.
 
@@ -85,13 +85,14 @@ The operators that SentinelOne takes over run as SentinelOne runs them, which ca
 * SentinelOne keeps nested fields as flat fields with dotted names, such as `event.type`. A [`select`](../operators/select.md) of a record, such as `select event`, returns `null`. Select its fields instead.
 * `count(x)` counts the events where `x` has a value. `group` puts events without a group key into the group `null`.
 * `sort` puts `null` first in ascending and last in descending order.
-* A query that SentinelOne rejects fails the pipeline with a hint to use `pushdown=false`.
+* `count_distinct(x)` becomes `estimate_distinct(x)`, since PowerQuery has no exact distinct count, so the count is approximate.
+* A query that SentinelOne rejects fails the pipeline with the error of SentinelOne, a note that SentinelOne computed the stages that the operator took over with its own semantics, and a hint to use `pushdown=false`. The note and the hint appear only if the operator took over stages.
 
-Summaries with `min`, `max`, `sum`, `mean`, or other functions stay in Tenzir, since PowerQuery computes them only for numbers and returns a timestamp’s minimum as a floating-point number.
+Summaries with `min`, `max`, `count_if`, `sum`, `mean`, or other functions stay in Tenzir, since PowerQuery computes `min`, `max`, `sum`, and `mean` only for numbers and returns a timestamp’s minimum as a floating-point number. A summary of computed keys or arguments, such as values that a [`set`](../operators/set.md) assigns, stays in Tenzir too.
 
 ## Time window
 
-Without `query`, comparisons of `timestamp` with times in the filters before any summary, limit, or sort also narrow the time window of the request, rounded outward to whole milliseconds plus one more on each side, since SentinelOne compares times as floating-point numbers. An `or` of time ranges selects their enclosing range. When you omit `start` or `end`, these comparisons supply them, so a historical search needs no explicit bounds; otherwise, they narrow the bounds that you set and never widen them. The comparisons stay in the query in every case. A narrowed window that cannot contain an event completes the read without a request, unless a summary still yields a row for it. With `query`, the window stays as you set it.
+Without `query`, comparisons of `timestamp` with times in the filters before any summary, limit, or sort also narrow the time window of the request, rounded outward to whole milliseconds plus one more on each side, since SentinelOne compares times as floating-point numbers. An `or` of time ranges selects their enclosing range. When you omit `start` or `end`, these comparisons supply them, so a historical search needs no explicit bounds; otherwise, they narrow the bounds that you set and never widen them. The comparisons stay in the query in every case. A narrowed window that cannot contain an event, such as for a strict comparison beyond the range of a time, completes the read without a request, unless a summary still yields a row for it. With `query`, the window stays as you set it.
 
 ## Warnings
 

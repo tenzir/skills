@@ -1,7 +1,7 @@
 ---
 title: "Parse delimited text"
-canonical: https://tenzir.com/docs/v6.22.0/guides/parse/parse-delimited-text
-source: https://tenzir.com/docs/v6.22.0/guides/parse/parse-delimited-text.md
+canonical: https://tenzir.com/docs/guides/parse/parse-delimited-text
+source: https://tenzir.com/docs/guides/parse/parse-delimited-text.md
 section: "Docs"
 ---
 
@@ -135,7 +135,7 @@ from_file "windows_events.xml" {
 this = data.parse_winlog()
 ```
 
-See [Windows event logs](https://tenzir.com/integrations/microsoft/windows-event-logs) for a complete example.
+See [Windows event logs](https://tenzir.com/product/integrations/microsoft/windows-event-logs) for a complete example.
 
 ## Line-based structured formats
 
@@ -278,4 +278,4 @@ from_file "syslog.txt" {
 * [Parse binary data](parse-binary-data.md)
 * [Parse string fields](parse-string-fields.md)
 * [Read and watch files](../collect/read-and-watch-files.md)
-* [Windows event logs](https://tenzir.com/integrations/microsoft/windows-event-logs)
+* [Windows event logs](https://tenzir.com/product/integrations/microsoft/windows-event-logs)

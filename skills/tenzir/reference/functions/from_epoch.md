@@ -1,7 +1,7 @@
 ---
 title: "from_epoch"
-canonical: https://tenzir.com/docs/v6.22.0/reference/functions/from_epoch
-source: https://tenzir.com/docs/v6.22.0/reference/functions/from_epoch.md
+canonical: https://tenzir.com/docs/reference/functions/from_epoch
+source: https://tenzir.com/docs/reference/functions/from_epoch.md
 section: "Docs"
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "decompress_gzip"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/decompress_gzip
-source: https://tenzir.com/docs/v6.22.0/reference/operators/decompress_gzip.md
+canonical: https://tenzir.com/docs/reference/operators/decompress_gzip
+source: https://tenzir.com/docs/reference/operators/decompress_gzip.md
 section: "Docs"
 ---
 

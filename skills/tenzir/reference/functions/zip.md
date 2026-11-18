@@ -1,7 +1,7 @@
 ---
 title: "zip"
-canonical: https://tenzir.com/docs/v6.22.0/reference/functions/zip
-source: https://tenzir.com/docs/v6.22.0/reference/functions/zip.md
+canonical: https://tenzir.com/docs/reference/functions/zip
+source: https://tenzir.com/docs/reference/functions/zip.md
 section: "Docs"
 ---
 

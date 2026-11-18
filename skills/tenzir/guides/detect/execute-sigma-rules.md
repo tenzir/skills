@@ -1,8 +1,8 @@
 ---
 title: "Execute Sigma rules"
 description: "Run Sigma v2.1 rules on structured events and emit OCSF Detection Findings with causal match evidence"
-canonical: https://tenzir.com/docs/v6.22.0/guides/detect/execute-sigma-rules
-source: https://tenzir.com/docs/v6.22.0/guides/detect/execute-sigma-rules.md
+canonical: https://tenzir.com/docs/guides/detect/execute-sigma-rules
+source: https://tenzir.com/docs/guides/detect/execute-sigma-rules.md
 section: "Docs"
 ---
 
@@ -232,6 +232,6 @@ this = {
 * [Match events with TQL](match-events-with-tql.md)
 * [Model detections in OCSF](model-detections-in-ocsf.md)
 * [Create multi-stage detectors](create-multi-stage-detectors.md)
-* [Add operators](../packages/add-operators.md)
+* [Add operators](https://tenzir.com/docs/guides/packages/add-operators)
 * [Map to OCSF](../normalize/map-to-ocsf.md)
-* [Windows event logs](https://tenzir.com/integrations/microsoft/windows-event-logs)
+* [Windows event logs](https://tenzir.com/product/integrations/microsoft/windows-event-logs)

@@ -1,245 +1,167 @@
 ---
 title: "Quickstart"
-canonical: https://tenzir.com/docs/v6.22.0/guides/quickstart
-source: https://tenzir.com/docs/v6.22.0/guides/quickstart.md
+description: "See live security events flow through Tenzir within minutes, from your AI agent, the app, or a terminal."
+canonical: https://tenzir.com/docs/guides/quickstart
+source: https://tenzir.com/docs/guides/quickstart.md
 section: "Docs"
 ---
 
 # Quickstart
 
-> Drowning in logs, alerts, and rigid tools? Meet Tenzir - your engine for taming security data. In just a few minutes, you’ll be ingesting, transforming, and enriching data on your terms, with full control. Here’s what you’ll accomplish:
+> See live security events flow through Tenzir within minutes, from your AI agent, the app, or a terminal.
 
-Drowning in logs, alerts, and rigid tools? Meet **Tenzir** - your engine for taming security data. In just a few minutes, you’ll be ingesting, transforming, and enriching data on your terms, with full control. Here’s what you’ll accomplish:
+The fastest way to understand Tenzir is to watch it work on real data. In a few steps, you get a deployment, feed it a live stream of Zeek and Suricata events from our [`demo` package](https://tenzir.com/product/library/demo), look at them, and keep a pipeline running. Each step offers three ways to do it: ask your AI agent via MCP, click through the app, or use a terminal. Pick one, and every step follows it.
 
-1. Use Tenzir instantly
-2. Deploy your first pipeline
-3. See results in action
+1. Create an account at [platform.tenzir.com](https://platform.tenzir.com) and connect the way you want to work.
 
-## Prerequisites
+   * MCP
 
-You need zero infrastructure to get started - just a browser and access to [app.tenzir.com](https://app.tenzir.com).
+     Add the platform’s MCP server to your agent, such as Claude Code:
 
-It helps if you have basic familiarity with logs or security telemetry, but it’s not required.
+     ```sh
+     claude mcp add --transport http tenzir https://platform.tenzir.com/mcp
+     ```
 
-Prefer the command line?
+     Start Claude Code and run `/mcp`, which opens your browser to sign in.
 
-Run pipelines directly on your machine with `uvx tenzir 'your pipeline'`. See [Install Tenzir](installation.md) for details.
+   * App
 
-## Setup & deploy a demo node
+     Sign in. The app needs no further setup.
 
-Visit [app.tenzir.com](https://app.tenzir.com), sign in to [create a free account](installation/create-account.md), and you’ll see this page:
+   * CLI
 
-![Landing page](https://tenzir.com/docs-assets/v6.22.0-r1/_astro/new-account.Qul5lKOD_ZKnk9H.webp)
+     [Install the `tenzir` command](installation.md) with the package manager of your system, then sign in:
 
-Begin with deploying a node:
+     ```sh
+     tenzir auth login
+     ```
 
-1. Select the **Cloud-hosted demo-node** tab.
-2. Click **Add node**.
-3. Click **Get Started**.
+2. Get a deployment to run your pipelines.
 
-Spinning up a demo node can take up to 2 minutes. Sorry for the wait, we’ll cut down this time soon! Grab a coffee or learn more about the [key Tenzir concepts](../explanations/deployment.md) while we get everything set up.
+   * MCP
 
-## Get started with demo data
+     ```prompt
+     Create a Tenzir-hosted deployment named quickstart. If my organization can't have one, install the tenzir command with uv, sign me in with tenzir auth login, select my workspace with tenzir use, and run tenzir up quickstart -d.
+     ```
 
-Our demo nodes have the Demo Node [package](../explanations/packages.md) pre-installed, giving you sample pipelines that fetch data from a public cloud bucket and [store it into the node’s edge storage](store/import-into-a-node.md). Once you have the sample data in the node, it will be simpler to work with it.
+   * App
 
-The **Packages** tab shows that the demo node package is installed:
+     Open **Deployments**, select **New deployment**, then **Tenzir-hosted**, name it `quickstart`, and select **Start deployment**. On the Community edition, select **Self-hosted** instead and follow the install dialog.
 
-![Demo node package installed](https://tenzir.com/docs-assets/v6.22.0-r1/_astro/demo-node-packages.B7a3szfC_Z21dppB.webp)
+   * CLI
 
-When you go back to the **Pipelines** tab, you see the pipelines churning away:
+     Select your workspace and run a deployment on your machine in the background:
 
-![Nodes page after demo node package](https://tenzir.com/docs-assets/v6.22.0-r1/_astro/demo-node-pipelines.B3TjVIac_Z1fJqbq.webp)
+     ```sh
+     tenzir use <org>/<workspace>
+     tenzir up quickstart -d
+     tenzir use quickstart
+     ```
 
-Note the two new pipelines that import data into our demo node. If you click on them, a context pane opens on the right and you’ll see details about their activity as well as the their definition.
+3. Add the demo package, which generates live security events.
 
-Tenzir Query Language (TQL)
+   * MCP
 
-One major difference to other pipeline tools is that Tenzir comes with a full-fledged streaming execution engine and domain-specific language to process data. TQL is a powerful dataflow language similar to Splunk’s SPL or Microsoft’s KQL, just with a lot more power when it comes to transforming data.
+     ```prompt
+     Add the demo package to my configuration, commit it, and deploy it to quickstart.
+     ```
 
-The FAQ entry on [why Tenzir created TQL instead of using SQL](https://tenzir.com/faqs/why-tql-instead-of-sql) explains the language design in more detail.
+   * App
 
-## Explore the demo data
+     Open **Packages**, select **Demo**, and select **Add**. Then commit the draft from the top bar.
 
-The first step in understanding new data sources is getting a sense of their structural complexlity, or simply put, how messy or clean the data is. Let’s take a taste of the demo data. Click the **Explorer** tab and [run](basic-usage/run-pipelines.md) this pipeline:
+   * CLI
 
-```tql
-export
-taste
-```
+     ```sh
+     tenzir config clone
+     cd tenzir-workspace
+     test -f package.yaml || echo 'dependencies: {}' > package.yaml
+     tenzir package add demo
+     tenzir config apply -m 'Add the demo package'
+     ```
 
-This pipelines does the following: [`export`](../reference/operators/export.md) references all data in the node’s edge storage, and [`taste`](../reference/operators/taste.md) samples 10 events of every unique schema. You’ll now see Explorer filling up with events.
+4. Look at live data.
 
-![Getting a taste](https://tenzir.com/docs-assets/v6.22.0-r1/_astro/demo-node-export-taste.DKQLkuB8_Z2vmeIs.webp)
+   * MCP
 
-Auto-completion of pipelines
+     ```prompt
+     Run demo::zeek | head 10 on quickstart and explain what the events show.
+     ```
 
-If you look carefully, you’ll note that the above pipeline doesn’t end with an *output operator*. Just an input (`export`) and a transformation (`taste`). But for a [pipeline](../explanations/pipeline.md) to be well-formed, it must have at least one input and one output. Otherwise data would leak somewhere! So what’s happening?
+   * App
 
-If you don’t write an output operator in the Explorer, the platform auto-completes the pipeline so that it can extract events and show them to you in the browser.
+     Open **Explorer**, select the `quickstart` deployment, enter `demo::zeek | head 10`, and select **Run**.
 
-Also note the **Schemas** pane. It gives you an overview of how heterogeneous the data is. Click on a schema to zoom into all events having the same shape. Later, you’ll learn to normalize the data to make it more homogeneous by reducing the number of unique schemas.
+   * CLI
 
-Now click on a row in the results table. The **Inspector** pops up for a vertical view of the event, which can be helpful for seeing the full structure of an event, especially for wide schemas with many fields.
+     ```sh
+     tenzir run -r 'demo::zeek | head 10'
+     ```
 
-One more detail: you can **uncollapse nested records** in the results table by clicking on the column name. This switches from the record-style display to more of a data-frame-style view, allowing you to see more data at once.
+5. Keep a pipeline running that publishes the Suricata events to a topic:
 
-## Reshape data at ease
+   pipelines/suricata.tql
 
-Now that you have a rough understanding of our cockpit, let’s wrangle that data. This is what we’ve designed TQL for, so it should be fun - or at least more fun compared to other tools.
+   ```tql
+   demo::suricata
+   publish "suricata"
+   ```
 
-Begin with selecting a subset of available schemas:
+   * MCP
 
-```tql
-export
-where @name.starts_with("zeek")
-```
+     ```prompt
+     Add a pipeline pipelines/suricata.tql to my configuration that publishes demo::suricata to the topic "suricata", commit it, and deploy it to quickstart.
+     ```
 
-Here we filter on event metadata, starting with `@`. The special `@name` field is a string that contains the name of the event. Actually, let’s hone in on the connection logs only, once for [Zeek](https://zeek.org) and once for [Suricata](https://suricata.io):
+   * App
 
-* Zeek
+     Open **Files**, select **Create file**, name it `pipelines/suricata.tql`, enter the pipeline, and commit the draft from the top bar.
 
-  ```tql
-  export
-  where @name == "zeek.conn"
-  set src_endpoint = {
-    ip: id.orig_h,
-    port: id.orig_p,
-  }
-  set dst_endpoint = {
-    ip: id.resp_h,
-    port: id.resp_p,
-  }
-  select src_endpoint, dst_endpoint, protocol=proto
-  set @name = "flow"
-  ```
-
-  ```tql
-  {
-    src_endpoint: {
-      ip: 89.248.165.145,
-      port: 43831
-    },
-    dst_endpoint: {
-      ip: 198.71.247.91,
-      port: 52806
-    },
-    protocol: "tcp"
-  }
-  ```
-
-* Suricata
-
-  ```tql
-  export
-  where @name == "suricata.flow"
-  set src_endpoint = {
-    ip: src_ip,
-    port: src_port,
-  }
-  set dst_endpoint = {
-    ip: dest_ip,
-    port: dest_port,
-  }
-  select src_endpoint, dst_endpoint, protocol=proto.to_lower()
-  set @name = "flow"
-  ```
-
-  ```tql
-  {
-    src_endpoint: {
-      ip: 10.0.0.167,
-      port: 51666
-    },
-    dst_endpoint: {
-      ip: 97.74.135.10,
-      port: 993
-    },
-    protocol: "tcp"
-  }
-  ```
-
-A few notes:
-
-* The [`set`](../reference/operators/set.md) operator performs an assignment and creates new fields.
-* Because `set` is *the* most frequently used operator, it is “implied” and you just write `x = y` instead of `set x = y`. We generally recommend doing so and write it out only out for didactic reasons.
-* You can use `set` to assign schema names, e.g., `@name = "new-schema-name"`.
-* [`select`](../reference/operators/select.md) selects the fields to keep, but also supports an assignment to rename the new field in one shot.
-* As you can see in the `select` operator (Suricata tab) above, TQL expressions have [functions](../reference/functions.md) like [`to_lower`](../reference/functions/to_lower.md), which makes working with values a breeze.
-
-![Reshaping Suricata flow logs](https://tenzir.com/docs-assets/v6.22.0-r1/_astro/demo-node-reshape-flow.DGbYIpBh_Z1pG5a.webp)
-
-Now what do you do with this normalized data from these two data sources? It just has a new shape, so what? Read on, we’ll show you next.
-
-## Composing pipelines via publish/subscribe
-
-The above example starts with a specific input operator (`export`) and no output operator (we used the Explorer). This is useful for explorative data analysis, but in practice you’d want these sorts of transformations to run continuously. In fact, what you really want is a streaming pipeline that accepts data, potentially from multiple sources, and exposes its results in a way so that you can route it to multiple destinations.
-
-To this end, nodes have a publish/subscribe feature, allowing you to efficiently connect pipelines using static topics (and very soon dynamic routes). The [`publish`](../reference/operators/publish.md) and [`subscribe`](../reference/operators/subscribe.md) operators are all you need for this. The typical pipeline pattern for composable pipelines looks like this:
-
-```tql
-subscribe "in"
-// transformations go here
-publish "out"
-```
-
-Let’s adapt our transformation pipelines from above:
-
-* Zeek
-
-  ```tql
-  subscribe "zeek"
-  where @name == "zeek.conn"
-  set src_endpoint = {
-    ip: id.orig_h,
-    port: id.orig_p,
-  }
-  set dst_endpoint = {
-    ip: id.resp_h,
-    port: id.resp_p,
-  }
-  select src_endpoint, dst_endpoint, protocol=proto
-  publish "flow"
-  ```
-
-* Suricata
-
-  ```tql
-  subscribe "suricata"
-  where @name == "suricata.flow"
-  set src_endpoint = {
-    ip: src_ip,
-    port: src_port,
-  }
-  set dst_endpoint = {
-    ip: dest_ip,
-    port: dest_port,
-  }
-  select src_endpoint, dst_endpoint, protocol=proto.to_lower()
-  publish "flow"
-  ```
-
-When clicking the **Run** button for these pipeline, the events will *not* show up in the Explorer because we now use `publish` as output operator. Instead, you’ll see this deployment modal:
-
-![Deployment modal](https://tenzir.com/docs-assets/v6.22.0-r1/_astro/demo-node-deploy-modal.C8YJw_nJ_Z1mak16.webp)
-
-After you give the pipeline a name (or leave it blank for a dummy name), click **Confirm** to deploy the pipeline. You’ll see it popping up on the **Pipelines** tab:
-
-![New pipeline](https://tenzir.com/docs-assets/v6.22.0-r1/_astro/demo-node-pipelines-new.BSYbUO4v_1ACYCg.webp)
-
-Now that you’ve deployed one pipeline with two topics as its “interface,” you can direct data to it from other pipelines. For example, you can create a pipeline that accepts logs via [Syslog](https://tenzir.com/integrations/syslog) and forwards them to the transformation pipeline. Then you can write two more pipelines that each take a subset to implement split-routing scenario.
-
-Data fabric as network of pipelines
-
-You’ve probably heard the buzzy term *data fabric* before. With Tenzir, you implement a data fabric as a network of pipelines, potentially distributed over multiple nodes. With our growing library of [packages](../explanations/packages.md) to 1-click-deploy pre-packaged pipelines, and of course AI to generate pipelines, you can roll out sophisticated use cases without the need for dedicated data engineers.
-
-## What’s Next?
-
-You’ve just scratched the surface. Here’s where to go next:
-
-1. Explore the [Library](https://app.tenzir.com/library) and browse through packages of pre-built pipelines.
-2. [Visualize pipeline insights and build dashboards](../tutorials/plot-data-with-charts.md)
-3. [Map events to OCSF](../tutorials/onboard-a-data-source.md#map-to-ocsf)
-4. Send events to your data lake, such as [Amazon Security Lake](https://tenzir.com/integrations/amazon/security-lake)
-
-Curious how it all fits together? Brush up on the [Tenzir architecture](../explanations/deployment.md) to learn more about all moving parts. We’re here to help. Join us at our friendly [Tenzir Discord](https://discord.tenzir.com) if you have any questions.
+   * CLI
+
+     Save the pipeline as `pipelines/suricata.tql` in your clone, then commit and push it:
+
+     ```sh
+     tenzir config apply -m 'Publish the Suricata demo feed'
+     ```
+
+6. Watch the alerts flow through it.
+
+   * MCP
+
+     ```prompt
+     Show me five alerts from the topic "suricata" on quickstart.
+     ```
+
+   * App
+
+     Run this in the **Explorer**:
+
+     ```tql
+     subscribe "suricata"
+     where @name == "suricata.alert"
+     head 5
+     ```
+
+   * CLI
+
+     ```sh
+     tenzir run -r 'subscribe "suricata" | where @name == "suricata.alert" | head 5'
+     ```
+
+You’re in business: a deployment runs a pipeline continuously, and you can look at any data it sees.
+
+What just happened
+
+* The [deployment](../explanations/deployment.md) connected to the platform and follows the `main` branch of your configuration. Every commit there reaches it automatically, which is how the package and the pipeline arrived without a separate deploy step.
+* Looking at `demo::zeek` ran an **ad-hoc pipeline**: it ran once, showed you its events, and is gone.
+* The pipeline in `pipelines/suricata.tql` is a **deployed pipeline**: it keeps running, also after a restart, and feeds the topic `suricata` that other pipelines subscribe to.
+
+Our explanation of [where pipelines run](../explanations/pipeline.md#where-pipelines-run) compares both kinds.
+
+## Next steps
+
+* [Connect to Tenzir](connect-to-tenzir.md)
+* [Onboard a data source](../tutorials/onboard-a-data-source.md)
+* [Change configurations](change-configurations.md)
+* [Configuration](../explanations/configuration.md)

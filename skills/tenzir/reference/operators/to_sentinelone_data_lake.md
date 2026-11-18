@@ -1,7 +1,7 @@
 ---
 title: "to_sentinelone_data_lake"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/to_sentinelone_data_lake
-source: https://tenzir.com/docs/v6.22.0/reference/operators/to_sentinelone_data_lake.md
+canonical: https://tenzir.com/docs/reference/operators/to_sentinelone_data_lake
+source: https://tenzir.com/docs/reference/operators/to_sentinelone_data_lake.md
 section: "Docs"
 ---
 
@@ -82,13 +82,11 @@ The `client_ca` and `require_client_cert` options are only valid for operators t
 
 Any value not specified in the record will either be picked up from the configuration or if not configured will not be used by the operator.
 
-See the [Node TLS Setup guide](../../guides/node-setup/configure-tls.md) for more details.
-
 For SentinelOne endpoints that use a private CA, set `tls={cacert: "/path/to/ca.pem"}`.
 
 ## Parallelism
 
-In a [parallel pipeline](../../guides/node-setup/tune-performance.md#parallelism), each instance of `to_sentinelone_data_lake` batches, authenticates, and sends independently with its own connection pool. Each instance sends at most 16 concurrent requests, so the pipeline-wide bound is 16 times the number of instances.
+In a [parallel pipeline](../../explanations/executor.md#parallel-execution), each instance of `to_sentinelone_data_lake` batches, authenticates, and sends independently with its own connection pool. Each instance sends at most 16 concurrent requests, so the pipeline-wide bound is 16 times the number of instances.
 
 The API ingests every request on its own and gives no ordering guarantee across requests.
 
@@ -136,6 +134,6 @@ If you already have structured data in Tenzir, prefer sending structured data, a
 ## See Also
 
 * [`from_sentinelone_data_lake`](from_sentinelone_data_lake.md)
-* [Sentinelone data lake](https://tenzir.com/integrations/sentinelone-data-lake)
+* [Sentinelone data lake](https://tenzir.com/product/integrations/sentinelone-data-lake)
 
 Parallelizable: a parallel pipeline may run this operator on several cores at once.

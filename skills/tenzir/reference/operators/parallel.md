@@ -1,7 +1,7 @@
 ---
 title: "parallel"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/parallel
-source: https://tenzir.com/docs/v6.22.0/reference/operators/parallel.md
+canonical: https://tenzir.com/docs/reference/operators/parallel
+source: https://tenzir.com/docs/reference/operators/parallel.md
 section: "Docs"
 ---
 
@@ -21,7 +21,11 @@ The [`parallel`](parallel.md) operator marks the operators in its subpipeline to
 
 Tenzir replicates only those operators that can work on any batch they receive, such as [`where`](where.md), [`drop`](drop.md), and assignments, including those that call [`ocsf_cast`](../functions/ocsf_cast.md). Operators that combine related events, such as [`summarize`](summarize.md), [`group`](group.md), and [`deduplicate`](deduplicate.md), receive a stream partitioned by their own key fields, so every event of a group reaches the instance that owns it. Tenzir leaves the remaining operators, including sources and most sinks, at a single instance. Our explanation of [parallel execution](../../explanations/executor.md#parallel-execution) covers which operators fall into which category.
 
-Reach for `parallel` when profiling points at a section of a pipeline rather than at the pipeline as a whole. To parallelize a whole pipeline, prefer the `// parallelism:` comment described in our guide on [tuning performance](../../guides/node-setup/tune-performance.md#parallelism).
+Reach for `parallel` when profiling points at a section of a pipeline rather than at the pipeline as a whole. When you run a pipeline with `tenzir run` on your machine, prefer the `// parallelism:` comment to parallelize all of it.
+
+Parallelism in deployments
+
+A deployment runs its pipelines without the `// parallelism:` comment and the `--parallelism` option. To parallelize a pipeline that a deployment runs, wrap its expensive section in `parallel`.
 
 Parallelism reorders events
 
@@ -35,19 +39,19 @@ Defaults to `8`, or to the number of available cores if that is lower.
 
 ### `fuse = string (optional)`
 
-Controls which operator-to-operator channels inside the block are [fused](../../guides/node-setup/tune-performance.md#fusing), i.e., run run-to-completion without a buffer in between:
+Controls which operator-to-operator channels inside the block are [fused](../../explanations/executor.md#operator-fusion), i.e., run run-to-completion without a buffer in between:
 
 * `"none"`: never fuse a channel.
 * `"parallel"`: fuse only matched lane-to-lane channels between parallelizable operators.
 * `"all"`: fuse every channel.
 
-Defaults to the surrounding pipeline’s setting, which is `"parallel"` unless a `// parallelism:` directive says otherwise.
+Defaults to the surrounding pipeline’s setting, which is `"parallel"` unless a `// parallelism:` directive in a local run says otherwise.
 
 ### `limit_partitions = int (optional)`
 
 The upper bound on the number of instances for operators whose input must be partitioned by key, such as [`summarize`](summarize.md), [`group`](group.md), and [`deduplicate`](deduplicate.md). Must be greater than zero.
 
-Defaults to the surrounding pipeline’s setting, which is `4` unless a `// parallelism:` directive says otherwise.
+Defaults to the surrounding pipeline’s setting, which is `4` unless a `// parallelism:` directive in a local run says otherwise.
 
 ### `{ … }`
 
@@ -116,5 +120,5 @@ to_file "/tmp/tenzir/high-severity.json" { write_ndjson }
 * [`each`](each.md)
 * [`group`](group.md)
 * [`load_balance`](load_balance.md)
-* [Tune performance](../../guides/node-setup/tune-performance.md)
+* [Executor](../../explanations/executor.md)
 * [Fan out with subpipelines](../../guides/route/fan-out-with-subpipelines.md)

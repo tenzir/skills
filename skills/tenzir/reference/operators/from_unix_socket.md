@@ -1,7 +1,7 @@
 ---
 title: "from_unix_socket"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/from_unix_socket
-source: https://tenzir.com/docs/v6.22.0/reference/operators/from_unix_socket.md
+canonical: https://tenzir.com/docs/reference/operators/from_unix_socket
+source: https://tenzir.com/docs/reference/operators/from_unix_socket.md
 section: "Docs"
 ---
 
@@ -46,4 +46,4 @@ from_unix_socket "/run/collector.sock" {
 * [`to_unix_socket`](to_unix_socket.md)
 * [`accept_unix_socket`](accept_unix_socket.md)
 * [`from_tcp`](from_tcp.md)
-* [File](https://tenzir.com/integrations/file)
+* [File](https://tenzir.com/product/integrations/file)

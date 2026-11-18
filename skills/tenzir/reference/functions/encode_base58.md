@@ -1,7 +1,7 @@
 ---
 title: "encode_base58"
-canonical: https://tenzir.com/docs/v6.22.0/reference/functions/encode_base58
-source: https://tenzir.com/docs/v6.22.0/reference/functions/encode_base58.md
+canonical: https://tenzir.com/docs/reference/functions/encode_base58
+source: https://tenzir.com/docs/reference/functions/encode_base58.md
 section: "Docs"
 ---
 

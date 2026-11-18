@@ -1,7 +1,7 @@
 ---
 title: "sigma"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/sigma
-source: https://tenzir.com/docs/v6.22.0/reference/operators/sigma.md
+canonical: https://tenzir.com/docs/reference/operators/sigma
+source: https://tenzir.com/docs/reference/operators/sigma.md
 section: "Docs"
 ---
 

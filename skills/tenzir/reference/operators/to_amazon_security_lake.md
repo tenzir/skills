@@ -1,7 +1,7 @@
 ---
 title: "to_amazon_security_lake"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/to_amazon_security_lake
-source: https://tenzir.com/docs/v6.22.0/reference/operators/to_amazon_security_lake.md
+canonical: https://tenzir.com/docs/reference/operators/to_amazon_security_lake
+source: https://tenzir.com/docs/reference/operators/to_amazon_security_lake.md
 section: "Docs"
 ---
 
@@ -118,4 +118,4 @@ to_amazon_security_lake $s3_uri,
 * [`ocsf_cast`](../functions/ocsf_cast.md)
 * [`to_s3`](to_s3.md)
 * [Write partitioned files](../../guides/store/write-partitioned-files.md)
-* [Security lake](https://tenzir.com/integrations/amazon/security-lake)
+* [Security lake](https://tenzir.com/product/integrations/amazon/security-lake)

@@ -1,7 +1,7 @@
 ---
 title: "Shape records"
-canonical: https://tenzir.com/docs/v6.22.0/guides/shape/shape-records
-source: https://tenzir.com/docs/v6.22.0/guides/shape/shape-records.md
+canonical: https://tenzir.com/docs/guides/shape/shape-records
+source: https://tenzir.com/docs/guides/shape/shape-records.md
 section: "Docs"
 ---
 

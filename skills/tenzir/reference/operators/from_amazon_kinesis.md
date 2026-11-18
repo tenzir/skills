@@ -1,7 +1,7 @@
 ---
 title: "from_amazon_kinesis"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/from_amazon_kinesis
-source: https://tenzir.com/docs/v6.22.0/reference/operators/from_amazon_kinesis.md
+canonical: https://tenzir.com/docs/reference/operators/from_amazon_kinesis
+source: https://tenzir.com/docs/reference/operators/from_amazon_kinesis.md
 section: "Docs"
 ---
 
@@ -173,4 +173,4 @@ from_amazon_kinesis "security-events",
 
 * [`to_amazon_kinesis`](to_amazon_kinesis.md)
 * [Read from message brokers](../../guides/collect/read-from-message-brokers.md)
-* [Kinesis](https://tenzir.com/integrations/amazon/kinesis)
+* [Kinesis](https://tenzir.com/product/integrations/amazon/kinesis)

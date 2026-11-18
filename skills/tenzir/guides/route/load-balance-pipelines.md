@@ -1,7 +1,7 @@
 ---
 title: "Load-balance pipelines"
-canonical: https://tenzir.com/docs/v6.22.0/guides/route/load-balance-pipelines
-source: https://tenzir.com/docs/v6.22.0/guides/route/load-balance-pipelines.md
+canonical: https://tenzir.com/docs/guides/route/load-balance-pipelines
+source: https://tenzir.com/docs/guides/route/load-balance-pipelines.md
 section: "Docs"
 ---
 
@@ -105,8 +105,8 @@ Use `load_balance` when you need to:
 
 ### Comparison with other operators
 
-| Operator                                                                              | Behavior                        | Use case                       |
-| ------------------------------------------------------------------------------------- | ------------------------------- | ------------------------------ |
+| Operator                                                                      | Behavior                        | Use case                       |
+| ----------------------------------------------------------------------------- | ------------------------------- | ------------------------------ |
 | [`load_balance`](../../reference/operators/load_balance.md) | Events go to exactly one target | Throughput scaling, HA         |
 | [`fork`](../../reference/operators/fork.md)                 | Events copied to all targets    | Parallel processing, archiving |
 | [`publish`](../../reference/operators/publish.md)           | Events go to all subscribers    | Fan-out to pipelines           |

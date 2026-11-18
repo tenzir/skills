@@ -1,7 +1,7 @@
 ---
 title: "print_ssv"
-canonical: https://tenzir.com/docs/v6.22.0/reference/functions/print_ssv
-source: https://tenzir.com/docs/v6.22.0/reference/functions/print_ssv.md
+canonical: https://tenzir.com/docs/reference/functions/print_ssv
+source: https://tenzir.com/docs/reference/functions/print_ssv.md
 section: "Docs"
 ---
 

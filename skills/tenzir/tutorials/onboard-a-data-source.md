@@ -1,7 +1,7 @@
 ---
 title: "Onboard a data source"
-canonical: https://tenzir.com/docs/v6.22.0/tutorials/onboard-a-data-source
-source: https://tenzir.com/docs/v6.22.0/tutorials/onboard-a-data-source.md
+canonical: https://tenzir.com/docs/tutorials/onboard-a-data-source
+source: https://tenzir.com/docs/tutorials/onboard-a-data-source.md
 section: "Docs"
 ---
 
@@ -188,7 +188,7 @@ amazon::vpc_flow::parse message, vpc_flow
 }
 ```
 
-That is the parsing layer finished: Amazon’s own field names, with `ip`, `port`, and `time` types, ready for any pipeline in the estate. One value improved on the inline version, because the operator pads `account_id` back to the 12 digits that `parse_ssv` had inferred as a number. Our guide on [adding operators](../guides/packages/add-operators.md) covers frontmatter, arguments, and the rules for operators that need scratch state.
+That is the parsing layer finished: Amazon’s own field names, with `ip`, `port`, and `time` types, ready for any pipeline in the estate. One value improved on the inline version, because the operator pads `account_id` back to the 12 digits that `parse_ssv` had inferred as a number. Our guide on [adding operators](../guides/manage-packages.md#add-operators) covers frontmatter, arguments, and the rules for operators that need scratch state.
 
 ## Map to OCSF
 
@@ -347,7 +347,7 @@ That is a complete OCSF Network Activity event. The `unmapped` record is empty b
 
 ### Map each event class
 
-Amazon’s mapper delegates the mapping itself to [`amazon::vpc_flow::ocsf::events::network_activity`](https://tenzir.com/docs/v6.22.0/packages/amazon/operators/vpc_flow/ocsf/events/network_activity.tql), which receives the same two fields and fills in the class. One event type needs one leaf.
+Amazon’s mapper delegates the mapping itself to [`amazon::vpc_flow::ocsf::events::network_activity`](https://tenzir.com/docs/packages/amazon/operators/vpc_flow/ocsf/events/network_activity.tql), which receives the same two fields and fills in the class. One event type needs one leaf.
 
 A product that emits several keeps the same shape and dispatches. Leaving Amazon aside for a moment, here is that mapper for a `vendor` package with three event types:
 
@@ -602,7 +602,7 @@ from {
   message: "2 123456789012 eni-0a1b2c3d4e5f67890 10.0.1.10 198.51.100.20 51514 443 6 10 840 1767225600 1767225660 ACCEPT OK",
 }
 amazon::vpc_flow::ocsf::normalize message
-ocsf_derive
+this = ocsf_derive(this)
 ```
 
 The second example, `vpc-flow-line-to-ocsf-staged.tql`, is the staged version from [creating the mapper](onboard-a-data-source.md#create-the-mapper). Both produce the same event.
@@ -644,7 +644,7 @@ from_file env("TENZIR_INPUT") {
   read_lines
 }
 amazon::vpc_flow::ocsf::normalize line
-ocsf_cast
+this = ocsf_cast(this)
 sort time, type_uid
 ```
 
@@ -658,7 +658,7 @@ uvx tenzir-test amazon --update
 uvx tenzir-test amazon
 ```
 
-The guide to [testing packages](../guides/packages/test-packages.md) covers inline inputs, shared fixtures, expected errors, and ordered suites.
+The guide to [testing packages](../guides/write-tests.md#test-packages) covers inline inputs, shared fixtures, expected errors, and ordered suites.
 
 ### Ship it
 
@@ -670,9 +670,9 @@ uvx tenzir-ship add \
   --type feature
 ```
 
-Then install it by putting the directory where Tenzir looks for packages, which is the `packages` directory next to `tenzir.yaml`:
+Then put the package to work in your deployment’s configuration. Clone the configuration with `tenzir config clone`, move the directory you built under its `packages/` folder, and add the collection pipeline next to it:
 
-* /opt/tenzir/etc/tenzir/
+* my-configuration/
 
   * packages/
 
@@ -680,21 +680,31 @@ Then install it by putting the directory where Tenzir looks for packages, which 
 
       * …
 
-  * tenzir.yaml
+  * pipelines/
 
-The directory name matches the package id, and the operators arrive under the `amazon` namespace on the next start. Installing this way keeps the package in version control with everything else that defines the deployment, so a review precedes every change and a fresh machine gets the same set of packages from the same commit.
+    * vpc-flow\.tql The collection pipeline from above
 
-Check what registered:
+  * package.yaml
 
-```tql
-package_list
-where id == "amazon"
+Declare the package from the root of the configuration:
+
+```sh
+tenzir package add amazon --path packages/amazon
 ```
 
-Run both examples to check the transformation without AWS access, then point your own collection pipeline at the normalizer. Our guides on [maintaining a changelog](../guides/packages/maintain-a-changelog.md) and [installing a package](../guides/packages/install-a-package.md) cover releases, the Library, and the remaining install paths, including [`package_add`](../reference/operators/package_add.md) for trying something out interactively.
+The configuration’s `package.yaml` now lists the package, so its pipelines can call the operators under the `amazon` namespace. Run both examples from inside the configuration to check the transformation without AWS access:
+
+```sh
+tenzir run -f packages/amazon/examples/vpc-flow-line-to-ocsf.tql
+tenzir run -f packages/amazon/examples/vpc-flow-line-to-ocsf-staged.tql
+```
+
+Then commit and deploy with `tenzir config apply`. The package travels with the configuration, so a review precedes every change, and every deployment of the workspace runs the same operators from the same commit.
+
+To share the package beyond one configuration, release it and publish it, either in our library or in a repository of your own. Our guides on [releasing a package](../guides/manage-packages.md#release-a-package) and [contributing to the library](../guides/manage-packages.md#contribute-to-the-library) cover both, and configurations then add it by version instead of by path.
 
 ## Next
 
-* [Add enrichment contexts](add-enrichment-contexts.md) adds a context package and enriches the endpoints you just mapped.
+* [Add enrichment contexts](add-enrichment-contexts.md) declares a GeoIP context next to this package and enriches the endpoints you just mapped.
 * Our guide on [mapping to OCSF](../guides/normalize/map-to-ocsf.md) goes deeper on classes, attribute groups, and validation.
 * Our guides on [normalizing data](../guides/normalize.md) cover the other target schemas, which start from the OCSF event this package produces.

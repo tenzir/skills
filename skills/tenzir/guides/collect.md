@@ -1,8 +1,8 @@
 ---
 title: "Overview"
 description: "Read events and bytes from files, APIs, brokers, stores, and networks."
-canonical: https://tenzir.com/docs/v6.22.0/guides/collect
-source: https://tenzir.com/docs/v6.22.0/guides/collect.md
+canonical: https://tenzir.com/docs/guides/collect
+source: https://tenzir.com/docs/guides/collect.md
 section: "Docs"
 ---
 
@@ -135,7 +135,7 @@ One subpipeline per reference event
 
 Only accept references from trusted producers. A URL supplied by an untrusted event could direct the Tenzir Node to an internal or sensitive network location.
 
-For an SQS-to-S3 example, see the [Crowdstrike](https://tenzir.com/integrations/crowdstrike) integration, which uses this pattern to collect Falcon Data Replicator events.
+For an SQS-to-S3 example, see the [Crowdstrike](https://tenzir.com/product/integrations/crowdstrike) integration, which uses this pattern to collect Falcon Data Replicator events.
 
 ## Sending data to destinations
 

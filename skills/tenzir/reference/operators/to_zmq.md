@@ -1,7 +1,7 @@
 ---
 title: "to_zmq"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/to_zmq
-source: https://tenzir.com/docs/v6.22.0/reference/operators/to_zmq.md
+canonical: https://tenzir.com/docs/reference/operators/to_zmq
+source: https://tenzir.com/docs/reference/operators/to_zmq.md
 section: "Docs"
 ---
 
@@ -65,4 +65,4 @@ to_zmq "tcp://collector.example.com:5555", encoding="ndjson", prefix=f"{source}/
 * [`from_zmq`](from_zmq.md)
 * [`accept_zmq`](accept_zmq.md)
 * [`to_zmq`](to_zmq.md)
-* [Zeromq](https://tenzir.com/integrations/zeromq)
+* [Zeromq](https://tenzir.com/product/integrations/zeromq)

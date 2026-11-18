@@ -1,7 +1,7 @@
 ---
 title: "Microsoft SQL Server"
-canonical: https://tenzir.com/docs/v6.22.0/reference/optimizations/microsoft-sql
-source: https://tenzir.com/docs/v6.22.0/reference/optimizations/microsoft-sql.md
+canonical: https://tenzir.com/docs/reference/optimizations/microsoft-sql
+source: https://tenzir.com/docs/reference/optimizations/microsoft-sql.md
 section: "Docs"
 ---
 
@@ -28,7 +28,7 @@ The operator takes over the longest run of operators directly after it that T-SQ
 * [`where`](../operators/where.md), as the [filters](microsoft-sql.md#filters) section describes.
 * [`select`](../operators/select.md) of top-level fields, including renames, such as `select ip=src_ip, ts`.
 * [`drop`](../operators/drop.md) after a [`select`](../operators/select.md) or a [`summarize`](../operators/summarize.md) that SQL Server took over, which names the fields that remain. T-SQL has no way to select every column but some, so a [`drop`](../operators/drop.md) of table columns stays in Tenzir.
-* [`summarize`](../operators/summarize.md) with group keys on fields and `count()`, `count(x)`, `min(x)`, and `max(x)` of fields. Counts are `bigint`. The summary may follow [`select`](../operators/select.md), [`drop`](../operators/drop.md), and assignments that copy fields, as [Aggregations in the source](../optimizations.md#aggregations-in-the-source) describes.
+* [`summarize`](../operators/summarize.md) with group keys and the functions that the [summaries](microsoft-sql.md#summaries) section lists. Counts are `bigint`. The summary may follow [`select`](../operators/select.md), [`drop`](../operators/drop.md), and assignments, as [Aggregations in the source](../optimizations.md#aggregations-in-the-source) describes.
 * [`sort`](../operators/sort.md) by fields.
 * [`head`](../operators/head.md) as `TOP`, and [`top`](../operators/top.md) or [`rare`](../operators/rare.md) followed by [`head`](../operators/head.md).
 
@@ -44,6 +44,40 @@ head 20
 ```
 
 and returns at most 20 groups. The operator nests derived tables where SQL’s clause order requires it, and keeps the order of a [`sort`](../operators/sort.md) across them where a `TOP` decides which rows a derived table keeps.
+
+## Summaries
+
+SQL Server computes these aggregation functions of a [`summarize`](../operators/summarize.md):
+
+| TQL                   | SQL Server                                                     |
+| --------------------- | -------------------------------------------------------------- |
+| `count()`             | `COUNT_BIG(*)`                                                 |
+| `count(x)`            | `COUNT_BIG(x)`                                                 |
+| `min(x)`, `max(x)`    | `MIN(x)`, `MAX(x)`                                             |
+| `count_if(x, v => p)` | `COUNT_BIG(CASE WHEN p THEN x END)`, which skips `NULL` values |
+| `count_distinct(x)`   | `COUNT_BIG(DISTINCT x)`                                        |
+| `sum(x)`              | `SUM(x)`                                                       |
+| `mean(x)`             | `AVG(CAST(x AS float))`, since `AVG` truncates integers        |
+
+For example, the pipeline
+
+```tql
+from_microsoft_sql table="events", host="db", user="u", password=secret("p"), database="d"
+summarize big=count_if(n, v => v > 0), kinds=count_distinct(n), total=sum(id), avg=mean(id)
+```
+
+computes `COUNT_BIG(CASE WHEN (([n] IS NOT NULL) AND ([n] > 0)) THEN [n] END)`, `COUNT_BIG(DISTINCT [n])`, `SUM([id])`, and `AVG(CAST([id] AS float))`.
+
+Group keys and aggregate arguments can be computed values, such as `level` in
+
+```tql
+level = severity * 2
+summarize src_ip, worst=max(level)
+```
+
+SQL Server computes an assignment that the summary reads with its own semantics, even if it calls a function that SQL Server spells. An assignment that the summary doesn’t read, including one that a later assignment shadows, must be infallible. See [Computed keys and arguments](../optimizations.md#computed-keys-and-arguments).
+
+A `floor` of a time to a duration, such as in `day = floor(ts, 1d)` before a `summarize day, rows=count()`, runs as `DATE_BUCKET(second, 86400, …, CAST('1970-01-01' AS datetime2(7)))`. The buckets count from the epoch, as in TQL. `DATE_BUCKET` requires SQL Server 2022 or later. Earlier servers reject the query, so use `pushdown=false` with them. Widths that are multiples of a week or a month stay in Tenzir, since TQL aligns them to the calendar, and so do widths below a second.
 
 ## Filters
 
@@ -67,7 +101,7 @@ The operators that SQL Server takes over run as SQL Server runs them, which can 
 * A time becomes a `datetimeoffset(7)` in UTC, such as `CAST('2024-01-01T00:00:00.0000000+00:00' AS datetimeoffset(7))`, which SQL Server compares with `date`, `datetime`, `smalldatetime`, `datetime2`, and `datetimeoffset` columns as an instant, reading the types without an offset as UTC.
 * An IP address becomes its text, such as `N'10.0.0.1'`, which compares as text.
 * `min` and `max` also take text, which TQL’s functions do not.
-* The operator takes over operators before it knows the types of the columns, so a query that SQL Server rejects fails the pipeline: for example, a stage that reads a column that the table lacks, where Tenzir would warn and read `null`, `max` of a `bit` column, or a comparison, count, group, or sort of a legacy `text`, `ntext`, or `image` column. Use `pushdown=false` for such pipelines.
+* The operator takes over operators before it knows the types of the columns, so a query that SQL Server rejects fails the pipeline: for example, a stage that reads a column that the table lacks, where Tenzir would warn and read `null`, `max` of a `bit` column, a comparison, count, group, or sort of a legacy `text`, `ntext`, or `image` column, or a time bucket on a server earlier than SQL Server 2022. The error of SQL Server then carries a note that SQL Server computed the stages that the operator took over with its own semantics, and a hint to use `pushdown=false`, which you can use for such pipelines. The note and the hint appear only if the operator took over stages.
 
 ## Verify an optimization
 

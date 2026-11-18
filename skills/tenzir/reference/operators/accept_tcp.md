@@ -1,7 +1,7 @@
 ---
 title: "accept_tcp"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/accept_tcp
-source: https://tenzir.com/docs/v6.22.0/reference/operators/accept_tcp.md
+canonical: https://tenzir.com/docs/reference/operators/accept_tcp
+source: https://tenzir.com/docs/reference/operators/accept_tcp.md
 section: "Docs"
 ---
 
@@ -44,8 +44,6 @@ TLS configuration. Provide an empty record (`tls={}`) to enable TLS with default
 The `client_ca` and `require_client_cert` options are only valid for operators that accept incoming client connections.
 
 Any value not specified in the record will either be picked up from the configuration or if not configured will not be used by the operator.
-
-See the [Node TLS Setup guide](../../guides/node-setup/configure-tls.md) for more details.
 
 ### `auto_detect_tls = bool (optional)`
 
@@ -134,4 +132,4 @@ Use this mode when you migrate clients from plaintext TCP to TLS and need to kee
 * [`to_tcp`](to_tcp.md)
 * [`serve_tcp`](serve_tcp.md)
 * [`accept_unix_socket`](accept_unix_socket.md)
-* [Tcp](https://tenzir.com/integrations/tcp)
+* [Tcp](https://tenzir.com/product/integrations/tcp)

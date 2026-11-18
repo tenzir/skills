@@ -1,7 +1,7 @@
 ---
 title: "compress_gzip"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/compress_gzip
-source: https://tenzir.com/docs/v6.22.0/reference/operators/compress_gzip.md
+canonical: https://tenzir.com/docs/reference/operators/compress_gzip
+source: https://tenzir.com/docs/reference/operators/compress_gzip.md
 section: "Docs"
 ---
 

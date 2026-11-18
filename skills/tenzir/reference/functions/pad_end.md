@@ -1,7 +1,7 @@
 ---
 title: "pad_end"
-canonical: https://tenzir.com/docs/v6.22.0/reference/functions/pad_end
-source: https://tenzir.com/docs/v6.22.0/reference/functions/pad_end.md
+canonical: https://tenzir.com/docs/reference/functions/pad_end
+source: https://tenzir.com/docs/reference/functions/pad_end.md
 section: "Docs"
 ---
 

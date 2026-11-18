@@ -1,7 +1,7 @@
 ---
 title: "delay"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/delay
-source: https://tenzir.com/docs/v6.22.0/reference/operators/delay.md
+canonical: https://tenzir.com/docs/reference/operators/delay
+source: https://tenzir.com/docs/reference/operators/delay.md
 section: "Docs"
 ---
 

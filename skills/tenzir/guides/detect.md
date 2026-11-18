@@ -1,8 +1,8 @@
 ---
 title: "Overview"
 description: "Match security activity and model the resulting findings."
-canonical: https://tenzir.com/docs/v6.22.0/guides/detect
-source: https://tenzir.com/docs/v6.22.0/guides/detect.md
+canonical: https://tenzir.com/docs/guides/detect
+source: https://tenzir.com/docs/guides/detect.md
 section: "Docs"
 ---
 

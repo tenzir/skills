@@ -1,7 +1,7 @@
 ---
 title: "tdigest_quantile"
-canonical: https://tenzir.com/docs/v6.22.0/reference/functions/tdigest_quantile
-source: https://tenzir.com/docs/v6.22.0/reference/functions/tdigest_quantile.md
+canonical: https://tenzir.com/docs/reference/functions/tdigest_quantile
+source: https://tenzir.com/docs/reference/functions/tdigest_quantile.md
 section: "Docs"
 ---
 

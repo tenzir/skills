@@ -1,7 +1,7 @@
 ---
 title: "Map to ASIM"
-canonical: https://tenzir.com/docs/v6.22.0/guides/normalize/map-to-asim
-source: https://tenzir.com/docs/v6.22.0/guides/normalize/map-to-asim.md
+canonical: https://tenzir.com/docs/guides/normalize/map-to-asim
+source: https://tenzir.com/docs/guides/normalize/map-to-asim.md
 section: "Docs"
 ---
 
@@ -13,7 +13,7 @@ This guide shows you how to map events to Microsoft Sentinel Advanced Security I
 
 ## Use the ASIM skill
 
-Install the `tenzir-asim` skill when you want an agent to help with ASIM schema decisions. See [Use agent skills](../ai-workbench/use-agent-skills.md#use-the-asim-skill) for installation and usage examples.
+Install the `tenzir-asim` skill when you want an agent to help with ASIM schema decisions. See [Use agent skills](https://tenzir.com/docs/guides/ai-workbench/use-agent-skills#use-the-asim-skill) for installation and usage examples.
 
 Ask the agent to choose the event or entity schema before it maps fields. ASIM fields use Microsoft Sentinel column names such as `EventSchema`, `EventSchemaVersion`, `SrcIpAddr`, and `DstIpAddr`. Prefer canonical fields over aliases when you build reusable mappings, analytics rules, or workbooks.
 
@@ -50,12 +50,12 @@ These rules are specific to ASIM:
 
 * [`to_azure_log_analytics`](../../reference/operators/to_azure_log_analytics.md)
 * [Clean up values](../parse/clean-up-values.md)
-* [Use agent skills](../ai-workbench/use-agent-skills.md#use-the-asim-skill)
+* [Use agent skills](https://tenzir.com/docs/guides/ai-workbench/use-agent-skills#use-the-asim-skill)
 * [Map to CIM](map-to-cim.md)
 * [Map to ECS](map-to-ecs.md)
 * [Map to OCSF](map-to-ocsf.md)
 * [Map to UDM](map-to-udm.md)
-* [Create a package](../packages/create-a-package.md)
-* [Write tests](../testing/write-tests.md)
-* [Sentinel](https://tenzir.com/integrations/microsoft/sentinel)
+* [Create a package](https://tenzir.com/docs/guides/packages/create-a-package)
+* [Write tests](https://tenzir.com/docs/guides/testing/write-tests)
+* [Sentinel](https://tenzir.com/product/integrations/microsoft/sentinel)
 * [Onboard a data source](../../tutorials/onboard-a-data-source.md)

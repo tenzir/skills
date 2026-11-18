@@ -1,7 +1,7 @@
 ---
 title: "compress_brotli"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/compress_brotli
-source: https://tenzir.com/docs/v6.22.0/reference/operators/compress_brotli.md
+canonical: https://tenzir.com/docs/reference/operators/compress_brotli
+source: https://tenzir.com/docs/reference/operators/compress_brotli.md
 section: "Docs"
 ---
 

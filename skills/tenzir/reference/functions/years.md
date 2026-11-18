@@ -1,7 +1,7 @@
 ---
 title: "years"
-canonical: https://tenzir.com/docs/v6.22.0/reference/functions/years
-source: https://tenzir.com/docs/v6.22.0/reference/functions/years.md
+canonical: https://tenzir.com/docs/reference/functions/years
+source: https://tenzir.com/docs/reference/functions/years.md
 section: "Docs"
 ---
 

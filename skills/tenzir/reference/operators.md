@@ -1,7 +1,7 @@
 ---
 title: "Operators"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators
-source: https://tenzir.com/docs/v6.22.0/reference/operators.md
+canonical: https://tenzir.com/docs/reference/operators
+source: https://tenzir.com/docs/reference/operators.md
 section: "Docs"
 ---
 
@@ -69,40 +69,6 @@ Groups events into event-time windows and runs a subpipeline per window.
 window size=1h, on=ts { summarize count() }
 ```
 
-## Charts
-
-### [chart\_area](operators/chart_area.md)
-
-Plots events on an area chart.
-
-```tql
-chart_area …
-```
-
-### [chart\_bar](operators/chart_bar.md)
-
-Plots events on an bar chart.
-
-```tql
-chart_bar …
-```
-
-### [chart\_line](operators/chart_line.md)
-
-Plots events on an line chart.
-
-```tql
-chart_line …
-```
-
-### [chart\_pie](operators/chart_pie.md)
-
-Plots events on an pie chart.
-
-```tql
-chart_pie …
-```
-
 ## Connecting Pipelines
 
 ### [publish](operators/publish.md)
@@ -123,100 +89,12 @@ subscribe "topic"
 
 ## Contexts
 
-### [context\_create\_bloom\_filter](operators/context_create_bloom_filter.md)
-
-Creates a Bloom filter context.
-
-```tql
-context_create_bloom_filter "ctx", capacity=1Mi, fp_probability=0.01
-```
-
-### [context\_create\_geoip](operators/context_create_geoip.md)
-
-Creates a GeoIP context.
-
-```tql
-context_create_geoip "ctx", db_path="GeoLite2-City.mmdb"
-```
-
-### [context\_create\_lookup\_table](operators/context_create_lookup_table.md)
-
-Creates a lookup table context.
-
-```tql
-context_create_lookup_table "ctx"
-```
-
 ### [context\_enrich](operators/context_enrich.md)
 
 Enriches events with data from a context.
 
 ```tql
 context_enrich "ctx", key=x
-```
-
-### [context\_erase](operators/context_erase.md)
-
-Removes entries from a context.
-
-```tql
-context_erase "ctx", key=x
-```
-
-### [context\_inspect](operators/context_inspect.md)
-
-Resets a context.
-
-```tql
-context_inspect "ctx"
-```
-
-### [context\_list](operators/context_list.md)
-
-Lists all contexts.
-
-```tql
-context_list
-```
-
-### [context\_load](operators/context_load.md)
-
-Loads context state.
-
-```tql
-context_load "ctx"
-```
-
-### [context\_lookup](operators/context_lookup.md)
-
-Performs unified matching.
-
-```tql
-context_lookup "ctx", key=field
-```
-
-### [context\_remove](operators/context_remove.md)
-
-Deletes a context.
-
-```tql
-context_remove "ctx"
-```
-
-### [context\_reset](operators/context_reset.md)
-
-Resets a context.
-
-```tql
-context_reset "ctx"
-```
-
-### [context\_save](operators/context_save.md)
-
-Saves context state.
-
-```tql
-context_save "ctx"
 ```
 
 ### [context\_update](operators/context_update.md)
@@ -901,15 +779,15 @@ Connects to a remote ZeroMQ publisher and receives events.
 from_zmq "tcp://collector.example.com:5555", prefix="alerts/" { read_json }
 ```
 
-## Internals
+### [ingest](operators/ingest.md)
 
-### [api](operators/api.md)
-
-Use Tenzir's REST API directly from a pipeline.
+Reads the events that an ingest endpoint received.
 
 ```tql
-api "/pipeline/list"
+ingest "app-events"
 ```
+
+## Internals
 
 ### [batch](operators/batch.md)
 
@@ -917,14 +795,6 @@ The `batch` operator controls the batch size of events.
 
 ```tql
 batch timeout=1s
-```
-
-### [cache](operators/cache.md)
-
-An in-memory cache shared between pipelines.
-
-```tql
-cache "w01wyhTZm3", ttl=10min
 ```
 
 ### [measure](operators/measure.md)
@@ -1055,76 +925,6 @@ Returns a new event for each member of a list or a record in an event, duplicati
 
 ```tql
 unroll names
-```
-
-## Node
-
-### [diagnostics](operators/diagnostics.md)
-
-Retrieves diagnostic events from a Tenzir node.
-
-```tql
-diagnostics
-```
-
-### [metrics](operators/metrics.md)
-
-Retrieves metrics events from a Tenzir node.
-
-```tql
-metrics "cpu"
-```
-
-### [openapi](operators/openapi.md)
-
-Shows the node's OpenAPI specification.
-
-```tql
-openapi
-```
-
-### [plugins](operators/plugins.md)
-
-Shows all available plugins and built-ins.
-
-```tql
-plugins
-```
-
-### [version](operators/version.md)
-
-Shows the current version.
-
-```tql
-version
-```
-
-## OCSF
-
-The OCSF operators are deprecated. Use the [`ocsf_cast`](functions/ocsf_cast.md), [`ocsf_derive`](functions/ocsf_derive.md), and [`ocsf_trim`](functions/ocsf_trim.md) functions instead, assigning their result to `this` to transform a top-level event.
-
-### [ocsf\_cast](operators/ocsf_cast.md)
-
-Deprecated. Use the `ocsf_cast` function instead.
-
-```tql
-ocsf_cast
-```
-
-### [ocsf\_derive](operators/ocsf_derive.md)
-
-Deprecated. Use the `ocsf_derive` function instead.
-
-```tql
-ocsf_derive
-```
-
-### [ocsf\_trim](operators/ocsf_trim.md)
-
-Deprecated. Use the `ocsf_trim` function instead.
-
-```tql
-ocsf_trim
 ```
 
 ## Outputs
@@ -1417,32 +1217,6 @@ Connects to a remote ZeroMQ subscriber endpoint and sends events.
 to_zmq "tcp://collector.example.com:5555", encoding="json", prefix=f"{kind}/"
 ```
 
-## Packages
-
-### [package\_add](operators/package_add.md)
-
-Installs a package.
-
-```tql
-package_add "suricata-ocsf"
-```
-
-### [package\_list](operators/package_list.md)
-
-Shows installed packages.
-
-```tql
-package_list
-```
-
-### [package\_remove](operators/package_remove.md)
-
-Uninstalls a package.
-
-```tql
-package_remove "suricata-ocsf"
-```
-
 ## Parsing
 
 ### [read\_all](operators/read_all.md)
@@ -1669,40 +1443,6 @@ Parses an incoming `Zeek TSV` stream into events.
 read_zeek_tsv
 ```
 
-## Pipelines
-
-### [pipeline\_activity](operators/pipeline_activity.md)
-
-Summarizes the activity of pipelines.
-
-```tql
-pipeline_activity range=1d, interval=1h
-```
-
-### [pipeline\_detach](operators/pipeline_detach.md)
-
-Starts a pipeline in the node.
-
-```tql
-pipeline_detach { … }
-```
-
-### [pipeline\_list](operators/pipeline_list.md)
-
-Shows managed pipelines.
-
-```tql
-pipeline_list
-```
-
-### [pipeline\_run](operators/pipeline_run.md)
-
-Starts a pipeline in the node and waits for it to complete.
-
-```tql
-pipeline_run { … }
-```
-
 ## Printing
 
 ### [write\_all](operators/write_all.md)
@@ -1847,46 +1587,4 @@ Transforms event stream into Zeek Tab-Separated Value byte stream.
 
 ```tql
 write_zeek_tsv
-```
-
-## Storage
-
-### [export](operators/export.md)
-
-Retrieves events from a Tenzir node.
-
-```tql
-export
-```
-
-### [fields](operators/fields.md)
-
-Retrieves all fields stored at a node.
-
-```tql
-fields
-```
-
-### [import](operators/import.md)
-
-Imports events into a Tenzir node.
-
-```tql
-import
-```
-
-### [partitions](operators/partitions.md)
-
-Retrieves metadata about events stored at a node.
-
-```tql
-partitions src_ip == 1.2.3.4
-```
-
-### [schemas](operators/schemas.md)
-
-Retrieves all schemas for events stored at a node.
-
-```tql
-schemas
 ```

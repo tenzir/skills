@@ -1,7 +1,7 @@
 ---
 title: "sum"
-canonical: https://tenzir.com/docs/v6.22.0/reference/functions/sum
-source: https://tenzir.com/docs/v6.22.0/reference/functions/sum.md
+canonical: https://tenzir.com/docs/reference/functions/sum
+source: https://tenzir.com/docs/reference/functions/sum.md
 section: "Docs"
 ---
 
@@ -43,5 +43,4 @@ summarize n=sum(x)
 * [`mean`](mean.md)
 * [`min`](min.md)
 * [Aggregate event streams](../../guides/analyze/aggregate-event-streams.md)
-* [Plot data with charts](../../tutorials/plot-data-with-charts.md)
 * [Learn idiomatic TQL](../../tutorials/learn-idiomatic-tql.md)

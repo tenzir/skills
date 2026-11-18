@@ -1,7 +1,7 @@
 ---
 title: "assert_throughput"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/assert_throughput
-source: https://tenzir.com/docs/v6.22.0/reference/operators/assert_throughput.md
+canonical: https://tenzir.com/docs/reference/operators/assert_throughput
+source: https://tenzir.com/docs/reference/operators/assert_throughput.md
 section: "Docs"
 ---
 

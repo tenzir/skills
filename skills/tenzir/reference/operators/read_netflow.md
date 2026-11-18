@@ -1,7 +1,7 @@
 ---
 title: "read_netflow"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/read_netflow
-source: https://tenzir.com/docs/v6.22.0/reference/operators/read_netflow.md
+canonical: https://tenzir.com/docs/reference/operators/read_netflow
+source: https://tenzir.com/docs/reference/operators/read_netflow.md
 section: "Docs"
 ---
 
@@ -163,4 +163,4 @@ where netflow.record_type == "options"
 
 * [`accept_udp`](accept_udp.md)
 * [`from_file`](from_file.md)
-* [Netflow](https://tenzir.com/integrations/netflow)
+* [Netflow](https://tenzir.com/product/integrations/netflow)

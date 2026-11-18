@@ -1,7 +1,7 @@
 ---
 title: "to_splunk"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/to_splunk
-source: https://tenzir.com/docs/v6.22.0/reference/operators/to_splunk.md
+canonical: https://tenzir.com/docs/reference/operators/to_splunk
+source: https://tenzir.com/docs/reference/operators/to_splunk.md
 section: "Docs"
 ---
 
@@ -125,8 +125,6 @@ The `client_ca` and `require_client_cert` options are only valid for operators t
 
 Any value not specified in the record will either be picked up from the configuration or if not configured will not be used by the operator.
 
-See the [Node TLS Setup guide](../../guides/node-setup/configure-tls.md) for more details.
-
 ### `include_nulls = bool (optional)`
 
 Include fields with null values in the transmitted event data. By default, the operator drops all null values to save space.
@@ -159,7 +157,7 @@ Defaults to `true`.
 
 ## Parallelism
 
-In a [parallel pipeline](../../guides/node-setup/tune-performance.md#parallelism), each instance of `to_splunk` accumulates its own messages and sends them with its own HEC token and connection. Because `parallel` bounds the requests in flight within one instance, the pipeline-wide bound is `parallel` times the number of instances.
+In a [parallel pipeline](../../explanations/executor.md#parallel-execution), each instance of `to_splunk` accumulates its own messages and sends them with its own HEC token and connection. Because `parallel` bounds the requests in flight within one instance, the pipeline-wide bound is `parallel` times the number of instances.
 
 HEC indexes every request on its own and gives no ordering guarantee across requests, so the indexer never sees a strict pipeline order once more than one request is in flight.
 
@@ -267,6 +265,6 @@ to_splunk "https://localhost:8088",
 ## See Also
 
 * [Map to CIM](../../guides/normalize/map-to-cim.md)
-* [Splunk](https://tenzir.com/integrations/splunk)
+* [Splunk](https://tenzir.com/product/integrations/splunk)
 
 Parallelizable: a parallel pipeline may run this operator on several cores at once.

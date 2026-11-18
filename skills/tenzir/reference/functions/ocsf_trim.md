@@ -1,7 +1,7 @@
 ---
 title: "ocsf_trim"
-canonical: https://tenzir.com/docs/v6.22.0/reference/functions/ocsf_trim
-source: https://tenzir.com/docs/v6.22.0/reference/functions/ocsf_trim.md
+canonical: https://tenzir.com/docs/reference/functions/ocsf_trim
+source: https://tenzir.com/docs/reference/functions/ocsf_trim.md
 section: "Docs"
 ---
 
@@ -17,11 +17,11 @@ ocsf_trim(x:record, [drop_optional=bool, drop_recommended=bool]) -> record
 
 ## Description
 
-The `ocsf_trim` function removes fields from the OCSF event `x` based on their requirement level in the OCSF schema. It applies the same rules as the [`ocsf_trim`](../operators/ocsf_trim.md) operator.
+The `ocsf_trim` function removes fields from the OCSF event `x` based on their requirement level in the OCSF schema.
 
-Use the function for both top-level and nested OCSF events. To transform the whole event, write `this = ocsf_trim(this)`. For an OCSF event in a field, write `ocsf = ocsf_trim(ocsf)`, or use [`map`](map.md) to transform a list of events. The [`ocsf_trim`](../operators/ocsf_trim.md) operator is deprecated.
+Use the function for both top-level and nested OCSF events. To transform the whole event, write `this = ocsf_trim(this)`. For an OCSF event in a field, write `ocsf = ocsf_trim(ocsf)`, or use [`map`](map.md) to transform a list of events.
 
-Unlike the operator, which drops events whose OCSF version or class it cannot resolve, the function returns `null` with a warning and keeps the rest of the event. It also returns `null` with a warning when `x` is not a record, and returns `null` without a warning when `x` is `null`.
+When the function cannot resolve the OCSF version or class of `x`, it returns `null` with a warning and keeps the rest of the event. It also returns `null` with a warning when `x` is not a record, and returns `null` without a warning when `x` is `null`.
 
 ### `x: record`
 
@@ -43,7 +43,7 @@ Defaults to `false`.
 
 ### Transform a top-level event
 
-Replace an existing `ocsf_trim` operator call with an assignment:
+Tenzir 7 removes the `ocsf_trim` operator. Replace a call of it in a pipeline from Tenzir 6 with an assignment:
 
 ```tql
 this = ocsf_trim(this)
@@ -124,7 +124,6 @@ select retained, required
 
 ## See Also
 
-* [`ocsf_trim`](../operators/ocsf_trim.md)
 * [`ocsf_compact`](ocsf_compact.md)
 * [`ocsf_cast`](ocsf_cast.md)
 * [`ocsf_derive`](ocsf_derive.md)

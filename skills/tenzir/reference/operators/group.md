@@ -1,7 +1,7 @@
 ---
 title: "group"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/group
-source: https://tenzir.com/docs/v6.22.0/reference/operators/group.md
+canonical: https://tenzir.com/docs/reference/operators/group
+source: https://tenzir.com/docs/reference/operators/group.md
 section: "Docs"
 ---
 
@@ -35,7 +35,7 @@ Inside the subpipeline, `$group` refers to the current key.
 
 ### Parallelism
 
-When you enable [parallelism](../../guides/node-setup/tune-performance.md#parallelism), Tenzir can run `group` on several cores at once. It partitions the input by `over` so that every event of a group reaches the same instance, which caps the number of instances at `limit_partitions`, four by default.
+When you enable [parallelism](../../explanations/executor.md#parallel-execution), Tenzir can run `group` on several cores at once. It partitions the input by `over` so that every event of a group reaches the same instance, which caps the number of instances at `limit_partitions`, four by default.
 
 ## Examples
 

@@ -1,7 +1,7 @@
 ---
 title: "serve_tcp"
-canonical: https://tenzir.com/docs/v6.22.0/reference/operators/serve_tcp
-source: https://tenzir.com/docs/v6.22.0/reference/operators/serve_tcp.md
+canonical: https://tenzir.com/docs/reference/operators/serve_tcp
+source: https://tenzir.com/docs/reference/operators/serve_tcp.md
 section: "Docs"
 ---
 
@@ -46,8 +46,6 @@ The `client_ca` and `require_client_cert` options are only valid for operators t
 
 Any value not specified in the record will either be picked up from the configuration or if not configured will not be used by the operator.
 
-See the [Node TLS Setup guide](../../guides/node-setup/configure-tls.md) for more details.
-
 ### `max_connections = int (optional)`
 
 The maximum number of simultaneous client connections to accept. Additional connections beyond this limit are rejected.
@@ -87,4 +85,4 @@ serve_tcp "0.0.0.0:8443", tls={certfile: "cert.pem", keyfile: "key.pem"} {
 * [`accept_tcp`](accept_tcp.md)
 * [`from_tcp`](from_tcp.md)
 * [`to_tcp`](to_tcp.md)
-* [Tcp](https://tenzir.com/integrations/tcp)
+* [Tcp](https://tenzir.com/product/integrations/tcp)

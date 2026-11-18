@@ -1,7 +1,7 @@
 ---
 title: "Programs"
-canonical: https://tenzir.com/docs/v6.22.0/reference/programs
-source: https://tenzir.com/docs/v6.22.0/reference/programs.md
+canonical: https://tenzir.com/docs/reference/programs
+source: https://tenzir.com/docs/reference/programs.md
 section: "Docs"
 ---
 
@@ -16,7 +16,7 @@ TQL **programs** compose [statements](statements.md) into complete data processi
 
 Pipeline Auto-Completion
 
-When a pipeline is not closed, Tenzir attempts to *auto-complete* it in interactive execution contexts. For the command-line execution context described in [Run pipelines](../guides/basic-usage/run-pipelines.md#on-the-command-line), Tenzir uses standard input and standard output as the missing source or sink. For event pipelines, it prepends `from_stdin { read_json }` or appends `to_stdout { write_tql }`. For byte pipelines, it reads raw bytes from standard input or writes raw bytes to standard output. For the web execution context described in [Run pipelines](../guides/basic-usage/run-pipelines.md#in-the-platform), auto-completion takes place with an output operator: The web app appends [`serve_http`](operators/serve_http.md) to turn the dataflow into a REST API, allowing your browser to access it by routing the data through the platform.
+When a pipeline is not closed, Tenzir attempts to *auto-complete* it in interactive execution contexts. For the command-line execution context described in [CLI](cli.md#tenzir-run), Tenzir uses standard input and standard output as the missing source or sink. For event pipelines, it prepends `from_stdin { read_json }` or appends `to_stdout { write_tql }`. For byte pipelines, it reads raw bytes from standard input or writes raw bytes to standard output. For the web execution context described in our explanation of [where pipelines run](../explanations/pipeline.md#where-pipelines-run), auto-completion takes place with an output operator: The web app appends [`serve_http`](operators/serve_http.md) to turn the dataflow into a REST API, allowing your browser to access it by routing the data through the platform.
 
 ## Statement chaining
 
@@ -165,7 +165,6 @@ Key execution principles:
 * **Stream processing by default**: Data flows through operators as it arrives
 * **Lazy evaluation**: Operations execute only when data flows through them
 * **Back-pressure handling**: Automatic flow control prevents memory exhaustion
-* **Network transparency**: Pipelines can span multiple nodes seamlessly
 
 ### Streaming vs blocking
 
@@ -224,7 +223,3 @@ where timestamp > $start_time       // Constant comparison
 current_time = 2024-01-15T10:30:00  // Would be now() in real usage
 age = current_time - timestamp      // Runtime calculation
 ```
-
-### Network transparency
-
-TQL pipelines can span network boundaries seamlessly. For example, the [`import`](operators/import.md) operator implicitly performs a network connection based on where it runs. If the `tenzir` binary executes the pipeline, the executor establishesa transparent network connection. If the pipeline runs within a node, the executor passes the data directly to the next operator in the same process.

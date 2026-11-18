@@ -1,7 +1,7 @@
 ---
 title: "ocsf_cast"
-canonical: https://tenzir.com/docs/v6.22.0/reference/functions/ocsf_cast
-source: https://tenzir.com/docs/v6.22.0/reference/functions/ocsf_cast.md
+canonical: https://tenzir.com/docs/reference/functions/ocsf_cast
+source: https://tenzir.com/docs/reference/functions/ocsf_cast.md
 section: "Docs"
 ---
 
@@ -17,15 +17,13 @@ ocsf_cast(x:record, [encode_variants=bool, null_fill=bool, timestamp_to_ms=bool]
 
 ## Description
 
-The `ocsf_cast` function casts the record `x` to the OCSF event class type selected by its `metadata.version`, `metadata.profiles`, `metadata.extensions`, and `class_uid` fields. It applies the same casting rules as the [`ocsf_cast`](../operators/ocsf_cast.md) operator: it warns about fields that the schema does not define and removes them, encodes free-form objects such as `unmapped`, and converts values to the types the schema expects.
+The `ocsf_cast` function casts the record `x` to the OCSF event class type selected by its `metadata.version`, `metadata.profiles`, `metadata.extensions`, and `class_uid` fields. It warns about fields that the schema does not define and removes them, encodes free-form objects such as `unmapped`, and converts values to the types the schema expects.
 
-Use the function for both top-level and nested OCSF events. To transform the whole event, write `this = ocsf_cast(this)`. For an OCSF event in a field, write `ocsf = ocsf_cast(ocsf)`, or use [`map`](map.md) to transform a list of events. The [`ocsf_cast`](../operators/ocsf_cast.md) operator is deprecated.
+Use the function for both top-level and nested OCSF events. To transform the whole event, write `this = ocsf_cast(this)`. For an OCSF event in a field, write `ocsf = ocsf_cast(ocsf)`, or use [`map`](map.md) to transform a list of events.
 
-The function differs from the operator in three ways:
+The function returns `null` with a warning when it cannot resolve the OCSF version or class of `x`. The rest of the event stays intact, so you can route such events instead of losing them. It does not assign `@name`, because the schema name belongs to the whole event rather than to a field.
 
-* It returns `null` with a warning when it cannot resolve the OCSF version or class of `x`, where the operator drops the event. The rest of the event stays intact, so you can route such events instead of losing them.
-* It does not assign `@name`, because the schema name belongs to the whole event rather than to a field.
-* It warns when `x` lacks a field that the schema requires, or violates an OCSF constraint that needs at least one or exactly one of a set of fields. These checks only emit warnings and never change the result.
+The function also warns when `x` lacks a field that the schema requires, or violates an OCSF constraint that needs at least one or exactly one of a set of fields. These checks only emit warnings and never change the result.
 
 The function also returns `null` with a warning when `x` is not a record, and returns `null` without a warning when `x` is `null`.
 
@@ -55,7 +53,7 @@ Defaults to `false`.
 
 ### Transform a top-level event
 
-Replace an existing `ocsf_cast` operator call with an assignment:
+Tenzir 7 removes the `ocsf_cast` operator. Replace a call of it in a pipeline from Tenzir 6 with an assignment:
 
 ```tql
 this = ocsf_cast(this)
@@ -193,7 +191,6 @@ The function returns both events unchanged. The first event emits a warning beca
 
 ## See Also
 
-* [`ocsf_cast`](../operators/ocsf_cast.md)
 * [`ocsf_derive`](ocsf_derive.md)
 * [`ocsf_trim`](ocsf_trim.md)
 * [Map to OCSF](../../guides/normalize/map-to-ocsf.md)
