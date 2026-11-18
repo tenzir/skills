@@ -1,6 +1,6 @@
 ---
 title: The tenzir skill covers Tenzir 7
-type: change
+type: breaking
 authors:
   - mavam
 prs:
