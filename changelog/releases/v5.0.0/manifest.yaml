@@ -1,0 +1,8 @@
+created: 2026-11-18
+title: Tenzir 7 skill documentation
+intro: >-
+  The tenzir skill now documents Tenzir 7. Tenzir 6 users can point their agents at
+  their release's documentation instead.
+source:
+  mode: sync-stable-queue
+  previous_stable: v4.1.0

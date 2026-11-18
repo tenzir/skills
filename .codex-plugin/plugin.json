@@ -1,6 +1,6 @@
 {
   "name": "skills",
-  "version": "4.1.0",
+  "version": "5.0.0",
   "description": "Use Tenzir, TQL, and security-data schemas in Codex.",
   "author": {
     "name": "Tenzir",
