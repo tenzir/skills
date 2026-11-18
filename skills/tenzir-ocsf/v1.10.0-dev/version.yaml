@@ -3,7 +3,7 @@ status: development
 source:
   repository: https://github.com/ocsf/ocsf-schema.git
   ref: main
-  commit: 3ee473eab8b27f8f50beb6b37cbf85961e91b607
+  commit: 157fbad12c81707cd60eff097d8a8e54b77118ea
   compiler: ocsf-schema-compiler 1.1.1
 extensions:
   linux:
