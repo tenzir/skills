@@ -1,7 +1,7 @@
 ---
 title: "Manage organizations"
-canonical: https://tenzir.com/docs/guides/platform-management/manage-organizations
-source: https://tenzir.com/docs/guides/platform-management/manage-organizations.md
+canonical: https://tenzir.com/docs/v6.22.0/guides/platform-management/manage-organizations
+source: https://tenzir.com/docs/v6.22.0/guides/platform-management/manage-organizations.md
 section: "Docs"
 ---
 

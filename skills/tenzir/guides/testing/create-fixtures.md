@@ -1,7 +1,7 @@
 ---
 title: "Create fixtures"
-canonical: https://tenzir.com/docs/guides/testing/create-fixtures
-source: https://tenzir.com/docs/guides/testing/create-fixtures.md
+canonical: https://tenzir.com/docs/v6.22.0/guides/testing/create-fixtures
+source: https://tenzir.com/docs/v6.22.0/guides/testing/create-fixtures.md
 section: "Docs"
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "accept_opensearch"
-canonical: https://tenzir.com/docs/reference/operators/accept_opensearch
-source: https://tenzir.com/docs/reference/operators/accept_opensearch.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/accept_opensearch
+source: https://tenzir.com/docs/v6.22.0/reference/operators/accept_opensearch.md
 section: "Docs"
 ---
 

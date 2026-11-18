@@ -1,7 +1,7 @@
 ---
 title: "Parse delimited text"
-canonical: https://tenzir.com/docs/guides/parse/parse-delimited-text
-source: https://tenzir.com/docs/guides/parse/parse-delimited-text.md
+canonical: https://tenzir.com/docs/v6.22.0/guides/parse/parse-delimited-text
+source: https://tenzir.com/docs/v6.22.0/guides/parse/parse-delimited-text.md
 section: "Docs"
 ---
 

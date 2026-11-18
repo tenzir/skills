@@ -1,7 +1,7 @@
 ---
 title: "Map to ASIM"
-canonical: https://tenzir.com/docs/guides/normalize/map-to-asim
-source: https://tenzir.com/docs/guides/normalize/map-to-asim.md
+canonical: https://tenzir.com/docs/v6.22.0/guides/normalize/map-to-asim
+source: https://tenzir.com/docs/v6.22.0/guides/normalize/map-to-asim.md
 section: "Docs"
 ---
 

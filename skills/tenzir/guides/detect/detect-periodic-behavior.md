@@ -1,8 +1,8 @@
 ---
 title: "Detect periodic behavior"
 description: "Score beaconing cadence with robust statistics, recover periods with autocorrelation, and catch implants that hold one connection open"
-canonical: https://tenzir.com/docs/guides/detect/detect-periodic-behavior
-source: https://tenzir.com/docs/guides/detect/detect-periodic-behavior.md
+canonical: https://tenzir.com/docs/v6.22.0/guides/detect/detect-periodic-behavior
+source: https://tenzir.com/docs/v6.22.0/guides/detect/detect-periodic-behavior.md
 section: "Docs"
 ---
 

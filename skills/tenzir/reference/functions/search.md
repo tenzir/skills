@@ -1,7 +1,7 @@
 ---
 title: "search"
-canonical: https://tenzir.com/docs/reference/functions/search
-source: https://tenzir.com/docs/reference/functions/search.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/functions/search
+source: https://tenzir.com/docs/v6.22.0/reference/functions/search.md
 section: "Docs"
 ---
 

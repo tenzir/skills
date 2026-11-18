@@ -1,7 +1,7 @@
 ---
 title: "print_kv"
-canonical: https://tenzir.com/docs/reference/functions/print_kv
-source: https://tenzir.com/docs/reference/functions/print_kv.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/functions/print_kv
+source: https://tenzir.com/docs/v6.22.0/reference/functions/print_kv.md
 section: "Docs"
 ---
 

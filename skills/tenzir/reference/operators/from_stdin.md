@@ -1,7 +1,7 @@
 ---
 title: "from_stdin"
-canonical: https://tenzir.com/docs/reference/operators/from_stdin
-source: https://tenzir.com/docs/reference/operators/from_stdin.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/from_stdin
+source: https://tenzir.com/docs/v6.22.0/reference/operators/from_stdin.md
 section: "Docs"
 ---
 

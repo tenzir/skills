@@ -1,7 +1,7 @@
 ---
 title: "Filter and select data"
-canonical: https://tenzir.com/docs/guides/optimize/filter-and-select-data
-source: https://tenzir.com/docs/guides/optimize/filter-and-select-data.md
+canonical: https://tenzir.com/docs/v6.22.0/guides/optimize/filter-and-select-data
+source: https://tenzir.com/docs/v6.22.0/guides/optimize/filter-and-select-data.md
 section: "Docs"
 ---
 

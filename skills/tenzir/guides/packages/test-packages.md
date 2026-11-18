@@ -1,7 +1,7 @@
 ---
 title: "Test packages"
-canonical: https://tenzir.com/docs/guides/packages/test-packages
-source: https://tenzir.com/docs/guides/packages/test-packages.md
+canonical: https://tenzir.com/docs/v6.22.0/guides/packages/test-packages
+source: https://tenzir.com/docs/v6.22.0/guides/packages/test-packages.md
 section: "Docs"
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "pad_start"
-canonical: https://tenzir.com/docs/reference/functions/pad_start
-source: https://tenzir.com/docs/reference/functions/pad_start.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/functions/pad_start
+source: https://tenzir.com/docs/v6.22.0/reference/functions/pad_start.md
 section: "Docs"
 ---
 

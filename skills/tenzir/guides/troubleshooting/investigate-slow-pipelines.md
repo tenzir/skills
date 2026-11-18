@@ -1,7 +1,7 @@
 ---
 title: "Investigate slow pipelines"
-canonical: https://tenzir.com/docs/guides/troubleshooting/investigate-slow-pipelines
-source: https://tenzir.com/docs/guides/troubleshooting/investigate-slow-pipelines.md
+canonical: https://tenzir.com/docs/v6.22.0/guides/troubleshooting/investigate-slow-pipelines
+source: https://tenzir.com/docs/v6.22.0/guides/troubleshooting/investigate-slow-pipelines.md
 section: "Docs"
 ---
 

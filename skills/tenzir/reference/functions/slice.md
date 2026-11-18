@@ -1,7 +1,7 @@
 ---
 title: "slice"
-canonical: https://tenzir.com/docs/reference/functions/slice
-source: https://tenzir.com/docs/reference/functions/slice.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/functions/slice
+source: https://tenzir.com/docs/v6.22.0/reference/functions/slice.md
 section: "Docs"
 ---
 

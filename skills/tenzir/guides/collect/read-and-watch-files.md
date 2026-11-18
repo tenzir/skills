@@ -1,7 +1,7 @@
 ---
 title: "Read and watch files"
-canonical: https://tenzir.com/docs/guides/collect/read-and-watch-files
-source: https://tenzir.com/docs/guides/collect/read-and-watch-files.md
+canonical: https://tenzir.com/docs/v6.22.0/guides/collect/read-and-watch-files
+source: https://tenzir.com/docs/v6.22.0/guides/collect/read-and-watch-files.md
 section: "Docs"
 ---
 

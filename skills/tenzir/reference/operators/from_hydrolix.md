@@ -1,7 +1,7 @@
 ---
 title: "from_hydrolix"
-canonical: https://tenzir.com/docs/reference/operators/from_hydrolix
-source: https://tenzir.com/docs/reference/operators/from_hydrolix.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/from_hydrolix
+source: https://tenzir.com/docs/v6.22.0/reference/operators/from_hydrolix.md
 section: "Docs"
 ---
 

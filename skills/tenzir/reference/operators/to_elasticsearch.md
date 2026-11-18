@@ -1,7 +1,7 @@
 ---
 title: "to_elasticsearch"
-canonical: https://tenzir.com/docs/reference/operators/to_elasticsearch
-source: https://tenzir.com/docs/reference/operators/to_elasticsearch.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/to_elasticsearch
+source: https://tenzir.com/docs/v6.22.0/reference/operators/to_elasticsearch.md
 section: "Docs"
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "pipeline_run"
-canonical: https://tenzir.com/docs/reference/operators/pipeline_run
-source: https://tenzir.com/docs/reference/operators/pipeline_run.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/pipeline_run
+source: https://tenzir.com/docs/v6.22.0/reference/operators/pipeline_run.md
 section: "Docs"
 ---
 

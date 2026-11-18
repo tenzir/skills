@@ -1,7 +1,7 @@
 ---
 title: "count_milliseconds"
-canonical: https://tenzir.com/docs/reference/functions/count_milliseconds
-source: https://tenzir.com/docs/reference/functions/count_milliseconds.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/functions/count_milliseconds
+source: https://tenzir.com/docs/v6.22.0/reference/functions/count_milliseconds.md
 section: "Docs"
 ---
 

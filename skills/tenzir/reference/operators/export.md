@@ -1,7 +1,7 @@
 ---
 title: "export"
-canonical: https://tenzir.com/docs/reference/operators/export
-source: https://tenzir.com/docs/reference/operators/export.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/export
+source: https://tenzir.com/docs/v6.22.0/reference/operators/export.md
 section: "Docs"
 ---
 

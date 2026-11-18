@@ -1,7 +1,7 @@
 ---
 title: "dns_lookup"
-canonical: https://tenzir.com/docs/reference/operators/dns_lookup
-source: https://tenzir.com/docs/reference/operators/dns_lookup.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/dns_lookup
+source: https://tenzir.com/docs/v6.22.0/reference/operators/dns_lookup.md
 section: "Docs"
 ---
 

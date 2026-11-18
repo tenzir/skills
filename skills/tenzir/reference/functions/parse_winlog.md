@@ -1,7 +1,7 @@
 ---
 title: "parse_winlog"
-canonical: https://tenzir.com/docs/reference/functions/parse_winlog
-source: https://tenzir.com/docs/reference/functions/parse_winlog.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/functions/parse_winlog
+source: https://tenzir.com/docs/v6.22.0/reference/functions/parse_winlog.md
 section: "Docs"
 ---
 

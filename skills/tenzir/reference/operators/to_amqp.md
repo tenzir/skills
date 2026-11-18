@@ -1,7 +1,7 @@
 ---
 title: "to_amqp"
-canonical: https://tenzir.com/docs/reference/operators/to_amqp
-source: https://tenzir.com/docs/reference/operators/to_amqp.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/to_amqp
+source: https://tenzir.com/docs/v6.22.0/reference/operators/to_amqp.md
 section: "Docs"
 ---
 

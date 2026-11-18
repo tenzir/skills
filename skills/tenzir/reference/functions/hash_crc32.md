@@ -1,7 +1,7 @@
 ---
 title: "hash_crc32"
-canonical: https://tenzir.com/docs/reference/functions/hash_crc32
-source: https://tenzir.com/docs/reference/functions/hash_crc32.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/functions/hash_crc32
+source: https://tenzir.com/docs/v6.22.0/reference/functions/hash_crc32.md
 section: "Docs"
 ---
 

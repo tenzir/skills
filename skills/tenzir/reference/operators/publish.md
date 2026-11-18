@@ -1,7 +1,7 @@
 ---
 title: "publish"
-canonical: https://tenzir.com/docs/reference/operators/publish
-source: https://tenzir.com/docs/reference/operators/publish.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/publish
+source: https://tenzir.com/docs/v6.22.0/reference/operators/publish.md
 section: "Docs"
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "parse_grok"
-canonical: https://tenzir.com/docs/reference/functions/parse_grok
-source: https://tenzir.com/docs/reference/functions/parse_grok.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/functions/parse_grok
+source: https://tenzir.com/docs/v6.22.0/reference/functions/parse_grok.md
 section: "Docs"
 ---
 

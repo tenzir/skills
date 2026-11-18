@@ -1,7 +1,7 @@
 ---
 title: "Add contexts"
-canonical: https://tenzir.com/docs/guides/packages/add-contexts
-source: https://tenzir.com/docs/guides/packages/add-contexts.md
+canonical: https://tenzir.com/docs/v6.22.0/guides/packages/add-contexts
+source: https://tenzir.com/docs/v6.22.0/guides/packages/add-contexts.md
 section: "Docs"
 ---
 

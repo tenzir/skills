@@ -1,7 +1,7 @@
 ---
 title: "Transform data at rest"
-canonical: https://tenzir.com/docs/guides/store/transform-data-at-rest
-source: https://tenzir.com/docs/guides/store/transform-data-at-rest.md
+canonical: https://tenzir.com/docs/v6.22.0/guides/store/transform-data-at-rest
+source: https://tenzir.com/docs/v6.22.0/guides/store/transform-data-at-rest.md
 section: "Docs"
 ---
 

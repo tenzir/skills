@@ -1,7 +1,7 @@
 ---
 title: "subscribe"
-canonical: https://tenzir.com/docs/reference/operators/subscribe
-source: https://tenzir.com/docs/reference/operators/subscribe.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/subscribe
+source: https://tenzir.com/docs/v6.22.0/reference/operators/subscribe.md
 section: "Docs"
 ---
 

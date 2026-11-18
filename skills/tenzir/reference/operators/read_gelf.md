@@ -1,7 +1,7 @@
 ---
 title: "read_gelf"
-canonical: https://tenzir.com/docs/reference/operators/read_gelf
-source: https://tenzir.com/docs/reference/operators/read_gelf.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/read_gelf
+source: https://tenzir.com/docs/v6.22.0/reference/operators/read_gelf.md
 section: "Docs"
 ---
 

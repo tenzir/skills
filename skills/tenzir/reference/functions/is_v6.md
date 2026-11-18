@@ -1,7 +1,7 @@
 ---
 title: "is_v6"
-canonical: https://tenzir.com/docs/reference/functions/is_v6
-source: https://tenzir.com/docs/reference/functions/is_v6.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/functions/is_v6
+source: https://tenzir.com/docs/v6.22.0/reference/functions/is_v6.md
 section: "Docs"
 ---
 

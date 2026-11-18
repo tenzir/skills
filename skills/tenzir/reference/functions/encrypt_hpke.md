@@ -1,7 +1,7 @@
 ---
 title: "encrypt_hpke"
-canonical: https://tenzir.com/docs/reference/functions/encrypt_hpke
-source: https://tenzir.com/docs/reference/functions/encrypt_hpke.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/functions/encrypt_hpke
+source: https://tenzir.com/docs/v6.22.0/reference/functions/encrypt_hpke.md
 section: "Docs"
 ---
 

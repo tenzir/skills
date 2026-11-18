@@ -1,7 +1,7 @@
 ---
 title: "quantile"
-canonical: https://tenzir.com/docs/reference/functions/quantile
-source: https://tenzir.com/docs/reference/functions/quantile.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/functions/quantile
+source: https://tenzir.com/docs/v6.22.0/reference/functions/quantile.md
 section: "Docs"
 ---
 

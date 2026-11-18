@@ -1,8 +1,8 @@
 ---
 title: "Overview"
 description: "Read events and bytes from files, APIs, brokers, stores, and networks."
-canonical: https://tenzir.com/docs/guides/collect
-source: https://tenzir.com/docs/guides/collect.md
+canonical: https://tenzir.com/docs/v6.22.0/guides/collect
+source: https://tenzir.com/docs/v6.22.0/guides/collect.md
 section: "Docs"
 ---
 

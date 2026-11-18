@@ -1,7 +1,7 @@
 ---
 title: "accept_zmq"
-canonical: https://tenzir.com/docs/reference/operators/accept_zmq
-source: https://tenzir.com/docs/reference/operators/accept_zmq.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/accept_zmq
+source: https://tenzir.com/docs/v6.22.0/reference/operators/accept_zmq.md
 section: "Docs"
 ---
 

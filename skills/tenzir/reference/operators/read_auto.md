@@ -1,7 +1,7 @@
 ---
 title: "read_auto"
-canonical: https://tenzir.com/docs/reference/operators/read_auto
-source: https://tenzir.com/docs/reference/operators/read_auto.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/read_auto
+source: https://tenzir.com/docs/v6.22.0/reference/operators/read_auto.md
 section: "Docs"
 ---
 

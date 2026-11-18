@@ -1,7 +1,7 @@
 ---
 title: "Debug field values"
-canonical: https://tenzir.com/docs/guides/troubleshooting/debug-field-values
-source: https://tenzir.com/docs/guides/troubleshooting/debug-field-values.md
+canonical: https://tenzir.com/docs/v6.22.0/guides/troubleshooting/debug-field-values
+source: https://tenzir.com/docs/v6.22.0/guides/troubleshooting/debug-field-values.md
 section: "Docs"
 ---
 

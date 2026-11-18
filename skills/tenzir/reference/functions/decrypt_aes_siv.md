@@ -1,7 +1,7 @@
 ---
 title: "decrypt_aes_siv"
-canonical: https://tenzir.com/docs/reference/functions/decrypt_aes_siv
-source: https://tenzir.com/docs/reference/functions/decrypt_aes_siv.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/functions/decrypt_aes_siv
+source: https://tenzir.com/docs/v6.22.0/reference/functions/decrypt_aes_siv.md
 section: "Docs"
 ---
 

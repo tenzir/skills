@@ -1,7 +1,7 @@
 ---
 title: "contains_null"
-canonical: https://tenzir.com/docs/reference/functions/contains_null
-source: https://tenzir.com/docs/reference/functions/contains_null.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/functions/contains_null
+source: https://tenzir.com/docs/v6.22.0/reference/functions/contains_null.md
 section: "Docs"
 ---
 

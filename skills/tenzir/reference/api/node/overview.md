@@ -1,7 +1,7 @@
 ---
 title: "Overview"
-canonical: https://tenzir.com/docs/reference/api/node/overview
-source: https://tenzir.com/docs/reference/api/node/overview.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/api/node/overview
+source: https://tenzir.com/docs/v6.22.0/reference/api/node/overview.md
 section: "Docs"
 ---
 

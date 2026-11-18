@@ -1,7 +1,7 @@
 ---
 title: "write_feather"
-canonical: https://tenzir.com/docs/reference/operators/write_feather
-source: https://tenzir.com/docs/reference/operators/write_feather.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/write_feather
+source: https://tenzir.com/docs/v6.22.0/reference/operators/write_feather.md
 section: "Docs"
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "shift_left"
-canonical: https://tenzir.com/docs/reference/functions/shift_left
-source: https://tenzir.com/docs/reference/functions/shift_left.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/functions/shift_left
+source: https://tenzir.com/docs/v6.22.0/reference/functions/shift_left.md
 section: "Docs"
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "floor"
-canonical: https://tenzir.com/docs/reference/functions/floor
-source: https://tenzir.com/docs/reference/functions/floor.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/functions/floor
+source: https://tenzir.com/docs/v6.22.0/reference/functions/floor.md
 section: "Docs"
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "api"
-canonical: https://tenzir.com/docs/reference/operators/api
-source: https://tenzir.com/docs/reference/operators/api.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/api
+source: https://tenzir.com/docs/v6.22.0/reference/operators/api.md
 section: "Docs"
 ---
 

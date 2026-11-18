@@ -1,7 +1,7 @@
 ---
 title: "Add constants"
-canonical: https://tenzir.com/docs/guides/packages/add-constants
-source: https://tenzir.com/docs/guides/packages/add-constants.md
+canonical: https://tenzir.com/docs/v6.22.0/guides/packages/add-constants
+source: https://tenzir.com/docs/v6.22.0/guides/packages/add-constants.md
 section: "Docs"
 ---
 

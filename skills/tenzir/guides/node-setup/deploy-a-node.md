@@ -1,7 +1,7 @@
 ---
 title: "Deploy a node"
-canonical: https://tenzir.com/docs/guides/node-setup/deploy-a-node
-source: https://tenzir.com/docs/guides/node-setup/deploy-a-node.md
+canonical: https://tenzir.com/docs/v6.22.0/guides/node-setup/deploy-a-node
+source: https://tenzir.com/docs/v6.22.0/guides/node-setup/deploy-a-node.md
 section: "Docs"
 ---
 
@@ -176,11 +176,11 @@ Before deploying with either method, you need to subscribe to the Tenzir Node pr
 
 1. Go to [AWS Marketplace](https://console.aws.amazon.com/marketplace/) and subscribe to the free [Tenzir Node](https://console.aws.amazon.com/marketplace/search/listing/prodview-gsofc3z6f3vsu) product.
 
-   ![AWS Marketplace Tenzir Node](https://tenzir.com/docs-assets/roots/6.22.0-r1/_astro/01-aws-marketplace.BV34EsMs_1BhABC.webp)
+   ![AWS Marketplace Tenzir Node](https://tenzir.com/docs-assets/v6.22.0-r1/_astro/01-aws-marketplace.BV34EsMs_1nqIXH.webp)
 
 2. Accept the terms to subscribe to the offering.
 
-   ![AWS Marketplace Tenzir Node](https://tenzir.com/docs-assets/roots/6.22.0-r1/_astro/02-subscribe.BuWO6X8P_Z10F8Rn.webp)
+   ![AWS Marketplace Tenzir Node](https://tenzir.com/docs-assets/v6.22.0-r1/_astro/02-subscribe.BuWO6X8P_Z1Ufa19.webp)
 
 ### Choose your deployment method
 
@@ -194,7 +194,7 @@ Before deploying with either method, you need to subscribe to the Tenzir Node pr
 
   1. **Review the pre-filled template**: The CloudFormation console will open with our single-node container template already loaded:
 
-     ![CloudFormation Create Stack](https://tenzir.com/docs-assets/roots/6.22.0-r1/_astro/01-create-stack.GmdJ5tXH_1VXYyr.webp)
+     ![CloudFormation Create Stack](https://tenzir.com/docs-assets/v6.22.0-r1/_astro/01-create-stack.GmdJ5tXH_okAvx.webp)
 
   2. **Configure your stack**:
 
@@ -203,15 +203,15 @@ Before deploying with either method, you need to subscribe to the Tenzir Node pr
 
      Double-check that the container image URL points to the Tenzir Node version you want to deploy.
 
-     ![Stack Parameters](https://tenzir.com/docs-assets/roots/6.22.0-r1/_astro/02-stack-parameters.B4Oua0h9_ZxFm40.webp)
+     ![Stack Parameters](https://tenzir.com/docs-assets/v6.22.0-r1/_astro/02-stack-parameters.B4Oua0h9_Z2uOX1w.webp)
 
   3. **Accept the default stack options**: For most deployments, the defaults work perfectly:
 
-     ![Stack Options](https://tenzir.com/docs-assets/roots/6.22.0-r1/_astro/03-stack-options.5n7bQip1_14IK2p.webp)
+     ![Stack Options](https://tenzir.com/docs-assets/v6.22.0-r1/_astro/03-stack-options.5n7bQip1_Z1fua48.webp)
 
   4. **Review and acknowledge**: Confirm your configuration and check the acknowledgment box:
 
-     ![Review Stack](https://tenzir.com/docs-assets/roots/6.22.0-r1/_astro/04-review-stack.DSPyQTC8_1m5FCn.webp)
+     ![Review Stack](https://tenzir.com/docs-assets/v6.22.0-r1/_astro/04-review-stack.DSPyQTC8_ZbxHpw.webp)
 
   5. **Deploy your node**: Click *Submit* to start the deployment. Monitor progress in the *Events* tab.
 
@@ -311,18 +311,18 @@ Before deploying with either method, you need to subscribe to the Tenzir Node pr
 
   1. Navigate to [Amazon Elastic Container Service (ECS)](https://console.aws.amazon.com/ecs).
 
-     ![Amazon Elastic Container Service (ECS)](https://tenzir.com/docs-assets/roots/6.22.0-r1/_astro/01-ecs.D-9AB8KO_ZqGoWw.webp)
+     ![Amazon Elastic Container Service (ECS)](https://tenzir.com/docs-assets/v6.22.0-r1/_astro/01-ecs.D-9AB8KO_2plyrD.webp)
 
   2. Create a new cluster. Choose between **EC2** or **Fargate** based on your needs:
 
      * **EC2 clusters** give you full control over the underlying instances. They’re ideal for long-running workloads with consistent resource requirements.
      * **Fargate clusters** provide serverless container execution where you pay only for the resources you use. They’re cost-effective for workloads with variable demand.
 
-     ![Create a Cluster](https://tenzir.com/docs-assets/roots/6.22.0-r1/_astro/02-create-cluster.DWOcGwyQ_1oxAoB.webp)
+     ![Create a Cluster](https://tenzir.com/docs-assets/v6.22.0-r1/_astro/02-create-cluster.DWOcGwyQ_Z2n2EHd.webp)
 
   3. Create a task definition to specify how the Tenzir node container should run.
 
-     ![Create a Cluster](https://tenzir.com/docs-assets/roots/6.22.0-r1/_astro/03-create-task-definition.Ds8CzEXJ_Z107mnc.webp)
+     ![Create a Cluster](https://tenzir.com/docs-assets/v6.22.0-r1/_astro/03-create-task-definition.Ds8CzEXJ_2nhuFg.webp)
 
      In the *Containers* section, enter the repository URL from your AWS Marketplace subscription:
 
@@ -334,11 +334,11 @@ Before deploying with either method, you need to subscribe to the Tenzir Node pr
 
   4. Return to your cluster, navigate to the *Tasks* tab, and click *Run new task*. Select the task definition you just created.
 
-     ![Create a Cluster](https://tenzir.com/docs-assets/roots/6.22.0-r1/_astro/04-run-task.BaW9wNbx_1oc9XD.webp)
+     ![Create a Cluster](https://tenzir.com/docs-assets/v6.22.0-r1/_astro/04-run-task.BaW9wNbx_Z1fGs3N.webp)
 
      In the *Container overrides* section, add the `TENZIR_TOKEN` environment variable with the token value corresponding to your node.
 
-     ![Container Overrides](https://tenzir.com/docs-assets/roots/6.22.0-r1/_astro/05-container-overrides.DgPIqnAZ_Z1Lu6iN.webp)
+     ![Container Overrides](https://tenzir.com/docs-assets/v6.22.0-r1/_astro/05-container-overrides.DgPIqnAZ_ZanNli.webp)
 
      Click *Create* to launch your node.
 
@@ -370,19 +370,19 @@ In the *Basics* tab, perform the following action:
 2. For *Image source*, select *Other registry*.
 3. For *Image*, enter `tenzir/tenzir-node`.
 
-![Basics](https://tenzir.com/docs-assets/roots/6.22.0-r1/_astro/basics.bOCDyyP__Z1UW2qx.webp)
+![Basics](https://tenzir.com/docs-assets/v6.22.0-r1/_astro/basics.bOCDyyP__yvQqr.webp)
 
 #### Networking
 
 In the *Networking* tab, configure the ports you plan to use for pipelines that receive incoming connections.
 
-![Networking](https://tenzir.com/docs-assets/roots/6.22.0-r1/_astro/networking.DpOSLd0n_Z1D0O3F.webp)
+![Networking](https://tenzir.com/docs-assets/v6.22.0-r1/_astro/networking.DpOSLd0n_jjsca.webp)
 
 #### Advanced
 
 In the *Advanced* tab, enter the `TENZIR_TOKEN` environment variable from your Docker Compose file.
 
-![Advanced](https://tenzir.com/docs-assets/roots/6.22.0-r1/_astro/advanced.afPiy2h8_Z1wqce8.webp)
+![Advanced](https://tenzir.com/docs-assets/v6.22.0-r1/_astro/advanced.afPiy2h8_Z2nApji.webp)
 
 #### Create
 

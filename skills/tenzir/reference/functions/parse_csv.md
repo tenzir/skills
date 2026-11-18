@@ -1,7 +1,7 @@
 ---
 title: "parse_csv"
-canonical: https://tenzir.com/docs/reference/functions/parse_csv
-source: https://tenzir.com/docs/reference/functions/parse_csv.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/functions/parse_csv
+source: https://tenzir.com/docs/v6.22.0/reference/functions/parse_csv.md
 section: "Docs"
 ---
 

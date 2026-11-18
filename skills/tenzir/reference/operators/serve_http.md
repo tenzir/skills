@@ -1,7 +1,7 @@
 ---
 title: "serve_http"
-canonical: https://tenzir.com/docs/reference/operators/serve_http
-source: https://tenzir.com/docs/reference/operators/serve_http.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/serve_http
+source: https://tenzir.com/docs/v6.22.0/reference/operators/serve_http.md
 section: "Docs"
 ---
 

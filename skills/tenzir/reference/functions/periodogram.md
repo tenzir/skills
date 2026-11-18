@@ -1,7 +1,7 @@
 ---
 title: "periodogram"
-canonical: https://tenzir.com/docs/reference/functions/periodogram
-source: https://tenzir.com/docs/reference/functions/periodogram.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/functions/periodogram
+source: https://tenzir.com/docs/v6.22.0/reference/functions/periodogram.md
 section: "Docs"
 ---
 

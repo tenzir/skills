@@ -1,8 +1,8 @@
 ---
 title: "Detect over time windows"
 description: "Build streaming detections with event-time windows, from failure thresholds to statistical baselines, with duplicate suppression"
-canonical: https://tenzir.com/docs/guides/detect/detect-over-time-windows
-source: https://tenzir.com/docs/guides/detect/detect-over-time-windows.md
+canonical: https://tenzir.com/docs/v6.22.0/guides/detect/detect-over-time-windows
+source: https://tenzir.com/docs/v6.22.0/guides/detect/detect-over-time-windows.md
 section: "Docs"
 ---
 

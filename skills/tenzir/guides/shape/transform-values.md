@@ -1,7 +1,7 @@
 ---
 title: "Transform values"
-canonical: https://tenzir.com/docs/guides/shape/transform-values
-source: https://tenzir.com/docs/guides/shape/transform-values.md
+canonical: https://tenzir.com/docs/v6.22.0/guides/shape/transform-values
+source: https://tenzir.com/docs/v6.22.0/guides/shape/transform-values.md
 section: "Docs"
 ---
 

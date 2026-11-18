@@ -1,7 +1,7 @@
 ---
 title: "Check node health"
-canonical: https://tenzir.com/docs/reference/api/node/health/ping-node
-source: https://tenzir.com/docs/reference/api/node/health/ping-node.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/api/node/health/ping-node
+source: https://tenzir.com/docs/v6.22.0/reference/api/node/health/ping-node.md
 section: "Docs"
 ---
 

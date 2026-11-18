@@ -1,7 +1,7 @@
 ---
 title: "split"
-canonical: https://tenzir.com/docs/reference/functions/split
-source: https://tenzir.com/docs/reference/functions/split.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/functions/split
+source: https://tenzir.com/docs/v6.22.0/reference/functions/split.md
 section: "Docs"
 ---
 

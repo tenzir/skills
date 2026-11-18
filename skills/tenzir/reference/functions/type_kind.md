@@ -1,7 +1,7 @@
 ---
 title: "type_kind"
-canonical: https://tenzir.com/docs/reference/functions/type_kind
-source: https://tenzir.com/docs/reference/functions/type_kind.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/functions/type_kind
+source: https://tenzir.com/docs/v6.22.0/reference/functions/type_kind.md
 section: "Docs"
 ---
 

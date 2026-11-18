@@ -1,7 +1,7 @@
 ---
 title: "to_opensearch"
-canonical: https://tenzir.com/docs/reference/operators/to_opensearch
-source: https://tenzir.com/docs/reference/operators/to_opensearch.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/to_opensearch
+source: https://tenzir.com/docs/v6.22.0/reference/operators/to_opensearch.md
 section: "Docs"
 ---
 

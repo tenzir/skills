@@ -1,7 +1,7 @@
 ---
 title: "Import into a node"
-canonical: https://tenzir.com/docs/guides/store/import-into-a-node
-source: https://tenzir.com/docs/guides/store/import-into-a-node.md
+canonical: https://tenzir.com/docs/v6.22.0/guides/store/import-into-a-node
+source: https://tenzir.com/docs/v6.22.0/guides/store/import-into-a-node.md
 section: "Docs"
 ---
 

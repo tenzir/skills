@@ -1,7 +1,7 @@
 ---
 title: "length"
-canonical: https://tenzir.com/docs/reference/functions/length
-source: https://tenzir.com/docs/reference/functions/length.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/functions/length
+source: https://tenzir.com/docs/v6.22.0/reference/functions/length.md
 section: "Docs"
 ---
 

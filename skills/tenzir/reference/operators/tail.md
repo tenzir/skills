@@ -1,7 +1,7 @@
 ---
 title: "tail"
-canonical: https://tenzir.com/docs/reference/operators/tail
-source: https://tenzir.com/docs/reference/operators/tail.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/tail
+source: https://tenzir.com/docs/v6.22.0/reference/operators/tail.md
 section: "Docs"
 ---
 

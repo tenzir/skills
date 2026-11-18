@@ -1,7 +1,7 @@
 ---
 title: "to_splunk"
-canonical: https://tenzir.com/docs/reference/operators/to_splunk
-source: https://tenzir.com/docs/reference/operators/to_splunk.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/to_splunk
+source: https://tenzir.com/docs/v6.22.0/reference/operators/to_splunk.md
 section: "Docs"
 ---
 

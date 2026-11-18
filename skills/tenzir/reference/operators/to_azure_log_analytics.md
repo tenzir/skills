@@ -1,7 +1,7 @@
 ---
 title: "to_azure_log_analytics"
-canonical: https://tenzir.com/docs/reference/operators/to_azure_log_analytics
-source: https://tenzir.com/docs/reference/operators/to_azure_log_analytics.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/to_azure_log_analytics
+source: https://tenzir.com/docs/v6.22.0/reference/operators/to_azure_log_analytics.md
 section: "Docs"
 ---
 

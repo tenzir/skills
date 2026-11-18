@@ -1,7 +1,7 @@
 ---
 title: "select_matching"
-canonical: https://tenzir.com/docs/reference/functions/select_matching
-source: https://tenzir.com/docs/reference/functions/select_matching.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/functions/select_matching
+source: https://tenzir.com/docs/v6.22.0/reference/functions/select_matching.md
 section: "Docs"
 ---
 

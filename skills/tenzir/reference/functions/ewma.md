@@ -1,7 +1,7 @@
 ---
 title: "ewma"
-canonical: https://tenzir.com/docs/reference/functions/ewma
-source: https://tenzir.com/docs/reference/functions/ewma.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/functions/ewma
+source: https://tenzir.com/docs/v6.22.0/reference/functions/ewma.md
 section: "Docs"
 ---
 

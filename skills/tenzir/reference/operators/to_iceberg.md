@@ -1,7 +1,7 @@
 ---
 title: "to_iceberg"
-canonical: https://tenzir.com/docs/reference/operators/to_iceberg
-source: https://tenzir.com/docs/reference/operators/to_iceberg.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/to_iceberg
+source: https://tenzir.com/docs/v6.22.0/reference/operators/to_iceberg.md
 section: "Docs"
 ---
 

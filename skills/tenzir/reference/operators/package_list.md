@@ -1,7 +1,7 @@
 ---
 title: "package_list"
-canonical: https://tenzir.com/docs/reference/operators/package_list
-source: https://tenzir.com/docs/reference/operators/package_list.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/package_list
+source: https://tenzir.com/docs/v6.22.0/reference/operators/package_list.md
 section: "Docs"
 ---
 

@@ -1,8 +1,8 @@
 ---
 title: "Overview"
 description: "Deliver event streams to the systems that need them."
-canonical: https://tenzir.com/docs/guides/route
-source: https://tenzir.com/docs/guides/route.md
+canonical: https://tenzir.com/docs/v6.22.0/guides/route
+source: https://tenzir.com/docs/v6.22.0/guides/route.md
 section: "Docs"
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "print_ndjson"
-canonical: https://tenzir.com/docs/reference/functions/print_ndjson
-source: https://tenzir.com/docs/reference/functions/print_ndjson.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/functions/print_ndjson
+source: https://tenzir.com/docs/v6.22.0/reference/functions/print_ndjson.md
 section: "Docs"
 ---
 

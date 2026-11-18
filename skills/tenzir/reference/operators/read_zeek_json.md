@@ -1,7 +1,7 @@
 ---
 title: "read_zeek_json"
-canonical: https://tenzir.com/docs/reference/operators/read_zeek_json
-source: https://tenzir.com/docs/reference/operators/read_zeek_json.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/read_zeek_json
+source: https://tenzir.com/docs/v6.22.0/reference/operators/read_zeek_json.md
 section: "Docs"
 ---
 

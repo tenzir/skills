@@ -1,7 +1,7 @@
 ---
 title: "is_alnum"
-canonical: https://tenzir.com/docs/reference/functions/is_alnum
-source: https://tenzir.com/docs/reference/functions/is_alnum.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/functions/is_alnum
+source: https://tenzir.com/docs/v6.22.0/reference/functions/is_alnum.md
 section: "Docs"
 ---
 

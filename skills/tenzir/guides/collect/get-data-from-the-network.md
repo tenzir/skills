@@ -1,7 +1,7 @@
 ---
 title: "Get data from the network"
-canonical: https://tenzir.com/docs/guides/collect/get-data-from-the-network
-source: https://tenzir.com/docs/guides/collect/get-data-from-the-network.md
+canonical: https://tenzir.com/docs/v6.22.0/guides/collect/get-data-from-the-network
+source: https://tenzir.com/docs/v6.22.0/guides/collect/get-data-from-the-network.md
 section: "Docs"
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "context_create_geoip"
-canonical: https://tenzir.com/docs/reference/operators/context_create_geoip
-source: https://tenzir.com/docs/reference/operators/context_create_geoip.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/context_create_geoip
+source: https://tenzir.com/docs/v6.22.0/reference/operators/context_create_geoip.md
 section: "Docs"
 ---
 

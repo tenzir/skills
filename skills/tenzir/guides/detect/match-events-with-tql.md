@@ -1,8 +1,8 @@
 ---
 title: "Match events with TQL"
 description: "Write single-event detections over OCSF events and package their matching and output logic as reusable TQL operators"
-canonical: https://tenzir.com/docs/guides/detect/match-events-with-tql
-source: https://tenzir.com/docs/guides/detect/match-events-with-tql.md
+canonical: https://tenzir.com/docs/v6.22.0/guides/detect/match-events-with-tql
+source: https://tenzir.com/docs/v6.22.0/guides/detect/match-events-with-tql.md
 section: "Docs"
 ---
 

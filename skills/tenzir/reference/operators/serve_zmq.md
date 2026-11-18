@@ -1,7 +1,7 @@
 ---
 title: "serve_zmq"
-canonical: https://tenzir.com/docs/reference/operators/serve_zmq
-source: https://tenzir.com/docs/reference/operators/serve_zmq.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/serve_zmq
+source: https://tenzir.com/docs/v6.22.0/reference/operators/serve_zmq.md
 section: "Docs"
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "KQL"
-canonical: https://tenzir.com/docs/reference/optimizations/kql
-source: https://tenzir.com/docs/reference/optimizations/kql.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/optimizations/kql
+source: https://tenzir.com/docs/v6.22.0/reference/optimizations/kql.md
 section: "Docs"
 ---
 

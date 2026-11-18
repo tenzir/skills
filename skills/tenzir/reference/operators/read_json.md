@@ -1,7 +1,7 @@
 ---
 title: "read_json"
-canonical: https://tenzir.com/docs/reference/operators/read_json
-source: https://tenzir.com/docs/reference/operators/read_json.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/read_json
+source: https://tenzir.com/docs/v6.22.0/reference/operators/read_json.md
 section: "Docs"
 ---
 

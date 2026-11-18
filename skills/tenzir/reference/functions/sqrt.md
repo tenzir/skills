@@ -1,7 +1,7 @@
 ---
 title: "sqrt"
-canonical: https://tenzir.com/docs/reference/functions/sqrt
-source: https://tenzir.com/docs/reference/functions/sqrt.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/functions/sqrt
+source: https://tenzir.com/docs/v6.22.0/reference/functions/sqrt.md
 section: "Docs"
 ---
 

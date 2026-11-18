@@ -1,7 +1,7 @@
 ---
 title: "read_netflow"
-canonical: https://tenzir.com/docs/reference/operators/read_netflow
-source: https://tenzir.com/docs/reference/operators/read_netflow.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/read_netflow
+source: https://tenzir.com/docs/v6.22.0/reference/operators/read_netflow.md
 section: "Docs"
 ---
 

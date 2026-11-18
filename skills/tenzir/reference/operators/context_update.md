@@ -1,7 +1,7 @@
 ---
 title: "context_update"
-canonical: https://tenzir.com/docs/reference/operators/context_update
-source: https://tenzir.com/docs/reference/operators/context_update.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/context_update
+source: https://tenzir.com/docs/v6.22.0/reference/operators/context_update.md
 section: "Docs"
 ---
 

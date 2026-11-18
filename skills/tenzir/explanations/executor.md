@@ -1,8 +1,8 @@
 ---
 title: "Executor"
 description: "Understand how Tenzir compiles TQL into an execution plan and runs operators with fused handoffs, channels, subpipelines, and parallel jobs."
-canonical: https://tenzir.com/docs/explanations/executor
-source: https://tenzir.com/docs/explanations/executor.md
+canonical: https://tenzir.com/docs/v6.22.0/explanations/executor
+source: https://tenzir.com/docs/v6.22.0/explanations/executor.md
 section: "Docs"
 ---
 

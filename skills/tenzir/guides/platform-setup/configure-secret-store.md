@@ -1,7 +1,7 @@
 ---
 title: "Configure secret store"
-canonical: https://tenzir.com/docs/guides/platform-setup/configure-secret-store
-source: https://tenzir.com/docs/guides/platform-setup/configure-secret-store.md
+canonical: https://tenzir.com/docs/v6.22.0/guides/platform-setup/configure-secret-store
+source: https://tenzir.com/docs/v6.22.0/guides/platform-setup/configure-secret-store.md
 section: "Docs"
 ---
 
@@ -31,7 +31,7 @@ Refer to the [CLI reference](https://tenzir.com/docs/reference/platform/command-
 
 To manage secrets from the web interface, go to the `Workspace Settings` screen by clicking the gear icon in the workspace selector.
 
-![Screenshot](https://tenzir.com/docs-assets/roots/6.22.0-r1/_astro/secrets.Dd085Pjn_Z1TMLYD.webp)
+![Screenshot](https://tenzir.com/docs-assets/v6.22.0-r1/_astro/secrets.Dd085Pjn_hVy1b.webp)
 
 ## Configuring External Secret Stores
 

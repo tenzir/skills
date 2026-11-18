@@ -1,7 +1,7 @@
 ---
 title: "from_microsoft_defender"
-canonical: https://tenzir.com/docs/reference/operators/from_microsoft_defender
-source: https://tenzir.com/docs/reference/operators/from_microsoft_defender.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/from_microsoft_defender
+source: https://tenzir.com/docs/v6.22.0/reference/operators/from_microsoft_defender.md
 section: "Docs"
 ---
 

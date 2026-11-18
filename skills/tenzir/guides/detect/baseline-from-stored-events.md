@@ -1,8 +1,8 @@
 ---
 title: "Baseline behavior from stored events"
 description: "Learn per-entity baselines from stored events on a schedule, publish them as lookup tables, and judge live streams with robust scores"
-canonical: https://tenzir.com/docs/guides/detect/baseline-from-stored-events
-source: https://tenzir.com/docs/guides/detect/baseline-from-stored-events.md
+canonical: https://tenzir.com/docs/v6.22.0/guides/detect/baseline-from-stored-events
+source: https://tenzir.com/docs/v6.22.0/guides/detect/baseline-from-stored-events.md
 section: "Docs"
 ---
 

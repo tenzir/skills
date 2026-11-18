@@ -1,7 +1,7 @@
 ---
 title: "Send to destinations"
-canonical: https://tenzir.com/docs/guides/route/send-to-destinations
-source: https://tenzir.com/docs/guides/route/send-to-destinations.md
+canonical: https://tenzir.com/docs/v6.22.0/guides/route/send-to-destinations
+source: https://tenzir.com/docs/v6.22.0/guides/route/send-to-destinations.md
 section: "Docs"
 ---
 

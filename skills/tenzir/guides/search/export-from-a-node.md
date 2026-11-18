@@ -1,7 +1,7 @@
 ---
 title: "Export from a node"
-canonical: https://tenzir.com/docs/guides/search/export-from-a-node
-source: https://tenzir.com/docs/guides/search/export-from-a-node.md
+canonical: https://tenzir.com/docs/v6.22.0/guides/search/export-from-a-node
+source: https://tenzir.com/docs/v6.22.0/guides/search/export-from-a-node.md
 section: "Docs"
 ---
 

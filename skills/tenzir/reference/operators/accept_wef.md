@@ -1,7 +1,7 @@
 ---
 title: "accept_wef"
-canonical: https://tenzir.com/docs/reference/operators/accept_wef
-source: https://tenzir.com/docs/reference/operators/accept_wef.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/accept_wef
+source: https://tenzir.com/docs/v6.22.0/reference/operators/accept_wef.md
 section: "Docs"
 ---
 

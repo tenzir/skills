@@ -1,7 +1,7 @@
 ---
 title: "Read from message brokers"
-canonical: https://tenzir.com/docs/guides/collect/read-from-message-brokers
-source: https://tenzir.com/docs/guides/collect/read-from-message-brokers.md
+canonical: https://tenzir.com/docs/v6.22.0/guides/collect/read-from-message-brokers
+source: https://tenzir.com/docs/v6.22.0/guides/collect/read-from-message-brokers.md
 section: "Docs"
 ---
 

@@ -1,8 +1,8 @@
 ---
 title: "Use agent skills"
 description: "Install Tenzir agent skills for documentation and security schemas"
-canonical: https://tenzir.com/docs/guides/ai-workbench/use-agent-skills
-source: https://tenzir.com/docs/guides/ai-workbench/use-agent-skills.md
+canonical: https://tenzir.com/docs/v6.22.0/guides/ai-workbench/use-agent-skills
+source: https://tenzir.com/docs/v6.22.0/guides/ai-workbench/use-agent-skills.md
 section: "Docs"
 ---
 

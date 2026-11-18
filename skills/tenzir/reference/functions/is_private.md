@@ -1,7 +1,7 @@
 ---
 title: "is_private"
-canonical: https://tenzir.com/docs/reference/functions/is_private
-source: https://tenzir.com/docs/reference/functions/is_private.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/functions/is_private
+source: https://tenzir.com/docs/v6.22.0/reference/functions/is_private.md
 section: "Docs"
 ---
 

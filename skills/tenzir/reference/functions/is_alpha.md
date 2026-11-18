@@ -1,7 +1,7 @@
 ---
 title: "is_alpha"
-canonical: https://tenzir.com/docs/reference/functions/is_alpha
-source: https://tenzir.com/docs/reference/functions/is_alpha.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/functions/is_alpha
+source: https://tenzir.com/docs/v6.22.0/reference/functions/is_alpha.md
 section: "Docs"
 ---
 

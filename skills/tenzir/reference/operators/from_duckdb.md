@@ -1,7 +1,7 @@
 ---
 title: "from_duckdb"
-canonical: https://tenzir.com/docs/reference/operators/from_duckdb
-source: https://tenzir.com/docs/reference/operators/from_duckdb.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/from_duckdb
+source: https://tenzir.com/docs/v6.22.0/reference/operators/from_duckdb.md
 section: "Docs"
 ---
 

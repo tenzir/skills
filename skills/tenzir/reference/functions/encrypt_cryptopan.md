@@ -1,7 +1,7 @@
 ---
 title: "encrypt_cryptopan"
-canonical: https://tenzir.com/docs/reference/functions/encrypt_cryptopan
-source: https://tenzir.com/docs/reference/functions/encrypt_cryptopan.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/functions/encrypt_cryptopan
+source: https://tenzir.com/docs/v6.22.0/reference/functions/encrypt_cryptopan.md
 section: "Docs"
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "to_amazon_cloudwatch"
-canonical: https://tenzir.com/docs/reference/operators/to_amazon_cloudwatch
-source: https://tenzir.com/docs/reference/operators/to_amazon_cloudwatch.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/to_amazon_cloudwatch
+source: https://tenzir.com/docs/v6.22.0/reference/operators/to_amazon_cloudwatch.md
 section: "Docs"
 ---
 

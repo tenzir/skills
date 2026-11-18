@@ -1,7 +1,7 @@
 ---
 title: "to_azure_blob_storage"
-canonical: https://tenzir.com/docs/reference/operators/to_azure_blob_storage
-source: https://tenzir.com/docs/reference/operators/to_azure_blob_storage.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/to_azure_blob_storage
+source: https://tenzir.com/docs/v6.22.0/reference/operators/to_azure_blob_storage.md
 section: "Docs"
 ---
 

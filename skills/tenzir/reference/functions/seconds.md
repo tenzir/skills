@@ -1,7 +1,7 @@
 ---
 title: "seconds"
-canonical: https://tenzir.com/docs/reference/functions/seconds
-source: https://tenzir.com/docs/reference/functions/seconds.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/functions/seconds
+source: https://tenzir.com/docs/v6.22.0/reference/functions/seconds.md
 section: "Docs"
 ---
 

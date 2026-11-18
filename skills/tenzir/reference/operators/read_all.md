@@ -1,7 +1,7 @@
 ---
 title: "read_all"
-canonical: https://tenzir.com/docs/reference/operators/read_all
-source: https://tenzir.com/docs/reference/operators/read_all.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/read_all
+source: https://tenzir.com/docs/v6.22.0/reference/operators/read_all.md
 section: "Docs"
 ---
 

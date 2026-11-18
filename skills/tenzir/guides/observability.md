@@ -1,8 +1,8 @@
 ---
 title: "Overview"
 description: "Inspect node, pipeline, and host behavior."
-canonical: https://tenzir.com/docs/guides/observability
-source: https://tenzir.com/docs/guides/observability.md
+canonical: https://tenzir.com/docs/v6.22.0/guides/observability
+source: https://tenzir.com/docs/v6.22.0/guides/observability.md
 section: "Docs"
 ---
 

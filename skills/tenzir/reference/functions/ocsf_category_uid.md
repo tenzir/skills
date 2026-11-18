@@ -1,7 +1,7 @@
 ---
 title: "ocsf_category_uid"
-canonical: https://tenzir.com/docs/reference/functions/ocsf_category_uid
-source: https://tenzir.com/docs/reference/functions/ocsf_category_uid.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/functions/ocsf_category_uid
+source: https://tenzir.com/docs/v6.22.0/reference/functions/ocsf_category_uid.md
 section: "Docs"
 ---
 

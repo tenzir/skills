@@ -1,7 +1,7 @@
 ---
 title: "nics"
-canonical: https://tenzir.com/docs/reference/operators/nics
-source: https://tenzir.com/docs/reference/operators/nics.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/nics
+source: https://tenzir.com/docs/v6.22.0/reference/operators/nics.md
 section: "Docs"
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "Microsoft SQL Server"
-canonical: https://tenzir.com/docs/reference/optimizations/microsoft-sql
-source: https://tenzir.com/docs/reference/optimizations/microsoft-sql.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/optimizations/microsoft-sql
+source: https://tenzir.com/docs/v6.22.0/reference/optimizations/microsoft-sql.md
 section: "Docs"
 ---
 

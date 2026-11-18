@@ -1,7 +1,7 @@
 ---
 title: "processes"
-canonical: https://tenzir.com/docs/reference/operators/processes
-source: https://tenzir.com/docs/reference/operators/processes.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/processes
+source: https://tenzir.com/docs/v6.22.0/reference/operators/processes.md
 section: "Docs"
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "Glossary"
-canonical: https://tenzir.com/docs/explanations/glossary
-source: https://tenzir.com/docs/explanations/glossary.md
+canonical: https://tenzir.com/docs/v6.22.0/explanations/glossary
+source: https://tenzir.com/docs/v6.22.0/explanations/glossary.md
 section: "Docs"
 ---
 

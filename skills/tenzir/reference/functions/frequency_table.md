@@ -1,7 +1,7 @@
 ---
 title: "frequency_table"
-canonical: https://tenzir.com/docs/reference/functions/frequency_table
-source: https://tenzir.com/docs/reference/functions/frequency_table.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/functions/frequency_table
+source: https://tenzir.com/docs/v6.22.0/reference/functions/frequency_table.md
 section: "Docs"
 ---
 

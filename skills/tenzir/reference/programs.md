@@ -1,7 +1,7 @@
 ---
 title: "Programs"
-canonical: https://tenzir.com/docs/reference/programs
-source: https://tenzir.com/docs/reference/programs.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/programs
+source: https://tenzir.com/docs/v6.22.0/reference/programs.md
 section: "Docs"
 ---
 

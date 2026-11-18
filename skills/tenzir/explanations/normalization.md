@@ -1,8 +1,8 @@
 ---
 title: "Normalization"
 description: "Why Tenzir maps every source to OCSF first and translates from there"
-canonical: https://tenzir.com/docs/explanations/normalization
-source: https://tenzir.com/docs/explanations/normalization.md
+canonical: https://tenzir.com/docs/v6.22.0/explanations/normalization
+source: https://tenzir.com/docs/v6.22.0/explanations/normalization.md
 section: "Docs"
 ---
 
@@ -16,8 +16,8 @@ Normalization means giving events from different products the same field names a
 
 Security data has no single standard, and not for lack of trying. Every analytics platform defines the shape it wants to read:
 
-| Schema                                                                  | Defined by                                                                                          | Read by                                                             | Agent skill                                                                                         |
-| ----------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| Schema                                                                  | Defined by                                                                                          | Read by                                                             | Agent skill                                                                                                 |
+| ----------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
 | [OCSF](https://schema.ocsf.io)                                          | The OCSF project, an open effort with contributors from AWS, Splunk, Cisco, CrowdStrike, and others | Amazon Security Lake, Splunk, Snowflake, and a growing set of tools | [`tenzir-ocsf`](../guides/ai-workbench/use-agent-skills.md#use-the-ocsf-skill) |
 | [ASIM](https://learn.microsoft.com/en-us/azure/sentinel/normalization)  | Microsoft                                                                                           | Microsoft Sentinel                                                  | [`tenzir-asim`](../guides/ai-workbench/use-agent-skills.md#use-the-asim-skill) |
 | [CIM](https://docs.splunk.com/Documentation/CIM)                        | Splunk                                                                                              | Splunk Enterprise Security                                          | [`tenzir-cim`](../guides/ai-workbench/use-agent-skills.md#use-the-cim-skill)   |

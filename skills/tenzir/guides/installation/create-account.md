@@ -1,7 +1,7 @@
 ---
 title: "Create account"
-canonical: https://tenzir.com/docs/guides/installation/create-account
-source: https://tenzir.com/docs/guides/installation/create-account.md
+canonical: https://tenzir.com/docs/v6.22.0/guides/installation/create-account
+source: https://tenzir.com/docs/v6.22.0/guides/installation/create-account.md
 section: "Docs"
 ---
 
@@ -15,11 +15,11 @@ Prefer the command line?
 
 You don’t need an account to run pipelines locally. See [Install Tenzir](../installation.md) to get started with the CLI.
 
-1. Go to [app.tenzir.com](https://app.tenzir.com). ![Landing page](https://tenzir.com/docs-assets/roots/6.22.0-r1/_astro/signin.D-Kjtq1Z_Z1lR5OK.webp)
+1. Go to [app.tenzir.com](https://app.tenzir.com). ![Landing page](https://tenzir.com/docs-assets/v6.22.0-r1/_astro/signin.D-Kjtq1Z_1uaRzp.webp)
 
-2. Log in with your identity provider. This creates an account implicitly. ![IdP](https://tenzir.com/docs-assets/roots/6.22.0-r1/_astro/signin-choice.CDMmwGmU_1xRygM.webp)
+2. Log in with your identity provider. This creates an account implicitly. ![IdP](https://tenzir.com/docs-assets/v6.22.0-r1/_astro/signin-choice.CDMmwGmU_Z1fUi5q.webp)
 
-3. Can’t use an identity provider? Click **Sign up** below the **Continue** button. We recommend using a [passkey](https://www.passkeys.com/what-are-passkeys.html) as a safer alternative to traditional passwords. ![Create passkey](https://tenzir.com/docs-assets/roots/6.22.0-r1/_astro/signin-passkey.AZS33VhO_ZSIjTs.webp)
+3. Can’t use an identity provider? Click **Sign up** below the **Continue** button. We recommend using a [passkey](https://www.passkeys.com/what-are-passkeys.html) as a safer alternative to traditional passwords. ![Create passkey](https://tenzir.com/docs-assets/v6.22.0-r1/_astro/signin-passkey.AZS33VhO_Z1Kathb.webp)
 
 4. If you created an account with us, you’ll receive an email with a link to verify your email address. Click the link to complete the registration process.
 

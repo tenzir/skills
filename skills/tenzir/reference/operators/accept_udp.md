@@ -1,7 +1,7 @@
 ---
 title: "accept_udp"
-canonical: https://tenzir.com/docs/reference/operators/accept_udp
-source: https://tenzir.com/docs/reference/operators/accept_udp.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/accept_udp
+source: https://tenzir.com/docs/v6.22.0/reference/operators/accept_udp.md
 section: "Docs"
 ---
 

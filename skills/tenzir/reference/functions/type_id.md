@@ -1,7 +1,7 @@
 ---
 title: "type_id"
-canonical: https://tenzir.com/docs/reference/functions/type_id
-source: https://tenzir.com/docs/reference/functions/type_id.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/functions/type_id
+source: https://tenzir.com/docs/v6.22.0/reference/functions/type_id.md
 section: "Docs"
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "Azure Authentication"
-canonical: https://tenzir.com/docs/reference/azure-authentication
-source: https://tenzir.com/docs/reference/azure-authentication.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/azure-authentication
+source: https://tenzir.com/docs/v6.22.0/reference/azure-authentication.md
 section: "Docs"
 ---
 

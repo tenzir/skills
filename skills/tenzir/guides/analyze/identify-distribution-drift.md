@@ -1,8 +1,8 @@
 ---
 title: "Identify distribution drift"
 description: "Find changes in coding-agent operation mix and duration distributions."
-canonical: https://tenzir.com/docs/guides/analyze/identify-distribution-drift
-source: https://tenzir.com/docs/guides/analyze/identify-distribution-drift.md
+canonical: https://tenzir.com/docs/v6.22.0/guides/analyze/identify-distribution-drift
+source: https://tenzir.com/docs/v6.22.0/guides/analyze/identify-distribution-drift.md
 section: "Docs"
 ---
 

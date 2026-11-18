@@ -1,7 +1,7 @@
 ---
 title: "entries"
-canonical: https://tenzir.com/docs/reference/functions/entries
-source: https://tenzir.com/docs/reference/functions/entries.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/functions/entries
+source: https://tenzir.com/docs/v6.22.0/reference/functions/entries.md
 section: "Docs"
 ---
 

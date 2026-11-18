@@ -1,7 +1,7 @@
 ---
 title: "Run the platform"
-canonical: https://tenzir.com/docs/guides/platform-setup/run-the-platform
-source: https://tenzir.com/docs/guides/platform-setup/run-the-platform.md
+canonical: https://tenzir.com/docs/v6.22.0/guides/platform-setup/run-the-platform
+source: https://tenzir.com/docs/v6.22.0/guides/platform-setup/run-the-platform.md
 section: "Docs"
 ---
 

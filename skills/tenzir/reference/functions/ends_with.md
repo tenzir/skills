@@ -1,7 +1,7 @@
 ---
 title: "ends_with"
-canonical: https://tenzir.com/docs/reference/functions/ends_with
-source: https://tenzir.com/docs/reference/functions/ends_with.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/functions/ends_with
+source: https://tenzir.com/docs/v6.22.0/reference/functions/ends_with.md
 section: "Docs"
 ---
 

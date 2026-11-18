@@ -1,7 +1,7 @@
 ---
 title: "hash_sha384"
-canonical: https://tenzir.com/docs/reference/functions/hash_sha384
-source: https://tenzir.com/docs/reference/functions/hash_sha384.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/functions/hash_sha384
+source: https://tenzir.com/docs/v6.22.0/reference/functions/hash_sha384.md
 section: "Docs"
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "from_splunk"
-canonical: https://tenzir.com/docs/reference/operators/from_splunk
-source: https://tenzir.com/docs/reference/operators/from_splunk.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/from_splunk
+source: https://tenzir.com/docs/v6.22.0/reference/operators/from_splunk.md
 section: "Docs"
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "kolmogorov_smirnov"
-canonical: https://tenzir.com/docs/reference/functions/kolmogorov_smirnov
-source: https://tenzir.com/docs/reference/functions/kolmogorov_smirnov.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/functions/kolmogorov_smirnov
+source: https://tenzir.com/docs/v6.22.0/reference/functions/kolmogorov_smirnov.md
 section: "Docs"
 ---
 

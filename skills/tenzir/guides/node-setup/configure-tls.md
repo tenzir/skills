@@ -1,8 +1,8 @@
 ---
 title: "Configure TLS"
 description: "Set up TLS encryption for operators and platform connections"
-canonical: https://tenzir.com/docs/guides/node-setup/configure-tls
-source: https://tenzir.com/docs/guides/node-setup/configure-tls.md
+canonical: https://tenzir.com/docs/v6.22.0/guides/node-setup/configure-tls
+source: https://tenzir.com/docs/v6.22.0/guides/node-setup/configure-tls.md
 section: "Docs"
 ---
 

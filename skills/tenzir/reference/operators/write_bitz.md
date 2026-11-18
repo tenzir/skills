@@ -1,7 +1,7 @@
 ---
 title: "write_bitz"
-canonical: https://tenzir.com/docs/reference/operators/write_bitz
-source: https://tenzir.com/docs/reference/operators/write_bitz.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/write_bitz
+source: https://tenzir.com/docs/v6.22.0/reference/operators/write_bitz.md
 section: "Docs"
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "from_clickhouse"
-canonical: https://tenzir.com/docs/reference/operators/from_clickhouse
-source: https://tenzir.com/docs/reference/operators/from_clickhouse.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/from_clickhouse
+source: https://tenzir.com/docs/v6.22.0/reference/operators/from_clickhouse.md
 section: "Docs"
 ---
 
@@ -146,27 +146,27 @@ The `sql` mode and tables without a catch-all column return the columns as they 
 
 Tenzir maps ClickHouse types to Tenzir types as follows:
 
-| ClickHouse                                        | Tenzir      | Comment                                                                                                                                       |
-| ------------------------------------------------- | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| `Bool`                                            | `bool`      |                                                                                                                                               |
-| `Int8`, `Int16`, `Int32`, `Int64`                 | `int64`     |                                                                                                                                               |
-| `UInt8`, `UInt16`, `UInt32`, `UInt64`             | `uint64`    |                                                                                                                                               |
-| `Int128`, `UInt128`                               | `string`    | Emitted as integer text to preserve precision.                                                                                                |
-| `Time`, `Time64`                                  | `duration`  |                                                                                                                                               |
-| `LowCardinality(T)`                               | Same as `T` | Dictionary encoding does not change the resulting type.                                                                                       |
-| `Float32`, `Float64`                              | `double`    |                                                                                                                                               |
-| `String`, `FixedString(N)`                        | `string`    |                                                                                                                                               |
+| ClickHouse                                        | Tenzir      | Comment                                                                                                                                               |
+| ------------------------------------------------- | ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Bool`                                            | `bool`      |                                                                                                                                                       |
+| `Int8`, `Int16`, `Int32`, `Int64`                 | `int64`     |                                                                                                                                                       |
+| `UInt8`, `UInt16`, `UInt32`, `UInt64`             | `uint64`    |                                                                                                                                                       |
+| `Int128`, `UInt128`                               | `string`    | Emitted as integer text to preserve precision.                                                                                                        |
+| `Time`, `Time64`                                  | `duration`  |                                                                                                                                                       |
+| `LowCardinality(T)`                               | Same as `T` | Dictionary encoding does not change the resulting type.                                                                                               |
+| `Float32`, `Float64`                              | `double`    |                                                                                                                                                       |
+| `String`, `FixedString(N)`                        | `string`    |                                                                                                                                                       |
 | `JSON`                                            | `string`    | Emitted as one-line JSON text, except in [catch-all tables](from_clickhouse.md#catch-all-tables). |
-| `UUID`                                            | `string`    | Emitted as canonical UUID text.                                                                                                               |
-| `Enum8`, `Enum16`                                 | `string`    | Emitted as the enum label.                                                                                                                    |
-| `Decimal`, `Decimal32`, `Decimal64`, `Decimal128` | `string`    | Emitted as decimal text to preserve precision.                                                                                                |
-| `Date`, `Date32`, `DateTime`, `DateTime64`        | `time`      |                                                                                                                                               |
-| `IPv4`, `IPv6`                                    | `ip`        |                                                                                                                                               |
-| `Tuple(...)`                                      | `record`    |                                                                                                                                               |
-| `Array(T)`                                        | `list<T>`   |                                                                                                                                               |
-| `Array(UInt8)`                                    | `blob`      |                                                                                                                                               |
-| `Nullable(T)`                                     | `T`         | Null values stay null.                                                                                                                        |
-| `Map(K, V)`                                       | `record`    | One field per key; see below.                                                                                                                 |
+| `UUID`                                            | `string`    | Emitted as canonical UUID text.                                                                                                                       |
+| `Enum8`, `Enum16`                                 | `string`    | Emitted as the enum label.                                                                                                                            |
+| `Decimal`, `Decimal32`, `Decimal64`, `Decimal128` | `string`    | Emitted as decimal text to preserve precision.                                                                                                        |
+| `Date`, `Date32`, `DateTime`, `DateTime64`        | `time`      |                                                                                                                                                       |
+| `IPv4`, `IPv6`                                    | `ip`        |                                                                                                                                                       |
+| `Tuple(...)`                                      | `record`    |                                                                                                                                                       |
+| `Array(T)`                                        | `list<T>`   |                                                                                                                                                       |
+| `Array(UInt8)`                                    | `blob`      |                                                                                                                                                       |
+| `Nullable(T)`                                     | `T`         | Null values stay null.                                                                                                                                |
+| `Map(K, V)`                                       | `record`    | One field per key; see below.                                                                                                                         |
 
 Date and timestamp values outside Tenzir’s nanosecond timestamp range become null with a warning.
 

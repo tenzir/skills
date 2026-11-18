@@ -1,8 +1,8 @@
 ---
 title: "Overview"
 description: "Run stored events through live pipelines again."
-canonical: https://tenzir.com/docs/guides/replay
-source: https://tenzir.com/docs/guides/replay.md
+canonical: https://tenzir.com/docs/v6.22.0/guides/replay
+source: https://tenzir.com/docs/v6.22.0/guides/replay.md
 section: "Docs"
 ---
 

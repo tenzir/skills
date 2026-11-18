@@ -1,7 +1,7 @@
 ---
 title: "write_json"
-canonical: https://tenzir.com/docs/reference/operators/write_json
-source: https://tenzir.com/docs/reference/operators/write_json.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/write_json
+source: https://tenzir.com/docs/v6.22.0/reference/operators/write_json.md
 section: "Docs"
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "MySQL"
-canonical: https://tenzir.com/docs/reference/optimizations/mysql
-source: https://tenzir.com/docs/reference/optimizations/mysql.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/optimizations/mysql
+source: https://tenzir.com/docs/v6.22.0/reference/optimizations/mysql.md
 section: "Docs"
 ---
 

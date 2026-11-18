@@ -1,8 +1,8 @@
 ---
 title: "Build an OCSF lake with ClickHouse"
 description: "Store OCSF events in ClickHouse, from a table that accepts anything to a tuned lake with typed columns, skip indexes, codecs, and per-class retention."
-canonical: https://tenzir.com/docs/tutorials/build-an-ocsf-lake-with-clickhouse
-source: https://tenzir.com/docs/tutorials/build-an-ocsf-lake-with-clickhouse.md
+canonical: https://tenzir.com/docs/v6.22.0/tutorials/build-an-ocsf-lake-with-clickhouse
+source: https://tenzir.com/docs/v6.22.0/tutorials/build-an-ocsf-lake-with-clickhouse.md
 section: "Docs"
 ---
 
@@ -295,13 +295,13 @@ A column whose name is a field path, such as `src_endpoint.ip`, receives that fi
 
 Whether a field deserves a typed column depends on how queries use it:
 
-|                                    | Typed column                                                                                                                                            | Catch-all path                                                                                                                                                         |
-| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Filtering                          | Can use the sort key and skip indexes                                                                                                                   | Reads the path in every row                                                                                                                                            |
+|                                    | Typed column                                                                                                                                                    | Catch-all path                                                                                                                                                                 |
+| ---------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Filtering                          | Can use the sort key and skip indexes                                                                                                                           | Reads the path in every row                                                                                                                                                    |
 | Operators that ClickHouse computes | [Filters, selections, summaries, sorts, and limits](../reference/optimizations/clickhouse.md#operators-that-clickhouse-takes-over) | [Filters, sorts, and limits](../reference/optimizations/clickhouse.md#catch-all-tables); comparisons fail if the path’s type differs between rows |
-| Sort or partition by the field     | Possible                                                                                                                                                | Not supported for the catch-all                                                                                                                                        |
-| Value type                         | Declared once, checked on insert                                                                                                                        | Inferred per value, can differ between rows                                                                                                                            |
-| Cost when mostly empty             | Small, but not zero                                                                                                                                     | None                                                                                                                                                                   |
+| Sort or partition by the field     | Possible                                                                                                                                                        | Not supported for the catch-all                                                                                                                                                |
+| Value type                         | Declared once, checked on insert                                                                                                                                | Inferred per value, can differ between rows                                                                                                                                    |
+| Cost when mostly empty             | Small, but not zero                                                                                                                                             | None                                                                                                                                                                           |
 
 Pushdown
 

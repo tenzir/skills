@@ -1,7 +1,7 @@
 ---
 title: "to_udp"
-canonical: https://tenzir.com/docs/reference/operators/to_udp
-source: https://tenzir.com/docs/reference/operators/to_udp.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/to_udp
+source: https://tenzir.com/docs/v6.22.0/reference/operators/to_udp.md
 section: "Docs"
 ---
 

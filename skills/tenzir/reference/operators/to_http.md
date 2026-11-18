@@ -1,7 +1,7 @@
 ---
 title: "to_http"
-canonical: https://tenzir.com/docs/reference/operators/to_http
-source: https://tenzir.com/docs/reference/operators/to_http.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/to_http
+source: https://tenzir.com/docs/v6.22.0/reference/operators/to_http.md
 section: "Docs"
 ---
 

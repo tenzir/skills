@@ -1,7 +1,7 @@
 ---
 title: "openapi"
-canonical: https://tenzir.com/docs/reference/operators/openapi
-source: https://tenzir.com/docs/reference/operators/openapi.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/openapi
+source: https://tenzir.com/docs/v6.22.0/reference/operators/openapi.md
 section: "Docs"
 ---
 

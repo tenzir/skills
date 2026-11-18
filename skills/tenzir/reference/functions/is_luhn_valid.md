@@ -1,7 +1,7 @@
 ---
 title: "is_luhn_valid"
-canonical: https://tenzir.com/docs/reference/functions/is_luhn_valid
-source: https://tenzir.com/docs/reference/functions/is_luhn_valid.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/functions/is_luhn_valid
+source: https://tenzir.com/docs/v6.22.0/reference/functions/is_luhn_valid.md
 section: "Docs"
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "context_lookup"
-canonical: https://tenzir.com/docs/reference/operators/context_lookup
-source: https://tenzir.com/docs/reference/operators/context_lookup.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/context_lookup
+source: https://tenzir.com/docs/v6.22.0/reference/operators/context_lookup.md
 section: "Docs"
 ---
 

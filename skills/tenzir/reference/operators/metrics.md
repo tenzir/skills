@@ -1,7 +1,7 @@
 ---
 title: "metrics"
-canonical: https://tenzir.com/docs/reference/operators/metrics
-source: https://tenzir.com/docs/reference/operators/metrics.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/metrics
+source: https://tenzir.com/docs/v6.22.0/reference/operators/metrics.md
 section: "Docs"
 ---
 

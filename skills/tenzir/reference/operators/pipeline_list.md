@@ -1,7 +1,7 @@
 ---
 title: "pipeline_list"
-canonical: https://tenzir.com/docs/reference/operators/pipeline_list
-source: https://tenzir.com/docs/reference/operators/pipeline_list.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/pipeline_list
+source: https://tenzir.com/docs/v6.22.0/reference/operators/pipeline_list.md
 section: "Docs"
 ---
 

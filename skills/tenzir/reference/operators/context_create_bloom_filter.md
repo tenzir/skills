@@ -1,7 +1,7 @@
 ---
 title: "context_create_bloom_filter"
-canonical: https://tenzir.com/docs/reference/operators/context_create_bloom_filter
-source: https://tenzir.com/docs/reference/operators/context_create_bloom_filter.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/context_create_bloom_filter
+source: https://tenzir.com/docs/v6.22.0/reference/operators/context_create_bloom_filter.md
 section: "Docs"
 ---
 

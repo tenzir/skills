@@ -1,7 +1,7 @@
 ---
 title: "read_cef"
-canonical: https://tenzir.com/docs/reference/operators/read_cef
-source: https://tenzir.com/docs/reference/operators/read_cef.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/read_cef
+source: https://tenzir.com/docs/v6.22.0/reference/operators/read_cef.md
 section: "Docs"
 ---
 

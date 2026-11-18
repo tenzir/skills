@@ -1,7 +1,7 @@
 ---
 title: "ocsf_compact"
-canonical: https://tenzir.com/docs/reference/functions/ocsf_compact
-source: https://tenzir.com/docs/reference/functions/ocsf_compact.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/functions/ocsf_compact
+source: https://tenzir.com/docs/v6.22.0/reference/functions/ocsf_compact.md
 section: "Docs"
 ---
 

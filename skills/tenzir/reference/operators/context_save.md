@@ -1,7 +1,7 @@
 ---
 title: "context_save"
-canonical: https://tenzir.com/docs/reference/operators/context_save
-source: https://tenzir.com/docs/reference/operators/context_save.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/context_save
+source: https://tenzir.com/docs/v6.22.0/reference/operators/context_save.md
 section: "Docs"
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "join"
-canonical: https://tenzir.com/docs/reference/functions/join
-source: https://tenzir.com/docs/reference/functions/join.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/functions/join
+source: https://tenzir.com/docs/v6.22.0/reference/functions/join.md
 section: "Docs"
 ---
 

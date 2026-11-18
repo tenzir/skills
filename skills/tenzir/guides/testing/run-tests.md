@@ -1,7 +1,7 @@
 ---
 title: "Run tests"
-canonical: https://tenzir.com/docs/guides/testing/run-tests
-source: https://tenzir.com/docs/guides/testing/run-tests.md
+canonical: https://tenzir.com/docs/v6.22.0/guides/testing/run-tests
+source: https://tenzir.com/docs/v6.22.0/guides/testing/run-tests.md
 section: "Docs"
 ---
 

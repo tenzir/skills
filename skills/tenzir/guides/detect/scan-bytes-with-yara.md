@@ -1,8 +1,8 @@
 ---
 title: "Scan bytes with YARA"
 description: "Run YARA-X rules on files and finite byte streams and emit OCSF or native matches"
-canonical: https://tenzir.com/docs/guides/detect/scan-bytes-with-yara
-source: https://tenzir.com/docs/guides/detect/scan-bytes-with-yara.md
+canonical: https://tenzir.com/docs/v6.22.0/guides/detect/scan-bytes-with-yara
+source: https://tenzir.com/docs/v6.22.0/guides/detect/scan-bytes-with-yara.md
 section: "Docs"
 ---
 

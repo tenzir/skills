@@ -1,7 +1,7 @@
 ---
 title: "weeks"
-canonical: https://tenzir.com/docs/reference/functions/weeks
-source: https://tenzir.com/docs/reference/functions/weeks.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/functions/weeks
+source: https://tenzir.com/docs/v6.22.0/reference/functions/weeks.md
 section: "Docs"
 ---
 

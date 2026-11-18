@@ -1,7 +1,7 @@
 ---
 title: "Collect metrics"
-canonical: https://tenzir.com/docs/guides/observability/collect-metrics
-source: https://tenzir.com/docs/guides/observability/collect-metrics.md
+canonical: https://tenzir.com/docs/v6.22.0/guides/observability/collect-metrics
+source: https://tenzir.com/docs/v6.22.0/guides/observability/collect-metrics.md
 section: "Docs"
 ---
 

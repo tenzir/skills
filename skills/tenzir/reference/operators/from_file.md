@@ -1,7 +1,7 @@
 ---
 title: "from_file"
-canonical: https://tenzir.com/docs/reference/operators/from_file
-source: https://tenzir.com/docs/reference/operators/from_file.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/from_file
+source: https://tenzir.com/docs/v6.22.0/reference/operators/from_file.md
 section: "Docs"
 ---
 

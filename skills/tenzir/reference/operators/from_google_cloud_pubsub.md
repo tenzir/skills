@@ -1,7 +1,7 @@
 ---
 title: "from_google_cloud_pubsub"
-canonical: https://tenzir.com/docs/reference/operators/from_google_cloud_pubsub
-source: https://tenzir.com/docs/reference/operators/from_google_cloud_pubsub.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/from_google_cloud_pubsub
+source: https://tenzir.com/docs/v6.22.0/reference/operators/from_google_cloud_pubsub.md
 section: "Docs"
 ---
 

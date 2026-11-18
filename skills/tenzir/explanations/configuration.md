@@ -1,7 +1,7 @@
 ---
 title: "Configuration"
-canonical: https://tenzir.com/docs/explanations/configuration
-source: https://tenzir.com/docs/explanations/configuration.md
+canonical: https://tenzir.com/docs/v6.22.0/explanations/configuration
+source: https://tenzir.com/docs/v6.22.0/explanations/configuration.md
 section: "Docs"
 ---
 

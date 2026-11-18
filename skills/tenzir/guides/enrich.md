@@ -1,8 +1,8 @@
 ---
 title: "Overview"
 description: "Add context that the original event does not contain."
-canonical: https://tenzir.com/docs/guides/enrich
-source: https://tenzir.com/docs/guides/enrich.md
+canonical: https://tenzir.com/docs/v6.22.0/guides/enrich
+source: https://tenzir.com/docs/v6.22.0/guides/enrich.md
 section: "Docs"
 ---
 

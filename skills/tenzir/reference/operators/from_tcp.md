@@ -1,7 +1,7 @@
 ---
 title: "from_tcp"
-canonical: https://tenzir.com/docs/reference/operators/from_tcp
-source: https://tenzir.com/docs/reference/operators/from_tcp.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/from_tcp
+source: https://tenzir.com/docs/v6.22.0/reference/operators/from_tcp.md
 section: "Docs"
 ---
 

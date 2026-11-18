@@ -1,7 +1,7 @@
 ---
 title: "from_http"
-canonical: https://tenzir.com/docs/reference/operators/from_http
-source: https://tenzir.com/docs/reference/operators/from_http.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/from_http
+source: https://tenzir.com/docs/v6.22.0/reference/operators/from_http.md
 section: "Docs"
 ---
 

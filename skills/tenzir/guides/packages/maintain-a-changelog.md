@@ -1,7 +1,7 @@
 ---
 title: "Maintain a changelog"
-canonical: https://tenzir.com/docs/guides/packages/maintain-a-changelog
-source: https://tenzir.com/docs/guides/packages/maintain-a-changelog.md
+canonical: https://tenzir.com/docs/v6.22.0/guides/packages/maintain-a-changelog
+source: https://tenzir.com/docs/v6.22.0/guides/packages/maintain-a-changelog.md
 section: "Docs"
 ---
 

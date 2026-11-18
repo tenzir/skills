@@ -1,7 +1,7 @@
 ---
 title: "ip"
-canonical: https://tenzir.com/docs/reference/functions/ip
-source: https://tenzir.com/docs/reference/functions/ip.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/functions/ip
+source: https://tenzir.com/docs/v6.22.0/reference/functions/ip.md
 section: "Docs"
 ---
 

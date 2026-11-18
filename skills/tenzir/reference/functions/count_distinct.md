@@ -1,7 +1,7 @@
 ---
 title: "count_distinct"
-canonical: https://tenzir.com/docs/reference/functions/count_distinct
-source: https://tenzir.com/docs/reference/functions/count_distinct.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/functions/count_distinct
+source: https://tenzir.com/docs/v6.22.0/reference/functions/count_distinct.md
 section: "Docs"
 ---
 

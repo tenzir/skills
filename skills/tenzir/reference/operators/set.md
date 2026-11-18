@@ -1,7 +1,7 @@
 ---
 title: "set"
-canonical: https://tenzir.com/docs/reference/operators/set
-source: https://tenzir.com/docs/reference/operators/set.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/set
+source: https://tenzir.com/docs/v6.22.0/reference/operators/set.md
 section: "Docs"
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "write_pcap"
-canonical: https://tenzir.com/docs/reference/operators/write_pcap
-source: https://tenzir.com/docs/reference/operators/write_pcap.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/write_pcap
+source: https://tenzir.com/docs/v6.22.0/reference/operators/write_pcap.md
 section: "Docs"
 ---
 

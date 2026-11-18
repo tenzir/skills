@@ -1,7 +1,7 @@
 ---
 title: "all"
-canonical: https://tenzir.com/docs/reference/functions/all
-source: https://tenzir.com/docs/reference/functions/all.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/functions/all
+source: https://tenzir.com/docs/v6.22.0/reference/functions/all.md
 section: "Docs"
 ---
 

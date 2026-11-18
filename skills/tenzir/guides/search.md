@@ -1,8 +1,8 @@
 ---
 title: "Overview"
 description: "Query stored events and continue processing the results."
-canonical: https://tenzir.com/docs/guides/search
-source: https://tenzir.com/docs/guides/search.md
+canonical: https://tenzir.com/docs/v6.22.0/guides/search
+source: https://tenzir.com/docs/v6.22.0/guides/search.md
 section: "Docs"
 ---
 

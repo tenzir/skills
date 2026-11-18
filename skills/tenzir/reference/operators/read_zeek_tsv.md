@@ -1,7 +1,7 @@
 ---
 title: "read_zeek_tsv"
-canonical: https://tenzir.com/docs/reference/operators/read_zeek_tsv
-source: https://tenzir.com/docs/reference/operators/read_zeek_tsv.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/read_zeek_tsv
+source: https://tenzir.com/docs/v6.22.0/reference/operators/read_zeek_tsv.md
 section: "Docs"
 ---
 

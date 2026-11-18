@@ -1,7 +1,7 @@
 ---
 title: "hll"
-canonical: https://tenzir.com/docs/reference/functions/hll
-source: https://tenzir.com/docs/reference/functions/hll.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/functions/hll
+source: https://tenzir.com/docs/v6.22.0/reference/functions/hll.md
 section: "Docs"
 ---
 

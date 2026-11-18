@@ -1,7 +1,7 @@
 ---
 title: "round"
-canonical: https://tenzir.com/docs/reference/functions/round
-source: https://tenzir.com/docs/reference/functions/round.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/functions/round
+source: https://tenzir.com/docs/v6.22.0/reference/functions/round.md
 section: "Docs"
 ---
 

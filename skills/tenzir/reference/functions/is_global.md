@@ -1,7 +1,7 @@
 ---
 title: "is_global"
-canonical: https://tenzir.com/docs/reference/functions/is_global
-source: https://tenzir.com/docs/reference/functions/is_global.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/functions/is_global
+source: https://tenzir.com/docs/v6.22.0/reference/functions/is_global.md
 section: "Docs"
 ---
 

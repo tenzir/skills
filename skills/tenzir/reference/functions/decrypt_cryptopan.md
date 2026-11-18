@@ -1,7 +1,7 @@
 ---
 title: "decrypt_cryptopan"
-canonical: https://tenzir.com/docs/reference/functions/decrypt_cryptopan
-source: https://tenzir.com/docs/reference/functions/decrypt_cryptopan.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/functions/decrypt_cryptopan
+source: https://tenzir.com/docs/v6.22.0/reference/functions/decrypt_cryptopan.md
 section: "Docs"
 ---
 

@@ -1,8 +1,8 @@
 ---
 title: "Data model"
 description: "Understand how Tenzir stores events in columnar batches, keeps events of different shapes and types side by side, and selects rows with bitmaps instead of slicing batches apart."
-canonical: https://tenzir.com/docs/explanations/data-model
-source: https://tenzir.com/docs/explanations/data-model.md
+canonical: https://tenzir.com/docs/v6.22.0/explanations/data-model
+source: https://tenzir.com/docs/v6.22.0/explanations/data-model.md
 section: "Docs"
 ---
 

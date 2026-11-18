@@ -1,7 +1,7 @@
 ---
 title: "community_id"
-canonical: https://tenzir.com/docs/reference/functions/community_id
-source: https://tenzir.com/docs/reference/functions/community_id.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/functions/community_id
+source: https://tenzir.com/docs/v6.22.0/reference/functions/community_id.md
 section: "Docs"
 ---
 

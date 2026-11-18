@@ -1,7 +1,7 @@
 ---
 title: "match_regex"
-canonical: https://tenzir.com/docs/reference/functions/match_regex
-source: https://tenzir.com/docs/reference/functions/match_regex.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/functions/match_regex
+source: https://tenzir.com/docs/v6.22.0/reference/functions/match_regex.md
 section: "Docs"
 ---
 

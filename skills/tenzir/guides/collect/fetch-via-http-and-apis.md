@@ -1,7 +1,7 @@
 ---
 title: "Fetch via HTTP and APIs"
-canonical: https://tenzir.com/docs/guides/collect/fetch-via-http-and-apis
-source: https://tenzir.com/docs/guides/collect/fetch-via-http-and-apis.md
+canonical: https://tenzir.com/docs/v6.22.0/guides/collect/fetch-via-http-and-apis
+source: https://tenzir.com/docs/v6.22.0/guides/collect/fetch-via-http-and-apis.md
 section: "Docs"
 ---
 

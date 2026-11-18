@@ -1,7 +1,7 @@
 ---
 title: "write_delimited"
-canonical: https://tenzir.com/docs/reference/operators/write_delimited
-source: https://tenzir.com/docs/reference/operators/write_delimited.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/write_delimited
+source: https://tenzir.com/docs/v6.22.0/reference/operators/write_delimited.md
 section: "Docs"
 ---
 

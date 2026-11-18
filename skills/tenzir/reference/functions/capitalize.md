@@ -1,7 +1,7 @@
 ---
 title: "capitalize"
-canonical: https://tenzir.com/docs/reference/functions/capitalize
-source: https://tenzir.com/docs/reference/functions/capitalize.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/functions/capitalize
+source: https://tenzir.com/docs/v6.22.0/reference/functions/capitalize.md
 section: "Docs"
 ---
 

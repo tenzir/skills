@@ -1,7 +1,7 @@
 ---
 title: "to_prometheus"
-canonical: https://tenzir.com/docs/reference/operators/to_prometheus
-source: https://tenzir.com/docs/reference/operators/to_prometheus.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/to_prometheus
+source: https://tenzir.com/docs/v6.22.0/reference/operators/to_prometheus.md
 section: "Docs"
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "Investigate storage growth"
-canonical: https://tenzir.com/docs/guides/troubleshooting/investigate-storage-growth
-source: https://tenzir.com/docs/guides/troubleshooting/investigate-storage-growth.md
+canonical: https://tenzir.com/docs/v6.22.0/guides/troubleshooting/investigate-storage-growth
+source: https://tenzir.com/docs/v6.22.0/guides/troubleshooting/investigate-storage-growth.md
 section: "Docs"
 ---
 

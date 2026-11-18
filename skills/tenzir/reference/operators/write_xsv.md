@@ -1,7 +1,7 @@
 ---
 title: "write_xsv"
-canonical: https://tenzir.com/docs/reference/operators/write_xsv
-source: https://tenzir.com/docs/reference/operators/write_xsv.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/write_xsv
+source: https://tenzir.com/docs/v6.22.0/reference/operators/write_xsv.md
 section: "Docs"
 ---
 
@@ -21,8 +21,8 @@ The [`xsv`](https://en.wikipedia.org/wiki/Delimiter-separated_values) format is 
 
 The following table lists existing XSV configurations:
 
-| Format                                                            | Field Separator | List Separator | Null Value |
-| ----------------------------------------------------------------- | --------------- | -------------- | ---------- |
+| Format                                                                    | Field Separator | List Separator | Null Value |
+| ------------------------------------------------------------------------- | --------------- | -------------- | ---------- |
 | [`csv`](write_csv.md) | `,`             | `;`            | empty      |
 | [`ssv`](write_ssv.md) | `<space>`       | `,`            | `-`        |
 | [`tsv`](write_tsv.md) | `\t`            | `,`            | `-`        |

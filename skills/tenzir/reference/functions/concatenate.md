@@ -1,7 +1,7 @@
 ---
 title: "concatenate"
-canonical: https://tenzir.com/docs/reference/functions/concatenate
-source: https://tenzir.com/docs/reference/functions/concatenate.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/functions/concatenate
+source: https://tenzir.com/docs/v6.22.0/reference/functions/concatenate.md
 section: "Docs"
 ---
 

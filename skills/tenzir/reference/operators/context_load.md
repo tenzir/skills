@@ -1,7 +1,7 @@
 ---
 title: "context_load"
-canonical: https://tenzir.com/docs/reference/operators/context_load
-source: https://tenzir.com/docs/reference/operators/context_load.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/context_load
+source: https://tenzir.com/docs/v6.22.0/reference/operators/context_load.md
 section: "Docs"
 ---
 

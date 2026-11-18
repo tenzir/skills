@@ -1,7 +1,7 @@
 ---
 title: "print_leef"
-canonical: https://tenzir.com/docs/reference/functions/print_leef
-source: https://tenzir.com/docs/reference/functions/print_leef.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/functions/print_leef
+source: https://tenzir.com/docs/v6.22.0/reference/functions/print_leef.md
 section: "Docs"
 ---
 

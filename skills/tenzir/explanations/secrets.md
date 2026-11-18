@@ -1,7 +1,7 @@
 ---
 title: "Secrets"
-canonical: https://tenzir.com/docs/explanations/secrets
-source: https://tenzir.com/docs/explanations/secrets.md
+canonical: https://tenzir.com/docs/v6.22.0/explanations/secrets
+source: https://tenzir.com/docs/v6.22.0/explanations/secrets.md
 section: "Docs"
 ---
 

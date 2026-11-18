@@ -1,7 +1,7 @@
 ---
 title: "chart_area"
-canonical: https://tenzir.com/docs/reference/operators/chart_area
-source: https://tenzir.com/docs/reference/operators/chart_area.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/chart_area
+source: https://tenzir.com/docs/v6.22.0/reference/operators/chart_area.md
 section: "Docs"
 ---
 

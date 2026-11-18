@@ -1,7 +1,7 @@
 ---
 title: "luhn_check_digit"
-canonical: https://tenzir.com/docs/reference/functions/luhn_check_digit
-source: https://tenzir.com/docs/reference/functions/luhn_check_digit.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/functions/luhn_check_digit
+source: https://tenzir.com/docs/v6.22.0/reference/functions/luhn_check_digit.md
 section: "Docs"
 ---
 

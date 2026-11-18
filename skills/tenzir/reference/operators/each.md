@@ -1,7 +1,7 @@
 ---
 title: "each"
-canonical: https://tenzir.com/docs/reference/operators/each
-source: https://tenzir.com/docs/reference/operators/each.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/each
+source: https://tenzir.com/docs/v6.22.0/reference/operators/each.md
 section: "Docs"
 ---
 

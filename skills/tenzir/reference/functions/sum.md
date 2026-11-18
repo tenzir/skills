@@ -1,7 +1,7 @@
 ---
 title: "sum"
-canonical: https://tenzir.com/docs/reference/functions/sum
-source: https://tenzir.com/docs/reference/functions/sum.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/functions/sum
+source: https://tenzir.com/docs/v6.22.0/reference/functions/sum.md
 section: "Docs"
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "abs"
-canonical: https://tenzir.com/docs/reference/functions/abs
-source: https://tenzir.com/docs/reference/functions/abs.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/functions/abs
+source: https://tenzir.com/docs/v6.22.0/reference/functions/abs.md
 section: "Docs"
 ---
 

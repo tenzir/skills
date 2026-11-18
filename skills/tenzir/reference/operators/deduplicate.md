@@ -1,7 +1,7 @@
 ---
 title: "deduplicate"
-canonical: https://tenzir.com/docs/reference/operators/deduplicate
-source: https://tenzir.com/docs/reference/operators/deduplicate.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/deduplicate
+source: https://tenzir.com/docs/v6.22.0/reference/operators/deduplicate.md
 section: "Docs"
 ---
 

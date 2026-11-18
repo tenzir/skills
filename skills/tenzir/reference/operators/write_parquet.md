@@ -1,7 +1,7 @@
 ---
 title: "write_parquet"
-canonical: https://tenzir.com/docs/reference/operators/write_parquet
-source: https://tenzir.com/docs/reference/operators/write_parquet.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/write_parquet
+source: https://tenzir.com/docs/v6.22.0/reference/operators/write_parquet.md
 section: "Docs"
 ---
 

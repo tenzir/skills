@@ -1,7 +1,7 @@
 ---
 title: "max"
-canonical: https://tenzir.com/docs/reference/functions/max
-source: https://tenzir.com/docs/reference/functions/max.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/functions/max
+source: https://tenzir.com/docs/v6.22.0/reference/functions/max.md
 section: "Docs"
 ---
 

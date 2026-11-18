@@ -1,7 +1,7 @@
 ---
 title: "decrypt_ff1"
-canonical: https://tenzir.com/docs/reference/functions/decrypt_ff1
-source: https://tenzir.com/docs/reference/functions/decrypt_ff1.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/functions/decrypt_ff1
+source: https://tenzir.com/docs/v6.22.0/reference/functions/decrypt_ff1.md
 section: "Docs"
 ---
 

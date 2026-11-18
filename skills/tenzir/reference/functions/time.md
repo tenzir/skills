@@ -1,7 +1,7 @@
 ---
 title: "time"
-canonical: https://tenzir.com/docs/reference/functions/time
-source: https://tenzir.com/docs/reference/functions/time.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/functions/time
+source: https://tenzir.com/docs/v6.22.0/reference/functions/time.md
 section: "Docs"
 ---
 

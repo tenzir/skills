@@ -1,7 +1,7 @@
 ---
 title: "chart_pie"
-canonical: https://tenzir.com/docs/reference/operators/chart_pie
-source: https://tenzir.com/docs/reference/operators/chart_pie.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/chart_pie
+source: https://tenzir.com/docs/v6.22.0/reference/operators/chart_pie.md
 section: "Docs"
 ---
 

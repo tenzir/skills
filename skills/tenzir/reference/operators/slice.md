@@ -1,7 +1,7 @@
 ---
 title: "slice"
-canonical: https://tenzir.com/docs/reference/operators/slice
-source: https://tenzir.com/docs/reference/operators/slice.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/slice
+source: https://tenzir.com/docs/v6.22.0/reference/operators/slice.md
 section: "Docs"
 ---
 

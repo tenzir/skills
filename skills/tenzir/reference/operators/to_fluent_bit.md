@@ -1,7 +1,7 @@
 ---
 title: "to_fluent_bit"
-canonical: https://tenzir.com/docs/reference/operators/to_fluent_bit
-source: https://tenzir.com/docs/reference/operators/to_fluent_bit.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/to_fluent_bit
+source: https://tenzir.com/docs/v6.22.0/reference/operators/to_fluent_bit.md
 section: "Docs"
 ---
 

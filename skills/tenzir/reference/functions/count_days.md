@@ -1,7 +1,7 @@
 ---
 title: "count_days"
-canonical: https://tenzir.com/docs/reference/functions/count_days
-source: https://tenzir.com/docs/reference/functions/count_days.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/functions/count_days
+source: https://tenzir.com/docs/v6.22.0/reference/functions/count_days.md
 section: "Docs"
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "diagnostics"
-canonical: https://tenzir.com/docs/reference/operators/diagnostics
-source: https://tenzir.com/docs/reference/operators/diagnostics.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/diagnostics
+source: https://tenzir.com/docs/v6.22.0/reference/operators/diagnostics.md
 section: "Docs"
 ---
 

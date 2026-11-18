@@ -1,7 +1,7 @@
 ---
 title: "Configure workspaces"
-canonical: https://tenzir.com/docs/guides/platform-management/configure-workspaces
-source: https://tenzir.com/docs/guides/platform-management/configure-workspaces.md
+canonical: https://tenzir.com/docs/v6.22.0/guides/platform-management/configure-workspaces
+source: https://tenzir.com/docs/v6.22.0/guides/platform-management/configure-workspaces.md
 section: "Docs"
 ---
 

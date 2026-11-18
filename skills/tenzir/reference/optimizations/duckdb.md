@@ -1,7 +1,7 @@
 ---
 title: "DuckDB"
-canonical: https://tenzir.com/docs/reference/optimizations/duckdb
-source: https://tenzir.com/docs/reference/optimizations/duckdb.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/optimizations/duckdb
+source: https://tenzir.com/docs/v6.22.0/reference/optimizations/duckdb.md
 section: "Docs"
 ---
 

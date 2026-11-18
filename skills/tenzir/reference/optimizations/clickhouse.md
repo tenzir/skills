@@ -1,7 +1,7 @@
 ---
 title: "ClickHouse"
-canonical: https://tenzir.com/docs/reference/optimizations/clickhouse
-source: https://tenzir.com/docs/reference/optimizations/clickhouse.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/optimizations/clickhouse
+source: https://tenzir.com/docs/v6.22.0/reference/optimizations/clickhouse.md
 section: "Docs"
 ---
 

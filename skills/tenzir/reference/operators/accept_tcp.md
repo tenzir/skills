@@ -1,7 +1,7 @@
 ---
 title: "accept_tcp"
-canonical: https://tenzir.com/docs/reference/operators/accept_tcp
-source: https://tenzir.com/docs/reference/operators/accept_tcp.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/accept_tcp
+source: https://tenzir.com/docs/v6.22.0/reference/operators/accept_tcp.md
 section: "Docs"
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "Reconnect an offline node"
-canonical: https://tenzir.com/docs/guides/troubleshooting/reconnect-an-offline-node
-source: https://tenzir.com/docs/guides/troubleshooting/reconnect-an-offline-node.md
+canonical: https://tenzir.com/docs/v6.22.0/guides/troubleshooting/reconnect-an-offline-node
+source: https://tenzir.com/docs/v6.22.0/guides/troubleshooting/reconnect-an-offline-node.md
 section: "Docs"
 ---
 

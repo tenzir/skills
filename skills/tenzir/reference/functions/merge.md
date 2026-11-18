@@ -1,7 +1,7 @@
 ---
 title: "merge"
-canonical: https://tenzir.com/docs/reference/functions/merge
-source: https://tenzir.com/docs/reference/functions/merge.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/functions/merge
+source: https://tenzir.com/docs/v6.22.0/reference/functions/merge.md
 section: "Docs"
 ---
 

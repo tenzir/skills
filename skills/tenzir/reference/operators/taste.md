@@ -1,7 +1,7 @@
 ---
 title: "taste"
-canonical: https://tenzir.com/docs/reference/operators/taste
-source: https://tenzir.com/docs/reference/operators/taste.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/taste
+source: https://tenzir.com/docs/v6.22.0/reference/operators/taste.md
 section: "Docs"
 ---
 

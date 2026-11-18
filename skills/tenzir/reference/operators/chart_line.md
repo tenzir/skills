@@ -1,7 +1,7 @@
 ---
 title: "chart_line"
-canonical: https://tenzir.com/docs/reference/operators/chart_line
-source: https://tenzir.com/docs/reference/operators/chart_line.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/chart_line
+source: https://tenzir.com/docs/v6.22.0/reference/operators/chart_line.md
 section: "Docs"
 ---
 

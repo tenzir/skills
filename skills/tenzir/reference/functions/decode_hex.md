@@ -1,7 +1,7 @@
 ---
 title: "decode_hex"
-canonical: https://tenzir.com/docs/reference/functions/decode_hex
-source: https://tenzir.com/docs/reference/functions/decode_hex.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/functions/decode_hex
+source: https://tenzir.com/docs/v6.22.0/reference/functions/decode_hex.md
 section: "Docs"
 ---
 

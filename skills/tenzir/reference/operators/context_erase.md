@@ -1,7 +1,7 @@
 ---
 title: "context_erase"
-canonical: https://tenzir.com/docs/reference/operators/context_erase
-source: https://tenzir.com/docs/reference/operators/context_erase.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/context_erase
+source: https://tenzir.com/docs/v6.22.0/reference/operators/context_erase.md
 section: "Docs"
 ---
 

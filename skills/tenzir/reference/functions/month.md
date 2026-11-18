@@ -1,7 +1,7 @@
 ---
 title: "month"
-canonical: https://tenzir.com/docs/reference/functions/month
-source: https://tenzir.com/docs/reference/functions/month.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/functions/month
+source: https://tenzir.com/docs/v6.22.0/reference/functions/month.md
 section: "Docs"
 ---
 

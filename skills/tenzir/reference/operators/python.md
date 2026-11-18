@@ -1,7 +1,7 @@
 ---
 title: "python"
-canonical: https://tenzir.com/docs/reference/operators/python
-source: https://tenzir.com/docs/reference/operators/python.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/python
+source: https://tenzir.com/docs/v6.22.0/reference/operators/python.md
 section: "Docs"
 ---
 

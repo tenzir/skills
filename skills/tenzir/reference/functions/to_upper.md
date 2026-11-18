@@ -1,7 +1,7 @@
 ---
 title: "to_upper"
-canonical: https://tenzir.com/docs/reference/functions/to_upper
-source: https://tenzir.com/docs/reference/functions/to_upper.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/functions/to_upper
+source: https://tenzir.com/docs/v6.22.0/reference/functions/to_upper.md
 section: "Docs"
 ---
 

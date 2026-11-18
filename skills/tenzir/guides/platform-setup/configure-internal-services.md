@@ -1,7 +1,7 @@
 ---
 title: "Configure internal services"
-canonical: https://tenzir.com/docs/guides/platform-setup/configure-internal-services
-source: https://tenzir.com/docs/guides/platform-setup/configure-internal-services.md
+canonical: https://tenzir.com/docs/v6.22.0/guides/platform-setup/configure-internal-services
+source: https://tenzir.com/docs/v6.22.0/guides/platform-setup/configure-internal-services.md
 section: "Docs"
 ---
 

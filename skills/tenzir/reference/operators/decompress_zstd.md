@@ -1,7 +1,7 @@
 ---
 title: "decompress_zstd"
-canonical: https://tenzir.com/docs/reference/operators/decompress_zstd
-source: https://tenzir.com/docs/reference/operators/decompress_zstd.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/decompress_zstd
+source: https://tenzir.com/docs/v6.22.0/reference/operators/decompress_zstd.md
 section: "Docs"
 ---
 

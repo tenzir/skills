@@ -1,7 +1,7 @@
 ---
 title: "parse_syslog"
-canonical: https://tenzir.com/docs/reference/functions/parse_syslog
-source: https://tenzir.com/docs/reference/functions/parse_syslog.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/functions/parse_syslog
+source: https://tenzir.com/docs/v6.22.0/reference/functions/parse_syslog.md
 section: "Docs"
 ---
 

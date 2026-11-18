@@ -1,7 +1,7 @@
 ---
 title: "to_sentinelone_data_lake"
-canonical: https://tenzir.com/docs/reference/operators/to_sentinelone_data_lake
-source: https://tenzir.com/docs/reference/operators/to_sentinelone_data_lake.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/to_sentinelone_data_lake
+source: https://tenzir.com/docs/v6.22.0/reference/operators/to_sentinelone_data_lake.md
 section: "Docs"
 ---
 

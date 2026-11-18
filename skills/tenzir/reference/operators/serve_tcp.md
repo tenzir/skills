@@ -1,7 +1,7 @@
 ---
 title: "serve_tcp"
-canonical: https://tenzir.com/docs/reference/operators/serve_tcp
-source: https://tenzir.com/docs/reference/operators/serve_tcp.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/serve_tcp
+source: https://tenzir.com/docs/v6.22.0/reference/operators/serve_tcp.md
 section: "Docs"
 ---
 

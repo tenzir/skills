@@ -1,7 +1,7 @@
 ---
 title: "compress_lz4"
-canonical: https://tenzir.com/docs/reference/operators/compress_lz4
-source: https://tenzir.com/docs/reference/operators/compress_lz4.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/compress_lz4
+source: https://tenzir.com/docs/v6.22.0/reference/operators/compress_lz4.md
 section: "Docs"
 ---
 

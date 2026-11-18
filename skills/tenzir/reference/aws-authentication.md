@@ -1,7 +1,7 @@
 ---
 title: "AWS Authentication"
-canonical: https://tenzir.com/docs/reference/aws-authentication
-source: https://tenzir.com/docs/reference/aws-authentication.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/aws-authentication
+source: https://tenzir.com/docs/v6.22.0/reference/aws-authentication.md
 section: "Docs"
 ---
 

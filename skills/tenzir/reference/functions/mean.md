@@ -1,7 +1,7 @@
 ---
 title: "mean"
-canonical: https://tenzir.com/docs/reference/functions/mean
-source: https://tenzir.com/docs/reference/functions/mean.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/functions/mean
+source: https://tenzir.com/docs/v6.22.0/reference/functions/mean.md
 section: "Docs"
 ---
 

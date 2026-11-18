@@ -1,7 +1,7 @@
 ---
 title: "summarize"
-canonical: https://tenzir.com/docs/reference/operators/summarize
-source: https://tenzir.com/docs/reference/operators/summarize.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/summarize
+source: https://tenzir.com/docs/v6.22.0/reference/operators/summarize.md
 section: "Docs"
 ---
 

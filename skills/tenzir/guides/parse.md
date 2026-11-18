@@ -1,8 +1,8 @@
 ---
 title: "Overview"
 description: "Turn byte streams and text fields into structured events."
-canonical: https://tenzir.com/docs/guides/parse
-source: https://tenzir.com/docs/guides/parse.md
+canonical: https://tenzir.com/docs/v6.22.0/guides/parse
+source: https://tenzir.com/docs/v6.22.0/guides/parse.md
 section: "Docs"
 ---
 

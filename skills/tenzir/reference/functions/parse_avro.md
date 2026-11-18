@@ -1,7 +1,7 @@
 ---
 title: "parse_avro"
-canonical: https://tenzir.com/docs/reference/functions/parse_avro
-source: https://tenzir.com/docs/reference/functions/parse_avro.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/functions/parse_avro
+source: https://tenzir.com/docs/v6.22.0/reference/functions/parse_avro.md
 section: "Docs"
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "print_avro"
-canonical: https://tenzir.com/docs/reference/functions/print_avro
-source: https://tenzir.com/docs/reference/functions/print_avro.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/functions/print_avro
+source: https://tenzir.com/docs/v6.22.0/reference/functions/print_avro.md
 section: "Docs"
 ---
 

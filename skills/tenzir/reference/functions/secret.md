@@ -1,7 +1,7 @@
 ---
 title: "secret"
-canonical: https://tenzir.com/docs/reference/functions/secret
-source: https://tenzir.com/docs/reference/functions/secret.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/functions/secret
+source: https://tenzir.com/docs/v6.22.0/reference/functions/secret.md
 section: "Docs"
 ---
 

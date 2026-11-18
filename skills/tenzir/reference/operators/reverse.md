@@ -1,7 +1,7 @@
 ---
 title: "reverse"
-canonical: https://tenzir.com/docs/reference/operators/reverse
-source: https://tenzir.com/docs/reference/operators/reverse.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/reverse
+source: https://tenzir.com/docs/v6.22.0/reference/operators/reverse.md
 section: "Docs"
 ---
 

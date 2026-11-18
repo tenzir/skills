@@ -1,7 +1,7 @@
 ---
 title: "wasserstein"
-canonical: https://tenzir.com/docs/reference/functions/wasserstein
-source: https://tenzir.com/docs/reference/functions/wasserstein.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/functions/wasserstein
+source: https://tenzir.com/docs/v6.22.0/reference/functions/wasserstein.md
 section: "Docs"
 ---
 

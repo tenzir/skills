@@ -1,7 +1,7 @@
 ---
 title: "parent_dir"
-canonical: https://tenzir.com/docs/reference/functions/parent_dir
-source: https://tenzir.com/docs/reference/functions/parent_dir.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/functions/parent_dir
+source: https://tenzir.com/docs/v6.22.0/reference/functions/parent_dir.md
 section: "Docs"
 ---
 

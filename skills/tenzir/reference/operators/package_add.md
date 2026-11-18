@@ -1,7 +1,7 @@
 ---
 title: "package_add"
-canonical: https://tenzir.com/docs/reference/operators/package_add
-source: https://tenzir.com/docs/reference/operators/package_add.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/package_add
+source: https://tenzir.com/docs/v6.22.0/reference/operators/package_add.md
 section: "Docs"
 ---
 

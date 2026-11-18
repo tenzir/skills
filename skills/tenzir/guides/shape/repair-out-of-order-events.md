@@ -1,8 +1,8 @@
 ---
 title: "Repair out-of-order events"
 description: "Restore timestamp order in finite and live event streams without waiting indefinitely for input"
-canonical: https://tenzir.com/docs/guides/shape/repair-out-of-order-events
-source: https://tenzir.com/docs/guides/shape/repair-out-of-order-events.md
+canonical: https://tenzir.com/docs/v6.22.0/guides/shape/repair-out-of-order-events
+source: https://tenzir.com/docs/v6.22.0/guides/shape/repair-out-of-order-events.md
 section: "Docs"
 ---
 
@@ -30,8 +30,8 @@ Follow the guide on [normalizing event timestamps](normalize-event-timestamps.md
 
 Choose based on whether the input ends and whether you can bound its timestamp skew:
 
-| Input and requirement                                   | Use                                                                                              | Trade-off                                                                             |
-| ------------------------------------------------------- | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------- |
+| Input and requirement                                   | Use                                                                                                      | Trade-off                                                                             |
+| ------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
 | Finite input, arbitrary disorder                        | [`sort`](../../reference/operators/sort.md)                                    | Waits for all input and holds it in memory.                                           |
 | Large or live input, bounded disorder                   | [`reorder`](../../reference/operators/reorder.md)                              | Adds buffering latency and drops only events whose timestamps precede emitted output. |
 | Event-time aggregation without sequence-dependent logic | [`window`](../../reference/operators/window.md) `tolerance=...`                | Accepts late window members without necessarily reordering them.                      |

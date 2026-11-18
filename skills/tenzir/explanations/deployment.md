@@ -1,7 +1,7 @@
 ---
 title: "Deployment"
-canonical: https://tenzir.com/docs/explanations/deployment
-source: https://tenzir.com/docs/explanations/deployment.md
+canonical: https://tenzir.com/docs/v6.22.0/explanations/deployment
+source: https://tenzir.com/docs/v6.22.0/explanations/deployment.md
 section: "Docs"
 ---
 

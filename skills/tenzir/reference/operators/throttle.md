@@ -1,7 +1,7 @@
 ---
 title: "throttle"
-canonical: https://tenzir.com/docs/reference/operators/throttle
-source: https://tenzir.com/docs/reference/operators/throttle.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/throttle
+source: https://tenzir.com/docs/v6.22.0/reference/operators/throttle.md
 section: "Docs"
 ---
 

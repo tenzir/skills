@@ -1,7 +1,7 @@
 ---
 title: "tdigest_cdf"
-canonical: https://tenzir.com/docs/reference/functions/tdigest_cdf
-source: https://tenzir.com/docs/reference/functions/tdigest_cdf.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/functions/tdigest_cdf
+source: https://tenzir.com/docs/v6.22.0/reference/functions/tdigest_cdf.md
 section: "Docs"
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "random"
-canonical: https://tenzir.com/docs/reference/functions/random
-source: https://tenzir.com/docs/reference/functions/random.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/functions/random
+source: https://tenzir.com/docs/v6.22.0/reference/functions/random.md
 section: "Docs"
 ---
 

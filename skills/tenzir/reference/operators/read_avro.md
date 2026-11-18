@@ -1,7 +1,7 @@
 ---
 title: "read_avro"
-canonical: https://tenzir.com/docs/reference/operators/read_avro
-source: https://tenzir.com/docs/reference/operators/read_avro.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/read_avro
+source: https://tenzir.com/docs/v6.22.0/reference/operators/read_avro.md
 section: "Docs"
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "ip_category"
-canonical: https://tenzir.com/docs/reference/functions/ip_category
-source: https://tenzir.com/docs/reference/functions/ip_category.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/functions/ip_category
+source: https://tenzir.com/docs/v6.22.0/reference/functions/ip_category.md
 section: "Docs"
 ---
 

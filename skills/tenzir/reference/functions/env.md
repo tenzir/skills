@@ -1,7 +1,7 @@
 ---
 title: "env"
-canonical: https://tenzir.com/docs/reference/functions/env
-source: https://tenzir.com/docs/reference/functions/env.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/functions/env
+source: https://tenzir.com/docs/v6.22.0/reference/functions/env.md
 section: "Docs"
 ---
 

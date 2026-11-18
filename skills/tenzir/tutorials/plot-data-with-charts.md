@@ -1,7 +1,7 @@
 ---
 title: "Plot data with charts"
-canonical: https://tenzir.com/docs/tutorials/plot-data-with-charts
-source: https://tenzir.com/docs/tutorials/plot-data-with-charts.md
+canonical: https://tenzir.com/docs/v6.22.0/tutorials/plot-data-with-charts
+source: https://tenzir.com/docs/v6.22.0/tutorials/plot-data-with-charts.md
 section: "Docs"
 ---
 
@@ -53,15 +53,15 @@ To make a chart permanent:
 
 1. Click the **Dashboard** button.
 
-   ![Add Chart to Dashboard](https://tenzir.com/docs-assets/roots/6.22.0-r1/_astro/add-chart-to-dashboard-1.CKWKUeyV_Z1IMBeM.webp)
+   ![Add Chart to Dashboard](https://tenzir.com/docs-assets/v6.22.0-r1/_astro/add-chart-to-dashboard-1.CKWKUeyV_Z279Clt.webp)
 
 2. Enter a title for the chart, then click **Add to Dashboard**.
 
-   ![Add Chart Title](https://tenzir.com/docs-assets/roots/6.22.0-r1/_astro/add-chart-to-dashboard-2.CH4qklWh_1pHHfn.webp)
+   ![Add Chart Title](https://tenzir.com/docs-assets/v6.22.0-r1/_astro/add-chart-to-dashboard-2.CH4qklWh_12lG8G.webp)
 
 3. View the chart in your dashboard.
 
-   ![Chart in Dashboard](https://tenzir.com/docs-assets/roots/6.22.0-r1/_astro/add-chart-to-dashboard-3.CbiY8Gpy_Z1x99lr.webp)
+   ![Chart in Dashboard](https://tenzir.com/docs-assets/v6.22.0-r1/_astro/add-chart-to-dashboard-3.CbiY8Gpy_Z1Uvas8.webp)
 
 Congratulations! Your chart is now saved and will automatically reload when you open the dashboard.
 
@@ -71,7 +71,7 @@ Download a chart in the Explorer as follows:
 
 1. Click the download button in the top-right corner.
 
-   ![Download Chart](https://tenzir.com/docs-assets/roots/6.22.0-r1/_astro/download-chart-explorer.BaT4xIUq_ZI8UAj.webp)
+   ![Download Chart](https://tenzir.com/docs-assets/v6.22.0-r1/_astro/download-chart-explorer.BaT4xIUq_Z1HVf2T.webp)
 
 2. Choose **PNG** or **SVG** to save the chart as an image.
 
@@ -81,7 +81,7 @@ You can also download a chart on a dashboard:
 
 2. Click **Download**
 
-   ![Download Chart](https://tenzir.com/docs-assets/roots/6.22.0-r1/_astro/download-chart-dashboard.CDK7X36c_hmqPn.webp)
+   ![Download Chart](https://tenzir.com/docs-assets/v6.22.0-r1/_astro/download-chart-dashboard.CDK7X36c_Z5Yzgj.webp)
 
 3. Choose **PNG** or **SVG** to save the chart as an image.
 
@@ -121,7 +121,7 @@ A good use case for bar charts is visualization of counters of categorical value
    chart_bar x=outcome, y=n
    ```
 
-   ![Bar chart](https://tenzir.com/docs-assets/roots/6.22.0-r1/_astro/chart-bar.DEYyg_Q2_Z27bs2E.webp)
+   ![Bar chart](https://tenzir.com/docs-assets/v6.22.0-r1/_astro/chart-bar.DEYyg_Q2_299mjL.webp)
 
    Bar charts with categorical labels preserve the input order of the labels. Use [`sort`](../reference/operators/sort.md) before [`chart_bar`](../reference/operators/chart_bar.md) when you want to order categorical bars by a metric instead of first-seen order.
 
@@ -143,7 +143,7 @@ from (
 chart_bar x=outcome, y=n, group=time
 ```
 
-![Grouped bar chart](https://tenzir.com/docs-assets/roots/6.22.0-r1/_astro/chart-bar-grouped.CFNoOv9R_Zsx7Sx.webp)
+![Grouped bar chart](https://tenzir.com/docs-assets/v6.22.0-r1/_astro/chart-bar-grouped.CFNoOv9R_Z274Gbv.webp)
 
 To **stack** the grouped bars, add `position="stacked"`:
 
@@ -159,7 +159,7 @@ from (
 chart_bar x=outcome, y=n, group=time, position="stacked"
 ```
 
-![Stacked bar chart](https://tenzir.com/docs-assets/roots/6.22.0-r1/_astro/chart-bar-stacked.D14MtCVs_1Fp9CW.webp)
+![Stacked bar chart](https://tenzir.com/docs-assets/v6.22.0-r1/_astro/chart-bar-stacked.D14MtCVs_1RAkY.webp)
 
 #### Scale the y-axis logarithmically
 
@@ -178,7 +178,7 @@ from (
 chart_bar x=outcome, y=n
 ```
 
-![Unscaled bar chart](https://tenzir.com/docs-assets/roots/6.22.0-r1/_astro/chart-bar-nolog.Bbkxdwf4_1wErcU.webp)
+![Unscaled bar chart](https://tenzir.com/docs-assets/v6.22.0-r1/_astro/chart-bar-nolog.Bbkxdwf4_J8xUo.webp)
 
 The large value (`E`) dominates the chart, hiding the smaller categories.
 
@@ -195,7 +195,7 @@ from (
 chart_bar x=outcome, y=n, y_log=true
 ```
 
-![Log-scaled bar chart](https://tenzir.com/docs-assets/roots/6.22.0-r1/_astro/chart-bar-log.DkLhynLc_ZktxQO.webp)
+![Log-scaled bar chart](https://tenzir.com/docs-assets/v6.22.0-r1/_astro/chart-bar-log.DkLhynLc_1as1Sk.webp)
 
 Now, you can clearly see all the values!
 
@@ -218,7 +218,7 @@ from (
 chart_pie label=category, value=percentage
 ```
 
-![Pie chart](https://tenzir.com/docs-assets/roots/6.22.0-r1/_astro/chart-pie.DZN_Mgb1_ZPD94o.webp)
+![Pie chart](https://tenzir.com/docs-assets/v6.22.0-r1/_astro/chart-pie.DZN_Mgb1_Z1EusvT.webp)
 
 To provide a consistent user experience across all chart types, `chart_pie` treats `label` and `x` as interchangeable, as well as `value` and `y`. This mapping makes intuitive sense when you consider a pie chart as a bar chart rendered in a radial coordinate system.
 
@@ -252,7 +252,7 @@ Line charts come in handy when visualizing data trends over a continuous scale, 
    chart_line x=timestamp, y=current_memory_usage
    ```
 
-   ![Line chart](https://tenzir.com/docs-assets/roots/6.22.0-r1/_astro/chart-line.BGCcmM4p_Z1dU2JL.webp)
+   ![Line chart](https://tenzir.com/docs-assets/v6.22.0-r1/_astro/chart-line.BGCcmM4p_qvLVh.webp)
 
 3. **Aggregate to reduce the resolution**: Plotting metrics with a 1-second granularity over the course of a full day can make a line chart very noisy. In fact, we have a total of 86,400 samples in our plot. This can make a line chart quickly illegible. Let’s reduce the noise by aggregating the samples into 15-min buckets:
 
@@ -264,7 +264,7 @@ Line charts come in handy when visualizing data trends over a continuous scale, 
    chart_line x=timestamp, y=mem
    ```
 
-   ![Line chart with summarize](https://tenzir.com/docs-assets/roots/6.22.0-r1/_astro/chart-line-summarize.C-kldtdX_Zvkoa9.webp)
+   ![Line chart with summarize](https://tenzir.com/docs-assets/v6.22.0-r1/_astro/chart-line-summarize.C-kldtdX_msN3m.webp)
 
    This looks a lot smoother! **Pro tip**: you can even further [optimize the above pipeline](plot-data-with-charts.md#optimize-plotting-with-inline-expressions) by using additional operator arguments.
 
@@ -282,7 +282,7 @@ chart_line (
 )
 ```
 
-![Line chart with multiple series](https://tenzir.com/docs-assets/roots/6.22.0-r1/_astro/chart-line-multiple.Dp7WqfNy_1ENF3I.webp)
+![Line chart with multiple series](https://tenzir.com/docs-assets/v6.22.0-r1/_astro/chart-line-multiple.Dp7WqfNy_ZDfDpa.webp)
 
 Because `current_memory_usage` comes in gigabytes and `peak_memory_usage` in megabytes, we cannot compare them directly. Hence we normalized the peak usage to gigabytes to make them comparable in a single plot.
 
@@ -316,7 +316,7 @@ from (
 chart_area x=time, y={a: a, b: b}
 ```
 
-![Area chart](https://tenzir.com/docs-assets/roots/6.22.0-r1/_astro/chart-area.qpx_UOJY_1pvxh8.webp)
+![Area chart](https://tenzir.com/docs-assets/v6.22.0-r1/_astro/chart-area.qpx_UOJY_Z1aE7ST.webp)
 
 The area under the curve gives you a strong visual impression of the total event volume over time.
 
@@ -337,7 +337,7 @@ from (
 chart_area x=time, y={a: a, b: b}, position="stacked"
 ```
 
-![Stacked area chart](https://tenzir.com/docs-assets/roots/6.22.0-r1/_astro/chart-area-stacked.D1LdGZR3_shlC3.webp)
+![Stacked area chart](https://tenzir.com/docs-assets/v6.22.0-r1/_astro/chart-area-stacked.D1LdGZR3_2aM1oE.webp)
 
 Notice the difference in the y-axis interpretation:
 
@@ -358,7 +358,7 @@ summarize timestamp, mem=mean(current_memory_usage)  // aggregation
 chart_line x=timestamp, y=mem
 ```
 
-![Line chart with summarize](https://tenzir.com/docs-assets/roots/6.22.0-r1/_astro/chart-line-summarize.C-kldtdX_Zvkoa9.webp)
+![Line chart with summarize](https://tenzir.com/docs-assets/v6.22.0-r1/_astro/chart-line-summarize.C-kldtdX_msN3m.webp)
 
 You can push the filtering, rounding, and aggregation into the chart operator:
 
@@ -372,7 +372,7 @@ chart_line (
 )
 ```
 
-![Line chart with resolution](https://tenzir.com/docs-assets/roots/6.22.0-r1/_astro/chart-line-resolution.CA1-QTst_Z1x2W4i.webp)
+![Line chart with resolution](https://tenzir.com/docs-assets/v6.22.0-r1/_astro/chart-line-resolution.CA1-QTst_mWwGM.webp)
 
 Note how this make the pipeline more succinct by removing the extra `where`, `set`, and `summarize` operators.
 

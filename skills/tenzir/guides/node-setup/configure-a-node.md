@@ -1,7 +1,7 @@
 ---
 title: "Configure a node"
-canonical: https://tenzir.com/docs/guides/node-setup/configure-a-node
-source: https://tenzir.com/docs/guides/node-setup/configure-a-node.md
+canonical: https://tenzir.com/docs/v6.22.0/guides/node-setup/configure-a-node
+source: https://tenzir.com/docs/v6.22.0/guides/node-setup/configure-a-node.md
 section: "Docs"
 ---
 

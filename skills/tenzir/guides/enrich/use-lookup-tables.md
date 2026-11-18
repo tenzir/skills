@@ -1,8 +1,8 @@
 ---
 title: "Use lookup tables"
 description: "Store reference data in lookup tables and apply it to OCSF events"
-canonical: https://tenzir.com/docs/guides/enrich/use-lookup-tables
-source: https://tenzir.com/docs/guides/enrich/use-lookup-tables.md
+canonical: https://tenzir.com/docs/v6.22.0/guides/enrich/use-lookup-tables
+source: https://tenzir.com/docs/v6.22.0/guides/enrich/use-lookup-tables.md
 section: "Docs"
 ---
 

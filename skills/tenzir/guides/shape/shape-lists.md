@@ -1,7 +1,7 @@
 ---
 title: "Shape lists"
-canonical: https://tenzir.com/docs/guides/shape/shape-lists
-source: https://tenzir.com/docs/guides/shape/shape-lists.md
+canonical: https://tenzir.com/docs/v6.22.0/guides/shape/shape-lists
+source: https://tenzir.com/docs/v6.22.0/guides/shape/shape-lists.md
 section: "Docs"
 ---
 

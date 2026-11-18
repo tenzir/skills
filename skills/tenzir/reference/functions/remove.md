@@ -1,7 +1,7 @@
 ---
 title: "remove"
-canonical: https://tenzir.com/docs/reference/functions/remove
-source: https://tenzir.com/docs/reference/functions/remove.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/functions/remove
+source: https://tenzir.com/docs/v6.22.0/reference/functions/remove.md
 section: "Docs"
 ---
 

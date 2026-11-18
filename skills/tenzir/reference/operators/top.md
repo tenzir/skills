@@ -1,7 +1,7 @@
 ---
 title: "top"
-canonical: https://tenzir.com/docs/reference/operators/top
-source: https://tenzir.com/docs/reference/operators/top.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/top
+source: https://tenzir.com/docs/v6.22.0/reference/operators/top.md
 section: "Docs"
 ---
 

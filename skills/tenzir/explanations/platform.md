@@ -1,7 +1,7 @@
 ---
 title: "Platform"
-canonical: https://tenzir.com/docs/explanations/platform
-source: https://tenzir.com/docs/explanations/platform.md
+canonical: https://tenzir.com/docs/v6.22.0/explanations/platform
+source: https://tenzir.com/docs/v6.22.0/explanations/platform.md
 section: "Docs"
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "ocsf_class_name"
-canonical: https://tenzir.com/docs/reference/functions/ocsf_class_name
-source: https://tenzir.com/docs/reference/functions/ocsf_class_name.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/functions/ocsf_class_name
+source: https://tenzir.com/docs/v6.22.0/reference/functions/ocsf_class_name.md
 section: "Docs"
 ---
 

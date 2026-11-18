@@ -1,7 +1,7 @@
 ---
 title: "frequency_table_count"
-canonical: https://tenzir.com/docs/reference/functions/frequency_table_count
-source: https://tenzir.com/docs/reference/functions/frequency_table_count.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/functions/frequency_table_count
+source: https://tenzir.com/docs/v6.22.0/reference/functions/frequency_table_count.md
 section: "Docs"
 ---
 

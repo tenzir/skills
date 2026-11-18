@@ -1,7 +1,7 @@
 ---
 title: "Packages"
-canonical: https://tenzir.com/docs/explanations/packages
-source: https://tenzir.com/docs/explanations/packages.md
+canonical: https://tenzir.com/docs/v6.22.0/explanations/packages
+source: https://tenzir.com/docs/v6.22.0/explanations/packages.md
 section: "Docs"
 ---
 

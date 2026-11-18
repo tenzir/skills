@@ -1,7 +1,7 @@
 ---
 title: "Parse binary data"
-canonical: https://tenzir.com/docs/guides/parse/parse-binary-data
-source: https://tenzir.com/docs/guides/parse/parse-binary-data.md
+canonical: https://tenzir.com/docs/v6.22.0/guides/parse/parse-binary-data
+source: https://tenzir.com/docs/v6.22.0/guides/parse/parse-binary-data.md
 section: "Docs"
 ---
 
@@ -124,8 +124,8 @@ from_file "logs.json.zst"        // Auto-detects zstd
 
 When automatic detection doesn’t apply (e.g., custom extensions or chained formats), use explicit decompression operators in the parsing subpipeline. These are bytes-to-bytes operators, so they must appear before the parser:
 
-| Format    | Operator                                                                                |
-| --------- | --------------------------------------------------------------------------------------- |
+| Format    | Operator                                                                                        |
+| --------- | ----------------------------------------------------------------------------------------------- |
 | Gzip      | [`decompress_gzip`](../../reference/operators/decompress_gzip.md)     |
 | Zstandard | [`decompress_zstd`](../../reference/operators/decompress_zstd.md)     |
 | Bzip2     | [`decompress_bz2`](../../reference/operators/decompress_bz2.md)       |

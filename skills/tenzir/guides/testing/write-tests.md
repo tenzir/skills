@@ -1,7 +1,7 @@
 ---
 title: "Write tests"
-canonical: https://tenzir.com/docs/guides/testing/write-tests
-source: https://tenzir.com/docs/guides/testing/write-tests.md
+canonical: https://tenzir.com/docs/v6.22.0/guides/testing/write-tests
+source: https://tenzir.com/docs/v6.22.0/guides/testing/write-tests.md
 section: "Docs"
 ---
 

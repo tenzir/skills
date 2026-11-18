@@ -1,8 +1,8 @@
 ---
 title: "Execute Sigma rules"
 description: "Run Sigma v2.1 rules on structured events and emit OCSF Detection Findings with causal match evidence"
-canonical: https://tenzir.com/docs/guides/detect/execute-sigma-rules
-source: https://tenzir.com/docs/guides/detect/execute-sigma-rules.md
+canonical: https://tenzir.com/docs/v6.22.0/guides/detect/execute-sigma-rules
+source: https://tenzir.com/docs/v6.22.0/guides/detect/execute-sigma-rules.md
 section: "Docs"
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "to_google_secops"
-canonical: https://tenzir.com/docs/reference/operators/to_google_secops
-source: https://tenzir.com/docs/reference/operators/to_google_secops.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/to_google_secops
+source: https://tenzir.com/docs/v6.22.0/reference/operators/to_google_secops.md
 section: "Docs"
 ---
 

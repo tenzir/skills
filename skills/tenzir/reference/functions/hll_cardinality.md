@@ -1,7 +1,7 @@
 ---
 title: "hll_cardinality"
-canonical: https://tenzir.com/docs/reference/functions/hll_cardinality
-source: https://tenzir.com/docs/reference/functions/hll_cardinality.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/functions/hll_cardinality
+source: https://tenzir.com/docs/v6.22.0/reference/functions/hll_cardinality.md
 section: "Docs"
 ---
 

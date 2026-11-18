@@ -1,7 +1,7 @@
 ---
 title: "Configure project hooks"
-canonical: https://tenzir.com/docs/guides/testing/configure-project-hooks
-source: https://tenzir.com/docs/guides/testing/configure-project-hooks.md
+canonical: https://tenzir.com/docs/v6.22.0/guides/testing/configure-project-hooks
+source: https://tenzir.com/docs/v6.22.0/guides/testing/configure-project-hooks.md
 section: "Docs"
 ---
 

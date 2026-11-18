@@ -1,7 +1,7 @@
 ---
 title: "Investigate memory growth"
-canonical: https://tenzir.com/docs/guides/troubleshooting/investigate-memory-growth
-source: https://tenzir.com/docs/guides/troubleshooting/investigate-memory-growth.md
+canonical: https://tenzir.com/docs/v6.22.0/guides/troubleshooting/investigate-memory-growth
+source: https://tenzir.com/docs/v6.22.0/guides/troubleshooting/investigate-memory-growth.md
 section: "Docs"
 ---
 

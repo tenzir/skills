@@ -1,7 +1,7 @@
 ---
 title: "from_microsoft_365_activity"
-canonical: https://tenzir.com/docs/reference/operators/from_microsoft_365_activity
-source: https://tenzir.com/docs/reference/operators/from_microsoft_365_activity.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/from_microsoft_365_activity
+source: https://tenzir.com/docs/v6.22.0/reference/operators/from_microsoft_365_activity.md
 section: "Docs"
 ---
 

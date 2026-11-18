@@ -1,7 +1,7 @@
 ---
 title: "file_name"
-canonical: https://tenzir.com/docs/reference/functions/file_name
-source: https://tenzir.com/docs/reference/functions/file_name.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/functions/file_name
+source: https://tenzir.com/docs/v6.22.0/reference/functions/file_name.md
 section: "Docs"
 ---
 

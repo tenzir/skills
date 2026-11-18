@@ -1,7 +1,7 @@
 ---
 title: "write_chunks"
-canonical: https://tenzir.com/docs/reference/operators/write_chunks
-source: https://tenzir.com/docs/reference/operators/write_chunks.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/write_chunks
+source: https://tenzir.com/docs/v6.22.0/reference/operators/write_chunks.md
 section: "Docs"
 ---
 

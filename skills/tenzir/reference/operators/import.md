@@ -1,7 +1,7 @@
 ---
 title: "import"
-canonical: https://tenzir.com/docs/reference/operators/import
-source: https://tenzir.com/docs/reference/operators/import.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/import
+source: https://tenzir.com/docs/v6.22.0/reference/operators/import.md
 section: "Docs"
 ---
 

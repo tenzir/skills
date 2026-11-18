@@ -1,7 +1,7 @@
 ---
 title: "read_leef"
-canonical: https://tenzir.com/docs/reference/operators/read_leef
-source: https://tenzir.com/docs/reference/operators/read_leef.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/read_leef
+source: https://tenzir.com/docs/v6.22.0/reference/operators/read_leef.md
 section: "Docs"
 ---
 

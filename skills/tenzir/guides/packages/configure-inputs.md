@@ -1,7 +1,7 @@
 ---
 title: "Configure inputs"
-canonical: https://tenzir.com/docs/guides/packages/configure-inputs
-source: https://tenzir.com/docs/guides/packages/configure-inputs.md
+canonical: https://tenzir.com/docs/v6.22.0/guides/packages/configure-inputs
+source: https://tenzir.com/docs/v6.22.0/guides/packages/configure-inputs.md
 section: "Docs"
 ---
 

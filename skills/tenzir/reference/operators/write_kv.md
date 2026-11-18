@@ -1,7 +1,7 @@
 ---
 title: "write_kv"
-canonical: https://tenzir.com/docs/reference/operators/write_kv
-source: https://tenzir.com/docs/reference/operators/write_kv.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/write_kv
+source: https://tenzir.com/docs/v6.22.0/reference/operators/write_kv.md
 section: "Docs"
 ---
 

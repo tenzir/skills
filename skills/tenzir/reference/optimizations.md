@@ -1,7 +1,7 @@
 ---
 title: "Overview"
-canonical: https://tenzir.com/docs/reference/optimizations
-source: https://tenzir.com/docs/reference/optimizations.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/optimizations
+source: https://tenzir.com/docs/v6.22.0/reference/optimizations.md
 section: "Docs"
 ---
 
@@ -54,8 +54,8 @@ The [database pages](optimizations.md#filters-by-database) state which databases
 
 These operators act on hints:
 
-| Operator                                                                                                  | Filters                      | Projections                | Limits                 | Aggregations          |
-| --------------------------------------------------------------------------------------------------------- | ---------------------------- | -------------------------- | ---------------------- | --------------------- |
+| Operator                                                                                                          | Filters                      | Projections                | Limits                 | Aggregations          |
+| ----------------------------------------------------------------------------------------------------------------- | ---------------------------- | -------------------------- | ---------------------- | --------------------- |
 | [`from_azure_log_analytics`](operators/from_azure_log_analytics.md)     | Taken over                   | Top-level columns          | Taken over             | Taken over            |
 | [`from_clickhouse`](operators/from_clickhouse.md)                       | Taken over                   | Including tuple fields     | Taken over             | Taken over            |
 | [`from_duckdb`](operators/from_duckdb.md)                               | Taken over                   | Top-level columns          | Taken over             | Taken over            |

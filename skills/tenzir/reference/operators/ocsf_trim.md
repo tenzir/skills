@@ -1,7 +1,7 @@
 ---
 title: "ocsf_trim"
-canonical: https://tenzir.com/docs/reference/operators/ocsf_trim
-source: https://tenzir.com/docs/reference/operators/ocsf_trim.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/ocsf_trim
+source: https://tenzir.com/docs/v6.22.0/reference/operators/ocsf_trim.md
 section: "Docs"
 ---
 

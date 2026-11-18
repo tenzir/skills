@@ -1,7 +1,7 @@
 ---
 title: "count_minutes"
-canonical: https://tenzir.com/docs/reference/functions/count_minutes
-source: https://tenzir.com/docs/reference/functions/count_minutes.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/functions/count_minutes
+source: https://tenzir.com/docs/v6.22.0/reference/functions/count_minutes.md
 section: "Docs"
 ---
 

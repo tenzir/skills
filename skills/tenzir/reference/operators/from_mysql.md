@@ -1,7 +1,7 @@
 ---
 title: "from_mysql"
-canonical: https://tenzir.com/docs/reference/operators/from_mysql
-source: https://tenzir.com/docs/reference/operators/from_mysql.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/from_mysql
+source: https://tenzir.com/docs/v6.22.0/reference/operators/from_mysql.md
 section: "Docs"
 ---
 

@@ -1,8 +1,8 @@
 ---
 title: "Check Sigma rule compatibility with OCSF"
 description: "Test a Sigma rule against a normalized event, inspect its field requirements, and distinguish missing evidence from a nonmatch"
-canonical: https://tenzir.com/docs/guides/detect/check-sigma-rule-compatibility-with-ocsf
-source: https://tenzir.com/docs/guides/detect/check-sigma-rule-compatibility-with-ocsf.md
+canonical: https://tenzir.com/docs/v6.22.0/guides/detect/check-sigma-rule-compatibility-with-ocsf
+source: https://tenzir.com/docs/v6.22.0/guides/detect/check-sigma-rule-compatibility-with-ocsf.md
 section: "Docs"
 ---
 

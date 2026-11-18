@@ -1,7 +1,7 @@
 ---
 title: "string"
-canonical: https://tenzir.com/docs/reference/functions/string
-source: https://tenzir.com/docs/reference/functions/string.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/functions/string
+source: https://tenzir.com/docs/v6.22.0/reference/functions/string.md
 section: "Docs"
 ---
 

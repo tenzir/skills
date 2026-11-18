@@ -1,7 +1,7 @@
 ---
 title: "replace"
-canonical: https://tenzir.com/docs/reference/functions/replace
-source: https://tenzir.com/docs/reference/functions/replace.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/functions/replace
+source: https://tenzir.com/docs/v6.22.0/reference/functions/replace.md
 section: "Docs"
 ---
 

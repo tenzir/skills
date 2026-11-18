@@ -1,7 +1,7 @@
 ---
 title: "int"
-canonical: https://tenzir.com/docs/reference/functions/int
-source: https://tenzir.com/docs/reference/functions/int.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/functions/int
+source: https://tenzir.com/docs/v6.22.0/reference/functions/int.md
 section: "Docs"
 ---
 

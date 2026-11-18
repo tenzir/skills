@@ -1,7 +1,7 @@
 ---
 title: "ocsf_derive"
-canonical: https://tenzir.com/docs/reference/functions/ocsf_derive
-source: https://tenzir.com/docs/reference/functions/ocsf_derive.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/functions/ocsf_derive
+source: https://tenzir.com/docs/v6.22.0/reference/functions/ocsf_derive.md
 section: "Docs"
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "from_nic"
-canonical: https://tenzir.com/docs/reference/operators/from_nic
-source: https://tenzir.com/docs/reference/operators/from_nic.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/from_nic
+source: https://tenzir.com/docs/v6.22.0/reference/operators/from_nic.md
 section: "Docs"
 ---
 

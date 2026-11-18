@@ -1,7 +1,7 @@
 ---
 title: "from_nats"
-canonical: https://tenzir.com/docs/reference/operators/from_nats
-source: https://tenzir.com/docs/reference/operators/from_nats.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/from_nats
+source: https://tenzir.com/docs/v6.22.0/reference/operators/from_nats.md
 section: "Docs"
 ---
 

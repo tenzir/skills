@@ -1,7 +1,7 @@
 ---
 title: "merge"
-canonical: https://tenzir.com/docs/reference/operators/merge
-source: https://tenzir.com/docs/reference/operators/merge.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/merge
+source: https://tenzir.com/docs/v6.22.0/reference/operators/merge.md
 section: "Docs"
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "chart_bar"
-canonical: https://tenzir.com/docs/reference/operators/chart_bar
-source: https://tenzir.com/docs/reference/operators/chart_bar.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/chart_bar
+source: https://tenzir.com/docs/v6.22.0/reference/operators/chart_bar.md
 section: "Docs"
 ---
 

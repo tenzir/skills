@@ -1,7 +1,7 @@
 ---
 title: "hour"
-canonical: https://tenzir.com/docs/reference/functions/hour
-source: https://tenzir.com/docs/reference/functions/hour.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/functions/hour
+source: https://tenzir.com/docs/v6.22.0/reference/functions/hour.md
 section: "Docs"
 ---
 

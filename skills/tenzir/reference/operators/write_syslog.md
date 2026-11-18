@@ -1,7 +1,7 @@
 ---
 title: "write_syslog"
-canonical: https://tenzir.com/docs/reference/operators/write_syslog
-source: https://tenzir.com/docs/reference/operators/write_syslog.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/write_syslog
+source: https://tenzir.com/docs/v6.22.0/reference/operators/write_syslog.md
 section: "Docs"
 ---
 

@@ -1,8 +1,8 @@
 ---
 title: "Language"
 description: "Understand TQL's dataflow model, streaming and batch semantics, and support for events with different schemas."
-canonical: https://tenzir.com/docs/explanations/language
-source: https://tenzir.com/docs/explanations/language.md
+canonical: https://tenzir.com/docs/v6.22.0/explanations/language
+source: https://tenzir.com/docs/v6.22.0/explanations/language.md
 section: "Docs"
 ---
 

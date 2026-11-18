@@ -1,8 +1,8 @@
 ---
 title: "Create multi-stage detectors"
 description: "Combine independent detections into higher-confidence verdicts with correlation combinators, cross-stage state, and suppression"
-canonical: https://tenzir.com/docs/guides/detect/create-multi-stage-detectors
-source: https://tenzir.com/docs/guides/detect/create-multi-stage-detectors.md
+canonical: https://tenzir.com/docs/v6.22.0/guides/detect/create-multi-stage-detectors
+source: https://tenzir.com/docs/v6.22.0/guides/detect/create-multi-stage-detectors.md
 section: "Docs"
 ---
 

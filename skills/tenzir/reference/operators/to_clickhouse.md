@@ -1,7 +1,7 @@
 ---
 title: "to_clickhouse"
-canonical: https://tenzir.com/docs/reference/operators/to_clickhouse
-source: https://tenzir.com/docs/reference/operators/to_clickhouse.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/to_clickhouse
+source: https://tenzir.com/docs/v6.22.0/reference/operators/to_clickhouse.md
 section: "Docs"
 ---
 

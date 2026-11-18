@@ -1,7 +1,7 @@
 ---
 title: "accept_otlp"
-canonical: https://tenzir.com/docs/reference/operators/accept_otlp
-source: https://tenzir.com/docs/reference/operators/accept_otlp.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/accept_otlp
+source: https://tenzir.com/docs/v6.22.0/reference/operators/accept_otlp.md
 section: "Docs"
 ---
 

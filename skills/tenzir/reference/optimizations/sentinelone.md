@@ -1,7 +1,7 @@
 ---
 title: "SentinelOne"
-canonical: https://tenzir.com/docs/reference/optimizations/sentinelone
-source: https://tenzir.com/docs/reference/optimizations/sentinelone.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/optimizations/sentinelone
+source: https://tenzir.com/docs/v6.22.0/reference/optimizations/sentinelone.md
 section: "Docs"
 ---
 

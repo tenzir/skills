@@ -1,7 +1,7 @@
 ---
 title: "shell"
-canonical: https://tenzir.com/docs/reference/operators/shell
-source: https://tenzir.com/docs/reference/operators/shell.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/shell
+source: https://tenzir.com/docs/v6.22.0/reference/operators/shell.md
 section: "Docs"
 ---
 

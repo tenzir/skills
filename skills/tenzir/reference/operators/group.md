@@ -1,7 +1,7 @@
 ---
 title: "group"
-canonical: https://tenzir.com/docs/reference/operators/group
-source: https://tenzir.com/docs/reference/operators/group.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/group
+source: https://tenzir.com/docs/v6.22.0/reference/operators/group.md
 section: "Docs"
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "has"
-canonical: https://tenzir.com/docs/reference/functions/has
-source: https://tenzir.com/docs/reference/functions/has.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/functions/has
+source: https://tenzir.com/docs/v6.22.0/reference/functions/has.md
 section: "Docs"
 ---
 

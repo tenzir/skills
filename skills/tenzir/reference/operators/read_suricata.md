@@ -1,7 +1,7 @@
 ---
 title: "read_suricata"
-canonical: https://tenzir.com/docs/reference/operators/read_suricata
-source: https://tenzir.com/docs/reference/operators/read_suricata.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/read_suricata
+source: https://tenzir.com/docs/v6.22.0/reference/operators/read_suricata.md
 section: "Docs"
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "count_if"
-canonical: https://tenzir.com/docs/reference/functions/count_if
-source: https://tenzir.com/docs/reference/functions/count_if.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/functions/count_if
+source: https://tenzir.com/docs/v6.22.0/reference/functions/count_if.md
 section: "Docs"
 ---
 

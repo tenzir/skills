@@ -1,7 +1,7 @@
 ---
 title: "SPL"
-canonical: https://tenzir.com/docs/reference/optimizations/spl
-source: https://tenzir.com/docs/reference/optimizations/spl.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/optimizations/spl
+source: https://tenzir.com/docs/v6.22.0/reference/optimizations/spl.md
 section: "Docs"
 ---
 

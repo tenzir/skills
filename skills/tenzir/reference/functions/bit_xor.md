@@ -1,7 +1,7 @@
 ---
 title: "bit_xor"
-canonical: https://tenzir.com/docs/reference/functions/bit_xor
-source: https://tenzir.com/docs/reference/functions/bit_xor.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/functions/bit_xor
+source: https://tenzir.com/docs/v6.22.0/reference/functions/bit_xor.md
 section: "Docs"
 ---
 

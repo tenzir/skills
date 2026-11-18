@@ -1,7 +1,7 @@
 ---
 title: "read_xsv"
-canonical: https://tenzir.com/docs/reference/operators/read_xsv
-source: https://tenzir.com/docs/reference/operators/read_xsv.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/read_xsv
+source: https://tenzir.com/docs/v6.22.0/reference/operators/read_xsv.md
 section: "Docs"
 ---
 
@@ -23,8 +23,8 @@ The `read_xsv` operator transforms a byte stream into a event stream by parsing 
 
 The following table lists existing XSV configurations:
 
-| Format                                                           | Field Separator | List Separator | Null Value |
-| ---------------------------------------------------------------- | --------------- | -------------- | ---------- |
+| Format                                                                   | Field Separator | List Separator | Null Value |
+| ------------------------------------------------------------------------ | --------------- | -------------- | ---------- |
 | [`csv`](read_csv.md) | `,`             | `;`            | empty      |
 | [`ssv`](read_ssv.md) | `<space>`       | `,`            | `-`        |
 | [`tsv`](read_tsv.md) | `\t`            | `,`            | `-`        |

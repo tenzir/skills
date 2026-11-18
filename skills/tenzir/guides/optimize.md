@@ -1,8 +1,8 @@
 ---
 title: "Overview"
 description: "Reduce data volume and processing work in a pipeline."
-canonical: https://tenzir.com/docs/guides/optimize
-source: https://tenzir.com/docs/guides/optimize.md
+canonical: https://tenzir.com/docs/v6.22.0/guides/optimize
+source: https://tenzir.com/docs/v6.22.0/guides/optimize.md
 section: "Docs"
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "Inspect a node"
-canonical: https://tenzir.com/docs/guides/observability/inspect-a-node
-source: https://tenzir.com/docs/guides/observability/inspect-a-node.md
+canonical: https://tenzir.com/docs/v6.22.0/guides/observability/inspect-a-node
+source: https://tenzir.com/docs/v6.22.0/guides/observability/inspect-a-node.md
 section: "Docs"
 ---
 

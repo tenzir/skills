@@ -1,7 +1,7 @@
 ---
 title: "ocsf_type_name"
-canonical: https://tenzir.com/docs/reference/functions/ocsf_type_name
-source: https://tenzir.com/docs/reference/functions/ocsf_type_name.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/functions/ocsf_type_name
+source: https://tenzir.com/docs/v6.22.0/reference/functions/ocsf_type_name.md
 section: "Docs"
 ---
 

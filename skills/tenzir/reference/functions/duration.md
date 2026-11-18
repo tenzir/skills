@@ -1,7 +1,7 @@
 ---
 title: "duration"
-canonical: https://tenzir.com/docs/reference/functions/duration
-source: https://tenzir.com/docs/reference/functions/duration.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/functions/duration
+source: https://tenzir.com/docs/v6.22.0/reference/functions/duration.md
 section: "Docs"
 ---
 

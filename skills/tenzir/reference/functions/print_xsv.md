@@ -1,7 +1,7 @@
 ---
 title: "print_xsv"
-canonical: https://tenzir.com/docs/reference/functions/print_xsv
-source: https://tenzir.com/docs/reference/functions/print_xsv.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/functions/print_xsv
+source: https://tenzir.com/docs/v6.22.0/reference/functions/print_xsv.md
 section: "Docs"
 ---
 
@@ -21,8 +21,8 @@ The `parse_xsv` function prints a record’s values as delimiter separated strin
 
 The following table lists existing XSV configurations:
 
-| Format                                                            | Field Separator | List Separator | Null Value |
-| ----------------------------------------------------------------- | --------------- | -------------- | ---------- |
+| Format                                                                    | Field Separator | List Separator | Null Value |
+| ------------------------------------------------------------------------- | --------------- | -------------- | ---------- |
 | [`csv`](print_csv.md) | `,`             | `;`            | empty      |
 | [`ssv`](print_ssv.md) | `<space>`       | `,`            | `-`        |
 | [`tsv`](print_tsv.md) | `\t`            | `,`            | `-`        |

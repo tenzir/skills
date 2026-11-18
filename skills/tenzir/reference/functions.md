@@ -1,7 +1,7 @@
 ---
 title: "Functions"
-canonical: https://tenzir.com/docs/reference/functions
-source: https://tenzir.com/docs/reference/functions.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/functions
+source: https://tenzir.com/docs/v6.22.0/reference/functions.md
 section: "Docs"
 ---
 

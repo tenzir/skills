@@ -1,7 +1,7 @@
 ---
 title: "to_amazon_sqs"
-canonical: https://tenzir.com/docs/reference/operators/to_amazon_sqs
-source: https://tenzir.com/docs/reference/operators/to_amazon_sqs.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/to_amazon_sqs
+source: https://tenzir.com/docs/v6.22.0/reference/operators/to_amazon_sqs.md
 section: "Docs"
 ---
 

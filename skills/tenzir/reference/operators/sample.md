@@ -1,7 +1,7 @@
 ---
 title: "sample"
-canonical: https://tenzir.com/docs/reference/operators/sample
-source: https://tenzir.com/docs/reference/operators/sample.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/sample
+source: https://tenzir.com/docs/v6.22.0/reference/operators/sample.md
 section: "Docs"
 ---
 

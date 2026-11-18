@@ -1,7 +1,7 @@
 ---
 title: "Split and merge streams"
-canonical: https://tenzir.com/docs/guides/route/split-and-merge-streams
-source: https://tenzir.com/docs/guides/route/split-and-merge-streams.md
+canonical: https://tenzir.com/docs/v6.22.0/guides/route/split-and-merge-streams
+source: https://tenzir.com/docs/v6.22.0/guides/route/split-and-merge-streams.md
 section: "Docs"
 ---
 

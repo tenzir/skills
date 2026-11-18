@@ -1,7 +1,7 @@
 ---
 title: "read_tsv"
-canonical: https://tenzir.com/docs/reference/operators/read_tsv
-source: https://tenzir.com/docs/reference/operators/read_tsv.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/read_tsv
+source: https://tenzir.com/docs/v6.22.0/reference/operators/read_tsv.md
 section: "Docs"
 ---
 

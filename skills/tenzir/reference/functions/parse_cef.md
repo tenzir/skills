@@ -1,7 +1,7 @@
 ---
 title: "parse_cef"
-canonical: https://tenzir.com/docs/reference/functions/parse_cef
-source: https://tenzir.com/docs/reference/functions/parse_cef.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/functions/parse_cef
+source: https://tenzir.com/docs/v6.22.0/reference/functions/parse_cef.md
 section: "Docs"
 ---
 

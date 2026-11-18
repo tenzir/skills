@@ -1,7 +1,7 @@
 ---
 title: "ewm_variance"
-canonical: https://tenzir.com/docs/reference/functions/ewm_variance
-source: https://tenzir.com/docs/reference/functions/ewm_variance.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/functions/ewm_variance
+source: https://tenzir.com/docs/v6.22.0/reference/functions/ewm_variance.md
 section: "Docs"
 ---
 

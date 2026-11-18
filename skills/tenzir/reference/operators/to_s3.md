@@ -1,7 +1,7 @@
 ---
 title: "to_s3"
-canonical: https://tenzir.com/docs/reference/operators/to_s3
-source: https://tenzir.com/docs/reference/operators/to_s3.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/to_s3
+source: https://tenzir.com/docs/v6.22.0/reference/operators/to_s3.md
 section: "Docs"
 ---
 

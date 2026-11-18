@@ -1,7 +1,7 @@
 ---
 title: "Deduplicate events"
-canonical: https://tenzir.com/docs/guides/optimize/deduplicate-events
-source: https://tenzir.com/docs/guides/optimize/deduplicate-events.md
+canonical: https://tenzir.com/docs/v6.22.0/guides/optimize/deduplicate-events
+source: https://tenzir.com/docs/v6.22.0/guides/optimize/deduplicate-events.md
 section: "Docs"
 ---
 

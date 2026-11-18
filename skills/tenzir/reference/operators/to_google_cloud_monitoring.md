@@ -1,7 +1,7 @@
 ---
 title: "to_google_cloud_monitoring"
-canonical: https://tenzir.com/docs/reference/operators/to_google_cloud_monitoring
-source: https://tenzir.com/docs/reference/operators/to_google_cloud_monitoring.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/to_google_cloud_monitoring
+source: https://tenzir.com/docs/v6.22.0/reference/operators/to_google_cloud_monitoring.md
 section: "Docs"
 ---
 

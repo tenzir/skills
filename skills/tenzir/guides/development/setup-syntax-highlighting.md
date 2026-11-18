@@ -1,8 +1,8 @@
 ---
 title: "Setup syntax highlighting"
 description: "Install TQL language extensions for syntax highlighting in your editor"
-canonical: https://tenzir.com/docs/guides/development/setup-syntax-highlighting
-source: https://tenzir.com/docs/guides/development/setup-syntax-highlighting.md
+canonical: https://tenzir.com/docs/v6.22.0/guides/development/setup-syntax-highlighting
+source: https://tenzir.com/docs/v6.22.0/guides/development/setup-syntax-highlighting.md
 section: "Docs"
 ---
 

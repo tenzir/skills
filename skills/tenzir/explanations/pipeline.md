@@ -1,7 +1,7 @@
 ---
 title: "Pipeline"
-canonical: https://tenzir.com/docs/explanations/pipeline
-source: https://tenzir.com/docs/explanations/pipeline.md
+canonical: https://tenzir.com/docs/v6.22.0/explanations/pipeline
+source: https://tenzir.com/docs/v6.22.0/explanations/pipeline.md
 section: "Docs"
 ---
 

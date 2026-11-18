@@ -1,7 +1,7 @@
 ---
 title: "count"
-canonical: https://tenzir.com/docs/reference/functions/count
-source: https://tenzir.com/docs/reference/functions/count.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/functions/count
+source: https://tenzir.com/docs/v6.22.0/reference/functions/count.md
 section: "Docs"
 ---
 

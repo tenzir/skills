@@ -1,7 +1,7 @@
 ---
 title: "Enrichment"
-canonical: https://tenzir.com/docs/explanations/enrichment
-source: https://tenzir.com/docs/explanations/enrichment.md
+canonical: https://tenzir.com/docs/v6.22.0/explanations/enrichment
+source: https://tenzir.com/docs/v6.22.0/explanations/enrichment.md
 section: "Docs"
 ---
 

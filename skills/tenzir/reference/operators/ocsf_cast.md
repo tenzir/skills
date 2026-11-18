@@ -1,7 +1,7 @@
 ---
 title: "ocsf_cast"
-canonical: https://tenzir.com/docs/reference/operators/ocsf_cast
-source: https://tenzir.com/docs/reference/operators/ocsf_cast.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/ocsf_cast
+source: https://tenzir.com/docs/v6.22.0/reference/operators/ocsf_cast.md
 section: "Docs"
 ---
 

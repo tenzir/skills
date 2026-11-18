@@ -1,7 +1,7 @@
 ---
 title: "Write partitioned files"
-canonical: https://tenzir.com/docs/guides/store/write-partitioned-files
-source: https://tenzir.com/docs/guides/store/write-partitioned-files.md
+canonical: https://tenzir.com/docs/v6.22.0/guides/store/write-partitioned-files
+source: https://tenzir.com/docs/v6.22.0/guides/store/write-partitioned-files.md
 section: "Docs"
 ---
 

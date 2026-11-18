@@ -1,7 +1,7 @@
 ---
 title: "Learn the data lifecycle"
-canonical: https://tenzir.com/docs/tutorials/learn-the-data-lifecycle
-source: https://tenzir.com/docs/tutorials/learn-the-data-lifecycle.md
+canonical: https://tenzir.com/docs/v6.22.0/tutorials/learn-the-data-lifecycle
+source: https://tenzir.com/docs/v6.22.0/tutorials/learn-the-data-lifecycle.md
 section: "Docs"
 ---
 

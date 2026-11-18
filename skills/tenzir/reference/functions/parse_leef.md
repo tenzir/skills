@@ -1,7 +1,7 @@
 ---
 title: "parse_leef"
-canonical: https://tenzir.com/docs/reference/functions/parse_leef
-source: https://tenzir.com/docs/reference/functions/parse_leef.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/functions/parse_leef
+source: https://tenzir.com/docs/v6.22.0/reference/functions/parse_leef.md
 section: "Docs"
 ---
 

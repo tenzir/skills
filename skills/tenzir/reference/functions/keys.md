@@ -1,7 +1,7 @@
 ---
 title: "keys"
-canonical: https://tenzir.com/docs/reference/functions/keys
-source: https://tenzir.com/docs/reference/functions/keys.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/functions/keys
+source: https://tenzir.com/docs/v6.22.0/reference/functions/keys.md
 section: "Docs"
 ---
 

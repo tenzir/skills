@@ -1,7 +1,7 @@
 ---
 title: "accept_splunk"
-canonical: https://tenzir.com/docs/reference/operators/accept_splunk
-source: https://tenzir.com/docs/reference/operators/accept_splunk.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/accept_splunk
+source: https://tenzir.com/docs/v6.22.0/reference/operators/accept_splunk.md
 section: "Docs"
 ---
 

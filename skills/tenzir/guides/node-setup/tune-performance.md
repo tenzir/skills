@@ -1,7 +1,7 @@
 ---
 title: "Tune performance"
-canonical: https://tenzir.com/docs/guides/node-setup/tune-performance
-source: https://tenzir.com/docs/guides/node-setup/tune-performance.md
+canonical: https://tenzir.com/docs/v6.22.0/guides/node-setup/tune-performance
+source: https://tenzir.com/docs/v6.22.0/guides/node-setup/tune-performance.md
 section: "Docs"
 ---
 

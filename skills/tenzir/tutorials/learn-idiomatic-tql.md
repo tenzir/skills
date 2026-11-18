@@ -1,7 +1,7 @@
 ---
 title: "Learn idiomatic TQL"
-canonical: https://tenzir.com/docs/tutorials/learn-idiomatic-tql
-source: https://tenzir.com/docs/tutorials/learn-idiomatic-tql.md
+canonical: https://tenzir.com/docs/v6.22.0/tutorials/learn-idiomatic-tql
+source: https://tenzir.com/docs/v6.22.0/tutorials/learn-idiomatic-tql.md
 section: "Docs"
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "context_enrich"
-canonical: https://tenzir.com/docs/reference/operators/context_enrich
-source: https://tenzir.com/docs/reference/operators/context_enrich.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/context_enrich
+source: https://tenzir.com/docs/v6.22.0/reference/operators/context_enrich.md
 section: "Docs"
 ---
 

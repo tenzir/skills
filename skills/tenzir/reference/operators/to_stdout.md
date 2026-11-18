@@ -1,7 +1,7 @@
 ---
 title: "to_stdout"
-canonical: https://tenzir.com/docs/reference/operators/to_stdout
-source: https://tenzir.com/docs/reference/operators/to_stdout.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/to_stdout
+source: https://tenzir.com/docs/v6.22.0/reference/operators/to_stdout.md
 section: "Docs"
 ---
 

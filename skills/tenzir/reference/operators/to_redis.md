@@ -1,7 +1,7 @@
 ---
 title: "to_redis"
-canonical: https://tenzir.com/docs/reference/operators/to_redis
-source: https://tenzir.com/docs/reference/operators/to_redis.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/operators/to_redis
+source: https://tenzir.com/docs/v6.22.0/reference/operators/to_redis.md
 section: "Docs"
 ---
 

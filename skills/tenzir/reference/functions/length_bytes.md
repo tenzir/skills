@@ -1,7 +1,7 @@
 ---
 title: "length_bytes"
-canonical: https://tenzir.com/docs/reference/functions/length_bytes
-source: https://tenzir.com/docs/reference/functions/length_bytes.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/functions/length_bytes
+source: https://tenzir.com/docs/v6.22.0/reference/functions/length_bytes.md
 section: "Docs"
 ---
 

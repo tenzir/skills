@@ -1,7 +1,7 @@
 ---
 title: "hash_xxh3"
-canonical: https://tenzir.com/docs/reference/functions/hash_xxh3
-source: https://tenzir.com/docs/reference/functions/hash_xxh3.md
+canonical: https://tenzir.com/docs/v6.22.0/reference/functions/hash_xxh3
+source: https://tenzir.com/docs/v6.22.0/reference/functions/hash_xxh3.md
 section: "Docs"
 ---
 
