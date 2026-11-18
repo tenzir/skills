@@ -17,7 +17,7 @@ Want the full walkthrough?
 
 ## Use the OCSF skill
 
-Install the `tenzir-ocsf` skill when you want an agent to help with OCSF schema decisions. See [Use agent skills](https://tenzir.com/docs/guides/ai-workbench/use-agent-skills#use-the-ocsf-skill) for installation and usage examples.
+Install the `tenzir-ocsf` skill when you want an agent to help with OCSF schema decisions. See [Set up your agent](../set-up-your-agent.md#use-the-ocsf-skill) for installation and usage examples.
 
 Ask the agent to choose the OCSF version, event class, and profiles before it maps attributes. OCSF mappings should produce the required classification and occurrence attributes first, then add primary, context, and profile-specific attributes.
 
@@ -129,7 +129,7 @@ They also make a mapping readable in the other direction. Writing `where class_u
 
 * [Model detections in OCSF](../detect/model-detections-in-ocsf.md)
 * [Clean up values](../parse/clean-up-values.md)
-* [Use agent skills](https://tenzir.com/docs/guides/ai-workbench/use-agent-skills#use-the-ocsf-skill)
+* [Set up your agent](../set-up-your-agent.md#use-the-ocsf-skill)
 * [Map to ASIM](map-to-asim.md)
 * [Map to CIM](map-to-cim.md)
 * [Map to ECS](map-to-ecs.md)

@@ -33,6 +33,6 @@ A mapping that lives in a package gets a test, a version, and one place to fix a
 ## See also
 
 * [Parse string fields](parse/parse-string-fields.md)
-* [Create a package](https://tenzir.com/docs/guides/packages/create-a-package)
-* [Write tests](https://tenzir.com/docs/guides/testing/write-tests)
+* [Manage packages](manage-packages.md)
+* [Write tests](write-tests.md)
 * [Normalization](../explanations/normalization.md)

@@ -83,6 +83,8 @@ Use this catalog to look up a rule’s `logsource` selector, compatible OCSF cla
 | Zeek HTTP                                             | product: zeek, service: http                                                   | HTTP Activity             | class\_uid: 4002   |
 | Zeek SMB files                                        | product: zeek, service: smb\_files                                             | SMB Activity              | class\_uid: 4006   |
 
+<a id="sigma-aws-cloudtrail"></a>
+
 ### AWS CloudTrail
 
 product: aws, service: cloudtrail
@@ -133,6 +135,8 @@ These fields are not preserved by the source-to-OCSF mapping. A rule requiring o
 | `additionalEventData.MFAUsed`                               | Console sign-in details land in the Authentication class, not in API Activity.   |
 | `status`                                                    | The API Activity mapping translates the status into the OCSF status enumeration. |
 
+<a id="sigma-azure-activitylogs"></a>
+
 ### Azure activity log
 
 product: azure, service: activitylogs
@@ -165,6 +169,8 @@ These fields are not preserved by the source-to-OCSF mapping. A rule requiring o
 | --------------- | --------------------------------------------------------------------- |
 | `CategoryValue` | The API Activity mapping does not preserve the activity log category. |
 | `Category`      | The API Activity mapping does not preserve the activity log category. |
+
+<a id="sigma-azure-auditlogs-account-change"></a>
 
 ### Entra ID audit user management
 
@@ -217,6 +223,8 @@ These fields are not preserved by the source-to-OCSF mapping. A rule requiring o
 | `ConsentContext.IsAdminConsent`                  | The audit mapping does not preserve consent context.                              |
 | `additionalDetails.additionalInfo`               | The audit mapping does not preserve additional details.                           |
 
+<a id="sigma-azure-auditlogs-entity-management"></a>
+
 ### Entra ID audit directory management
 
 product: azure, service: auditlogs
@@ -267,6 +275,8 @@ These fields are not preserved by the source-to-OCSF mapping. A rule requiring o
 | `failure_status_reason`                          | The audit mapping stores the failure reason as status\_detail under ResultReason. |
 | `ConsentContext.IsAdminConsent`                  | The audit mapping does not preserve consent context.                              |
 | `additionalDetails.additionalInfo`               | The audit mapping does not preserve additional details.                           |
+
+<a id="sigma-azure-auditlogs-group-management"></a>
 
 ### Entra ID audit group management
 
@@ -319,6 +329,8 @@ These fields are not preserved by the source-to-OCSF mapping. A rule requiring o
 | `ConsentContext.IsAdminConsent`                  | The audit mapping does not preserve consent context.                              |
 | `additionalDetails.additionalInfo`               | The audit mapping does not preserve additional details.                           |
 
+<a id="sigma-azure-riskdetection"></a>
+
 ### Entra ID Protection risk detections
 
 product: azure, service: riskdetection
@@ -347,6 +359,8 @@ These fields are not preserved by the source-to-OCSF mapping. A rule requiring o
 | ------------------- | ------------------------------------------------------------------------ |
 | `userPrincipalName` | The Detection Finding mapping stores the user under evidences.           |
 | `ipAddress`         | The Detection Finding mapping stores the source address under evidences. |
+
+<a id="sigma-azure-signinlogs"></a>
 
 ### Entra ID sign-ins
 
@@ -394,6 +408,8 @@ These fields are not preserved by the source-to-OCSF mapping. A rule requiring o
 | `ActivityDetails`           | The Authentication mapping does not preserve activity details.                            |
 | `properties.message`        | Sign-in events carry no activity message.                                                 |
 
+<a id="sigma-gcp-audit"></a>
+
 ### GCP Cloud Audit Logs
 
 product: gcp, service: gcp.audit
@@ -429,6 +445,8 @@ These fields are not preserved by the source-to-OCSF mapping. A rule requiring o
 | `data.protoPayload.authorizationInfo.permission` | Authorization decisions have no OCSF attribute in API Activity.            |
 | `data.protoPayload.logName`                      | The audit log name selects the source, not an OCSF attribute of the event. |
 
+<a id="sigma-linux-file-event"></a>
+
 ### Linux file creation
 
 product: linux, category: file\_event
@@ -462,6 +480,8 @@ These fields are not preserved by the source-to-OCSF mapping. A rule requiring o
 | Sigma field       | Reason                                                                                                       |
 | ----------------- | ------------------------------------------------------------------------------------------------------------ |
 | `CreationUtcTime` | The File System Activity mapping stores the creation time as a timestamp, not as the Sysmon-rendered string. |
+
+<a id="sigma-linux-network-connection"></a>
 
 ### Linux network connection
 
@@ -507,6 +527,8 @@ These fields are not preserved by the source-to-OCSF mapping. A rule requiring o
 | `SourcePortName`      | The Network Activity mapping resolves the service name from a table, not from the source string. |
 | `DestinationPortName` | The Network Activity mapping resolves the service name from a table, not from the source string. |
 
+<a id="sigma-linux-process-creation"></a>
+
 ### Linux process creation
 
 product: linux, category: process\_creation
@@ -548,6 +570,8 @@ These fields are not preserved by the source-to-OCSF mapping. A rule requiring o
 | `IntegrityLevel` | Integrity levels are a Windows concept.                                             |
 | `LogonId`        | The Process Activity mapping does not preserve the Sysmon logon session identifier. |
 
+<a id="sigma-macos-process-creation"></a>
+
 ### macOS process creation
 
 product: macos, category: process\_creation
@@ -588,6 +612,8 @@ These fields are not preserved by the source-to-OCSF mapping. A rule requiring o
 | `EventID`        | Sysmon for Linux and macOS event IDs are not part of the OCSF process mapping.      |
 | `IntegrityLevel` | Integrity levels are a Windows concept.                                             |
 | `LogonId`        | The Process Activity mapping does not preserve the Sysmon logon session identifier. |
+
+<a id="sigma-okta-account-change"></a>
 
 ### Okta account change
 
@@ -631,6 +657,8 @@ These fields are not preserved by the source-to-OCSF mapping. A rule requiring o
 | `target.displayName`                         | Targets become class-specific user, group, or entity objects.             |
 | `target.alternateId`                         | Targets become class-specific user, group, or entity objects.             |
 
+<a id="sigma-okta-api-activity"></a>
+
 ### Okta API token and OAuth activity
 
 product: okta, service: okta
@@ -672,6 +700,8 @@ These fields are not preserved by the source-to-OCSF mapping. A rule requiring o
 | `debugContext.debugData.logOnlySecurityData` | The Okta mapping does not preserve the log-only security data.            |
 | `target.displayName`                         | Targets become class-specific user, group, or entity objects.             |
 | `target.alternateId`                         | Targets become class-specific user, group, or entity objects.             |
+
+<a id="sigma-okta-authentication"></a>
 
 ### Okta authentication
 
@@ -715,6 +745,8 @@ These fields are not preserved by the source-to-OCSF mapping. A rule requiring o
 | `target.displayName`                         | Targets become class-specific user, group, or entity objects.             |
 | `target.alternateId`                         | Targets become class-specific user, group, or entity objects.             |
 
+<a id="sigma-okta-detection-finding"></a>
+
 ### Okta threat detections
 
 product: okta, service: okta
@@ -756,6 +788,8 @@ These fields are not preserved by the source-to-OCSF mapping. A rule requiring o
 | `debugContext.debugData.logOnlySecurityData` | The Okta mapping does not preserve the log-only security data.            |
 | `target.displayName`                         | Targets become class-specific user, group, or entity objects.             |
 | `target.alternateId`                         | Targets become class-specific user, group, or entity objects.             |
+
+<a id="sigma-okta-entity-management"></a>
 
 ### Okta policy, application, zone, and device management
 
@@ -799,6 +833,8 @@ These fields are not preserved by the source-to-OCSF mapping. A rule requiring o
 | `target.displayName`                         | Targets become class-specific user, group, or entity objects.             |
 | `target.alternateId`                         | Targets become class-specific user, group, or entity objects.             |
 
+<a id="sigma-okta-group-management"></a>
+
 ### Okta group management
 
 product: okta, service: okta
@@ -841,6 +877,8 @@ These fields are not preserved by the source-to-OCSF mapping. A rule requiring o
 | `target.displayName`                         | Targets become class-specific user, group, or entity objects.             |
 | `target.alternateId`                         | Targets become class-specific user, group, or entity objects.             |
 
+<a id="sigma-windows-appxdeployment-server"></a>
+
 ### Windows AppX package deployments
 
 product: windows, service: appxdeployment-server
@@ -871,6 +909,8 @@ For provenance-scoped fields, rejects `metadata.log_name` or `metadata.product.n
 | `HasFullTrust`        | Reads `application.data.has_full_trust`. Requires consistent producer provenance because the value lives in a source-specific namespace.                          |
 | `Flags`               | Reads `application.data.flags`. Requires consistent producer provenance because the value lives in a source-specific namespace.                                   |
 
+<a id="sigma-windows-bits-client"></a>
+
 ### Windows BITS transfer jobs
 
 product: windows, service: bits-client
@@ -895,6 +935,8 @@ For provenance-scoped fields, rejects `metadata.log_name` or `metadata.product.n
 | `LocalName`   | Reads `file.path`.                                                                                                                                                |
 | `processPath` | Reads `actor.process.path`, falling back to `actor.process.file.path` when absent or empty. The process that created the job.                                     |
 | `processId`   | Reads `actor.process.pid`, comparing numbers and strings alike.                                                                                                   |
+
+<a id="sigma-windows-codeintegrity-operational"></a>
 
 ### Windows App Control blocks and audits
 
@@ -933,6 +975,8 @@ These fields are not preserved by the source-to-OCSF mapping. A rule requiring o
 | ------------------- | ------------------------------------------------------------ |
 | `FileNameLength`    | Buffer lengths describe the event encoding, not the file.    |
 | `ProcessNameLength` | Buffer lengths describe the event encoding, not the process. |
+
+<a id="sigma-windows-create-remote-thread"></a>
 
 ### Windows remote thread creation
 
@@ -978,6 +1022,8 @@ These fields are not preserved by the source-to-OCSF mapping. A rule requiring o
 | `SourceParentImage` | The Process Activity mapping does not carry the acting process's parent.     |
 | `SourceCommandLine` | The Process Activity mapping does not carry the acting process command line. |
 
+<a id="sigma-windows-create-stream-hash"></a>
+
 ### Windows alternate data stream creation
 
 product: windows, category: create\_stream\_hash, service: sysmon (optional)
@@ -1015,6 +1061,8 @@ These fields are not preserved by the source-to-OCSF mapping. A rule requiring o
 | `Contents`        | The File System Activity mapping does not preserve stream contents.                                          |
 | `CreationUtcTime` | The File System Activity mapping stores the creation time as a timestamp, not as the Sysmon-rendered string. |
 
+<a id="sigma-windows-dns-client"></a>
+
 ### Windows DNS client queries
 
 product: windows, service: dns-client
@@ -1048,6 +1096,8 @@ These fields are not preserved by the source-to-OCSF mapping. A rule requiring o
 | `QueryType`    | The DNS Activity mapping stores the record type by name, not by number. |
 | `QueryOptions` | The DNS Activity mapping does not preserve the query option flags.      |
 
+<a id="sigma-windows-dns-query"></a>
+
 ### Windows DNS query
 
 product: windows, category: dns\_query, service: sysmon (optional)
@@ -1077,6 +1127,8 @@ For provenance-scoped fields, rejects `metadata.log_name` or `metadata.product.n
 | `User`         | Rebuilds `DOMAIN\name` from `actor.user.domain` and `actor.user.name`. Uses the acting user, not the affected user.                                               |
 | `ProcessId`    | Reads `actor.process.pid`, comparing numbers and strings alike.                                                                                                   |
 | `ProcessGuid`  | Reads `actor.process.uid`.                                                                                                                                        |
+
+<a id="sigma-windows-driver-load"></a>
 
 ### Windows driver load
 
@@ -1111,6 +1163,8 @@ These fields are not preserved by the source-to-OCSF mapping. A rule requiring o
 | Sigma field | Reason                                                                       |
 | ----------- | ---------------------------------------------------------------------------- |
 | `Signed`    | OCSF encodes signing as the presence of the signature object, not as a flag. |
+
+<a id="sigma-windows-file-delete"></a>
 
 ### Windows file deletion
 
@@ -1150,6 +1204,8 @@ These fields are not preserved by the source-to-OCSF mapping. A rule requiring o
 | `IsExecutable` | The File System Activity mapping folds the flag into the file type. |
 | `Archived`     | The Sysmon archive flag has no OCSF attribute.                      |
 
+<a id="sigma-windows-file-event"></a>
+
 ### Windows file creation
 
 product: windows, category: file\_event, service: sysmon (optional)
@@ -1187,6 +1243,8 @@ These fields are not preserved by the source-to-OCSF mapping. A rule requiring o
 | Sigma field       | Reason                                                                                                       |
 | ----------------- | ------------------------------------------------------------------------------------------------------------ |
 | `CreationUtcTime` | The File System Activity mapping stores the creation time as a timestamp, not as the Sysmon-rendered string. |
+
+<a id="sigma-windows-firewall-as"></a>
 
 ### Windows Firewall rule changes
 
@@ -1232,6 +1290,8 @@ These fields are not preserved by the source-to-OCSF mapping. A rule requiring o
 | `EdgeTraversal` | The Entity Management mapping stores the flag as a boolean. |
 | `Origin`        | Stock rules never target the rule origin.                   |
 
+<a id="sigma-windows-image-load"></a>
+
 ### Windows image load
 
 product: windows, category: image\_load, service: sysmon (optional)
@@ -1275,6 +1335,8 @@ These fields are not preserved by the source-to-OCSF mapping. A rule requiring o
 | Sigma field | Reason                                                                       |
 | ----------- | ---------------------------------------------------------------------------- |
 | `Signed`    | OCSF encodes signing as the presence of the signature object, not as a flag. |
+
+<a id="sigma-windows-network-connection"></a>
 
 ### Windows network connection
 
@@ -1324,6 +1386,8 @@ These fields are not preserved by the source-to-OCSF mapping. A rule requiring o
 | `SourcePortName`      | The Network Activity mapping resolves the service name from a table, not from the source string. |
 | `DestinationPortName` | The Network Activity mapping resolves the service name from a table, not from the source string. |
 
+<a id="sigma-windows-pipe-created"></a>
+
 ### Windows named pipe creation
 
 product: windows, category: pipe\_created, service: sysmon (optional)
@@ -1358,6 +1422,8 @@ These fields are not preserved by the source-to-OCSF mapping. A rule requiring o
 | Sigma field | Reason                                                                                    |
 | ----------- | ----------------------------------------------------------------------------------------- |
 | `EventType` | The Windows Resource Activity mapping does not distinguish pipe creation from connection. |
+
+<a id="sigma-windows-process-access"></a>
 
 ### Windows process access
 
@@ -1398,6 +1464,8 @@ These fields are not preserved by the source-to-OCSF mapping. A rule requiring o
 | ----------- | ------------------------------------- |
 | `CallTrace` | The call stack has no OCSF attribute. |
 
+<a id="sigma-windows-process-creation"></a>
+
 ### Windows process creation
 
 product: windows, category: process\_creation, service: sysmon (optional)
@@ -1434,6 +1502,8 @@ For provenance-scoped fields, rejects `metadata.log_name` or `metadata.product.n
 | `FileVersion`       | Reads `process.file.version`.                                                                                                                                                                                                                                                                                                                                                            |
 | `Hashes`            | Rebuilds the `ALGORITHM=value` list from `process.file.hashes`. Never pairs an algorithm with another fingerprint's value.                                                                                                                                                                                                                                                               |
 
+<a id="sigma-windows-ps-module"></a>
+
 ### Windows PowerShell module logging
 
 product: windows, category: ps\_module, service: powershell (optional)
@@ -1464,6 +1534,8 @@ These fields are not preserved by the source-to-OCSF mapping. A rule requiring o
 | Sigma field   | Reason                                                                 |
 | ------------- | ---------------------------------------------------------------------- |
 | `ContextInfo` | The Script Activity mapping does not carry the module logging context. |
+
+<a id="sigma-windows-ps-script"></a>
 
 ### Windows PowerShell script block
 
@@ -1499,6 +1571,8 @@ These fields are not preserved by the source-to-OCSF mapping. A rule requiring o
 | `MessageNumber` | Script block fragments are not preserved by the Script Activity mapping. |
 | `MessageTotal`  | Script block fragments are not preserved by the Script Activity mapping. |
 
+<a id="sigma-windows-registry-add"></a>
+
 ### Windows registry key creation
 
 product: windows, category: registry\_add, service: sysmon (optional)
@@ -1526,6 +1600,8 @@ For provenance-scoped fields, rejects `metadata.log_name` or `metadata.product.n
 | `User`         | Rebuilds `DOMAIN\name` from `actor.user.domain` and `actor.user.name`. Uses the acting user, not the affected user.                                               |
 | `ProcessId`    | Reads `actor.process.pid`, comparing numbers and strings alike.                                                                                                   |
 | `ProcessGuid`  | Reads `actor.process.uid`.                                                                                                                                        |
+
+<a id="sigma-windows-registry-delete-key"></a>
 
 ### Windows registry key deletion
 
@@ -1563,6 +1639,8 @@ These fields are not preserved by the source-to-OCSF mapping. A rule requiring o
 | ----------- | ---------------------------------- |
 | `Details`   | Registry keys carry no value data. |
 
+<a id="sigma-windows-registry-delete-value"></a>
+
 ### Windows registry value deletion
 
 product: windows, category: registry\_delete, service: sysmon (optional)
@@ -1598,6 +1676,8 @@ These fields are not preserved by the source-to-OCSF mapping. A rule requiring o
 | Sigma field | Reason                        |
 | ----------- | ----------------------------- |
 | `Details`   | Deleted values carry no data. |
+
+<a id="sigma-windows-registry-event-key"></a>
 
 ### Windows registry key event
 
@@ -1636,6 +1716,8 @@ These fields are not preserved by the source-to-OCSF mapping. A rule requiring o
 | ----------- | ---------------------------------- |
 | `Details`   | Registry keys carry no value data. |
 
+<a id="sigma-windows-registry-event-value"></a>
+
 ### Windows registry value event
 
 product: windows, category: registry\_event, service: sysmon (optional)
@@ -1673,6 +1755,8 @@ These fields are not preserved by the source-to-OCSF mapping. A rule requiring o
 | ----------- | ------------------------------------------ |
 | `NewName`   | Registry values are not renamed as values. |
 
+<a id="sigma-windows-registry-set"></a>
+
 ### Windows registry value set
 
 product: windows, category: registry\_set, service: sysmon (optional)
@@ -1698,6 +1782,8 @@ For provenance-scoped fields, rejects `metadata.log_name` or `metadata.product.n
 | `Details`      | Reads `reg_value.data`. Reads the value data the normalizer stored, whatever its type.                                                                            |
 | `Image`        | Reads `actor.process.path`, falling back to `actor.process.file.path` when absent or empty. Uses the acting process.                                              |
 | `User`         | Rebuilds `DOMAIN\name` from `actor.user.domain` and `actor.user.name`. Uses the acting user, not the affected user.                                               |
+
+<a id="sigma-windows-security-account-change"></a>
 
 ### Windows Security account change
 
@@ -1737,6 +1823,8 @@ These fields are not preserved by the source-to-OCSF mapping. A rule requiring o
 | ---------------- | ------------------------------------------------------------------------------------------------------------ |
 | `SamAccountName` | Account attribute changes (4738) land in the OCSF user management class, which this document does not cover. |
 | `PrivilegeList`  | The Account Change mapping does not preserve the privilege list.                                             |
+
+<a id="sigma-windows-security-authentication"></a>
 
 ### Windows Security authentication
 
@@ -1795,6 +1883,8 @@ These fields are not preserved by the source-to-OCSF mapping. A rule requiring o
 | `ElevatedToken`        | The Authentication mapping does not preserve the elevation flag.                                               |
 | `ImpersonationLevel`   | The Authentication mapping does not preserve the impersonation level.                                          |
 
+<a id="sigma-windows-security-authorize-session"></a>
+
 ### Windows Security special privilege assignment
 
 product: windows, service: security
@@ -1822,6 +1912,8 @@ For provenance-scoped fields, expected log channel: `Security`. Explicitly confl
 | `SubjectUserSid`    | Reads `user.uid`.                                                                                                                                                 |
 | `SubjectLogonId`    | Reads `session.uid_alt`.                                                                                                                                          |
 | `PrivilegeList`     | Reads `privileges`. A rule value matches when any assigned privilege matches.                                                                                     |
+
+<a id="sigma-windows-security-entity"></a>
 
 ### Windows Security directory and object management
 
@@ -1872,6 +1964,8 @@ These fields are not preserved by the source-to-OCSF mapping. A rule requiring o
 | `AccessMask` | The source renders the access mask in hexadecimal; OCSF stores an integer.                                               |
 | `ObjectGUID` | The Entity Management mapping stores the GUID as the entity identifier but rules compare it against distinguished names. |
 
+<a id="sigma-windows-security-event-log"></a>
+
 ### Windows Security log clearing
 
 product: windows, service: security
@@ -1898,6 +1992,8 @@ For provenance-scoped fields, expected log channel: `Security`. Explicitly confl
 | `SubjectDomainName` | Reads `actor.user.domain`.                                                                                                                                        |
 | `SubjectUserSid`    | Reads `actor.user.uid`.                                                                                                                                           |
 | `SubjectLogonId`    | Reads `actor.session.uid_alt`.                                                                                                                                    |
+
+<a id="sigma-windows-security-file"></a>
 
 ### Windows Security file access
 
@@ -1940,6 +2036,8 @@ These fields are not preserved by the source-to-OCSF mapping. A rule requiring o
 | `HandleId`   | Handles are not part of the OCSF object access mapping.                      |
 | `ProcessId`  | The source renders process identifiers in hexadecimal; OCSF stores integers. |
 
+<a id="sigma-windows-security-group-management"></a>
+
 ### Windows Security group management
 
 product: windows, service: security
@@ -1979,6 +2077,8 @@ These fields are not preserved by the source-to-OCSF mapping. A rule requiring o
 | Sigma field     | Reason                                                             |
 | --------------- | ------------------------------------------------------------------ |
 | `PrivilegeList` | The Group Management mapping does not preserve the privilege list. |
+
+<a id="sigma-windows-security-process"></a>
 
 ### Windows Security process creation
 
@@ -2024,6 +2124,8 @@ These fields are not preserved by the source-to-OCSF mapping. A rule requiring o
 | `ProcessId`          | The source renders process identifiers in hexadecimal; OCSF stores integers. |
 | `TokenElevationType` | The Security process mapping does not preserve the token elevation type.     |
 
+<a id="sigma-windows-security-registry-key"></a>
+
 ### Windows Security registry key access
 
 product: windows, service: security
@@ -2064,6 +2166,8 @@ These fields are not preserved by the source-to-OCSF mapping. A rule requiring o
 | `AccessList` | The object access mapping does not preserve the rendered access list.        |
 | `HandleId`   | Handles are not part of the OCSF object access mapping.                      |
 | `ProcessId`  | The source renders process identifiers in hexadecimal; OCSF stores integers. |
+
+<a id="sigma-windows-security-registry-value"></a>
 
 ### Windows Security registry value change
 
@@ -2107,6 +2211,8 @@ These fields are not preserved by the source-to-OCSF mapping. A rule requiring o
 | `OperationType` | The Registry Value Activity mapping folds the operation into the activity.   |
 | `ProcessId`     | The source renders process identifiers in hexadecimal; OCSF stores integers. |
 
+<a id="sigma-windows-security-scheduled-job"></a>
+
 ### Windows Security scheduled task change
 
 product: windows, service: security
@@ -2142,6 +2248,8 @@ These fields are not preserved by the source-to-OCSF mapping. A rule requiring o
 | Sigma field   | Reason                                                             |
 | ------------- | ------------------------------------------------------------------ |
 | `TaskContent` | The Scheduled Job Activity mapping does not preserve the task XML. |
+
+<a id="sigma-windows-security-service"></a>
 
 ### Windows Security service installation
 
@@ -2181,6 +2289,8 @@ These fields are not preserved by the source-to-OCSF mapping. A rule requiring o
 | ------------------ | -------------------------------------------------------------------------------------------------------- |
 | `ServiceType`      | The Windows Service Activity mapping translates the type into enumerations, not the rendered code.       |
 | `ServiceStartType` | The Windows Service Activity mapping translates the start type into enumerations, not the rendered code. |
+
+<a id="sigma-windows-security-smb"></a>
 
 ### Windows Security network share access
 
@@ -2224,6 +2334,8 @@ These fields are not preserved by the source-to-OCSF mapping. A rule requiring o
 | `ShareLocalPath` | The SMB Activity mapping does not preserve the local share path.           |
 | `ObjectType`     | Share access events always concern files.                                  |
 
+<a id="sigma-windows-security-user-management"></a>
+
 ### Windows Security user management
 
 product: windows, service: security
@@ -2264,6 +2376,8 @@ These fields are not preserved by the source-to-OCSF mapping. A rule requiring o
 | ---------------- | ----------------------------------------------------------------------------- |
 | `SamAccountName` | The User Management mapping does not preserve the SAM account name attribute. |
 
+<a id="sigma-windows-system-event-log"></a>
+
 ### Windows System log event log clearing
 
 product: windows, service: system
@@ -2291,6 +2405,8 @@ For provenance-scoped fields, expected log channel: `System`. Explicitly conflic
 | `SubjectUserName`   | Reads `actor.user.name`.                                                                                                                                                         |
 | `SubjectDomainName` | Reads `actor.user.domain`.                                                                                                                                                       |
 | `BackupPath`        | Reads `file.path`.                                                                                                                                                               |
+
+<a id="sigma-windows-system-service"></a>
 
 ### Windows System log service activity
 
@@ -2332,6 +2448,8 @@ These fields are not preserved by the source-to-OCSF mapping. A rule requiring o
 | `StartType`   | The Windows Service Activity mapping translates the start type into enumerations, not the rendered code. |
 | `Computer`    | The host name lives in device.hostname, which no stock rule targets through this field.                  |
 
+<a id="sigma-windows-windefend"></a>
+
 ### Windows Defender detections
 
 product: windows, service: windefend
@@ -2371,6 +2489,8 @@ These fields are not preserved by the source-to-OCSF mapping. A rule requiring o
 | `Feature_Name` | The Detection Finding mapping does not preserve the feature name.                   |
 | `Action`       | The Detection Finding mapping translates the action into a disposition enumeration. |
 
+<a id="sigma-zeek-dns"></a>
+
 ### Zeek DNS
 
 product: zeek, service: dns
@@ -2406,6 +2526,8 @@ These fields are not preserved by the source-to-OCSF mapping. A rule requiring o
 | `TC`        | The DNS Activity mapping does not preserve DNS header flags.            |
 | `RD`        | The DNS Activity mapping does not preserve DNS header flags.            |
 | `RA`        | The DNS Activity mapping does not preserve DNS header flags.            |
+
+<a id="sigma-zeek-http"></a>
 
 ### Zeek HTTP
 
@@ -2447,6 +2569,8 @@ These fields are not preserved by the source-to-OCSF mapping. A rule requiring o
 | `c-useragent`       | Web proxy taxonomy fields do not apply to Zeek HTTP records.       |
 | `request_body_len`  | The HTTP Activity mapping does not preserve request body lengths.  |
 | `response_body_len` | The HTTP Activity mapping does not preserve response body lengths. |
+
+<a id="sigma-zeek-smb-files"></a>
 
 ### Zeek SMB files
 

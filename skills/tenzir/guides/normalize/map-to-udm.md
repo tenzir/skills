@@ -19,7 +19,7 @@ The TQL examples in this guide build API-facing UDM records, so they use lowerCa
 
 ## Use the UDM skill
 
-Install the `tenzir-udm` skill when you want an agent to help with UDM schema decisions. See [Use agent skills](https://tenzir.com/docs/guides/ai-workbench/use-agent-skills#use-the-udm-skill) for installation and usage examples.
+Install the `tenzir-udm` skill when you want an agent to help with UDM schema decisions. See [Set up your agent](../set-up-your-agent.md#use-the-udm-skill) for installation and usage examples.
 
 Ask the agent to use ingestion object field names when it maps logs into UDM event or entity objects for Google SecOps UDM API ingestion. When generated UDM field headings show two forms, choose the right-side lowerCamelCase ingestion object form. For example, use `metadata.eventType` and `network.ipProtocol` in the TQL output. If a heading has one name, use that spelling.
 
@@ -49,11 +49,11 @@ These rules are specific to UDM:
 
 * [`to_google_secops`](../../reference/operators/to_google_secops.md)
 * [Clean up values](../parse/clean-up-values.md)
-* [Use agent skills](https://tenzir.com/docs/guides/ai-workbench/use-agent-skills#use-the-udm-skill)
+* [Set up your agent](../set-up-your-agent.md#use-the-udm-skill)
 * [Map to ASIM](map-to-asim.md)
 * [Map to CIM](map-to-cim.md)
 * [Map to ECS](map-to-ecs.md)
 * [Map to OCSF](map-to-ocsf.md)
-* [Create a package](https://tenzir.com/docs/guides/packages/create-a-package)
-* [Write tests](https://tenzir.com/docs/guides/testing/write-tests)
+* [Manage packages](../manage-packages.md)
+* [Write tests](../write-tests.md)
 * [Onboard a data source](../../tutorials/onboard-a-data-source.md)

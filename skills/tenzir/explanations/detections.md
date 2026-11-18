@@ -102,4 +102,4 @@ Treat detections as versioned content: give analytics stable identities, test th
 * [Create multi-stage detectors](../guides/detect/create-multi-stage-detectors.md)
 * [Execute Sigma rules](../guides/detect/execute-sigma-rules.md)
 * [Scan bytes with YARA](../guides/detect/scan-bytes-with-yara.md)
-* [Add operators](https://tenzir.com/docs/guides/packages/add-operators)
+* [Manage packages](../guides/manage-packages.md)

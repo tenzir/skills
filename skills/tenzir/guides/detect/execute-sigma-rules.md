@@ -232,6 +232,6 @@ this = {
 * [Match events with TQL](match-events-with-tql.md)
 * [Model detections in OCSF](model-detections-in-ocsf.md)
 * [Create multi-stage detectors](create-multi-stage-detectors.md)
-* [Add operators](https://tenzir.com/docs/guides/packages/add-operators)
+* [Manage packages](../manage-packages.md)
 * [Map to OCSF](../normalize/map-to-ocsf.md)
 * [Windows event logs](https://tenzir.com/product/integrations/microsoft/windows-event-logs)
