@@ -27,10 +27,9 @@ not be edited by hand here:
 - `skills/tenzir-ocsf/`
 - `skills/tenzir-udm/`
 
-The `tenzir-7` branch copies `skills/tenzir/` from the Tenzir 7 preview
-documentation; the nightly sync on `main` starts its sync. Keep it close to
-`main` by merging `main` into it, and delete it once Tenzir 7 is the latest
-release.
+The nightly sync copies `skills/tenzir/` from the agent map of the default
+documentation at <https://tenzir.com/docs/SKILL.md>, so the skill follows
+whichever version the website serves at `/docs/`.
 
 ## Skill authoring guidelines
 
