@@ -27,6 +27,10 @@ The number of events to keep.
 
 Defaults to `10`.
 
+## Optimizations
+
+A remote source, such as [`from_mysql`](from_mysql.md) or [`from_splunk`](from_splunk.md), may take over a `head` that follows it, so that its target returns at most `n` events, as with a `LIMIT`. After a summary that the target computes, the limit counts groups. Our [optimizations reference](../optimizations.md#the-run-of-operators-after-the-source) describes which operators a source takes over.
+
 ## Examples
 
 ### Get the first 10 events

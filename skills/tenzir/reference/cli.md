@@ -145,13 +145,13 @@ The `organization member list` command shows each member’s id, which `organiza
 
 | Command                                                      | Description                                                                                                                                                              |
 | ------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `deployment list`                                            | Lists the deployments with their version, whether an upgrade is available, whether they’re reachable, and when each was last seen.                                       |
+| `deployment list`                                            | Lists the deployments with their version, whether an update is available, whether they’re reachable, and when each was last seen.                                        |
 | `deployment create [<name>]`                                 | Registers a deployment that you run yourself. With `--hosted`, Tenzir runs it, in `--type` and `--region`.                                                               |
 | `deployment types`                                           | Lists the types and regions of Tenzir-hosted deployments, with vCPUs, memory, and rates.                                                                                 |
 | `deployment change-type <deployment> <type>`                 | Runs a Tenzir-hosted deployment as another type, which restarts it.                                                                                                      |
-| `deployment upgrade <deployment> [-d]`                       | Runs a Tenzir-hosted deployment on the platform’s current version, which restarts it.                                                                                    |
+| `deployment update <deployment> [--version <v>] [-d]`        | Runs a Tenzir-hosted deployment on the version the platform offers, which restarts it.                                                                                   |
 | `deployment resume <deployment>`                             | Resumes a deployment that the usage limit suspended, once the limit allows it.                                                                                           |
-| `deployment update <deployment>`                             | Changes the name or slug.                                                                                                                                                |
+| `deployment rename <deployment>`                             | Changes the name or slug.                                                                                                                                                |
 | `deployment rotate-token <deployment>`                       | Mints a new key and stops the current one at once.                                                                                                                       |
 | `deployment delete <deployment>`                             | Deletes a deployment and its metrics. A self-hosted installation stays on its host.                                                                                      |
 | `deployment diagnose <deployment>`                           | Shows whether the deployment answers, its uptime, and whether log retrieval works.                                                                                       |
@@ -163,6 +163,8 @@ The `organization member list` command shows each member’s id, which `organiza
 | `deployment tracker get\|set <deployment>`                   | Reads or changes the [tracker](cli.md#deployment-trackers).                                                                            |
 | `deployment resilience get\|enable\|disable <deployment>`    | Reads or changes whether the deployment buffers secrets to keep working while the platform is unreachable.                                                               |
 | `deployment configuration status\|deploy <deployment>`       | Reads the [configuration status](cli.md#configuration-status) or [deploys a commit](cli.md#deploys). |
+
+The `deployment update` command reads the version the platform offers the deployment, as `deployment list` shows it, and updates to that version. It fails without changing anything when no update is on offer. With `--version <version>`, it updates to that version without reading the deployment first, which needs only the `Deployment.update` permission together with `-d`.
 
 The `deployment logs` command takes `--source application`, the default, or `kubernetes` and `pod` for a Tenzir-hosted deployment, and filters with `--from`, `--to`, `--levels` (`trace`, `debug`, `info`, `warning`, `error`, `critical`), `--search`, and `--limit`. It needs `Deployment.diagnose`. Starting and stopping a pipeline doesn’t change the configuration.
 
@@ -343,16 +345,20 @@ tenzir package remove suricata
 #### `tenzir package update`
 
 ```text
-tenzir package update [<id>] [--directory <directory>] [--json]
+tenzir package update [<id>] [--latest] [--directory <directory>] [--json]
 ```
 
-Moves every package, or the named one and the packages it needs, to the newest version that the requirements accept. The id must be declared in the manifest or locked, so you can update a package that only another package uses. Only `package.lock` changes. A package [pinned to a branch](dependencies.md#pinned-revisions) moves to the branch’s latest commit. To accept versions that the requirement rules out, change the requirement with `package add <id>@<requirement>`.
+Moves every package, or the named one and the packages it needs, to the newest version that the requirements accept. The id must be declared in the manifest or locked, so you can update a package that only another package uses. Without `--latest`, only `package.lock` changes. A package [pinned to a branch](dependencies.md#pinned-revisions) moves to the branch’s latest commit.
+
+With `--latest`, the command also moves a package to its newest stable release when the requirement in `package.yaml` accepts only older ones, such as `^0.0.1` or the pin `=1.0.0`. It then rewrites the requirement to `^<newest>`, which accepts the newest release and compatible ones after it, edits `package.yaml`, and resolves the lock. Without an id, `--latest` leaves packages pinned with `=` as they are, as Cargo does. Naming a package lifts its pin. You can also change a requirement yourself with `package add <id>@<requirement>`.
 
 ```sh
 # Every package.
 tenzir package update
 # Only suricata and what it needs.
 tenzir package update suricata
+# Newest stable release, even past the requirement.
+tenzir package update suricata --latest
 ```
 
 The command resolves in [update mode](dependencies.md#modes) and prints the locked packages.

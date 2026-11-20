@@ -44,7 +44,7 @@ It takes these keys:
 | `id`           | string          | the folder name | The package id, which is also its module name. See [the id](manifest.md#the-id).                                                                    |
 | `name`         | string          | required        | The display name. Its presence marks the file as a package’s manifest.                                                                                                                |
 | `version`      | string          | none            | The version of the package’s latest release, quoted and without a `v`, such as `"1.4.0"`. See [the version](manifest.md#the-version).               |
-| `description`  | string          | none            | What the package does, in Markdown.                                                                                                                                                   |
+| `description`  | string          | none            | What the package is and what it covers, in Markdown.                                                                                                                                  |
 | `author`       | string          | none            | The display name of the author.                                                                                                                                                       |
 | `author_icon`  | string          | none            | The URL of an image of the author.                                                                                                                                                    |
 | `package_icon` | string          | none            | The URL of an image of the package.                                                                                                                                                   |
@@ -85,6 +85,10 @@ Where Tenzir takes a package’s version from depends on how a dependency names 
 Our reference on [package dependencies](dependencies.md#pinned-revisions) covers pinned revisions in full.
 
 The `version` stays at the last released version between releases. In package mode, [`tenzir-ship release create`](https://tenzir.com/docs/reference/ship-framework/) writes the version it releases into `version`, so the release and its manifest agree. Our library’s CI refuses a release whose manifest states another version, and a change of `version` without a release. Our guide on [releasing a package](../guides/manage-packages.md#release-a-package) walks through a release.
+
+### The description
+
+Describe what the package is for: what the integrated product is, what the package does for the user, and the caveats that decide whether to use it. How long that takes depends on how much the package covers. Leave out what has a home elsewhere: runnable TQL belongs in `examples/`, operator usage in the operator’s [frontmatter](directory-layout.md#frontmatter), edge cases in `tests/`, and release notes in `changelog/`. Our guide on [describing what a package is for](../guides/manage-packages.md#describe-what-the-package-is-for) shows an example.
 
 ## Configuration manifest
 

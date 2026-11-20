@@ -115,18 +115,28 @@ select id, message
 head 100
 ```
 
-Read literally, it fetches every row and column, then discards most of them. Instead, [`from_clickhouse`](../reference/operators/from_clickhouse.md) sends a single query that does all of that on the server:
+Read literally, it fetches every row and column, then discards most of them. Instead, ClickHouse takes over the three operators, and [`from_clickhouse`](../reference/operators/from_clickhouse.md) sends a single query equivalent to:
 
 ```sql
-SELECT id, message, severity, source
+SELECT id, message
 FROM logs.events
 WHERE (severity > 3 OR source = 'fw')
 LIMIT 100
 ```
 
-Every rewrite preserves results. The `where`, `select`, and `head` stay in the pipeline, so a source that acts on a hint only partially, or not at all, still produces the same output. When only part of a predicate translates, for example because it calls a function the backend does not have, the source pushes what it can and evaluates the rest itself.
+Sources use what the optimizer tells them in one of two ways, and the two differ in whose semantics the result follows.
 
-Which hints a source acts on depends on its backend. [Optimizations](../reference/optimizations.md) lists the operators that act on hints and states, for each database, which predicates go into the query and which stay in Tenzir. When downstream does not depend on event order, operators may take faster code paths that reorder events, for example a parser that splits its input across several jobs.
+### Sources that act on hints
+
+A source that reads local data, such as [`read_parquet`](../reference/operators/read_parquet.md), treats the request as **hints**: it skips row groups that no predicate can match, decodes only the fields of the projection, and stops after the limit. The [`where`](../reference/operators/where.md), [`select`](../reference/operators/select.md), and [`head`](../reference/operators/head.md) stay in the pipeline and run on what the source produces, so a source that acts on a hint only partially, or not at all, still produces the same output. The result is always TQL’s.
+
+### Sources whose target takes over operators
+
+A remote source, such as [`from_clickhouse`](../reference/operators/from_clickhouse.md), [`from_splunk`](../reference/operators/from_splunk.md), or [`from_microsoft_defender`](../reference/operators/from_microsoft_defender.md), writes the operators after it into the request to the system it reads from, its **target**. After the walk, the optimizer offers the source the chain of [`where`](../reference/operators/where.md), [`select`](../reference/operators/select.md), [`drop`](../reference/operators/drop.md), [`summarize`](../reference/operators/summarize.md), [`sort`](../reference/operators/sort.md), and [`head`](../reference/operators/head.md) directly behind it. The source takes over the longest run of that chain that its target can spell, and those operators leave the pipeline: they run in the target, with the target’s semantics, such as how it compares `null` and text in a filter or where it sorts `null`. The first operator that the target cannot spell, and everything after it, runs in Tenzir with TQL semantics. Tenzir splits a [`where`](../reference/operators/where.md) at `and`, so the target can still take over the conjuncts that it spells.
+
+This is what lets a database compute a summary and return one row per group, or a SIEM sort and limit its results, instead of shipping every event to Tenzir. To run every operator in Tenzir with TQL semantics instead, set `pushdown=false` on the source, which then still reads only the fields that the pipeline uses.
+
+Which operators a source takes over, and which functions its target computes, depends on the target. Our [optimizations reference](../reference/optimizations.md) lists the sources, compares what their targets compute, and links a page per target that describes its semantics. When downstream does not depend on event order, operators may take faster code paths that reorder events, for example a parser that splits its input across several jobs.
 
 Federated Search
 

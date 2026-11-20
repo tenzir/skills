@@ -20,7 +20,7 @@ Every endpoint has a name that is unique in your organization, such as `app-even
 
 1. A sender sends an HTTP request to the URL, with the token in an `Authorization: Bearer` header.
 2. The platform checks the token, appends the request to the endpoint’s buffer, and answers `202 Accepted`.
-3. A pipeline on a deployment that may read the endpoint runs `ingest "app-events"` and receives each request as one event, with its method, path, query, headers, and body.
+3. A pipeline on a Tenzir-hosted deployment that may read the endpoint runs `ingest "app-events"` and receives each request as one event, with its method, path, query, headers, and body.
 
 The endpoint accepts any method and any path below its URL, so a sender can encode where an event comes from in the path. The token never reaches a pipeline.
 
@@ -41,6 +41,8 @@ When a deployment loses access to an endpoint or you delete the deployment, the 
 
 * **The token** decides who may send. Treat it like a password. Rotating it invalidates the old token within seconds. Tokens start with `tzi_`, which makes a leaked one easy to spot in logs and secret scanners.
 * **Readers** decide which deployments may read: every deployment of the organization, or only the workspaces and deployments you list. A deployment that loses access stops reading.
+
+For now, only deployments that Tenzir hosts in `europe-west3` can read ingest endpoints, because the buffer is reachable only from inside Tenzir’s cloud network. Readers therefore include only those deployments, and the app offers no other deployment as a reader. On a self-hosted deployment, the [`ingest`](../reference/operators/ingest.md) operator fails with an error that names the cause. The [deployment guide](../guides/add-a-deployment.md) compares Tenzir-hosted and self-hosted deployments.
 
 Managing endpoints takes the **Ingest Endpoints** permission, as our [IAM reference](../reference/iam.md) lists.
 

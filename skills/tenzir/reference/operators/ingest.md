@@ -17,7 +17,11 @@ ingest name:string
 
 ## Description
 
-The `ingest` operator reads the requests that senders sent to an [ingest endpoint](../../explanations/ingest-endpoints.md). Only a deployment connected to the platform offers it, and the endpoint must allow the deployment to read it.
+The `ingest` operator reads the requests that senders sent to an [ingest endpoint](../../explanations/ingest-endpoints.md). The endpoint must allow the deployment to read it.
+
+Tenzir-hosted deployments only
+
+For now, only [Tenzir-hosted deployments](../../guides/add-a-deployment.md) in `europe-west3` can read ingest endpoints. On a self-hosted deployment, the operator fails with an error that says so. A node outside a deployment does not offer the operator at all.
 
 Each request becomes one event:
 

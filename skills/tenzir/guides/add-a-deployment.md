@@ -27,7 +27,8 @@ Pick where your deployment runs:
 | Data access | sources and destinations reachable from the cloud | everything in your network                    |
 | Edition     | Enterprise                                        | every edition                                 |
 | Start       | one step, it connects on its own                  | `tenzir up` or Docker on your machine         |
-| Upgrades    | one step in the app, the CLI, or via MCP          | where it runs                                 |
+| Updates     | one step in the app, the CLI, or via MCP          | where it runs                                 |
+| Ingest      | reads ingest endpoints, in `europe-west3`         | cannot read ingest endpoints yet              |
 
 A self-hosted deployment only dials out to the platform, so it needs no inbound ports. Every new deployment follows the branch `main` of its workspace’s configuration and deploys each new commit automatically.
 
@@ -187,36 +188,36 @@ A deployment that never shows up, or that drops off, tells you why in its diagno
 
 On your own machine, `tenzir up` in the foreground prints the same log as it runs, and `tenzir up -d` appends it to the file `log` in the deployment’s state directory. A deployment needs to reach the platform over HTTPS, so check proxies and firewalls first. An install command or key link that expired or was used already needs a new one: on the deployment’s page, select **Install** or **Reinstall**, then **Show install command** or **Issue install command**.
 
-## Change or upgrade a Tenzir-hosted deployment
+## Change or update a Tenzir-hosted deployment
 
-Change the type of a Tenzir-hosted deployment when it needs more or less capacity, and upgrade it when the platform offers a newer version. Both restart the deployment:
+Change the type of a Tenzir-hosted deployment when it needs more or less capacity, and update it when the platform offers a newer version. Both restart the deployment:
 
 * MCP
 
   Ask your agent:
 
   ```prompt
-  Change edge-1 to the type medium, then upgrade it if it runs an older version.
+  Change edge-1 to the type medium, then update it if it runs an older version.
   ```
 
 * App
 
-  On the deployment’s page, select **Change type** and pick the new type. Select **Upgrade available** when the page offers it.
+  On the deployment’s page, select **Change type** and pick the new type. Select **Update available** when the page offers it.
 
 * CLI
 
   ```sh
   tenzir deployment change-type edge-1 medium
-  tenzir deployment upgrade edge-1
+  tenzir deployment update edge-1
   ```
 
-  The `upgrade` command follows the restart until the deployment is back. Add `-d` to return right away.
+  The `update` command follows the restart until the deployment is back. Add `-d` to return right away.
 
 On Enterprise, the deployment accrues the rate of its new type from the change. A deployment that the organization’s usage limit suspended resumes only when you resume it, with **Resume deployment** on its page or `tenzir deployment resume edge-1`.
 
-## Upgrade a self-hosted deployment
+## Update a self-hosted deployment
 
-A self-hosted deployment is upgraded where it runs, the same way you installed it. When the platform offers a newer version, the deployment’s page shows **Upgrade available**, and its dialog names the current and the available version. Upgrade to the available version, then restart the deployment:
+A self-hosted deployment is updated where it runs, the same way you installed it. When the platform offers a newer version, the deployment’s page shows **Update available**, and its dialog names the current and the available version. Update to the available version, then restart the deployment:
 
 * Docker
 

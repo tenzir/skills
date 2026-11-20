@@ -204,6 +204,8 @@ Resolution runs in one of two modes, which decide how far locked versions may mo
 | Lock   | `package add`, `package remove`, `package lock`, `package fetch` | Every locked version that still satisfies all requirements stays. Others move to the newest that fits. |
 | Update | `package update`, `package update <id>`                          | The named package and what it needs, or every package, move to the newest version that fits.           |
 
+With `--latest`, `package update` first rewrites a requirement that rules out the newest stable release to `^<newest>`, then resolves in update mode. Without an id, it skips requirements pinned with `=`.
+
 In both modes, a package that nothing asks for any more leaves the lock. Our reference on the [package commands](cli.md) lists what each command does.
 
 ## Visibility

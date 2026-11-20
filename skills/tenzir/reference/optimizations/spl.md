@@ -7,9 +7,9 @@ section: "Docs"
 
 # SPL
 
-> The Splunk source fromsplunk hands Splunk the operators that follow it by appending stages in the Splunk Search Processing Language (SPL) to the search that it sends, so that Splunk returns only what the pipeline keeps. Those operators leave the pipeline and run in Splunk, with Splunk’s semantics. This page describes which operators Splunk takes over, how its results can differ from Tenzir’s, and how to keep operators in Tenzir. Our optimizations overview explains how Tenzir optimizes pipelines in general.
+> The Splunk source fromsplunk hands Splunk the operators that follow it by appending stages in the Splunk Search Processing Language (SPL) to the search that it sends, so that Splunk returns only what the pipeline keeps. Splunk takes over those operators, which leave the pipeline and run in Splunk with Splunk’s semantics, and the rest of the pipeline runs in Tenzir. This page describes which operators Splunk takes over, which functions it computes, and how its results can differ from Tenzir’s. Our optimizations overview compares the targets and describes the rules that all sources share.
 
-The Splunk source [`from_splunk`](../operators/from_splunk.md) hands Splunk the operators that follow it by appending stages in the Splunk Search Processing Language (SPL) to the search that it sends, so that Splunk returns only what the pipeline keeps. Those operators leave the pipeline and run in Splunk, with Splunk’s semantics. This page describes which operators Splunk takes over, how its results can differ from Tenzir’s, and how to keep operators in Tenzir. Our [optimizations overview](../optimizations.md) explains how Tenzir optimizes pipelines in general.
+The Splunk source [`from_splunk`](../operators/from_splunk.md) hands Splunk the operators that follow it by appending stages in the Splunk Search Processing Language (SPL) to the search that it sends, so that Splunk returns only what the pipeline keeps. Splunk takes over those operators, which leave the pipeline and run in Splunk with Splunk’s semantics, and the rest of the pipeline runs in Tenzir. This page describes which operators Splunk takes over, which functions it computes, and how its results can differ from Tenzir’s. Our [optimizations overview](../optimizations.md) compares the targets and describes the rules that all sources share.
 
 ## When it applies
 
@@ -19,20 +19,54 @@ The operator searches in one of three ways:
 * **With `search`**, the operator runs your search, prepending the `search` command where Splunk Web does, and appends the operators that follow, each on a new line. The appended stages apply to the results of your search, so they also work after transforming commands such as `stats`.
 * **With `spl2`**, the operator runs your SPL2 search and appends the operators that follow, as [SPL2](spl.md#spl2) describes.
 
-The operator takes over no operator if your search does not end where stages may follow, such as a search that ends in `|` or has an unterminated string, comment, or subsearch, or if it may format its values with `fieldformat` or a macro. It also takes over nothing with `options`, which may change how Splunk runs the search, and with `pushdown=false`, which keeps every operator in Tenzir with TQL semantics. The search then still returns only the fields that the pipeline uses.
+The operator takes over no operator if your search does not end where stages may follow, such as a search that ends in `|` or has an unterminated string, comment, or subsearch, or if it may format its values with `fieldformat` or a macro. It also takes over nothing with `options`, which may change how Splunk runs the search, and with `pushdown=false`, which runs every operator in Tenzir with TQL semantics. The search then still returns only the fields that the pipeline uses.
+
+### SPL2
+
+The `spl2` argument of [`from_splunk`](../operators/from_splunk.md) runs an SPL2 search. Splunk takes over the same operators as for `search`, appended to your search as SPL2 stages, and [Splunk semantics](spl.md#splunk-semantics) apply too. SPL2 spells a few things differently:
+
+* Fields in commands are single-quoted, as in `'user'`.
+* SPL2 has a `null` literal, and `stats` counts with `count()` and `count(if(p, 1, null))`.
+* There is no `fields *`. The operator asks Splunk to extract all fields instead, and appends a `fields` stage only to keep the fields that the pipeline reads.
+* Comments are `//` and `/* */`, raw strings start with `@"`, and a `;` ends the search so that no stage may follow.
+
+The operator never treats an SPL2 search as plain, because a search may redefine `_time`. Comparisons of `_time` and the operators after them run in Tenzir, and the bounds `earliest` and `latest` never narrow. The pipeline
+
+```tql
+from_splunk "https://splunk.example.com:8089",
+  spl2=r#"from main where sourcetype == "linux_secure""#,
+  earliest="-1h",
+  latest="now",
+  headers={Authorization: secret("splunk-rest-authorization")}
+where user != "root"
+summarize user, attempts=count()
+sort -attempts
+head 20
+```
+
+dispatches this search:
+
+```text
+from main where sourcetype == "linux_secure"
+| where ('user' != "root")
+| stats count() as tenzir_column_0 by 'user'
+| sort 20 -'tenzir_column_0'
+| head 20
+| appendpipe [stats count() as tenzir_groups_0]
+```
 
 ## Operators that Splunk takes over
 
-The operator takes over the longest run of operators directly after it that SPL can spell:
+Splunk takes over the [longest run of operators](../optimizations.md#the-run-of-operators-after-the-source) directly after the source that SPL can spell:
 
-* [`where`](../operators/where.md), as the [filters](spl.md#filters) section describes.
+* [`where`](../operators/where.md), as the [filters and functions](spl.md#filters-and-functions) section describes.
 * [`select`](../operators/select.md) of top-level fields, including renames, which becomes `fields`.
 * [`drop`](../operators/drop.md) of top-level fields, which becomes `fields -`.
 * [`summarize`](../operators/summarize.md) with group keys and the functions that the [summaries](spl.md#summaries) section lists, which becomes `stats … by`. The summary may follow [`select`](../operators/select.md), [`drop`](../operators/drop.md), and assignments, as [Aggregations in the source](../optimizations.md#aggregations-in-the-source) describes.
 * [`sort`](../operators/sort.md) by fields, which becomes `sort` with an explicit count: the count of the [`head`](../operators/head.md) after it, or `0` for all results, since `sort` keeps only 10,000 results by default.
-* [`head`](../operators/head.md), which becomes `head`, and [`top`](../operators/top.md) or [`rare`](../operators/rare.md) followed by [`head`](../operators/head.md). A search with a command that has side effects, such as `outputlookup` or `collect`, or with a macro, which may hide one, keeps the limit in Tenzir.
+* [`head`](../operators/head.md), which becomes `head`, and [`top`](../operators/top.md) or [`rare`](../operators/rare.md) followed by [`head`](../operators/head.md). A search with a command that has side effects, such as `outputlookup` or `collect`, or with a macro, which may hide one, runs the limit in Tenzir.
 
-The first operator that SPL cannot spell ends the run. That operator and everything after it run in Tenzir. Tenzir splits a [`where`](../operators/where.md) at `and`, so Splunk can still take over the conjuncts that it spells. For example, the pipeline
+For example, the pipeline
 
 ```tql
 from_splunk "https://splunk.example.com:8089",
@@ -68,17 +102,22 @@ Without an operator that enumerates the fields, the search ends with a `fields` 
 
 Splunk computes these aggregation functions of a [`summarize`](../operators/summarize.md):
 
-| TQL                   | SPL                                                  |
-| --------------------- | ---------------------------------------------------- |
-| `count()`             | `count`                                              |
-| `count(x)`            | `count(x)`                                           |
-| `min(x)`, `max(x)`    | `min(x)`, `max(x)`                                   |
-| `count_if(x, v => p)` | `count(eval(p))`, which skips events without a value |
-| `count_distinct(x)`   | `dc(x)`, which counts exactly, unlike `estdc`        |
-| `sum(x)`              | `sum(x)`                                             |
-| `mean(x)`             | `avg(x)`                                             |
+| TQL                   | SPL              | Notes                                                         |
+| --------------------- | ---------------- | ------------------------------------------------------------- |
+| `count()`             | `count`          | SPL2 spells it `count()`                                      |
+| `count(x)`            | `count(x)`       | Counts each value of a multivalue field                       |
+| `min(x)`              | `min(x)`         | Compares numbers numerically and other values as text         |
+| `max(x)`              | `max(x)`         | Compares numbers numerically and other values as text         |
+| `count_if(x, v => p)` | `count(eval(p))` | Skips events without a value; `count(if(p, 1, null))` in SPL2 |
+| `count_distinct(x)`   | `dc(x)`          | Exact, unlike `estdc`                                         |
+| `sum(x)`              | `sum(x)`         |                                                               |
+| `mean(x)`             | `avg(x)`         |                                                               |
+| `stddev(x)`           | `stdevp(x)`      |                                                               |
+| `variance(x)`         | `varp(x)`        |                                                               |
 
-Splunk returns every value as a string, so the operator reads counts as integers and sums and means as numbers.
+Splunk has no booleans, so `all(x)` and `any(x)` run in Tenzir.
+
+Splunk returns every value as a string, so the operator reads counts as integers, and sums, means, deviations, and variances as numbers.
 
 Group keys and aggregate arguments can be computed values, such as values that a [`set`](../operators/set.md) before the summary assigns. Splunk computes them with `eval` before `stats`:
 
@@ -88,11 +127,11 @@ kind = action.to_upper()
 summarize kind, events=count()
 ```
 
-The search computes the key with `| eval tenzir_column_0=upper('action')`. An assignment that the summary reads may call a function that SPL spells, and Splunk computes it with its own semantics. An assignment that the summary doesn’t read, including one that a later assignment shadows, must be infallible. See [Computed keys and arguments](../optimizations.md#computed-keys-and-arguments).
+The search computes the key with `| eval tenzir_column_0=upper('action')`. An assignment that the summary reads may call a function that SPL spells, and Splunk computes it with its own semantics. An assignment that the summary doesn’t read must be infallible, as the rules for [computed keys and arguments](../optimizations.md#computed-keys-and-arguments) explain.
 
-A `floor` of a time stays in Tenzir.
+Splunk computes no time buckets: a `floor` of a time runs in Tenzir.
 
-## Filters
+## Filters and functions
 
 With `index`, the conjuncts of the filters right after the operator extend the base `search` command where it can spell them, which lets Splunk use its indexes:
 
@@ -103,66 +142,54 @@ With `index`, the conjuncts of the filters right after the operator extend the b
 * `starts_with` and `ends_with`, and `"x" in field`, which become wildcards.
 * `and` and `or` of such terms.
 
-All other filters become `where` stages. They consist of top-level fields, literals (numbers, strings, booleans, `null`, times compared with `_time`, and IP addresses), comparisons, `in` with a list, arithmetic, `and`, `or`, `not`, and the functions `starts_with`, `ends_with`, `match_regex`, `length_chars`, `to_lower`, `to_upper`, `trim`, and `abs`, without named arguments such as `ignore_case`.
+All other filters become `where` stages. They consist of top-level fields, literals (numbers, strings, booleans, `null`, times compared with `_time`, and IP addresses), comparisons, `in` with a list, arithmetic, `and`, `or`, `not`, and these functions:
 
-Nested field paths, subnets outside the base search, times compared with fields other than Splunk’s own `_time`, such as `_time` after `select _time=event_time` or after a `search` that runs more than a single `search` command, such as `| rename event* AS _*`, bare boolean fields such as `where flag`, fields whose names start with `__`, which Splunk treats as internal, and optional fields such as `x?` stay in Tenzir.
+| TQL                      | SPL                             | Notes                                             |
+| ------------------------ | ------------------------------- | ------------------------------------------------- |
+| `x.starts_with(y)`       | `substr(x, 1, len(y))==y`       | In filters only, since the target has no booleans |
+| `x.ends_with(y)`         | `substr(x, len(x)-len(y)+1)==y` | In filters only, since the target has no booleans |
+| `x.match_regex(y)`       | `match(x, y)`                   | In filters only, since the target has no booleans |
+| `x.length_chars()`       | `len(x)`                        |                                                   |
+| `x.to_lower()`           | `lower(x)`                      |                                                   |
+| `x.to_upper()`           | `upper(x)`                      |                                                   |
+| `x.trim()`               | `trim(x)`                       |                                                   |
+| `x.trim_start()`         | `ltrim(x)`                      |                                                   |
+| `x.trim_end()`           | `rtrim(x)`                      |                                                   |
+| `x.is_empty()`           | `len(x)==0`                     | In filters only, since the target has no booleans |
+| `x.hash_md5()`           | `md5(x)`                        |                                                   |
+| `x.hash_sha1()`          | `sha1(x)`                       |                                                   |
+| `x.hash_sha256()`        | `sha256(x)`                     |                                                   |
+| `x.abs()`                | `abs(x)`                        |                                                   |
+| `x.ceil()`               | `ceiling(x)`                    |                                                   |
+| `x.floor()`              | `floor(x)`                      |                                                   |
+| `x.round()`              | `round(x)`                      |                                                   |
+| `x.sqrt()`               | `sqrt(x)`                       |                                                   |
+| `x.exp()`                | `exp(x)`                        |                                                   |
+| `x.log()`, `x.log(base)` | `ln(x)`, `log(x, base)`         |                                                   |
+
+Splunk has no durations, so `x.since_epoch()` runs in Tenzir.
+
+The same functions compute group keys and aggregate arguments with `eval`, except for the predicates that the table marks. They follow Splunk’s semantics, such as how `round` rounds halves and how `trim` delimits whitespace.
+
+Nested field paths, subnets outside the base search, times compared with fields other than Splunk’s own `_time`, such as `_time` after `select _time=event_time` or after a `search` that runs more than a single `search` command, such as `| rename event* AS _*`, bare boolean fields such as `where flag`, fields whose names start with `__`, which Splunk treats as internal, named arguments such as `ignore_case`, and optional fields such as `x?` run in Tenzir.
 
 ## Splunk semantics
 
 The operators that Splunk takes over run as Splunk runs them, which can differ from TQL:
 
 * Terms of the base `search` command match strings without regard to case, so `user == "root"` also matches `Root`. A string with `*` becomes a `where` stage instead, so that `*` is no wildcard.
-* `where` compares strings exactly. `x != "a"` drops results without `x`, and a comparison with a multivalue field holds if any of its values matches.
+* A `where` stage compares strings exactly. The filter `x != "a"` drops results without `x`, and a comparison with a multivalue field holds if any of its values matches.
 * Splunk returns every value as a string. A comparison with an IP address compares the text of the address, such as `198.51.100.24`.
-* `stats` drops results whose group key is `null`, puts a result with a multivalue key into the group of each of its values, and counts each value of a multivalue field in `count(field)`. `min` and `max` compare numbers numerically and other values as text.
+* The `stats` command drops results whose group key is `null`, and puts a result with a multivalue key into the group of each of its values.
 * A summary value that Splunk leaves out, such as `min` over no values, is missing from the result rather than `null`.
 * Counts are integers also with `raw=true`. Other values follow `raw`.
 * A `where` stage whose expression fails, outside a search with `stats`, makes Splunk return an empty result without an error.
+* When Splunk reports an error or a warning, the diagnostic shows the search as the operator sent it, including the appended stages.
 
-## Time window
+### Time window
 
 With `index`, comparisons of `_time` in the filters before any summary, limit, or sort also narrow `earliest` and `latest`, rounded outward to whole seconds, when both are absolute. A strict bound excludes its time, so `where _time < 2025-01-01T00:02:00Z` requests `latest_time=1735689720`. A relative bound, such as `-15m`, resolves on the server, so the operator keeps both bounds as they are. It also keeps them when the narrowed bounds would cross, since Splunk rejects crossing bounds. The comparisons stay in the search in every case. With `search`, the bounds never narrow, since a `_time` field in your search’s results may stem from an aggregation or a computation.
 
-## SPL2
-
-The `spl2` argument of [`from_splunk`](../operators/from_splunk.md) runs an SPL2 search. The operator takes over the same operators as for `search`, appended to your search as SPL2 stages, and [Splunk semantics](spl.md#splunk-semantics) apply too. SPL2 spells a few things differently:
-
-* Fields in commands are single-quoted, as in `'user'`.
-* `null` is a literal, and `stats` counts with `count()` and `count(if(p, 1, null))`.
-* There is no `fields *`. The operator asks Splunk to extract all fields instead, and appends a `fields` stage only to keep the fields that the pipeline reads.
-* Comments are `//` and `/* */`, raw strings start with `@"`, and a `;` ends the search so that no stage may follow.
-
-The operator never treats an SPL2 search as plain, because a search may redefine `_time`. Comparisons of `_time` and the operators after them stay in Tenzir, and the bounds `earliest` and `latest` never narrow. The pipeline
-
-```tql
-from_splunk "https://splunk.example.com:8089",
-  spl2=r#"from main where sourcetype == "linux_secure""#,
-  earliest="-1h",
-  latest="now",
-  headers={Authorization: secret("splunk-rest-authorization")}
-where user != "root"
-summarize user, attempts=count()
-sort -attempts
-head 20
-```
-
-dispatches this search:
-
-```text
-from main where sourcetype == "linux_secure"
-| where ('user' != "root")
-| stats count() as tenzir_column_0 by 'user'
-| sort 20 -'tenzir_column_0'
-| head 20
-| appendpipe [stats count() as tenzir_groups_0]
-```
-
 ## Verify an optimization
 
-To see the operators that Splunk takes over, print the optimized pipeline:
-
-```sh
-tenzir --dump-opt-ir 'from_splunk "https://splunk.example.com:8089", index="main", earliest="-1h", latest="now", headers={Authorization: secret("splunk-rest-authorization")} | where user == "root" | head 10'
-```
-
-The operator lists the operators that it took over as `plan`, and the reason why it took over no more as `declined`. When Splunk reports an error or a warning, the diagnostic shows the search as the operator sent it, including the appended stages.
+To see which operators Splunk takes over in a pipeline, print the optimized pipeline, as the overview’s section on [verifying an optimization](../optimizations.md#verify-an-optimization) shows.

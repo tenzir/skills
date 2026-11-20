@@ -14,7 +14,7 @@ This guide sets up an [ingest endpoint](../../explanations/ingest-endpoints.md),
 
 Before you begin
 
-You need a deployment and a configuration in its workspace. Your role needs **Ingest Endpoints** → **Manage**, **Configuration** → **Write** and **Deploy**, and **Adhoc Pipelines** → **Create** and **Run**. Our [IAM reference](../../reference/iam.md) lists the details.
+You need a [Tenzir-hosted deployment](../add-a-deployment.md) in `europe-west3` and a configuration in its workspace. Self-hosted deployments cannot read ingest endpoints yet. Your role needs **Ingest Endpoints** → **Manage**, **Configuration** → **Write** and **Deploy**, and **Adhoc Pipelines** → **Create** and **Run**. Our [IAM reference](../../reference/iam.md) lists the details.
 
 ## Create an endpoint
 

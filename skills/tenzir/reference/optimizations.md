@@ -7,9 +7,9 @@ section: "Docs"
 
 # Overview
 
-> Tenzir runs part of a pipeline where the data lives. When a pipeline reads from a database or a file and then filters events, selects fields, or keeps only the first few, the source can often do that work itself: it skips the rows and columns that the rest of the pipeline would discard, instead of reading everything and throwing most of it away. You write the pipeline as usual, and Tenzir applies these optimizations automatically, without changing the result.
+> Tenzir runs part of a pipeline where the data lives. When a pipeline reads from a database, a SIEM, or an API and then filters, selects, summarizes, sorts, or limits events, the source hands those operators to the system that it reads from, its target. The target takes over the operators, runs them with its own semantics, and returns only what the pipeline keeps, instead of everything that the pipeline would discard. The operators that the target does not take over run in Tenzir, with TQL semantics. With pushdown=false, a source hands over nothing, and every operator runs in Tenzir.
 
-Tenzir runs part of a pipeline where the data lives. When a pipeline reads from a database or a file and then filters events, selects fields, or keeps only the first few, the source can often do that work itself: it skips the rows and columns that the rest of the pipeline would discard, instead of reading everything and throwing most of it away. You write the pipeline as usual, and Tenzir applies these optimizations automatically, without changing the result.
+Tenzir runs part of a pipeline where the data lives. When a pipeline reads from a database, a SIEM, or an API and then filters, selects, summarizes, sorts, or limits events, the source hands those operators to the system that it reads from, its **target**. The target takes over the operators, runs them with its own semantics, and returns only what the pipeline keeps, instead of everything that the pipeline would discard. The operators that the target does not take over run in Tenzir, with TQL semantics. With `pushdown=false`, a source hands over nothing, and every operator runs in Tenzir.
 
 For example, take this pipeline:
 
@@ -20,43 +20,52 @@ select id, message
 head 10
 ```
 
-Instead of fetching the whole `alerts` table, [`from_mysql`](operators/from_mysql.md) sends a query that returns only the ten rows and the columns that the pipeline needs:
+Instead of fetching the whole `alerts` table, MySQL takes over the three operators, and [`from_mysql`](operators/from_mysql.md) sends a query equivalent to:
 
 ```sql
-SELECT `id`, `message`, `severity` FROM `alerts` WHERE `severity` >= 3 LIMIT 10
+SELECT `id`, `message`
+FROM `alerts`
+WHERE `severity` >= 3
+LIMIT 10
 ```
 
-This reference explains how such optimizations come about, what they promise about results, which operators apply them, and, for each database, which filters it evaluates.
+Our explanation of [pipeline optimization](../explanations/pipeline.md#optimization) describes how the optimizer finds this work, and how sources that act on hints differ from sources whose target takes over operators. This reference lists what each source takes over, compares what the targets compute, and states the rules that all of them share.
 
-## How it works
+## Sources and their pages
 
-Before a pipeline runs, Tenzir’s [optimizer](../explanations/pipeline.md#optimization) walks it from the last operator to the first and tells each operator what the operators after it will do. We call this information **hints**, and there are four kinds:
+Each remote source has a page that describes when its target takes over operators, which ones, and how the target’s semantics differ from TQL’s:
 
-* **Filters**: the predicates of the [`where`](operators/where.md) operators.
-* **Projections**: the fields that downstream operators need, such as the fields that [`select`](operators/select.md) keeps or a final [`summarize`](operators/summarize.md) reads.
-* **Limits**: the number of events that [`head`](operators/head.md) keeps.
-* **Aggregations**: the groups and aggregation functions of a final [`summarize`](operators/summarize.md) that directly follows the operator. Unlike the other hints, the optimizer offers an aggregation only after the walk, once it knows which filters and limits the operator took over.
+| Target                     | Sources                                                                                                                                                                                                    | Page                                                                                  |
+| -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| ClickHouse and Hydrolix    | [`from_clickhouse`](operators/from_clickhouse.md), [`from_hydrolix`](operators/from_hydrolix.md)                                       | [ClickHouse](optimizations/clickhouse.md)           |
+| DuckDB                     | [`from_duckdb`](operators/from_duckdb.md)                                                                                                                                | [DuckDB](optimizations/duckdb.md)                   |
+| MySQL                      | [`from_mysql`](operators/from_mysql.md)                                                                                                                                  | [MySQL](optimizations/mysql.md)                     |
+| Microsoft SQL Server       | [`from_microsoft_sql`](operators/from_microsoft_sql.md)                                                                                                                  | [SQL Server](optimizations/microsoft-sql.md)        |
+| Defender and Log Analytics | [`from_microsoft_defender`](operators/from_microsoft_defender.md), [`from_azure_log_analytics`](operators/from_azure_log_analytics.md) | [KQL](optimizations/kql.md)                         |
+| Splunk                     | [`from_splunk`](operators/from_splunk.md)                                                                                                                                | [SPL](optimizations/spl.md)                         |
+| SentinelOne                | [`from_sentinelone_data_lake`](operators/from_sentinelone_data_lake.md)                                                                                                  | [SentinelOne](optimizations/sentinelone.md)         |
+| CloudWatch Logs            | [`from_amazon_cloudwatch`](operators/from_amazon_cloudwatch.md)                                                                                                          | [CloudWatch Logs](optimizations/cloudwatch.md)      |
+| Microsoft Graph            | [`from_microsoft_graph`](operators/from_microsoft_graph.md)                                                                                                              | [Microsoft Graph](optimizations/microsoft-graph.md) |
 
-An operator that understands a hint acts on it, for example by turning a filter into a `WHERE` clause. The [`where`](operators/where.md), [`select`](operators/select.md), and [`head`](operators/head.md) operators stay in the pipeline and run on what the operator produces, so an operator that acts on a hint only partially, or not at all, still produces the same result. The exception is a source that [computes an aggregation](optimizations.md#aggregations-in-the-source), which takes over the
+Other sources narrow what they read and keep TQL’s results, as their reference pages describe: [`read_parquet`](operators/read_parquet.md) skips row groups and fields, [`subscribe`](operators/subscribe.md) filters before it queues events, and [`from_microsoft_365_activity`](operators/from_microsoft_365_activity.md) skips blobs by their metadata. [`from_velociraptor`](operators/from_velociraptor.md) hands over nothing, since a VQL query may have effects that a filter or a limit would change.
 
-[`summarize`](operators/summarize.md) and the filters before it, and which can also take over the [`where`](operators/where.md), [`sort`](operators/sort.md), and [`head`](operators/head.md) that follow the summary and then runs them with the database’s semantics.
+## Results follow the target’s semantics
 
-## Results stay the same
+The operators that a target takes over leave the pipeline and run as the target runs them. Their results can therefore differ from TQL’s, for example:
 
-An optimization never changes the result of a pipeline, with a few deliberate exceptions that let common filters reach a database, Splunk, or an API:
+* **Filters.** A comparison with `null` yields `null` in SQL, so `name != "alpha"` does not keep rows where `name` is `null`. MySQL and SQL Server compare text without regard to case by default, and so does Splunk’s base `search` command.
+* **Sorts.** Text sorts under the collation of its column, the target decides where `null` sorts, and groups that tie arrive in the target’s order.
+* **Functions.** The target computes functions with its own arithmetic, case mapping, and regular expressions, as the [functions](optimizations.md#functions) section describes.
 
-* **Case-insensitive matching.** `starts_with` and `ends_with` with `ignore_case=true` use the database’s lowercase mapping. It agrees with TQL’s case folding for ASCII and most other text, but TQL folds `ß` to `ss`, so `"Straße".starts_with("strass", ignore_case=true)` is `true` in TQL and matches no row in the database.
-* **Regular expressions.** `match_regex` uses the database’s release of RE2, which may disagree with TQL’s on rarely used syntax and on text that is not valid UTF-8.
-* **IP addresses in string columns.** In TQL, a string never equals an `ip` value, so the comparison is `false`. When a database source compares a text column with an address, as in `src == 1.1.1.1`, it compares the canonical text of the address, `1.1.1.1`, instead, so that the common way of storing addresses as text works.
-* **Remote sources.** [`from_clickhouse`](operators/from_clickhouse.md), [`from_duckdb`](operators/from_duckdb.md), [`from_hydrolix`](operators/from_hydrolix.md), [`from_mysql`](operators/from_mysql.md), [`from_microsoft_sql`](operators/from_microsoft_sql.md), [`from_splunk`](operators/from_splunk.md), [`from_sentinelone_data_lake`](operators/from_sentinelone_data_lake.md), [`from_microsoft_defender`](operators/from_microsoft_defender.md), [`from_azure_log_analytics`](operators/from_azure_log_analytics.md), [`from_microsoft_graph`](operators/from_microsoft_graph.md), and [`from_amazon_cloudwatch`](operators/from_amazon_cloudwatch.md) hand the database or API the operators that follow them, which then run with its semantics instead of TQL’s, unless you set `pushdown=false`, which still reads only the columns that the pipeline uses. For example, Microsoft Graph compares many strings without regard to case, and CloudWatch filter patterns match words rather than substrings. Our [ClickHouse](optimizations/clickhouse.md), [DuckDB](optimizations/duckdb.md), [MySQL](optimizations/mysql.md), [SQL Server](optimizations/microsoft-sql.md), [SPL](optimizations/spl.md), [SentinelOne](optimizations/sentinelone.md), [KQL](optimizations/kql.md), [CloudWatch Logs](optimizations/cloudwatch.md), and [Microsoft Graph](optimizations/microsoft-graph.md) pages describe the differences.
+The semantics section of each backend page lists the differences. To run every operator with TQL semantics, set `pushdown=false`. The source then still reads only the fields that the pipeline uses.
 
-The [database pages](optimizations.md#filters-by-database) state which databases use these exceptions. Everything else the database cannot evaluate exactly like TQL runs in Tenzir, including when it would merely differ for `null` values, `NaN`, or text that differs only in case, accents, or trailing spaces.
+Sources that only act on hints, such as [`read_parquet`](operators/read_parquet.md), keep TQL’s results: the [`where`](operators/where.md), [`select`](operators/select.md), and [`head`](operators/head.md) stay in the pipeline and run on what the source produces.
 
-## Operators that optimize
+## What each source takes over
 
-These operators act on hints:
+These operators act on the requests of the operators after them, or take them over:
 
-| Operator                                                                                                    | Filters                      | Projections                | Limits                 | Aggregations          |
+| Operator                                                                                                    | Filters                      | Projections                | Limits                 | Summaries             |
 | ----------------------------------------------------------------------------------------------------------- | ---------------------------- | -------------------------- | ---------------------- | --------------------- |
 | [`from_amazon_cloudwatch`](operators/from_amazon_cloudwatch.md)           | Patterns, times, streams     | No                         | Taken over             | No                    |
 | [`from_azure_log_analytics`](operators/from_azure_log_analytics.md)       | Taken over                   | Top-level columns          | Taken over             | Taken over            |
@@ -73,49 +82,177 @@ These operators act on hints:
 | [`read_parquet`](operators/read_parquet.md)                               | While decoding, by row group | Including record fields    | Stops decoding         | No                    |
 | [`subscribe`](operators/subscribe.md)                                     | Before queuing               | Applied on arrival         | With one topic         | No                    |
 | [`sort`](operators/sort.md)                                               | Moved before the sort        | Passed on                  | Keeps the top `N`      | No                    |
-| [`summarize`](operators/summarize.md) (final summary)                     | Kept after aggregation       | Group and aggregate inputs | Kept after aggregation | Offered to the source |
+| [`summarize`](operators/summarize.md) (final summary)                     | Kept after aggregation       | Group and aggregate inputs | Kept after aggregation | Taken over by sources |
 
-The reference page of each operator describes the details.
+## What the targets compute
 
-## Aggregation input projections
+The targets differ in the aggregation functions, functions, and time buckets that they compute. The following matrices compare them, and each backend page lists the target’s spelling of every function.
 
-With final summary output, [`summarize`](operators/summarize.md) supplies its own projection hint. You do not need an explicit [`select`](operators/select.md) before aggregation:
+### Aggregation functions
+
+A source takes over a [`summarize`](operators/summarize.md) only if its target computes every aggregation function of the summary:
+
+| Aggregation      | [ClickHouse](optimizations/clickhouse.md) | [DuckDB](optimizations/duckdb.md) | [MySQL](optimizations/mysql.md) | [SQL Server](optimizations/microsoft-sql.md) | [KQL](optimizations/kql.md) | [SPL](optimizations/spl.md) | [SentinelOne](optimizations/sentinelone.md) |
+| ---------------- | --------------------------------------------------------------------------- | ------------------------------------------------------------------- | ----------------------------------------------------------------- | ------------------------------------------------------------------------------ | ------------------------------------------------------------- | ------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| `count()`        | Yes                                                                         | Yes                                                                 | Yes                                                               | Yes                                                                            | Yes                                                           | Yes                                                           | Yes                                                                           |
+| `count(x)`       | Yes                                                                         | Yes                                                                 | Yes                                                               | Yes                                                                            | Yes                                                           | Yes                                                           | Yes                                                                           |
+| `min`            | Yes                                                                         | Yes                                                                 | Yes                                                               | Yes                                                                            | Yes                                                           | Yes                                                           | Not yet                                                                       |
+| `max`            | Yes                                                                         | Yes                                                                 | Yes                                                               | Yes                                                                            | Yes                                                           | Yes                                                           | Not yet                                                                       |
+| `count_if`       | Yes                                                                         | Yes                                                                 | Yes                                                               | Yes                                                                            | Yes                                                           | Yes                                                           | Not yet                                                                       |
+| `count_distinct` | Yes                                                                         | Yes                                                                 | Yes                                                               | Yes                                                                            | Yes                                                           | Yes                                                           | Partly                                                                        |
+| `sum`            | Yes                                                                         | Yes                                                                 | Yes                                                               | Yes                                                                            | Yes                                                           | Yes                                                           | Not yet                                                                       |
+| `mean`           | Yes                                                                         | Yes                                                                 | Yes                                                               | Yes                                                                            | Yes                                                           | Yes                                                           | Not yet                                                                       |
+| `stddev`         | Yes                                                                         | Yes                                                                 | Yes                                                               | Yes                                                                            | Yes                                                           | Yes                                                           | Not yet                                                                       |
+| `variance`       | Yes                                                                         | Yes                                                                 | Yes                                                               | Yes                                                                            | Yes                                                           | Yes                                                           | Not yet                                                                       |
+| `all`            | Yes                                                                         | Yes                                                                 | Not possible                                                      | Not possible                                                                   | Yes                                                           | Not possible                                                  | Not yet                                                                       |
+| `any`            | Yes                                                                         | Yes                                                                 | Not possible                                                      | Not possible                                                                   | Yes                                                           | Not possible                                                  | Not yet                                                                       |
+
+Yes means that the target computes it, and Partly that it computes it only under conditions or approximately. Not yet means that it runs in Tenzir because Tenzir does not hand it over yet, and Not possible that it runs in Tenzir because the target cannot express it. The notes below the table name the conditions and how the targets differ.
+
+* `count()` (SPL): SPL2 spells it `count()`.
+* `count(x)` (KQL): leaves out empty strings, which KQL holds in place of `null`.
+* `count(x)` (SPL): counts each value of a multivalue field.
+* `count(x)` (SentinelOne): counts the events where `x` has a value.
+* `min` and `max` (ClickHouse): yields `null` without values.
+* `min` and `max` (SQL Server): also takes text.
+* `min` and `max` (SPL): compares numbers numerically and other values as text.
+* `count_if`, `all`, and `any` (ClickHouse, DuckDB, and KQL): skips `null` values.
+* `count_if` (MySQL and SQL Server): skips `NULL` values.
+* `count_if` (SPL): skips events without a value; `count(if(p, 1, null))` in SPL2.
+* `count_distinct` (KQL): exact; leaves out empty strings and fails beyond 100 million values in a group.
+* `count_distinct` (SPL): exact, unlike `estdc`.
+* `count_distinct` (SentinelOne): approximate, since PowerQuery has no exact distinct count.
+* `sum` (DuckDB): widens integers to a `HUGEINT`, which still arrives as an `int`.
+* `sum` (MySQL): sums integers as a `DECIMAL`, which still arrives as an `int`.
+* `sum`, `mean`, `stddev`, and `variance` (KQL): yields `null` without values.
+* `mean` (SQL Server): casts first, since `AVG` truncates integers.
+* `all` and `any` (MySQL, SQL Server, and SPL): the target has no booleans.
+
+A few rules hold for every target:
+
+* **Counting with a predicate.** The `count_if` function counts only the events whose input is not `null`, as TQL does.
+* **No values.** Without values, `sum`, `mean`, `stddev`, and `variance` yield `null`, `all` holds, and `any` does not, also where the target would yield 0 or `NaN`.
+* **Wide sums.** A sum that the target widens, as DuckDB does to a `HUGEINT` and MySQL to a `DECIMAL`, still arrives as an `int`. A sum beyond 64 bits becomes `null` with a warning, as in TQL.
+* **Floating-point results.** The target computes results such as those of `mean` and `stddev` with its own arithmetic, which may differ from TQL’s in the last digits.
+
+### Functions
+
+A target computes these functions in filters, group keys, and aggregate arguments:
+
+| Kind    | Function       | [ClickHouse](optimizations/clickhouse.md) | [DuckDB](optimizations/duckdb.md) | [MySQL](optimizations/mysql.md) | [SQL Server](optimizations/microsoft-sql.md) | [KQL](optimizations/kql.md) | [SPL](optimizations/spl.md) | [SentinelOne](optimizations/sentinelone.md) |
+| ------- | -------------- | --------------------------------------------------------------------------- | ------------------------------------------------------------------- | ----------------------------------------------------------------- | ------------------------------------------------------------------------------ | ------------------------------------------------------------- | ------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| Strings | `starts_with`  | Yes                                                                         | Yes                                                                 | Partly                                                            | Partly                                                                         | Yes                                                           | Partly                                                        | Partly                                                                        |
+| Strings | `ends_with`    | Yes                                                                         | Yes                                                                 | Partly                                                            | Partly                                                                         | Yes                                                           | Partly                                                        | Partly                                                                        |
+| Strings | `match_regex`  | Yes                                                                         | Yes                                                                 | Partly                                                            | Not yet                                                                        | Yes                                                           | Partly                                                        | Not yet                                                                       |
+| Strings | `length_bytes` | Yes                                                                         | Yes                                                                 | Yes                                                               | Not yet                                                                        | Not yet                                                       | Not yet                                                       | Not yet                                                                       |
+| Strings | `length_chars` | Yes                                                                         | Yes                                                                 | Yes                                                               | Yes                                                                            | Yes                                                           | Yes                                                           | Not yet                                                                       |
+| Strings | `to_lower`     | Yes                                                                         | Yes                                                                 | Yes                                                               | Yes                                                                            | Yes                                                           | Yes                                                           | Not yet                                                                       |
+| Strings | `to_upper`     | Yes                                                                         | Yes                                                                 | Yes                                                               | Yes                                                                            | Yes                                                           | Yes                                                           | Not yet                                                                       |
+| Strings | `capitalize`   | Yes                                                                         | Yes                                                                 | Yes                                                               | Yes                                                                            | Yes                                                           | Not yet                                                       | Not yet                                                                       |
+| Strings | `trim`         | Yes                                                                         | Yes                                                                 | Yes                                                               | Yes                                                                            | Yes                                                           | Yes                                                           | Not yet                                                                       |
+| Strings | `trim_start`   | Yes                                                                         | Yes                                                                 | Yes                                                               | Yes                                                                            | Yes                                                           | Yes                                                           | Not yet                                                                       |
+| Strings | `trim_end`     | Yes                                                                         | Yes                                                                 | Yes                                                               | Yes                                                                            | Yes                                                           | Yes                                                           | Not yet                                                                       |
+| Strings | `replace`      | Yes                                                                         | Yes                                                                 | Yes                                                               | Yes                                                                            | Yes                                                           | Not yet                                                       | Not yet                                                                       |
+| Strings | `is_empty`     | Yes                                                                         | Yes                                                                 | Partly                                                            | Partly                                                                         | Yes                                                           | Partly                                                        | Not yet                                                                       |
+| Strings | `slice`        | Partly                                                                      | Partly                                                              | Partly                                                            | Partly                                                                         | Partly                                                        | Not yet                                                       | Not yet                                                                       |
+| Hashes  | `hash_md5`     | Yes                                                                         | Yes                                                                 | Yes                                                               | Not yet                                                                        | Yes                                                           | Yes                                                           | Not yet                                                                       |
+| Hashes  | `hash_sha1`    | Yes                                                                         | Yes                                                                 | Yes                                                               | Not yet                                                                        | Yes                                                           | Yes                                                           | Not yet                                                                       |
+| Hashes  | `hash_sha256`  | Yes                                                                         | Yes                                                                 | Yes                                                               | Not yet                                                                        | Yes                                                           | Yes                                                           | Not yet                                                                       |
+| Numbers | `abs`          | Yes                                                                         | Yes                                                                 | Yes                                                               | Yes                                                                            | Yes                                                           | Yes                                                           | Not yet                                                                       |
+| Numbers | `ceil`         | Yes                                                                         | Yes                                                                 | Yes                                                               | Yes                                                                            | Yes                                                           | Yes                                                           | Not yet                                                                       |
+| Numbers | `floor`        | Yes                                                                         | Yes                                                                 | Yes                                                               | Yes                                                                            | Yes                                                           | Yes                                                           | Not yet                                                                       |
+| Numbers | `round`        | Yes                                                                         | Yes                                                                 | Yes                                                               | Yes                                                                            | Yes                                                           | Yes                                                           | Not yet                                                                       |
+| Numbers | `sqrt`         | Yes                                                                         | Yes                                                                 | Yes                                                               | Yes                                                                            | Yes                                                           | Yes                                                           | Not yet                                                                       |
+| Numbers | `exp`          | Yes                                                                         | Yes                                                                 | Yes                                                               | Yes                                                                            | Yes                                                           | Yes                                                           | Not yet                                                                       |
+| Numbers | `log`          | Yes                                                                         | Yes                                                                 | Yes                                                               | Yes                                                                            | Yes                                                           | Yes                                                           | Not yet                                                                       |
+| Times   | `year`         | Yes                                                                         | Yes                                                                 | Yes                                                               | Yes                                                                            | Yes                                                           | Not yet                                                       | Not yet                                                                       |
+| Times   | `month`        | Yes                                                                         | Yes                                                                 | Yes                                                               | Yes                                                                            | Yes                                                           | Not yet                                                       | Not yet                                                                       |
+| Times   | `day`          | Yes                                                                         | Yes                                                                 | Yes                                                               | Yes                                                                            | Yes                                                           | Not yet                                                       | Not yet                                                                       |
+| Times   | `hour`         | Yes                                                                         | Yes                                                                 | Yes                                                               | Yes                                                                            | Yes                                                           | Not yet                                                       | Not yet                                                                       |
+| Times   | `minute`       | Yes                                                                         | Yes                                                                 | Yes                                                               | Yes                                                                            | Yes                                                           | Not yet                                                       | Not yet                                                                       |
+| Times   | `second`       | Yes                                                                         | Yes                                                                 | Yes                                                               | Yes                                                                            | Yes                                                           | Not yet                                                       | Not yet                                                                       |
+| Times   | `since_epoch`  | Not yet                                                                     | Not yet                                                             | Not possible                                                      | Not possible                                                                   | Yes                                                           | Not possible                                                  | Not possible                                                                  |
+
+Yes means that the target computes it, and Partly that it computes it only under conditions or approximately. Not yet means that it runs in Tenzir because Tenzir does not hand it over yet, and Not possible that it runs in Tenzir because the target cannot express it. The notes below the table name the conditions and how the targets differ.
+
+* `starts_with`, `ends_with`, and `is_empty` (MySQL, SQL Server, and SPL): in filters only, since the target has no booleans.
+* `starts_with` and `ends_with` (SentinelOne): in filters only, on a field with a string that is not empty.
+* `match_regex` (ClickHouse): clickHouse's RE2.
+* `match_regex` (MySQL and SPL): in filters only, since the target has no booleans.
+* `length_chars` (SQL Server): counts trailing spaces, which `LEN` alone leaves out.
+* `slice` (ClickHouse, DuckDB, MySQL, SQL Server, and KQL): with constant `begin` and `end` that are not negative.
+* `hash_md5`, `hash_sha1`, and `hash_sha256` (ClickHouse): rejects arguments that are no strings.
+* `round` (ClickHouse): rounds halves to even.
+* `second` (ClickHouse): plus the fraction of the second, from `toUnixTimestamp64Nano`.
+* `since_epoch` (MySQL, SQL Server, SPL, and SentinelOne): the target has no durations.
+
+Every target computes a function in kind like TQL: with the same type, with `null` where TQL yields `null`, such as for the root of a negative number, and with the same result without values. Within that, the target’s own semantics hold, such as how it rounds floating-point numbers, maps case, or matches regular expressions. A function takes positional arguments only, so a call with a named argument such as `ignore_case=true` runs in Tenzir. The `slice` function is the exception: it takes constant `begin` and `end` arguments.
+
+### Time buckets
+
+A `floor` of a time to a constant duration, such as the group key `hour` in
 
 ```tql
-from_mysql table="events", host="db.example.com", database="soc"
-summarize host, events=count(), bytes=sum(bytes)
-head 10
+from_clickhouse table="events", host="localhost"
+hour = floor(time, 1h)
+summarize hour, events=count()
 ```
 
-The source can read only `host` and `bytes`. For this table, the generated query is equivalent to:
+runs in these targets:
 
-```sql
-SELECT `host`, `bytes` FROM `events`
+| Width                                  | [ClickHouse](optimizations/clickhouse.md) | [DuckDB](optimizations/duckdb.md) | [MySQL](optimizations/mysql.md) | [SQL Server](optimizations/microsoft-sql.md) | [KQL](optimizations/kql.md) | [SPL](optimizations/spl.md) | [SentinelOne](optimizations/sentinelone.md) |
+| -------------------------------------- | --------------------------------------------------------------------------- | ------------------------------------------------------------------- | ----------------------------------------------------------------- | ------------------------------------------------------------------------------ | ------------------------------------------------------------- | ------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| Whole seconds, such as `1h`            | Yes                                                                         | Yes                                                                 | Yes                                                               | Partly                                                                         | Partly                                                        | Not yet                                                       | Yes                                                                           |
+| Fractions of a second, such as `250ms` | Yes                                                                         | Yes                                                                 | Partly                                                            | Not yet                                                                        | Partly                                                        | Not yet                                                       | Not yet                                                                       |
+| Multiples of a week or a month         | Not yet                                                                     | Not yet                                                             | Not yet                                                           | Not yet                                                                        | Not yet                                                       | Not yet                                                       | Not yet                                                                       |
+
+Yes means that the target computes it, and Partly that it computes it only under conditions or approximately. Not yet means that it runs in Tenzir because Tenzir does not hand it over yet, and Not possible that it runs in Tenzir because the target cannot express it. The notes below the table name the conditions and how the targets differ.
+
+* Whole seconds, such as `1h` (SQL Server): needs SQL Server 2022 or later; use `pushdown=false` with earlier servers.
+* Whole seconds, such as `1h` (KQL): widths that divide the time from 0001-01-01 to the epoch, such as those that divide two days.
+* Fractions of a second, such as `250ms` (MySQL): whole microseconds only.
+* Fractions of a second, such as `250ms` (KQL): whole multiples of 100 nanoseconds that divide the time from 0001-01-01 to the epoch.
+
+The buckets count from the epoch, as in TQL, also before 1970. Widths that are multiples of a week or a month run in Tenzir, since TQL aligns them to the calendar.
+
+## Rules that all sources share
+
+The remote sources take over operators the same way, whatever their target.
+
+### The run of operators after the source
+
+A source takes over the longest run of operators directly after it that its target can spell: [`where`](operators/where.md), [`select`](operators/select.md), [`drop`](operators/drop.md), [`summarize`](operators/summarize.md), [`sort`](operators/sort.md), and [`head`](operators/head.md), as well as [`top`](operators/top.md) or [`rare`](operators/rare.md) followed by [`head`](operators/head.md). The first operator that the target cannot spell ends the run. That operator and everything after it run in Tenzir, even if the target could spell a later one.
+
+The source decides from the pipeline alone and never falls back: an operator that it takes over runs in the target, and a target that rejects the request fails the pipeline with a [diagnostic](optimizations.md#diagnostics).
+
+Tenzir splits a [`where`](operators/where.md) at `and`, so the target can still take over the conjuncts that it spells. In
+
+```tql
+from_duckdb "events.duckdb", table="alerts"
+where severity >= 3 and message.parse_json().level == "high"
 ```
 
-This source does not compute the aggregation, so this is input projection, not remote aggregation. The query has no `GROUP BY`, `COUNT`, `SUM`, or `LIMIT`. Tenzir groups and aggregates the complete input, then keeps at most ten summary rows. Filters after `summarize` also stay after aggregation; filters before it can still reach the source. Some sources go further and [compute the aggregation](optimizations.md#aggregations-in-the-source).
+DuckDB takes over `severity >= 3`, and `parse_json` runs in Tenzir on the rows that DuckDB returns.
 
-These rules preserve the aggregation’s inputs and behavior:
+### Aggregations in the source
 
-* All grouping keys remain required, even if a later selection drops them.
-* All aggregate arguments remain required, even if their results are unused, because evaluating them can produce diagnostics.
-* Output aliases are not input dependencies. In the example, `events` does not request a source column.
-* A keyless `summarize events=count()` needs the row count but no field values. A source may still read a column or emit a placeholder per row to preserve that count. Unless the source [computes the aggregation](optimizations.md#aggregations-in-the-source), it does not replace the pipeline with a remote `COUNT(*)`.
-* Whole-event access, such as `collect(this)`, and dynamic field access, such as `sum(this[key])`, prevent narrowing.
-* Options must be resolved before `summarize` supplies a projection. Inside runtime-bound subpipelines, such as [`group`](operators/group.md) and [`window`](operators/window.md), an unresolved `summarize` does not narrow the enclosing source.
-* Input ordering requirements remain intact for order-sensitive aggregates. Trigger output, event output, and periodic summaries retain their barriers.
+A target that computes a final summary returns one row per group instead of every matching row. This happens if the source writes or extends the query itself in a read that ends, so not with `live=true`, as the backend pages describe for each source, and if every filter before the summary went to the target as well. The summary can follow the source directly or behind operators that keep every event and only keep, drop, or copy fields:
 
-The [`top`](operators/top.md) and [`rare`](operators/rare.md) operators compile into `summarize` and
+* [`select`](operators/select.md) and [`drop`](operators/drop.md) that keep the fields that the summary reads.
+* Renames and copies with [`select`](operators/select.md), [`set`](operators/set.md), or a plain assignment, such as `select ip=src_ip` or `ip = src_ip`. The target then groups and aggregates the original fields, and the result keeps the new names.
 
-[`sort`](operators/sort.md), so they benefit from the same input projection. A following [`head`](operators/head.md) still limits groups, not raw input events. Source-specific column rules and fields required by earlier operators still apply.
+For example, MySQL computes the summary of
 
-## Aggregations in the source
+```tql
+from_mysql table="alerts", host="db.example.com", database="soc"
+select ip=src_ip, ts, severity
+where severity >= 3
+summarize ip, alerts=count(), last=max(ts)
+```
 
-A source that reads from a database can compute a final summary itself, so that the database returns one row per group instead of every matching row. This happens only if the source reads a table once, in [table mode](optimizations.md#database-sources) and without `live=true`, if [`summarize`](operators/summarize.md) follows the source, after every filter before it went into the query, and if the summary groups by and aggregates fields or computed values with functions that the database computes exactly like Tenzir. A query that you write with `sql` is sent as written, and a live read never ends, so the summary of either runs in Tenzir. The `summarize` and the filters before it then disappear from the pipeline, the database returns only the group and aggregate fields, and the operators after the summary run on it as usual.
+by grouping on the `src_ip` column. Every right-hand side of a [`select`](operators/select.md) or [`set`](operators/set.md) reads the original event, so `select a=b, b=a` swaps the fields, and the summary reads them swapped. A summary can also read [computed values](optimizations.md#computed-keys-and-arguments).
 
-A source that computes the summary also takes over the [`where`](operators/where.md),
-
-[`sort`](operators/sort.md), and [`head`](operators/head.md) that directly follow it, so that the database returns only the groups that the pipeline keeps:
+A target that computes the summary also takes over the [`where`](operators/where.md), [`sort`](operators/sort.md), and [`head`](operators/head.md) that directly follow it, so that it returns only the groups that the pipeline keeps:
 
 ```tql
 from_clickhouse table="events", host="clickhouse.example.com", tls=false
@@ -126,62 +263,18 @@ sort -events, src_ip
 head 20
 ```
 
-The filter applies to the groups after grouping, and the limit counts groups. A [`top`](operators/top.md) or [`rare`](operators/rare.md) followed by [`head`](operators/head.md) runs in the database. These operators leave the pipeline, and the database runs them with its own semantics:
-
-* Text compares and sorts under the collation of its column.
-* The database decides where `null` sorts. MySQL and SQL Server sort it first in ascending order, DuckDB and ClickHouse last.
-* Groups that tie in a sort arrive in the order in which the database returns them.
-
-Some steps still run in Tenzir, together with everything after them:
-
-* A [`where`](operators/where.md) with function calls, or with constants other than numbers, strings, booleans, and `null`, such as times and IP addresses. Tenzir splits a [`where`](operators/where.md) at `and`, so it can still send the supported conjuncts to the database.
-* A [`sort`](operators/sort.md) by fields that the summary does not produce.
-
-Two details depend on the database. SQL Server spells booleans as bits, so a bare `where flag` stays in Tenzir. MySQL keeps strings with backslashes in Tenzir.
-
-The summary can follow the source directly or behind operators that keep every event and only keep, drop, or copy fields:
-
-* [`select`](operators/select.md) and [`drop`](operators/drop.md) that keep the fields that the summary reads.
-* Renames and copies with [`select`](operators/select.md), [`set`](operators/set.md), or a plain assignment, such as `select ip=src_ip` or `ip = src_ip`. The source then groups and aggregates the original fields, and the result keeps the new names.
-
-For example, the source computes the summary of
-
-```tql
-from_mysql table="alerts", host="db.example.com", database="soc"
-select ip=src_ip, ts, severity
-where severity >= 3
-summarize ip, alerts=count(), last=max(ts)
-```
-
-by grouping on the `src_ip` column. Every right-hand side of a [`select`](operators/select.md) or [`set`](operators/set.md) reads the original event, so `select a=b, b=a` swaps the fields, and the summary reads them swapped. An assignment of anything but a record literal to `this`, and every other operator, including [`head`](operators/head.md) and a [`where`](operators/where.md) that stays in Tenzir, keep the summary in Tenzir. A summary can also read [computed values](optimizations.md#computed-keys-and-arguments).
-
-### Aggregation functions
-
-Each source computes the functions that its target computes exactly like TQL, and then the steps after the summary, with the semantics of the target. It decides from the pipeline alone and never falls back: a summary that the source takes over runs in the source. Other functions keep the summary in Tenzir, and the other sources still aggregate in Tenzir.
-
-| Source                                                                                                                                                                                                     | `count()` | `count(x)` | `min`, `max` | `count_if` | `count_distinct` | `sum` | `mean` |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------- | ---------- | ------------ | ---------- | ---------------- | ----- | ------ |
-| [`from_clickhouse`](operators/from_clickhouse.md), [`from_hydrolix`](operators/from_hydrolix.md)                                       | Yes       | Yes        | Yes          | Yes        | Yes              | Yes   | Yes    |
-| [`from_duckdb`](operators/from_duckdb.md), [`from_mysql`](operators/from_mysql.md)                                                     | Yes       | Yes        | Yes          | Yes        | Yes              | Local | Yes    |
-| [`from_microsoft_sql`](operators/from_microsoft_sql.md)                                                                                                                  | Yes       | Yes        | Yes          | Yes        | Yes              | Yes   | Yes    |
-| [`from_splunk`](operators/from_splunk.md)                                                                                                                                | Yes       | Yes        | Yes          | Yes        | Yes              | Yes   | Yes    |
-| [`from_microsoft_defender`](operators/from_microsoft_defender.md), [`from_azure_log_analytics`](operators/from_azure_log_analytics.md) | Yes       | Yes        | Yes          | Yes        | Local            | Yes   | Local  |
-| [`from_sentinelone_data_lake`](operators/from_sentinelone_data_lake.md)                                                                                                  | Yes       | Yes        | Local        | Local      | Approximate      | Local | Local  |
-
-*Local* means that the summary stays in Tenzir. A source that computes `count_distinct` *approximately*, as SentinelOne does with `estimate_distinct` because PowerQuery has no exact distinct count, may return a different count than TQL. DuckDB and MySQL keep `sum` local because it yields wider result types than TQL’s, and KQL keeps `mean` and `count_distinct` local.
-
-In every source that computes it, `count_if` counts only the events whose input is not `null`, as TQL does. The pages of [ClickHouse](optimizations/clickhouse.md#summaries), [DuckDB](optimizations/duckdb.md#summaries), [MySQL](optimizations/mysql.md#summaries), [SQL Server](optimizations/microsoft-sql.md#summaries), [SPL](optimizations/spl.md#summaries), [SentinelOne](optimizations/sentinelone.md#operators-that-sentinelone-takes-over), and [KQL](optimizations/kql.md#summaries) list how each source spells the functions.
+The filter applies to the groups after grouping, and the limit counts groups. A [`top`](operators/top.md) or [`rare`](operators/rare.md) followed by [`head`](operators/head.md) runs in the target as well.
 
 ### Computed keys and arguments
 
-A summary can group by or aggregate computed values, such as values that a [`set`](operators/set.md) before it assigns. The SQL sources, [`from_splunk`](operators/from_splunk.md), and the KQL sources compute them in the target, with its semantics, before the aggregation:
+A summary can group by or aggregate computed values, such as values that a [`set`](operators/set.md) before it assigns. The target computes them with its own semantics before the aggregation:
 
-| Source                                                                                                                                                                                                                                                                                                                                                                                                                  | Computes with                       |
-| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------- |
-| [`from_clickhouse`](operators/from_clickhouse.md), [`from_duckdb`](operators/from_duckdb.md), [`from_hydrolix`](operators/from_hydrolix.md), [`from_microsoft_sql`](operators/from_microsoft_sql.md), [`from_mysql`](operators/from_mysql.md) | The expression inside the aggregate |
-| [`from_splunk`](operators/from_splunk.md)                                                                                                                                                                                                                                                                                                                                             | `eval`                              |
-| [`from_microsoft_defender`](operators/from_microsoft_defender.md), [`from_azure_log_analytics`](operators/from_azure_log_analytics.md)                                                                                                                                                                                                              | `extend`                            |
-| [`from_sentinelone_data_lake`](operators/from_sentinelone_data_lake.md)                                                                                                                                                                                                                                                                                                               | Declines                            |
+| Source                                                                                                                                                                                                                                                                                                                                                                                                                  | Computes with                           |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------- |
+| [`from_clickhouse`](operators/from_clickhouse.md), [`from_duckdb`](operators/from_duckdb.md), [`from_hydrolix`](operators/from_hydrolix.md), [`from_microsoft_sql`](operators/from_microsoft_sql.md), [`from_mysql`](operators/from_mysql.md) | The expression inside the aggregate     |
+| [`from_splunk`](operators/from_splunk.md)                                                                                                                                                                                                                                                                                                                                             | `eval`                                  |
+| [`from_microsoft_defender`](operators/from_microsoft_defender.md), [`from_azure_log_analytics`](operators/from_azure_log_analytics.md)                                                                                                                                                                                                              | `extend`                                |
+| [`from_sentinelone_data_lake`](operators/from_sentinelone_data_lake.md)                                                                                                                                                                                                                                                                                                               | Only time buckets, in its `group` stage |
 
 For example, Splunk computes the key of
 
@@ -201,89 +294,38 @@ summarize src_ip, worst=max(level)
 
 as `MAX(("severity" * 2))`.
 
-An assignment that the summary reads may be fallible, such as a function call, since the target computes it with its own semantics. An assignment that the summary doesn’t read, including one that a later assignment shadows, must be infallible, since the target skips it and so would hide a failure that the pipeline would report. Otherwise, the operators stay in the pipeline. A value that the target cannot spell, such as a call of a function that the [filters](optimizations.md#filters-by-database) don’t list, also keeps the summary in Tenzir.
+An assignment that the summary reads may be fallible, such as a function call, since the target computes it with its own semantics. An assignment that the summary doesn’t read, including one that a later assignment shadows, must be infallible, since the target skips it and so would hide a failure that the pipeline would report. Otherwise, the operators run in Tenzir. A value that the target cannot spell, such as a call of a function that the [matrix](optimizations.md#functions) doesn’t list for it, also makes the summary run in Tenzir.
 
-### Time buckets
+### Aggregation input projections
 
-A `floor` of a time to a duration, such as the groups of a summary, runs in the database in these sources:
-
-| Source                                                                                                                                                               | `floor(time, width)`                        |
-| -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------- |
-| [`from_duckdb`](operators/from_duckdb.md)                                                                                          | Yes                                         |
-| [`from_microsoft_sql`](operators/from_microsoft_sql.md)                                                                            | Yes, as `DATE_BUCKET`, with SQL Server 2022 |
-| [`from_clickhouse`](operators/from_clickhouse.md), [`from_hydrolix`](operators/from_hydrolix.md) | Yes                                         |
-| [`from_mysql`](operators/from_mysql.md)                                                                                            | No, since times arrive as text              |
-| KQL, PowerQuery, and Splunk sources                                                                                                                                  | No                                          |
+A final [`summarize`](operators/summarize.md) also tells the source which fields it reads, so a source reads only those even if its target does not compute the summary. You do not need an explicit [`select`](operators/select.md) before aggregation:
 
 ```tql
-from_clickhouse table="events", host="localhost"
-hour = floor(time, 1h)
-summarize hour, events=count()
+from_mysql table="events", host="db.example.com", database="soc", pushdown=false
+summarize host, events=count(), bytes=sum(bytes)
+head 10
 ```
 
-The buckets count from the epoch, as in TQL, also before 1970. Widths that are multiples of a week or a month stay in the pipeline, since TQL aligns them to the calendar, and so do widths below a second in SQL Server. SQL Server computes the bucket with `DATE_BUCKET(second, 3600, …, CAST('1970-01-01' AS datetime2(7)))`, which SQL Server earlier than 2022 rejects. With such a server, use `pushdown=false`.
+With `pushdown=false`, MySQL computes nothing, but the source still reads only `host` and `bytes`, with a query equivalent to:
 
-## Database sources
+```sql
+SELECT `host`, `bytes`
+FROM `events`
+```
 
-The database sources [`from_clickhouse`](operators/from_clickhouse.md), [`from_duckdb`](operators/from_duckdb.md),
+Tenzir then groups and aggregates the complete input and keeps at most ten summary rows. These rules preserve the aggregation’s inputs and behavior:
 
-[`from_microsoft_sql`](operators/from_microsoft_sql.md), and [`from_mysql`](operators/from_mysql.md) read in one of two modes, and only one of them optimizes:
+* All grouping keys remain required, even if a later selection drops them.
+* All aggregate arguments remain required, even if their results are unused, because evaluating them can produce diagnostics.
+* Output aliases are not input dependencies. In the example, `events` does not request a source column.
+* A keyless `summarize events=count()` needs the row count but no field values. A source may still read a column or emit a placeholder per row to preserve that count.
+* Whole-event access, such as `collect(this)`, and dynamic field access, such as `sum(this[key])`, prevent narrowing.
+* Options must be resolved before `summarize` supplies a projection. Inside runtime-bound subpipelines, such as [`group`](operators/group.md) and [`window`](operators/window.md), an unresolved `summarize` does not narrow the enclosing source.
+* Input ordering requirements remain intact for order-sensitive aggregates. Trigger output, event output, and periodic summaries retain their barriers.
 
-* In **table mode**, you name a table, as in `from_mysql table="alerts"`. The operator writes the query itself, so it can add the work of the operators that follow it.
-* In **SQL mode**, you write the query, as in `from_mysql sql="SELECT …"`. The operator sends it exactly as written, and Tenzir applies the rest of the pipeline to its result. To have the database filter, write the filter into your query.
+The [`top`](operators/top.md) and [`rare`](operators/rare.md) operators compile into `summarize` and [`sort`](operators/sort.md), so they benefit from the same input projection. A following [`head`](operators/head.md) still limits groups, not raw input events.
 
-In table mode, the operator hands the database the operators that follow it, as our [ClickHouse](optimizations/clickhouse.md), [DuckDB](optimizations/duckdb.md), [MySQL](optimizations/mysql.md), and [SQL Server](optimizations/microsoft-sql.md) pages describe.
-
-[`from_hydrolix`](operators/from_hydrolix.md) follows the rules of [`from_clickhouse`](operators/from_clickhouse.md).
-
-## SentinelOne
-
-[`from_sentinelone_data_lake`](operators/from_sentinelone_data_lake.md) reads with a PowerQuery that you write in `query`, or one that Tenzir writes. In both cases, the operator hands SentinelOne the operators that follow it as PowerQuery stages, which run with SentinelOne’s semantics:
-
-* **Filters** become `filter` stages. Reads of whole events with only filters and a final [`head`](operators/head.md) use a LOG query instead, which returns complete events and pages without a cap.
-* **Projections** become a `columns` stage, and **summaries** a `group` stage.
-* **Sorts and limits** become `sort` and `limit`. A PowerQuery that does not end in a limit ends in `limit 1600000`, since PowerQuery otherwise returns at most 1,000 rows.
-* **The time window** narrows from comparisons of `timestamp` when you omit `query`.
-
-Our [SentinelOne optimization reference](optimizations/sentinelone.md) lists the operators that SentinelOne takes over and how its semantics differ.
-
-## KQL sources
-
-[`from_microsoft_defender`](operators/from_microsoft_defender.md) and [`from_azure_log_analytics`](operators/from_azure_log_analytics.md) run a KQL query that you write, and hand the service the operators that follow by appending KQL stages to it, which apply to the table that your query returns and run with KQL’s semantics. Your query text stays as is:
-
-* **Filters** become `where` stages, **projections** `project` and `project-away`, and **summaries, sorts, and limits** `summarize`, `sort`, and `take`. A summary of computed values starts with an `extend`.
-* **Projections with `pushdown=false`:** the operator appends the `project` also then, so that the service returns only the fields that the pipeline reads, while every operator stays in Tenzir.
-* **Missing columns and types:** the operator knows neither the columns nor the types of your query’s output before it runs, so a stage that names a column that your query doesn’t return, or that KQL rejects for its type, fails the query with the service’s error.
-* **The time window** never narrows, since a time field in your query’s output need not refer to the time that `start` and `end` select.
-
-Our [KQL optimization reference](optimizations/kql.md) lists the operators that the service takes over and the queries that stay unchanged.
-
-## SPL source
-
-[`from_splunk`](operators/from_splunk.md) runs a Splunk search. With `search`, you write the search in SPL, and with `index`, Tenzir writes the search for the indexes. In both cases, the operator hands Splunk the operators that follow it by appending SPL stages, which run with Splunk’s semantics:
-
-* **Filters** become `where` stages. With `index`, the filters right after the operator extend the base `search` command where it can spell them, which matches strings without regard to case and lets Splunk use its indexes.
-* **Projections** become a `fields` stage. Without one, the operator appends `fields *`, since Splunk otherwise returns only the fields that the search references.
-* **Summaries, sorts, and limits** become `stats`, `sort`, and `head`. A summary of computed values starts with an `eval`.
-* **The time window** narrows with `index` from comparisons of `_time`, when `earliest` and `latest` are absolute.
-
-Our [SPL optimization reference](optimizations/spl.md) lists the operators that Splunk takes over and how its semantics differ.
-
-## API sources
-
-[`from_microsoft_graph`](operators/from_microsoft_graph.md), [`from_amazon_cloudwatch`](operators/from_amazon_cloudwatch.md), and [`from_microsoft_365_activity`](operators/from_microsoft_365_activity.md) hand their APIs the operators that follow, as far as the request parameters can express them:
-
-* **Microsoft Graph** turns a [`where`](operators/where.md) into a `$filter` only where it documents `$filter` support, since it may silently ignore a query parameter that it does not support. A [`select`](operators/select.md) becomes a `$select`, and a [`head`](operators/head.md) stops paging. Our [Microsoft Graph page](optimizations/microsoft-graph.md) lists the details.
-* **CloudWatch Logs** turns phrases in `message` into filter patterns, and times and stream names into its request window and streams. Our [CloudWatch Logs page](optimizations/cloudwatch.md) lists the details.
-* **The Activity API** returns whole blobs, so filters on their metadata skip downloads and keep TQL semantics, and comparisons of `content_created` narrow the time range of a bounded read, as the [operator reference](operators/from_microsoft_365_activity.md#optimizations) describes.
-
-[`from_velociraptor`](operators/from_velociraptor.md) takes over nothing, since a VQL query may have effects that a filter or a limit would change.
-
-## Filters by database
-
-Each database takes over the filters that it can spell, and runs them with its own semantics. The pages on [ClickHouse](optimizations/clickhouse.md#filters), [DuckDB](optimizations/duckdb.md#filters), [MySQL](optimizations/mysql.md#filters), and [SQL Server](optimizations/microsoft-sql.md#filters) list them.
-
-## Time windows
+### Time windows
 
 [`from_splunk`](operators/from_splunk.md) with `index`, [`from_sentinelone_data_lake`](operators/from_sentinelone_data_lake.md) without `query`, [`from_amazon_cloudwatch`](operators/from_amazon_cloudwatch.md), and [`from_microsoft_365_activity`](operators/from_microsoft_365_activity.md) narrow the time range of their request to the comparisons of a time in the filters after them. They share one reading of these filters:
 
@@ -295,16 +337,31 @@ Each database takes over the filters that it can spell, and runs them with its o
 | `and` of comparisons                           | The intersection of their windows                                                          |
 | `or` of comparisons                            | The range that encloses their windows                                                      |
 
-Each source then rounds the window to the units of its request. A strict bound now excludes its time, so `from_splunk` requests `latest_time=1735689720`, and not `1735689721`, for `where _time < 2025-01-01T00:02:00Z`. [`from_microsoft_365_activity`](operators/from_microsoft_365_activity.md) also narrows the listing to the range that encloses an `or`, such as for `where microsoft_365_activity.content_created >= 2024-01-02 or microsoft_365_activity.content_created == 2024-01-01`, and narrows the side of an `==` that it can represent. The comparisons always stay in the pipeline or the request, so the window never changes the result.
+Each source then rounds the window to the units of its request. A strict bound now excludes its time, so `from_splunk` requests `latest_time=1735689720`, and not `1735689721`, for `where _time < 2025-01-01T00:02:00Z`. [`from_microsoft_365_activity`](operators/from_microsoft_365_activity.md) also narrows the listing to the range that encloses an `or`, such as for
+
+```tql
+where microsoft_365_activity.content_created >= 2024-01-02
+   or microsoft_365_activity.content_created == 2024-01-01
+```
+
+and narrows the side of an `==` that it can represent. The comparisons always stay in the pipeline or the request, so the window never changes the result.
 
 ## Diagnostics
 
 A source tells you when its target did not compute the operators that it took over like Tenzir would:
 
-| Situation                                              | Diagnostic                                                                                                                                                                      |
-| ------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| The target rejects the request                         | The target’s error, with the note `<target> computes the stages that the operator took over with its own semantics` and the hint ``use `pushdown=false` to run them in Tenzir`` |
-| The source cannot plan the operators for what it reads | The error `<target> cannot compute the stages that the operator took over`, with the reason as note and the same hint                                                           |
+* **The target rejects the request.** The source reports the target’s error with a note and a hint:
+
+  ```text
+  note: <target> computes the stages that the operator took over with its own semantics
+  hint: use `pushdown=false` to run them in Tenzir
+  ```
+
+* **The source cannot plan the operators for what it reads.** The source reports an error with the reason as note and the same hint:
+
+  ```text
+  error: <target> cannot compute the stages that the operator took over
+  ```
 
 The first case adds the note and the hint only if the source took over operators. A source that took over none, such as with `pushdown=false`, shows the error of the target alone. For example, DuckDB rejects the filter of
 
@@ -335,12 +392,12 @@ error: ClickHouse cannot compute the stages that the operator took over
 
 ## Verify an optimization
 
-To see which hints an operator received, print the optimized pipeline:
+To see what a source takes over, print the optimized pipeline:
 
 ```sh
 tenzir --dump-opt-ir 'from_mysql table="logins" | where user == "admin" | head 10'
 ```
 
-The operator shows the accepted predicates as `filter`, the limit as `limit`, the projection as `projection`, and a summary that it computes as `aggregation`, and the [`where`](operators/where.md) or [`summarize`](operators/summarize.md) that it took over no longer appears. [`from_duckdb`](operators/from_duckdb.md), [`from_mysql`](operators/from_mysql.md),
+Every remote source in the [table of sources](optimizations.md#sources-and-their-pages) lists the operators that its target took over as `plan`, and the reason why it took over no more as `declined`. The [`where`](operators/where.md), [`summarize`](operators/summarize.md), or other operators that the target took over no longer appear after the source. A source that acts on hints shows the predicates that it received as `filter`, the limit as `limit`, and the fields that it reads as `projection`.
 
-[`from_microsoft_sql`](operators/from_microsoft_sql.md), and [`from_splunk`](operators/from_splunk.md) list the operators that they took over as `plan`, and the reason why they took over no more as `declined`. To see the query that a database source sends, look it up in the database’s own query log.
+To see the request itself, use the target’s own tools, such as the query log of a database or ClickHouse’s `system.query_log` table. When Splunk reports an error or a warning, and when SentinelOne rejects a query, the diagnostic shows the request as the source sent it.

@@ -60,7 +60,7 @@ Read a table from a local DuckDB database file. DuckDB runs embedded in Tenzir, 
 from_duckdb "alerts.duckdb", table="alerts"
 ```
 
-With ClickHouse, the operators that follow travel into the query. A `where` becomes a `WHERE` clause, a `select` narrows the columns, and a `head` adds a `LIMIT`, so this pipeline reads only matching rows and the columns it names:
+In `table` mode, the database takes over the operators that follow the source: filters, selections, summaries, sorts, and limits, including many functions in them. A `where` becomes a `WHERE` clause, a `select` narrows the columns, a `summarize` becomes a `GROUP BY`, and a `head` adds a `LIMIT`, so this pipeline reads only the matching rows and the columns that it names:
 
 ```tql
 from_clickhouse table="security.events"
@@ -69,25 +69,34 @@ select time, host, message
 head 1000
 ```
 
-The reference for [`from_clickhouse`](../../reference/operators/from_clickhouse.md) lists which predicates translate. Anything that does not, such as a function call, runs in Tenzir with the same result. With MySQL, `table` mode fetches every row and the pipeline filters afterwards.
+The same holds for [`from_mysql`](../../reference/operators/from_mysql.md), [`from_duckdb`](../../reference/operators/from_duckdb.md), and [`from_microsoft_sql`](../../reference/operators/from_microsoft_sql.md). The database runs these operators with its own semantics, such as its collation when it compares text, or its handling of `null`. The first operator that the database cannot compute, and everything after it, runs in Tenzir. Our [optimizations reference](../../reference/optimizations.md) lists, for each database, the operators and functions that it takes over and how its results can differ from TQL’s. To run every operator in Tenzir with TQL semantics, set `pushdown=false` on the source.
 
 ## Shape results with SQL
 
-Use `sql=...` when the data store should sort, aggregate, join, or cast before Tenzir receives the rows, or when you read from MySQL and want the database to filter.
+Use `sql=...` for what the operators cannot express, such as joins, casts, or functions of the data store that TQL lacks. Tenzir sends the query as is.
 
-Sort in ClickHouse:
+Unnest an array column in ClickHouse, one event per tag:
 
 ```tql
-from_clickhouse sql="SELECT time, host, severity, message FROM events WHERE severity >= 3 ORDER BY time DESC",
+from_clickhouse sql=r#"
+                  SELECT time, host, arrayJoin(tags) AS tag
+                  FROM events
+                  WHERE severity >= 3
+                "#,
                 host="clickhouse.example.com",
                 password=secret("CLICKHOUSE_PASSWORD"),
                 tls=false
 ```
 
-Filter in MySQL:
+Join in MySQL:
 
 ```tql
-from_mysql sql="SELECT id, user, last_login FROM users WHERE active = 1 ORDER BY last_login DESC",
+from_mysql sql=r#"
+             SELECT u.id, u.user, r.name AS role
+             FROM users u
+             JOIN roles r ON r.id = u.role_id
+             WHERE u.active = 1
+           "#,
            host="mysql.example.com",
            user="tenzir",
            password=secret("MYSQL_PASSWORD"),
@@ -98,7 +107,11 @@ Query files through DuckDB. An in-memory DuckDB database reads Parquet, CSV, and
 
 ```tql
 from_duckdb ":memory:",
-  sql="SELECT * FROM 'flows/*.parquet' WHERE bytes > 1000000"
+  sql=r#"
+    SELECT *
+    FROM 'flows/*.parquet'
+    WHERE bytes > 1000000
+  "#
 ```
 
 This pattern lets you use the full query language of the source system. Tenzir sends the query as is and applies the rest of the pipeline to the result.
@@ -131,7 +144,10 @@ List the tables in a DuckDB database:
 
 ```tql
 from_duckdb "alerts.duckdb",
-  sql="SELECT table_schema, table_name FROM information_schema.tables"
+  sql=r#"
+    SELECT table_schema, table_name
+    FROM information_schema.tables
+  "#
 ```
 
 Use metadata queries when you want to discover available tables, inspect a schema, or validate assumptions before you run a larger pipeline. In ClickHouse and DuckDB, prefer regular SQL such as `SHOW`, `DESCRIBE`, or queries against system catalogs.
@@ -160,14 +176,17 @@ where severity == "high"
 
 Use this mode when you want to turn a database table into a continuously polled event source.
 
-`from_clickhouse` does not currently provide a comparable live mode. It runs a query, emits the result, and then finishes.
+The [`from_clickhouse`](../../reference/operators/from_clickhouse.md) operator does not currently provide a comparable live mode. It runs a query, emits the result, and then finishes.
 
 ## Shape rows after reading
 
 All three operators produce structured events, so you can transform the result right away.
 
 ```tql
-from_clickhouse sql="SELECT host, severity, message FROM events",
+from_clickhouse sql=r#"
+                  SELECT host, severity, message
+                  FROM events
+                "#,
                 host="clickhouse.example.com",
                 password=secret("CLICKHOUSE_PASSWORD"),
                 tls=false

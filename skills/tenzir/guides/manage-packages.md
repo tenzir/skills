@@ -205,7 +205,7 @@ A new package release never reaches your deployments by itself. Your configurati
 
 ### Find updates
 
-Updates are the newer releases that a package’s requirement accepts:
+Look for newer package releases before deciding which to apply. The app includes releases outside the current requirement, while an ordinary CLI update stays within it:
 
 * MCP
 
@@ -217,7 +217,7 @@ Updates are the newer releases that a package’s requirement accepts:
 
 * App
 
-  The **Updates** tab of the **Packages** page lists the packages with a newer release that their requirement accepts. A release outside the requirement, such as a new major version, appears only in the version list of the package.
+  The **Updates** tab of the **Packages** page lists every installed package with a newer stable release, including releases that the requirement of the package rules out, such as a new major version.
 
 * CLI
 
@@ -232,7 +232,7 @@ Updates are the newer releases that a package’s requirement accepts:
 
 ### Apply updates
 
-An update moves packages to the newest versions that their requirements in `package.yaml` accept, and only `package.lock` changes. Before you commit, read the release notes of each new version on its page in our [library catalog](https://tenzir.com/product/library). A requirement such as `^1.2` lets in data changes, such as a mapping that fills another OCSF attribute, and those can affect detections or dashboards that rely on the events.
+An update moves packages to the newest versions that their requirements in `package.yaml` accept, and only `package.lock` changes. An update to the newest release, which the app always makes and the CLI’s `--latest` and the `latest` option of `update_draft_packages` ask for, also rewrites a requirement in `package.yaml` that rules that release out. Before you commit, read the release notes of each new version on its page in our [library catalog](https://tenzir.com/product/library). A requirement such as `^1.2` lets in data changes, such as a mapping that fills another OCSF attribute, and those can affect detections or dashboards that rely on the events.
 
 * MCP
 
@@ -244,7 +244,7 @@ An update moves packages to the newest versions that their requirements in `pack
 
 * App
 
-  Select **Update** on a package, or **Update all** above the tabs, then commit the draft from the top bar.
+  Select **Update** on a package, or **Update all** at the right of the tabs, then commit the draft from the top bar. **Update all** shows how many packages have updates and appears only when there are any. Both buttons move to the newest release. If the requirement in `package.yaml` rules it out, the update rewrites the requirement to `^<newest>`. **Update all** leaves packages pinned with `=` as they are, and its tooltip says how many. The **Update** button of a package lifts its pin.
 
 * CLI
 
@@ -255,9 +255,15 @@ An update moves packages to the newest versions that their requirements in `pack
   tenzir config apply -m 'Update the suricata package'
   ```
 
+  To also move packages whose requirement rules out the newest release, add `--latest`. This rewrites the requirement in `package.yaml` to `^<newest>`. Without a package id, `--latest` leaves packages pinned with `=` as they are, and with an id it lifts the pin of that package:
+
+  ```sh
+  tenzir package update suricata --latest
+  ```
+
 ### Move to an incompatible version
 
-A requirement excludes versions that break the way pipelines call the package, so `^1.2` never updates to 2.0. Before 1.0, every minor version may break callers, so `^0.1` never updates to 0.2 either, and a package at `^0.0.1` takes the same step to reach any newer release. To move on, change the requirement:
+A requirement excludes versions that break the way pipelines call the package, so `^1.2` never updates to 2.0. Before 1.0, every minor version may break callers, so `^0.1` never updates to 0.2 either, and a package at `^0.0.1` takes the same step to reach any newer release. To move on, update with `--latest`, which rewrites the requirement to the newest release, or change the requirement yourself. The **Update** button of a package in the app and the `update_draft_packages` tool with `latest` and a `package` do the former:
 
 * MCP
 
@@ -287,7 +293,7 @@ To keep a package at one version until you decide otherwise, require exactly tha
 tenzir package add suricata@=0.1.0
 ```
 
-Updates then leave the package alone until you change the requirement again.
+Ordinary updates and **Update all** leave the package pinned, as does `tenzir package update --latest` without a package id. A per-package **Update** in the app, `tenzir package update suricata --latest`, or `update_draft_packages` with `latest` and that `package` lifts the pin by rewriting the requirement when a newer release is available.
 
 ### Roll out and roll back
 
@@ -443,10 +449,10 @@ author: Your Name
 author_icon: https://github.com/yourusername.png
 
 
-# A user-facing description of the package.
+# A user-facing description of what the package is for.
 description: |
-  A brief description of what your package does and the use cases it supports.
-  You can use **Markdown** formatting here.
+  Parses the logs of Acme firewalls and maps them to
+  [OCSF](https://schema.ocsf.io).
 
 
 # Tags that the Packages page and our library catalog filter by, such as
@@ -457,6 +463,34 @@ categories:
 ```
 
 Leave out `version` for now. Cutting the first release with `tenzir-ship` sets it to the released version, as in `version: "0.1.0"`, and every later release raises it, as the section on [releasing a package](manage-packages.md#release-a-package) shows. Our reference on the [package manifest](../reference/manifest.md#package-manifest) lists every field.
+
+#### Describe what the package is for
+
+Treat the `description` as the answer to “what is this package and should I install it?”, not as its README. Say what the integrated product is, what the package does for the user, such as which data it maps to which schema or which sources it fetches from, and the caveats that decide whether and how to use it, such as the contexts that your operators expect the configuration to declare. Open with a paragraph that stands on its own, because cards and previews show only the first one, and put further detail after it:
+
+package.yaml
+
+```yaml
+description: |
+  Collects audit logs and security events from Acme Cloud and maps them to
+  [OCSF](https://schema.ocsf.io).
+
+
+  The package covers authentication and configuration changes. It does not
+  cover Acme's billing events.
+```
+
+Length follows scope. A package that does one thing needs a sentence or two. A package that covers many products, data sources, or schemas needs more, because each of them is part of what it is for. What does not belong in the description is anything that already has a home, because a copy there goes stale and hides the answer users came for:
+
+| Content                                           | Where it belongs                                                                                     |
+| ------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| Complete, runnable TQL pipelines                  | [`examples/`](manage-packages.md#add-examples)                        |
+| Usage, arguments, and behavior of an operator     | The [frontmatter](../reference/directory-layout.md#frontmatter) of the operator |
+| Which fields map where, and other mapping details | The operator’s frontmatter, or a test                                                                |
+| Edge cases                                        | [Tests](manage-packages.md#test-a-package)                            |
+| What changed in a release                         | The [changelog](manage-packages.md#release-a-package)                 |
+
+If the description grows because it repeats one of these, move that content to its home and keep the description to what the package covers.
 
 #### Add external metadata
 
@@ -496,6 +530,13 @@ The `examples` folder holds self-contained snippets that run after installation.
 examples/basic-usage.tql
 
 ```tql
+---
+name: Basic usage
+description: |
+  Normalizes a single authentication log line with the package's operator.
+---
+
+
 from {message: "2026-01-15T10:30:00Z auth alice success"}
 vendor::ocsf::normalize message
 ```
@@ -505,13 +546,20 @@ Then show a snippet per use case the package supports:
 examples/alert-on-high-severity.tql
 
 ```tql
+---
+name: Alert on high severity
+description: |
+  Publishes normalized events with a high severity to the `alerts` topic.
+---
+
+
 from {message: "2026-01-15T10:31:00Z auth root failure"}
 vendor::ocsf::normalize message
 where severity_id >= 4
 publish "alerts"
 ```
 
-One example, one use case. An example that needs a paragraph of setup belongs in a test.
+One example, one use case. An example that needs a paragraph of setup belongs in a test. Give each example file a `name` and a `description` in its frontmatter, as above. Those are the only keys that [an example’s frontmatter](../reference/directory-layout.md#examples) accepts. Put examples here rather than in the package’s `description`, as the section on [describing what the package is for](manage-packages.md#describe-what-the-package-is-for) explains.
 
 Contexts stay in the configuration
 
@@ -1072,6 +1120,12 @@ The type of each entry decides the next version number, and with it which config
 
 A `change` can still matter downstream, for example to a detection that matches on a field you renamed in the output. Say so in the entry, so that users read it before they update.
 
+### Release what you record
+
+A changelog entry alone reaches no one. A package that others install from a repository or from our library has releases, and configurations update to released versions, so a fix or a feature arrives only when a release carries it. Every entry describes something users notice, which means that nearly every change should end in a release: cut it in the same pull request as the change, and let the entries you just recorded decide the version. In a repository where you tag releases yourself, cutting it right after the merge works too. A bug fix that merges with its entry but without a release leaves users on the defect, and leaves the next person to wonder why the entry sits in `changelog/unreleased/`.
+
+The exception is a planned sequence of changes that only make sense together, such as a rename that takes several pull requests. Collect their entries and release once, when the sequence is complete. Whoever makes the change, you or a coding agent, should treat the release as part of finishing it, not as a separate chore.
+
 ### Cut the release
 
 1. Preview the release from your package’s folder:
@@ -1286,7 +1340,7 @@ A package in the library lives in a folder at the root of the repository, named 
 
 Check it against what the library expects:
 
-* **Manifest**: The `package.yaml` has an `id`, a `name`, a Markdown `description` that says which product and use cases the package covers, an `author`, and `categories` such as `sources`, `mappings`, or `detections`. The `package_icon` points to the SVG in your folder through its raw GitHub URL, as the other packages in the library show.
+* **Manifest**: The `package.yaml` has an `id`, a `name`, a Markdown [`description`](manage-packages.md#describe-what-the-package-is-for) that says which product and use cases the package covers, an `author`, and `categories` such as `sources`, `mappings`, or `detections`. The `package_icon` points to the SVG in your folder through its raw GitHub URL, as the other packages in the library show.
 * **Operators only**: The package provides operators and constants. It contains no pipelines and no contexts, because deployments refuse such packages.
 * **Dependencies**: The package depends only on other packages of the library, in the short form that names nothing but a version requirement.
 * **Examples**: Every use case has an example that runs on literal events, without credentials or network access.

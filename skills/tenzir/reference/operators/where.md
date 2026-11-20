@@ -19,6 +19,10 @@ where predicate:bool
 
 The `where` operator only keeps events that match the provided predicate and discards all other events. Only events for which it evaluates to `true` pass. If the predicate evaluates to `null`, it is falsy, so `where` discards the event. See [Null is falsy in predicates](../expressions.md#null).
 
+## Optimizations
+
+A remote source, such as [`from_mysql`](from_mysql.md) or [`from_splunk`](from_splunk.md), may take over a `where` that follows it and run the filter in its target, with the target’s semantics. For example, a comparison with `null` yields `null` in SQL, so `name != "alpha"` does not keep rows where `name` is `null`, and a database may compare text without regard to case. Our [optimizations reference](../optimizations.md#results-follow-the-targets-semantics) lists the sources and how their targets differ. With `pushdown=false` on the source, the filter runs in Tenzir.
+
 ## Examples
 
 ### Keep only events where `src_ip` is `1.2.3.4`

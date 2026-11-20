@@ -16,7 +16,7 @@ The [`sigma`](../../reference/operators/sigma.md) operator translates supported 
 
 ## Mapping catalog
 
-Use this catalog to look up a rule’s `logsource` selector, compatible OCSF class, event guard, and field projections. It starts with **All** products. Select a product to narrow the diagram. Each family shows its selector; select the family to open its field projections. On a narrow screen, expand the family’s row.
+Use this catalog to look up a rule’s `logsource` selector, compatible OCSF class, event guard, and field projections. It starts with **All** products. Select a product to narrow the diagram. Sigma’s generic categories, such as `proxy`, `webserver`, and `dns`, name no product and appear under **Generic**. They match conformant events of their OCSF class from any producer. Each family shows its selector; select the family to open its field projections. On a narrow screen, expand the family’s row.
 
 | Sigma logsource family                                | Source details                                                                 | OCSF class                | Target details     |
 | ----------------------------------------------------- | ------------------------------------------------------------------------------ | ------------------------- | ------------------ |
@@ -28,6 +28,9 @@ Use this catalog to look up a rule’s `logsource` selector, compatible OCSF cla
 | Entra ID Protection risk detections                   | product: azure, service: riskdetection                                         | Detection Finding         | class\_uid: 2004   |
 | Entra ID sign-ins                                     | product: azure, service: signinlogs                                            | Authentication            | class\_uid: 3002   |
 | GCP Cloud Audit Logs                                  | product: gcp, service: gcp.audit                                               | API Activity              | class\_uid: 6003   |
+| DNS                                                   | category: dns                                                                  | DNS Activity              | class\_uid: 4003   |
+| Web proxy                                             | category: proxy                                                                | HTTP Activity             | class\_uid: 4002   |
+| Web server access log                                 | category: webserver                                                            | HTTP Activity             | class\_uid: 4002   |
 | Linux file creation                                   | product: linux, category: file\_event                                          | File System Activity      | class\_uid: 1001   |
 | Linux network connection                              | product: linux, category: network\_connection                                  | Network Activity          | class\_uid: 4001   |
 | Linux process creation                                | product: linux, category: process\_creation                                    | Process Activity          | class\_uid: 1007   |
@@ -444,6 +447,120 @@ These fields are not preserved by the source-to-OCSF mapping. A rule requiring o
 | `data.protoPayload.authorizationInfo.granted`    | Authorization decisions have no OCSF attribute in API Activity.            |
 | `data.protoPayload.authorizationInfo.permission` | Authorization decisions have no OCSF attribute in API Activity.            |
 | `data.protoPayload.logName`                      | The audit log name selects the source, not an OCSF attribute of the event. |
+
+<a id="sigma-generic-dns"></a>
+
+### DNS
+
+category: dns
+
+* category: dns
+
+#### Event guard
+
+Matches DNS Activity (`class_uid: 4003`) with `activity_id` `1`, `2`, `6`. Absent, Unknown, and Other activities stay eligible.
+
+#### Field projections
+
+| Sigma field   | OCSF lookup and interpretation                                                             |
+| ------------- | ------------------------------------------------------------------------------------------ |
+| `query`       | Reads `query.hostname`.                                                                    |
+| `answer`      | Reads `rdata` from every entry of `answers`. A rule value matches when any answer matches. |
+| `record_type` | Reads `query.type`.                                                                        |
+
+#### Unmapped source fields
+
+These fields are not preserved by the source-to-OCSF mapping. A rule requiring one must find an explicit representation in the input schema or it is skipped, not weakened.
+
+| Sigma field           | Reason                                                                |
+| --------------------- | --------------------------------------------------------------------- |
+| `parent_domain`       | DNS Activity has no attribute for the parent domain of the query.     |
+| `query_etld_plus_one` | DNS Activity has no attribute for the registered domain of the query. |
+| `query_length`        | DNS Activity has no attribute for the length of the query.            |
+
+<a id="sigma-generic-proxy"></a>
+
+### Web proxy
+
+category: proxy
+
+* category: proxy
+
+#### Event guard
+
+Matches HTTP Activity (`class_uid: 4002`) with `activity_id` `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `13`, `14`, `15`, `16`, `17`, `18`, `19`, `20`, `21`, `22`, `23`, `24`, `25`, `26`, `27`, `28`, `29`, `30`, `31`, `32`, `33`, `34`, `35`, `36`, `37`, `38`, `39`, `40`. Absent, Unknown, and Other activities stay eligible.
+
+#### Field projections
+
+| Sigma field   | OCSF lookup and interpretation                                                                                                                                            |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `c-uri`       | Reads `http_request.url.url_string`. Reads the complete URL, including scheme and host.                                                                                   |
+| `c-uri-stem`  | Reads `http_request.url.path`.                                                                                                                                            |
+| `cs-uri-stem` | Reads `http_request.url.path`.                                                                                                                                            |
+| `c-uri-query` | Reads `http_request.url.query_string`.                                                                                                                                    |
+| `c-useragent` | Reads `http_request.user_agent`.                                                                                                                                          |
+| `cs-host`     | Reads `http_request.url.hostname`.                                                                                                                                        |
+| `r-dns`       | Reads `http_request.url.hostname`, falling back to `dst_endpoint.hostname` when absent or empty. Falls back to the hostname of the remote endpoint when the URL has none. |
+| `cs-method`   | Reads `http_request.http_method`.                                                                                                                                         |
+| `cs-referrer` | Reads `http_request.referrer`.                                                                                                                                            |
+| `cs-version`  | Reads `http_request.version`.                                                                                                                                             |
+| `sc-status`   | Reads `http_response.code`.                                                                                                                                               |
+| `cs-bytes`    | Reads `traffic.bytes_out`. Reads the bytes the client sent.                                                                                                               |
+| `sc-bytes`    | Reads `traffic.bytes_in`. Reads the bytes the client received.                                                                                                            |
+| `c-ip`        | Reads `src_endpoint.ip`.                                                                                                                                                  |
+| `src_ip`      | Reads `src_endpoint.ip`.                                                                                                                                                  |
+| `dst_ip`      | Reads `dst_endpoint.ip`.                                                                                                                                                  |
+
+#### Unmapped source fields
+
+These fields are not preserved by the source-to-OCSF mapping. A rule requiring one must find an explicit representation in the input schema or it is skipped, not weakened.
+
+| Sigma field       | Reason                                                                             |
+| ----------------- | ---------------------------------------------------------------------------------- |
+| `c-uri-extension` | The OCSF URL object has no file extension attribute.                               |
+| `cs-uri`          | No OCSF attribute carries the request URI without scheme and host.                 |
+| `cs-cookie`       | HTTP Activity splits cookies into objects; the raw Cookie header does not survive. |
+
+<a id="sigma-generic-webserver"></a>
+
+### Web server access log
+
+category: webserver
+
+* category: webserver
+
+#### Event guard
+
+Matches HTTP Activity (`class_uid: 4002`) with `activity_id` `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `13`, `14`, `15`, `16`, `17`, `18`, `19`, `20`, `21`, `22`, `23`, `24`, `25`, `26`, `27`, `28`, `29`, `30`, `31`, `32`, `33`, `34`, `35`, `36`, `37`, `38`, `39`, `40`. Absent, Unknown, and Other activities stay eligible.
+
+#### Field projections
+
+| Sigma field     | OCSF lookup and interpretation                                                                                                                         |
+| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `cs-uri-stem`   | Reads `http_request.url.path`.                                                                                                                         |
+| `cs-uri-query`  | Reads `http_request.url.query_string`. Reads only the query component, as the W3C field defines; a rule value that spells out the path does not match. |
+| `cs-method`     | Reads `http_request.http_method`.                                                                                                                      |
+| `cs-user-agent` | Reads `http_request.user_agent`.                                                                                                                       |
+| `cs-referer`    | Reads `http_request.referrer`.                                                                                                                         |
+| `cs-host`       | Reads `http_request.url.hostname`.                                                                                                                     |
+| `cs-version`    | Reads `http_request.version`.                                                                                                                          |
+| `sc-status`     | Reads `http_response.code`.                                                                                                                            |
+| `cs-bytes`      | Reads `traffic.bytes_out`. Reads the bytes the client sent.                                                                                            |
+| `sc-bytes`      | Reads `traffic.bytes_in`. Reads the bytes the client received.                                                                                         |
+| `c-ip`          | Reads `src_endpoint.ip`.                                                                                                                               |
+| `s-ip`          | Reads `dst_endpoint.ip`.                                                                                                                               |
+| `s-port`        | Reads `dst_endpoint.port`.                                                                                                                             |
+
+#### Unmapped source fields
+
+These fields are not preserved by the source-to-OCSF mapping. A rule requiring one must find an explicit representation in the input schema or it is skipped, not weakened.
+
+| Sigma field       | Reason                                                                             |
+| ----------------- | ---------------------------------------------------------------------------------- |
+| `cs-cookie`       | HTTP Activity splits cookies into objects; the raw Cookie header does not survive. |
+| `cs-content-type` | The OCSF HTTP request has no content type attribute.                               |
+| `sc-win32-status` | HTTP Activity has no attribute for the Windows status code.                        |
+| `s-sitename`      | HTTP Activity has no attribute for the IIS site name.                              |
 
 <a id="sigma-linux-file-event"></a>
 
@@ -2639,6 +2756,18 @@ class\_uid: 3002
 
 * class\_uid: 3002
 
+### DNS Activity
+
+class\_uid: 4003
+
+* class\_uid: 4003
+
+### HTTP Activity
+
+class\_uid: 4002
+
+* class\_uid: 4002
+
 ### File System Activity
 
 class\_uid: 1001
@@ -2662,18 +2791,6 @@ class\_uid: 1007
 class\_uid: 6002
 
 * class\_uid: 6002
-
-### HTTP Activity
-
-class\_uid: 4002
-
-* class\_uid: 4002
-
-### DNS Activity
-
-class\_uid: 4003
-
-* class\_uid: 4003
 
 ### Kernel Extension Activity
 
