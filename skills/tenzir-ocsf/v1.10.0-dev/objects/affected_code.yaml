@@ -2,7 +2,7 @@ name: affected_code
 caption: Affected Code
 extends: object
 description: The Affected Code object describes details about a code block identified as vulnerable.
-profiles: [container, data_classification]
+profiles: [container, data_classification, physical_site]
 referenced_by:
   objects:
     vulnerability: [affected_code]

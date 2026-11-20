@@ -5,7 +5,7 @@ caption: Endpoint
 extends: _entity
 observable: 20
 description: The Endpoint object describes a physical or virtual device that connects to and exchanges information with a computer network. Some examples of endpoints are mobile devices, desktop computers, virtual machines, embedded devices, and servers. Internet-of-Things devices—like cameras, lighting, refrigerators, security systems, smart speakers, and thermostats—are also endpoints.
-profiles: [container]
+profiles: [container, physical_site]
 constraints:
   at_least_one: [ip, mac, uid, name, hostname, instance_uid, interface_uid, interface_name]
 references:

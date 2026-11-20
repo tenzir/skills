@@ -7,7 +7,7 @@ category: system
 category_uid: 1
 extends: system
 description: Scheduled Job Activity events report activities related to scheduled jobs or tasks.
-profiles: [ai_operation, cloud, container, data_classification, datetime, host, osint, record_integrity, security_control]
+profiles: [ai_operation, cloud, container, data_classification, datetime, host, osint, physical_site, record_integrity, security_control]
 associations:
   actor.user: [device]
   device: [actor.user]

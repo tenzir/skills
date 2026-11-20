@@ -8,7 +8,7 @@ category_uid: 1
 extension: win
 extends: system
 description: Windows Resource Activity events report when a process accesses a Windows managed resource object, successful or otherwise.
-profiles: [ai_operation, cloud, container, data_classification, datetime, host, linux/linux_users, macos/macos_users, osint, record_integrity, security_control]
+profiles: [ai_operation, cloud, container, data_classification, datetime, host, linux/linux_users, macos/macos_users, osint, physical_site, record_integrity, security_control]
 associations:
   actor.user: [device]
   device: [actor.user]

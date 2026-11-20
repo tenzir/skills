@@ -7,7 +7,7 @@ category: application
 category_uid: 6
 extends: application
 description: 'API events describe general API activities: create, read, update, delete and list.'
-profiles: [ai_operation, cloud, container, data_classification, datetime, host, osint, record_integrity, security_control, trace]
+profiles: [ai_operation, cloud, container, data_classification, datetime, host, osint, physical_site, record_integrity, security_control, trace]
 attributes:
   activity_id:
     caption: Activity ID

@@ -4,7 +4,7 @@ name: iam_role
 caption: IAM Role
 extends: _entity
 description: The IAM Role object describes permission characteristics (or privileges) associated with a user or group of users as security principals against one or more resources. In some cases only the name or ID of the role is known hence other attributes are optional. In some systems a user or group of users can have multiple roles, imparting the union of privileges to the principal. In some systems the role can serve as a temporary security principal without its own credentials on behalf of the actual security principal.
-profiles: [cloud, container, data_classification]
+profiles: [cloud, container, data_classification, physical_site]
 constraints:
   at_least_one: [name, uid]
 referenced_by:

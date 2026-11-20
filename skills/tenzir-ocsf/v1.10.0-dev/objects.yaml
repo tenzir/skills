@@ -851,6 +851,12 @@ objects:
   group: Findings & Compliance
   summary: The Permission Analysis object describes analysis results of permissions, policies directly associated with an identity (user, role, or service account).
   path: v1.10.0-dev/objects/permission_analysis_result.yaml
+- name: physical_site
+  caption: Physical Site
+  extends: _entity
+  group: Other
+  summary: 'The Physical Site object describes a physical site, such as a campus, facility, or property, as defined by the reporting organization, and the location within it where the activity occurred: the building, the floor, and the site zone.'
+  path: v1.10.0-dev/objects/physical_site.yaml
 - name: policy
   caption: Policy
   extends: _entity
@@ -1032,6 +1038,12 @@ objects:
   group: Identity & Access
   summary: The Session object describes details about an authenticated session. e.g.
   path: v1.10.0-dev/objects/session.yaml
+- name: site_zone
+  caption: Site Zone
+  extends: _entity
+  group: Other
+  summary: 'The Site Zone object describes a site zone: a defined area within a physical site that shares a common security posture, such as a perimeter, a public lobby, or a restricted area.'
+  path: v1.10.0-dev/objects/site_zone.yaml
 - name: software_component
   caption: Software Component
   extends: object

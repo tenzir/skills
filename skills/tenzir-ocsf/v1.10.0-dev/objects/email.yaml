@@ -3,7 +3,7 @@ caption: Email
 extends: object
 observable: 22
 description: The Email object describes the email metadata such as sender, recipients, and direction, and can include embedded URLs and files.
-profiles: [container, data_classification]
+profiles: [container, data_classification, physical_site]
 constraints:
   at_least_one: [from, to]
 references:

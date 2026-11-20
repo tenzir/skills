@@ -4,7 +4,7 @@ name: message_context
 caption: Message Context
 extends: _entity
 description: Communication context for AI system interactions including protocols, roles, clients, and session information for MCP and other AI communication systems.
-profiles: [data_classification]
+profiles: [data_classification, physical_site]
 constraints:
   at_least_one: [application, service]
 references:

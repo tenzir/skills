@@ -4,7 +4,7 @@ name: resource_details
 caption: Resource Details
 extends: _resource
 description: The Resource Details object describes details about a resource (including a user) affected by or related to the activity or finding. The `name` and/or `uid` should correspond to the resource for which the details pertain. Use `role_id` to characterize the role of the resource.
-profiles: [cloud, container, data_classification, datetime]
+profiles: [cloud, container, data_classification, datetime, physical_site]
 constraints:
   at_least_one: [name, uid]
 referenced_by:

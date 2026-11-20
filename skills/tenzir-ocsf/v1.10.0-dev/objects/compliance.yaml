@@ -7,7 +7,7 @@ supersedes:
 - name: cis_benchmark_result
   since: 1.5.0
 description: The Compliance object contains information about Industry and Regulatory Framework standards, controls and requirements or details about custom assessments utilized in a compliance evaluation. Standards define broad security frameworks, controls represent specific security requirements within those frameworks, and checks are the testable verification points used to determine if controls are properly implemented.
-profiles: [cloud, container, data_classification]
+profiles: [cloud, container, data_classification, physical_site]
 referenced_by:
   classes:
     application_security_posture_finding: [compliance]

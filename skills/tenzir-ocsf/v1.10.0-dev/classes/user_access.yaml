@@ -11,7 +11,7 @@ deprecated:
   message: Use the `user_management` class instead.
   superseded_by: [user_management]
 description: User Access Management events report management updates to a user's privileges.
-profiles: [ai_operation, cloud, container, data_classification, datetime, host, osint, record_integrity, security_control]
+profiles: [ai_operation, cloud, container, data_classification, datetime, host, osint, physical_site, record_integrity, security_control]
 references:
 - description: D3FEND™ Ontology d3f:PermissionGrantingEvent
   url: https://d3fend.mitre.org/event/d3f:PermissionGrantingEvent/
@@ -138,6 +138,7 @@ attributes:
   is_alert: {caption: Alert, type: boolean_t, requirement: recommended, group: primary, profile: security_control, from: base_event}
   message: {caption: Message, type: string_t, requirement: recommended, group: primary, from: base_event}
   observables: {caption: Observables, type: object_t, object: observable, array: true, requirement: recommended, group: primary, from: base_event}
+  physical_site: {caption: Physical Site, type: object_t, object: physical_site, requirement: recommended, group: context, profile: physical_site, from: iam}
   privileges:
     caption: Privileges
     type: string_t

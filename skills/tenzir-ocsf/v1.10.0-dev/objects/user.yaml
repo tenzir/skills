@@ -5,6 +5,7 @@ caption: User
 extends: _entity
 observable: 21
 description: The User object describes the characteristics of a user/person or a security principal.
+profiles: [physical_site]
 constraints:
   at_least_one: [account, name, uid]
 references:

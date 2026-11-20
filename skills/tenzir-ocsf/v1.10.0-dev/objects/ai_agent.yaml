@@ -4,7 +4,7 @@ name: ai_agent
 caption: AI Agent
 extends: _entity
 description: An autonomous AI agent that performs tasks under delegated authority. Distinguished from the OCSF agent object (which describes security sensors such as EDR and DLP tools) and from human principals. An AI agent has a stable logical identity across runs and a restart-sensitive instance identity. The agent owns its model; the ai_model attribute captures which model was backing the agent at the time of action.
-profiles: [container, data_classification]
+profiles: [container, data_classification, physical_site]
 constraints:
   at_least_one: [name, uid]
 referenced_by:

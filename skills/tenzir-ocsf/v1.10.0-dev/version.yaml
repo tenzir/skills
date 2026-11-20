@@ -3,7 +3,7 @@ status: development
 source:
   repository: https://github.com/ocsf/ocsf-schema.git
   ref: main
-  commit: 434ade7b1d762d23ef426efd81a7a00b4e27bee7
+  commit: 2c75d30c3fff4ff0b5cf0e69754211445106716e
   compiler: ocsf-schema-compiler 1.1.1
 extensions:
   linux:
@@ -35,4 +35,5 @@ previous: 1.9.0
 changes:
   added:
     classes: [dns_zone_transfer_activity]
-    objects: [ai_capability, ai_status, dns_soa, firewall_rule_evaluation, wifi]
+    objects: [ai_capability, ai_status, dns_soa, firewall_rule_evaluation, physical_site, site_zone, wifi]
+    profiles: [physical_site]

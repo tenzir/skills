@@ -2,7 +2,7 @@ name: download_info
 caption: Download Info
 extends: object
 description: The Download Info object contains metadata pertaining to a downloaded file.
-profiles: [container]
+profiles: [container, physical_site]
 constraints:
   at_least_one: [src_endpoint, src_url, type_id]
 references:

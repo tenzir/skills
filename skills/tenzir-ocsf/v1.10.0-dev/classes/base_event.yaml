@@ -3,7 +3,7 @@ caption: Base Event
 uid: 0
 category_uid: 0
 description: The base event is a generic and concrete event. It also defines a set of attributes available in most event classes. As a generic event that does not belong to any event category, it could be used to log events that are not otherwise defined by the schema.
-profiles: [cloud, container, data_classification, datetime, host, osint, record_integrity, security_control]
+profiles: [cloud, container, data_classification, datetime, host, osint, physical_site, record_integrity, security_control]
 attributes:
   activity_id:
     caption: Activity ID

@@ -5,7 +5,7 @@ caption: Windows Service
 extension: win
 extends: service
 description: The Windows Service object describes a Windows service.
-profiles: [container, data_classification]
+profiles: [container, data_classification, physical_site]
 constraints:
   at_least_one: [cmd_line, service_category_id, service_dependencies, service_error_control_id, service_start_name, service_start_type_id, service_type_id]
 references:

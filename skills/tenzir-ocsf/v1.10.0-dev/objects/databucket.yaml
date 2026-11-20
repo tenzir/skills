@@ -4,7 +4,7 @@ name: databucket
 caption: Databucket
 extends: _resource
 description: The databucket object is a basic container that holds data, typically organized through the use of data partitions.
-profiles: [cloud, container, data_classification, datetime]
+profiles: [cloud, container, data_classification, datetime, physical_site]
 constraints:
   at_least_one: [name, uid]
 references:

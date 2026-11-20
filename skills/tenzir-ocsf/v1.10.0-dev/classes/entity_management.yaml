@@ -7,7 +7,7 @@ category: iam
 category_uid: 3
 extends: iam
 description: Entity Management events report activity by a managed client, a micro service, or a user at a management console. The activity can be a create, read, update, and delete operation on a managed entity.
-profiles: [ai_operation, cloud, container, data_classification, datetime, host, osint, record_integrity, security_control]
+profiles: [ai_operation, cloud, container, data_classification, datetime, host, osint, physical_site, record_integrity, security_control]
 attributes:
   activity_id:
     caption: Activity ID
@@ -167,6 +167,7 @@ attributes:
   is_alert: {caption: Alert, type: boolean_t, requirement: recommended, group: primary, profile: security_control, from: base_event}
   message: {caption: Message, type: string_t, requirement: recommended, group: primary, from: base_event}
   observables: {caption: Observables, type: object_t, object: observable, array: true, requirement: recommended, group: primary, from: base_event}
+  physical_site: {caption: Physical Site, type: object_t, object: physical_site, requirement: recommended, group: context, profile: physical_site, from: iam}
   src_endpoint: {caption: Source Endpoint, type: object_t, object: network_endpoint, requirement: recommended, group: primary, observable: 20, from: iam}
   status: {caption: Status, type: string_t, requirement: recommended, group: primary, from: base_event}
   status_code: {caption: Status Code, type: string_t, requirement: recommended, group: primary, from: base_event}

@@ -2,7 +2,7 @@ name: ldap_person
 caption: LDAP Person
 extends: object
 description: The additional LDAP attributes that describe a person.
-profiles: [datetime]
+profiles: [datetime, physical_site]
 referenced_by:
   objects:
     user: [ldap_person]

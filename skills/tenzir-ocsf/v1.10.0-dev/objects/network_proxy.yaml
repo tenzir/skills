@@ -5,7 +5,7 @@ caption: Network Proxy Endpoint
 extends: network_endpoint
 observable: 20
 description: The network proxy endpoint object describes a proxy server, which acts as an intermediary between a client requesting a resource and the server providing that resource.
-profiles: [container]
+profiles: [container, physical_site]
 constraints:
   at_least_one: [ip, mac, uid, name, hostname, svc_name, instance_uid, interface_uid, interface_name, domain]
 references:

@@ -11,7 +11,7 @@ deprecated:
   message: Use the `evidence_info` class.
   superseded_by: [evidence_info]
 description: Module Query events report information about loaded modules.
-profiles: [cloud, container, data_classification, datetime, host, osint, record_integrity, security_control]
+profiles: [cloud, container, data_classification, datetime, host, osint, physical_site, record_integrity, security_control]
 attributes:
   activity_id: {caption: Activity ID, type: integer_t, requirement: required, group: classification, sibling: activity_name, enum: {0: Unknown, 1: Query, 99: Other}, from: discovery_result}
   category_uid:

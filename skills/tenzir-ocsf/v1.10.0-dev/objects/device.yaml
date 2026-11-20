@@ -5,7 +5,7 @@ caption: Device
 extends: endpoint
 observable: 20
 description: The Device object represents an addressable computer system or host, which is typically connected to a computer network and participates in the transmission or processing of data within the computer network.
-profiles: [container, datetime]
+profiles: [container, datetime, physical_site]
 constraints:
   at_least_one: [ip, mac, uid, name, hostname, instance_uid, interface_uid, interface_name]
 references:

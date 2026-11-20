@@ -7,7 +7,7 @@ category: unmanned_systems
 category_uid: 8
 extends: unmanned_systems
 description: Airborne Broadcast Activity events report the activity of any aircraft or unmanned system as reported and tracked by Automatic Dependent Surveillance - Broadcast (ADS-B) receivers. Based on the ADS-B standards described in Code of Federal Regulations (CFR) Title 14 Chapter I Subchapter F Part 91 and in other general Federal Aviation Administration (FAA) supplemental orders and guidance.
-profiles: [cloud, container, data_classification, datetime, host, osint, record_integrity, security_control]
+profiles: [cloud, container, data_classification, datetime, host, osint, physical_site, record_integrity, security_control]
 constraints:
   at_least_one: [aircraft, unmanned_aerial_system, unmanned_system_operating_area]
 references:

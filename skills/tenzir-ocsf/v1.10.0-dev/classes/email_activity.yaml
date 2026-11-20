@@ -12,7 +12,7 @@ supersedes:
 - name: email_url_activity
   since: 1.3.0
 description: Email Activity events report SMTP protocol and email activities including those with embedded URLs and files. See the `Email` object for details.
-profiles: [ai_operation, cloud, container, data_classification, datetime, host, osint, record_integrity, security_control]
+profiles: [ai_operation, cloud, container, data_classification, datetime, host, osint, physical_site, record_integrity, security_control]
 references:
 - description: D3FEND™ Ontology d3f:EmailEvent
   url: https://d3fend.mitre.org/event/d3f:EmailEvent/

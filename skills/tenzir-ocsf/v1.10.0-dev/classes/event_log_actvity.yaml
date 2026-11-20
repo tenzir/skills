@@ -7,7 +7,7 @@ category: system
 category_uid: 1
 extends: system
 description: Event Log Activity events report actions pertaining to the system's event logging service(s), such as disabling logging or clearing the log data.
-profiles: [ai_operation, cloud, container, data_classification, datetime, host, osint, record_integrity, security_control]
+profiles: [ai_operation, cloud, container, data_classification, datetime, host, osint, physical_site, record_integrity, security_control]
 constraints:
   at_least_one: [file, log_name, log_provider, log_type, log_type_id]
 associations:

@@ -742,6 +742,12 @@ build:
   description: The operating system build number.
   used_by:
     objects: [os]
+building:
+  caption: Building
+  type: string_t
+  description: The building within the physical site where the activity occurred.
+  used_by:
+    objects: [physical_site]
 bulletin:
   caption: Patch Bulletin
   type: string_t
@@ -2631,6 +2637,12 @@ flags:
   used_by:
     classes: [dns_activity]
     objects: [dce_rpc, dns_answer, request, response, trace]
+floor:
+  caption: Floor
+  type: string_t
+  description: The floor or level within the building where the activity occurred.
+  used_by:
+    objects: [physical_site]
 folder:
   caption: Folder
   type: object_t
@@ -3179,6 +3191,12 @@ is_applied:
   description: A determination if a policy, rule, or enforcement action was applied.
   used_by:
     objects: [policy]
+is_armed:
+  caption: Armed
+  type: boolean_t
+  description: Indicates whether the intrusion detection or alarm system protecting the site zone was armed (active) at the time of the event. `false` means it was disarmed.
+  used_by:
+    objects: [site_zone]
 is_backed_up:
   caption: Back Ups Configured
   type: boolean_t
@@ -4180,7 +4198,7 @@ name:
   description: The name of the entity. See specific usage.
   used_by:
     classes: [ftp_activity]
-    objects: [account, affected_package, agent, ai_agent, ai_capability, ai_model, aircraft, analysis_target, analytic, application, assessment, authentication_token, autonomous_system, campaign, check, cis_benchmark, cis_benchmark_result, cis_control, classifier_details, clipboard, container, d3f_tactic, d3f_technique, database, databucket, device, domain_contact, edge, endpoint, enrichment, environment_variable, evidences, extension, feature, file, firewall_rule, firewall_rule_evaluation, graph, group, http_cookie, http_header, iam_role, idp, image, job, kernel, key_value_object, load_balancer, logger, malware, malware_scan_info, managed_entity, message_context, metric, mitigation, network_endpoint, network_interface, network_proxy, node, observable, organization, os, osint, package, parameter, peripheral_device, policy, privilege_info, process, process_entity, product, query_info, reporter, resource_details, rule, san, scan, scim, script, sensor_info, service, service_privilege_analysis, software_component, sso, startup_item, sub_technique, table, tactic, technique, threat_actor, token, trait, transformation_info, unmanned_aerial_system, user, web_resource]
+    objects: [account, affected_package, agent, ai_agent, ai_capability, ai_model, aircraft, analysis_target, analytic, application, assessment, authentication_token, autonomous_system, campaign, check, cis_benchmark, cis_benchmark_result, cis_control, classifier_details, clipboard, container, d3f_tactic, d3f_technique, database, databucket, device, domain_contact, edge, endpoint, enrichment, environment_variable, evidences, extension, feature, file, firewall_rule, firewall_rule_evaluation, graph, group, http_cookie, http_header, iam_role, idp, image, job, kernel, key_value_object, load_balancer, logger, malware, malware_scan_info, managed_entity, message_context, metric, mitigation, network_endpoint, network_interface, network_proxy, node, observable, organization, os, osint, package, parameter, peripheral_device, physical_site, policy, privilege_info, process, process_entity, product, query_info, reporter, resource_details, rule, san, scan, scim, script, sensor_info, service, service_privilege_analysis, site_zone, software_component, sso, startup_item, sub_technique, table, tactic, technique, threat_actor, token, trait, transformation_info, unmanned_aerial_system, user, web_resource]
 name_servers:
   caption: Name Servers
   type: string_t
@@ -4775,6 +4793,14 @@ physical_orientation:
   description: The numeric physical orientation of display.
   used_by:
     objects: [display]
+physical_site:
+  caption: Physical Site
+  type: object_t
+  object: physical_site
+  description: The physical site where the activity occurred, and the location within it.
+  used_by:
+    classes: [account_change, application_security_posture_finding, authentication, authorize_session, compliance_finding, data_security_finding, detection_finding, entity_management, group_management, iam_analysis_finding, incident_finding, role_management, user_access, user_management, vulnerability_finding]
+    objects: [location, unmanned_system_operating_area]
 physical_width:
   caption: Physical Width
   type: integer_t
@@ -6148,6 +6174,13 @@ signatures:
   description: A collection of `Digital Signature` objects.
   used_by:
     objects: [attestation, file, osint]
+site_zone:
+  caption: Site Zone
+  type: object_t
+  object: site_zone
+  description: 'The site zone where the activity occurred: a defined area within a physical site that shares a common security posture.'
+  used_by:
+    objects: [physical_site]
 size:
   caption: Size
   type: long_t
@@ -6930,7 +6963,7 @@ type:
   description: The type of an object or value, normalized to the caption of the type_id value. In the case of 'Other', it is defined by the event source. See specific usage.
   used_by:
     classes: [datastore_activity, ftp_activity]
-    objects: [account, affected_package, agent, ai_agent, ai_capability, analysis_target, analytic, application, authentication_token, classifier_details, cve, database, databucket, device, discovery_details, dns_answer, dns_query, dns_resource_record, domain_contact, download_info, encryption_details, endpoint, enrichment, file, firewall_rule, firewall_rule_evaluation, graph, group, ja4_fingerprint, job, job_action, job_trigger, kernel, malware_scan_info, managed_entity, metadata, module, network_endpoint, network_interface, network_proxy, node, observable, os, osint, package, peripheral_device, policy, privilege_info, programmatic_credential, related_event, resource_details, rule, san, sbom, scan, script, software_component, startup_item, threat_actor, ticket, timespan, tls_extension, token, trait, unmanned_aerial_system, unmanned_system_operating_area, user, web_resource]
+    objects: [account, affected_package, agent, ai_agent, ai_capability, analysis_target, analytic, application, authentication_token, classifier_details, cve, database, databucket, device, discovery_details, dns_answer, dns_query, dns_resource_record, domain_contact, download_info, encryption_details, endpoint, enrichment, file, firewall_rule, firewall_rule_evaluation, graph, group, ja4_fingerprint, job, job_action, job_trigger, kernel, malware_scan_info, managed_entity, metadata, module, network_endpoint, network_interface, network_proxy, node, observable, os, osint, package, peripheral_device, policy, privilege_info, programmatic_credential, related_event, resource_details, rule, san, sbom, scan, script, site_zone, software_component, startup_item, threat_actor, ticket, timespan, tls_extension, token, trait, unmanned_aerial_system, unmanned_system_operating_area, user, web_resource]
 type_id:
   caption: Type ID
   type: integer_t
@@ -6938,7 +6971,7 @@ type_id:
   description: The normalized type identifier of an object. See specific usage.
   used_by:
     classes: [datastore_activity]
-    objects: [account, affected_package, agent, ai_agent, ai_capability, analytic, authentication_token, database, databucket, device, domain_contact, download_info, endpoint, file, ja4_fingerprint, job, job_action, job_trigger, kernel, malware_scan_info, managed_entity, network_endpoint, network_interface, network_proxy, observable, os, osint, package, peripheral_device, privilege_info, related_event, sbom, scan, script, software_component, startup_item, threat_actor, ticket, timespan, tls_extension, token, unmanned_aerial_system, unmanned_system_operating_area, user]
+    objects: [account, affected_package, agent, ai_agent, ai_capability, analytic, authentication_token, database, databucket, device, domain_contact, download_info, endpoint, file, ja4_fingerprint, job, job_action, job_trigger, kernel, malware_scan_info, managed_entity, network_endpoint, network_interface, network_proxy, observable, os, osint, package, peripheral_device, privilege_info, related_event, sbom, scan, script, site_zone, software_component, startup_item, threat_actor, ticket, timespan, tls_extension, token, unmanned_aerial_system, unmanned_system_operating_area, user]
 type_name:
   caption: Type Name
   type: string_t
@@ -6972,7 +7005,7 @@ uid:
   type: string_t
   description: The unique identifier. See specific usage.
   used_by:
-    objects: [account, advisory, affected_package, agent, ai_agent, ai_capability, ai_model, aircraft, analytic, application, assessment, attestation, authentication_token, certificate, check, classifier_details, container, cve, cwe, d3f_tactic, d3f_technique, data_classification, data_security, database, databucket, delegation, device, domain_contact, edge, email, endpoint, evidences, extension, feature, file, finding, finding_info, firewall_rule, firewall_rule_evaluation, graph, group, http_request, iam_role, idp, image, job, kb_article, load_balancer, logger, malware, malware_scan_info, managed_entity, message_context, metadata, mitigation, network_connection_info, network_endpoint, network_interface, network_proxy, node, note, organization, osint, package, peripheral_device, policy, prev_event, process, process_entity, product, programmatic_credential, query_info, related_event, reporter, request, resource_details, rule, sbom, scan, scim, script, sensor_info, service, session, span, sso, sub_technique, table, tactic, technique, ticket, token, trace, trait, transformation_info, unmanned_aerial_system, user, web_resource]
+    objects: [account, advisory, affected_package, agent, ai_agent, ai_capability, ai_model, aircraft, analytic, application, assessment, attestation, authentication_token, certificate, check, classifier_details, container, cve, cwe, d3f_tactic, d3f_technique, data_classification, data_security, database, databucket, delegation, device, domain_contact, edge, email, endpoint, evidences, extension, feature, file, finding, finding_info, firewall_rule, firewall_rule_evaluation, graph, group, http_request, iam_role, idp, image, job, kb_article, load_balancer, logger, malware, malware_scan_info, managed_entity, message_context, metadata, mitigation, network_connection_info, network_endpoint, network_interface, network_proxy, node, note, organization, osint, package, peripheral_device, physical_site, policy, prev_event, process, process_entity, product, programmatic_credential, query_info, related_event, reporter, request, resource_details, rule, sbom, scan, scim, script, sensor_info, service, session, site_zone, span, sso, sub_technique, table, tactic, technique, ticket, token, trace, trait, transformation_info, unmanned_aerial_system, user, web_resource]
 uid_alt:
   caption: Alternate ID
   type: string_t
@@ -6984,7 +7017,7 @@ uid_numeric:
   type: long_t
   description: The unique identifier in numeric form. See specific usage.
   used_by:
-    objects: [account, ai_agent, ai_capability, ai_model, aircraft, analytic, assessment, d3f_tactic, d3f_technique, database, databucket, device, edge, endpoint, evidences, extension, feature, file, firewall_rule, firewall_rule_evaluation, graph, group, iam_role, idp, image, load_balancer, logger, malware, malware_scan_info, managed_entity, message_context, mitigation, network_endpoint, network_interface, network_proxy, organization, peripheral_device, policy, process, process_entity, product, query_info, reporter, resource_details, rule, scan, sensor_info, service, sub_technique, table, tactic, technique, trait, transformation_info, unmanned_aerial_system, user, web_resource]
+    objects: [account, ai_agent, ai_capability, ai_model, aircraft, analytic, assessment, d3f_tactic, d3f_technique, database, databucket, device, edge, endpoint, evidences, extension, feature, file, firewall_rule, firewall_rule_evaluation, graph, group, iam_role, idp, image, load_balancer, logger, malware, malware_scan_info, managed_entity, message_context, mitigation, network_endpoint, network_interface, network_proxy, organization, peripheral_device, physical_site, policy, process, process_entity, product, query_info, reporter, resource_details, rule, scan, sensor_info, service, site_zone, sub_technique, table, tactic, technique, trait, transformation_info, unmanned_aerial_system, user, web_resource]
 unique_malware_count:
   caption: Unique Malware Count
   type: integer_t

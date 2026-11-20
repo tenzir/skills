@@ -5,9 +5,9 @@ caption: Unmanned System Operating Area
 extends: location
 observable: 26
 description: The Unmanned System Operating Area object describes details about a precise area of operations for a UAS flight or mission.
-profiles: [datetime]
+profiles: [datetime, physical_site]
 constraints:
-  at_least_one: [city, country, postal_code, region]
+  at_least_one: [city, country, physical_site, postal_code, region]
 referenced_by:
   classes:
     airborne_broadcast_activity: [unmanned_system_operating_area]
@@ -29,6 +29,7 @@ attributes:
     requirement: recommended
     observable: 26
     description: A list of Position Location Information (PLI) (latitude/longitude pairs) defining the area where a group or Intent-Based Network Participant operation is taking place. (This field is only applicable to Network Remote ID.)
+  physical_site: {caption: Physical Site, type: object_t, object: physical_site, requirement: recommended, group: context, profile: physical_site, from: location}
   postal_code: {caption: Postal Code, type: string_t, requirement: recommended, from: location}
   region: {caption: Region, type: string_t, requirement: recommended, from: location}
   type_id:

@@ -5,7 +5,7 @@ caption: Process
 extends: process_entity
 observable: 25
 description: The Process object describes a running instance of a launched program.
-profiles: [container, data_classification, datetime, ai_operation]
+profiles: [container, data_classification, datetime, physical_site, ai_operation]
 constraints:
   at_least_one: [pid, uid, cpid]
 references:

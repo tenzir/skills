@@ -9,7 +9,7 @@ extends: finding
 description: |-
   The Application Security Posture Finding event is a notification about any bug, defect, deficiency, exploit, vulnerability, weakness or any other issue with software and related systems. Application Security Posture Findings typically involve reporting on the greater context including compliance, impacted resources, remediation guidance, specific code defects, and/or vulnerability metadata. Application Security Posture Findings can be reported by Threat & Vulnerability Management (TVM) tools, Application Security Posture Management (ASPM) tools, or other similar tools. Note: if the event producer is a security control, the `security_control` profile should be applied and its `attacks` information, if present, should be duplicated into the `finding_info` object.
   Note: If the Finding is an incident, i.e. requires incident workflow, also apply the `incident` profile or aggregate this finding into an `Incident Finding`.
-profiles: [cloud, container, data_classification, datetime, host, incident, osint, record_integrity, security_control]
+profiles: [cloud, container, data_classification, datetime, host, incident, osint, physical_site, record_integrity, security_control]
 constraints:
   at_least_one: [application, compliance, remediation, vulnerabilities]
 attributes:
@@ -112,6 +112,7 @@ attributes:
   is_alert: {caption: Alert, type: boolean_t, requirement: recommended, group: primary, profile: security_control, from: base_event}
   message: {caption: Message, type: string_t, requirement: recommended, group: primary, from: base_event}
   observables: {caption: Observables, type: object_t, object: observable, array: true, requirement: recommended, group: primary, from: base_event}
+  physical_site: {caption: Physical Site, type: object_t, object: physical_site, requirement: recommended, group: context, profile: physical_site, from: finding}
   priority_id: {caption: Priority ID, type: integer_t, requirement: recommended, group: context, profile: incident, sibling: priority, enum: {0: Unknown, 1: Low, 2: Medium, 3: High, 4: Critical, 99: Other}, from: finding}
   remediation:
     caption: Remediation Guidance

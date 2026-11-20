@@ -12,7 +12,7 @@ deprecated:
   message: Use the `evidence_info` class instead. Populate `query_evidence.reg_key` and set `query_type_id` to `Registry Key`.
   superseded_by: [evidence_info]
 description: Registry Key Query events report information about discovered Windows registry keys.
-profiles: [cloud, container, data_classification, datetime, host, linux/linux_users, macos/macos_users, osint, record_integrity, security_control]
+profiles: [cloud, container, data_classification, datetime, host, linux/linux_users, macos/macos_users, osint, physical_site, record_integrity, security_control]
 attributes:
   activity_id: {caption: Activity ID, type: integer_t, requirement: required, group: classification, sibling: activity_name, enum: {0: Unknown, 1: Query, 99: Other}, from: discovery_result}
   category_uid:

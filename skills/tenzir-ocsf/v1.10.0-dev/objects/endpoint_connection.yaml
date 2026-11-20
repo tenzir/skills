@@ -2,7 +2,7 @@ name: endpoint_connection
 caption: Endpoint Connection
 extends: object
 description: The Endpoint Connection object contains information detailing a connection attempt to an endpoint.
-profiles: [container]
+profiles: [container, physical_site]
 constraints:
   at_least_one: [network_endpoint, code]
 referenced_by:

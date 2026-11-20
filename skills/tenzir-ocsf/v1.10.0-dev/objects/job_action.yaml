@@ -1,7 +1,7 @@
 name: job_action
 caption: Job Action
 description: The action that will be performed by the job when certain conditions are met.
-profiles: [container, data_classification]
+profiles: [container, data_classification, physical_site]
 referenced_by:
   objects:
     job: [job_actions]

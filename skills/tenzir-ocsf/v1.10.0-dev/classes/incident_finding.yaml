@@ -12,7 +12,7 @@ supersedes:
 description: |-
   An Incident Finding reports the creation, update, or closure of security incidents as a result of detections and/or analytics.
   Note: `Incident Finding` implicitly includes the `incident` profile and it should be added to the `metadata.profiles[]` array.
-profiles: [cloud, container, data_classification, datetime, host, incident, osint, record_integrity, security_control]
+profiles: [cloud, container, data_classification, datetime, host, incident, osint, physical_site, record_integrity, security_control]
 constraints:
   at_least_one: [assignee, assignee_group]
 attributes:
@@ -245,6 +245,14 @@ attributes:
   is_alert: {caption: Alert, type: boolean_t, requirement: recommended, group: primary, profile: security_control, from: base_event}
   message: {caption: Message, type: string_t, requirement: recommended, group: primary, from: base_event}
   observables: {caption: Observables, type: object_t, object: observable, array: true, requirement: recommended, group: primary, from: base_event}
+  physical_site:
+    caption: Physical Site
+    type: object_t
+    object: physical_site
+    requirement: recommended
+    group: context
+    profile: physical_site
+    description: The physical site where the activity occurred, and the location within it.
   priority_id:
     caption: Priority ID
     type: integer_t

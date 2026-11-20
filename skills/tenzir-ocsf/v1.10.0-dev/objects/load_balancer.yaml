@@ -4,7 +4,7 @@ name: load_balancer
 caption: Load Balancer
 extends: _entity
 description: The load balancer object describes the load balancer entity and contains additional information regarding the distribution of traffic across a network.
-profiles: [container]
+profiles: [container, physical_site]
 constraints:
   at_least_one: [name, uid]
 referenced_by:

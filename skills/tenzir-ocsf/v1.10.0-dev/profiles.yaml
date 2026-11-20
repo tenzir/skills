@@ -425,6 +425,20 @@ osint:
       requirement: required
       group: primary
       description: The OSINT (Open Source Intelligence) object contains details related to an indicator such as the indicator itself, related indicators, geolocation, registrar information, subdomains, analyst commentary, and other contextual information. This information can be used to further enrich a detection or finding by providing decisioning support to other analysts and engineers.
+physical_site:
+  caption: Physical Site
+  description: 'Adds physical site context through the `physical_site` object: the site identity (`physical_site.uid`, `physical_site.name`) and the location within the site (`building`, `floor`, `site_zone`). The profile is attached where the event itself takes place at a site the producer can name: the Identity & Access Management classes (an access decision at a reader, or the administration of access rights to a site''s doors, correlated with logical access at the same site) and the Findings classes (findings raised about, or aggregated by, a site). It is also applied to the `location` object, so a device, endpoint, or person in any class carries physical site context through its `location`; when the profile is applied, `physical_site` alone satisfies that object''s at-least-one constraint, so an indoor reader or device need not carry geographic attributes. Further categories can be added as producers appear.'
+  applies_to:
+    classes: [account_change, application_security_posture_finding, authentication, authorize_session, compliance_finding, data_security_finding, detection_finding, entity_management, group_management, iam_analysis_finding, incident_finding, role_management, user_access, user_management, vulnerability_finding]
+    objects: [location, unmanned_system_operating_area]
+  attributes:
+    physical_site:
+      caption: Physical Site
+      type: object_t
+      object: physical_site
+      requirement: recommended
+      group: context
+      description: The physical site where the activity occurred, and the location within it.
 record_integrity:
   caption: Record Integrity
   description: The Record Integrity profile adds one or more cryptographic attestations over the event itself, providing integrity, authenticity, and non-repudiation independent of any domain-specific content. It is domain-agnostic and may be applied to any event class. Each attestation is computed over a canonical serialization of the event; independent attesters over the same event each contribute a separate entry in `attestation_list`, while multiple signers of a single attestation, such as a producer plus a co-signature, notary, or witness, are carried in that attestation's `signatures` array, and a sequence of events may form a tamper-evident hash chain.

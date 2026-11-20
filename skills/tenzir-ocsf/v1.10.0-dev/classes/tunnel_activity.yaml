@@ -7,7 +7,7 @@ category: network
 category_uid: 4
 extends: network
 description: Tunnel Activity events report secure tunnel establishment (such as VPN), teardowns, renewals, and other network tunnel specific actions.
-profiles: [ai_operation, cloud, container, data_classification, datetime, host, load_balancer, network_proxy, osint, record_integrity, security_control]
+profiles: [ai_operation, cloud, container, data_classification, datetime, host, load_balancer, network_proxy, osint, physical_site, record_integrity, security_control]
 constraints:
   at_least_one: [connection_info, session, src_endpoint, traffic, tunnel_interface, tunnel_type_id]
 associations:

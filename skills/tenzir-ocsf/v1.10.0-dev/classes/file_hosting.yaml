@@ -10,7 +10,7 @@ supersedes:
 - name: network_file_activity
   since: 1.1.0
 description: File Hosting Activity events report the actions taken by file management applications, including file sharing servers like Sharepoint and services such as Box, MS OneDrive, Google Drive, or network file share services.
-profiles: [ai_operation, cloud, container, data_classification, datetime, host, osint, record_integrity, security_control]
+profiles: [ai_operation, cloud, container, data_classification, datetime, host, osint, physical_site, record_integrity, security_control]
 attributes:
   activity_id:
     caption: Activity ID

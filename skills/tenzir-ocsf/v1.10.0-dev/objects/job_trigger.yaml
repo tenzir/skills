@@ -1,7 +1,7 @@
 name: job_trigger
 caption: Job Trigger
 description: The condition or event that, when met, will initiate the job to perform specified actions.
-profiles: [datetime]
+profiles: [datetime, physical_site]
 referenced_by:
   objects:
     job: [job_triggers]

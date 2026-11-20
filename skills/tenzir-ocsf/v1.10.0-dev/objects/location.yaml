@@ -3,8 +3,9 @@ caption: Geo Location
 extends: object
 observable: 26
 description: The Geo Location object describes a geographical location, usually associated with an IP address.
+profiles: [physical_site]
 constraints:
-  at_least_one: [city, country, postal_code, region]
+  at_least_one: [city, country, physical_site, postal_code, region]
 referenced_by:
   objects:
     aircraft: [location]
@@ -41,6 +42,14 @@ attributes:
     references:
     - description: ISO 3166-1 alpha-2 codes
       url: https://www.iso.org/obp/ui/#iso:pub:PUB500001:en
+  physical_site:
+    caption: Physical Site
+    type: object_t
+    object: physical_site
+    requirement: recommended
+    group: context
+    profile: physical_site
+    description: The physical site where the activity occurred, and the location within it.
   postal_code:
     caption: Postal Code
     type: string_t

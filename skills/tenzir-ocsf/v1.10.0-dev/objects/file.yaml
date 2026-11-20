@@ -5,7 +5,7 @@ caption: File
 extends: _entity
 observable: 24
 description: The File object represents the metadata associated with a file stored in a computer system. It encompasses information about the file itself, including its attributes, properties, and organizational details.
-profiles: [container, data_classification, datetime, cloud]
+profiles: [container, data_classification, datetime, physical_site, cloud]
 references:
 - description: D3FEND™ Ontology d3f:File
   url: https://next.d3fend.mitre.org/dao/artifact/d3f:File/

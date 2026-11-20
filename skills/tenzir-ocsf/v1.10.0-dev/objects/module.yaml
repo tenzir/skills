@@ -2,7 +2,7 @@ name: module
 caption: Module
 extends: object
 description: The Module object describes the attributes of a module.
-profiles: [container, data_classification]
+profiles: [container, data_classification, physical_site]
 constraints:
   at_least_one: [load_type_id, function_name]
 referenced_by:

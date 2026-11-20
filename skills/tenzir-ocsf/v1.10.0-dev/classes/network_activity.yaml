@@ -7,7 +7,7 @@ category: network
 category_uid: 4
 extends: network
 description: Network Activity events report network connection and traffic activity.
-profiles: [ai_operation, cloud, container, data_classification, datetime, host, load_balancer, network_proxy, osint, record_integrity, security_control]
+profiles: [ai_operation, cloud, container, data_classification, datetime, host, load_balancer, network_proxy, osint, physical_site, record_integrity, security_control]
 constraints:
   at_least_one: [dst_endpoint, src_endpoint]
 references:

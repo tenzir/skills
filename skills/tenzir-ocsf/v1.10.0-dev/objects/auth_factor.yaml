@@ -2,7 +2,7 @@ name: auth_factor
 caption: Authentication Factor
 extends: object
 description: An Authentication Factor object describes a category of methods used for identity verification in an authentication attempt.
-profiles: [container]
+profiles: [container, physical_site]
 referenced_by:
   classes:
     account_change: [auth_factors]

@@ -2,7 +2,7 @@ name: metadata
 caption: Metadata
 extends: object
 description: The Metadata object describes the metadata associated with the event.
-profiles: [container, data_classification, datetime]
+profiles: [container, data_classification, datetime, physical_site]
 references:
 - description: D3FEND™ Ontology d3f:Metadata
   url: https://d3fend.mitre.org/dao/artifact/d3f:Metadata/

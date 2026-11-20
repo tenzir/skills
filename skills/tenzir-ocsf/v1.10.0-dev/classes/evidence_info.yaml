@@ -36,7 +36,7 @@ supersedes:
 - name: user_query
   since: 1.5.0
 description: Data collected directly from devices that represents forensic information pulled, queried, or discovered from devices that may indicate malicious activity. It contains a number of child objects, each representing a distinct evidence domain (network connections, file artifacts, registry entries, etc.). When mapping raw telemetry data users should select Query Evidence and then the appropriate child object that best matches the evidence type.
-profiles: [cloud, container, data_classification, datetime, host, osint, record_integrity, security_control]
+profiles: [cloud, container, data_classification, datetime, host, osint, physical_site, record_integrity, security_control]
 attributes:
   activity_id: {caption: Activity ID, type: integer_t, requirement: required, group: classification, sibling: activity_name, enum: {0: Unknown, 1: Query, 99: Other}, from: discovery_result}
   category_uid:

@@ -7,7 +7,7 @@ category: application
 category_uid: 6
 extends: application
 description: Application Lifecycle events report installation, removal, start, stop of an application or service.
-profiles: [ai_operation, cloud, container, data_classification, datetime, host, osint, record_integrity, security_control]
+profiles: [ai_operation, cloud, container, data_classification, datetime, host, osint, physical_site, record_integrity, security_control]
 constraints:
   at_least_one: [app, application]
 references:

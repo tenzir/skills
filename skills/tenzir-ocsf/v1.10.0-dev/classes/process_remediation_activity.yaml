@@ -7,7 +7,7 @@ category: remediation
 category_uid: 7
 extends: remediation_activity
 description: Process Remediation Activity events report on attempts at remediating processes. Sub-techniques of countermeasures will include Process Eviction, such as Process Termination or Kernel-based Process Isolation.
-profiles: [cloud, container, data_classification, datetime, host, osint, record_integrity, security_control]
+profiles: [cloud, container, data_classification, datetime, host, osint, physical_site, record_integrity, security_control]
 references:
 - description: Countermeasures as defined by the D3FEND™ Matrix
   url: https://d3fend.mitre.org/

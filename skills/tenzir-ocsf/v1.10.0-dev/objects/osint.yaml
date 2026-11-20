@@ -2,7 +2,7 @@ name: osint
 caption: OSINT
 extends: object
 description: The OSINT (Open Source Intelligence) object contains details related to an indicator such as the indicator itself, related indicators, geolocation, registrar information, subdomains, analyst commentary, and other contextual information. This information can be used to further enrich a detection or finding by providing decisioning support to other analysts and engineers.
-profiles: [container, data_classification, datetime]
+profiles: [container, data_classification, datetime, physical_site]
 referenced_by:
   classes:
     account_change: [osint]

@@ -7,7 +7,7 @@ category: application
 category_uid: 6
 extends: application
 description: Datastore events describe general activities (Read, Update, Query, Delete, etc.) which affect datastores or data within those datastores, e.g. (AWS RDS, AWS S3).
-profiles: [ai_operation, cloud, container, data_classification, datetime, host, osint, record_integrity, security_control]
+profiles: [ai_operation, cloud, container, data_classification, datetime, host, osint, physical_site, record_integrity, security_control]
 constraints:
   at_least_one: [database, databucket, table]
 attributes:
