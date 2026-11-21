@@ -14,12 +14,12 @@ files do not cover a question.
 
 ## Versions
 
-Use v1.9.0, the latest stable version, unless the user asks for another one. Stay
+Use v1.10.0, the latest stable version, unless the user asks for another one. Stay
 within one version per answer.
 
-Available: v1.0.0 through v1.9.0 and v1.10.0-dev (unreleased).
+Available: v1.0.0 through v1.10.0 and v1.11.0-dev (unreleased).
 
-Paths below use `v1.9.0/`; swap in the version you need.
+Paths below use `v1.10.0/`; swap in the version you need.
 
 ## Data files
 
@@ -27,17 +27,17 @@ All paths are relative to this skill's directory. Run searches from there.
 
 | File | Contents |
 | --- | --- |
-| `v1.9.0/version.yaml` | Status, source commit, extensions, and changes since the previous version |
-| `v1.9.0/changelog.md` | Upstream release notes: added, improved, deprecated, and fixed items with PR links |
-| `v1.9.0/categories.yaml` | Categories with UID and classes |
-| `v1.9.0/classes.yaml` | Class index: UID, category, summary, `activities`, path |
-| `v1.9.0/classes/{name}.yaml` | One class, fully resolved |
-| `v1.9.0/objects.yaml` | Object index: group, summary, path |
-| `v1.9.0/objects/{name}.yaml` | One object, fully resolved |
-| `v1.9.0/profiles.yaml` | Profiles with their attributes and `applies_to` |
-| `v1.9.0/attributes.yaml` | Attribute dictionary with `used_by` |
-| `v1.9.0/types.yaml` | Data types with base type, constraints, and observable type ID |
-| `v1.9.0/extensions/{ext}/{classes,objects}/{name}.yaml` | Extension classes and objects, and patches of core items |
+| `v1.10.0/version.yaml` | Status, source commit, extensions, and changes since the previous version |
+| `v1.10.0/changelog.md` | Upstream release notes: added, improved, deprecated, and fixed items with PR links |
+| `v1.10.0/categories.yaml` | Categories with UID and classes |
+| `v1.10.0/classes.yaml` | Class index: UID, category, summary, `activities`, path |
+| `v1.10.0/classes/{name}.yaml` | One class, fully resolved |
+| `v1.10.0/objects.yaml` | Object index: group, summary, path |
+| `v1.10.0/objects/{name}.yaml` | One object, fully resolved |
+| `v1.10.0/profiles.yaml` | Profiles with their attributes and `applies_to` |
+| `v1.10.0/attributes.yaml` | Attribute dictionary with `used_by` |
+| `v1.10.0/types.yaml` | Data types with base type, constraints, and observable type ID |
+| `v1.10.0/extensions/{ext}/{classes,objects}/{name}.yaml` | Extension classes and objects, and patches of core items |
 
 Names resolve within the same version: `object: actor` →
 `objects/actor.yaml`; `object: win/reg_key` →
@@ -48,10 +48,10 @@ file; `type`, `profile`, and `category` → the key in `types.yaml`,
 
 Searches that avoid opening many files:
 
-- Find a class: `grep -n -i "keyword" v1.9.0/classes.yaml`
-- Find an attribute and where it is used: `grep -n -A 12 "^src_endpoint:" v1.9.0/attributes.yaml`
-- Jump to an attribute in a class: `grep -n -A 20 "^  actor:" v1.9.0/classes/process_activity.yaml`
-- Find what holds an object: `referenced_by` in `v1.9.0/objects/{name}.yaml`
+- Find a class: `grep -n -i "keyword" v1.10.0/classes.yaml`
+- Find an attribute and where it is used: `grep -n -A 12 "^src_endpoint:" v1.10.0/attributes.yaml`
+- Jump to an attribute in a class: `grep -n -A 20 "^  actor:" v1.10.0/classes/process_activity.yaml`
+- Find what holds an object: `referenced_by` in `v1.10.0/objects/{name}.yaml`
 
 ## Reading class and object files
 

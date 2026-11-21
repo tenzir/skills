@@ -1,0 +1,45 @@
+name: win/reg_key
+caption: Registry Key
+extension: win
+extends: object
+observable: 28
+description: The registry key object describes a Windows registry key.
+profiles: [datetime]
+references:
+- description: D3FEND™ Ontology d3f:WindowsRegistryKey.
+  url: https://d3fend.mitre.org/dao/artifact/d3f:WindowsRegistryKey/
+referenced_by:
+  classes:
+    win/registry_key_activity: [prev_reg_key, reg_key]
+    win/registry_key_query: [reg_key]
+  objects:
+    evidences: [reg_key]
+    query_evidence: [reg_key]
+attributes:
+  path:
+    caption: Path
+    type: reg_key_path_t
+    requirement: required
+    observable: 46
+    description: The full path to the registry key.
+  is_system:
+    caption: System
+    type: boolean_t
+    requirement: optional
+    description: The indication of whether the object is part of the operating system.
+  modified_time:
+    caption: Modified Time
+    type: timestamp_t
+    requirement: optional
+    description: The time when the registry key was last modified.
+  modified_time_dt:
+    caption: Modified Time
+    type: datetime_t
+    requirement: optional
+    profile: datetime
+    description: The time when the registry key was last modified.
+  security_descriptor:
+    caption: Security Descriptor
+    type: string_t
+    requirement: optional
+    description: The security descriptor of the registry key.

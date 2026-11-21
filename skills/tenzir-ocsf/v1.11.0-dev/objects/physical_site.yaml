@@ -1,0 +1,56 @@
+# Attributes with `from` but no description are inherited unchanged. Their
+# descriptions are in the file of the item that `from` names.
+name: physical_site
+caption: Physical Site
+extends: _entity
+description: 'The Physical Site object describes a physical site, such as a campus, facility, or property, as defined by the reporting organization, and the location within it where the activity occurred: the building, the floor, and the site zone.'
+constraints:
+  at_least_one: [name, uid]
+referenced_by:
+  classes:
+    account_change: [physical_site]
+    application_security_posture_finding: [physical_site]
+    authentication: [physical_site]
+    authorize_session: [physical_site]
+    compliance_finding: [physical_site]
+    data_security_finding: [physical_site]
+    detection_finding: [physical_site]
+    entity_management: [physical_site]
+    group_management: [physical_site]
+    iam_analysis_finding: [physical_site]
+    incident_finding: [physical_site]
+    role_management: [physical_site]
+    user_access: [physical_site]
+    user_management: [physical_site]
+    vulnerability_finding: [physical_site]
+  objects:
+    location: [physical_site]
+    unmanned_system_operating_area: [physical_site]
+attributes:
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: recommended
+    description: The unique identifier of the physical site, as defined by the reporting organization.
+  building:
+    caption: Building
+    type: string_t
+    requirement: optional
+    description: The building within the physical site.
+  floor:
+    caption: Floor
+    type: string_t
+    requirement: optional
+    description: The floor or level within the building.
+  name:
+    caption: Name
+    type: string_t
+    requirement: optional
+    description: The name of the physical site, as defined by the reporting organization.
+  site_zone:
+    caption: Site Zone
+    type: object_t
+    object: site_zone
+    requirement: optional
+    description: The site zone within the physical site where the activity occurred.
+  uid_numeric: {caption: Numeric Unique ID, type: long_t, requirement: optional, from: _entity}

@@ -1,0 +1,28 @@
+name: clipboard_item
+caption: Clipboard Item
+extends: object
+description: A piece of data on the system clipboard.
+referenced_by:
+  objects:
+    clipboard: [contents]
+attributes:
+  mime_type:
+    caption: MIME type
+    type: string_t
+    requirement: required
+    description: 'The Multipurpose Internet Mail Extensions (MIME) type of the item''s data. For example: `text/plain`.'
+  binary_data:
+    caption: Binary Data
+    type: bytestring_t
+    requirement: optional
+    description: The item's data in binary form, used when the clipboard content cannot be represented as text or when preserving the exact binary representation is required.
+  clipboard_native_type:
+    caption: Data Type
+    type: string_t
+    requirement: optional
+    description: 'The type of the item''s data, in an operating specific form. For example: `CF_TEXT` or `public.utf8-plain-text`.'
+  string_data:
+    caption: String Data
+    type: string_t
+    requirement: optional
+    description: The item's data if it can be represented as a UTF-8 string.

@@ -1,0 +1,34 @@
+# Attributes with `from` but no description are inherited unchanged. Their
+# descriptions are in the file of the item that `from` names.
+name: technique
+caption: MITRE Technique
+extends: _entity
+description: The MITRE Technique object describes the ATT&CK® or ATLAS™ Technique ID and/or name associated to an attack.
+constraints:
+  at_least_one: [name, uid]
+references:
+- description: ATT&CK® Matrix
+  url: https://attack.mitre.org
+- description: ATLAS™ Matrix
+  url: https://atlas.mitre.org/matrices/ATLAS
+referenced_by:
+  objects:
+    attack: [technique]
+attributes:
+  name:
+    caption: Name
+    type: string_t
+    requirement: recommended
+    description: 'The name of the attack technique. For example: `Active Scanning` or `AI Model Inference API Access`.'
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: recommended
+    description: 'The unique identifier of the attack technique. For example: `T1595` or `AML.T0040`.'
+  src_url:
+    caption: Source URL
+    type: url_t
+    requirement: optional
+    observable: 6
+    description: 'The versioned permalink of the attack technique. For example: `https://attack.mitre.org/versions/v14/techniques/T1595/`.'
+  uid_numeric: {caption: Numeric Unique ID, type: long_t, requirement: optional, from: _entity}

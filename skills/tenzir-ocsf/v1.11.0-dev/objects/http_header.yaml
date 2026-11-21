@@ -1,0 +1,20 @@
+name: http_header
+caption: HTTP Header
+extends: object
+description: The HTTP Header object represents the headers sent in an HTTP request or response. HTTP headers are key-value pairs that convey additional information about the HTTP message, including details about the content, caching, authentication, encoding, and other aspects of the communication.
+referenced_by:
+  objects:
+    email: [http_headers]
+    http_request: [http_headers]
+    http_response: [http_headers]
+attributes:
+  name:
+    caption: Name
+    type: string_t
+    requirement: required
+    description: The name of the HTTP header.
+  value:
+    caption: Value
+    type: string_t
+    requirement: required
+    description: The value of the HTTP header.

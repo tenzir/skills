@@ -1,0 +1,84 @@
+name: certificate
+caption: Digital Certificate
+extends: object
+description: The Digital Certificate, also known as a Public Key Certificate, object contains information about the ownership and usage of a public key. It serves as a means to establish trust in the authenticity and integrity of the public key and the associated entity.
+profiles: [datetime]
+references:
+- description: D3FEND™ Ontology d3f:Certificate.
+  url: https://d3fend.mitre.org/dao/artifact/d3f:Certificate/
+referenced_by:
+  classes:
+    authentication: [certificate]
+  objects:
+    digital_signature: [certificate]
+    sso: [certificate]
+    tls: [certificate]
+attributes:
+  issuer:
+    caption: Issuer Distinguished Name
+    type: string_t
+    requirement: required
+    description: The certificate issuer distinguished name.
+  serial_number:
+    caption: Certificate Serial Number
+    type: string_t
+    requirement: required
+    observable: 37
+    description: The serial number of the certificate used to create the digital signature.
+  created_time:
+    caption: Created Time
+    type: timestamp_t
+    requirement: recommended
+    description: The time when the certificate was created.
+  expiration_time:
+    caption: Expiration Time
+    type: timestamp_t
+    requirement: recommended
+    description: The expiration time of the certificate.
+  fingerprints:
+    caption: Fingerprints
+    type: object_t
+    object: fingerprint
+    array: true
+    requirement: recommended
+    observable: 30
+    description: The fingerprint list of the certificate.
+  is_self_signed:
+    caption: Certificate Self-Signed
+    type: boolean_t
+    requirement: recommended
+    description: Denotes whether a digital certificate is self-signed or signed by a known certificate authority (CA).
+  subject:
+    caption: Subject Distinguished Name
+    type: string_t
+    requirement: recommended
+    description: The certificate subject distinguished name.
+  version:
+    caption: Version
+    type: string_t
+    requirement: recommended
+    description: The certificate version.
+  created_time_dt:
+    caption: Created Time
+    type: datetime_t
+    requirement: optional
+    profile: datetime
+    description: The time when the certificate was created.
+  expiration_time_dt:
+    caption: Expiration Time
+    type: datetime_t
+    requirement: optional
+    profile: datetime
+    description: The expiration time of the certificate.
+  sans:
+    caption: Subject Alternative Names
+    type: object_t
+    object: san
+    array: true
+    requirement: optional
+    description: The list of subject alternative names that are secured by a specific certificate.
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: optional
+    description: The unique identifier of the certificate.

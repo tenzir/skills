@@ -1,0 +1,25 @@
+name: parameter
+caption: Parameter
+extends: object
+description: The Parameter object provides details regarding a parameter of a a function.
+constraints:
+  at_least_one: [name, pre_value, post_value]
+referenced_by:
+  objects:
+    function_invocation: [parameters]
+attributes:
+  name:
+    caption: Name
+    type: string_t
+    requirement: recommended
+    description: The parameter name.
+  post_value:
+    caption: Post-Value
+    type: string_t
+    requirement: recommended
+    description: The parameter value after function execution.
+  pre_value:
+    caption: Pre-Value
+    type: string_t
+    requirement: recommended
+    description: The parameter value before function execution.

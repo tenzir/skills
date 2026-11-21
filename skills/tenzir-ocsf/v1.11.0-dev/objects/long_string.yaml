@@ -1,0 +1,23 @@
+name: long_string
+caption: Long String
+extends: object
+description: This object is a used to capture strings which may be truncated by a security product due to their length.
+referenced_by:
+  objects:
+    script: [script_content]
+attributes:
+  value:
+    caption: Value
+    type: string_t
+    requirement: required
+    description: The string value, truncated if `is_truncated` is `true`.
+  is_truncated:
+    caption: Is Truncated
+    type: boolean_t
+    requirement: optional
+    description: Indicates that `value` has been truncated. May be omitted if truncation has not occurred.
+  untruncated_size:
+    caption: Untruncated Size
+    type: integer_t
+    requirement: optional
+    description: The size in bytes of the string represented by `value` before truncation. Should be omitted if truncation has not occurred.

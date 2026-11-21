@@ -1,0 +1,102 @@
+name: ticket
+caption: Ticket
+extends: object
+description: The Ticket object represents ticket in the customer's IT Service Management (ITSM) systems like ServiceNow, Jira, etc.
+constraints:
+  at_least_one: [src_url, uid]
+referenced_by:
+  classes:
+    application_security_posture_finding: [ticket, tickets]
+    compliance_finding: [ticket, tickets]
+    data_security_finding: [ticket, tickets]
+    detection_finding: [ticket, tickets]
+    iam_analysis_finding: [ticket, tickets]
+    incident_finding: [ticket, tickets]
+    vulnerability_finding: [ticket, tickets]
+attributes:
+  src_url:
+    caption: Source URL
+    type: url_t
+    requirement: recommended
+    observable: 6
+    description: The url of a ticket in the ticket system.
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: recommended
+    description: Unique identifier of the ticket.
+  status:
+    caption: Ticket Status
+    type: string_t
+    requirement: optional
+    description: The status of the ticket normalized to the caption of the `status_id` value. In the case of `99`, this value should as defined by the source.
+  status_details:
+    caption: Status Details
+    type: string_t
+    array: true
+    requirement: optional
+    description: A list of contextual descriptions of the `status, status_id` values.
+  status_id:
+    caption: Ticket Status ID
+    type: integer_t
+    requirement: optional
+    sibling: status
+    description: The normalized identifier for the ticket status.
+    enum:
+      0:
+        caption: Unknown
+        description: The status is unknown.
+      1:
+        caption: New
+        description: The ticket is new and yet to be reviewed.
+      2:
+        caption: In Progress
+        description: The ticket is actively being worked on.
+      3:
+        caption: Notified
+        description: Relevant parties have been notified about the ticket.
+      4:
+        caption: On Hold
+        description: Work on the ticket is temporarily suspended.
+      5:
+        caption: Resolved
+        description: The ticket is resolved and a solution is implemented, pending confirmation or verification from the requestor.
+      6:
+        caption: Closed
+        description: The ticket has been completed and closed.
+      7:
+        caption: Canceled
+        description: The ticket has been canceled and will not be processed.
+      8:
+        caption: Reopened
+        description: The ticket was previously closed, but has been reopened.
+      99:
+        caption: Other
+        description: The status is not mapped. See the `status` attribute, which contains a data source specific value.
+  title:
+    caption: Title
+    type: string_t
+    requirement: optional
+    description: The title of the ticket.
+  type:
+    caption: Ticket Type
+    type: string_t
+    requirement: optional
+    description: The linked ticket type determines whether the ticket is internal or in an external ticketing system.
+  type_id:
+    caption: Ticket Type ID
+    type: integer_t
+    requirement: optional
+    sibling: type
+    description: The normalized identifier for the ticket type.
+    enum:
+      0:
+        caption: Unknown
+        description: The type is unknown.
+      1:
+        caption: Internal
+      2:
+        caption: External
+      99:
+        caption: Other
+        description: The type is not mapped. See the `type` attribute, which contains a data source specific value.

@@ -1,0 +1,101 @@
+name: authorization
+caption: Authorization Result
+extends: object
+description: The Authorization Result object provides details about the authorization outcome and associated policies related to activity.
+referenced_by:
+  classes:
+    account_change: [authorizations]
+    admin_group_query: [authorizations]
+    airborne_broadcast_activity: [authorizations]
+    api_activity: [authorizations]
+    application_error: [authorizations]
+    application_lifecycle: [authorizations]
+    application_security_posture_finding: [authorizations]
+    authentication: [authorizations]
+    authorize_session: [authorizations]
+    base_event: [authorizations]
+    clipboard_activity: [authorizations]
+    cloud_resources_inventory_info: [authorizations]
+    compliance_finding: [authorizations]
+    config_state: [authorizations]
+    data_security_finding: [authorizations]
+    datastore_activity: [authorizations]
+    detection_finding: [authorizations]
+    device_config_state_change: [authorizations]
+    device_power_state_activity: [authorizations]
+    dhcp_activity: [authorizations]
+    dns_activity: [authorizations]
+    dns_zone_transfer_activity: [authorizations]
+    drone_flights_activity: [authorizations]
+    email_activity: [authorizations]
+    email_file_activity: [authorizations]
+    email_url_activity: [authorizations]
+    entity_management: [authorizations]
+    event_log_actvity: [authorizations]
+    evidence_info: [authorizations]
+    file_activity: [authorizations]
+    file_hosting: [authorizations]
+    file_query: [authorizations]
+    file_remediation_activity: [authorizations]
+    folder_query: [authorizations]
+    ftp_activity: [authorizations]
+    group_management: [authorizations]
+    http_activity: [authorizations]
+    iam_analysis_finding: [authorizations]
+    incident_finding: [authorizations]
+    inventory_info: [authorizations]
+    job_query: [authorizations]
+    kernel_activity: [authorizations]
+    kernel_extension_activity: [authorizations]
+    kernel_object_query: [authorizations]
+    memory_activity: [authorizations]
+    module_activity: [authorizations]
+    module_query: [authorizations]
+    network_activity: [authorizations]
+    network_connection_query: [authorizations]
+    network_file_activity: [authorizations]
+    network_remediation_activity: [authorizations]
+    networks_query: [authorizations]
+    ntp_activity: [authorizations]
+    osint_inventory_info: [authorizations]
+    patch_state: [authorizations]
+    peripheral_activity: [authorizations]
+    peripheral_device_query: [authorizations]
+    process_activity: [authorizations]
+    process_query: [authorizations]
+    process_remediation_activity: [authorizations]
+    rdp_activity: [authorizations]
+    remediation_activity: [authorizations]
+    role_management: [authorizations]
+    scan_activity: [authorizations]
+    scheduled_job_activity: [authorizations]
+    script_activity: [authorizations]
+    security_finding: [authorizations]
+    service_query: [authorizations]
+    session_query: [authorizations]
+    smb_activity: [authorizations]
+    software_info: [authorizations]
+    ssh_activity: [authorizations]
+    startup_item_query: [authorizations]
+    tunnel_activity: [authorizations]
+    user_access: [authorizations]
+    user_inventory: [authorizations]
+    user_management: [authorizations]
+    user_query: [authorizations]
+    vulnerability_finding: [authorizations]
+    web_resource_access_activity: [authorizations]
+    web_resources_activity: [authorizations]
+  objects:
+    actor: [authorizations]
+attributes:
+  decision:
+    caption: Authorization Decision/Outcome
+    type: string_t
+    requirement: recommended
+    description: Authorization Result/outcome, e.g. allowed, denied.
+  policy:
+    caption: Policy
+    type: object_t
+    object: policy
+    requirement: optional
+    description: Details about the Identity/Access management policies that are applicable.

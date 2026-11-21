@@ -1,0 +1,19 @@
+name: process
+caption: macOS Process
+extension: macos
+patches: process
+description: Extends the process object to add macOS specific fields
+profiles: [macos/macos_users]
+attributes:
+  egid:
+    caption: Effective Group ID
+    type: integer_t
+    requirement: optional
+    profiles: [linux/linux_users, macos/macos_users]
+    description: The effective group under which this process is running.
+  euid:
+    caption: Effective User ID
+    type: integer_t
+    requirement: optional
+    profiles: [linux/linux_users, macos/macos_users]
+    description: The effective user under which this process is running.

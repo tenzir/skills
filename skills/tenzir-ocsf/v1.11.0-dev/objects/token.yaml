@@ -1,0 +1,106 @@
+name: token
+caption: Token
+extends: object
+description: 'The Token object is the base object for representing tokens, API keys, and authentication credentials used across different contexts. This object provides common attributes for all token types, including protocol-specific authentication tokens (Kerberos, OIDC, SAML) and API/client tokens used for service authentication. When to use this object: Use the base `token` object directly in API activity events to represent API tokens, client tokens, or API keys used to authenticate API requests. Examples include: Okta API tokens, Microsoft Entra ID Application Registration client secrets, Stripe API keys, AWS API keys. When NOT to use this object: Do NOT use the base `token` object for protocol-specific authentication tokens in authentication events - use `authentication_token` instead (which extends this object). Do NOT use `token` for tracking credential lifecycle and usage patterns - use `programmatic_credential` instead.'
+profiles: [datetime]
+referenced_by:
+  objects:
+    api: [token]
+attributes:
+  created_time:
+    caption: Created Time
+    type: timestamp_t
+    requirement: recommended
+    description: The time that the token was created.
+  type:
+    caption: Type
+    type: string_t
+    requirement: recommended
+    description: The type of the token, normalized to the caption of the `type_id` value. This indicates whether the token is a Client Token, API Token, or one of the protocol-specific token types.
+  type_id:
+    caption: Type ID
+    type: integer_t
+    requirement: recommended
+    sibling: type
+    description: 'The normalized token type identifier. Valid values: 0 (Unknown), 1 (Ticket Granting Ticket - Kerberos), 2 (Service Ticket - Kerberos), 3 (Identity Token - OIDC), 4 (Refresh Token - OIDC), 5 (SAML Assertion), 6 (Client Token - IdP-issued), 7 (API Token - generic API keys), 99 (Other).'
+    enum:
+      0:
+        caption: Unknown
+        description: The token type is unknown.
+      1:
+        caption: Ticket Granting Ticket
+        description: Ticket Granting Ticket (TGT) for Kerberos.
+      2:
+        caption: Service Ticket
+        description: Service Ticket (ST) for Kerberos.
+      3:
+        caption: Identity Token
+        description: Identity (ID) Token for OIDC.
+      4:
+        caption: Refresh Token
+        description: Refresh Token for OIDC.
+      5:
+        caption: SAML Assertion
+        description: Authentication Assertion for SAML.
+      6:
+        caption: Client Token
+        description: 'Client Token issued by an Identity Provider (IdP) for application authentication. Use this value for IdP-issued tokens used for service-to-service authentication. Examples: Microsoft Entra ID Application Registration client secrets, Okta API tokens, Auth0 Machine-to-Machine tokens. Key characteristic: These tokens are issued by Identity Providers, not by individual services.'
+      7:
+        caption: API Token
+        description: 'A generic API token or API key used for authenticating API requests. Use this value for service-specific API authentication tokens that are NOT issued by Identity Providers. Examples: REST API keys, GraphQL API keys, Stripe API keys, Twilio API keys, AWS API keys. Key characteristic: These tokens are issued by individual services/platforms, not by Identity Providers.'
+      99:
+        caption: Other
+        description: The type is not mapped. See the `type` attribute, which contains a data source specific value.
+  created_time_dt:
+    caption: Created Time
+    type: datetime_t
+    requirement: optional
+    profile: datetime
+    description: The time that the token was created.
+  expiration_time:
+    caption: Expiration Time
+    type: timestamp_t
+    requirement: optional
+    description: The expiration time of the token.
+  expiration_time_dt:
+    caption: Expiration Time
+    type: datetime_t
+    requirement: optional
+    profile: datetime
+    description: The expiration time of the token.
+  is_renewable:
+    caption: Renewable
+    type: boolean_t
+    requirement: optional
+    description: Indicates whether the token is renewable.
+  modified_time:
+    caption: Modified Time
+    type: timestamp_t
+    requirement: optional
+    description: The last time the token was updated.
+  modified_time_dt:
+    caption: Modified Time
+    type: datetime_t
+    requirement: optional
+    profile: datetime
+    description: The last time the token was updated.
+  name:
+    caption: Name
+    type: string_t
+    requirement: optional
+    description: The human-friendly name of a token or key, if available, such as the `name` from the Okta API Token API.
+  tenant_uid:
+    caption: Tenant UID
+    type: string_t
+    requirement: optional
+    description: The unique identifier of the tenant or organization that owns the token or key, or the tenant context in which the token is authorized for use. This is particularly relevant in multi-tenant Identity Provider scenarios where tokens are scoped to specific tenants.
+  uid:
+    caption: Unique ID
+    type: string_t
+    requirement: optional
+    description: The unique ID of a token or key, if available, such as the `Secret ID` of Entra ID Application Registration Client Secrets.
+  zone:
+    caption: Network Zone
+    type: string_t
+    requirement: optional
+    description: The network zone or geographic region that the token or key is authorized to be used from. This may represent network-based access restrictions, geographic limitations, or other zone-based authorization policies. Examples include Okta's network zone restrictions or cloud provider region restrictions.
