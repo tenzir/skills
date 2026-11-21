@@ -48,14 +48,14 @@ Waits for the first peer connection before publishing messages on TCP transports
 ### Listen and publish JSON
 
 ```tql
-export
+from_duckdb "events.duckdb", table="events"
 serve_zmq "tcp://0.0.0.0:5555", encoding="json"
 ```
 
 ### Publish with a dynamic prefix
 
 ```tql
-export
+from_duckdb "events.duckdb", table="events"
 serve_zmq "tcp://0.0.0.0:5555", encoding="json", prefix=f"{kind}/"
 ```
 

@@ -52,17 +52,24 @@ Tenzir arranges the result columns into the fields of the pipeline, such as `eve
 
 ## Summaries
 
-SentinelOne computes these aggregation functions of a [`summarize`](../operators/summarize.md), of fields:
+The table shows which aggregation functions run in SentinelOne and which run in Tenzir:
 
-| TQL                 | PowerQuery             | Notes                                                     |
-| ------------------- | ---------------------- | --------------------------------------------------------- |
-| `count()`           | `count()`              |                                                           |
-| `count(x)`          | `count(x)`             | Counts the events where `x` has a value                   |
-| `count_distinct(x)` | `estimate_distinct(x)` | Approximate, since PowerQuery has no exact distinct count |
+| TQL                   | PowerQuery                   | Notes                                                                          |
+| --------------------- | ---------------------------- | ------------------------------------------------------------------------------ |
+| `count()`             | `count()`                    |                                                                                |
+| `count(x)`            | `count(x)`                   | Counts the events where `x` has a value                                        |
+| `min(x)`              | `min(x)`                     | Yields `Infinity` without values                                               |
+| `max(x)`              | `max(x)`                     | Yields `-Infinity` without values                                              |
+| `count_if(x, v => p)` | `count(((x != null) and p))` | Skips `null` values                                                            |
+| `count_distinct(x)`   | `estimate_distinct(x)`       | PowerQuery has no exact distinct count; it runs `estimate_distinct(x)` instead |
+| `sum(x)`              | `sum(x)`                     | Yields `0.0` without values                                                    |
+| `mean(x)`             | `avg(x)`                     | Yields `0.0` without values                                                    |
+| `stddev(x)`           | Runs in Tenzir               | PowerQuery has sample `stddev`, but no population deviation or variance        |
+| `variance(x)`         | Runs in Tenzir               | PowerQuery has sample `stddev`, but no population deviation or variance        |
 
-A summary with `min`, `max`, `count_if`, `sum`, `mean`, or other functions runs in Tenzir, since PowerQuery computes `min`, `max`, `sum`, and `mean` only for numbers and returns a timestamp’s minimum as a floating-point number. The `group` stage puts events without a group key into the group `null`.
+PowerQuery computes group keys and aggregate arguments in a `let` stage before `group`. They can use arithmetic and the functions listed in [Filters and functions](sentinelone.md#filters-and-functions). A group key using `+` runs in Tenzir if Tenzir cannot tell whether it returns a number or a string. The `group` stage puts events without a group key into the group `null`.
 
-Group keys are fields or time buckets. A summary of other computed keys or arguments, such as values that a [`set`](../operators/set.md) assigns, runs in Tenzir. A time bucket, such as in
+For example, the following summary groups events into time buckets:
 
 ```tql
 from_sentinelone_data_lake "https://<tenant>.sentinelone.net",
@@ -73,7 +80,7 @@ bucket = floor(timestamp, 7h)
 summarize bucket, events=count()
 ```
 
-runs in SentinelOne as `timebucket(timestamp, "25200s")` for these widths:
+PowerQuery computes the key as `timebucket(timestamp, "25200s")`. It supports these widths:
 
 | Width                                  | SentinelOne                                                         |
 | -------------------------------------- | ------------------------------------------------------------------- |
@@ -93,26 +100,50 @@ Filters become `filter` stages of PowerQuery or the filter of a LOG query. They 
 | `x != 1`                  | `(x != 1)`                           |
 | `x in ["a", 1]`           | `(x in ("a", 1))`                    |
 | `not (x in ["a"])`        | `!((x in ("a")))`                    |
-| `x == null`, `x != null`  | `!(x = *)`, `(x = *)`                |
+| `x == null`, `x != null`  | `!(x != null)`, `(x != null)`        |
 | `timestamp >= 2024-01-01` | `(timestamp >= 1704067200000000000)` |
 
-Filters can also call these functions:
+PowerQuery can also compute arithmetic. The table shows which functions PowerQuery can call and which run in Tenzir. LOG queries do not compute values: they support only `starts_with` and `ends_with` from this table, and use `!(x = *)` and `(x = *)` for `x == null` and `x != null`, respectively.
 
-| TQL                | PowerQuery                  | Notes                                                       |
-| ------------------ | --------------------------- | ----------------------------------------------------------- |
-| `x.starts_with(y)` | `x starts_with:matchcase y` | In filters only, on a field with a string that is not empty |
-| `x.ends_with(y)`   | `x ends_with:matchcase y`   | In filters only, on a field with a string that is not empty |
+| TQL                       | PowerQuery                         | Notes                                                                                                         |
+| ------------------------- | ---------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| `x.starts_with(y)`        | `x starts_with:matchcase y`        | As a predicate with a non-empty string; in LOG queries, `x` must be a field                                   |
+| `x.ends_with(y)`          | `x ends_with:matchcase y`          | As a predicate with a non-empty string; in LOG queries, `x` must be a field                                   |
+| `x.length_chars()`        | `len(x)`                           |                                                                                                               |
+| `x.to_lower()`            | `lower(x)`                         |                                                                                                               |
+| `x.to_upper()`            | `upper(x)`                         |                                                                                                               |
+| `x.trim()`                | `trim(x)`                          |                                                                                                               |
+| `x.trim_start()`          | `ltrim(x)`                         |                                                                                                               |
+| `x.trim_end()`            | `rtrim(x)`                         |                                                                                                               |
+| `x.replace(y, z)`         | Runs in Tenzir                     | PowerQuery treats the pattern as a case-insensitive regex                                                     |
+| `x.is_empty()`            | `isempty(x)`                       | As a predicate only; yields `true` for `null`                                                                 |
+| `x.slice(begin=b, end=e)` | `substr(x, b, e - b)`              | With constant `begin` and `end` that are not negative; use `substr(x, b)` or `substr(x, 0, e)` with one bound |
+| `x.abs()`                 | `abs(x)`                           |                                                                                                               |
+| `x.ceil()`                | `ceiling(x)`                       |                                                                                                               |
+| `x.floor()`               | `floor(x)`                         |                                                                                                               |
+| `x.sqrt()`                | `sqrt(x)`                          |                                                                                                               |
+| `x.exp()`                 | `exp(x)`                           |                                                                                                               |
+| `x.log()`, `x.log(base)`  | `ln(x)`, `log(x, base)`            |                                                                                                               |
+| `x.year()`                | `number(strftime(x, "%Y", "UTC"))` |                                                                                                               |
+| `x.month()`               | `number(strftime(x, "%m", "UTC"))` |                                                                                                               |
+| `x.day()`                 | `number(strftime(x, "%d", "UTC"))` |                                                                                                               |
+| `x.hour()`                | `number(strftime(x, "%H", "UTC"))` |                                                                                                               |
+| `x.minute()`              | `number(strftime(x, "%M", "UTC"))` |                                                                                                               |
+
+SentinelOne has no hash functions, so `x.hash_md5()`, `x.hash_sha1()` and `x.hash_sha256()` run in Tenzir.
 
 SentinelOne has no durations, so `x.since_epoch()` runs in Tenzir.
 
-Regular expressions, IP addresses and subnets, durations, arithmetic, other functions, named arguments such as `ignore_case`, bare fields such as `where flag`, the literal `null` outside a comparison, strings with control characters, and optional fields such as `x?` run in Tenzir. A time compares only with SentinelOne’s own `timestamp`, not with a field that holds a time as text, nor with `timestamp` after a [`select`](../operators/select.md) that renames it or after a `query` with `|`.
+Regular expressions, IP addresses and subnets, durations, unsupported functions or named arguments, bare fields such as `where flag`, the literal `null` outside a comparison, strings with control characters, and optional fields such as `x?` run in Tenzir. A time compares only with SentinelOne’s own `timestamp`, not with a field that holds a time as text, nor with `timestamp` after a [`select`](../operators/select.md) that renames it or after a `query` with `|`.
 
 ## SentinelOne semantics
 
 The operators that SentinelOne takes over run as SentinelOne runs them, which can differ from TQL:
 
 * The filters `x != "a"` and `not (x in […])` also match events without `x`.
-* Numbers are doubles. A time compares as nanoseconds since the epoch, exact to a few hundred nanoseconds.
+* Functions and arithmetic can coerce `null` to `0` or `""`. A nonzero number divided by zero yields an infinity. The `+` operator also concatenates strings.
+* Computed numeric keys and numeric aggregates return doubles. For example, `year` can return `2026.0`. The `min(timestamp)` and `max(timestamp)` aggregates return times. Time comparisons use nanoseconds as doubles.
+* An ungrouped summary over no events returns no rows.
 * SentinelOne keeps nested fields as flat fields with dotted names, such as `event.type`. A [`select`](../operators/select.md) of a record, such as `select event`, returns `null`. Select its fields instead.
 * PowerQuery’s `sort` puts `null` first in ascending and last in descending order.
 * A query that SentinelOne rejects fails the pipeline with the error of SentinelOne, as the overview’s [diagnostics](../optimizations.md#diagnostics) describe. The diagnostic shows SentinelOne’s response.

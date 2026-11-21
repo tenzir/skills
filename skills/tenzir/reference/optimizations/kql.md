@@ -71,22 +71,22 @@ Tenzir leaves out a projection that would exceed the 16 KiB.
 
 The service computes these aggregation functions of a [`summarize`](../operators/summarize.md):
 
-| TQL                   | KQL                                  | Notes                                                                          |
-| --------------------- | ------------------------------------ | ------------------------------------------------------------------------------ |
-| `count()`             | `count()`                            |                                                                                |
-| `count(x)`            | `countif(isnotempty(x))`             | Leaves out empty strings, which KQL holds in place of `null`                   |
-| `min(x)`              | `min(x)`                             |                                                                                |
-| `max(x)`              | `max(x)`                             |                                                                                |
-| `count_if(x, v => p)` | `countif(p)`                         | Skips `null` values                                                            |
-| `count_distinct(x)`   | `count_distinctif(x, isnotempty(x))` | Exact; leaves out empty strings and fails beyond 100 million values in a group |
-| `sum(x)`              | `sum(x)`                             | Yields `null` without values                                                   |
-| `mean(x)`             | `avg(x)`                             | Yields `null` without values                                                   |
-| `stddev(x)`           | `stdevp(x)`                          | Yields `null` without values                                                   |
-| `variance(x)`         | `variancep(x)`                       | Yields `null` without values                                                   |
-| `all(x)`              | `countif(x == false) == 0`           | Skips `null` values                                                            |
-| `any(x)`              | `countif(x == true) > 0`             | Skips `null` values                                                            |
+| TQL                   | KQL                        | Notes                                                                      |
+| --------------------- | -------------------------- | -------------------------------------------------------------------------- |
+| `count()`             | `count()`                  |                                                                            |
+| `count(x)`            | `countif(isnotnull(x))`    | Counts empty strings                                                       |
+| `min(x)`              | `min(x)`                   |                                                                            |
+| `max(x)`              | `max(x)`                   |                                                                            |
+| `count_if(x, v => p)` | `countif(p)`               | Skips `null` values                                                        |
+| `count_distinct(x)`   | `count_distinct(x)`        | Exact; counts empty strings and fails beyond 100 million values in a group |
+| `sum(x)`              | `sum(x)`                   | Yields `0` without values                                                  |
+| `mean(x)`             | `avg(x)`                   | Yields `NaN` without values                                                |
+| `stddev(x)`           | `stdevp(x)`                | Yields `0` without values                                                  |
+| `variance(x)`         | `variancep(x)`             | Yields `0` without values                                                  |
+| `all(x)`              | `countif(x == false) == 0` | Skips `null` values                                                        |
+| `any(x)`              | `countif(x == true) > 0`   | Skips `null` values                                                        |
 
-Without values, KQL’s `sum` yields 0 and `avg`, `stdevp`, and `variancep` yield `NaN`, so the service checks for values first and yields `null`, as TQL does. Without values, `all` holds and `any` does not, as in TQL, but both skip `null` values, where TQL’s `all(true, null)` is `null`. A summary keeps a group for `null` keys.
+Without values, KQL’s `sum`, `stdevp`, and `variancep` return `0`, and `avg` returns `NaN`. Without values, `all` holds and `any` does not, as in TQL, but both skip `null` values, where TQL’s `all(true, null)` is `null`. A summary keeps a group for `null` keys.
 
 Group keys and aggregate arguments can be computed values, such as values that a [`set`](../operators/set.md) before the summary assigns. The service computes them with `extend` before `summarize`:
 
@@ -120,38 +120,38 @@ Filters become `where` stages. They consist of top-level fields, literals, compa
 
 Literals are strings, numbers, booleans, times as `datetime(…)` and durations as `timespan(…)`, both in whole multiples of 100 nanoseconds, and IP addresses as their canonical text. Filters, group keys, and aggregate arguments can also call these functions:
 
-| TQL                       | KQL                                                                            | Notes                                                 |
-| ------------------------- | ------------------------------------------------------------------------------ | ----------------------------------------------------- |
-| `x.starts_with(y)`        | `x startswith_cs y`                                                            |                                                       |
-| `x.ends_with(y)`          | `x endswith_cs y`                                                              |                                                       |
-| `x.match_regex(y)`        | `x matches regex y`                                                            |                                                       |
-| `x.length_chars()`        | `strlen(x)`                                                                    |                                                       |
-| `x.to_lower()`            | `tolower(x)`                                                                   |                                                       |
-| `x.to_upper()`            | `toupper(x)`                                                                   |                                                       |
-| `x.capitalize()`          | `strcat(toupper(substring(x, 0, 1)), tolower(substring(x, 1)))`                |                                                       |
-| `x.trim()`                | `trim(@"\s+", x)`                                                              |                                                       |
-| `x.trim_start()`          | `trim_start(@"\s+", x)`                                                        |                                                       |
-| `x.trim_end()`            | `trim_end(@"\s+", x)`                                                          |                                                       |
-| `x.replace(y, z)`         | `replace_string(x, y, z)`                                                      |                                                       |
-| `x.is_empty()`            | `isempty(x)`                                                                   |                                                       |
-| `x.slice(begin=b, end=e)` | `substring(x, b, max_of(e - b, 0))`                                            | With constant `begin` and `end` that are not negative |
-| `x.hash_md5()`            | `hash_md5(x)`                                                                  |                                                       |
-| `x.hash_sha1()`           | `hash_sha1(x)`                                                                 |                                                       |
-| `x.hash_sha256()`         | `hash_sha256(x)`                                                               |                                                       |
-| `x.abs()`                 | `abs(x)`                                                                       |                                                       |
-| `x.ceil()`                | `tolong(ceiling(x))`                                                           |                                                       |
-| `x.floor()`               | `tolong(floor(x, 1))`                                                          |                                                       |
-| `x.round()`               | `tolong(round(x))`                                                             |                                                       |
-| `x.sqrt()`                | `iff(x >= 0, sqrt(x), real(null))`                                             |                                                       |
-| `x.exp()`                 | `exp(x)`                                                                       |                                                       |
-| `x.log()`, `x.log(base)`  | `iff(x > 0, log(x), real(null))`, `iff(x > 0, log(x) / log(base), real(null))` |                                                       |
-| `x.year()`                | `getyear(x)`                                                                   |                                                       |
-| `x.month()`               | `getmonth(x)`                                                                  |                                                       |
-| `x.day()`                 | `dayofmonth(x)`                                                                |                                                       |
-| `x.hour()`                | `datetime_part("hour", x)`                                                     |                                                       |
-| `x.minute()`              | `datetime_part("minute", x)`                                                   |                                                       |
-| `x.second()`              | `datetime_part("second", x) + datetime_part("nanosecond", x) / 1e9`            |                                                       |
-| `x.since_epoch()`         | `x - datetime(1970-01-01)`                                                     |                                                       |
+| TQL                       | KQL                                                                 | Notes                                                 |
+| ------------------------- | ------------------------------------------------------------------- | ----------------------------------------------------- |
+| `x.starts_with(y)`        | `x startswith_cs y`                                                 |                                                       |
+| `x.ends_with(y)`          | `x endswith_cs y`                                                   |                                                       |
+| `x.match_regex(y)`        | `x matches regex y`                                                 |                                                       |
+| `x.length_chars()`        | `strlen(x)`                                                         |                                                       |
+| `x.to_lower()`            | `tolower(x)`                                                        |                                                       |
+| `x.to_upper()`            | `toupper(x)`                                                        |                                                       |
+| `x.capitalize()`          | `strcat(toupper(substring(x, 0, 1)), tolower(substring(x, 1)))`     |                                                       |
+| `x.trim()`                | `trim(@"\s+", x)`                                                   |                                                       |
+| `x.trim_start()`          | `trim_start(@"\s+", x)`                                             |                                                       |
+| `x.trim_end()`            | `trim_end(@"\s+", x)`                                               |                                                       |
+| `x.replace(y, z)`         | `replace_string(x, y, z)`                                           |                                                       |
+| `x.is_empty()`            | `isempty(x)`                                                        |                                                       |
+| `x.slice(begin=b, end=e)` | `substring(x, b, e - b)`                                            | With constant `begin` and `end` that are not negative |
+| `x.hash_md5()`            | `hash_md5(x)`                                                       |                                                       |
+| `x.hash_sha1()`           | `hash_sha1(x)`                                                      |                                                       |
+| `x.hash_sha256()`         | `hash_sha256(x)`                                                    |                                                       |
+| `x.abs()`                 | `abs(x)`                                                            |                                                       |
+| `x.ceil()`                | `tolong(ceiling(x))`                                                |                                                       |
+| `x.floor()`               | `tolong(floor(x, 1))`                                               |                                                       |
+| `x.round()`               | `tolong(round(x))`                                                  |                                                       |
+| `x.sqrt()`                | `sqrt(x)`                                                           |                                                       |
+| `x.exp()`                 | `exp(x)`                                                            |                                                       |
+| `x.log()`, `x.log(base)`  | `log(x)`, `(log(x) / log(base))`                                    |                                                       |
+| `x.year()`                | `getyear(x)`                                                        |                                                       |
+| `x.month()`               | `getmonth(x)`                                                       |                                                       |
+| `x.day()`                 | `dayofmonth(x)`                                                     |                                                       |
+| `x.hour()`                | `datetime_part("hour", x)`                                          |                                                       |
+| `x.minute()`              | `datetime_part("minute", x)`                                        |                                                       |
+| `x.second()`              | `datetime_part("second", x) + datetime_part("nanosecond", x) / 1e9` |                                                       |
+| `x.since_epoch()`         | `x - datetime(1970-01-01)`                                          |                                                       |
 
 Ordering comparisons with a string, nested fields such as `Process.Name`, field names with `*`, the literal `null` outside a comparison, non-finite numbers, named arguments such as `ignore_case`, and optional fields such as `x?` run in Tenzir.
 
@@ -160,7 +160,7 @@ Ordering comparisons with a string, nested fields such as `Process.Name`, field 
 The operators that the service takes over run as KQL runs them, which can differ from TQL:
 
 * KQL is statically typed. A field that your query doesn’t return, `sum` of a string, and `summarize` or `sort` by a `dynamic` column fail the query with the service’s error. Comparing a string column with a number matches no rows, and comparing a number column with a string converts the string.
-* Strings are never `null` in KQL: a missing string is the empty string. So `x == null` doesn’t match it, and `count(x)`, which becomes `countif(isnotempty(x))`, doesn’t count it.
+* Strings are never `null` in KQL: a missing string is the empty string. The comparison `x == null` doesn’t match it, but `count(x)`, which becomes `countif(isnotnull(x))`, counts it.
 * IP addresses compare as text, so `RemoteIP == 2001:db8::1` doesn’t match another spelling of the same address. Subnet membership parses addresses.
 * Integer division truncates, and arithmetic follows KQL’s types.
 * KQL’s `sort` puts `null` first in ascending and last in descending order, and compares strings by their characters.

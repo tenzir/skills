@@ -115,37 +115,37 @@ SQL Server takes over a [`where`](../operators/where.md) whose predicate consist
 * Comparisons, `in` with a list of literals, arithmetic with `+`, `-`, `*`, and `/`, and the boolean operators `and`, `or`, and `not`.
 * The functions in the following table.
 
-| TQL                       | SQL Server                                                                 | Notes                                                 |
-| ------------------------- | -------------------------------------------------------------------------- | ----------------------------------------------------- |
-| `x.starts_with(y)`        | `LEFT(x, LEN(CAST(y AS nvarchar(max)) + N'.') - 1) = y`                    | In filters only, since the target has no booleans     |
-| `x.ends_with(y)`          | `RIGHT(x, LEN(CAST(y AS nvarchar(max)) + N'.') - 1) = y`                   | In filters only, since the target has no booleans     |
-| `x.length_chars()`        | `LEN(CAST(x AS nvarchar(max)) + N'.') - 1`                                 | Counts trailing spaces, which `LEN` alone leaves out  |
-| `x.to_lower()`            | `LOWER(x)`                                                                 |                                                       |
-| `x.to_upper()`            | `UPPER(x)`                                                                 |                                                       |
-| `x.capitalize()`          | `UPPER(LEFT(x, 1)) + LOWER(SUBSTRING(x, 2, 2147483647))`                   |                                                       |
-| `x.trim()`                | `LTRIM(RTRIM(x))`                                                          |                                                       |
-| `x.trim_start()`          | `LTRIM(x)`                                                                 |                                                       |
-| `x.trim_end()`            | `RTRIM(x)`                                                                 |                                                       |
-| `x.replace(y, z)`         | `REPLACE(CAST(x AS nvarchar(max)), y, z)`                                  |                                                       |
-| `x.is_empty()`            | `DATALENGTH(x) = 0`                                                        | In filters only, since the target has no booleans     |
-| `x.slice(begin=b, end=e)` | `SUBSTRING(x, b + 1, CASE WHEN e > b THEN e - b ELSE 0 END)`               | With constant `begin` and `end` that are not negative |
-| `x.abs()`                 | `ABS(x)`                                                                   |                                                       |
-| `x.ceil()`                | `CAST(CEILING(x) AS bigint)`                                               |                                                       |
-| `x.floor()`               | `CAST(FLOOR(x) AS bigint)`                                                 |                                                       |
-| `x.round()`               | `CAST(ROUND(x, 0) AS bigint)`                                              |                                                       |
-| `x.sqrt()`                | `CASE WHEN x >= 0 THEN SQRT(x) END`                                        |                                                       |
-| `x.exp()`                 | `EXP(x)`                                                                   |                                                       |
-| `x.log()`, `x.log(base)`  | `CASE WHEN x > 0 THEN LOG(x) END`, `CASE WHEN x > 0 THEN LOG(x, base) END` |                                                       |
-| `x.year()`                | `DATEPART(year, x)`                                                        |                                                       |
-| `x.month()`               | `DATEPART(month, x)`                                                       |                                                       |
-| `x.day()`                 | `DATEPART(day, x)`                                                         |                                                       |
-| `x.hour()`                | `DATEPART(hour, x)`                                                        |                                                       |
-| `x.minute()`              | `DATEPART(minute, x)`                                                      |                                                       |
-| `x.second()`              | `DATEPART(second, x) + DATEPART(nanosecond, x) / 1e9`                      |                                                       |
+| TQL                       | SQL Server                                                   | Notes                                                 |
+| ------------------------- | ------------------------------------------------------------ | ----------------------------------------------------- |
+| `x.starts_with(y)`        | `LEFT(x, LEN(CAST(y AS nvarchar(max)) + N'.') - 1) = y`      | In filters only, since the target has no booleans     |
+| `x.ends_with(y)`          | `RIGHT(x, LEN(CAST(y AS nvarchar(max)) + N'.') - 1) = y`     | In filters only, since the target has no booleans     |
+| `x.length_chars()`        | `LEN(CAST(x AS nvarchar(max)) + N'.') - 1`                   | Counts trailing spaces, which `LEN` alone leaves out  |
+| `x.to_lower()`            | `LOWER(x)`                                                   |                                                       |
+| `x.to_upper()`            | `UPPER(x)`                                                   |                                                       |
+| `x.capitalize()`          | `UPPER(LEFT(x, 1)) + LOWER(SUBSTRING(x, 2, 2147483647))`     |                                                       |
+| `x.trim()`                | `LTRIM(RTRIM(x))`                                            |                                                       |
+| `x.trim_start()`          | `LTRIM(x)`                                                   |                                                       |
+| `x.trim_end()`            | `RTRIM(x)`                                                   |                                                       |
+| `x.replace(y, z)`         | `REPLACE(CAST(x AS nvarchar(max)), y, z)`                    |                                                       |
+| `x.is_empty()`            | `DATALENGTH(x) = 0`                                          | In filters only, since the target has no booleans     |
+| `x.slice(begin=b, end=e)` | `SUBSTRING(x, b + 1, CASE WHEN e > b THEN e - b ELSE 0 END)` | With constant `begin` and `end` that are not negative |
+| `x.abs()`                 | `ABS(x)`                                                     |                                                       |
+| `x.ceil()`                | `CAST(CEILING(x) AS bigint)`                                 |                                                       |
+| `x.floor()`               | `CAST(FLOOR(x) AS bigint)`                                   |                                                       |
+| `x.round()`               | `CAST(ROUND(x, 0) AS bigint)`                                |                                                       |
+| `x.sqrt()`                | `SQRT(x)`                                                    | Fails the query for negative inputs                   |
+| `x.exp()`                 | `EXP(x)`                                                     |                                                       |
+| `x.log()`, `x.log(base)`  | `LOG(x)`, `LOG(x, base)`                                     | Fails the query for zero or negative inputs           |
+| `x.year()`                | `DATEPART(year, x)`                                          |                                                       |
+| `x.month()`               | `DATEPART(month, x)`                                         |                                                       |
+| `x.day()`                 | `DATEPART(day, x)`                                           |                                                       |
+| `x.hour()`                | `DATEPART(hour, x)`                                          |                                                       |
+| `x.minute()`              | `DATEPART(minute, x)`                                        |                                                       |
+| `x.second()`              | `DATEPART(second, x) + DATEPART(nanosecond, x) / 1e9`        |                                                       |
 
 SQL Server has no durations, so `x.since_epoch()` runs in Tenzir.
 
-The same functions compute group keys and aggregate arguments, except for the predicates that the table marks. The functions yield `null` where TQL does, such as `sqrt` and `log` for negative numbers, where SQL Server would fail the query.
+The same functions compute group keys and aggregate arguments, except for the predicates that the table marks. SQL Server fails the query for `sqrt` of a negative number or `log` of zero or a negative number.
 
 T-SQL has no boolean values, so a bare `bit` column is no predicate: `where flag` runs in Tenzir, while `where flag == true` compares with `1`. Other functions, including `length_bytes`, `match_regex`, and the hashes, which SQL Server computes over UTF-16 for `nvarchar`, named arguments such as `ignore_case`, nested fields, subnets, durations, other kinds of literals, strings with a NUL byte, arithmetic with a time literal such as `ts - 2024-01-01`, and optional fields such as `x?` run in Tenzir.
 

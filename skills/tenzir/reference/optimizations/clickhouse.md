@@ -65,22 +65,22 @@ The operator nests derived tables where SQL’s clause order requires it, and ke
 
 ClickHouse and Hydrolix compute these aggregation functions of a [`summarize`](../operators/summarize.md):
 
-| TQL                   | ClickHouse                    | Notes                        |
-| --------------------- | ----------------------------- | ---------------------------- |
-| `count()`             | `toInt64(count())`            |                              |
-| `count(x)`            | `toInt64(count(x))`           |                              |
-| `min(x)`              | `minOrNull(x)`                | Yields `null` without values |
-| `max(x)`              | `maxOrNull(x)`                | Yields `null` without values |
-| `count_if(x, v => p)` | `toInt64(countIf(x, p))`      | Skips `null` values          |
-| `count_distinct(x)`   | `toInt64(uniqExact(x))`       |                              |
-| `sum(x)`              | `sumOrNull(x)`                |                              |
-| `mean(x)`             | `avgOrNull(x)`                |                              |
-| `stddev(x)`           | `stddevPopOrNull(x)`          |                              |
-| `variance(x)`         | `varPopOrNull(x)`             |                              |
-| `all(x)`              | `ifNull(minOrNull(x), true)`  | Skips `null` values          |
-| `any(x)`              | `ifNull(maxOrNull(x), false)` | Skips `null` values          |
+| TQL                   | ClickHouse               | Notes                                    |
+| --------------------- | ------------------------ | ---------------------------------------- |
+| `count()`             | `toInt64(count())`       |                                          |
+| `count(x)`            | `toInt64(count(x))`      |                                          |
+| `min(x)`              | `min(x)`                 | Yields the type's default without values |
+| `max(x)`              | `max(x)`                 | Yields the type's default without values |
+| `count_if(x, v => p)` | `toInt64(countIf(x, p))` | Skips `null` values                      |
+| `count_distinct(x)`   | `toInt64(uniqExact(x))`  |                                          |
+| `sum(x)`              | `sum(x)`                 |                                          |
+| `mean(x)`             | `avg(x)`                 |                                          |
+| `stddev(x)`           | `stddevPop(x)`           |                                          |
+| `variance(x)`         | `varPop(x)`              |                                          |
+| `all(x)`              | `min(x)`                 | Skips `null` values                      |
+| `any(x)`              | `max(x)`                 | Skips `null` values                      |
 
-The `OrNull` functions yield `NULL` without values, as TQL does, instead of the default value of the type. Without values, `all` holds and `any` does not, as in TQL, but both skip `null` values, where TQL’s `all(true, null)` is `null`. A summary keeps a group for `null` keys.
+Without values, `min`, `max`, and `sum` can return the type’s default rather than `null`. The `all` and `any` functions skip `null` values and can return `null` without values. A summary keeps a group for `null` keys.
 
 Group keys and aggregate arguments can be computed values, such as `level` in
 
@@ -131,9 +131,9 @@ ClickHouse takes over a [`where`](../operators/where.md) whose predicate consist
 | `x.ceil()`                | `toInt64(ceil(x))`                                                  |                                                               |
 | `x.floor()`               | `toInt64(floor(x))`                                                 |                                                               |
 | `x.round()`               | `toInt64(round(x))`                                                 | Rounds halves to even                                         |
-| `x.sqrt()`                | `if(x >= 0, sqrt(x), NULL)`                                         |                                                               |
+| `x.sqrt()`                | `sqrt(x)`                                                           |                                                               |
 | `x.exp()`                 | `exp(x)`                                                            |                                                               |
-| `x.log()`, `x.log(base)`  | `if(x > 0, log(x), NULL)`, `if(x > 0, log(x) / log(base), NULL)`    |                                                               |
+| `x.log()`, `x.log(base)`  | `log(x)`, `(log(x) / log(base))`                                    |                                                               |
 | `x.year()`                | `toYear(x, 'UTC')`                                                  |                                                               |
 | `x.month()`               | `toMonth(x, 'UTC')`                                                 |                                                               |
 | `x.day()`                 | `toDayOfMonth(x, 'UTC')`                                            |                                                               |
