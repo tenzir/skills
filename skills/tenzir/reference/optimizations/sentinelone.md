@@ -45,7 +45,31 @@ head 2
 sends this PowerQuery:
 
 ```text
-| filter (event.type == "DNS Resolved") | columns __tenzir_column_0 = event.type, __tenzir_column_1 = timestamp | sort -__tenzir_column_1 | limit 2
+| filter (event.type == "DNS Resolved")
+| columns __tenzir_column_0 = event.type, __tenzir_column_1 = timestamp
+| sort -__tenzir_column_1
+| limit 2
+```
+
+For a [`summarize`](../operators/summarize.md) with a computed group key, PowerQuery evaluates the expression in a `let` stage before `group`. For example, the pipeline
+
+```tql
+from_sentinelone_data_lake "https://<tenant>.sentinelone.net",
+  token=secret("sentinelone-console-token"),
+  start=2024-01-01, end=2024-01-02
+kind = event.type.to_lower()
+summarize kind, events=count()
+sort -events
+head 10
+```
+
+sends this PowerQuery:
+
+```text
+| let __tenzir_column_0 = lower(event.type)
+| group __tenzir_column_1 = count() by __tenzir_column_0
+| sort -__tenzir_column_1
+| limit 10
 ```
 
 Tenzir arranges the result columns into the fields of the pipeline, such as `event.kind` and `t`. A column that holds SentinelOne’s `timestamp`, also under another name or as a group key, becomes a time. Counts become integers, also with `raw=true`.
@@ -54,18 +78,20 @@ Tenzir arranges the result columns into the fields of the pipeline, such as `eve
 
 The table shows which aggregation functions run in SentinelOne and which run in Tenzir:
 
-| TQL                   | PowerQuery                   | Notes                                                                          |
-| --------------------- | ---------------------------- | ------------------------------------------------------------------------------ |
-| `count()`             | `count()`                    |                                                                                |
-| `count(x)`            | `count(x)`                   | Counts the events where `x` has a value                                        |
-| `min(x)`              | `min(x)`                     | Yields `Infinity` without values                                               |
-| `max(x)`              | `max(x)`                     | Yields `-Infinity` without values                                              |
-| `count_if(x, v => p)` | `count(((x != null) and p))` | Skips `null` values                                                            |
-| `count_distinct(x)`   | `estimate_distinct(x)`       | PowerQuery has no exact distinct count; it runs `estimate_distinct(x)` instead |
-| `sum(x)`              | `sum(x)`                     | Yields `0.0` without values                                                    |
-| `mean(x)`             | `avg(x)`                     | Yields `0.0` without values                                                    |
-| `stddev(x)`           | Runs in Tenzir               | PowerQuery has sample `stddev`, but no population deviation or variance        |
-| `variance(x)`         | Runs in Tenzir               | PowerQuery has sample `stddev`, but no population deviation or variance        |
+| TQL                   | PowerQuery                                            | Notes                                                                                                                                                      |
+| --------------------- | ----------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `count()`             | `count()`                                             |                                                                                                                                                            |
+| `count(x)`            | `count(x)`                                            | Counts the events where `x` has a value                                                                                                                    |
+| `min(x)`              | `min(x)`                                              | Yields `Infinity` without values                                                                                                                           |
+| `max(x)`              | `max(x)`                                              | Yields `-Infinity` without values                                                                                                                          |
+| `count_if(x, v => p)` | `count(((x != null) and p))`                          | Skips `null` values                                                                                                                                        |
+| `count_distinct(x)`   | `group … by …, x \| group count(x) by …`              | Exact via two `group` stages, excluding `null`; falls back to approximate `estimate_distinct(x)` alongside `stddev`, `variance`, or another distinct field |
+| `sum(x)`              | `sum(x)`                                              | Yields `0.0` without values                                                                                                                                |
+| `mean(x)`             | `avg(x)`                                              | Yields `0.0` without values                                                                                                                                |
+| `stddev(x)`           | `stddev(x) * sqrt((count(x) - 1) / count(x))`         | Rescales PowerQuery's sample `stddev` to population form                                                                                                   |
+| `variance(x)`         | `stddev(x) * stddev(x) * ((count(x) - 1) / count(x))` | Rescales PowerQuery's sample `stddev` to population variance                                                                                               |
+| `all(x)`              | `count(x == false) == 0`                              | Skips `null` values; yields `true` without values                                                                                                          |
+| `any(x)`              | `count(x == true) > 0`                                | Skips `null` values; yields `false` without values                                                                                                         |
 
 PowerQuery computes group keys and aggregate arguments in a `let` stage before `group`. They can use arithmetic and the functions listed in [Filters and functions](sentinelone.md#filters-and-functions). A group key using `+` runs in Tenzir if Tenzir cannot tell whether it returns a number or a string. The `group` stage puts events without a group key into the group `null`.
 
@@ -105,30 +131,30 @@ Filters become `filter` stages of PowerQuery or the filter of a LOG query. They 
 
 PowerQuery can also compute arithmetic. The table shows which functions PowerQuery can call and which run in Tenzir. LOG queries do not compute values: they support only `starts_with` and `ends_with` from this table, and use `!(x = *)` and `(x = *)` for `x == null` and `x != null`, respectively.
 
-| TQL                       | PowerQuery                         | Notes                                                                                                         |
-| ------------------------- | ---------------------------------- | ------------------------------------------------------------------------------------------------------------- |
-| `x.starts_with(y)`        | `x starts_with:matchcase y`        | As a predicate with a non-empty string; in LOG queries, `x` must be a field                                   |
-| `x.ends_with(y)`          | `x ends_with:matchcase y`          | As a predicate with a non-empty string; in LOG queries, `x` must be a field                                   |
-| `x.length_chars()`        | `len(x)`                           |                                                                                                               |
-| `x.to_lower()`            | `lower(x)`                         |                                                                                                               |
-| `x.to_upper()`            | `upper(x)`                         |                                                                                                               |
-| `x.trim()`                | `trim(x)`                          |                                                                                                               |
-| `x.trim_start()`          | `ltrim(x)`                         |                                                                                                               |
-| `x.trim_end()`            | `rtrim(x)`                         |                                                                                                               |
-| `x.replace(y, z)`         | Runs in Tenzir                     | PowerQuery treats the pattern as a case-insensitive regex                                                     |
-| `x.is_empty()`            | `isempty(x)`                       | As a predicate only; yields `true` for `null`                                                                 |
-| `x.slice(begin=b, end=e)` | `substr(x, b, e - b)`              | With constant `begin` and `end` that are not negative; use `substr(x, b)` or `substr(x, 0, e)` with one bound |
-| `x.abs()`                 | `abs(x)`                           |                                                                                                               |
-| `x.ceil()`                | `ceiling(x)`                       |                                                                                                               |
-| `x.floor()`               | `floor(x)`                         |                                                                                                               |
-| `x.sqrt()`                | `sqrt(x)`                          |                                                                                                               |
-| `x.exp()`                 | `exp(x)`                           |                                                                                                               |
-| `x.log()`, `x.log(base)`  | `ln(x)`, `log(x, base)`            |                                                                                                               |
-| `x.year()`                | `number(strftime(x, "%Y", "UTC"))` |                                                                                                               |
-| `x.month()`               | `number(strftime(x, "%m", "UTC"))` |                                                                                                               |
-| `x.day()`                 | `number(strftime(x, "%d", "UTC"))` |                                                                                                               |
-| `x.hour()`                | `number(strftime(x, "%H", "UTC"))` |                                                                                                               |
-| `x.minute()`              | `number(strftime(x, "%M", "UTC"))` |                                                                                                               |
+| TQL                       | PowerQuery                         | Notes                                                                                                          |
+| ------------------------- | ---------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| `x.starts_with(y)`        | `x starts_with:matchcase y`        | As a predicate with a non-empty string; in LOG queries, `x` must be a field                                    |
+| `x.ends_with(y)`          | `x ends_with:matchcase y`          | As a predicate with a non-empty string; in LOG queries, `x` must be a field                                    |
+| `x.length_chars()`        | `len(x)`                           |                                                                                                                |
+| `x.to_lower()`            | `lower(x)`                         |                                                                                                                |
+| `x.to_upper()`            | `upper(x)`                         |                                                                                                                |
+| `x.trim()`                | `trim(x)`                          |                                                                                                                |
+| `x.trim_start()`          | `ltrim(x)`                         |                                                                                                                |
+| `x.trim_end()`            | `rtrim(x)`                         |                                                                                                                |
+| `x.replace(y, z)`         | Runs in Tenzir                     | PowerQuery treats the pattern as a case-insensitive regex                                                      |
+| `x.is_empty()`            | `isempty(x)`                       | As a predicate only; yields `true` for `null`                                                                  |
+| `x.slice(begin=b, end=e)` | `substr(x, b, e - b)`              | With constant `begin` and `end` that are not negative; uses `substr(x, b)` or `substr(x, 0, e)` with one bound |
+| `x.abs()`                 | `abs(x)`                           |                                                                                                                |
+| `x.ceil()`                | `ceiling(x)`                       |                                                                                                                |
+| `x.floor()`               | `floor(x)`                         |                                                                                                                |
+| `x.sqrt()`                | `sqrt(x)`                          |                                                                                                                |
+| `x.exp()`                 | `exp(x)`                           |                                                                                                                |
+| `x.log()`, `x.log(base)`  | `ln(x)`, `log(x, base)`            |                                                                                                                |
+| `x.year()`                | `number(strftime(x, "%Y", "UTC"))` |                                                                                                                |
+| `x.month()`               | `number(strftime(x, "%m", "UTC"))` |                                                                                                                |
+| `x.day()`                 | `number(strftime(x, "%d", "UTC"))` |                                                                                                                |
+| `x.hour()`                | `number(strftime(x, "%H", "UTC"))` |                                                                                                                |
+| `x.minute()`              | `number(strftime(x, "%M", "UTC"))` |                                                                                                                |
 
 SentinelOne has no hash functions, so `x.hash_md5()`, `x.hash_sha1()` and `x.hash_sha256()` run in Tenzir.
 

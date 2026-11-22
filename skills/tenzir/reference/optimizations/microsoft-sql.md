@@ -55,7 +55,7 @@ SQL Server computes these aggregation functions of a [`summarize`](../operators/
 | `count(x)`            | `COUNT_BIG(x)`                      |                                             |
 | `min(x)`              | `MIN(x)`                            | Also takes text                             |
 | `max(x)`              | `MAX(x)`                            | Also takes text                             |
-| `count_if(x, v => p)` | `COUNT_BIG(CASE WHEN p THEN x END)` | Skips `NULL` values                         |
+| `count_if(x, v => p)` | `COUNT_BIG(CASE WHEN p THEN x END)` | Skips `null` values                         |
 | `count_distinct(x)`   | `COUNT_BIG(DISTINCT x)`             |                                             |
 | `sum(x)`              | `SUM(x)`                            |                                             |
 | `mean(x)`             | `AVG(CAST(x AS float))`             | Casts first, since `AVG` truncates integers |
@@ -145,7 +145,7 @@ SQL Server takes over a [`where`](../operators/where.md) whose predicate consist
 
 SQL Server has no durations, so `x.since_epoch()` runs in Tenzir.
 
-The same functions compute group keys and aggregate arguments, except for the predicates that the table marks. SQL Server fails the query for `sqrt` of a negative number or `log` of zero or a negative number.
+The same functions compute group keys and aggregate arguments, except for the predicates that the table marks.
 
 T-SQL has no boolean values, so a bare `bit` column is no predicate: `where flag` runs in Tenzir, while `where flag == true` compares with `1`. Other functions, including `length_bytes`, `match_regex`, and the hashes, which SQL Server computes over UTF-16 for `nvarchar`, named arguments such as `ignore_case`, nested fields, subnets, durations, other kinds of literals, strings with a NUL byte, arithmetic with a time literal such as `ts - 2024-01-01`, and optional fields such as `x?` run in Tenzir.
 

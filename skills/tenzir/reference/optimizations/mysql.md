@@ -32,7 +32,7 @@ MySQL takes over the [longest run of operators](../optimizations.md#the-run-of-o
 * [`sort`](../operators/sort.md) by fields.
 * [`head`](../operators/head.md), and [`top`](../operators/top.md) or [`rare`](../operators/rare.md) followed by [`head`](../operators/head.md).
 
-For example, MySQL runs every step of
+For example, the pipeline
 
 ```tql
 from_mysql table="alerts", host="db.example.com", database="soc"
@@ -43,7 +43,25 @@ sort -events
 head 20
 ```
 
-and returns at most 20 groups. The operator nests derived tables where SQL’s clause order requires it, and keeps the order of a [`sort`](../operators/sort.md) across them.
+sends this query:
+
+```sql
+SELECT *
+FROM (
+  SELECT `src_ip` AS `__tenzir_column_0`, COUNT(*) AS `__tenzir_column_1`
+  FROM (
+    SELECT `src_ip`, `severity`
+    FROM `alerts`
+  ) AS `__tenzir_table`
+  WHERE (`severity` >= 3)
+  GROUP BY `src_ip`
+) AS `__tenzir_level_2`
+WHERE (`__tenzir_column_1` >= 10)
+ORDER BY `__tenzir_column_1` DESC
+LIMIT 20
+```
+
+The operator nests derived tables where SQL’s clause order requires it, and keeps the order of a [`sort`](../operators/sort.md) across them. Tenzir arranges the result columns into the fields of the pipeline, such as `src_ip` and `events`.
 
 ## Summaries
 
@@ -55,7 +73,7 @@ MySQL computes these aggregation functions of a [`summarize`](../operators/summa
 | `count(x)`            | `COUNT(x)`                      |                                                               |
 | `min(x)`              | `MIN(x)`                        |                                                               |
 | `max(x)`              | `MAX(x)`                        |                                                               |
-| `count_if(x, v => p)` | `COUNT(CASE WHEN p THEN x END)` | Skips `NULL` values                                           |
+| `count_if(x, v => p)` | `COUNT(CASE WHEN p THEN x END)` | Skips `null` values                                           |
 | `count_distinct(x)`   | `COUNT(DISTINCT x)`             |                                                               |
 | `sum(x)`              | `SUM(x)`                        | Sums integers as a `DECIMAL`, which still arrives as an `int` |
 | `mean(x)`             | `AVG(x)`                        |                                                               |

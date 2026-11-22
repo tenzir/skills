@@ -21,7 +21,7 @@ The operator sends your query and appends the operators that follow as further s
 * Queries with several tabular statements separated by `;`, since the service returns a table for each of them. Statements with `let`, `declare`, or `alias` before the final one are fine.
 * Queries that end in `;` or `|`, that contain only whitespace and comments, or that the operator can’t tokenize, such as one with an unterminated string.
 
-Words in string literals and comments don’t count, so `where Action == "render"` still receives stages. With `pushdown=false`, the operator takes over nothing, and every operator runs in Tenzir with TQL semantics. The operator then still appends the `project` of the fields that the pipeline reads, as [below](kql.md#operators-that-the-service-takes-over) describes, but no other stage.
+Words in string literals and comments don’t count, so `where Action == "render"` still receives stages. With `pushdown=false`, the operator takes over nothing, and every operator runs in Tenzir with TQL semantics. The operator then still appends the `project` of the fields that the pipeline reads, as [Operators that the service takes over](kql.md#operators-that-the-service-takes-over) describes, but no other stage.
 
 ## Operators that the service takes over
 
@@ -86,7 +86,7 @@ The service computes these aggregation functions of a [`summarize`](../operators
 | `all(x)`              | `countif(x == false) == 0` | Skips `null` values                                                        |
 | `any(x)`              | `countif(x == true) > 0`   | Skips `null` values                                                        |
 
-Without values, KQL’s `sum`, `stdevp`, and `variancep` return `0`, and `avg` returns `NaN`. Without values, `all` holds and `any` does not, as in TQL, but both skip `null` values, where TQL’s `all(true, null)` is `null`. A summary keeps a group for `null` keys.
+Without values, `all` holds and `any` does not, as in TQL, but both skip `null` values, where TQL’s `all(true, null)` is `null`. A summary keeps a group for `null` keys.
 
 Group keys and aggregate arguments can be computed values, such as values that a [`set`](../operators/set.md) before the summary assigns. The service computes them with `extend` before `summarize`:
 

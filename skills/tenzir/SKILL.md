@@ -432,7 +432,7 @@ TQL programs compose statements into complete data processing workflows that can
 
 #### [Overview](reference/optimizations.md)
 
-Tenzir runs part of a pipeline where the data lives.
+Tenzir’s federated search runs pipeline operators in the remote system where your data lives, using that system’s semantics unless you set pushdown=false to run every operator in Tenzir.
 
 ### Configuration
 

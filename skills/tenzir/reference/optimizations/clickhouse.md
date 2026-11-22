@@ -80,7 +80,7 @@ ClickHouse and Hydrolix compute these aggregation functions of a [`summarize`](.
 | `all(x)`              | `min(x)`                 | Skips `null` values                      |
 | `any(x)`              | `max(x)`                 | Skips `null` values                      |
 
-Without values, `min`, `max`, and `sum` can return the type’s default rather than `null`. The `all` and `any` functions skip `null` values and can return `null` without values. A summary keeps a group for `null` keys.
+A summary keeps a group for `null` keys.
 
 Group keys and aggregate arguments can be computed values, such as `level` in
 
@@ -124,9 +124,9 @@ ClickHouse takes over a [`where`](../operators/where.md) whose predicate consist
 | `x.replace(y, z)`         | `replaceAll(x, y, z)`                                               |                                                               |
 | `x.is_empty()`            | `toBool(empty(x))`                                                  |                                                               |
 | `x.slice(begin=b, end=e)` | `substringUTF8(x, b + 1, greatest(e - b, 0))`                       | With constant `begin` and `end` that are not negative         |
-| `x.hash_md5()`            | `lower(hex(MD5(x)))`                                                | Rejects arguments that are no strings                         |
-| `x.hash_sha1()`           | `lower(hex(SHA1(x)))`                                               | Rejects arguments that are no strings                         |
-| `x.hash_sha256()`         | `lower(hex(SHA256(x)))`                                             | Rejects arguments that are no strings                         |
+| `x.hash_md5()`            | `lower(hex(MD5(x)))`                                                | Rejects non-string arguments                                  |
+| `x.hash_sha1()`           | `lower(hex(SHA1(x)))`                                               | Rejects non-string arguments                                  |
+| `x.hash_sha256()`         | `lower(hex(SHA256(x)))`                                             | Rejects non-string arguments                                  |
 | `x.abs()`                 | `abs(x)`                                                            |                                                               |
 | `x.ceil()`                | `toInt64(ceil(x))`                                                  |                                                               |
 | `x.floor()`               | `toInt64(floor(x))`                                                 |                                                               |
