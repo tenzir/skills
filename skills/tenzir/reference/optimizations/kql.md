@@ -7,9 +7,9 @@ section: "Docs"
 
 # KQL
 
-> The KQL sources frommicrosoftdefender and fromazureloganalytics hand the service the operators that follow them by appending stages in the Kusto Query Language (KQL) to your query, so that the service returns only what the pipeline keeps. The service takes over those operators, which leave the pipeline and run in the service with KQL’s semantics, and the rest of the pipeline runs in Tenzir. This page describes which operators the service takes over, which functions it computes, and how its results can differ from Tenzir’s. Our optimizations overview compares the targets and describes the rules that all sources share.
+> This page documents which operators and functions frommicrosoftdefender and fromazureloganalytics transpile to Kusto Query Language (KQL) stages, and how KQL’s semantics differ from TQL. See our explanation of transpilation for shared planning rules and our optimizations overview for cross-target matrices.
 
-The KQL sources [`from_microsoft_defender`](../operators/from_microsoft_defender.md) and [`from_azure_log_analytics`](../operators/from_azure_log_analytics.md) hand the service the operators that follow them by appending stages in the Kusto Query Language (KQL) to your query, so that the service returns only what the pipeline keeps. The service takes over those operators, which leave the pipeline and run in the service with KQL’s semantics, and the rest of the pipeline runs in Tenzir. This page describes which operators the service takes over, which functions it computes, and how its results can differ from Tenzir’s. Our [optimizations overview](../optimizations.md) compares the targets and describes the rules that all sources share.
+This page documents which operators and functions [`from_microsoft_defender`](../operators/from_microsoft_defender.md) and [`from_azure_log_analytics`](../operators/from_azure_log_analytics.md) transpile to Kusto Query Language (KQL) stages, and how KQL’s semantics differ from TQL. See our explanation of [transpilation](../../explanations/transpilation.md) for shared planning rules and our [optimizations overview](../optimizations.md) for cross-target matrices.
 
 ## When it applies
 
@@ -25,12 +25,12 @@ Words in string literals and comments don’t count, so `where Action == "render
 
 ## Operators that the service takes over
 
-The service takes over the [longest run of operators](../optimizations.md#the-run-of-operators-after-the-source) directly after the source that KQL can spell:
+The service takes over the [longest run of operators](../../explanations/transpilation.md#the-run-of-operators-after-the-source) directly after the source that KQL can spell:
 
 * [`where`](../operators/where.md), as the [filters and functions](kql.md#filters-and-functions) section describes.
 * [`select`](../operators/select.md) of top-level fields, including renames, which becomes `project`.
 * [`drop`](../operators/drop.md) of top-level fields, which becomes `project-away`.
-* [`summarize`](../operators/summarize.md) with group keys and the functions that the [summaries](kql.md#summaries) section lists, which becomes `summarize … by`. This includes [`top`](../operators/top.md) and [`rare`](../operators/rare.md). The summary may follow [`select`](../operators/select.md), [`drop`](../operators/drop.md), and assignments, as [Aggregations in the source](../optimizations.md#aggregations-in-the-source) describes.
+* [`summarize`](../operators/summarize.md) with group keys and the functions that the [summaries](kql.md#summaries) section lists, which becomes `summarize … by`. This includes [`top`](../operators/top.md) and [`rare`](../operators/rare.md). The summary may follow [`select`](../operators/select.md), [`drop`](../operators/drop.md), and assignments, as [Aggregations in the source](../../explanations/transpilation.md#summaries-and-computed-expressions) describes.
 * [`sort`](../operators/sort.md) by fields, which becomes `sort by` with an explicit direction.
 * [`head`](../operators/head.md), which becomes `take`.
 
@@ -71,20 +71,22 @@ Tenzir leaves out a projection that would exceed the 16 KiB.
 
 The service computes these aggregation functions of a [`summarize`](../operators/summarize.md):
 
-| TQL                   | KQL                        | Notes                                                                      |
-| --------------------- | -------------------------- | -------------------------------------------------------------------------- |
-| `count()`             | `count()`                  |                                                                            |
-| `count(x)`            | `countif(isnotnull(x))`    | Counts empty strings                                                       |
-| `min(x)`              | `min(x)`                   |                                                                            |
-| `max(x)`              | `max(x)`                   |                                                                            |
-| `count_if(x, v => p)` | `countif(p)`               | Skips `null` values                                                        |
-| `count_distinct(x)`   | `count_distinct(x)`        | Exact; counts empty strings and fails beyond 100 million values in a group |
-| `sum(x)`              | `sum(x)`                   | Yields `0` without values                                                  |
-| `mean(x)`             | `avg(x)`                   | Yields `NaN` without values                                                |
-| `stddev(x)`           | `stdevp(x)`                | Yields `0` without values                                                  |
-| `variance(x)`         | `variancep(x)`             | Yields `0` without values                                                  |
-| `all(x)`              | `countif(x == false) == 0` | Skips `null` values                                                        |
-| `any(x)`              | `countif(x == true) > 0`   | Skips `null` values                                                        |
+🟢 runs in the service, 🟡 runs in the service conditionally or approximately, and ⚪ runs in Tenzir.
+
+| TQL                   | Status | KQL                        | Notes                                                                      |
+| --------------------- | ------ | -------------------------- | -------------------------------------------------------------------------- |
+| `count()`             | 🟢     | `count()`                  |                                                                            |
+| `count(x)`            | 🟢     | `countif(isnotnull(x))`    | Counts empty strings                                                       |
+| `min(x)`              | 🟢     | `min(x)`                   |                                                                            |
+| `max(x)`              | 🟢     | `max(x)`                   |                                                                            |
+| `count_if(x, v => p)` | 🟢     | `countif(p)`               | Skips `null` values                                                        |
+| `count_distinct(x)`   | 🟢     | `count_distinct(x)`        | Exact; counts empty strings and fails beyond 100 million values in a group |
+| `sum(x)`              | 🟢     | `sum(x)`                   | Yields `0` without values                                                  |
+| `mean(x)`             | 🟢     | `avg(x)`                   | Yields `NaN` without values                                                |
+| `stddev(x)`           | 🟢     | `stdevp(x)`                | Yields `0` without values                                                  |
+| `variance(x)`         | 🟢     | `variancep(x)`             | Yields `0` without values                                                  |
+| `all(x)`              | 🟢     | `countif(x == false) == 0` | Skips `null` values                                                        |
+| `any(x)`              | 🟢     | `countif(x == true) > 0`   | Skips `null` values                                                        |
 
 Without values, `all` holds and `any` does not, as in TQL, but both skip `null` values, where TQL’s `all(true, null)` is `null`. A summary keeps a group for `null` keys.
 
@@ -96,15 +98,15 @@ kind = ActionType.to_upper()
 summarize kind, events=count()
 ```
 
-An assignment that the summary reads may call a function that KQL spells, and the service computes it with KQL’s semantics. An assignment that the summary doesn’t read must be infallible, as the rules for [computed keys and arguments](../optimizations.md#computed-keys-and-arguments) explain.
+An assignment that the summary reads may call a function that KQL spells, and the service computes it with KQL’s semantics. An assignment that the summary doesn’t read must be infallible, as the rules for [computed keys and arguments](../../explanations/transpilation.md#summaries-and-computed-expressions) explain.
 
 A time bucket, such as `hour = floor(TimeGenerated, 1h)` before a `summarize hour, events=count()`, runs in the service for these widths:
 
-| Width                                  | KQL                                                                                                               |
-| -------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
-| Whole seconds, such as `1h`            | Runs as `bin(x, w)`. Widths that divide the time from 0001-01-01 to the epoch, such as those that divide two days |
-| Fractions of a second, such as `250ms` | Runs as `bin(x, w)`. Whole multiples of 100 nanoseconds that divide the time from 0001-01-01 to the epoch         |
-| Multiples of a week or a month         | Runs in Tenzir, since TQL aligns them to the calendar                                                             |
+| Width                                  | Status | KQL                                                                                                               |
+| -------------------------------------- | ------ | ----------------------------------------------------------------------------------------------------------------- |
+| Whole seconds, such as `1h`            | 🟡     | Runs as `bin(x, w)`. Widths that divide the time from 0001-01-01 to the epoch, such as those that divide two days |
+| Fractions of a second, such as `250ms` | 🟡     | Runs as `bin(x, w)`. Whole multiples of 100 nanoseconds that divide the time from 0001-01-01 to the epoch         |
+| Multiples of a week or a month         | ⚪      | Runs in Tenzir, since TQL aligns them to the calendar                                                             |
 
 KQL’s `bin` counts from 0001-01-01 rather than from the epoch, which agrees with TQL only for widths that divide the time between the two, so other widths run in Tenzir. For example, `1h` becomes `bin(TimeGenerated, timespan(36000000000tick))`.
 
@@ -120,38 +122,39 @@ Filters become `where` stages. They consist of top-level fields, literals, compa
 
 Literals are strings, numbers, booleans, times as `datetime(…)` and durations as `timespan(…)`, both in whole multiples of 100 nanoseconds, and IP addresses as their canonical text. Filters, group keys, and aggregate arguments can also call these functions:
 
-| TQL                       | KQL                                                                 | Notes                                                 |
-| ------------------------- | ------------------------------------------------------------------- | ----------------------------------------------------- |
-| `x.starts_with(y)`        | `x startswith_cs y`                                                 |                                                       |
-| `x.ends_with(y)`          | `x endswith_cs y`                                                   |                                                       |
-| `x.match_regex(y)`        | `x matches regex y`                                                 |                                                       |
-| `x.length_chars()`        | `strlen(x)`                                                         |                                                       |
-| `x.to_lower()`            | `tolower(x)`                                                        |                                                       |
-| `x.to_upper()`            | `toupper(x)`                                                        |                                                       |
-| `x.capitalize()`          | `strcat(toupper(substring(x, 0, 1)), tolower(substring(x, 1)))`     |                                                       |
-| `x.trim()`                | `trim(@"\s+", x)`                                                   |                                                       |
-| `x.trim_start()`          | `trim_start(@"\s+", x)`                                             |                                                       |
-| `x.trim_end()`            | `trim_end(@"\s+", x)`                                               |                                                       |
-| `x.replace(y, z)`         | `replace_string(x, y, z)`                                           |                                                       |
-| `x.is_empty()`            | `isempty(x)`                                                        |                                                       |
-| `x.slice(begin=b, end=e)` | `substring(x, b, e - b)`                                            | With constant `begin` and `end` that are not negative |
-| `x.hash_md5()`            | `hash_md5(x)`                                                       |                                                       |
-| `x.hash_sha1()`           | `hash_sha1(x)`                                                      |                                                       |
-| `x.hash_sha256()`         | `hash_sha256(x)`                                                    |                                                       |
-| `x.abs()`                 | `abs(x)`                                                            |                                                       |
-| `x.ceil()`                | `tolong(ceiling(x))`                                                |                                                       |
-| `x.floor()`               | `tolong(floor(x, 1))`                                               |                                                       |
-| `x.round()`               | `tolong(round(x))`                                                  |                                                       |
-| `x.sqrt()`                | `sqrt(x)`                                                           |                                                       |
-| `x.exp()`                 | `exp(x)`                                                            |                                                       |
-| `x.log()`, `x.log(base)`  | `log(x)`, `(log(x) / log(base))`                                    |                                                       |
-| `x.year()`                | `getyear(x)`                                                        |                                                       |
-| `x.month()`               | `getmonth(x)`                                                       |                                                       |
-| `x.day()`                 | `dayofmonth(x)`                                                     |                                                       |
-| `x.hour()`                | `datetime_part("hour", x)`                                          |                                                       |
-| `x.minute()`              | `datetime_part("minute", x)`                                        |                                                       |
-| `x.second()`              | `datetime_part("second", x) + datetime_part("nanosecond", x) / 1e9` |                                                       |
-| `x.since_epoch()`         | `x - datetime(1970-01-01)`                                          |                                                       |
+| Kind    | TQL                       | Status | KQL                                                                 | Notes                                                 |
+| ------- | ------------------------- | ------ | ------------------------------------------------------------------- | ----------------------------------------------------- |
+| Strings | `x.starts_with(y)`        | 🟢     | `x startswith_cs y`                                                 |                                                       |
+| Strings | `x.ends_with(y)`          | 🟢     | `x endswith_cs y`                                                   |                                                       |
+| Strings | `x.match_regex(y)`        | 🟢     | `x matches regex y`                                                 |                                                       |
+| Strings | `x.length_bytes()`        | 🟢     | `string_size(x)`                                                    |                                                       |
+| Strings | `x.length_chars()`        | 🟢     | `strlen(x)`                                                         |                                                       |
+| Strings | `x.to_lower()`            | 🟢     | `tolower(x)`                                                        |                                                       |
+| Strings | `x.to_upper()`            | 🟢     | `toupper(x)`                                                        |                                                       |
+| Strings | `x.capitalize()`          | 🟢     | `strcat(toupper(substring(x, 0, 1)), tolower(substring(x, 1)))`     |                                                       |
+| Strings | `x.trim()`                | 🟢     | `trim(@"\s+", x)`                                                   |                                                       |
+| Strings | `x.trim_start()`          | 🟢     | `trim_start(@"\s+", x)`                                             |                                                       |
+| Strings | `x.trim_end()`            | 🟢     | `trim_end(@"\s+", x)`                                               |                                                       |
+| Strings | `x.replace(y, z)`         | 🟢     | `replace_string(x, y, z)`                                           |                                                       |
+| Strings | `x.is_empty()`            | 🟢     | `isempty(x)`                                                        |                                                       |
+| Strings | `x.slice(begin=b, end=e)` | 🟡     | `substring(x, b, e - b)`                                            | With constant `begin` and `end` that are not negative |
+| Hashes  | `x.hash_md5()`            | 🟢     | `hash_md5(x)`                                                       |                                                       |
+| Hashes  | `x.hash_sha1()`           | 🟢     | `hash_sha1(x)`                                                      |                                                       |
+| Hashes  | `x.hash_sha256()`         | 🟢     | `hash_sha256(x)`                                                    |                                                       |
+| Numbers | `x.abs()`                 | 🟢     | `abs(x)`                                                            |                                                       |
+| Numbers | `x.ceil()`                | 🟢     | `tolong(ceiling(x))`                                                |                                                       |
+| Numbers | `x.floor()`               | 🟢     | `tolong(floor(x, 1))`                                               |                                                       |
+| Numbers | `x.round()`               | 🟢     | `tolong(round(x))`                                                  |                                                       |
+| Numbers | `x.sqrt()`                | 🟢     | `sqrt(x)`                                                           |                                                       |
+| Numbers | `x.exp()`                 | 🟢     | `exp(x)`                                                            |                                                       |
+| Numbers | `x.log()`, `x.log(base)`  | 🟢     | `log(x)`, `(log(x) / log(base))`                                    |                                                       |
+| Times   | `x.year()`                | 🟢     | `getyear(x)`                                                        |                                                       |
+| Times   | `x.month()`               | 🟢     | `getmonth(x)`                                                       |                                                       |
+| Times   | `x.day()`                 | 🟢     | `dayofmonth(x)`                                                     |                                                       |
+| Times   | `x.hour()`                | 🟢     | `datetime_part("hour", x)`                                          |                                                       |
+| Times   | `x.minute()`              | 🟢     | `datetime_part("minute", x)`                                        |                                                       |
+| Times   | `x.second()`              | 🟢     | `datetime_part("second", x) + datetime_part("nanosecond", x) / 1e9` |                                                       |
+| Times   | `x.since_epoch()`         | 🟢     | `x - datetime(1970-01-01)`                                          |                                                       |
 
 Ordering comparisons with a string, nested fields such as `Process.Name`, field names with `*`, the literal `null` outside a comparison, non-finite numbers, named arguments such as `ignore_case`, and optional fields such as `x?` run in Tenzir.
 
@@ -165,7 +168,7 @@ The operators that the service takes over run as KQL runs them, which can differ
 * Integer division truncates, and arithmetic follows KQL’s types.
 * KQL’s `sort` puts `null` first in ascending and last in descending order, and compares strings by their characters.
 * A name that a `let` statement of your query binds shadows a column of the same name in an appended stage.
-* A query that the service rejects fails the pipeline with the error of the service, as the overview’s [diagnostics](../optimizations.md#diagnostics) describe.
+* A query that the service rejects fails the pipeline with the error of the service, as our explanation of [plan-time diagnostics](../../explanations/transpilation.md#plan-time-decisions-and-diagnostics) describes.
 
 ### Result cap
 
@@ -176,7 +179,3 @@ Log Analytics returns at most 500,000 rows and about 100 MiB of data, and report
 ### Time window
 
 The operator never narrows the `start` and `end` window based on an operator. A time field in your query’s output, such as `Timestamp` or `TimeGenerated`, may stem from an aggregation, a rename, or a computation, so a filter on it doesn’t reliably refer to the time that the window selects. Such filters still run in the service. Use `start` and `end`, or a time filter in your query, to bound the request.
-
-## Verify an optimization
-
-To see which operators the service takes over in a pipeline, print the optimized pipeline, as the overview’s section on [verifying an optimization](../optimizations.md#verify-an-optimization) shows.

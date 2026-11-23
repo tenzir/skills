@@ -255,10 +255,11 @@ Printers appear as the `write_*` operators, and as `print_*` [functions](glossar
 
 Moving a requirement of a later [operator](glossary.md#operator) toward the [source](glossary.md#source) of a [pipeline](glossary.md#pipeline), so that upstream operators can act on it early.
 
-Before a pipeline runs, Tenzir carries filter predicates, field projections, row limits, summaries, and ordering requirements upstream. Local readers such as `read_parquet` act on physical hints for filters, projections, limits, and ordering while downstream operators stay in the pipeline, and a [parser](glossary.md#parser) that learns order does not matter can split its work across several jobs; these hints keep TQL results unchanged. Remote sources such as `from_clickhouse` instead absorb eligible downstream operators into the query they send to the target system. Absorbed operators leave the pipeline and run with the target’s semantics, which can differ from TQL, unless you set `pushdown=false`.
+Before a pipeline runs, Tenzir carries filter predicates, field projections, row limits, summaries, and ordering requirements upstream. Local readers such as `read_parquet` act on physical hints while downstream operators stay in the pipeline, keeping exact TQL results. Remote sources such as `from_clickhouse` instead compile eligible downstream operators into the target system’s native query language; those transpiled operators leave the pipeline and run with the target’s native semantics unless you set `pushdown=false`.
 
-* Learn more about [pipeline optimization](pipeline.md#optimization)
-* See what each source pushes down in our [optimizations reference](../reference/optimizations.md)
+* Understand how remote sources compile TQL in our explanation of [transpilation](transpilation.md)
+* Learn how the optimizer rewrites predicates in [pipeline optimization](pipeline.md#optimization)
+* See what each target computes in our [optimizations reference](../reference/optimizations.md)
 
 ## Role
 

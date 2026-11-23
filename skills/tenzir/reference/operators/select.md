@@ -29,7 +29,7 @@ An assignment of the form `<field>=<expr>`. Use brackets to compute a path segme
 
 ## Optimizations
 
-A remote source, such as [`from_clickhouse`](from_clickhouse.md) or [`from_splunk`](from_splunk.md), may take over a `select` that follows it, so that its target returns only the selected fields, and runs it with the target’s semantics. For example, a database fails the query for a column that the table lacks, where Tenzir would warn and fill in `null`. Our [optimizations reference](../optimizations.md#results-follow-the-targets-semantics) lists the sources and how their targets differ. With `pushdown=false` on the source, the selection runs in Tenzir.
+A remote source, such as [`from_clickhouse`](from_clickhouse.md) or [`from_splunk`](from_splunk.md), may take over a `select` that follows it, so that its target returns only the selected fields, and runs it with the target’s semantics. For example, a database fails the query for a column that the table lacks, where Tenzir would warn and fill in `null`. Our [transpilation explanation](../../explanations/transpilation.md#native-semantics-vs-tql-semantics) lists the sources and how their targets differ. With `pushdown=false` on the source, the selection runs in Tenzir.
 
 ## Examples
 

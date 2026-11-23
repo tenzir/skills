@@ -7,9 +7,9 @@ section: "Docs"
 
 # DuckDB
 
-> When fromduckdb reads a table, DuckDB takes over the operators that follow it, so that it returns only what the pipeline keeps instead of the whole table. Those operators leave the pipeline and run in DuckDB, with DuckDB’s semantics, and the rest of the pipeline runs in Tenzir. This page describes which operators DuckDB takes over, which functions it computes, and how its results can differ from Tenzir’s. Our optimizations overview compares the targets and describes the rules that all sources share.
+> This page documents which operators and functions fromduckdb transpiles to DuckDB SQL, and how DuckDB’s semantics differ from TQL. See our explanation of transpilation for shared planning rules and our optimizations overview for cross-target matrices.
 
-When [`from_duckdb`](../operators/from_duckdb.md) reads a table, DuckDB takes over the operators that follow it, so that it returns only what the pipeline keeps instead of the whole table. Those operators leave the pipeline and run in DuckDB, with DuckDB’s semantics, and the rest of the pipeline runs in Tenzir. This page describes which operators DuckDB takes over, which functions it computes, and how its results can differ from Tenzir’s. Our [optimizations overview](../optimizations.md) compares the targets and describes the rules that all sources share.
+This page documents which operators and functions [`from_duckdb`](../operators/from_duckdb.md) transpiles to DuckDB SQL, and how DuckDB’s semantics differ from TQL. See our explanation of [transpilation](../../explanations/transpilation.md) for shared planning rules and our [optimizations overview](../optimizations.md) for cross-target matrices.
 
 ## When it applies
 
@@ -23,12 +23,12 @@ With `pushdown=false`, every operator runs in Tenzir with TQL semantics. The ope
 
 ## Operators that DuckDB takes over
 
-DuckDB takes over the [longest run of operators](../optimizations.md#the-run-of-operators-after-the-source) directly after the source that it can spell:
+DuckDB takes over the [longest run of operators](../../explanations/transpilation.md#the-run-of-operators-after-the-source) directly after the source that it can spell:
 
 * [`where`](../operators/where.md), as the [filters and functions](duckdb.md#filters-and-functions) section describes.
 * [`select`](../operators/select.md) of fields, including renames and fields of `STRUCT` columns, such as `select ip=src_ip, host=meta.host`.
 * [`drop`](../operators/drop.md) of top-level fields.
-* [`summarize`](../operators/summarize.md) with group keys and the functions that the [summaries](duckdb.md#summaries) section lists. The summary may follow [`select`](../operators/select.md), [`drop`](../operators/drop.md), and assignments, as [Aggregations in the source](../optimizations.md#aggregations-in-the-source) describes.
+* [`summarize`](../operators/summarize.md) with group keys and the functions that the [summaries](duckdb.md#summaries) section lists. The summary may follow [`select`](../operators/select.md), [`drop`](../operators/drop.md), and assignments, as [Aggregations in the source](../../explanations/transpilation.md#summaries-and-computed-expressions) describes.
 * [`sort`](../operators/sort.md) by fields.
 * [`head`](../operators/head.md), and [`top`](../operators/top.md) or [`rare`](../operators/rare.md) followed by [`head`](../operators/head.md).
 
@@ -67,20 +67,22 @@ The operator nests derived tables where SQL’s clause order requires it, and ke
 
 DuckDB computes these aggregation functions of a [`summarize`](../operators/summarize.md):
 
-| TQL                   | DuckDB                          | Notes                                                           |
-| --------------------- | ------------------------------- | --------------------------------------------------------------- |
-| `count()`             | `COUNT(*)`                      |                                                                 |
-| `count(x)`            | `COUNT(x)`                      |                                                                 |
-| `min(x)`              | `MIN(x)`                        |                                                                 |
-| `max(x)`              | `MAX(x)`                        |                                                                 |
-| `count_if(x, v => p)` | `COUNT(CASE WHEN p THEN x END)` | Skips `null` values                                             |
-| `count_distinct(x)`   | `COUNT(DISTINCT x)`             |                                                                 |
-| `sum(x)`              | `SUM(x)`                        | Widens integers to a `HUGEINT`, which still arrives as an `int` |
-| `mean(x)`             | `AVG(x)`                        |                                                                 |
-| `stddev(x)`           | `STDDEV_POP(x)`                 |                                                                 |
-| `variance(x)`         | `VAR_POP(x)`                    |                                                                 |
-| `all(x)`              | `bool_and(x)`                   | Skips `null` values; yields `null` without values               |
-| `any(x)`              | `bool_or(x)`                    | Skips `null` values; yields `null` without values               |
+🟢 runs in DuckDB, 🟡 runs in DuckDB conditionally or approximately, and ⚪ runs in Tenzir.
+
+| TQL                   | Status | DuckDB                          | Notes                                                           |
+| --------------------- | ------ | ------------------------------- | --------------------------------------------------------------- |
+| `count()`             | 🟢     | `COUNT(*)`                      |                                                                 |
+| `count(x)`            | 🟢     | `COUNT(x)`                      |                                                                 |
+| `min(x)`              | 🟢     | `MIN(x)`                        |                                                                 |
+| `max(x)`              | 🟢     | `MAX(x)`                        |                                                                 |
+| `count_if(x, v => p)` | 🟢     | `COUNT(CASE WHEN p THEN x END)` | Skips `null` values                                             |
+| `count_distinct(x)`   | 🟢     | `COUNT(DISTINCT x)`             |                                                                 |
+| `sum(x)`              | 🟢     | `SUM(x)`                        | Widens integers to a `HUGEINT`, which still arrives as an `int` |
+| `mean(x)`             | 🟢     | `AVG(x)`                        |                                                                 |
+| `stddev(x)`           | 🟢     | `STDDEV_POP(x)`                 |                                                                 |
+| `variance(x)`         | 🟢     | `VAR_POP(x)`                    |                                                                 |
+| `all(x)`              | 🟢     | `bool_and(x)`                   | Skips `null` values; yields `null` without values               |
+| `any(x)`              | 🟢     | `bool_or(x)`                    | Skips `null` values; yields `null` without values               |
 
 Group keys and aggregate arguments can be computed values, such as `level` in
 
@@ -89,15 +91,15 @@ level = severity * 2
 summarize src_ip, worst=max(level)
 ```
 
-DuckDB computes an assignment that the summary reads with its own semantics, including calls of the functions that the [filters and functions](duckdb.md#filters-and-functions) section lists. An assignment that the summary doesn’t read must be infallible, as the rules for [computed keys and arguments](../optimizations.md#computed-keys-and-arguments) explain.
+DuckDB computes an assignment that the summary reads with its own semantics, including calls of the functions that the [filters and functions](duckdb.md#filters-and-functions) section lists. An assignment that the summary doesn’t read must be infallible, as the rules for [computed keys and arguments](../../explanations/transpilation.md#summaries-and-computed-expressions) explain.
 
 A time bucket, such as `hour = floor(ts, 1h)` before a `summarize hour, events=count()`, runs in DuckDB for these widths:
 
-| Width                                  | DuckDB                                                  |
-| -------------------------------------- | ------------------------------------------------------- |
-| Whole seconds, such as `1h`            | Runs as flooring division of `epoch_ns(x)` by the width |
-| Fractions of a second, such as `250ms` | Runs as flooring division of `epoch_ns(x)` by the width |
-| Multiples of a week or a month         | Runs in Tenzir, since TQL aligns them to the calendar   |
+| Width                                  | Status | DuckDB                                                  |
+| -------------------------------------- | ------ | ------------------------------------------------------- |
+| Whole seconds, such as `1h`            | 🟢     | Runs as flooring division of `epoch_ns(x)` by the width |
+| Fractions of a second, such as `250ms` | 🟢     | Runs as flooring division of `epoch_ns(x)` by the width |
+| Multiples of a week or a month         | ⚪      | Runs in Tenzir, since TQL aligns them to the calendar   |
 
 ## Filters and functions
 
@@ -108,38 +110,39 @@ DuckDB takes over a [`where`](../operators/where.md) whose predicate consists of
 * Comparisons, `in` with a list of literals, arithmetic with `+`, `-`, `*`, and `/`, and the boolean operators `and`, `or`, and `not`.
 * The functions in the following table.
 
-| TQL                       | DuckDB                                       | Notes                                                 |
-| ------------------------- | -------------------------------------------- | ----------------------------------------------------- |
-| `x.starts_with(y)`        | `starts_with(x, y)`                          |                                                       |
-| `x.ends_with(y)`          | `ends_with(x, y)`                            |                                                       |
-| `x.match_regex(y)`        | `regexp_matches(x, y)`                       |                                                       |
-| `x.length_bytes()`        | `strlen(x)`                                  |                                                       |
-| `x.length_chars()`        | `length(x)`                                  |                                                       |
-| `x.to_lower()`            | `lower(x)`                                   |                                                       |
-| `x.to_upper()`            | `upper(x)`                                   |                                                       |
-| `x.capitalize()`          | `upper(left(x, 1)) \|\| lower(substr(x, 2))` |                                                       |
-| `x.trim()`                | `trim(x)`                                    |                                                       |
-| `x.trim_start()`          | `ltrim(x)`                                   |                                                       |
-| `x.trim_end()`            | `rtrim(x)`                                   |                                                       |
-| `x.replace(y, z)`         | `replace(x, y, z)`                           |                                                       |
-| `x.is_empty()`            | `length(x) = 0`                              |                                                       |
-| `x.slice(begin=b, end=e)` | `substr(x, b + 1, greatest(e - b, 0))`       | With constant `begin` and `end` that are not negative |
-| `x.hash_md5()`            | `md5(x)`                                     |                                                       |
-| `x.hash_sha1()`           | `sha1(x)`                                    |                                                       |
-| `x.hash_sha256()`         | `sha256(x)`                                  |                                                       |
-| `x.abs()`                 | `abs(x)`                                     |                                                       |
-| `x.ceil()`                | `CAST(ceil(x) AS BIGINT)`                    |                                                       |
-| `x.floor()`               | `CAST(floor(x) AS BIGINT)`                   |                                                       |
-| `x.round()`               | `CAST(round(x) AS BIGINT)`                   |                                                       |
-| `x.sqrt()`                | `sqrt(x)`                                    | Fails the query for negative inputs                   |
-| `x.exp()`                 | `exp(x)`                                     |                                                       |
-| `x.log()`, `x.log(base)`  | `ln(x)`, `(ln(x) / ln(base))`                | Fails the query for zero or negative inputs           |
-| `x.year()`                | `year(x)`                                    |                                                       |
-| `x.month()`               | `month(x)`                                   |                                                       |
-| `x.day()`                 | `day(x)`                                     |                                                       |
-| `x.hour()`                | `hour(x)`                                    |                                                       |
-| `x.minute()`              | `minute(x)`                                  |                                                       |
-| `x.second()`              | `microsecond(x) / 1e6`                       |                                                       |
+| Kind    | TQL                       | Status | DuckDB                                       | Notes                                                 |
+| ------- | ------------------------- | ------ | -------------------------------------------- | ----------------------------------------------------- |
+| Strings | `x.starts_with(y)`        | 🟢     | `starts_with(x, y)`                          |                                                       |
+| Strings | `x.ends_with(y)`          | 🟢     | `ends_with(x, y)`                            |                                                       |
+| Strings | `x.match_regex(y)`        | 🟢     | `regexp_matches(x, y)`                       |                                                       |
+| Strings | `x.length_bytes()`        | 🟢     | `strlen(x)`                                  |                                                       |
+| Strings | `x.length_chars()`        | 🟢     | `length(x)`                                  |                                                       |
+| Strings | `x.to_lower()`            | 🟢     | `lower(x)`                                   |                                                       |
+| Strings | `x.to_upper()`            | 🟢     | `upper(x)`                                   |                                                       |
+| Strings | `x.capitalize()`          | 🟢     | `upper(left(x, 1)) \|\| lower(substr(x, 2))` |                                                       |
+| Strings | `x.trim()`                | 🟢     | `trim(x)`                                    |                                                       |
+| Strings | `x.trim_start()`          | 🟢     | `ltrim(x)`                                   |                                                       |
+| Strings | `x.trim_end()`            | 🟢     | `rtrim(x)`                                   |                                                       |
+| Strings | `x.replace(y, z)`         | 🟢     | `replace(x, y, z)`                           |                                                       |
+| Strings | `x.is_empty()`            | 🟢     | `length(x) = 0`                              |                                                       |
+| Strings | `x.slice(begin=b, end=e)` | 🟡     | `substr(x, b + 1, greatest(e - b, 0))`       | With constant `begin` and `end` that are not negative |
+| Hashes  | `x.hash_md5()`            | 🟢     | `md5(x)`                                     |                                                       |
+| Hashes  | `x.hash_sha1()`           | 🟢     | `sha1(x)`                                    |                                                       |
+| Hashes  | `x.hash_sha256()`         | 🟢     | `sha256(x)`                                  |                                                       |
+| Numbers | `x.abs()`                 | 🟢     | `abs(x)`                                     |                                                       |
+| Numbers | `x.ceil()`                | 🟢     | `CAST(ceil(x) AS BIGINT)`                    |                                                       |
+| Numbers | `x.floor()`               | 🟢     | `CAST(floor(x) AS BIGINT)`                   |                                                       |
+| Numbers | `x.round()`               | 🟢     | `CAST(round(x) AS BIGINT)`                   |                                                       |
+| Numbers | `x.sqrt()`                | 🟢     | `sqrt(x)`                                    | Fails the query for negative inputs                   |
+| Numbers | `x.exp()`                 | 🟢     | `exp(x)`                                     |                                                       |
+| Numbers | `x.log()`, `x.log(base)`  | 🟢     | `ln(x)`, `(ln(x) / ln(base))`                | Fails the query for zero or negative inputs           |
+| Times   | `x.year()`                | 🟢     | `year(x)`                                    |                                                       |
+| Times   | `x.month()`               | 🟢     | `month(x)`                                   |                                                       |
+| Times   | `x.day()`                 | 🟢     | `day(x)`                                     |                                                       |
+| Times   | `x.hour()`                | 🟢     | `hour(x)`                                    |                                                       |
+| Times   | `x.minute()`              | 🟢     | `minute(x)`                                  |                                                       |
+| Times   | `x.second()`              | 🟢     | `microsecond(x) / 1e6`                       |                                                       |
+| Times   | `x.since_epoch()`         | 🟢     | `to_microseconds(epoch_us(x))`               | Microsecond precision (`INTERVAL`)                    |
 
 The same functions compute group keys and aggregate arguments. Other functions, named arguments such as `ignore_case`, subnets, other kinds of literals, strings with NUL bytes, arithmetic with a time literal such as `ts - 2024-01-01`, and optional fields such as `x?` run in Tenzir.
 
@@ -154,10 +157,6 @@ The operators that DuckDB takes over run as DuckDB runs them, which can differ f
 * A time becomes a string in UTC, such as `'2024-01-01 00:00:00.000000000+00'`, which DuckDB casts to the type of the column. A comparison therefore never depends on the session time zone, but a `DATE` or `TIMESTAMP_S` column compares with the time truncated to its precision.
 * An IP address becomes its text, such as `'10.0.0.1'`, which compares as text against a `VARCHAR` column.
 * A [`select`](../operators/select.md) of a column that the table lacks fails the query, where Tenzir would warn and fill in `null`.
-* A query that DuckDB rejects fails the pipeline with the error of DuckDB, as the overview’s [diagnostics](../optimizations.md#diagnostics) describe.
+* A query that DuckDB rejects fails the pipeline with the error of DuckDB, as our explanation of [plan-time diagnostics](../../explanations/transpilation.md#plan-time-decisions-and-diagnostics) describes.
 
 When DuckDB computes a summary or a [`select`](../operators/select.md), Tenzir does not see the individual rows, so it does not warn about values that it reads as `null`, such as a field of a `NULL` struct.
-
-## Verify an optimization
-
-To see which operators DuckDB takes over in a pipeline, print the optimized pipeline, as the overview’s section on [verifying an optimization](../optimizations.md#verify-an-optimization) shows.

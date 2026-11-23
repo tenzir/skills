@@ -250,7 +250,13 @@ Deliver event streams to the systems that need them.
 
 #### [Overview](guides/search.md)
 
-Query stored events and continue processing the results.
+Push selective queries to data stores, search across heterogeneous backends in one pipeline, and scan Parquet archives in place.
+
+##### [Push queries to data stores](guides/search/push-queries-to-data-stores.md)
+
+##### [Search across data stores](guides/search/search-across-data-stores.md)
+
+##### [Query open archives in place](guides/search/query-open-archives-in-place.md)
 
 #### [Overview](guides/shape.md)
 
@@ -346,7 +352,7 @@ Explanations are big-picture explanations of higher-level Tenzir concepts.
 
 #### [Platform](explanations/platform.md)
 
-Understand how the platform organizes organizations, workspaces, and deployments, how deployments connect to it, and which data it sees.
+Understand how the platform organizes organizations, workspaces, deployments, and ingest endpoints, how deployments connect to it, and which data it sees.
 
 #### [Configuration](explanations/configuration.md)
 
@@ -398,9 +404,9 @@ Understand what a package contains, how a configuration and its packages depend 
 
 Encryption turns a value into ciphertext that only the holders of a key can turn back into the original.
 
-#### [Ingest endpoints](explanations/ingest-endpoints.md)
+#### [Transpilation](explanations/transpilation.md)
 
-Understand how ingest endpoints accept events over HTTPS, buffer them on the platform, and hand them to the pipelines of your deployments.
+Understand how Tenzir compiles TQL operators after a remote source into the target's native query language, how native semantics differ from TQL, and when operators stay in Tenzir.
 
 ### Help
 
@@ -432,7 +438,7 @@ TQL programs compose statements into complete data processing workflows that can
 
 #### [Overview](reference/optimizations.md)
 
-Tenzir’s federated search runs pipeline operators in the remote system where your data lives, using that system’s semantics unless you set pushdown=false to run every operator in Tenzir.
+This reference lists which operators each source pushes down, compares what the query-language targets compute, and links a page per remote target with its native spellings and semantic differences.
 
 ### Configuration
 
@@ -504,6 +510,7 @@ For the complete function listing by category, read [Function Index](reference/f
 
 #### Overview Index
 
+- [Axiom](reference/optimizations/axiom.md)
 - [ClickHouse](reference/optimizations/clickhouse.md)
 - [CloudWatch Logs](reference/optimizations/cloudwatch.md)
 - [DuckDB](reference/optimizations/duckdb.md)

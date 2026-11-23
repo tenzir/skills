@@ -7,9 +7,9 @@ section: "Docs"
 
 # ClickHouse
 
-> When fromclickhouse reads a table, ClickHouse takes over the operators that follow it, so that it sends only what the pipeline keeps instead of the whole table. Those operators leave the pipeline and run in ClickHouse, with ClickHouse’s semantics, and the rest of the pipeline runs in Tenzir. This page describes which operators ClickHouse takes over, which functions it computes, and how its results can differ from Tenzir’s. Our optimizations overview compares the targets and describes the rules that all sources share.
+> This page documents which operators and functions fromclickhouse and fromhydrolix transpile to ClickHouse SQL, and how ClickHouse’s semantics differ from TQL. See our explanation of transpilation for shared planning rules and our optimizations overview for cross-target matrices.
 
-When [`from_clickhouse`](../operators/from_clickhouse.md) reads a table, ClickHouse takes over the operators that follow it, so that it sends only what the pipeline keeps instead of the whole table. Those operators leave the pipeline and run in ClickHouse, with ClickHouse’s semantics, and the rest of the pipeline runs in Tenzir. This page describes which operators ClickHouse takes over, which functions it computes, and how its results can differ from Tenzir’s. Our [optimizations overview](../optimizations.md) compares the targets and describes the rules that all sources share.
+This page documents which operators and functions [`from_clickhouse`](../operators/from_clickhouse.md) and [`from_hydrolix`](../operators/from_hydrolix.md) transpile to ClickHouse SQL, and how ClickHouse’s semantics differ from TQL. See our explanation of [transpilation](../../explanations/transpilation.md) for shared planning rules and our [optimizations overview](../optimizations.md) for cross-target matrices.
 
 ## When it applies
 
@@ -24,12 +24,12 @@ With `pushdown=false`, every operator runs in Tenzir with TQL semantics. The ope
 
 ## Operators that ClickHouse takes over
 
-ClickHouse takes over the [longest run of operators](../optimizations.md#the-run-of-operators-after-the-source) directly after the source that it can spell:
+ClickHouse takes over the [longest run of operators](../../explanations/transpilation.md#the-run-of-operators-after-the-source) directly after the source that it can spell:
 
 * [`where`](../operators/where.md), as the [filters and functions](clickhouse.md#filters-and-functions) section describes.
 * [`select`](../operators/select.md) of fields, including renames and elements of named tuples, such as `select ip=src_ip, meta.level`.
 * [`drop`](../operators/drop.md) of top-level fields, which becomes `* EXCEPT (…)`.
-* [`summarize`](../operators/summarize.md) with group keys and the functions that the [summaries](clickhouse.md#summaries) section lists. The summary may follow [`select`](../operators/select.md), [`drop`](../operators/drop.md), and assignments, as [Aggregations in the source](../optimizations.md#aggregations-in-the-source) describes.
+* [`summarize`](../operators/summarize.md) with group keys and the functions that the [summaries](clickhouse.md#summaries) section lists. The summary may follow [`select`](../operators/select.md), [`drop`](../operators/drop.md), and assignments, as [Aggregations in the source](../../explanations/transpilation.md#summaries-and-computed-expressions) describes.
 * [`sort`](../operators/sort.md) by fields.
 * [`head`](../operators/head.md), and [`top`](../operators/top.md) or [`rare`](../operators/rare.md) followed by [`head`](../operators/head.md).
 
@@ -65,20 +65,22 @@ The operator nests derived tables where SQL’s clause order requires it, and ke
 
 ClickHouse and Hydrolix compute these aggregation functions of a [`summarize`](../operators/summarize.md):
 
-| TQL                   | ClickHouse               | Notes                                    |
-| --------------------- | ------------------------ | ---------------------------------------- |
-| `count()`             | `toInt64(count())`       |                                          |
-| `count(x)`            | `toInt64(count(x))`      |                                          |
-| `min(x)`              | `min(x)`                 | Yields the type's default without values |
-| `max(x)`              | `max(x)`                 | Yields the type's default without values |
-| `count_if(x, v => p)` | `toInt64(countIf(x, p))` | Skips `null` values                      |
-| `count_distinct(x)`   | `toInt64(uniqExact(x))`  |                                          |
-| `sum(x)`              | `sum(x)`                 |                                          |
-| `mean(x)`             | `avg(x)`                 |                                          |
-| `stddev(x)`           | `stddevPop(x)`           |                                          |
-| `variance(x)`         | `varPop(x)`              |                                          |
-| `all(x)`              | `min(x)`                 | Skips `null` values                      |
-| `any(x)`              | `max(x)`                 | Skips `null` values                      |
+🟢 runs in ClickHouse, 🟡 runs in ClickHouse conditionally or approximately, and ⚪ runs in Tenzir.
+
+| TQL                   | Status | ClickHouse               | Notes                                    |
+| --------------------- | ------ | ------------------------ | ---------------------------------------- |
+| `count()`             | 🟢     | `toInt64(count())`       |                                          |
+| `count(x)`            | 🟢     | `toInt64(count(x))`      |                                          |
+| `min(x)`              | 🟢     | `min(x)`                 | Yields the type's default without values |
+| `max(x)`              | 🟢     | `max(x)`                 | Yields the type's default without values |
+| `count_if(x, v => p)` | 🟢     | `toInt64(countIf(x, p))` | Skips `null` values                      |
+| `count_distinct(x)`   | 🟢     | `toInt64(uniqExact(x))`  |                                          |
+| `sum(x)`              | 🟢     | `sum(x)`                 |                                          |
+| `mean(x)`             | 🟢     | `avg(x)`                 |                                          |
+| `stddev(x)`           | 🟢     | `stddevPop(x)`           |                                          |
+| `variance(x)`         | 🟢     | `varPop(x)`              |                                          |
+| `all(x)`              | 🟢     | `min(x)`                 | Skips `null` values                      |
+| `any(x)`              | 🟢     | `max(x)`                 | Skips `null` values                      |
 
 A summary keeps a group for `null` keys.
 
@@ -89,15 +91,15 @@ level = severity * 2
 summarize src_ip, worst=max(level)
 ```
 
-ClickHouse computes an assignment that the summary reads with its own semantics, including calls of the functions that the [filters and functions](clickhouse.md#filters-and-functions) section lists. An assignment that the summary doesn’t read must be infallible, as the rules for [computed keys and arguments](../optimizations.md#computed-keys-and-arguments) explain.
+ClickHouse computes an assignment that the summary reads with its own semantics, including calls of the functions that the [filters and functions](clickhouse.md#filters-and-functions) section lists. An assignment that the summary doesn’t read must be infallible, as the rules for [computed keys and arguments](../../explanations/transpilation.md#summaries-and-computed-expressions) explain.
 
 A time bucket, such as `hour = floor(time, 1h)` before a `summarize hour, events=count()`, runs in ClickHouse for these widths:
 
-| Width                                  | ClickHouse                                                           |
-| -------------------------------------- | -------------------------------------------------------------------- |
-| Whole seconds, such as `1h`            | Runs as flooring division of `toUnixTimestamp64Nano(x)` by the width |
-| Fractions of a second, such as `250ms` | Runs as flooring division of `toUnixTimestamp64Nano(x)` by the width |
-| Multiples of a week or a month         | Runs in Tenzir, since TQL aligns them to the calendar                |
+| Width                                  | Status | ClickHouse                                                           |
+| -------------------------------------- | ------ | -------------------------------------------------------------------- |
+| Whole seconds, such as `1h`            | 🟢     | Runs as flooring division of `toUnixTimestamp64Nano(x)` by the width |
+| Fractions of a second, such as `250ms` | 🟢     | Runs as flooring division of `toUnixTimestamp64Nano(x)` by the width |
+| Multiples of a week or a month         | ⚪      | Runs in Tenzir, since TQL aligns them to the calendar                |
 
 ## Filters and functions
 
@@ -108,38 +110,39 @@ ClickHouse takes over a [`where`](../operators/where.md) whose predicate consist
 * Comparisons, `in` with a list of literals, arithmetic, and the boolean operators `and`, `or`, and `not`.
 * The functions in the following table.
 
-| TQL                       | ClickHouse                                                          | Notes                                                         |
-| ------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------- |
-| `x.starts_with(y)`        | `startsWith(x, y)`                                                  |                                                               |
-| `x.ends_with(y)`          | `endsWith(x, y)`                                                    |                                                               |
-| `x.match_regex(y)`        | `match(x, y)`                                                       | ClickHouse's RE2                                              |
-| `x.length_bytes()`        | `length(x)`                                                         |                                                               |
-| `x.length_chars()`        | `lengthUTF8(x)`                                                     |                                                               |
-| `x.to_lower()`            | `lowerUTF8(x)`                                                      |                                                               |
-| `x.to_upper()`            | `upperUTF8(x)`                                                      |                                                               |
-| `x.capitalize()`          | `concat(upperUTF8(leftUTF8(x, 1)), lowerUTF8(substringUTF8(x, 2)))` |                                                               |
-| `x.trim()`                | `trimBoth(x)`                                                       |                                                               |
-| `x.trim_start()`          | `trimLeft(x)`                                                       |                                                               |
-| `x.trim_end()`            | `trimRight(x)`                                                      |                                                               |
-| `x.replace(y, z)`         | `replaceAll(x, y, z)`                                               |                                                               |
-| `x.is_empty()`            | `toBool(empty(x))`                                                  |                                                               |
-| `x.slice(begin=b, end=e)` | `substringUTF8(x, b + 1, greatest(e - b, 0))`                       | With constant `begin` and `end` that are not negative         |
-| `x.hash_md5()`            | `lower(hex(MD5(x)))`                                                | Rejects non-string arguments                                  |
-| `x.hash_sha1()`           | `lower(hex(SHA1(x)))`                                               | Rejects non-string arguments                                  |
-| `x.hash_sha256()`         | `lower(hex(SHA256(x)))`                                             | Rejects non-string arguments                                  |
-| `x.abs()`                 | `abs(x)`                                                            |                                                               |
-| `x.ceil()`                | `toInt64(ceil(x))`                                                  |                                                               |
-| `x.floor()`               | `toInt64(floor(x))`                                                 |                                                               |
-| `x.round()`               | `toInt64(round(x))`                                                 | Rounds halves to even                                         |
-| `x.sqrt()`                | `sqrt(x)`                                                           |                                                               |
-| `x.exp()`                 | `exp(x)`                                                            |                                                               |
-| `x.log()`, `x.log(base)`  | `log(x)`, `(log(x) / log(base))`                                    |                                                               |
-| `x.year()`                | `toYear(x, 'UTC')`                                                  |                                                               |
-| `x.month()`               | `toMonth(x, 'UTC')`                                                 |                                                               |
-| `x.day()`                 | `toDayOfMonth(x, 'UTC')`                                            |                                                               |
-| `x.hour()`                | `toHour(x, 'UTC')`                                                  |                                                               |
-| `x.minute()`              | `toMinute(x, 'UTC')`                                                |                                                               |
-| `x.second()`              | `toSecond(x, 'UTC')`                                                | Plus the fraction of the second, from `toUnixTimestamp64Nano` |
+| Kind    | TQL                       | Status | ClickHouse                                                          | Notes                                                         |
+| ------- | ------------------------- | ------ | ------------------------------------------------------------------- | ------------------------------------------------------------- |
+| Strings | `x.starts_with(y)`        | 🟢     | `startsWith(x, y)`                                                  |                                                               |
+| Strings | `x.ends_with(y)`          | 🟢     | `endsWith(x, y)`                                                    |                                                               |
+| Strings | `x.match_regex(y)`        | 🟢     | `match(x, y)`                                                       | ClickHouse's RE2                                              |
+| Strings | `x.length_bytes()`        | 🟢     | `length(x)`                                                         |                                                               |
+| Strings | `x.length_chars()`        | 🟢     | `lengthUTF8(x)`                                                     |                                                               |
+| Strings | `x.to_lower()`            | 🟢     | `lowerUTF8(x)`                                                      |                                                               |
+| Strings | `x.to_upper()`            | 🟢     | `upperUTF8(x)`                                                      |                                                               |
+| Strings | `x.capitalize()`          | 🟢     | `concat(upperUTF8(leftUTF8(x, 1)), lowerUTF8(substringUTF8(x, 2)))` |                                                               |
+| Strings | `x.trim()`                | 🟢     | `trimBoth(x)`                                                       |                                                               |
+| Strings | `x.trim_start()`          | 🟢     | `trimLeft(x)`                                                       |                                                               |
+| Strings | `x.trim_end()`            | 🟢     | `trimRight(x)`                                                      |                                                               |
+| Strings | `x.replace(y, z)`         | 🟢     | `replaceAll(x, y, z)`                                               |                                                               |
+| Strings | `x.is_empty()`            | 🟢     | `toBool(empty(x))`                                                  |                                                               |
+| Strings | `x.slice(begin=b, end=e)` | 🟡     | `substringUTF8(x, b + 1, greatest(e - b, 0))`                       | With constant `begin` and `end` that are not negative         |
+| Hashes  | `x.hash_md5()`            | 🟢     | `lower(hex(MD5(x)))`                                                | Rejects non-string arguments                                  |
+| Hashes  | `x.hash_sha1()`           | 🟢     | `lower(hex(SHA1(x)))`                                               | Rejects non-string arguments                                  |
+| Hashes  | `x.hash_sha256()`         | 🟢     | `lower(hex(SHA256(x)))`                                             | Rejects non-string arguments                                  |
+| Numbers | `x.abs()`                 | 🟢     | `abs(x)`                                                            |                                                               |
+| Numbers | `x.ceil()`                | 🟢     | `toInt64(ceil(x))`                                                  |                                                               |
+| Numbers | `x.floor()`               | 🟢     | `toInt64(floor(x))`                                                 |                                                               |
+| Numbers | `x.round()`               | 🟢     | `toInt64(round(x))`                                                 | Rounds halves to even                                         |
+| Numbers | `x.sqrt()`                | 🟢     | `sqrt(x)`                                                           |                                                               |
+| Numbers | `x.exp()`                 | 🟢     | `exp(x)`                                                            |                                                               |
+| Numbers | `x.log()`, `x.log(base)`  | 🟢     | `log(x)`, `(log(x) / log(base))`                                    |                                                               |
+| Times   | `x.year()`                | 🟢     | `toYear(x, 'UTC')`                                                  |                                                               |
+| Times   | `x.month()`               | 🟢     | `toMonth(x, 'UTC')`                                                 |                                                               |
+| Times   | `x.day()`                 | 🟢     | `toDayOfMonth(x, 'UTC')`                                            |                                                               |
+| Times   | `x.hour()`                | 🟢     | `toHour(x, 'UTC')`                                                  |                                                               |
+| Times   | `x.minute()`              | 🟢     | `toMinute(x, 'UTC')`                                                |                                                               |
+| Times   | `x.second()`              | 🟢     | `toSecond(x, 'UTC')`                                                | Plus the fraction of the second, from `toUnixTimestamp64Nano` |
+| Times   | `x.since_epoch()`         | 🟢     | `toUnixTimestamp64Nano(toDateTime64(x, 9, 'UTC'))`                  | Decoded from nanoseconds as a duration                        |
 
 The same functions compute group keys and aggregate arguments. The time functions count in UTC, whatever the time zone of the column. Durations, subnets, non-finite numbers, other functions, named arguments such as `ignore_case`, and optional fields such as `x?` run in Tenzir.
 
@@ -151,7 +154,7 @@ The operators that ClickHouse takes over run as ClickHouse runs them, which can 
 * Comparisons with `NULL` yield `NULL`, so `name != "alpha"` does not keep rows where `name` is `NULL`.
 * A time compares in UTC at nanosecond precision. A `Date32` column holds no dates before 1900.
 * ClickHouse sorts `NULL` last in ascending order and returns rows that tie in a sort in any order.
-* A query that ClickHouse rejects fails the pipeline with the error of ClickHouse, as the overview’s [diagnostics](../optimizations.md#diagnostics) describe.
+* A query that ClickHouse rejects fails the pipeline with the error of ClickHouse, as our explanation of [plan-time diagnostics](../../explanations/transpilation.md#plan-time-decisions-and-diagnostics) describes. ClickHouse’s `system.query_log` table shows the query the operator sent.
 
 ### Limits and cancellation
 
@@ -175,7 +178,3 @@ The read fails before it runs a query, with the error `ClickHouse cannot compute
 * A field holds a whole `JSON` value, such as the catch-all column itself.
 
 Use `pushdown=false` to compute these operators in Tenzir on the reconstructed events.
-
-## Verify an optimization
-
-To see which operators ClickHouse takes over in a pipeline, print the optimized pipeline, as the overview’s section on [verifying an optimization](../optimizations.md#verify-an-optimization) shows. ClickHouse’s `system.query_log` table shows the query that the operator sent.

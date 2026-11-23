@@ -17,7 +17,7 @@ ingest name:string
 
 ## Description
 
-The `ingest` operator reads the requests that senders sent to an [ingest endpoint](../../explanations/ingest-endpoints.md). The endpoint must allow the deployment to read it.
+The `ingest` operator reads the requests that senders sent to an [ingest endpoint](../../explanations/platform.md#ingest-endpoints). The endpoint must allow the deployment to read it.
 
 Tenzir-hosted deployments only
 
@@ -38,7 +38,7 @@ Each request becomes one event:
 
 The `method` is in lowercase, and `headers` leaves out the `authorization` header. Parse the `body` in the pipeline that follows, for example with [`parse_json`](../functions/parse_json.md).
 
-Every pipeline that reads an endpoint receives every event. A deployed pipeline resumes where it left off when it restarts, and starts with the events that arrive from then on the first time it runs or after you rename its file. An ad-hoc pipeline, such as one in the Explorer, reads only the events that arrive while it runs.
+Every pipeline that reads an endpoint receives every event. A deployed pipeline resumes where it left off when it restarts, and starts with the events that arrive from then on the first time it runs or after you rename its file. If a deployed pipeline falls behind the endpoint’s 24-hour or 10 GB buffer, it skips ahead to the events that arrive next. When a deployment loses access to an endpoint or is deleted, the platform discards its pipelines’ positions. An ad-hoc pipeline, such as one in the Explorer, reads only the events that arrive while it runs.
 
 ### `name: string`
 
@@ -66,5 +66,5 @@ publish "firewall-alerts"
 ## See Also
 
 * [`accept_http`](accept_http.md)
-* [Ingest endpoints](../../explanations/ingest-endpoints.md)
+* [Platform](../../explanations/platform.md#ingest-endpoints)
 * [Receive events with ingest endpoints](../../guides/collect/receive-events-with-ingest-endpoints.md)

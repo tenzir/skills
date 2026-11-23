@@ -136,7 +136,7 @@ A remote source, such as [`from_clickhouse`](../reference/operators/from_clickho
 
 This is what lets a database compute a summary and return one row per group, or a SIEM sort and limit its results, instead of shipping every event to Tenzir. To run every operator in Tenzir with TQL semantics instead, set `pushdown=false` on the source, which then still reads only the fields that the pipeline uses.
 
-Which operators a source takes over, and which functions its target computes, depends on the target. Our [optimizations reference](../reference/optimizations.md) lists the sources, compares what their targets compute, and links a page per target that describes its semantics. When downstream does not depend on event order, operators may take faster code paths that reorder events, for example a parser that splits its input across several jobs.
+Our explanation of [transpilation](transpilation.md) covers this remote execution model, plan-time diagnostics, and truncation limits in detail. Our [optimizations reference](../reference/optimizations.md) lists the sources, compares what their targets compute, and links a page per target that describes its native semantics. When downstream does not depend on event order, operators may take faster code paths that reorder events, for example a parser that splits its input across several jobs.
 
 Federated Search
 

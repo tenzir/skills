@@ -7,9 +7,9 @@ section: "Docs"
 
 # SPL
 
-> The Splunk source fromsplunk hands Splunk the operators that follow it by appending stages in the Splunk Search Processing Language (SPL) to the search that it sends, so that Splunk returns only what the pipeline keeps. Splunk takes over those operators, which leave the pipeline and run in Splunk with Splunk’s semantics, and the rest of the pipeline runs in Tenzir. This page describes which operators Splunk takes over, which functions it computes, and how its results can differ from Tenzir’s. Our optimizations overview compares the targets and describes the rules that all sources share.
+> This page documents which operators and functions fromsplunk transpiles to Splunk Search Processing Language (SPL and SPL2), and how Splunk’s semantics differ from TQL. See our explanation of transpilation for shared planning rules and our optimizations overview for cross-target matrices.
 
-The Splunk source [`from_splunk`](../operators/from_splunk.md) hands Splunk the operators that follow it by appending stages in the Splunk Search Processing Language (SPL) to the search that it sends, so that Splunk returns only what the pipeline keeps. Splunk takes over those operators, which leave the pipeline and run in Splunk with Splunk’s semantics, and the rest of the pipeline runs in Tenzir. This page describes which operators Splunk takes over, which functions it computes, and how its results can differ from Tenzir’s. Our [optimizations overview](../optimizations.md) compares the targets and describes the rules that all sources share.
+This page documents which operators and functions [`from_splunk`](../operators/from_splunk.md) transpiles to Splunk Search Processing Language (SPL and SPL2), and how Splunk’s semantics differ from TQL. See our explanation of [transpilation](../../explanations/transpilation.md) for shared planning rules and our [optimizations overview](../optimizations.md) for cross-target matrices.
 
 ## When it applies
 
@@ -57,12 +57,12 @@ from main where sourcetype == "linux_secure"
 
 ## Operators that Splunk takes over
 
-Splunk takes over the [longest run of operators](../optimizations.md#the-run-of-operators-after-the-source) directly after the source that SPL can spell:
+Splunk takes over the [longest run of operators](../../explanations/transpilation.md#the-run-of-operators-after-the-source) directly after the source that SPL can spell:
 
 * [`where`](../operators/where.md), as the [filters and functions](spl.md#filters-and-functions) section describes.
 * [`select`](../operators/select.md) of top-level fields, including renames, which becomes `fields`.
 * [`drop`](../operators/drop.md) of top-level fields, which becomes `fields -`.
-* [`summarize`](../operators/summarize.md) with group keys and the functions that the [summaries](spl.md#summaries) section lists, which becomes `stats … by`. The summary may follow [`select`](../operators/select.md), [`drop`](../operators/drop.md), and assignments, as [Aggregations in the source](../optimizations.md#aggregations-in-the-source) describes.
+* [`summarize`](../operators/summarize.md) with group keys and the functions that the [summaries](spl.md#summaries) section lists, which becomes `stats … by`. The summary may follow [`select`](../operators/select.md), [`drop`](../operators/drop.md), and assignments, as [Aggregations in the source](../../explanations/transpilation.md#summaries-and-computed-expressions) describes.
 * [`sort`](../operators/sort.md) by fields, which becomes `sort` with an explicit count: the count of the [`head`](../operators/head.md) after it, or `0` for all results, since `sort` keeps only 10,000 results by default.
 * [`head`](../operators/head.md), which becomes `head`, and [`top`](../operators/top.md) or [`rare`](../operators/rare.md) followed by [`head`](../operators/head.md). A search with a command that has side effects, such as `outputlookup` or `collect`, or with a macro, which may hide one, runs the limit in Tenzir.
 
@@ -102,20 +102,22 @@ Without an operator that enumerates the fields, the search ends with a `fields` 
 
 Splunk computes these aggregation functions of a [`summarize`](../operators/summarize.md):
 
-| TQL                   | SPL              | Notes                                                         |
-| --------------------- | ---------------- | ------------------------------------------------------------- |
-| `count()`             | `count`          | SPL2 spells it `count()`                                      |
-| `count(x)`            | `count(x)`       | Counts each value of a multivalue field                       |
-| `min(x)`              | `min(x)`         | Compares numbers numerically and other values as text         |
-| `max(x)`              | `max(x)`         | Compares numbers numerically and other values as text         |
-| `count_if(x, v => p)` | `count(eval(p))` | Skips events without a value; `count(if(p, 1, null))` in SPL2 |
-| `count_distinct(x)`   | `dc(x)`          | Exact, unlike `estdc`                                         |
-| `sum(x)`              | `sum(x)`         |                                                               |
-| `mean(x)`             | `avg(x)`         |                                                               |
-| `stddev(x)`           | `stdevp(x)`      |                                                               |
-| `variance(x)`         | `varp(x)`        |                                                               |
+🟢 runs in Splunk, 🟡 runs in Splunk conditionally or approximately, and ⚪ runs in Tenzir.
 
-Splunk has no booleans, so `all(x)` and `any(x)` run in Tenzir.
+| TQL                   | Status | SPL                                            | Notes                                                                                                |
+| --------------------- | ------ | ---------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `count()`             | 🟢     | `count`                                        | SPL2 spells it `count()`                                                                             |
+| `count(x)`            | 🟢     | `count(x)`                                     | Counts each value of a multivalue field                                                              |
+| `min(x)`              | 🟢     | `min(x)`                                       | Compares numbers numerically and other values as text                                                |
+| `max(x)`              | 🟢     | `max(x)`                                       | Compares numbers numerically and other values as text                                                |
+| `count_if(x, v => p)` | 🟢     | `count(eval(p))`                               | Skips events without a value; `count(if(p, 1, null))` in SPL2                                        |
+| `count_distinct(x)`   | 🟢     | `dc(x)`                                        | Exact, unlike `estdc`                                                                                |
+| `sum(x)`              | 🟢     | `sum(x)`                                       |                                                                                                      |
+| `mean(x)`             | 🟢     | `avg(x)`                                       |                                                                                                      |
+| `stddev(x)`           | 🟢     | `stdevp(x)`                                    |                                                                                                      |
+| `variance(x)`         | 🟢     | `varp(x)`                                      |                                                                                                      |
+| `all(x)`              | 🟢     | `min(eval(case(x=="true", 1, x=="false", 0)))` | Decoded as a boolean; skips `null` values and yields `null` without values; `min(case(...))` in SPL2 |
+| `any(x)`              | 🟢     | `max(eval(case(x=="true", 1, x=="false", 0)))` | Decoded as a boolean; skips `null` values and yields `null` without values; `max(case(...))` in SPL2 |
 
 Splunk returns every value as a string, so the operator reads counts as integers, and sums, means, deviations, and variances as numbers.
 
@@ -127,9 +129,17 @@ kind = action.to_upper()
 summarize kind, events=count()
 ```
 
-The search computes the key with `| eval tenzir_column_0=upper('action')`. An assignment that the summary reads may call a function that SPL spells, and Splunk computes it with its own semantics. An assignment that the summary doesn’t read must be infallible, as the rules for [computed keys and arguments](../optimizations.md#computed-keys-and-arguments) explain.
+The search computes the key with `| eval tenzir_column_0=upper('action')`. An assignment that the summary reads may call a function that SPL spells, and Splunk computes it with its own semantics. An assignment that the summary doesn’t read must be infallible, as the rules for [computed keys and arguments](../../explanations/transpilation.md#summaries-and-computed-expressions) explain.
 
-Splunk computes no time buckets: a `floor` of a time runs in Tenzir.
+A time bucket, such as `hour = floor(_time, 1h)` before a
+
+[`summarize`](../operators/summarize.md), also runs in Splunk:
+
+| Width                                  | Status | SPL                                                                                  |
+| -------------------------------------- | ------ | ------------------------------------------------------------------------------------ |
+| Whole seconds, such as `1h`            | 🟢     | Runs as `strftime(floor(x / w) * w, "%Y-%m-%dT%H:%M:%S%z")`, which arrives as a time |
+| Fractions of a second, such as `250ms` | ⚪      | Runs in Tenzir                                                                       |
+| Multiples of a week or a month         | ⚪      | Runs in Tenzir, since TQL aligns them to the calendar                                |
 
 ## Filters and functions
 
@@ -142,34 +152,43 @@ With `index`, the conjuncts of the filters right after the operator extend the b
 * `starts_with` and `ends_with`, and `"x" in field`, which become wildcards.
 * `and` and `or` of such terms.
 
-All other filters become `where` stages. They consist of top-level fields, literals (numbers, strings, booleans, `null`, times compared with `_time`, and IP addresses), comparisons, `in` with a list, arithmetic, `and`, `or`, `not`, and these functions:
+All other filters become `where` stages. They consist of top-level fields, literals (numbers, strings, booleans, `null`, times compared with `_time`, and IP addresses), comparisons, `in` with a list, arithmetic, `and`, `or`, `not`, and the functions marked 🟢 or 🟡 in the following table:
 
-| TQL                      | SPL                             | Notes                                             |
-| ------------------------ | ------------------------------- | ------------------------------------------------- |
-| `x.starts_with(y)`       | `substr(x, 1, len(y))==y`       | In filters only, since the target has no booleans |
-| `x.ends_with(y)`         | `substr(x, len(x)-len(y)+1)==y` | In filters only, since the target has no booleans |
-| `x.match_regex(y)`       | `match(x, y)`                   | In filters only, since the target has no booleans |
-| `x.length_chars()`       | `len(x)`                        |                                                   |
-| `x.to_lower()`           | `lower(x)`                      |                                                   |
-| `x.to_upper()`           | `upper(x)`                      |                                                   |
-| `x.trim()`               | `trim(x)`                       |                                                   |
-| `x.trim_start()`         | `ltrim(x)`                      |                                                   |
-| `x.trim_end()`           | `rtrim(x)`                      |                                                   |
-| `x.is_empty()`           | `len(x)==0`                     | In filters only, since the target has no booleans |
-| `x.hash_md5()`           | `md5(x)`                        |                                                   |
-| `x.hash_sha1()`          | `sha1(x)`                       |                                                   |
-| `x.hash_sha256()`        | `sha256(x)`                     |                                                   |
-| `x.abs()`                | `abs(x)`                        |                                                   |
-| `x.ceil()`               | `ceiling(x)`                    |                                                   |
-| `x.floor()`              | `floor(x)`                      |                                                   |
-| `x.round()`              | `round(x)`                      |                                                   |
-| `x.sqrt()`               | `sqrt(x)`                       |                                                   |
-| `x.exp()`                | `exp(x)`                        |                                                   |
-| `x.log()`, `x.log(base)` | `ln(x)`, `log(x, base)`         |                                                   |
+| Kind    | TQL                       | Status | SPL                                            | Notes                                                                                                              |
+| ------- | ------------------------- | ------ | ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| Strings | `x.starts_with(y)`        | 🟢     | `substr(x, 1, len(y))==y`                      | As a value, wrapped in `if(p, "true", "false")` and decoded as a boolean (`null` becomes `false`)                  |
+| Strings | `x.ends_with(y)`          | 🟢     | `substr(x, len(x)-len(y)+1)==y`                | As a value, wrapped in `if(p, "true", "false")` and decoded as a boolean (`null` becomes `false`)                  |
+| Strings | `x.match_regex(y)`        | 🟢     | `match(x, y)`                                  | As a value, wrapped in `if(p, "true", "false")` and decoded as a boolean (`null` becomes `false`)                  |
+| Strings | `x.length_bytes()`        | ⚪      | —                                              |                                                                                                                    |
+| Strings | `x.length_chars()`        | 🟢     | `len(x)`                                       |                                                                                                                    |
+| Strings | `x.to_lower()`            | 🟢     | `lower(x)`                                     |                                                                                                                    |
+| Strings | `x.to_upper()`            | 🟢     | `upper(x)`                                     |                                                                                                                    |
+| Strings | `x.capitalize()`          | 🟢     | `upper(substr(x, 1, 1)) + lower(substr(x, 2))` | Yields `null` for an empty string                                                                                  |
+| Strings | `x.trim()`                | 🟢     | `trim(x)`                                      |                                                                                                                    |
+| Strings | `x.trim_start()`          | 🟢     | `ltrim(x)`                                     |                                                                                                                    |
+| Strings | `x.trim_end()`            | 🟢     | `rtrim(x)`                                     |                                                                                                                    |
+| Strings | `x.replace(y, z)`         | 🟡     | `replace(x, y, z)`                             | With a constant string `y`, regex-escaped for Splunk's PCRE matcher                                                |
+| Strings | `x.is_empty()`            | 🟢     | `len(x)==0`                                    | As a value, wrapped in `if(p, "true", "false")` and decoded as a boolean (`null` becomes `false`)                  |
+| Strings | `x.slice(begin=b, end=e)` | 🟡     | `if(e > b, substr(x, b + 1, e - b), "")`       | With constant `begin` and `end` that are not negative; uses `substr(x, b + 1)` or `substr(x, 1, e)` with one bound |
+| Hashes  | `x.hash_md5()`            | 🟢     | `md5(x)`                                       |                                                                                                                    |
+| Hashes  | `x.hash_sha1()`           | 🟢     | `sha1(x)`                                      |                                                                                                                    |
+| Hashes  | `x.hash_sha256()`         | 🟢     | `sha256(x)`                                    |                                                                                                                    |
+| Numbers | `x.abs()`                 | 🟢     | `abs(x)`                                       |                                                                                                                    |
+| Numbers | `x.ceil()`                | 🟢     | `ceiling(x)`                                   |                                                                                                                    |
+| Numbers | `x.floor()`               | 🟢     | `floor(x)`                                     |                                                                                                                    |
+| Numbers | `x.round()`               | 🟢     | `round(x)`                                     |                                                                                                                    |
+| Numbers | `x.sqrt()`                | 🟢     | `sqrt(x)`                                      |                                                                                                                    |
+| Numbers | `x.exp()`                 | 🟢     | `exp(x)`                                       |                                                                                                                    |
+| Numbers | `x.log()`, `x.log(base)`  | 🟢     | `ln(x)`, `log(x, base)`                        |                                                                                                                    |
+| Times   | `x.year()`                | 🟢     | `tonumber(strftime(x, "%Y"))`                  | Uses Splunk's configured time zone                                                                                 |
+| Times   | `x.month()`               | 🟢     | `tonumber(strftime(x, "%m"))`                  | Uses Splunk's configured time zone                                                                                 |
+| Times   | `x.day()`                 | 🟢     | `tonumber(strftime(x, "%d"))`                  | Uses Splunk's configured time zone                                                                                 |
+| Times   | `x.hour()`                | 🟢     | `tonumber(strftime(x, "%H"))`                  | Uses Splunk's configured time zone                                                                                 |
+| Times   | `x.minute()`              | 🟢     | `tonumber(strftime(x, "%M"))`                  | Uses Splunk's configured time zone                                                                                 |
+| Times   | `x.second()`              | 🟢     | `tonumber(strftime(x, "%S.%6N"))`              | Microsecond precision                                                                                              |
+| Times   | `x.since_epoch()`         | ⚪      | —                                              | Splunk has no durations                                                                                            |
 
-Splunk has no durations, so `x.since_epoch()` runs in Tenzir.
-
-The same functions compute group keys and aggregate arguments with `eval`, except for the predicates that the table marks. They follow Splunk’s semantics, such as how `round` rounds halves and how `trim` delimits whitespace.
+The same functions compute group keys and aggregate arguments with `eval`. Predicates used as values are wrapped in `if(p, "true", "false")` and decoded back as booleans (`null` predicates become `false`). They follow Splunk’s semantics, such as how `round` rounds halves, how `trim` delimits whitespace, and Splunk’s configured time zone for `strftime`.
 
 Nested field paths, subnets outside the base search, times compared with fields other than Splunk’s own `_time`, such as `_time` after `select _time=event_time` or after a `search` that runs more than a single `search` command, such as `| rename event* AS _*`, bare boolean fields such as `where flag`, fields whose names start with `__`, which Splunk treats as internal, named arguments such as `ignore_case`, and optional fields such as `x?` run in Tenzir.
 
@@ -189,7 +208,3 @@ The operators that Splunk takes over run as Splunk runs them, which can differ f
 ### Time window
 
 With `index`, comparisons of `_time` in the filters before any summary, limit, or sort also narrow `earliest` and `latest`, rounded outward to whole seconds, when both are absolute. A strict bound excludes its time, so `where _time < 2025-01-01T00:02:00Z` requests `latest_time=1735689720`. A relative bound, such as `-15m`, resolves on the server, so the operator keeps both bounds as they are. It also keeps them when the narrowed bounds would cross, since Splunk rejects crossing bounds. The comparisons stay in the search in every case. With `search`, the bounds never narrow, since a `_time` field in your search’s results may stem from an aggregation or a computation.
-
-## Verify an optimization
-
-To see which operators Splunk takes over in a pipeline, print the optimized pipeline, as the overview’s section on [verifying an optimization](../optimizations.md#verify-an-optimization) shows.

@@ -10,7 +10,7 @@ section: "Docs"
 
 > Give webhooks and applications an HTTPS address to push events to, and read them in the pipelines of your deployments.
 
-This guide sets up an [ingest endpoint](../../explanations/ingest-endpoints.md), watches a first event arrive, and deploys a pipeline that reads the endpoint with the [`ingest`](../../reference/operators/ingest.md) operator.
+This guide sets up an [ingest endpoint](../../explanations/platform.md#ingest-endpoints), watches a first event arrive, and deploys a pipeline that reads the endpoint with the [`ingest`](../../reference/operators/ingest.md) operator.
 
 Before you begin
 
@@ -52,6 +52,18 @@ The endpoint answers `202 Accepted` once it holds the event, and the event shows
 
 Configure your sender the same way: it must set the `Authorization` header. It may add a path or a query to the URL, such as `/audit?service=billing`, which reaches your pipeline in the `path` and `query` fields.
 
+The endpoint answers with these status codes:
+
+| Status | Reason                                                       |
+| ------ | ------------------------------------------------------------ |
+| `202`  | The platform accepted the event.                             |
+| `401`  | The request has no token, or the token is unknown.           |
+| `413`  | The request body is larger than 1 MB.                        |
+| `415`  | The request body is not valid UTF-8 text.                    |
+| `503`  | The buffer is unavailable for the moment. Retry the request. |
+
+A sender that retries on `503` and on network errors loses no events. The endpoint does not detect duplicates, so a retried request may arrive twice.
+
 ## Deploy a pipeline
 
 Add the pipeline to the `pipelines/` folder of your configuration and send the events on:
@@ -73,12 +85,12 @@ publish "app-events"
 
 ## Keep the endpoint safe
 
-* **Rotate token** when the token leaks. The old token stops working within seconds, so update your senders right away.
+* **Rotate token** when the token leaks. Tokens start with `tzi_`, which makes a leaked one easy to spot in logs and secret scanners. The old token stops working within seconds, so update your senders right away.
 * **Edit** next to **Readable by** changes which deployments may read.
 * **Delete** removes the endpoint along with the events it still buffers.
 
 ## See also
 
-* [Ingest endpoints](../../explanations/ingest-endpoints.md)
+* [Platform](../../explanations/platform.md#ingest-endpoints)
 * [Fetch via HTTP and APIs](fetch-via-http-and-apis.md)
 * [IAM](../../reference/iam.md)

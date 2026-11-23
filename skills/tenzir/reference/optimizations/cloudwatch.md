@@ -7,9 +7,9 @@ section: "Docs"
 
 # CloudWatch Logs
 
-> The CloudWatch source fromamazoncloudwatch hands CloudWatch Logs the operators that follow it, as far as its request parameters can express them: a filter pattern, a time range, log stream names, and a limit. CloudWatch takes over those operators, which leave the pipeline and run in CloudWatch with CloudWatch’s semantics, and the rest of the pipeline runs in Tenzir. This page describes which operators CloudWatch takes over and how its results can differ from Tenzir’s. Our optimizations overview compares the targets and describes the rules that all sources share.
+> This page documents which operators fromamazoncloudwatch pushes down as CloudWatch Logs request parameters (filter pattern, time range, log streams, and limit), and how CloudWatch’s semantics differ from TQL. See our explanation of transpilation for shared planning rules and our optimizations overview for the source overview.
 
-The CloudWatch source [`from_amazon_cloudwatch`](../operators/from_amazon_cloudwatch.md) hands CloudWatch Logs the operators that follow it, as far as its request parameters can express them: a filter pattern, a time range, log stream names, and a limit. CloudWatch takes over those operators, which leave the pipeline and run in CloudWatch with CloudWatch’s semantics, and the rest of the pipeline runs in Tenzir. This page describes which operators CloudWatch takes over and how its results can differ from Tenzir’s. Our [optimizations overview](../optimizations.md) compares the targets and describes the rules that all sources share.
+This page documents which operators [`from_amazon_cloudwatch`](../operators/from_amazon_cloudwatch.md) pushes down as CloudWatch Logs request parameters (filter pattern, time range, log streams, and limit), and how CloudWatch’s semantics differ from TQL. See our explanation of [transpilation](../../explanations/transpilation.md) for shared planning rules and our [optimizations overview](../optimizations.md) for the source overview.
 
 ## When it applies
 
@@ -23,7 +23,7 @@ With `count`, only a [`head`](../operators/head.md) directly after the operator 
 
 ## Operators that CloudWatch takes over
 
-CloudWatch takes over the [longest run of operators](../optimizations.md#the-run-of-operators-after-the-source) directly after the source that it can express:
+CloudWatch takes over the [longest run of operators](../../explanations/transpilation.md#the-run-of-operators-after-the-source) directly after the source that it can express:
 
 * [`where`](../operators/where.md) with phrases in `message`, which become a filter pattern, as the [filter patterns](cloudwatch.md#filter-patterns) section describes, if you set no `filter`.
 * [`where`](../operators/where.md) that compares `timestamp` with a time, which narrows the time range of the request.
@@ -85,8 +85,4 @@ The operators that CloudWatch takes over run as CloudWatch runs them, which can 
 * Filter patterns match words and phrases case-sensitively, not arbitrary substrings like TQL’s `in`, so a message with `"ERROR"` inside a longer word may not match `"ERROR" in message`.
 * A limit counts the events that CloudWatch returns for the request.
 * Live Tail may sample the matching events when they arrive too fast, which the operator reports as a warning.
-* A request that CloudWatch rejects fails the pipeline with the error of CloudWatch, as the overview’s [diagnostics](../optimizations.md#diagnostics) describe.
-
-## Verify an optimization
-
-To see which operators CloudWatch takes over in a pipeline, print the optimized pipeline, as the overview’s section on [verifying an optimization](../optimizations.md#verify-an-optimization) shows.
+* A request that CloudWatch rejects fails the pipeline with the error of CloudWatch, as our explanation of [plan-time diagnostics](../../explanations/transpilation.md#plan-time-decisions-and-diagnostics) describes.

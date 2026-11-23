@@ -7,9 +7,9 @@ section: "Docs"
 
 # Microsoft Graph
 
-> The Microsoft Graph source frommicrosoftgraph hands Microsoft Graph the operators that follow it as OData query parameters: $filter, $select, and $top. Graph takes over those operators, which leave the pipeline and run in Graph with Graph’s semantics, and the rest of the pipeline runs in Tenzir. This page describes which operators Graph takes over and how its results can differ from Tenzir’s. Our optimizations overview compares the targets and describes the rules that all sources share.
+> This page documents which operators frommicrosoftgraph pushes down as OData query parameters ($filter, $select, and $top), and how Graph’s semantics differ from TQL. See our explanation of transpilation for shared planning rules and our optimizations overview for the source overview.
 
-The Microsoft Graph source [`from_microsoft_graph`](../operators/from_microsoft_graph.md) hands Microsoft Graph the operators that follow it as OData query parameters: `$filter`, `$select`, and `$top`. Graph takes over those operators, which leave the pipeline and run in Graph with Graph’s semantics, and the rest of the pipeline runs in Tenzir. This page describes which operators Graph takes over and how its results can differ from Tenzir’s. Our [optimizations overview](../optimizations.md) compares the targets and describes the rules that all sources share.
+This page documents which operators [`from_microsoft_graph`](../operators/from_microsoft_graph.md) pushes down as OData query parameters (`$filter`, `$select`, and `$top`), and how Graph’s semantics differ from TQL. See our explanation of [transpilation](../../explanations/transpilation.md) for shared planning rules and our [optimizations overview](../optimizations.md) for the source overview.
 
 ## When it applies
 
@@ -17,7 +17,7 @@ The operator hands Graph the operators that follow it when it reads a collection
 
 ## Operators that Graph takes over
 
-Graph takes over the [longest run of operators](../optimizations.md#the-run-of-operators-after-the-source) directly after the source that it can express:
+Graph takes over the [longest run of operators](../../explanations/transpilation.md#the-run-of-operators-after-the-source) directly after the source that it can express:
 
 * [`where`](../operators/where.md), which becomes a `$filter` for the resources and properties that the [filters and functions](microsoft-graph.md#filters-and-functions) section lists.
 * [`select`](../operators/select.md) of top-level properties, including renames, which becomes a `$select` for any resource.
@@ -67,8 +67,4 @@ The operators that Graph takes over run as Graph runs them, which can differ fro
 
 * Graph compares many directory strings without regard to case, so `displayName == "alice"` also matches `Alice`.
 * The `$top` parameter sets the size of a page, not the number of results. The operator counts the events itself and stops paging once the [`head`](../operators/head.md) has enough.
-* A request that Graph rejects fails the pipeline with the error of Graph, as the overview’s [diagnostics](../optimizations.md#diagnostics) describe.
-
-## Verify an optimization
-
-To see which operators Graph takes over in a pipeline, print the optimized pipeline, as the overview’s section on [verifying an optimization](../optimizations.md#verify-an-optimization) shows.
+* A request that Graph rejects fails the pipeline with the error of Graph, as our explanation of [plan-time diagnostics](../../explanations/transpilation.md#plan-time-decisions-and-diagnostics) describes.

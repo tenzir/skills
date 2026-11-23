@@ -21,7 +21,7 @@ The `where` operator only keeps events that match the provided predicate and dis
 
 ## Optimizations
 
-A remote source, such as [`from_mysql`](from_mysql.md) or [`from_splunk`](from_splunk.md), may take over a `where` that follows it and run the filter in its target, with the target’s semantics. For example, a comparison with `null` yields `null` in SQL, so `name != "alpha"` does not keep rows where `name` is `null`, and a database may compare text without regard to case. Our [optimizations reference](../optimizations.md#results-follow-the-targets-semantics) lists the sources and how their targets differ. With `pushdown=false` on the source, the filter runs in Tenzir.
+A remote source, such as [`from_mysql`](from_mysql.md) or [`from_splunk`](from_splunk.md), may take over a `where` that follows it and run the filter in its target, with the target’s semantics. For example, a comparison with `null` yields `null` in SQL, so `name != "alpha"` does not keep rows where `name` is `null`, and a database may compare text without regard to case. Our [transpilation explanation](../../explanations/transpilation.md#native-semantics-vs-tql-semantics) lists the sources and how their targets differ. With `pushdown=false` on the source, the filter runs in Tenzir.
 
 ## Examples
 

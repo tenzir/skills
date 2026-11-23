@@ -1,6 +1,6 @@
 ---
 title: "Platform"
-description: "Understand how the platform organizes organizations, workspaces, and deployments, how deployments connect to it, and which data it sees."
+description: "Understand how the platform organizes organizations, workspaces, deployments, and ingest endpoints, how deployments connect to it, and which data it sees."
 canonical: https://tenzir.com/docs/explanations/platform
 source: https://tenzir.com/docs/explanations/platform.md
 section: "Docs"
@@ -8,9 +8,9 @@ section: "Docs"
 
 # Platform
 
-> Understand how the platform organizes organizations, workspaces, and deployments, how deployments connect to it, and which data it sees.
+> Understand how the platform organizes organizations, workspaces, deployments, and ingest endpoints, how deployments connect to it, and which data it sees.
 
-The **platform** is where you manage Tenzir. It stores the [configuration](configuration.md) of every workspace, delivers it to your [deployments](deployment.md), and shows what they do. Your events never pass through it: they flow from your sources through a deployment straight to your destinations.
+The **platform** is where you manage Tenzir. It stores the [configuration](configuration.md) of every workspace, delivers it to your [deployments](deployment.md), and shows what they do. Your events normally stay in the data plane, flowing from sources through a deployment straight to destinations without passing through the platform.
 
 The platform deploys configurations to the deployments in the data plane, which report metrics and status back. In the platform, an organization has members, roles, and billing, and holds workspaces with their configuration, deployments, secrets, ingest endpoints, access rules, and library. You and your agent reach the platform through the app, MCP, the CLI, and the API.
 
@@ -49,8 +49,17 @@ The platform sees what it needs to manage your deployments, and little else:
 * **Secrets** flow to the deployment when a pipeline asks for one, encrypted for that request.
 * **Telemetry** flows to the platform: how many events and bytes each pipeline reads and writes, when a pipeline starts, finishes, or fails, and the diagnostics that pipelines report.
 * **Events of ad-hoc pipelines** flow to the platform, which holds only the most recent ones, so that the Explorer and `tenzir run -r` can show them.
+* **Events sent to [ingest endpoints](platform.md#ingest-endpoints)** wait in a platform buffer until deployments pull them.
 
 When the connection drops, the deployment keeps running its pipelines and reconnects, as our explanation of [deployments without the platform](deployment.md#when-the-platform-is-unreachable) describes.
+
+## Ingest endpoints
+
+Because deployments only dial out, a sender that can only push over HTTPS cannot reach them directly. An **ingest endpoint** closes that gap: it gives webhooks, SaaS integrations, and applications an HTTPS address on the platform that turns each request into an event and buffers it until your deployments pull it with the [`ingest`](../reference/operators/ingest.md) operator.
+
+Each endpoint has an organization-wide name, a URL, and a bearer token that controls who may send; the platform strips the token before events reach a pipeline. The platform buffers events for up to 24 hours or 10 GB, whichever comes first, dropping the oldest once full. Every pipeline that reads the endpoint receives every event independently: deployed pipelines resume where they left off across restarts, while ad-hoc pipelines read only events that arrive while they run.
+
+**Readers** control which deployments may pull from an endpoint, either every deployment in the organization or specific workspaces and deployments. For now, only Tenzir-hosted deployments in `europe-west3` can read ingest endpoints, because the buffer is reachable only from inside Tenzir’s cloud network. Our guide on [receiving events with ingest endpoints](../guides/collect/receive-events-with-ingest-endpoints.md) walks through setup, sender limits, and token rotation.
 
 ## See also
 
@@ -58,4 +67,5 @@ When the connection drops, the deployment keeps running its pipelines and reconn
 * [Deployment](deployment.md)
 * [Quickstart](../guides/quickstart.md)
 * [Control access](../guides/control-access.md)
+* [Receive events with ingest endpoints](../guides/collect/receive-events-with-ingest-endpoints.md)
 * [IAM](../reference/iam.md)
