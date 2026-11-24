@@ -254,6 +254,8 @@ output = input.parse_syslog()
 
 Some Check Point exports use a structured-data dialect that differs from RFC 5424. Tenzir supports the common variants, including `key:"value"` parameters, semicolon separators, and records that omit the SD-ID.
 
+A parameter name that repeats within a structured-data element yields a list of its values in their original order. Check Point, for example, repeats its match-table fields such as `layer_name` once per matching policy layer.
+
 When an SD-ID is missing, Tenzir stores the parameters under `structured_data.checkpoint_2620`:
 
 ```tql

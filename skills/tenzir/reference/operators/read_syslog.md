@@ -23,6 +23,8 @@ Tenzir supports reading syslog messages in both the standardized “Syslog Proto
 
 It also accepts common Check Point structured-data variants, including `key:"value"` parameters, semicolon separators, and messages with no SD-ID.
 
+A parameter name that repeats within a structured-data element yields a list of its values in their original order. Check Point, for example, repeats its match-table fields such as `layer_name` once per matching policy layer.
+
 Depending on the syslog format, the result can be different. Here’s an example of a syslog message in RFC 5424 format:
 
 ```plaintext

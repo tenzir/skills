@@ -34,9 +34,12 @@ Every change to a configuration ends as a commit on a branch of its repository. 
 
 * App
 
-  1. Open **Files** with the branch selected.
-  2. Edit a file, or select **Create file** to add one, such as `pipelines/alerts.tql`. The editor saves your changes into your draft of the branch as you type.
-  3. To throw the draft away, select **Discard** in the top bar.
+  1. Use the path picker in the top bar (available on every page) to select a deployment or a branch. The picker lists each configuration with the deployments that run it beneath, followed by other branches (each showing `off <origin>` when made from a configuration) and **New branch…**.
+  2. Open **Files** under **Configuration** in the sidebar.
+  3. Edit a file, or select **Create file** to add one, such as `pipelines/alerts.tql`. The editor saves your changes into your draft of the branch as you type.
+  4. To throw the draft away, select **Discard** in the top bar.
+
+  When you select a branch without a deployment, runtime pages under **Deployment** stay clickable and tell you they need a deployment. The **Pipelines** page shows each pipeline’s **Pipeline** name, its **File** path, and (when the branch has an origin) a **Changes** column marking pipelines **Added**, **Modified**, or **Deleted** compared with the origin configuration, including your uncommitted edits. Pipelines that merging the branch would delete appear struck through below the branch’s pipelines.
 
 * CLI
 
@@ -81,9 +84,10 @@ Look at the change before it becomes a commit, and once more before it reaches a
 
 * App
 
-  1. Open **History**. Your draft appears at the top, marked **Draft**, and every commit of the branch follows.
+  1. Open **History**. Your draft appears at the top, marked **Draft**, above the branch’s commit graph.
   2. Select the draft or a commit to see the files it changes, each with its diff.
-  3. Commit the draft from the top bar.
+  3. Select **Commit** in the top bar to open the commit review.
+  4. When you have permission to write the branch, your draft commits directly to it by default. On a configuration, you can instead select **Commit to a new branch** to commit your draft to a new working branch made from that configuration (which runs nowhere until merged back). When you may not write the configuration, such as a protected branch, committing to a new branch is the only option.
 
 * CLI
 
@@ -154,7 +158,7 @@ With **Auto deploy** on, every commit to the tracked branch deploys automaticall
   2. In the **Configuration** card, select **Deploy**.
   3. Wait for the message “The deployment accepted the configuration.”
 
-  With **Auto deploy** off, the top bar also offers **Deploy** once the tracked branch has commits that the deployment doesn’t run yet, with a count when the platform knows how many, such as **Deploy 3**. It deploys the latest commit of the selected deployment’s tracked branch, not uncommitted edits, and not each pending commit in turn.
+  With **Auto deploy** off, the top bar also offers **Deploy** once the tracked branch has commits that the deployment doesn’t run yet, with a count when the platform knows how many, such as **Deploy 3**. **Deploy** only appears on a deployment with **Auto deploy** off that is behind its branch; on a working branch selected alone, the top bar offers **Merge** instead. **Deploy** delivers the latest commit of the selected deployment’s tracked branch, not uncommitted edits, and not each pending commit in turn.
 
   With **Auto deploy** on, the top bar shows a notification instead: *Deployed* means that the deployment accepted the latest commit, and *Not deployed* means that it refused it and names the reason.
 
@@ -216,7 +220,60 @@ To test a change on one deployment before production sees it, give the test depl
   tenzir config apply -m 'Try the new alert filter'
   ```
 
-Once the change works on the test deployment, bring it to `main` with Git, such as `git switch main`, `git merge staging`, and `tenzir config apply` in your clone. If `main` is protected, merging into it takes Protected Branches → Write, as our guide on [protecting production branches](control-access.md#protect-production-branches) explains.
+Once the change works on the test deployment, bring it to `main` by merging the branch in the app (see [Merge a branch into a configuration](change-configurations.md#merge-a-branch-into-a-configuration)) or with Git, such as `git switch main`, `git merge staging`, and `tenzir config apply` in your clone. If `main` is protected, merging into it takes **Protected Branches** → **Write**, as our guide on [protecting production branches](control-access.md#protect-production-branches) explains.
+
+## Merge a branch into a configuration
+
+When you commit changes to a working branch (such as one created via **Commit to a new branch** or pushed with Git), merge it into a configuration to ship those commits:
+
+1. Select the working branch in the top-bar picker.
+
+2. Select **Merge** in the top bar to open the **Merge into …** dialog.
+
+   * If the branch was made from a configuration, that origin configuration is preselected.
+   * If the branch has no recorded origin (for example, a branch pushed with Git), choose the target configuration from the list.
+
+3. Review the commits the merge brings, and select **Show diff** to inspect all their changes together against the target configuration.
+
+4. If you still have uncommitted edits on the branch, commit them first: only commits merge.
+
+5. Check the summary of which deployments will deploy the merge automatically and which require **Deploy** by hand, and decide whether to keep **Delete `<branch>` once merged** selected (enabled by default; the branch is kept if someone committed to it in the meantime).
+
+6. Select **Merge**.
+
+Merging requires `WorkspaceBranch.merge` on the target branch (included in **Configuration** → **Write** for unprotected branches and **Protected Branches** → **Write** for protected branches). Merging updates the configuration branch; whether each deployment tracking that branch deploys the result automatically or waits for **Deploy** depends on its **Auto deploy** setting.
+
+## Manage branches
+
+View, rename, and delete workspace branches from the **Branches** page, the CLI, or MCP:
+
+* MCP
+
+  Ask your agent:
+
+  ```prompt
+  Rename the branch alice/main to alice/suricata-alerts in the workspace prod.
+  ```
+
+  You can also ask your agent to list, create, or delete branches.
+
+* App
+
+  1. Open **Branches** under **Platform** in the sidebar. The table lists each configuration with the deployments that run it and the branches made from it nested beneath, followed by **Other branches**.
+  2. To rename a branch, select the rename (pencil) button on its row, enter the new name, and select **Rename branch**. Renaming keeps the branch’s commits, its origin, any branches made from it (which then point to the new name), and every user’s saved draft on it. If you have unsaved edits on that branch or edits kept only in your browser, save or resolve them before renaming.
+  3. To delete a branch, select the delete button on its row and confirm. Deleting a branch also removes every user’s draft on it.
+
+  Both renaming and deleting are refused while any deployment tracks the branch: point those deployments at another branch first.
+
+* CLI
+
+  ```sh
+  tenzir config branch create alice/suricata-alerts --base main
+  tenzir config branch rename alice/suricata-alerts alice/suricata-v2
+  tenzir config branch delete alice/suricata-v2
+  ```
+
+Renaming a branch requires `WorkspaceBranch.rename` on the branch and `WorkspaceBranch.create` on the new name, both subject to branch protection. Deleting a branch requires `WorkspaceBranch.delete`, also subject to branch protection.
 
 ## Fix a refused deploy
 

@@ -96,7 +96,7 @@ A [pipeline](glossary.md#pipeline) that ends in an [output](glossary.md#output) 
 
 Your personal, uncommitted changes to one branch of a [configuration](glossary.md#configuration).
 
-The [app](glossary.md#app) and [MCP](glossary.md#mcp) collect edits in a draft, which nobody else sees and which changes nothing until you commit it. Committing turns the draft into a commit on the branch, and discarding throws it away.
+The [app](glossary.md#app) and [MCP](glossary.md#mcp) collect edits in a draft, which nobody else sees and which changes nothing until you commit it. Committing turns the draft into a commit on the branch (or on a new working branch made from a configuration), and discarding throws it away.
 
 * Read why [every change is a commit](configuration.md#every-change-is-a-commit)
 * [Change configurations](../guides/change-configurations.md#review-and-commit-the-change)

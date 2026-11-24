@@ -48,15 +48,21 @@ Our reference on the [directory layout](../reference/directory-layout.md) lists 
 
 Because the configuration is a Git repository, its history is the history of everything your deployments run. You see who changed what and when, compare commits, and review a change before it reaches production. Every way to change a configuration ends in a commit:
 
-* In the app, the configuration editor keeps a personal **draft** for each branch. It saves as you type and changes nothing until you commit it.
+* In the app, the configuration editor keeps a personal **draft** for each branch. It saves as you type and changes nothing until you commit it. When you have permission to write a configuration, you commit to it directly by default, or choose **Commit to a new branch** in the commit review. When you may not write a configuration, such as a protected branch, committing to a new branch is the only option.
 * On your machine, `tenzir config clone` clones the repository, and `tenzir config apply` commits your changes and pushes them back. Any Git client works as well.
 * An AI agent [connected via MCP](../guides/connect-to-tenzir.md) writes drafts for you to review and commit.
 
 ## Branches and deployments
 
-Each deployment **tracks** one branch of the repository, `main` by default. With **auto deploy** on, every new commit on that branch deploys right away, and a deployment that reconnects while behind its branch gets the latest commit as well. With auto deploy off, the deployment keeps what it runs until you deploy a commit by hand.
+Each deployment **tracks** one branch of the repository, `main` by default. A branch that one or more deployments track is a **configuration**; other branches are working branches that run nowhere on their own.
 
-Several deployments can track the same branch, or different ones, for example `staging` for a test deployment and `main` for production. A workspace can **protect** branches by name pattern, so that only members with the right permission can commit or push to them.
+With **auto deploy** on, every new commit on a tracked branch deploys right away, and a deployment that reconnects while behind its branch gets the latest commit as well. With auto deploy off, the deployment keeps what it runs until you deploy a commit by hand.
+
+Several deployments can track the same branch, or different ones, for example `staging` for a test deployment and `main` for production. A workspace can **protect** branches by name pattern, so that only members with the right permission can commit, merge, push, rename, or delete them.
+
+When you create a working branch from a configuration, the repository records that configuration as the branch’s **origin** (shown as `<branch> off <origin>` in the top bar). Once your changes on the working branch are committed, you merge it back into its origin configuration, and the deployments tracking that configuration pick up the merge commit according to their auto deploy setting.
+
+In the app, **Branches** under **Platform** lists every configuration with the deployments that run it and the working branches made from it, followed by other branches. **History** displays the branch’s commit graph so merged branches appear alongside the main line.
 
 ## What a deploy guarantees
 

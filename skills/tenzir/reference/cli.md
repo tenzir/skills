@@ -91,15 +91,17 @@ The pipeline can call the operators of every package in the deployment’s confi
 
 ### Manage a configuration
 
-| Command                                            | Description                                                                                 |
-| -------------------------------------------------- | ------------------------------------------------------------------------------------------- |
-| `tenzir config clone [<workspace>]`                | Clones a workspace’s configuration, by default into `tenzir-workspace`.                     |
-| `tenzir config apply [-m <message>]`               | Commits every change in the working copy and pushes it to the checked-out branch.           |
-| `tenzir config commit <commit>`                    | Shows a commit and the files it changes, compared with its first parent.                    |
-| `tenzir config diff <commit> <path>`               | Shows the patch of one file that a commit changes.                                          |
-| `tenzir config branch create <name>`               | Creates a branch from the tip of `--base <branch>`, or with `--empty` from an empty commit. |
-| `tenzir config branch protection set [<pattern>…]` | Replaces the patterns of the protected branches. No pattern protects no branch.             |
-| `tenzir package <command>`                         | Adds, updates, and removes [packages](cli.md#packages).   |
+| Command                                            | Description                                                                                                                                    |
+| -------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| `tenzir config clone [<workspace>]`                | Clones a workspace’s configuration, by default into `tenzir-workspace`.                                                                        |
+| `tenzir config apply [-m <message>]`               | Commits every change in the working copy and pushes it to the checked-out branch.                                                              |
+| `tenzir config commit <commit>`                    | Shows a commit and the files it changes, compared with its first parent.                                                                       |
+| `tenzir config diff <commit> <path>`               | Shows the patch of one file that a commit changes.                                                                                             |
+| `tenzir config branch create <name>`               | Creates a branch from the tip of `--base <branch>`, or with `--empty` from an empty commit.                                                    |
+| `tenzir config branch rename <name> <new-name>`    | Renames a branch, keeping its commits, its origin, branches made from it, and every draft on it. Refused while a deployment tracks the branch. |
+| `tenzir config branch delete <name>`               | Deletes a branch and every draft on it. Refused while a deployment tracks the branch.                                                          |
+| `tenzir config branch protection set [<pattern>…]` | Replaces the patterns of the protected branches. No pattern protects no branch.                                                                |
+| `tenzir package <command>`                         | Adds, updates, and removes [packages](cli.md#packages).                                                      |
 
 The `config apply` command refuses a push that isn’t a fast-forward. Named no workspace, it pushes to the one the working copy was cloned from. The `config commit` and `config diff` commands take a full commit SHA. Creating a branch never changes a deployment’s tracker. With auto deploy on, a push to the tracked branch deploys, as the section on [deploying](cli.md#deploying) and our guide on [changing configurations](../guides/change-configurations.md) show.
 

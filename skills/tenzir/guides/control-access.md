@@ -196,7 +196,7 @@ Two safeguards apply to every agent. Before an agent deploys a configuration, th
 
 ## Protect production branches
 
-A deployment runs what its tracked branch holds, so whoever may write that branch decides what runs in production. Protect the branches that production deployments follow, so that committing or pushing to them takes **Protected Branches** → **Write**:
+A deployment runs what its tracked branch holds, so whoever may write that branch decides what runs in production. Protect the branches that production deployments follow, so that committing, merging, pushing, renaming, or deleting them takes **Protected Branches** → **Write**:
 
 * MCP
 
@@ -218,7 +218,7 @@ A deployment runs what its tracked branch holds, so whoever may write that branc
 
   The command replaces every pattern, so list all of them. Without a pattern, it lifts the protection from every branch.
 
-A pattern’s `*` matches any characters but `/`, and `**` matches any characters. The built-in **Member** role can’t write protected branches, but can still draft changes on them, and commit to other branches and propose the change from there. Setting the patterns takes **Protected Branches** → **Change Protection**, which can lift any protection, so grant it as sparingly as **Owner**.
+A pattern’s `*` matches any characters but `/`, and `**` matches any characters. The built-in **Member** role can’t write protected branches, but can still draft changes on them and commit the draft to a new working branch made from the protected configuration, ready for someone with **Protected Branches** → **Write** to review and merge. Setting the patterns takes **Protected Branches** → **Change Protection**, which can lift any protection, so grant it as sparingly as **Owner**.
 
 ## Remove a member
 
