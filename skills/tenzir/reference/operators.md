@@ -363,6 +363,14 @@ Routes events with the same key through the same subpipeline.
 group tenant { summarize count() }
 ```
 
+### [join](operators/join.md)
+
+Combines events from the pipeline input with events from a finite source subpipeline on matching keys.
+
+```tql
+join src_ip == ip, kind="left", into=asset { from_file "assets.json" { read_json } }
+```
+
 ### [load\_balance](operators/load_balance.md)
 
 Routes the data to one of multiple subpipelines.

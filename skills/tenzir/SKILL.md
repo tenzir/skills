@@ -184,6 +184,8 @@ Add context that the original event does not contain.
 
 ##### [Enrich events with AI](guides/enrich/enrich-events-with-ai.md)
 
+##### [Join event streams](guides/enrich/join-event-streams.md)
+
 #### [Overview](guides/normalize.md)
 
 Map source-specific events into a shared schema.

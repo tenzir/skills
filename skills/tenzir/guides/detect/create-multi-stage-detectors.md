@@ -415,6 +415,8 @@ The verdict follows the same conventions as its stages: `time` records when the 
 
 A multi-stage match is still a Detection Finding. OCSF reserves [Incident Finding](https://schema.ocsf.io/classes/incident_finding) (`class_uid: 2005`) for records that a workflow acts on: it requires `finding_info_list` and an `activity_id` from its Create/Update/Close lifecycle, and recommends `impact`, `priority`, and `desc`. Emit one only when your pipeline genuinely opens incidents, for example when handing off to a case management system, and set `is_alert: true` on creation, not on updates or closes. Until then, a Detection Finding with `related_events` carries the full composition story.
 
+To scope findings against a finite asset or vulnerability snapshot or suppress authorized scanners inside a single pipeline, use [`join`](../../reference/operators/join.md) with `kind="semi"` or `kind="anti"`, as shown in our guide on [joining event streams](../enrich/join-event-streams.md).
+
 ## See Also
 
 * [Detections](../../explanations/detections.md)
@@ -425,3 +427,4 @@ A multi-stage match is still a Detection Finding. OCSF reserves [Incident Findin
 * [Model detections in OCSF](model-detections-in-ocsf.md)
 * [Detect over time windows](detect-over-time-windows.md)
 * [Use lookup tables](../enrich/use-lookup-tables.md)
+* [Join event streams](../enrich/join-event-streams.md)

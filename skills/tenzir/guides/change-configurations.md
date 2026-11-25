@@ -226,20 +226,42 @@ Once the change works on the test deployment, bring it to `main` by merging the 
 
 When you commit changes to a working branch (such as one created via **Commit to a new branch** or pushed with Git), merge it into a configuration to ship those commits:
 
-1. Select the working branch in the top-bar picker.
+* MCP
 
-2. Select **Merge** in the top bar to open the **Merge into …** dialog.
+  Ask your agent:
 
-   * If the branch was made from a configuration, that origin configuration is preselected.
-   * If the branch has no recorded origin (for example, a branch pushed with Git), choose the target configuration from the list.
+  ```prompt
+  Merge my branch alice/main into its configuration in the workspace prod.
+  ```
 
-3. Review the commits the merge brings, and select **Show diff** to inspect all their changes together against the target configuration.
+  The `merge_workspace_configuration_branch` tool defaults the target to the branch’s recorded origin when you don’t name one, asks you to confirm when deployments follow the target automatically, and returns the merge commit along with which deployments run the target branch and whether each deploys it automatically.
 
-4. If you still have uncommitted edits on the branch, commit them first: only commits merge.
+* App
 
-5. Check the summary of which deployments will deploy the merge automatically and which require **Deploy** by hand, and decide whether to keep **Delete `<branch>` once merged** selected (enabled by default; the branch is kept if someone committed to it in the meantime).
+  1. Select the working branch in the top-bar picker.
 
-6. Select **Merge**.
+  2. Select **Merge** in the top bar to open the **Merge into …** dialog.
+
+     * If the branch was made from a configuration, that origin configuration is preselected.
+     * If the branch has no recorded origin (for example, a branch pushed with Git), choose the target configuration from the list.
+
+  3. Review the commits the merge brings, and select **Show diff** to inspect all their changes together against the target configuration.
+
+  4. If you still have uncommitted edits on the branch, commit them first: only commits merge.
+
+  5. Check the summary of which deployments will deploy the merge automatically and which require **Deploy** by hand, and decide whether to keep **Delete `<branch>` once merged** selected (enabled by default; the branch is kept if someone committed to it in the meantime).
+
+  6. Select **Merge**.
+
+* CLI
+
+  Merge into the branch’s recorded origin and delete the merged branch afterward:
+
+  ```sh
+  tenzir config branch merge alice/main --delete
+  ```
+
+  Pass `--into <branch>` when the branch has no recorded origin (for example, a branch pushed with Git), `-m <message>` to customize the merge commit message, or `--expected <commit-sha>` to pin a specific reviewed tip. Without `--expected`, the command pins the merge (and `--delete`) to the tip it reads before merging so unseen commits aren’t merged or deleted.
 
 Merging requires `WorkspaceBranch.merge` on the target branch (included in **Configuration** → **Write** for unprotected branches and **Protected Branches** → **Write** for protected branches). Merging updates the configuration branch; whether each deployment tracking that branch deploys the result automatically or waits for **Deploy** depends on its **Auto deploy** setting.
 
@@ -255,7 +277,7 @@ View, rename, and delete workspace branches from the **Branches** page, the CLI,
   Rename the branch alice/main to alice/suricata-alerts in the workspace prod.
   ```
 
-  You can also ask your agent to list, create, or delete branches.
+  You can also ask your agent to list, create, merge, or delete branches.
 
 * App
 
@@ -270,8 +292,11 @@ View, rename, and delete workspace branches from the **Branches** page, the CLI,
   ```sh
   tenzir config branch create alice/suricata-alerts --base main
   tenzir config branch rename alice/suricata-alerts alice/suricata-v2
+  tenzir config branch merge alice/suricata-v2 --delete
   tenzir config branch delete alice/suricata-v2
   ```
+
+When someone renames a branch (through the app, REST API, MCP, or CLI), the platform remembers the rename and forwards the old name to the new one, including across chained renames. Other open browser tabs and saved links holding the old name follow the rename automatically to the same page on the new branch. Saved drafts move with the branch. Edits that a browser hasn’t saved yet stay with the old name, which is why the app waits to rename a branch until your own edits on it are saved. Forwarding ends once another branch is created or pushed with the old name, or once the renamed branch is deleted.
 
 Renaming a branch requires `WorkspaceBranch.rename` on the branch and `WorkspaceBranch.create` on the new name, both subject to branch protection. Deleting a branch requires `WorkspaceBranch.delete`, also subject to branch protection.
 

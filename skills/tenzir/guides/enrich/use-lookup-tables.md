@@ -12,7 +12,7 @@ section: "Docs"
 
 This guide shows you how to use lookup tables in Tenzir to store reference data and apply it to OCSF events. Use lookup tables when you have data keyed by an event value, such as a user ID, hostname, IP address, subnet, file hash, or cloud resource ID.
 
-A [lookup table](../../explanations/enrichment.md#lookup-table) is a Tenzir context that stores key-value mappings. Pipelines update the table, and other pipelines query it with [`context_enrich`](../../reference/operators/context_enrich.md). This guide covers the basic lookup table lifecycle first, then shows where enrichment results should land in OCSF events. Start with the standard `enrichments` array when the extra data is general context. When the enrichment result describes a specific OCSF object, enrich that object instead.
+A [lookup table](../../explanations/enrichment.md#lookup-table) is a Tenzir context that stores key-value mappings. Pipelines update the table, and other pipelines query it with [`context_enrich`](../../reference/operators/context_enrich.md). If you instead need a self-contained relational join against a finite file or query inside one pipeline, including one-to-many matches or `semi` and `anti` filtering, see our guide on [joining event streams](join-event-streams.md). This guide covers the basic lookup table lifecycle first, then shows where enrichment results should land in OCSF events. Start with the standard `enrichments` array when the extra data is general context. When the enrichment result describes a specific OCSF object, enrich that object instead.
 
 ## Set up lookup tables
 

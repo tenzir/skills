@@ -73,7 +73,7 @@ The same holds for [`from_mysql`](../../reference/operators/from_mysql.md), [`fr
 
 ## Shape results with SQL
 
-Use `sql=...` for what the operators cannot express, such as joins, casts, or functions of the data store that TQL lacks. Tenzir sends the query as is.
+Use `sql=...` for what the operators cannot express inside a single database, such as in-database joins, casts, or store-specific functions. Tenzir sends the query as is. When you need to correlate a database query with a separate event stream or file, use [`join`](../../reference/operators/join.md) inside your pipeline as shown in our guide on [joining event streams](../enrich/join-event-streams.md).
 
 Unnest an array column in ClickHouse, one event per tag:
 
