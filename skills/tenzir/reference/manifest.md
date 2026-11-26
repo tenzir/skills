@@ -84,7 +84,7 @@ Where Tenzir takes a package’s version from depends on how a dependency names 
 
 Our reference on [package dependencies](dependencies.md#pinned-revisions) covers pinned revisions in full.
 
-The `version` stays at the last released version between releases. In package mode, [`tenzir-ship release create`](https://tenzir.com/docs/reference/ship-framework/) writes the version it releases into `version`, so the release and its manifest agree. Our library’s CI refuses a release whose manifest states another version, and a change of `version` without a release. Our guide on [releasing a package](../guides/manage-packages.md#release-a-package) walks through a release.
+The `version` stays at the last released version between releases. In package mode, [`tenzir-ship release create`](ship-framework.md) writes the version it releases into `version`, so the release and its manifest agree. Our library’s CI refuses a release whose manifest states another version, and a change of `version` without a release. Our guide on [releasing a package](../guides/manage-packages.md#release-a-package) walks through a release.
 
 ### The description
 

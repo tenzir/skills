@@ -394,4 +394,4 @@ When the pipeline ends while an SPL2 search job is still running, the operator d
 * [`every`](every.md)
 * [`from_http`](from_http.md)
 * [`to_splunk`](to_splunk.md)
-* [Splunk](https://tenzir.com/product/integrations/splunk)
+* [Splunk](https://tenzir.com/product/integrations/splunk.md)

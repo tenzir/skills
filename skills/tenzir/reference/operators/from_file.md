@@ -125,6 +125,6 @@ from_file "/logs/*.json", max_age=1h
 * [`from_file`](from_file.md)
 * [Enrich with asset inventory](../../guides/enrich/enrich-with-asset-inventory.md)
 * [Use lookup tables](../../guides/enrich/use-lookup-tables.md)
-* [File](https://tenzir.com/product/integrations/file)
+* [File](https://tenzir.com/product/integrations/file.md)
 
 Parallelizable: a parallel pipeline may run this operator on several cores at once.

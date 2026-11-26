@@ -129,7 +129,7 @@ Versions follow [semantic versioning](https://semver.org/), applied to the calle
 * A **feature** adds an operator, a constant, or an optional argument.
 * A **bug fix** fixes a defect.
 
-Every entry in a package’s changelog has one of these types, and our [`tenzir-ship`](https://tenzir.com/docs/reference/ship-framework/) tool derives the next version from the entries since the last release:
+Every entry in a package’s changelog has one of these types, and our [`tenzir-ship`](../reference/ship-framework.md) tool derives the next version from the entries since the last release:
 
 | Highest entry type | Before 1.0 | From 1.0 on |
 | ------------------ | ---------- | ----------- |
@@ -153,7 +153,7 @@ Every package in the library follows the same release process:
 2. CI checks the changelog, parses every TQL file, and runs the tests of each changed package against the latest Tenzir release and pre-release.
 3. Once the pull request merges and CI passes, CI tags the release. A released version never changes afterwards.
 
-You can browse the released packages and the use cases they cover in our [library catalog](https://tenzir.com/product/library), on the **Packages** page of the app, or with `tenzir package search`. Our guide on [contributing to the library](../guides/manage-packages.md#contribute-to-the-library) covers the pull request.
+You can browse the released packages and the use cases they cover in our [library catalog](https://tenzir.com/product/library.md), on the **Packages** page of the app, or with `tenzir package search`. Our guide on [contributing to the library](../guides/manage-packages.md#contribute-to-the-library) covers the pull request.
 
 Tenzir 7.0 fetches packages only from public repositories on GitHub: our library or a repository of your own, as our guide on [hosting a package repository](../guides/manage-packages.md#host-a-package-repository) shows. A package that must stay private lives in your configuration under `packages/`.
 

@@ -258,4 +258,4 @@ from_microsoft_sql table="dbo.events",
 
 ## See Also
 
-* [Sql server](https://tenzir.com/product/integrations/microsoft/sql-server)
+* [Microsoft SQL Server](https://tenzir.com/product/integrations/microsoft/sql-server.md)

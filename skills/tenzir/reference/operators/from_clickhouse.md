@@ -122,7 +122,7 @@ Defaults to `true`.
 
 ## Catch-all tables
 
-When you read a table with a [catch-all column](https://tenzir.com/product/integrations/clickhouse#catch-all-columns) in `table` mode, the operator reverses how [`to_clickhouse`](to_clickhouse.md) split each event across the columns:
+When you read a table with a [catch-all column](https://tenzir.com/product/integrations/clickhouse.md#catch-all-columns) in `table` mode, the operator reverses how [`to_clickhouse`](to_clickhouse.md) split each event across the columns:
 
 * The fields of the catch-all column move back to the top level of the event, and the catch-all column itself disappears.
 * A column with a dotted name, such as `src_endpoint.ip`, becomes the nested field at that path and merges with the other fields of `src_endpoint`.
@@ -168,7 +168,7 @@ Tenzir maps ClickHouse types to Tenzir types as follows:
 
 Date and timestamp values outside Tenzir’s nanosecond timestamp range become null with a warning.
 
-JSON in [tables with a catch-all](https://tenzir.com/product/integrations/clickhouse#preserve-dotted-json-keys) is written with `json_type_escape_dots_in_keys=1`. The `table` form enables this setting for such tables to restore literal dotted keys. With `sql`, add `SETTINGS json_type_escape_dots_in_keys=1` to your query. Otherwise, ClickHouse returns escaped keys such as `"a%2Eb"`.
+JSON in [tables with a catch-all](https://tenzir.com/product/integrations/clickhouse.md#preserve-dotted-json-keys) is written with `json_type_escape_dots_in_keys=1`. The `table` form enables this setting for such tables to restore literal dotted keys. With `sql`, add `SETTINGS json_type_escape_dots_in_keys=1` to your query. Otherwise, ClickHouse returns escaped keys such as `"a%2Eb"`.
 
 A `Map(K, V)` becomes a record with one field per key, named by the key’s text, such as `200` for a `UInt16` key. The values convert like a column of type `V`. Rows can have different keys, an empty map becomes an empty record, and if a key repeats, the last value wins. Filters on map fields aren’t pushed down to ClickHouse, and since rows may lack a key, use `?` to access map fields, as in `where attributes.status? == "ok"`.
 
@@ -262,5 +262,5 @@ from_clickhouse sql="DESCRIBE TABLE events", tls=false
 
 * [`to_clickhouse`](to_clickhouse.md)
 * [Read from data stores](../../guides/collect/read-from-data-stores.md)
-* [Clickhouse](https://tenzir.com/product/integrations/clickhouse)
-* [Nano](https://tenzir.com/product/integrations/nano)
+* [ClickHouse](https://tenzir.com/product/integrations/clickhouse.md)
+* [nano](https://tenzir.com/product/integrations/nano.md)

@@ -179,6 +179,6 @@ from_s3 "s3://public-bucket/zeek/**.log", anonymous=true {
 * [`from_file`](from_file.md)
 * [`from_s3`](from_s3.md)
 * [`to_s3`](to_s3.md)
-* [S3](https://tenzir.com/product/integrations/amazon/s3)
+* [Amazon S3](https://tenzir.com/product/integrations/amazon/s3.md)
 
 Parallelizable: a parallel pipeline may run this operator on several cores at once.

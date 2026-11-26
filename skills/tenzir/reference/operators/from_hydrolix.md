@@ -194,4 +194,4 @@ from_hydrolix "https://acme.hydrolix.live",
 ## See Also
 
 * [`to_hydrolix`](to_hydrolix.md)
-* [Hydrolix](https://tenzir.com/product/integrations/hydrolix)
+* [Hydrolix](https://tenzir.com/product/integrations/hydrolix.md)

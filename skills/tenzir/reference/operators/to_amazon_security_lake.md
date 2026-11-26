@@ -118,4 +118,4 @@ to_amazon_security_lake $s3_uri,
 * [`ocsf_cast`](../functions/ocsf_cast.md)
 * [`to_s3`](to_s3.md)
 * [Write partitioned files](../../guides/store/write-partitioned-files.md)
-* [Security lake](https://tenzir.com/product/integrations/amazon/security-lake)
+* [Amazon Security Lake](https://tenzir.com/product/integrations/amazon/security-lake.md)

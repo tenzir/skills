@@ -168,13 +168,13 @@ If a field cannot be bound, the read fails before ClickHouse runs a query, with 
 
 ### Catch-all tables
 
-A table with a [catch-all column](https://tenzir.com/product/integrations/clickhouse#catch-all-columns) returns reconstructed events, in which the fields of the catch-all move to the top level and dotted columns become nested fields. ClickHouse takes over [`where`](../operators/where.md), [`sort`](../operators/sort.md), and [`head`](../operators/head.md) on such a table, binding each field to the single column that holds it: a typed column, or a path of the catch-all or another `JSON` column.
+A table with a [catch-all column](https://tenzir.com/product/integrations/clickhouse.md#catch-all-columns) returns reconstructed events, in which the fields of the catch-all move to the top level and dotted columns become nested fields. ClickHouse takes over [`where`](../operators/where.md), [`sort`](../operators/sort.md), and [`head`](../operators/head.md) on such a table, binding each field to the single column that holds it: a typed column, or a path of the catch-all or another `JSON` column.
 
 The read fails before it runs a query, with the error `ClickHouse cannot compute the stages that the operator took over`, the reason as a note, and a hint to use `pushdown=false`, if:
 
 * ClickHouse takes over a [`select`](../operators/select.md), [`drop`](../operators/drop.md), or [`summarize`](../operators/summarize.md), which need the reconstructed events.
 * A field has no single origin, such as a record that a dotted column merges into, or a field that overlaps a generated column.
-* A column shadows the field, such as a column `event.category` next to the catch-all `event` for the field `category`, since ClickHouse resolves the path to that column. Our integration guide explains how to [name the catch-all column](https://tenzir.com/product/integrations/clickhouse#name-the-catch-all-column) to avoid this.
+* A column shadows the field, such as a column `event.category` next to the catch-all `event` for the field `category`, since ClickHouse resolves the path to that column. Our integration guide explains how to [name the catch-all column](https://tenzir.com/product/integrations/clickhouse.md#name-the-catch-all-column) to avoid this.
 * A field holds a whole `JSON` value, such as the catch-all column itself.
 
 Use `pushdown=false` to compute these operators in Tenzir on the reconstructed events.

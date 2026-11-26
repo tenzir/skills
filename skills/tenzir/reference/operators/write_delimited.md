@@ -89,4 +89,4 @@ ab
 * [`write_all`](write_all.md)
 * [`write_lines`](write_lines.md)
 * [`print_ndjson`](../functions/print_ndjson.md)
-* [Graylog](https://tenzir.com/product/integrations/graylog)
+* [Graylog](https://tenzir.com/product/integrations/graylog.md)

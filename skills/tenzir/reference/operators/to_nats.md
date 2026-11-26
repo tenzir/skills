@@ -120,6 +120,6 @@ to_nats "alerts",
 
 * [`from_nats`](from_nats.md)
 * [Send to destinations](../../guides/route/send-to-destinations.md)
-* [Nats](https://tenzir.com/product/integrations/nats)
+* [NATS](https://tenzir.com/product/integrations/nats.md)
 
 Parallelizable: a parallel pipeline may run this operator on several cores at once.

@@ -110,6 +110,6 @@ to_axiom "eu-logs",
 ## See Also
 
 * [`from_axiom`](from_axiom.md)
-* [Axiom](https://tenzir.com/product/integrations/axiom)
+* [Axiom](https://tenzir.com/product/integrations/axiom.md)
 
 Parallelizable: a parallel pipeline may run this operator on several cores at once.

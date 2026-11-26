@@ -99,5 +99,5 @@ accept_elasticsearch "0.0.0.0:8443",
 
 * [`to_elasticsearch`](to_elasticsearch.md)
 * [`accept_opensearch`](accept_opensearch.md)
-* [Elasticsearch](https://tenzir.com/product/integrations/elasticsearch)
-* [Opensearch](https://tenzir.com/product/integrations/opensearch)
+* [Elasticsearch](https://tenzir.com/product/integrations/elasticsearch.md)
+* [OpenSearch](https://tenzir.com/product/integrations/opensearch.md)

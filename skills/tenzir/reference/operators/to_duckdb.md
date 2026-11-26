@@ -111,7 +111,7 @@ For local databases, a batch is written completely or not at all. DuckDB rejects
 
 Each operator keeps its credentials and TLS settings isolated from other operators. Local-file locking rules do not apply to remote connections.
 
-Remote connections require a DuckDB 2.0 server; DuckDB 1.x servers are not supported. Our [DuckDB integration](https://tenzir.com/product/integrations/duckdb#quack) describes the bundled extensions and tested client and server versions.
+Remote connections require a DuckDB 2.0 server; DuckDB 1.x servers are not supported. Our [DuckDB integration](https://tenzir.com/product/integrations/duckdb.md#quack) describes the bundled extensions and tested client and server versions.
 
 Check remote writes before retrying
 
@@ -197,4 +197,4 @@ to_duckdb "ocsf.duckdb", table="network_activity", checkpoint_interval=1min
 * [Send to destinations](../../guides/route/send-to-destinations.md)
 * [`from_duckdb`](from_duckdb.md)
 * [`to_clickhouse`](to_clickhouse.md)
-* [Duckdb](https://tenzir.com/product/integrations/duckdb)
+* [DuckDB](https://tenzir.com/product/integrations/duckdb.md)

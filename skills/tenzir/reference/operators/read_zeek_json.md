@@ -99,4 +99,4 @@ read_zeek_json
 
 * [`read_zeek_tsv`](read_zeek_tsv.md)
 * [`write_zeek_tsv`](write_zeek_tsv.md)
-* [Zeek](https://tenzir.com/product/integrations/zeek)
+* [Zeek](https://tenzir.com/product/integrations/zeek.md)

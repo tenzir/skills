@@ -127,6 +127,6 @@ to_kafka "metrics", message=this.print_ndjson(), key="server-01"
 ## See Also
 
 * [`from_kafka`](from_kafka.md)
-* [Kafka](https://tenzir.com/product/integrations/kafka)
+* [Kafka](https://tenzir.com/product/integrations/kafka.md)
 
 Parallelizable: a parallel pipeline may run this operator on several cores at once.

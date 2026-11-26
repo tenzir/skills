@@ -82,4 +82,4 @@ from_ftp "ftp://user:pass@ftp.example.org/events.json.gz" {
 ## See Also
 
 * [`to_ftp`](to_ftp.md)
-* [Ftp](https://tenzir.com/product/integrations/ftp)
+* [FTP](https://tenzir.com/product/integrations/ftp.md)

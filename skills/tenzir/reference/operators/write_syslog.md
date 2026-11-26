@@ -91,4 +91,4 @@ write_syslog
 
 * [`read_syslog`](read_syslog.md)
 * [`parse_syslog`](../functions/parse_syslog.md)
-* [Syslog](https://tenzir.com/product/integrations/syslog)
+* [Syslog](https://tenzir.com/product/integrations/syslog.md)

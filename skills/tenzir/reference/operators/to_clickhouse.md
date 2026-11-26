@@ -23,7 +23,7 @@ to_clickhouse [table=string,
 
 In an existing table, mark one writable, top-level `JSON` column with `COMMENT 'tenzir:catch_all'` to collect fields that do not map to other columns. The catch-all column must be a `JSON` column without a default expression. It may set `max_dynamic_paths` and `max_dynamic_types`, but not typed paths or `SKIP` clauses, and its name must not contain dots.
 
-Our [ClickHouse integration guide](https://tenzir.com/product/integrations/clickhouse#catch-all-columns) covers table setup, OCSF examples, type and JSON behavior, restrictions, and schema changes.
+Our [ClickHouse integration guide](https://tenzir.com/product/integrations/clickhouse.md#catch-all-columns) covers table setup, OCSF examples, type and JSON behavior, restrictions, and schema changes.
 
 ## Description
 
@@ -153,7 +153,7 @@ Any value not specified in the record will either be picked up from the configur
 
 ## Types
 
-This section describes automatic table creation in the deprecated create modes and insertion into unmarked tables. Our ClickHouse integration guide describes the [type and JSON behavior of catch-all tables](https://tenzir.com/product/integrations/clickhouse#json-values-and-type-restrictions).
+This section describes automatic table creation in the deprecated create modes and insertion into unmarked tables. Our ClickHouse integration guide describes the [type and JSON behavior of catch-all tables](https://tenzir.com/product/integrations/clickhouse.md#json-values-and-type-restrictions).
 
 Tenzir uses ClickHouse’s [clickhouse-cpp](https://github.com/ClickHouse/clickhouse-cpp) client library to communicate with ClickHouse. The below table explains the translation from Tenzir’s types to ClickHouse:
 
@@ -253,7 +253,7 @@ this = ocsf_cast(this)
 to_clickhouse table=f"ocsf.{class_name.replace(" ","_")}"
 ```
 
-Create one table per OCSF class ahead of time, with a `JSON` column for every free-form field such as `unmapped`. Our [ClickHouse integration guide](https://tenzir.com/product/integrations/clickhouse#catch-all-columns) shows how to set up such tables.
+Create one table per OCSF class ahead of time, with a `JSON` column for every free-form field such as `unmapped`. Our [ClickHouse integration guide](https://tenzir.com/product/integrations/clickhouse.md#catch-all-columns) shows how to set up such tables.
 
 Alternatively, for a single high-volume landing table, serialize each event to a JSON string and write it into one `JSON` column. All events then share one schema and [batch](to_clickhouse.md#batching) into large inserts:
 
@@ -294,5 +294,5 @@ This creates the following table:
 * [`from_clickhouse`](from_clickhouse.md)
 * [`ocsf_cast`](../functions/ocsf_cast.md)
 * [Send to destinations](../../guides/route/send-to-destinations.md)
-* [Clickhouse](https://tenzir.com/product/integrations/clickhouse)
-* [Nano](https://tenzir.com/product/integrations/nano)
+* [ClickHouse](https://tenzir.com/product/integrations/clickhouse.md)
+* [nano](https://tenzir.com/product/integrations/nano.md)

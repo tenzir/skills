@@ -158,5 +158,5 @@ to_redis "user:" + user, command="hset", field=attribute, message=value
 
 * [`from_redis`](from_redis.md)
 * [Send to destinations](../../guides/route/send-to-destinations.md)
-* [Redis](https://tenzir.com/product/integrations/redis)
-* [D4](https://tenzir.com/product/integrations/d4)
+* [Redis](https://tenzir.com/product/integrations/redis.md)
+* [D4 Project](https://tenzir.com/product/integrations/d4.md)

@@ -165,8 +165,8 @@ A package holds operators and constants that pipelines call, in these files:
 | `operators/`    | no       | [User-defined operators](directory-layout.md#operators), one per `.tql` file, in any depth of folders.          |
 | `constants.tql` | no       | [Constants](directory-layout.md#constants) that the package’s operators and its users share, as `let` bindings. |
 | `examples/`     | no       | Runnable example pipelines, one per `.tql` file directly in the folder.                                                                           |
-| `tests/`        | no       | Tests that [`tenzir-test`](https://tenzir.com/docs/reference/test-framework/) runs, with sample data in `tests/inputs/`.                          |
-| `changelog/`    | no       | The changelog and release notes that [`tenzir-ship`](https://tenzir.com/docs/reference/ship-framework/) writes.                                   |
+| `tests/`        | no       | Tests that [`tenzir-test`](test-framework.md) runs, with sample data in `tests/inputs/`.                        |
+| `changelog/`    | no       | The changelog and release notes that [`tenzir-ship`](ship-framework.md) writes.                                 |
 | `package.svg`   | no       | The package’s icon, by our library’s convention, which `package_icon` links.                                                                      |
 | `package.lock`  | no       | The [lock](lock.md) of the package’s dependencies, for a package of its own outside a configuration. Commit it. |
 

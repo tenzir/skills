@@ -62,4 +62,4 @@ from_file "/tmp/conn.log" {
 * [`read_zeek_json`](read_zeek_json.md)
 * [`write_zeek_tsv`](write_zeek_tsv.md)
 * [Onboard a data source](../../tutorials/onboard-a-data-source.md)
-* [Zeek](https://tenzir.com/product/integrations/zeek)
+* [Zeek](https://tenzir.com/product/integrations/zeek.md)

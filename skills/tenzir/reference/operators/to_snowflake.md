@@ -86,4 +86,4 @@ to_snowflake \
 ## See Also
 
 * [Send to destinations](../../guides/route/send-to-destinations.md)
-* [Snowflake](https://tenzir.com/product/integrations/snowflake)
+* [Snowflake](https://tenzir.com/product/integrations/snowflake.md)

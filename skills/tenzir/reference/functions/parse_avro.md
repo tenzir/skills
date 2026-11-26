@@ -71,7 +71,7 @@ this = message.parse_avro(schema={
 
 ## See Also
 
-* [Avro](https://tenzir.com/product/integrations/avro)
+* [Apache Avro](https://tenzir.com/product/integrations/avro.md)
 * [`print_avro`](print_avro.md)
 * [`read_avro`](../operators/read_avro.md)
 * [`decode_hex`](decode_hex.md)

@@ -138,12 +138,12 @@ Documentation and prebuilt TQL for working with one third-party product.
 
 An integration tells you which operators to use for a given vendor, what to configure on their side, and which [package](glossary.md#package) provides operators for it if one exists.
 
-* List of [all integrations](https://tenzir.com/product/integrations)
-* [Does Tenzir have an integration for my system or format?](https://tenzir.com/faqs/does-tenzir-have-an-integration-for-x)
+* List of [all integrations](https://tenzir.com/product/integrations.md)
+* [Does Tenzir have an integration for my system or format?](https://tenzir.com/faqs/does-tenzir-have-an-integration-for-x.md)
 
 ## Library
 
-A public collection of [packages](glossary.md#package) that a [configuration](glossary.md#configuration) can depend on by version, browsable in our [library catalog](https://tenzir.com/product/library) and in the [app](glossary.md#app).
+A public collection of [packages](glossary.md#package) that a [configuration](glossary.md#configuration) can depend on by version, browsable in our [library catalog](https://tenzir.com/product/library.md) and in the [app](glossary.md#app).
 
 The library is [freely available on GitHub](https://github.com/tenzir/library), where we and the community maintain its packages and CI tests and tags every release. A [configuration](glossary.md#configuration) can also depend on packages from other public Git repositories.
 

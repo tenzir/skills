@@ -179,6 +179,6 @@ from_amqp "amqp://broker/vhost",
 
 * [`to_amqp`](to_amqp.md)
 * [Read from message brokers](../../guides/collect/read-from-message-brokers.md)
-* [Amqp](https://tenzir.com/product/integrations/amqp)
+* [AMQP](https://tenzir.com/product/integrations/amqp.md)
 
 Parallelizable: a parallel pipeline may run this operator on several cores at once.

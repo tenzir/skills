@@ -80,6 +80,6 @@ Use [`to_opensearch`](../../reference/operators/to_opensearch.md) instead when t
 * [Map to UDM](map-to-udm.md)
 * [Manage packages](../manage-packages.md)
 * [Write tests](../write-tests.md)
-* [Elasticsearch](https://tenzir.com/product/integrations/elasticsearch)
-* [Opensearch](https://tenzir.com/product/integrations/opensearch)
+* [Elasticsearch](https://tenzir.com/product/integrations/elasticsearch.md)
+* [OpenSearch](https://tenzir.com/product/integrations/opensearch.md)
 * [Onboard a data source](../../tutorials/onboard-a-data-source.md)

@@ -17,7 +17,7 @@ TQL provides `to_*` operators for sending events to various destinations. Messag
 
 ### Message brokers
 
-Send events to message brokers like [Kafka](https://tenzir.com/product/integrations/kafka), [Amazon Kinesis Data Streams](https://tenzir.com/product/integrations/amazon/kinesis), [NATS](https://tenzir.com/product/integrations/nats), and [Redis](https://tenzir.com/product/integrations/redis).
+Send events to message brokers like [Kafka](https://tenzir.com/product/integrations/kafka.md), [Amazon Kinesis Data Streams](https://tenzir.com/product/integrations/amazon/kinesis.md), [NATS](https://tenzir.com/product/integrations/nats.md), and [Redis](https://tenzir.com/product/integrations/redis.md).
 
 Send to Kafka with [`to_kafka`](../../reference/operators/to_kafka.md) and automatic JSON formatting:
 
@@ -62,7 +62,7 @@ to_amazon_kinesis "security-events"
 
 ### Data stores
 
-Send events to data stores like [Clickhouse](https://tenzir.com/product/integrations/clickhouse), [Duckdb](https://tenzir.com/product/integrations/duckdb), [Hydrolix](https://tenzir.com/product/integrations/hydrolix), [Iceberg](https://tenzir.com/product/integrations/iceberg), and [Snowflake](https://tenzir.com/product/integrations/snowflake).
+Send events to data stores like [ClickHouse](https://tenzir.com/product/integrations/clickhouse.md), [DuckDB](https://tenzir.com/product/integrations/duckdb.md), [Hydrolix](https://tenzir.com/product/integrations/hydrolix.md), [Apache Iceberg](https://tenzir.com/product/integrations/iceberg.md), and [Snowflake](https://tenzir.com/product/integrations/snowflake.md).
 
 Send structured events to an existing ClickHouse table with [`to_clickhouse`](../../reference/operators/to_clickhouse.md):
 
@@ -113,7 +113,7 @@ These operators preserve event structure instead of requiring a `message` expres
 
 ### Analytics platforms
 
-Send data to platforms like [Splunk](https://tenzir.com/product/integrations/splunk), [OpenSearch](https://tenzir.com/product/integrations/opensearch), [Elasticsearch](https://tenzir.com/product/integrations/elasticsearch), and [VictoriaLogs](https://tenzir.com/product/integrations/victorialogs), which accepts the same bulk API as OpenSearch.
+Send data to platforms like [Splunk](https://tenzir.com/product/integrations/splunk.md), [OpenSearch](https://tenzir.com/product/integrations/opensearch.md), [Elasticsearch](https://tenzir.com/product/integrations/elasticsearch.md), and [VictoriaLogs](https://tenzir.com/product/integrations/victorialogs.md), which accepts the same bulk API as OpenSearch.
 
 Send to a Splunk HEC endpoint with [`to_splunk`](../../reference/operators/to_splunk.md):
 
@@ -134,7 +134,7 @@ to_opensearch "https://opensearch.example.com:9200",
 
 ### Cloud services
 
-Route events to cloud destinations like [Amazon SQS](https://tenzir.com/product/integrations/amazon/sqs) and [Google Cloud Pub/Sub](https://tenzir.com/product/integrations/google/cloud-pubsub).
+Route events to cloud destinations like [Amazon SQS](https://tenzir.com/product/integrations/amazon/sqs.md) and [Google Cloud Pub/Sub](https://tenzir.com/product/integrations/google/cloud-pubsub.md).
 
 Send to SQS with [`to_amazon_sqs`](../../reference/operators/to_amazon_sqs.md):
 
@@ -176,7 +176,7 @@ to_file "archive.parquet" {
 
 Our guide on [Write partitioned files](../store/write-partitioned-files.md) explains how to partition files and rotate them by size or time, including how buffering operators such as `sort` affect rotation.
 
-Serialize events with [`write_ndjson`](../../reference/operators/write_ndjson.md) and write them to [S3](https://tenzir.com/product/integrations/amazon/s3) with [`to_s3`](../../reference/operators/to_s3.md):
+Serialize events with [`write_ndjson`](../../reference/operators/write_ndjson.md) and write them to [Amazon S3](https://tenzir.com/product/integrations/amazon/s3.md) with [`to_s3`](../../reference/operators/to_s3.md):
 
 ```tql
 from {time: 2026-01-01T00:00:00Z, message: "authentication failed"}
@@ -198,7 +198,7 @@ to_http "https://example.com/ingest" {
 }
 ```
 
-Send newline-delimited JSON over [Tcp](https://tenzir.com/product/integrations/tcp) with [`to_tcp`](../../reference/operators/to_tcp.md):
+Send newline-delimited JSON over [TCP](https://tenzir.com/product/integrations/tcp.md) with [`to_tcp`](../../reference/operators/to_tcp.md):
 
 ```tql
 from {time: 2026-01-01T00:00:00Z, message: "authentication failed"}

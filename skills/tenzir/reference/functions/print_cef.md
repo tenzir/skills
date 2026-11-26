@@ -116,4 +116,4 @@ write_syslog
 * [`read_cef`](../operators/read_cef.md)
 * [`read_syslog`](../operators/read_syslog.md)
 * [`write_syslog`](../operators/write_syslog.md)
-* [Syslog](https://tenzir.com/product/integrations/syslog)
+* [Syslog](https://tenzir.com/product/integrations/syslog.md)

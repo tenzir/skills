@@ -127,6 +127,6 @@ to_amqp "amqp://broker/vhost", message=payload, options={
 
 * [`from_amqp`](from_amqp.md)
 * [Send to destinations](../../guides/route/send-to-destinations.md)
-* [Amqp](https://tenzir.com/product/integrations/amqp)
+* [AMQP](https://tenzir.com/product/integrations/amqp.md)
 
 Parallelizable: a parallel pipeline may run this operator on several cores at once.

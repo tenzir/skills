@@ -284,7 +284,7 @@ unroll hits.hits
 this = hits.hits._source
 ```
 
-See the [OpenSearch integration](https://tenzir.com/product/integrations/opensearch) and the [Wazuh integration](https://tenzir.com/product/integrations/wazuh) for more search-backend examples that use the same pagination pattern.
+See the [OpenSearch integration](https://tenzir.com/product/integrations/opensearch.md) and the [Wazuh integration](https://tenzir.com/product/integrations/wazuh.md) for more search-backend examples that use the same pagination pattern.
 
 ### Rate limiting
 

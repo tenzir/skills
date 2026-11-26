@@ -135,7 +135,7 @@ The operator falls back to a single instance when an argument ties the run to on
 
 ## Amazon MSK
 
-The operator supports [Amazon MSK](https://tenzir.com/product/integrations/amazon/msk) with IAM authentication.
+The operator supports [Amazon MSK](https://tenzir.com/product/integrations/amazon/msk.md) with IAM authentication.
 
 ### `aws_iam = record (optional)`
 
@@ -198,6 +198,6 @@ from_kafka "^tenant-.*\\.alerts$", offset="beginning"
 ## See Also
 
 * [`to_kafka`](to_kafka.md)
-* [Kafka](https://tenzir.com/product/integrations/kafka)
+* [Kafka](https://tenzir.com/product/integrations/kafka.md)
 
 Parallelizable: a parallel pipeline may run this operator on several cores at once.

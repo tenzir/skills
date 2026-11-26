@@ -110,27 +110,7 @@ Write and run tests for your pipelines and packages, with fixtures, custom runne
 
 Invite members and give them the roles they need, limit what scripts and AI agents may do, protect production branches, and remove access you no longer trust.
 
-### Work with Data
-
-#### [Overview](guides/analyze.md)
-
-Summarize event streams and compare current activity with prior behavior.
-
-##### [Aggregate event streams](guides/analyze/aggregate-event-streams.md)
-
-##### [Shape aggregation results](guides/analyze/shape-aggregation-results.md)
-
-##### [Window event streams](guides/analyze/window-event-streams.md)
-
-##### [Calculate aggregate statistics](guides/analyze/calculate-aggregate-statistics.md)
-
-##### [Find unseen and rare values](guides/analyze/find-unseen-and-rare-values.md)
-
-##### [Set adaptive thresholds from a baseline](guides/analyze/set-adaptive-thresholds-from-a-baseline.md)
-
-##### [Identify distribution drift](guides/analyze/identify-distribution-drift.md)
-
-##### [Find cardinality spikes](guides/analyze/find-cardinality-spikes.md)
+### Collect
 
 #### [Overview](guides/collect.md)
 
@@ -148,67 +128,7 @@ Read events and bytes from files, APIs, brokers, stores, and networks.
 
 ##### [Receive events with ingest endpoints](guides/collect/receive-events-with-ingest-endpoints.md)
 
-#### [Overview](guides/detect.md)
-
-Match security activity and model the resulting findings.
-
-##### [Match events with TQL](guides/detect/match-events-with-tql.md)
-
-##### [Model detections in OCSF](guides/detect/model-detections-in-ocsf.md)
-
-##### [Detect over time windows](guides/detect/detect-over-time-windows.md)
-
-##### [Baseline behavior from stored events](guides/detect/baseline-from-stored-events.md)
-
-##### [Detect periodic behavior](guides/detect/detect-periodic-behavior.md)
-
-##### [Create multi-stage detectors](guides/detect/create-multi-stage-detectors.md)
-
-##### [Execute Sigma rules](guides/detect/execute-sigma-rules.md)
-
-##### [Check Sigma rule compatibility with OCSF](guides/detect/check-sigma-rule-compatibility-with-ocsf.md)
-
-##### [Scan bytes with YARA](guides/detect/scan-bytes-with-yara.md)
-
-#### [Overview](guides/enrich.md)
-
-Add context that the original event does not contain.
-
-##### [Declare contexts](guides/enrich/declare-contexts.md)
-
-##### [Use lookup tables](guides/enrich/use-lookup-tables.md)
-
-##### [Enrich with asset inventory](guides/enrich/enrich-with-asset-inventory.md)
-
-##### [Enrich with threat intel](guides/enrich/enrich-with-threat-intel.md)
-
-##### [Enrich events with AI](guides/enrich/enrich-events-with-ai.md)
-
-##### [Join event streams](guides/enrich/join-event-streams.md)
-
-#### [Overview](guides/normalize.md)
-
-Map source-specific events into a shared schema.
-
-##### [Map to ASIM](guides/normalize/map-to-asim.md)
-
-##### [Map to CIM](guides/normalize/map-to-cim.md)
-
-##### [Map to ECS](guides/normalize/map-to-ecs.md)
-
-##### [Map to OCSF](guides/normalize/map-to-ocsf.md)
-
-##### [Map to UDM](guides/normalize/map-to-udm.md)
-
-#### [Overview](guides/optimize.md)
-
-Reduce data volume and processing work in a pipeline.
-
-##### [Filter and select data](guides/optimize/filter-and-select-data.md)
-
-##### [Slice and sample data](guides/optimize/slice-and-sample-data.md)
-
-##### [Deduplicate events](guides/optimize/deduplicate-events.md)
+### Parse
 
 #### [Overview](guides/parse.md)
 
@@ -222,43 +142,7 @@ Turn byte streams and text fields into structured events.
 
 ##### [Clean up values](guides/parse/clean-up-values.md)
 
-#### [Overview](guides/protect.md)
-
-Limit sensitive-data exposure while preserving useful structure.
-
-##### [Mask sensitive data](guides/protect/mask-sensitive-data.md)
-
-##### [Encrypt sensitive data](guides/protect/encrypt-sensitive-data.md)
-
-#### [Overview](guides/replay.md)
-
-Run stored events through live pipelines again.
-
-##### [Replay historical events](guides/replay/replay-historical-events.md)
-
-#### [Overview](guides/route.md)
-
-Deliver event streams to the systems that need them.
-
-##### [Send to destinations](guides/route/send-to-destinations.md)
-
-##### [Expose data as a server](guides/route/expose-data-as-server.md)
-
-##### [Split and merge streams](guides/route/split-and-merge-streams.md)
-
-##### [Fan out with subpipelines](guides/route/fan-out-with-subpipelines.md)
-
-##### [Load-balance pipelines](guides/route/load-balance-pipelines.md)
-
-#### [Overview](guides/search.md)
-
-Push selective queries to data stores, search across heterogeneous backends in one pipeline, and scan Parquet archives in place.
-
-##### [Push queries to data stores](guides/search/push-queries-to-data-stores.md)
-
-##### [Search across data stores](guides/search/search-across-data-stores.md)
-
-##### [Query open archives in place](guides/search/query-open-archives-in-place.md)
+### Shape
 
 #### [Overview](guides/shape.md)
 
@@ -282,11 +166,151 @@ Prepare event fields and records for downstream processing.
 
 ##### [Convert data formats](guides/shape/convert-data-formats.md)
 
+### Normalize
+
+#### [Overview](guides/normalize.md)
+
+Map source-specific events into a shared schema.
+
+##### [Map to ASIM](guides/normalize/map-to-asim.md)
+
+##### [Map to CIM](guides/normalize/map-to-cim.md)
+
+##### [Map to ECS](guides/normalize/map-to-ecs.md)
+
+##### [Map to OCSF](guides/normalize/map-to-ocsf.md)
+
+##### [Map to UDM](guides/normalize/map-to-udm.md)
+
+### Optimize
+
+#### [Overview](guides/optimize.md)
+
+Reduce data volume and processing work in a pipeline.
+
+##### [Filter and select data](guides/optimize/filter-and-select-data.md)
+
+##### [Slice and sample data](guides/optimize/slice-and-sample-data.md)
+
+##### [Deduplicate events](guides/optimize/deduplicate-events.md)
+
+### Protect
+
+#### [Overview](guides/protect.md)
+
+Limit sensitive-data exposure while preserving useful structure.
+
+##### [Mask sensitive data](guides/protect/mask-sensitive-data.md)
+
+##### [Encrypt sensitive data](guides/protect/encrypt-sensitive-data.md)
+
+### Enrich
+
+#### [Overview](guides/enrich.md)
+
+Add context that the original event does not contain.
+
+##### [Declare contexts](guides/enrich/declare-contexts.md)
+
+##### [Use lookup tables](guides/enrich/use-lookup-tables.md)
+
+##### [Enrich with asset inventory](guides/enrich/enrich-with-asset-inventory.md)
+
+##### [Enrich with threat intel](guides/enrich/enrich-with-threat-intel.md)
+
+##### [Enrich events with AI](guides/enrich/enrich-events-with-ai.md)
+
+##### [Join event streams](guides/enrich/join-event-streams.md)
+
+### Analyze
+
+#### [Overview](guides/analyze.md)
+
+Summarize event streams and compare current activity with prior behavior.
+
+##### [Aggregate event streams](guides/analyze/aggregate-event-streams.md)
+
+##### [Shape aggregation results](guides/analyze/shape-aggregation-results.md)
+
+##### [Window event streams](guides/analyze/window-event-streams.md)
+
+##### [Calculate aggregate statistics](guides/analyze/calculate-aggregate-statistics.md)
+
+##### [Find unseen and rare values](guides/analyze/find-unseen-and-rare-values.md)
+
+##### [Set adaptive thresholds from a baseline](guides/analyze/set-adaptive-thresholds-from-a-baseline.md)
+
+##### [Identify distribution drift](guides/analyze/identify-distribution-drift.md)
+
+##### [Find cardinality spikes](guides/analyze/find-cardinality-spikes.md)
+
+### Detect
+
+#### [Overview](guides/detect.md)
+
+Match security activity and model the resulting findings.
+
+##### [Match events with TQL](guides/detect/match-events-with-tql.md)
+
+##### [Model detections in OCSF](guides/detect/model-detections-in-ocsf.md)
+
+##### [Detect over time windows](guides/detect/detect-over-time-windows.md)
+
+##### [Baseline behavior from stored events](guides/detect/baseline-from-stored-events.md)
+
+##### [Detect periodic behavior](guides/detect/detect-periodic-behavior.md)
+
+##### [Create multi-stage detectors](guides/detect/create-multi-stage-detectors.md)
+
+##### [Execute Sigma rules](guides/detect/execute-sigma-rules.md)
+
+##### [Check Sigma rule compatibility with OCSF](guides/detect/check-sigma-rule-compatibility-with-ocsf.md)
+
+##### [Scan bytes with YARA](guides/detect/scan-bytes-with-yara.md)
+
+### Store
+
 #### [Overview](guides/store.md)
 
 Persist events for later search, replay, and analysis.
 
 ##### [Write partitioned files](guides/store/write-partitioned-files.md)
+
+### Search
+
+#### [Overview](guides/search.md)
+
+Push selective queries to data stores, search across heterogeneous backends in one pipeline, and scan Parquet archives in place.
+
+##### [Push queries to data stores](guides/search/push-queries-to-data-stores.md)
+
+##### [Search across data stores](guides/search/search-across-data-stores.md)
+
+##### [Query open archives in place](guides/search/query-open-archives-in-place.md)
+
+### Route
+
+#### [Overview](guides/route.md)
+
+Deliver event streams to the systems that need them.
+
+##### [Send to destinations](guides/route/send-to-destinations.md)
+
+##### [Expose data as a server](guides/route/expose-data-as-server.md)
+
+##### [Split and merge streams](guides/route/split-and-merge-streams.md)
+
+##### [Fan out with subpipelines](guides/route/fan-out-with-subpipelines.md)
+
+##### [Load-balance pipelines](guides/route/load-balance-pipelines.md)
+
+### Replay
+
+#### [Overview](guides/replay.md)
+
+Run stored events through live pipelines again.
+
+##### [Replay historical events](guides/replay/replay-historical-events.md)
 
 ### Contribute
 
@@ -463,6 +487,16 @@ The dependencies key of a manifest lists the packages that a configuration or a 
 #### [Package lock file](reference/lock.md)
 
 The package.lock file pins every package that a configuration uses to one version, one commit, and a hash of its files, including the packages that these use in turn.
+
+### Tools
+
+#### [Test Framework](reference/test-framework.md)
+
+The tenzir-test harness discovers and runs integration tests for pipelines, fixtures, and custom runners.
+
+#### [Ship Framework](reference/ship-framework.md)
+
+tenzir-ship ships as a Python package that requires Python 3.12 or later.
 
 ### Security
 

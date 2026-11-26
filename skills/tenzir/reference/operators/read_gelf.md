@@ -138,4 +138,4 @@ accept_tcp "0.0.0.0:54321" {
 
 ## See Also
 
-* [Graylog](https://tenzir.com/product/integrations/graylog)
+* [Graylog](https://tenzir.com/product/integrations/graylog.md)

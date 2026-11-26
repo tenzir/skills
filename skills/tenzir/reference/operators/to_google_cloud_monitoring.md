@@ -292,4 +292,4 @@ to_google_cloud_monitoring project="my-project",
 ## See Also
 
 * [`to_prometheus`](to_prometheus.md)
-* [Cloud monitoring](https://tenzir.com/product/integrations/google/cloud-monitoring)
+* [Google Cloud Monitoring](https://tenzir.com/product/integrations/google/cloud-monitoring.md)

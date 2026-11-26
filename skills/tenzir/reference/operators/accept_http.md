@@ -165,4 +165,4 @@ accept_http "0.0.0.0:8443" {
 * [`to_http`](to_http.md)
 * [`serve_http`](serve_http.md)
 * [Fetch via HTTP and APIs](../../guides/collect/fetch-via-http-and-apis.md)
-* [Http](https://tenzir.com/product/integrations/http)
+* [HTTP](https://tenzir.com/product/integrations/http.md)

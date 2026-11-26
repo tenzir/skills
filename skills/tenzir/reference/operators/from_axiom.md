@@ -158,5 +158,5 @@ head 20
 ## See Also
 
 * [`to_axiom`](to_axiom.md)
-* [Axiom](https://tenzir.com/product/integrations/axiom)
+* [Axiom](https://tenzir.com/product/integrations/axiom.md)
 * [Axiom](../optimizations/axiom.md)

@@ -149,5 +149,5 @@ from_azure_log_analytics "MyLogs_CL | summarize Count=count() by Computer",
 
 ## See also
 
-* [Azure log analytics](https://tenzir.com/product/integrations/microsoft/azure-log-analytics)
+* [Azure Log Analytics](https://tenzir.com/product/integrations/microsoft/azure-log-analytics.md)
 * [Azure Authentication](../azure-authentication.md)

@@ -54,4 +54,4 @@ to_unix_socket "/run/collector.sock" { write_json }
 * [`accept_unix_socket`](accept_unix_socket.md)
 * [`to_tcp`](to_tcp.md)
 * [`write_delimited`](write_delimited.md)
-* [File](https://tenzir.com/product/integrations/file)
+* [File](https://tenzir.com/product/integrations/file.md)

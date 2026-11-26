@@ -135,4 +135,4 @@ from_velociraptor subscribe="Windows"
 
 ## See Also
 
-* [Velociraptor](https://tenzir.com/product/integrations/velociraptor)
+* [Velociraptor](https://tenzir.com/product/integrations/velociraptor.md)

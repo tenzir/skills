@@ -71,4 +71,4 @@ accept_zmq "tcp://0.0.0.0:5555", prefix="suricata/" {
 * [`to_zmq`](to_zmq.md)
 * [`serve_zmq`](serve_zmq.md)
 * [`from_zmq`](from_zmq.md)
-* [Zeromq](https://tenzir.com/product/integrations/zeromq)
+* [ZeroMQ](https://tenzir.com/product/integrations/zeromq.md)

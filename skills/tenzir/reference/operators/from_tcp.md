@@ -89,4 +89,4 @@ from_tcp "example.org:4443", tls={cacert: "ca.pem"} {
 * [`accept_tcp`](accept_tcp.md)
 * [`serve_tcp`](serve_tcp.md)
 * [`from_unix_socket`](from_unix_socket.md)
-* [Tcp](https://tenzir.com/product/integrations/tcp)
+* [TCP](https://tenzir.com/product/integrations/tcp.md)

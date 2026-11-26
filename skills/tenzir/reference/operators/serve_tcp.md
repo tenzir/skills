@@ -85,4 +85,4 @@ serve_tcp "0.0.0.0:8443", tls={certfile: "cert.pem", keyfile: "key.pem"} {
 * [`accept_tcp`](accept_tcp.md)
 * [`from_tcp`](from_tcp.md)
 * [`to_tcp`](to_tcp.md)
-* [Tcp](https://tenzir.com/product/integrations/tcp)
+* [TCP](https://tenzir.com/product/integrations/tcp.md)

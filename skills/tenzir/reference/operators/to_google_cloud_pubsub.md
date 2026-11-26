@@ -54,6 +54,6 @@ to_google_cloud_pubsub project_id="amazing-project-123456", topic_id="alerts-top
 ## See Also
 
 * [`from_google_cloud_pubsub`](from_google_cloud_pubsub.md)
-* [Cloud pubsub](https://tenzir.com/product/integrations/google/cloud-pubsub)
+* [Google Cloud Pub/Sub](https://tenzir.com/product/integrations/google/cloud-pubsub.md)
 
 Parallelizable: a parallel pipeline may run this operator on several cores at once.

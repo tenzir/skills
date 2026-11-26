@@ -77,4 +77,4 @@ Suricata’s `unix-command` socket is separate from EVE output. It is a control 
 
 * [`read_json`](read_json.md)
 * [`accept_unix_socket`](accept_unix_socket.md)
-* [Suricata](https://tenzir.com/product/integrations/suricata)
+* [Suricata](https://tenzir.com/product/integrations/suricata.md)

@@ -129,6 +129,6 @@ to_google_cloud_logging log_id="LOG_ID", project="PROJECT_ID"
 ## See Also
 
 * [`to_google_secops`](to_google_secops.md)
-* [Cloud logging](https://tenzir.com/product/integrations/google/cloud-logging)
+* [Google Cloud Logging](https://tenzir.com/product/integrations/google/cloud-logging.md)
 
 Parallelizable: a parallel pipeline may run this operator on several cores at once.

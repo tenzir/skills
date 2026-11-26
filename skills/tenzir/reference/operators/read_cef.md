@@ -168,4 +168,4 @@ When you provide a `schema` or `selector`, the last value of a repeated key wins
 * [`read_leef`](read_leef.md)
 * [`parse_cef`](../functions/parse_cef.md)
 * [`print_cef`](../functions/print_cef.md)
-* [Syslog](https://tenzir.com/product/integrations/syslog)
+* [Syslog](https://tenzir.com/product/integrations/syslog.md)

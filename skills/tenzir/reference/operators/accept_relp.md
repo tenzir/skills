@@ -9,7 +9,7 @@ section: "Docs"
 
 > Receives Syslog messages over the Reliable Event Logging Protocol (RELP).
 
-Receives Syslog messages over the [Reliable Event Logging Protocol (RELP)](https://tenzir.com/product/integrations/relp).
+Receives Syslog messages over the [Reliable Event Logging Protocol (RELP)](https://tenzir.com/product/integrations/relp.md).
 
 ```tql
 accept_relp endpoint:string, [max_message_size=int, max_connections=int,

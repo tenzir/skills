@@ -107,6 +107,6 @@ The consumer must know the matching writer schema because `print_avro` does not 
 
 ## See Also
 
-* [Avro](https://tenzir.com/product/integrations/avro)
+* [Apache Avro](https://tenzir.com/product/integrations/avro.md)
 * [`parse_avro`](parse_avro.md)
 * [`to_kafka`](../operators/to_kafka.md)

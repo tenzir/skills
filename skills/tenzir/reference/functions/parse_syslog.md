@@ -334,4 +334,4 @@ RFC 3164/BSD syslog timestamps don’t include a year or timezone, so `parse_sys
 * [`parse_time`](parse_time.md)
 * [`read_syslog`](../operators/read_syslog.md)
 * [`write_syslog`](../operators/write_syslog.md)
-* [Syslog](https://tenzir.com/product/integrations/syslog)
+* [Syslog](https://tenzir.com/product/integrations/syslog.md)

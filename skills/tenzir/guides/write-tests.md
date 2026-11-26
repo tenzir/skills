@@ -10,12 +10,12 @@ section: "Docs"
 
 > Write and run tests for your pipelines and packages, with fixtures, custom runners, and project hooks when tests need more than TQL.
 
-Tests prove that a pipeline or a package turns known input into the output you expect, and keep proving it as TQL, packages, and data change. This guide walks you through the life of a test with our `tenzir-test` harness: write a test, run it, update its baseline, and organize your tests, then extend the harness with fixtures, custom runners, and project hooks, and run everything in CI. Our [test framework reference](https://tenzir.com/docs/reference/test-framework/) lists every setting, flag, and API that the guide uses.
+Tests prove that a pipeline or a package turns known input into the output you expect, and keep proving it as TQL, packages, and data change. This guide walks you through the life of a test with our `tenzir-test` harness: write a test, run it, update its baseline, and organize your tests, then extend the harness with fixtures, custom runners, and project hooks, and run everything in CI. Our [test framework reference](../reference/test-framework.md) lists every setting, flag, and API that the guide uses.
 
 Before you begin
 
 * Install [`uv`](https://docs.astral.sh/uv/). It runs the harness with `uvx tenzir-test` and provides the Python 3.13 that the harness requires.
-* The harness runs pipelines with the `tenzir` command: the one in `TENZIR_BINARY`, else the one on your `PATH`, else `uvx tenzir`. Our reference describes the [binary resolution](https://tenzir.com/docs/reference/test-framework/#binary-resolution) in detail.
+* The harness runs pipelines with the `tenzir` command: the one in `TENZIR_BINARY`, else the one on your `PATH`, else `uvx tenzir`. Our reference describes the [binary resolution](../reference/test-framework.md#binary-resolution) in detail.
 
 ## Write a test
 
@@ -213,9 +213,9 @@ A baseline only works when every run produces the same output. Avoid timestamps 
 
 [`now`](../reference/functions/now.md).
 
-If the pipeline emits the right events in a varying order, as `summarize` does for its groups, add `pre-compare: sort` to the frontmatter instead of ending the pipeline with a `sort` operator, which would leave test scaffolding in the pipeline. Our reference explains how [pre-compare transforms](https://tenzir.com/docs/reference/test-framework/#pre-compare-transforms) order the output.
+If the pipeline emits the right events in a varying order, as `summarize` does for its groups, add `pre-compare: sort` to the frontmatter instead of ending the pipeline with a `sort` operator, which would leave test scaffolding in the pipeline. Our reference explains how [pre-compare transforms](../reference/test-framework.md#pre-compare-transforms) order the output.
 
-If runtime warnings are irrelevant to what a test checks, add `quiet: true` to its frontmatter to keep them out of the baseline. Leave the setting off when the warnings themselves are part of the expected output. Errors and compilation diagnostics remain visible. Our reference covers [runtime warning suppression](https://tenzir.com/docs/reference/test-framework/#runtime-warning-suppression) in full.
+If runtime warnings are irrelevant to what a test checks, add `quiet: true` to its frontmatter to keep them out of the baseline. Leave the setting off when the warnings themselves are part of the expected output. Errors and compilation diagnostics remain visible. Our reference covers [runtime warning suppression](../reference/test-framework.md#runtime-warning-suppression) in full.
 
 ### Configure a test with frontmatter
 
@@ -232,7 +232,7 @@ timeout: 60
 // Long-running test pipeline
 ```
 
-Besides `timeout`, `pre-compare`, and `quiet`, the frontmatter sets the expected exit code with `error`, the runner, the fixtures a test needs, skips, and retries. The [configuration and frontmatter](https://tenzir.com/docs/reference/test-framework/#configuration-and-frontmatter) table in our reference lists every key with its type and default. A `test.yaml` file sets the same keys for a whole directory, as the section on [sharing settings](write-tests.md#share-settings-across-a-directory) shows.
+Besides `timeout`, `pre-compare`, and `quiet`, the frontmatter sets the expected exit code with `error`, the runner, the fixtures a test needs, skips, and retries. The [configuration and frontmatter](../reference/test-framework.md#configuration-and-frontmatter) table in our reference lists every key with its type and default. A `test.yaml` file sets the same keys for a whole directory, as the section on [sharing settings](write-tests.md#share-settings-across-a-directory) shows.
 
 ## Test packages
 
@@ -371,7 +371,7 @@ tenzir package fetch --locked
 
 The tests see only the packages that your `package.yaml` declares. Package directories from `test.yaml` or `--package-dirs` don’t load for a package with a lock, so list every package your tests call under `dependencies` instead. After you edit `package.yaml` by hand, run `tenzir package lock` to bring the lock in line.
 
-Without a `package.lock`, the harness doesn’t use a workspace, and your tests load other packages from the package directories in `test.yaml` or `--package-dirs`, as the section on [loading packages](write-tests.md#load-packages) shows. That suits a repository of packages that test against each other’s current state, such as our library. Our reference details how the harness picks the [workspace](https://tenzir.com/docs/reference/test-framework/#workspaces) for each test.
+Without a `package.lock`, the harness doesn’t use a workspace, and your tests load other packages from the package directories in `test.yaml` or `--package-dirs`, as the section on [loading packages](write-tests.md#load-packages) shows. That suits a repository of packages that test against each other’s current state, such as our library. Our reference details how the harness picks the [workspace](../reference/test-framework.md#workspaces) for each test.
 
 ## Run tests
 
@@ -515,7 +515,7 @@ Large organizations often split tests across several repositories but still want
 uvx tenzir-test --root example-project --all-projects ../example-satellite
 ```
 
-The root project, `example-project`, supplies the shared fixtures and runners. Satellites inherit those definitions, can register their own, and run their tests in isolation. Because the selection lists only the satellite, `--all-projects` keeps the root in scope. The harness prints how many tests each project contributes and which runners they use. Add `--verbose` to see individual results and `--summary` for the breakdown after each project. Our reference explains how [selections](https://tenzir.com/docs/reference/test-framework/#selections) decide which projects run.
+The root project, `example-project`, supplies the shared fixtures and runners. Satellites inherit those definitions, can register their own, and run their tests in isolation. Because the selection lists only the satellite, `--all-projects` keeps the root in scope. The harness prints how many tests each project contributes and which runners they use. Add `--verbose` to see individual results and `--summary` for the breakdown after each project. Our reference explains how [selections](../reference/test-framework.md#selections) decide which projects run.
 
 ### Load packages
 
@@ -535,7 +535,7 @@ When you change a pipeline on purpose, its output changes, and the baselines mus
 uvx tenzir-test --update tests/parse.tql
 ```
 
-The harness rewrites the `.txt` files next to the tests. Review the change with `git diff` before you commit it, so that an unintended change in the output doesn’t slip into a baseline. The update writes raw output, so a [pre-compare transform](https://tenzir.com/docs/reference/test-framework/#pre-compare-transforms) such as `sort` applies only when the harness compares.
+The harness rewrites the `.txt` files next to the tests. Review the change with `git diff` before you commit it, so that an unintended change in the output doesn’t slip into a baseline. The update writes raw output, so a [pre-compare transform](../reference/test-framework.md#pre-compare-transforms) such as `sort` applies only when the harness compares.
 
 To remove generated artifacts from earlier runs, run `uvx tenzir-test --purge`.
 
@@ -592,7 +592,7 @@ from_file f"{env("TENZIR_INPUTS")}/packets.pcap" {
 vendor::analyze
 ```
 
-Place `inputs/` directories as close to the tests that use them as possible. This keeps related data together and makes clear which tests depend on which files. Our reference lists the full [resolution order](https://tenzir.com/docs/reference/test-framework/#local-inputs-directories).
+Place `inputs/` directories as close to the tests that use them as possible. This keeps related data together and makes clear which tests depend on which files. Our reference lists the full [resolution order](../reference/test-framework.md#local-inputs-directories).
 
 ### Group tests into suites
 
@@ -633,7 +633,7 @@ Run the directory that defines the suite when you iterate on it:
 uvx tenzir-test tests/http
 ```
 
-Selecting a single file inside a suite fails with a descriptive error, which keeps the fixture lifecycle predictable and prevents partial runs from leaving shared state behind. Our reference lists every rule of [suites](https://tenzir.com/docs/reference/test-framework/#suites), including how parallel suites claim workers.
+Selecting a single file inside a suite fails with a descriptive error, which keeps the fixture lifecycle predictable and prevents partial runs from leaving shared state behind. Our reference lists every rule of [suites](../reference/test-framework.md#suites), including how parallel suites claim workers.
 
 ### Skip tests
 
@@ -668,7 +668,7 @@ skip:
     - capability-unavailable
 ```
 
-Our reference covers the [skip configuration](https://tenzir.com/docs/reference/test-framework/#skip-configuration) and the [capability requirements](https://tenzir.com/docs/reference/test-framework/#capability-requirements) in detail.
+Our reference covers the [skip configuration](../reference/test-framework.md#skip-configuration) and the [capability requirements](../reference/test-framework.md#capability-requirements) in detail.
 
 ### Retry flaky tests
 
@@ -773,7 +773,7 @@ from {
 }
 ```
 
-Our reference on the [built-in docker-compose fixture](https://tenzir.com/docs/reference/test-framework/#built-in-docker-compose-fixture) lists all options, the readiness detection, and every exported variable.
+Our reference on the [built-in docker-compose fixture](../reference/test-framework.md#built-in-docker-compose-fixture) lists all options, the readiness detection, and every exported variable.
 
 ### Register a fixture
 
@@ -975,7 +975,7 @@ fixtures:
       port: 9090
 ```
 
-The harness constructs the dataclass from the YAML mapping. Nested dataclasses work too, because the harness walks the type annotations recursively. Our reference covers the [fixture options](https://tenzir.com/docs/reference/test-framework/#fixture-options).
+The harness constructs the dataclass from the YAML mapping. Nested dataclasses work too, because the harness walks the type annotations recursively. Our reference covers the [fixture options](../reference/test-framework.md#fixture-options).
 
 ### Add fixture assertions
 
@@ -1046,7 +1046,7 @@ def http() -> FixtureHandle:
     )
 ```
 
-The hook runs after every successful test that requests the fixture, with the keyword arguments `test`, `assertions`, and `fixture`. When it raises an exception, the harness reports the test as failed. Our reference lists the [fixture API](https://tenzir.com/docs/reference/test-framework/#fixture-api), including the fields of `FixtureHandle` and the arguments of `assert_test`.
+The hook runs after every successful test that requests the fixture, with the keyword arguments `test`, `assertions`, and `fixture`. When it raises an exception, the harness reports the test as failed. Our reference lists the [fixture API](../reference/test-framework.md#fixture-api), including the fields of `FixtureHandle` and the arguments of `assert_test`.
 
 #### Write assertion payloads in test frontmatter
 
@@ -1066,7 +1066,7 @@ assertions:
 ---
 ```
 
-The harness constructs an `HttpAssertions` instance from the payload and passes it to the hook. Inside the fixture, `current_assertions("http")` returns the same instance. Our reference covers [fixture assertions](https://tenzir.com/docs/reference/test-framework/#fixture-assertions) in suites.
+The harness constructs an `HttpAssertions` instance from the payload and passes it to the hook. Inside the fixture, `current_assertions("http")` returns the same instance. Our reference covers [fixture assertions](../reference/test-framework.md#fixture-assertions) in suites.
 
 ### Control fixtures from Python tests
 
@@ -1296,7 +1296,7 @@ class XxdRunner(runners.ExtRunner):
 runners.register(XxdRunner())
 ```
 
-The runner claims the `.xxd` extension, and its `run()` method returns whether the test passed. Our reference lists the [runner API](https://tenzir.com/docs/reference/test-framework/#runner-api), including the helpers that the template calls.
+The runner claims the `.xxd` extension, and its `run()` method returns whether the test passed. Our reference lists the [runner API](../reference/test-framework.md#runner-api), including the helpers that the template calls.
 
 Finally, import the runner in `runners/__init__.py` so that the harness registers it on startup:
 
@@ -1465,7 +1465,7 @@ def save_failure_artifacts(ctx):
     print(f"saved failure artifacts to {target}")
 ```
 
-This hook runs after `test_finish` and only for final failures, not for intermediate retry attempts. Our reference lists the [hook events](https://tenzir.com/docs/reference/test-framework/#hooks) and the attributes of `ctx` for each one.
+This hook runs after `test_finish` and only for final failures, not for intermediate retry attempts. Our reference lists the [hook events](../reference/test-framework.md#hooks) and the attributes of `ctx` for each one.
 
 Hook ordering
 
@@ -1568,7 +1568,7 @@ Upload the report even when the test step fails:
 
 Your CI wrapper can use the report to publish test summaries and source-file annotations. The harness doesn’t create those itself.
 
-If tests run inside a build sandbox that can’t export a report file, use `--report-json -` instead. This emits tagged JSON records alongside the normal log, so the wrapper can retain partial results as tests finish. Treat a missing completion record as an incomplete run, not a success. Our reference on [structured reports](https://tenzir.com/docs/reference/test-framework/#structured-reports) describes the schema, the stream protocol, path validation, and diagnostic limits.
+If tests run inside a build sandbox that can’t export a report file, use `--report-json -` instead. This emits tagged JSON records alongside the normal log, so the wrapper can retain partial results as tests finish. Treat a missing completion record as an incomplete run, not a success. Our reference on [structured reports](../reference/test-framework.md#structured-reports) describes the schema, the stream protocol, path validation, and diagnostic limits.
 
 ## Troubleshoot tests
 
@@ -1599,5 +1599,5 @@ The harness loads fixtures from the `fixtures/` folder of the directory you run 
 ## See also
 
 * [Manage packages](manage-packages.md)
-* [Test framework](https://tenzir.com/docs/reference/test-framework)
+* [Test Framework](../reference/test-framework.md)
 * [Onboard a data source](../tutorials/onboard-a-data-source.md)

@@ -267,4 +267,4 @@ The operator currently supports scalar samples only. It does not support native 
 
 * [`to_google_cloud_monitoring`](to_google_cloud_monitoring.md)
 * [`to_http`](to_http.md)
-* [Prometheus](https://tenzir.com/product/integrations/prometheus)
+* [Prometheus](https://tenzir.com/product/integrations/prometheus.md)

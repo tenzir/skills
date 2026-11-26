@@ -134,6 +134,6 @@ If you already have structured data in Tenzir, prefer sending structured data, a
 ## See Also
 
 * [`from_sentinelone_data_lake`](from_sentinelone_data_lake.md)
-* [Sentinelone data lake](https://tenzir.com/product/integrations/sentinelone-data-lake)
+* [SentinelOne Data Lake](https://tenzir.com/product/integrations/sentinelone-data-lake.md)
 
 Parallelizable: a parallel pipeline may run this operator on several cores at once.

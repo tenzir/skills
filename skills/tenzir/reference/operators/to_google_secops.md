@@ -315,6 +315,6 @@ to_google_secops \
 
 * [`to_google_cloud_logging`](to_google_cloud_logging.md)
 * [Map to UDM](../../guides/normalize/map-to-udm.md)
-* [Secops](https://tenzir.com/product/integrations/google/secops)
+* [Google SecOps](https://tenzir.com/product/integrations/google/secops.md)
 
 Parallelizable: a parallel pipeline may run this operator on several cores at once.

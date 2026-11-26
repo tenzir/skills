@@ -189,6 +189,6 @@ to_hydrolix "https://acme.hydrolix.live",
 ## See Also
 
 * [`from_hydrolix`](from_hydrolix.md)
-* [Hydrolix](https://tenzir.com/product/integrations/hydrolix)
+* [Hydrolix](https://tenzir.com/product/integrations/hydrolix.md)
 
 Parallelizable: a parallel pipeline may run this operator on several cores at once.

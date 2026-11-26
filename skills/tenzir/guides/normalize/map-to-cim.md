@@ -88,5 +88,5 @@ Use the `index` option when the destination index differs per event.
 * [Map to UDM](map-to-udm.md)
 * [Manage packages](../manage-packages.md)
 * [Write tests](../write-tests.md)
-* [Splunk](https://tenzir.com/product/integrations/splunk)
+* [Splunk](https://tenzir.com/product/integrations/splunk.md)
 * [Onboard a data source](../../tutorials/onboard-a-data-source.md)

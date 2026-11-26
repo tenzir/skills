@@ -265,6 +265,6 @@ to_splunk "https://localhost:8088",
 ## See Also
 
 * [Map to CIM](../../guides/normalize/map-to-cim.md)
-* [Splunk](https://tenzir.com/product/integrations/splunk)
+* [Splunk](https://tenzir.com/product/integrations/splunk.md)
 
 Parallelizable: a parallel pipeline may run this operator on several cores at once.

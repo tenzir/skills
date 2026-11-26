@@ -168,7 +168,7 @@ ORDER BY time;
 
 The comment `tenzir:catch_all` marks the `event` column as the **catch-all column**. When [`to_clickhouse`](../reference/operators/to_clickhouse.md) writes an event, it looks up each field in the table: a field with a column of the same name goes into that column, and every other field goes into the catch-all. Without a catch-all, Tenzir drops fields that have no column, with a warning.
 
-The name `event` works for OCSF, which has no top-level attribute called `event`. Data with such a field, such as Elastic Common Schema events, needs another name. Otherwise a typed column like `event.category` shadows part of the catch-all, and filters on it stay out of ClickHouse. Our integration guide explains how to [name the catch-all column](https://tenzir.com/product/integrations/clickhouse#name-the-catch-all-column).
+The name `event` works for OCSF, which has no top-level attribute called `event`. Data with such a field, such as Elastic Common Schema events, needs another name. Otherwise a typed column like `event.category` shadows part of the catch-all, and filters on it stay out of ClickHouse. Our integration guide explains how to [name the catch-all column](https://tenzir.com/product/integrations/clickhouse.md#name-the-catch-all-column).
 
 The `DateTime64(9, 'UTC')` type keeps the full nanosecond precision of Tenzir timestamps. The `MergeTree` engine stores the rows sorted by the `ORDER BY` key, here `time`, which the next steps make use of.
 
@@ -975,6 +975,6 @@ rm ocsf-events.json.zst
 
 ## See also
 
-* [Clickhouse](https://tenzir.com/product/integrations/clickhouse)
+* [ClickHouse](https://tenzir.com/product/integrations/clickhouse.md)
 * [Map to OCSF](../guides/normalize/map-to-ocsf.md)
 * [Onboard a data source](onboard-a-data-source.md)

@@ -24,7 +24,7 @@ You install a package by adding it to the dependencies of your workspace’s con
 
 ### Find a package
 
-Our [library catalog](https://tenzir.com/product/library) lists every released package of our library with the use cases it covers and its operators. You can also search from where you work:
+Our [library catalog](https://tenzir.com/product/library.md) lists every released package of our library with the use cases it covers and its operators. You can also search from where you work:
 
 * MCP
 
@@ -232,7 +232,7 @@ Look for newer package releases before deciding which to apply. The app includes
 
 ### Apply updates
 
-An update moves packages to the newest versions that their requirements in `package.yaml` accept, and only `package.lock` changes. An update to the newest release, which the app always makes and the CLI’s `--latest` and the `latest` option of `update_draft_packages` ask for, also rewrites a requirement in `package.yaml` that rules that release out. Before you commit, read the release notes of each new version on its page in our [library catalog](https://tenzir.com/product/library). A requirement such as `^1.2` lets in data changes, such as a mapping that fills another OCSF attribute, and those can affect detections or dashboards that rely on the events.
+An update moves packages to the newest versions that their requirements in `package.yaml` accept, and only `package.lock` changes. An update to the newest release, which the app always makes and the CLI’s `--latest` and the `latest` option of `update_draft_packages` ask for, also rewrites a requirement in `package.yaml` that rules that release out. Before you commit, read the release notes of each new version on its page in our [library catalog](https://tenzir.com/product/library.md). A requirement such as `^1.2` lets in data changes, such as a mapping that fills another OCSF attribute, and those can affect detections or dashboards that rely on the events.
 
 * MCP
 
@@ -525,7 +525,7 @@ A package provides operators and constants, and the pipelines that run belong to
 
 ### Add examples
 
-The `examples` folder holds self-contained snippets that run after installation. For a package in our library, they appear in our [library catalog](https://tenzir.com/product/library), which makes them the first TQL most users see from your package, so they run on a literal event rather than on live credentials. Start with the shortest path through the package:
+The `examples` folder holds self-contained snippets that run after installation. For a package in our library, they appear in our [library catalog](https://tenzir.com/product/library.md), which makes them the first TQL most users see from your package, so they run on a literal event rather than on live credentials. Start with the shortest path through the package:
 
 examples/basic-usage.tql
 
@@ -1093,7 +1093,7 @@ The harness detects the package, runs every test with `tenzir run`, and download
 
 ## Release a package
 
-A release gives a state of your package a version that configurations can depend on. It consists of release notes, the version in your `package.yaml`, and a Git tag on the released commit. You record each change as you make it, then cut, version, and tag the release with our release tool [`tenzir-ship`](https://tenzir.com/docs/reference/ship-framework/).
+A release gives a state of your package a version that configurations can depend on. It consists of release notes, the version in your `package.yaml`, and a Git tag on the released commit. You record each change as you make it, then cut, version, and tag the release with our release tool [`tenzir-ship`](../reference/ship-framework.md).
 
 ### Record each change
 
@@ -1273,7 +1273,7 @@ jobs:
         run: uvx tenzir-test firewall proxy
 ```
 
-The job needs nothing but uv with Python 3.13, which `tenzir-test` requires. Without a `tenzir` on the runner’s `PATH`, the harness runs the pipelines with `uvx tenzir`, the latest Tenzir release. Before the tests of each package, it downloads the locked dependencies with `tenzir package fetch --locked`, which needs Git and network access but no sign-in, and the cache keeps them between runs. To learn early whether your packages work with the next Tenzir release, run the tests a second time with `TENZIR_BINARY: uvx --prerelease allow tenzir` in the step’s `env`, as our library does. Our reference on the [test framework](https://tenzir.com/docs/reference/test-framework/#binary-resolution) lists how the harness finds Tenzir.
+The job needs nothing but uv with Python 3.13, which `tenzir-test` requires. Without a `tenzir` on the runner’s `PATH`, the harness runs the pipelines with `uvx tenzir`, the latest Tenzir release. Before the tests of each package, it downloads the locked dependencies with `tenzir package fetch --locked`, which needs Git and network access but no sign-in, and the cache keeps them between runs. To learn early whether your packages work with the next Tenzir release, run the tests a second time with `TENZIR_BINARY: uvx --prerelease allow tenzir` in the step’s `env`, as our library does. Our reference on the [test framework](../reference/test-framework.md#binary-resolution) lists how the harness finds Tenzir.
 
 With many packages, test only those a pull request touches, as the [detection script](https://github.com/tenzir/library/blob/main/.github/scripts/detect-touched-packages.sh) of our library does.
 
@@ -1304,7 +1304,7 @@ tenzir package search --git https://github.com/acme/acme-packages.git
 
 ## Contribute to the library
 
-Our library at [github.com/tenzir/library](https://github.com/tenzir/library) collects the packages that we and the community maintain. A package in the library is one short line away for every Tenzir user, as in `suricata: ^1.2.0`, and appears in our [library catalog](https://tenzir.com/product/library) and on the app’s **Packages** page. Your package joins it through a pull request that CI and a maintainer check, and CI releases it once the pull request merges.
+Our library at [github.com/tenzir/library](https://github.com/tenzir/library) collects the packages that we and the community maintain. A package in the library is one short line away for every Tenzir user, as in `suricata: ^1.2.0`, and appears in our [library catalog](https://tenzir.com/product/library.md) and on the app’s **Packages** page. Your package joins it through a pull request that CI and a maintainer check, and CI releases it once the pull request merges.
 
 Get feedback first
 

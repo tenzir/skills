@@ -234,4 +234,4 @@ this = {
 * [Create multi-stage detectors](create-multi-stage-detectors.md)
 * [Manage packages](../manage-packages.md)
 * [Map to OCSF](../normalize/map-to-ocsf.md)
-* [Windows event logs](https://tenzir.com/product/integrations/microsoft/windows-event-logs)
+* [Microsoft Windows Event Logs](https://tenzir.com/product/integrations/microsoft/windows-event-logs.md)

@@ -220,4 +220,4 @@ The input emits the MQTT topic and stores the JSON message under `payload`.
 
 ## See also
 
-* [Fluent bit](https://tenzir.com/product/integrations/fluent-bit)
+* [Fluent Bit](https://tenzir.com/product/integrations/fluent-bit.md)

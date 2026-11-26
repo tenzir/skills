@@ -127,4 +127,4 @@ Microsoft also describes [advanced hunting with connected Sentinel data](https:/
 
 ## See also
 
-[Defender](https://tenzir.com/product/integrations/microsoft/defender)
+[Microsoft Defender](https://tenzir.com/product/integrations/microsoft/defender.md)

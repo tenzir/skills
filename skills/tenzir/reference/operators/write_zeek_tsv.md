@@ -61,4 +61,4 @@ to_file "filtered_conn.log" {
 
 * [`read_zeek_json`](read_zeek_json.md)
 * [`read_zeek_tsv`](read_zeek_tsv.md)
-* [Zeek](https://tenzir.com/product/integrations/zeek)
+* [Zeek](https://tenzir.com/product/integrations/zeek.md)

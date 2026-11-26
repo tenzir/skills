@@ -181,4 +181,4 @@ publish "splunk"
 
 ## See also
 
-* [Splunk](https://tenzir.com/product/integrations/splunk)
+* [Splunk](https://tenzir.com/product/integrations/splunk.md)

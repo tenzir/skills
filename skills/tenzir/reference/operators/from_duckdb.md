@@ -21,7 +21,7 @@ from_duckdb uri:string, [token=secret], [tls=bool|record],
 
 The `from_duckdb` operator reads data from a [DuckDB](https://duckdb.org) database. Use a local file, an in-memory database, or a remote DuckDB server over Quack. Local databases run embedded inside Tenzir.
 
-Our [DuckDB integration](https://tenzir.com/product/integrations/duckdb#extensions) describes the bundled extensions available to local queries.
+Our [DuckDB integration](https://tenzir.com/product/integrations/duckdb.md#extensions) describes the bundled extensions available to local queries.
 
 The operator supports two query modes:
 
@@ -130,7 +130,7 @@ The page on [DuckDB optimizations](../optimizations/duckdb.md) describes which o
 
 Each operator keeps its credentials and TLS settings isolated from other operators. Local-file locking rules do not apply to remote connections.
 
-Remote connections require a DuckDB 2.0 server; DuckDB 1.x servers are not supported. Our [DuckDB integration](https://tenzir.com/product/integrations/duckdb#quack) describes the tested client and server versions.
+Remote connections require a DuckDB 2.0 server; DuckDB 1.x servers are not supported. Our [DuckDB integration](https://tenzir.com/product/integrations/duckdb.md#quack) describes the tested client and server versions.
 
 ## Concurrency
 
@@ -267,4 +267,4 @@ from_duckdb "events.duckdb", table="alerts", live=true, tracking_column="seq"
 * [`to_duckdb`](to_duckdb.md)
 * [`from_clickhouse`](from_clickhouse.md)
 * [`from_mysql`](from_mysql.md)
-* [Duckdb](https://tenzir.com/product/integrations/duckdb)
+* [DuckDB](https://tenzir.com/product/integrations/duckdb.md)

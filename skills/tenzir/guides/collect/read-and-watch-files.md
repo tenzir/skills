@@ -153,7 +153,7 @@ Access files directly from cloud storage providers using their native URLs. The 
 
 ### Amazon S3
 
-Access [S3](https://tenzir.com/product/integrations/amazon/s3) buckets directly using `s3://` URLs:
+Access [Amazon S3](https://tenzir.com/product/integrations/amazon/s3.md) buckets directly using `s3://` URLs:
 
 ```tql
 from_file "s3://bucket/path/to/file.csv"
@@ -167,7 +167,7 @@ from_file "s3://bucket/data/**/*.parquet"
 
 ### Google Cloud Storage
 
-Access [GCS](https://tenzir.com/product/integrations/google/cloud-storage) buckets using `gs://` URLs:
+Access [GCS](https://tenzir.com/product/integrations/google/cloud-storage.md) buckets using `gs://` URLs:
 
 ```tql
 from_file "gs://bucket/path/to/file.csv"
@@ -175,7 +175,7 @@ from_file "gs://bucket/path/to/file.csv"
 
 ### Azure Blob Storage
 
-Access [Azure blob storage](https://tenzir.com/product/integrations/microsoft/azure-blob-storage) using `abfs://` URLs:
+Access [Azure Blob Storage](https://tenzir.com/product/integrations/microsoft/azure-blob-storage.md) using `abfs://` URLs:
 
 ```tql
 from_file "abfs://container/path/to/file.csv"

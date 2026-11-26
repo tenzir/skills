@@ -255,4 +255,4 @@ from_mysql table="events", live=true, tracking_column="event_id",
 
 * [Read from data stores](../../guides/collect/read-from-data-stores.md)
 * [`to_clickhouse`](to_clickhouse.md)
-* [Mysql](https://tenzir.com/product/integrations/mysql)
+* [MySQL](https://tenzir.com/product/integrations/mysql.md)

@@ -515,4 +515,4 @@ from_file "/var/log/auth.log" {
 
 * [`write_syslog`](write_syslog.md)
 * [`parse_syslog`](../functions/parse_syslog.md)
-* [Syslog](https://tenzir.com/product/integrations/syslog)
+* [Syslog](https://tenzir.com/product/integrations/syslog.md)

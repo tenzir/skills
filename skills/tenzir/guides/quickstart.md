@@ -10,7 +10,7 @@ section: "Docs"
 
 > See live security events flow through Tenzir within minutes, from your AI agent, the app, or a terminal.
 
-The fastest way to understand Tenzir is to watch it work on real data. In a few steps, you get a deployment, feed it a live stream of Zeek and Suricata events from our [`demo` package](https://tenzir.com/product/library/demo), look at them, and keep a pipeline running. Each step offers three ways to do it: ask your AI agent via MCP, click through the app, or use a terminal. Pick one, and every step follows it.
+The fastest way to understand Tenzir is to watch it work on real data. In a few steps, you get a deployment, feed it a live stream of Zeek and Suricata events from our [`demo` package](https://tenzir.com/product/library/demo.md), look at them, and keep a pipeline running. Each step offers three ways to do it: ask your AI agent via MCP, click through the app, or use a terminal. Pick one, and every step follows it.
 
 1. Create an account at [platform.tenzir.com](https://platform.tenzir.com) and connect the way you want to work.
 

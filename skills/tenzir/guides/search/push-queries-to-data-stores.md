@@ -103,7 +103,7 @@ sort -errors, bucket, method
 head 10
 ```
 
-Axiom evaluates the filter, 5-minute `bin` buckets, exact two-stage summary, sort, and `take 10` server-side before returning the top 10 rows. See the [Axiom integration](https://tenzir.com/product/integrations/axiom) for token scopes and edge endpoints, and our [Axiom optimizations reference](../../reference/optimizations/axiom.md) for APL spellings and semantic details.
+Axiom evaluates the filter, 5-minute `bin` buckets, exact two-stage summary, sort, and `take 10` server-side before returning the top 10 rows. See the [Axiom integration](https://tenzir.com/product/integrations/axiom.md) for token scopes and edge endpoints, and our [Axiom optimizations reference](../../reference/optimizations/axiom.md) for APL spellings and semantic details.
 
 ### SentinelOne Singularity Data Lake (PowerQuery)
 
