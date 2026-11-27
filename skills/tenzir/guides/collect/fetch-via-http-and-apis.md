@@ -327,8 +327,8 @@ Wrap `to_http` in [`each`](../../reference/operators/each.md) to send a separate
 from {message: "event-1"},
      {message: "event-2"},
      {message: "event-3"}
-each {
-  from $this
+each $event=this {
+  from $event
   to_http "https://example.com/webhook" {
     write_json
   }
@@ -339,8 +339,8 @@ This sends three independent `POST` requests, each carrying one event as JSON. U
 
 ```tql
 subscribe "alerts"
-each parallel=4 {
-  from $this
+each $event=this, parallel=4 {
+  from $event
   to_http "https://example.com/webhook" {
     write_json
   }
@@ -353,8 +353,8 @@ When sending a single event and either using JSON or form encoding, [`from_http`
 
 ```tql
 subscribe "alerts"
-each {
-  from_http f"https://example.com/webhook", body=$this {
+each $event=this {
+  from_http f"https://example.com/webhook", body=$event {
     read_json
   }
 }

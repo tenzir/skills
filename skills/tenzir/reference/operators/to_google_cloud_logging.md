@@ -16,7 +16,7 @@ to_google_cloud_logging log_id=string, [project=string, organization=string,
           billing_account=string, folder=string,] [resource_type=string,
           resource_labels=record, payload=string, severity=string,
           timestamp=time, service_credentials=string, batch_timeout=duration,
-          max_batch_size=int, parallel=int]
+          max_batch_size=int, parallel=int, compress=bool]
 ```
 
 ## Description
@@ -94,6 +94,12 @@ Defaults to `1k`.
 The maximum number of concurrent requests per operator instance.
 
 Defaults to `10`. Must be at least `1`.
+
+### `compress = bool (optional)`
+
+Whether to compress write requests with gzip. Cloud Logging decompresses the requests transparently, so compression reduces network traffic without changing the ingested log entries.
+
+Defaults to `true`.
 
 ## Parallelism
 

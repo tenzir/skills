@@ -149,7 +149,7 @@ A deployment looks up a secret’s actual value when it prepares the expression 
 
 The deployment caches a resolved value for 15 minutes after its first use. A changed value therefore reaches a pipeline that starts once the cache has dropped the old one, while a running pipeline keeps the value it resolved.
 
-Because the values come from the platform, a pipeline that starts while the platform is unreachable cannot resolve its managed secrets. A deployment that **buffers secrets** avoids this: the platform seals every secret the deployment may read into the configuration it delivers, with a key that only the deployment holds, so its pipelines start without the platform. Turn it on with `tenzir deployment resilience enable`. A pipeline that uses a buffered secret restarts when the secret’s value changes.
+Because the values come from the platform, a pipeline that starts while the platform is unreachable cannot resolve its managed secrets. A deployment that **buffers secrets** avoids this: the platform seals every secret the deployment may read into the configuration it delivers, with a key that only the deployment holds, so its pipelines start without the platform. Turn it on with `tenzir deployment settings <deployment> --resilience on`. A pipeline that uses a buffered secret restarts when the secret’s value changes.
 
 ## Security Design
 

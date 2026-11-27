@@ -117,7 +117,7 @@ reorder on=time, tolerance=30s
 A busy producer can advance that watermark far enough to make an event from a quiet producer late. Put `reorder` inside [`group`](../../reference/operators/group.md) when each source or entity needs an independent clock:
 
 ```tql
-group device.uid {
+group $device=device.uid {
   reorder on=time, tolerance=30s
   // Process each device in timestamp order.
   …

@@ -18,8 +18,8 @@ The `load_balance` operator spawns a nested pipeline for each element in a confi
 ```tql
 let $endpoints = ["host1:8080", "host2:8080", "host3:8080"]
 subscribe "events"
-load_balance $endpoints {
-  to_tcp $endpoints { write_json }
+load_balance $endpoint=$endpoints {
+  to_tcp $endpoint { write_json }
 }
 ```
 
@@ -32,12 +32,12 @@ Each event goes to exactly one endpoint. The operator may reorder the event stre
 Distribute events across multiple TCP receivers:
 
 ```tql
-let $cfg = ["192.168.0.30:8080", "192.168.0.31:8080"]
+let $endpoints = ["192.168.0.30:8080", "192.168.0.31:8080"]
 
 
 subscribe "input"
-load_balance $cfg {
-  to_tcp $cfg { write_json }
+load_balance $endpoint=$endpoints {
+  to_tcp $endpoint { write_json }
 }
 ```
 
@@ -53,8 +53,8 @@ let $brokers = [
 
 
 subscribe "events"
-load_balance $brokers {
-  to_kafka $brokers.topic, options={"bootstrap.servers": $brokers.host}
+load_balance $broker=$brokers {
+  to_kafka $broker.topic, options={"bootstrap.servers": $broker.host}
 }
 ```
 
@@ -65,16 +65,16 @@ load_balance $brokers {
 Route to multiple Splunk instances, each with its own authentication:
 
 ```tql
-let $cfg = [
+let $targets = [
   {ip: "192.168.0.30", token: "token-1234"},
   {ip: "192.168.0.31", token: "token-5678"},
 ]
 
 
 subscribe "input"
-load_balance $cfg {
-  let $endpoint = f"{$cfg.ip}:8088"
-  to_splunk $endpoint, hec_token=$cfg.token
+load_balance $target=$targets {
+  let $endpoint = f"{$target.ip}:8088"
+  to_splunk $endpoint, hec_token=$target.token
 }
 ```
 
@@ -90,8 +90,8 @@ let $clusters = [
 
 
 subscribe "logs"
-load_balance $clusters {
-  to_opensearch $clusters.url, action="index", index=$clusters.index
+load_balance $cluster=$clusters {
+  to_opensearch $cluster.url, action="index", index=$cluster.index
 }
 ```
 

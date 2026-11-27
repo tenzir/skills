@@ -78,7 +78,7 @@ You work with Tenzir through the [platform](../explanations/platform.md), and yo
   2. Select **Create API key** and give the key a name, such as `ci`.
   3. Copy the secret that the dialog shows.
 
-  The platform shows the secret only once, so store it where your script reads it, such as a secret of your CI system. With the CLI, `tenzir api-key create --name ci` does the same.
+  The platform shows the secret only once, so store it where your script reads it, such as a secret of your CI system. With the CLI, `tenzir platform api-key create --name ci` does the same.
 
   Send the key in the `x-tenzir-api-key` header. Reading your account works with every key:
 

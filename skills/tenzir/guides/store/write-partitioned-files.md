@@ -137,10 +137,10 @@ Use `partition_by` when each key only needs a separate output path. The destinat
 Use [`group`](../../reference/operators/group.md) when each key needs a complete keyed subpipeline, such as a different destination, independent stateful processing, or additional routing logic. For example, aggregate each tenant independently before writing one summary per tenant:
 
 ```tql
-group tenant {
+group $tenant=tenant {
   summarize events=count(), bytes=sum(bytes)
-  tenant = $group
-  to_file f"/tmp/summaries/{$group}.json" {
+  tenant = $tenant
+  to_file f"/tmp/summaries/{$tenant}.json" {
     write_ndjson
   }
 }

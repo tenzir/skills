@@ -75,7 +75,7 @@ When the search parameters come from an input stream, such as a list of indicato
 
 [`fork_merge`](../../reference/operators/fork_merge.md) to send every request event to all backend branches and collect their answers back into one stream.
 
-Because source operators produce events on their own rather than consuming an upstream stream, wrap each branch’s source inside [`each`](../../reference/operators/each.md). Inside `each`, `$this` binds the current request record so every branch can parameterize its query and time range from the same input:
+Because source operators produce events on their own rather than consuming an upstream stream, wrap each branch’s source inside [`each`](../../reference/operators/each.md). Named bindings on `each` expose the current request’s fields as scoped `$` variables so every branch can parameterize its query and time range from the same input:
 
 ```tql
 from {
@@ -88,13 +88,13 @@ from {
   end: 2026-09-01T11:00:00Z,
 }
 fork_merge {
-  each {
+  each $ip=ip, $start=start, $end=end {
     from_splunk "https://splunk.example.com:8089",
       index="network",
-      earliest=$this.start,
-      latest=$this.end,
+      earliest=$start,
+      latest=$end,
       headers={Authorization: secret("splunk-rest-authorization")}
-    where dest_ip == $this.ip
+    where dest_ip == $ip
     this = {
       event: {
         time: _time,
@@ -109,12 +109,12 @@ fork_merge {
     }
   }
 }, {
-  each {
+  each $ip=ip, $start=start, $end=end {
     from_clickhouse table="ocsf.network_activity",
       host="clickhouse.example.com",
       password=secret("CLICKHOUSE_PASSWORD")
-    where dst_endpoint.ip == $this.ip
-    where time >= $this.start and time < $this.end
+    where dst_endpoint.ip == $ip
+    where time >= $start and time < $end
     this = {
       event: {
         time: time,
@@ -129,12 +129,12 @@ fork_merge {
     }
   }
 }, {
-  each {
+  each $ip=ip, $start=start, $end=end {
     from_s3 "s3://security-archive/network/**/*.parquet" {
       read_parquet
     }
-    where time >= $this.start and time < $this.end
-    where dst_endpoint.ip == $this.ip
+    where time >= $start and time < $end
+    where dst_endpoint.ip == $ip
     this = {
       event: {
         time: time,
@@ -162,9 +162,9 @@ head 500
 
 When the same observation was routed to both a SIEM and a lake or archive, two branches return the same event. Map every branch into the same `(origin, uid)` producer namespace and stable event identifier (here, the producing product name and event UID). The second `fork_merge` keeps unidentified records safe: events with both `origin` and `uid` present are grouped with [`summarize`](../../reference/operators/summarize.md) (taking a representative record with [`first`](../../reference/functions/first.md) and collecting retrieval sources with [`distinct`](../../reference/functions/distinct.md)), while events where either key is `null` bypass grouping with `seen_in=[backend]` so unrelated records never collapse together. If you only need the first sighting of identified events and do not need `seen_in`, replace the first branch’s `summarize` with [`deduplicate`](../../reference/operators/deduplicate.md) on `origin, uid` while keeping the `null`-bypass branch intact.
 
-In the S3 branch, `**/*.parquet` covers arbitrary date ranges without skipping partitions across midnight UTC or month boundaries, while `where time >= $this.start and time < $this.end` enforces the exact window. When your requests always stay within a single UTC day or month, you can narrow the S3 prefix explicitly (for example with `$this.start.format_time("%Y/%m/%d")`) to reduce object listings.
+In the S3 branch, `**/*.parquet` covers arbitrary date ranges without skipping partitions across midnight UTC or month boundaries, while `where time >= $start and time < $end` enforces the exact window. When your requests always stay within a single UTC day or month, you can narrow the S3 prefix explicitly (for example with `$start.format_time("%Y/%m/%d")`) to reduce object listings.
 
-For large indicator lists, set `parallel` on `each` (for example `each parallel=4`) to bound the number of concurrent child subpipelines per operator instance. This caps in-flight concurrency within one instance rather than enforcing a deployment-wide or requests-per-second rate limit.
+For large indicator lists, set `parallel` on `each` (for example `each $ip=ip, $start=start, $end=end, parallel=4`) to bound the number of concurrent child subpipelines per operator instance. This caps in-flight concurrency within one instance rather than enforcing a deployment-wide or requests-per-second rate limit.
 
 ## Filter on normalized OCSF fields and still push down
 

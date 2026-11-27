@@ -26,6 +26,7 @@ The operator injects the following default librdkafka configuration values in ca
 
 * `bootstrap.servers`: `localhost`
 * `client.id`: `tenzir`
+* `compression.type`: `zstd`, as described in [Compression](to_kafka.md#compression)
 
 ### `topic: string`
 
@@ -84,6 +85,14 @@ Kafka orders messages only within a partition, and without a `key` the partition
 
 Setting `key` keeps the operator on a single instance. The key is one constant for the whole run, so every message hashes to the same partition. Independent producers would interleave their requests into that partition without gaining any throughput, because a partition accepts writes at the same rate no matter how many producers target it.
 
+## Compression
+
+The operator compresses messages with zstd by default to reduce the bytes it sends over the network. Kafka consumers decompress messages transparently, so readers of the topic need no changes. A batch that compression would not make smaller, such as a single very short message, goes out uncompressed.
+
+Brokers accept zstd-compressed messages from Kafka 2.1 onwards. For older brokers, or to trade compression ratio for lower CPU usage, set `compression.type` to `lz4`, `snappy`, or `gzip` in `options`. To disable compression, set it to `none`, as in `options={"compression.type": "none"}`. A value for `compression.type` or its alias `compression.codec` in `options` or in `kafka.yaml` takes precedence over the default.
+
+The operator’s bytes-written metrics count the message payload before compression.
+
 ## Examples
 
 ### Send NDJSON-formatted events to topic `events` (using default)
@@ -122,6 +131,15 @@ to_kafka "alerts", message=alert_msg, timestamp=2024-01-01T00:00:00
 ```tql
 metrics
 to_kafka "metrics", message=this.print_ndjson(), key="server-01"
+```
+
+### Send uncompressed messages
+
+Disable the default zstd compression, for example when a broker or consumer cannot handle compressed messages:
+
+```tql
+subscribe "logs"
+to_kafka "events", options={"compression.type": "none"}
 ```
 
 ## See Also

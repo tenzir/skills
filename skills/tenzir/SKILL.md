@@ -514,17 +514,19 @@ The platform decides every request with role-based access control: a member’s 
 
 ### Interfaces
 
-#### [API](reference/api.md)
-
-The platform’s REST API offers everything that the app, the CLI, and the MCP server do, under the same permissions, for your own scripts and tools.
-
 #### [MCP](reference/mcp.md)
 
 The platform’s MCP server lets an AI agent do what you do in the app, with your permissions: run pipelines, read diagnostics, change the configuration, and manage deployments.
 
 #### [CLI](reference/cli.md)
 
-The tenzir command runs pipelines on your machine and on your deployments, runs a deployment on your machine, and does everything the platform offers from a terminal.
+The tenzir command runs pipelines on your machine and on your deployments, runs a deployment on your machine, and does everything the platform offers from a terminal, under the same permissions as the app, the API, and the MCP server.
+
+### API
+
+#### [Overview](reference/api.md)
+
+The platform’s REST API offers everything that the app, the MCP server, and the CLI do, under the same permissions, for your own scripts and tools.
 
 ### Operators
 

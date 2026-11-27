@@ -16,7 +16,7 @@ to_iceberg table:string, catalog=string,
   [mode=string, partition_by=list, warehouse=string, location=string,
    catalog_aws_service=string, token=string, aws_iam=record,
    s3_endpoint=string, s3_path_style=bool,
-   gcp_auth=bool, gcp_service_account_key=string, gcp_project=string,
+   gcp_service_account_key=string, gcp_project=string,
    max_size=int, buffer_size=int, timeout=duration]
 ```
 
@@ -34,7 +34,9 @@ The identifier of the table in the form `namespace.table_name`. Additional dots 
 
 ### `catalog = string`
 
-The URL of the Iceberg REST catalog, e.g., `https://catalog.example.com`.
+The URL of the Iceberg REST catalog, for example `https://catalog.example.com`.
+
+When `catalog` points to an `https://*.googleapis.com` endpoint (such as Google Lakehouse) and you set neither `token` nor `catalog_aws_service`, Google Cloud authentication activates automatically using Application Default Credentials.
 
 ### `mode = string (optional)`
 
@@ -82,7 +84,7 @@ Authenticates requests to an AWS-managed Iceberg REST catalog with AWS Signature
 
 Credentials come from `aws_iam` when supplied and from the AWS default credentials provider chain otherwise. The same refreshable provider authenticates catalog requests and S3 data-file operations. Configure the AWS Region through `aws_iam`, the selected AWS profile, or the `AWS_REGION` or `AWS_DEFAULT_REGION` environment variables.
 
-Cannot be combined with `token` or Google authentication.
+Cannot be combined with `token`, Google Cloud authentication, or a Google Cloud catalog URL.
 
 ### `token = string (optional)`
 
@@ -119,21 +121,19 @@ Uses path-style addressing (`endpoint/bucket/key`) instead of virtual-hosted add
 
 Requires `s3_endpoint` and defaults to `true` when it is set, since most S3-compatible stores require path-style addressing. Set `s3_path_style=false` for stores that use virtual-hosted addressing.
 
-### `gcp_auth = bool (optional)`
-
-Authenticates against Google-hosted catalogs, such as the Lakehouse runtime catalog, with Application Default Credentials. One credential serves both the catalog and `gs://` object storage.
-
-Defaults to `false`.
-
 ### `gcp_service_account_key = string (optional)`
 
-A Google service account key in JSON format. Implies Google authentication, so `gcp_auth` does not need to be set.
+A Google service account key in JSON format. Setting this option activates Google Cloud authentication automatically for both the catalog and `gs://` object storage, minting and refreshing OAuth2 tokens without additional configuration.
+
+Cannot be combined with `token` or `catalog_aws_service`.
 
 ### `gcp_project = string (optional)`
 
-The Google Cloud project to bill and scope requests to, when it differs from the project of the credential.
+The Google Cloud project to bill and scope requests to, when it differs from the project of the credential. Setting this option activates Google Cloud authentication automatically.
 
-Requires Google authentication.
+Cannot be combined with `token` or `catalog_aws_service`.
+
+Tables with `gs://` storage locations automatically resolve through native Google Cloud Storage unless explicit S3 settings (`aws_iam`, `catalog_aws_service`, or `s3_endpoint`) are configured.
 
 ### `max_size = int (optional)`
 
@@ -192,7 +192,7 @@ Partition by day unless your queries need more. Adding `class_uid` reduces what 
 
 ## Commits and visibility
 
-Events become visible to readers when the operator commits a snapshot, not when they enter the pipeline. Without checkpointing, size- and timeout-driven rotations trigger a snapshot commit. Files closed by buffer eviction can wait another `timeout` interval before a grouped commit. An event buffered for almost one interval before eviction can therefore wait nearly two intervals, plus I/O and retries. Lower `timeout` for a fresher table, but expect smaller data files, more snapshots, and more metadata in exchange.
+Events become visible to readers, including [`from_iceberg`](from_iceberg.md), when the operator commits a snapshot, not when they enter the pipeline. Without checkpointing, size- and timeout-driven rotations trigger a snapshot commit. Files closed by buffer eviction can wait another `timeout` interval before a grouped commit. An event buffered for almost one interval before eviction can therefore wait nearly two intervals, plus I/O and retries. Lower `timeout` for a fresher table, but expect smaller data files, more snapshots, and more metadata in exchange.
 
 After a pipeline starts checkpointing, rotations stage files for the next checkpoint. The operator commits those files after the checkpoint becomes durable, so checkpoint progress also controls visibility.
 
@@ -276,6 +276,7 @@ to_iceberg "lake.events",
 
 ## See Also
 
+* [`from_iceberg`](from_iceberg.md)
 * [`ocsf_cast`](../functions/ocsf_cast.md)
 * [`to_s3`](to_s3.md)
 * [`to_clickhouse`](to_clickhouse.md)

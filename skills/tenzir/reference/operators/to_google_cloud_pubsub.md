@@ -12,7 +12,8 @@ section: "Docs"
 Publishes events to a Google Cloud Pub/Sub topic.
 
 ```tql
-to_google_cloud_pubsub project_id=string, topic_id=string, message=string
+to_google_cloud_pubsub project_id=string, topic_id=string, message=string,
+                       [compress=bool]
 ```
 
 Authentication
@@ -34,6 +35,12 @@ The Pub/Sub topic to publish to.
 ### `message = string`
 
 A string to publish as the message.
+
+### `compress = bool (optional)`
+
+Whether to compress publish requests with gzip to reduce network traffic. The operator compresses only requests of at least 240 bytes, because smaller requests barely shrink. Pub/Sub decompresses the requests transparently, so subscribers receive the original message data.
+
+Defaults to `true`.
 
 ## Parallelism
 

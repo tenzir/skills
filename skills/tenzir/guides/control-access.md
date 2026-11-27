@@ -39,7 +39,7 @@ An invitation is a link that adds whoever redeems it to your organization. The p
 * CLI
 
   ```sh
-  tenzir organization member invite 'Jane Doe' --org acme
+  tenzir platform organization member invite 'Jane Doe' --org acme
   ```
 
   The command prints the link that admits the invitee.
@@ -121,12 +121,12 @@ This example creates a role that may only read the configurations of every works
   Create the role, which prints its id, and assign it:
 
   ```sh
-  tenzir organization role create --org acme --label Auditor \
+  tenzir platform organization role create --org acme --label Auditor \
     --policy "$(cat auditor.json)"
-  tenzir organization role assign <role-id> <member-id> --org acme
+  tenzir platform organization role assign <role-id> <member-id> --org acme
   ```
 
-  The `<member-id>` is the member’s id, not the user’s, as `tenzir organization member list --org acme` shows it. A built-in role goes by `org.owner` or `org.member` instead of a UUID.
+  The `<member-id>` is the member’s id, not the user’s, as `tenzir platform organization member list --org acme` shows it. A built-in role goes by `org.owner` or `org.member` instead of a UUID.
 
 * API
 
@@ -175,14 +175,14 @@ Create a key with that policy, or give an existing key a new one:
 * CLI
 
   ```sh
-  tenzir api-key create --name ci \
+  tenzir platform api-key create --name ci \
     --policy '[[{"target":{"_tag":"Workspace"},"relationships":[]},["Workspace.listDeployments"]]]'
   ```
 
   The command prints the secret once. To change the policy of an existing key:
 
   ```sh
-  tenzir api-key update ci \
+  tenzir platform api-key update ci \
     --policy '[[{"target":{"_tag":"Workspace"},"relationships":[]},["Workspace.listDeployments"]]]'
   ```
 
@@ -192,7 +192,7 @@ Agents act as you
 
 An agent that you connect via MCP acts as you, with exactly your permissions. Every connected agent appears under **Settings** → **Sessions** → **Agent sessions**, with when it connected and when it was last active.
 
-Two safeguards apply to every agent. Before an agent deploys a configuration, the platform asks you to confirm, as a form in your client or in the conversation if your client can’t show forms. And secrets never pass through an agent: create them in the app or with `tenzir secret set`.
+Two safeguards apply to every agent. Before an agent deploys a configuration, the platform asks you to confirm, as a form in your client or in the conversation if your client can’t show forms. And secrets never pass through an agent: create them in the app or with `tenzir platform secret set`.
 
 ## Protect production branches
 
@@ -213,7 +213,7 @@ A deployment runs what its tracked branch holds, so whoever may write that branc
 * CLI
 
   ```sh
-  tenzir config branch protection set main 'release/*' --org acme --workspace prod
+  tenzir platform config branch protection set main 'release/*' --org acme --workspace prod
   ```
 
   The command replaces every pattern, so list all of them. Without a pattern, it lifts the protection from every branch.
@@ -240,8 +240,8 @@ Removing a member ends the membership and every role assignment at once, includi
 * CLI
 
   ```sh
-  tenzir organization member list --org acme
-  tenzir organization member remove <member-id> --org acme
+  tenzir platform organization member list --org acme
+  tenzir platform organization member remove <member-id> --org acme
   ```
 
   The `list` command shows each member’s id, also for pending invitations.
@@ -259,14 +259,14 @@ The same recovery rule applies: the platform refuses to remove the last member w
 
 Revoke access as soon as you no longer trust it:
 
-| To revoke…           | Do this                                                                                                                                   |
-| -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| A member             | [Remove the member](control-access.md#remove-a-member) from the organization.                              |
-| A member’s role      | Remove the role on the member’s page under **Settings** → **IAM** → **People**, or run `tenzir organization role revoke <role> <member>`. |
-| An agent             | Select **Disconnect** under **Settings** → **Sessions** → **Agent sessions**.                                                             |
-| Every agent of yours | Select **Disconnect all** in the same place.                                                                                              |
-| An API key           | Select **Revoke** on the key’s page under **Settings** → **API keys**, or run `tenzir api-key revoke <key>`.                              |
-| A browser session    | Sign it out under **Settings** → **Sessions** → **User sessions**.                                                                        |
+| To revoke…           | Do this                                                                                                                                            |
+| -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| A member             | [Remove the member](control-access.md#remove-a-member) from the organization.                                       |
+| A member’s role      | Remove the role on the member’s page under **Settings** → **IAM** → **People**, or run `tenzir platform organization role revoke <role> <member>`. |
+| An agent             | Select **Disconnect** under **Settings** → **Sessions** → **Agent sessions**.                                                                      |
+| Every agent of yours | Select **Disconnect all** in the same place.                                                                                                       |
+| An API key           | Select **Revoke** on the key’s page under **Settings** → **API keys**, or run `tenzir platform api-key revoke <key>`.                              |
+| A browser session    | Sign it out under **Settings** → **Sessions** → **User sessions**.                                                                                 |
 
 A revoked agent or key fails on its next request.
 

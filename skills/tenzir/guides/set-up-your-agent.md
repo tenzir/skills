@@ -62,7 +62,7 @@ Your agent loads the skill when a request is about Tenzir. To make sure that it 
 Use the tenzir skill to explain the difference between the summarize and top operators.
 ```
 
-For the `tenzir` command itself, an agent needs no skill: `tenzir help` and `tenzir help <command>` describe every command and flag.
+For the `tenzir` command itself, an agent needs no skill: `tenzir help --all` lists every command, and `tenzir help <command>` describes its flags.
 
 ## Let your agent run pipelines
 

@@ -7,23 +7,29 @@ section: "Docs"
 
 # each
 
-> Spawns a subpipeline for every incoming event, with the event bound to $this.
+> Spawns a subpipeline for every incoming event, binding per-event values into the subpipeline.
 
-Spawns a subpipeline for every incoming event, with the event bound to `$this`.
+Spawns a subpipeline for every incoming event, binding per-event values into the subpipeline.
 
 ```tql
-each [parallel=int] { … }
+each [$name=expr, …] [parallel=int] { … }
 ```
 
 ## Description
 
-The `each` operator runs a fresh subpipeline for every incoming event. The record of the current event is bound to `$this` inside the subpipeline, so the subpipeline can parametrize its behavior on a per-event basis.
+The `each` operator runs a fresh subpipeline for every incoming event.
 
-The subpipeline takes no input from `each`. It either emits events - which are forwarded as the operator’s output - or ends with a sink, in which case `each` itself becomes a sink. The subpipeline must not produce bytes.
+With one or more named bindings (`$name=expr`), each expression is evaluated against the incoming event and bound to `$name` inside the subpipeline. Named bindings let nested `each` blocks keep enclosing bindings in scope, and let the optimizer push field projections upstream when you bind specific fields instead of `this`. Binding expressions resolve against the enclosing scope before opening the subpipeline scope, so `each $x=n + $x { … }` reads the outer `$x` on the right-hand side and binds the new `$x` inside the subpipeline. When you omit named bindings, `each` binds the complete input event record to `$this`.
+
+The subpipeline takes no input from `each`. It either emits events (which are forwarded as the operator’s output) or ends with a sink, in which case `each` itself becomes a sink. The subpipeline must not produce bytes.
 
 Use `each` for per-event jobs, such as running a lookup, export, or sink whose source depends on the incoming event. For keyed streams that should keep one subpipeline alive per key, use [`group`](group.md) instead.
 
-### `parallel = int (optional)`
+### `$name=expr` (optional)
+
+One or more comma-separated bindings that evaluate `expr` for every incoming event and bind the result to `$name` inside the subpipeline. Binding names must be unique within a single `each` invocation. When omitted, `each` binds the entire input event to `$this`.
+
+### `parallel = int` (optional)
 
 The maximum number of subpipelines that may run concurrently. Must be at least `1`. Excess events queue and start as soon as a slot frees.
 
@@ -33,13 +39,13 @@ Defaults to `10`.
 
 The subpipeline to spawn for each event. Must start with a source.
 
-Inside the subpipeline, `$this` refers to the record of the current input event.
+Inside the subpipeline, each named `$name` refers to its bound per-event value (or `$this` refers to the complete input event when no named bindings are given).
 
 ## Parallelism
 
 In a [parallel pipeline](../../explanations/executor.md#parallel-execution), each instance of `each` owns and runs its own child subpipelines. The `parallel` argument limits each instance separately. At a pipeline degree of `N`, up to `N * parallel` child subpipelines can therefore run at once.
 
-For example, `// parallelism: 4` together with `each parallel=10` permits up to 40 concurrent child subpipelines. Keep this combined limit in mind when a child subpipeline connects to a service with concurrency or rate limits.
+For example, `// parallelism: 4` together with `each $ip=ip, parallel=10` permits up to 40 concurrent child subpipelines. Keep this combined limit in mind when a child subpipeline connects to a service with concurrency or rate limits.
 
 ## Examples
 
@@ -50,12 +56,12 @@ Use fields from the input event to parametrize a source subpipeline. This exampl
 ```tql
 from {case_id: "C-1", ip: "10.0.0.5"},
      {case_id: "C-2", ip: "10.0.0.7"}
-each parallel=4 {
+each $id=case_id, $ip=ip, parallel=4 {
   from {ts: 2024-01-01T10:00:00, src_ip: "10.0.0.5", action: "login"},
        {ts: 2024-01-01T10:02:00, src_ip: "10.0.0.8", action: "scan"},
        {ts: 2024-01-01T10:05:00, src_ip: "10.0.0.7", action: "download"}
-  where src_ip == $this.ip
-  case_id = $this.case_id
+  where src_ip == $ip
+  case_id = $id
 }
 sort case_id, ts
 ```
@@ -81,10 +87,10 @@ When the subpipeline ends with a sink, `each` itself becomes a sink. Use this to
 
 ```tql
 from {tenant: "alpha"}, {tenant: "beta"}
-each {
-  from {tenant: $this.tenant, status: "ok"},
-       {tenant: $this.tenant, status: "fail"}
-  to_file f"/tmp/tenzir/{$this.tenant}.json" {
+each $tenant=tenant {
+  from {tenant: $tenant, status: "ok"},
+       {tenant: $tenant, status: "fail"}
+  to_file f"/tmp/tenzir/{$tenant}.json" {
     write_ndjson
   }
 }

@@ -22,7 +22,7 @@ The `lag` operator preserves every input event and assigns a preceding value to 
 The first `offset` events receive `null`. Compose `lag` with [`group`](group.md) when you need an independent history for each key:
 
 ```tql
-group user {
+group $user=user {
   lag value=location, into=previous_location
 }
 ```
@@ -32,7 +32,7 @@ Enclosing operators define the lifetime of the history. For example, placing the
 The operator follows input order within its pipeline. It doesn’t sort by event time or inspect timestamps. Use [`sort`](sort.md) to order bounded input. For live streams with bounded event-time disorder, put [`reorder`](reorder.md) before `lag`. When using keyed histories, place both operators inside the same group so each key has an independent watermark:
 
 ```tql
-group user {
+group $user=user {
   reorder on=time, tolerance=2min
   lag value=location, into=previous_location
 }
@@ -75,7 +75,7 @@ from \
   {sequence: 1, user: "alice", location: "Berlin"},
   {sequence: 2, user: "bob", location: "Paris"},
   {sequence: 3, user: "alice", location: "London"}
-group user {
+group $user=user {
   lag value=location, into=previous_location
 }
 sort sequence
@@ -116,7 +116,7 @@ from {time: 2025-01-01T10:01:00, host: "a", bytes: 15},
      {time: 2025-01-01T10:00:30, host: "b", bytes: 100},
      {time: 2025-01-01T10:07:00, host: "a", bytes: 38},
      {time: 2025-01-01T10:06:00, host: "a", bytes: 30}
-group host {
+group $host=host {
   reorder on=time, tolerance=2min
   lag value=bytes, into=previous_bytes
   where previous_bytes != null

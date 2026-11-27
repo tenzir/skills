@@ -15,7 +15,7 @@ Sends events to a ClickHouse table.
 to_clickhouse [table=string,
                uri=string, host=string, port=int, user=string, password=string,
                mode=string, primary=field, json=field|[field], low_cardinality=field|[field],
-               max_batch_rows=int, batch_timeout=duration,
+               max_batch_rows=int, batch_timeout=duration, compress=bool,
                tls=bool|record]
 ```
 
@@ -129,6 +129,12 @@ Defaults to `8192`.
 The time after which the operator flushes a table’s buffered events, even if the buffer has not reached `max_batch_rows`. Queued writes and backpressure can delay insertion beyond this timeout.
 
 Defaults to `1s`.
+
+### `compress = bool (optional)`
+
+Whether to compress the inserted data with ZSTD. ClickHouse decompresses it transparently, so compression reduces network traffic at a moderate CPU cost.
+
+Defaults to `true`.
 
 ### `tls = record (optional)`
 

@@ -98,13 +98,13 @@ Look at the change before it becomes a commit, and once more before it reaches a
   tenzir config apply -m 'Publish severe Suricata alerts'
   ```
 
-  The `config apply` command commits every change in the clone and pushes it to the checked-out branch. To review a commit that someone else pushed, read its changed files and the diff of one of them:
+  The `config apply` command commits every change in the clone and pushes it to the branch the workspace serves, or the one that `--branch` names. To review a commit that someone else pushed, read its changed files and the diff of one of them:
 
   ```sh
   git pull
   git log --format='%H %s' -5
-  tenzir config commit <full-commit-sha>
-  tenzir config diff <full-commit-sha> pipelines/alerts.tql
+  tenzir platform config log --commit <full-commit-sha>
+  tenzir platform config log --commit <full-commit-sha> --path pipelines/alerts.tql
   ```
 
 With **Auto deploy** on, the commit now goes to every deployment that follows the branch. The next sections show how to choose that.
@@ -130,11 +130,11 @@ A **deployment tracker** selects the branch that a deployment follows and whethe
 * CLI
 
   ```sh
-  tenzir deployment tracker get <deployment>
-  tenzir deployment tracker set <deployment> --branch main --auto-deploy true
+  tenzir deployment info <deployment>
+  tenzir deployment configuration follow <deployment> --branch main
   ```
 
-  Pass `--branch`, `--auto-deploy true|false`, or both. An omitted setting stays unchanged.
+  Add `--manual` to follow the branch with **Auto deploy** off.
 
 Turning **Auto deploy** on, or changing the branch while it is on, deploys the branch’s latest commit. Turning it off keeps what the deployment runs. Our CLI reference lists [every rule of the tracker](../reference/cli.md#deployment-trackers).
 
@@ -164,21 +164,13 @@ With **Auto deploy** on, every commit to the tracked branch deploys automaticall
 
 * CLI
 
-  Read the current status first:
+  Deploy the latest commit of the tracked branch:
 
   ```sh
-  tenzir deployment configuration status <deployment> --json
+  tenzir deployment configuration deploy <deployment>
   ```
 
-  Copy the full SHA in `latest` and the `generation` of the `deployed` revision, or `0` if nothing was deployed yet, then deploy:
-
-  ```sh
-  tenzir deployment configuration deploy <deployment> \
-    --commit <full-commit-sha> \
-    --expected-deployed-generation <generation>
-  ```
-
-  The command returns once the deployment accepted the configuration. If another deploy happened in between, it fails with a conflict: read the status again and retry.
+  The command refuses a deployment with **Auto deploy** on. It returns once the deployment accepted the configuration. If another deploy happened in between, it fails with a conflict: read the status with `tenzir deployment configuration status <deployment>` and retry.
 
 Deploying the latest commit by hand doesn’t turn **Auto deploy** off.
 
@@ -208,8 +200,8 @@ To test a change on one deployment before production sees it, give the test depl
   Create the branch and point the test deployment at it:
 
   ```sh
-  tenzir config branch create staging --base main
-  tenzir deployment tracker set edge-staging --branch staging --auto-deploy true
+  tenzir platform config branch create staging --base main
+  tenzir deployment configuration follow edge-staging --branch staging
   ```
 
   Switch your clone to the branch, then change and apply as before:
@@ -217,7 +209,7 @@ To test a change on one deployment before production sees it, give the test depl
   ```sh
   git fetch origin
   git switch staging
-  tenzir config apply -m 'Try the new alert filter'
+  tenzir config apply --branch staging -m 'Try the new alert filter'
   ```
 
 Once the change works on the test deployment, bring it to `main` by merging the branch in the app (see [Merge a branch into a configuration](change-configurations.md#merge-a-branch-into-a-configuration)) or with Git, such as `git switch main`, `git merge staging`, and `tenzir config apply` in your clone. If `main` is protected, merging into it takes **Protected Branches** → **Write**, as our guide on [protecting production branches](control-access.md#protect-production-branches) explains.
@@ -258,7 +250,7 @@ When you commit changes to a working branch (such as one created via **Commit to
   Merge into the branch’s recorded origin and delete the merged branch afterward:
 
   ```sh
-  tenzir config branch merge alice/main --delete
+  tenzir platform config branch merge alice/main --delete
   ```
 
   Pass `--into <branch>` when the branch has no recorded origin (for example, a branch pushed with Git), `-m <message>` to customize the merge commit message, or `--expected <commit-sha>` to pin a specific reviewed tip. Without `--expected`, the command pins the merge (and `--delete`) to the tip it reads before merging so unseen commits aren’t merged or deleted.
@@ -290,10 +282,10 @@ View, rename, and delete workspace branches from the **Branches** page, the CLI,
 * CLI
 
   ```sh
-  tenzir config branch create alice/suricata-alerts --base main
-  tenzir config branch rename alice/suricata-alerts alice/suricata-v2
-  tenzir config branch merge alice/suricata-v2 --delete
-  tenzir config branch delete alice/suricata-v2
+  tenzir platform config branch create alice/suricata-alerts --base main
+  tenzir platform config branch rename alice/suricata-alerts alice/suricata-v2
+  tenzir platform config branch merge alice/suricata-v2 --delete
+  tenzir platform config branch delete alice/suricata-v2
   ```
 
 When someone renames a branch (through the app, REST API, MCP, or CLI), the platform remembers the rename and forwards the old name to the new one, including across chained renames. Other open browser tabs and saved links holding the old name follow the rename automatically to the same page on the new branch. Saved drafts move with the branch. Edits that a browser hasn’t saved yet stay with the old name, which is why the app waits to rename a branch until your own edits on it are saved. Forwarding ends once another branch is created or pushed with the old name, or once the renamed branch is deleted.
@@ -353,13 +345,11 @@ Deploy an older revision to roll back fast, without moving a branch or creating 
 
   ```sh
   git log --format='%H %s' -10
-  tenzir deployment tracker set <deployment> --auto-deploy false
-  tenzir deployment configuration deploy <deployment> \
-    --commit <full-commit-sha> \
-    --expected-deployed-generation <generation>
+  tenzir deployment configuration follow <deployment> --branch <branch> --manual
+  tenzir deployment configuration deploy <deployment> --commit <full-commit-sha>
   ```
 
-  Unlike the history dialog, the deploy command doesn’t change the tracker, so turn **Auto deploy** off first to keep the revision deployed.
+  Unlike the history dialog, the deploy command doesn’t change the tracker, and it refuses a deployment with **Auto deploy** on, so turn **Auto deploy** off first.
 
 The commit must exist in the workspace’s repository, but needn’t belong to the tracked branch. To resume following new commits, turn **Auto deploy** on again, which deploys the branch’s latest commit.
 
@@ -422,9 +412,9 @@ Start or stop a pipeline of the configuration without changing the configuration
 * CLI
 
   ```sh
-  tenzir deployment start-pipeline <deployment> pipelines/onboard-suricata.tql
-  tenzir deployment stop-pipeline <deployment> pipelines/onboard-suricata.tql
-  tenzir deployment stop-pipeline <deployment> pipelines/onboard-suricata.tql --force
+  tenzir pipeline start pipelines/onboard-suricata.tql --deployment <deployment>
+  tenzir pipeline stop pipelines/onboard-suricata.tql --deployment <deployment>
+  tenzir pipeline stop pipelines/onboard-suricata.tql --deployment <deployment> --force
   ```
 
 A start runs the deployed definition, not pending changes on the branch. A stop lets the pipeline drain its events, and a forced stop ends it at once, also one that is stopping already, losing the events in flight. To keep a pipeline from starting with the next deploy, mark it [`disabled`](../reference/directory-layout.md#pipelines) in the configuration instead.
@@ -454,8 +444,8 @@ Check that the deployment runs what you expect, and that its pipelines are healt
 
   ```sh
   tenzir deployment configuration status <deployment>
-  tenzir deployment pipelines <deployment>
-  tenzir deployment pipeline-diagnostics <deployment> pipelines/alerts.tql
+  tenzir pipeline list --deployment <deployment>
+  tenzir pipeline diagnostics pipelines/alerts.tql --deployment <deployment>
   ```
 
 A difference between the latest and the deployed revision is intentional when **Auto deploy** is off, and otherwise points to a pending or refused deploy. An accepted configuration doesn’t confirm that its pipelines run: a pipeline that doesn’t compile fails on its own while the rest of the configuration runs. Our CLI reference describes [every field of the status](../reference/cli.md#configuration-status).

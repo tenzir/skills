@@ -66,6 +66,7 @@ Other operators narrow what they read or pass requirements upstream while keepin
 
 | Operator                                                                                                    | Filters | Projections | Limits |
 | ----------------------------------------------------------------------------------------------------------- | ------- | ----------- | ------ |
+| [`from_iceberg`](operators/from_iceberg.md)                               | 🟡      | 🟢          | 🟡     |
 | [`from_microsoft_365_activity`](operators/from_microsoft_365_activity.md) | 🟡      | ⚪           | 🟡     |
 | [`read_parquet`](operators/read_parquet.md)                               | 🟡      | 🟢          | 🟡     |
 | [`subscribe`](operators/subscribe.md)                                     | 🟡      | 🟢          | 🟡     |
@@ -74,6 +75,9 @@ Other operators narrow what they read or pass requirements upstream while keepin
 
 How each operator applies physical hints
 
+* `from_iceberg` (Filters): prunes manifests and data files; exact predicates stay local.
+* `from_iceberg` (Projections): reads only needed columns, with a metadata-only fast path for zero-column scans.
+* `from_iceberg` (Limits): bounds unfiltered scans and stops reading early.
 * `from_microsoft_365_activity` (Filters): skips blobs by metadata.
 * `from_microsoft_365_activity` (Limits): stops downloading early.
 * `read_parquet` (Filters): skips row groups while decoding.

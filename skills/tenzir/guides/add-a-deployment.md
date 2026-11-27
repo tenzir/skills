@@ -207,7 +207,7 @@ Change the type of a Tenzir-hosted deployment when it needs more or less capacit
 * CLI
 
   ```sh
-  tenzir deployment change-type edge-1 medium
+  tenzir deployment resize edge-1 --type medium
   tenzir deployment update edge-1
   ```
 

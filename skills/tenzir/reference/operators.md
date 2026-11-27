@@ -325,10 +325,10 @@ discard
 
 ### [each](operators/each.md)
 
-Spawns a subpipeline for every incoming event, with the event bound to `$this`.
+Spawns a subpipeline for every incoming event, binding per-event values into the subpipeline.
 
 ```tql
-each { from $this }
+each $event=this { from $event }
 ```
 
 ### [every](operators/every.md)
@@ -360,7 +360,7 @@ fork_merge { summarize sum(x) }, { summarize count() }
 Routes events with the same key through the same subpipeline.
 
 ```tql
-group tenant { summarize count() }
+group $tenant=tenant { summarize count() }
 ```
 
 ### [join](operators/join.md)
@@ -376,7 +376,7 @@ join src_ip == ip, kind="left", into=asset { from_file "assets.json" { read_json
 Routes the data to one of multiple subpipelines.
 
 ```tql
-load_balance $over { publish $over }
+load_balance $target=["a", "b"] { publish $target }
 ```
 
 ### [merge](operators/merge.md)

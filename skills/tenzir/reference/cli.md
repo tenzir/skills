@@ -7,11 +7,11 @@ section: "Docs"
 
 # CLI
 
-> The tenzir command runs pipelines on your machine and on your deployments, runs a deployment on your machine, and does everything the platform offers from a terminal. This page lists its settings and commands. Our guide on connecting to Tenzir installs it.
+> The tenzir command runs pipelines on your machine and on your deployments, runs a deployment on your machine, and does everything the platform offers from a terminal, under the same permissions as the app, the API, and the MCP server. This page lists its settings and commands. Our guide on connecting to Tenzir installs it.
 
-The `tenzir` command runs pipelines on your machine and on your deployments, runs a deployment on your machine, and does everything the [platform](../explanations/platform.md) offers from a terminal. This page lists its settings and commands. Our guide on [connecting to Tenzir](../guides/connect-to-tenzir.md) installs it.
+The `tenzir` command runs pipelines on your machine and on your deployments, runs a deployment on your machine, and does everything the [platform](../explanations/platform.md) offers from a terminal, under the same permissions as the app, the [API](api.md), and the [MCP server](mcp.md). This page lists its settings and commands. Our guide on [connecting to Tenzir](../guides/connect-to-tenzir.md) installs it.
 
-Run `tenzir help` for every command, and `tenzir help <command>` for the flags and examples of one. Agents learn the command the same way.
+Run `tenzir` without arguments for the commands most people start with, `tenzir help --all` for every command, and `tenzir help <command>` for the subcommands, flags, and examples of one. Agents learn the command the same way.
 
 ## Settings
 
@@ -22,6 +22,7 @@ Every command that talks to the platform reads these settings:
 | Platform URL | `--url`          | `TENZIR_PLATFORM_URL` | `https://platform.tenzir.com` |
 | API key      | `--api-key-file` | `TENZIR_API_KEY`      | none                          |
 | Bearer token | `--token`        | `TENZIR_TOKEN`        | the saved sign-in             |
+| Target       | none             | `TENZIR_TARGET`       | what `tenzir use` selected    |
 
 An API key or a token that you pass explicitly wins over the saved sign-in, and `tenzir auth logout` doesn’t clear credentials from the environment. Keep an API key in a file or an environment variable, so that it doesn’t end up in your shell history.
 
@@ -37,7 +38,7 @@ The command keeps your sign-in and selection under `$XDG_STATE_HOME/tenzir/platf
 
 ## Targets
 
-Most commands act on an organization, a workspace, or a deployment. Select one with `tenzir use`, and the commands fall back to it when you leave off `--org`, `--workspace`, or `--on`:
+Most commands act on an organization, a workspace, or a deployment. Select one with `tenzir use`, and the commands fall back to it when you leave off `--org`, `--workspace`, `--deployment`, `--on`, or the deployment name of a `tenzir deployment` command:
 
 ```sh
 # Select a workspace and a deployment in it.
@@ -48,9 +49,42 @@ tenzir use edge-2
 tenzir status
 ```
 
-A deployment goes by its id, its slug, or its name when only one carries it. A flag always wins over the selection, and `tenzir use --` clears it.
+A deployment goes by its id, its slug, or its name when only one carries it. A name or a flag always wins over the selection, and `tenzir use --` clears it.
+
+To act on another target in one shell or script without changing the selection, set `TENZIR_TARGET` to `<org>/<workspace>` or `<org>/<workspace>/<deployment>`. It takes precedence over what `tenzir use` selected, so a command acts on what it names, else on `TENZIR_TARGET`, else on the selection. `tenzir use` and `tenzir status` say when the target comes from `TENZIR_TARGET`:
+
+```sh
+TENZIR_TARGET=acme/staging/canary tenzir deployment info
+```
 
 ## Commands
+
+A bare `tenzir` shows the commands most people start with:
+
+```text
+Get started
+  auth login                              Sign in to the Tenzir Platform
+  up -d [<name>]                          Run a deployment in the background
+  ask '<question>'                        Ask the Tenzir Assistant
+
+
+Run on this machine
+  run [-f <file>] <tql> ...               Run a pipeline locally
+  config clone [<workspace>]              Clone a workspace's configuration
+  package add <id>[@<versions>]           Use a package in the clone, and lock it
+
+
+Work with the platform
+  use [<org>/<workspace>[/<deployment>]]  Select the deployment to work with
+  pipeline list                           List the pipelines of the selected deployment
+  run -r [-f <file>] <tql> ...            Run on the selected deployment
+
+
+More commands
+  run  up  down  config  package  pipeline  ask  auth  use  status  deployment  platform
+```
+
+The top-level commands are for daily work: running pipelines and deployments, the clone of a configuration, and the deployments and pipelines on the platform. The `tenzir platform` commands set up an account and an organization, and work with the history and branches of a configuration on the platform.
 
 ### Run pipelines
 
@@ -58,7 +92,6 @@ A deployment goes by its id, its slug, or its name when only one carries it. A f
 | ----------------------------------------- | ----------------------------------------------------------- |
 | `tenzir run [-f <file>] <tql>`            | Runs a pipeline on this machine.                            |
 | `tenzir run -r [--on <deployment>] <tql>` | Runs a pipeline once on a deployment and prints its events. |
-| `tenzir inspect channels <pipeline>`      | Shows the channels of a running pipeline.                   |
 
 #### `tenzir run`
 
@@ -91,20 +124,13 @@ The pipeline can call the operators of every package in the deployment’s confi
 
 ### Manage a configuration
 
-| Command                                                            | Description                                                                                                                                                                                                                                |
-| ------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `tenzir config clone [<workspace>]`                                | Clones a workspace’s configuration, by default into `tenzir-workspace`.                                                                                                                                                                    |
-| `tenzir config apply [-m <message>]`                               | Commits every change in the working copy and pushes it to the checked-out branch.                                                                                                                                                          |
-| `tenzir config commit <commit>`                                    | Shows a commit and the files it changes, compared with its first parent.                                                                                                                                                                   |
-| `tenzir config diff <commit> <path>`                               | Shows the patch of one file that a commit changes.                                                                                                                                                                                         |
-| `tenzir config branch create <name>`                               | Creates a branch from the tip of `--base <branch>`, or with `--empty` from an empty commit.                                                                                                                                                |
-| `tenzir config branch rename <name> <new-name>`                    | Renames a branch, keeping its commits, its origin, branches made from it, and every draft on it, and forwards the old name to the new name. Refused while a deployment tracks the branch.                                                  |
-| `tenzir config branch merge <branch> [--into <branch>] [--delete]` | Merges a branch into a configuration branch, defaulting `--into` to its recorded origin. With `--expected <sha>`, merges only if the branch is at that commit. With `--delete`, deletes the merged branch afterward unless it moved since. |
-| `tenzir config branch delete <name>`                               | Deletes a branch and every draft on it. Refused while a deployment tracks the branch.                                                                                                                                                      |
-| `tenzir config branch protection set [<pattern>…]`                 | Replaces the patterns of the protected branches. No pattern protects no branch.                                                                                                                                                            |
-| `tenzir package <command>`                                         | Adds, updates, and removes [packages](cli.md#packages).                                                                                                                                                  |
+| Command                                                | Description                                                                                                             |
+| ------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------- |
+| `tenzir config clone [<workspace>] [--branch <name>]`  | Clones a workspace’s configuration, by default into `tenzir-workspace`.                                                 |
+| `tenzir config apply [-m <message>] [--branch <name>]` | Commits every change in the working copy and pushes it to the branch the workspace serves, or the one `--branch` names. |
+| `tenzir package <command>`                             | Adds, updates, and removes [packages](cli.md#packages).                               |
 
-The `config apply` command refuses a push that isn’t a fast-forward. Named no workspace, it pushes to the one the working copy was cloned from. The `config commit` and `config diff` commands take a full commit SHA. Creating a branch never changes a deployment’s tracker. The `config branch merge` command also accepts `-m <message>` (`--message`) to customize the merge commit message; when `--delete` is passed and deleting the branch fails afterward (for example, because another commit landed on it), the merge stands and the output notes why the branch was kept. With auto deploy on, a push or merge to the tracked branch deploys, as the section on [deploying](cli.md#deploying) and our guide on [changing configurations](../guides/change-configurations.md) show.
+The `config apply` command refuses a push that isn’t a fast-forward. Named no workspace, it pushes to the one the working copy was cloned from. With `--branch`, it pushes to that branch and creates it if the workspace has none of that name. After the push, it names the deployments that deploy it by themselves. With auto deploy on, a push to the tracked branch deploys, as the section on [deploying](cli.md#deploying) and our guide on [changing configurations](../guides/change-configurations.md) show. The [`tenzir platform config`](cli.md#manage-the-platform) commands work with the history and branches of a configuration without a clone.
 
 ### Run a deployment on this machine
 
@@ -126,50 +152,81 @@ Each deployment has a folder there with its `key`, its `store/`, and, while it r
 
 A key link needs no sign-in: the platform issues it for one deployment, and it works once, within 15 minutes. The first Ctrl-C or `SIGTERM` lets the pipelines finish, and a second one stops the deployment at once. The `tenzir down` command waits up to ten seconds for the pipelines to finish. Our guide on [adding a deployment](../guides/add-a-deployment.md) runs one and keeps it running across reboots.
 
-### Manage the platform
+### Manage pipelines
 
-| Command                      | Subcommands                                                                           |
-| ---------------------------- | ------------------------------------------------------------------------------------- |
-| `tenzir auth`                | `login`, `logout`                                                                     |
-| `tenzir account`             | `delete`                                                                              |
-| `tenzir organization`        | `list`, `update`, `usage`, `cost`, `plan`, `credits`, `budget`                        |
-| `tenzir organization role`   | `list`, `get`, `create`, `update`, `delete`, `assign`, `revoke`                       |
-| `tenzir organization member` | `list`, `invite`, `remove`                                                            |
-| `tenzir workspace`           | `list`, `create`, `update`                                                            |
-| `tenzir deployment`          | [Deployment subcommands](cli.md#manage-deployments) |
-| `tenzir api-key`             | `list`, `create`, `update`, `revoke`                                                  |
-| `tenzir secret`              | `list`, `set`, `delete`                                                               |
+The `tenzir pipeline` commands act on the selected deployment, or on the one that `--deployment` names.
 
-The `auth login` command prints a URL to sign in with, which also works when the browser runs on another machine. The `api-key create` and `deployment rotate-token` commands print a secret once, and nothing reads it back. The `api-key create --policy <json>` flag sets the key’s [policy](iam.md#policies), and without it, the key may only read its own account.
+| Command                                                  | Description                                                                                                                             |
+| -------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| `tenzir pipeline list`                                   | Lists the pipelines with their state and run, which counts up on every start. With only a workspace selected, lists every deployment’s. |
+| `tenzir pipeline start <pipeline>`                       | Starts the deployed definition of a pipeline, such as `pipelines/ingest.tql`.                                                           |
+| `tenzir pipeline stop <pipeline> [--force]`              | Stops a pipeline and lets it drain. With `--force`, ends it at once and loses the events in flight.                                     |
+| `tenzir pipeline diagnostics <pipeline>`                 | Shows why a pipeline misbehaves.                                                                                                        |
+| `tenzir pipeline metrics <pipeline>`                     | Shows what a pipeline read and wrote, by default over the last 24 hours.                                                                |
+| `tenzir pipeline inspect channels <pipeline>`            | Shows the channels of a running pipeline.                                                                                               |
+| `tenzir pipeline inspect events <pipeline> <channel>...` | Prints the events that flow through channels of a running pipeline.                                                                     |
 
-The `organization member list` command shows each member’s id, which `organization member remove`, `organization role assign`, and `organization role revoke` take. The `organization member invite <label>` command prints the link that admits the invitee, once.
+Starting and stopping a pipeline doesn’t change the configuration.
 
 ### Manage deployments
 
-| Command                                                      | Description                                                                                                                                                              |
-| ------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `deployment list`                                            | Lists the deployments with their version, whether an update is available, whether they’re reachable, and when each was last seen.                                        |
-| `deployment create [<name>]`                                 | Registers a deployment that you run yourself. With `--hosted`, Tenzir runs it, in `--type` and `--region`.                                                               |
-| `deployment types`                                           | Lists the types and regions of Tenzir-hosted deployments, with vCPUs, memory, and rates.                                                                                 |
-| `deployment change-type <deployment> <type>`                 | Runs a Tenzir-hosted deployment as another type, which restarts it.                                                                                                      |
-| `deployment update <deployment> [--version <v>] [-d]`        | Runs a Tenzir-hosted deployment on the version the platform offers, which restarts it.                                                                                   |
-| `deployment resume <deployment>`                             | Resumes a deployment that the usage limit suspended, once the limit allows it.                                                                                           |
-| `deployment rename <deployment>`                             | Changes the name or slug.                                                                                                                                                |
-| `deployment rotate-token <deployment>`                       | Mints a new key and stops the current one at once.                                                                                                                       |
-| `deployment delete <deployment>`                             | Deletes a deployment and its metrics. A self-hosted installation stays on its host.                                                                                      |
-| `deployment diagnose <deployment>`                           | Shows whether the deployment answers, its uptime, and whether log retrieval works.                                                                                       |
-| `deployment logs <deployment>`                               | Reads the deployment’s logs, newest first, by default the latest 10.                                                                                                     |
-| `deployment pipelines <deployment>`                          | Lists the pipelines with their state and run, which counts up on every start.                                                                                            |
-| `deployment pipeline-diagnostics <deployment> <pipeline>`    | Shows why a pipeline misbehaves.                                                                                                                                         |
-| `deployment start-pipeline <deployment> <pipeline>`          | Starts the deployed definition of a pipeline, such as `pipelines/ingest.tql`.                                                                                            |
-| `deployment stop-pipeline <deployment> <pipeline> [--force]` | Stops a pipeline and lets it drain. With `--force`, ends it at once and loses the events in flight.                                                                      |
-| `deployment tracker get\|set <deployment>`                   | Reads or changes the [tracker](cli.md#deployment-trackers).                                                                            |
-| `deployment resilience get\|enable\|disable <deployment>`    | Reads or changes whether the deployment buffers secrets to keep working while the platform is unreachable.                                                               |
-| `deployment configuration status\|deploy <deployment>`       | Reads the [configuration status](cli.md#configuration-status) or [deploys a commit](cli.md#deploys). |
+| Command                                                       | Description                                                                                                                                             |
+| ------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `deployment list`                                             | Lists the deployments with their version, whether an update is available, whether they’re reachable, and when each was last seen.                       |
+| `deployment info [<deployment>]`                              | Shows a deployment’s details, load, CPU and memory, and the branch it follows.                                                                          |
+| `deployment create [<name>]`                                  | Registers a deployment that you run yourself. With `--hosted`, Tenzir runs it, in `--type` and `--region`.                                              |
+| `deployment types`                                            | Lists the types and regions of Tenzir-hosted deployments, with vCPUs, memory, and rates.                                                                |
+| `deployment resize [<deployment>] --type <type>`              | Runs a Tenzir-hosted deployment as another type, which restarts it.                                                                                     |
+| `deployment update [<deployment>] [--version <v>] [-d]`       | Runs a Tenzir-hosted deployment on the version the platform offers, which restarts it.                                                                  |
+| `deployment resume [<deployment>]`                            | Resumes a deployment that the usage limit suspended, once the limit allows it.                                                                          |
+| `deployment settings [<deployment>]`                          | Shows the name, the slug, and whether the deployment buffers secrets. `--name`, `--slug`, and `--resilience on\|off` change them.                       |
+| `deployment rotate-token [<deployment>]`                      | Mints a new key and stops the current one at once.                                                                                                      |
+| `deployment delete <deployment>`                              | Deletes a deployment and its metrics. A self-hosted installation stays on its host.                                                                     |
+| `deployment diagnose [<deployment>]`                          | Shows whether the deployment answers, its uptime, and whether log retrieval works.                                                                      |
+| `deployment logs [<deployment>]`                              | Reads the deployment’s logs, newest first, by default the latest 10.                                                                                    |
+| `deployment contexts [<deployment>]`                          | Lists the contexts on a deployment.                                                                                                                     |
+| `deployment configuration status [<deployment>]`              | Reads the [configuration status](cli.md#configuration-status).                                                        |
+| `deployment configuration follow [<deployment>] --branch <b>` | Changes the branch that the deployment [follows](cli.md#deployment-trackers). With `--manual`, turns auto deploy off. |
+| `deployment configuration deploy [<deployment>]`              | [Deploys](cli.md#deploys) the tip of the followed branch, or with `--commit` any commit.                              |
+
+The `deployment` commands that act on one deployment take it the way `tenzir use` does, and act on the selected deployment when you leave it off. `deployment delete` is the exception and always needs the deployment named.
 
 The `deployment update` command reads the version the platform offers the deployment, as `deployment list` shows it, and updates to that version. It fails without changing anything when no update is on offer. With `--version <version>`, it updates to that version without reading the deployment first, which needs only the `Deployment.update` permission together with `-d`.
 
-The `deployment logs` command takes `--source application`, the default, or `kubernetes` and `pod` for a Tenzir-hosted deployment, and filters with `--from`, `--to`, `--levels` (`trace`, `debug`, `info`, `warning`, `error`, `critical`), `--search`, and `--limit`. It needs `Deployment.diagnose`. Starting and stopping a pipeline doesn’t change the configuration.
+The `deployment logs` command takes `--source application`, the default, or `kubernetes` and `pod` for a Tenzir-hosted deployment, and filters with `--from`, `--to`, `--levels` (`trace`, `debug`, `info`, `warning`, `error`, `critical`), `--search`, and `--limit`. It needs `Deployment.diagnose`.
+
+### Manage the platform
+
+| Command                               | Subcommands                                                                                                              |
+| ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| `tenzir auth`                         | `login`, `logout`                                                                                                        |
+| `tenzir platform account`             | `sessions`, `delete`                                                                                                     |
+| `tenzir platform organization`        | `list`, `memberships`, `create`, `update`, `leave`, `delete`, `audit-log`, `usage`, `cost`, `plan`, `credits`, `budget`  |
+| `tenzir platform organization role`   | `list`, `get`, `create`, `update`, `delete`, `assign`, `revoke`                                                          |
+| `tenzir platform organization member` | `list`, `invite`, `remove`                                                                                               |
+| `tenzir platform workspace`           | `list`, `create`, `update`, `delete`, `metrics`                                                                          |
+| `tenzir platform api-key`             | `list`, `create`, `update`, `revoke`                                                                                     |
+| `tenzir platform secret`              | `list`, `set`, `delete`                                                                                                  |
+| `tenzir platform endpoint`            | `list`, `get`, `create`, `update`, `delete`, `rotate-token`, `token`, `test`, `resume`, `metrics`, `buffer`, `consumers` |
+| `tenzir platform config`              | `log`, `branch`                                                                                                          |
+
+The `auth login` command prints a URL to sign in with, which also works when the browser runs on another machine. The `platform api-key create` and `deployment rotate-token` commands print a secret once, and nothing reads it back. The `platform api-key create --policy <json>` flag sets the key’s [policy](iam.md#policies), and without it, the key may only read its own account.
+
+The `platform organization member list` command shows each member’s id, which `platform organization member remove`, `platform organization role assign`, and `platform organization role revoke` take. The `platform organization member invite <label>` command prints the link that admits the invitee, once.
+
+The `platform config` commands work on a workspace’s configuration on the platform, without a clone:
+
+| Command                                                                     | Description                                                                                                                                                                                                                                |
+| --------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `tenzir platform config log [--branch <branch>]`                            | Lists the commits of a branch, by default `main`, newest first.                                                                                                                                                                            |
+| `tenzir platform config log --commit <commit> [--path <path>]`              | Shows a commit and the files it changes, compared with its first parent, or with `--path` the patch of one file.                                                                                                                           |
+| `tenzir platform config branch create <name>`                               | Creates a branch from the tip of `--base <branch>`, or with `--empty` from an empty commit.                                                                                                                                                |
+| `tenzir platform config branch rename <name> <new-name>`                    | Renames a branch, keeping its commits, its origin, branches made from it, and every draft on it, and forwards the old name to the new name. Refused while a deployment tracks the branch.                                                  |
+| `tenzir platform config branch merge <branch> [--into <branch>] [--delete]` | Merges a branch into a configuration branch, defaulting `--into` to its recorded origin. With `--expected <sha>`, merges only if the branch is at that commit. With `--delete`, deletes the merged branch afterward unless it moved since. |
+| `tenzir platform config branch delete <name>`                               | Deletes a branch and every draft on it. Refused while a deployment tracks the branch.                                                                                                                                                      |
+| `tenzir platform config branch protection set [<pattern>…]`                 | Replaces the patterns of the protected branches. No pattern protects no branch.                                                                                                                                                            |
+
+The `platform config log --commit` flag takes a full commit SHA. Creating a branch never changes a deployment’s tracker. The `platform config branch merge` command also accepts `-m <message>` (`--message`) to customize the merge commit message; when `--delete` is passed and deleting the branch fails afterward (for example, because another commit landed on it), the merge stands and the output notes why the branch was kept.
 
 ### Use with AI
 
@@ -183,7 +240,7 @@ A deploy takes a commit of a workspace’s configuration to one deployment. Our 
 
 ### Deployment trackers
 
-Each deployment has a tracker, which `deployment tracker get` reads and `deployment tracker set --branch <branch> --auto-deploy true|false` changes:
+Each deployment has a tracker, which `deployment info` and `deployment configuration status` show and `deployment configuration follow --branch <branch> [--manual]` changes:
 
 | Field       | JSON key     | Default for a new deployment | Meaning                                                      |
 | ----------- | ------------ | ---------------------------- | ------------------------------------------------------------ |
@@ -192,7 +249,7 @@ Each deployment has a tracker, which `deployment tracker get` reads and `deploym
 
 These rules apply:
 
-* A setting that you leave out stays as it is.
+* Without `--manual`, auto deploy is on.
 * Turning auto deploy on, or changing the branch while it is on, deploys the branch’s latest commit.
 * Turning auto deploy off keeps the configuration that the deployment runs, also when it reconnects.
 * When a deployment with auto deploy on connects and runs something other than its branch’s latest commit, the platform deploys that commit.
@@ -220,16 +277,16 @@ A refusal means that the commit’s files can’t become a configuration, or tha
 
 The `deployment configuration deploy` command deploys a commit by hand:
 
-| Flag                                          | Description                                                                |
-| --------------------------------------------- | -------------------------------------------------------------------------- |
-| `--commit <sha>`                              | The full SHA of any commit in the workspace’s repository, on any branch.   |
-| `--expected-deployed-generation <generation>` | The `deployed.generation` from the status, or `0` if nothing was deployed. |
+| Flag                                          | Description                                                                                                                |
+| --------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `--commit <sha>`                              | The full SHA of any commit in the workspace’s repository, on any branch. Defaults to the tip of the followed branch.       |
+| `--expected-deployed-generation <generation>` | The `deployed.generation` from the status, or `0` if nothing was deployed. Defaults to the generation the deployment runs. |
 
 These rules apply:
 
 * The command returns once the deployment accepted the configuration, and fails when the deployment refuses it or doesn’t confirm it.
 * When the deployed generation is no longer the expected one, because another deploy happened in between, the command fails with a conflict. If the deployment has accepted the same commit in the meantime, the command returns that revision instead.
-* The command works with auto deploy on or off and changes neither the tracker nor the branch. Deploying an older commit with auto deploy on lasts only until the next commit on the branch.
+* Unless you pass both flags, the command refuses a deployment with auto deploy on, so follow its branch with `--manual` first. It changes neither the tracker nor the branch. Deploying an older commit with auto deploy on lasts only until the next commit on the branch.
 * Every deploy gets a higher generation, and a deployment takes only a configuration with a higher generation than the one it runs, so a delayed or repeated delivery never rolls it back.
 
 ## Packages

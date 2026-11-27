@@ -77,11 +77,9 @@ from {time: 2024-01-01T10:00:00, class_uid: 4001, activity_id: 6, src_endpoint: 
 // class_name: "Network Activity", activity_name: "Traffic"
 where class_uid == 4001 and activity_id == 6
 window size=30min, on=time, tolerance=1min, idle_timeout=5min {
-  group {
-    src_ip: src_endpoint.ip,
-    dst_ip: dst_endpoint.ip,
-    dst_port: dst_endpoint.port,
-  } {
+  group $src_ip=src_endpoint.ip,
+        $dst_ip=dst_endpoint.ip,
+        $dst_port=dst_endpoint.port {
     sort time
     summarize times=collect(time),
               sizes=collect(traffic.bytes_out),
@@ -93,9 +91,9 @@ window size=30min, on=time, tolerance=1min, idle_timeout=5min {
     size_median = sizes.median()
     size_mad = sizes.mad()
     size_skew = sizes.skewness(method="bowley")
-    src_ip = $group.src_ip
-    dst_ip = $group.dst_ip
-    dst_port = $group.dst_port
+    src_ip = $src_ip
+    dst_ip = $dst_ip
+    dst_port = $dst_port
     start = $window.start
     end = $window.end
     drop times, sizes, intervals
@@ -185,17 +183,15 @@ subscribe "ocsf"
 where class_uid == 4001 and activity_id == 6
 window size=30min, every=5min, on=time,
        tolerance=1min, idle_timeout=5min {
-  group {
-    src_ip: src_endpoint.ip,
-    dst_ip: dst_endpoint.ip,
-    dst_port: dst_endpoint.port,
-  } {
+  group $src_ip=src_endpoint.ip,
+        $dst_ip=dst_endpoint.ip,
+        $dst_port=dst_endpoint.port {
     summarize times=collect(time), samples=count()
     where samples >= $min_samples
     beat = times.dominant_period(resolution=10s)
-    src_ip = $group.src_ip
-    dst_ip = $group.dst_ip
-    dst_port = $group.dst_port
+    src_ip = $src_ip
+    dst_ip = $dst_ip
+    dst_port = $dst_port
     start = $window.start
     end = $window.end
     drop times
@@ -247,15 +243,13 @@ from {time: 2024-01-01T10:00:00, class_uid: 4001, activity_id: 6, src_endpoint: 
      {time: 2024-01-01T10:20:00, class_uid: 4001, activity_id: 6, src_endpoint: {ip: 10.0.0.4}, dst_endpoint: {ip: 198.51.100.7, port: 443}, traffic: {timespan: {duration: 2000}}}
 where class_uid == 4001 and activity_id == 6
 window size=1h, on=time, tolerance=1min, idle_timeout=15min {
-  group {
-    src_ip: src_endpoint.ip,
-    dst_ip: dst_endpoint.ip,
-    dst_port: dst_endpoint.port,
-  } {
+  group $src_ip=src_endpoint.ip,
+        $dst_ip=dst_endpoint.ip,
+        $dst_port=dst_endpoint.port {
     summarize observed_ms=sum(traffic.timespan.duration), flows=count()
-    src_ip = $group.src_ip
-    dst_ip = $group.dst_ip
-    dst_port = $group.dst_port
+    src_ip = $src_ip
+    dst_ip = $dst_ip
+    dst_port = $dst_port
   }
 }
 where observed_ms >= count_milliseconds($min_observed)

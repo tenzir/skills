@@ -44,10 +44,10 @@ from {time: 2024-01-01T10:00:00, class_uid: 3002, activity_id: 1, status_id: 2, 
 // class_name: "Authentication", activity_name: "Logon", status: "Failure"
 where class_uid == 3002 and activity_id == 1 and status_id == 2
 window size=10min, on=time, tolerance=30s, idle_timeout=5min {
-  group {user: user.name, src_ip: src_endpoint.ip} {
+  group $user=user.name, $src_ip=src_endpoint.ip {
     summarize failures=count(), target_hosts=count_distinct(dst_endpoint.hostname)
-    user = $group.user
-    src_ip = $group.src_ip
+    user = $user
+    src_ip = $src_ip
     start = $window.start
     end = $window.end
   }
@@ -97,7 +97,7 @@ from {
     location: {city: "Berlin", long: 13.405, lat: 52.52},
   },
 }
-group user.name {
+group $user=user.name {
   window size=1h, trailing=true, on=time, tolerance=1min {
     summarize logins=count(),
               max_distance_m=max(
@@ -142,7 +142,7 @@ The per-user [`group`](../../reference/operators/group.md) isolates login histor
 The window checks the current login against every login in the preceding hour. When a detection needs only the immediately preceding login for each user, use [`lag`](../../reference/operators/lag.md) to attach it directly. For the same input data, replace the `group` and `window` block and the following `select` with:
 
 ```tql
-group user.name {
+group $user=user.name {
   reorder on=time, tolerance=1min
   lag into=previous
   where previous != null
@@ -444,7 +444,7 @@ from {time: 2024-01-01T10:00:00, class_uid: 4001, activity_id: 6, src_endpoint: 
 // class_name: "Network Activity", activity_name: "Traffic"
 where class_uid == 4001 and activity_id == 6
 window size=5min, on=time, tolerance=30s, idle_timeout=2min {
-  group src_endpoint.ip {
+  group $src_ip=src_endpoint.ip {
     summarize flows=count(),
               targets=count_distinct(dst_endpoint.ip),
               ports=count_distinct(dst_endpoint.port),
@@ -452,7 +452,7 @@ window size=5min, on=time, tolerance=30s, idle_timeout=2min {
               tcp_flows=count(connection_info.tcp_flags),
               unanswered=count_if(connection_info.tcp_flags,
                                   flags => bit_and(flags, 16) == 0)
-    src_ip = $group
+    src_ip = $src_ip
     start = $window.start
     end = $window.end
   }
@@ -498,10 +498,10 @@ where class_uid == 4001 and activity_id == 6
 where src_endpoint.network_scope_id == 1 and
       dst_endpoint.network_scope_id == 2
 window size=15min, on=time, tolerance=1min, idle_timeout=5min {
-  group src_endpoint.ip {
+  group $asset=src_endpoint.ip {
     summarize bytes_out=sum(traffic.bytes_out),
               destinations=count_distinct(dst_endpoint.ip)
-    asset = $group
+    asset = $asset
     start = $window.start
     end = $window.end
   }

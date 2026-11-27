@@ -9,19 +9,20 @@ section: "Docs"
 
 > The platform’s MCP server lets an AI agent do what you do in the app, with your permissions: run pipelines, read diagnostics, change the configuration, and manage deployments. It speaks the Model Context Protocol, so any agent that supports remote MCP servers can connect. This page lists the endpoint, how an agent signs in, and the tools it gets. Our guide on connecting to Tenzir sets up a client.
 
-The platform’s MCP server lets an AI agent do what you do in the app, with your permissions: run pipelines, read diagnostics, change the configuration, and manage deployments. It speaks the [Model Context Protocol](https://modelcontextprotocol.io), so any agent that supports remote MCP servers can connect. This page lists the endpoint, how an agent signs in, and the tools it gets. Our guide on [connecting to Tenzir](../guides/connect-to-tenzir.md) sets up a client.
+The [platform](../explanations/platform.md)’s MCP server lets an AI agent do what you do in the app, with your permissions: run pipelines, read diagnostics, change the configuration, and manage deployments. It speaks the [Model Context Protocol](https://modelcontextprotocol.io), so any agent that supports remote MCP servers can connect. This page lists the endpoint, how an agent signs in, and the tools it gets. Our guide on [connecting to Tenzir](../guides/connect-to-tenzir.md) sets up a client.
 
 ## Endpoint
 
-The server lives at `/mcp` on the platform and uses the streamable HTTP transport:
+The server uses the streamable HTTP transport at `https://platform.tenzir.com/mcp`. Clients discover how to sign in from the platform’s live [OAuth protected resource metadata](https://platform.tenzir.com/.well-known/oauth-protected-resource/mcp), so a client needs nothing but the endpoint URL:
 
-```text
-https://platform.tenzir.com/mcp
-```
+| Resource                                                                                                  | Purpose                                                              |
+| --------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| `https://platform.tenzir.com/mcp`                                                                         | Streamable HTTP endpoint for remote MCP clients.                     |
+| [OAuth protected resource metadata](https://platform.tenzir.com/.well-known/oauth-protected-resource/mcp) | RFC 9728 discovery document that tells MCP clients where to sign in. |
 
 ## Authentication
 
-The server signs agents in with OAuth. The first time an agent connects, it opens your browser, you sign in to the platform as usual, and the agent receives a token that acts on your behalf. The agent discovers how to sign in from the server’s metadata at `/.well-known/oauth-protected-resource/mcp`, so a client needs nothing but the endpoint’s URL.
+The server signs agents in with OAuth. The first time an agent connects, it opens your browser, you sign in to the platform as usual, and the agent receives a token that acts on your behalf.
 
 The server accepts only these tokens. API keys work with the [API](api.md) and the [CLI](cli.md), not with MCP.
 
@@ -35,7 +36,7 @@ Every agent you connect appears in the app under **Settings** → **Sessions** �
 
 A tool that deploys a configuration asks you to confirm before it acts. The server shows the question as a form in your client, if the client can show forms. Otherwise the tool’s description tells the agent to confirm with you in the conversation first.
 
-Secrets never pass through an agent: create them in the app or with `tenzir secret set`. The agent can list which secrets a deployment reaches and delete them, but not read or set their values. For the same reason, an agent can’t create API keys, whose secret the platform shows once.
+Secrets never pass through an agent: create them in the app or with `tenzir platform secret set`. The agent can list which secrets a deployment reaches and delete them, but not read or set their values. For the same reason, an agent can’t create API keys, whose secret the platform shows once.
 
 ## Tools
 

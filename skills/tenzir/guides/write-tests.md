@@ -820,8 +820,8 @@ timeout: 10
 
 
 from {x: 42, y: "foo"}
-each {
-  from_http env("HTTP_FIXTURE_URL"), body=$this {
+each $body=this {
+  from_http env("HTTP_FIXTURE_URL"), body=$body {
     read_json
   }
 }
@@ -1082,7 +1082,7 @@ tests/python/manual-http.py
 with acquire_fixture("http") as http:
     url = http.env["HTTP_FIXTURE_URL"]
     result = Executor().run(
-        f'from {{x: 1}} | each {{ from_http "{url}", body=$this {{ read_json }} }}'
+        f'from {{x: 1}} | each $body=this {{ from_http "{url}", body=$body {{ read_json }} }}'
     )
     print(result.stdout.decode(), end="")
 

@@ -1103,9 +1103,9 @@ from {ts: 2024-01-01T10:00:00, user: "alice"},
      {ts: 2024-01-01T10:01:00, user: "alice"},
      {ts: 2024-01-01T10:02:00, user: "bob"}
 window size=5min, on=ts {
-  group user {
+  group $user=user {
     summarize failures=count()
-    user = $group
+    user = $user
     start = $window.start
   }
 }
@@ -1117,10 +1117,10 @@ window size=5min, on=ts {
 from {ts: 2024-01-01T10:00:00, user: "alice"},
      {ts: 2024-01-01T10:01:00, user: "alice"},
      {ts: 2024-01-01T10:02:00, user: "bob"}
-group user {
+group $user=user {
   window size=5min, on=ts {
     summarize failures=count()
-    user = $group
+    user = $user
     start = $window.start
   }
 }

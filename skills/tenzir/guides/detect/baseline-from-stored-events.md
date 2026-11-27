@@ -69,9 +69,9 @@ where class_uid == 4001 and activity_id == 6
 where src_endpoint.network_scope_id == 1 and
       dst_endpoint.network_scope_id == 2
 window size=15min, on=time, tolerance=1min, idle_timeout=5min {
-  group src_endpoint.ip {
+  group $asset=src_endpoint.ip {
     summarize bytes_out=sum(traffic.bytes_out)
-    asset = $group
+    asset = $asset
     start = $window.start
     end = $window.end
   }

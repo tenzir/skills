@@ -18,7 +18,7 @@ to_google_cloud_monitoring [project=string, service_credentials=string,
     sum=number, bucket_counts=list<int>, explicit_bounds=list<number>,
     metric_prefix=string, resource_type=string, resource_labels=record,
     flush_interval=duration, max_pending_series=int, timeout=duration,
-    max_retry_count=int]
+    max_retry_count=int, compress=bool]
 ```
 
 ## Description
@@ -241,6 +241,12 @@ Defaults to `30s`.
 Maximum number of retries per request.
 
 Defaults to `5`.
+
+### `compress = bool (optional)`
+
+Whether to compress the request bodies with gzip. Cloud Monitoring decompresses them transparently.
+
+Defaults to `true`.
 
 ## Examples
 

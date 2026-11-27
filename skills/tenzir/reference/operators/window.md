@@ -79,10 +79,10 @@ Count windows follow arrival order. They don’t accept `on`, `tolerance`, or `i
 Put `group` outside `window` when each key requires independent fixed-window clocks, trailing history, or sessions. A busy key then cannot advance another key’s event-time clock or enter its retained history. Session windows usually use this form because inactivity applies independently to each key:
 
 ```tql
-group host {
+group $host=host {
   window gap=5min, on=time {
     summarize events=count()
-    host = $group
+    host = $host
   }
 }
 ```
@@ -110,11 +110,11 @@ summarize rolling_bytes=sum(bytes), host,
 
 Use a trailing `window` when you need bounded `streamstats` semantics or an arbitrary subpipeline:
 
-| Splunk SPL                                      | TQL                                                           |
-| ----------------------------------------------- | ------------------------------------------------------------- |
-| `streamstats sum(bytes) BY host`                | Cumulative event emission from `summarize`                    |
-| `streamstats window=100 sum(bytes) BY host`     | `group host { window size=100, trailing=true { … } }`         |
-| `streamstats time_window=5m sum(bytes) BY host` | `group host { window size=5min, trailing=true, on=ts { … } }` |
+| Splunk SPL                                      | TQL                                                                 |
+| ----------------------------------------------- | ------------------------------------------------------------------- |
+| `streamstats sum(bytes) BY host`                | Cumulative event emission from `summarize`                          |
+| `streamstats window=100 sum(bytes) BY host`     | `group $host=host { window size=100, trailing=true { … } }`         |
+| `streamstats time_window=5m sum(bytes) BY host` | `group $host=host { window size=5min, trailing=true, on=ts { … } }` |
 
 ### Session-window cost
 
@@ -222,10 +222,10 @@ window size=5s {
 Count each host’s activity burst after more than five minutes of event-time inactivity. The session can last longer than five minutes as long as every consecutive gap stays within the bound:
 
 ```tql
-group host {
+group $host=host {
   window gap=5min, size=24h, on=time, tolerance=30s {
     summarize events=count(), commands=distinct(process.name)
-    host = $group
+    host = $host
     where events >= 5
     session_start = $window.start
   }
@@ -253,7 +253,7 @@ Use `every=10` to start a 100-event window every 10 events.
 The trailing interval for an event at `ts` contains events from `ts - 5min` through `ts`, including both endpoints. The outer group keeps independent host histories. A 30-second tolerance reorders slightly late events before evaluating the trailing windows:
 
 ```tql
-group host {
+group $host=host {
   window size=5min, trailing=true, on=ts, tolerance=30s {
     summarize rolling_bytes=sum(bytes), events=count()
     this = {
@@ -293,7 +293,7 @@ A trigger fires the trailing window only for successful logins. The preceding fa
 
 ```tql
 where class_uid == 3002 and activity_id == 1
-group user.name {
+group $user=user.name {
   window size=10min, trailing=true, on=time, trigger=status_id == 1 {
     summarize failures=count_if(status_id, x => x == 2)
     where failures >= 5
@@ -314,10 +314,10 @@ Use a fixed event-time window to evaluate grouped detections over aligned interv
 ```tql
 where action == "login" and outcome == "failure"
 window size=10min, every=1min, on=ts, tolerance=2min, idle_timeout=5min {
-  group {user: user, src_ip: src_ip} {
+  group $user=user, $src_ip=src_ip {
     summarize failures=count(), target_hosts=distinct(host)
-    user = $group.user
-    src_ip = $group.src_ip
+    user = $user
+    src_ip = $src_ip
     start = $window.start
     end = $window.end
   }

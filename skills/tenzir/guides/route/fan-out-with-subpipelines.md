@@ -15,31 +15,31 @@ This guide shows you how to fan out an event stream into subpipelines with [`eac
 
 Tenzir has several operators that send events into subpipelines. Choose the operator based on how many subpipelines you need and how events should flow into them:
 
-| Operator                                                                      | Subpipelines                          | Event flow                                                         | Use case                                                      |
-| ----------------------------------------------------------------------------- | ------------------------------------- | ------------------------------------------------------------------ | ------------------------------------------------------------- |
-| [`fork`](../../reference/operators/fork.md)                 | One fixed side branch                 | Every event goes to the main pipeline and the side branch          | Archive or publish a copy while continuing processing         |
-| [`merge`](../../reference/operators/merge.md)               | One fixed side source                 | The side branch produces events that join the main stream          | Pull a second input into the pipeline                         |
-| [`load_balance`](../../reference/operators/load_balance.md) | One branch per configured target      | Each event goes to one target                                      | Distribute load across equivalent sinks                       |
-| [`each`](../../reference/operators/each.md)                 | One fresh subpipeline per input event | The input event is available as `$this`; it is not passed as input | Run a per-event job, such as a lookup or export               |
-| [`group`](../../reference/operators/group.md)               | One subpipeline per key               | Matching events are passed to the same keyed subpipeline           | Keep per-tenant, per-host, or per-session processing isolated |
+| Operator                                                                      | Subpipelines                          | Event flow                                                            | Use case                                                      |
+| ----------------------------------------------------------------------------- | ------------------------------------- | --------------------------------------------------------------------- | ------------------------------------------------------------- |
+| [`fork`](../../reference/operators/fork.md)                 | One fixed side branch                 | Every event goes to the main pipeline and the side branch             | Archive or publish a copy while continuing processing         |
+| [`merge`](../../reference/operators/merge.md)               | One fixed side source                 | The side branch produces events that join the main stream             | Pull a second input into the pipeline                         |
+| [`load_balance`](../../reference/operators/load_balance.md) | One branch per configured target      | Each event goes to one target                                         | Distribute load across equivalent sinks                       |
+| [`each`](../../reference/operators/each.md)                 | One fresh subpipeline per input event | Per-event values are bound to `$` variables; input is not streamed in | Run a per-event job, such as a lookup or export               |
+| [`group`](../../reference/operators/group.md)               | One subpipeline per key               | Matching events are passed to the same keyed subpipeline              | Keep per-tenant, per-host, or per-session processing isolated |
 
 Use regular transformations when every event can flow through the same linear pipeline. Use subpipeline fan-out when the pipeline structure itself depends on each event or key.
 
 ## Run one subpipeline per event
 
-Use [`each`](../../reference/operators/each.md) when every input event describes a job to run. The nested pipeline must start with a source because `each` does not pass the input event into the subpipeline. Instead, it binds the current event record to `$this`.
+Use [`each`](../../reference/operators/each.md) when every input event describes a job to run. The nested pipeline must start with a source because `each` does not pass the input event into the subpipeline. Instead, named bindings such as `$id=case_id` expose per-event values as scoped `$` variables inside the subpipeline (omitting named bindings binds the complete event to `$this`).
 
 The following pipeline treats incoming cases as lookup requests. Each case queries the same historical dataset for matching source IPs and annotates the matches with the case ID:
 
 ```tql
 from {case_id: "C-1", ip: "10.0.0.5"},
      {case_id: "C-2", ip: "10.0.0.7"}
-each parallel=4 {
+each $id=case_id, $ip=ip, parallel=4 {
   from {ts: 2024-01-01T10:00:00, src_ip: "10.0.0.5", action: "login"},
        {ts: 2024-01-01T10:02:00, src_ip: "10.0.0.8", action: "scan"},
        {ts: 2024-01-01T10:05:00, src_ip: "10.0.0.7", action: "download"}
-  where src_ip == $this.ip
-  case_id = $this.case_id
+  where src_ip == $ip
+  case_id = $id
 }
 sort case_id, ts
 ```
@@ -63,7 +63,7 @@ The `parallel` option limits how many per-event jobs run at the same time. When 
 
 ## Keep one subpipeline per key
 
-Use [`group`](../../reference/operators/group.md) when events with the same key must go through the same subpipeline. Unlike `each`, the nested pipeline receives input: Tenzir sends all matching events for a key to that key’s subpipeline. The key is available as `$group` inside the subpipeline.
+Use [`group`](../../reference/operators/group.md) when events with the same key must go through the same subpipeline. Unlike `each`, the nested pipeline receives input: Tenzir sends all matching events for a key to that key’s subpipeline. Named bindings such as `$tenant=tenant` expose each key as a scoped `$` variable inside the subpipeline (a single unnamed key binds `$group`).
 
 The following pipeline keeps tenant streams separate and computes a summary per tenant:
 
@@ -71,9 +71,9 @@ The following pipeline keeps tenant streams separate and computes a summary per 
 from {tenant: "alpha", bytes: 120},
      {tenant: "beta", bytes: 90},
      {tenant: "alpha", bytes: 80}
-group tenant {
+group $tenant=tenant {
   summarize events=count(), bytes=sum(bytes)
-  tenant = $group
+  tenant = $tenant
 }
 sort tenant
 ```
@@ -101,8 +101,8 @@ A common `group` pattern is to write each tenant, host, or sensor to its own fil
 from {tenant: "alpha", message: "login"},
      {tenant: "beta", message: "scan"},
      {tenant: "alpha", message: "logout"}
-group tenant {
-  to_file f"/tmp/tenzir/{$group}.json" {
+group $tenant=tenant {
+  to_file f"/tmp/tenzir/{$tenant}.json" {
     write_ndjson
   }
 }

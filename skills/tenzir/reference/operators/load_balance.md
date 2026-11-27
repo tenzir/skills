@@ -12,6 +12,7 @@ section: "Docs"
 Routes the data to one of multiple subpipelines.
 
 ```tql
+load_balance $name=list { … }
 load_balance over:list { … }
 ```
 
@@ -19,23 +20,21 @@ load_balance over:list { … }
 
 The `load_balance` operator spawns a nested pipeline for each element in the given list. Incoming events are distributed to exactly one of the nested pipelines. This operator may reorder the event stream.
 
+With a named binding (`$name=list`), each worker subpipeline receives its list element in `$name`. The list expression resolves against the enclosing scope before opening the subpipeline scope, so `load_balance $target=$target { … }` reads the outer `$target` list on the right-hand side and binds the per-worker `$target` inside the subpipeline. As a shorthand, passing an unnamed list (`over`) binds each element to `$over`.
+
 In a parallel pipeline, `load_balance` runs in at most as many parallel instances as there are targets. Each target has one nested pipeline, assigned to one instance. If the requested parallelism exceeds the number of targets, the operator uses fewer instances.
+
+### `$name=list`
+
+A named binding whose right-hand side evaluates to a non-empty constant list. Inside each spawned subpipeline, `$name` holds one element from the list.
 
 ### `over: list`
 
-This must be a `$`-variable, previously declared with `let`. For example, to load balance over a list of ports, use `let $cfg = [8080, 8081, 8082]` followed by `load_balance $cfg { … }`.
+Shorthand for an unnamed target list. Evaluates to a non-empty constant list and binds each element to `$over` inside the spawned subpipeline.
 
 ### `{ … }`
 
-The nested pipeline to spawn. This pipeline can use the same variable as passed to `over`, which will be resolved to one of the list items. The following example spawns three nested pipelines, where `$port` is bound to `8080`, `8081` and `8082`, respectively.
-
-```tql
-let $cfg = [8080, 8081, 8082]
-load_balance $cfg {
-  let $port = $cfg
-  // … continue here
-}
-```
+The nested pipeline to spawn for each element in the list. Inside the subpipeline, `$name` (or `$over` when using the unnamed shorthand) resolves to the worker’s assigned list element.
 
 The given subpipeline must end with a sink. This limitation might be removed in future versions.
 
@@ -44,19 +43,19 @@ The given subpipeline must end with a sink. This limitation might be removed in 
 ### Route data to multiple TCP ports
 
 ```tql
-let $cfg = ["192.168.0.30:8080", "192.168.0.30:8081"]
+let $endpoints = ["192.168.0.30:8080", "192.168.0.30:8081"]
 
 
 subscribe "input"
-load_balance $cfg {
-  to_tcp $cfg { write_json }
+load_balance $endpoint=$endpoints {
+  to_tcp $endpoint { write_json }
 }
 ```
 
 ### Route data to multiple Splunk endpoints
 
 ```tql
-let $cfg = [{
+let $targets = [{
   ip: 192.168.0.30,
   token: "example-token-1234",
 }, {
@@ -66,9 +65,9 @@ let $cfg = [{
 
 
 subscribe "input"
-load_balance $cfg {
-  let $endpoint = f"{$cfg.ip}:8080"
-  to_splunk $endpoint, hec_token=$cfg.token
+load_balance $target=$targets {
+  let $endpoint = f"{$target.ip}:8080"
+  to_splunk $endpoint, hec_token=$target.token
 }
 ```
 

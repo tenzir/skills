@@ -7,9 +7,9 @@ section: "Docs"
 
 # AWS Authentication
 
-> Tenzir’s AWS operators authenticate with AWS using the AWS SDK’s default credential chain, an OIDC web identity token, or static credentials. This page describes the shared awsiam option used by froms3, tos3, fromamazonsqs, toamazonsqs, fromamazoncloudwatch, toamazoncloudwatch, fromkafka, tokafka, and toiceberg. For toiceberg against an AWS-managed catalog, one resolved provider signs both the catalog requests and the S3 data-file operations.
+> Tenzir’s AWS operators authenticate with AWS using the AWS SDK’s default credential chain, an OIDC web identity token, or static credentials. This page describes the shared awsiam option used by froms3, tos3, fromamazonsqs, toamazonsqs, fromamazoncloudwatch, toamazoncloudwatch, fromkafka, tokafka, fromiceberg, and toiceberg. For fromiceberg and toiceberg against an AWS-managed catalog, one resolved provider signs both the catalog requests and the S3 data-file operations.
 
-Tenzir’s AWS operators authenticate with AWS using the AWS SDK’s default credential chain, an OIDC web identity token, or static credentials. This page describes the shared `aws_iam` option used by [`from_s3`](operators/from_s3.md), [`to_s3`](operators/to_s3.md), [`from_amazon_sqs`](operators/from_amazon_sqs.md), [`to_amazon_sqs`](operators/to_amazon_sqs.md), [`from_amazon_cloudwatch`](operators/from_amazon_cloudwatch.md), [`to_amazon_cloudwatch`](operators/to_amazon_cloudwatch.md), [`from_kafka`](operators/from_kafka.md), [`to_kafka`](operators/to_kafka.md), and [`to_iceberg`](operators/to_iceberg.md). For [`to_iceberg`](operators/to_iceberg.md) against an AWS-managed catalog, one resolved provider signs both the catalog requests and the S3 data-file operations.
+Tenzir’s AWS operators authenticate with AWS using the AWS SDK’s default credential chain, an OIDC web identity token, or static credentials. This page describes the shared `aws_iam` option used by [`from_s3`](operators/from_s3.md), [`to_s3`](operators/to_s3.md), [`from_amazon_sqs`](operators/from_amazon_sqs.md), [`to_amazon_sqs`](operators/to_amazon_sqs.md), [`from_amazon_cloudwatch`](operators/from_amazon_cloudwatch.md), [`to_amazon_cloudwatch`](operators/to_amazon_cloudwatch.md), [`from_kafka`](operators/from_kafka.md), [`to_kafka`](operators/to_kafka.md), [`from_iceberg`](operators/from_iceberg.md), and [`to_iceberg`](operators/to_iceberg.md). For [`from_iceberg`](operators/from_iceberg.md) and [`to_iceberg`](operators/to_iceberg.md) against an AWS-managed catalog, one resolved provider signs both the catalog requests and the S3 data-file operations.
 
 ## Local usage with the AWS CLI
 
@@ -159,6 +159,7 @@ The role’s trust policy must allow your active principal (for example an EC2 i
 ## See Also
 
 * [`from_amazon_cloudwatch`](operators/from_amazon_cloudwatch.md)
+* [`from_iceberg`](operators/from_iceberg.md)
 * [`from_kafka`](operators/from_kafka.md)
 * [`from_s3`](operators/from_s3.md)
 * [`from_amazon_sqs`](operators/from_amazon_sqs.md)

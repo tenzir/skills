@@ -1,30 +1,25 @@
 ---
-title: "API"
+title: "Overview"
 canonical: https://tenzir.com/docs/reference/api
 source: https://tenzir.com/docs/reference/api.md
 section: "Docs"
 ---
 
-# API
+# Overview
 
-> The platform’s REST API offers everything that the app, the CLI, and the MCP server do, under the same permissions, for your own scripts and tools. This page lists where the API lives, how a request authenticates, and what it can do. Our guide on connecting to Tenzir makes a first request.
+> The platform’s REST API offers everything that the app, the MCP server, and the CLI do, under the same permissions, for your own scripts and tools. This page lists where the API lives, how a request authenticates, and what it can do. Our guide on connecting to Tenzir makes a first request.
 
-The platform’s REST API offers everything that the app, the [CLI](cli.md), and the [MCP server](mcp.md) do, under the same permissions, for your own scripts and tools. This page lists where the API lives, how a request authenticates, and what it can do. Our guide on [connecting to Tenzir](../guides/connect-to-tenzir.md) makes a first request.
+The [platform](../explanations/platform.md)’s REST API offers everything that the app, the [MCP server](mcp.md), and the [CLI](cli.md) do, under the same permissions, for your own scripts and tools. This page lists where the API lives, how a request authenticates, and what it can do. Our guide on [connecting to Tenzir](../guides/connect-to-tenzir.md) makes a first request.
 
 ## Endpoint
 
-The API lives under `/api` on the platform:
+All REST API requests use `https://platform.tenzir.com/api` as their base URL. You can browse and test operations directly in the platform’s [interactive API documentation](https://platform.tenzir.com/api/docs), or fetch the live [OpenAPI 3.1 specification](https://platform.tenzir.com/api/openapi.json):
 
-```text
-https://platform.tenzir.com/api
-```
-
-The platform describes every operation in an OpenAPI document, and renders it as interactive documentation:
-
-| Path                | Content                                           |
-| ------------------- | ------------------------------------------------- |
-| `/api/openapi.json` | The OpenAPI document, for clients and generators. |
-| `/api/docs`         | The interactive documentation in your browser.    |
+| Resource                                                              | Purpose                                                                                                                              |
+| --------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| `https://platform.tenzir.com/api`                                     | Base URL for all REST API requests.                                                                                                  |
+| [Interactive API docs](https://platform.tenzir.com/api/docs)          | Browse and test endpoints in your browser.                                                                                           |
+| [OpenAPI specification](https://platform.tenzir.com/api/openapi.json) | Live OpenAPI 3.1 JSON for clients and generators (mirrored at [`/openapi/platform.json`](https://tenzir.com/openapi/platform.json)). |
 
 Requests and responses carry JSON. A path names an organization, a workspace, or a deployment by its slug or its id, such as `/api/organizations/acme/workspaces/prod/deployments`.
 
@@ -42,7 +37,7 @@ curl -H "x-tenzir-api-key: $TENZIR_API_KEY" \
   https://platform.tenzir.com/api/account
 ```
 
-You create an API key in the app under **Settings** → **API keys**, or with `tenzir api-key create`. The platform shows its secret once, and nothing reads it back. A lost key must be revoked and replaced.
+You create an API key in the app under **Settings** → **API keys**, or with `tenzir platform api-key create`. The platform shows its secret once, and nothing reads it back. A lost key must be revoked and replaced.
 
 ## Permissions
 
@@ -63,24 +58,20 @@ The empty policy `[]` allows only reading the key’s own account. Actions have 
 
 ## Operations
 
-The operations cover every area of the platform:
+The operations are grouped by resource area in the sidebar, with one reference page per endpoint:
 
-| Area             | What you can do                                                                                                    | Examples                                                                                                                                                               |
-| ---------------- | ------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Account          | Read your account, and manage your API keys and sessions.                                                          | `readAccount`, `createApiKey`, `setApiKeyPolicy`, `revokeApiKey`                                                                                                       |
-| Organizations    | Invite and remove members, manage roles, and read usage, billing, and budgets.                                     | `listMembers`, `inviteMember`, `removeMember`, `createRole`, `assignMemberRole`, `revokeMemberRole`                                                                    |
-| Workspaces       | Create, update, and delete workspaces.                                                                             | `createWorkspace`, `updateWorkspace`, `deleteWorkspace`                                                                                                                |
-| Configuration    | Read and write the configuration repository: branches, commits, files, drafts, merges, and reverts.                | `readCommits`, `readCommitDiff`, `saveDraft`, `commitDraft`, `createRevertDraft`, `createBranch`, `mergeBranch`, `renameBranch`, `deleteBranch`, `setBranchProtection` |
-| Packages         | Read the packages of a configuration and of our library, and add, update, remove, and re-lock packages in a draft. | `readPackages`, `readPackageLibrary`, `addDraftPackage`, `updateDraftPackage`, `updateDraftPackages`, `removeDraftPackage`, `syncDraftPackages`                        |
-| Deployments      | Create, rename, update, change the type of, resume, and delete deployments, and diagnose them.                     | `createHostedDeployment`, `changeDeploymentType`, `renameDeployment`, `updateDeployment`, `deleteDeployment`, `diagnoseDeployment`                                     |
-| Deploying        | Read and change a deployment’s tracker, read its configuration status, and deploy a commit.                        | `readDeploymentTracker`, `changeDeploymentTracker`, `readDeploymentConfigurationStatus`, `deployDeploymentConfiguration`                                               |
-| Pipelines        | List pipelines, start and stop them, and read their diagnostics and metrics.                                       | `listPipelines`, `startPipeline`, `stopPipeline`, `readPipelineDiagnostics`                                                                                            |
-| Ad-hoc pipelines | Run a pipeline once on a deployment and read its events.                                                           | `startAdhocPipeline`, `readAdhocPipeline`, `stopAdhocPipeline`                                                                                                         |
-| Contexts         | Read the contexts that a configuration declares, and inspect the contexts of a deployment.                         | `readConfiguredContexts`, `inspectContexts`                                                                                                                            |
-| Secrets          | Create, list, update, and delete secrets.                                                                          | `createWorkspaceSecret`, `listDeploymentSecrets`, `deleteOrganizationSecret`                                                                                           |
-| Ingest endpoints | Create and manage ingest endpoints, and read their metrics.                                                        | `createIngestEndpoint`, `readIngestEndpointMetrics`, `rotateIngestToken`                                                                                               |
-| Deployment logs  | Read what a deployment logged.                                                                                     | `readLogs`                                                                                                                                                             |
-| Audit log        | List and export the organization’s audit events.                                                                   | `listAuditEvents`, `exportAuditEvents`                                                                                                                                 |
+| Area             | What you can do                                                                                           | Examples                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| ---------------- | --------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Account          | Read your account, and manage API keys, sessions, agent sessions, and preferences.                        | [`readAccount`](api/account/read-account.md), [`createApiKey`](api/account/create-api-key.md), [`setApiKeyPolicy`](api/account/set-api-key-policy.md), [`listSessions`](api/account/list-sessions.md)                                                                                                                                                            |
+| Organizations    | Manage organizations, members, invitations, custom roles, and audit logs.                                 | [`listOrganizations`](api/organizations/list-organizations.md), [`inviteMember`](api/organizations/invite-member.md), [`createRole`](api/organizations/create-role.md), [`listAuditEvents`](api/organizations/list-audit-events.md)                                                                                                                              |
+| Billing          | Read billing plans, cost, credit grants, and usage state, and set budgets.                                | [`readBilling`](api/billing/read-billing.md), [`readCost`](api/billing/read-cost.md), [`setBudget`](api/billing/set-budget.md), [`readUsageState`](api/billing/read-usage-state.md)                                                                                                                                                                              |
+| Workspaces       | Manage workspaces and their Git configuration repository: branches, commits, diffs, drafts, and packages. | [`createWorkspace`](api/workspaces/create-workspace.md), [`readBranches`](api/workspaces/read-branches.md), [`saveDraft`](api/workspaces/save-draft.md), [`commitDraft`](api/workspaces/commit-draft.md), [`addDraftPackage`](api/workspaces/add-draft-package.md)                                                             |
+| Deployments      | Create, update, resize, and deploy configurations to deployments, and inspect their contexts and logs.    | [`listDeployments`](api/deployments/list-deployments.md), [`createHostedDeployment`](api/deployments/create-hosted-deployment.md), [`deployDeploymentConfiguration`](api/deployments/deploy-deployment-configuration.md), [`inspectContexts`](api/deployments/inspect-contexts.md), [`readLogs`](api/deployments/read-logs.md) |
+| Pipelines        | Start, stop, and diagnose pipelines, run ad-hoc pipelines, and read throughput metrics.                   | [`listPipelines`](api/pipelines/list-pipelines.md), [`startPipeline`](api/pipelines/start-pipeline.md), [`startAdhocPipeline`](api/pipelines/start-adhoc-pipeline.md), [`readWorkspaceMetrics`](api/pipelines/read-workspace-metrics.md)                                                                                                                         |
+| Secrets          | Create, list, update, and delete organization, workspace, and deployment secrets.                         | [`createOrganizationSecret`](api/secrets/create-organization-secret.md), [`setWorkspaceSecret`](api/secrets/set-workspace-secret.md), [`listDeploymentSecrets`](api/secrets/list-deployment-secrets.md)                                                                                                                                                                                            |
+| Ingest Endpoints | Create and manage ingest endpoints, rotate tokens, and inspect buffer and throughput metrics.             | [`createIngestEndpoint`](api/ingest-endpoints/create-ingest-endpoint.md), [`rotateIngestToken`](api/ingest-endpoints/rotate-ingest-token.md), [`readIngestEndpointMetrics`](api/ingest-endpoints/read-ingest-endpoint-metrics.md)                                                                                                                                                                  |
+| Assistant        | Check assistant availability, manage conversations, and send feedback.                                    | [`readAssistant`](api/assistant/read-assistant.md), [`createConversation`](api/assistant/create-conversation.md), [`askConversation`](api/assistant/ask-conversation.md)                                                                                                                                                                                                                           |
+| Platform         | Sign in via OIDC or CLI flows, check health and build info, and discover platform and MCP metadata.       | [`readHealth`](api/platform/read-health.md), [`readPlatformConfiguration`](api/platform/read-platform-configuration.md), [`getProtectedResourceMetadata`](api/platform/get-protected-resource-metadata.md)                                                                                                                                                                                         |
 
 Updating a deployment names the version it updates to, as `listDeployments` offers it in the deployment’s `update.version`: `updateDeployment` takes the body `{"version": "7.0.1"}`. The platform refuses any other version, and any while it offers no update, with `VersionNotOffered`, and a body without a version with `Validation`.
 

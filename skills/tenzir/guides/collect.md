@@ -122,8 +122,8 @@ For example, assume that each Amazon SQS message contains a JSON object with an 
 ```tql
 from_amazon_sqs "sqs://object-notifications"
 this = message.parse_json()
-each {
-  from_s3 $this.object_url {
+each $url=object_url {
+  from_s3 $url {
     read_auto
   }
 }
@@ -131,7 +131,7 @@ each {
 
 One subpipeline per reference event
 
-[`each`](../reference/operators/each.md) starts a fresh subpipeline for every reference event. The current reference is available as `$this`, so the source operator can use fields from the reference event. The fetched events flow back into one output stream.
+[`each`](../reference/operators/each.md) starts a fresh subpipeline for every reference event. Named bindings such as `$url=object_url` pass fields from the reference event into the source operator. The fetched events flow back into one output stream.
 
 Only accept references from trusted producers. A URL supplied by an untrusted event could direct the Tenzir Node to an internal or sensitive network location.
 

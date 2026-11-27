@@ -34,7 +34,7 @@ Every configured pipeline is in one of five states:
 | `failed`   | The pipeline ended with an error, which its state records.      |
 | `stopped`  | Someone stopped the pipeline, or the configuration disables it. |
 
-You can start and stop a configured pipeline without changing the configuration, with **Start** and **Stop** in the app or with `tenzir deployment start-pipeline` and `stop-pipeline`. A stop is graceful: the pipeline finishes the events it holds before it ends. The deployment never restarts a failed pipeline on its own, so it stays failed until you start it again or a new configuration changes it.
+You can start and stop a configured pipeline without changing the configuration, with **Start** and **Stop** in the app or with `tenzir pipeline start` and `tenzir pipeline stop`. A stop is graceful: the pipeline finishes the events it holds before it ends. The deployment never restarts a failed pipeline on its own, so it stays failed until you start it again or a new configuration changes it.
 
 The platform can also suspend a whole deployment, for example when an organization reaches its usage limit. A suspended deployment runs no pipelines but remembers their states, and resuming it starts the ones that were running.
 

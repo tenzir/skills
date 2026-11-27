@@ -115,7 +115,7 @@ Defaults to `8`. Must be at least `1`.
 
 ### `compress = bool (optional)`
 
-Whether to compress the message body using standard gzip.
+Whether to compress the message body using standard gzip. Elasticsearch decompresses gzip-compressed requests transparently, so compression reduces the bytes sent over the network without further configuration. Set `compress=false` for endpoints that don’t accept compressed requests.
 
 Defaults to `true`.
 

@@ -62,7 +62,7 @@ For input timestamps `12:00:00`, `12:02:00`, and `12:01:00`, the operator emits 
 Put `reorder` inside `group` so activity from one user doesn’t advance another user’s watermark:
 
 ```tql
-group user.name {
+group $user=user.name {
   reorder on=time, tolerance=2min
 }
 ```

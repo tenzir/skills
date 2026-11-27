@@ -145,8 +145,8 @@ A D4 server keeps the queues of its analyzers in database 2. For sensor data of 
 ```tql
 from_redis "analyzer:1:2b5c0f6a-9d3c-4b8e-8f1d-7a1b2c3d4e5f",
   url="redis://d4.example.org:6380", db=2
-each {
-  from_file string($this.message) {
+each $path=string(message) {
+  from_file $path {
     decompress_gzip
     read_pcap
   }

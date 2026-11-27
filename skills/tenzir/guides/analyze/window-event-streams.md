@@ -22,10 +22,10 @@ Put [`reorder`](../../reference/operators/reorder.md) before a fixed window only
 Use `gap` to select a session when inactivity defines the population. An event-time session continues while the distance between consecutive events stays within `gap`, so its total duration can exceed the gap. An optional `size` caps its total duration or event count. A processing-time session closes at the wall-clock gap deadline. Compose an outer [`group`](../../reference/operators/group.md) with the session window when each key needs its own session:
 
 ```tql
-group host {
+group $host=host {
   window gap=5min, on=time {
     summarize events=count()
-    host = $group
+    host = $host
   }
 }
 ```
@@ -43,7 +43,7 @@ Session windows model bursts whose boundaries come from inactivity rather than a
 Put [`group`](../../reference/operators/group.md) outside [`window`](../../reference/operators/window.md) so each key gets an independent session and event-time clock. This example emits destinations with at least five events in one activity burst:
 
 ```tql
-group dest {
+group $dest=dest {
   window gap=5min,
          size=24h,
          on=time,
@@ -51,7 +51,7 @@ group dest {
     summarize eventcount=count(), session_end=max(time)
     session_start = $window.start
     duration = session_end - session_start
-    dest = $group
+    dest = $dest
     where eventcount >= 5
   }
 }
@@ -64,10 +64,10 @@ The `tolerance` buffer orders events before assigning them to sessions. Events t
 Omit `on` when arrival time defines activity. The operator closes a processing-time session on its wall-clock gap timer, even if no later event arrives:
 
 ```tql
-group connection_id {
+group $connection_id=connection_id {
   window gap=30s, size=10min {
     summarize eventcount=count()
-    connection_id = $group
+    connection_id = $connection_id
   }
 }
 ```
@@ -81,10 +81,10 @@ A busy session has no natural duration or event-count limit. Set `size` to a dur
 This event-time session closes after 1,000 events:
 
 ```tql
-group dest {
+group $dest=dest {
   window gap=5min, size=1000, on=time {
     summarize eventcount=count()
-    dest = $group
+    dest = $dest
   }
 }
 ```
@@ -106,14 +106,14 @@ The closest TQL translation makes the output fields explicit:
 
 ```tql
 sort time
-group dest {
+group $dest=dest {
   window gap=5min,
          size=24h,
          on=time {
     summarize eventcount=count(), session_end=max(time)
     session_start = $window.start
     duration = session_end - session_start
-    dest = $group
+    dest = $dest
     where eventcount >= 5
   }
 }
@@ -123,7 +123,7 @@ The core options map as follows:
 
 | Splunk `transaction`              | TQL session window                                   |
 | --------------------------------- | ---------------------------------------------------- |
-| One grouping field such as `dest` | `group dest { … }`                                   |
+| One grouping field such as `dest` | `group $dest=dest { … }`                             |
 | `maxpause=5m`                     | `window gap=5min`                                    |
 | `maxspan=24h`                     | Approximate duration cap `size=24h`                  |
 | `maxevents=1000`                  | Approximate event-count cap `size=1000`              |
@@ -135,7 +135,7 @@ One TQL session window accepts either the duration cap or the event-count cap, n
 
 Check transaction semantics before translating
 
-Multiple fields in Splunk `transaction` can connect events through transitive field matches. A TQL record key such as `group {host, cookie}` instead groups by an exact tuple. Splunk’s `startswith`, `endswith`, `connected`, orphan, and eviction options also have no direct session-window equivalent.
+Multiple fields in Splunk `transaction` can connect events through transitive field matches. Multi-key grouping in TQL, such as `group $host=host, $cookie=cookie { … }`, instead groups by an exact tuple. Splunk’s `startswith`, `endswith`, `connected`, orphan, and eviction options also have no direct session-window equivalent.
 
 Caps anchor at opposite ends of the input. Splunk processes events from newest to oldest, while the TQL session processes them from oldest to newest after `sort time`. Given events at hours 0, 23, and 25 with no inactivity split, `maxspan=24h` groups hours 23 and 25 in Splunk. The TQL duration `size=24h` groups hours 0 and 23 instead. Event-count caps can differ at the partial group for the same reason.
 

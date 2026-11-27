@@ -13,8 +13,9 @@ Sends events as a single HTTP request to a webhook or API endpoint.
 
 ```tql
 to_http url:string, [method=string, headers=record, buffer_all=bool,
-        timeout=duration, tls=record, connection_timeout=duration,
-        max_retry_count=int, retry_delay=duration] { … }
+        compress=bool, timeout=duration, tls=record,
+        connection_timeout=duration, max_retry_count=int,
+        retry_delay=duration] { … }
 ```
 
 ## Description
@@ -55,6 +56,18 @@ Buffer the entire request body in memory before sending it.
 When set to `true`, the operator accumulates all output from the printer sub-pipeline and sends the request with a `Content-Length` header instead of `Transfer-Encoding: chunked`. This is required for servers that don’t support chunked transfer encoding.
 
 Buffering also enables retries for every failure, because the full body is always available for replay. Without `buffer_all`, retries are only possible before the body stream starts.
+
+Defaults to `false`.
+
+### `compress = bool (optional)`
+
+Compress the request body with gzip and send it with a `Content-Encoding: gzip` header.
+
+Compression reduces the bytes sent over the network. Enable it only when the receiving server decompresses gzip-encoded request bodies, because many HTTP servers reject them or pass them on undecoded.
+
+The body remains a single gzip stream, also when Tenzir streams it in chunks. Tenzir flushes the compressed data of each chunk right away, so the server can process it without waiting for the rest of the body. With `buffer_all`, Tenzir compresses the complete body before sending it.
+
+The operator sets the `Content-Encoding` header itself, so you can’t combine `compress=true` with a `Content-Encoding` header in `headers`.
 
 Defaults to `false`.
 
@@ -140,8 +153,8 @@ Wrap `to_http` in [`each`](each.md) to send a separate HTTP request for every in
 ```tql
 from {message: "hello", severity: "info"},
      {message: "world", severity: "warn"}
-each {
-  from $this
+each $event=this {
+  from $event
   to_http "https://example.com/webhook" {
     write_json
   }
@@ -207,6 +220,21 @@ to_http "https://s3.example.com/bucket/key", method="put", buffer_all=true {
 ```
 
 The `head 1000` limits the input so that `buffer_all` has a finite body to buffer. Without a bound, `subscribe` streams indefinitely and the buffer grows without limit. Use [`every`](every.md) instead of `head` when you want periodic flushing.
+
+### Compress the request body
+
+Send the request body gzip-compressed to a server that accepts `Content-Encoding: gzip`:
+
+```tql
+subscribe "events"
+every 1m {
+  to_http "https://example.com/ingest", compress=true {
+    write_ndjson
+  }
+}
+```
+
+This reduces the bytes sent over the network. The server decompresses the body and receives the same NDJSON as without `compress`.
 
 ## See Also
 

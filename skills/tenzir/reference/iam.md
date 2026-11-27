@@ -80,18 +80,18 @@ The platform refuses a change to roles, assignments, or members that would leave
 
 ### Manage roles
 
-| Task                       | App                                        | CLI                                                               | MCP                  | API                |
-| -------------------------- | ------------------------------------------ | ----------------------------------------------------------------- | -------------------- | ------------------ |
-| List roles                 | **Settings** → **IAM** → **Roles**         | `tenzir organization role list`                                   | `list_roles`         | `listRoles`        |
-| Read a role’s policy       | Select the role                            | `tenzir organization role get <role>`                             | `read_role`          | `readRole`         |
-| Create a role              | **New role**                               | `tenzir organization role create --label <label> --policy <json>` | `create_role`        | `createRole`       |
-| Change a role              | Select the role and change its permissions | `tenzir organization role update <role>`                          | `update_role`        | `updateRole`       |
-| Delete a role              | Select the role, then **Delete role**      | `tenzir organization role delete <role>`                          | `delete_role`        | `deleteRole`       |
-| List members and their ids | **Settings** → **IAM** → **People**        | `tenzir organization member list`                                 | `list_members`       | `listMembers`      |
-| Assign a role              | Select the member, then **Add**            | `tenzir organization role assign <role> <member>`                 | `assign_member_role` | `assignMemberRole` |
-| Revoke a role              | Select the member and remove the role      | `tenzir organization role revoke <role> <member>`                 | `revoke_member_role` | `revokeMemberRole` |
+| Task                       | App                                        | CLI                                                                        | MCP                  | API                |
+| -------------------------- | ------------------------------------------ | -------------------------------------------------------------------------- | -------------------- | ------------------ |
+| List roles                 | **Settings** → **IAM** → **Roles**         | `tenzir platform organization role list`                                   | `list_roles`         | `listRoles`        |
+| Read a role’s policy       | Select the role                            | `tenzir platform organization role get <role>`                             | `read_role`          | `readRole`         |
+| Create a role              | **New role**                               | `tenzir platform organization role create --label <label> --policy <json>` | `create_role`        | `createRole`       |
+| Change a role              | Select the role and change its permissions | `tenzir platform organization role update <role>`                          | `update_role`        | `updateRole`       |
+| Delete a role              | Select the role, then **Delete role**      | `tenzir platform organization role delete <role>`                          | `delete_role`        | `deleteRole`       |
+| List members and their ids | **Settings** → **IAM** → **People**        | `tenzir platform organization member list`                                 | `list_members`       | `listMembers`      |
+| Assign a role              | Select the member, then **Add**            | `tenzir platform organization role assign <role> <member>`                 | `assign_member_role` | `assignMemberRole` |
+| Revoke a role              | Select the member and remove the role      | `tenzir platform organization role revoke <role> <member>`                 | `revoke_member_role` | `revokeMemberRole` |
 
-A role goes by its id, `org.owner`, `org.member`, or a custom role’s UUID. A member goes by its member id, a UUID that also identifies an invited member who hasn’t joined yet. It is not the user’s id: take it from `tenzir organization member list`, `list_members`, `listMembers`, or the address of the member’s page in the app.
+A role goes by its id, `org.owner`, `org.member`, or a custom role’s UUID. A member goes by its member id, a UUID that also identifies an invited member who hasn’t joined yet. It is not the user’s id: take it from `tenzir platform organization member list`, `list_members`, `listMembers`, or the address of the member’s page in the app.
 
 ## Permissions in the app
 

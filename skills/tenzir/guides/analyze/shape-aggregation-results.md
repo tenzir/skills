@@ -82,7 +82,7 @@ Use a trailing [`window`](../../reference/operators/window.md) when only a bound
 from {user: "alice", ts: 2024-01-01T10:00:00Z, bytes: 10},
      {user: "alice", ts: 2024-01-01T10:01:00Z, bytes: 20},
      {user: "bob", ts: 2024-01-01T10:02:00Z, bytes: 5}
-group user {
+group $user=user {
   window size=5min, trailing=true, on=ts, tolerance=30s {
     summarize rolling_bytes=sum(bytes), events=count()
     this = {
