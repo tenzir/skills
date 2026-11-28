@@ -27,16 +27,16 @@ All paths are relative to this skill's directory. Run searches from there.
 
 | File | Contents |
 | --- | --- |
-| `v1.10.0/version.yaml` | Status, source commit, extensions, and changes since the previous version |
-| `v1.10.0/changelog.md` | Upstream release notes: added, improved, deprecated, and fixed items with PR links |
-| `v1.10.0/categories.yaml` | Categories with UID and classes |
-| `v1.10.0/classes.yaml` | Class index: UID, category, summary, `activities`, path |
+| [`v1.10.0/version.yaml`](v1.10.0/version.yaml) | Status, source commit, extensions, and changes since the previous version |
+| [`v1.10.0/changelog.md`](v1.10.0/changelog.md) | Upstream release notes: added, improved, deprecated, and fixed items with PR links |
+| [`v1.10.0/categories.yaml`](v1.10.0/categories.yaml) | Categories with UID and classes |
+| [`v1.10.0/classes.yaml`](v1.10.0/classes.yaml) | Class index: UID, category, summary, `activities`, path |
 | `v1.10.0/classes/{name}.yaml` | One class, fully resolved |
-| `v1.10.0/objects.yaml` | Object index: group, summary, path |
+| [`v1.10.0/objects.yaml`](v1.10.0/objects.yaml) | Object index: group, summary, path |
 | `v1.10.0/objects/{name}.yaml` | One object, fully resolved |
-| `v1.10.0/profiles.yaml` | Profiles with their attributes and `applies_to` |
-| `v1.10.0/attributes.yaml` | Attribute dictionary with `used_by` |
-| `v1.10.0/types.yaml` | Data types with base type, constraints, and observable type ID |
+| [`v1.10.0/profiles.yaml`](v1.10.0/profiles.yaml) | Profiles with their attributes and `applies_to` |
+| [`v1.10.0/attributes.yaml`](v1.10.0/attributes.yaml) | Attribute dictionary with `used_by` |
+| [`v1.10.0/types.yaml`](v1.10.0/types.yaml) | Data types with base type, constraints, and observable type ID |
 | `v1.10.0/extensions/{ext}/{classes,objects}/{name}.yaml` | Extension classes and objects, and patches of core items |
 
 Names resolve within the same version: `object: actor` →
