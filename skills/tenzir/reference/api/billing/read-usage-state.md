@@ -12,7 +12,7 @@ section: "Docs"
 
 `GET /api/organizations/{org}/usage/state`
 
-Where an organization stands against its usage limit, and the state of each of its deployments: active, locked or suspended. On Community, running out of credits or exceeding the hosted internet egress guardrail (`credits.hostedEgressExceeded`) suspends Tenzir-hosted deployments immediately, while self-hosted deployments keep running within the daily UTC allowance and suspend beyond it until 00:00 UTC (`resumableAt`). On Enterprise with a budget, reaching it suspends Tenzir-hosted deployments and makes self-hosted ones locked once the grace of the plan, by default 24 hours and 7 days, has passed since it was first reached in the billing period. A suspended deployment stays suspended until it is resumed. It has no amounts. Requires Organization.readUsageState
+Where an organization stands against its usage limit, and the state of each of its deployments: active, locked or suspended. On Community, running out of credits or exceeding the hosted internet egress guardrail (`credits.hostedEgressExceeded`) suspends Tenzir-hosted deployments immediately, while self-hosted deployments keep running within the daily UTC allowance and suspend beyond it until 00:00 UTC (`resumableAt`). On Enterprise with a budget, reaching it suspends Tenzir-hosted deployments and makes self-hosted ones locked once the grace of the plan, by default 24 hours and 7 days, has passed since it was first reached in the billing period. A suspended deployment stays suspended until it is resumed. Ingest endpoints are Tenzir-hosted: whenever the limit suspends Tenzir-hosted deployments, whether the organization has any or not, it suspends its endpoints (`ingestEndpoints`), whose routers then refuse every request with 403 until each is resumed. It has no amounts. Requires Organization.readUsageState
 
 Authentication: `bearer` + `session` + `apiKey`.
 
@@ -73,6 +73,15 @@ Media type: `application/json`
   * `state` (`enum`, required): The state of a deployment, from least to most restricted. `locked`: its pipelines keep running, but no configuration change reaches it, which includes starting, stopping, pausing and deleting pipelines, no ad-hoc pipeline starts on it, and it cannot run as a larger type; deleting it and downsizing it still work. It ends on its own once usage is back within limits. `suspended`: what a locked deployment refuses, and it runs no pipelines, and a Tenzir-hosted one does not run at all. It ends only when the deployment is resumed, which the usage limit allows once usage is back within limits. Allowed values: `active`, `locked`, `suspended`.
   * `resumable` (`boolean`, required): Whether the deployment is suspended and the usage limit allows resuming it now. Nothing resumes on its own
   * `resuming` (`boolean`, required): Whether resuming the suspended deployment was asked for and is under way: a Tenzir-hosted one starts again, and resumes once it connects
+
+* `ingestEndpoints` (`array<Ingest Endpoint Usage State>`, optional)
+
+  Array items:
+
+  * `ingestEndpointId` (`string`, required): A UUID
+  * `name` (`string`, required): The name pipelines refer to an ingest endpoint by, unique in its organization: lowercase letters, digits, and single dashes. Length: `>= 2, <= 21`.
+  * `state` (`enum`, required): The state of an ingest endpoint. `suspended`: its router refuses every request sent to it with 403, so it accepts and bills nothing. It ends only when the endpoint is resumed, which the usage limit allows once it no longer suspends Tenzir-hosted resources. Allowed values: `active`, `suspended`.
+  * `resumable` (`boolean`, required): Whether the endpoint is suspended and the usage limit allows resuming it now. Nothing resumes on its own
 
 ### `400`: CredentialConflict | Validation
 

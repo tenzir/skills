@@ -1,6 +1,6 @@
 ---
 title: "Create role"
-description: "Creates a custom organization role with its raw policy"
+description: "Creates a custom organization role with its raw policy."
 canonical: https://tenzir.com/docs/reference/api/organizations/create-role
 source: https://tenzir.com/docs/reference/api/organizations/create-role.md
 section: "Docs"
@@ -8,11 +8,11 @@ section: "Docs"
 
 # Create role
 
-> Creates a custom organization role with its raw policy
+> Creates a custom organization role with its raw policy.
 
 `POST /api/organizations/{org}/roles`
 
-Creates a custom organization role with its raw policy
+Creates a custom organization role with its raw policy. Not available on the Community Edition. Requires Organization.createRole.
 
 Authentication: `bearer` + `session` + `apiKey`.
 
@@ -394,6 +394,13 @@ Any of:
 Media type: `application/json`
 
 * `_tag` (`"Unauthenticated"`, required)
+* `message` (`string`, required)
+
+### `402`: UpgradeRequired
+
+Media type: `application/json`
+
+* `_tag` (`"UpgradeRequired"`, required)
 * `message` (`string`, required)
 
 ### `403`: Unauthorized

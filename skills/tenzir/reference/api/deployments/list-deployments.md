@@ -55,7 +55,9 @@ Array items:
 
 * `size` (`enum | null`, optional): The machine type a hosted deployment runs as. Allowed values: `tiny`, `small`, `medium`, `large`, `xlarge`.
 
-* `region` (`string | null`, optional): The cloud region of a deployment Tenzir runs
+* `cloud` (`enum | null`, optional): The cloud a deployment Tenzir runs is in: Google Cloud or Amazon Web Services. Allowed values: `gcp`, `aws`.
+
+* `region` (`string | null`, optional): The region of its cloud a deployment Tenzir runs is in
 
 * `source` (`string | null`, optional): The source tag of the build the deployment ran when it last connected, such as `src-<hash>`. Absent for one whose build has none
 

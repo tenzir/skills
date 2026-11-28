@@ -1,6 +1,6 @@
 ---
 title: "Create workspace"
-description: "Creates a workspace in an organization"
+description: "Creates a workspace in an organization."
 canonical: https://tenzir.com/docs/reference/api/workspaces/create-workspace
 source: https://tenzir.com/docs/reference/api/workspaces/create-workspace.md
 section: "Docs"
@@ -8,11 +8,11 @@ section: "Docs"
 
 # Create workspace
 
-> Creates a workspace in an organization
+> Creates a workspace in an organization.
 
 `POST /api/organizations/{org}/workspaces`
 
-Creates a workspace in an organization
+Creates a workspace in an organization. Community organizations are limited to 1 workspace; creating another fails with 402 UpgradeRequired. Requires Organization.createWorkspace.
 
 Authentication: `bearer` + `session` + `apiKey`.
 
@@ -66,6 +66,13 @@ Any of:
 Media type: `application/json`
 
 * `_tag` (`"Unauthenticated"`, required)
+* `message` (`string`, required)
+
+### `402`: UpgradeRequired
+
+Media type: `application/json`
+
+* `_tag` (`"UpgradeRequired"`, required)
 * `message` (`string`, required)
 
 ### `403`: Unauthorized

@@ -12,7 +12,7 @@ section: "Docs"
 
 `POST /api/organizations/{org}/billing/set-budget`
 
-Sets, changes or removes an organization's monthly budget, in the smallest unit of its currency, in whole units of it: 150000 is 1,500. Only Enterprise can set one. It applies to PAYG ingest and infrastructure spend, not the platform fee, taxes or credit purchases, and warns and enforces but never caps the invoice. Requires Organization.setBudget
+Sets, changes or removes an organization's monthly budget, in the smallest unit of its currency, in whole units of it: 150000 is 1,500. Only Enterprise can set one. It applies to PAYG ingest and infrastructure spend, not the minimum-spend shortfall, taxes or credit purchases, and warns and enforces but never caps the invoice. Requires Organization.setBudget
 
 Authentication: `bearer` + `session` + `apiKey`.
 
@@ -27,7 +27,7 @@ Authentication: `bearer` + `session` + `apiKey`.
 
 ## Request body (`application/json`, required)
 
-* `monthlyBudget` (`integer | null`, required): A threshold on the PAYG ingest and infrastructure spend of a billing month, in the smallest unit of the organization currency, such as cents: 150000 is 1,500. Only whole units of the currency, such as whole dollars, make a budget. It excludes the platform fee, taxes and credit purchases. It warns and enforces, but never caps the invoice. Range: `> 0, <= 9007199254740991`.
+* `monthlyBudget` (`integer | null`, required): A threshold on the PAYG ingest and infrastructure spend of a billing month, in the smallest unit of the organization currency, such as cents: 150000 is 1,500. Only whole units of the currency, such as whole dollars, make a budget. It excludes the minimum-spend shortfall, taxes and credit purchases. It warns and enforces, but never caps the invoice. Range: `> 0, <= 9007199254740991`.
 
 ## Responses
 
@@ -35,7 +35,7 @@ Authentication: `bearer` + `session` + `apiKey`.
 
 Media type: `application/json`
 
-* `monthlyBudget` (`integer | null`, required): A threshold on the PAYG ingest and infrastructure spend of a billing month, in the smallest unit of the organization currency, such as cents: 150000 is 1,500. Only whole units of the currency, such as whole dollars, make a budget. It excludes the platform fee, taxes and credit purchases. It warns and enforces, but never caps the invoice. Range: `> 0, <= 9007199254740991`.
+* `monthlyBudget` (`integer | null`, required): A threshold on the PAYG ingest and infrastructure spend of a billing month, in the smallest unit of the organization currency, such as cents: 150000 is 1,500. Only whole units of the currency, such as whole dollars, make a budget. It excludes the minimum-spend shortfall, taxes and credit purchases. It warns and enforces, but never caps the invoice. Range: `> 0, <= 9007199254740991`.
 * `currency` (`string | null`, required): An ISO 4217 code. A plan offers the currencies it has prices for, and nothing converts between them
 
 ### `400`: InvalidBudget | CredentialConflict | Validation

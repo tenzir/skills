@@ -175,7 +175,7 @@ Any of:
   * `message` (`string`, required)
   * `resolution` (`string`, required)
   * `state` (`enum`, required): The state of a deployment, from least to most restricted. `locked`: its pipelines keep running, but no configuration change reaches it, which includes starting, stopping, pausing and deleting pipelines, no ad-hoc pipeline starts on it, and it cannot run as a larger type; deleting it and downsizing it still work. It ends on its own once usage is back within limits. `suspended`: what a locked deployment refuses, and it runs no pipelines, and a Tenzir-hosted one does not run at all. It ends only when the deployment is resumed, which the usage limit allows once usage is back within limits. Allowed values: `active`, `locked`, `suspended`.
-  * `operation` (`enum`, required): What the state of a deployment admits or refuses on it: delivering a configuration to it, changing the branch it follows, starting an ad-hoc pipeline on it, creating it, running it as a larger type, and resuming it from a suspension. Allowed values: `deliverConfiguration`, `changeTracker`, `startAdhocPipeline`, `createDeployment`, `upsize`, `resume`.
+  * `operation` (`enum`, required): What the state of a deployment or an ingest endpoint admits or refuses on it: delivering a configuration to it, changing the branch it follows, starting an ad-hoc pipeline on it, creating it, running it as a larger type, resuming it from a suspension, accepting events at an ingest endpoint, and creating one. Allowed values: `deliverConfiguration`, `changeTracker`, `startAdhocPipeline`, `createDeployment`, `upsize`, `resume`, `ingest`, `createIngestEndpoint`.
 
 * **DeploymentSuspended** (`DeploymentSuspended`)
 

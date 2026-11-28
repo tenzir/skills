@@ -70,7 +70,7 @@ with the operator reference.
 
 Guides are practical step-by-step explanation to help you achieve a specific goal.
 
-### Get Started
+### Get started
 
 #### [Quickstart](guides/quickstart.md)
 
