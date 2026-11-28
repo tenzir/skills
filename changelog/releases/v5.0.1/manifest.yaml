@@ -1,0 +1,7 @@
+created: 2026-11-28
+intro: >-
+  This patch release makes data file references in the Open Cybersecurity Schema Framework
+  skill clickable links. It also refreshes the synced Tenzir skill and schema data.
+source:
+  mode: sync-stable-queue
+  previous_stable: v5.0.0
