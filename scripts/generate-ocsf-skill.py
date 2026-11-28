@@ -1128,16 +1128,16 @@ All paths are relative to this skill's directory. Run searches from there.
 
 | File | Contents |
 | --- | --- |
-| `${latest}/version.yaml` | Status, source commit, extensions, and changes since the previous version |
-| `${latest}/changelog.md` | Upstream release notes: added, improved, deprecated, and fixed items with PR links |
-| `${latest}/categories.yaml` | Categories with UID and classes |
-| `${latest}/classes.yaml` | Class index: UID, category, summary, `activities`, path |
+| [`${latest}/version.yaml`](${latest}/version.yaml) | Status, source commit, extensions, and changes since the previous version |
+| [`${latest}/changelog.md`](${latest}/changelog.md) | Upstream release notes: added, improved, deprecated, and fixed items with PR links |
+| [`${latest}/categories.yaml`](${latest}/categories.yaml) | Categories with UID and classes |
+| [`${latest}/classes.yaml`](${latest}/classes.yaml) | Class index: UID, category, summary, `activities`, path |
 | `${latest}/classes/{name}.yaml` | One class, fully resolved |
-| `${latest}/objects.yaml` | Object index: group, summary, path |
+| [`${latest}/objects.yaml`](${latest}/objects.yaml) | Object index: group, summary, path |
 | `${latest}/objects/{name}.yaml` | One object, fully resolved |
-| `${latest}/profiles.yaml` | Profiles with their attributes and `applies_to` |
-| `${latest}/attributes.yaml` | Attribute dictionary with `used_by` |
-| `${latest}/types.yaml` | Data types with base type, constraints, and observable type ID |
+| [`${latest}/profiles.yaml`](${latest}/profiles.yaml) | Profiles with their attributes and `applies_to` |
+| [`${latest}/attributes.yaml`](${latest}/attributes.yaml) | Attribute dictionary with `used_by` |
+| [`${latest}/types.yaml`](${latest}/types.yaml) | Data types with base type, constraints, and observable type ID |
 | `${latest}/extensions/{ext}/{classes,objects}/{name}.yaml` | Extension classes and objects, and patches of core items |
 
 Names resolve within the same version: `object: actor` →
